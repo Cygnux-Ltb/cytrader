@@ -1,0 +1,147 @@
+{
+    "namespace": "io.ffreedom.persistence.avro.entity",
+    "type": "record",
+    "name": "Order",
+    "fields": [
+        {
+            "name": "strategyId",
+            "type": "int"
+        },
+        {
+            "name": "brokerId",
+            "type": "string"
+        },
+        {
+            "name": "investorId",
+            "type": "string"
+        },
+        {
+            "name": "instrumentId",
+            "type": "string"
+        },
+        {
+            "name": "orderMsgType",
+            "type": "int"
+        },
+        {
+            "name": "orderRef",
+            "type": "int"
+        },
+        {
+            "name": "userId",
+            "type": "string"
+        },
+        {
+            "name": "direction",
+            "type": "int"
+        },
+        {
+            "name": "offset",
+            "type": "int"
+        },
+        {
+            "name": "limitPrice",
+            "type": "double"
+        },
+        {
+            "name": "volume",
+            "type": "int"
+        },
+        {
+            "name": "volumeFilled",
+            "type": "int"
+        },
+        {
+            "name": "volumeRemained",
+            "type": "int"
+        },
+        {
+            "name": "volumeTotalOriginal",
+            "type": "int"
+        },
+        {
+            "name": "tradingDay",
+            "type": "string"
+        },
+        {
+            "name": "orderSysId",
+            "type": "string"
+        },
+        {
+            "name": "orderStatus",
+            "type": "int"
+        },
+        {
+            "name": "orderType",
+            "type": "int"
+        },
+        {
+            "name": "price",
+            "type": "double"
+        },
+        {
+            "name": "tradeId",
+            "type": "string"
+        },
+        {
+            "name": "ordRejReason",
+            "type": "int"
+        },
+        {
+            "name": "insertTime",
+            "type": "string"
+        },
+        {
+            "name": "updateTime",
+            "type": "string"
+        },
+        {
+            "name": "cancelTime",
+            "type": "string"
+        },
+        {
+            "name": "frontId",
+            "type": "int"
+        },
+        {
+            "name": "sessionId",
+            "type": "int"
+        },
+        {
+            "name": "statusMsg",
+            "type": "string"
+        },
+        {
+            "name": "exchangeCode",
+            "type": "string"
+        },
+        {
+            "name": "fee",
+            "type": "double"
+        },
+        {
+            "name": "counterType",
+            "type": "int"
+        },
+        {
+            "name": "counterSysId",
+            "type": "long"
+        },
+        {
+            "name": "cancelAttempts",
+            "type": "int"
+        },
+        {
+            "name": "timeStamp",
+            "type": "long"
+        },
+        {
+            "name": "epochTimeReturn",
+            "type": "long"
+        },
+        {
+            "name": "funcName",
+            "type": "string"
+        }
+    ]
+}

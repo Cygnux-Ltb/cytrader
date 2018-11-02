@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.ffreedom</groupId>
+		<artifactId>redstone</artifactId>
+		<version>0.1</version>
+	</parent>
+	
+	<artifactId>actor</artifactId>
+	<name>actor</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-actor_2.12</artifactId>
+			<version>2.5.14</version>
+		</dependency>
+		<dependency>
+			<groupId>net.openhft</groupId>
+			<artifactId>chronicle-map</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

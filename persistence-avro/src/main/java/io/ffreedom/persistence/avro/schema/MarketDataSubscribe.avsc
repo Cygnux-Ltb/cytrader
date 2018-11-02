@@ -1,0 +1,26 @@
+{
+    "namespace": "io.ffreedom.persistence.avro.entity",
+    "type": "record",
+    "name": "MarketDataSubscribe",
+    "fields": [
+    	{
+            "name": "uniqueId",
+            "type": "int"
+        },
+    	{
+            "name": "startTradingDay",
+            "type": "string"
+        },
+        {
+            "name": "endTradingDay",
+            "type": "string"
+        },
+        {
+            "name": "instrumentIdList",
+            "type": {
+                "type": "array",
+                "items": "string"
+            }
+        }
+    ]
+}

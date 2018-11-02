@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.ffreedom</groupId>
+		<artifactId>redstone</artifactId>
+		<version>0.1</version>
+	</parent>
+
+	<artifactId>strategy</artifactId>
+	<name>strategy</name>
+
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.collections</groupId>
+			<artifactId>eclipse-collections</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.collections</groupId>
+			<artifactId>eclipse-collections-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>indicator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>financial-market</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>adaptor</artifactId>
+		</dependency>
+		
+	</dependencies>
+
+</project>

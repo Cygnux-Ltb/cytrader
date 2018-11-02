@@ -1,0 +1,163 @@
+{
+    "namespace": "io.ffreedom.persistence.avro.entity",
+    "type": "record",
+    "name": "MarketDataLevel1",
+    "fields": [
+        {
+            "name": "tradingDay",
+            "type": "string"
+        },
+        {
+            "name": "instrumentId",
+            "type": "string"
+        },
+        {
+            "name": "exchangeId",
+            "type": "string"
+        },
+        {
+            "name": "lastPrice",
+            "type": "double"
+        },
+        {
+            "name": "preSettlementPrice",
+            "type": "double"
+        },
+        {
+            "name": "preClosePrice",
+            "type": "double"
+        },
+        {
+            "name": "preOpenInterest",
+            "type": "double"
+        },
+        {
+            "name": "openPrice",
+            "type": "double"
+        },
+        {
+            "name": "highestPrice",
+            "type": "double"
+        },
+        {
+            "name": "lowestPrice",
+            "type": "double"
+        },
+        {
+            "name": "volume",
+            "type": "int"
+        },
+        {
+            "name": "turnover",
+            "type": "double"
+        },
+        {
+            "name": "openInterest",
+            "type": "double"
+        },
+        {
+            "name": "upperLimitPrice",
+            "type": "double"
+        },
+        {
+            "name": "lowerLimitPrice",
+            "type": "double"
+        },
+        {
+            "name": "bidPrice1",
+            "type": "double"
+        },
+        {
+            "name": "bidVolume1",
+            "type": "int"
+        },
+        {
+            "name": "askPrice1",
+            "type": "double"
+        },
+        {
+            "name": "askVolume1",
+            "type": "int"
+        },
+        {
+            "name": "bidPrice2",
+            "type": "double"
+        },
+        {
+            "name": "bidVolume2",
+            "type": "int"
+        },
+        {
+            "name": "askPrice2",
+            "type": "double"
+        },
+        {
+            "name": "askVolume2",
+            "type": "int"
+        },
+        {
+            "name": "bidPrice3",
+            "type": "double"
+        },
+        {
+            "name": "bidVolume3",
+            "type": "int"
+        },
+        {
+            "name": "askPrice3",
+            "type": "double"
+        },
+        {
+            "name": "askVolume3",
+            "type": "int"
+        },
+        {
+            "name": "bidPrice4",
+            "type": "double"
+        },
+        {
+            "name": "bidVolume4",
+            "type": "int"
+        },
+        {
+            "name": "askPrice4",
+            "type": "double"
+        },
+        {
+            "name": "askVolume4",
+            "type": "int"
+        },
+        {
+            "name": "bidPrice5",
+            "type": "double"
+        },
+        {
+            "name": "bidVolume5",
+            "type": "int"
+        },
+        {
+            "name": "askPrice5",
+            "type": "double"
+        },
+        {
+            "name": "askVolume5",
+            "type": "int"
+        },
+        {
+            "name": "averagePrice",
+            "type": "double"
+        },
+        {
+            "name": "updateTime",
+            "type": "string"
+        },
+        {
+            "name": "updateMillisec",
+            "type": "int"
+        },
+        {
+            "name": "localTimestamp",
+            "type": "string"
+        }
+    ]
+}
