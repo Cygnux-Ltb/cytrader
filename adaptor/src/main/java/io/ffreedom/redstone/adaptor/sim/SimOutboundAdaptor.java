@@ -86,7 +86,7 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 
 	@Override
 	public Collection<Order> queryPositions(ReqQueryPositions queryPositions) {
-
+		
 		return null;
 	}
 

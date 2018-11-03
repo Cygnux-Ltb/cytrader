@@ -3,7 +3,6 @@ package io.ffreedom.redstone.core.strategy;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.market.MarketData;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.core.trade.enums.Direction;
 
 public interface Strategy extends CircuitBreaker {
 
@@ -35,6 +34,6 @@ public interface Strategy extends CircuitBreaker {
 
 	void onError(Throwable throwable);
 
-	void positionsTo(int strategyId, Instrument instrument, Direction direction, double price, double qty);
+	void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice);
 
 }

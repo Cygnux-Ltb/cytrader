@@ -3,7 +3,6 @@ package io.ffreedom.redstone.strategy.impl.base;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.strategy.Strategy;
-import io.ffreedom.redstone.core.trade.enums.Direction;
 import io.ffreedom.redstone.state.InstrumentState;
 
 public abstract class BaseStrategy implements Strategy {
@@ -50,8 +49,9 @@ public abstract class BaseStrategy implements Strategy {
 	}
 
 	@Override
-	public void positionsTo(int strategyId, Instrument instrument, Direction direction, double price, double qty) {
-
+	public void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

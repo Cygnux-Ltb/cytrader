@@ -1,9 +1,7 @@
 package io.ffreedom.redstone.strategy.impl;
 
-import io.ffreedom.financial.Instrument;
 import io.ffreedom.market.MarketData;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.core.trade.enums.Direction;
 import io.ffreedom.redstone.strategy.impl.base.BaseStrategy;
 
 public class BarStrategy extends BaseStrategy {
@@ -66,9 +64,5 @@ public class BarStrategy extends BaseStrategy {
 
 	}
 
-	@Override
-	public void positionsTo(int strategyId, Instrument instrument, Direction direction, double price, double qty) {
-
-	}
-
+	
 }

@@ -1,6 +1,8 @@
 package io.ffreedom.redstone.core.trade.enums;
 
-public enum Action {
+public enum TradeAction {
+
+	Invalid(-1),
 
 	Open(0),
 
@@ -10,11 +12,11 @@ public enum Action {
 
 	private int code;
 
-	private Action(int code) {
+	private TradeAction(int code) {
 		this.code = code;
 	}
 
-	public int getCode() {
+	public int code() {
 		return code;
 	}
 
