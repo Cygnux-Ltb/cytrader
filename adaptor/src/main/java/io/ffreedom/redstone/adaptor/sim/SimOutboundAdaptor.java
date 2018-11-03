@@ -7,12 +7,10 @@ import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
 import io.ffreedom.persistence.avro.serializable.AvroBytesSerializer;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
+import io.ffreedom.redstone.adaptor.sim.dto.SimReqSubscribeMarketData;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
-import io.ffreedom.redstone.core.adaptor.SubscribeMarketDataOutboundAdaptor;
-import io.ffreedom.redstone.core.adaptor.dto.CancelOrder;
-import io.ffreedom.redstone.core.adaptor.dto.NewOrder;
-import io.ffreedom.redstone.core.adaptor.dto.QueryPositions;
-import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
+import io.ffreedom.redstone.core.adaptor.req.ReqQueryBalance;
+import io.ffreedom.redstone.core.adaptor.req.ReqQueryPositions;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.state.OrderState;
@@ -20,7 +18,8 @@ import io.ffreedom.transport.base.role.Sender;
 import io.ffreedom.transport.socket.SocketSender;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 
-public class SimOutboundAdaptor extends BaseSimAdaptor implements OutboundAdaptor, SubscribeMarketDataOutboundAdaptor {
+public class SimOutboundAdaptor extends BaseSimAdaptor
+		implements OutboundAdaptor<SimReqSubscribeMarketData, ReqQueryPositions, ReqQueryBalance> {
 
 	private Sender<byte[]> mdSender;
 	private Sender<byte[]> tdSender;
@@ -48,9 +47,9 @@ public class SimOutboundAdaptor extends BaseSimAdaptor implements OutboundAdapto
 		return "SimOutboundAdaptor$" + this.hashCode();
 	}
 
-	public boolean newOredr(NewOrder order) {
+	public boolean newOredr(Order order) {
 		io.ffreedom.persistence.avro.entity.Order simOrder = io.ffreedom.persistence.avro.entity.Order.newBuilder()
-				.setOrderRef(new Long(order.getOrderSysId()).intValue())
+				.setOrderRef(new Long(order.getOrdSysId()).intValue())
 				.setInstrumentId(order.getInstrument().getInstrumentCode())
 				.setLimitPrice(order.getOrdQtyPrice().getOfferPrice())
 				.setVolumeTotalOriginal(new Double(order.getOrdQtyPrice().getTotalQty()).intValue())
@@ -60,10 +59,10 @@ public class SimOutboundAdaptor extends BaseSimAdaptor implements OutboundAdapto
 		return true;
 	}
 
-	public boolean cancelOrder(CancelOrder order) {
-		Order cancelOrder = OrderState.INSTANCE.getOrder(order.getOrderSysId());
+	public boolean cancelOrder(Order order) {
+		Order cancelOrder = OrderState.INSTANCE.getOrder(order.getOrdSysId());
 		io.ffreedom.persistence.avro.entity.Order simOrder = io.ffreedom.persistence.avro.entity.Order.newBuilder()
-				.setOrderRef(new Long(order.getOrderSysId()).intValue())
+				.setOrderRef(new Long(order.getOrdSysId()).intValue())
 				.setInstrumentId(cancelOrder.getInstrument().getInstrumentCode())
 				.setLimitPrice(cancelOrder.getOrdQtyPrice().getOfferPrice())
 				.setVolumeTotalOriginal(new Double(cancelOrder.getOrdQtyPrice().getTotalQty()).intValue())
@@ -75,22 +74,18 @@ public class SimOutboundAdaptor extends BaseSimAdaptor implements OutboundAdapto
 	}
 
 	@Override
-	public boolean subscribeMarketData(SubscribeMarketData subscribe) {
-		// TODO null
-		io.ffreedom.persistence.avro.entity.MarketDataSubscribe simMdSubscribe = null;
-
-		MarketDataSubscribe simSubscribe = MarketDataSubscribe.newBuilder().setUniqueId(simMdSubscribe.getUniqueId())
-				.setStartTradingDay(simMdSubscribe.getStartTradingDay())
-				.setEndTradingDay(simMdSubscribe.getEndTradingDay())
-				.setInstrumentIdList(new ArrayList<>(simMdSubscribe.getInstrumentIdList())).build();
-
+	public boolean subscribeMarketData(SimReqSubscribeMarketData subscribe) {
+		MarketDataSubscribe simSubscribe = MarketDataSubscribe.newBuilder()
+				.setUniqueId(Integer.valueOf(subscribe.getInvestorId()))
+				.setStartTradingDay(subscribe.getStartTradingDay()).setEndTradingDay(subscribe.getEndTradingDay())
+				.setInstrumentIdList(new ArrayList<>(subscribe.getInstrumentIdList())).build();
 		byte[] byteMsg = serializer.serialization(simSubscribe);
 		mdSender.sent(byteMsg);
 		return true;
 	}
 
 	@Override
-	public Collection<Order> queryPositions(QueryPositions queryPositions) {
+	public Collection<Order> queryPositions(ReqQueryPositions queryPositions) {
 
 		return null;
 	}
@@ -103,21 +98,9 @@ public class SimOutboundAdaptor extends BaseSimAdaptor implements OutboundAdapto
 	}
 
 	@Override
-	public boolean newOredr(Order order) {
+	public Collection<Order> queryBalance(ReqQueryBalance reqQueryPositions) {
 		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean cancelOrder(Order order) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean modifyOrder(Order order) {
-		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }

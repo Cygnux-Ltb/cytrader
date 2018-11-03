@@ -1,12 +1,12 @@
-package io.ffreedom.redstone.core.adaptor.dto;
+package io.ffreedom.redstone.core.adaptor.req;
 
 import java.util.Collection;
 
-public abstract class SubscribeMarketData {
+public class ReqSubscribeMarketData {
 
 	private Collection<String> instrumentIdList;
 
-	public SubscribeMarketData(Collection<String> instrumentIdList) {
+	public ReqSubscribeMarketData(Collection<String> instrumentIdList) {
 		super();
 		this.instrumentIdList = instrumentIdList;
 	}

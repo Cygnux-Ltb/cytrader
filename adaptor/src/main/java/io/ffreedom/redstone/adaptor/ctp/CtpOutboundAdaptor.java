@@ -14,7 +14,9 @@ import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundMsg;
 import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundNewOrder;
 import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundTitle;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
-import io.ffreedom.redstone.core.adaptor.dto.QueryPositions;
+import io.ffreedom.redstone.core.adaptor.req.ReqQueryBalance;
+import io.ffreedom.redstone.core.adaptor.req.ReqQueryPositions;
+import io.ffreedom.redstone.core.adaptor.req.ReqSubscribeMarketData;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.transport.base.role.Publisher;
 import io.ffreedom.transport.rabbitmq.RabbitMqPublisher;
@@ -88,7 +90,19 @@ public class CtpOutboundAdaptor implements OutboundAdaptor {
 	}
 
 	@Override
-	public Collection<Order> queryPositions(QueryPositions queryPositions) {
+	public Collection<Order> queryPositions(ReqQueryPositions queryPositions) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean subscribeMarketData(ReqSubscribeMarketData subscribeMarketData) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Collection<Order> queryBalance(ReqQueryBalance queryPositions) {
 		// TODO Auto-generated method stub
 		return null;
 	}
