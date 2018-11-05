@@ -65,6 +65,23 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.8.1</version>
 		</dependency>
+		<!-- commons -->
+		<!-- see https://github.com/yellow013/commons.git -->
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>common</artifactId>
+			<version>${commons.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.collections</groupId>
+			<artifactId>eclipse-collections-api</artifactId>
+			<version>${ec.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.collections</groupId>
+			<artifactId>eclipse-collections</artifactId>
+			<version>${ec.version}</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -79,16 +96,7 @@
 				<artifactId>commons-io</artifactId>
 				<version>2.6</version>
 			</dependency>
-			<dependency>
-				<groupId>org.eclipse.collections</groupId>
-				<artifactId>eclipse-collections-api</artifactId>
-				<version>${ec.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.collections</groupId>
-				<artifactId>eclipse-collections</artifactId>
-				<version>${ec.version}</version>
-			</dependency>
+
 			<dependency>
 				<groupId>net.openhft</groupId>
 				<artifactId>chronicle-map</artifactId>
@@ -103,11 +111,6 @@
 			<!-- see https://github.com/yellow013/commons.git -->
 			<dependency>
 				<groupId>io.ffreedom</groupId>
-				<artifactId>common</artifactId>
-				<version>${commons.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.ffreedom</groupId>
 				<artifactId>transport</artifactId>
 				<version>${commons.version}</version>
 			</dependency>
@@ -115,12 +118,7 @@
 			<!-- see https://github.com/yellow013/polaris.git -->
 			<dependency>
 				<groupId>io.ffreedom</groupId>
-				<artifactId>financial-market</artifactId>
-				<version>${polaris.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.ffreedom</groupId>
-				<artifactId>indicator</artifactId>
+				<artifactId>polaris</artifactId>
 				<version>${polaris.version}</version>
 			</dependency>
 			<!-- redstone -->

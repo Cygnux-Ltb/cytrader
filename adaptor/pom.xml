@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
-			<artifactId>financial-market</artifactId>
+			<artifactId>polaris</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>

@@ -74,11 +74,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.ffreedom</groupId>
-			<artifactId>common</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.avro</groupId>
 			<artifactId>avro</artifactId>
 			<version>1.8.2</version>

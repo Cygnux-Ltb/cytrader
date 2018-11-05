@@ -9,7 +9,7 @@
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
-	
+
 	<artifactId>actor</artifactId>
 	<name>actor</name>
 
@@ -31,6 +31,10 @@
 		<dependency>
 			<groupId>io.ffreedom</groupId>
 			<artifactId>core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>polaris</artifactId>
 		</dependency>
 	</dependencies>
 
