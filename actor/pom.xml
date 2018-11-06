@@ -29,6 +29,10 @@
 			<artifactId>chronicle-map</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>net.openhft</groupId>
+			<artifactId>chronicle-queue</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>io.ffreedom</groupId>
 			<artifactId>core</artifactId>
 		</dependency>
