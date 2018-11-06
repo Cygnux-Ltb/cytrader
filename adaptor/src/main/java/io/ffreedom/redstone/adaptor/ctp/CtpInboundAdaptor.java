@@ -18,7 +18,7 @@ import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.redstone.state.OrderState;
-import io.ffreedom.transport.base.role.Receiver;
+import io.ffreedom.transport.core.role.Receiver;
 import io.ffreedom.transport.rabbitmq.RabbitMqReceiver;
 import io.ffreedom.transport.rabbitmq.config.RmqReceiverConfigurator;
 

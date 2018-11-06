@@ -14,7 +14,7 @@ import io.ffreedom.redstone.core.adaptor.req.ReqQueryPositions;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.state.OrderState;
-import io.ffreedom.transport.base.role.Sender;
+import io.ffreedom.transport.core.role.Sender;
 import io.ffreedom.transport.socket.SocketSender;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 

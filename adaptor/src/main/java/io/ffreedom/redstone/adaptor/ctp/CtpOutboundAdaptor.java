@@ -18,7 +18,7 @@ import io.ffreedom.redstone.core.adaptor.req.ReqQueryBalance;
 import io.ffreedom.redstone.core.adaptor.req.ReqQueryPositions;
 import io.ffreedom.redstone.core.adaptor.req.ReqSubscribeMarketData;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.transport.base.role.Publisher;
+import io.ffreedom.transport.core.role.Publisher;
 import io.ffreedom.transport.rabbitmq.RabbitMqPublisher;
 import io.ffreedom.transport.rabbitmq.config.RmqPublisherConfigurator;
 

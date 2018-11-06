@@ -13,7 +13,7 @@ import io.ffreedom.redstone.adaptor.sim.converter.OrderConverter;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
-import io.ffreedom.transport.base.role.Receiver;
+import io.ffreedom.transport.core.role.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
 
 public class SimInboundAdaptor extends BaseSimAdaptor implements InboundAdaptor {

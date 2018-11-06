@@ -21,11 +21,15 @@
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
-			<artifactId>transport</artifactId>
+			<artifactId>core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>transport-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>transport-socket</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
