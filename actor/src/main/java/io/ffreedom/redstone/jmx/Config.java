@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.state.jmx;
+package io.ffreedom.redstone.jmx;
 
 public class Config implements ConfigMBean {
 

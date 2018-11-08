@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.ffreedom.common.collect.ECFactory;
+import io.ffreedom.common.collect.EclipseCollections;
 import io.ffreedom.common.datetime.EpochTimestamp;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdRank;
@@ -21,7 +21,7 @@ public final class ParentOrder extends SingleOrder {
 		super(instrument, new OrdQtyPrice(quantity, offerPrice), ordSide, ordType, ordStatus,
 				new OrdTimestamps(EpochTimestamp.now()), strategyId, subAccountId);
 		// TODO List Type
-		this.childOrders = ECFactory.newFastList();
+		this.childOrders = EclipseCollections.newFastList();
 	}
 
 	public ChildOrder toChildOrder() {

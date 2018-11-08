@@ -1,12 +1,10 @@
-package io.ffreedom.redstone.state;
+package io.ffreedom.redstone.actor;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.time.ZonedDateTime;
 
 public final class ApplicationState {
 
@@ -16,7 +14,7 @@ public final class ApplicationState {
 
 	private static int APPLICATION_ID = 0;
 
-	private AppState currentState;
+	private AppStatus currentState;
 
 	private ApplicationState() {
 	}
@@ -35,11 +33,11 @@ public final class ApplicationState {
 		}
 	}
 
-	public AppState getCurrentState() {
+	public AppStatus appStatus() {
 		return currentState;
 	}
-	
-	public static enum AppState {
+
+	public static enum AppStatus {
 		Initialization, Offline, Online, Unknown
 	}
 
@@ -48,22 +46,17 @@ public final class ApplicationState {
 		System.out.println(Integer.MAX_VALUE);
 		System.out.println(Long.MAX_VALUE);
 
-		System.out.println(LocalDate.now().getDayOfYear());
-		System.out.println(LocalTime.now().toSecondOfDay());
+		long zoned2018_1 = ZonedDateTime.of(LocalDate.of(2018, 11, 8), LocalTime.MIN, ZoneId.systemDefault())
+				.toInstant().getEpochSecond();
+		System.out.println(zoned2018_1);
 
-		Map<String, String> shortIds = ZoneId.SHORT_IDS;
+		long epochMilli = Instant.now().getEpochSecond();
+		System.out.println(epochMilli);
 
-		System.out.println(ZoneId.of("Asia/Shanghai").getRules());
+		System.out.println(epochMilli - zoned2018_1);
 
-		Set<Entry<String, String>> entrySet = shortIds.entrySet();
-		for (Entry<String, String> entry : entrySet) {
-			System.out.println(entry.getKey() + " -> " + entry.getValue());
-		}
-
-		ZoneOffset.getAvailableZoneIds().forEach(str -> {
-			System.out.println(str);
-		});
-		;
+		// System.out.println(LocalDate.now().getDayOfYear());
+		// System.out.println(LocalTime.now().toSecondOfDay());
 
 	}
 

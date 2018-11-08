@@ -1,10 +1,10 @@
 package io.ffreedom.redstone.adaptor.ctp.converter.outbound;
 
 import io.ffreedom.common.functional.Converter;
+import io.ffreedom.redstone.actor.ApplicationState;
 import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundNewOrder;
 import io.ffreedom.redstone.adaptor.ctp.utils.CtpOrderRefBuilder;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.state.ApplicationState;
 
 public class CtpOutboundNewOrderConverter implements Converter<Order, CtpOutboundNewOrder> {
 

@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.state.actor;
+package io.ffreedom.redstone.actor.temp;
 
 import akka.actor.AbstractActor;
 import akka.actor.Props;

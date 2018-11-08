@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.state;
+package io.ffreedom.redstone.actor;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntBooleanMap;

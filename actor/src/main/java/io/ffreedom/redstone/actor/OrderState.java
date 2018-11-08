@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.state;
+package io.ffreedom.redstone.actor;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
@@ -6,7 +6,7 @@ import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
 
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.state.order.storage.OrderBook;
+import io.ffreedom.redstone.storage.OrderBook;
 
 public class OrderState {
 

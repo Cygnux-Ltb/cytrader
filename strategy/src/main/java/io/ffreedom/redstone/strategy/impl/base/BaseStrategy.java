@@ -1,9 +1,9 @@
 package io.ffreedom.redstone.strategy.impl.base;
 
 import io.ffreedom.financial.Instrument;
+import io.ffreedom.redstone.actor.InstrumentState;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.strategy.Strategy;
-import io.ffreedom.redstone.state.InstrumentState;
 
 public abstract class BaseStrategy implements Strategy {
 

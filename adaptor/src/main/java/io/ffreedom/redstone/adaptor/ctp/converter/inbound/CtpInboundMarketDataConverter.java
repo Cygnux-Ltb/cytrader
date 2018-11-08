@@ -13,8 +13,8 @@ import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.market.MarketData;
 import io.ffreedom.market.QuoteLevelOverflowException;
+import io.ffreedom.redstone.actor.InstrumentState;
 import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMarketData;
-import io.ffreedom.redstone.state.InstrumentState;
 
 public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarketData, MarketData> {
 

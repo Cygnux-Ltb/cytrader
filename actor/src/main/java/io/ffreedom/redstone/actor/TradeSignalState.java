@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.state;
+package io.ffreedom.redstone.actor;
 
 import java.util.LinkedList;
 

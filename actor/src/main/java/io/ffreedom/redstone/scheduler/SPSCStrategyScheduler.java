@@ -2,9 +2,9 @@ package io.ffreedom.redstone.scheduler;
 
 import io.ffreedom.common.queue.disruptor.SPSCQueue;
 import io.ffreedom.market.MarketData;
+import io.ffreedom.redstone.actor.StrategyState;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
-import io.ffreedom.redstone.state.StrategyState;
 
 public class SPSCStrategyScheduler implements StrategyScheduler {
 

@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.state.order.storage;
+package io.ffreedom.redstone.storage;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;

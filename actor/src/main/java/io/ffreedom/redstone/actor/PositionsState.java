@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.state;
+package io.ffreedom.redstone.actor;
 
 import org.eclipse.collections.api.map.primitive.MutableIntDoubleMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap;

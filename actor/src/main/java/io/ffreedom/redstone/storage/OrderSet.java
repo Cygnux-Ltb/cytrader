@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.state.order.storage;
+package io.ffreedom.redstone.storage;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;

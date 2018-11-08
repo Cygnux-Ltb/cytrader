@@ -8,12 +8,12 @@ import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.financial.futures.ChinaFuturesSymbol;
 import io.ffreedom.indicators.api.IndicatorPeriod;
 import io.ffreedom.indicators.pools.IndicatorPeriodTimePools;
+import io.ffreedom.redstone.actor.ApplicationState;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.ctp.CtpInboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.redstone.scheduler.SPSCStrategyScheduler;
-import io.ffreedom.redstone.state.ApplicationState;
 
 public class Saturn5 {
 

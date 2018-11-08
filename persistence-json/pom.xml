@@ -9,9 +9,9 @@
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
+
 	<artifactId>persistence-json</artifactId>
 	<name>persistence-json</name>
-	<url>http://maven.apache.org</url>
 
 	<dependencies>
 		<dependency>
@@ -28,6 +28,11 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.23</version>
+		</dependency>
+
 	</dependencies>
 </project>
