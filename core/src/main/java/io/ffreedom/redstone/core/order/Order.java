@@ -10,12 +10,11 @@ public interface Order extends Comparable<Order> {
 
 	/**
 	 * 
-	 * ownerId | epochSecond | increment <br>
-	 *     922 | 3372036854  | 775807 <br>
+	 * oId | epochSecond| increment <br>
+	 * 922 | 3372036854 | 775807 <br>
 	 * 
 	 * @return int
 	 */
-
 	long getOrdSysId();
 
 	Instrument getInstrument();

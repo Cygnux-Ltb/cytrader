@@ -1,7 +1,5 @@
 package io.ffreedom.redstone.adaptor.ctp;
 
-import java.util.Collection;
-
 import io.ffreedom.common.charset.Charsets;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamMap;
@@ -17,6 +15,8 @@ import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.req.ReqQueryBalance;
 import io.ffreedom.redstone.core.adaptor.req.ReqQueryPositions;
 import io.ffreedom.redstone.core.adaptor.req.ReqSubscribeMarketData;
+import io.ffreedom.redstone.core.assets.Balance;
+import io.ffreedom.redstone.core.assets.Positions;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.transport.core.role.Publisher;
 import io.ffreedom.transport.rabbitmq.RabbitMqPublisher;
@@ -89,11 +89,7 @@ public class CtpOutboundAdaptor implements OutboundAdaptor {
 		outboundPublisher.publish(JsonSerializationUtil.objToJson(msg).getBytes(Charsets.UTF8));
 	}
 
-	@Override
-	public Collection<Order> queryPositions(ReqQueryPositions queryPositions) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public boolean subscribeMarketData(ReqSubscribeMarketData subscribeMarketData) {
@@ -102,9 +98,17 @@ public class CtpOutboundAdaptor implements OutboundAdaptor {
 	}
 
 	@Override
-	public Collection<Order> queryBalance(ReqQueryBalance queryPositions) {
+	public Positions queryPositions(ReqQueryPositions queryPositions) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Balance queryBalance(ReqQueryBalance queryPositions) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

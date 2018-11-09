@@ -1,10 +1,10 @@
 package io.ffreedom.redstone.core.adaptor;
 
-import java.util.Collection;
-
 import io.ffreedom.redstone.core.adaptor.req.ReqQueryBalance;
 import io.ffreedom.redstone.core.adaptor.req.ReqQueryPositions;
 import io.ffreedom.redstone.core.adaptor.req.ReqSubscribeMarketData;
+import io.ffreedom.redstone.core.assets.Balance;
+import io.ffreedom.redstone.core.assets.Positions;
 import io.ffreedom.redstone.core.order.Order;
 
 public interface OutboundAdaptor<RSM extends ReqSubscribeMarketData, RQP extends ReqQueryPositions, RQB extends ReqQueryBalance>
@@ -17,12 +17,11 @@ public interface OutboundAdaptor<RSM extends ReqSubscribeMarketData, RQP extends
 	boolean cancelOrder(Order order);
 
 	default boolean modifyOrder(Order order) {
-		throw new UnsupportedOperationException("AdaptorId -> " + getAdaptorId() + ", AdaptorName - >"
-				+ getAdaptorName() + " - Method modifyOrder(order) is unsupported.");
+		return false;
 	}
 
-	Collection<Order> queryPositions(RQP queryPositions);
+	Positions queryPositions(RQP queryPositions);
 
-	Collection<Order> queryBalance(RQB queryPositions);
+	Balance queryBalance(RQB queryPositions);
 
 }

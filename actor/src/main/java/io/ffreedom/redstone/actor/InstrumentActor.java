@@ -24,27 +24,27 @@ public final class InstrumentActor {
 	private InstrumentActor() {
 	}
 
-	public static void setNotTradeable(Instrument instrument) {
-		INSTANCE.notTradeable(instrument);
+	public static void setNotTradable(Instrument instrument) {
+		INSTANCE.notTradable(instrument);
 	}
 
-	private void notTradeable(Instrument instrument) {
+	private void notTradable(Instrument instrument) {
 		isTradableMap.put(instrument.getInstrumentId(), false);
 	}
 
-	public static void setTradeable(Instrument instrument) {
-		INSTANCE.tradeable(instrument);
+	public static void setTradable(Instrument instrument) {
+		INSTANCE.tradable(instrument);
 	}
 
-	private void tradeable(Instrument instrument) {
+	private void tradable(Instrument instrument) {
 		isTradableMap.put(instrument.getInstrumentId(), true);
 	}
 
-	public static boolean isTradeable(Instrument instrument) {
-		return INSTANCE.isTradeable0(instrument);
+	public static boolean isTradable(Instrument instrument) {
+		return INSTANCE.isTradable0(instrument);
 	}
 
-	private boolean isTradeable0(Instrument instrument) {
+	private boolean isTradable0(Instrument instrument) {
 		return isTradableMap.get(instrument.getInstrumentId());
 	}
 
@@ -55,7 +55,7 @@ public final class InstrumentActor {
 	private void putInstrument0(Instrument instrument) {
 		instrumentIdMap.put(instrument.getInstrumentId(), instrument);
 		instrumentCodeMap.put(instrument.getInstrumentCode(), instrument);
-		tradeable(instrument);
+		tradable(instrument);
 	}
 
 	public static Instrument getInstrument(int instrumentId) {

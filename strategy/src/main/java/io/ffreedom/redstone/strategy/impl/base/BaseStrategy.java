@@ -40,12 +40,12 @@ public abstract class BaseStrategy implements Strategy {
 
 	@Override
 	public void openInstrument(Instrument instrument) {
-		InstrumentActor.setTradeable(instrument);
+		InstrumentActor.setTradable(instrument);
 	}
 
 	@Override
 	public void closeInstrument(Instrument instrument) {
-		InstrumentActor.setNotTradeable(instrument);
+		InstrumentActor.setNotTradable(instrument);
 	}
 
 	@Override

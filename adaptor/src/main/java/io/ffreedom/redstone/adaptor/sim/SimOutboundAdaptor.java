@@ -1,7 +1,6 @@
 package io.ffreedom.redstone.adaptor.sim;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
@@ -12,6 +11,8 @@ import io.ffreedom.redstone.adaptor.sim.dto.SimReqSubscribeMarketData;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.req.ReqQueryBalance;
 import io.ffreedom.redstone.core.adaptor.req.ReqQueryPositions;
+import io.ffreedom.redstone.core.assets.Balance;
+import io.ffreedom.redstone.core.assets.Positions;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.transport.core.role.Sender;
@@ -85,12 +86,6 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 	}
 
 	@Override
-	public Collection<Order> queryPositions(ReqQueryPositions queryPositions) {
-
-		return null;
-	}
-
-	@Override
 	public boolean close() {
 		mdSender.destroy();
 		tdSender.destroy();
@@ -98,7 +93,13 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 	}
 
 	@Override
-	public Collection<Order> queryBalance(ReqQueryBalance reqQueryPositions) {
+	public Positions queryPositions(ReqQueryPositions queryPositions) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Balance queryBalance(ReqQueryBalance queryPositions) {
 		// TODO Auto-generated method stub
 		return null;
 	}

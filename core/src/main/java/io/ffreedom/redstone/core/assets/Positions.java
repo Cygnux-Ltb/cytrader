@@ -1,8 +1,8 @@
 package io.ffreedom.redstone.core.assets;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
+import io.ffreedom.common.collect.EclipseCollections;
 import io.ffreedom.common.utils.DoubleUtil;
 import io.ffreedom.redstone.core.order.Order;
 
@@ -10,7 +10,7 @@ public class Positions {
 
 	private int accountId;
 	// Map<instrumentId, Position>
-	private MutableIntObjectMap<Position> positionMap = IntObjectHashMap.newMap();
+	private MutableIntObjectMap<Position> positionMap = EclipseCollections.newIntObjectHashMap();
 
 	public Positions(int accountId) {
 		this.accountId = accountId;
