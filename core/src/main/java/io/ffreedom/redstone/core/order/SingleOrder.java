@@ -20,7 +20,7 @@ public abstract class SingleOrder implements Order {
 
 	public SingleOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
 			OrdStatus ordStatus, OrdTimestamps ordTimestamps, int strategyId, int subAccountId) {
-		this.ordSysId = OrdSysIdGenerate.nextOrdSysId(strategyId);
+		this.ordSysId = OrdSysIdGenerate.next(strategyId);
 		this.instrument = instrument;
 		this.ordQtyPrice = ordQtyPrice;
 		this.ordSide = ordSide;

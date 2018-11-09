@@ -19,22 +19,22 @@ class CtpOrderRefLogger {
 	private CtpOrderRefLogger() {
 	}
 
-	void put(Integer orderRef, Long orderSysId) {
-		ctpOrderBook.put(orderRef, orderSysId);
+	void put(Integer orderRef, Long ordSysId) {
+		ctpOrderBook.put(orderRef, ordSysId);
 	}
 
-	Long getOrderSysId(Integer orderRef) throws CtpOrderRefNotFoundException {
+	Long getOrdSysId(Integer orderRef) throws CtpOrderRefNotFoundException {
 		if (ctpOrderBook.containsKey(orderRef)) {
 			return ctpOrderBook.get(orderRef);
 		}
 		throw new CtpOrderRefNotFoundException(orderRef);
 	}
 
-	Integer getOrderRef(Long orderSysId) throws CtpOrderRefNotFoundException {
-		if (ctpOrderBook.inverse().containsKey(orderSysId)) {
-			return ctpOrderBook.inverse().get(orderSysId);
+	Integer getOrderRef(Long ordSysId) throws CtpOrderRefNotFoundException {
+		if (ctpOrderBook.inverse().containsKey(ordSysId)) {
+			return ctpOrderBook.inverse().get(ordSysId);
 		}
-		throw new CtpOrderRefNotFoundException(orderSysId);
+		throw new CtpOrderRefNotFoundException(ordSysId);
 	}
 
 }

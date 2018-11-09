@@ -1,7 +1,7 @@
 package io.ffreedom.redstone.strategy.impl.base;
 
 import io.ffreedom.financial.Instrument;
-import io.ffreedom.redstone.actor.InstrumentState;
+import io.ffreedom.redstone.actor.InstrumentActor;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.strategy.Strategy;
 
@@ -40,18 +40,18 @@ public abstract class BaseStrategy implements Strategy {
 
 	@Override
 	public void openInstrument(Instrument instrument) {
-		InstrumentState.setTradable(instrument);
+		InstrumentActor.setTradeable(instrument);
 	}
 
 	@Override
 	public void closeInstrument(Instrument instrument) {
-		InstrumentState.setNontradable(instrument);
+		InstrumentActor.setNotTradeable(instrument);
 	}
 
 	@Override
 	public void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

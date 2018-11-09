@@ -8,21 +8,25 @@ import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.storage.OrderBook;
 
-public class OrderState {
+public class OrderActor {
 
-	private MutableLongObjectMap<Order> orderSysIdOrderMap = LongObjectHashMap.newMap();
+	private MutableLongObjectMap<Order> ordSysIdOrderMap = LongObjectHashMap.newMap();
 
 	private MutableIntObjectMap<OrderBook> accountIdOrderBookMap = IntObjectHashMap.newMap();
 
 	private MutableIntObjectMap<OrderBook> strategyIdOrderBookMap = IntObjectHashMap.newMap();
 
-	public final static OrderState INSTANCE = new OrderState();
+	private final static OrderActor INSTANCE = new OrderActor();
 
-	private OrderState() {
+	private OrderActor() {
 	}
 
-	public void onOrder(Order order) {
-		if (orderSysIdOrderMap.containsKey(order.getOrdSysId())) {
+	public static void onOrder(Order order) {
+		INSTANCE.onOrder0(order);
+	}
+
+	private void onOrder0(Order order) {
+		if (ordSysIdOrderMap.containsKey(order.getOrdSysId())) {
 			updateOrder(order);
 		} else {
 			putOrder(order);
@@ -34,8 +38,8 @@ public class OrderState {
 	}
 
 	private void putOrder(Order order) {
-		orderSysIdOrderMap.put(order.getOrdSysId(), order);
-		int accountId = AccountState.getAccount(order.getSubAccountId()).getAccountId();
+		ordSysIdOrderMap.put(order.getOrdSysId(), order);
+		int accountId = AccountActor.getAccount(order.getSubAccountId()).getAccountId();
 		if (!accountIdOrderBookMap.containsKey(accountId)) {
 			accountIdOrderBookMap.put(accountId, OrderBook.newInstance());
 		}
@@ -46,8 +50,12 @@ public class OrderState {
 		strategyIdOrderBookMap.get(order.getStrategyId()).putOrder(order);
 	}
 
-	public Order getOrder(long orderSysId) {
-		return orderSysIdOrderMap.get(orderSysId);
+	public static Order getOrder(long orderSysId) {
+		return INSTANCE.getOrder0(orderSysId);
+	}
+
+	private Order getOrder0(long orderSysId) {
+		return ordSysIdOrderMap.get(orderSysId);
 	}
 
 	public OrderBook getStrategyOrderBook(int strategyId) {
@@ -56,7 +64,7 @@ public class OrderState {
 		}
 		return strategyIdOrderBookMap.get(strategyId);
 	}
-	
+
 	public OrderBook getAccountOrderBook(int accountId) {
 		if (!accountIdOrderBookMap.containsKey(accountId)) {
 			accountIdOrderBookMap.put(accountId, OrderBook.newInstance());

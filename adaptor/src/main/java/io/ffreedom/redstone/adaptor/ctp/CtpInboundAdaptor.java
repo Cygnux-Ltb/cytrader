@@ -6,7 +6,7 @@ import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.market.MarketData;
 import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
-import io.ffreedom.redstone.actor.OrderState;
+import io.ffreedom.redstone.actor.OrderActor;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.ctp.converter.inbound.CtpInboundMarketDataConverter;
 import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMarketData;
@@ -77,8 +77,8 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 
 	private Order checkoutCtpOrder(Integer orderRef) {
 		try {
-			Long orderSysId = CtpOrderRefLogger.INSTANCE.getOrderSysId(orderRef);
-			return OrderState.INSTANCE.getOrder(orderSysId);
+			Long orderSysId = CtpOrderRefLogger.INSTANCE.getOrdSysId(orderRef);
+			return OrderActor.getOrder(orderSysId);
 		} catch (CtpOrderRefNotFoundException e) {
 			// TODO Log
 			throw new RuntimeException(e);

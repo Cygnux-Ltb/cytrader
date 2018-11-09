@@ -8,7 +8,7 @@ import io.ffreedom.common.collect.EclipseCollections;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.account.SubAccount;
 
-public final class AccountState {
+public final class AccountActor {
 
 	// Map<subAccountId, Account>
 	private MutableIntObjectMap<Account> accountMap = EclipseCollections.newIntObjectHashMap();
@@ -16,9 +16,9 @@ public final class AccountState {
 	// Map<accountId, List<subAccount>>
 	private MutableListMultimap<Integer, SubAccount> subAccountMap = EclipseCollections.newFastListMultimap();
 
-	private final static AccountState INSTANCE = new AccountState();
+	private final static AccountActor INSTANCE = new AccountActor();
 
-	private AccountState() {
+	private AccountActor() {
 	}
 
 	public final static Account getAccount(int subAccountId) {

@@ -13,7 +13,7 @@ import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.market.MarketData;
 import io.ffreedom.market.QuoteLevelOverflowException;
-import io.ffreedom.redstone.actor.InstrumentState;
+import io.ffreedom.redstone.actor.InstrumentActor;
 import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMarketData;
 
 public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarketData, MarketData> {
@@ -32,7 +32,7 @@ public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarket
 		LocalTime time = LocalTime.parse(ctpMarketData.getUpdateTime(), updateTimeformatter)
 				.plus(ctpMarketData.getUpdateMillisec(), ChronoUnit.MILLIS);
 
-		Instrument instrument = InstrumentState.getInstrument(ctpMarketData.getInstrumentID());
+		Instrument instrument = InstrumentActor.getInstrument(ctpMarketData.getInstrumentID());
 
 		MarketData marketData = null;
 		try {

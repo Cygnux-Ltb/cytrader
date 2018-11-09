@@ -6,7 +6,7 @@ import java.util.Collection;
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
 import io.ffreedom.persistence.avro.serializable.AvroBytesSerializer;
-import io.ffreedom.redstone.actor.OrderState;
+import io.ffreedom.redstone.actor.OrderActor;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.sim.dto.SimReqSubscribeMarketData;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
@@ -60,7 +60,7 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 	}
 
 	public boolean cancelOrder(Order order) {
-		Order cancelOrder = OrderState.INSTANCE.getOrder(order.getOrdSysId());
+		Order cancelOrder = OrderActor.getOrder(order.getOrdSysId());
 		io.ffreedom.persistence.avro.entity.Order simOrder = io.ffreedom.persistence.avro.entity.Order.newBuilder()
 				.setOrderRef(new Long(order.getOrdSysId()).intValue())
 				.setInstrumentId(cancelOrder.getInstrument().getInstrumentCode())
@@ -86,7 +86,7 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 
 	@Override
 	public Collection<Order> queryPositions(ReqQueryPositions queryPositions) {
-		
+
 		return null;
 	}
 

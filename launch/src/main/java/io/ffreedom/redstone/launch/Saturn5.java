@@ -8,7 +8,7 @@ import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.financial.futures.ChinaFuturesSymbol;
 import io.ffreedom.indicators.api.IndicatorPeriod;
 import io.ffreedom.indicators.pools.IndicatorPeriodTimePools;
-import io.ffreedom.redstone.actor.ApplicationState;
+import io.ffreedom.redstone.actor.AppGlobalStatus;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.ctp.CtpInboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
@@ -26,20 +26,13 @@ public class Saturn5 {
 			System.out.println(printInfo);
 			throw new RuntimeException("param error.");
 		}
-		Integer applicationId = Integer.valueOf(args[0]);
-		if (applicationId < ApplicationState.MINIMUM_ID) {
-			throw new RuntimeException("ApplicationId too small, Not less than -> " + ApplicationState.MINIMUM_ID);
-		}
-		if (applicationId > ApplicationState.MAXIMUM_ID) {
-			throw new RuntimeException("ApplicationId too big, Not greater than -> " + ApplicationState.MAXIMUM_ID);
-		}
-
-		// Set Global ApplicationId
-		ApplicationState.setApplicationId(applicationId);
+		Integer appId = Integer.valueOf(args[0]);
+		// Set Global AppId
+		AppGlobalStatus.setAppId(appId);
 
 		long datetime = DateTimeUtil.datetimeToSecond();
 
-		LoggerSetter.setLogFileName("redstone-" + applicationId + "-" + datetime);
+		LoggerSetter.setLogFileName("redstone-" + appId + "-" + datetime);
 		LoggerSetter.setLogLevel(LogLevel.DEBUG);
 
 		IndicatorPeriodTimePools.INSTANCE.register(IndicatorPeriod.M1, ChinaFuturesSymbol.values());

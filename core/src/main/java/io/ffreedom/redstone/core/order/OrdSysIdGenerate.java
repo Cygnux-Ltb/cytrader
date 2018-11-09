@@ -1,12 +1,17 @@
 package io.ffreedom.redstone.core.order;
 
-import java.time.Clock;
+import javax.annotation.concurrent.NotThreadSafe;
 
+import io.ffreedom.common.datetime.EpochTime;
+
+@NotThreadSafe
 public final class OrdSysIdGenerate {
 
 	private static int increment;
 
-	private static long lastUseEpochSecond;
+	private static long lastUseEpochSeconds;
+
+	private static int maxLimitOwnerId = 921;
 
 	/**
 	 * 
@@ -14,25 +19,29 @@ public final class OrdSysIdGenerate {
 	 *            max value 921
 	 * @return
 	 */
-	public static long nextOrdSysId(int ownerId) {
-		long nowEpochSecond = Clock.systemUTC().instant().getEpochSecond();
-		if (nowEpochSecond != lastUseEpochSecond) {
-			lastUseEpochSecond = nowEpochSecond;
+	public static long next(int ownerId) {
+		if (ownerId < 1 || ownerId > maxLimitOwnerId)
+			throw new RuntimeException("OwnerId is illegal.");
+		long nowEpochSeconds = EpochTime.seconds();
+		if (nowEpochSeconds != lastUseEpochSeconds) {
+			lastUseEpochSeconds = nowEpochSeconds;
 			increment = 0;
 		}
-		return ownerId * 10_000_000_000_000_000L + lastUseEpochSecond * 1_000_000L + ++increment;
+		return ownerId * 10_000_000_000_000_000L + lastUseEpochSeconds * 1_000_000L + ++increment;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		System.out.println(9219999999999999999L);
 		System.out.println(Long.MAX_VALUE);
-		System.out.println("000" + Clock.systemUTC().instant().getEpochSecond() + "000000");
+		System.out.println("000" + EpochTime.seconds() + "000000");
 
 		System.out.println("OrdSysId");
 
-		for (int i = 0; i < 10000; i++)
-			System.out.println(OrdSysIdGenerate.nextOrdSysId(100));
+		for (int i = 0; i < 10000; i++) {
+			Thread.sleep(1);
+			System.out.println(OrdSysIdGenerate.next(100));
+		}
 
 	}
 

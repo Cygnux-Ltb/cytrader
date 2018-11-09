@@ -6,35 +6,43 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public final class ApplicationState {
+public final class AppGlobalStatus {
 
-	public static final int MINIMUM_ID = 100;
+	private int maxLimit = 20;
 
-	public static final int MAXIMUM_ID = 214;
+	private int appId = 0;
 
-	private static int APPLICATION_ID = 0;
+	private AppStatus currentStatus = AppStatus.Unknown;
 
-	private AppStatus currentState;
+	private final static AppGlobalStatus INSTANCE = new AppGlobalStatus();
 
-	private ApplicationState() {
+	private AppGlobalStatus() {
 	}
 
-	public static int getApplicationId() {
-		return APPLICATION_ID;
+	public static int appId() {
+		return INSTANCE.appId;
 	}
 
-	public static void setApplicationId(int applicationId) {
-		if (APPLICATION_ID == 0) {
-			if (applicationId > 0 && applicationId < 215) {
-				ApplicationState.APPLICATION_ID = applicationId;
+	public static AppStatus appStatus() {
+		return INSTANCE.currentStatus;
+	}
+
+	public static void setAppId(int appId) {
+		INSTANCE.setAppId0(appId);
+	}
+
+	public void setAppId0(int appId) {
+		if (this.appId == 0) {
+			if (appId > 0 && appId < maxLimit) {
+				this.appId = appId;
 			} else {
-				throw new RuntimeException("ApplicationId is illegal.");
+				throw new RuntimeException("AppId is illegal.");
 			}
 		}
 	}
 
-	public AppStatus appStatus() {
-		return currentState;
+	public static void setStatus(AppStatus status) {
+		INSTANCE.currentStatus = status;
 	}
 
 	public static enum AppStatus {
@@ -54,9 +62,6 @@ public final class ApplicationState {
 		System.out.println(epochMilli);
 
 		System.out.println(epochMilli - zoned2018_1);
-
-		// System.out.println(LocalDate.now().getDayOfYear());
-		// System.out.println(LocalTime.now().toSecondOfDay());
 
 	}
 

@@ -1,19 +1,17 @@
 package io.ffreedom.redstone.adaptor.ctp.converter.outbound;
 
 import io.ffreedom.common.functional.Converter;
-import io.ffreedom.redstone.actor.ApplicationState;
+import io.ffreedom.redstone.actor.AppGlobalStatus;
 import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundNewOrder;
-import io.ffreedom.redstone.adaptor.ctp.utils.CtpOrderRefBuilder;
+import io.ffreedom.redstone.adaptor.ctp.utils.CtpOrderRefGenerate;
 import io.ffreedom.redstone.core.order.Order;
 
 public class CtpOutboundNewOrderConverter implements Converter<Order, CtpOutboundNewOrder> {
 
-	private CtpOrderRefBuilder orderRefBuilder = new CtpOrderRefBuilder();
-
 	@Override
 	public CtpOutboundNewOrder convert(Order order) {
 
-		int orderRef = orderRefBuilder.build(ApplicationState.getApplicationId(), order.getStrategyId());
+		int orderRef = CtpOrderRefGenerate.next(AppGlobalStatus.appId());
 
 		char direction;
 		switch (order.getOrdSide()) {

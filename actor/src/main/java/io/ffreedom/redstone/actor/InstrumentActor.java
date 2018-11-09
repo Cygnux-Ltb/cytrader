@@ -3,46 +3,48 @@ package io.ffreedom.redstone.actor;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntBooleanMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
+import io.ffreedom.common.collect.EclipseCollections;
 import io.ffreedom.financial.Instrument;
 
-public final class InstrumentState {
+public final class InstrumentActor {
 
+	// Map<instrumentId, boolean>
 	private MutableIntBooleanMap isTradableMap = new IntBooleanHashMap();
 
-	private MutableIntObjectMap<Instrument> instrumentIdMap = IntObjectHashMap.newMap();
+	// Map<instrumentId, instrument>
+	private MutableIntObjectMap<Instrument> instrumentIdMap = EclipseCollections.newIntObjectHashMap();
 
-	private MutableMap<String, Instrument> instrumentCodeMap = UnifiedMap.newMap();
+	// Map<instrumentCode, instrument>
+	private MutableMap<String, Instrument> instrumentCodeMap = EclipseCollections.newUnifiedMap();
 
-	private final static InstrumentState INSTANCE = new InstrumentState();
+	private final static InstrumentActor INSTANCE = new InstrumentActor();
 
-	private InstrumentState() {
+	private InstrumentActor() {
 	}
 
-	public static void setNontradable(Instrument instrument) {
-		INSTANCE.setNontradable0(instrument);
+	public static void setNotTradeable(Instrument instrument) {
+		INSTANCE.notTradeable(instrument);
 	}
 
-	private void setNontradable0(Instrument instrument) {
+	private void notTradeable(Instrument instrument) {
 		isTradableMap.put(instrument.getInstrumentId(), false);
 	}
 
-	public static void setTradable(Instrument instrument) {
-		INSTANCE.setTradable0(instrument);
+	public static void setTradeable(Instrument instrument) {
+		INSTANCE.tradeable(instrument);
 	}
 
-	private void setTradable0(Instrument instrument) {
+	private void tradeable(Instrument instrument) {
 		isTradableMap.put(instrument.getInstrumentId(), true);
 	}
 
-	public boolean isTradable(Instrument instrument) {
-		return INSTANCE.isTradable0(instrument);
+	public static boolean isTradeable(Instrument instrument) {
+		return INSTANCE.isTradeable0(instrument);
 	}
 
-	private boolean isTradable0(Instrument instrument) {
+	private boolean isTradeable0(Instrument instrument) {
 		return isTradableMap.get(instrument.getInstrumentId());
 	}
 
@@ -53,7 +55,7 @@ public final class InstrumentState {
 	private void putInstrument0(Instrument instrument) {
 		instrumentIdMap.put(instrument.getInstrumentId(), instrument);
 		instrumentCodeMap.put(instrument.getInstrumentCode(), instrument);
-		setTradable(instrument);
+		tradeable(instrument);
 	}
 
 	public static Instrument getInstrument(int instrumentId) {
