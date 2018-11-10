@@ -1,9 +1,5 @@
 package io.ffreedom.redstone.core.order.enums;
 
-import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntObjectMapFactoryImpl;
-import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 import org.slf4j.Logger;
 
 import io.ffreedom.common.log.LoggerFactory;
@@ -57,27 +53,24 @@ public enum OrdStatus {
 		return isActive;
 	}
 
-	private static ImmutableIntObjectMap<OrdStatus> codeMap;
-
-	static {
-		synchronized (OrdStatus.class) {
-			if (codeMap == null) {
-				MutableIntObjectMap<OrdStatus> tempMap = IntObjectHashMap.newMap();
-				for (OrdStatus ordStatus : OrdStatus.values()) {
-					tempMap.put(ordStatus.getCode(), ordStatus);
-				}
-				codeMap = ImmutableIntObjectMapFactoryImpl.INSTANCE.withAll(tempMap);
-			}
-		}
-	}
-
 	public static OrdStatus valueOf(int code) {
-		OrdStatus ordStatus = codeMap.get(code);
-		if (ordStatus == null) {
-			logger.error("OrdStatus.valueOf(code=={}) -> is not find, return OrdStatus.Invalid");
+		switch (code) {
+		case 10:return PendingNew;
+		case 11:return New;
+		case 12:return NewRejected;
+		case 20:return PendingCancel;
+		case 21:return Canceled;
+		case 22:return CancelRejected;
+		case 30:return PendingReplace;
+		case 31:return Replaced;
+		case 41:return Suspended;
+		case 51:return PartiallyFilled;
+		case 52:return Filled;
+		default:
+			logger.error("OrdStatus.valueOf(code=={}) -> is no matches, return OrdStatus.Invalid", code);
 			return Invalid;
 		}
-		return ordStatus;
+
 	}
 
 }

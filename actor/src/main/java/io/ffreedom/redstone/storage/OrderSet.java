@@ -1,41 +1,48 @@
 package io.ffreedom.redstone.storage;
 
-import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
-import org.eclipse.collections.api.set.sorted.MutableSortedSet;
-import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
+import java.util.Collection;
 
+import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
+
+import io.ffreedom.common.collect.EclipseCollections;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.core.order.enums.OrdSide;
+import io.ffreedom.redstone.core.trade.enums.TrdDirection;
 
 public final class OrderSet {
 
-	private MutableSortedSet<Order> mutableOrders = TreeSortedSet.newSet();
+	private TrdDirection direction;
+	private MutableLongObjectMap<Order> orders = EclipseCollections.newLongObjectHashMap();
 
-	private OrderSet() {
+	private OrderSet(TrdDirection direction) {
+		this.direction = direction;
 	}
 
-	public static OrderSet newInstance() {
-		return new OrderSet();
+	public static OrderSet newLongSet() {
+		return new OrderSet(TrdDirection.Long);
 	}
 
-	public boolean addOrder(Order order) {
-		return mutableOrders.add(order);
+	public static OrderSet newShortSet() {
+		return new OrderSet(TrdDirection.Short);
 	}
 
-	public boolean removeOrder(Order order) {
-		return mutableOrders.remove(order);
+	public TrdDirection getDirection() {
+		return direction;
 	}
 
-	public ImmutableSortedSet<Order> immutableSet() {
-		return mutableOrders.toImmutable();
+	public Order put(Order order) {
+		return orders.put(order.getOrdSysId(), order);
 	}
 
-	public ImmutableSortedSet<Order> immutableSet(OrdSide ordSide) {
-		return mutableOrders.select(order -> order.getOrdSide().equals(ordSide)).toImmutable();
+	public Order remove(Order order) {
+		return orders.remove(order.getOrdSysId());
 	}
 
-	public static void main(String[] args) {
+	public Order get(long ordSysId) {
+		return orders.get(ordSysId);
+	}
 
+	public Collection<Order> getAll() {
+		return orders.values();
 	}
 
 }

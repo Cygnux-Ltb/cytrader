@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.core.trade.enums;
 
-public enum TradeDirection {
+public enum TrdDirection {
 
 	Invalid(-1),
 
@@ -12,7 +12,7 @@ public enum TradeDirection {
 
 	private int code;
 
-	private TradeDirection(int code) {
+	private TrdDirection(int code) {
 		this.code = code;
 	}
 

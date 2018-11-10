@@ -12,7 +12,7 @@ public abstract class GroupOrder {
 	private ImmutableSet<Order> orderSet;
 
 	public GroupOrder(Order... orders) {
-		this.orderSet = EclipseCollections.immutableSet(orders);
+		this.orderSet = EclipseCollections.newImmutableSet(orders);
 	}
 
 	public long getGroupOrderId() {

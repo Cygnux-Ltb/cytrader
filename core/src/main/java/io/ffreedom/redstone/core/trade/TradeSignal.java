@@ -1,8 +1,8 @@
 package io.ffreedom.redstone.core.trade;
 
 import io.ffreedom.financial.Instrument;
-import io.ffreedom.redstone.core.trade.enums.TradeAction;
-import io.ffreedom.redstone.core.trade.enums.TradeDirection;
+import io.ffreedom.redstone.core.trade.enums.TrdAction;
+import io.ffreedom.redstone.core.trade.enums.TrdDirection;
 
 public interface TradeSignal {
 
@@ -12,9 +12,9 @@ public interface TradeSignal {
 
 	double getQty();
 
-	TradeAction getAction();
+	TrdAction getAction();
 
-	TradeDirection getDirection();
+	TrdDirection getDirection();
 
 	public static TradeSignal openLongSignal(Instrument instrument, double price, double qty) {
 		return new OpenLongSignal(instrument, price, qty);
@@ -38,13 +38,13 @@ public interface TradeSignal {
 		}
 
 		@Override
-		public TradeAction getAction() {
-			return TradeAction.Open;
+		public TrdAction getAction() {
+			return TrdAction.Open;
 		}
 
 		@Override
-		public TradeDirection getDirection() {
-			return TradeDirection.Long;
+		public TrdDirection getDirection() {
+			return TrdDirection.Long;
 		}
 	}
 
@@ -54,13 +54,13 @@ public interface TradeSignal {
 		}
 
 		@Override
-		public TradeAction getAction() {
-			return TradeAction.Open;
+		public TrdAction getAction() {
+			return TrdAction.Open;
 		}
 
 		@Override
-		public TradeDirection getDirection() {
-			return TradeDirection.Short;
+		public TrdDirection getDirection() {
+			return TrdDirection.Short;
 		}
 	}
 
@@ -70,13 +70,13 @@ public interface TradeSignal {
 		}
 
 		@Override
-		public TradeAction getAction() {
-			return TradeAction.Close;
+		public TrdAction getAction() {
+			return TrdAction.Close;
 		}
 
 		@Override
-		public TradeDirection getDirection() {
-			return TradeDirection.Long;
+		public TrdDirection getDirection() {
+			return TrdDirection.Long;
 		}
 	}
 
@@ -86,13 +86,13 @@ public interface TradeSignal {
 		}
 
 		@Override
-		public TradeAction getAction() {
-			return TradeAction.Close;
+		public TrdAction getAction() {
+			return TrdAction.Close;
 		}
 
 		@Override
-		public TradeDirection getDirection() {
-			return TradeDirection.Short;
+		public TrdDirection getDirection() {
+			return TrdDirection.Short;
 		}
 	}
 

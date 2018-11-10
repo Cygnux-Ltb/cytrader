@@ -29,7 +29,7 @@ public class OrderActor {
 		if (ordSysIdOrderMap.containsKey(order.getOrdSysId())) {
 			updateOrder(order);
 		} else {
-			putOrder(order);
+			saveOrder(order);
 		}
 	}
 
@@ -37,17 +37,17 @@ public class OrderActor {
 
 	}
 
-	private void putOrder(Order order) {
+	private void saveOrder(Order order) {
 		ordSysIdOrderMap.put(order.getOrdSysId(), order);
 		int accountId = AccountActor.getAccount(order.getSubAccountId()).getAccountId();
 		if (!accountIdOrderBookMap.containsKey(accountId)) {
 			accountIdOrderBookMap.put(accountId, OrderBook.newInstance());
 		}
-		accountIdOrderBookMap.get(accountId).putOrder(order);
+		accountIdOrderBookMap.get(accountId).saveOrder(order);
 		if (!strategyIdOrderBookMap.containsKey(order.getStrategyId())) {
 			strategyIdOrderBookMap.put(order.getStrategyId(), OrderBook.newInstance());
 		}
-		strategyIdOrderBookMap.get(order.getStrategyId()).putOrder(order);
+		strategyIdOrderBookMap.get(order.getStrategyId()).saveOrder(order);
 	}
 
 	public static Order getOrder(long orderSysId) {

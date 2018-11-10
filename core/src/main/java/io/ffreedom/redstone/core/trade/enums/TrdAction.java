@@ -1,18 +1,18 @@
 package io.ffreedom.redstone.core.trade.enums;
 
-public enum TradeAction {
+public enum TrdAction {
 
 	Invalid(-1),
 
-	Open(0),
+	Open(1),
 
-	Close(1),
+	Close(2),
 
 	;
 
 	private int code;
 
-	private TradeAction(int code) {
+	private TrdAction(int code) {
 		this.code = code;
 	}
 
