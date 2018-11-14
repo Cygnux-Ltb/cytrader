@@ -1,36 +1,23 @@
 package io.ffreedom.redstone.core.strategy;
 
+import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.financial.Instrument;
-import io.ffreedom.market.MarketData;
+import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
 
-public interface Strategy extends CircuitBreaker {
+public interface Strategy<I, M extends BasicMarketData> {
 
 	int getStrategyId();
 
-	boolean isTradable();
+	boolean isEnable();
 
-	void init();
+	void init(Initializer<I> initializer);
 
-	default void onControlEvent(StrategyControlEvent event) {
-		if (event != null) {
-			event.onEvent();
-		}
-	}
+	void onControlEvent(StrategyControlEvent event);
 
-	void onMarketData(MarketData marketData);
+	void onMarketData(M marketData);
 
-	void onNewOrder(Order order);
-
-	void onNewOrderReject(Order order);
-
-	void onCancelOrder(Order order);
-
-	void onCancelOrderReject(Order order);
-
-	void onOrderFilled(Order order);
-
-	void onOrderPartiallyFilled(Order order);
+	void onOrder(Order order);
 
 	void onError(Throwable throwable);
 

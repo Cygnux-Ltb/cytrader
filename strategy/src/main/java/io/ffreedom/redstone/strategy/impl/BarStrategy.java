@@ -1,53 +1,28 @@
 package io.ffreedom.redstone.strategy.impl;
 
-import io.ffreedom.market.MarketData;
+import io.ffreedom.common.functional.Initializer;
+import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
 import io.ffreedom.redstone.strategy.impl.base.BaseStrategy;
 
-public class BarStrategy extends BaseStrategy {
+public class BarStrategy extends BaseStrategy<BasicMarketData> {
 
 	public BarStrategy(int strategyId) {
 		super(strategyId);
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void init() {
-
-	}
+	
 
 	@Override
-	public void onNewOrder(Order order) {
+	public void onControlEvent(StrategyControlEvent event) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void onNewOrderReject(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onCancelOrder(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onCancelOrderReject(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onOrderFilled(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onOrderPartiallyFilled(Order order) {
+	public void onMarketData(BasicMarketData marketData) {
 		// TODO Auto-generated method stub
 
 	}
@@ -58,11 +33,4 @@ public class BarStrategy extends BaseStrategy {
 
 	}
 
-	@Override
-	public void onMarketData(MarketData marketData) {
-		// TODO Auto-generated method stub
-
-	}
-
-	
 }

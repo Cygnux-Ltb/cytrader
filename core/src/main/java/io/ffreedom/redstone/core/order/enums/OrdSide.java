@@ -3,43 +3,38 @@ package io.ffreedom.redstone.core.order.enums;
 import org.slf4j.Logger;
 
 import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.redstone.core.trade.enums.TrdDirection;
 
 public enum OrdSide {
 
-	Invalid(-1, false, false),
+	Invalid(-1, TrdDirection.Invalid),
 
-	BUY(1, true, false),
+	BUY(1, TrdDirection.Long),
 
-	SELL(2, false, true),
+	SELL(2, TrdDirection.Short),
 
-	MARGIN_BUY(3, true, false),
+	MARGIN_BUY(3, TrdDirection.Long),
 
-	SHORT_SELL(4, false, true),
+	SHORT_SELL(4, TrdDirection.Short),
 
 	;
 
 	private int code;
-	private boolean isBuy;
-	private boolean isSell;
+	private TrdDirection direction;
 
 	private static Logger logger = LoggerFactory.getLogger(OrdStatus.class);
 
-	private OrdSide(int code, boolean isBuy, boolean isSell) {
+	private OrdSide(int code, TrdDirection direction) {
 		this.code = code;
-		this.isBuy = isBuy;
-		this.isSell = isSell;
+		this.direction = direction;
 	}
 
 	public int getCode() {
 		return code;
 	}
 
-	public boolean isBuy() {
-		return isBuy;
-	}
-
-	public boolean isSell() {
-		return isSell;
+	public TrdDirection getDirection() {
+		return direction;
 	}
 
 	public static OrdSide valueOf(int code) {

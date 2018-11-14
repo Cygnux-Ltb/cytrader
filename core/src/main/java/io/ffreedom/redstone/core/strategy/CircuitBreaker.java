@@ -1,15 +1,17 @@
 package io.ffreedom.redstone.core.strategy;
 
-import io.ffreedom.financial.Instrument;
-
 public interface CircuitBreaker {
 
-	void openStrategy();
+	void enableStrategy();
 
-	void closeStrategy();
+	void disableStrategy();
 
-	void openInstrument(Instrument instrument);
+	void enableAccount(int accountId);
 
-	void closeInstrument(Instrument instrument);
+	void disableAccount(int accountId);
+
+	void enableInstrument(int instrumentId);
+
+	void disableInstrument(int instrumentId);
 
 }

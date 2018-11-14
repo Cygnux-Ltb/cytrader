@@ -1,8 +1,8 @@
 package io.ffreedom.redstone.strategy.impl;
 
 import io.ffreedom.indicators.impl.sar.SAR;
-import io.ffreedom.market.MarketData;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.market.BasicMarketData;
+import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
 import io.ffreedom.redstone.strategy.impl.base.BaseStrategy;
 
 /**
@@ -13,7 +13,7 @@ import io.ffreedom.redstone.strategy.impl.base.BaseStrategy;
  *          Index SAR Strategy
  *
  */
-public class SarStrategy extends BaseStrategy {
+public class SarStrategy extends BaseStrategy<BasicMarketData> {
 
 	private SAR sar = new SAR();
 
@@ -22,55 +22,13 @@ public class SarStrategy extends BaseStrategy {
 	}
 
 	@Override
-	public void init() {
+	public void onControlEvent(StrategyControlEvent event) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void onNewOrder(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onNewOrderReject(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onCancelOrder(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onCancelOrderReject(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onOrderFilled(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onOrderPartiallyFilled(Order order) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onError(Throwable throwable) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onMarketData(MarketData marketData) {
+	public void onMarketData(BasicMarketData marketData) {
 		// TODO Auto-generated method stub
 
 	}

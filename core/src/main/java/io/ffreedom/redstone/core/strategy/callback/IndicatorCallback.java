@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.strategy.specific;
+package io.ffreedom.redstone.core.strategy.callback;
 
 import io.ffreedom.indicators.api.TimeSeriesPoint;
 
