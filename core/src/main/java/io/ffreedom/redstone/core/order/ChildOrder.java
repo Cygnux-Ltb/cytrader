@@ -23,7 +23,7 @@ public final class ChildOrder extends SingleOrder {
 	}
 
 	@Override
-	public OrdRank getOrdRank() {
+	public OrdRank getRank() {
 		return OrdRank.Child;
 	}
 

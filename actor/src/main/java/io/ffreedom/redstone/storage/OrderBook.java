@@ -22,7 +22,7 @@ public class OrderBook {
 	}
 
 	public Order saveOrder(Order order) {
-		switch (order.getOrdSide()) {
+		switch (order.getSide()) {
 		case BUY:
 		case MARGIN_BUY:
 			longOrderSet.put(order);
@@ -33,7 +33,7 @@ public class OrderBook {
 			break;
 		default:
 			throw new RuntimeException(
-					"OrderSysId : " + order.getOrdSysId() + ", OrdSide : " + order.getOrdSide() + " -> is undefined.");
+					"OrderSysId : " + order.getOrdSysId() + ", OrdSide : " + order.getSide() + " -> is undefined.");
 		}
 		return orderMap.put(order.getOrdSysId(), order);
 	}

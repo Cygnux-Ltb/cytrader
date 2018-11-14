@@ -1,7 +1,7 @@
 package io.ffreedom.redstone.scheduler;
 
 import io.ffreedom.common.queue.disruptor.SPSCQueue;
-import io.ffreedom.market.MarketData;
+import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.redstone.actor.StrategyState;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
@@ -18,7 +18,7 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 		this.recvQueue = new SPSCQueue<>(size, true, recvMsg -> {
 			switch (recvMsg.getMark()) {
 			case marketDataMark:
-				MarketData marketData = (MarketData) recvMsg.getContent();
+				BasicMarketData marketData = (BasicMarketData) recvMsg.getContent();
 				StrategyState.INSTANCE.onMarketData(marketData);
 				break;
 			case orderMark:
@@ -33,8 +33,8 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 
 	// TODO Pool RecvMsg
 	@Override
-	public void onMarketData(MarketData marketData) {
-		recvQueue.enQueue(new RecvMsg<MarketData>(marketDataMark, marketData));
+	public void onMarketData(BasicMarketData marketData) {
+		recvQueue.enQueue(new RecvMsg<BasicMarketData>(marketDataMark, marketData));
 	}
 
 	// TODO Pool RecvMsg

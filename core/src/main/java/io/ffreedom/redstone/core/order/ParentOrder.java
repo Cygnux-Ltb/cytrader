@@ -16,16 +16,16 @@ public final class ParentOrder extends SingleOrder {
 
 	private MutableList<ChildOrder> childOrders;
 
-	public ParentOrder(Instrument instrument, double quantity, double offerPrice, OrdSide ordSide, OrdType ordType,
+	public ParentOrder(Instrument instrument, double offerQty, double offerPrice, OrdSide ordSide, OrdType ordType,
 			OrdStatus ordStatus, int strategyId, int subAccountId) {
-		super(instrument, new OrdQtyPrice(quantity, offerPrice), ordSide, ordType, ordStatus,
+		super(instrument, new OrdQtyPrice(offerQty, offerPrice), ordSide, ordType, ordStatus,
 				new OrdTimestamps(EpochTimestamp.now()), strategyId, subAccountId);
 		// TODO List Type
 		this.childOrders = EclipseCollections.newFastList();
 	}
 
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = new ChildOrder(ordSysId, instrument, ordQtyPrice.getTotalQty(),
+		ChildOrder childOrder = new ChildOrder(ordSysId, instrument, ordQtyPrice.getOfferQty(),
 				ordQtyPrice.getOfferPrice(), ordSide, ordType, ordStatus, strategyId, subAccountId);
 		childOrders.add(childOrder);
 		return childOrder;
@@ -38,7 +38,7 @@ public final class ParentOrder extends SingleOrder {
 	}
 
 	@Override
-	public OrdRank getOrdRank() {
+	public OrdRank getRank() {
 		return OrdRank.Parent;
 	}
 

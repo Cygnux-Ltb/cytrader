@@ -7,61 +7,66 @@ import io.ffreedom.redstone.core.order.TradeList.Trade;
 
 public class OrdQtyPrice {
 
-	private double totalQty;
+	private double offerQty;
 	private double filledQty;
-	private double remainedQty;
+	private double lastFilledQty;
+	private double leavesQty;
 
 	private double offerPrice;
-	private double avgExecutionPrice;
+	private double avgPrice;
 
-	public OrdQtyPrice(double totalQty, double offerPrice) {
+	public OrdQtyPrice(double offerQty, double offerPrice) {
 		super();
-		this.totalQty = totalQty;
+		this.offerQty = offerQty;
 		this.filledQty = 0;
-		this.remainedQty = totalQty;
+		this.lastFilledQty = 0;
+		this.leavesQty = offerQty;
 		this.offerPrice = offerPrice;
 	}
 
-	public double getTotalQty() {
-		return totalQty;
+	public double getOfferQty() {
+		return offerQty;
+	}
+
+	public double getLastFilledQty() {
+		return lastFilledQty;
 	}
 
 	public double getFilledQty() {
 		return filledQty;
 	}
 
-	public void setFilledQty(double filledQty) {
-		this.filledQty = filledQty;
-	}
-
-	public double getRemainedQty() {
-		return remainedQty;
-	}
-
-	public void setRemainedQty(double remainedQty) {
-		this.remainedQty = remainedQty;
-	}
-
-	public void setOfferPrice(double offerPrice) {
-		this.offerPrice = offerPrice;
+	public double getLeavesQty() {
+		return leavesQty;
 	}
 
 	public double getOfferPrice() {
 		return offerPrice;
 	}
 
-	public double getAvgExecutionPrice() {
-		return avgExecutionPrice;
+	public double getAvgPrice() {
+		return avgPrice;
 	}
 
-	public OrdQtyPrice calculationAvgExecutionPrice(TradeList trades) {
+	public OrdQtyPrice setLeavesQty(double leavesQty) {
+		this.leavesQty = leavesQty;
+		return this;
+	}
+
+	public OrdQtyPrice setFilledQty(double filledQty) {
+		this.lastFilledQty = this.filledQty;
+		this.filledQty = filledQty;
+		return this;
+	}
+
+	public OrdQtyPrice calculationAvgPrice(TradeList trades) {
 		if (!trades.isEmpty()) {
 			MutableSortedSet<Trade> tradeSet = trades.getTradeSet();
 			double totalPrice = tradeSet
 					.sumOfDouble(trade -> DoubleUtil.multiply8(trade.getTradePrice(), trade.getTradeQty()));
 			double totalQty = DoubleUtil.correction8(tradeSet.sumOfDouble(trade -> trade.getTradeQty()));
 			if (totalQty > 0.0D)
-				this.avgExecutionPrice = DoubleUtil.division(totalPrice, totalQty);
+				this.avgPrice = DoubleUtil.division(totalPrice, totalQty);
 			return this;
 		}
 		return this;

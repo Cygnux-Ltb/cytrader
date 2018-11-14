@@ -27,15 +27,15 @@ public class Positions {
 			position = Position.create(instrumentId);
 			positionMap.put(instrumentId, position);
 		}
-		switch (order.getOrdSide()) {
+		switch (order.getSide()) {
 		case BUY:
 		case MARGIN_BUY:
-			position.setCurrentQty(DoubleUtil.add8(position.getCurrentQty(), order.getOrdQtyPrice().getFilledQty()));
+			position.setCurrentQty(DoubleUtil.add8(position.getCurrentQty(), order.getQtyPrice().getFilledQty()));
 			break;
 		case SELL:
 		case SHORT_SELL:
 			position.setCurrentQty(
-					DoubleUtil.subtraction(position.getCurrentQty(), order.getOrdQtyPrice().getFilledQty()));
+					DoubleUtil.subtraction(position.getCurrentQty(), order.getQtyPrice().getFilledQty()));
 		default:
 			break;
 		}

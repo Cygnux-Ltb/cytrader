@@ -12,7 +12,7 @@ import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
 
-public abstract class BaseStrategy<M extends BasicMarketData> implements Strategy<Boolean, M>, CircuitBreaker {
+public abstract class BaseStrategy<M extends BasicMarketData> implements Strategy, CircuitBreaker {
 
 	private int strategyId;
 

@@ -4,7 +4,9 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
+import org.slf4j.Logger;
 
+import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.storage.OrderBook;
 
@@ -17,6 +19,8 @@ public class OrderActor {
 	private MutableIntObjectMap<OrderBook> strategyIdOrderBookMap = IntObjectHashMap.newMap();
 
 	private final static OrderActor INSTANCE = new OrderActor();
+
+	private static Logger logger = LoggerFactory.getLogger(OrderActor.class);
 
 	private OrderActor() {
 	}
@@ -34,7 +38,23 @@ public class OrderActor {
 	}
 
 	private void updateOrder(Order order) {
-
+		switch (order.getStatus()) {
+		case New:
+			break;
+		case Canceled:
+			break;
+		case PartiallyFilled:
+			break;
+		case Filled:
+			break;
+		case NewRejected:
+			break;
+		case CancelRejected:
+			break;
+		default:
+			logger.warn("Not processed : OrdSysId -> {}, OrdStatus -> {}", order.getOrdSysId(), order.getStatus());
+			break;
+		}
 	}
 
 	private void saveOrder(Order order) {

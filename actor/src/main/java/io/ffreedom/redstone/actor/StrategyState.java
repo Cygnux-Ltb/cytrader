@@ -15,9 +15,9 @@ public final class StrategyState {
 
 	private Logger logger = LoggerFactory.getLogger(StrategyState.class);
 
-	private MutableIntObjectMap<Strategy<?>> strategyMap = new IntObjectHashMap<>();
+	private MutableIntObjectMap<Strategy> strategyMap = new IntObjectHashMap<>();
 
-	private MutableMultimap<Integer, Strategy<BasicMarketData>> instrumentStrategyMultimap = FastListMultimap
+	private MutableMultimap<Integer, Strategy> instrumentStrategyMultimap = FastListMultimap
 			.newMultimap();
 
 	public static final StrategyState INSTANCE = new StrategyState();
@@ -31,34 +31,11 @@ public final class StrategyState {
 	}
 
 	public void onOrder(Order order) {
-		Strategy<?> strategy = strategyMap.get(order.getStrategyId());
-		switch (order.getOrdStatus()) {
-		case New:
-			strategy.onNewOrder(order);
-			break;
-		case Canceled:
-			strategy.onCancelOrder(order);
-			break;
-		case PartiallyFilled:
-			strategy.onOrderPartiallyFilled(order);
-			break;
-		case Filled:
-			strategy.onOrderFilled(order);
-			break;
-		case NewRejected:
-			strategy.onNewOrderReject(order);
-			break;
-		case CancelRejected:
-			strategy.onCancelOrderReject(order);
-			break;
-		default:
-			logger.warn("Not processed : OrdSysId -> {}, OrdStatus -> {}", order.getOrdSysId(), order.getOrdStatus());
-			break;
-		}
-
+		Strategy strategy = strategyMap.get(order.getStrategyId());
+		strategy.onOrder(order);
 	}
 
-	public void registerStrategy(Strategy<?> strategy) {
+	public void registerStrategy(Strategy strategy) {
 		strategyMap.put(strategy.getStrategyId(), strategy);
 	}
 

@@ -5,17 +5,17 @@ import io.ffreedom.financial.Instrument;
 import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
 
-public interface Strategy<I, M extends BasicMarketData> {
+public interface Strategy {
 
 	int getStrategyId();
 
 	boolean isEnable();
 
-	void init(Initializer<I> initializer);
+	void init(Initializer<Boolean> initializer);
 
 	void onControlEvent(StrategyControlEvent event);
 
-	void onMarketData(M marketData);
+	void onMarketData(BasicMarketData marketData);
 
 	void onOrder(Order order);
 

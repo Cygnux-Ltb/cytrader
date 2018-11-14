@@ -1,12 +1,14 @@
 package io.ffreedom.redstone.strategy.impl;
 
 import io.ffreedom.indicators.impl.ma.SMA;
+import io.ffreedom.indicators.impl.ma.base.MAPoint;
 import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
+import io.ffreedom.redstone.core.strategy.callback.IndicatorCallback;
 import io.ffreedom.redstone.strategy.impl.base.BaseStrategy;
 
-public class SmaStrategy extends BaseStrategy<BasicMarketData> {
+public class SmaStrategy extends BaseStrategy<BasicMarketData> implements IndicatorCallback<MAPoint> {
 
 	private SMA sma;
 
@@ -29,6 +31,18 @@ public class SmaStrategy extends BaseStrategy<BasicMarketData> {
 
 	@Override
 	public void onControlEvent(StrategyControlEvent event) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onStartPoint(MAPoint p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onEndPoint(MAPoint p) {
 		// TODO Auto-generated method stub
 
 	}

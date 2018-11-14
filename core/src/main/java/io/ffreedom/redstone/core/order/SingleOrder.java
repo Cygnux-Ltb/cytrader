@@ -43,36 +43,36 @@ public abstract class SingleOrder implements Order {
 	}
 
 	@Override
-	public OrdQtyPrice getOrdQtyPrice() {
+	public OrdQtyPrice getQtyPrice() {
 		return ordQtyPrice;
 	}
 
 	@Override
-	public OrdSide getOrdSide() {
+	public OrdSide getSide() {
 		return ordSide;
 	}
 
 	@Override
-	public OrdType getOrdType() {
+	public OrdType getType() {
 		return ordType;
 	}
 
 	@Override
-	public OrdStatus getOrdStatus() {
+	public OrdStatus getStatus() {
 		return ordStatus;
 	}
 
 	@Override
-	public OrdTimestamps getOrdTimestamps() {
+	public OrdTimestamps getTimestamps() {
 		return ordTimestamps;
 	}
 
 	@Override
-	public Order setOrdStatus(OrdStatus ordStatus) {
+	public Order setStatus(OrdStatus ordStatus) {
 		this.ordStatus = ordStatus;
 		switch (ordStatus) {
 		case Filled:
-			ordQtyPrice.calculationAvgExecutionPrice(tradeList);
+			ordQtyPrice.calculationAvgPrice(tradeList);
 			break;
 		default:
 			break;

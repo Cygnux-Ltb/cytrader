@@ -19,23 +19,23 @@ public interface Order extends Comparable<Order> {
 
 	Instrument getInstrument();
 
-	OrdQtyPrice getOrdQtyPrice();
+	OrdQtyPrice getQtyPrice();
 
-	OrdSide getOrdSide();
+	OrdSide getSide();
 
-	OrdType getOrdType();
+	OrdType getType();
 
-	OrdStatus getOrdStatus();
+	OrdStatus getStatus();
 
-	OrdTimestamps getOrdTimestamps();
+	OrdTimestamps getTimestamps();
 
-	Order setOrdStatus(OrdStatus ordStatus);
+	Order setStatus(OrdStatus ordStatus);
 
 	int getStrategyId();
 
 	int getSubAccountId();
 
-	OrdRank getOrdRank();
+	OrdRank getRank();
 
 	TradeList getTradeList();
 

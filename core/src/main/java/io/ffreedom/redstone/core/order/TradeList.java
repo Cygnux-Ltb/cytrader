@@ -48,8 +48,7 @@ public class TradeList {
 		private double tradePrice;
 		private double tradeQty;
 
-		public Trade(long ordSysId, int tradeSerial, LocalDateTime tradeDateTime, double tradePrice,
-				double tradeQty) {
+		public Trade(long ordSysId, int tradeSerial, LocalDateTime tradeDateTime, double tradePrice, double tradeQty) {
 			super();
 			this.ordSysId = ordSysId;
 			this.tradeSerial = tradeSerial;
@@ -80,13 +79,7 @@ public class TradeList {
 
 		@Override
 		public int compareTo(Trade o) {
-			if (this.tradeSerial < o.tradeSerial) {
-				return -1;
-			} else if (this.tradeSerial > o.tradeSerial) {
-				return 1;
-			} else {
-				return 0;
-			}
+			return this.tradeSerial < o.tradeSerial ? -1 : this.tradeSerial > o.tradeSerial ? 1 : 0;
 		}
 
 	}
