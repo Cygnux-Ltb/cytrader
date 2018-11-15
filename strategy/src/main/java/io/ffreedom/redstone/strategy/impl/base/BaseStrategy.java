@@ -1,7 +1,9 @@
 package io.ffreedom.redstone.strategy.impl.base;
 
+import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
+import io.ffreedom.common.collect.EclipseCollections;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.financial.Instrument;
@@ -19,6 +21,8 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	private boolean isEnable;
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
+
+	protected MutableLongObjectMap<Order> strategyOrders = EclipseCollections.newLongObjectHashMap();
 
 	public BaseStrategy(int strategyId) {
 		super();
@@ -45,6 +49,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void onOrder(Order order) {
+
 		OrderActor.onOrder(order);
 	}
 
@@ -60,7 +65,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void enableAccount(int accountId) {
-
+		
 	}
 
 	@Override

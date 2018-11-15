@@ -10,27 +10,14 @@
 		<version>0.1</version>
 	</parent>
 
-	<artifactId>actor</artifactId>
-	<name>actor</name>
+	<artifactId>engine</artifactId>
+	<name>engine</name>
 
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
 			<artifactId>akka-actor_2.12</artifactId>
 			<version>2.5.14</version>
-		</dependency>
-		<dependency>
-			<groupId>net.openhft</groupId>
-			<artifactId>chronicle-map</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.openhft</groupId>
-			<artifactId>chronicle-queue</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>

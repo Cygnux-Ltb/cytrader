@@ -16,17 +16,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-
-		<dependency>
 			<groupId>io.ffreedom</groupId>
 			<artifactId>polaris</artifactId>
 		</dependency>
-
-
 	</dependencies>
+
 </project>

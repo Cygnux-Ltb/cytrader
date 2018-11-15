@@ -3,9 +3,9 @@ package io.ffreedom.redstone.actor;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
-import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.slf4j.Logger;
 
+import io.ffreedom.common.collect.EclipseCollections;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
@@ -17,8 +17,8 @@ public final class StrategyState {
 
 	private MutableIntObjectMap<Strategy> strategyMap = new IntObjectHashMap<>();
 
-	private MutableMultimap<Integer, Strategy> instrumentStrategyMultimap = FastListMultimap
-			.newMultimap();
+	// Map<instrumentId, List<Strategy>>
+	private MutableMultimap<Integer, Strategy> instrumentIdStrategyMultimap = EclipseCollections.newFastListMultimap();
 
 	public static final StrategyState INSTANCE = new StrategyState();
 
@@ -26,13 +26,14 @@ public final class StrategyState {
 	}
 
 	public void onMarketData(BasicMarketData marketData) {
-		instrumentStrategyMultimap.get(marketData.getInstrumentId())
-				.each(strategy -> strategy.onMarketData(marketData));
+		instrumentIdStrategyMultimap.get(marketData.getInstrumentId()).each(strategy -> {
+			if (strategy.isEnable())
+				strategy.onMarketData(marketData);
+		});
 	}
 
 	public void onOrder(Order order) {
-		Strategy strategy = strategyMap.get(order.getStrategyId());
-		strategy.onOrder(order);
+		strategyMap.get(order.getStrategyId()).onOrder(order);
 	}
 
 	public void registerStrategy(Strategy strategy) {

@@ -23,7 +23,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
-			<artifactId>actor</artifactId>
+			<artifactId>engine</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
