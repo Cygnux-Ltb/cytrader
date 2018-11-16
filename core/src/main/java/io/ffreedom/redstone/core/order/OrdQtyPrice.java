@@ -16,7 +16,8 @@ public class OrdQtyPrice {
 	private double avgPrice;
 
 	public OrdQtyPrice(double offerQty, double offerPrice) {
-		super();
+		if (offerPrice <= 0)
+			throw new IllegalArgumentException("Param -> offerQty Must be greater than 0.");
 		this.offerQty = offerQty;
 		this.filledQty = 0;
 		this.lastFilledQty = 0;

@@ -5,6 +5,7 @@ import io.ffreedom.redstone.core.order.enums.OrdStatus;
 public final class OrderReport {
 
 	private long ordSysId;
+	private long epochMilliseconds;
 	private OrdStatus ordStatus;
 	/**
 	 * 
@@ -27,6 +28,15 @@ public final class OrderReport {
 
 	public OrderReport setOrdSysId(long ordSysId) {
 		this.ordSysId = ordSysId;
+		return this;
+	}
+
+	public long getEpochMilliseconds() {
+		return epochMilliseconds;
+	}
+
+	public OrderReport setEpochMilliseconds(long epochMilliseconds) {
+		this.epochMilliseconds = epochMilliseconds;
 		return this;
 	}
 

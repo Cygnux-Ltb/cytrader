@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.core.order;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
@@ -36,7 +36,7 @@ public class TradeList {
 		return tradeSet.last();
 	}
 
-	public void addNewTrade(LocalDateTime tradeDateTime, double price, double qty) {
+	public void addNewTrade(ZonedDateTime tradeDateTime, double price, double qty) {
 		tradeSet.add(new Trade(ordSysId, ++tradeSerial, tradeDateTime, price, qty));
 	}
 
@@ -44,11 +44,11 @@ public class TradeList {
 
 		private long ordSysId;
 		private int tradeSerial;
-		private LocalDateTime tradeDateTime;
+		private ZonedDateTime tradeDateTime;
 		private double tradePrice;
 		private double tradeQty;
 
-		public Trade(long ordSysId, int tradeSerial, LocalDateTime tradeDateTime, double tradePrice, double tradeQty) {
+		public Trade(long ordSysId, int tradeSerial, ZonedDateTime tradeDateTime, double tradePrice, double tradeQty) {
 			super();
 			this.ordSysId = ordSysId;
 			this.tradeSerial = tradeSerial;
@@ -65,7 +65,7 @@ public class TradeList {
 			return tradeSerial;
 		}
 
-		public LocalDateTime getTradeDateTime() {
+		public ZonedDateTime getTradeDateTime() {
 			return tradeDateTime;
 		}
 

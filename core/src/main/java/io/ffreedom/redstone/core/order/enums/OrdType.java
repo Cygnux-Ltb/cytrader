@@ -9,6 +9,10 @@ public enum OrdType {
 	Stop,
 
 	StopLimit,
+	
+	FOK,
+	
+	FAK,
 
 	;
 

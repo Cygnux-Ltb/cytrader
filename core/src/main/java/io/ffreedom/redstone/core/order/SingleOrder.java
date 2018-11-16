@@ -70,13 +70,6 @@ public abstract class SingleOrder implements Order {
 	@Override
 	public Order setStatus(OrdStatus ordStatus) {
 		this.ordStatus = ordStatus;
-		switch (ordStatus) {
-		case Filled:
-			ordQtyPrice.calculationAvgPrice(tradeList);
-			break;
-		default:
-			break;
-		}
 		return this;
 	}
 

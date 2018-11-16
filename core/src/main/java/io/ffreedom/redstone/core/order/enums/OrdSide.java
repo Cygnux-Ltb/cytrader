@@ -9,13 +9,13 @@ public enum OrdSide {
 
 	Invalid(-1, TrdDirection.Invalid),
 
-	BUY(1, TrdDirection.Long),
+	Buy(1, TrdDirection.Long),
 
-	SELL(2, TrdDirection.Short),
+	Sell(2, TrdDirection.Short),
 
-	MARGIN_BUY(3, TrdDirection.Long),
+	MarginBuy(3, TrdDirection.Long),
 
-	SHORT_SELL(4, TrdDirection.Short),
+	ShortSell(4, TrdDirection.Short),
 
 	;
 
@@ -39,10 +39,10 @@ public enum OrdSide {
 
 	public static OrdSide valueOf(int code) {
 		switch (code) {
-		case 1:return BUY;
-		case 2:return SELL;
-		case 3:return MARGIN_BUY;
-		case 4:return SHORT_SELL;
+		case 1:return Buy;
+		case 2:return Sell;
+		case 3:return MarginBuy;
+		case 4:return ShortSell;
 		default:
 			logger.error("OrdSide.valueOf(code=={}) -> is no matches, return OrdSide.Invalid", code);
 			return Invalid;

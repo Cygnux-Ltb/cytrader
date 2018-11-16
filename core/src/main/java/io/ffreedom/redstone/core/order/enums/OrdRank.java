@@ -2,11 +2,11 @@ package io.ffreedom.redstone.core.order.enums;
 
 public enum OrdRank {
 
-	Group,
+	GROUP,
 
-	Parent,
+	PARENT,
 
-	Child,
+	CHILD,
 
 	;
 

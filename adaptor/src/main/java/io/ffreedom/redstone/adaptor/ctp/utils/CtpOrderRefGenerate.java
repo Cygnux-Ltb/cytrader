@@ -7,6 +7,7 @@ import java.time.ZonedDateTime;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import io.ffreedom.common.datetime.EpochTime;
 import io.ffreedom.common.datetime.TimeZones;
 
 @NotThreadSafe
@@ -24,7 +25,7 @@ public final class CtpOrderRefGenerate {
 	public static int next(int ownerId) {
 		if (ownerId < 1 || ownerId > maxLimitOwnerId)
 			throw new RuntimeException("OwnerId is illegal.");
-		long nowEpochSecondsDifference = System.currentTimeMillis() / 1000 - epochSecondsBenchmarkPoint;
+		long nowEpochSecondsDifference = EpochTime.seconds() - epochSecondsBenchmarkPoint;
 		if (nowEpochSecondsDifference != lastUseEpochSecondsDifference) {
 			lastUseEpochSecondsDifference = nowEpochSecondsDifference;
 			increment = 0;
