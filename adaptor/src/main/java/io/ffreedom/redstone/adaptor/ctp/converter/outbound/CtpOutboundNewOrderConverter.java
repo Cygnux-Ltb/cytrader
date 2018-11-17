@@ -14,20 +14,18 @@ public class CtpOutboundNewOrderConverter implements Converter<Order, CtpOutboun
 		int orderRef = CtpOrderRefGenerate.next(AppGlobalStatus.appId());
 
 		char direction;
-		switch (order.getOrdSide()) {
-		case BUY:
-		case MARGIN_BUY:
+		switch (order.getSide().direction()) {
+		case Long:
 			direction = 0;
 			break;
-		case SELL:
-		case SHORT_SELL:
+		case Short:
 			direction = 1;
 			break;
 		default:
-			throw new RuntimeException(order.getOrdSide() + " does not exist.");
+			throw new RuntimeException(order.getSide() + " does not exist.");
 		}
 		CtpOutboundNewOrder ctpNewOrder = new CtpOutboundNewOrder(orderRef, order.getInstrument().getInstrumentCode(),
-				order.getOrdQtyPrice().getOfferPrice(), Double.valueOf(order.getOrdQtyPrice().getTotalQty()).intValue(),
+				order.getQtyPrice().getOfferPrice(), Double.valueOf(order.getQtyPrice().getOfferQty()).intValue(),
 				direction);
 
 		return ctpNewOrder;

@@ -45,7 +45,7 @@ public enum OrdStatus {
 		this.isActive = isActive;
 	}
 
-	public int getCode() {
+	public int code() {
 		return code;
 	}
 

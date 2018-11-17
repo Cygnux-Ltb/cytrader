@@ -22,13 +22,11 @@ public class OrderBook {
 	}
 
 	public Order saveOrder(Order order) {
-		switch (order.getSide()) {
-		case BUY:
-		case MARGIN_BUY:
+		switch (order.getSide().direction()) {
+		case Long:
 			longOrderSet.put(order);
 			break;
-		case SELL:
-		case SHORT_SELL:
+		case Short:
 			shortOrderSet.put(order);
 			break;
 		default:

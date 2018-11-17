@@ -12,14 +12,12 @@ public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {
 
 	@Override
 	public boolean filter(ChildOrder order) {
-		switch (order.getSide()) {
-		case BUY:
-		case MARGIN_BUY:
+		switch (order.getSide().direction()) {
+		case Long:
 			
 			return false;
-
-		case SELL:
-		case SHORT_SELL:
+		
+		case Short:
 
 			return false;
 

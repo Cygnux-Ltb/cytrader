@@ -71,7 +71,7 @@ public final class Position implements Comparable<Position> {
 		if (beforeTodayQty == 0) {
 			return 0;
 		} else if (beforeTodayQty > 0) {
-			switch (side.getDirection()) {
+			switch (side.direction()) {
 			case Short:
 				// 需要锁定的Qty小于或等于昨仓,实际锁定量等于请求量
 				if (offerQty <= beforeTodayQty) {
@@ -90,7 +90,7 @@ public final class Position implements Comparable<Position> {
 				return 0;
 			}
 		} else {
-			switch (side.getDirection()) {
+			switch (side.direction()) {
 			case Long:
 				// 需要锁定的Qty小于或等于昨仓,实际锁定量等于请求量
 				double absBeforeTodayQty = Math.abs(beforeTodayQty);

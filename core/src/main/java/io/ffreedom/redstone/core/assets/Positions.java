@@ -33,7 +33,7 @@ public class Positions {
 		}
 		OrdStatus status = order.getStatus();
 		OrdQtyPrice ordQtyPrice = order.getQtyPrice();
-		switch (order.getSide().getDirection()) {
+		switch (order.getSide().direction()) {
 		case Long:
 			switch (status) {
 			case PartiallyFilled:
@@ -61,7 +61,7 @@ public class Positions {
 			case Filled:
 				position.setCurrentQty(DoubleUtil.subtraction(position.getCurrentQty(),
 						ordQtyPrice.getFilledQty() + ordQtyPrice.getLastFilledQty()));
-
+				break;
 			default:
 				break;
 			}

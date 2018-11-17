@@ -52,9 +52,9 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 		io.ffreedom.persistence.avro.entity.Order simOrder = io.ffreedom.persistence.avro.entity.Order.newBuilder()
 				.setOrderRef(new Long(order.getOrdSysId()).intValue())
 				.setInstrumentId(order.getInstrument().getInstrumentCode())
-				.setLimitPrice(order.getOrdQtyPrice().getOfferPrice())
-				.setVolumeTotalOriginal(new Double(order.getOrdQtyPrice().getTotalQty()).intValue())
-				.setOrderStatus(OrdStatus.PendingNew.getCode()).setDirection(order.getOrdSide().getCode()).build();
+				.setLimitPrice(order.getQtyPrice().getOfferPrice())
+				.setVolumeTotalOriginal(new Double(order.getQtyPrice().getOfferQty()).intValue())
+				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.getSide().code()).build();
 		byte[] byteMsg = serializer.serialization(simOrder);
 		tdSender.sent(byteMsg);
 		return true;
@@ -65,9 +65,9 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 		io.ffreedom.persistence.avro.entity.Order simOrder = io.ffreedom.persistence.avro.entity.Order.newBuilder()
 				.setOrderRef(new Long(order.getOrdSysId()).intValue())
 				.setInstrumentId(cancelOrder.getInstrument().getInstrumentCode())
-				.setLimitPrice(cancelOrder.getOrdQtyPrice().getOfferPrice())
-				.setVolumeTotalOriginal(new Double(cancelOrder.getOrdQtyPrice().getTotalQty()).intValue())
-				.setOrderStatus(OrdStatus.PendingCancel.getCode()).setDirection(cancelOrder.getOrdSide().getCode())
+				.setLimitPrice(cancelOrder.getQtyPrice().getOfferPrice())
+				.setVolumeTotalOriginal(new Double(cancelOrder.getQtyPrice().getOfferQty()).intValue())
+				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.getSide().code())
 				.build();
 		byte[] byteMsg = serializer.serialization(simOrder);
 		tdSender.sent(byteMsg);

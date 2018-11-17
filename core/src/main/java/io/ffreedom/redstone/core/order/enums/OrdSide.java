@@ -29,11 +29,11 @@ public enum OrdSide {
 		this.direction = direction;
 	}
 
-	public int getCode() {
+	public int code() {
 		return code;
 	}
 
-	public TrdDirection getDirection() {
+	public TrdDirection direction() {
 		return direction;
 	}
 
