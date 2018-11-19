@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.assets;
+package io.ffreedom.redstone.core.balance;
 
 public final class Balance {
 

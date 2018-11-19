@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.assets;
+package io.ffreedom.redstone.core.position;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
@@ -51,6 +51,8 @@ public class Positions {
 		case Short:
 			switch (status) {
 			case PendingNew:
+				position.getAvailableQty();
+				
 				position.setAvailableQty(DoubleUtil.subtraction(position.getAvailableQty(), ordQtyPrice.getOfferQty()));
 			case Canceled:
 			case NewRejected:
@@ -65,8 +67,6 @@ public class Positions {
 			default:
 				break;
 			}
-			position.setCurrentQty(DoubleUtil.subtraction(position.getCurrentQty(),
-					order.getQtyPrice().getFilledQty() + order.getQtyPrice().getLastFilledQty()));
 		default:
 			break;
 		}

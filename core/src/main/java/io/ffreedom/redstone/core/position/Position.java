@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.assets;
+package io.ffreedom.redstone.core.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongDoubleMap;
 
@@ -67,18 +67,18 @@ public final class Position implements Comparable<Position> {
 		return availableQty;
 	}
 
-	public double lockBeforeTodayQty(long ordSysId, OrdSide side, double offerQty) {
+	public double lockBeforeTodayQty(long ordSysId, OrdSide side, double lockQty) {
 		if (beforeTodayQty == 0) {
 			return 0;
 		} else if (beforeTodayQty > 0) {
 			switch (side.direction()) {
 			case Short:
 				// 需要锁定的Qty小于或等于昨仓,实际锁定量等于请求量
-				if (offerQty <= beforeTodayQty) {
+				if (lockQty <= beforeTodayQty) {
 					// 记录此订单锁定量
-					beforeTodayQtyLockRecord.put(ordSysId, offerQty);
-					beforeTodayQty -= offerQty;
-					return offerQty;
+					beforeTodayQtyLockRecord.put(ordSysId, lockQty);
+					beforeTodayQty -= lockQty;
+					return lockQty;
 				}
 				// 需要锁定的Qty大于昨仓,实际锁定量等于全部剩余量
 				else {
@@ -94,11 +94,11 @@ public final class Position implements Comparable<Position> {
 			case Long:
 				// 需要锁定的Qty小于或等于昨仓,实际锁定量等于请求量
 				double absBeforeTodayQty = Math.abs(beforeTodayQty);
-				if (offerQty <= absBeforeTodayQty) {
+				if (lockQty <= absBeforeTodayQty) {
 					// 记录此订单锁定量
-					beforeTodayQtyLockRecord.put(ordSysId, offerQty);
-					beforeTodayQty += offerQty;
-					return offerQty;
+					beforeTodayQtyLockRecord.put(ordSysId, lockQty);
+					beforeTodayQty += lockQty;
+					return lockQty;
 				} else {
 					beforeTodayQtyLockRecord.put(ordSysId, absBeforeTodayQty);
 					beforeTodayQty = 0;
@@ -108,6 +108,10 @@ public final class Position implements Comparable<Position> {
 				return 0;
 			}
 		}
+	}
+	
+	public double unlockBeforeTodayQty(long ordSysId, OrdSide side, double unlockQty) {
+		return 0;
 	}
 
 	@Override

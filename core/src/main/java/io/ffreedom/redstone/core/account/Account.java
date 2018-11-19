@@ -5,6 +5,7 @@ public class Account {
 	private int accountId;
 	private AccountInfo info;
 	
+	
 	public final static Account EMPTY = new Account(-1, null);
 
 	public Account(int accountId, AccountInfo info) {
