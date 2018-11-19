@@ -6,20 +6,20 @@ public class AbsCouchBean {
 	private String _rev;
 	private String value;
 
-	public String get_id() {
+	public String _id() {
 		return _id;
 	}
 
-	public AbsCouchBean set_id(String _id) {
+	public AbsCouchBean _id(String _id) {
 		this._id = _id;
 		return this;
 	}
 
-	public String get_rev() {
+	public String _rev() {
 		return _rev;
 	}
 
-	public AbsCouchBean set_rev(String _rev) {
+	public AbsCouchBean _rev(String _rev) {
 		this._rev = _rev;
 		return this;
 	}
