@@ -11,12 +11,13 @@ import io.ffreedom.common.datetime.DatePattern;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.financial.Instrument;
+import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.market.MarketData;
 import io.ffreedom.market.QuoteLevelOverflowException;
 import io.ffreedom.redstone.actor.InstrumentActor;
 import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMarketData;
 
-public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarketData, MarketData> {
+public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarketData, BasicMarketData> {
 
 	private DateTimeFormatter updateTimeformatter = DateTimeFormatter.ofPattern(DatePattern.HH_MM_SS);
 
@@ -25,7 +26,7 @@ public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarket
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	@Override
-	public MarketData convert(CtpInboundMarketData ctpMarketData) {
+	public BasicMarketData convert(CtpInboundMarketData ctpMarketData) {
 
 		LocalDate date = LocalDate.parse(ctpMarketData.getActionDay(), actionDayformatter);
 

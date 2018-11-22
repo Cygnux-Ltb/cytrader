@@ -2,12 +2,12 @@ package io.ffreedom.redstone.adaptor.sim.converter;
 
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
-import io.ffreedom.redstone.adaptor.sim.dto.SimReqSubscribeMarketData;
+import io.ffreedom.redstone.adaptor.sim.dto.SimSubscribeMarketData;
 
-public class SubscribeMarketDataConverter implements Converter<SimReqSubscribeMarketData, MarketDataSubscribe> {
+public class SubscribeMarketDataConverter implements Converter<SimSubscribeMarketData, MarketDataSubscribe> {
 
 	@Override
-	public MarketDataSubscribe convert(SimReqSubscribeMarketData from) {
+	public MarketDataSubscribe convert(SimSubscribeMarketData from) {
 		// TODO Auto-generated method stub
 		return null;
 	}

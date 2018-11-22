@@ -1,16 +1,16 @@
 package io.ffreedom.redstone.core.adaptor;
 
-import io.ffreedom.redstone.core.adaptor.req.ReqQueryBalance;
-import io.ffreedom.redstone.core.adaptor.req.ReqQueryPositions;
-import io.ffreedom.redstone.core.adaptor.req.ReqSubscribeMarketData;
-import io.ffreedom.redstone.core.balance.Balance;
+import io.ffreedom.redstone.core.adaptor.dto.QueryBalance;
+import io.ffreedom.redstone.core.adaptor.dto.QueryPositions;
+import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
+import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
+import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.core.position.Positions;
 
-public interface OutboundAdaptor<RSM extends ReqSubscribeMarketData, RQP extends ReqQueryPositions, RQB extends ReqQueryBalance>
+public interface OutboundAdaptor<SM extends SubscribeMarketData, QP extends QueryPositions, QB extends QueryBalance, RP extends ReplyPositions, RB extends ReplyBalance>
 		extends Adaptor {
 
-	boolean subscribeMarketData(RSM subscribeMarketData);
+	boolean subscribeMarketData(SM subscribeMarketData);
 
 	boolean newOredr(Order order);
 
@@ -20,8 +20,8 @@ public interface OutboundAdaptor<RSM extends ReqSubscribeMarketData, RQP extends
 		return false;
 	}
 
-	Positions queryPositions(RQP queryPositions);
+	RP queryPositions(QP queryPositions);
 
-	Balance queryBalance(RQB queryPositions);
+	RB queryBalance(QB queryPositions);
 
 }

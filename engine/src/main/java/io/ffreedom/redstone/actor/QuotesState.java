@@ -16,7 +16,6 @@ public class QuotesState {
 	public static final QuotesState INSTANCE = new QuotesState();
 
 	private QuotesState() {
-
 	}
 
 	public void putQuotes(Instrument instrument, Quotes quotes) {

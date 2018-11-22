@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamMap;
-import io.ffreedom.market.MarketData;
+import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.persistence.avro.entity.MarketDataLevel1;
 import io.ffreedom.persistence.avro.serializable.AvroBytesDeserializer;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
@@ -24,7 +24,7 @@ public class SimInboundAdaptor extends BaseSimAdaptor implements InboundAdaptor 
 
 	private StrategyScheduler scheduler;
 
-	private Converter<MarketDataLevel1, MarketData> marketDataConverter = new MarketDataConverter();
+	private Converter<MarketDataLevel1, BasicMarketData> marketDataConverter = new MarketDataConverter();
 
 	private Converter<io.ffreedom.persistence.avro.entity.Order, Order> orderConverter = new OrderConverter();
 

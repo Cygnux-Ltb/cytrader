@@ -4,6 +4,7 @@ import io.ffreedom.common.charset.Charsets;
 import io.ffreedom.common.functional.BeanSetter;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamMap;
+import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.market.MarketData;
 import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
 import io.ffreedom.redstone.actor.OrderActor;
@@ -26,7 +27,7 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 
 	private Receiver inboundReceiver;
 
-	private Converter<CtpInboundMarketData, MarketData> marketDataConverter = new CtpInboundMarketDataConverter();
+	private Converter<CtpInboundMarketData, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
 
 	private BeanSetter<CtpInboundRtnOrder, Order> rtnOrderSetter = new CtpInboundRtnOrderSetter();
 
@@ -38,8 +39,7 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 						paramMap.getInteger(AdaptorParams.CTP_MQ_PORT))
 				.setUserParam(paramMap.getString(AdaptorParams.CTP_MQ_USERNAME),
 						paramMap.getString(AdaptorParams.CTP_MQ_PASSWORD))
-				.setReceiveQueue(paramMap.getString(AdaptorParams.CTP_QNAME_INBOUND))
-				.setAutomaticRecovery(true);
+				.setReceiveQueue(paramMap.getString(AdaptorParams.CTP_QNAME_INBOUND)).setAutomaticRecovery(true);
 
 		inboundReceiver = new RabbitMqReceiver("CTP_INBOUND_QUEUE", configurator, (bytes) -> {
 			// Subscriber callback function
@@ -48,7 +48,7 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 			case MarketData:
 				CtpInboundMarketData ctpMarketData = JsonSerializationUtil.jsonToObj(msg.getContent(),
 						CtpInboundMarketData.class);
-				MarketData marketData = marketDataConverter.convert(ctpMarketData);
+				BasicMarketData marketData = marketDataConverter.convert(ctpMarketData);
 				scheduler.onMarketData(marketData);
 				break;
 			case RtnOrder:
@@ -66,7 +66,6 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 				scheduler.onOrder(rtnTrade);
 				break;
 			case Error:
-
 				break;
 			default:
 				break;
@@ -87,12 +86,11 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public String getAdaptorName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
