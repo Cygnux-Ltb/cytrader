@@ -7,22 +7,23 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.EclipseCollections;
 import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.financial.Instrument;
 import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.Strategy;
 
-public final class StrategyState {
+public final class StrategyActor {
 
-	private Logger logger = LoggerFactory.getLogger(StrategyState.class);
+	private Logger logger = LoggerFactory.getLogger(StrategyActor.class);
 
 	private MutableIntObjectMap<Strategy> strategyMap = new IntObjectHashMap<>();
 
 	// Map<instrumentId, List<Strategy>>
 	private MutableMultimap<Integer, Strategy> instrumentIdStrategyMultimap = EclipseCollections.newFastListMultimap();
 
-	public static final StrategyState INSTANCE = new StrategyState();
+	public static final StrategyActor INSTANCE = new StrategyActor();
 
-	private StrategyState() {
+	private StrategyActor() {
 	}
 
 	public void onMarketData(BasicMarketData marketData) {
@@ -38,6 +39,10 @@ public final class StrategyState {
 
 	public void registerStrategy(Strategy strategy) {
 		strategyMap.put(strategy.getStrategyId(), strategy);
+	}
+
+	public void registerMarketData(Instrument instrument, Strategy strategy) {
+		instrumentIdStrategyMultimap.put(instrument.getInstrumentId(), strategy);
 	}
 
 }

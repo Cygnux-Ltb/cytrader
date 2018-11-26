@@ -2,7 +2,7 @@ package io.ffreedom.redstone.scheduler;
 
 import io.ffreedom.common.queue.disruptor.SPSCQueue;
 import io.ffreedom.market.BasicMarketData;
-import io.ffreedom.redstone.actor.StrategyState;
+import io.ffreedom.redstone.actor.StrategyActor;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 
@@ -19,11 +19,11 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 			switch (recvMsg.getMark()) {
 			case marketDataMark:
 				BasicMarketData marketData = (BasicMarketData) recvMsg.getContent();
-				StrategyState.INSTANCE.onMarketData(marketData);
+				StrategyActor.INSTANCE.onMarketData(marketData);
 				break;
 			case orderMark:
 				Order order = (Order) recvMsg.getContent();
-				StrategyState.INSTANCE.onOrder(order);
+				StrategyActor.INSTANCE.onOrder(order);
 				break;
 			default:
 				break;

@@ -1,11 +1,12 @@
 package io.ffreedom.redstone.core.position;
 
-import io.ffreedom.common.functional.Factory;
-import io.ffreedom.financial.Instrument;
-
 @FunctionalInterface
-public interface PositionFactory<T extends Position> extends Factory<Instrument, T> {
+public interface PositionFactory<T extends Position> {
 
-	T produce(Instrument instrument);
+	default T produce(int accountId, int instrumentId) {
+		return produce(accountId, instrumentId, 0);
+	}
+
+	T produce(int accountId, int instrumentId, double qty);
 
 }

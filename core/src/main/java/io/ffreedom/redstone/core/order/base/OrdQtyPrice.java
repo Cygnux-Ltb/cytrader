@@ -1,9 +1,9 @@
-package io.ffreedom.redstone.core.order;
+package io.ffreedom.redstone.core.order.base;
 
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
 import io.ffreedom.common.utils.DoubleUtil;
-import io.ffreedom.redstone.core.order.TradeList.Trade;
+import io.ffreedom.redstone.core.order.base.TradeList.Trade;
 
 public class OrdQtyPrice {
 

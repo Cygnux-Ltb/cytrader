@@ -3,6 +3,8 @@ package io.ffreedom.redstone.core.position;
 import io.ffreedom.redstone.core.order.Order;
 
 public interface Position extends Comparable<Position> {
+	
+	int getAccountId();
 
 	int getInstrumentId();
 

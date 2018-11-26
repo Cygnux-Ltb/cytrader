@@ -1,8 +1,8 @@
 package io.ffreedom.redstone.specific;
 
 import io.ffreedom.common.utils.DoubleUtil;
-import io.ffreedom.redstone.core.order.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.position.AbsPosition;
 
@@ -10,8 +10,8 @@ public class StockPosition extends AbsPosition {
 
 	private double availableQty;
 
-	public StockPosition(int instrumentId) {
-		super(instrumentId);
+	public StockPosition(int accountId, int instrumentId) {
+		super(accountId, instrumentId);
 	}
 
 	@Override

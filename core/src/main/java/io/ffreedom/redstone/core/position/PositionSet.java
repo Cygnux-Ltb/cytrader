@@ -3,7 +3,6 @@ package io.ffreedom.redstone.core.position;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.ffreedom.common.collect.EclipseCollections;
-import io.ffreedom.financial.Instrument;
 import io.ffreedom.redstone.core.order.Order;
 
 public abstract class PositionSet<T extends Position> {
@@ -25,11 +24,10 @@ public abstract class PositionSet<T extends Position> {
 	}
 
 	public void onOrder(Order order) {
-		Instrument instrument = order.getInstrument();
-		int instrumentId = instrument.getInstrumentId();
+		int instrumentId = order.getInstrument().getInstrumentId();
 		T position = positionMap.get(instrumentId);
 		if (position == null) {
-			position = positionFactory.produce(instrument);
+			position = positionFactory.produce(accountId, instrumentId);
 			positionMap.put(instrumentId, position);
 		}
 		position.updatePosition(order);

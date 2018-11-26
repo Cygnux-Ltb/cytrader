@@ -2,11 +2,17 @@ package io.ffreedom.redstone.core.position;
 
 public abstract class AbsPosition implements Position {
 
+	protected int accountId;
 	protected int instrumentId;
 	protected double currentQty;
 
-	public AbsPosition(int instrumentId) {
+	public AbsPosition(int accountId, int instrumentId) {
 		this.instrumentId = instrumentId;
+	}
+
+	@Override
+	public int getAccountId() {
+		return accountId;
 	}
 
 	@Override

@@ -1,11 +1,12 @@
-package io.ffreedom.redstone.core.order;
+package io.ffreedom.redstone.core.order.base;
 
 import io.ffreedom.financial.Instrument;
+import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.enums.OrdType;
 
-public abstract class SingleOrder implements Order {
+public abstract class ActualOrder implements Order {
 
 	protected long ordSysId;
 	protected Instrument instrument;
@@ -18,7 +19,7 @@ public abstract class SingleOrder implements Order {
 	protected int subAccountId;
 	protected TradeList tradeList;
 
-	public SingleOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
+	protected ActualOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
 			OrdStatus ordStatus, OrdTimestamps ordTimestamps, int strategyId, int subAccountId) {
 		this.ordSysId = OrdSysIdGenerate.next(strategyId);
 		this.instrument = instrument;

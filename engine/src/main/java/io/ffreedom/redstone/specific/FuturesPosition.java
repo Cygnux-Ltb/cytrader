@@ -3,9 +3,8 @@ package io.ffreedom.redstone.specific;
 import org.eclipse.collections.api.map.primitive.MutableLongDoubleMap;
 
 import io.ffreedom.common.utils.DoubleUtil;
-import io.ffreedom.financial.Instrument;
-import io.ffreedom.redstone.core.order.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.position.AbsPosition;
@@ -15,14 +14,14 @@ public final class FuturesPosition extends AbsPosition {
 	private double beforeTodayQty;
 	private MutableLongDoubleMap beforeTodayQtyLockRecord;
 
-	public final static FuturesPosition EMPTY = new FuturesPosition(-1);
+	public final static FuturesPosition EMPTY = new FuturesPosition(-1, -1);
 
-	private FuturesPosition(int instrumentId) {
-		this(instrumentId, 0);
+	private FuturesPosition(int accountId, int instrumentId) {
+		this(accountId, instrumentId, 0);
 	}
 
-	private FuturesPosition(int instrumentId, double beforeTodayQty) {
-		super(instrumentId);
+	private FuturesPosition(int accountId, int instrumentId, double beforeTodayQty) {
+		super(accountId, instrumentId);
 		if (beforeTodayQty != 0)
 			initBeforeTodayQty(beforeTodayQty);
 	}
@@ -31,12 +30,12 @@ public final class FuturesPosition extends AbsPosition {
 		this.beforeTodayQty = beforeTodayQty;
 	}
 
-	final static FuturesPosition newInstance(Instrument instrument) {
-		return new FuturesPosition(instrument.getInstrumentId());
+	final static FuturesPosition newInstance(int accountId, int instrumentId) {
+		return new FuturesPosition(accountId, instrumentId);
 	}
 
-	final static FuturesPosition newInstance(Instrument instrument, double beforeTodayQty) {
-		return new FuturesPosition(instrument.getInstrumentId(), beforeTodayQty);
+	final static FuturesPosition newInstance(int accountId, int instrumentId, double beforeTodayQty) {
+		return new FuturesPosition(accountId, instrumentId, beforeTodayQty);
 	}
 
 	public double getBeforeTodayQty() {

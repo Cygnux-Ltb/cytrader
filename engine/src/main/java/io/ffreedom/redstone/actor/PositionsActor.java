@@ -6,7 +6,7 @@ import org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.redstone.core.order.Order;
 
-public class PositionsState {
+public class PositionsActor {
 
 	private MutableIntDoubleMap instrumentPositionsMaxLimit = new IntDoubleHashMap();
 
@@ -14,9 +14,9 @@ public class PositionsState {
 
 	private MutableIntDoubleMap subAccountPositions = new IntDoubleHashMap();
 
-	public final static PositionsState INSTANCE = new PositionsState();
+	public final static PositionsActor INSTANCE = new PositionsActor();
 
-	private PositionsState() {
+	private PositionsActor() {
 	}
 
 	/**

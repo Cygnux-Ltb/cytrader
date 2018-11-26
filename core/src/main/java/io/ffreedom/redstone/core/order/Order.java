@@ -1,6 +1,9 @@
 package io.ffreedom.redstone.core.order;
 
 import io.ffreedom.financial.Instrument;
+import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
+import io.ffreedom.redstone.core.order.base.OrdTimestamps;
+import io.ffreedom.redstone.core.order.base.TradeList;
 import io.ffreedom.redstone.core.order.enums.OrdRank;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;

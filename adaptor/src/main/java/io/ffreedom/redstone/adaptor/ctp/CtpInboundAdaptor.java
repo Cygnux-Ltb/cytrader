@@ -5,7 +5,6 @@ import io.ffreedom.common.functional.BeanSetter;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.market.BasicMarketData;
-import io.ffreedom.market.MarketData;
 import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
 import io.ffreedom.redstone.actor.OrderActor;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
