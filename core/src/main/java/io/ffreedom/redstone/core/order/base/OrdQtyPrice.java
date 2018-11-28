@@ -3,26 +3,80 @@ package io.ffreedom.redstone.core.order.base;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
 import io.ffreedom.common.utils.DoubleUtil;
-import io.ffreedom.redstone.core.order.base.TradeList.Trade;
+import io.ffreedom.redstone.core.order.base.TradeSet.Trade;
 
+/**
+ * @author Administrator
+ *
+ */
 public class OrdQtyPrice {
 
 	private double offerQty;
+	private double leavesQty;
 	private double filledQty;
 	private double lastFilledQty;
-	private double leavesQty;
+	private boolean isBestPrice;
 
 	private double offerPrice;
 	private double avgPrice;
+	private boolean isMaxPossibleQty;
 
-	public OrdQtyPrice(double offerQty, double offerPrice) {
-		if (offerPrice <= 0)
-			throw new IllegalArgumentException("Param -> offerQty Must be greater than 0.");
+	private OrdQtyPrice(double offerQty, double offerPrice) {
 		this.offerQty = offerQty;
-		this.filledQty = 0;
-		this.lastFilledQty = 0;
 		this.leavesQty = offerQty;
 		this.offerPrice = offerPrice;
+	}
+
+	private OrdQtyPrice() {
+
+	}
+
+	public static OrdQtyPrice withOffer(double offerQty, double offerPrice) {
+		return new OrdQtyPrice(offerQty, offerPrice);
+	}
+
+	public static OrdQtyPrice withBestPrice(double offerQty) {
+		return new OrdQtyPrice().isBestPrice(true).setOfferQty(offerQty);
+	}
+
+	public static OrdQtyPrice withMaxPossibleQty(double offerPrice) {
+		return new OrdQtyPrice().isMaxPossibleQty(true).setOfferPrice(offerPrice);
+	}
+
+	public static OrdQtyPrice withBestPriceAndMaxPossibleQty() {
+		return new OrdQtyPrice().isMaxPossibleQty(true).isMaxPossibleQty(true);
+	}
+
+	private OrdQtyPrice isBestPrice(boolean isBestPrice) {
+		this.isBestPrice = isBestPrice;
+		return this;
+	}
+
+	private OrdQtyPrice isMaxPossibleQty(boolean isMaxPossibleQty) {
+		this.isMaxPossibleQty = isMaxPossibleQty;
+		return this;
+	}
+
+	public boolean isBestPrice() {
+		return isBestPrice;
+	}
+
+	public boolean isMaxPossibleQty() {
+		return isMaxPossibleQty;
+	}
+
+	public OrdQtyPrice setOfferQty(double offerQty) {
+		if (this.offerQty == 0) {
+			this.offerQty = offerQty;
+			this.leavesQty = offerQty;
+		}
+		return this;
+	}
+
+	public OrdQtyPrice setOfferPrice(double offerPrice) {
+		if (this.offerPrice == 0)
+			this.offerPrice = offerPrice;
+		return this;
 	}
 
 	public double getOfferQty() {
@@ -60,12 +114,12 @@ public class OrdQtyPrice {
 		return this;
 	}
 
-	public OrdQtyPrice calculationAvgPrice(TradeList trades) {
-		if (!trades.isEmpty()) {
-			MutableSortedSet<Trade> tradeSet = trades.getTradeSet();
-			double totalPrice = tradeSet
+	public OrdQtyPrice calculationAvgPrice(TradeSet tradeSet) {
+		if (!tradeSet.isEmpty()) {
+			MutableSortedSet<Trade> innerSet = tradeSet.innerSet();
+			double totalPrice = innerSet
 					.sumOfDouble(trade -> DoubleUtil.multiply8(trade.getTradePrice(), trade.getTradeQty()));
-			double totalQty = DoubleUtil.correction8(tradeSet.sumOfDouble(trade -> trade.getTradeQty()));
+			double totalQty = DoubleUtil.correction8(innerSet.sumOfDouble(trade -> trade.getTradeQty()));
 			if (totalQty > 0.0D)
 				this.avgPrice = DoubleUtil.division(totalPrice, totalQty);
 			return this;

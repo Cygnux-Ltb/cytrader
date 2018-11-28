@@ -20,7 +20,7 @@ public final class ParentOrder extends ActualOrder {
 
 	public ParentOrder(Instrument instrument, double offerQty, double offerPrice, OrdSide ordSide, OrdType ordType,
 			OrdStatus ordStatus, int strategyId, int subAccountId) {
-		super(instrument, new OrdQtyPrice(offerQty, offerPrice), ordSide, ordType, ordStatus, OrdTimestamps.generate(),
+		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, ordStatus, OrdTimestamps.generate(),
 				strategyId, subAccountId);
 		// TODO List Type
 		this.childOrders = EclipseCollections.newFastList();

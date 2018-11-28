@@ -10,7 +10,7 @@ public final class OrderReport {
 	/**
 	 * 
 	 */
-	private String borkerRtnId;
+	private String borkerReturnId;
 	/**
 	 * 
 	 */
@@ -49,12 +49,12 @@ public final class OrderReport {
 		return this;
 	}
 
-	public String getBorkerRtnId() {
-		return borkerRtnId;
+	public String getBorkerReturnId() {
+		return borkerReturnId;
 	}
 
-	public OrderReport setBorkerRtnId(String borkerRtnId) {
-		this.borkerRtnId = borkerRtnId;
+	public OrderReport setBorkerReturnId(String borkerReturnId) {
+		this.borkerReturnId = borkerReturnId;
 		return this;
 	}
 

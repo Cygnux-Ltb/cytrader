@@ -11,6 +11,7 @@ import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.redstone.actor.InstrumentActor;
 import io.ffreedom.redstone.actor.OrderActor;
 import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
 
@@ -22,8 +23,12 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	protected MutableLongObjectMap<Order> strategyOrders = EclipseCollections.newLongObjectHashMap();
+	//
+	protected MutableLongObjectMap<VirtualOrder> strategyOrders = EclipseCollections.newLongObjectHashMap();
 
+	
+	
+	
 	public BaseStrategy(int strategyId) {
 		super();
 		this.strategyId = strategyId;

@@ -7,6 +7,7 @@ import io.ffreedom.common.datetime.TimeZones;
 
 public class OrderOperator {
 
+	// TODO Call this update order
 	public static void update(Order order, OrderReport report) {
 		order.setStatus(report.getOrdStatus());
 		switch (order.getStatus()) {
@@ -14,7 +15,7 @@ public class OrderOperator {
 			// Set FilledQty
 			order.getQtyPrice().setFilledQty(report.getFilledQty());
 			// Add NewTrade record
-			order.getTradeList().addNewTrade(
+			order.getTradeSet().addNewTrade(
 					ZonedDateTime.ofInstant(Instant.ofEpochMilli(report.getEpochMilliseconds()), TimeZones.SYS_DEFAULT),
 					report.getExecPrice(), report.getFilledQty() - order.getQtyPrice().getLastFilledQty());
 			break;
@@ -22,11 +23,11 @@ public class OrderOperator {
 			// Set FilledQty
 			order.getQtyPrice().setFilledQty(report.getFilledQty());
 			// Add NewTrade Record
-			order.getTradeList().addNewTrade(
+			order.getTradeSet().addNewTrade(
 					ZonedDateTime.ofInstant(Instant.ofEpochMilli(report.getEpochMilliseconds()), TimeZones.SYS_DEFAULT),
 					report.getExecPrice(), report.getFilledQty() - order.getQtyPrice().getLastFilledQty());
 			// Calculation AvgPrice
-			order.getQtyPrice().calculationAvgPrice(order.getTradeList());
+			order.getQtyPrice().calculationAvgPrice(order.getTradeSet());
 			break;
 		default:
 			break;

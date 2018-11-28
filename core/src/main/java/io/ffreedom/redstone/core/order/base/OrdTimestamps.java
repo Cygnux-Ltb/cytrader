@@ -6,7 +6,6 @@ public final class OrdTimestamps {
 
 	private EpochTimestamp generateTime;
 	private EpochTimestamp sendTime;
-	private EpochTimestamp receiveTime;
 	private EpochTimestamp finishTime;
 
 	private OrdTimestamps() {
@@ -25,21 +24,12 @@ public final class OrdTimestamps {
 		return sendTime;
 	}
 
-	public EpochTimestamp getReceiveTime() {
-		return receiveTime;
-	}
-
 	public EpochTimestamp getFinishTime() {
 		return finishTime;
 	}
 
 	public OrdTimestamps fillingSendTime() {
 		this.sendTime = EpochTimestamp.now();
-		return this;
-	}
-
-	public OrdTimestamps fillingReceiveTime() {
-		this.receiveTime = EpochTimestamp.now();
 		return this;
 	}
 

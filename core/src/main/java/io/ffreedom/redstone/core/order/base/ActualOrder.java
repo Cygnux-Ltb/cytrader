@@ -17,7 +17,7 @@ public abstract class ActualOrder implements Order {
 	protected OrdTimestamps ordTimestamps;
 	protected int strategyId;
 	protected int subAccountId;
-	protected TradeList tradeList;
+	protected TradeSet tradeSet;
 
 	protected ActualOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
 			OrdStatus ordStatus, OrdTimestamps ordTimestamps, int strategyId, int subAccountId) {
@@ -30,7 +30,7 @@ public abstract class ActualOrder implements Order {
 		this.ordTimestamps = ordTimestamps;
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
-		this.tradeList = new TradeList(ordSysId);
+		this.tradeSet = new TradeSet(ordSysId);
 	}
 
 	@Override
@@ -85,8 +85,8 @@ public abstract class ActualOrder implements Order {
 	}
 
 	@Override
-	public TradeList getTradeList() {
-		return tradeList;
+	public TradeSet getTradeSet() {
+		return tradeSet;
 	}
 
 }

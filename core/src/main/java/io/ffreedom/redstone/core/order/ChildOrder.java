@@ -13,9 +13,9 @@ public final class ChildOrder extends ActualOrder {
 
 	private long parentOrdSysId;
 
-	public ChildOrder(Long parentOrdSysId, Instrument instrument, double quantity, double offerPrice, OrdSide ordSide,
+	public ChildOrder(Long parentOrdSysId, Instrument instrument, double offerQty, double offerPrice, OrdSide ordSide,
 			OrdType ordType, OrdStatus ordStatus, int strategyId, int subAccountId) {
-		super(instrument, new OrdQtyPrice(quantity, offerPrice), ordSide, ordType, ordStatus, OrdTimestamps.generate(),
+		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, ordStatus, OrdTimestamps.generate(),
 				strategyId, subAccountId);
 		this.parentOrdSysId = parentOrdSysId;
 	}

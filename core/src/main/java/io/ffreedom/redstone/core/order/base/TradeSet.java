@@ -3,16 +3,17 @@ package io.ffreedom.redstone.core.order.base;
 import java.time.ZonedDateTime;
 
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
-import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 
-public class TradeList {
+import io.ffreedom.common.collect.EclipseCollections;
+
+public class TradeSet {
 
 	private long ordSysId;
 	private int tradeSerial = -1;
 
-	private MutableSortedSet<Trade> tradeSet = new TreeSortedSet<>();
+	private MutableSortedSet<Trade> innerSet = EclipseCollections.newTreeSortedSet();
 
-	public TradeList(long ordSysId) {
+	public TradeSet(long ordSysId) {
 		this.ordSysId = ordSysId;
 	}
 
@@ -20,24 +21,24 @@ public class TradeList {
 		return ordSysId;
 	}
 
-	public MutableSortedSet<Trade> getTradeSet() {
-		return tradeSet;
+	public MutableSortedSet<Trade> innerSet() {
+		return innerSet;
 	}
 
 	public boolean isEmpty() {
-		return tradeSet.isEmpty();
+		return innerSet.isEmpty();
 	}
 
 	public Trade firstTrade() {
-		return tradeSet.first();
+		return innerSet.first();
 	}
 
 	public Trade lastTrade() {
-		return tradeSet.last();
+		return innerSet.last();
 	}
 
 	public void addNewTrade(ZonedDateTime tradeDateTime, double price, double qty) {
-		tradeSet.add(new Trade(ordSysId, ++tradeSerial, tradeDateTime, price, qty));
+		innerSet.add(new Trade(ordSysId, ++tradeSerial, tradeDateTime, price, qty));
 	}
 
 	public class Trade implements Comparable<Trade> {
