@@ -1,0 +1,14 @@
+{
+  "_id": "AccountConfig",
+  "_rev": "2-a156408730efc80269a74378c1017886",
+  "value": [
+    {
+      "id": 100,
+      "invstId": "",
+      "password": 9988
+    },
+    {
+      "id": 101
+    }
+  ]
+}
