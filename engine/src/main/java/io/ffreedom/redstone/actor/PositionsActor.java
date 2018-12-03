@@ -27,7 +27,7 @@ public class PositionsActor {
 	public void plusPositions(Order order) {
 		int instrumentId = order.getInstrument().getInstrumentId();
 		int subAccountId = order.getSubAccountId();
-		double tradeQty = order.getTradeList().lastTrade().getTradeQty();
+		double tradeQty = order.getTradeSet().lastTrade().getTradeQty();
 		if (instrumentPositions.containsKey(instrumentId)) {
 			modifyInstrumentPositions(instrumentId, tradeQty);
 		} else {
@@ -48,7 +48,7 @@ public class PositionsActor {
 	public void minusPositions(Order order) {
 		int instrumentId = order.getInstrument().getInstrumentId();
 		int subAccountId = order.getSubAccountId();
-		double tradeQty = order.getTradeList().lastTrade().getTradeQty();
+		double tradeQty = order.getTradeSet().lastTrade().getTradeQty();
 		modifyInstrumentPositions(instrumentId, 0 - tradeQty);
 		modifySubAccountPositions(subAccountId, 0 - tradeQty);
 	}
