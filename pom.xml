@@ -28,9 +28,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<ec.version>9.2.0</ec.version>
-		<commons.version>1.0</commons.version>
-		<transport.version>1.0</transport.version>
 		<polaris.version>0.1</polaris.version>
+		<commons.version>1.0-SNAPSHOT</commons.version>
+		<transport.version>1.0-SNAPSHOT</transport.version>
 	</properties>
 
 	<build>
