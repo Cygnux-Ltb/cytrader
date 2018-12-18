@@ -89,8 +89,6 @@ public class CtpOutboundAdaptor implements OutboundAdaptor {
 		outboundPublisher.publish(JsonSerializationUtil.objToJson(msg).getBytes(Charsets.UTF8));
 	}
 
-
-
 	@Override
 	public boolean subscribeMarketData(SubscribeMarketData subscribeMarketData) {
 		// TODO Auto-generated method stub
@@ -108,7 +106,5 @@ public class CtpOutboundAdaptor implements OutboundAdaptor {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 }
