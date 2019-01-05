@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.redstone.core.order.base.ActualOrder;
 import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
@@ -23,7 +23,7 @@ public final class ParentOrder extends ActualOrder {
 		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, ordStatus, OrdTimestamps.generate(),
 				strategyId, subAccountId);
 		// TODO List Type
-		this.childOrders = EclipseCollections.newFastList();
+		this.childOrders = ECollections.newFastList();
 	}
 
 	public ChildOrder toChildOrder() {

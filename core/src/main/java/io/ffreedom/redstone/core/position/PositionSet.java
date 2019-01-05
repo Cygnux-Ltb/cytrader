@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.position;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.redstone.core.order.Order;
 
 public abstract class PositionSet<T extends Position> {
@@ -10,7 +10,7 @@ public abstract class PositionSet<T extends Position> {
 	private int accountId;
 
 	// Map<instrumentId, Position>
-	private MutableIntObjectMap<T> positionMap = EclipseCollections.newIntObjectHashMap();
+	private MutableIntObjectMap<T> positionMap = ECollections.newIntObjectHashMap();
 
 	private PositionFactory<T> positionFactory;
 

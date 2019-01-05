@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.order;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.base.OrdTimestamps;
@@ -22,7 +22,7 @@ public class VirtualOrder {
 	protected int strategyId;
 	protected int subAccountId;
 	
-	private MutableLongObjectMap<ParentOrder> actualOrders = EclipseCollections.newLongObjectHashMap();
+	private MutableLongObjectMap<ParentOrder> actualOrders = ECollections.newLongObjectHashMap();
 
 	
 	

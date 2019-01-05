@@ -4,14 +4,14 @@ import java.util.Collection;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.trade.enums.TrdDirection;
 
 public final class OrderSet {
 
 	private TrdDirection direction;
-	private MutableLongObjectMap<Order> orders = EclipseCollections.newLongObjectHashMap();
+	private MutableLongObjectMap<Order> orders = ECollections.newLongObjectHashMap();
 
 	private OrderSet(TrdDirection direction) {
 		this.direction = direction;

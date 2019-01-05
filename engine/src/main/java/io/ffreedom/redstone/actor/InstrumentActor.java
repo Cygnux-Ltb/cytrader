@@ -5,7 +5,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntBooleanMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.financial.Instrument;
 
 public final class InstrumentActor {
@@ -14,10 +14,10 @@ public final class InstrumentActor {
 	private MutableIntBooleanMap isTradableMap = new IntBooleanHashMap();
 
 	// Map<instrumentId, instrument>
-	private MutableIntObjectMap<Instrument> instrumentIdMap = EclipseCollections.newIntObjectHashMap();
+	private MutableIntObjectMap<Instrument> instrumentIdMap = ECollections.newIntObjectHashMap();
 
 	// Map<instrumentCode, instrument>
-	private MutableMap<String, Instrument> instrumentCodeMap = EclipseCollections.newUnifiedMap();
+	private MutableMap<String, Instrument> instrumentCodeMap = ECollections.newUnifiedMap();
 
 	private final static InstrumentActor INSTANCE = new InstrumentActor();
 

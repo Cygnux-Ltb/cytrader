@@ -4,17 +4,17 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.account.SubAccount;
 
 public final class AccountActor {
 
 	// Map<subAccountId, Account>
-	private MutableIntObjectMap<Account> accountMap = EclipseCollections.newIntObjectHashMap();
+	private MutableIntObjectMap<Account> accountMap = ECollections.newIntObjectHashMap();
 
 	// Map<accountId, List<subAccount>>
-	private MutableListMultimap<Integer, SubAccount> subAccountMap = EclipseCollections.newFastListMultimap();
+	private MutableListMultimap<Integer, SubAccount> subAccountMap = ECollections.newFastListMultimap();
 
 	private final static AccountActor INSTANCE = new AccountActor();
 

@@ -2,14 +2,14 @@ package io.ffreedom.redstone.actor;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.redstone.core.trade.TradeSignal;
 
 public final class TradeSignalActor {
 
 	public static final TradeSignalActor INSTANCE = new TradeSignalActor();
 
-	private MutableList<TradeSignal> tradeSignalList = EclipseCollections.newFastList(256);
+	private MutableList<TradeSignal> tradeSignalList = ECollections.newFastList(256);
 
 	public static boolean addTradeSignal(TradeSignal tradeSignal) {
 		return INSTANCE.addTradeSignal0(tradeSignal);

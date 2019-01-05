@@ -1,11 +1,11 @@
 package io.ffreedom.redstone.actor;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.market.BasicMarketData;
@@ -19,7 +19,7 @@ public final class StrategyActor {
 	private MutableIntObjectMap<Strategy> strategyMap = new IntObjectHashMap<>();
 
 	// Map<instrumentId, List<Strategy>>
-	private MutableMultimap<Integer, Strategy> instrumentIdStrategyMultimap = EclipseCollections.newFastListMultimap();
+	private MutableIntObjectMap<MutableList<Strategy>> instrumentStrategyMultimap = ECollections.newIntObjectHashMap();
 
 	public static final StrategyActor INSTANCE = new StrategyActor();
 
@@ -27,22 +27,32 @@ public final class StrategyActor {
 	}
 
 	public void onMarketData(BasicMarketData marketData) {
-		instrumentIdStrategyMultimap.get(marketData.getInstrumentId()).each(strategy -> {
+		instrumentStrategyMultimap.get(marketData.getInstrumentId()).each(strategy -> {
 			if (strategy.isEnable())
 				strategy.onMarketData(marketData);
 		});
 	}
 
 	public void onOrder(Order order) {
+		logger.debug("Call StrategyActor.onOrder , StrategyId==[{}], ordSysId==[{}]", order.getStrategyId(),
+				order.getOrdSysId());
 		strategyMap.get(order.getStrategyId()).onOrder(order);
 	}
 
-	public void registerStrategy(Strategy strategy) {
+	public void addStrategy(Strategy strategy) {
 		strategyMap.put(strategy.getStrategyId(), strategy);
 	}
 
-	public void registerMarketData(Instrument instrument, Strategy strategy) {
-		instrumentIdStrategyMultimap.put(instrument.getInstrumentId(), strategy);
+	public void bindInstrument(Strategy strategy, Instrument... instruments) {
+		for (int i = 0; i < instruments.length; i++) {
+			int instrumentId = instruments[i].getInstrumentId();
+			MutableList<Strategy> strategyList = instrumentStrategyMultimap.get(instrumentId);
+			if (strategyList == null) {
+				strategyList = ECollections.newFastList();
+				instrumentStrategyMultimap.put(instrumentId, strategyList);
+			}
+			strategyList.add(strategy);
+		}
 	}
 
 }

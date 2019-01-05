@@ -12,7 +12,6 @@ import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.financial.Instrument;
 import io.ffreedom.market.BasicMarketData;
-import io.ffreedom.market.MarketData;
 import io.ffreedom.market.QuoteLevelOverflowException;
 import io.ffreedom.redstone.actor.InstrumentActor;
 import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMarketData;
@@ -23,7 +22,7 @@ public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarket
 
 	private DateTimeFormatter actionDayformatter = DateTimeFormatter.ofPattern(DatePattern.YYYYMMDD);
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(CtpInboundMarketDataConverter.class);
 
 	@Override
 	public BasicMarketData convert(CtpInboundMarketData ctpMarketData) {
@@ -52,7 +51,7 @@ public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarket
 					.addAskQuote(ctpMarketData.getAskPrice4(), ctpMarketData.getAskVolume4())
 					.addAskQuote(ctpMarketData.getAskPrice5(), ctpMarketData.getAskVolume5());
 		} catch (QuoteLevelOverflowException e) {
-			log.error(e.getMessage(), e);
+			logger.error(e.getMessage(), e);
 		}
 		return marketData;
 	}

@@ -4,14 +4,14 @@ import java.time.ZonedDateTime;
 
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 
 public class TradeSet {
 
 	private long ordSysId;
 	private int tradeSerial = -1;
 
-	private MutableSortedSet<Trade> innerSet = EclipseCollections.newTreeSortedSet();
+	private MutableSortedSet<Trade> innerSet = ECollections.newTreeSortedSet();
 
 	public TradeSet(long ordSysId) {
 		this.ordSysId = ordSysId;

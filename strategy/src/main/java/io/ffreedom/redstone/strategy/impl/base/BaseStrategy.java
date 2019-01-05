@@ -3,7 +3,7 @@ package io.ffreedom.redstone.strategy.impl.base;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.collect.EclipseCollections;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.financial.Instrument;
@@ -24,7 +24,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	//
-	protected MutableLongObjectMap<VirtualOrder> strategyOrders = EclipseCollections.newLongObjectHashMap();
+	protected MutableLongObjectMap<VirtualOrder> strategyOrders = ECollections.newLongObjectHashMap();
 
 	
 	
