@@ -8,11 +8,11 @@ import io.ffreedom.redstone.core.order.Order;
 public class OrderBook {
 
 	// Map<ordSysId, order>
-	private MutableLongObjectMap<Order> orderMap = LongObjectHashMap.newMap();
+	private MutableLongObjectMap<Order> allOrderMap = LongObjectHashMap.newMap();
 
-	private OrderSet longOrderSet = OrderSet.newLongSet();
+	private OrderSet longOrderSet = OrderSet.newLongOrderSet();
 
-	private OrderSet shortOrderSet = OrderSet.newShortSet();
+	private OrderSet shortOrderSet = OrderSet.newShortOrderSet();
 
 	private OrderBook() {
 	}
@@ -33,11 +33,11 @@ public class OrderBook {
 			throw new RuntimeException(
 					"OrderSysId : " + order.getOrdSysId() + ", OrdSide : " + order.getSide() + " -> is undefined.");
 		}
-		return orderMap.put(order.getOrdSysId(), order);
+		return allOrderMap.put(order.getOrdSysId(), order);
 	}
 
 	public Order getOrder(long orderSysId) {
-		return orderMap.get(orderSysId);
+		return allOrderMap.get(orderSysId);
 	}
 
 	public OrderSet getLongOrderSet() {

@@ -17,11 +17,11 @@ public final class OrderSet {
 		this.direction = direction;
 	}
 
-	public static OrderSet newLongSet() {
+	public static OrderSet newLongOrderSet() {
 		return new OrderSet(TrdDirection.Long);
 	}
 
-	public static OrderSet newShortSet() {
+	public static OrderSet newShortOrderSet() {
 		return new OrderSet(TrdDirection.Short);
 	}
 
