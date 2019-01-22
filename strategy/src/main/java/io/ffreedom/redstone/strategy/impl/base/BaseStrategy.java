@@ -19,16 +19,15 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	private int strategyId;
 
-	private boolean isEnable;
+	private boolean isEnable = false;
+
+	private boolean isInitSuccess = false;
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	//
 	protected MutableLongObjectMap<VirtualOrder> strategyOrders = ECollections.newLongObjectHashMap();
 
-	
-	
-	
 	public BaseStrategy(int strategyId) {
 		super();
 		this.strategyId = strategyId;
@@ -37,9 +36,10 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	@Override
 	public void init(Initializer<Boolean> initializer) {
 		if (initializer != null)
-			isEnable = initializer.initialize();
+			isInitSuccess = initializer.initialize();
 		else
-			logger.info("Initializer is null.");
+			logger.error("Initializer is null.");
+		logger.info("Initialize result isInitSuccess==[{}]", isInitSuccess);
 	}
 
 	@Override
@@ -54,13 +54,15 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void onOrder(Order order) {
-
 		OrderActor.onOrder(order);
 	}
 
 	@Override
 	public void enableStrategy() {
-		this.isEnable = true;
+		if (isInitSuccess)
+			this.isEnable = true;
+		else
+			logger.info("Enable strategy failure, strategyId==[{}], isInitSuccess==[false]", strategyId);
 	}
 
 	@Override
@@ -70,7 +72,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void enableAccount(int accountId) {
-		
+
 	}
 
 	@Override
@@ -95,7 +97,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice) {
-
+		
 	}
 
 }

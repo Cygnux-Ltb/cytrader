@@ -10,8 +10,6 @@ public class BarStrategy extends BaseStrategy<BasicMarketData> {
 		super(strategyId);
 	}
 
-	
-
 	@Override
 	public void onControlEvent(StrategyControlEvent event) {
 
