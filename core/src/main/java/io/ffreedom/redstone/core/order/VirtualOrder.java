@@ -21,9 +21,7 @@ public class VirtualOrder {
 	protected OrdTimestamps ordTimestamps;
 	protected int strategyId;
 	protected int subAccountId;
-	
+
 	private MutableLongObjectMap<ParentOrder> actualOrders = ECollections.newLongObjectHashMap();
 
-	
-	
 }

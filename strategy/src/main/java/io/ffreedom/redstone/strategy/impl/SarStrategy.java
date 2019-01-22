@@ -23,13 +23,11 @@ public class SarStrategy extends BaseStrategy<BasicMarketData> {
 
 	@Override
 	public void onControlEvent(StrategyControlEvent event) {
-		// TODO Auto-generated method stub
-
+			
 	}
 
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
-		// TODO Auto-generated method stub
 
 	}
 
