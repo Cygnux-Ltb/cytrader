@@ -22,6 +22,6 @@ public interface OutboundAdaptor<SM extends SubscribeMarketData, QP extends Quer
 
 	RP queryPositions(QP queryPositions);
 
-	RB queryBalance(QB queryPositions);
+	RB queryBalance(QB queryBalance);
 
 }
