@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.core.strategy.callback;
 
-import io.ffreedom.indicators.api.TimeSeriesPoint;
+import io.ffreedom.polaris.indicators.api.TimeSeriesPoint;
 
 public interface IndicatorCallback<P extends TimeSeriesPoint<?>> {
 

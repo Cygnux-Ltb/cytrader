@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.log.LoggerFactory;
-import io.ffreedom.financial.Instrument;
-import io.ffreedom.market.BasicMarketData;
+import io.ffreedom.polaris.financial.Instrument;
+import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.Strategy;
 

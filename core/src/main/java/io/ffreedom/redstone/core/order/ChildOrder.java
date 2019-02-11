@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.core.order;
 
-import io.ffreedom.financial.Instrument;
+import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.base.ActualOrder;
 import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.base.OrdTimestamps;

@@ -1,8 +1,8 @@
 package io.ffreedom.redstone.adaptor.sim.converter;
 
 import io.ffreedom.common.functional.Converter;
-import io.ffreedom.market.BasicMarketData;
 import io.ffreedom.persistence.avro.entity.MarketDataLevel1;
+import io.ffreedom.polaris.market.BasicMarketData;
 
 public class MarketDataConverter implements Converter<MarketDataLevel1, BasicMarketData>{
 

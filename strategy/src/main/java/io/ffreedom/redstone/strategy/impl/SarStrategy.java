@@ -1,7 +1,7 @@
 package io.ffreedom.redstone.strategy.impl;
 
-import io.ffreedom.indicators.impl.sar.SAR;
-import io.ffreedom.market.BasicMarketData;
+import io.ffreedom.polaris.indicators.impl.sar.SAR;
+import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
 import io.ffreedom.redstone.strategy.impl.base.BaseStrategy;
 

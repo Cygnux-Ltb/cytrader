@@ -1,8 +1,8 @@
 package io.ffreedom.redstone.strategy.impl;
 
-import io.ffreedom.indicators.impl.ma.SMA;
-import io.ffreedom.indicators.impl.ma.base.MAPoint;
-import io.ffreedom.market.BasicMarketData;
+import io.ffreedom.polaris.indicators.impl.ma.SMA;
+import io.ffreedom.polaris.indicators.impl.ma.base.MAPoint;
+import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
 import io.ffreedom.redstone.core.strategy.callback.IndicatorCallback;

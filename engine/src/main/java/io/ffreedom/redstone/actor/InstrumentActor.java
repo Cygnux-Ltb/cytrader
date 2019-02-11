@@ -6,7 +6,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 
 import io.ffreedom.common.collect.ECollections;
-import io.ffreedom.financial.Instrument;
+import io.ffreedom.polaris.financial.Instrument;
 
 public final class InstrumentActor {
 

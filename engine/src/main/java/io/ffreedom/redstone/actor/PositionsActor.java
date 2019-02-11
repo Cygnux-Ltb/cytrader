@@ -3,7 +3,7 @@ package io.ffreedom.redstone.actor;
 import org.eclipse.collections.api.map.primitive.MutableIntDoubleMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap;
 
-import io.ffreedom.financial.Instrument;
+import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.Order;
 
 public class PositionsActor {

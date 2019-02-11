@@ -3,7 +3,7 @@ package io.ffreedom.redstone.core.order;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.ffreedom.common.collect.ECollections;
-import io.ffreedom.financial.Instrument;
+import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.base.OrdTimestamps;
 import io.ffreedom.redstone.core.order.enums.OrdSide;

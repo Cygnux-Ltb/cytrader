@@ -5,7 +5,7 @@ import java.util.List;
 import org.eclipse.collections.api.list.MutableList;
 
 import io.ffreedom.common.collect.ECollections;
-import io.ffreedom.financial.Instrument;
+import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.base.ActualOrder;
 import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.base.OrdTimestamps;

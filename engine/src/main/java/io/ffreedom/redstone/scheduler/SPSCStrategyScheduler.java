@@ -1,7 +1,7 @@
 package io.ffreedom.redstone.scheduler;
 
 import io.ffreedom.common.queue.disruptor.SPSCQueue;
-import io.ffreedom.market.BasicMarketData;
+import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.StrategyActor;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;

@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
-import io.ffreedom.financial.Instrument;
-import io.ffreedom.market.Quotes;
+import io.ffreedom.polaris.financial.Instrument;
+import io.ffreedom.polaris.market.Quotes;
 
 public class QuotesState {
 

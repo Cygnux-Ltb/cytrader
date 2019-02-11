@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.core.trade;
 
-import io.ffreedom.financial.Instrument;
+import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.trade.enums.TrdAction;
 import io.ffreedom.redstone.core.trade.enums.TrdDirection;
 
