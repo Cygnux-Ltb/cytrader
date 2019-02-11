@@ -2,7 +2,6 @@ package io.ffreedom.redstone.actor;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
@@ -16,18 +15,19 @@ public final class StrategyActor {
 
 	private Logger logger = LoggerFactory.getLogger(StrategyActor.class);
 
-	private MutableIntObjectMap<Strategy> strategyMap = new IntObjectHashMap<>();
+	private MutableIntObjectMap<Strategy> strategyMap = ECollections.newIntObjectHashMap();
 
 	// Map<instrumentId, List<Strategy>>
-	private MutableIntObjectMap<MutableList<Strategy>> instrumentStrategyMultimap = ECollections.newIntObjectHashMap();
+	private MutableIntObjectMap<MutableList<Strategy>> instrumentStrategyMap = ECollections.newIntObjectHashMap();
 
 	public static final StrategyActor INSTANCE = new StrategyActor();
 
 	private StrategyActor() {
+
 	}
 
 	public void onMarketData(BasicMarketData marketData) {
-		instrumentStrategyMultimap.get(marketData.getInstrumentId()).each(strategy -> {
+		instrumentStrategyMap.get(marketData.getInstrumentId()).each(strategy -> {
 			if (strategy.isEnable())
 				strategy.onMarketData(marketData);
 		});
@@ -46,10 +46,10 @@ public final class StrategyActor {
 	public void bindInstrument(Strategy strategy, Instrument... instruments) {
 		for (int i = 0; i < instruments.length; i++) {
 			int instrumentId = instruments[i].getInstrumentId();
-			MutableList<Strategy> strategyList = instrumentStrategyMultimap.get(instrumentId);
+			MutableList<Strategy> strategyList = instrumentStrategyMap.get(instrumentId);
 			if (strategyList == null) {
 				strategyList = ECollections.newFastList();
-				instrumentStrategyMultimap.put(instrumentId, strategyList);
+				instrumentStrategyMap.put(instrumentId, strategyList);
 			}
 			strategyList.add(strategy);
 		}

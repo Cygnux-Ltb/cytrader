@@ -28,16 +28,14 @@ public class PositionsActor {
 		int instrumentId = order.getInstrument().getInstrumentId();
 		int subAccountId = order.getSubAccountId();
 		double tradeQty = order.getTradeSet().lastTrade().getTradeQty();
-		if (instrumentPositions.containsKey(instrumentId)) {
+		if (instrumentPositions.containsKey(instrumentId))
 			modifyInstrumentPositions(instrumentId, tradeQty);
-		} else {
+		else
 			instrumentPositions.put(instrumentId, tradeQty);
-		}
-		if (subAccountPositions.containsKey(subAccountId)) {
+		if (subAccountPositions.containsKey(subAccountId))
 			modifySubAccountPositions(subAccountId, tradeQty);
-		} else {
+		else
 			subAccountPositions.put(subAccountId, tradeQty);
-		}
 	}
 
 	/**

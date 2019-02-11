@@ -35,7 +35,7 @@ public class Saturn5 {
 		LoggerSetter.setLogFileName("redstone-" + appId + "-" + datetime);
 		LoggerSetter.setLogLevel(LogLevel.DEBUG);
 
-		IndicatorPeriodTimePools.INSTANCE.register(IndicatorPeriod.M1, ChinaFuturesSymbol.values());
+		IndicatorPeriodTimePools.register(IndicatorPeriod.M1, ChinaFuturesSymbol.values());
 
 		StrategyScheduler scheduler = new SPSCStrategyScheduler(2048);
 

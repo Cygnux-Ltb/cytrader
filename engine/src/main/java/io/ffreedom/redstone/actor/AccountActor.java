@@ -1,8 +1,7 @@
 package io.ffreedom.redstone.actor;
 
-import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.api.set.MutableSet;
 
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.redstone.core.account.Account;
@@ -14,7 +13,7 @@ public final class AccountActor {
 	private MutableIntObjectMap<Account> accountMap = ECollections.newIntObjectHashMap();
 
 	// Map<accountId, List<subAccount>>
-	private MutableListMultimap<Integer, SubAccount> subAccountMap = ECollections.newFastListMultimap();
+	private MutableIntObjectMap<MutableSet<SubAccount>> subAccountMap = ECollections.newIntObjectHashMap();
 
 	private final static AccountActor INSTANCE = new AccountActor();
 
@@ -30,12 +29,17 @@ public final class AccountActor {
 		return account != null ? account : Account.EMPTY;
 	}
 
-	public final static MutableList<SubAccount> getSubAccounts(int accountId) {
+	public final static MutableSet<SubAccount> getSubAccounts(int accountId) {
 		return INSTANCE.getSubAccounts0(accountId);
 	}
 
-	private MutableList<SubAccount> getSubAccounts0(int accountId) {
-		return subAccountMap.get(accountId);
+	private MutableSet<SubAccount> getSubAccounts0(int accountId) {
+		MutableSet<SubAccount> subAccountSet = subAccountMap.get(accountId);
+		if (subAccountSet == null) {
+			subAccountSet = ECollections.newUnifiedSet();
+			subAccountMap.put(accountId, subAccountSet);
+		}
+		return subAccountSet;
 	}
 
 }
