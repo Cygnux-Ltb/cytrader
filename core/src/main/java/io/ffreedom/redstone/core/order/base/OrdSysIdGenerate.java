@@ -15,8 +15,7 @@ public final class OrdSysIdGenerate {
 
 	/**
 	 * 
-	 * @param ownerId
-	 *            max value 921
+	 * @param ownerId min value 1 max value 921
 	 * @return
 	 */
 	public static long next(int ownerId) {

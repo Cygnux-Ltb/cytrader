@@ -17,7 +17,7 @@ public class OrderOperator {
 			// Add NewTrade record
 			order.getTradeSet().addNewTrade(
 					ZonedDateTime.ofInstant(Instant.ofEpochMilli(report.getEpochMilliseconds()), TimeZones.SYS_DEFAULT),
-					report.getExecPrice(), report.getFilledQty() - order.getQtyPrice().getLastFilledQty());
+					report.getExecutePrice(), report.getFilledQty() - order.getQtyPrice().getLastFilledQty());
 			break;
 		case Filled:
 			// Set FilledQty
@@ -25,7 +25,7 @@ public class OrderOperator {
 			// Add NewTrade Record
 			order.getTradeSet().addNewTrade(
 					ZonedDateTime.ofInstant(Instant.ofEpochMilli(report.getEpochMilliseconds()), TimeZones.SYS_DEFAULT),
-					report.getExecPrice(), report.getFilledQty() - order.getQtyPrice().getLastFilledQty());
+					report.getExecutePrice(), report.getFilledQty() - order.getQtyPrice().getLastFilledQty());
 			// Calculation AvgPrice
 			order.getQtyPrice().calculationAvgPrice(order.getTradeSet());
 			break;

@@ -55,17 +55,28 @@ public enum OrdStatus {
 
 	public static OrdStatus valueOf(int code) {
 		switch (code) {
-		case 10:return PendingNew;
-		case 11:return New;
-		case 12:return NewRejected;
-		case 20:return PendingCancel;
-		case 21:return Canceled;
-		case 22:return CancelRejected;
-		case 30:return PendingReplace;
-		case 31:return Replaced;
-		case 41:return Suspended;
-		case 51:return PartiallyFilled;
-		case 52:return Filled;
+		case 10:
+			return PendingNew;
+		case 11:
+			return New;
+		case 12:
+			return NewRejected;
+		case 20:
+			return PendingCancel;
+		case 21:
+			return Canceled;
+		case 22:
+			return CancelRejected;
+		case 30:
+			return PendingReplace;
+		case 31:
+			return Replaced;
+		case 41:
+			return Suspended;
+		case 51:
+			return PartiallyFilled;
+		case 52:
+			return Filled;
 		default:
 			logger.error("OrdStatus.valueOf(code=={}) -> is no matches, return OrdStatus.Invalid", code);
 			return Invalid;

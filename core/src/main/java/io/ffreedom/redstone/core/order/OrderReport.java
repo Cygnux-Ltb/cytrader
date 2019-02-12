@@ -4,23 +4,40 @@ import io.ffreedom.redstone.core.order.enums.OrdStatus;
 
 public final class OrderReport {
 
-	private long ordSysId;
-	private long epochMilliseconds;
-	private OrdStatus ordStatus;
 	/**
-	 * 
+	 * mapping to order ordSysId
 	 */
-	private String borkerReturnId;
+	private long ordSysId;
+
 	/**
-	 * 
+	 * report epoch milliseconds
+	 */
+	private long epochMilliseconds;
+
+	/**
+	 * order status of now report
+	 */
+	private OrdStatus ordStatus;
+
+	/**
+	 * broker return id
+	 */
+	private String brokerRtnId;
+
+	/**
+	 * filled quantity
 	 */
 	private double filledQty;
+
 	/**
-	 * 
+	 * leaves quantity
 	 */
 	private double leavesQty;
 
-	private double execPrice;
+	/**
+	 * order execute price
+	 */
+	private double executePrice;
 
 	public long getOrdSysId() {
 		return ordSysId;
@@ -49,12 +66,12 @@ public final class OrderReport {
 		return this;
 	}
 
-	public String getBorkerReturnId() {
-		return borkerReturnId;
+	public String getBrokerRtnId() {
+		return brokerRtnId;
 	}
 
-	public OrderReport setBorkerReturnId(String borkerReturnId) {
-		this.borkerReturnId = borkerReturnId;
+	public OrderReport setBrokerRtnId(String brokerRtnId) {
+		this.brokerRtnId = brokerRtnId;
 		return this;
 	}
 
@@ -76,12 +93,12 @@ public final class OrderReport {
 		return this;
 	}
 
-	public double getExecPrice() {
-		return execPrice;
+	public double getExecutePrice() {
+		return executePrice;
 	}
 
-	public OrderReport setExecPrice(double execPrice) {
-		this.execPrice = execPrice;
+	public OrderReport setExecutePrice(double executePrice) {
+		this.executePrice = executePrice;
 		return this;
 	}
 

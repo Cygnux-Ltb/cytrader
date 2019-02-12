@@ -64,9 +64,8 @@ public final class InstrumentActor {
 
 	private Instrument getInstrument0(int instrumentId) {
 		Instrument instrument = instrumentIdMap.get(instrumentId);
-		if (instrument == null) {
+		if (instrument == null)
 			throw new IllegalArgumentException("InstrumentId -> " + instrumentId + " is not find.");
-		}
 		return instrument;
 		// return Optional.ofNullable(instrumentMap.get(instrumentId))
 		// .orElseThrow(() -> new IllegalArgumentException(""));
@@ -78,9 +77,8 @@ public final class InstrumentActor {
 
 	private Instrument getInstrument0(String instrumentCode) {
 		Instrument instrument = instrumentCodeMap.get(instrumentCode);
-		if (instrument == null) {
+		if (instrument == null)
 			throw new IllegalArgumentException("InstrumentCode -> " + instrumentCode + " is not find.");
-		}
 		return instrument;
 		// return Optional.ofNullable(instrumentMap.get(instrumentId))
 		// .orElseThrow(() -> new IllegalArgumentException(""));

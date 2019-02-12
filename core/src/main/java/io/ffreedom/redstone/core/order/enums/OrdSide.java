@@ -39,10 +39,14 @@ public enum OrdSide {
 
 	public static OrdSide valueOf(int code) {
 		switch (code) {
-		case 1:return Buy;
-		case 2:return Sell;
-		case 3:return MarginBuy;
-		case 4:return ShortSell;
+		case 1:
+			return Buy;
+		case 2:
+			return Sell;
+		case 3:
+			return MarginBuy;
+		case 4:
+			return ShortSell;
 		default:
 			logger.error("OrdSide.valueOf(code=={}) -> is no matches, return OrdSide.Invalid", code);
 			return Invalid;

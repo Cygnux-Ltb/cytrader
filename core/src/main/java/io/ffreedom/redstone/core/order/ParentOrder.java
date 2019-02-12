@@ -22,8 +22,7 @@ public final class ParentOrder extends ActualOrder {
 			OrdStatus ordStatus, int strategyId, int subAccountId) {
 		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, ordStatus, OrdTimestamps.generate(),
 				strategyId, subAccountId);
-		// TODO List Type
-		this.childOrders = ECollections.newFastList();
+		this.childOrders = ECollections.newFastList(16);
 	}
 
 	public ChildOrder toChildOrder() {

@@ -12,11 +12,12 @@ import io.ffreedom.redstone.core.order.enums.OrdType;
 public interface Order extends Comparable<Order> {
 
 	/**
+	 * ordSysId构成<br>
+	 * 策略Id | 时间戳Second | 自增量Number<br>
+	 * strategyId | epochSecond| increment<br>
+	 * 922 | 3372036854 | 775807<br>
 	 * 
-	 * oId | epochSecond| increment <br>
-	 * 922 | 3372036854 | 775807 <br>
-	 * 
-	 * @return int
+	 * @return long
 	 */
 	long getOrdSysId();
 
@@ -40,6 +41,11 @@ public interface Order extends Comparable<Order> {
 
 	OrdRank getRank();
 
+	/**
+	 * Order成交列表
+	 * 
+	 * @return TradeSet
+	 */
 	TradeSet getTradeSet();
 
 	@Override

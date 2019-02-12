@@ -6,20 +6,44 @@ import io.ffreedom.common.utils.DoubleUtil;
 import io.ffreedom.redstone.core.order.base.TradeSet.Trade;
 
 /**
- * @author Administrator
+ * @author yellow013
  *
  */
 public class OrdQtyPrice {
 
+	/**
+	 * 委托数量
+	 */
 	private double offerQty;
+	/**
+	 * 剩余数量
+	 */
 	private double leavesQty;
+	/**
+	 * 已成交数量
+	 */
 	private double filledQty;
+	/**
+	 * 最后一次成交数量
+	 */
 	private double lastFilledQty;
-	private boolean isBestPrice;
-
-	private double offerPrice;
-	private double avgPrice;
+	/**
+	 * 是否以最大可能的数量
+	 */
 	private boolean isMaxPossibleQty;
+
+	/**
+	 * 委托价格
+	 */
+	private double offerPrice;
+	/**
+	 * 成交均价
+	 */
+	private double avgPrice;
+	/**
+	 * 以最优价格
+	 */
+	private boolean isBestPrice;
 
 	private OrdQtyPrice(double offerQty, double offerPrice) {
 		this.offerQty = offerQty;
