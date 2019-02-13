@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.keeper.OrderKeeper;
+import io.ffreedom.redstone.core.order.storage.OrderKeeper;
 
 public class OrderActor {
 
