@@ -6,7 +6,7 @@ public interface PositionManager<T extends Position> {
 
 	void putPosition(T position);
 
-	T getPosition();
+	T getPosition(int instrumentId);
 
 	void onOrder(Order order);
 
