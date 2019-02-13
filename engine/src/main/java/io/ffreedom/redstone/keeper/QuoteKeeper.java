@@ -11,7 +11,7 @@ import io.ffreedom.common.functional.Callback;
 import io.ffreedom.polaris.market.Quotes;
 
 @NotThreadSafe
-public class QuoteKeeper {
+public final class QuoteKeeper {
 
 	// Map<InstrumentId, Quotes>
 	private MutableIntObjectMap<Quotes> quotesMap = IntObjectHashMap.newMap();

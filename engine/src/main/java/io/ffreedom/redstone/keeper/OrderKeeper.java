@@ -11,7 +11,7 @@ import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.storage.OrderBook;
 
 @NotThreadSafe
-public class OrderKeeper {
+public final class OrderKeeper {
 
 	private static Logger logger = LoggerFactory.getLogger(OrderKeeper.class);
 
@@ -41,7 +41,7 @@ public class OrderKeeper {
 		case Filled:
 		case NewRejected:
 		case CancelRejected:
-
+			
 			break;
 		default:
 			logger.warn("Not processed : OrdSysId -> {}, OrdStatus -> {}", order.getOrdSysId(), order.getStatus());
@@ -58,9 +58,13 @@ public class OrderKeeper {
 		getStrategyOrderBook(order.getStrategyId()).putOrder(order);
 		getInstrumentOrderBook(order.getInstrument().getInstrumentId()).putOrder(order);
 	}
+	
+	public static boolean containsOrder(long ordSysId) {
+		return INSTANCE.allOrders.containsOrder(ordSysId);
+	}
 
-	public static Order getOrder(long orderSysId) {
-		return INSTANCE.allOrders.getOrder(orderSysId);
+	public static Order getOrder(long ordSysId) {
+		return INSTANCE.allOrders.getOrder(ordSysId);
 	}
 
 	public static OrderBook getAllOrders() {

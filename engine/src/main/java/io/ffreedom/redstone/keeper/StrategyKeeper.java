@@ -26,7 +26,29 @@ public final class StrategyKeeper {
 	public static final StrategyKeeper INSTANCE = new StrategyKeeper();
 
 	private StrategyKeeper() {
+	}
 
+	public static void put(Strategy strategy, Instrument... instruments) {
+		INSTANCE.strategyMap.put(strategy.getStrategyId(), strategy);
+		if (instruments != null) {
+			for (int i = 0; i < instruments.length; i++) {
+				int instrumentId = instruments[i].getInstrumentId();
+				MutableList<Strategy> strategyList = INSTANCE.instrumentStrategyMap.get(instrumentId);
+				if (strategyList == null) {
+					strategyList = ECollections.newFastList();
+					INSTANCE.instrumentStrategyMap.put(instrumentId, strategyList);
+				}
+				strategyList.add(strategy);
+			}
+		}
+	}
+
+	public static Strategy getStrategy(int strategyId) {
+		return INSTANCE.strategyMap.get(strategyId);
+	}
+
+	public static MutableList<Strategy> getStrategys(int instrumentId) {
+		return INSTANCE.instrumentStrategyMap.get(instrumentId);
 	}
 
 	public void onMarketData(BasicMarketData marketData) {
@@ -40,21 +62,6 @@ public final class StrategyKeeper {
 		logger.debug("Call StrategyActor.onOrder , StrategyId==[{}], ordSysId==[{}]", order.getStrategyId(),
 				order.getOrdSysId());
 		strategyMap.get(order.getStrategyId()).onOrder(order);
-	}
-
-	public void put(Strategy strategy, Instrument... instruments) {
-		strategyMap.put(strategy.getStrategyId(), strategy);
-		if (instruments != null) {
-			for (int i = 0; i < instruments.length; i++) {
-				int instrumentId = instruments[i].getInstrumentId();
-				MutableList<Strategy> strategyList = instrumentStrategyMap.get(instrumentId);
-				if (strategyList == null) {
-					strategyList = ECollections.newFastList();
-					instrumentStrategyMap.put(instrumentId, strategyList);
-				}
-				strategyList.add(strategy);
-			}
-		}
 	}
 
 }
