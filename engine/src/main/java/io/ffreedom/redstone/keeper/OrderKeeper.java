@@ -37,14 +37,21 @@ public final class OrderKeeper {
 
 	public static void updateOrder(Order order) {
 		switch (order.getStatus()) {
-		case Canceled:
 		case Filled:
+		case Canceled:
 		case NewRejected:
-		case CancelRejected:
-			
+			INSTANCE.allOrders.terminatedOrder(order);
+			int subAccountId = order.getSubAccountId();
+			int accountId = AccountKeeper.getAccountId(subAccountId);
+			getSubAccountOrderBook(subAccountId).terminatedOrder(order);
+			getAccountOrderBook(accountId).terminatedOrder(order);
+			getStrategyOrderBook(order.getStrategyId()).terminatedOrder(order);
+			getInstrumentOrderBook(order.getInstrument().getInstrumentId()).terminatedOrder(order);
+			break;
+		case Invalid:
+			logger.warn("Not processed : OrdSysId -> {}, OrdStatus -> {}", order.getOrdSysId(), order.getStatus());
 			break;
 		default:
-			logger.warn("Not processed : OrdSysId -> {}, OrdStatus -> {}", order.getOrdSysId(), order.getStatus());
 			break;
 		}
 	}
@@ -58,7 +65,7 @@ public final class OrderKeeper {
 		getStrategyOrderBook(order.getStrategyId()).putOrder(order);
 		getInstrumentOrderBook(order.getInstrument().getInstrumentId()).putOrder(order);
 	}
-	
+
 	public static boolean containsOrder(long ordSysId) {
 		return INSTANCE.allOrders.containsOrder(ordSysId);
 	}

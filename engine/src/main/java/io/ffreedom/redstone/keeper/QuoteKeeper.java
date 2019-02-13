@@ -1,7 +1,5 @@
 package io.ffreedom.redstone.keeper;
 
-import java.util.Optional;
-
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
@@ -21,26 +19,26 @@ public final class QuoteKeeper {
 	private QuoteKeeper() {
 	}
 
-	public void putQuotes(int instrumentId, Quotes quotes) {
-		quotesMap.put(instrumentId, quotes);
+	public static void put(int instrumentId, Quotes quotes) {
+		INSTANCE.quotesMap.put(instrumentId, quotes);
 	}
 
-	public Optional<Quotes> getQuotes(int instrumentId) {
-		return Optional.ofNullable(quotesMap.get(instrumentId));
+	public static Quotes getQuotes(int instrumentId) {
+		Quotes quotes = INSTANCE.quotesMap.get(instrumentId);
+		if (quotes == null) {
+			quotes = Quotes.newInstance();
+			INSTANCE.quotesMap.put(instrumentId, quotes);
+		}
+		return quotes;
 	}
 
-	public void updateQuotes(int instrumentId, QuotesUpdater updater) {
-		updater.updateQuotes(getQuotes(instrumentId).orElseGet(() -> {
-			// TODO Quotes level set def level 10
-			Quotes quotes = Quotes.newInstance();
-			putQuotes(instrumentId, quotes);
-			return quotes;
-		}));
+	public static void updateQuotes(int instrumentId, QuotesUpdater updater) {
+		updater.update(getQuotes(instrumentId));
 	}
 
 	@FunctionalInterface
 	public static interface QuotesUpdater extends Callback<Quotes> {
-		default void updateQuotes(Quotes quotes) {
+		default void update(Quotes quotes) {
 			onEvent(quotes);
 		}
 	}
