@@ -12,8 +12,9 @@ import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.polaris.market.MarketData;
 import io.ffreedom.polaris.market.QuoteLevelOverflowException;
-import io.ffreedom.redstone.actor.InstrumentActor;
+import io.ffreedom.redstone.actor.InstrumentKeeper;
 import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMarketData;
 
 public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarketData, BasicMarketData> {
@@ -32,11 +33,11 @@ public class CtpInboundMarketDataConverter implements Converter<CtpInboundMarket
 		LocalTime time = LocalTime.parse(ctpMarketData.getUpdateTime(), updateTimeformatter)
 				.plus(ctpMarketData.getUpdateMillisec(), ChronoUnit.MILLIS);
 
-		Instrument instrument = InstrumentActor.getInstrument(ctpMarketData.getInstrumentID());
+		Instrument instrument = InstrumentKeeper.getInstrument(ctpMarketData.getInstrumentID());
 
 		MarketData marketData = null;
 		try {
-			marketData = new MarketData(date, time, instrument, 5).setLastPrice(ctpMarketData.getLastPrice())
+			marketData = new BasicMarketData(date, time, instrument, 5).setLastPrice(ctpMarketData.getLastPrice())
 					.setVolume(ctpMarketData.getVolume()).setTurnover(ctpMarketData.getTurnover())
 					// Set Bid Price
 					.addBidQuote(ctpMarketData.getBidPrice1(), ctpMarketData.getBidVolume1())

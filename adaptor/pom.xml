@@ -47,6 +47,11 @@
 			<groupId>io.ffreedom</groupId>
 			<artifactId>persistence-json</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>jctp</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 
 </project>
