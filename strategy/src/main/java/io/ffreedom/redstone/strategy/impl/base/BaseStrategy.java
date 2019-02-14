@@ -8,7 +8,7 @@ import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
-import io.ffreedom.redstone.actor.InstrumentActor;
+import io.ffreedom.redstone.actor.InstrumentKeeper;
 import io.ffreedom.redstone.actor.OrderActor;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.VirtualOrder;
@@ -18,8 +18,6 @@ import io.ffreedom.redstone.core.strategy.Strategy;
 public abstract class BaseStrategy<M extends BasicMarketData> implements Strategy, CircuitBreaker {
 
 	private int strategyId;
-
-	private boolean isEnable = false;
 
 	private boolean isInitSuccess = false;
 
@@ -48,26 +46,23 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	}
 
 	@Override
-	public boolean isEnable() {
-		return isEnable;
-	}
-
-	@Override
 	public void onOrder(Order order) {
 		OrderActor.onOrder(order);
 	}
 
+	private boolean isEnable = false;
+
 	@Override
-	public void enableStrategy() {
-		if (isInitSuccess)
-			this.isEnable = true;
-		else
-			logger.info("Enable strategy failure, strategyId==[{}], isInitSuccess==[false]", strategyId);
+	public boolean enabled() {
+		return isEnable;
 	}
 
 	@Override
-	public void disableStrategy() {
-		this.isEnable = false;
+	public void setEnable(boolean enable) {
+		if (isInitSuccess && enable)
+			this.isEnable = true;
+		logger.info("Enable strategy , strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
+				isEnable);
 	}
 
 	@Override
@@ -82,12 +77,12 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void enableInstrument(int instrumentId) {
-		InstrumentActor.setTradable(instrumentId);
+		InstrumentKeeper.setTradable(instrumentId);
 	}
 
 	@Override
 	public void disableInstrument(int instrumentId) {
-		InstrumentActor.setNotTradable(instrumentId);
+		InstrumentKeeper.setNotTradable(instrumentId);
 	}
 
 	@Override
@@ -97,7 +92,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice) {
-		
+
 	}
 
 }

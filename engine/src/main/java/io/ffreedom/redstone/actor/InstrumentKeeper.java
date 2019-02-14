@@ -8,80 +8,52 @@ import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.polaris.financial.Instrument;
 
-public final class InstrumentActor {
+public final class InstrumentKeeper {
 
-	// Map<instrumentId, boolean>
-	private MutableIntBooleanMap isTradableMap = new IntBooleanHashMap();
+	// 存储instrument的交易状态,以instrumentId索引
+	private MutableIntBooleanMap tradableMap = new IntBooleanHashMap();
 
-	// Map<instrumentId, instrument>
+	// 存储instrument,以instrumentId索引
 	private MutableIntObjectMap<Instrument> instrumentIdMap = ECollections.newIntObjectHashMap();
 
-	// Map<instrumentCode, instrument>
+	// 存储instrument,以instrumentCode索引
 	private MutableMap<String, Instrument> instrumentCodeMap = ECollections.newUnifiedMap();
 
-	private final static InstrumentActor INSTANCE = new InstrumentActor();
+	private final static InstrumentKeeper INSTANCE = new InstrumentKeeper();
 
-	private InstrumentActor() {
+	private InstrumentKeeper() {
 	}
 
 	public static void setNotTradable(int instrumentId) {
-		INSTANCE.notTradable(instrumentId);
-	}
-
-	private void notTradable(int instrumentId) {
-		isTradableMap.put(instrumentId, false);
+		getInstrument(instrumentId).setEnable(false);
 	}
 
 	public static void setTradable(int instrumentId) {
-		INSTANCE.tradable(instrumentId);
+		getInstrument(instrumentId).setEnable(true);
 	}
 
-	private void tradable(int instrumentId) {
-		isTradableMap.put(instrumentId, true);
-	}
-
-	public static boolean isTradable(Instrument instrument) {
-		return INSTANCE.isTradable0(instrument);
-	}
-
-	private boolean isTradable0(Instrument instrument) {
-		return isTradableMap.get(instrument.getInstrumentId());
+	public static boolean isTradable(int instrumentId) {
+		return INSTANCE.tradableMap.get(instrumentId);
 	}
 
 	public static void putInstrument(Instrument instrument) {
-		INSTANCE.putInstrument0(instrument);
-	}
-
-	private void putInstrument0(Instrument instrument) {
-		instrumentIdMap.put(instrument.getInstrumentId(), instrument);
-		instrumentCodeMap.put(instrument.getInstrumentCode(), instrument);
-		tradable(instrument.getInstrumentId());
+		INSTANCE.instrumentIdMap.put(instrument.getInstrumentId(), instrument);
+		INSTANCE.instrumentCodeMap.put(instrument.getInstrumentCode(), instrument);
+		setTradable(instrument.getInstrumentId());
 	}
 
 	public static Instrument getInstrument(int instrumentId) {
-		return INSTANCE.getInstrument0(instrumentId);
-	}
-
-	private Instrument getInstrument0(int instrumentId) {
-		Instrument instrument = instrumentIdMap.get(instrumentId);
+		Instrument instrument = INSTANCE.instrumentIdMap.get(instrumentId);
 		if (instrument == null)
-			throw new IllegalArgumentException("InstrumentId -> " + instrumentId + " is not find.");
+			throw new IllegalArgumentException("Instrument is not find, instrumentId == " + instrumentId);
 		return instrument;
-		// return Optional.ofNullable(instrumentMap.get(instrumentId))
-		// .orElseThrow(() -> new IllegalArgumentException(""));
 	}
 
 	public static Instrument getInstrument(String instrumentCode) {
-		return INSTANCE.getInstrument0(instrumentCode);
-	}
-
-	private Instrument getInstrument0(String instrumentCode) {
-		Instrument instrument = instrumentCodeMap.get(instrumentCode);
+		Instrument instrument = INSTANCE.instrumentCodeMap.get(instrumentCode);
 		if (instrument == null)
-			throw new IllegalArgumentException("InstrumentCode -> " + instrumentCode + " is not find.");
+			throw new IllegalArgumentException("Instrument is not find, instrumentCode ==" + instrumentCode);
 		return instrument;
-		// return Optional.ofNullable(instrumentMap.get(instrumentId))
-		// .orElseThrow(() -> new IllegalArgumentException(""));
 	}
 
 }
