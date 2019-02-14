@@ -9,14 +9,12 @@ import org.slf4j.Logger;
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.polaris.market.BasicMarketData;
-import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.Strategy;
 
 @NotThreadSafe
 public final class StrategyKeeper {
 
-	private Logger logger = LoggerFactory.getLogger(StrategyKeeper.class);
+	private static final Logger logger = LoggerFactory.getLogger(StrategyKeeper.class);
 
 	private MutableIntObjectMap<Strategy> strategyMap = ECollections.newIntObjectHashMap();
 
@@ -30,6 +28,7 @@ public final class StrategyKeeper {
 
 	public static void put(Strategy strategy, Instrument... instruments) {
 		INSTANCE.strategyMap.put(strategy.getStrategyId(), strategy);
+		logger.info("Put to strategyMap. strategyId==[{}]", strategy.getStrategyId());
 		if (instruments != null) {
 			for (int i = 0; i < instruments.length; i++) {
 				int instrumentId = instruments[i].getInstrumentId();
@@ -39,6 +38,8 @@ public final class StrategyKeeper {
 					INSTANCE.instrumentStrategyMap.put(instrumentId, strategyList);
 				}
 				strategyList.add(strategy);
+				logger.info("Put to instrumentStrategyMap. strategyId==[{}], instrumentId==[{}]",
+						strategy.getStrategyId(), instrumentId);
 			}
 		}
 	}
@@ -49,19 +50,6 @@ public final class StrategyKeeper {
 
 	public static MutableList<Strategy> getStrategys(int instrumentId) {
 		return INSTANCE.instrumentStrategyMap.get(instrumentId);
-	}
-
-	public void onMarketData(BasicMarketData marketData) {
-		instrumentStrategyMap.get(marketData.getInstrumentId()).each(strategy -> {
-			if (strategy.isEnable())
-				strategy.onMarketData(marketData);
-		});
-	}
-
-	public void onOrder(Order order) {
-		logger.debug("Call StrategyActor.onOrder , StrategyId==[{}], ordSysId==[{}]", order.getStrategyId(),
-				order.getOrdSysId());
-		strategyMap.get(order.getStrategyId()).onOrder(order);
 	}
 
 }

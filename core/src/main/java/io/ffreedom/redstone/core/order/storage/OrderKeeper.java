@@ -13,7 +13,7 @@ import io.ffreedom.redstone.core.order.Order;
 @NotThreadSafe
 public final class OrderKeeper {
 
-	private static Logger logger = LoggerFactory.getLogger(OrderKeeper.class);
+	private static final Logger logger = LoggerFactory.getLogger(OrderKeeper.class);
 
 	private static final OrderKeeper INSTANCE = new OrderKeeper();
 

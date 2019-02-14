@@ -2,9 +2,11 @@ package io.ffreedom.redstone.core.account.storage;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.eclipse.collections.api.map.primitive.MutableIntBooleanMap;
 import org.eclipse.collections.api.map.primitive.MutableIntIntMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.redstone.core.account.Account;
@@ -12,6 +14,12 @@ import io.ffreedom.redstone.core.account.SubAccount;
 
 @NotThreadSafe
 public final class AccountKeeper {
+
+	// 存储account的交易状态,以accountId索引
+	private MutableIntBooleanMap accountTradableMap = new IntBooleanHashMap();
+
+	// 存储subAccount的交易状态,以subAccountId索引
+	private MutableIntBooleanMap subAccountTradableMap = new IntBooleanHashMap();
 
 	// 存储account信息,一对一关系,以subAccountId索引
 	private MutableIntObjectMap<Account> accountMap = ECollections.newIntObjectHashMap();
@@ -39,6 +47,30 @@ public final class AccountKeeper {
 			INSTANCE.accountIdMap.put(subAccountId, accountId);
 			getSubAccounts(accountId).add(subAccount);
 		}
+	}
+
+	public static void setAccountNotTradable(int accountId) {
+		INSTANCE.accountTradableMap.put(accountId, false);
+	}
+
+	public static void setAccountTradable(int accountId) {
+		INSTANCE.accountTradableMap.put(accountId, true);
+	}
+
+	public static boolean isAccountTradable(int accountId) {
+		return INSTANCE.accountTradableMap.get(accountId);
+	}
+
+	public static void setSubAccountNotTradable(int subAccountId) {
+		INSTANCE.subAccountTradableMap.put(subAccountId, false);
+	}
+
+	public static void setSubAccountTradable(int subAccountId) {
+		INSTANCE.subAccountTradableMap.put(subAccountId, true);
+	}
+
+	public static boolean isSubAccountTradable(int subAccountId) {
+		return INSTANCE.subAccountTradableMap.get(subAccountId);
 	}
 
 	public static int getAccountId(int subAccountId) {
