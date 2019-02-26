@@ -1,12 +1,12 @@
 package io.ffreedom.redstone.adaptor.ctp;
 
+import ctp.thostapi.CThostFtdcDepthMarketDataField;
 import io.ffreedom.common.charset.Charsets;
 import io.ffreedom.common.functional.BeanSetter;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
 import io.ffreedom.polaris.market.BasicMarketData;
-import io.ffreedom.redstone.actor.OrderActor;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.ctp.converter.inbound.CtpInboundMarketDataConverter;
 import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMarketData;
@@ -17,6 +17,7 @@ import io.ffreedom.redstone.adaptor.ctp.setter.CtpInboundRtnOrderSetter;
 import io.ffreedom.redstone.adaptor.ctp.setter.CtpInboundRtnTradeSetter;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
 import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.storage.OrderKeeper;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.role.Receiver;
 import io.ffreedom.transport.rabbitmq.RabbitMqReceiver;
@@ -26,7 +27,7 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 
 	private Receiver inboundReceiver;
 
-	private Converter<CtpInboundMarketData, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
+	private Converter<CThostFtdcDepthMarketDataField, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
 
 	private BeanSetter<CtpInboundRtnOrder, Order> rtnOrderSetter = new CtpInboundRtnOrderSetter();
 
@@ -76,7 +77,7 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 	private Order checkoutCtpOrder(Integer orderRef) {
 		try {
 			Long orderSysId = CtpOrderRefLogger.INSTANCE.getOrdSysId(orderRef);
-			return OrderActor.getOrder(orderSysId);
+			return OrderKeeper.getOrder(orderSysId);
 		} catch (CtpOrderRefNotFoundException e) {
 			// TODO Log
 			throw new RuntimeException(e);

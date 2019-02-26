@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
 import io.ffreedom.persistence.avro.serializable.AvroBytesSerializer;
-import io.ffreedom.redstone.actor.OrderActor;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.sim.dto.SimSubscribeMarketData;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
@@ -15,6 +14,7 @@ import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
+import io.ffreedom.redstone.core.order.storage.OrderKeeper;
 import io.ffreedom.transport.core.role.Sender;
 import io.ffreedom.transport.socket.SocketSender;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
@@ -50,10 +50,10 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 
 	public boolean newOredr(Order order) {
 		io.ffreedom.persistence.avro.entity.Order simOrder = io.ffreedom.persistence.avro.entity.Order.newBuilder()
-				.setOrderRef(new Long(order.getOrdSysId()).intValue())
+				.setOrderRef(Long.valueOf(order.getOrdSysId()).intValue())
 				.setInstrumentId(order.getInstrument().getInstrumentCode())
 				.setLimitPrice(order.getQtyPrice().getOfferPrice())
-				.setVolumeTotalOriginal(new Double(order.getQtyPrice().getOfferQty()).intValue())
+				.setVolumeTotalOriginal(Double.valueOf(order.getQtyPrice().getOfferQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.getSide().code()).build();
 		byte[] byteMsg = serializer.serialization(simOrder);
 		tdSender.sent(byteMsg);
@@ -61,12 +61,12 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 	}
 
 	public boolean cancelOrder(Order order) {
-		Order cancelOrder = OrderActor.getOrder(order.getOrdSysId());
+		Order cancelOrder = OrderKeeper.getOrder(order.getOrdSysId());
 		io.ffreedom.persistence.avro.entity.Order simOrder = io.ffreedom.persistence.avro.entity.Order.newBuilder()
-				.setOrderRef(new Long(order.getOrdSysId()).intValue())
+				.setOrderRef(Long.valueOf(order.getOrdSysId()).intValue())
 				.setInstrumentId(cancelOrder.getInstrument().getInstrumentCode())
 				.setLimitPrice(cancelOrder.getQtyPrice().getOfferPrice())
-				.setVolumeTotalOriginal(new Double(cancelOrder.getQtyPrice().getOfferQty()).intValue())
+				.setVolumeTotalOriginal(Double.valueOf(cancelOrder.getQtyPrice().getOfferQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.getSide().code()).build();
 		byte[] byteMsg = serializer.serialization(simOrder);
 		tdSender.sent(byteMsg);

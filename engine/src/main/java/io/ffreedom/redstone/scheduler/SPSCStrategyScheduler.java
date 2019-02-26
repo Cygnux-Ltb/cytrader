@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.scheduler;
 
-import io.ffreedom.common.queue.disruptor.SPSCQueue;
+import io.ffreedom.common.queue.impl.disruptor.SPSCQueue;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.StrategyActor;
 import io.ffreedom.redstone.core.order.Order;
@@ -34,13 +34,13 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 	// TODO Pool RecvMsg
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
-		recvQueue.enQueue(new RecvMsg<BasicMarketData>(marketDataMark, marketData));
+		recvQueue.enqueue(new RecvMsg<BasicMarketData>(marketDataMark, marketData));
 	}
 
 	// TODO Pool RecvMsg
 	@Override
 	public void onOrder(Order order) {
-		recvQueue.enQueue(new RecvMsg<Order>(orderMark, order));
+		recvQueue.enqueue(new RecvMsg<Order>(orderMark, order));
 	}
 
 	private class RecvMsg<T> {

@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
-import io.ffreedom.common.datetime.DatePattern;
+import io.ffreedom.common.datetime.DateTimeStyle;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.LoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
@@ -16,13 +16,12 @@ import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.polaris.market.MarketData;
 import io.ffreedom.polaris.market.QuoteLevelOverflowException;
 import io.ffreedom.redstone.actor.InstrumentKeeper;
-import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMarketData;
 
 public class CtpInboundMarketDataConverter implements Converter<CThostFtdcDepthMarketDataField, BasicMarketData> {
 
-	private DateTimeFormatter updateTimeformatter = DateTimeFormatter.ofPattern(DatePattern.HH_MM_SS);
+	private DateTimeFormatter updateTimeformatter = DateTimeStyle.HH_MM_SS.newFormatter();
 
-	private DateTimeFormatter actionDayformatter = DateTimeFormatter.ofPattern(DatePattern.YYYYMMDD);
+	private DateTimeFormatter actionDayformatter = DateTimeStyle.YYYYMMDD.newFormatter();
 
 	private Logger logger = LoggerFactory.getLogger(CtpInboundMarketDataConverter.class);
 
