@@ -1,5 +1,7 @@
 package io.ffreedom.redstone.adaptor.ctp;
 
+import java.util.stream.Collectors;
+
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.ffreedom.common.functional.Converter;
@@ -8,6 +10,7 @@ import io.ffreedom.jctp.Gateway;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.ctp.converter.outbound.CtpOutboundCancelOrderConverter;
 import io.ffreedom.redstone.adaptor.ctp.converter.outbound.CtpOutboundNewOrderConverter;
+import io.ffreedom.redstone.adaptor.ctp.dto.CtpSubscribeMarketData;
 import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundCancelOrder;
 import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundNewOrder;
 import io.ffreedom.redstone.core.account.Account;
@@ -21,7 +24,7 @@ import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.transport.rabbitmq.RabbitMqPublisher;
 import io.ffreedom.transport.rabbitmq.config.RmqPublisherConfigurator;
 
-public class CtpOutboundAdaptor implements OutboundAdaptor {
+public class CtpOutboundAdaptor implements OutboundAdaptor<CtpSubscribeMarketData, ReplyPositions, ReplyBalance> {
 
 	private Converter<Order, CThostFtdcInputOrderField> newOrderConverter = new CtpOutboundNewOrderConverter();
 
@@ -79,9 +82,15 @@ public class CtpOutboundAdaptor implements OutboundAdaptor {
 	}
 
 	@Override
-	public boolean subscribeMarketData(SubscribeMarketData subscribeMarketData) {
-
-		return false;
+	public boolean subscribeMarketData(CtpSubscribeMarketData subscribeMarketData) {
+		try {
+			gateway.subscribeMarketData(subscribeMarketData.getInstrumentSet().stream()
+					.map(instrument -> instrument.getInstrumentCode()).collect(Collectors.toSet()));
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
 	}
 
 	@Override
