@@ -6,10 +6,10 @@ import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
 import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.ffreedom.redstone.core.order.Order;
 
-public interface OutboundAdaptor<RP extends ReplyPositions, RB extends ReplyBalance>
+public interface OutboundAdaptor<SMD extends SubscribeMarketData, RP extends ReplyPositions, RB extends ReplyBalance>
 		extends Adaptor {
 
-	boolean subscribeMarketData(SubscribeMarketData subscribeMarketData);
+	boolean subscribeMarketData(SMD subscribeMarketData);
 
 	boolean newOredr(Order order);
 
