@@ -1,16 +1,15 @@
 package io.ffreedom.redstone.core.adaptor;
 
-import io.ffreedom.redstone.core.adaptor.dto.QueryBalance;
-import io.ffreedom.redstone.core.adaptor.dto.QueryPositions;
+import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
 import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.ffreedom.redstone.core.order.Order;
 
-public interface OutboundAdaptor<SM extends SubscribeMarketData, QP extends QueryPositions, QB extends QueryBalance, RP extends ReplyPositions, RB extends ReplyBalance>
+public interface OutboundAdaptor<RP extends ReplyPositions, RB extends ReplyBalance>
 		extends Adaptor {
 
-	boolean subscribeMarketData(SM subscribeMarketData);
+	boolean subscribeMarketData(SubscribeMarketData subscribeMarketData);
 
 	boolean newOredr(Order order);
 
@@ -20,8 +19,8 @@ public interface OutboundAdaptor<SM extends SubscribeMarketData, QP extends Quer
 		return false;
 	}
 
-	RP queryPositions(QP queryPositions);
+	RP queryPositions(Account account);
 
-	RB queryBalance(QB queryBalance);
+	RB queryBalance(Account account);
 
 }
