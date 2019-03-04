@@ -21,7 +21,6 @@ import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.storage.OrderKeeper;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.role.Receiver;
-import io.ffreedom.transport.rabbitmq.RabbitMqReceiver;
 import io.ffreedom.transport.rabbitmq.config.RmqReceiverConfigurator;
 
 public class CtpInboundAdaptor implements InboundAdaptor {

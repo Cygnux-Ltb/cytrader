@@ -5,24 +5,15 @@ import java.util.stream.Collectors;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.ffreedom.common.functional.Converter;
-import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.jctp.Gateway;
-import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.ctp.converter.outbound.CtpOutboundCancelOrderConverter;
 import io.ffreedom.redstone.adaptor.ctp.converter.outbound.CtpOutboundNewOrderConverter;
 import io.ffreedom.redstone.adaptor.ctp.dto.CtpSubscribeMarketData;
-import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundCancelOrder;
-import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundNewOrder;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
-import io.ffreedom.redstone.core.adaptor.dto.QueryBalance;
-import io.ffreedom.redstone.core.adaptor.dto.QueryPositions;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
-import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.transport.rabbitmq.RabbitMqPublisher;
-import io.ffreedom.transport.rabbitmq.config.RmqPublisherConfigurator;
 
 public class CtpOutboundAdaptor implements OutboundAdaptor<CtpSubscribeMarketData, ReplyPositions, ReplyBalance> {
 
@@ -34,7 +25,6 @@ public class CtpOutboundAdaptor implements OutboundAdaptor<CtpSubscribeMarketDat
 
 	public CtpOutboundAdaptor(Gateway gateway) {
 		this.gateway = gateway;
-
 		init();
 	}
 
@@ -55,7 +45,6 @@ public class CtpOutboundAdaptor implements OutboundAdaptor<CtpSubscribeMarketDat
 
 	@Override
 	public boolean close() {
-
 		return false;
 	}
 
