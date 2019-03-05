@@ -8,6 +8,7 @@ import ctp.thostapi.CThostFtdcOrderField;
 import ctp.thostapi.CThostFtdcTradeField;
 import io.ffreedom.common.functional.BeanSetter;
 import io.ffreedom.common.functional.Converter;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.common.queue.impl.ArrayBlockingMPSCQueue;
 import io.ffreedom.jctp.bean.rsp.RspMsg;
@@ -25,7 +26,7 @@ import io.ffreedom.transport.rabbitmq.config.RmqReceiverConfigurator;
 
 public class CtpInboundAdaptor implements InboundAdaptor {
 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+	private static final Logger logger = CommonLoggerFactory.getLogger(CtpInboundAdaptor.class);
 
 	private Receiver inboundReceiver;
 
@@ -62,7 +63,7 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 				rtnTradeSetter.setBean(ctpRtnTrade, rtnTrade);
 				scheduler.onOrder(rtnTrade);
 				break;
-
+				
 			default:
 				break;
 			}
@@ -110,6 +111,13 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 	public boolean close() {
 		inboundReceiver.destroy();
 		return true;
+	}
+	
+	public static void main(String[] args) {
+		
+		
+		logger.debug("dsfsdfsd");
+		
 	}
 
 }

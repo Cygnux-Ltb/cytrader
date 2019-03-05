@@ -12,7 +12,7 @@ import ctp.thostapi.CThostFtdcDepthMarketDataField;
 import io.ffreedom.common.datetime.DateTimeStyle;
 import io.ffreedom.common.datetime.TimeZones;
 import io.ffreedom.common.functional.Converter;
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.InstrumentKeeper;
@@ -23,7 +23,7 @@ public class CtpInboundMarketDataConverter implements Converter<CThostFtdcDepthM
 
 	private DateTimeFormatter actionDayformatter = DateTimeStyle.YYYYMMDD.newFormatter();
 
-	private Logger logger = LoggerFactory.getLogger(CtpInboundMarketDataConverter.class);
+	private Logger logger = CommonLoggerFactory.getLogger(CtpInboundMarketDataConverter.class);
 
 	@Override
 	public BasicMarketData convert(CThostFtdcDepthMarketDataField depthMarketData) {
