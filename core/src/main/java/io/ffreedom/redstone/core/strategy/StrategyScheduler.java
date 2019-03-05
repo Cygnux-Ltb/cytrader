@@ -7,6 +7,8 @@ public interface StrategyScheduler {
 
 	void onMarketData(BasicMarketData marketData);
 
-	void onOrder(Order order);
+	void onInboundOrder(Order order);
+
+	void onOutboundOrder(Order order);
 
 }

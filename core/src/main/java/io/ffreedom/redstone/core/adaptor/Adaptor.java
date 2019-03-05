@@ -9,11 +9,11 @@ public interface Adaptor {
 	String getAdaptorName();
 
 	boolean close();
+	
+	AdaptorType getAdaptorType();
 
 	public static enum AdaptorType {
-
-		CTP, OTHER
-
+		Inbound, Outbound
 	}
 
 }

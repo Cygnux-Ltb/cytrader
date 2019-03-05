@@ -10,10 +10,12 @@ import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.InstrumentKeeper;
 import io.ffreedom.redstone.actor.OrderActor;
+import io.ffreedom.redstone.core.account.storage.AccountKeeper;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
+import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
 
 public abstract class BaseStrategy<M extends BasicMarketData> implements Strategy, CircuitBreaker {
 
@@ -50,20 +52,25 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 		OrderActor.onOrder(order);
 	}
 
+	@Override
+	public void onControlEvent(StrategyControlEvent event) {
+		logger.info("Handle StrategyControlEvent -> {}", event);
+	}
+
 	private boolean isEnable = false;
 
 	@Override
 	public void enable() {
 		if (isInitSuccess)
 			this.isEnable = true;
-		logger.info("Enable strategy , strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
+		logger.info("Enable strategy -> strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
 				isEnable);
 	}
 
 	@Override
 	public void disable() {
 		this.isEnable = false;
-		logger.info("Disable strategy , strategyId==[{}]", strategyId);
+		logger.info("Disable strategy -> strategyId==[{}]", strategyId);
 	}
 
 	@Override
@@ -78,12 +85,12 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void enableAccount(int accountId) {
-
+		AccountKeeper.setAccountTradable(accountId);
 	}
 
 	@Override
 	public void disableAccount(int accountId) {
-
+		AccountKeeper.setAccountNotTradable(accountId);
 	}
 
 	@Override
@@ -103,7 +110,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice) {
-
+		
 	}
 
 }
