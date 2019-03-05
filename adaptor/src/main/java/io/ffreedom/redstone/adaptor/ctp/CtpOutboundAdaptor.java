@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.ffreedom.common.functional.Converter;
-import io.ffreedom.jctp.Gateway;
+import io.ffreedom.jctp.JctpGateway;
 import io.ffreedom.redstone.adaptor.ctp.converter.outbound.CtpOutboundCancelOrderConverter;
 import io.ffreedom.redstone.adaptor.ctp.converter.outbound.CtpOutboundNewOrderConverter;
 import io.ffreedom.redstone.adaptor.ctp.dto.CtpSubscribeMarketData;
@@ -15,15 +15,16 @@ import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
 import io.ffreedom.redstone.core.order.Order;
 
-public class CtpOutboundAdaptor implements OutboundAdaptor<CtpSubscribeMarketData, ReplyPositions, ReplyBalance> {
+public class CtpOutboundAdaptor extends OutboundAdaptor<CtpSubscribeMarketData, ReplyPositions, ReplyBalance> {
 
 	private Converter<Order, CThostFtdcInputOrderField> newOrderConverter = new CtpOutboundNewOrderConverter();
 
 	private Converter<Order, CThostFtdcInputOrderActionField> cancelOrderConverter = new CtpOutboundCancelOrderConverter();
 
-	private Gateway gateway;
+	private JctpGateway gateway;
 
-	public CtpOutboundAdaptor(Gateway gateway) {
+	public CtpOutboundAdaptor(int adaptorId, String adaptorName, JctpGateway gateway) {
+		super(adaptorId, adaptorName);
 		this.gateway = gateway;
 		init();
 	}
