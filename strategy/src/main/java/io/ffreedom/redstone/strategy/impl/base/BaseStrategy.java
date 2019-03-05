@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.functional.Initializer;
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.InstrumentKeeper;
@@ -21,7 +21,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	private boolean isInitSuccess = false;
 
-	protected Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
 
 	//
 	protected MutableLongObjectMap<VirtualOrder> strategyOrders = ECollections.newLongObjectHashMap();
@@ -53,16 +53,27 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	private boolean isEnable = false;
 
 	@Override
-	public boolean enabled() {
+	public void enable() {
+		if (isInitSuccess)
+			this.isEnable = true;
+		logger.info("Enable strategy , strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
+				isEnable);
+	}
+
+	@Override
+	public void disable() {
+		this.isEnable = false;
+		logger.info("Disable strategy , strategyId==[{}]", strategyId);
+	}
+
+	@Override
+	public boolean isEnabled() {
 		return isEnable;
 	}
 
 	@Override
-	public void setEnable(boolean enable) {
-		if (isInitSuccess && enable)
-			this.isEnable = true;
-		logger.info("Enable strategy , strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
-				isEnable);
+	public boolean isDisabled() {
+		return !isEnable;
 	}
 
 	@Override

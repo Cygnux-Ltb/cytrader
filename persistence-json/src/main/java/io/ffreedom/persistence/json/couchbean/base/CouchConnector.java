@@ -16,12 +16,12 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.charset.Charsets;
 import io.ffreedom.common.env.SysProperty;
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
 
 public final class CouchConnector {
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private Logger logger = CommonLoggerFactory.getLogger(getClass());
 
 	private final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
 
