@@ -5,7 +5,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
@@ -13,7 +13,7 @@ import io.ffreedom.redstone.core.strategy.Strategy;
 
 public final class StrategyActor {
 
-	private Logger logger = LoggerFactory.getLogger(StrategyActor.class);
+	private Logger logger = CommonLoggerFactory.getLogger(StrategyActor.class);
 
 	private MutableIntObjectMap<Strategy> strategyMap = ECollections.newIntObjectHashMap();
 
@@ -27,8 +27,8 @@ public final class StrategyActor {
 	}
 
 	public void onMarketData(BasicMarketData marketData) {
-		instrumentStrategyMap.get(marketData.getInstrumentId()).each(strategy -> {
-			if (strategy.enabled())
+		instrumentStrategyMap.get(marketData.getInstrument().getInstrumentId()).each(strategy -> {
+			if (strategy.isEnabled())
 				strategy.onMarketData(marketData);
 		});
 	}

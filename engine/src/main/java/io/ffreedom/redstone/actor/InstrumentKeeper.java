@@ -25,11 +25,11 @@ public final class InstrumentKeeper {
 	}
 
 	public static void setNotTradable(int instrumentId) {
-		getInstrument(instrumentId).setEnable(false);
+		getInstrument(instrumentId).disable();
 	}
 
 	public static void setTradable(int instrumentId) {
-		getInstrument(instrumentId).setEnable(true);
+		getInstrument(instrumentId).enable();
 	}
 
 	public static boolean isTradable(int instrumentId) {
