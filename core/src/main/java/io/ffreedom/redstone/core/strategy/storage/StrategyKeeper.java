@@ -7,14 +7,14 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.strategy.Strategy;
 
 @NotThreadSafe
 public final class StrategyKeeper {
 
-	private static final Logger logger = LoggerFactory.getLogger(StrategyKeeper.class);
+	private static final Logger logger = CommonLoggerFactory.getLogger(StrategyKeeper.class);
 
 	private MutableIntObjectMap<Strategy> strategyMap = ECollections.newIntObjectHashMap();
 

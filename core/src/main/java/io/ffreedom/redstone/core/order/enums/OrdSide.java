@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.order.enums;
 
 import org.slf4j.Logger;
 
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.redstone.core.trade.enums.TrdDirection;
 
 public enum OrdSide {
@@ -22,7 +22,7 @@ public enum OrdSide {
 	private int code;
 	private TrdDirection direction;
 
-	private static Logger logger = LoggerFactory.getLogger(OrdStatus.class);
+	private static Logger logger = CommonLoggerFactory.getLogger(OrdStatus.class);
 
 	private OrdSide(int code, TrdDirection direction) {
 		this.code = code;
