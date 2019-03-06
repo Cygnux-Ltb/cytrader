@@ -11,6 +11,7 @@ import io.ffreedom.polaris.indicators.pools.IndicatorPeriodTimePools;
 import io.ffreedom.redstone.actor.AppGlobalStatus;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.ctp.CtpInboundAdaptor;
+import io.ffreedom.redstone.adaptor.ctp.CtpOutboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.redstone.scheduler.SPSCStrategyScheduler;
@@ -44,8 +45,19 @@ public class Saturn5 {
 			return null;
 		});
 
-		InboundAdaptor inboundAdaptor = new CtpInboundAdaptor(scheduler, adaptorParam);
+		//创建InboundAdaptor
+		int inboundAdaptorId = 1;
+		String inboundAdaptorName = "Ctp-InboundAdaptor";
+		CtpInboundAdaptor inboundAdaptor = new CtpInboundAdaptor(inboundAdaptorId, inboundAdaptorName, scheduler,
+				adaptorParam);
 
+		//创建OutboundAdaptor
+		int outboundAdaptorId = 2;
+		String outboundAdaptorName = "Ctp-InboundAdaptor";
+		CtpOutboundAdaptor outboundAdaptor = new CtpOutboundAdaptor(outboundAdaptorId, outboundAdaptorName,
+				inboundAdaptor.getJctpGeteway());
+
+		
 		inboundAdaptor.activate();
 
 	}
