@@ -23,35 +23,18 @@
 			<groupId>io.ffreedom</groupId>
 			<artifactId>core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>io.ffreedom</groupId>
-			<artifactId>transport-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.ffreedom</groupId>
-			<artifactId>transport-socket</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>io.ffreedom</groupId>
 			<artifactId>transport-rabbitmq</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>io.ffreedom</groupId>
-			<artifactId>engine</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.ffreedom</groupId>
-			<artifactId>persistence-avro</artifactId>
-		</dependency>
+		
+		
 		<dependency>
 			<groupId>io.ffreedom</groupId>
 			<artifactId>persistence-json</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>io.ffreedom</groupId>
-			<artifactId>jctp</artifactId>
-			<version>0.1</version>
-		</dependency>
+		
 	</dependencies>
 
 </project>

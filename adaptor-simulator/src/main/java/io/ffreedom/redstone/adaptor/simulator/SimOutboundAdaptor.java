@@ -1,12 +1,11 @@
-package io.ffreedom.redstone.adaptor.sim;
+package io.ffreedom.redstone.adaptor.simulator;
 
 import java.util.stream.Collectors;
 
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
 import io.ffreedom.persistence.avro.serializable.AvroBytesSerializer;
-import io.ffreedom.redstone.adaptor.base.AdaptorParams;
-import io.ffreedom.redstone.adaptor.sim.dto.SimSubscribeMarketData;
+import io.ffreedom.redstone.adaptor.simulator.dto.SimSubscribeMarketData;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
@@ -23,22 +22,22 @@ public class SimOutboundAdaptor extends OutboundAdaptor<SimSubscribeMarketData, 
 	private Sender<byte[]> mdSender;
 	private Sender<byte[]> tdSender;
 
-	private ParamMap<AdaptorParams> paramMap;
+	private ParamMap<SimAdaptorParams> paramMap;
 
 	private AvroBytesSerializer serializer = new AvroBytesSerializer();
 
-	public SimOutboundAdaptor(int adaptorId, String adaptorName, ParamMap<AdaptorParams> paramMap) {
+	public SimOutboundAdaptor(int adaptorId, String adaptorName, ParamMap<SimAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
 	}
 
 	@Override
 	public void init() {
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
-				.setHost(paramMap.getString(AdaptorParams.SIM_MD_HOST))
-				.setPort(paramMap.getInteger(AdaptorParams.SIM_MD_PORT)).build();
+				.setHost(paramMap.getString(SimAdaptorParams.SIM_MD_HOST))
+				.setPort(paramMap.getInteger(SimAdaptorParams.SIM_MD_PORT)).build();
 		SocketConfigurator tdConfigurator = SocketConfigurator.builder()
-				.setHost(paramMap.getString(AdaptorParams.SIM_TD_HOST))
-				.setPort(paramMap.getInteger(AdaptorParams.SIM_TD_PORT)).build();
+				.setHost(paramMap.getString(SimAdaptorParams.SIM_TD_HOST))
+				.setPort(paramMap.getInteger(SimAdaptorParams.SIM_TD_PORT)).build();
 		this.mdSender = new SocketSender(mdConfigurator);
 		this.tdSender = new SocketSender(tdConfigurator);
 	}

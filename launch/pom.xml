@@ -16,7 +16,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
-			<artifactId>adaptor</artifactId>
+			<artifactId>adaptor-jctp</artifactId>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>

@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.adaptor.sim.dto;
+package io.ffreedom.redstone.adaptor.simulator.dto;
 
 import java.util.Set;
 
