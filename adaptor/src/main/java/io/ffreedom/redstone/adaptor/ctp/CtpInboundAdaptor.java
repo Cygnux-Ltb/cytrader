@@ -1,83 +1,82 @@
 package io.ffreedom.redstone.adaptor.ctp;
 
+import org.slf4j.Logger;
+
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
-import io.ffreedom.common.charset.Charsets;
+import ctp.thostapi.CThostFtdcOrderField;
+import ctp.thostapi.CThostFtdcTradeField;
 import io.ffreedom.common.functional.BeanSetter;
 import io.ffreedom.common.functional.Converter;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.param.ParamMap;
-import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
+import io.ffreedom.common.queue.impl.ArrayBlockingMPSCQueue;
+import io.ffreedom.jctp.JctpGateway;
+import io.ffreedom.jctp.bean.CtpUserInfo;
+import io.ffreedom.jctp.bean.rsp.RspMsg;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.ctp.converter.inbound.CtpInboundMarketDataConverter;
-import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMarketData;
-import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundMsg;
-import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundRtnOrder;
-import io.ffreedom.redstone.adaptor.ctp.dto.inbound.CtpInboundRtnTrade;
 import io.ffreedom.redstone.adaptor.ctp.setter.CtpInboundRtnOrderSetter;
 import io.ffreedom.redstone.adaptor.ctp.setter.CtpInboundRtnTradeSetter;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.storage.OrderKeeper;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
-import io.ffreedom.transport.core.role.Receiver;
-import io.ffreedom.transport.rabbitmq.RabbitMqReceiver;
-import io.ffreedom.transport.rabbitmq.config.RmqReceiverConfigurator;
 
-public class CtpInboundAdaptor implements InboundAdaptor {
+public class CtpInboundAdaptor extends InboundAdaptor {
 
-	private Receiver inboundReceiver;
+	private static final Logger logger = CommonLoggerFactory.getLogger(CtpInboundAdaptor.class);
 
 	private Converter<CThostFtdcDepthMarketDataField, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
 
-	private BeanSetter<CtpInboundRtnOrder, Order> rtnOrderSetter = new CtpInboundRtnOrderSetter();
+	private BeanSetter<CThostFtdcOrderField, Order> rtnOrderSetter = new CtpInboundRtnOrderSetter();
 
-	private BeanSetter<CtpInboundRtnTrade, Order> rtnTradeSetter = new CtpInboundRtnTradeSetter();
+	private BeanSetter<CThostFtdcTradeField, Order> rtnTradeSetter = new CtpInboundRtnTradeSetter();
 
-	public CtpInboundAdaptor(StrategyScheduler scheduler, ParamMap<AdaptorParams> paramMap) {
-		RmqReceiverConfigurator configurator = RmqReceiverConfigurator.configuration()
-				.setConnectionParam(paramMap.getString(AdaptorParams.CTP_MQ_HOST),
-						paramMap.getInteger(AdaptorParams.CTP_MQ_PORT))
-				.setUserParam(paramMap.getString(AdaptorParams.CTP_MQ_USERNAME),
-						paramMap.getString(AdaptorParams.CTP_MQ_PASSWORD))
-				.setReceiveQueue(paramMap.getString(AdaptorParams.CTP_QNAME_INBOUND)).setAutomaticRecovery(true);
+	private final JctpGateway gateway;
 
-		inboundReceiver = new RabbitMqReceiver("CTP_INBOUND_QUEUE", configurator, (bytes) -> {
-			// Subscriber callback function
-			CtpInboundMsg msg = JsonSerializationUtil.jsonToObj(new String(bytes, Charsets.UTF8), CtpInboundMsg.class);
-			switch (msg.getTitle()) {
-			case MarketData:
-				CtpInboundMarketData ctpMarketData = JsonSerializationUtil.jsonToObj(msg.getContent(),
-						CtpInboundMarketData.class);
-				BasicMarketData marketData = marketDataConverter.convert(ctpMarketData);
-				scheduler.onMarketData(marketData);
-				break;
-			case RtnOrder:
-				CtpInboundRtnOrder ctpRtnOrder = JsonSerializationUtil.jsonToObj(msg.getContent(),
-						CtpInboundRtnOrder.class);
-				Order rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
-				rtnOrderSetter.setBean(ctpRtnOrder, rtnOrder);
-				scheduler.onOrder(rtnOrder);
-				break;
-			case RtnTrade:
-				CtpInboundRtnTrade ctpRtnTrade = JsonSerializationUtil.jsonToObj(msg.getContent(),
-						CtpInboundRtnTrade.class);
-				Order rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
-				rtnTradeSetter.setBean(ctpRtnTrade, rtnTrade);
-				scheduler.onOrder(rtnTrade);
-				break;
-			case Error:
-
-				break;
-			default:
-				break;
-			}
-		});
+	public CtpInboundAdaptor(int adaptorId, String adaptorName, StrategyScheduler scheduler,
+			ParamMap<AdaptorParams> paramMap) {
+		super(adaptorId, adaptorName);
+		// 写入Gateway用户信息
+		CtpUserInfo userInfo = CtpUserInfo.newEmpty()
+				.setTraderAddress(paramMap.getString(AdaptorParams.CTP_Trader_Address))
+				.setMdAddress(paramMap.getString(AdaptorParams.CTP_Md_Address))
+				.setBrokerId(paramMap.getString(AdaptorParams.CTP_BrokerId))
+				.setInvestorId(paramMap.getString(AdaptorParams.CTP_InvestorId))
+				.setUserId(paramMap.getString(AdaptorParams.CTP_UserId))
+				.setAccountId(paramMap.getString(AdaptorParams.CTP_AccountId))
+				.setPassword(paramMap.getString(AdaptorParams.CTP_Password));
+		// 初始化Gateway
+		this.gateway = new JctpGateway("Ctp-Gateway", userInfo,
+				ArrayBlockingMPSCQueue.autoRunQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
+					switch (msg.getType()) {
+					case DepthMarketData:
+						BasicMarketData marketData = marketDataConverter.convert(msg.getDepthMarketData());
+						scheduler.onMarketData(marketData);
+						break;
+					case RtnOrder:
+						CThostFtdcOrderField ctpRtnOrder = msg.getRtnOrder();
+						Order rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
+						rtnOrderSetter.setBean(ctpRtnOrder, rtnOrder);
+						scheduler.onInboundOrder(rtnOrder);
+						break;
+					case RtnTrade:
+						CThostFtdcTradeField ctpRtnTrade = msg.getRtnTrade();
+						Order rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
+						rtnTradeSetter.setBean(ctpRtnTrade, rtnTrade);
+						scheduler.onInboundOrder(rtnTrade);
+						break;
+					default:
+						break;
+					}
+				}));
 		init();
 	}
 
-	private Order checkoutCtpOrder(Integer orderRef) {
+	private Order checkoutCtpOrder(String orderRef) {
 		try {
-			Long orderSysId = CtpOrderRefLogger.INSTANCE.getOrdSysId(orderRef);
+			Long orderSysId = CtpOrderRefLogger.getOrdSysId(orderRef);
 			return OrderKeeper.getOrder(orderSysId);
 		} catch (CtpOrderRefNotFoundException e) {
 			// TODO Log
@@ -95,10 +94,17 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 		return null;
 	}
 
+	public JctpGateway getJctpGeteway() {
+		return gateway;
+	}
+
 	@Override
 	public boolean activate() {
-		inboundReceiver.receive();
-		return false;
+		try {
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
@@ -109,8 +115,11 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 
 	@Override
 	public boolean close() {
-		inboundReceiver.destroy();
 		return true;
+	}
+
+	public static void main(String[] args) {
+		logger.debug("dsfsdfsd");
 	}
 
 }

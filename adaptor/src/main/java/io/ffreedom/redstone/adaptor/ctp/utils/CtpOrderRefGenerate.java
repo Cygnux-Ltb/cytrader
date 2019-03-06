@@ -54,11 +54,12 @@ public final class CtpOrderRefGenerate {
 		long diff = nowInstant.getEpochSecond() - baseInstant.getEpochSecond();
 
 		System.out.println(Integer.MAX_VALUE);
+		System.out.println(diff);
 
-		// for (int i = 0; i < 10240; i++) {
-		// Thread.sleep(5);
-		// System.out.println(CtpOrderRefGenerate.next(5));
-		// }
+		for (int i = 0; i < 10240; i++) {
+			Thread.sleep(5);
+			System.out.println(CtpOrderRefGenerate.next(5));
+		}
 
 		System.out.println(Instant.now().toEpochMilli());
 		System.out.println(System.currentTimeMillis());

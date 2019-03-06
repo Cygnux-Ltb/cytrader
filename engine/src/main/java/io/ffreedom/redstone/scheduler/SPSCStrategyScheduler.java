@@ -8,22 +8,26 @@ import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 
 public class SPSCStrategyScheduler implements StrategyScheduler {
 
-	private SPSCQueue<RecvMsg<?>> recvQueue;
+	private SPSCQueue<EnqueueMsg> msgQueue;
 
-	private final int marketDataMark = 0;
-
-	private final int orderMark = 1;
+	private static final int MarketData = 0;
+	private static final int InboundOrder = 1;
+	private static final int OutboundOrder = 2;
 
 	public SPSCStrategyScheduler(int size) {
-		this.recvQueue = new SPSCQueue<>(size, true, recvMsg -> {
-			switch (recvMsg.getMark()) {
-			case marketDataMark:
-				BasicMarketData marketData = (BasicMarketData) recvMsg.getContent();
+		this.msgQueue = new SPSCQueue<>(size, true, enqueueMsg -> {
+			switch (enqueueMsg.mark()) {
+			case MarketData:
+				BasicMarketData marketData = enqueueMsg.getMarketData();
 				StrategyActor.INSTANCE.onMarketData(marketData);
 				break;
-			case orderMark:
-				Order order = (Order) recvMsg.getContent();
-				StrategyActor.INSTANCE.onOrder(order);
+			case InboundOrder:
+				Order inboundOrder = enqueueMsg.getOrder();
+				StrategyActor.INSTANCE.onOrder(inboundOrder);
+				break;
+			case OutboundOrder:
+				Order outboundOrder = enqueueMsg.getOrder();
+
 				break;
 			default:
 				break;
@@ -31,35 +35,50 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 		});
 	}
 
-	// TODO Pool RecvMsg
+	// TODO add pools
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
-		recvQueue.enqueue(new RecvMsg<BasicMarketData>(marketDataMark, marketData));
+		msgQueue.enqueue(new EnqueueMsg(MarketData, marketData));
 	}
 
-	// TODO Pool RecvMsg
+	// TODO add pools
 	@Override
-	public void onOrder(Order order) {
-		recvQueue.enqueue(new RecvMsg<Order>(orderMark, order));
+	public void onInboundOrder(Order order) {
+		msgQueue.enqueue(new EnqueueMsg(InboundOrder, order));
 	}
 
-	private class RecvMsg<T> {
+	// TODO add pools
+	@Override
+	public void onOutboundOrder(Order order) {
+		msgQueue.enqueue(new EnqueueMsg(OutboundOrder, order));
+	}
+
+	private class EnqueueMsg {
 
 		private int mark;
-		private T t;
+		private BasicMarketData marketData;
+		private Order order;
 
-		RecvMsg(int mark, T t) {
-			super();
+		EnqueueMsg(int mark, BasicMarketData marketData) {
 			this.mark = mark;
-			this.t = t;
+			this.marketData = marketData;
 		}
 
-		public int getMark() {
+		EnqueueMsg(int mark, Order order) {
+			this.mark = mark;
+			this.order = order;
+		}
+
+		public int mark() {
 			return mark;
 		}
 
-		public T getContent() {
-			return t;
+		public BasicMarketData getMarketData() {
+			return marketData;
+		}
+
+		public Order getOrder() {
+			return order;
 		}
 
 	}

@@ -1,18 +1,20 @@
 package io.ffreedom.redstone.core.adaptor.dto;
 
-import java.util.Collection;
+import java.util.Set;
+
+import io.ffreedom.polaris.financial.Instrument;
 
 public class SubscribeMarketData {
 
-	private Collection<String> instrumentIdList;
+	private Set<Instrument> instrumentSet;
 
-	public SubscribeMarketData(Collection<String> instrumentIdList) {
+	public SubscribeMarketData(Set<Instrument> instrumentSet) {
 		super();
-		this.instrumentIdList = instrumentIdList;
+		this.instrumentSet = instrumentSet;
 	}
 
-	public Collection<String> getInstrumentIdList() {
-		return instrumentIdList;
+	public Set<Instrument> getInstrumentSet() {
+		return instrumentSet;
 	}
 
 }

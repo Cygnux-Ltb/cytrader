@@ -1,15 +1,14 @@
 package io.ffreedom.redstone.adaptor.sim;
 
-import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
 import io.ffreedom.persistence.avro.serializable.AvroBytesSerializer;
 import io.ffreedom.redstone.adaptor.base.AdaptorParams;
 import io.ffreedom.redstone.adaptor.sim.dto.SimSubscribeMarketData;
+import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
-import io.ffreedom.redstone.core.adaptor.dto.QueryBalance;
-import io.ffreedom.redstone.core.adaptor.dto.QueryPositions;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
 import io.ffreedom.redstone.core.order.Order;
@@ -20,7 +19,8 @@ import io.ffreedom.transport.socket.SocketSender;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 
 public class SimOutboundAdaptor extends BaseSimAdaptor
-		implements OutboundAdaptor<SimSubscribeMarketData, QueryPositions, QueryBalance, ReplyPositions, ReplyBalance> {
+
+		implements OutboundAdaptor<SimSubscribeMarketData, ReplyPositions, ReplyBalance> {
 
 	private Sender<byte[]> mdSender;
 	private Sender<byte[]> tdSender;
@@ -78,7 +78,9 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 		MarketDataSubscribe simSubscribe = MarketDataSubscribe.newBuilder()
 				.setUniqueId(Integer.valueOf(subscribe.getInvestorId()))
 				.setStartTradingDay(subscribe.getStartTradingDay()).setEndTradingDay(subscribe.getEndTradingDay())
-				.setInstrumentIdList(new ArrayList<>(subscribe.getInstrumentIdList())).build();
+				.setInstrumentIdList(subscribe.getInstrumentSet().stream()
+						.map(instrument -> instrument.getInstrumentCode()).collect(Collectors.toList()))
+				.build();
 		byte[] byteMsg = serializer.serialization(simSubscribe);
 		mdSender.sent(byteMsg);
 		return true;
@@ -92,13 +94,13 @@ public class SimOutboundAdaptor extends BaseSimAdaptor
 	}
 
 	@Override
-	public ReplyPositions queryPositions(QueryPositions queryPositions) {
+	public ReplyPositions queryPositions(Account account) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ReplyBalance queryBalance(QueryBalance queryPositions) {
+	public ReplyBalance queryBalance(Account account) {
 		// TODO Auto-generated method stub
 		return null;
 	}

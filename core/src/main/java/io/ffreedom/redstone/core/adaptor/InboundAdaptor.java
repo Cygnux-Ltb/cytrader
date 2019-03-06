@@ -1,7 +1,16 @@
 package io.ffreedom.redstone.core.adaptor;
 
-public interface InboundAdaptor extends Adaptor{
+public abstract class InboundAdaptor extends AbstractAdaptor {
 
-	boolean activate();
+	public InboundAdaptor(int adaptorId, String adaptorName) {
+		super(adaptorId, adaptorName);
+	}
+
+	public abstract boolean activate();
+
+	@Override
+	public AdaptorType getAdaptorType() {
+		return AdaptorType.Inbound;
+	}
 
 }

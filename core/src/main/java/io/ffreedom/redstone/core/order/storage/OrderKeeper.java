@@ -6,14 +6,14 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.redstone.core.account.storage.AccountKeeper;
 import io.ffreedom.redstone.core.order.Order;
 
 @NotThreadSafe
 public final class OrderKeeper {
 
-	private static final Logger logger = LoggerFactory.getLogger(OrderKeeper.class);
+	private static final Logger logger = CommonLoggerFactory.getLogger(OrderKeeper.class);
 
 	private static final OrderKeeper INSTANCE = new OrderKeeper();
 

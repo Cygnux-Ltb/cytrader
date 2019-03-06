@@ -3,11 +3,11 @@ package io.ffreedom.persistence.avro.serializable;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 
 public abstract class BaseAvroDeserializer<T> {
 
-	protected Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
 
 	protected SpecificDatumReader<T> datumReader;
 

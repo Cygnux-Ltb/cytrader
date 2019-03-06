@@ -16,7 +16,7 @@ import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.role.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
 
-public class SimInboundAdaptor extends BaseSimAdaptor implements InboundAdaptor {
+public class SimInboundAdaptor extends InboundAdaptor {
 
 	private Receiver mdReceiver;
 
@@ -50,7 +50,7 @@ public class SimInboundAdaptor extends BaseSimAdaptor implements InboundAdaptor 
 		this.tdReceiver = new SocketReceiver(tdConfigurator, (bytes) -> {
 			List<io.ffreedom.persistence.avro.entity.Order> orders = orderDeserializer1.deSerializationMultiple(bytes);
 			for (io.ffreedom.persistence.avro.entity.Order order : orders) {
-				scheduler.onOrder(orderConverter.convert(order));
+				scheduler.onInboundOrder(orderConverter.convert(order));
 			}
 		});
 	}

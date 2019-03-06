@@ -6,11 +6,11 @@ import org.apache.avro.specific.SpecificRecord;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 
 public abstract class BaseAvroSerializer {
 
-	protected Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
 
 	protected ByteArrayOutputStream outputStream;
 

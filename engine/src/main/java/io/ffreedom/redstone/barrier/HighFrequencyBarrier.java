@@ -2,13 +2,13 @@ package io.ffreedom.redstone.barrier;
 
 import org.slf4j.Logger;
 
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.redstone.barrier.base.OrderBarrier;
 import io.ffreedom.redstone.core.order.ChildOrder;
 
 public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private Logger logger = CommonLoggerFactory.getLogger(getClass());
 
 	@Override
 	public boolean filter(ChildOrder order) {

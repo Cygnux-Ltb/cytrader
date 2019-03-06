@@ -1,44 +1,31 @@
 package io.ffreedom.redstone.adaptor.ctp;
 
-import io.ffreedom.common.charset.Charsets;
+import java.util.stream.Collectors;
+
+import ctp.thostapi.CThostFtdcInputOrderActionField;
+import ctp.thostapi.CThostFtdcInputOrderField;
 import io.ffreedom.common.functional.Converter;
-import io.ffreedom.common.param.ParamMap;
-import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
-import io.ffreedom.redstone.adaptor.base.AdaptorParams;
+import io.ffreedom.jctp.JctpGateway;
 import io.ffreedom.redstone.adaptor.ctp.converter.outbound.CtpOutboundCancelOrderConverter;
 import io.ffreedom.redstone.adaptor.ctp.converter.outbound.CtpOutboundNewOrderConverter;
-import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundCancelOrder;
-import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundMsg;
-import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundNewOrder;
-import io.ffreedom.redstone.adaptor.ctp.dto.outbound.CtpOutboundTitle;
+import io.ffreedom.redstone.adaptor.ctp.dto.CtpSubscribeMarketData;
+import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
-import io.ffreedom.redstone.core.adaptor.dto.QueryBalance;
-import io.ffreedom.redstone.core.adaptor.dto.QueryPositions;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
-import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.transport.core.role.Publisher;
-import io.ffreedom.transport.rabbitmq.RabbitMqPublisher;
-import io.ffreedom.transport.rabbitmq.config.RmqPublisherConfigurator;
 
-public class CtpOutboundAdaptor implements OutboundAdaptor {
+public class CtpOutboundAdaptor extends OutboundAdaptor<CtpSubscribeMarketData, ReplyPositions, ReplyBalance> {
 
-	private Publisher<byte[]> outboundPublisher;
+	private Converter<Order, CThostFtdcInputOrderField> newOrderConverter = new CtpOutboundNewOrderConverter();
 
-	private Converter<Order, CtpOutboundNewOrder> newOrderConverter = new CtpOutboundNewOrderConverter();
+	private Converter<Order, CThostFtdcInputOrderActionField> cancelOrderConverter = new CtpOutboundCancelOrderConverter();
 
-	private Converter<Order, CtpOutboundCancelOrder> cancelOrderConverter = new CtpOutboundCancelOrderConverter();
+	private JctpGateway gateway;
 
-	public CtpOutboundAdaptor(ParamMap<AdaptorParams> paramMap) {
-		RmqPublisherConfigurator configurator = RmqPublisherConfigurator.configuration()
-				.setConnectionParam(paramMap.getString(AdaptorParams.CTP_MQ_HOST),
-						paramMap.getInteger(AdaptorParams.CTP_MQ_PORT))
-				.setUserParam(paramMap.getString(AdaptorParams.CTP_MQ_USERNAME),
-						paramMap.getString(AdaptorParams.CTP_MQ_PASSWORD))
-				.setModeDirect(paramMap.getString(AdaptorParams.CTP_QNAME_OUTBOUND)).setAutomaticRecovery(true);
-
-		outboundPublisher = new RabbitMqPublisher("CTP_OUTBOUND", configurator);
+	public CtpOutboundAdaptor(int adaptorId, String adaptorName, JctpGateway gateway) {
+		super(adaptorId, adaptorName);
+		this.gateway = gateway;
 		init();
 	}
 
@@ -59,25 +46,24 @@ public class CtpOutboundAdaptor implements OutboundAdaptor {
 
 	@Override
 	public boolean close() {
-		outboundPublisher.destroy();
 		return false;
 	}
 
 	@Override
 	public boolean newOredr(Order order) {
-		CtpOutboundNewOrder ctpNewOrder = newOrderConverter.convert(order);
-		CtpOrderRefLogger.INSTANCE.put(ctpNewOrder.getOrderRef(), order.getOrdSysId());
-		sendMsg(new CtpOutboundMsg(CtpOutboundTitle.NewOrder, JsonSerializationUtil.objToJson(ctpNewOrder)));
+		CThostFtdcInputOrderField ctpNewOrder = newOrderConverter.convert(order);
+		CtpOrderRefLogger.put(ctpNewOrder.getOrderRef(), order.getOrdSysId());
+		gateway.newOrder(ctpNewOrder);
 		return true;
 	}
 
 	@Override
 	public boolean cancelOrder(Order order) {
 		try {
-			Integer orderRef = CtpOrderRefLogger.INSTANCE.getOrderRef(order.getOrdSysId());
-			CtpOutboundCancelOrder ctpCancelOrder = cancelOrderConverter.convert(order);
+			CThostFtdcInputOrderActionField ctpCancelOrder = cancelOrderConverter.convert(order);
+			String orderRef = CtpOrderRefLogger.getOrderRef(order.getOrdSysId());
 			ctpCancelOrder.setOrderRef(orderRef);
-			sendMsg(new CtpOutboundMsg(CtpOutboundTitle.CancelOrder, JsonSerializationUtil.objToJson(ctpCancelOrder)));
+			gateway.cancelOrder(ctpCancelOrder);
 			return true;
 		} catch (CtpOrderRefNotFoundException e) {
 			// TODO log
@@ -85,24 +71,26 @@ public class CtpOutboundAdaptor implements OutboundAdaptor {
 		}
 	}
 
-	private void sendMsg(CtpOutboundMsg msg) {
-		outboundPublisher.publish(JsonSerializationUtil.objToJson(msg).getBytes(Charsets.UTF8));
+	@Override
+	public boolean subscribeMarketData(CtpSubscribeMarketData subscribeMarketData) {
+		try {
+			gateway.subscribeMarketData(subscribeMarketData.getInstrumentSet().stream()
+					.map(instrument -> instrument.getInstrumentCode()).collect(Collectors.toSet()));
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
 	}
 
 	@Override
-	public boolean subscribeMarketData(SubscribeMarketData subscribeMarketData) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ReplyPositions queryPositions(QueryPositions queryPositions) {
+	public ReplyPositions queryPositions(Account account) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ReplyBalance queryBalance(QueryBalance queryPositions) {
+	public ReplyBalance queryBalance(Account account) {
 		// TODO Auto-generated method stub
 		return null;
 	}

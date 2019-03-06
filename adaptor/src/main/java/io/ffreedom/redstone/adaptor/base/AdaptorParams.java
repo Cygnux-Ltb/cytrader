@@ -19,17 +19,19 @@ public enum AdaptorParams implements ParamKey {
 	/**
 	 * CTP Params
 	 */
-	CTP_MQ_HOST(201, "CTP MessageQueue Host", ParamType.STRING),
+	CTP_Trader_Address(201, "CTP_Trader_Address", ParamType.STRING),
+	
+	CTP_Md_Address(202, "CTP_Md_Address", ParamType.STRING),
 
-	CTP_MQ_PORT(202, "CTP MessageQueue Port", ParamType.INTEGER),
+	CTP_BrokerId(203, "CTP_BrokerId", ParamType.STRING),
+	
+	CTP_InvestorId(204, "CTP_InvestorId", ParamType.STRING),
+	
+	CTP_UserId(205, "CTP_UserId", ParamType.STRING),
+	
+	CTP_AccountId(206, "CTP_AccountId", ParamType.STRING),
 
-	CTP_MQ_USERNAME(203, "CTP MessageQueue Username", ParamType.STRING),
-
-	CTP_MQ_PASSWORD(204, "CTP MessageQueue Password", ParamType.STRING),
-
-	CTP_QNAME_INBOUND(205, "CTP MessageQueue Inbound Queue Name", ParamType.STRING),
-
-	CTP_QNAME_OUTBOUND(206, "CTP MessageQueue Outbound Queue Name", ParamType.STRING),
+	CTP_Password(207, "CTP_Password", ParamType.STRING),
 
 	;
 

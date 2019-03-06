@@ -5,15 +5,17 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.functional.Initializer;
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.InstrumentKeeper;
 import io.ffreedom.redstone.actor.OrderActor;
+import io.ffreedom.redstone.core.account.storage.AccountKeeper;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
+import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
 
 public abstract class BaseStrategy<M extends BasicMarketData> implements Strategy, CircuitBreaker {
 
@@ -21,7 +23,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	private boolean isInitSuccess = false;
 
-	protected Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
 
 	//
 	protected MutableLongObjectMap<VirtualOrder> strategyOrders = ECollections.newLongObjectHashMap();
@@ -50,29 +52,45 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 		OrderActor.onOrder(order);
 	}
 
+	@Override
+	public void onControlEvent(StrategyControlEvent event) {
+		logger.info("Handle StrategyControlEvent -> {}", event);
+	}
+
 	private boolean isEnable = false;
 
 	@Override
-	public boolean enabled() {
-		return isEnable;
-	}
-
-	@Override
-	public void setEnable(boolean enable) {
-		if (isInitSuccess && enable)
+	public void enable() {
+		if (isInitSuccess)
 			this.isEnable = true;
-		logger.info("Enable strategy , strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
+		logger.info("Enable strategy -> strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
 				isEnable);
 	}
 
 	@Override
-	public void enableAccount(int accountId) {
+	public void disable() {
+		this.isEnable = false;
+		logger.info("Disable strategy -> strategyId==[{}]", strategyId);
+	}
 
+	@Override
+	public boolean isEnabled() {
+		return isEnable;
+	}
+
+	@Override
+	public boolean isDisabled() {
+		return !isEnable;
+	}
+
+	@Override
+	public void enableAccount(int accountId) {
+		AccountKeeper.setAccountTradable(accountId);
 	}
 
 	@Override
 	public void disableAccount(int accountId) {
-
+		AccountKeeper.setAccountNotTradable(accountId);
 	}
 
 	@Override
@@ -92,7 +110,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice) {
-
+		
 	}
 
 }

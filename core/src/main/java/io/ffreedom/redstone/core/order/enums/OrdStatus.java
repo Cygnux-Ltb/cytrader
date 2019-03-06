@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.order.enums;
 
 import org.slf4j.Logger;
 
-import io.ffreedom.common.log.LoggerFactory;
+import io.ffreedom.common.log.CommonLoggerFactory;
 
 public enum OrdStatus {
 
@@ -35,7 +35,7 @@ public enum OrdStatus {
 	private int code;
 	private boolean isActive;
 
-	private static Logger logger = LoggerFactory.getLogger(OrdStatus.class);
+	private static Logger logger = CommonLoggerFactory.getLogger(OrdStatus.class);
 
 	/**
 	 * @param code

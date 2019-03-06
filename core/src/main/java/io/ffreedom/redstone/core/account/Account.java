@@ -1,14 +1,12 @@
 package io.ffreedom.redstone.core.account;
 
-import io.ffreedom.common.fsm.Enable;
 import io.ffreedom.redstone.core.balance.Balance;
 
-public class Account implements Enable {
+public class Account extends AbstractAccount {
 
 	private int accountId;
 	private AccountInfo accountInfo;
-	private Balance balance;
-	private boolean isEnable = false;
+	private Balance balance = Balance.EMPTY;
 
 	public final static Account EMPTY = new Account(-1, null, Balance.EMPTY);
 
@@ -19,15 +17,15 @@ public class Account implements Enable {
 		this.balance = balance;
 	}
 
-	@Override
-	public boolean enabled() {
-		return isEnable;
+	public Account(int accountId, AccountInfo accountInfo) {
+		super();
+		this.accountId = accountId;
+		this.accountInfo = accountInfo;
 	}
 
-	@Override
-	public void setEnable(boolean enable) {
-		if (enable)
-			this.isEnable = true;
+	public Account setBalance(Balance balance) {
+		this.balance = balance;
+		return this;
 	}
 
 	public int getAccountId() {

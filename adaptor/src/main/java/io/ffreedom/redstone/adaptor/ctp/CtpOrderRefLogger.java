@@ -1,7 +1,9 @@
 package io.ffreedom.redstone.adaptor.ctp;
 
-import org.eclipse.collections.api.bimap.MutableBiMap;
-import org.eclipse.collections.impl.factory.BiMaps;
+import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
+
+import io.ffreedom.common.collect.ECollections;
 
 /**
  * 
@@ -10,29 +12,31 @@ import org.eclipse.collections.impl.factory.BiMaps;
  *         TODO - Persistence
  */
 
-class CtpOrderRefLogger {
+public class CtpOrderRefLogger {
 
-	private MutableBiMap<Integer, Long> ctpOrderBook = BiMaps.mutable.empty();
+	private MutableObjectLongMap<String> orderRefMappingToOrdSysId = ECollections.newObjectLongHashMap(1024);
 
-	final static CtpOrderRefLogger INSTANCE = new CtpOrderRefLogger();
+	private MutableLongObjectMap<String> ordSysIdMappingToOrderRef = ECollections.newLongObjectHashMap(1024);
+
+	private final static CtpOrderRefLogger INSTANCE = new CtpOrderRefLogger();
 
 	private CtpOrderRefLogger() {
 	}
 
-	void put(Integer orderRef, Long ordSysId) {
-		ctpOrderBook.put(orderRef, ordSysId);
+	static void put(String orderRef, long ordSysId) {
+		INSTANCE.orderRefMappingToOrdSysId.put(orderRef, ordSysId);
+		INSTANCE.ordSysIdMappingToOrderRef.put(ordSysId, orderRef);
 	}
 
-	Long getOrdSysId(Integer orderRef) throws CtpOrderRefNotFoundException {
-		if (ctpOrderBook.containsKey(orderRef)) {
-			return ctpOrderBook.get(orderRef);
-		}
+	static long getOrdSysId(String orderRef) throws CtpOrderRefNotFoundException {
+		if (INSTANCE.orderRefMappingToOrdSysId.containsKey(orderRef))
+			return INSTANCE.orderRefMappingToOrdSysId.get(orderRef);
 		throw new CtpOrderRefNotFoundException(orderRef);
 	}
 
-	Integer getOrderRef(Long ordSysId) throws CtpOrderRefNotFoundException {
-		if (ctpOrderBook.inverse().containsKey(ordSysId)) {
-			return ctpOrderBook.inverse().get(ordSysId);
+	static String getOrderRef(long ordSysId) throws CtpOrderRefNotFoundException {
+		if (INSTANCE.ordSysIdMappingToOrderRef.containsKey(ordSysId)) {
+			return INSTANCE.ordSysIdMappingToOrderRef.get(ordSysId);
 		}
 		throw new CtpOrderRefNotFoundException(ordSysId);
 	}
