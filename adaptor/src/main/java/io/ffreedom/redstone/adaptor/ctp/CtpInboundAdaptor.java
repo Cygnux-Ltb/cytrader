@@ -66,6 +66,7 @@ public class CtpInboundAdaptor implements InboundAdaptor {
 				scheduler.onOrder(rtnTrade);
 				break;
 			case Error:
+
 				break;
 			default:
 				break;

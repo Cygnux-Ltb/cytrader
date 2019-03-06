@@ -29,7 +29,6 @@
 			<groupId>io.ffreedom</groupId>
 			<artifactId>polaris</artifactId>
 		</dependency>
-
 	</dependencies>
 
 </project>
