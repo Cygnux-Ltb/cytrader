@@ -18,17 +18,17 @@ import io.ffreedom.transport.core.role.Sender;
 import io.ffreedom.transport.socket.SocketSender;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 
-public class SimOutboundAdaptor extends BaseSimAdaptor
-
-		implements OutboundAdaptor<SimSubscribeMarketData, ReplyPositions, ReplyBalance> {
+public class SimOutboundAdaptor extends OutboundAdaptor<SimSubscribeMarketData, ReplyPositions, ReplyBalance> {
 
 	private Sender<byte[]> mdSender;
 	private Sender<byte[]> tdSender;
 
+	private ParamMap<AdaptorParams> paramMap;
+
 	private AvroBytesSerializer serializer = new AvroBytesSerializer();
 
-	public SimOutboundAdaptor(ParamMap<AdaptorParams> paramMap) {
-		super(paramMap);
+	public SimOutboundAdaptor(int adaptorId, String adaptorName, ParamMap<AdaptorParams> paramMap) {
+		super(adaptorId, adaptorName);
 	}
 
 	@Override

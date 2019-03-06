@@ -15,6 +15,7 @@ import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.role.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
+import io.ffreedom.transport.socket.config.SocketConfigurator;
 
 public class SimInboundAdaptor extends InboundAdaptor {
 
@@ -23,6 +24,10 @@ public class SimInboundAdaptor extends InboundAdaptor {
 	private Receiver tdReceiver;
 
 	private StrategyScheduler scheduler;
+	
+	protected SocketConfigurator mdConfigurator;
+
+	protected SocketConfigurator tdConfigurator;
 
 	private Converter<MarketDataLevel1, BasicMarketData> marketDataConverter = new MarketDataConverter();
 
@@ -34,8 +39,8 @@ public class SimInboundAdaptor extends InboundAdaptor {
 	private AvroBytesDeserializer<io.ffreedom.persistence.avro.entity.Order> orderDeserializer1 = new AvroBytesDeserializer<>(
 			io.ffreedom.persistence.avro.entity.Order.class);
 
-	public SimInboundAdaptor(ParamMap<AdaptorParams> paramMap, StrategyScheduler scheduler) {
-		super(paramMap);
+	public SimInboundAdaptor(int adaptorId, String adaptorName, ParamMap<AdaptorParams> paramMap, StrategyScheduler scheduler) {
+		super(adaptorId, adaptorName);
 		this.scheduler = scheduler;
 	}
 
