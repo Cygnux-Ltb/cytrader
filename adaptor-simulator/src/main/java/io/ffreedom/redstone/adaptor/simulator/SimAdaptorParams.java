@@ -8,31 +8,27 @@ public enum SimAdaptorParams implements ParamKey {
 	/**
 	 * Simulator Params
 	 */
-	SIM_MD_HOST(101, "Simulator MarketData Host", ParamType.STRING),
+	MdHost(101, ParamType.STRING),
 
-	SIM_MD_PORT(102, "Simulator MarketData Port", ParamType.INTEGER),
+	MdPort(102, ParamType.INTEGER),
 
-	SIM_TD_HOST(103, "Simulator Trading Host", ParamType.STRING),
+	TdHost(103, ParamType.STRING),
 
-	SIM_TD_PORT(104, "Simulator Trading Port", ParamType.INTEGER),
+	TdPort(104, ParamType.INTEGER),
+
+	StartTradingDay(105, ParamType.DATE),
+
+	EndTradingDay(106, ParamType.DATE),
 
 	;
 
 	private int keyId;
 
-	private String fullName;
-
 	private ParamType paramType;
 
-	private SimAdaptorParams(int keyId, String fullName, ParamType paramType) {
+	private SimAdaptorParams(int keyId, ParamType paramType) {
 		this.keyId = keyId;
-		this.fullName = fullName;
 		this.paramType = paramType;
-	}
-
-	@Override
-	public String fullName() {
-		return fullName;
 	}
 
 	@Override

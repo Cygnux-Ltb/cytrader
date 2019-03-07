@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
 import io.ffreedom.persistence.avro.serializable.AvroBytesSerializer;
-import io.ffreedom.redstone.adaptor.simulator.dto.SimSubscribeMarketData;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
 import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
+import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.storage.OrderKeeper;
@@ -17,7 +17,7 @@ import io.ffreedom.transport.core.role.Sender;
 import io.ffreedom.transport.socket.SocketSender;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 
-public class SimOutboundAdaptor extends OutboundAdaptor<SimSubscribeMarketData, ReplyPositions, ReplyBalance> {
+public class SimOutboundAdaptor extends OutboundAdaptor {
 
 	private Sender<byte[]> mdSender;
 	private Sender<byte[]> tdSender;
@@ -33,11 +33,11 @@ public class SimOutboundAdaptor extends OutboundAdaptor<SimSubscribeMarketData, 
 	@Override
 	public void init() {
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
-				.setHost(paramMap.getString(SimAdaptorParams.SIM_MD_HOST))
-				.setPort(paramMap.getInteger(SimAdaptorParams.SIM_MD_PORT)).build();
+				.setHost(paramMap.getString(SimAdaptorParams.MdHost))
+				.setPort(paramMap.getInteger(SimAdaptorParams.MdPort)).build();
 		SocketConfigurator tdConfigurator = SocketConfigurator.builder()
-				.setHost(paramMap.getString(SimAdaptorParams.SIM_TD_HOST))
-				.setPort(paramMap.getInteger(SimAdaptorParams.SIM_TD_PORT)).build();
+				.setHost(paramMap.getString(SimAdaptorParams.TdHost))
+				.setPort(paramMap.getInteger(SimAdaptorParams.TdPort)).build();
 		this.mdSender = new SocketSender(mdConfigurator);
 		this.tdSender = new SocketSender(tdConfigurator);
 	}
@@ -73,10 +73,10 @@ public class SimOutboundAdaptor extends OutboundAdaptor<SimSubscribeMarketData, 
 	}
 
 	@Override
-	public boolean subscribeMarketData(SimSubscribeMarketData subscribe) {
-		MarketDataSubscribe simSubscribe = MarketDataSubscribe.newBuilder()
-				.setUniqueId(Integer.valueOf(subscribe.getInvestorId()))
-				.setStartTradingDay(subscribe.getStartTradingDay()).setEndTradingDay(subscribe.getEndTradingDay())
+	public boolean subscribeMarketData(SubscribeMarketData subscribe) {
+		MarketDataSubscribe simSubscribe = MarketDataSubscribe.newBuilder().setUniqueId(Integer.valueOf(1))
+				.setStartTradingDay(paramMap.getDate(SimAdaptorParams.StartTradingDay).toString())
+				.setEndTradingDay(paramMap.getDate(SimAdaptorParams.EndTradingDay).toString())
 				.setInstrumentIdList(subscribe.getInstrumentSet().stream()
 						.map(instrument -> instrument.getInstrumentCode()).collect(Collectors.toList()))
 				.build();
@@ -93,15 +93,15 @@ public class SimOutboundAdaptor extends OutboundAdaptor<SimSubscribeMarketData, 
 	}
 
 	@Override
-	public ReplyPositions queryPositions(Account account) {
+	public boolean queryPositions(Account account) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
-	public ReplyBalance queryBalance(Account account) {
+	public boolean queryBalance(Account account) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 }

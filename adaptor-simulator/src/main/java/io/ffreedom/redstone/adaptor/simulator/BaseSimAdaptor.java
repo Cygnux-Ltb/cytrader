@@ -19,17 +19,11 @@ public abstract class BaseSimAdaptor implements Adaptor {
 	}
 
 	private void initSocketConfigurator() {
-		this.mdConfigurator = SocketConfigurator
-				.builder()
-				.setHost(paramMap.getString(SimAdaptorParams.SIM_MD_HOST))
-				.setPort(paramMap.getInteger(SimAdaptorParams.SIM_MD_PORT))
-				.build();
-		
-		this.tdConfigurator = SocketConfigurator
-				.builder()
-				.setHost(paramMap.getString(SimAdaptorParams.SIM_TD_HOST))
-				.setPort(paramMap.getInteger(SimAdaptorParams.SIM_TD_PORT))
-				.build();
+		this.mdConfigurator = SocketConfigurator.builder().setHost(paramMap.getString(SimAdaptorParams.MdHost))
+				.setPort(paramMap.getInteger(SimAdaptorParams.MdPort)).build();
+
+		this.tdConfigurator = SocketConfigurator.builder().setHost(paramMap.getString(SimAdaptorParams.TdHost))
+				.setPort(paramMap.getInteger(SimAdaptorParams.TdPort)).build();
 	}
 
 	@Override
