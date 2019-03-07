@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
@@ -16,15 +18,14 @@
 	<modules>
 		<module>core</module>
 		<module>engine</module>
-		<module>adaptor</module>
 		<module>strategy</module>
 		<module>launch</module>
 		<module>persistence-avro</module>
 		<module>persistence-json</module>
-    <module>adaptor-jctp</module>
-    <module>adaptor-simulator</module>
-    <module>adaptor-ib</module>
-  </modules>
+		<module>adaptor-ib</module>
+		<module>adaptor-jctp</module>
+		<module>adaptor-simulator</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,13 +50,9 @@
 	</build>
 
 	<dependencies>
-		<!-- <dependency>
-			<groupId>com.sun.java</groupId>
-			<artifactId>tools</artifactId>
-			<version>1.8</version>
-			<scope>system</scope>
-			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.sun.java</groupId> <artifactId>tools</artifactId> 
+			<version>1.8</version> <scope>system</scope> <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath> 
+			</dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
