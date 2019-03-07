@@ -3,14 +3,14 @@ package io.ffreedom.redstone.adaptor.jctp.converter.outbound;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.redstone.actor.AppGlobalStatus;
-import io.ffreedom.redstone.adaptor.jctp.utils.CtpOrderRefGenerate;
+import io.ffreedom.redstone.adaptor.jctp.utils.JctpOrderRefGenerate;
 import io.ffreedom.redstone.core.order.Order;
 
 public class CtpOutboundNewOrderConverter implements Converter<Order, CThostFtdcInputOrderField> {
 
 	@Override
 	public CThostFtdcInputOrderField convert(Order order) {
-		int orderRef = CtpOrderRefGenerate.next(AppGlobalStatus.appId());
+		int orderRef = JctpOrderRefGenerate.next(AppGlobalStatus.appId());
 		char direction;
 		switch (order.getSide().direction()) {
 		case Long:

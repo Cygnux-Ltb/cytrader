@@ -3,6 +3,9 @@ package io.ffreedom.redstone.adaptor.jctp;
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
+import ctp.thostapi.CThostFtdcInputOrderActionField;
+import ctp.thostapi.CThostFtdcInputOrderField;
+import ctp.thostapi.CThostFtdcOrderActionField;
 import ctp.thostapi.CThostFtdcOrderField;
 import ctp.thostapi.CThostFtdcTradeField;
 import io.ffreedom.common.functional.BeanSetter;
@@ -18,6 +21,7 @@ import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundMarketDataC
 import io.ffreedom.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 import io.ffreedom.redstone.adaptor.jctp.setter.CtpInboundRtnOrderSetter;
 import io.ffreedom.redstone.adaptor.jctp.setter.CtpInboundRtnTradeSetter;
+import io.ffreedom.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.storage.OrderKeeper;
@@ -67,6 +71,18 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 						rtnTradeSetter.setBean(ctpRtnTrade, rtnTrade);
 						scheduler.onInboundOrder(rtnTrade);
 						break;
+					case RspOrderInsert:
+						CThostFtdcInputOrderField rspOrderInsert = msg.getRspOrderInsert();
+						break;
+					case RspOrderAction:
+						CThostFtdcInputOrderActionField rspOrderAction = msg.getRspOrderAction();
+						break;
+					case ErrRtnOrderInsert:
+						CThostFtdcInputOrderField errRtnOrderInsert = msg.getErrRtnOrderInsert();
+						break;
+					case ErrRtnOrderAction:
+						CThostFtdcOrderActionField errRtnOrderAction = msg.getErrRtnOrderAction();
+						break;
 					default:
 						break;
 					}
@@ -76,10 +92,10 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 
 	private Order checkoutCtpOrder(String orderRef) {
 		try {
-			Long orderSysId = JctpOrderRefLogger.getOrdSysId(orderRef);
+			Long orderSysId = JctpOrderRefKeeper.getOrdSysId(orderRef);
 			return OrderKeeper.getOrder(orderSysId);
 		} catch (OrderRefNotFoundException e) {
-			// TODO Log
+			logger.error(e.getMessage(), e);
 			throw new RuntimeException(e);
 		}
 	}

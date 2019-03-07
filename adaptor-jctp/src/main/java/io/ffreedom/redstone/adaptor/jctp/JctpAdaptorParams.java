@@ -8,37 +8,29 @@ public enum JctpAdaptorParams implements ParamKey {
 	/**
 	 * CTP Params
 	 */
-	CTP_Trader_Address(201, "CTP_Trader_Address", ParamType.STRING),
+	CTP_Trader_Address(201, ParamType.STRING),
 
-	CTP_Md_Address(202, "CTP_Md_Address", ParamType.STRING),
+	CTP_Md_Address(202, ParamType.STRING),
 
-	CTP_BrokerId(203, "CTP_BrokerId", ParamType.STRING),
+	CTP_BrokerId(203, ParamType.STRING),
 
-	CTP_InvestorId(204, "CTP_InvestorId", ParamType.STRING),
+	CTP_InvestorId(204, ParamType.STRING),
 
-	CTP_UserId(205, "CTP_UserId", ParamType.STRING),
+	CTP_UserId(205, ParamType.STRING),
 
-	CTP_AccountId(206, "CTP_AccountId", ParamType.STRING),
+	CTP_AccountId(206, ParamType.STRING),
 
-	CTP_Password(207, "CTP_Password", ParamType.STRING),
+	CTP_Password(207, ParamType.STRING),
 
 	;
 
 	private int keyId;
 
-	private String fullName;
-
 	private ParamType paramType;
 
-	private JctpAdaptorParams(int keyId, String fullName, ParamType paramType) {
+	private JctpAdaptorParams(int keyId, ParamType paramType) {
 		this.keyId = keyId;
-		this.fullName = fullName;
 		this.paramType = paramType;
-	}
-
-	@Override
-	public String fullName() {
-		return fullName;
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import io.ffreedom.common.datetime.EpochTime;
 import io.ffreedom.common.datetime.TimeZones;
 
 @NotThreadSafe
-public final class CtpOrderRefGenerate {
+public final class JctpOrderRefGenerate {
 
 	private static int maxLimitOwnerId = 20;
 
@@ -58,7 +58,7 @@ public final class CtpOrderRefGenerate {
 
 		for (int i = 0; i < 10240; i++) {
 			Thread.sleep(5);
-			System.out.println(CtpOrderRefGenerate.next(5));
+			System.out.println(JctpOrderRefGenerate.next(5));
 		}
 
 		System.out.println(Instant.now().toEpochMilli());
