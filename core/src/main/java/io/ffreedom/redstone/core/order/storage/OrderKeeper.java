@@ -40,7 +40,7 @@ public final class OrderKeeper {
 		case Filled:
 		case Canceled:
 		case NewRejected:
-			INSTANCE.allOrders.terminatedOrder(order);
+			getAllOrders().terminatedOrder(order);
 			int subAccountId = order.getSubAccountId();
 			int accountId = AccountKeeper.getAccountId(subAccountId);
 			getSubAccountOrderBook(subAccountId).terminatedOrder(order);
@@ -48,16 +48,15 @@ public final class OrderKeeper {
 			getStrategyOrderBook(order.getStrategyId()).terminatedOrder(order);
 			getInstrumentOrderBook(order.getInstrument().getInstrumentId()).terminatedOrder(order);
 			break;
-		case Invalid:
-			logger.warn("Not processed : OrdSysId -> {}, OrdStatus -> {}", order.getOrdSysId(), order.getStatus());
-			break;
 		default:
+			logger.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.getOrdSysId(),
+					order.getStatus());
 			break;
 		}
 	}
 
 	public static void insertOrder(Order order) {
-		INSTANCE.allOrders.putOrder(order);
+		getAllOrders().putOrder(order);
 		int subAccountId = order.getSubAccountId();
 		int accountId = AccountKeeper.getAccountId(subAccountId);
 		getSubAccountOrderBook(subAccountId).putOrder(order);

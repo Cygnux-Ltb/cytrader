@@ -1,6 +1,9 @@
 package io.ffreedom.redstone.launch;
 
+import org.eclipse.collections.api.map.MutableMap;
+
 import io.ffreedom.common.charset.SysCharacter;
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.datetime.DateTimeUtil;
 import io.ffreedom.common.log.LogLevel;
 import io.ffreedom.common.log.LoggerSetter;
@@ -17,19 +20,22 @@ import io.ffreedom.redstone.scheduler.SPSCStrategyScheduler;
 
 public class Saturn5 {
 
-	private static StringBuilder printInfo = new StringBuilder().append("Param error...." + SysCharacter.LINE_SEPARATOR)
-			.append("Param List is ->" + SysCharacter.LINE_SEPARATOR)
-			.append("Param 1 : ApplicationId." + SysCharacter.LINE_SEPARATOR);
+//	private static StringBuilder printInfo = new StringBuilder().append("Param error...." + SysCharacter.LINE_SEPARATOR)
+//			.append("Param List is ->" + SysCharacter.LINE_SEPARATOR)
+//			.append("Param 1 : ApplicationId." + SysCharacter.LINE_SEPARATOR);
 
 	public static void main(String[] args) {
-		if (args.length < 1) {
-			System.out.println(printInfo);
-			throw new RuntimeException("param error.");
-		}
-		Integer appId = Integer.valueOf(args[0]);
+//		if (args.length < 1) {
+//			System.out.println(printInfo);
+//			throw new RuntimeException("param error.");
+//		}
+		int appId;
+		if (args.length == 0)
+			appId = 7;
+		else
+			appId = Integer.valueOf(args[0]).intValue();
 		// Set Global AppId
 		AppGlobalStatus.setAppId(appId);
-
 		long datetime = DateTimeUtil.datetimeToSecond();
 
 		LoggerSetter.setLogFileName("redstone-" + appId + "-" + datetime);
@@ -39,10 +45,9 @@ public class Saturn5 {
 
 		StrategyScheduler scheduler = new SPSCStrategyScheduler(2048);
 
-		ParamMap<JctpAdaptorParams> adaptorParam = new ParamMap<>(() -> {
+		MutableMap<JctpAdaptorParams, Object> paramMap = ECollections.newUnifiedMap();
 
-			return null;
-		});
+		ParamMap<JctpAdaptorParams> adaptorParam = new ParamMap<>(() -> paramMap.toImmutable());
 
 		// 创建InboundAdaptor
 		int inboundAdaptorId = 1;

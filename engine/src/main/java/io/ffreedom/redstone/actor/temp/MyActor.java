@@ -10,7 +10,7 @@ public class MyActor extends AbstractActor {
 		return receiveBuilder().match(String.class, str -> {
 			System.out.println("matchString -> " + str);
 		}).match(int.class, i -> {
-			System.out.println();
+			System.out.println(i);
 		}).matchAny(o -> {
 			System.out.println("matchAny -> " + o);
 		}).build();

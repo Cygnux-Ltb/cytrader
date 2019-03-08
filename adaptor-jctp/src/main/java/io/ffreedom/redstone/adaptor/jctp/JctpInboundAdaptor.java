@@ -14,7 +14,7 @@ import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.common.queue.impl.ArrayBlockingMPSCQueue;
 import io.ffreedom.jctp.JctpGateway;
-import io.ffreedom.jctp.bean.CtpUserInfo;
+import io.ffreedom.jctp.bean.JctpUserInfo;
 import io.ffreedom.jctp.bean.rsp.RspMsg;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundMarketDataConverter;
@@ -43,7 +43,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 			ParamMap<JctpAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
 		// 写入Gateway用户信息
-		CtpUserInfo userInfo = CtpUserInfo.newEmpty()
+		JctpUserInfo userInfo = JctpUserInfo.newEmpty()
 				.setTraderAddress(paramMap.getString(JctpAdaptorParams.CTP_Trader_Address))
 				.setMdAddress(paramMap.getString(JctpAdaptorParams.CTP_Md_Address))
 				.setBrokerId(paramMap.getString(JctpAdaptorParams.CTP_BrokerId))
@@ -52,7 +52,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				.setAccountId(paramMap.getString(JctpAdaptorParams.CTP_AccountId))
 				.setPassword(paramMap.getString(JctpAdaptorParams.CTP_Password));
 		// 初始化Gateway
-		this.gateway = new JctpGateway("Ctp-Gateway", userInfo,
+		this.gateway = new JctpGateway("Jctp-Gateway", userInfo,
 				ArrayBlockingMPSCQueue.autoRunQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
@@ -117,6 +117,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 	@Override
 	public boolean activate() {
 		try {
+			gateway.initAndJoin();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -125,7 +126,6 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 
 	@Override
 	public int getAdaptorId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -135,7 +135,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 	}
 
 	public static void main(String[] args) {
-		logger.debug("dsfsdfsd");
+		logger.debug("");
 	}
 
 }
