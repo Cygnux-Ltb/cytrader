@@ -2,8 +2,8 @@ package io.ffreedom.redstone.launch;
 
 import org.eclipse.collections.api.map.MutableMap;
 
-import io.ffreedom.common.charset.SysCharacter;
 import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.config.FromPropertiesFile;
 import io.ffreedom.common.datetime.DateTimeUtil;
 import io.ffreedom.common.log.LogLevel;
 import io.ffreedom.common.log.LoggerSetter;
@@ -29,11 +29,8 @@ public class Saturn5 {
 //			System.out.println(printInfo);
 //			throw new RuntimeException("param error.");
 //		}
-		int appId;
-		if (args.length == 0)
-			appId = 7;
-		else
-			appId = Integer.valueOf(args[0]).intValue();
+		int appId = FromPropertiesFile.getIntApplicationProperty("appId");
+		
 		// Set Global AppId
 		AppGlobalStatus.setAppId(appId);
 		long datetime = DateTimeUtil.datetimeToSecond();
@@ -46,7 +43,14 @@ public class Saturn5 {
 		StrategyScheduler scheduler = new SPSCStrategyScheduler(2048);
 
 		MutableMap<JctpAdaptorParams, Object> paramMap = ECollections.newUnifiedMap();
-
+		paramMap.put(JctpAdaptorParams.CTP_Md_Address, "");
+		paramMap.put(JctpAdaptorParams.CTP_Trader_Address, "");
+		paramMap.put(JctpAdaptorParams.CTP_BrokerId, "");
+		paramMap.put(JctpAdaptorParams.CTP_InvestorId, "");
+		paramMap.put(JctpAdaptorParams.CTP_AccountId, "");
+		paramMap.put(JctpAdaptorParams.CTP_UserId, "");
+		paramMap.put(JctpAdaptorParams.CTP_Password, "");
+		
 		ParamMap<JctpAdaptorParams> adaptorParam = new ParamMap<>(() -> paramMap.toImmutable());
 
 		// 创建InboundAdaptor
@@ -60,6 +64,8 @@ public class Saturn5 {
 		String outboundAdaptorName = "Ctp-InboundAdaptor";
 		JctpOutboundAdaptor outboundAdaptor = new JctpOutboundAdaptor(outboundAdaptorId, outboundAdaptorName,
 				inboundAdaptor.getJctpGeteway());
+		
+		
 
 		inboundAdaptor.activate();
 
