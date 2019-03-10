@@ -65,8 +65,6 @@ public class Saturn5 {
 		JctpOutboundAdaptor outboundAdaptor = new JctpOutboundAdaptor(outboundAdaptorId, outboundAdaptorName,
 				inboundAdaptor.getJctpGeteway());
 		
-		
-
 		inboundAdaptor.activate();
 
 	}
