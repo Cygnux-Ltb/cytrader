@@ -33,12 +33,11 @@ public class CtpInboundMarketDataConverter implements Converter<CThostFtdcDepthM
 		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
 		logger.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]",
 				instrument.getInstrumentCode(), depthDate, depthTime);
-		return BasicMarketData.newOf(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST))
+		return BasicMarketData.of(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST))
 				.setLastPrice(depthMarketData.getLastPrice()).setVolume(depthMarketData.getVolume())
 				.setTurnover(depthMarketData.getTurnover()).setBidPrice1(depthMarketData.getBidPrice1())
 				.setBidVolume1(depthMarketData.getBidVolume1()).setAskPrice1(depthMarketData.getAskPrice1())
 				.setAskVolume1(depthMarketData.getAskVolume1());
-
 	}
 
 }

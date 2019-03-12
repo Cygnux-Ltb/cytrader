@@ -35,16 +35,6 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	}
 
 	@Override
-	public String getAdaptorName() {
-		return "Ctp_Outbound_Adaptor";
-	}
-
-	@Override
-	public int getAdaptorId() {
-		return 0;
-	}
-
-	@Override
 	public boolean close() {
 		return false;
 	}
@@ -66,7 +56,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 			gateway.cancelOrder(ctpCancelOrder);
 			return true;
 		} catch (OrderRefNotFoundException e) {
-			// TODO log
+			logger.error(e.getMessage());
 			throw new RuntimeException(e);
 		} catch (Exception e) {
 			return false;

@@ -30,7 +30,7 @@ public class Saturn5 {
 //			throw new RuntimeException("param error.");
 //		}
 		int appId = FromPropertiesFile.getIntApplicationProperty("appId");
-		
+
 		// Set Global AppId
 		AppGlobalStatus.setAppId(appId);
 		long datetime = DateTimeUtil.datetimeToSecond();
@@ -38,19 +38,18 @@ public class Saturn5 {
 		LoggerSetter.setLogFileName("redstone-" + appId + "-" + datetime);
 		LoggerSetter.setLogLevel(LogLevel.DEBUG);
 
-		IndicatorPeriodTimePools.register(IndicatorPeriod.M1, ChinaFuturesSymbol.values());
-
+		IndicatorPeriodTimePools.register(ChinaFuturesSymbol.values(), IndicatorPeriod.M1);
 		StrategyScheduler scheduler = new SPSCStrategyScheduler(2048);
 
 		MutableMap<JctpAdaptorParams, Object> paramMap = ECollections.newUnifiedMap();
-		paramMap.put(JctpAdaptorParams.CTP_Md_Address, "");
-		paramMap.put(JctpAdaptorParams.CTP_Trader_Address, "");
-		paramMap.put(JctpAdaptorParams.CTP_BrokerId, "");
-		paramMap.put(JctpAdaptorParams.CTP_InvestorId, "");
-		paramMap.put(JctpAdaptorParams.CTP_AccountId, "");
-		paramMap.put(JctpAdaptorParams.CTP_UserId, "");
-		paramMap.put(JctpAdaptorParams.CTP_Password, "");
-		
+		paramMap.put(JctpAdaptorParams.CTP_Trader_Address, "tcp://180.168.146.187:10000");
+		paramMap.put(JctpAdaptorParams.CTP_Md_Address, "tcp://180.168.146.187:10010");
+		paramMap.put(JctpAdaptorParams.CTP_BrokerId, "9999");
+		paramMap.put(JctpAdaptorParams.CTP_InvestorId, "005853");
+		paramMap.put(JctpAdaptorParams.CTP_AccountId, "005853");
+		paramMap.put(JctpAdaptorParams.CTP_UserId, "005853");
+		paramMap.put(JctpAdaptorParams.CTP_Password, "jinpengpass101");
+
 		ParamMap<JctpAdaptorParams> adaptorParam = new ParamMap<>(() -> paramMap.toImmutable());
 
 		// 创建InboundAdaptor
@@ -64,7 +63,7 @@ public class Saturn5 {
 		String outboundAdaptorName = "Ctp-InboundAdaptor";
 		JctpOutboundAdaptor outboundAdaptor = new JctpOutboundAdaptor(outboundAdaptorId, outboundAdaptorName,
 				inboundAdaptor.getJctpGeteway());
-		
+
 		inboundAdaptor.activate();
 
 	}

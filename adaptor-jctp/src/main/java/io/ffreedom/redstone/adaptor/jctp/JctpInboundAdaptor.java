@@ -105,11 +105,6 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 
 	}
 
-	@Override
-	public String getAdaptorName() {
-		return null;
-	}
-
 	public JctpGateway getJctpGeteway() {
 		return gateway;
 	}
@@ -122,11 +117,6 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 		} catch (Exception e) {
 			return false;
 		}
-	}
-
-	@Override
-	public int getAdaptorId() {
-		return 0;
 	}
 
 	@Override
