@@ -1,19 +1,23 @@
 package io.ffreedom.redstone.core.adaptor.dto;
 
-import java.util.Set;
+import org.eclipse.collections.api.set.ImmutableSet;
 
+import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.polaris.financial.Instrument;
 
 public class SubscribeMarketData {
 
-	private Set<Instrument> instrumentSet;
+	private ImmutableSet<Instrument> instrumentSet;
 
-	public SubscribeMarketData(Set<Instrument> instrumentSet) {
-		super();
-		this.instrumentSet = instrumentSet;
+	protected SubscribeMarketData(Instrument... instruments) {
+		this.instrumentSet = ECollections.newImmutableSet(instruments);
 	}
 
-	public Set<Instrument> getInstrumentSet() {
+	public static SubscribeMarketData build(Instrument... instruments) {
+		return new SubscribeMarketData(instruments);
+	}
+
+	public ImmutableSet<Instrument> getInstrumentSet() {
 		return instrumentSet;
 	}
 
