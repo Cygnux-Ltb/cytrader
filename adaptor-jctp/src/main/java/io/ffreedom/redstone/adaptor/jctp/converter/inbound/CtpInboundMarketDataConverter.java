@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 import org.slf4j.Logger;
 
@@ -29,7 +28,7 @@ public class CtpInboundMarketDataConverter implements Converter<CThostFtdcDepthM
 	public BasicMarketData convert(CThostFtdcDepthMarketDataField depthMarketData) {
 		LocalDate depthDate = LocalDate.parse(depthMarketData.getActionDay(), actionDayformatter);
 		LocalTime depthTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
-				.plus(depthMarketData.getUpdateMillisec(), ChronoUnit.MILLIS);
+				.plusNanos(depthMarketData.getUpdateMillisec() * 1000_000);
 		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
 		logger.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]",
 				instrument.getInstrumentCode(), depthDate, depthTime);
