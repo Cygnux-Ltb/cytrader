@@ -1,6 +1,5 @@
 package io.ffreedom.redstone.strategy.impl;
 
-import io.ffreedom.polaris.indicators.impl.sar.SAR;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
 import io.ffreedom.redstone.strategy.impl.base.BaseStrategy;
@@ -14,8 +13,6 @@ import io.ffreedom.redstone.strategy.impl.base.BaseStrategy;
  *
  */
 public class SarStrategy extends BaseStrategy<BasicMarketData> {
-
-	private SAR sar = new SAR();
 
 	public SarStrategy(int strategyId) {
 		super(strategyId);

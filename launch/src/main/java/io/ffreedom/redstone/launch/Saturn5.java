@@ -12,7 +12,7 @@ import io.ffreedom.polaris.financial.Instrument.PriorityCloseType;
 import io.ffreedom.polaris.financial.futures.ChinaFutures;
 import io.ffreedom.polaris.financial.futures.ChinaFuturesSymbol;
 import io.ffreedom.polaris.indicators.api.IndicatorPeriod;
-import io.ffreedom.polaris.indicators.pools.IndicatorPeriodTimePools;
+import io.ffreedom.polaris.indicators.pools.TimeTwinPools;
 import io.ffreedom.redstone.actor.AppGlobalStatus;
 import io.ffreedom.redstone.actor.InstrumentKeeper;
 import io.ffreedom.redstone.adaptor.jctp.JctpAdaptorParams;
@@ -42,7 +42,7 @@ public class Saturn5 {
 		LoggerSetter.setLogFileName("redstone-" + appId + "-" + datetime);
 		LoggerSetter.setLogLevel(LogLevel.DEBUG);
 
-		IndicatorPeriodTimePools.register(ChinaFuturesSymbol.values(), IndicatorPeriod.M1);
+		TimeTwinPools.register(ChinaFuturesSymbol.values(), IndicatorPeriod.M1);
 		StrategyScheduler scheduler = new SPSCStrategyScheduler(2048);
 
 		ChinaFutures futures = ChinaFutures.build(ChinaFuturesSymbol.RB, 1910, PriorityCloseType.BEFORE_TODAY);
