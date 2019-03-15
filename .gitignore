@@ -53,5 +53,3 @@ simulator-pingpong/.factorypath
 strategy/.factorypath
 
 #user add
-launch/src/main/resources/accounts
-strategy/src/main/java/io/ffreedom/redstone/strategy/impl/*.java

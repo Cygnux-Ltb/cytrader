@@ -18,13 +18,12 @@
 	<modules>
 		<module>core</module>
 		<module>engine</module>
-		<module>strategy</module>
-		<module>launch</module>
 		<module>persistence-avro</module>
 		<module>persistence-json</module>
 		<module>adaptor-ib</module>
 		<module>adaptor-jctp</module>
 		<module>adaptor-simulator</module>
+		<module>example</module>
 	</modules>
 
 	<properties>

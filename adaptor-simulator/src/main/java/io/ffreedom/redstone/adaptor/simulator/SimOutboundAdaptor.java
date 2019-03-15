@@ -7,8 +7,6 @@ import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
 import io.ffreedom.persistence.avro.serializable.AvroBytesSerializer;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
-import io.ffreedom.redstone.core.adaptor.dto.ReplyBalance;
-import io.ffreedom.redstone.core.adaptor.dto.ReplyPositions;
 import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
