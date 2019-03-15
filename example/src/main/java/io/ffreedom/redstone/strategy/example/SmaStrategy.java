@@ -1,12 +1,12 @@
-package io.ffreedom.redstone.strategy.impl;
+package io.ffreedom.redstone.strategy.example;
 
+import io.ffreedom.polaris.indicators.api.IndicatorEvent;
 import io.ffreedom.polaris.indicators.impl.ma.base.MAPoint;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
-import io.ffreedom.redstone.core.strategy.callback.IndicatorCallback;
 import io.ffreedom.redstone.specific.BaseStrategy;
 
-public class SmaStrategy extends BaseStrategy<BasicMarketData> implements IndicatorCallback<MAPoint> {
+public class SmaStrategy extends BaseStrategy<BasicMarketData> implements IndicatorEvent<MAPoint> {
 
 	public SmaStrategy(int period, int strategyId) {
 		super(strategyId);
@@ -40,6 +40,12 @@ public class SmaStrategy extends BaseStrategy<BasicMarketData> implements Indica
 	public void onEndPoint(MAPoint p) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String getEventName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
