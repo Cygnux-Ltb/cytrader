@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.specific;
+package io.ffreedom.redstone.specific.strategy;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
@@ -25,11 +25,10 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
 
-	//
+	// 记录当前策略所有订单
 	protected MutableLongObjectMap<VirtualOrder> strategyOrders = ECollections.newLongObjectHashMap();
 
-	public BaseStrategy(int strategyId) {
-		super();
+	protected BaseStrategy(int strategyId) {
 		this.strategyId = strategyId;
 	}
 
@@ -110,7 +109,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice) {
-		
+
 	}
 
 }
