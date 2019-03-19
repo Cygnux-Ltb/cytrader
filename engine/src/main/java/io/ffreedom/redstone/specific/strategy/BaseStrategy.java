@@ -16,6 +16,7 @@ import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
+import io.ffreedom.redstone.core.trade.enums.TrdDirection;
 
 public abstract class BaseStrategy<M extends BasicMarketData> implements Strategy, CircuitBreaker {
 
@@ -25,11 +26,15 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
 
+	// 策略订阅的合约
+	protected Instrument instrument;
+
 	// 记录当前策略所有订单
 	protected MutableLongObjectMap<VirtualOrder> strategyOrders = ECollections.newLongObjectHashMap();
 
-	protected BaseStrategy(int strategyId) {
+	protected BaseStrategy(int strategyId, Instrument instrument) {
 		this.strategyId = strategyId;
+		this.instrument = instrument;
 	}
 
 	@Override
@@ -47,8 +52,15 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	}
 
 	@Override
+	public void onMarketData(BasicMarketData marketData) {
+		if (strategyOrders.isEmpty())
+			return;
+
+	}
+
+	@Override
 	public void onOrder(Order order) {
-		OrderActor.onOrder(order);
+		OrderActor.getSingleton().onOrder(order);
 	}
 
 	@Override
@@ -108,8 +120,21 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	}
 
 	@Override
-	public void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice) {
+	public Instrument getInstrument() {
+		return instrument;
+	}
 
+	protected void orderTarget(TrdDirection direction, double targetQty) {
+		orderTarget(this.instrument, direction, targetQty);
+	}
+
+	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty) {
+		orderTarget(instrument, direction, targetQty, Double.MIN_VALUE, Double.MAX_VALUE);
+	}
+
+	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty, double minPrice,
+			double maxPrice) {
+		
 	}
 
 }

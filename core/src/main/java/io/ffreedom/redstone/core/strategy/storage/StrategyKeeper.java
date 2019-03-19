@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.strategy.Strategy;
 
 @NotThreadSafe
@@ -26,22 +25,18 @@ public final class StrategyKeeper {
 	private StrategyKeeper() {
 	}
 
-	public static void put(Strategy strategy, Instrument... instruments) {
+	public static void put(Strategy strategy) {
 		INSTANCE.strategyMap.put(strategy.getStrategyId(), strategy);
 		logger.info("Put to strategyMap. strategyId==[{}]", strategy.getStrategyId());
-		if (instruments != null) {
-			for (int i = 0; i < instruments.length; i++) {
-				int instrumentId = instruments[i].getInstrumentId();
-				MutableList<Strategy> strategyList = INSTANCE.instrumentStrategyMap.get(instrumentId);
-				if (strategyList == null) {
-					strategyList = ECollections.newFastList();
-					INSTANCE.instrumentStrategyMap.put(instrumentId, strategyList);
-				}
-				strategyList.add(strategy);
-				logger.info("Put to instrumentStrategyMap. strategyId==[{}], instrumentId==[{}]",
-						strategy.getStrategyId(), instrumentId);
-			}
+		int instrumentId = strategy.getInstrument().getInstrumentId();
+		MutableList<Strategy> strategyList = INSTANCE.instrumentStrategyMap.get(instrumentId);
+		if (strategyList == null) {
+			strategyList = ECollections.newFastList();
+			INSTANCE.instrumentStrategyMap.put(instrumentId, strategyList);
 		}
+		strategyList.add(strategy);
+		logger.info("Put to instrumentStrategyMap. strategyId==[{}], instrumentId==[{}]", strategy.getStrategyId(),
+				instrumentId);
 	}
 
 	public static Strategy getStrategy(int strategyId) {

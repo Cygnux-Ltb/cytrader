@@ -6,9 +6,11 @@ import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
 
-public interface Strategy extends Enable{
+public interface Strategy extends Enable {
 
 	int getStrategyId();
+
+	Instrument getInstrument();
 
 	void init(Initializer<Boolean> initializer);
 
@@ -19,7 +21,5 @@ public interface Strategy extends Enable{
 	void onOrder(Order order);
 
 	void onError(Throwable throwable);
-
-	void positionTarget(Instrument instrument, double targetQty, double minPrice, double maxPrice);
 
 }

@@ -10,6 +10,11 @@ import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.enums.OrdType;
 
+/**
+ * 用于记录策略在出现交易信号后希望进行的交易
+ * 
+ * @author yellow013
+ */
 public class VirtualOrder {
 
 	protected long ordSysId;

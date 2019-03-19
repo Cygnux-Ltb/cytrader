@@ -27,7 +27,7 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 				break;
 			case OutboundOrder:
 				Order outboundOrder = enqueueMsg.getOrder();
-
+				
 				break;
 			default:
 				break;
