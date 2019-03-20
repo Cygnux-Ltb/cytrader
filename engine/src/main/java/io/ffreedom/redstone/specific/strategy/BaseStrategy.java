@@ -134,7 +134,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty, double minPrice,
 			double maxPrice) {
-		
+
 	}
 
 }
