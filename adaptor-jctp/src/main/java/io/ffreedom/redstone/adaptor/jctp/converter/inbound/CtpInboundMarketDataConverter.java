@@ -14,7 +14,7 @@ import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
-import io.ffreedom.redstone.actor.InstrumentKeeper;
+import io.ffreedom.redstone.storage.InstrumentKeeper;
 
 public class CtpInboundMarketDataConverter implements Converter<CThostFtdcDepthMarketDataField, BasicMarketData> {
 

@@ -24,8 +24,8 @@ import io.ffreedom.redstone.adaptor.jctp.setter.CtpInboundRtnTradeSetter;
 import io.ffreedom.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.core.order.storage.OrderKeeper;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
+import io.ffreedom.redstone.storage.OrderKeeper;
 
 public class JctpInboundAdaptor extends InboundAdaptor {
 
