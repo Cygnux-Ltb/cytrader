@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.specific;
+package io.ffreedom.redstone.specific.position;
 
 import io.ffreedom.redstone.core.position.PositionFactory;
 

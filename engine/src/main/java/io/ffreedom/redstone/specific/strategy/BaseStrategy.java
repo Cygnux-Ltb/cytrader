@@ -8,15 +8,15 @@ import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
-import io.ffreedom.redstone.actor.InstrumentKeeper;
 import io.ffreedom.redstone.actor.OrderActor;
-import io.ffreedom.redstone.core.account.storage.AccountKeeper;
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
 import io.ffreedom.redstone.core.trade.enums.TrdDirection;
+import io.ffreedom.redstone.storage.AccountKeeper;
+import io.ffreedom.redstone.storage.InstrumentKeeper;
 
 public abstract class BaseStrategy<M extends BasicMarketData> implements Strategy, CircuitBreaker {
 
@@ -60,7 +60,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void onOrder(Order order) {
-		OrderActor.getSingleton().onOrder(order);
+		OrderActor.Singleton.onOrder(order);
 	}
 
 	@Override

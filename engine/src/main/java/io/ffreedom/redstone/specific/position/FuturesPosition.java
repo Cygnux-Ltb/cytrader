@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.specific;
+package io.ffreedom.redstone.specific.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongDoubleMap;
 
