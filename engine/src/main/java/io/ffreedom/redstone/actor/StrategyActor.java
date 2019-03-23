@@ -20,7 +20,7 @@ public final class StrategyActor {
 	// Map<instrumentId, List<Strategy>>
 	private MutableIntObjectMap<MutableList<Strategy>> instrumentStrategyMap = ECollections.newIntObjectHashMap();
 
-	public static final StrategyActor INSTANCE = new StrategyActor();
+	public static final StrategyActor Singleton = new StrategyActor();
 
 	private StrategyActor() {
 

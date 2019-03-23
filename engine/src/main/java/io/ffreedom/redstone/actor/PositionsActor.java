@@ -14,7 +14,7 @@ public class PositionsActor {
 
 	private MutableIntDoubleMap subAccountPositions = new IntDoubleHashMap();
 
-	public final static PositionsActor INSTANCE = new PositionsActor();
+	public final static PositionsActor Singleton = new PositionsActor();
 
 	private PositionsActor() {
 	}

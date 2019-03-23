@@ -7,19 +7,15 @@ import io.ffreedom.redstone.core.trade.TradeSignal;
 
 public final class TradeSignalActor {
 
-	public static final TradeSignalActor INSTANCE = new TradeSignalActor();
-
 	private MutableList<TradeSignal> tradeSignalList = ECollections.newFastList(256);
 
-	public static boolean addTradeSignal(TradeSignal tradeSignal) {
-		return INSTANCE.addTradeSignal0(tradeSignal);
-	}
+	public static final TradeSignalActor Singleton = new TradeSignalActor();
 
-	private boolean addTradeSignal0(TradeSignal signal) {
+	public boolean addTradeSignal(TradeSignal signal) {
 		return tradeSignalList.add(signal);
 	}
 
-	private void handleTradeSignal(TradeSignal signal) {
+	public void handleTradeSignal(TradeSignal signal) {
 		switch (signal.getAction()) {
 		case Open:
 			switch (signal.getDirection()) {

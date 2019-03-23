@@ -5,22 +5,19 @@ import org.slf4j.Logger;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.core.order.storage.OrderKeeper;
+import io.ffreedom.redstone.storage.OrderKeeper;
 
 public class OrderActor {
 
-	private static Logger logger = CommonLoggerFactory.getLogger(OrderActor.class);
+	private Logger logger = CommonLoggerFactory.getLogger(OrderActor.class);
 
 	private OrderActor() {
 	}
 
-	private static final OrderActor singleton = new OrderActor();
-
-	public static OrderActor getSingleton() {
-		return singleton;
-	}
+	public static final OrderActor Singleton = new OrderActor();
 
 	public void onOrder(Order order) {
+		logger.info("handle order ordSysId==[{}]", order.getOrdSysId());
 		if (OrderKeeper.containsOrder(order.getOrdSysId()))
 			OrderKeeper.updateOrder(order);
 		else
