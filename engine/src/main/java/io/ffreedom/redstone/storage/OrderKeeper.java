@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order.storage;
+package io.ffreedom.redstone.storage;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.redstone.core.account.storage.AccountKeeper;
 import io.ffreedom.redstone.core.order.Order;
 
 @NotThreadSafe

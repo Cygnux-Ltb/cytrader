@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order.storage;
+package io.ffreedom.redstone.storage;
 
 import java.util.Collection;
 

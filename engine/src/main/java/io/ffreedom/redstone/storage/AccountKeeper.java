@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.account.storage;
+package io.ffreedom.redstone.storage;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
