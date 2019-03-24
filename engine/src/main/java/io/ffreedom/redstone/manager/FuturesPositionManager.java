@@ -2,7 +2,7 @@ package io.ffreedom.redstone.manager;
 
 import io.ffreedom.redstone.core.order.Order;
 import io.ffreedom.redstone.core.position.PositionManager;
-import io.ffreedom.redstone.specific.FuturesPosition;
+import io.ffreedom.redstone.specific.position.FuturesPosition;
 
 public class FuturesPositionManager implements PositionManager<FuturesPosition> {
 

@@ -19,11 +19,11 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 			switch (enqueueMsg.mark()) {
 			case MarketData:
 				BasicMarketData marketData = enqueueMsg.getMarketData();
-				StrategyActor.INSTANCE.onMarketData(marketData);
+				StrategyActor.Singleton.onMarketData(marketData);
 				break;
 			case InboundOrder:
 				Order inboundOrder = enqueueMsg.getOrder();
-				StrategyActor.INSTANCE.onOrder(inboundOrder);
+				StrategyActor.Singleton.onOrder(inboundOrder);
 				break;
 			case OutboundOrder:
 				Order outboundOrder = enqueueMsg.getOrder();
