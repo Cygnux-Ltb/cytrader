@@ -20,6 +20,7 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 			case MarketData:
 				BasicMarketData marketData = enqueueMsg.getMarketData();
 				StrategyActor.Singleton.onMarketData(marketData);
+				
 				break;
 			case InboundOrder:
 				Order inboundOrder = enqueueMsg.getOrder();
@@ -45,12 +46,6 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 	@Override
 	public void onInboundOrder(Order order) {
 		msgQueue.enqueue(new EnqueueMsg(InboundOrder, order));
-	}
-
-	// TODO add pools
-	@Override
-	public void onOutboundOrder(Order order) {
-		msgQueue.enqueue(new EnqueueMsg(OutboundOrder, order));
 	}
 
 	private class EnqueueMsg {

@@ -2,7 +2,6 @@ package io.ffreedom.redstone.adaptor.jctp;
 
 import org.slf4j.Logger;
 
-import ctp.thostapi.CThostFtdcDepthMarketDataField;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
@@ -15,6 +14,7 @@ import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.common.queue.impl.ArrayBlockingMPSCQueue;
 import io.ffreedom.jctp.JctpGateway;
 import io.ffreedom.jctp.bean.JctpUserInfo;
+import io.ffreedom.jctp.bean.rsp.RspCtpDepthMarketData;
 import io.ffreedom.jctp.bean.rsp.RspMsg;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundMarketDataConverter;
@@ -31,7 +31,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 
 	private static final Logger logger = CommonLoggerFactory.getLogger(JctpInboundAdaptor.class);
 
-	private Converter<CThostFtdcDepthMarketDataField, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
+	private Converter<RspCtpDepthMarketData, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
 
 	private BeanSetter<CThostFtdcOrderField, Order> rtnOrderSetter = new CtpInboundRtnOrderSetter();
 
@@ -56,7 +56,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				ArrayBlockingMPSCQueue.autoRunQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
-						BasicMarketData marketData = marketDataConverter.convert(msg.getDepthMarketData());
+						BasicMarketData marketData = marketDataConverter.convert(msg.getCtpDepthMarketData());
 						scheduler.onMarketData(marketData);
 						break;
 					case RtnOrder:

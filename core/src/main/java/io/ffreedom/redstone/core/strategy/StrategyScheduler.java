@@ -9,6 +9,4 @@ public interface StrategyScheduler {
 
 	void onInboundOrder(Order order);
 
-	void onOutboundOrder(Order order);
-
 }
