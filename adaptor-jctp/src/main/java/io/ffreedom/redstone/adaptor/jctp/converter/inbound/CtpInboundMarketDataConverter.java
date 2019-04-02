@@ -11,12 +11,12 @@ import io.ffreedom.common.datetime.DateTimeStyle;
 import io.ffreedom.common.datetime.TimeZones;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.jctp.bean.rsp.RspCtpDepthMarketData;
+import io.ffreedom.jctp.bean.rsp.RspDepthMarketData;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.storage.InstrumentKeeper;
 
-public class CtpInboundMarketDataConverter implements Converter<RspCtpDepthMarketData, BasicMarketData> {
+public class CtpInboundMarketDataConverter implements Converter<RspDepthMarketData, BasicMarketData> {
 
 	private DateTimeFormatter updateTimeformatter = DateTimeStyle.HH_MM_SS.newFormatter();
 
@@ -25,7 +25,7 @@ public class CtpInboundMarketDataConverter implements Converter<RspCtpDepthMarke
 	private Logger logger = CommonLoggerFactory.getLogger(CtpInboundMarketDataConverter.class);
 
 	@Override
-	public BasicMarketData convert(RspCtpDepthMarketData depthMarketData) {
+	public BasicMarketData convert(RspDepthMarketData depthMarketData) {
 		LocalDate depthDate = LocalDate.parse("20190327", actionDayformatter);
 		LocalTime depthTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
 				.plusNanos(depthMarketData.getUpdateMillisec() * 1000_000);

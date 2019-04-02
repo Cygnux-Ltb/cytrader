@@ -5,22 +5,22 @@ import org.slf4j.Logger;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
-import ctp.thostapi.CThostFtdcOrderField;
-import ctp.thostapi.CThostFtdcTradeField;
-import io.ffreedom.common.functional.BeanSetter;
+import io.ffreedom.common.functional.BiConverter;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.param.ParamMap;
 import io.ffreedom.common.queue.impl.ArrayBlockingMPSCQueue;
 import io.ffreedom.jctp.JctpGateway;
-import io.ffreedom.jctp.bean.JctpUserInfo;
-import io.ffreedom.jctp.bean.rsp.RspCtpDepthMarketData;
+import io.ffreedom.jctp.bean.config.JctpUserInfo;
+import io.ffreedom.jctp.bean.rsp.RspDepthMarketData;
 import io.ffreedom.jctp.bean.rsp.RspMsg;
+import io.ffreedom.jctp.bean.rsp.RtnOrder;
+import io.ffreedom.jctp.bean.rsp.RtnTrade;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundMarketDataConverter;
+import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnOrderBiConverter;
+import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnTradeBiConverter;
 import io.ffreedom.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
-import io.ffreedom.redstone.adaptor.jctp.setter.CtpInboundRtnOrderSetter;
-import io.ffreedom.redstone.adaptor.jctp.setter.CtpInboundRtnTradeSetter;
 import io.ffreedom.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
 import io.ffreedom.redstone.core.order.Order;
@@ -31,11 +31,11 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 
 	private static final Logger logger = CommonLoggerFactory.getLogger(JctpInboundAdaptor.class);
 
-	private Converter<RspCtpDepthMarketData, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
+	private Converter<RspDepthMarketData, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
 
-	private BeanSetter<CThostFtdcOrderField, Order> rtnOrderSetter = new CtpInboundRtnOrderSetter();
+	private BiConverter<RtnOrder, Order> rtnOrderConverter = new CtpInboundRtnOrderBiConverter();
 
-	private BeanSetter<CThostFtdcTradeField, Order> rtnTradeSetter = new CtpInboundRtnTradeSetter();
+	private BiConverter<RtnTrade, Order> rtnTradeConverter = new CtpInboundRtnTradeBiConverter();
 
 	private final JctpGateway gateway;
 
@@ -56,20 +56,18 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				ArrayBlockingMPSCQueue.autoRunQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
-						BasicMarketData marketData = marketDataConverter.convert(msg.getCtpDepthMarketData());
+						BasicMarketData marketData = marketDataConverter.convert(msg.getRspDepthMarketData());
 						scheduler.onMarketData(marketData);
 						break;
 					case RtnOrder:
-						CThostFtdcOrderField ctpRtnOrder = msg.getRtnOrder();
+						RtnOrder ctpRtnOrder = msg.getRtnOrder();
 						Order rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
-						rtnOrderSetter.setBean(ctpRtnOrder, rtnOrder);
-						scheduler.onInboundOrder(rtnOrder);
+						scheduler.onInboundOrder(rtnOrderConverter.convertTo(ctpRtnOrder, rtnOrder));
 						break;
 					case RtnTrade:
-						CThostFtdcTradeField ctpRtnTrade = msg.getRtnTrade();
+						RtnTrade ctpRtnTrade = msg.getRtnTrade();
 						Order rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
-						rtnTradeSetter.setBean(ctpRtnTrade, rtnTrade);
-						scheduler.onInboundOrder(rtnTrade);
+						scheduler.onInboundOrder(rtnTradeConverter.convertTo(ctpRtnTrade, rtnTrade));
 						break;
 					case RspOrderInsert:
 						CThostFtdcInputOrderField rspOrderInsert = msg.getRspOrderInsert();
