@@ -1,4 +1,7 @@
 # redstone
+redstone Project
+
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 
 #### 项目介绍
 **项目介绍**
