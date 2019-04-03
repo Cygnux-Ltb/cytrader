@@ -26,7 +26,7 @@ public class CtpInboundMarketDataConverter implements Converter<RspDepthMarketDa
 
 	@Override
 	public BasicMarketData convert(RspDepthMarketData depthMarketData) {
-		LocalDate depthDate = LocalDate.parse("20190327", actionDayformatter);
+		LocalDate depthDate = LocalDate.parse(depthMarketData.getActionDay(), actionDayformatter);
 		LocalTime depthTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
 				.plusNanos(depthMarketData.getUpdateMillisec() * 1000_000);
 		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());

@@ -2,7 +2,6 @@ package io.ffreedom.redstone.adaptor.jctp;
 
 import org.slf4j.Logger;
 
-import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
 import io.ffreedom.common.functional.BiConverter;
@@ -14,6 +13,8 @@ import io.ffreedom.jctp.JctpGateway;
 import io.ffreedom.jctp.bean.config.JctpUserInfo;
 import io.ffreedom.jctp.bean.rsp.RspDepthMarketData;
 import io.ffreedom.jctp.bean.rsp.RspMsg;
+import io.ffreedom.jctp.bean.rsp.RspOrderAction;
+import io.ffreedom.jctp.bean.rsp.RspOrderInsert;
 import io.ffreedom.jctp.bean.rsp.RtnOrder;
 import io.ffreedom.jctp.bean.rsp.RtnTrade;
 import io.ffreedom.polaris.market.BasicMarketData;
@@ -70,10 +71,10 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 						scheduler.onInboundOrder(rtnTradeConverter.convertTo(ctpRtnTrade, rtnTrade));
 						break;
 					case RspOrderInsert:
-						CThostFtdcInputOrderField rspOrderInsert = msg.getRspOrderInsert();
+						RspOrderInsert rspOrderInsert = msg.getRspOrderInsert();
 						break;
 					case RspOrderAction:
-						CThostFtdcInputOrderActionField rspOrderAction = msg.getRspOrderAction();
+						RspOrderAction rspOrderAction = msg.getRspOrderAction();
 						break;
 					case ErrRtnOrderInsert:
 						CThostFtdcInputOrderField errRtnOrderInsert = msg.getErrRtnOrderInsert();

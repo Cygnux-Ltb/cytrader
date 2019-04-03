@@ -25,7 +25,7 @@ public final class StrategyKeeper {
 	private StrategyKeeper() {
 	}
 
-	public static void put(Strategy strategy) {
+	public static void putStrategy(Strategy strategy) {
 		INSTANCE.strategyMap.put(strategy.getStrategyId(), strategy);
 		logger.info("Put to strategyMap. strategyId==[{}]", strategy.getStrategyId());
 		int instrumentId = strategy.getInstrument().getInstrumentId();

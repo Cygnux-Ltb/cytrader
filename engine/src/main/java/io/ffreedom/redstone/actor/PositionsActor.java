@@ -5,6 +5,8 @@ import org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap;
 
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.enums.OrdSide;
+import io.ffreedom.redstone.core.order.enums.OrdStatus;
 
 public class PositionsActor {
 
@@ -19,12 +21,53 @@ public class PositionsActor {
 	private PositionsActor() {
 	}
 
+	public void onPositions() {
+
+	}
+
+	public void onOrder(Order order) {
+		int instrumentId = order.getInstrument().getInstrumentId();
+		int subAccountId = order.getSubAccountId();
+		OrdSide side = order.getSide();
+		OrdStatus status = order.getStatus();
+		switch (side) {
+		case Buy:
+		case MarginBuy:
+			switch (status) {
+			case PartiallyFilled:
+			case Filled:
+
+				break;
+			default:
+				break;
+			}
+			break;
+		case Sell:
+		case ShortSell:
+			break;
+
+		default:
+
+			break;
+		}
+
+		double tradeQty = order.getTradeSet().lastTrade().getTradeQty();
+		if (instrumentPositions.containsKey(instrumentId))
+			modifyInstrumentPositions(instrumentId, tradeQty);
+		else
+			instrumentPositions.put(instrumentId, tradeQty);
+		if (subAccountPositions.containsKey(subAccountId))
+			modifySubAccountPositions(subAccountId, tradeQty);
+		else
+			subAccountPositions.put(subAccountId, tradeQty);
+	}
+
 	/**
 	 * 增加仓位记录
 	 * 
 	 * @param order
 	 */
-	public void plusPositions(Order order) {
+	private void plusPositions(Order order) {
 		int instrumentId = order.getInstrument().getInstrumentId();
 		int subAccountId = order.getSubAccountId();
 		double tradeQty = order.getTradeSet().lastTrade().getTradeQty();
@@ -43,7 +86,7 @@ public class PositionsActor {
 	 * 
 	 * @param order
 	 */
-	public void minusPositions(Order order) {
+	private void minusPositions(Order order) {
 		int instrumentId = order.getInstrument().getInstrumentId();
 		int subAccountId = order.getSubAccountId();
 		double tradeQty = order.getTradeSet().lastTrade().getTradeQty();
@@ -72,45 +115,45 @@ public class PositionsActor {
 		subAccountPositions.put(subAccountId, subAccountPositions.get(subAccountId) + qty);
 	}
 
-	public double getPositionsCount(Instrument instrument) {
+	private double getPositionsCount(Instrument instrument) {
 		return instrumentPositions.containsKey(instrument.getInstrumentId())
 				? instrumentPositions.get(instrument.getInstrumentId())
 				: 0;
 	}
 
-	public double getPositionsCount(int subAccount) {
+	private double getPositionsCount(int subAccount) {
 		return subAccountPositions.containsKey(subAccount) ? subAccountPositions.get(subAccount) : 0;
 
 	}
 
-	public double getRemainPositions(Instrument instrument) {
+	private double getRemainPositions(Instrument instrument) {
 		double positionsMaxLimit = getPositionsMaxLimit(instrument);
 		return positionsMaxLimit > 0 ? positionsMaxLimit - getPositionsCount(instrument) : positionsMaxLimit;
 	}
 
-	public double getPositionsMaxLimit(Instrument instrument) {
+	private double getPositionsMaxLimit(Instrument instrument) {
 		return instrumentPositionsMaxLimit.containsKey(instrument.getInstrumentId())
 				? instrumentPositionsMaxLimit.get(instrument.getInstrumentId())
 				: 0;
 	}
 
-	public void plusPositionsMaxLimit(Instrument instrument, double freedQty) {
+	private void plusPositionsMaxLimit(Instrument instrument, double freedQty) {
 		if (instrumentPositionsMaxLimit.containsKey(instrument.getInstrumentId())) {
 			instrumentPositionsMaxLimit.put(instrument.getInstrumentId(),
 					instrumentPositionsMaxLimit.get(instrument.getInstrumentId()) + freedQty);
 		}
 	}
 
-	public void minusPositionsMaxLimit(Instrument instrument, double usedQty) {
+	private void minusPositionsMaxLimit(Instrument instrument, double usedQty) {
 		if (instrumentPositionsMaxLimit.containsKey(instrument.getInstrumentId())) {
 			instrumentPositionsMaxLimit.put(instrument.getInstrumentId(),
 					instrumentPositionsMaxLimit.get(instrument.getInstrumentId()) - usedQty);
 		}
 	}
 
-	public static void main(String[] args) {
+	private static void main(String[] args) {
 
-		System.out.println(0 - 7);
+		System.out.println(10 - 7);
 		System.out.println(10 + -7);
 
 	}

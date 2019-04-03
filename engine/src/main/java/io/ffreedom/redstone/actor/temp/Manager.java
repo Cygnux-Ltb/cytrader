@@ -1,12 +1,12 @@
 package io.ffreedom.redstone.actor.temp;
 
-import io.ffreedom.common.functional.Callback;
+import java.util.function.Consumer;
 
 public abstract class Manager<IN> {
 
 	private boolean isInitialized = false;
 
-	abstract boolean initialization(Callback<IN> callback);
+	abstract boolean initialization(Consumer<IN> callback);
 
 	public boolean isInitialized() {
 		return isInitialized;
