@@ -18,7 +18,7 @@ public final class StrategyActor {
 	}
 
 	public void onMarketData(BasicMarketData marketData) {
-		StrategyKeeper.getStrategys(marketData.getInstrument().getInstrumentId()).each(strategy -> {
+		StrategyKeeper.getStrategys(marketData.getInstrument().getInstrumentId()).forEach(strategy -> {
 			if (strategy.isEnabled())
 				strategy.onMarketData(marketData);
 		});
