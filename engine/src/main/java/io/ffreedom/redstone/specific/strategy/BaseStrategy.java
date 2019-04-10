@@ -6,10 +6,12 @@ import org.slf4j.Logger;
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
+import io.ffreedom.common.mark.ProtectedAbstractMethod;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.OrderActor;
 import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.OrderConstant;
 import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
@@ -56,11 +58,13 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 		if (strategyOrders.isEmpty())
 			return;
 		else {
-			
-			
-			
+
 		}
+		specificOnMarketData(marketData);
 	}
+
+	@ProtectedAbstractMethod
+	protected abstract void specificOnMarketData(BasicMarketData marketData);
 
 	@Override
 	public void onOrder(Order order) {
@@ -133,12 +137,12 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	}
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty) {
-		orderTarget(instrument, direction, targetQty, Double.MIN_VALUE, Double.MAX_VALUE);
+		orderTarget(instrument, direction, targetQty, OrderConstant.OrdMinPrice, OrderConstant.OrdMaxPrice);
 	}
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty, double minPrice,
 			double maxPrice) {
-
+		
 	}
 
 }

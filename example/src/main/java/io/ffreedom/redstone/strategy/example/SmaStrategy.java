@@ -35,4 +35,10 @@ public class SmaStrategy extends IndicatorStrategy<BasicMarketData> implements S
 
 	}
 
+	@Override
+	protected void specificOnMarketData(BasicMarketData marketData) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
