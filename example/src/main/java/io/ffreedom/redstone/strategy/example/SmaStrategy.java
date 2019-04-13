@@ -2,7 +2,7 @@ package io.ffreedom.redstone.strategy.example;
 
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.indicators.events.SmaEvent;
-import io.ffreedom.polaris.indicators.impl.ma.point.SmaPoint;
+import io.ffreedom.polaris.indicators.impl.ma.points.SmaPoint;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.specific.strategy.IndicatorStrategy;
 

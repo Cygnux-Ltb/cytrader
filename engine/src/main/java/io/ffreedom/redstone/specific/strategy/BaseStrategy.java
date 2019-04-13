@@ -55,9 +55,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
-		if (strategyOrders.isEmpty())
-			return;
-		else {
+		if (strategyOrders.notEmpty()) {
 
 		}
 		specificOnMarketData(marketData);
@@ -142,7 +140,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty, double minPrice,
 			double maxPrice) {
-		
+
 	}
 
 }

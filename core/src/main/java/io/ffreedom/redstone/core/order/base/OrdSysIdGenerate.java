@@ -4,6 +4,25 @@ import javax.annotation.concurrent.NotThreadSafe;
 
 import io.ffreedom.common.datetime.EpochTime;
 
+/**
+ * 
+ * Generate规则<br>
+ * A方案<br>
+ * 1获取当前epoch秒<br>
+ * 2如果是通一秒内生成的两个id, 则自增位加一<br>
+ * 
+ * B方案<br>
+ * 1使用一个固定日期作为基准<br>
+ * 2使一个较长的自增位<br>
+ * 
+ * C方案<br>
+ * 
+ * 
+ * impl为方案A<br>
+ * 
+ * @author yellow013
+ * @creation 2019年4月13日
+ */
 @NotThreadSafe
 public final class OrdSysIdGenerate {
 
@@ -15,11 +34,11 @@ public final class OrdSysIdGenerate {
 
 	/**
 	 * 
-	 * @param ownerId min value 1 max value 921
+	 * @param ownerId min value 100 max value 921
 	 * @return
 	 */
 	public static long next(int ownerId) {
-		if (ownerId < 1 || ownerId > maxLimitOwnerId)
+		if (ownerId < 100 || ownerId > maxLimitOwnerId)
 			throw new RuntimeException("OwnerId is illegal.");
 		long nowEpochSeconds = EpochTime.seconds();
 		if (nowEpochSeconds != lastUseEpochSeconds) {
@@ -37,8 +56,8 @@ public final class OrdSysIdGenerate {
 
 		System.out.println("OrdSysId");
 
-		for (int i = 0; i < 10000; i++) {
-			Thread.sleep(1);
+		for (int i = 0; i < 1000000; i++) {
+
 			System.out.println(OrdSysIdGenerate.next(100));
 		}
 
