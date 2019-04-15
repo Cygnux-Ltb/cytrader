@@ -1,6 +1,8 @@
 package io.ffreedom.redstone.core.order.enums;
 
-public enum OrdRank {
+public enum OrdSort {
+	
+	Virtual,
 
 	Group,
 

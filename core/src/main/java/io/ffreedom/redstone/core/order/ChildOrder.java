@@ -1,23 +1,42 @@
 package io.ffreedom.redstone.core.order;
 
 import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.redstone.core.order.base.ActualOrder;
-import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
-import io.ffreedom.redstone.core.order.base.OrdTimestamps;
-import io.ffreedom.redstone.core.order.enums.OrdRank;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
+import io.ffreedom.redstone.core.order.enums.OrdSort;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.enums.OrdType;
+import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
+import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
+import io.ffreedom.redstone.core.order.structure.StopLoss;
 
 public final class ChildOrder extends ActualOrder {
 
 	private long parentOrdSysId;
 
-	public ChildOrder(Long parentOrdSysId, Instrument instrument, double offerQty, double offerPrice, OrdSide ordSide,
-			OrdType ordType, OrdStatus ordStatus, int strategyId, int subAccountId) {
-		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, ordStatus, OrdTimestamps.generate(),
-				strategyId, subAccountId);
+	private ChildOrder(long parentOrdSysId, Instrument instrument, double offerQty, double offerPrice, OrdSide ordSide,
+			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, OrdStatus.PendingNew,
+				OrdTimestamps.generate(), strategyId, subAccountId, stopLoss);
 		this.parentOrdSysId = parentOrdSysId;
+	}
+
+	public static ChildOrder generateChildOrder(long parentOrdSysId, Instrument instrument, double offerQty,
+			double offerPrice, OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+		return new ChildOrder(parentOrdSysId, instrument, offerQty, offerPrice, ordSide, ordType, strategyId,
+				subAccountId, stopLoss);
+	}
+
+	private ChildOrder(long parentOrdSysId, Instrument instrument, OrdQtyPrice qtyPrice, OrdSide ordSide,
+			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+		super(instrument, qtyPrice, ordSide, ordType, OrdStatus.PendingNew, OrdTimestamps.generate(), strategyId,
+				subAccountId, stopLoss);
+		this.parentOrdSysId = parentOrdSysId;
+	}
+
+	public static ChildOrder generateChildOrder(long parentOrdSysId, Instrument instrument, OrdQtyPrice qtyPrice,
+			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+		return new ChildOrder(parentOrdSysId, instrument, qtyPrice, ordSide, ordType, strategyId, subAccountId,
+				stopLoss);
 	}
 
 	public long getParentOrdSysId() {
@@ -25,8 +44,8 @@ public final class ChildOrder extends ActualOrder {
 	}
 
 	@Override
-	public OrdRank getRank() {
-		return OrdRank.Child;
+	public OrdSort getSort() {
+		return OrdSort.Child;
 	}
 
 }

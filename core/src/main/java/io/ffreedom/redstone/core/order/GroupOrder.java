@@ -3,7 +3,8 @@ package io.ffreedom.redstone.core.order;
 import org.eclipse.collections.api.set.ImmutableSet;
 
 import io.ffreedom.common.collect.ECollections;
-import io.ffreedom.redstone.core.order.base.OrdTimestamps;
+import io.ffreedom.redstone.core.order.api.Order;
+import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
 
 public abstract class GroupOrder {
 

@@ -1,9 +1,9 @@
-package io.ffreedom.redstone.core.order.base;
+package io.ffreedom.redstone.core.order.structure;
 
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
 import io.ffreedom.common.utils.DoubleUtil;
-import io.ffreedom.redstone.core.order.base.TradeSet.Trade;
+import io.ffreedom.redstone.core.order.structure.TradeSet.Trade;
 
 /**
  * @author yellow013

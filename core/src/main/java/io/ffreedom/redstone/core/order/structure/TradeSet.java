@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order.base;
+package io.ffreedom.redstone.core.order.structure;
 
 import java.time.ZonedDateTime;
 

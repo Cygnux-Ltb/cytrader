@@ -6,41 +6,42 @@ import org.eclipse.collections.api.list.MutableList;
 
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.redstone.core.order.base.ActualOrder;
-import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
-import io.ffreedom.redstone.core.order.base.OrdTimestamps;
-import io.ffreedom.redstone.core.order.enums.OrdRank;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
+import io.ffreedom.redstone.core.order.enums.OrdSort;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.enums.OrdType;
+import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
+import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
+import io.ffreedom.redstone.core.order.structure.StopLoss;
 
 public final class ParentOrder extends ActualOrder {
 
 	private MutableList<ChildOrder> childOrders;
 
 	public ParentOrder(Instrument instrument, double offerQty, double offerPrice, OrdSide ordSide, OrdType ordType,
-			OrdStatus ordStatus, int strategyId, int subAccountId) {
-		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, ordStatus, OrdTimestamps.generate(),
-				strategyId, subAccountId);
-		this.childOrders = ECollections.newFastList(16);
+			int strategyId, int subAccountId, StopLoss stopLoss) {
+		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, OrdStatus.PendingNew,
+				OrdTimestamps.generate(), strategyId, subAccountId, stopLoss);
+		this.childOrders = ECollections.newFastList(8);
 	}
 
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = new ChildOrder(ordSysId, instrument, ordQtyPrice.getOfferQty(),
-				ordQtyPrice.getOfferPrice(), ordSide, ordType, ordStatus, strategyId, subAccountId);
+		ChildOrder childOrder = ChildOrder.generateChildOrder(getOrdSysId(), getInstrument(), getQtyPrice(), getSide(),
+				getType(), getStrategyId(), getSubAccountId(), getStopLoss());
 		childOrders.add(childOrder);
 		return childOrder;
 	}
 
 	public List<ChildOrder> toChildOrder(int count) {
 		// TODO 增加拆分为多个订单的逻辑
-		toChildOrder();
+		OrdQtyPrice qtyPrice = getQtyPrice();
+		qtyPrice.getOfferQty();
 		return this.childOrders;
 	}
 
 	@Override
-	public OrdRank getRank() {
-		return OrdRank.Parent;
+	public OrdSort getSort() {
+		return OrdSort.Parent;
 	}
 
 }

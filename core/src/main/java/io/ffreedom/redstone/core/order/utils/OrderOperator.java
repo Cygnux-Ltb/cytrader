@@ -1,9 +1,11 @@
-package io.ffreedom.redstone.core.order;
+package io.ffreedom.redstone.core.order.utils;
 
 import java.time.Instant;
 import java.time.ZonedDateTime;
 
 import io.ffreedom.common.datetime.TimeZones;
+import io.ffreedom.redstone.core.order.OrderReport;
+import io.ffreedom.redstone.core.order.api.Order;
 
 public class OrderOperator {
 

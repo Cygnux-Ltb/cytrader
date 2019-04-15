@@ -1,15 +1,24 @@
-package io.ffreedom.redstone.core.order;
+package io.ffreedom.redstone.core.order.api;
 
 import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
-import io.ffreedom.redstone.core.order.base.OrdTimestamps;
-import io.ffreedom.redstone.core.order.base.TradeSet;
-import io.ffreedom.redstone.core.order.enums.OrdRank;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
+import io.ffreedom.redstone.core.order.enums.OrdSort;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.enums.OrdType;
+import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
+import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
+import io.ffreedom.redstone.core.order.structure.StopLoss;
+import io.ffreedom.redstone.core.order.structure.TradeSet;
 
 public interface Order extends Comparable<Order> {
+
+	public interface Constant {
+
+		double OrdMinPrice = 0.0D;
+
+		double OrdMaxPrice = 1_000_000D;
+
+	}
 
 	/**
 	 * ordSysId构成<br>
@@ -33,13 +42,15 @@ public interface Order extends Comparable<Order> {
 
 	OrdTimestamps getTimestamps();
 
-	Order setStatus(OrdStatus ordStatus);
+	void setStatus(OrdStatus ordStatus);
 
 	int getStrategyId();
 
 	int getSubAccountId();
 
-	OrdRank getRank();
+	OrdSort getSort();
+
+	StopLoss getStopLoss();
 
 	/**
 	 * Order成交列表
