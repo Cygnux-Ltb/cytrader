@@ -2,7 +2,7 @@ package io.ffreedom.redstone.barrier.base;
 
 import java.util.function.Predicate;
 
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 
 @FunctionalInterface
 public interface OrderBarrier<O extends Order> extends Predicate<O> {

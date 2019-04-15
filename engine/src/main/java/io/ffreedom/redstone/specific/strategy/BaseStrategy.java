@@ -10,9 +10,8 @@ import io.ffreedom.common.mark.ProtectedAbstractMethod;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.OrderActor;
-import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.core.order.OrderConstant;
 import io.ffreedom.redstone.core.order.VirtualOrder;
+import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
@@ -135,12 +134,12 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	}
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty) {
-		orderTarget(instrument, direction, targetQty, OrderConstant.OrdMinPrice, OrderConstant.OrdMaxPrice);
+		orderTarget(instrument, direction, targetQty, Order.Constant.OrdMinPrice, Order.Constant.OrdMaxPrice);
 	}
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty, double minPrice,
 			double maxPrice) {
-
+		// Positions
 	}
 
 }

@@ -1,9 +1,9 @@
 package io.ffreedom.redstone.specific.position;
 
 import io.ffreedom.common.utils.DoubleUtil;
-import io.ffreedom.redstone.core.order.Order;
-import io.ffreedom.redstone.core.order.base.OrdQtyPrice;
+import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
+import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
 import io.ffreedom.redstone.core.position.AbsPosition;
 
 public class StockPosition extends AbsPosition {

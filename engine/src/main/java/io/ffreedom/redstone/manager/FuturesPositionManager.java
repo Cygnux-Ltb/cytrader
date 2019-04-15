@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.manager;
 
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.position.PositionManager;
 import io.ffreedom.redstone.specific.position.FuturesPosition;
 
