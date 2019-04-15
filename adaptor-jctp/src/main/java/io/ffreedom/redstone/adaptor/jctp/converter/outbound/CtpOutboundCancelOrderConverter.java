@@ -2,7 +2,7 @@ package io.ffreedom.redstone.adaptor.jctp.converter.outbound;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import io.ffreedom.common.functional.Converter;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 
 public class CtpOutboundCancelOrderConverter implements Converter<Order, CThostFtdcInputOrderActionField> {
 

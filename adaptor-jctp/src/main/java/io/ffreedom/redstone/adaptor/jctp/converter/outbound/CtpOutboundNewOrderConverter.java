@@ -4,7 +4,7 @@ import ctp.thostapi.CThostFtdcInputOrderField;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.redstone.actor.AppGlobalStatus;
 import io.ffreedom.redstone.adaptor.jctp.utils.JctpOrderRefGenerate;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 
 public class CtpOutboundNewOrderConverter implements Converter<Order, CThostFtdcInputOrderField> {
 

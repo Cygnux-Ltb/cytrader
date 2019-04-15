@@ -7,7 +7,7 @@ import ctp.thostapi.CThostFtdcOrderActionField;
 import io.ffreedom.common.functional.BiConverter;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.common.param.ParamMap;
+import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.common.queue.impl.ArrayBlockingMPSCQueue;
 import io.ffreedom.jctp.JctpGateway;
 import io.ffreedom.jctp.bean.config.JctpUserInfo;
@@ -24,7 +24,7 @@ import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnTradeBiC
 import io.ffreedom.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 import io.ffreedom.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.redstone.storage.OrderKeeper;
 
@@ -41,7 +41,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 	private final JctpGateway gateway;
 
 	public JctpInboundAdaptor(int adaptorId, String adaptorName, StrategyScheduler scheduler,
-			ParamMap<JctpAdaptorParams> paramMap) {
+			ParamKeyMap<JctpAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
 		// 写入Gateway用户信息
 		JctpUserInfo userInfo = JctpUserInfo.newEmpty()
