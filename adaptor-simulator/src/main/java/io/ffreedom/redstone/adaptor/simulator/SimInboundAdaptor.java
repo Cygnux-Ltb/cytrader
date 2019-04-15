@@ -3,14 +3,14 @@ package io.ffreedom.redstone.adaptor.simulator;
 import java.util.List;
 
 import io.ffreedom.common.functional.Converter;
-import io.ffreedom.common.param.ParamMap;
+import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.persistence.avro.entity.MarketDataLevel1;
 import io.ffreedom.persistence.avro.serializable.AvroBytesDeserializer;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.adaptor.simulator.converter.MarketDataConverter;
 import io.ffreedom.redstone.adaptor.simulator.converter.OrderConverter;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.role.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
@@ -38,7 +38,7 @@ public class SimInboundAdaptor extends InboundAdaptor {
 	private AvroBytesDeserializer<io.ffreedom.persistence.avro.entity.Order> orderDeserializer1 = new AvroBytesDeserializer<>(
 			io.ffreedom.persistence.avro.entity.Order.class);
 
-	public SimInboundAdaptor(int adaptorId, String adaptorName, ParamMap<SimAdaptorParams> paramMap, StrategyScheduler scheduler) {
+	public SimInboundAdaptor(int adaptorId, String adaptorName, ParamKeyMap<SimAdaptorParams> paramMap, StrategyScheduler scheduler) {
 		super(adaptorId, adaptorName);
 		this.scheduler = scheduler;
 	}

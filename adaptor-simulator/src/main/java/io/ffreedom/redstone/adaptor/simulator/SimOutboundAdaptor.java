@@ -2,13 +2,13 @@ package io.ffreedom.redstone.adaptor.simulator;
 
 import java.util.stream.Collectors;
 
-import io.ffreedom.common.param.ParamMap;
+import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
 import io.ffreedom.persistence.avro.serializable.AvroBytesSerializer;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.storage.OrderKeeper;
 import io.ffreedom.transport.core.role.Sender;
@@ -20,11 +20,11 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 	private Sender<byte[]> mdSender;
 	private Sender<byte[]> tdSender;
 
-	private ParamMap<SimAdaptorParams> paramMap;
+	private ParamKeyMap<SimAdaptorParams> paramMap;
 
 	private AvroBytesSerializer serializer = new AvroBytesSerializer();
 
-	public SimOutboundAdaptor(int adaptorId, String adaptorName, ParamMap<SimAdaptorParams> paramMap) {
+	public SimOutboundAdaptor(int adaptorId, String adaptorName, ParamKeyMap<SimAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
 	}
 
