@@ -3,7 +3,7 @@ package io.ffreedom.redstone.core.position;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.ffreedom.common.collect.ECollections;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 
 public abstract class PositionSet<T extends Position> {
 

@@ -6,7 +6,7 @@ import io.ffreedom.common.fsm.Enable;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 
 public abstract class OutboundAdaptor extends AbstractAdaptor implements Enable {
 

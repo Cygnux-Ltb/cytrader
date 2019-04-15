@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.core.position;
 
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 
 public interface PositionManager<T extends Position> {
 
