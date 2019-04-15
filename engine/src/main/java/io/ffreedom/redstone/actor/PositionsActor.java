@@ -4,7 +4,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntDoubleMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap;
 
 import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.market.BasicMarketData;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.storage.OrderKeeper;
 
 public class OrderActor {
