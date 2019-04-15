@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.ffreedom.common.collect.ECollections;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 
 public class OrderBook {
 

@@ -7,14 +7,14 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.redstone.core.order.Order;
+import io.ffreedom.redstone.core.order.api.Order;
 
 @NotThreadSafe
 public final class OrderKeeper {
 
 	private static final Logger logger = CommonLoggerFactory.getLogger(OrderKeeper.class);
 
-	private static final OrderKeeper INSTANCE = new OrderKeeper();
+	private static final OrderKeeper InnerInstance = new OrderKeeper();
 
 	// * 存储所有的order
 	private final OrderBook allOrders = OrderBook.newInstance(65536);
@@ -65,49 +65,49 @@ public final class OrderKeeper {
 	}
 
 	public static boolean containsOrder(long ordSysId) {
-		return INSTANCE.allOrders.containsOrder(ordSysId);
+		return InnerInstance.allOrders.containsOrder(ordSysId);
 	}
 
 	public static Order getOrder(long ordSysId) {
-		return INSTANCE.allOrders.getOrder(ordSysId);
+		return InnerInstance.allOrders.getOrder(ordSysId);
 	}
 
 	public static OrderBook getAllOrders() {
-		return INSTANCE.allOrders;
+		return InnerInstance.allOrders;
 	}
 
 	public static OrderBook getSubAccountOrderBook(int subAccountId) {
-		OrderBook subAccountOrderBook = INSTANCE.subAccountOrderBookMap.get(subAccountId);
+		OrderBook subAccountOrderBook = InnerInstance.subAccountOrderBookMap.get(subAccountId);
 		if (subAccountOrderBook == null) {
 			subAccountOrderBook = OrderBook.newInstance(1024);
-			INSTANCE.subAccountOrderBookMap.put(subAccountId, subAccountOrderBook);
+			InnerInstance.subAccountOrderBookMap.put(subAccountId, subAccountOrderBook);
 		}
 		return subAccountOrderBook;
 	}
 
 	public static OrderBook getAccountOrderBook(int accountId) {
-		OrderBook accountOrderBook = INSTANCE.accountOrderBookMap.get(accountId);
+		OrderBook accountOrderBook = InnerInstance.accountOrderBookMap.get(accountId);
 		if (accountOrderBook == null) {
 			accountOrderBook = OrderBook.newInstance(2048);
-			INSTANCE.accountOrderBookMap.put(accountId, accountOrderBook);
+			InnerInstance.accountOrderBookMap.put(accountId, accountOrderBook);
 		}
 		return accountOrderBook;
 	}
 
 	public static OrderBook getStrategyOrderBook(int strategyId) {
-		OrderBook strategyOrderBook = INSTANCE.strategyOrderBookMap.get(strategyId);
+		OrderBook strategyOrderBook = InnerInstance.strategyOrderBookMap.get(strategyId);
 		if (strategyOrderBook == null) {
 			strategyOrderBook = OrderBook.newInstance(4096);
-			INSTANCE.strategyOrderBookMap.put(strategyId, strategyOrderBook);
+			InnerInstance.strategyOrderBookMap.put(strategyId, strategyOrderBook);
 		}
 		return strategyOrderBook;
 	}
 
 	public static OrderBook getInstrumentOrderBook(int instrumentId) {
-		OrderBook instrumentOrderBook = INSTANCE.instrumentOrderBookMap.get(instrumentId);
+		OrderBook instrumentOrderBook = InnerInstance.instrumentOrderBookMap.get(instrumentId);
 		if (instrumentOrderBook == null) {
 			instrumentOrderBook = OrderBook.newInstance(2048);
-			INSTANCE.instrumentOrderBookMap.put(instrumentId, instrumentOrderBook);
+			InnerInstance.instrumentOrderBookMap.put(instrumentId, instrumentOrderBook);
 		}
 		return instrumentOrderBook;
 	}

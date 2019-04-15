@@ -30,7 +30,7 @@ public final class AccountKeeper {
 	// 存储accountId信息,一对一关系,以subAccountId索引
 	private MutableIntIntMap accountIdMap = ECollections.newIntIntHashMap();
 
-	private final static AccountKeeper INSTANCE = new AccountKeeper();
+	private final static AccountKeeper InnerInstance = new AccountKeeper();
 
 	private AccountKeeper() {
 	}
@@ -43,51 +43,51 @@ public final class AccountKeeper {
 			Account account = subAccount.getAccount();
 			int subAccountId = subAccount.getSubAccountId();
 			int accountId = account.getAccountId();
-			INSTANCE.accountMap.put(subAccountId, account);
-			INSTANCE.accountIdMap.put(subAccountId, accountId);
+			InnerInstance.accountMap.put(subAccountId, account);
+			InnerInstance.accountIdMap.put(subAccountId, accountId);
 			getSubAccounts(accountId).add(subAccount);
 		}
 	}
 
 	public static void setAccountNotTradable(int accountId) {
-		INSTANCE.accountTradableMap.put(accountId, false);
+		InnerInstance.accountTradableMap.put(accountId, false);
 	}
 
 	public static void setAccountTradable(int accountId) {
-		INSTANCE.accountTradableMap.put(accountId, true);
+		InnerInstance.accountTradableMap.put(accountId, true);
 	}
 
 	public static boolean isAccountTradable(int accountId) {
-		return INSTANCE.accountTradableMap.get(accountId);
+		return InnerInstance.accountTradableMap.get(accountId);
 	}
 
 	public static void setSubAccountNotTradable(int subAccountId) {
-		INSTANCE.subAccountTradableMap.put(subAccountId, false);
+		InnerInstance.subAccountTradableMap.put(subAccountId, false);
 	}
 
 	public static void setSubAccountTradable(int subAccountId) {
-		INSTANCE.subAccountTradableMap.put(subAccountId, true);
+		InnerInstance.subAccountTradableMap.put(subAccountId, true);
 	}
 
 	public static boolean isSubAccountTradable(int subAccountId) {
-		return INSTANCE.subAccountTradableMap.get(subAccountId);
+		return InnerInstance.subAccountTradableMap.get(subAccountId);
 	}
 
 	public static int getAccountId(int subAccountId) {
-		int accountId = INSTANCE.accountIdMap.get(subAccountId);
+		int accountId = InnerInstance.accountIdMap.get(subAccountId);
 		return accountId > 0 ? accountId : -1;
 	}
 
 	public static Account getAccount(int subAccountId) {
-		Account account = INSTANCE.accountMap.get(subAccountId);
+		Account account = InnerInstance.accountMap.get(subAccountId);
 		return account != null ? account : Account.EMPTY;
 	}
 
 	public static MutableSet<SubAccount> getSubAccounts(int accountId) {
-		MutableSet<SubAccount> subAccountSet = INSTANCE.subAccountMap.get(accountId);
+		MutableSet<SubAccount> subAccountSet = InnerInstance.subAccountMap.get(accountId);
 		if (subAccountSet == null) {
 			subAccountSet = ECollections.newUnifiedSet();
-			INSTANCE.subAccountMap.put(accountId, subAccountSet);
+			InnerInstance.subAccountMap.put(accountId, subAccountSet);
 		}
 		return subAccountSet;
 	}
