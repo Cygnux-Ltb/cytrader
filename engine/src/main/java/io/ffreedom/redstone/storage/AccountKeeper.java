@@ -38,8 +38,7 @@ public final class AccountKeeper {
 	public static void put(SubAccount... subAccounts) {
 		if (subAccounts == null)
 			return;
-		for (int i = 0; i < subAccounts.length; i++) {
-			SubAccount subAccount = subAccounts[i];
+		for (SubAccount subAccount : subAccounts) {
 			Account account = subAccount.getAccount();
 			int subAccountId = subAccount.getSubAccountId();
 			int accountId = account.getAccountId();
