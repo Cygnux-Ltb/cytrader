@@ -8,6 +8,13 @@ import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 
+/**
+ * 统一管理仓位信息<br>
+ * 1更新仓位的入口<br>
+ * 2...<br>
+ * 
+ * @author yellow013
+ */
 public class PositionsActor {
 
 	private MutableIntDoubleMap instrumentPositionsMaxLimit = new IntDoubleHashMap();
@@ -36,7 +43,6 @@ public class PositionsActor {
 			switch (status) {
 			case PartiallyFilled:
 			case Filled:
-
 				break;
 			default:
 				break;
