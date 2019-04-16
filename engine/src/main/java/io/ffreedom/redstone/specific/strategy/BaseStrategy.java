@@ -10,8 +10,16 @@ import io.ffreedom.common.mark.ProtectedAbstractMethod;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.OrderActor;
+import io.ffreedom.redstone.actor.QuoteActor;
+import io.ffreedom.redstone.actor.QuoteActor.AtomicQuote;
+import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.order.api.Order;
+import io.ffreedom.redstone.core.order.enums.OrdSide;
+import io.ffreedom.redstone.core.order.enums.OrdType;
+import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
+import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
+import io.ffreedom.redstone.core.order.structure.StopLoss;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
@@ -23,6 +31,8 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	private int strategyId;
 
+	private int subAccountId;
+
 	private boolean isInitSuccess = false;
 
 	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
@@ -33,8 +43,9 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	// 记录当前策略所有订单
 	protected MutableLongObjectMap<VirtualOrder> strategyOrders = ECollections.newLongObjectHashMap();
 
-	protected BaseStrategy(int strategyId, Instrument instrument) {
+	protected BaseStrategy(int strategyId, int subAccountId, Instrument instrument) {
 		this.strategyId = strategyId;
+		this.subAccountId = subAccountId;
 		this.instrument = instrument;
 	}
 
@@ -139,7 +150,35 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty, double minPrice,
 			double maxPrice) {
-		// Positions
+		OrdSide ordSide;
+		AtomicQuote quote = QuoteActor.Singleton.getQuote(instrument);
+		double offerPrice;
+		switch (direction) {
+		case Long:
+			ordSide = OrdSide.Buy;
+			offerPrice = quote.getAskPrice1().get();
+			break;
+		case Short:
+			ordSide = OrdSide.Sell;
+			offerPrice = quote.getBidPrice1().get();
+			break;
+		default:
+			throw new IllegalArgumentException("TrdDirection is illegal");
+		}
+		VirtualOrder newVirtualOrder = VirtualOrder.newVirtualOrder(instrument,
+				OrdQtyPrice.withOffer(targetQty, offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
+		strategyOrders.put(newVirtualOrder.getOrdSysId(), newVirtualOrder);
+
+		OutboundAdaptor outboundAdaptor = getOutboundAdaptor(instrument);
+
 	}
+
+	/**
+	 * 由策略自行决定在交易不同Instrument时使用哪个Adaptor
+	 * 
+	 * @param instrument
+	 * @return
+	 */
+	protected abstract OutboundAdaptor getOutboundAdaptor(Instrument instrument);
 
 }
