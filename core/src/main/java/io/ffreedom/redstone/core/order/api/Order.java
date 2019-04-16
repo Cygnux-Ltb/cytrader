@@ -50,6 +50,8 @@ public interface Order extends Comparable<Order> {
 
 	OrdSort getSort();
 
+	//void setStopLoss(StopLoss stopLoss);
+
 	StopLoss getStopLoss();
 
 	/**

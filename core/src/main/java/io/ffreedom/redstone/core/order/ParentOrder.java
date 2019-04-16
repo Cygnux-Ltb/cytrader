@@ -8,10 +8,8 @@ import io.ffreedom.common.collect.ECollections;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdSort;
-import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.enums.OrdType;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
-import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
 import io.ffreedom.redstone.core.order.structure.StopLoss;
 
 public final class ParentOrder extends ActualOrder {
@@ -20,8 +18,8 @@ public final class ParentOrder extends ActualOrder {
 
 	public ParentOrder(Instrument instrument, double offerQty, double offerPrice, OrdSide ordSide, OrdType ordType,
 			int strategyId, int subAccountId, StopLoss stopLoss) {
-		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, OrdStatus.PendingNew,
-				OrdTimestamps.generate(), strategyId, subAccountId, stopLoss);
+		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, strategyId, subAccountId,
+				stopLoss);
 		this.childOrders = ECollections.newFastList(8);
 	}
 
