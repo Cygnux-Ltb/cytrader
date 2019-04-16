@@ -18,8 +18,6 @@ import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdType;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
-import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
-import io.ffreedom.redstone.core.order.structure.StopLoss;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
@@ -61,6 +59,11 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	@Override
 	public int getStrategyId() {
 		return strategyId;
+	}
+	
+	@Override
+	public int getSubAccountId() {
+		return subAccountId;
 	}
 
 	@Override

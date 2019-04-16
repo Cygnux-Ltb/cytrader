@@ -5,8 +5,8 @@ import io.ffreedom.polaris.market.BasicMarketData;
 
 public abstract class IndicatorStrategy<M extends BasicMarketData> extends BaseStrategy<M> {
 
-	protected IndicatorStrategy(int strategyId, Instrument instrument) {
-		super(strategyId, instrument);
+	protected IndicatorStrategy(int strategyId, int subAccountId, Instrument instrument) {
+		super(strategyId, subAccountId, instrument);
 	}
 
 }

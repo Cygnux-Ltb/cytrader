@@ -10,6 +10,8 @@ public interface Strategy extends Enable {
 
 	int getStrategyId();
 
+	int getSubAccountId();
+
 	Instrument getInstrument();
 
 	void init(Initializer<Boolean> initializer);
