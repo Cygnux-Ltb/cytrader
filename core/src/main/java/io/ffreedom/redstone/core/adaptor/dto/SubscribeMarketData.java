@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.adaptor.dto;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.ImmutableSets;
 import io.ffreedom.polaris.financial.Instrument;
 
 public class SubscribeMarketData {
@@ -10,7 +10,7 @@ public class SubscribeMarketData {
 	private ImmutableSet<Instrument> instrumentSet;
 
 	protected SubscribeMarketData(Instrument... instruments) {
-		this.instrumentSet = ECollections.newImmutableSet(instruments);
+		this.instrumentSet = ImmutableSets.newImmutableSet(instruments);
 	}
 
 	public static SubscribeMarketData build(Instrument... instruments) {
