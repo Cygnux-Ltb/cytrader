@@ -1,12 +1,13 @@
 package io.ffreedom.redstone.adaptor.simulator.converter;
 
 import io.ffreedom.common.functional.Converter;
-import io.ffreedom.redstone.core.order.api.Order;
+import io.ffreedom.persistence.avro.entity.Order;
+import io.ffreedom.redstone.core.order.OrderReport;
 
-public class OrderConverter implements Converter<io.ffreedom.persistence.avro.entity.Order, Order> {
+public class OrderConverter implements Converter<Order, OrderReport> {
 
 	@Override
-	public Order convert(io.ffreedom.persistence.avro.entity.Order from) {
+	public OrderReport convert(Order from) {
 		
 		
 		return null;

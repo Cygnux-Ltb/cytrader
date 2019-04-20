@@ -5,12 +5,13 @@ import java.util.List;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.persistence.avro.entity.MarketDataLevel1;
+import io.ffreedom.persistence.avro.entity.Order;
 import io.ffreedom.persistence.avro.serializable.AvroBytesDeserializer;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.adaptor.simulator.converter.MarketDataConverter;
 import io.ffreedom.redstone.adaptor.simulator.converter.OrderConverter;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
-import io.ffreedom.redstone.core.order.api.Order;
+import io.ffreedom.redstone.core.order.OrderReport;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.role.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
@@ -23,22 +24,23 @@ public class SimInboundAdaptor extends InboundAdaptor {
 	private Receiver tdReceiver;
 
 	private StrategyScheduler scheduler;
-	
+
 	protected SocketConfigurator mdConfigurator;
 
 	protected SocketConfigurator tdConfigurator;
 
 	private Converter<MarketDataLevel1, BasicMarketData> marketDataConverter = new MarketDataConverter();
 
-	private Converter<io.ffreedom.persistence.avro.entity.Order, Order> orderConverter = new OrderConverter();
+	private Converter<Order, OrderReport> orderConverter = new OrderConverter();
 
-	private AvroBytesDeserializer<io.ffreedom.persistence.avro.entity.MarketDataLevel1> marketDataDeserializer = new AvroBytesDeserializer<>(
+	private AvroBytesDeserializer<MarketDataLevel1> marketDataDeserializer = new AvroBytesDeserializer<>(
 			MarketDataLevel1.class);
 
-	private AvroBytesDeserializer<io.ffreedom.persistence.avro.entity.Order> orderDeserializer1 = new AvroBytesDeserializer<>(
-			io.ffreedom.persistence.avro.entity.Order.class);
+	private AvroBytesDeserializer<Order> orderDeserializer1 = new AvroBytesDeserializer<>(
+			Order.class);
 
-	public SimInboundAdaptor(int adaptorId, String adaptorName, ParamKeyMap<SimAdaptorParams> paramMap, StrategyScheduler scheduler) {
+	public SimInboundAdaptor(int adaptorId, String adaptorName, ParamKeyMap<SimAdaptorParams> paramMap,
+			StrategyScheduler scheduler) {
 		super(adaptorId, adaptorName);
 		this.scheduler = scheduler;
 	}
@@ -52,9 +54,9 @@ public class SimInboundAdaptor extends InboundAdaptor {
 			}
 		});
 		this.tdReceiver = new SocketReceiver(tdConfigurator, (bytes) -> {
-			List<io.ffreedom.persistence.avro.entity.Order> orders = orderDeserializer1.deSerializationMultiple(bytes);
-			for (io.ffreedom.persistence.avro.entity.Order order : orders) {
-				scheduler.onInboundOrder(orderConverter.convert(order));
+			List<Order> orders = orderDeserializer1.deSerializationMultiple(bytes);
+			for (Order order : orders) {
+				scheduler.onOrderReport(orderConverter.convert(order));
 			}
 		});
 	}
