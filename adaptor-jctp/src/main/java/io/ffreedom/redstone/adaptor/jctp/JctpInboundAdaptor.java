@@ -24,9 +24,8 @@ import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnTradeBiC
 import io.ffreedom.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 import io.ffreedom.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
-import io.ffreedom.redstone.core.order.api.Order;
+import io.ffreedom.redstone.core.order.OrderReport;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
-import io.ffreedom.redstone.storage.OrderKeeper;
 
 public class JctpInboundAdaptor extends InboundAdaptor {
 
@@ -34,9 +33,9 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 
 	private Converter<RspDepthMarketData, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
 
-	private BiConverter<RtnOrder, Order> rtnOrderConverter = new CtpInboundRtnOrderBiConverter();
+	private BiConverter<RtnOrder, OrderReport> rtnOrderConverter = new CtpInboundRtnOrderBiConverter();
 
-	private BiConverter<RtnTrade, Order> rtnTradeConverter = new CtpInboundRtnTradeBiConverter();
+	private BiConverter<RtnTrade, OrderReport> rtnTradeConverter = new CtpInboundRtnTradeBiConverter();
 
 	private final JctpGateway gateway;
 
@@ -54,7 +53,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				.setPassword(paramMap.getString(JctpAdaptorParams.CTP_Password));
 		// 初始化Gateway
 		this.gateway = new JctpGateway("Jctp-Gateway", userInfo,
-				ArrayBlockingMPSCQueue.autoRunQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
+				ArrayBlockingMPSCQueue.autoStartQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
 						BasicMarketData marketData = marketDataConverter.convert(msg.getRspDepthMarketData());
@@ -62,13 +61,13 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 						break;
 					case RtnOrder:
 						RtnOrder ctpRtnOrder = msg.getRtnOrder();
-						Order rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
-						scheduler.onInboundOrder(rtnOrderConverter.convertTo(ctpRtnOrder, rtnOrder));
+						OrderReport rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
+						scheduler.onOrderReport(rtnOrderConverter.convertTo(ctpRtnOrder, rtnOrder));
 						break;
 					case RtnTrade:
 						RtnTrade ctpRtnTrade = msg.getRtnTrade();
-						Order rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
-						scheduler.onInboundOrder(rtnTradeConverter.convertTo(ctpRtnTrade, rtnTrade));
+						OrderReport rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
+						scheduler.onOrderReport(rtnTradeConverter.convertTo(ctpRtnTrade, rtnTrade));
 						break;
 					case RspOrderInsert:
 						RspOrderInsert rspOrderInsert = msg.getRspOrderInsert();
@@ -89,10 +88,10 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 		init();
 	}
 
-	private Order checkoutCtpOrder(String orderRef) {
+	private OrderReport checkoutCtpOrder(String orderRef) {
 		try {
-			Long orderSysId = JctpOrderRefKeeper.getOrdSysId(orderRef);
-			return OrderKeeper.getOrder(orderSysId);
+			long orderSysId = JctpOrderRefKeeper.getOrdSysId(orderRef);
+			return new OrderReport().setOrdSysId(orderSysId);
 		} catch (OrderRefNotFoundException e) {
 			logger.error(e.getMessage(), e);
 			throw new RuntimeException(e);

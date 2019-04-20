@@ -3,7 +3,7 @@ package io.ffreedom.redstone.adaptor.jctp.utils;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 
 /**
@@ -15,31 +15,32 @@ import io.ffreedom.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 
 public class JctpOrderRefKeeper {
 
-	private MutableObjectLongMap<String> orderRefMappingToOrdSysId = ECollections.newObjectLongHashMap(1024);
+	private MutableObjectLongMap<String> orderRefToOrdSysId = MutableMaps.newObjectLongHashMap(1024);
 
-	private MutableLongObjectMap<String> ordSysIdMappingToOrderRef = ECollections.newLongObjectHashMap(1024);
+	private MutableLongObjectMap<String> ordSysIdToOrderRef = MutableMaps.newLongObjectHashMap(1024);
 
-	private final static JctpOrderRefKeeper INSTANCE = new JctpOrderRefKeeper();
+	private final static JctpOrderRefKeeper InnerInstance = new JctpOrderRefKeeper();
 
 	private JctpOrderRefKeeper() {
 	}
 
 	public static void put(String orderRef, long ordSysId) {
-		INSTANCE.orderRefMappingToOrdSysId.put(orderRef, ordSysId);
-		INSTANCE.ordSysIdMappingToOrderRef.put(ordSysId, orderRef);
+		InnerInstance.orderRefToOrdSysId.put(orderRef, ordSysId);
+		InnerInstance.ordSysIdToOrderRef.put(ordSysId, orderRef);
 	}
 
 	public static long getOrdSysId(String orderRef) throws OrderRefNotFoundException {
-		if (INSTANCE.orderRefMappingToOrdSysId.containsKey(orderRef))
-			return INSTANCE.orderRefMappingToOrdSysId.get(orderRef);
-		throw new OrderRefNotFoundException(orderRef);
+		long ordSysId = InnerInstance.orderRefToOrdSysId.get(orderRef);
+		if (ordSysId == 0)
+			throw new OrderRefNotFoundException(orderRef);
+		return ordSysId;
 	}
 
 	public static String getOrderRef(long ordSysId) throws OrderRefNotFoundException {
-		if (INSTANCE.ordSysIdMappingToOrderRef.containsKey(ordSysId)) {
-			return INSTANCE.ordSysIdMappingToOrderRef.get(ordSysId);
-		}
-		throw new OrderRefNotFoundException(ordSysId);
+		String orderRef = InnerInstance.ordSysIdToOrderRef.get(ordSysId);
+		if (orderRef == null)
+			throw new OrderRefNotFoundException(ordSysId);
+		return orderRef;
 	}
 
 }
