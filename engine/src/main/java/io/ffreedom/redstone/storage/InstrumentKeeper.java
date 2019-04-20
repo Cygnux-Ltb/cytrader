@@ -6,7 +6,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntBooleanMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.polaris.financial.Instrument;
 
 //TODO 修改为不可变类型
@@ -16,10 +16,10 @@ public final class InstrumentKeeper {
 	private MutableIntBooleanMap tradableMap = new IntBooleanHashMap();
 
 	// 存储instrument,以instrumentId索引
-	private MutableIntObjectMap<Instrument> instrumentIdMap = ECollections.newIntObjectHashMap();
+	private MutableIntObjectMap<Instrument> instrumentIdMap = MutableMaps.newIntObjectHashMap();
 
 	// 存储instrument,以instrumentCode索引
-	private MutableMap<String, Instrument> instrumentCodeMap = ECollections.newUnifiedMap();
+	private MutableMap<String, Instrument> instrumentCodeMap = MutableMaps.newUnifiedMap();
 
 	private final static InstrumentKeeper InnerInstance = new InstrumentKeeper();
 

@@ -8,7 +8,8 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.collect.MutableSets;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.account.SubAccount;
 
@@ -22,13 +23,13 @@ public final class AccountKeeper {
 	private MutableIntBooleanMap subAccountTradableMap = new IntBooleanHashMap();
 
 	// 存储account信息,一对一关系,以subAccountId索引
-	private MutableIntObjectMap<Account> accountMap = ECollections.newIntObjectHashMap();
+	private MutableIntObjectMap<Account> accountMap = MutableMaps.newIntObjectHashMap();
 
 	// 存储subAccount信息,一对多关系,以accountId索引
-	private MutableIntObjectMap<MutableSet<SubAccount>> subAccountMap = ECollections.newIntObjectHashMap();
+	private MutableIntObjectMap<MutableSet<SubAccount>> subAccountMap = MutableMaps.newIntObjectHashMap();
 
 	// 存储accountId信息,一对一关系,以subAccountId索引
-	private MutableIntIntMap accountIdMap = ECollections.newIntIntHashMap();
+	private MutableIntIntMap accountIdMap = MutableMaps.newIntIntHashMap();
 
 	private final static AccountKeeper InnerInstance = new AccountKeeper();
 
@@ -85,7 +86,7 @@ public final class AccountKeeper {
 	public static MutableSet<SubAccount> getSubAccounts(int accountId) {
 		MutableSet<SubAccount> subAccountSet = InnerInstance.subAccountMap.get(accountId);
 		if (subAccountSet == null) {
-			subAccountSet = ECollections.newUnifiedSet();
+			subAccountSet = MutableSets.newUnifiedSet();
 			InnerInstance.subAccountMap.put(accountId, subAccountSet);
 		}
 		return subAccountSet;

@@ -5,7 +5,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.redstone.core.order.api.Order;
 
@@ -20,16 +20,16 @@ public final class OrderKeeper {
 	private final OrderBook allOrders = OrderBook.newInstance(65536);
 
 	// * 按照subAccount分组存储
-	private final MutableIntObjectMap<OrderBook> subAccountOrderBookMap = ECollections.newIntObjectHashMap();
+	private final MutableIntObjectMap<OrderBook> subAccountOrderBookMap = MutableMaps.newIntObjectHashMap();
 
 	// * 按照account分组存储
-	private final MutableIntObjectMap<OrderBook> accountOrderBookMap = ECollections.newIntObjectHashMap();
+	private final MutableIntObjectMap<OrderBook> accountOrderBookMap = MutableMaps.newIntObjectHashMap();
 
 	// * 按照strategy分组存储
-	private final MutableIntObjectMap<OrderBook> strategyOrderBookMap = ECollections.newIntObjectHashMap();
+	private final MutableIntObjectMap<OrderBook> strategyOrderBookMap = MutableMaps.newIntObjectHashMap();
 
 	// * 按照instrument分组存储
-	private final MutableIntObjectMap<OrderBook> instrumentOrderBookMap = ECollections.newIntObjectHashMap();
+	private final MutableIntObjectMap<OrderBook> instrumentOrderBookMap = MutableMaps.newIntObjectHashMap();
 
 	private OrderKeeper() {
 	}

@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.redstone.core.order.api.Order;
 
 public class OrderBook {
@@ -28,12 +28,12 @@ public class OrderBook {
 	private MutableLongObjectMap<Order> activeShortOrders;
 
 	private OrderBook(int size) {
-		this.orders = ECollections.newLongObjectHashMap(size);
-		this.activeOrders = ECollections.newLongObjectHashMap(size / 4);
-		this.longOrders = ECollections.newLongObjectHashMap(size / 2);
-		this.activeLongOrders = ECollections.newLongObjectHashMap(size / 8);
-		this.shortOrders = ECollections.newLongObjectHashMap(size / 2);
-		this.activeShortOrders = ECollections.newLongObjectHashMap(size / 8);
+		this.orders = MutableMaps.newLongObjectHashMap(size);
+		this.activeOrders = MutableMaps.newLongObjectHashMap(size / 4);
+		this.longOrders = MutableMaps.newLongObjectHashMap(size / 2);
+		this.activeLongOrders = MutableMaps.newLongObjectHashMap(size / 8);
+		this.shortOrders = MutableMaps.newLongObjectHashMap(size / 2);
+		this.activeShortOrders = MutableMaps.newLongObjectHashMap(size / 8);
 	}
 
 	public static OrderBook newInstance() {

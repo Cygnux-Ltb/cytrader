@@ -6,7 +6,8 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableLists;
+import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.redstone.core.strategy.Strategy;
 
@@ -15,10 +16,10 @@ public final class StrategyKeeper {
 
 	private static final Logger logger = CommonLoggerFactory.getLogger(StrategyKeeper.class);
 
-	private MutableIntObjectMap<Strategy> strategyMap = ECollections.newIntObjectHashMap();
+	private MutableIntObjectMap<Strategy> strategyMap = MutableMaps.newIntObjectHashMap();
 
 	// Map<instrumentId, List<Strategy>>
-	private MutableIntObjectMap<MutableList<Strategy>> instrumentStrategyMap = ECollections.newIntObjectHashMap();
+	private MutableIntObjectMap<MutableList<Strategy>> instrumentStrategyMap = MutableMaps.newIntObjectHashMap();
 
 	public static final StrategyKeeper InnerInstance = new StrategyKeeper();
 
@@ -31,7 +32,7 @@ public final class StrategyKeeper {
 		int instrumentId = strategy.getInstrument().getInstrumentId();
 		MutableList<Strategy> strategyList = InnerInstance.instrumentStrategyMap.get(instrumentId);
 		if (strategyList == null) {
-			strategyList = ECollections.newFastList();
+			strategyList = MutableLists.newFastList();
 			InnerInstance.instrumentStrategyMap.put(instrumentId, strategyList);
 		}
 		strategy.enable();
