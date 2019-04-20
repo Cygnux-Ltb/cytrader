@@ -2,12 +2,12 @@ package io.ffreedom.redstone.actor;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableLists;
 import io.ffreedom.redstone.core.trade.TradeSignal;
 
 public final class TradeSignalActor {
 
-	private MutableList<TradeSignal> tradeSignalList = ECollections.newFastList(256);
+	private MutableList<TradeSignal> tradeSignalList = MutableLists.newFastList(256);
 
 	public static final TradeSignalActor Singleton = new TradeSignalActor();
 

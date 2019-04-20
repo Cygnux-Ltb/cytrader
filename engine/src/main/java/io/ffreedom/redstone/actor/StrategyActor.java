@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.redstone.core.order.OrderReport;
 import io.ffreedom.redstone.core.order.api.Order;
+import io.ffreedom.redstone.storage.OrderKeeper;
 import io.ffreedom.redstone.storage.StrategyKeeper;
 
 /**
@@ -31,9 +33,12 @@ public final class StrategyActor {
 		});
 	}
 
-	public void onOrder(Order order) {
-		logger.debug("Call StrategyActor.onOrder , StrategyId==[{}], ordSysId==[{}]", order.getStrategyId(),
-				order.getOrdSysId());
+	public void onOrderReport(OrderReport orderReport) {
+		logger.info("Handle OrderReport, brokerRtnId==[{}], ordSysId==[{}]", orderReport.getBrokerRtnId(),
+				orderReport.getOrdSysId());
+		Order order = OrderKeeper.getOrder(orderReport.getOrdSysId());
+		logger.info("Search Order OK. BrokerRtnId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
+				order.getStrategyId(), order.getInstrument().getInstrumentCode(), orderReport.getOrdSysId());
 		StrategyKeeper.getStrategy(order.getStrategyId()).onOrder(order);
 	}
 

@@ -6,7 +6,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import com.google.common.util.concurrent.AtomicDouble;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.storage.InstrumentKeeper;
@@ -28,7 +28,7 @@ public class QuoteActor {
 
 	public void init() {
 		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
-		MutableIntObjectMap<AtomicQuote> tempQuoteMap = ECollections.newIntObjectHashMap();
+		MutableIntObjectMap<AtomicQuote> tempQuoteMap = MutableMaps.newIntObjectHashMap();
 		if (allInstrument != null)
 			allInstrument.forEach(instrument -> tempQuoteMap.put(instrument.getInstrumentId(), new AtomicQuote()));
 		quoteMap = tempQuoteMap.toImmutable();
