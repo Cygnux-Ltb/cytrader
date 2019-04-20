@@ -3,13 +3,12 @@ package io.ffreedom.redstone.specific.strategy;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.mark.ProtectedAbstractMethod;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
-import io.ffreedom.redstone.actor.OrderActor;
 import io.ffreedom.redstone.actor.QuoteActor;
 import io.ffreedom.redstone.actor.QuoteActor.AtomicQuote;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
@@ -24,6 +23,7 @@ import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
 import io.ffreedom.redstone.core.trade.enums.TrdDirection;
 import io.ffreedom.redstone.storage.AccountKeeper;
 import io.ffreedom.redstone.storage.InstrumentKeeper;
+import io.ffreedom.redstone.storage.OrderKeeper;
 
 public abstract class BaseStrategy<M extends BasicMarketData> implements Strategy, CircuitBreaker {
 
@@ -39,7 +39,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	protected Instrument instrument;
 
 	// 记录当前策略所有订单
-	protected MutableLongObjectMap<VirtualOrder> strategyOrders = ECollections.newLongObjectHashMap();
+	protected MutableLongObjectMap<VirtualOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
 
 	protected BaseStrategy(int strategyId, int subAccountId, Instrument instrument) {
 		this.strategyId = strategyId;
@@ -60,7 +60,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	public int getStrategyId() {
 		return strategyId;
 	}
-	
+
 	@Override
 	public int getSubAccountId() {
 		return subAccountId;
@@ -79,7 +79,12 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void onOrder(Order order) {
-		OrderActor.Singleton.onOrder(order);
+		logger.info("handle order ordSysId==[{}]", order.getOrdSysId());
+		if (OrderKeeper.containsOrder(order.getOrdSysId())) {
+			OrderKeeper.updateOrder(order);
+		} else {
+			OrderKeeper.insertOrder(order);
+		}
 	}
 
 	@Override
@@ -171,10 +176,15 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 		VirtualOrder newVirtualOrder = VirtualOrder.newVirtualOrder(instrument,
 				OrdQtyPrice.withOffer(targetQty, offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
 		strategyOrders.put(newVirtualOrder.getOrdSysId(), newVirtualOrder);
-
+		
+		
+		
+		
+		
 		OutboundAdaptor outboundAdaptor = getOutboundAdaptor(instrument);
-
 	}
+	
+	
 
 	/**
 	 * 由策略自行决定在交易不同Instrument时使用哪个Adaptor
