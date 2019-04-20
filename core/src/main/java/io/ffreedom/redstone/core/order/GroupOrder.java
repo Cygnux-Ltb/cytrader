@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.order;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.ImmutableSets;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
 
@@ -14,7 +14,7 @@ public abstract class GroupOrder {
 	private ImmutableSet<Order> orderSet;
 
 	public GroupOrder(Order... orders) {
-		this.orderSet = ECollections.newImmutableSet(orders);
+		this.orderSet = ImmutableSets.newImmutableSet(orders);
 	}
 
 	public long getGroupOrdSysId() {

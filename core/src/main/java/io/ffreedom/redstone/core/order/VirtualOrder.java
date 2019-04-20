@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.order;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdSort;
@@ -16,7 +16,7 @@ import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
  */
 public final class VirtualOrder extends AbstractOrder {
 
-	private MutableLongObjectMap<ParentOrder> actualOrders = ECollections.newLongObjectHashMap();
+	private MutableLongObjectMap<ParentOrder> actualOrders = MutableMaps.newLongObjectHashMap();
 
 	private VirtualOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
 			int strategyId, int subAccountId) {

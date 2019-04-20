@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.ffreedom.common.collect.ECollections;
+import io.ffreedom.common.collect.MutableLists;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdSort;
@@ -20,7 +20,7 @@ public final class ParentOrder extends ActualOrder {
 			int strategyId, int subAccountId, StopLoss stopLoss) {
 		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, strategyId, subAccountId,
 				stopLoss);
-		this.childOrders = ECollections.newFastList(8);
+		this.childOrders = MutableLists.newFastList(8);
 	}
 
 	public ChildOrder toChildOrder() {
