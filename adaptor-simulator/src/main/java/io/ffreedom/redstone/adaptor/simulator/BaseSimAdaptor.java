@@ -15,13 +15,11 @@ public abstract class BaseSimAdaptor implements Adaptor {
 	public BaseSimAdaptor(ParamKeyMap<SimAdaptorParams> paramMap) {
 		this.paramMap = paramMap;
 		initSocketConfigurator();
-		init();
 	}
 
 	private void initSocketConfigurator() {
 		this.mdConfigurator = SocketConfigurator.builder().setHost(paramMap.getString(SimAdaptorParams.MdHost))
 				.setPort(paramMap.getInteger(SimAdaptorParams.MdPort)).build();
-
 		this.tdConfigurator = SocketConfigurator.builder().setHost(paramMap.getString(SimAdaptorParams.TdHost))
 				.setPort(paramMap.getInteger(SimAdaptorParams.TdPort)).build();
 	}

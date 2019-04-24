@@ -36,17 +36,12 @@ public class SimInboundAdaptor extends InboundAdaptor {
 	private AvroBytesDeserializer<MarketDataLevel1> marketDataDeserializer = new AvroBytesDeserializer<>(
 			MarketDataLevel1.class);
 
-	private AvroBytesDeserializer<Order> orderDeserializer1 = new AvroBytesDeserializer<>(
-			Order.class);
+	private AvroBytesDeserializer<Order> orderDeserializer1 = new AvroBytesDeserializer<>(Order.class);
 
 	public SimInboundAdaptor(int adaptorId, String adaptorName, ParamKeyMap<SimAdaptorParams> paramMap,
 			StrategyScheduler scheduler) {
 		super(adaptorId, adaptorName);
 		this.scheduler = scheduler;
-	}
-
-	@Override
-	public void init() {
 		this.mdReceiver = new SocketReceiver(mdConfigurator, (bytes) -> {
 			List<MarketDataLevel1> marketDatas = marketDataDeserializer.deSerializationMultiple(bytes);
 			for (MarketDataLevel1 marketData : marketDatas) {
