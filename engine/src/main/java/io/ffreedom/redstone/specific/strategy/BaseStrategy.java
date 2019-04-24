@@ -1,17 +1,21 @@
 package io.ffreedom.redstone.specific.strategy;
 
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
+import io.ffreedom.common.collect.ImmutableLists;
 import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.mark.ProtectedAbstractMethod;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.redstone.actor.OrderExecutionActor;
 import io.ffreedom.redstone.actor.QuoteActor;
 import io.ffreedom.redstone.actor.QuoteActor.AtomicQuote;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
+import io.ffreedom.redstone.core.order.ParentOrder;
 import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
@@ -36,15 +40,15 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
 
 	// 策略订阅的合约
-	protected Instrument instrument;
+	private ImmutableList<Instrument> instruments;
 
 	// 记录当前策略所有订单
-	protected MutableLongObjectMap<VirtualOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
+	protected MutableLongObjectMap<VirtualOrder> strategyVirtualOrders = MutableMaps.newLongObjectHashMap();
 
-	protected BaseStrategy(int strategyId, int subAccountId, Instrument instrument) {
+	protected BaseStrategy(int strategyId, int subAccountId, Instrument... instruments) {
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
-		this.instrument = instrument;
+		this.instruments = ImmutableLists.newImmutableList(instruments);
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
-		if (strategyOrders.notEmpty()) {
+		if (strategyVirtualOrders.notEmpty()) {
 
 		}
 		specificOnMarketData(marketData);
@@ -144,12 +148,8 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	}
 
 	@Override
-	public Instrument getInstrument() {
-		return instrument;
-	}
-
-	protected void orderTarget(TrdDirection direction, double targetQty) {
-		orderTarget(instrument, direction, targetQty);
+	public ImmutableList<Instrument> getInstruments() {
+		return instruments;
 	}
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty) {
@@ -175,16 +175,14 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 		}
 		VirtualOrder newVirtualOrder = VirtualOrder.newVirtualOrder(instrument,
 				OrdQtyPrice.withOffer(targetQty, offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
-		strategyOrders.put(newVirtualOrder.getOrdSysId(), newVirtualOrder);
-		
-		
-		
-		
-		
+		strategyVirtualOrders.put(newVirtualOrder.getOrdSysId(), newVirtualOrder);
+
+		ParentOrder parentOrder = OrderExecutionActor.Singleton.virtualOrderToActual(newVirtualOrder);
+
 		OutboundAdaptor outboundAdaptor = getOutboundAdaptor(instrument);
+
+		outboundAdaptor.newOredr(parentOrder.toChildOrder());
 	}
-	
-	
 
 	/**
 	 * 由策略自行决定在交易不同Instrument时使用哪个Adaptor

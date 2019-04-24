@@ -34,6 +34,10 @@ public final class OrderKeeper {
 	private OrderKeeper() {
 	}
 
+	public static void onOrder(Order order) {
+
+	}
+
 	public static void updateOrder(Order order) {
 		switch (order.getStatus()) {
 		case Filled:

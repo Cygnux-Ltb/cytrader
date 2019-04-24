@@ -2,6 +2,7 @@ package io.ffreedom.redstone.storage;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import io.ffreedom.common.collect.MutableLists;
 import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
+import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.strategy.Strategy;
 
 @NotThreadSafe
@@ -29,16 +31,20 @@ public final class StrategyKeeper {
 	public static void putStrategy(Strategy strategy) {
 		InnerInstance.strategyMap.put(strategy.getStrategyId(), strategy);
 		logger.info("Put to strategyMap. strategyId==[{}]", strategy.getStrategyId());
-		int instrumentId = strategy.getInstrument().getInstrumentId();
-		MutableList<Strategy> strategyList = InnerInstance.instrumentStrategyMap.get(instrumentId);
-		if (strategyList == null) {
-			strategyList = MutableLists.newFastList();
-			InnerInstance.instrumentStrategyMap.put(instrumentId, strategyList);
+		ImmutableList<Instrument> instruments = strategy.getInstruments();
+		for (Instrument instrument : instruments) {
+			int instrumentId = instrument.getInstrumentId();
+			MutableList<Strategy> strategyList = InnerInstance.instrumentStrategyMap.get(instrumentId);
+			if (strategyList == null) {
+				strategyList = MutableLists.newFastList();
+				InnerInstance.instrumentStrategyMap.put(instrumentId, strategyList);
+			}
+			strategyList.add(strategy);
+			logger.info("Put to instrumentStrategyMap. strategyId==[{}], instrumentId==[{}]", strategy.getStrategyId(),
+					instrumentId);
 		}
 		strategy.enable();
-		strategyList.add(strategy);
-		logger.info("Put to instrumentStrategyMap. strategyId==[{}], instrumentId==[{}]", strategy.getStrategyId(),
-				instrumentId);
+
 	}
 
 	public static Strategy getStrategy(int strategyId) {
