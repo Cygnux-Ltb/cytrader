@@ -26,13 +26,8 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	public JctpOutboundAdaptor(int adaptorId, String adaptorName, JctpGateway gateway) {
 		super(adaptorId, adaptorName);
 		this.gateway = gateway;
-		init();
 	}
 
-	@Override
-	public void init() {
-
-	}
 
 	@Override
 	public boolean close() {
@@ -70,17 +65,20 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 					.map(instrument -> instrument.getInstrumentCode()).collect(Collectors.toSet()));
 			return true;
 		} catch (Exception e) {
+			logger.error("subscribeMarketData throw {}", e.getClass().getSimpleName(), e);
 			return false;
 		}
 	}
 
 	@Override
 	public boolean queryPositions(Account account) {
+		// TODO
 		return false;
 	}
 
 	@Override
 	public boolean queryBalance(Account account) {
+		// TODO
 		return false;
 	}
 

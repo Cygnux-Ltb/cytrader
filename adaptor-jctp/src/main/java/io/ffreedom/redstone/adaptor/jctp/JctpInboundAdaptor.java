@@ -29,7 +29,7 @@ import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 
 public class JctpInboundAdaptor extends InboundAdaptor {
 
-	private static final Logger logger = CommonLoggerFactory.getLogger(JctpInboundAdaptor.class);
+	private final Logger logger = CommonLoggerFactory.getLogger(JctpInboundAdaptor.class);
 
 	private Converter<RspDepthMarketData, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
 
@@ -85,7 +85,6 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 						break;
 					}
 				}));
-		init();
 	}
 
 	private OrderReport checkoutCtpOrder(String orderRef) {
@@ -96,11 +95,6 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 			logger.error(e.getMessage(), e);
 			throw new RuntimeException(e);
 		}
-	}
-
-	@Override
-	public void init() {
-
 	}
 
 	public JctpGateway getJctpGeteway() {
@@ -123,7 +117,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 	}
 
 	public static void main(String[] args) {
-		logger.debug("");
+
 	}
 
 }
