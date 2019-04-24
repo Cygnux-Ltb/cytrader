@@ -1,5 +1,7 @@
 package io.ffreedom.redstone.core.strategy;
 
+import org.eclipse.collections.api.list.ImmutableList;
+
 import io.ffreedom.common.fsm.Enable;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.polaris.financial.Instrument;
@@ -12,7 +14,7 @@ public interface Strategy extends Enable {
 
 	int getSubAccountId();
 
-	Instrument getInstrument();
+	ImmutableList<Instrument> getInstruments();
 
 	void init(Initializer<Boolean> initializer);
 
