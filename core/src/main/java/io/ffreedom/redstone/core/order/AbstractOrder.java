@@ -45,7 +45,7 @@ public abstract class AbstractOrder implements Order {
 		this.ordSide = ordSide;
 		this.ordType = ordType;
 		this.ordStatus = OrdStatus.PendingNew;
-		this.ordTimestamps = OrdTimestamps.generate();
+		this.ordTimestamps = OrdTimestamps.newTimestamp();
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
 		if (stopLoss == null)

@@ -12,7 +12,7 @@ public final class OrdTimestamps {
 		this.generateTime = EpochTimestamp.now();
 	}
 
-	public static OrdTimestamps generate() {
+	public static OrdTimestamps newTimestamp() {
 		return new OrdTimestamps();
 	}
 

@@ -14,7 +14,7 @@ public interface Order extends Comparable<Order> {
 
 	public interface Constant {
 
-		double OrdMinPrice = 0.0D;
+		double OrdMinPrice = 0.0001D;
 
 		double OrdMaxPrice = 1_000_000D;
 
@@ -50,7 +50,7 @@ public interface Order extends Comparable<Order> {
 
 	OrdSort getSort();
 
-	//void setStopLoss(StopLoss stopLoss);
+	// void setStopLoss(StopLoss stopLoss);
 
 	StopLoss getStopLoss();
 

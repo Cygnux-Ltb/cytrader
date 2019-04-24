@@ -13,6 +13,8 @@ public enum OrdType {
 	FOK,
 	
 	FAK,
+	
+	Invalid,
 
 	;
 
