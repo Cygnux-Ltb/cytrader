@@ -53,3 +53,8 @@ simulator-pingpong/.factorypath
 strategy/.factorypath
 
 #user add
+adaptor-jctp/.factorypath
+adaptor-ib/.factorypath
+adaptor-simulator/.factorypath
+engine/.factorypath
+example/.factorypath

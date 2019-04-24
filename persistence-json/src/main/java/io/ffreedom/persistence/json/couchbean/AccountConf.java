@@ -1,5 +1,5 @@
 package io.ffreedom.persistence.json.couchbean;
 
-public class AccountList {
+public class AccountConf {
 
 }

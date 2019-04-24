@@ -2,9 +2,11 @@ package io.ffreedom.persistence.json.couchbean.base;
 
 public enum CouchDocumentEnum implements CouchDocument {
 
-	AppConfig("redstone/", "AppConfig"),
+	AppConf("/redstone", "/app_conf"),
 
-	AccountConfig("redstone/", "AccountConfig")
+	AccountConf("/redstone", "/account_config"),
+
+	StrategyConf("/redstone", "/strategy_conf"),
 
 	;
 
