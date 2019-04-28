@@ -11,7 +11,7 @@ import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.adaptor.simulator.converter.MarketDataConverter;
 import io.ffreedom.redstone.adaptor.simulator.converter.OrderConverter;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
-import io.ffreedom.redstone.core.order.OrderReport;
+import io.ffreedom.redstone.core.order.impl.OrderReport;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.role.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
