@@ -24,7 +24,7 @@ import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnTradeBiC
 import io.ffreedom.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 import io.ffreedom.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
 import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
-import io.ffreedom.redstone.core.order.OrderReport;
+import io.ffreedom.redstone.core.order.impl.OrderReport;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 
 public class JctpInboundAdaptor extends InboundAdaptor {

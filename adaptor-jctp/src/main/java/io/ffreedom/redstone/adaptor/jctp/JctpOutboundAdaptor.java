@@ -28,7 +28,6 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 		this.gateway = gateway;
 	}
 
-
 	@Override
 	public boolean close() {
 		return false;
@@ -36,10 +35,15 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 
 	@Override
 	public boolean newOredr(Order order) {
-		CThostFtdcInputOrderField ctpNewOrder = newOrderConverter.convert(order);
-		JctpOrderRefKeeper.put(ctpNewOrder.getOrderRef(), order.getOrdSysId());
-		gateway.newOrder(ctpNewOrder);
-		return true;
+		try {
+			CThostFtdcInputOrderField ctpNewOrder = newOrderConverter.convert(order);
+			JctpOrderRefKeeper.put(ctpNewOrder.getOrderRef(), order.getOrdSysId());
+			gateway.newOrder(ctpNewOrder);
+			return true;
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return false;
+		}
 	}
 
 	@Override
@@ -52,7 +56,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 			return true;
 		} catch (OrderRefNotFoundException e) {
 			logger.error(e.getMessage());
-			throw new RuntimeException(e);
+			return false;
 		} catch (Exception e) {
 			return false;
 		}

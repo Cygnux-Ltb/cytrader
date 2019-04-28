@@ -5,7 +5,7 @@ public enum CtpOutboundTitle {
 	NewOrder,
 
 	CancelOrder,
-	
+
 	;
-	
+
 }
