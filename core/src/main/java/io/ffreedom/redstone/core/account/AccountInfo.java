@@ -7,6 +7,20 @@ public class AccountInfo {
 	private String investorPassword;
 	private Broker broker;
 
+	public final static AccountInfo EMPTY = new AccountInfo("empty", "empty", "empty", new Broker() {
+
+		@Override
+		public int getBroketId() {
+			return -1;
+		}
+
+		@Override
+		public String getBroketName() {
+			return "empty";
+		}
+
+	});
+
 	public AccountInfo(String accountName, String investorId, String investorPassword, Broker broker) {
 		super();
 		this.accountName = accountName;

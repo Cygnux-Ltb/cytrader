@@ -1,16 +1,20 @@
-package io.ffreedom.redstone.core.position;
+package io.ffreedom.redstone.core.position.api;
 
 import io.ffreedom.redstone.core.order.api.Order;
 
 public interface Position extends Comparable<Position> {
-	
+
 	int getAccountId();
 
 	int getInstrumentId();
 
-	double getCurrentQty();
+	long getCurrentQty();
 
-	void setCurrentQty(double qty);
+	void setCurrentQty(long qty);
+
+	long getTradeableQty();
+
+	void setTradeableQty(long qty);
 
 	void updatePosition(Order order);
 

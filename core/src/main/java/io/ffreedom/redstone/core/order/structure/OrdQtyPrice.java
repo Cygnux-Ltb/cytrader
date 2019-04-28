@@ -14,21 +14,21 @@ public class OrdQtyPrice {
 	/**
 	 * 委托数量
 	 */
-	private double offerQty;
+	private long offerQty;
 	/**
 	 * 剩余数量
 	 */
-	private double leavesQty;
+	private long leavesQty;
 	/**
 	 * 已成交数量
 	 */
-	private double filledQty;
+	private long filledQty;
 	/**
 	 * 最后一次成交数量
 	 */
-	private double lastFilledQty;
+	private long lastFilledQty;
 	/**
-	 * 是否以最大可能的数量
+	 * 是否以最大能成交的数量
 	 */
 	private boolean isMaxPossibleQty;
 
@@ -45,51 +45,74 @@ public class OrdQtyPrice {
 	 */
 	private boolean isBestPrice;
 
-	private OrdQtyPrice(double offerQty, double offerPrice) {
+	private OrdQtyPrice(long offerQty, double offerPrice) {
 		this.offerQty = offerQty;
 		this.leavesQty = offerQty;
 		this.offerPrice = offerPrice;
 	}
 
 	private OrdQtyPrice() {
-
 	}
 
-	public static OrdQtyPrice withOffer(double offerQty, double offerPrice) {
+	public static OrdQtyPrice withOffer(long offerQty, double offerPrice) {
 		return new OrdQtyPrice(offerQty, offerPrice);
 	}
 
-	public static OrdQtyPrice withBestPrice(double offerQty) {
-		return new OrdQtyPrice().isBestPrice(true).setOfferQty(offerQty);
+	public static OrdQtyPrice withBestPrice(long offerQty) {
+		return new OrdQtyPrice().setBestPrice(true).setOfferQty(offerQty);
 	}
 
 	public static OrdQtyPrice withMaxPossibleQty(double offerPrice) {
-		return new OrdQtyPrice().isMaxPossibleQty(true).setOfferPrice(offerPrice);
+		return new OrdQtyPrice().setMaxPossibleQty(true).setOfferPrice(offerPrice);
 	}
 
 	public static OrdQtyPrice withBestPriceAndMaxPossibleQty() {
-		return new OrdQtyPrice().isMaxPossibleQty(true).isMaxPossibleQty(true);
+		return new OrdQtyPrice().setBestPrice(true).setMaxPossibleQty(true);
 	}
 
-	private OrdQtyPrice isBestPrice(boolean isBestPrice) {
-		this.isBestPrice = isBestPrice;
-		return this;
+	public long getOfferQty() {
+		return offerQty;
 	}
 
-	private OrdQtyPrice isMaxPossibleQty(boolean isMaxPossibleQty) {
-		this.isMaxPossibleQty = isMaxPossibleQty;
-		return this;
+	public long getLeavesQty() {
+		return leavesQty;
 	}
 
-	public boolean isBestPrice() {
-		return isBestPrice;
+	public long getFilledQty() {
+		return filledQty;
+	}
+
+	public long getLastFilledQty() {
+		return lastFilledQty;
 	}
 
 	public boolean isMaxPossibleQty() {
 		return isMaxPossibleQty;
 	}
 
-	public OrdQtyPrice setOfferQty(double offerQty) {
+	public double getOfferPrice() {
+		return offerPrice;
+	}
+
+	public double getAvgPrice() {
+		return avgPrice;
+	}
+
+	public boolean isBestPrice() {
+		return isBestPrice;
+	}
+
+	private OrdQtyPrice setBestPrice(boolean isBestPrice) {
+		this.isBestPrice = isBestPrice;
+		return this;
+	}
+
+	private OrdQtyPrice setMaxPossibleQty(boolean isMaxPossibleQty) {
+		this.isMaxPossibleQty = isMaxPossibleQty;
+		return this;
+	}
+
+	public OrdQtyPrice setOfferQty(long offerQty) {
 		if (this.offerQty == 0) {
 			this.offerQty = offerQty;
 			this.leavesQty = offerQty;
@@ -103,36 +126,12 @@ public class OrdQtyPrice {
 		return this;
 	}
 
-	public double getOfferQty() {
-		return offerQty;
-	}
-
-	public double getLastFilledQty() {
-		return lastFilledQty;
-	}
-
-	public double getFilledQty() {
-		return filledQty;
-	}
-
-	public double getLeavesQty() {
-		return leavesQty;
-	}
-
-	public double getOfferPrice() {
-		return offerPrice;
-	}
-
-	public double getAvgPrice() {
-		return avgPrice;
-	}
-
-	public OrdQtyPrice setLeavesQty(double leavesQty) {
+	public OrdQtyPrice setLeavesQty(long leavesQty) {
 		this.leavesQty = leavesQty;
 		return this;
 	}
 
-	public OrdQtyPrice setFilledQty(double filledQty) {
+	public OrdQtyPrice setFilledQty(long filledQty) {
 		this.lastFilledQty = this.filledQty;
 		this.filledQty = filledQty;
 		return this;
@@ -140,12 +139,12 @@ public class OrdQtyPrice {
 
 	public OrdQtyPrice calculationAvgPrice(TradeSet tradeSet) {
 		if (!tradeSet.isEmpty()) {
-			MutableSortedSet<Trade> innerSet = tradeSet.innerSet();
-			double totalPrice = innerSet
-					.sumOfDouble(trade -> DoubleUtil.multiply8(trade.getTradePrice(), trade.getTradeQty()));
-			double totalQty = DoubleUtil.correction8(innerSet.sumOfDouble(trade -> trade.getTradeQty()));
-			if (totalQty > 0.0D)
-				this.avgPrice = DoubleUtil.division(totalPrice, totalQty);
+			MutableSortedSet<Trade> innerSet = tradeSet.getInnerSet();
+			double totalPrice = DoubleUtil.correction8(
+					innerSet.sumOfDouble(trade -> DoubleUtil.correction8(trade.getTradePrice() * trade.getTradeQty())));
+			long totalQty = innerSet.sumOfLong(trade -> trade.getTradeQty());
+			if (totalQty > 0L)
+				this.avgPrice = DoubleUtil.correction8(totalPrice / totalQty);
 			return this;
 		}
 		return this;

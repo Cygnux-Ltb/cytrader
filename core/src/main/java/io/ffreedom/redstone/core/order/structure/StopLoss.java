@@ -25,7 +25,7 @@ public final class StopLoss implements Comparable<StopLoss>{
 
 	@Override
 	public int compareTo(StopLoss o) {
-		// TODO Auto-generated method stub
+		 
 		return 0;
 	}
 

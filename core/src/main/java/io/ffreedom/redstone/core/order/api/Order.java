@@ -14,7 +14,7 @@ public interface Order extends Comparable<Order> {
 
 	public interface Constant {
 
-		double OrdMinPrice = 0.0001D;
+		double OrdMinPrice = 0.0000001D;
 
 		double OrdMaxPrice = 1_000_000D;
 

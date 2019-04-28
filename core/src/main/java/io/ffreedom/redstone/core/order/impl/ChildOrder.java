@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order;
+package io.ffreedom.redstone.core.order.impl;
 
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
@@ -11,14 +11,14 @@ public final class ChildOrder extends ActualOrder {
 
 	private long parentOrdSysId;
 
-	private ChildOrder(long parentOrdSysId, Instrument instrument, double offerQty, double offerPrice, OrdSide ordSide,
+	private ChildOrder(long parentOrdSysId, Instrument instrument, long offerQty, double offerPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
 		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, strategyId, subAccountId,
 				stopLoss);
 		this.parentOrdSysId = parentOrdSysId;
 	}
 
-	public static ChildOrder generateChildOrder(long parentOrdSysId, Instrument instrument, double offerQty,
+	public static ChildOrder generateChildOrder(long parentOrdSysId, Instrument instrument, long offerQty,
 			double offerPrice, OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
 		return new ChildOrder(parentOrdSysId, instrument, offerQty, offerPrice, ordSide, ordType, strategyId,
 				subAccountId, stopLoss);

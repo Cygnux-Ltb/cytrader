@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.position;
+package io.ffreedom.redstone.core.position.api;
 
 import io.ffreedom.redstone.core.order.api.Order;
 

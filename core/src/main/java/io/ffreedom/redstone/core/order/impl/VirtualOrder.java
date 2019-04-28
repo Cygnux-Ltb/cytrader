@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order;
+package io.ffreedom.redstone.core.order.impl;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 

@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order;
+package io.ffreedom.redstone.core.order.impl;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public final class ParentOrder extends ActualOrder {
 
 	private MutableList<ChildOrder> childOrders;
 
-	public ParentOrder(Instrument instrument, double offerQty, double offerPrice, OrdSide ordSide, OrdType ordType,
+	public ParentOrder(Instrument instrument, long offerQty, double offerPrice, OrdSide ordSide, OrdType ordType,
 			int strategyId, int subAccountId, StopLoss stopLoss) {
 		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, strategyId, subAccountId,
 				stopLoss);

@@ -1,10 +1,12 @@
-package io.ffreedom.redstone.core.position;
+package io.ffreedom.redstone.core.position.impl;
+
+import io.ffreedom.redstone.core.position.api.Position;
 
 public abstract class AbsPosition implements Position {
 
 	protected int accountId;
 	protected int instrumentId;
-	protected double currentQty;
+	protected long currentQty;
 
 	public AbsPosition(int accountId, int instrumentId) {
 		this.instrumentId = instrumentId;
@@ -21,18 +23,21 @@ public abstract class AbsPosition implements Position {
 	}
 
 	@Override
-	public double getCurrentQty() {
+	public long getCurrentQty() {
 		return currentQty;
 	}
 
 	@Override
-	public void setCurrentQty(double qty) {
+	public void setCurrentQty(long qty) {
 		this.currentQty = qty;
 	}
 
 	@Override
-	public int compareTo(Position o) {
-		return this.instrumentId < o.getInstrumentId() ? -1 : this.instrumentId > o.getInstrumentId() ? 1 : 0;
+	public int compareTo(Position pos) {
+		return this.accountId < pos.getAccountId() ? -1
+				: this.accountId > pos.getAccountId() ? 1
+						: this.instrumentId < pos.getInstrumentId() ? -1
+								: this.instrumentId > pos.getInstrumentId() ? 1 : 0;
 	}
 
 }

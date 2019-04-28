@@ -1,7 +1,7 @@
-package io.ffreedom.redstone.core.position;
+package io.ffreedom.redstone.core.position.api;
 
 @FunctionalInterface
-public interface PositionFactory<T extends Position> {
+public interface PositionProducer<T extends Position> {
 
 	default T produce(int accountId, int instrumentId) {
 		return produce(accountId, instrumentId, 0);

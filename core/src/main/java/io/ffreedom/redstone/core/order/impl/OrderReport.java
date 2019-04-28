@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order;
+package io.ffreedom.redstone.core.order.impl;
 
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 
@@ -12,7 +12,7 @@ public final class OrderReport {
 	/**
 	 * report epoch milliseconds
 	 */
-	private long epochMilliseconds;
+	private long epochMillis;
 
 	/**
 	 * order status of now report
@@ -27,12 +27,12 @@ public final class OrderReport {
 	/**
 	 * filled quantity
 	 */
-	private double filledQty;
+	private long filledQty;
 
 	/**
 	 * leaves quantity
 	 */
-	private double leavesQty;
+	// private long leavesQty;
 
 	/**
 	 * order execute price
@@ -43,22 +43,34 @@ public final class OrderReport {
 		return ordSysId;
 	}
 
+	public long getEpochMillis() {
+		return epochMillis;
+	}
+
+	public OrdStatus getOrdStatus() {
+		return ordStatus;
+	}
+
+	public String getBrokerRtnId() {
+		return brokerRtnId;
+	}
+
+	public long getFilledQty() {
+		return filledQty;
+	}
+
+	public double getExecutePrice() {
+		return executePrice;
+	}
+
 	public OrderReport setOrdSysId(long ordSysId) {
 		this.ordSysId = ordSysId;
 		return this;
 	}
 
-	public long getEpochMilliseconds() {
-		return epochMilliseconds;
-	}
-
-	public OrderReport setEpochMilliseconds(long epochMilliseconds) {
-		this.epochMilliseconds = epochMilliseconds;
+	public OrderReport setEpochMillis(long epochMillis) {
+		this.epochMillis = epochMillis;
 		return this;
-	}
-
-	public OrdStatus getOrdStatus() {
-		return ordStatus;
 	}
 
 	public OrderReport setOrdStatus(OrdStatus ordStatus) {
@@ -66,35 +78,14 @@ public final class OrderReport {
 		return this;
 	}
 
-	public String getBrokerRtnId() {
-		return brokerRtnId;
-	}
-
 	public OrderReport setBrokerRtnId(String brokerRtnId) {
 		this.brokerRtnId = brokerRtnId;
 		return this;
 	}
 
-	public double getFilledQty() {
-		return filledQty;
-	}
-
-	public OrderReport setFilledQty(double filledQty) {
+	public OrderReport setFilledQty(long filledQty) {
 		this.filledQty = filledQty;
 		return this;
-	}
-
-	public double getLeavesQty() {
-		return leavesQty;
-	}
-
-	public OrderReport setLeavesQty(double leavesQty) {
-		this.leavesQty = leavesQty;
-		return this;
-	}
-
-	public double getExecutePrice() {
-		return executePrice;
 	}
 
 	public OrderReport setExecutePrice(double executePrice) {

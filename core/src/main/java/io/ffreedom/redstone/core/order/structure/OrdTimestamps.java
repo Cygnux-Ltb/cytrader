@@ -5,7 +5,7 @@ import io.ffreedom.common.datetime.EpochTimestamp;
 public final class OrdTimestamps {
 
 	private EpochTimestamp generateTime;
-	private EpochTimestamp sendTime;
+	private EpochTimestamp sendingTime;
 	private EpochTimestamp finishTime;
 
 	private OrdTimestamps() {
@@ -20,16 +20,16 @@ public final class OrdTimestamps {
 		return generateTime;
 	}
 
-	public EpochTimestamp getSendTime() {
-		return sendTime;
+	public EpochTimestamp getSendingTime() {
+		return sendingTime;
 	}
 
 	public EpochTimestamp getFinishTime() {
 		return finishTime;
 	}
 
-	public OrdTimestamps fillingSendTime() {
-		this.sendTime = EpochTimestamp.now();
+	public OrdTimestamps fillingSendingTime() {
+		this.sendingTime = EpochTimestamp.now();
 		return this;
 	}
 

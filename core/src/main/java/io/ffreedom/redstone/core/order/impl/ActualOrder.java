@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order;
+package io.ffreedom.redstone.core.order.impl;
 
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdSide;

@@ -4,17 +4,19 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.redstone.core.order.api.Order;
+import io.ffreedom.redstone.core.position.api.Position;
+import io.ffreedom.redstone.core.position.api.PositionProducer;
 
-public abstract class PositionSet<T extends Position> {
+public final class Positions<T extends Position> {
 
 	private int accountId;
 
 	// Map<instrumentId, Position>
 	private MutableIntObjectMap<T> positionMap = MutableMaps.newIntObjectHashMap();
 
-	private PositionFactory<T> positionFactory;
+	private PositionProducer<T> positionFactory;
 
-	public PositionSet(int accountId, PositionFactory<T> positionFactory) {
+	public Positions(int accountId, PositionProducer<T> positionFactory) {
 		this.accountId = accountId;
 		this.positionFactory = positionFactory;
 	}
