@@ -2,40 +2,34 @@ package io.ffreedom.redstone.specific.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongDoubleMap;
 
-import io.ffreedom.common.utils.DoubleUtil;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
-import io.ffreedom.redstone.core.position.AbsPosition;
+import io.ffreedom.redstone.core.position.impl.GenericT0Position;
 
-public final class FuturesPosition extends AbsPosition {
+public final class ChinaFuturesPosition extends GenericT0Position {
 
 	private double beforeTodayQty;
 	private MutableLongDoubleMap beforeTodayQtyLockRecord;
 
-	public final static FuturesPosition EMPTY = new FuturesPosition(-1, -1);
+	public final static ChinaFuturesPosition EMPTY = new ChinaFuturesPosition(-1, -1);
 
-	private FuturesPosition(int accountId, int instrumentId) {
+	private ChinaFuturesPosition(int accountId, int instrumentId) {
 		this(accountId, instrumentId, 0);
 	}
 
-	private FuturesPosition(int accountId, int instrumentId, double beforeTodayQty) {
+	private ChinaFuturesPosition(int accountId, int instrumentId, double beforeTodayQty) {
 		super(accountId, instrumentId);
-		if (beforeTodayQty != 0)
-			initBeforeTodayQty(beforeTodayQty);
-	}
-
-	private void initBeforeTodayQty(double beforeTodayQty) {
 		this.beforeTodayQty = beforeTodayQty;
 	}
 
-	final static FuturesPosition newInstance(int accountId, int instrumentId) {
-		return new FuturesPosition(accountId, instrumentId);
+	final static ChinaFuturesPosition newInstance(int accountId, int instrumentId) {
+		return new ChinaFuturesPosition(accountId, instrumentId);
 	}
 
-	final static FuturesPosition newInstance(int accountId, int instrumentId, double beforeTodayQty) {
-		return new FuturesPosition(accountId, instrumentId, beforeTodayQty);
+	final static ChinaFuturesPosition newInstance(int accountId, int instrumentId, double beforeTodayQty) {
+		return new ChinaFuturesPosition(accountId, instrumentId, beforeTodayQty);
 	}
 
 	public double getBeforeTodayQty() {
@@ -99,12 +93,10 @@ public final class FuturesPosition extends AbsPosition {
 		case Filled:
 			switch (order.getSide().direction()) {
 			case Long:
-				setCurrentQty(
-						DoubleUtil.add8(getCurrentQty(), ordQtyPrice.getFilledQty() - ordQtyPrice.getLastFilledQty()));
+				setCurrentQty(getCurrentQty() + ordQtyPrice.getFilledQty() - ordQtyPrice.getLastFilledQty());
 				break;
 			case Short:
-				setCurrentQty(DoubleUtil.subtraction(getCurrentQty(),
-						ordQtyPrice.getFilledQty() + ordQtyPrice.getLastFilledQty()));
+				setCurrentQty(getCurrentQty() - ordQtyPrice.getFilledQty() + ordQtyPrice.getLastFilledQty());
 			default:
 				break;
 			}

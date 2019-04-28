@@ -15,11 +15,11 @@ import io.ffreedom.redstone.actor.OrderExecutionActor;
 import io.ffreedom.redstone.actor.QuoteActor;
 import io.ffreedom.redstone.actor.QuoteActor.AtomicQuote;
 import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
-import io.ffreedom.redstone.core.order.ParentOrder;
-import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdType;
+import io.ffreedom.redstone.core.order.impl.ParentOrder;
+import io.ffreedom.redstone.core.order.impl.VirtualOrder;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
@@ -152,11 +152,11 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 		return instruments;
 	}
 
-	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty) {
+	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty) {
 		orderTarget(instrument, direction, targetQty, Order.Constant.OrdMinPrice, Order.Constant.OrdMaxPrice);
 	}
 
-	protected void orderTarget(Instrument instrument, TrdDirection direction, double targetQty, double minPrice,
+	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty, double minPrice,
 			double maxPrice) {
 		OrdSide ordSide;
 		AtomicQuote quote = QuoteActor.Singleton.getQuote(instrument);

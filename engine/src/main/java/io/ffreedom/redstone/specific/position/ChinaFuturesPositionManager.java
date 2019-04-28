@@ -1,17 +1,17 @@
 package io.ffreedom.redstone.specific.position;
 
 import io.ffreedom.redstone.core.order.api.Order;
-import io.ffreedom.redstone.core.position.PositionManager;
+import io.ffreedom.redstone.core.position.api.PositionManager;
 
-public class FuturesPositionManager implements PositionManager<FuturesPosition> {
+public class ChinaFuturesPositionManager implements PositionManager<ChinaFuturesPosition> {
 
 	@Override
-	public void putPosition(FuturesPosition position) {
+	public void putPosition(ChinaFuturesPosition position) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public FuturesPosition getPosition(int instrumentId) {
+	public ChinaFuturesPosition getPosition(int instrumentId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -4,7 +4,7 @@ import io.ffreedom.common.queue.impl.disruptor.SPSCQueue;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.QuoteActor;
 import io.ffreedom.redstone.actor.StrategyActor;
-import io.ffreedom.redstone.core.order.OrderReport;
+import io.ffreedom.redstone.core.order.impl.OrderReport;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 
 public class SPSCStrategyScheduler implements StrategyScheduler {

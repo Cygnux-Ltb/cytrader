@@ -1,17 +1,14 @@
 package io.ffreedom.redstone.specific.position;
 
-import io.ffreedom.common.utils.DoubleUtil;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
-import io.ffreedom.redstone.core.position.AbsPosition;
+import io.ffreedom.redstone.core.position.impl.GenericT1Position;
 
-public class StockPosition extends AbsPosition {
+public class ChinaStockPosition extends GenericT1Position {
 
-	private double availableQty;
-
-	public StockPosition(int accountId, int instrumentId) {
-		super(accountId, instrumentId);
+	public ChinaStockPosition(int accountId, int instrumentId, long tradeableQty) {
+		super(accountId, instrumentId, tradeableQty);
 	}
 
 	@Override
@@ -23,8 +20,7 @@ public class StockPosition extends AbsPosition {
 			switch (status) {
 			case PartiallyFilled:
 			case Filled:
-				setCurrentQty(
-						DoubleUtil.add8(getCurrentQty(), ordQtyPrice.getFilledQty() - ordQtyPrice.getLastFilledQty()));
+				setCurrentQty(getCurrentQty() + ordQtyPrice.getFilledQty() - ordQtyPrice.getLastFilledQty());
 				break;
 			default:
 				break;
@@ -33,17 +29,15 @@ public class StockPosition extends AbsPosition {
 		case Short:
 			switch (status) {
 			case PendingNew:
-				setAvailableQty(DoubleUtil.subtraction(getAvailableQty(), ordQtyPrice.getOfferQty()));
+				setTradeableQty(getTradeableQty() - ordQtyPrice.getOfferQty());
 				break;
 			case Canceled:
 			case NewRejected:
-				setAvailableQty(
-						DoubleUtil.add8(getAvailableQty(), ordQtyPrice.getOfferQty() - ordQtyPrice.getLastFilledQty()));
+				setTradeableQty(getTradeableQty() + ordQtyPrice.getOfferQty() - ordQtyPrice.getLastFilledQty());
 				break;
 			case PartiallyFilled:
 			case Filled:
-				setCurrentQty(DoubleUtil.subtraction(getCurrentQty(),
-						ordQtyPrice.getFilledQty() + ordQtyPrice.getLastFilledQty()));
+				setCurrentQty(getCurrentQty() - ordQtyPrice.getFilledQty() + ordQtyPrice.getLastFilledQty());
 				break;
 			default:
 				break;
@@ -51,15 +45,6 @@ public class StockPosition extends AbsPosition {
 		default:
 			break;
 		}
-	}
-
-	public double getAvailableQty() {
-		return availableQty;
-	}
-
-	public StockPosition setAvailableQty(double availableQty) {
-		this.availableQty = availableQty;
-		return this;
 	}
 
 }

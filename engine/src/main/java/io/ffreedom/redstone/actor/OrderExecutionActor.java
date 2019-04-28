@@ -5,10 +5,10 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.market.BasicMarketData;
-import io.ffreedom.redstone.core.order.ParentOrder;
-import io.ffreedom.redstone.core.order.VirtualOrder;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
+import io.ffreedom.redstone.core.order.impl.ParentOrder;
+import io.ffreedom.redstone.core.order.impl.VirtualOrder;
 import io.ffreedom.redstone.storage.OrderBook;
 import io.ffreedom.redstone.storage.OrderKeeper;
 
@@ -42,12 +42,18 @@ public class OrderExecutionActor {
 			MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.getActiveShortOrders();
 			if (activeShortOrders.notEmpty()) {
 				// 撤单
+			} else {
+				
+				
+				
 			}
 			break;
 		case Short:
 			MutableLongObjectMap<Order> activeLongOrders = instrumentOrderBook.getActiveLongOrders();
 			if (activeLongOrders.notEmpty()) {
 				// 撤单
+			} else {
+
 			}
 			break;
 		default:
