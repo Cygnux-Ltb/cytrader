@@ -4,6 +4,9 @@ import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.position.api.PositionManager;
 
 public class ChinaFuturesPositionManager implements PositionManager<ChinaFuturesPosition> {
+	
+	
+	
 
 	@Override
 	public void putPosition(ChinaFuturesPosition position) {
@@ -11,7 +14,7 @@ public class ChinaFuturesPositionManager implements PositionManager<ChinaFutures
 	}
 
 	@Override
-	public ChinaFuturesPosition getPosition(int instrumentId) {
+	public ChinaFuturesPosition getPosition(int accountId, int instrumentId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

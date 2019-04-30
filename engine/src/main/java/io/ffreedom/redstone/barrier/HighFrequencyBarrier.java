@@ -3,7 +3,7 @@ package io.ffreedom.redstone.barrier;
 import org.slf4j.Logger;
 
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.redstone.barrier.base.OrderBarrier;
+import io.ffreedom.redstone.core.barrier.OrderBarrier;
 import io.ffreedom.redstone.core.order.impl.ChildOrder;
 
 public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {

@@ -14,7 +14,7 @@ import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.OrderExecutionActor;
 import io.ffreedom.redstone.actor.QuoteActor;
 import io.ffreedom.redstone.actor.QuoteActor.AtomicQuote;
-import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
+import io.ffreedom.redstone.core.adaptor.impl.OutboundAdaptor;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdType;
@@ -75,11 +75,11 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 		if (strategyVirtualOrders.notEmpty()) {
 
 		}
-		specificOnMarketData(marketData);
+		handleMarketData(marketData);
 	}
 
 	@ProtectedAbstractMethod
-	protected abstract void specificOnMarketData(BasicMarketData marketData);
+	protected abstract void handleMarketData(BasicMarketData marketData);
 
 	@Override
 	public void onOrder(Order order) {

@@ -10,7 +10,7 @@ public class ChinaFuturesPositionProducer implements PositionProducer<ChinaFutur
 	}
 
 	@Override
-	public ChinaFuturesPosition produce(int accountId, int instrumentId, double qty) {
+	public ChinaFuturesPosition produce(int accountId, int instrumentId, long qty) {
 		return ChinaFuturesPosition.newInstance(accountId, instrumentId, qty);
 	}
 

@@ -1,5 +1,6 @@
 package io.ffreedom.redstone.scheduler;
 
+import io.ffreedom.common.queue.impl.disruptor.BufferSize;
 import io.ffreedom.common.queue.impl.disruptor.SPSCQueue;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.QuoteActor;
@@ -14,7 +15,7 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 	private static final int MarketData = 0;
 	private static final int OrderReport = 1;
 
-	public SPSCStrategyScheduler(int size) {
+	public SPSCStrategyScheduler(BufferSize size) {
 		this.msgQueue = new SPSCQueue<>(size, true, (enqueueMsg) -> {
 			switch (enqueueMsg.mark()) {
 			case MarketData:

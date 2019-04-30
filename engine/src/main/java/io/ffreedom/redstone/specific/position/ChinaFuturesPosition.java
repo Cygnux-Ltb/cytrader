@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.specific.position;
 
-import org.eclipse.collections.api.map.primitive.MutableLongDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
@@ -10,8 +10,8 @@ import io.ffreedom.redstone.core.position.impl.GenericT0Position;
 
 public final class ChinaFuturesPosition extends GenericT0Position {
 
-	private double beforeTodayQty;
-	private MutableLongDoubleMap beforeTodayQtyLockRecord;
+	private long beforeTodayQty;
+	private MutableLongLongMap beforeTodayQtyLockRecord;
 
 	public final static ChinaFuturesPosition EMPTY = new ChinaFuturesPosition(-1, -1);
 
@@ -19,7 +19,7 @@ public final class ChinaFuturesPosition extends GenericT0Position {
 		this(accountId, instrumentId, 0);
 	}
 
-	private ChinaFuturesPosition(int accountId, int instrumentId, double beforeTodayQty) {
+	private ChinaFuturesPosition(int accountId, int instrumentId, long beforeTodayQty) {
 		super(accountId, instrumentId);
 		this.beforeTodayQty = beforeTodayQty;
 	}
@@ -28,7 +28,7 @@ public final class ChinaFuturesPosition extends GenericT0Position {
 		return new ChinaFuturesPosition(accountId, instrumentId);
 	}
 
-	final static ChinaFuturesPosition newInstance(int accountId, int instrumentId, double beforeTodayQty) {
+	final static ChinaFuturesPosition newInstance(int accountId, int instrumentId, long beforeTodayQty) {
 		return new ChinaFuturesPosition(accountId, instrumentId, beforeTodayQty);
 	}
 
@@ -36,7 +36,7 @@ public final class ChinaFuturesPosition extends GenericT0Position {
 		return beforeTodayQty;
 	}
 
-	public double lockBeforeTodayQty(long ordSysId, OrdSide side, double lockQty) {
+	public double lockBeforeTodayQty(long ordSysId, OrdSide side, long lockQty) {
 		if (beforeTodayQty == 0) {
 			return 0;
 		} else if (beforeTodayQty > 0) {
@@ -62,7 +62,7 @@ public final class ChinaFuturesPosition extends GenericT0Position {
 			switch (side.direction()) {
 			case Long:
 				// 需要锁定的Qty小于或等于昨仓,实际锁定量等于请求量
-				double absBeforeTodayQty = Math.abs(beforeTodayQty);
+				long absBeforeTodayQty = Math.abs(beforeTodayQty);
 				if (lockQty <= absBeforeTodayQty) {
 					// 记录此订单锁定量
 					beforeTodayQtyLockRecord.put(ordSysId, lockQty);
