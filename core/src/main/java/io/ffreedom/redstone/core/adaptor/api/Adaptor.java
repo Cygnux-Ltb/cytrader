@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.adaptor;
+package io.ffreedom.redstone.core.adaptor.api;
 
 public interface Adaptor {
 

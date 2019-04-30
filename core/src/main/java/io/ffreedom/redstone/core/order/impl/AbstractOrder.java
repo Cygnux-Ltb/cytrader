@@ -8,7 +8,6 @@ import io.ffreedom.redstone.core.order.enums.OrdType;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
 import io.ffreedom.redstone.core.order.structure.StopLoss;
-import io.ffreedom.redstone.core.order.structure.TradeSet;
 import io.ffreedom.redstone.core.order.utils.OrdSysIdGenerate;
 
 public abstract class AbstractOrder implements Order {
@@ -32,10 +31,6 @@ public abstract class AbstractOrder implements Order {
 	 * 止损
 	 */
 	private StopLoss stopLoss;
-	/**
-	 * 成交列表
-	 */
-	private TradeSet tradeSet;
 
 	protected AbstractOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
 			int strategyId, int subAccountId, StopLoss stopLoss) {
@@ -45,14 +40,13 @@ public abstract class AbstractOrder implements Order {
 		this.ordSide = ordSide;
 		this.ordType = ordType;
 		this.ordStatus = OrdStatus.PendingNew;
-		this.ordTimestamps = OrdTimestamps.newTimestamp();
+		this.ordTimestamps = OrdTimestamps.generate();
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
 		if (stopLoss == null)
-			this.stopLoss = new StopLoss(ordSysId);
+			this.stopLoss = new StopLoss(ordSysId, ordSide.direction());
 		else
 			this.stopLoss = stopLoss;
-		this.tradeSet = new TradeSet(ordSysId);
 	}
 
 	protected AbstractOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
@@ -108,11 +102,6 @@ public abstract class AbstractOrder implements Order {
 	@Override
 	public int getSubAccountId() {
 		return subAccountId;
-	}
-
-	@Override
-	public TradeSet getTradeSet() {
-		return tradeSet;
 	}
 
 	@Override

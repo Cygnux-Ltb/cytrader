@@ -8,7 +8,6 @@ import io.ffreedom.redstone.core.order.enums.OrdType;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
 import io.ffreedom.redstone.core.order.structure.StopLoss;
-import io.ffreedom.redstone.core.order.structure.TradeSet;
 
 public interface Order extends Comparable<Order> {
 
@@ -50,16 +49,7 @@ public interface Order extends Comparable<Order> {
 
 	OrdSort getSort();
 
-	// void setStopLoss(StopLoss stopLoss);
-
 	StopLoss getStopLoss();
-
-	/**
-	 * Order成交列表
-	 * 
-	 * @return TradeSet
-	 */
-	TradeSet getTradeSet();
 
 	@Override
 	default int compareTo(Order o) {

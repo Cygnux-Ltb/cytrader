@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.barrier.base;
+package io.ffreedom.redstone.core.barrier;
 
 import java.util.function.Predicate;
 

@@ -12,7 +12,7 @@ public class GenericT0Position extends AbsPosition {
 	public long getTradeableQty() {
 		return currentQty;
 	}
-	
+
 	@Override
 	public void setTradeableQty(long qty) {
 		setCurrentQty(qty);

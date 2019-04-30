@@ -15,12 +15,14 @@ import io.ffreedom.redstone.core.order.structure.StopLoss;
 public final class ParentOrder extends ActualOrder {
 
 	private MutableList<ChildOrder> childOrders;
+	private long virtualId;
 
-	public ParentOrder(Instrument instrument, long offerQty, double offerPrice, OrdSide ordSide, OrdType ordType,
-			int strategyId, int subAccountId, StopLoss stopLoss) {
+	public ParentOrder(long virtualId, Instrument instrument, long offerQty, double offerPrice, OrdSide ordSide,
+			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
 		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, strategyId, subAccountId,
 				stopLoss);
 		this.childOrders = MutableLists.newFastList(8);
+		this.virtualId = virtualId;
 	}
 
 	public ChildOrder toChildOrder() {
@@ -40,6 +42,14 @@ public final class ParentOrder extends ActualOrder {
 	@Override
 	public OrdSort getSort() {
 		return OrdSort.Parent;
+	}
+
+	public long getVirtualId() {
+		return virtualId;
+	}
+
+	public long getParentId() {
+		return getOrdSysId();
 	}
 
 }

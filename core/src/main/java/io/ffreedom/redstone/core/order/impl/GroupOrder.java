@@ -6,6 +6,7 @@ import io.ffreedom.common.collect.ImmutableSets;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
 
+@Deprecated
 public abstract class GroupOrder {
 
 	private long groupOrdSysId;

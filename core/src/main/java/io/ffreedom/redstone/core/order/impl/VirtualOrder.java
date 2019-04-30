@@ -41,4 +41,8 @@ public final class VirtualOrder extends AbstractOrder {
 		return OrdSort.Virtual;
 	}
 
+	public long getVirtualId() {
+		return getOrdSysId();
+	}
+
 }

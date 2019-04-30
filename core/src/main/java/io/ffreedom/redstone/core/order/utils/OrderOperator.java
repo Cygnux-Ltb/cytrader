@@ -1,12 +1,12 @@
 package io.ffreedom.redstone.core.order.utils;
 
-import io.ffreedom.redstone.core.order.api.Order;
+import io.ffreedom.redstone.core.order.impl.ChildOrder;
 import io.ffreedom.redstone.core.order.impl.OrderReport;
 
 public final class OrderOperator {
 
 	// TODO Call this update order
-	public static void update(Order order, OrderReport report) {
+	public static void update(ChildOrder order, OrderReport report) {
 		order.setStatus(report.getOrdStatus());
 		switch (order.getStatus()) {
 		case PartiallyFilled:
