@@ -1,7 +1,7 @@
 package io.ffreedom.redstone.adaptor.simulator;
 
 import io.ffreedom.common.param.ParamKeyMap;
-import io.ffreedom.redstone.core.adaptor.Adaptor;
+import io.ffreedom.redstone.core.adaptor.api.Adaptor;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 
 public abstract class BaseSimAdaptor implements Adaptor {

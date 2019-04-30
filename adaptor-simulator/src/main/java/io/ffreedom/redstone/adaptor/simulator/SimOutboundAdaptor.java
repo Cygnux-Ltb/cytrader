@@ -6,10 +6,11 @@ import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
 import io.ffreedom.persistence.avro.serializable.AvroBytesSerializer;
 import io.ffreedom.redstone.core.account.Account;
-import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
+import io.ffreedom.redstone.core.adaptor.impl.OutboundAdaptor;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
+import io.ffreedom.redstone.core.order.impl.ChildOrder;
 import io.ffreedom.redstone.storage.OrderKeeper;
 import io.ffreedom.transport.core.role.Sender;
 import io.ffreedom.transport.socket.SocketSender;
@@ -42,7 +43,7 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 		return "SimOutboundAdaptor$" + this.hashCode();
 	}
 
-	public boolean newOredr(Order order) {
+	public boolean newOredr(ChildOrder order) {
 		io.ffreedom.persistence.avro.entity.Order simOrder = io.ffreedom.persistence.avro.entity.Order.newBuilder()
 				.setOrderRef(Long.valueOf(order.getOrdSysId()).intValue())
 				.setInstrumentId(order.getInstrument().getInstrumentCode())
@@ -54,7 +55,7 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 		return true;
 	}
 
-	public boolean cancelOrder(Order order) {
+	public boolean cancelOrder(ChildOrder order) {
 		Order cancelOrder = OrderKeeper.getOrder(order.getOrdSysId());
 		io.ffreedom.persistence.avro.entity.Order simOrder = io.ffreedom.persistence.avro.entity.Order.newBuilder()
 				.setOrderRef(Long.valueOf(order.getOrdSysId()).intValue())

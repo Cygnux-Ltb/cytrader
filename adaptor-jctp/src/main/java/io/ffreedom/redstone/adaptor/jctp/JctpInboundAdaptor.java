@@ -23,13 +23,13 @@ import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnOrderBiC
 import io.ffreedom.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnTradeBiConverter;
 import io.ffreedom.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 import io.ffreedom.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
-import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
+import io.ffreedom.redstone.core.adaptor.impl.InboundAdaptor;
 import io.ffreedom.redstone.core.order.impl.OrderReport;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 
 public class JctpInboundAdaptor extends InboundAdaptor {
 
-	private final Logger logger = CommonLoggerFactory.getLogger(JctpInboundAdaptor.class);
+	private final Logger logger = CommonLoggerFactory.getLogger(getClass());
 
 	private Converter<RspDepthMarketData, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
 

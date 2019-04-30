@@ -10,7 +10,7 @@ import io.ffreedom.persistence.avro.serializable.AvroBytesDeserializer;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.adaptor.simulator.converter.MarketDataConverter;
 import io.ffreedom.redstone.adaptor.simulator.converter.OrderConverter;
-import io.ffreedom.redstone.core.adaptor.InboundAdaptor;
+import io.ffreedom.redstone.core.adaptor.impl.InboundAdaptor;
 import io.ffreedom.redstone.core.order.impl.OrderReport;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.role.Receiver;
