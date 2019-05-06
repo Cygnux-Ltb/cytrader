@@ -16,7 +16,7 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 	private static final int OrderReport = 1;
 
 	public SPSCStrategyScheduler(BufferSize size) {
-		this.msgQueue = new SPSCQueue<>(size, true, (enqueueMsg) -> {
+		this.msgQueue = new SPSCQueue<>("SPSCStrategyScheduler-Queue", size, true, (enqueueMsg) -> {
 			switch (enqueueMsg.mark()) {
 			case MarketData:
 				BasicMarketData marketData = enqueueMsg.getMarketData();

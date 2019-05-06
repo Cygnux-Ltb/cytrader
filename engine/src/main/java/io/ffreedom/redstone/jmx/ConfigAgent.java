@@ -13,13 +13,13 @@ public class ConfigAgent {
 		Class<ConfigAgent> cc = ConfigAgent.class;
 		String name = cc.getName();
 		String simpleName = cc.getSimpleName();
-		
+
 		ObjectName configName = new ObjectName(name + ":name=" + simpleName);
 		// create mbean and register mbean
 		Config config = new Config();
 		server.registerMBean(config, configName);
 		Thread.sleep(60 * 60 * 1000);
-		
+
 	}
 
 }

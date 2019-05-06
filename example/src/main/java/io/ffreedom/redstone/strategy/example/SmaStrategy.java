@@ -4,7 +4,7 @@ import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.indicators.events.SmaEvent;
 import io.ffreedom.polaris.indicators.impl.ma.points.SmaPoint;
 import io.ffreedom.polaris.market.BasicMarketData;
-import io.ffreedom.redstone.core.adaptor.OutboundAdaptor;
+import io.ffreedom.redstone.core.adaptor.impl.OutboundAdaptor;
 import io.ffreedom.redstone.specific.strategy.IndicatorStrategy;
 
 public class SmaStrategy extends IndicatorStrategy<BasicMarketData> implements SmaEvent {
@@ -37,7 +37,7 @@ public class SmaStrategy extends IndicatorStrategy<BasicMarketData> implements S
 	}
 
 	@Override
-	protected void specificOnMarketData(BasicMarketData marketData) {
+	protected void handleMarketData(BasicMarketData marketData) {
 		// TODO Auto-generated method stub
 
 	}
