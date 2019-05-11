@@ -1,49 +1,59 @@
 package io.ffreedom.redstone.core.account;
 
-import io.ffreedom.common.fsm.EnableController;
+import org.eclipse.collections.api.set.MutableSet;
+
+import io.ffreedom.common.collect.MutableSets;
+import io.ffreedom.common.fsm.EnableComponent;
 import io.ffreedom.redstone.core.balance.Balance;
 
-public class Account extends EnableController {
+public class Account extends EnableComponent {
 
 	private int accountId;
-	private AccountInfo accountInfo;
+	private String accountName;
+	private String investorId;
+	private Broker broker;
 	private Balance balance;
+	private MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
-	public Account(int accountId, AccountInfo accountInfo, Balance balance) {
+	public Account(int accountId, String accountName, String investorId, Broker broker) {
 		super();
 		this.accountId = accountId;
-		this.accountInfo = accountInfo;
-		this.balance = balance;
-	}
-
-	public Account(int accountId, AccountInfo accountInfo) {
-		this(accountId, accountInfo, Balance.EMPTY);
-	}
-
-	public Account(int accountId) {
-		this(accountId, AccountInfo.EMPTY, Balance.EMPTY);
+		this.accountName = accountName;
+		this.investorId = investorId;
+		this.broker = broker;
+		this.balance = Balance.create(accountId);
 	}
 
 	public int getAccountId() {
 		return accountId;
 	}
 
-	public AccountInfo getAccountInfo() {
-		return accountInfo;
+	public String getAccountName() {
+		return accountName;
+	}
+
+	public String getInvestorId() {
+		return investorId;
+	}
+
+	public Broker getBroker() {
+		return broker;
+	}
+
+	public MutableSet<SubAccount> getSubAccounts() {
+		return subAccounts;
 	}
 
 	public Balance getBalance() {
 		return balance;
 	}
 
-	public Account setAccountInfo(AccountInfo accountInfo) {
-		this.accountInfo = accountInfo;
-		return this;
+	public int getSubAccountCount() {
+		return subAccounts.size();
 	}
 
-	public Account setBalance(Balance balance) {
-		this.balance = balance;
-		return this;
+	public void addSubAccount(SubAccount subAccount) {
+		subAccounts.add(subAccount);
 	}
 
 }

@@ -6,4 +6,18 @@ public interface Broker {
 
 	String getBroketName();
 
+	Broker GeneralBroker = new Broker() {
+
+		@Override
+		public int getBroketId() {
+			return 0;
+		}
+
+		@Override
+		public String getBroketName() {
+			return "CommonBroker";
+		}
+
+	};
+
 }
