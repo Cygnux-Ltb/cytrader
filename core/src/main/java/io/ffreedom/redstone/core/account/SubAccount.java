@@ -15,6 +15,7 @@ public class SubAccount extends EnableComponent {
 	public SubAccount(int subAccountId, String subAccountName, Account account) {
 		if (account == null)
 			throw new IllegalArgumentException("");
+		this.account = account;
 		this.subAccountId = subAccountId;
 		if (subAccountName == null)
 			this.subAccountName = "subAccount[" + subAccountId + "]-account[" + account.getAccountId() + "]";

@@ -44,7 +44,7 @@ public final class OrdTimestamps {
 	}
 
 	public OrdTimestamps fillFirstReportTime() {
-		this.sendingTime = EpochTimestamp.now();
+		this.firstReportTime = EpochTimestamp.now();
 		return this;
 	}
 

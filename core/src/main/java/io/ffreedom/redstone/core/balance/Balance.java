@@ -6,8 +6,6 @@ public final class Balance {
 	private double availableMargin;
 	private double availableCredit;
 
-	public final static Balance EMPTY = Balance.create(-1).setAvailableMargin(0).setAvailableCredit(0);
-
 	private Balance(int accountId) {
 		this.accountId = accountId;
 	}

@@ -16,6 +16,7 @@ public abstract class GroupOrder {
 
 	public GroupOrder(Order... orders) {
 		this.orderSet = ImmutableSets.newImmutableSet(orders);
+		this.orderTimestamps = OrdTimestamps.generate();
 	}
 
 	public long getGroupOrdSysId() {
