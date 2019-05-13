@@ -1,35 +1,36 @@
 package io.ffreedom.redstone.actor;
 
-import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
+import org.slf4j.Logger;
 
 import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.utils.JointIdUtil;
-import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
-import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.impl.ChildOrder;
 
 /**
  * 统一管理仓位信息<br>
  * 1更新仓位的入口<br>
- * 2...<br>
+ * 2记录子账号的仓位信息<br>
  * 
  * @author yellow013
  */
 public class PositionsActor {
 
+	private Logger Logger = CommonLoggerFactory.getLogger(getClass());
+
 	/**
 	 * subAccount的instrument的最大长仓持仓限制<br>
 	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
-	private MutableLongLongMap subAccountInstrumentLongPositionsMaxLimit = MutableMaps.newLongLongHashMap();
+	private MutableLongLongMap subAccountInstrumentLongLimit = MutableMaps.newLongLongHashMap();
 
 	/**
 	 * subAccount的instrument最大短仓持仓限制<br>
 	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
-	private MutableLongLongMap subAccountInstrumentShortPositionsMaxLimit = MutableMaps.newLongLongHashMap();
+	private MutableLongLongMap subAccountInstrumentShortLimit = MutableMaps.newLongLongHashMap();
 
 	/**
 	 * subAccount的instrument持仓数量<br>
@@ -42,37 +43,59 @@ public class PositionsActor {
 	private PositionsActor() {
 	}
 
-	public void onPositions() {
+	/**
+	 * 在初始化时设置子账户最大持仓限制<br>
+	 * 需要分别设置多空两个方向的持仓限制
+	 * 
+	 * @param subAccountId
+	 * @param instrumentId
+	 * @param side
+	 * @param limitQty
+	 */
+	public void setSubAccountPositionsLimit(int subAccountId, int instrumentId, long limitLongQty, long limitShortQty) {
+		long jointId = JointIdUtil.jointId(subAccountId, instrumentId);
+		subAccountInstrumentLongLimit.put(jointId, limitLongQty < 0 ? -limitLongQty : limitLongQty);
+		Logger.info("Set long positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
+				instrumentId, subAccountInstrumentLongLimit.get(jointId));
+		subAccountInstrumentShortLimit.put(jointId, limitShortQty > 0 ? -limitShortQty : limitShortQty);
+		Logger.info("Set short positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
+				instrumentId, subAccountInstrumentShortLimit.get(jointId));
 	}
 
-	public void onChildOrder(ChildOrder order) {
-		int instrumentId = order.getInstrument().getInstrumentId();
-		int subAccountId = order.getSubAccountId();
-		OrdSide side = order.getSide();
-		OrdStatus status = order.getStatus();
+	/**
+	 * 根据已有持仓计算 子账户的最大持仓限制<br>
+	 * 
+	 * @param subAccountId
+	 * @param instrumentId
+	 * @param side
+	 * @return
+	 */
+	public long getSubAccountPositionsLimit(int subAccountId, int instrumentId, OrdSide side) {
 		long jointId = JointIdUtil.jointId(subAccountId, instrumentId);
-		long tradeQty = order.getTradeSet().lastTrade().getTradeQty();
+		long currentQty = subAccountInstrumentPositions.get(jointId);
 		switch (side.direction()) {
 		case Long:
-			switch (status) {
-			case PartiallyFilled:
-
-			case Filled:
-				break;
-			default:
-				break;
-			}
-			break;
+			return subAccountInstrumentLongLimit.get(jointId) - currentQty;
 		case Short:
-			break;
+			return subAccountInstrumentShortLimit.get(jointId) - currentQty;
 		default:
-			throw new IllegalArgumentException("OrdSysId -> " + order.getOrdSysId());
+			return 0L;
 		}
-
 	}
 
-	private static void main(String[] args) {
+	/**
+	 * 根据子单状态变化更新持仓信息
+	 * 
+	 * @param order
+	 */
+	public void onChildOrder(ChildOrder order) {
+		long jointId = JointIdUtil.jointId(order.getInstrument().getInstrumentId(), order.getSubAccountId());
+		subAccountInstrumentPositions.put(jointId,
+				subAccountInstrumentPositions.get(jointId) + order.getTradeSet().lastTrade().getTradeQty());
+	}
 
+	public static void main(String[] args) {
+		System.out.println(-10 - 5);
 	}
 
 }

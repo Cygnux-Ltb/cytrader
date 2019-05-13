@@ -17,10 +17,11 @@ public class SubAccount extends EnableComponent {
 			throw new IllegalArgumentException("");
 		this.account = account;
 		this.subAccountId = subAccountId;
+		String attachName = "subAccount[" + subAccountId + "]-account[" + account.getAccountId() + "]";
 		if (subAccountName == null)
-			this.subAccountName = "subAccount[" + subAccountId + "]-account[" + account.getAccountId() + "]";
+			this.subAccountName = attachName;
 		else
-			this.subAccountName = subAccountName;
+			this.subAccountName = subAccountName + "-" + attachName;
 		account.addSubAccount(this);
 	}
 
