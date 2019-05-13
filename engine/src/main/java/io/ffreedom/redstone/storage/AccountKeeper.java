@@ -26,9 +26,6 @@ public final class AccountKeeper {
 	// 存储account信息,一对一关系,以subAccountId索引
 	private MutableIntObjectMap<Account> accountMap = MutableMaps.newIntObjectHashMap();
 
-	// 存储subAccount信息,一对多关系,以accountId索引
-	private MutableIntObjectMap<MutableSet<SubAccount>> subAccountMap = MutableMaps.newIntObjectHashMap();
-
 	// 存储accountId信息,一对一关系,以subAccountId索引
 	private MutableIntIntMap accountIdMap = MutableMaps.newIntIntHashMap();
 
@@ -46,7 +43,6 @@ public final class AccountKeeper {
 			int accountId = account.getAccountId();
 			InnerInstance.accountMap.put(subAccountId, account);
 			InnerInstance.accountIdMap.put(subAccountId, accountId);
-			getSubAccounts(accountId).add(subAccount);
 		}
 	}
 
@@ -84,13 +80,13 @@ public final class AccountKeeper {
 		return InnerInstance.accountMap.get(subAccountId);
 	}
 
+	private static MutableSet<SubAccount> EmptySubAccountSet = MutableSets.newUnifiedSet();
+
 	public static MutableSet<SubAccount> getSubAccounts(int accountId) {
-		MutableSet<SubAccount> subAccountSet = InnerInstance.subAccountMap.get(accountId);
-		if (subAccountSet == null) {
-			subAccountSet = MutableSets.newUnifiedSet();
-			InnerInstance.subAccountMap.put(accountId, subAccountSet);
-		}
-		return subAccountSet;
+		Account account = InnerInstance.accountMap.get(accountId);
+		if (account == null)
+			return EmptySubAccountSet;
+		return account.getSubAccounts();
 	}
 
 }

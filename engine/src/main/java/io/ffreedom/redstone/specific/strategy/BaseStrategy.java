@@ -4,11 +4,11 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
+import io.ffreedom.common.annotations.lang.ProtectedAbstractMethod;
 import io.ffreedom.common.collect.ImmutableLists;
 import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.common.mark.ProtectedAbstractMethod;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.OrderExecutionActor;

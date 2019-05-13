@@ -1,8 +1,10 @@
 package io.ffreedom.redstone.actor;
 
 import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
+import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
 import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.utils.JointIdUtil;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
@@ -18,19 +20,22 @@ import io.ffreedom.redstone.core.order.impl.ChildOrder;
 public class PositionsActor {
 
 	/**
-	 * instrument最大持仓限制
+	 * subAccount的instrument的最大长仓持仓限制<br>
+	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
-	private MutableIntLongMap instrumentPositionsMaxLimit = MutableMaps.newIntLongHashMap();
+	private MutableLongLongMap subAccountInstrumentLongPositionsMaxLimit = MutableMaps.newLongLongHashMap();
 
 	/**
-	 * 当前instrument持仓数量
+	 * subAccount的instrument最大短仓持仓限制<br>
+	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
-	private MutableIntLongMap instrumentPositions = MutableMaps.newIntLongHashMap();
+	private MutableLongLongMap subAccountInstrumentShortPositionsMaxLimit = MutableMaps.newLongLongHashMap();
 
 	/**
-	 * 当前subAccount持仓数量
+	 * subAccount的instrument持仓数量<br>
+	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
-	private MutableIntLongMap subAccountPositions = MutableMaps.newIntLongHashMap();
+	private MutableLongLongMap subAccountInstrumentPositions = MutableMaps.newLongLongHashMap();
 
 	public final static PositionsActor Singleton = new PositionsActor();
 
@@ -38,7 +43,6 @@ public class PositionsActor {
 	}
 
 	public void onPositions() {
-
 	}
 
 	public void onChildOrder(ChildOrder order) {
@@ -46,130 +50,28 @@ public class PositionsActor {
 		int subAccountId = order.getSubAccountId();
 		OrdSide side = order.getSide();
 		OrdStatus status = order.getStatus();
-		switch (side) {
-		case Buy:
-		case MarginBuy:
+		long jointId = JointIdUtil.jointId(subAccountId, instrumentId);
+		long tradeQty = order.getTradeSet().lastTrade().getTradeQty();
+		switch (side.direction()) {
+		case Long:
 			switch (status) {
 			case PartiallyFilled:
+
 			case Filled:
 				break;
 			default:
 				break;
 			}
 			break;
-		case Sell:
-		case ShortSell:
+		case Short:
 			break;
-
 		default:
-
-			break;
+			throw new IllegalArgumentException("OrdSysId -> " + order.getOrdSysId());
 		}
 
-		long tradeQty = order.getTradeSet().lastTrade().getTradeQty();
-		if (instrumentPositions.containsKey(instrumentId))
-			modifyInstrumentPositions(instrumentId, tradeQty);
-		else
-			instrumentPositions.put(instrumentId, tradeQty);
-		if (subAccountPositions.containsKey(subAccountId))
-			modifySubAccountPositions(subAccountId, tradeQty);
-		else
-			subAccountPositions.put(subAccountId, tradeQty);
-	}
-
-	/**
-	 * 增加仓位记录
-	 * 
-	 * @param order
-	 */
-	private void plusPositions(ChildOrder order) {
-		int instrumentId = order.getInstrument().getInstrumentId();
-		int subAccountId = order.getSubAccountId();
-		long tradeQty = order.getTradeSet().lastTrade().getTradeQty();
-		if (instrumentPositions.containsKey(instrumentId))
-			modifyInstrumentPositions(instrumentId, tradeQty);
-		else
-			instrumentPositions.put(instrumentId, tradeQty);
-		if (subAccountPositions.containsKey(subAccountId))
-			modifySubAccountPositions(subAccountId, tradeQty);
-		else
-			subAccountPositions.put(subAccountId, tradeQty);
-	}
-
-	/**
-	 * 减少仓位记录
-	 * 
-	 * @param order
-	 */
-	private void minusPositions(ChildOrder order) {
-		int instrumentId = order.getInstrument().getInstrumentId();
-		int subAccountId = order.getSubAccountId();
-		long tradeQty = order.getTradeSet().lastTrade().getTradeQty();
-		modifyInstrumentPositions(instrumentId, 0 - tradeQty);
-		modifySubAccountPositions(subAccountId, 0 - tradeQty);
-	}
-
-	/**
-	 * 修改instrumentId持仓数量
-	 * 
-	 * @param instrumentId
-	 * @param qty
-	 */
-	private void modifyInstrumentPositions(int instrumentId, long qty) {
-		instrumentPositions.put(instrumentId, instrumentPositions.get(instrumentId) + qty);
-
-	}
-
-	/**
-	 * 修改subAccount持仓数量
-	 * 
-	 * @param subAccountId
-	 * @param qty
-	 */
-	private void modifySubAccountPositions(int subAccountId, long qty) {
-		subAccountPositions.put(subAccountId, subAccountPositions.get(subAccountId) + qty);
-	}
-
-	private long getPositionsCount(Instrument instrument) {
-		return instrumentPositions.containsKey(instrument.getInstrumentId())
-				? instrumentPositions.get(instrument.getInstrumentId())
-				: 0;
-	}
-
-	private long getPositionsCount(int subAccount) {
-		return subAccountPositions.containsKey(subAccount) ? subAccountPositions.get(subAccount) : 0;
-
-	}
-
-	private long getRemainPositions(Instrument instrument) {
-		long positionsMaxLimit = getPositionsMaxLimit(instrument);
-		return positionsMaxLimit > 0 ? positionsMaxLimit - getPositionsCount(instrument) : positionsMaxLimit;
-	}
-
-	private long getPositionsMaxLimit(Instrument instrument) {
-		return instrumentPositionsMaxLimit.containsKey(instrument.getInstrumentId())
-				? instrumentPositionsMaxLimit.get(instrument.getInstrumentId())
-				: 0;
-	}
-
-	private void plusPositionsMaxLimit(Instrument instrument, long freedQty) {
-		if (instrumentPositionsMaxLimit.containsKey(instrument.getInstrumentId())) {
-			instrumentPositionsMaxLimit.put(instrument.getInstrumentId(),
-					instrumentPositionsMaxLimit.get(instrument.getInstrumentId()) + freedQty);
-		}
-	}
-
-	private void minusPositionsMaxLimit(Instrument instrument, long usedQty) {
-		if (instrumentPositionsMaxLimit.containsKey(instrument.getInstrumentId())) {
-			instrumentPositionsMaxLimit.put(instrument.getInstrumentId(),
-					instrumentPositionsMaxLimit.get(instrument.getInstrumentId()) - usedQty);
-		}
 	}
 
 	private static void main(String[] args) {
-
-		System.out.println(10 - 7);
-		System.out.println(10 + -7);
 
 	}
 

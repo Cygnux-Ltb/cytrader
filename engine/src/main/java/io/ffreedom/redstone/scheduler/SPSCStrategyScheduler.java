@@ -28,8 +28,7 @@ public class SPSCStrategyScheduler implements StrategyScheduler {
 				StrategyActor.Singleton.onOrderReport(orderReport);
 				break;
 			default:
-				new IllegalArgumentException("mark illegal");
-				break;
+				throw new IllegalArgumentException("mark illegal");
 			}
 		});
 	}

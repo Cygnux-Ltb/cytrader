@@ -1,7 +1,5 @@
 package io.ffreedom.redstone.actor;
 
-public class MarketDataDumpActor {
-	
-	
+public final class MarketDataDumpActor {
 
 }

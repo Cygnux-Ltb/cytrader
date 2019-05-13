@@ -1,5 +1,5 @@
 package io.ffreedom.redstone.actor;
 
-public class OrderDumpActor {
+public final class OrderDumpActor {
 
 }

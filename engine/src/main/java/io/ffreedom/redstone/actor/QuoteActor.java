@@ -58,7 +58,7 @@ public class QuoteActor {
 			this.askPrice1 = new AtomicDouble();
 			this.askVolume1 = new AtomicDouble();
 			this.bidPrice1 = new AtomicDouble();
-			this.askVolume1 = new AtomicDouble();
+			this.bidVolume1 = new AtomicDouble();
 		}
 
 		public AtomicDouble getAskPrice1() {

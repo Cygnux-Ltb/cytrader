@@ -2,6 +2,7 @@ package io.ffreedom.redstone.specific.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
+import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
@@ -11,7 +12,7 @@ import io.ffreedom.redstone.core.position.impl.GenericT0Position;
 public final class ChinaFuturesPosition extends GenericT0Position {
 
 	private long beforeTodayQty;
-	private MutableLongLongMap beforeTodayQtyLockRecord;
+	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(16);
 
 	public final static ChinaFuturesPosition EMPTY = new ChinaFuturesPosition(-1, -1);
 
@@ -32,11 +33,11 @@ public final class ChinaFuturesPosition extends GenericT0Position {
 		return new ChinaFuturesPosition(accountId, instrumentId, beforeTodayQty);
 	}
 
-	public double getBeforeTodayQty() {
+	public long getBeforeTodayQty() {
 		return beforeTodayQty;
 	}
 
-	public double lockBeforeTodayQty(long ordSysId, OrdSide side, long lockQty) {
+	public long lockBeforeTodayQty(long ordSysId, OrdSide side, long lockQty) {
 		if (beforeTodayQty == 0) {
 			return 0;
 		} else if (beforeTodayQty > 0) {
