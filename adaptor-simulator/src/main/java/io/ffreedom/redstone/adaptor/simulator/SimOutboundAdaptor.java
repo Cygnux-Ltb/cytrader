@@ -27,6 +27,7 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 
 	public SimOutboundAdaptor(int adaptorId, String adaptorName, ParamKeyMap<SimAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
+		this.paramMap = paramMap;
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
 				.setHost(paramMap.getString(SimAdaptorParams.MdHost))
 				.setPort(paramMap.getInteger(SimAdaptorParams.MdPort)).build();
