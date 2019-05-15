@@ -14,10 +14,25 @@ public abstract class AbstractOrder implements Order {
 
 	private long ordSysId;
 	private Instrument instrument;
+	/**
+	 * 数量和价格
+	 */
 	private OrdQtyPrice ordQtyPrice;
+	/**
+	 * 订单方向
+	 */
 	private OrdSide ordSide;
+	/**
+	 * 订单类型
+	 */
 	private OrdType ordType;
+	/**
+	 * 订单状态
+	 */
 	private OrdStatus ordStatus;
+	/**
+	 * 时间戳
+	 */
 	private OrdTimestamps ordTimestamps;
 	/**
 	 * 策略Id

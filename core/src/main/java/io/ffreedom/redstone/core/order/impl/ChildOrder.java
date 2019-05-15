@@ -8,6 +8,12 @@ import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.structure.StopLoss;
 import io.ffreedom.redstone.core.order.structure.TradeSet;
 
+/**
+ * 最小的订单执行单元
+ * 
+ * @author yellow013
+ * @creation 2018年1月14日
+ */
 public final class ChildOrder extends ActualOrder {
 
 	private long parentId;
@@ -15,26 +21,25 @@ public final class ChildOrder extends ActualOrder {
 	/**
 	 * 子订单成交列表
 	 */
-	private TradeSet tradeSet;;
+	private TradeSet tradeSet;
+
+	private ChildOrder(long parentId, Instrument instrument, OrdQtyPrice qtyPrice, OrdSide ordSide, OrdType ordType,
+			int strategyId, int subAccountId, StopLoss stopLoss) {
+		super(instrument, qtyPrice, ordSide, ordType, strategyId, subAccountId, stopLoss);
+		this.parentId = parentId;
+		this.tradeSet = new TradeSet(getOrdSysId());
+	}
 
 	private ChildOrder(long parentId, Instrument instrument, long offerQty, double offerPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
-		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, strategyId, subAccountId,
-				stopLoss);
-		this.parentId = parentId;
-		this.tradeSet = new TradeSet(getOrdSysId());
+		this(parentId, instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, strategyId,
+				subAccountId, stopLoss);
 	}
 
 	public static ChildOrder generateChildOrder(long parentOrdSysId, Instrument instrument, long offerQty,
 			double offerPrice, OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
 		return new ChildOrder(parentOrdSysId, instrument, offerQty, offerPrice, ordSide, ordType, strategyId,
 				subAccountId, stopLoss);
-	}
-
-	private ChildOrder(long parentId, Instrument instrument, OrdQtyPrice qtyPrice, OrdSide ordSide, OrdType ordType,
-			int strategyId, int subAccountId, StopLoss stopLoss) {
-		super(instrument, qtyPrice, ordSide, ordType, strategyId, subAccountId, stopLoss);
-		this.parentId = parentId;
 	}
 
 	public static ChildOrder generateChildOrder(long parentOrdSysId, Instrument instrument, OrdQtyPrice qtyPrice,
