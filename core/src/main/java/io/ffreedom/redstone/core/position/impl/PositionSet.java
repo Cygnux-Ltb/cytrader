@@ -1,38 +1,47 @@
-package io.ffreedom.redstone.core.position;
+package io.ffreedom.redstone.core.position.impl;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.ffreedom.common.collect.MutableMaps;
-import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.position.api.Position;
 import io.ffreedom.redstone.core.position.api.PositionProducer;
 
-public final class Positions<T extends Position> {
+/**
+ * 实际账户的持仓集合
+ * 
+ * @author yellow013
+ * @creation 2018年5月14日
+ * @param <T>
+ */
+public final class PositionSet<T extends Position> {
 
 	private int accountId;
 
 	// Map<instrumentId, Position>
 	private MutableIntObjectMap<T> positionMap = MutableMaps.newIntObjectHashMap();
 
-	private PositionProducer<T> positionFactory;
+	private PositionProducer<T> positionProducer;
 
-	public Positions(int accountId, PositionProducer<T> positionFactory) {
+	public PositionSet(int accountId, PositionProducer<T> positionProducer) {
 		this.accountId = accountId;
-		this.positionFactory = positionFactory;
+		this.positionProducer = positionProducer;
 	}
 
 	public int getAccountId() {
 		return accountId;
 	}
 
-	public void onOrder(Order order) {
-		int instrumentId = order.getInstrument().getInstrumentId();
+	public void putPosition(T position) {
+		positionMap.put(position.getInstrumentId(), position);
+	}
+
+	public T getPosition(int instrumentId) {
 		T position = positionMap.get(instrumentId);
 		if (position == null) {
-			position = positionFactory.produce(accountId, instrumentId);
+			position = positionProducer.produce(accountId, instrumentId);
 			positionMap.put(instrumentId, position);
 		}
-		position.updatePosition(order);
+		return position;
 	}
 
 }

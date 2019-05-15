@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.core.position.api;
 
-import io.ffreedom.redstone.core.order.api.Order;
+import io.ffreedom.redstone.core.order.impl.ChildOrder;
 
 public interface PositionManager<T extends Position> {
 
@@ -8,6 +8,8 @@ public interface PositionManager<T extends Position> {
 
 	T getPosition(int accountId, int instrumentId);
 
-	void onOrder(Order order);
+	default void onChildOrder(int accountId, int instrumentId, ChildOrder order) {
+		getPosition(accountId, instrumentId).updatePosition(order);
+	}
 
 }

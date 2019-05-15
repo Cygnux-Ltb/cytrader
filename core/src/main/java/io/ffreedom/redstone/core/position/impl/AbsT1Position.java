@@ -1,12 +1,10 @@
 package io.ffreedom.redstone.core.position.impl;
 
-import io.ffreedom.redstone.core.order.api.Order;
-
-public class GenericT1Position extends AbsPosition {
+public abstract class AbsT1Position extends AbsPosition {
 
 	private long tradeableQty;
 
-	public GenericT1Position(int accountId, int instrumentId, long tradeableQty) {
+	public AbsT1Position(int accountId, int instrumentId, long tradeableQty) {
 		super(accountId, instrumentId);
 		this.tradeableQty = tradeableQty;
 	}
@@ -18,12 +16,6 @@ public class GenericT1Position extends AbsPosition {
 
 	public void setTradeableQty(long tradeableQty) {
 		this.tradeableQty = tradeableQty;
-	}
-
-	@Override
-	public void updatePosition(Order order) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
