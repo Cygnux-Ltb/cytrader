@@ -13,6 +13,10 @@ public class Account extends EnableComponent {
 	private String investorId;
 	private Broker broker;
 	private Balance balance;
+	/**
+	 * 备用,数组下标,用于快速访问本账户对于的仓位信息集合
+	 */
+	// private int positionManagerIndex;
 	private MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
 	public Account(int accountId, String accountName, String investorId, Broker broker) {
