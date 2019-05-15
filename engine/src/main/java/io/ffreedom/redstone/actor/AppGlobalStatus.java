@@ -33,11 +33,10 @@ public final class AppGlobalStatus {
 
 	public void setAppId0(int appId) {
 		if (this.appId == 0) {
-			if (appId > 0 && appId < maxLimit) {
+			if (appId > 0 && appId < maxLimit)
 				this.appId = appId;
-			} else {
+			else
 				throw new RuntimeException("AppId is illegal.");
-			}
 		}
 	}
 
