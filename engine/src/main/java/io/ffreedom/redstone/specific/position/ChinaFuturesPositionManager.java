@@ -1,28 +1,23 @@
 package io.ffreedom.redstone.specific.position;
 
-import io.ffreedom.redstone.core.order.api.Order;
-import io.ffreedom.redstone.core.position.api.PositionManager;
+import io.ffreedom.redstone.core.position.api.PositionProducer;
+import io.ffreedom.redstone.core.position.impl.AbsPositionManager;
 
-public class ChinaFuturesPositionManager implements PositionManager<ChinaFuturesPosition> {
-	
-	
-	
+public final class ChinaFuturesPositionManager extends AbsPositionManager<ChinaFuturesPosition> {
 
-	@Override
-	public void putPosition(ChinaFuturesPosition position) {
-		// TODO Auto-generated method stub
+	private final static ChinaFuturesPositionProducer ProducerSingleton = new ChinaFuturesPositionProducer();
+
+	public final static ChinaFuturesPositionManager Singleton = new ChinaFuturesPositionManager();
+
+	private ChinaFuturesPositionManager() {
+		super(ProducerSingleton);
 	}
 
-	@Override
-	public ChinaFuturesPosition getPosition(int accountId, int instrumentId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void onOrder(Order order) {
-		// TODO Auto-generated method stub
-
+	private static class ChinaFuturesPositionProducer implements PositionProducer<ChinaFuturesPosition> {
+		@Override
+		public ChinaFuturesPosition produce(int accountId, int instrumentId, long qty) {
+			return ChinaFuturesPosition.newInstance(accountId, instrumentId, qty);
+		}
 	}
 
 }

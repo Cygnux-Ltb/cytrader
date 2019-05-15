@@ -7,9 +7,9 @@ import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
-import io.ffreedom.redstone.core.position.impl.GenericT0Position;
+import io.ffreedom.redstone.core.position.impl.AbsT0Position;
 
-public final class ChinaFuturesPosition extends GenericT0Position {
+public final class ChinaFuturesPosition extends AbsT0Position {
 
 	private long beforeTodayQty;
 	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(16);
@@ -98,6 +98,7 @@ public final class ChinaFuturesPosition extends GenericT0Position {
 				break;
 			case Short:
 				setCurrentQty(getCurrentQty() - ordQtyPrice.getFilledQty() + ordQtyPrice.getLastFilledQty());
+				break;
 			default:
 				break;
 			}
