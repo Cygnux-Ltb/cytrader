@@ -13,22 +13,22 @@ public abstract class AbsPosition implements Position {
 	}
 
 	@Override
-	public int getAccountId() {
+	public final int getAccountId() {
 		return accountId;
 	}
 
 	@Override
-	public int getInstrumentId() {
+	public final int getInstrumentId() {
 		return instrumentId;
 	}
 
 	@Override
-	public long getCurrentQty() {
+	public final long getCurrentQty() {
 		return currentQty;
 	}
 
 	@Override
-	public void setCurrentQty(long qty) {
+	public final void setCurrentQty(long qty) {
 		this.currentQty = qty;
 	}
 

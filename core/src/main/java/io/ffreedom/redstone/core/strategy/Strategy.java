@@ -12,6 +12,8 @@ public interface Strategy extends Enable {
 
 	int getStrategyId();
 
+	String getStrategyName();
+
 	int getSubAccountId();
 
 	ImmutableList<Instrument> getInstruments();
