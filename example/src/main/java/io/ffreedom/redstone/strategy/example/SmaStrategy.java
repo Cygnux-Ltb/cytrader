@@ -48,4 +48,10 @@ public class SmaStrategy extends IndicatorStrategy<BasicMarketData> implements S
 		return null;
 	}
 
+	@Override
+	public String getStrategyName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
