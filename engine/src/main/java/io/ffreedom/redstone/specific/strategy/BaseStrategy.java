@@ -9,6 +9,7 @@ import io.ffreedom.common.collect.ImmutableLists;
 import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
+import io.ffreedom.common.utils.StringUtil;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.actor.OrderExecutionActor;
@@ -39,6 +40,10 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 
 	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
 
+	protected String strategyName;
+
+	private String defaultStrategyName;
+
 	// 策略订阅的合约
 	private ImmutableList<Instrument> instruments;
 
@@ -48,6 +53,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	protected BaseStrategy(int strategyId, int subAccountId, Instrument... instruments) {
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
+		this.defaultStrategyName = "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]";
 		this.instruments = ImmutableLists.newImmutableList(instruments);
 	}
 
@@ -63,6 +69,13 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	@Override
 	public int getStrategyId() {
 		return strategyId;
+	}
+
+	@Override
+	public String getStrategyName() {
+		if (StringUtil.isNullOrEmpty(strategyName))
+			return defaultStrategyName;
+		return strategyName;
 	}
 
 	@Override
