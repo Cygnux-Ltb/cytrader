@@ -1,39 +1,19 @@
-package io.ffreedom.redstone.core.balance;
+package io.ffreedom.redstone.core.account;
 
-public final class Balance {
+public final class AccountBalance extends Balance {
 
 	private int accountId;
-	private double availableMargin;
-	private double availableCredit;
 
-	private Balance(int accountId) {
+	private AccountBalance(int accountId) {
 		this.accountId = accountId;
 	}
 
-	public final static Balance create(int accountId) {
-		return new Balance(accountId);
+	public final static AccountBalance newInstance(int accountId) {
+		return new AccountBalance(accountId);
 	}
 
 	public int getAccountId() {
 		return accountId;
-	}
-
-	public double getAvailableMargin() {
-		return availableMargin;
-	}
-
-	public Balance setAvailableMargin(double availableMargin) {
-		this.availableMargin = availableMargin;
-		return this;
-	}
-
-	public double getAvailableCredit() {
-		return availableCredit;
-	}
-
-	public Balance setAvailableCredit(double availableCredit) {
-		this.availableCredit = availableCredit;
-		return this;
 	}
 
 }
