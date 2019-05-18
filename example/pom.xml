@@ -29,6 +29,11 @@
 			<groupId>io.ffreedom</groupId>
 			<artifactId>polaris</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>adaptor-jctp</artifactId>
+			<version>0.1</version>
+		</dependency>
 	</dependencies>
 
 </project>

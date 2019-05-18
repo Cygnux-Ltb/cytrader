@@ -7,9 +7,9 @@ import io.ffreedom.polaris.market.BasicMarketData;
 import io.ffreedom.redstone.core.adaptor.impl.OutboundAdaptor;
 import io.ffreedom.redstone.specific.strategy.IndicatorStrategy;
 
-public class SmaStrategy extends IndicatorStrategy<BasicMarketData> implements SmaEvent {
+public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> implements SmaEvent {
 
-	public SmaStrategy(int strategyId, int subAccountId, Instrument instrument) {
+	public SmaStrategyExample(int strategyId, int subAccountId, Instrument instrument) {
 		super(strategyId, subAccountId, instrument);
 	}
 
