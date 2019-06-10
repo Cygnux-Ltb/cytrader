@@ -13,7 +13,7 @@ import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.jctp.bean.rsp.RspDepthMarketData;
 import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.storage.InstrumentKeeper;
 
 public class CtpInboundMarketDataConverter implements Converter<RspDepthMarketData, BasicMarketData> {
