@@ -1,9 +1,9 @@
-package io.ffreedom.redstone.strategy.example;
+package io.ffreedom.redstone.example;
 
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.indicators.events.SmaEvent;
-import io.ffreedom.polaris.indicators.impl.ma.points.SmaPoint;
-import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.polaris.indicators.impl.ma.SmaPoint;
+import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.core.adaptor.impl.OutboundAdaptor;
 import io.ffreedom.redstone.specific.strategy.IndicatorStrategy;
 
@@ -50,6 +50,12 @@ public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> imple
 
 	@Override
 	public String getStrategyName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getEventName() {
 		// TODO Auto-generated method stub
 		return null;
 	}

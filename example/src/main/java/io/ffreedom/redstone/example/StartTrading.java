@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.strategy.example;
+package io.ffreedom.redstone.example;
 
 import org.eclipse.collections.api.map.MutableMap;
 
@@ -8,12 +8,12 @@ import io.ffreedom.common.log.LogLevel;
 import io.ffreedom.common.log.LoggerSetter;
 import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.common.queue.impl.disruptor.BufferSize;
+import io.ffreedom.polaris.datetime.TimePeriodPool;
+import io.ffreedom.polaris.datetime.TradingPeriodPool;
 import io.ffreedom.polaris.financial.Instrument.PriorityCloseType;
 import io.ffreedom.polaris.financial.futures.ChinaFutures;
 import io.ffreedom.polaris.financial.futures.ChinaFuturesSymbol;
 import io.ffreedom.polaris.indicators.api.IndicatorTimePeriod;
-import io.ffreedom.polaris.indicators.pools.TimePeriodPool;
-import io.ffreedom.polaris.indicators.pools.TradingPeriodPool;
 import io.ffreedom.redstone.actor.AppGlobalStatus;
 import io.ffreedom.redstone.adaptor.jctp.JctpAdaptorParams;
 import io.ffreedom.redstone.adaptor.jctp.JctpInboundAdaptor;
@@ -74,7 +74,7 @@ public final class StartTrading {
 		int subAccountId = 1;
 
 		SmaStrategyExample example = new SmaStrategyExample(strategyId, subAccountId, rb1910);
-		example.init(() -> true);
+		example.initialize(() -> true);
 
 		StrategyKeeper.putStrategy(example);
 		AdaptorKeeper.putOutboundAdaptor(subAccountId, outboundAdaptor);
