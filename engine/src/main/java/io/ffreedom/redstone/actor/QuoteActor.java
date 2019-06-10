@@ -8,7 +8,7 @@ import com.google.common.util.concurrent.AtomicDouble;
 
 import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.storage.InstrumentKeeper;
 
 /**

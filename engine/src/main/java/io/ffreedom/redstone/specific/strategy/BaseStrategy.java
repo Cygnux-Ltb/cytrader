@@ -11,7 +11,8 @@ import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.utils.StringUtil;
 import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.polaris.market.api.MarketData;
+import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.actor.OrderExecutionActor;
 import io.ffreedom.redstone.actor.QuoteActor;
 import io.ffreedom.redstone.actor.QuoteActor.AtomicQuote;
@@ -30,7 +31,7 @@ import io.ffreedom.redstone.storage.AccountKeeper;
 import io.ffreedom.redstone.storage.InstrumentKeeper;
 import io.ffreedom.redstone.storage.OrderKeeper;
 
-public abstract class BaseStrategy<M extends BasicMarketData> implements Strategy, CircuitBreaker {
+public abstract class BaseStrategy<M extends MarketData> implements Strategy, CircuitBreaker {
 
 	private int strategyId;
 
@@ -58,7 +59,7 @@ public abstract class BaseStrategy<M extends BasicMarketData> implements Strateg
 	}
 
 	@Override
-	public void init(Initializer<Boolean> initializer) {
+	public void initialize(Initializer<Boolean> initializer) {
 		if (initializer != null)
 			isInitSuccess = initializer.initialize();
 		else

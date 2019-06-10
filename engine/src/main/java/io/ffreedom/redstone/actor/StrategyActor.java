@@ -3,7 +3,7 @@ package io.ffreedom.redstone.actor;
 import org.slf4j.Logger;
 
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.impl.OrderReport;
 import io.ffreedom.redstone.storage.OrderKeeper;

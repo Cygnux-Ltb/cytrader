@@ -16,19 +16,29 @@ public final class OrderKeeper {
 
 	private static final OrderKeeper InnerInstance = new OrderKeeper();
 
-	// * 存储所有的order
+	/**
+	 * 存储所有的order
+	 */
 	private final OrderBook allOrders = OrderBook.newInstance(65536);
 
-	// * 按照subAccount分组存储
+	/**
+	 * 按照subAccount分组存储
+	 */
 	private final MutableIntObjectMap<OrderBook> subAccountOrderBookMap = MutableMaps.newIntObjectHashMap();
 
-	// * 按照account分组存储
+	/**
+	 * 按照account分组存储
+	 */
 	private final MutableIntObjectMap<OrderBook> accountOrderBookMap = MutableMaps.newIntObjectHashMap();
 
-	// * 按照strategy分组存储
+	/**
+	 * 按照strategy分组存储
+	 */
 	private final MutableIntObjectMap<OrderBook> strategyOrderBookMap = MutableMaps.newIntObjectHashMap();
 
-	// * 按照instrument分组存储
+	/**
+	 * 按照instrument分组存储
+	 */
 	private final MutableIntObjectMap<OrderBook> instrumentOrderBookMap = MutableMaps.newIntObjectHashMap();
 
 	private OrderKeeper() {
