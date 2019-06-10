@@ -5,7 +5,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.ffreedom.common.fsm.Enable;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.core.order.api.Order;
 
 public interface Strategy extends Enable {
@@ -18,7 +18,7 @@ public interface Strategy extends Enable {
 
 	ImmutableList<Instrument> getInstruments();
 
-	void init(Initializer<Boolean> initializer);
+	void initialize(Initializer<Boolean> initializer);
 
 	void onControlEvent(StrategyControlEvent event);
 

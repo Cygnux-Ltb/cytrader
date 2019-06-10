@@ -1,6 +1,6 @@
 package io.ffreedom.redstone.core.event;
 
-import io.ffreedom.polaris.market.MarketData;
+import io.ffreedom.polaris.market.api.MarketData;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.impl.OrderReport;
 import io.ffreedom.redstone.core.trade.Signal;
