@@ -7,7 +7,7 @@ import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.persistence.avro.entity.MarketDataLevel1;
 import io.ffreedom.persistence.avro.entity.Order;
 import io.ffreedom.persistence.avro.serializable.AvroBytesDeserializer;
-import io.ffreedom.polaris.market.BasicMarketData;
+import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.adaptor.simulator.converter.MarketDataConverter;
 import io.ffreedom.redstone.adaptor.simulator.converter.OrderConverter;
 import io.ffreedom.redstone.core.adaptor.impl.InboundAdaptor;
