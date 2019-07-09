@@ -12,6 +12,11 @@ import io.ffreedom.redstone.core.order.enums.OrdType;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
 import io.ffreedom.redstone.core.order.structure.StopLoss;
 
+/**
+ * 
+ * @author yellow013
+ * @creation 2019年7月9日
+ */
 public final class ParentOrder extends ActualOrder {
 
 	private MutableList<ChildOrder> childOrders;

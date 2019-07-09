@@ -1,14 +1,15 @@
 package io.ffreedom.redstone.actor;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
-import com.google.common.util.concurrent.AtomicDouble;
-
 import io.ffreedom.common.collect.MutableMaps;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.impl.BasicMarketData;
+import io.ffreedom.redstone.core.order.utils.PriceUtil;
 import io.ffreedom.redstone.storage.InstrumentKeeper;
 
 /**
@@ -36,9 +37,9 @@ public class QuoteActor {
 
 	public void onMarketDate(BasicMarketData marketData) {
 		AtomicQuote atomicQuote = quoteMap.get(marketData.getInstrument().getInstrumentId());
-		atomicQuote.getAskPrice1().set(marketData.getAskPrice1());
+		atomicQuote.getAskPrice1().set(PriceUtil.doublePriceToLong(marketData.getAskPrice1()));
 		atomicQuote.getAskVolume1().set(marketData.getAskVolume1());
-		atomicQuote.getBidPrice1().set(marketData.getBidPrice1());
+		atomicQuote.getBidPrice1().set(PriceUtil.doublePriceToLong(marketData.getBidPrice1()));
 		atomicQuote.getBidVolume1().set(marketData.getBidVolume1());
 	}
 
@@ -48,32 +49,32 @@ public class QuoteActor {
 
 	public static class AtomicQuote {
 
-		private AtomicDouble askPrice1;
-		private AtomicDouble askVolume1;
-		private AtomicDouble bidPrice1;
-		private AtomicDouble bidVolume1;
+		private AtomicLong askPrice1;
+		private AtomicLong askVolume1;
+		private AtomicLong bidPrice1;
+		private AtomicLong bidVolume1;
 
 		public AtomicQuote() {
 			super();
-			this.askPrice1 = new AtomicDouble();
-			this.askVolume1 = new AtomicDouble();
-			this.bidPrice1 = new AtomicDouble();
-			this.bidVolume1 = new AtomicDouble();
+			this.askPrice1 = new AtomicLong();
+			this.askVolume1 = new AtomicLong();
+			this.bidPrice1 = new AtomicLong();
+			this.bidVolume1 = new AtomicLong();
 		}
 
-		public AtomicDouble getAskPrice1() {
+		public AtomicLong getAskPrice1() {
 			return askPrice1;
 		}
 
-		public AtomicDouble getAskVolume1() {
+		public AtomicLong getAskVolume1() {
 			return askVolume1;
 		}
 
-		public AtomicDouble getBidPrice1() {
+		public AtomicLong getBidPrice1() {
 			return bidPrice1;
 		}
 
-		public AtomicDouble getBidVolume1() {
+		public AtomicLong getBidVolume1() {
 			return bidVolume1;
 		}
 
