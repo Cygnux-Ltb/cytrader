@@ -23,6 +23,7 @@ import io.ffreedom.redstone.core.order.enums.OrdType;
 import io.ffreedom.redstone.core.order.impl.ParentOrder;
 import io.ffreedom.redstone.core.order.impl.VirtualOrder;
 import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
+import io.ffreedom.redstone.core.order.utils.PriceUtil;
 import io.ffreedom.redstone.core.strategy.CircuitBreaker;
 import io.ffreedom.redstone.core.strategy.Strategy;
 import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
@@ -178,11 +179,11 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 		switch (direction) {
 		case Long:
 			ordSide = OrdSide.Buy;
-			offerPrice = quote.getAskPrice1().get();
+			offerPrice = PriceUtil.longPriceToDouble(quote.getAskPrice1().get());
 			break;
 		case Short:
 			ordSide = OrdSide.Sell;
-			offerPrice = quote.getBidPrice1().get();
+			offerPrice = PriceUtil.longPriceToDouble(quote.getBidPrice1().get());
 			break;
 		default:
 			throw new IllegalArgumentException("TrdDirection is illegal");
