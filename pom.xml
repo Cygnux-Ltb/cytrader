@@ -28,7 +28,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<ec.version>9.2.0</ec.version>
 		<polaris.version>0.1</polaris.version>
 		<commons.version>1.0-SNAPSHOT</commons.version>
 		<transport.version>1.0-SNAPSHOT</transport.version>
@@ -64,16 +63,6 @@
 			<groupId>io.ffreedom</groupId>
 			<artifactId>commons</artifactId>
 			<version>${commons.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.collections</groupId>
-			<artifactId>eclipse-collections-api</artifactId>
-			<version>${ec.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.collections</groupId>
-			<artifactId>eclipse-collections</artifactId>
-			<version>${ec.version}</version>
 		</dependency>
 	</dependencies>
 
