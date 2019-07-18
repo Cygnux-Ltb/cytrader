@@ -2,7 +2,7 @@ package io.ffreedom.redstone.specific.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
-import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;

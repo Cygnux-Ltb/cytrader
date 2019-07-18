@@ -6,7 +6,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
-import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.core.order.utils.PriceUtil;

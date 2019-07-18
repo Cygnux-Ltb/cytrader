@@ -5,7 +5,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.redstone.core.order.api.Order;
 

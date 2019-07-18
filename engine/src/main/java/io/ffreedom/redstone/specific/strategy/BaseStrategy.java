@@ -5,8 +5,8 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
 import io.ffreedom.common.annotations.lang.ProtectedAbstractMethod;
-import io.ffreedom.common.collect.ImmutableLists;
-import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.collections.ImmutableLists;
+import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.utils.StringUtil;

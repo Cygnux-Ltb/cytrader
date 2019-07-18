@@ -9,8 +9,8 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 
-import io.ffreedom.common.collect.MutableMaps;
-import io.ffreedom.common.collect.MutableSets;
+import io.ffreedom.common.collections.MutableMaps;
+import io.ffreedom.common.collections.MutableSets;
 import io.ffreedom.redstone.core.account.Account;
 import io.ffreedom.redstone.core.account.SubAccount;
 

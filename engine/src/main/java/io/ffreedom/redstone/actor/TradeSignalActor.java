@@ -2,7 +2,7 @@ package io.ffreedom.redstone.actor;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.ffreedom.common.collect.MutableLists;
+import io.ffreedom.common.collections.MutableLists;
 import io.ffreedom.redstone.core.trade.TradeSignal;
 
 public final class TradeSignalActor {

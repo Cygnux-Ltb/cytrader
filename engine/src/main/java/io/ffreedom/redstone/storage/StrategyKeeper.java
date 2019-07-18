@@ -7,8 +7,8 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.collect.MutableLists;
-import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.collections.MutableLists;
+import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.strategy.Strategy;

@@ -3,7 +3,7 @@ package io.ffreedom.redstone.actor;
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 import org.slf4j.Logger;
 
-import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.utils.JointIdUtil;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
