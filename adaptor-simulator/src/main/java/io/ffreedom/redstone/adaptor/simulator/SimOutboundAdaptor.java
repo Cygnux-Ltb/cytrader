@@ -52,7 +52,7 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 				.setVolumeTotalOriginal(Double.valueOf(order.getQtyPrice().getOfferQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.getSide().code()).build();
 		byte[] byteMsg = serializer.serialization(simOrder);
-		tdSender.sent(byteMsg);
+		tdSender.send(byteMsg);
 		return true;
 	}
 
@@ -65,7 +65,7 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 				.setVolumeTotalOriginal(Double.valueOf(cancelOrder.getQtyPrice().getOfferQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.getSide().code()).build();
 		byte[] byteMsg = serializer.serialization(simOrder);
-		tdSender.sent(byteMsg);
+		tdSender.send(byteMsg);
 		return true;
 	}
 
@@ -78,7 +78,7 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 						.map(instrument -> instrument.getInstrumentCode()).collect(Collectors.toList()))
 				.build();
 		byte[] byteMsg = serializer.serialization(simSubscribe);
-		mdSender.sent(byteMsg);
+		mdSender.send(byteMsg);
 		return true;
 	}
 
