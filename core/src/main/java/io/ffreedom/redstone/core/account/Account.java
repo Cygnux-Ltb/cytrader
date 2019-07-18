@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.account;
 
 import org.eclipse.collections.api.set.MutableSet;
 
-import io.ffreedom.common.collect.MutableSets;
+import io.ffreedom.common.collections.MutableSets;
 import io.ffreedom.common.fsm.EnableComponent;
 
 public class Account extends EnableComponent {

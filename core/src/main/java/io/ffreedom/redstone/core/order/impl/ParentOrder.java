@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.ffreedom.common.collect.MutableLists;
+import io.ffreedom.common.collections.MutableLists;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdSort;

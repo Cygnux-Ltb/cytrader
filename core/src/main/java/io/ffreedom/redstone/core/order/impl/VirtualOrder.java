@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.order.impl;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.ffreedom.common.collect.MutableMaps;
+import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.polaris.financial.Instrument;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.enums.OrdSort;

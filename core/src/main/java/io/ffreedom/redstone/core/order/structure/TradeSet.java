@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.order.structure;
 
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
-import io.ffreedom.common.collect.MutableSets;
+import io.ffreedom.common.collections.MutableSets;
 
 public class TradeSet {
 

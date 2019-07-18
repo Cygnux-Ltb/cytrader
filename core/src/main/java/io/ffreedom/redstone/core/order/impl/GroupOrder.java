@@ -2,7 +2,7 @@ package io.ffreedom.redstone.core.order.impl;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
-import io.ffreedom.common.collect.ImmutableSets;
+import io.ffreedom.common.collections.ImmutableSets;
 import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
 
