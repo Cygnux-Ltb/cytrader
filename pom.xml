@@ -28,6 +28,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
 		<polaris.version>0.1</polaris.version>
 		<commons.version>1.0-SNAPSHOT</commons.version>
 		<transport.version>1.0-SNAPSHOT</transport.version>
@@ -38,10 +39,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5</version>
+				<version>3.8.1</version>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -61,7 +62,12 @@
 		<!-- see https://github.com/yellow013/commons.git -->
 		<dependency>
 			<groupId>io.ffreedom</groupId>
-			<artifactId>commons</artifactId>
+			<artifactId>commons-core</artifactId>
+			<version>${commons.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.ffreedom</groupId>
+			<artifactId>commons-queue</artifactId>
 			<version>${commons.version}</version>
 		</dependency>
 	</dependencies>
