@@ -1,8 +1,9 @@
 package io.ffreedom.redstone.core.order.structure;
 
+import static io.ffreedom.common.number.DoubleArithmetic.correction8;
+
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
-import io.ffreedom.common.number.DoubleUtil;
 import io.ffreedom.redstone.core.order.structure.TradeSet.Trade;
 
 /**
@@ -140,11 +141,11 @@ public class OrdQtyPrice {
 	public OrdQtyPrice calculationAvgPrice(TradeSet tradeSet) {
 		if (!tradeSet.isEmpty()) {
 			MutableSortedSet<Trade> innerSet = tradeSet.getInnerSet();
-			double totalPrice = DoubleUtil.correction8(
-					innerSet.sumOfDouble(trade -> DoubleUtil.correction8(trade.getTradePrice() * trade.getTradeQty())));
+			double totalPrice = correction8(
+					innerSet.sumOfDouble(trade -> correction8(trade.getTradePrice() * trade.getTradeQty())));
 			long totalQty = innerSet.sumOfLong(trade -> trade.getTradeQty());
 			if (totalQty > 0L)
-				this.avgPrice = DoubleUtil.correction8(totalPrice / totalQty);
+				this.avgPrice = correction8(totalPrice / totalQty);
 			return this;
 		}
 		return this;
