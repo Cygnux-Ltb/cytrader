@@ -4,11 +4,11 @@ import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
+import io.ffreedom.common.concurrent.queue.impl.ArrayBlockingMPSCQueue;
 import io.ffreedom.common.functional.BiConverter;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.param.ParamKeyMap;
-import io.ffreedom.common.queue.impl.ArrayBlockingMPSCQueue;
 import io.ffreedom.jctp.JctpGateway;
 import io.ffreedom.jctp.bean.config.JctpUserInfo;
 import io.ffreedom.jctp.bean.rsp.RspDepthMarketData;
