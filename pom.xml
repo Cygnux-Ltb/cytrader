@@ -28,7 +28,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<polaris.version>0.1</polaris.version>
 		<commons.version>1.0-SNAPSHOT</commons.version>
 		<transport.version>1.0-SNAPSHOT</transport.version>
@@ -67,7 +67,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
-			<artifactId>commons-queue</artifactId>
+			<artifactId>commons-concurrent</artifactId>
 			<version>${commons.version}</version>
 		</dependency>
 	</dependencies>
