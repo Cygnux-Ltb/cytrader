@@ -13,12 +13,20 @@
 	<artifactId>persistence-avro</artifactId>
 	<name>persistence-avro</name>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.avro</groupId>
 				<artifactId>avro-maven-plugin</artifactId>
-				<version>1.8.2</version>
+				<version>1.9.1</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -38,7 +46,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-		
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -52,7 +60,7 @@
 									<pluginExecutionFilter>
 										<groupId>org.apache.avro</groupId>
 										<artifactId>avro-maven-plugin</artifactId>
-										<versionRange>1.8.2</versionRange>
+										<versionRange>1.9.1</versionRange>
 										<goals>
 											<goal>schema</goal>
 											<goal>idl-protocol</goal>
@@ -69,16 +77,8 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		
 	</build>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.avro</groupId>
-			<artifactId>avro</artifactId>
-			<version>1.8.2</version>
-		</dependency>
 
-	</dependencies>
 
 </project>

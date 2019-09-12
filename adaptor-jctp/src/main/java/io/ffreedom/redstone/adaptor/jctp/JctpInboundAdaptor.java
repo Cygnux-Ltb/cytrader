@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
-import io.ffreedom.common.concurrent.queue.impl.ArrayBlockingMPSCQueue;
+import io.ffreedom.common.concurrent.queue.ArrayBlockingMPSCQueue;
 import io.ffreedom.common.functional.BiConverter;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;

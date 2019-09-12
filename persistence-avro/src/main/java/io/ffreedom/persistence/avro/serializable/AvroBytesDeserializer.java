@@ -43,8 +43,6 @@ public final class AvroBytesDeserializer<T extends SpecificRecord> extends BaseA
 		}
 	}
 
-	
-
 	private BinaryDecoder initDecoder(byte[] bytes) {
 		return DecoderFactory.get().binaryDecoder(bytes, decoder);
 	}
@@ -75,7 +73,7 @@ public final class AvroBytesDeserializer<T extends SpecificRecord> extends BaseA
 				datumReader = initDatumReader(tClass);
 			}
 			int countSize = allBytes.length;
-			
+
 			remainingBytes = null; // Comment for testing
 			offset = 0;
 			decoder = initDecoder(allBytes);// Comment for testing
@@ -105,30 +103,30 @@ public final class AvroBytesDeserializer<T extends SpecificRecord> extends BaseA
 		AvroBytesDeserializer<Order> deserializer = new AvroBytesDeserializer<>(Order.class);
 
 		for (int i = 0; i < 1000; i++) {
-			Order simOrder1 = Order.newBuilder().setOrderSysId("1").setStrategyId(1).setBrokerId("1")
-					.setInvestorId("1").setInstrumentId("ag1712").setOrderMsgType(1).setOrderRef(0).setUserId("1")
-					.setDirection(1).setOffset(1).setVolumeFilled(1).setVolumeRemained(1).setVolumeTotalOriginal(1)
-					.setTradeId("1").setTradingDay("1").setOrderStatus(1).setOrderType(1).setPrice(1).setOrdRejReason(1)
+			Order simOrder1 = Order.newBuilder().setOrderSysId("1").setStrategyId(1).setBrokerId("1").setInvestorId("1")
+					.setInstrumentId("ag1712").setOrderMsgType(1).setOrderRef(0).setUserId("1").setDirection(1)
+					.setOffset(1).setVolumeFilled(1).setVolumeRemained(1).setVolumeTotalOriginal(1).setTradeId("1")
+					.setTradingDay("1").setOrderStatus(1).setOrderType(1).setPrice(1).setOrdRejReason(1)
 					.setInsertTime("1").setUpdateTime("1").setCancelTime("1").setFrontId(1).setSessionId(1)
 					.setStatusMsg("1").setExchangeCode("1").setFee(1).setCounterType(1).setCounterSysId(1)
 					.setCancelAttempts(1).setTimeStamp(1).setEpochTimeReturn(1).setFuncName("1").setLimitPrice(1)
 					.setVolume(1).build();
 			byte[] serialization1 = serializer.serialization(simOrder1);
 
-			Order simOrder2 = Order.newBuilder().setOrderSysId("2").setStrategyId(2).setBrokerId("2")
-					.setInvestorId("1").setInstrumentId("ag1712").setOrderMsgType(1).setOrderRef(0).setUserId("1")
-					.setDirection(1).setOffset(1).setVolumeFilled(1).setVolumeRemained(1).setVolumeTotalOriginal(1)
-					.setTradeId("1").setTradingDay("1").setOrderStatus(1).setOrderType(1).setPrice(1).setOrdRejReason(1)
+			Order simOrder2 = Order.newBuilder().setOrderSysId("2").setStrategyId(2).setBrokerId("2").setInvestorId("1")
+					.setInstrumentId("ag1712").setOrderMsgType(1).setOrderRef(0).setUserId("1").setDirection(1)
+					.setOffset(1).setVolumeFilled(1).setVolumeRemained(1).setVolumeTotalOriginal(1).setTradeId("1")
+					.setTradingDay("1").setOrderStatus(1).setOrderType(1).setPrice(1).setOrdRejReason(1)
 					.setInsertTime("1").setUpdateTime("1").setCancelTime("1").setFrontId(1).setSessionId(1)
 					.setStatusMsg("1").setExchangeCode("1").setFee(1).setCounterType(1).setCounterSysId(1)
 					.setCancelAttempts(1).setTimeStamp(1).setEpochTimeReturn(1).setFuncName("1").setLimitPrice(1)
 					.setVolume(1).build();
 			byte[] serialization2 = serializer.serialization(simOrder2);
 
-			Order simOrder3 = Order.newBuilder().setOrderSysId("3").setStrategyId(2).setBrokerId("3")
-					.setInvestorId("1").setInstrumentId("ag1712").setOrderMsgType(1).setOrderRef(0).setUserId("1")
-					.setDirection(1).setOffset(1).setVolumeFilled(1).setVolumeRemained(1).setVolumeTotalOriginal(1)
-					.setTradeId("1").setTradingDay("1").setOrderStatus(1).setOrderType(1).setPrice(1).setOrdRejReason(1)
+			Order simOrder3 = Order.newBuilder().setOrderSysId("3").setStrategyId(2).setBrokerId("3").setInvestorId("1")
+					.setInstrumentId("ag1712").setOrderMsgType(1).setOrderRef(0).setUserId("1").setDirection(1)
+					.setOffset(1).setVolumeFilled(1).setVolumeRemained(1).setVolumeTotalOriginal(1).setTradeId("1")
+					.setTradingDay("1").setOrderStatus(1).setOrderType(1).setPrice(1).setOrdRejReason(1)
 					.setInsertTime("1").setUpdateTime("1").setCancelTime("1").setFrontId(1).setSessionId(1)
 					.setStatusMsg("1").setExchangeCode("1").setFee(1).setCounterType(1).setCounterSysId(1)
 					.setCancelAttempts(1).setTimeStamp(1).setEpochTimeReturn(1).setFuncName("1").setLimitPrice(1)

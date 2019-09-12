@@ -1,7 +1,7 @@
 package io.ffreedom.redstone.scheduler;
 
-import io.ffreedom.common.concurrent.queue.impl.disruptor.BufferSize;
-import io.ffreedom.common.concurrent.queue.impl.disruptor.SPSCQueue;
+import io.ffreedom.common.concurrent.disruptor.BufferSize;
+import io.ffreedom.common.concurrent.disruptor.SPSCQueue;
 import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.actor.QuoteActor;
 import io.ffreedom.redstone.actor.StrategyActor;

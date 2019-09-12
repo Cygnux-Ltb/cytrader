@@ -3,7 +3,7 @@ package io.ffreedom.redstone.example;
 import org.eclipse.collections.api.map.MutableMap;
 
 import io.ffreedom.common.collections.MutableMaps;
-import io.ffreedom.common.concurrent.queue.impl.disruptor.BufferSize;
+import io.ffreedom.common.concurrent.disruptor.BufferSize;
 import io.ffreedom.common.datetime.DateTimeUtil;
 import io.ffreedom.common.log.LogLevel;
 import io.ffreedom.common.log.LoggerSetter;
