@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
-import io.ffreedom.common.concurrent.queue.ArrayBlockingMPSCQueue;
+import io.ffreedom.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.ffreedom.common.functional.BiConverter;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;
@@ -53,7 +53,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				.setPassword(paramMap.getString(JctpAdaptorParams.CTP_Password));
 		// 初始化Gateway
 		this.gateway = new JctpGateway("Jctp-Gateway", userInfo,
-				ArrayBlockingMPSCQueue.autoStartQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
+				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
 						BasicMarketData marketData = marketDataConverter.convert(msg.getRspDepthMarketData());
