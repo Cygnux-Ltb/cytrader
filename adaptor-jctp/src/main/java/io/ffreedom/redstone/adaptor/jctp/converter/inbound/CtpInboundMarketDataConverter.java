@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.slf4j.Logger;
 
-import io.ffreedom.common.datetime.DateTimePattern;
+import io.ffreedom.common.datetime.Pattern.DatePattern;
+import io.ffreedom.common.datetime.Pattern.TimePattern;
 import io.ffreedom.common.datetime.TimeZones;
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;
@@ -18,9 +19,9 @@ import io.ffreedom.redstone.storage.InstrumentKeeper;
 
 public class CtpInboundMarketDataConverter implements Converter<RspDepthMarketData, BasicMarketData> {
 
-	private DateTimeFormatter updateTimeformatter = DateTimePattern.HH_MM_SS.newFormatter();
+	private DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newFormatter();
 
-	private DateTimeFormatter actionDayformatter = DateTimePattern.YYYYMMDD.newFormatter();
+	private DateTimeFormatter actionDayformatter = DatePattern.YYYYMMDD.newFormatter();
 
 	private Logger logger = CommonLoggerFactory.getLogger(CtpInboundMarketDataConverter.class);
 
