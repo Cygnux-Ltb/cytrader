@@ -1,9 +1,17 @@
 package io.ffreedom.redstone.actor;
 
-public final class MarketDataDumpActor {
+import com.lmax.disruptor.EventHandler;
+
+import io.ffreedom.polaris.market.impl.BasicMarketData;
+
+public final class MarketDataDumpActor implements EventHandler<BasicMarketData> {
+
 	
-	private void onMarketData() {
-		
+	
+	@Override
+	public void onEvent(BasicMarketData event, long sequence, boolean endOfBatch) throws Exception {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -13,7 +13,7 @@ import io.ffreedom.redstone.adaptor.simulator.converter.OrderConverter;
 import io.ffreedom.redstone.core.adaptor.impl.InboundAdaptor;
 import io.ffreedom.redstone.core.order.impl.OrderReport;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
-import io.ffreedom.transport.core.role.Receiver;
+import io.ffreedom.transport.core.api.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 

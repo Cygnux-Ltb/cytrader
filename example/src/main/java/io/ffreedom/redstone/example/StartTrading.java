@@ -3,7 +3,7 @@ package io.ffreedom.redstone.example;
 import org.eclipse.collections.api.map.MutableMap;
 
 import io.ffreedom.common.collections.MutableMaps;
-import io.ffreedom.common.concurrent.queue.impl.disruptor.BufferSize;
+import io.ffreedom.common.concurrent.disruptor.BufferSize;
 import io.ffreedom.common.datetime.DateTimeUtil;
 import io.ffreedom.common.log.LogLevel;
 import io.ffreedom.common.log.LoggerSetter;
@@ -20,7 +20,7 @@ import io.ffreedom.redstone.adaptor.jctp.JctpInboundAdaptor;
 import io.ffreedom.redstone.adaptor.jctp.JctpOutboundAdaptor;
 import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.ffreedom.redstone.core.strategy.StrategyScheduler;
-import io.ffreedom.redstone.scheduler.SPSCStrategyScheduler;
+import io.ffreedom.redstone.scheduler.SpscStrategyScheduler;
 import io.ffreedom.redstone.storage.AdaptorKeeper;
 import io.ffreedom.redstone.storage.InstrumentKeeper;
 import io.ffreedom.redstone.storage.StrategyKeeper;
@@ -37,7 +37,7 @@ public final class StartTrading {
 		// Set Global AppId
 		AppGlobalStatus.setAppId(appId);
 
-		StrategyScheduler scheduler = new SPSCStrategyScheduler(BufferSize.POW2_12);
+		StrategyScheduler scheduler = new SpscStrategyScheduler(BufferSize.POW2_12);
 
 		// Adaptor Params
 		MutableMap<JctpAdaptorParams, Object> paramMap = MutableMaps.newUnifiedMap();

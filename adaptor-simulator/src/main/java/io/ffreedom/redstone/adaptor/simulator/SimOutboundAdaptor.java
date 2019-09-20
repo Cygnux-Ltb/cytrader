@@ -12,7 +12,7 @@ import io.ffreedom.redstone.core.order.api.Order;
 import io.ffreedom.redstone.core.order.enums.OrdStatus;
 import io.ffreedom.redstone.core.order.impl.ChildOrder;
 import io.ffreedom.redstone.storage.OrderKeeper;
-import io.ffreedom.transport.core.role.Sender;
+import io.ffreedom.transport.core.api.Sender;
 import io.ffreedom.transport.socket.SocketSender;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 
