@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.common.utils.JointIdUtil;
+import io.ffreedom.common.param.JointIdUtil;
 import io.ffreedom.redstone.core.order.enums.OrdSide;
 import io.ffreedom.redstone.core.order.impl.ChildOrder;
 
