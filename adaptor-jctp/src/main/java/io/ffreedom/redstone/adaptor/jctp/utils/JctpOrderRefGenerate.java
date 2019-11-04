@@ -18,7 +18,7 @@ public final class JctpOrderRefGenerate {
 	private static int increment;
 
 	private static long epochSecondsBenchmarkPoint = ZonedDateTime
-			.of(LocalDate.now().minusDays(1), LocalTime.of(19, 00), TimeZones.DEFAULT_ZONE_ID).toEpochSecond();
+			.of(LocalDate.now().minusDays(1), LocalTime.of(19, 00), TimeZones.SYSTEM_DEFAULT).toEpochSecond();
 
 	private static long lastUseEpochSecondsDifference;
 

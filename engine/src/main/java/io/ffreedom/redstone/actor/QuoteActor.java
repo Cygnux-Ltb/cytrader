@@ -24,7 +24,6 @@ public class QuoteActor {
 	public final static QuoteActor Singleton = new QuoteActor();
 
 	private QuoteActor() {
-
 	}
 
 	public void init() {

@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 
-import io.ffreedom.common.env.SysProperty;
+import io.ffreedom.common.env.SystemPropertys;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
 import io.ffreedom.transport.http.HttpRequester;
@@ -24,7 +24,7 @@ public final class CouchConnector {
 	private CouchConnector() {
 		Properties properties = new Properties();
 		try {
-			File configFile = new File(SysProperty.USER_HOME + "/config/couchdb.properties");
+			File configFile = new File(SystemPropertys.USER_HOME + "/config/couchdb.properties");
 			InputStream inputStream = null;
 			if (configFile.exists())
 				inputStream = new FileInputStream(configFile);
