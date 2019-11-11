@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
-			<artifactId>persistence-avro</artifactId>
+			<artifactId>beans</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.ffreedom</groupId>
@@ -30,4 +30,5 @@
 			<artifactId>engine</artifactId>
 		</dependency>
 	</dependencies>
+	
 </project>

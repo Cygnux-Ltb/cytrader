@@ -5,7 +5,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-
 	<groupId>io.ffreedom</groupId>
 	<artifactId>redstone</artifactId>
 	<version>0.1</version>
@@ -16,13 +15,13 @@
 	<url>https://github.com/yellow013/redstone.git</url>
 
 	<modules>
-		<module>core</module>
-		<module>engine</module>
-		<module>persistence-avro</module>
-		<module>persistence-json</module>
 		<module>adaptor-ib</module>
 		<module>adaptor-jctp</module>
 		<module>adaptor-simulator</module>
+		<module>beans</module>
+		<module>config</module>
+		<module>core</module>
+		<module>engine</module>
 		<module>example</module>
 	</modules>
 
@@ -121,12 +120,12 @@
 			</dependency>
 			<dependency>
 				<groupId>io.ffreedom</groupId>
-				<artifactId>persistence-json</artifactId>
+				<artifactId>config</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.ffreedom</groupId>
-				<artifactId>persistence-avro</artifactId>
+				<artifactId>beans</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
