@@ -6,7 +6,6 @@ import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.persistence.avro.entity.MarketDataLevel1;
 import io.ffreedom.persistence.avro.entity.Order;
-import io.ffreedom.persistence.avro.serializable.AvroBytesDeserializer;
 import io.ffreedom.polaris.market.impl.BasicMarketData;
 import io.ffreedom.redstone.adaptor.simulator.converter.MarketDataConverter;
 import io.ffreedom.redstone.adaptor.simulator.converter.OrderConverter;
@@ -16,6 +15,7 @@ import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.api.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
+import io.nagoya.persistence.avro.serializable.AvroBytesDeserializer;
 
 public class SimInboundAdaptor extends InboundAdaptor {
 
