@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import io.ffreedom.persistence.avro.entity.Order;
-import io.nagoya.persistence.avro.serializable.AvroBytesDeserializer;
-import io.nagoya.persistence.avro.serializable.AvroBytesSerializer;
+import io.mercury.persistence.avro.serializable.AvroBytesDeserializer;
+import io.mercury.persistence.avro.serializable.AvroBytesSerializer;
 
 public class AvroDome0 {
 	

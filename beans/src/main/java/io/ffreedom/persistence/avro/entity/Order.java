@@ -2529,7 +2529,6 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Order build() {
       try {
         Order record = new Order();

@@ -3,10 +3,10 @@ package io.ffreedom.persistence.avro;
 import java.util.Arrays;
 
 import io.ffreedom.persistence.avro.entity.MarketDataSubscribe;
-import io.nagoya.persistence.avro.serializable.AvroBytesDeserializer;
-import io.nagoya.persistence.avro.serializable.AvroBytesSerializer;
-import io.nagoya.persistence.avro.serializable.AvroTextDeserializer;
-import io.nagoya.persistence.avro.serializable.AvroTextSerializer;
+import io.mercury.persistence.avro.serializable.AvroBytesDeserializer;
+import io.mercury.persistence.avro.serializable.AvroBytesSerializer;
+import io.mercury.persistence.avro.serializable.AvroTextDeserializer;
+import io.mercury.persistence.avro.serializable.AvroTextSerializer;
 
 public class AvroDemo {
 
