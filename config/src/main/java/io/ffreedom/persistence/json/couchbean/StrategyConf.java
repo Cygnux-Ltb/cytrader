@@ -1,6 +1,6 @@
 package io.ffreedom.persistence.json.couchbean;
 
-import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
+import io.mercury.persistence.json.JsonWrapper;
 
 public class StrategyConf {
 
@@ -32,7 +32,7 @@ public class StrategyConf {
 		conf.strategyId = 1;
 		conf.tradeables = new String[] { "1", "2", "3" };
 
-		System.out.println(JsonSerializationUtil.objToJson(conf));
+		System.out.println(JsonWrapper.toJson(conf));
 
 		System.out.println();
 

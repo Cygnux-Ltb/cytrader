@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.ffreedom.persistence.json.couchbean.base.CouchConnector;
 import io.ffreedom.persistence.json.couchbean.base.CouchDocumentEnum;
-import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
+import io.mercury.persistence.json.JsonParser;
 
 public class AppConf {
 
@@ -23,7 +23,7 @@ public class AppConf {
 
 		String json = CouchConnector.Singleton.getCouchBeanValue(CouchDocumentEnum.AppConf);
 
-		List<AppConf> jsonToList = JsonSerializationUtil.jsonToList(json, AppConf.class);
+		List<AppConf> jsonToList = JsonParser.toList(json, AppConf.class);
 
 		jsonToList.forEach(appConfig -> {
 			System.out.println(appConfig.getId());

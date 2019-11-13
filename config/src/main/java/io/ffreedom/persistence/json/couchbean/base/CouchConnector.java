@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 
 import io.ffreedom.common.env.SystemPropertys;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.persistence.json.serializable.JsonSerializationUtil;
 import io.ffreedom.transport.http.HttpRequester;
+import io.mercury.persistence.json.JsonParser;
 
 public final class CouchConnector {
 
@@ -46,8 +46,8 @@ public final class CouchConnector {
 	 * @return
 	 */
 	public String getCouchBeanValue(CouchDocument document) {
-		AbsCouchBean absCouchBean = JsonSerializationUtil
-				.jsonToObj(sendGetRequest(document._database(), document._id()), AbsCouchBean.class);
+		AbsCouchBean absCouchBean = JsonParser.toObject(sendGetRequest(document._database(), document._id()),
+				AbsCouchBean.class);
 		return absCouchBean.getValue();
 	}
 
