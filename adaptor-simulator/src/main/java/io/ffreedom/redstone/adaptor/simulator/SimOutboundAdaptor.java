@@ -14,7 +14,7 @@ import io.ffreedom.redstone.storage.OrderKeeper;
 import io.ffreedom.transport.core.api.Sender;
 import io.ffreedom.transport.socket.SocketSender;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
-import io.nagoya.persistence.avro.serializable.AvroBytesSerializer;
+import io.mercury.persistence.avro.serializable.AvroBytesSerializer;
 
 public class SimOutboundAdaptor extends OutboundAdaptor {
 

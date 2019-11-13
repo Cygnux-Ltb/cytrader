@@ -15,7 +15,7 @@ import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.api.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
-import io.nagoya.persistence.avro.serializable.AvroBytesDeserializer;
+import io.mercury.persistence.avro.serializable.AvroBytesDeserializer;
 
 public class SimInboundAdaptor extends InboundAdaptor {
 
