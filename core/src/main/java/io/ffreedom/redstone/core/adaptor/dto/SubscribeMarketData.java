@@ -10,7 +10,7 @@ public class SubscribeMarketData {
 	private ImmutableSet<Instrument> instrumentSet;
 
 	protected SubscribeMarketData(Instrument... instruments) {
-		this.instrumentSet = ImmutableSets.newImmutableSet(instruments);
+		this.instrumentSet = ImmutableSets.newSet(instruments);
 	}
 
 	public static SubscribeMarketData build(Instrument... instruments) {

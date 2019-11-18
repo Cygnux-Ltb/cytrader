@@ -56,7 +56,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
 		this.defaultStrategyName = "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]";
-		this.instruments = ImmutableLists.newImmutableList(instruments);
+		this.instruments = ImmutableLists.newList(instruments);
 	}
 
 	@Override

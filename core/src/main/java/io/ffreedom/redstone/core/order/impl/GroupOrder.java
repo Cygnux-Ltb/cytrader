@@ -15,7 +15,7 @@ public abstract class GroupOrder {
 	private ImmutableSet<Order> orderSet;
 
 	public GroupOrder(Order... orders) {
-		this.orderSet = ImmutableSets.newImmutableSet(orders);
+		this.orderSet = ImmutableSets.newSet(orders);
 		this.orderTimestamps = OrdTimestamps.generate();
 	}
 
