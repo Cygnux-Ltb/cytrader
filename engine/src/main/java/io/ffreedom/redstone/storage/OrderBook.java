@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
+import io.ffreedom.common.collections.InitialCapacity;
 import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.redstone.core.order.api.Order;
 
@@ -27,21 +28,28 @@ public class OrderBook {
 	// 存储本OrderBook里的所有活动状态的short订单,以ordSysId索引
 	private MutableLongObjectMap<Order> activeShortOrders;
 
-	private OrderBook(int size) {
-		this.orders = MutableMaps.newLongObjectHashMap(size);
-		this.activeOrders = MutableMaps.newLongObjectHashMap(size / 4);
-		this.longOrders = MutableMaps.newLongObjectHashMap(size / 2);
-		this.activeLongOrders = MutableMaps.newLongObjectHashMap(size / 8);
-		this.shortOrders = MutableMaps.newLongObjectHashMap(size / 2);
-		this.activeShortOrders = MutableMaps.newLongObjectHashMap(size / 8);
+	private OrderBook(InitialCapacity capacity) {
+		//添加取一半, 1/4, 1/8
+//		this.orders = MutableMaps.newLongObjectHashMap(size);
+//		this.activeOrders = MutableMaps.newLongObjectHashMap(size / 4);
+//		this.longOrders = MutableMaps.newLongObjectHashMap(size / 2);
+//		this.activeLongOrders = MutableMaps.newLongObjectHashMap(size / 8);
+//		this.shortOrders = MutableMaps.newLongObjectHashMap(size / 2);
+//		this.activeShortOrders = MutableMaps.newLongObjectHashMap(size / 8);
+		this.orders = MutableMaps.newLongObjectHashMap(capacity);
+		this.activeOrders = MutableMaps.newLongObjectHashMap(capacity);
+		this.longOrders = MutableMaps.newLongObjectHashMap(capacity);
+		this.activeLongOrders = MutableMaps.newLongObjectHashMap(capacity);
+		this.shortOrders = MutableMaps.newLongObjectHashMap(capacity);
+		this.activeShortOrders = MutableMaps.newLongObjectHashMap(capacity);
 	}
 
 	public static OrderBook newInstance() {
-		return new OrderBook(1024);
+		return new OrderBook(InitialCapacity.L10_Size_1024);
 	}
 
-	public static OrderBook newInstance(int size) {
-		return new OrderBook(size);
+	public static OrderBook newInstance(InitialCapacity capacity) {
+		return new OrderBook(capacity);
 	}
 
 	public Order putOrder(Order order) {
