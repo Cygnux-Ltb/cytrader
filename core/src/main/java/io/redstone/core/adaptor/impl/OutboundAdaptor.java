@@ -1,8 +1,8 @@
-package io.ffreedom.redstone.core.adaptor.impl;
+package io.redstone.core.adaptor.impl;
 
-import io.ffreedom.redstone.core.account.Account;
-import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
-import io.ffreedom.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.account.Account;
+import io.redstone.core.adaptor.dto.SubscribeMarketData;
+import io.redstone.core.order.impl.ChildOrder;
 
 public abstract class OutboundAdaptor extends AbstractAdaptor {
 

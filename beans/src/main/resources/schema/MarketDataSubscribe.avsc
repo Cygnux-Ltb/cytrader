@@ -1,5 +1,5 @@
 {
-    "namespace": "io.ffreedom.persistence.avro.entity",
+    "namespace": "io.redstone.persistence.avro.entity",
     "type": "record",
     "name": "MarketDataSubscribe",
     "fields": [

@@ -1,9 +1,9 @@
-package io.ffreedom.redstone.core.order.enums;
+package io.redstone.core.order.enums;
 
 import org.slf4j.Logger;
 
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.redstone.core.trade.enums.TrdDirection;
+import io.redstone.core.trade.enums.TrdDirection;
 
 public enum OrdSide {
 

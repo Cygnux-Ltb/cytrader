@@ -1,11 +1,11 @@
-package io.ffreedom.persistence.avro;
+package io.redstone.persistence.avro;
 
 import java.io.IOException;
 import java.util.List;
 
-import io.ffreedom.persistence.avro.entity.Order;
 import io.mercury.persistence.avro.serializable.AvroBytesDeserializer;
 import io.mercury.persistence.avro.serializable.AvroBytesSerializer;
+import io.redstone.persistence.avro.entity.Order;
 
 public class AvroDome0 {
 	

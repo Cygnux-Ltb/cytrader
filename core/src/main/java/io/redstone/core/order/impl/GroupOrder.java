@@ -1,10 +1,10 @@
-package io.ffreedom.redstone.core.order.impl;
+package io.redstone.core.order.impl;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
 import io.ffreedom.common.collections.ImmutableSets;
-import io.ffreedom.redstone.core.order.api.Order;
-import io.ffreedom.redstone.core.order.structure.OrdTimestamps;
+import io.redstone.core.order.api.Order;
+import io.redstone.core.order.structure.OrdTimestamps;
 
 @Deprecated
 public abstract class GroupOrder {

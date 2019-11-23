@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.specific.strategy;
+package io.redstone.specific.strategy;
 
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
@@ -10,27 +10,27 @@ import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.utils.StringUtil;
-import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.polaris.market.api.MarketData;
-import io.ffreedom.polaris.market.impl.BasicMarketData;
-import io.ffreedom.redstone.actor.OrderExecutionActor;
-import io.ffreedom.redstone.actor.QuoteActor;
-import io.ffreedom.redstone.actor.QuoteActor.AtomicQuote;
-import io.ffreedom.redstone.core.adaptor.impl.OutboundAdaptor;
-import io.ffreedom.redstone.core.order.api.Order;
-import io.ffreedom.redstone.core.order.enums.OrdSide;
-import io.ffreedom.redstone.core.order.enums.OrdType;
-import io.ffreedom.redstone.core.order.impl.ParentOrder;
-import io.ffreedom.redstone.core.order.impl.VirtualOrder;
-import io.ffreedom.redstone.core.order.structure.OrdQtyPrice;
-import io.ffreedom.redstone.core.order.utils.PriceUtil;
-import io.ffreedom.redstone.core.strategy.CircuitBreaker;
-import io.ffreedom.redstone.core.strategy.Strategy;
-import io.ffreedom.redstone.core.strategy.StrategyControlEvent;
-import io.ffreedom.redstone.core.trade.enums.TrdDirection;
-import io.ffreedom.redstone.storage.AccountKeeper;
-import io.ffreedom.redstone.storage.InstrumentKeeper;
-import io.ffreedom.redstone.storage.OrderKeeper;
+import io.polaris.financial.Instrument;
+import io.polaris.market.api.MarketData;
+import io.polaris.market.impl.BasicMarketData;
+import io.redstone.actor.OrderExecutionActor;
+import io.redstone.actor.QuoteActor;
+import io.redstone.actor.QuoteActor.AtomicQuote;
+import io.redstone.core.adaptor.impl.OutboundAdaptor;
+import io.redstone.core.order.api.Order;
+import io.redstone.core.order.enums.OrdSide;
+import io.redstone.core.order.enums.OrdType;
+import io.redstone.core.order.impl.ParentOrder;
+import io.redstone.core.order.impl.VirtualOrder;
+import io.redstone.core.order.structure.OrdQtyPrice;
+import io.redstone.core.order.utils.PriceUtil;
+import io.redstone.core.strategy.CircuitBreaker;
+import io.redstone.core.strategy.Strategy;
+import io.redstone.core.strategy.StrategyControlEvent;
+import io.redstone.core.trade.enums.TrdDirection;
+import io.redstone.storage.AccountKeeper;
+import io.redstone.storage.InstrumentKeeper;
+import io.redstone.storage.OrderKeeper;
 
 public abstract class BaseStrategy<M extends MarketData> implements Strategy, CircuitBreaker {
 

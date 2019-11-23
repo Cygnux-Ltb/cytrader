@@ -1,4 +1,4 @@
-package io.ffreedom.persistence.json.entity.pack;
+package io.redstone.config.entity.pack;
 
 import java.util.HashMap;
 import java.util.Map;

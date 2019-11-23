@@ -1,10 +1,10 @@
-package io.ffreedom.persistence.json.couchbean;
+package io.redstone.config.couchbean;
 
 import java.util.List;
 
-import io.ffreedom.persistence.json.couchbean.base.CouchConnector;
-import io.ffreedom.persistence.json.couchbean.base.CouchDocumentEnum;
 import io.mercury.persistence.json.JsonParser;
+import io.redstone.config.couchbean.base.CouchConnector;
+import io.redstone.config.couchbean.base.CouchDocumentEnum;
 
 public class AppConf {
 

@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order.enums;
+package io.redstone.core.order.enums;
 
 import org.slf4j.Logger;
 

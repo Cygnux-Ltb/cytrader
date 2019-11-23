@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.adaptor.simulator;
+package io.redstone.adaptor.simulator;
 
 import io.ffreedom.common.param.ParamKey;
 import io.ffreedom.common.param.ParamType;

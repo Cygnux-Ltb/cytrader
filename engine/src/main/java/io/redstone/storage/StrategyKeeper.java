@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.storage;
+package io.redstone.storage;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import io.ffreedom.common.collections.MutableLists;
 import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.redstone.core.strategy.Strategy;
+import io.polaris.financial.Instrument;
+import io.redstone.core.strategy.Strategy;
 
 @NotThreadSafe
 public final class StrategyKeeper {

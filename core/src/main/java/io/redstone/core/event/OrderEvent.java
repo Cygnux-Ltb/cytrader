@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.event;
+package io.redstone.core.event;
 
 public class OrderEvent {
 

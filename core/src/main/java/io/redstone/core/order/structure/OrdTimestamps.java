@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.order.structure;
+package io.redstone.core.order.structure;
 
 import javax.annotation.Nullable;
 

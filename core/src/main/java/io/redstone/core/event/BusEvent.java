@@ -1,9 +1,9 @@
-package io.ffreedom.redstone.core.event;
+package io.redstone.core.event;
 
-import io.ffreedom.polaris.market.api.MarketData;
-import io.ffreedom.redstone.core.order.api.Order;
-import io.ffreedom.redstone.core.order.impl.OrderReport;
-import io.ffreedom.redstone.core.trade.Signal;
+import io.polaris.market.api.MarketData;
+import io.redstone.core.order.api.Order;
+import io.redstone.core.order.impl.OrderReport;
+import io.redstone.core.trade.Signal;
 
 public final class BusEvent {
 

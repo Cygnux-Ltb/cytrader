@@ -1,8 +1,8 @@
-package io.ffreedom.redstone.actor;
+package io.redstone.actor;
 
 import com.lmax.disruptor.EventHandler;
 
-import io.ffreedom.redstone.core.order.api.Order;
+import io.redstone.core.order.api.Order;
 
 public final class OrderDumpActor implements EventHandler<Order> {
 

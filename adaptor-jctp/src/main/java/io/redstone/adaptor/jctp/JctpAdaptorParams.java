@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.adaptor.jctp;
+package io.redstone.adaptor.jctp;
 
 import io.ffreedom.common.param.ParamKey;
 import io.ffreedom.common.param.ParamType;

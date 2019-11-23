@@ -1,7 +1,7 @@
-package io.ffreedom.redstone.specific.strategy;
+package io.redstone.specific.strategy;
 
-import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.polaris.market.api.MarketData;
+import io.polaris.financial.Instrument;
+import io.polaris.market.api.MarketData;
 
 public abstract class IndicatorStrategy<M extends MarketData> extends BaseStrategy<M> {
 

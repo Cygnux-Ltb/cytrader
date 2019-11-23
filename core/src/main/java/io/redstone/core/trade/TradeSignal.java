@@ -1,8 +1,8 @@
-package io.ffreedom.redstone.core.trade;
+package io.redstone.core.trade;
 
-import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.redstone.core.trade.enums.TrdAction;
-import io.ffreedom.redstone.core.trade.enums.TrdDirection;
+import io.polaris.financial.Instrument;
+import io.redstone.core.trade.enums.TrdAction;
+import io.redstone.core.trade.enums.TrdDirection;
 
 public interface TradeSignal {
 

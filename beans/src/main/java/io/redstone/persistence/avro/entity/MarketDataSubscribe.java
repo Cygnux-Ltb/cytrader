@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.ffreedom.persistence.avro.entity;
+package io.redstone.persistence.avro.entity;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -169,8 +169,8 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
    * Creates a new MarketDataSubscribe RecordBuilder.
    * @return A new MarketDataSubscribe RecordBuilder
    */
-  public static io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder() {
-    return new io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder();
+  public static io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder() {
+    return new io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder();
   }
 
   /**
@@ -178,8 +178,8 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
    * @param other The existing builder to copy.
    * @return A new MarketDataSubscribe RecordBuilder
    */
-  public static io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder(io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder other) {
-    return new io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder(other);
+  public static io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder(io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder other) {
+    return new io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder(other);
   }
 
   /**
@@ -187,8 +187,8 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
    * @param other The existing instance to copy.
    * @return A new MarketDataSubscribe RecordBuilder
    */
-  public static io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder(io.ffreedom.persistence.avro.entity.MarketDataSubscribe other) {
-    return new io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder(other);
+  public static io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder(io.redstone.persistence.avro.entity.MarketDataSubscribe other) {
+    return new io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder(other);
   }
 
   /**
@@ -211,7 +211,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder other) {
+    private Builder(io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.uniqueId)) {
         this.uniqueId = data().deepCopy(fields()[0].schema(), other.uniqueId);
@@ -235,7 +235,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
      * Creates a Builder by copying an existing MarketDataSubscribe instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.ffreedom.persistence.avro.entity.MarketDataSubscribe other) {
+    private Builder(io.redstone.persistence.avro.entity.MarketDataSubscribe other) {
             super(SCHEMA$);
       if (isValidValue(fields()[0], other.uniqueId)) {
         this.uniqueId = data().deepCopy(fields()[0].schema(), other.uniqueId);
@@ -268,7 +268,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
       * @param value The value of 'uniqueId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder setUniqueId(int value) {
+    public io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder setUniqueId(int value) {
       validate(fields()[0], value);
       this.uniqueId = value;
       fieldSetFlags()[0] = true;
@@ -288,7 +288,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
       * Clears the value of the 'uniqueId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder clearUniqueId() {
+    public io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder clearUniqueId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -306,7 +306,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
       * @param value The value of 'startTradingDay'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder setStartTradingDay(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder setStartTradingDay(java.lang.String value) {
       validate(fields()[1], value);
       this.startTradingDay = value;
       fieldSetFlags()[1] = true;
@@ -326,7 +326,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
       * Clears the value of the 'startTradingDay' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder clearStartTradingDay() {
+    public io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder clearStartTradingDay() {
       startTradingDay = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -345,7 +345,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
       * @param value The value of 'endTradingDay'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder setEndTradingDay(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder setEndTradingDay(java.lang.String value) {
       validate(fields()[2], value);
       this.endTradingDay = value;
       fieldSetFlags()[2] = true;
@@ -365,7 +365,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
       * Clears the value of the 'endTradingDay' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder clearEndTradingDay() {
+    public io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder clearEndTradingDay() {
       endTradingDay = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -384,7 +384,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
       * @param value The value of 'instrumentIdList'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder setInstrumentIdList(java.util.List<java.lang.String> value) {
+    public io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder setInstrumentIdList(java.util.List<java.lang.String> value) {
       validate(fields()[3], value);
       this.instrumentIdList = value;
       fieldSetFlags()[3] = true;
@@ -404,7 +404,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
       * Clears the value of the 'instrumentIdList' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.MarketDataSubscribe.Builder clearInstrumentIdList() {
+    public io.redstone.persistence.avro.entity.MarketDataSubscribe.Builder clearInstrumentIdList() {
       instrumentIdList = null;
       fieldSetFlags()[3] = false;
       return this;

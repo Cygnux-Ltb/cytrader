@@ -1,21 +1,21 @@
-package io.ffreedom.redstone.adaptor.simulator;
+package io.redstone.adaptor.simulator;
 
 import java.util.List;
 
 import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamKeyMap;
-import io.ffreedom.persistence.avro.entity.MarketDataLevel1;
-import io.ffreedom.persistence.avro.entity.Order;
-import io.ffreedom.polaris.market.impl.BasicMarketData;
-import io.ffreedom.redstone.adaptor.simulator.converter.MarketDataConverter;
-import io.ffreedom.redstone.adaptor.simulator.converter.OrderConverter;
-import io.ffreedom.redstone.core.adaptor.impl.InboundAdaptor;
-import io.ffreedom.redstone.core.order.impl.OrderReport;
-import io.ffreedom.redstone.core.strategy.StrategyScheduler;
 import io.ffreedom.transport.core.api.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 import io.mercury.persistence.avro.serializable.AvroBytesDeserializer;
+import io.polaris.market.impl.BasicMarketData;
+import io.redstone.adaptor.simulator.converter.MarketDataConverter;
+import io.redstone.adaptor.simulator.converter.OrderConverter;
+import io.redstone.core.adaptor.impl.InboundAdaptor;
+import io.redstone.core.order.impl.OrderReport;
+import io.redstone.core.strategy.StrategyScheduler;
+import io.redstone.persistence.avro.entity.MarketDataLevel1;
+import io.redstone.persistence.avro.entity.Order;
 
 public class SimInboundAdaptor extends InboundAdaptor {
 

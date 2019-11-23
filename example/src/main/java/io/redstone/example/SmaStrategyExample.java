@@ -1,11 +1,11 @@
-package io.ffreedom.redstone.example;
+package io.redstone.example;
 
-import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.polaris.indicators.events.SmaEvent;
-import io.ffreedom.polaris.indicators.impl.ma.SmaPoint;
-import io.ffreedom.polaris.market.impl.BasicMarketData;
-import io.ffreedom.redstone.core.adaptor.impl.OutboundAdaptor;
-import io.ffreedom.redstone.specific.strategy.IndicatorStrategy;
+import io.polaris.financial.Instrument;
+import io.polaris.indicators.events.SmaEvent;
+import io.polaris.indicators.impl.ma.SmaPoint;
+import io.polaris.market.impl.BasicMarketData;
+import io.redstone.core.adaptor.impl.OutboundAdaptor;
+import io.redstone.specific.strategy.IndicatorStrategy;
 
 public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> implements SmaEvent {
 

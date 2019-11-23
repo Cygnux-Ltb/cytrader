@@ -1,9 +1,9 @@
-package io.ffreedom.redstone.storage;
+package io.redstone.storage;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.ffreedom.common.collections.MutableMaps;
-import io.ffreedom.redstone.core.adaptor.impl.OutboundAdaptor;
+import io.redstone.core.adaptor.impl.OutboundAdaptor;
 
 public class AdaptorKeeper {
 

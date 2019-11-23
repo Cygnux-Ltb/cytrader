@@ -1,4 +1,4 @@
-package io.ffreedom.persistence.json.couchbean.base;
+package io.redstone.config.couchbean.base;
 
 public enum CouchDocumentEnum implements CouchDocument {
 

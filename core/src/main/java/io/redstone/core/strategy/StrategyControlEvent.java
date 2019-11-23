@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.strategy;
+package io.redstone.core.strategy;
 
 public interface StrategyControlEvent {
 

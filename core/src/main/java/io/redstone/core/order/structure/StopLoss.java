@@ -1,6 +1,6 @@
-package io.ffreedom.redstone.core.order.structure;
+package io.redstone.core.order.structure;
 
-import io.ffreedom.redstone.core.trade.enums.TrdDirection;
+import io.redstone.core.trade.enums.TrdDirection;
 
 public final class StopLoss implements Comparable<StopLoss> {
 

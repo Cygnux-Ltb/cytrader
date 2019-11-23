@@ -1,6 +1,6 @@
-package io.ffreedom.redstone.core.adaptor.impl;
+package io.redstone.core.adaptor.impl;
 
-import io.ffreedom.redstone.core.adaptor.api.Adaptor;
+import io.redstone.core.adaptor.api.Adaptor;
 
 public abstract class AbstractAdaptor implements Adaptor {
 

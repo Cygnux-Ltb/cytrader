@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.trade;
+package io.redstone.core.trade;
 
 public interface Signal {
 

@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.jmx;
+package io.redstone.jmx;
 
 public interface ConfigMBean {
 

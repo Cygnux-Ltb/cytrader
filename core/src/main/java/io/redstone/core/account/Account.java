@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.account;
+package io.redstone.core.account;
 
 import org.eclipse.collections.api.set.MutableSet;
 

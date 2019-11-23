@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.adaptor.jctp.dto.outbound;
+package io.redstone.adaptor.jctp.dto.outbound;
 
 public class CtpOutboundCancelOrder {
 

@@ -1,7 +1,7 @@
-package io.ffreedom.redstone.specific.position;
+package io.redstone.specific.position;
 
-import io.ffreedom.redstone.core.position.api.PositionProducer;
-import io.ffreedom.redstone.core.position.impl.AbsPositionManager;
+import io.redstone.core.position.api.PositionProducer;
+import io.redstone.core.position.impl.AbsPositionManager;
 
 public final class ChinaFuturesPositionManager extends AbsPositionManager<ChinaFuturesPosition> {
 

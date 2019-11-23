@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.ffreedom.persistence.avro.entity;
+package io.redstone.persistence.avro.entity;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -820,8 +820,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
    * Creates a new Order RecordBuilder.
    * @return A new Order RecordBuilder
    */
-  public static io.ffreedom.persistence.avro.entity.Order.Builder newBuilder() {
-    return new io.ffreedom.persistence.avro.entity.Order.Builder();
+  public static io.redstone.persistence.avro.entity.Order.Builder newBuilder() {
+    return new io.redstone.persistence.avro.entity.Order.Builder();
   }
 
   /**
@@ -829,8 +829,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
    * @param other The existing builder to copy.
    * @return A new Order RecordBuilder
    */
-  public static io.ffreedom.persistence.avro.entity.Order.Builder newBuilder(io.ffreedom.persistence.avro.entity.Order.Builder other) {
-    return new io.ffreedom.persistence.avro.entity.Order.Builder(other);
+  public static io.redstone.persistence.avro.entity.Order.Builder newBuilder(io.redstone.persistence.avro.entity.Order.Builder other) {
+    return new io.redstone.persistence.avro.entity.Order.Builder(other);
   }
 
   /**
@@ -838,8 +838,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
    * @param other The existing instance to copy.
    * @return A new Order RecordBuilder
    */
-  public static io.ffreedom.persistence.avro.entity.Order.Builder newBuilder(io.ffreedom.persistence.avro.entity.Order other) {
-    return new io.ffreedom.persistence.avro.entity.Order.Builder(other);
+  public static io.redstone.persistence.avro.entity.Order.Builder newBuilder(io.redstone.persistence.avro.entity.Order other) {
+    return new io.redstone.persistence.avro.entity.Order.Builder(other);
   }
 
   /**
@@ -893,7 +893,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.ffreedom.persistence.avro.entity.Order.Builder other) {
+    private Builder(io.redstone.persistence.avro.entity.Order.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.strategyId)) {
         this.strategyId = data().deepCopy(fields()[0].schema(), other.strategyId);
@@ -1041,7 +1041,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
      * Creates a Builder by copying an existing Order instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.ffreedom.persistence.avro.entity.Order other) {
+    private Builder(io.redstone.persistence.avro.entity.Order other) {
             super(SCHEMA$);
       if (isValidValue(fields()[0], other.strategyId)) {
         this.strategyId = data().deepCopy(fields()[0].schema(), other.strategyId);
@@ -1198,7 +1198,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'strategyId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setStrategyId(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setStrategyId(int value) {
       validate(fields()[0], value);
       this.strategyId = value;
       fieldSetFlags()[0] = true;
@@ -1218,7 +1218,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'strategyId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearStrategyId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearStrategyId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -1236,7 +1236,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'brokerId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setBrokerId(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setBrokerId(java.lang.String value) {
       validate(fields()[1], value);
       this.brokerId = value;
       fieldSetFlags()[1] = true;
@@ -1256,7 +1256,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'brokerId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearBrokerId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearBrokerId() {
       brokerId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -1275,7 +1275,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'investorId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setInvestorId(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setInvestorId(java.lang.String value) {
       validate(fields()[2], value);
       this.investorId = value;
       fieldSetFlags()[2] = true;
@@ -1295,7 +1295,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'investorId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearInvestorId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearInvestorId() {
       investorId = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -1314,7 +1314,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'instrumentId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setInstrumentId(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setInstrumentId(java.lang.String value) {
       validate(fields()[3], value);
       this.instrumentId = value;
       fieldSetFlags()[3] = true;
@@ -1334,7 +1334,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'instrumentId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearInstrumentId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearInstrumentId() {
       instrumentId = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -1353,7 +1353,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'orderMsgType'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setOrderMsgType(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setOrderMsgType(int value) {
       validate(fields()[4], value);
       this.orderMsgType = value;
       fieldSetFlags()[4] = true;
@@ -1373,7 +1373,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'orderMsgType' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearOrderMsgType() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearOrderMsgType() {
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -1391,7 +1391,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'orderRef'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setOrderRef(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setOrderRef(int value) {
       validate(fields()[5], value);
       this.orderRef = value;
       fieldSetFlags()[5] = true;
@@ -1411,7 +1411,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'orderRef' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearOrderRef() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearOrderRef() {
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -1429,7 +1429,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'userId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setUserId(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setUserId(java.lang.String value) {
       validate(fields()[6], value);
       this.userId = value;
       fieldSetFlags()[6] = true;
@@ -1449,7 +1449,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'userId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearUserId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearUserId() {
       userId = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -1468,7 +1468,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'direction'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setDirection(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setDirection(int value) {
       validate(fields()[7], value);
       this.direction = value;
       fieldSetFlags()[7] = true;
@@ -1488,7 +1488,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'direction' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearDirection() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearDirection() {
       fieldSetFlags()[7] = false;
       return this;
     }
@@ -1506,7 +1506,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'offset'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setOffset(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setOffset(int value) {
       validate(fields()[8], value);
       this.offset = value;
       fieldSetFlags()[8] = true;
@@ -1526,7 +1526,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'offset' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearOffset() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearOffset() {
       fieldSetFlags()[8] = false;
       return this;
     }
@@ -1544,7 +1544,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'limitPrice'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setLimitPrice(double value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setLimitPrice(double value) {
       validate(fields()[9], value);
       this.limitPrice = value;
       fieldSetFlags()[9] = true;
@@ -1564,7 +1564,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'limitPrice' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearLimitPrice() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearLimitPrice() {
       fieldSetFlags()[9] = false;
       return this;
     }
@@ -1582,7 +1582,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'volume'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setVolume(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setVolume(int value) {
       validate(fields()[10], value);
       this.volume = value;
       fieldSetFlags()[10] = true;
@@ -1602,7 +1602,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'volume' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearVolume() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearVolume() {
       fieldSetFlags()[10] = false;
       return this;
     }
@@ -1620,7 +1620,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'volumeFilled'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setVolumeFilled(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setVolumeFilled(int value) {
       validate(fields()[11], value);
       this.volumeFilled = value;
       fieldSetFlags()[11] = true;
@@ -1640,7 +1640,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'volumeFilled' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearVolumeFilled() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearVolumeFilled() {
       fieldSetFlags()[11] = false;
       return this;
     }
@@ -1658,7 +1658,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'volumeRemained'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setVolumeRemained(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setVolumeRemained(int value) {
       validate(fields()[12], value);
       this.volumeRemained = value;
       fieldSetFlags()[12] = true;
@@ -1678,7 +1678,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'volumeRemained' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearVolumeRemained() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearVolumeRemained() {
       fieldSetFlags()[12] = false;
       return this;
     }
@@ -1696,7 +1696,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'volumeTotalOriginal'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setVolumeTotalOriginal(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setVolumeTotalOriginal(int value) {
       validate(fields()[13], value);
       this.volumeTotalOriginal = value;
       fieldSetFlags()[13] = true;
@@ -1716,7 +1716,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'volumeTotalOriginal' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearVolumeTotalOriginal() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearVolumeTotalOriginal() {
       fieldSetFlags()[13] = false;
       return this;
     }
@@ -1734,7 +1734,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'tradingDay'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setTradingDay(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setTradingDay(java.lang.String value) {
       validate(fields()[14], value);
       this.tradingDay = value;
       fieldSetFlags()[14] = true;
@@ -1754,7 +1754,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'tradingDay' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearTradingDay() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearTradingDay() {
       tradingDay = null;
       fieldSetFlags()[14] = false;
       return this;
@@ -1773,7 +1773,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'orderSysId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setOrderSysId(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setOrderSysId(java.lang.String value) {
       validate(fields()[15], value);
       this.orderSysId = value;
       fieldSetFlags()[15] = true;
@@ -1793,7 +1793,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'orderSysId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearOrderSysId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearOrderSysId() {
       orderSysId = null;
       fieldSetFlags()[15] = false;
       return this;
@@ -1812,7 +1812,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'orderStatus'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setOrderStatus(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setOrderStatus(int value) {
       validate(fields()[16], value);
       this.orderStatus = value;
       fieldSetFlags()[16] = true;
@@ -1832,7 +1832,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'orderStatus' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearOrderStatus() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearOrderStatus() {
       fieldSetFlags()[16] = false;
       return this;
     }
@@ -1850,7 +1850,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'orderType'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setOrderType(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setOrderType(int value) {
       validate(fields()[17], value);
       this.orderType = value;
       fieldSetFlags()[17] = true;
@@ -1870,7 +1870,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'orderType' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearOrderType() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearOrderType() {
       fieldSetFlags()[17] = false;
       return this;
     }
@@ -1888,7 +1888,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'price'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setPrice(double value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setPrice(double value) {
       validate(fields()[18], value);
       this.price = value;
       fieldSetFlags()[18] = true;
@@ -1908,7 +1908,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'price' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearPrice() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearPrice() {
       fieldSetFlags()[18] = false;
       return this;
     }
@@ -1926,7 +1926,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'tradeId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setTradeId(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setTradeId(java.lang.String value) {
       validate(fields()[19], value);
       this.tradeId = value;
       fieldSetFlags()[19] = true;
@@ -1946,7 +1946,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'tradeId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearTradeId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearTradeId() {
       tradeId = null;
       fieldSetFlags()[19] = false;
       return this;
@@ -1965,7 +1965,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'ordRejReason'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setOrdRejReason(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setOrdRejReason(int value) {
       validate(fields()[20], value);
       this.ordRejReason = value;
       fieldSetFlags()[20] = true;
@@ -1985,7 +1985,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'ordRejReason' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearOrdRejReason() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearOrdRejReason() {
       fieldSetFlags()[20] = false;
       return this;
     }
@@ -2003,7 +2003,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'insertTime'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setInsertTime(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setInsertTime(java.lang.String value) {
       validate(fields()[21], value);
       this.insertTime = value;
       fieldSetFlags()[21] = true;
@@ -2023,7 +2023,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'insertTime' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearInsertTime() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearInsertTime() {
       insertTime = null;
       fieldSetFlags()[21] = false;
       return this;
@@ -2042,7 +2042,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'updateTime'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setUpdateTime(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setUpdateTime(java.lang.String value) {
       validate(fields()[22], value);
       this.updateTime = value;
       fieldSetFlags()[22] = true;
@@ -2062,7 +2062,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'updateTime' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearUpdateTime() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearUpdateTime() {
       updateTime = null;
       fieldSetFlags()[22] = false;
       return this;
@@ -2081,7 +2081,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'cancelTime'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setCancelTime(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setCancelTime(java.lang.String value) {
       validate(fields()[23], value);
       this.cancelTime = value;
       fieldSetFlags()[23] = true;
@@ -2101,7 +2101,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'cancelTime' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearCancelTime() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearCancelTime() {
       cancelTime = null;
       fieldSetFlags()[23] = false;
       return this;
@@ -2120,7 +2120,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'frontId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setFrontId(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setFrontId(int value) {
       validate(fields()[24], value);
       this.frontId = value;
       fieldSetFlags()[24] = true;
@@ -2140,7 +2140,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'frontId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearFrontId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearFrontId() {
       fieldSetFlags()[24] = false;
       return this;
     }
@@ -2158,7 +2158,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'sessionId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setSessionId(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setSessionId(int value) {
       validate(fields()[25], value);
       this.sessionId = value;
       fieldSetFlags()[25] = true;
@@ -2178,7 +2178,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'sessionId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearSessionId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearSessionId() {
       fieldSetFlags()[25] = false;
       return this;
     }
@@ -2196,7 +2196,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'statusMsg'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setStatusMsg(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setStatusMsg(java.lang.String value) {
       validate(fields()[26], value);
       this.statusMsg = value;
       fieldSetFlags()[26] = true;
@@ -2216,7 +2216,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'statusMsg' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearStatusMsg() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearStatusMsg() {
       statusMsg = null;
       fieldSetFlags()[26] = false;
       return this;
@@ -2235,7 +2235,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'exchangeCode'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setExchangeCode(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setExchangeCode(java.lang.String value) {
       validate(fields()[27], value);
       this.exchangeCode = value;
       fieldSetFlags()[27] = true;
@@ -2255,7 +2255,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'exchangeCode' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearExchangeCode() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearExchangeCode() {
       exchangeCode = null;
       fieldSetFlags()[27] = false;
       return this;
@@ -2274,7 +2274,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'fee'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setFee(double value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setFee(double value) {
       validate(fields()[28], value);
       this.fee = value;
       fieldSetFlags()[28] = true;
@@ -2294,7 +2294,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'fee' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearFee() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearFee() {
       fieldSetFlags()[28] = false;
       return this;
     }
@@ -2312,7 +2312,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'counterType'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setCounterType(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setCounterType(int value) {
       validate(fields()[29], value);
       this.counterType = value;
       fieldSetFlags()[29] = true;
@@ -2332,7 +2332,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'counterType' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearCounterType() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearCounterType() {
       fieldSetFlags()[29] = false;
       return this;
     }
@@ -2350,7 +2350,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'counterSysId'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setCounterSysId(long value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setCounterSysId(long value) {
       validate(fields()[30], value);
       this.counterSysId = value;
       fieldSetFlags()[30] = true;
@@ -2370,7 +2370,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'counterSysId' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearCounterSysId() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearCounterSysId() {
       fieldSetFlags()[30] = false;
       return this;
     }
@@ -2388,7 +2388,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'cancelAttempts'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setCancelAttempts(int value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setCancelAttempts(int value) {
       validate(fields()[31], value);
       this.cancelAttempts = value;
       fieldSetFlags()[31] = true;
@@ -2408,7 +2408,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'cancelAttempts' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearCancelAttempts() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearCancelAttempts() {
       fieldSetFlags()[31] = false;
       return this;
     }
@@ -2426,7 +2426,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'timeStamp'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setTimeStamp(long value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setTimeStamp(long value) {
       validate(fields()[32], value);
       this.timeStamp = value;
       fieldSetFlags()[32] = true;
@@ -2446,7 +2446,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'timeStamp' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearTimeStamp() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearTimeStamp() {
       fieldSetFlags()[32] = false;
       return this;
     }
@@ -2464,7 +2464,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'epochTimeReturn'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setEpochTimeReturn(long value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setEpochTimeReturn(long value) {
       validate(fields()[33], value);
       this.epochTimeReturn = value;
       fieldSetFlags()[33] = true;
@@ -2484,7 +2484,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'epochTimeReturn' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearEpochTimeReturn() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearEpochTimeReturn() {
       fieldSetFlags()[33] = false;
       return this;
     }
@@ -2502,7 +2502,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'funcName'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder setFuncName(java.lang.String value) {
+    public io.redstone.persistence.avro.entity.Order.Builder setFuncName(java.lang.String value) {
       validate(fields()[34], value);
       this.funcName = value;
       fieldSetFlags()[34] = true;
@@ -2522,7 +2522,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'funcName' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.Order.Builder clearFuncName() {
+    public io.redstone.persistence.avro.entity.Order.Builder clearFuncName() {
       funcName = null;
       fieldSetFlags()[34] = false;
       return this;

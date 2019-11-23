@@ -1,4 +1,4 @@
-package io.ffreedom.persistence.json;
+package io.redstone.config;
 
 /**
  * Unit test for simple App.

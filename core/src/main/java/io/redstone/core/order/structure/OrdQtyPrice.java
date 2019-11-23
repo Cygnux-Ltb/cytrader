@@ -1,10 +1,10 @@
-package io.ffreedom.redstone.core.order.structure;
+package io.redstone.core.order.structure;
 
 import static io.ffreedom.common.number.DoubleArithmetic.correction8;
 
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
-import io.ffreedom.redstone.core.order.structure.TradeSet.Trade;
+import io.redstone.core.order.structure.TradeSet.Trade;
 
 /**
  * @author yellow013

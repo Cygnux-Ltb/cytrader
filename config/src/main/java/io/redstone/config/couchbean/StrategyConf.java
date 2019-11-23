@@ -1,4 +1,4 @@
-package io.ffreedom.persistence.json.couchbean;
+package io.redstone.config.couchbean;
 
 import io.mercury.persistence.json.JsonWrapper;
 

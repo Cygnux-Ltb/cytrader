@@ -1,7 +1,7 @@
-package io.ffreedom.redstone.adaptor.simulator.dto;
+package io.redstone.adaptor.simulator.dto;
 
-import io.ffreedom.polaris.financial.Instrument;
-import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
+import io.polaris.financial.Instrument;
+import io.redstone.core.adaptor.dto.SubscribeMarketData;
 
 public final class SimSubscribeMarketData extends SubscribeMarketData {
 

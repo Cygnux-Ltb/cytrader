@@ -1,7 +1,7 @@
-package io.ffreedom.redstone.barrier;
+package io.redstone.barrier;
 
-import io.ffreedom.redstone.core.barrier.OrderBarrier;
-import io.ffreedom.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.barrier.OrderBarrier;
+import io.redstone.core.order.impl.ChildOrder;
 
 public class AccountBarrier implements OrderBarrier<ChildOrder> {
 

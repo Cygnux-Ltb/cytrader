@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.ffreedom.persistence.avro.entity;
+package io.redstone.persistence.avro.entity;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -51,7 +51,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
     return DECODER.decode(b);
   }
 
-   private io.ffreedom.persistence.avro.entity.PackTitle title;
+   private io.redstone.persistence.avro.entity.PackTitle title;
    private java.nio.ByteBuffer content;
 
   /**
@@ -66,7 +66,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
    * @param title The new value for title
    * @param content The new value for content
    */
-  public TransportPack(io.ffreedom.persistence.avro.entity.PackTitle title, java.nio.ByteBuffer content) {
+  public TransportPack(io.redstone.persistence.avro.entity.PackTitle title, java.nio.ByteBuffer content) {
     this.title = title;
     this.content = content;
   }
@@ -85,7 +85,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: title = (io.ffreedom.persistence.avro.entity.PackTitle)value$; break;
+    case 0: title = (io.redstone.persistence.avro.entity.PackTitle)value$; break;
     case 1: content = (java.nio.ByteBuffer)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
@@ -95,7 +95,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'title' field.
    * @return The value of the 'title' field.
    */
-  public io.ffreedom.persistence.avro.entity.PackTitle getTitle() {
+  public io.redstone.persistence.avro.entity.PackTitle getTitle() {
     return title;
   }
 
@@ -103,7 +103,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
    * Sets the value of the 'title' field.
    * @param value the value to set.
    */
-  public void setTitle(io.ffreedom.persistence.avro.entity.PackTitle value) {
+  public void setTitle(io.redstone.persistence.avro.entity.PackTitle value) {
     this.title = value;
   }
 
@@ -127,8 +127,8 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
    * Creates a new TransportPack RecordBuilder.
    * @return A new TransportPack RecordBuilder
    */
-  public static io.ffreedom.persistence.avro.entity.TransportPack.Builder newBuilder() {
-    return new io.ffreedom.persistence.avro.entity.TransportPack.Builder();
+  public static io.redstone.persistence.avro.entity.TransportPack.Builder newBuilder() {
+    return new io.redstone.persistence.avro.entity.TransportPack.Builder();
   }
 
   /**
@@ -136,8 +136,8 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing builder to copy.
    * @return A new TransportPack RecordBuilder
    */
-  public static io.ffreedom.persistence.avro.entity.TransportPack.Builder newBuilder(io.ffreedom.persistence.avro.entity.TransportPack.Builder other) {
-    return new io.ffreedom.persistence.avro.entity.TransportPack.Builder(other);
+  public static io.redstone.persistence.avro.entity.TransportPack.Builder newBuilder(io.redstone.persistence.avro.entity.TransportPack.Builder other) {
+    return new io.redstone.persistence.avro.entity.TransportPack.Builder(other);
   }
 
   /**
@@ -145,8 +145,8 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing instance to copy.
    * @return A new TransportPack RecordBuilder
    */
-  public static io.ffreedom.persistence.avro.entity.TransportPack.Builder newBuilder(io.ffreedom.persistence.avro.entity.TransportPack other) {
-    return new io.ffreedom.persistence.avro.entity.TransportPack.Builder(other);
+  public static io.redstone.persistence.avro.entity.TransportPack.Builder newBuilder(io.redstone.persistence.avro.entity.TransportPack other) {
+    return new io.redstone.persistence.avro.entity.TransportPack.Builder(other);
   }
 
   /**
@@ -155,7 +155,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<TransportPack>
     implements org.apache.avro.data.RecordBuilder<TransportPack> {
 
-    private io.ffreedom.persistence.avro.entity.PackTitle title;
+    private io.redstone.persistence.avro.entity.PackTitle title;
     private java.nio.ByteBuffer content;
 
     /** Creates a new Builder */
@@ -167,7 +167,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(io.ffreedom.persistence.avro.entity.TransportPack.Builder other) {
+    private Builder(io.redstone.persistence.avro.entity.TransportPack.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.title)) {
         this.title = data().deepCopy(fields()[0].schema(), other.title);
@@ -183,7 +183,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing TransportPack instance
      * @param other The existing instance to copy.
      */
-    private Builder(io.ffreedom.persistence.avro.entity.TransportPack other) {
+    private Builder(io.redstone.persistence.avro.entity.TransportPack other) {
             super(SCHEMA$);
       if (isValidValue(fields()[0], other.title)) {
         this.title = data().deepCopy(fields()[0].schema(), other.title);
@@ -199,7 +199,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
       * Gets the value of the 'title' field.
       * @return The value.
       */
-    public io.ffreedom.persistence.avro.entity.PackTitle getTitle() {
+    public io.redstone.persistence.avro.entity.PackTitle getTitle() {
       return title;
     }
 
@@ -208,7 +208,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'title'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.TransportPack.Builder setTitle(io.ffreedom.persistence.avro.entity.PackTitle value) {
+    public io.redstone.persistence.avro.entity.TransportPack.Builder setTitle(io.redstone.persistence.avro.entity.PackTitle value) {
       validate(fields()[0], value);
       this.title = value;
       fieldSetFlags()[0] = true;
@@ -228,7 +228,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'title' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.TransportPack.Builder clearTitle() {
+    public io.redstone.persistence.avro.entity.TransportPack.Builder clearTitle() {
       title = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -247,7 +247,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'content'.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.TransportPack.Builder setContent(java.nio.ByteBuffer value) {
+    public io.redstone.persistence.avro.entity.TransportPack.Builder setContent(java.nio.ByteBuffer value) {
       validate(fields()[1], value);
       this.content = value;
       fieldSetFlags()[1] = true;
@@ -267,7 +267,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'content' field.
       * @return This builder.
       */
-    public io.ffreedom.persistence.avro.entity.TransportPack.Builder clearContent() {
+    public io.redstone.persistence.avro.entity.TransportPack.Builder clearContent() {
       content = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -278,7 +278,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase i
     public TransportPack build() {
       try {
         TransportPack record = new TransportPack();
-        record.title = fieldSetFlags()[0] ? this.title : (io.ffreedom.persistence.avro.entity.PackTitle) defaultValue(fields()[0]);
+        record.title = fieldSetFlags()[0] ? this.title : (io.redstone.persistence.avro.entity.PackTitle) defaultValue(fields()[0]);
         record.content = fieldSetFlags()[1] ? this.content : (java.nio.ByteBuffer) defaultValue(fields()[1]);
         return record;
       } catch (java.lang.Exception e) {

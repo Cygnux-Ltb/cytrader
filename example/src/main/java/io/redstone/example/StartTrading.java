@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.example;
+package io.redstone.example;
 
 import org.eclipse.collections.api.map.MutableMap;
 
@@ -8,22 +8,22 @@ import io.ffreedom.common.datetime.DateTimeUtil;
 import io.ffreedom.common.log.LogLevel;
 import io.ffreedom.common.log.LoggerSetter;
 import io.ffreedom.common.param.ParamKeyMap;
-import io.ffreedom.polaris.datetime.TimePeriodPool;
-import io.ffreedom.polaris.datetime.TradingPeriodPool;
-import io.ffreedom.polaris.financial.Instrument.PriorityCloseType;
-import io.ffreedom.polaris.financial.futures.ChinaFutures;
-import io.ffreedom.polaris.financial.futures.ChinaFuturesSymbol;
-import io.ffreedom.polaris.indicators.api.IndicatorTimePeriod;
-import io.ffreedom.redstone.actor.AppGlobalStatus;
-import io.ffreedom.redstone.adaptor.jctp.JctpAdaptorParams;
-import io.ffreedom.redstone.adaptor.jctp.JctpInboundAdaptor;
-import io.ffreedom.redstone.adaptor.jctp.JctpOutboundAdaptor;
-import io.ffreedom.redstone.core.adaptor.dto.SubscribeMarketData;
-import io.ffreedom.redstone.core.strategy.StrategyScheduler;
-import io.ffreedom.redstone.scheduler.SpscStrategyScheduler;
-import io.ffreedom.redstone.storage.AdaptorKeeper;
-import io.ffreedom.redstone.storage.InstrumentKeeper;
-import io.ffreedom.redstone.storage.StrategyKeeper;
+import io.polaris.datetime.TimePeriodPool;
+import io.polaris.datetime.TradingPeriodPool;
+import io.polaris.financial.Instrument.PriorityCloseType;
+import io.polaris.financial.futures.ChinaFutures;
+import io.polaris.financial.futures.ChinaFuturesSymbol;
+import io.polaris.indicators.api.IndicatorTimePeriod;
+import io.redstone.actor.AppGlobalStatus;
+import io.redstone.adaptor.jctp.JctpAdaptorParams;
+import io.redstone.adaptor.jctp.JctpInboundAdaptor;
+import io.redstone.adaptor.jctp.JctpOutboundAdaptor;
+import io.redstone.core.adaptor.dto.SubscribeMarketData;
+import io.redstone.core.strategy.StrategyScheduler;
+import io.redstone.scheduler.SpscStrategyScheduler;
+import io.redstone.storage.AdaptorKeeper;
+import io.redstone.storage.InstrumentKeeper;
+import io.redstone.storage.StrategyKeeper;
 
 public final class StartTrading {
 

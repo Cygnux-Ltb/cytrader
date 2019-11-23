@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.example;
+package io.redstone.example;
 
 import io.ffreedom.common.env.SystemPropertys;
 

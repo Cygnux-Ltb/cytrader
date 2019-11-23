@@ -1,4 +1,4 @@
-package io.ffreedom.persistence.json.entity;
+package io.redstone.config.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

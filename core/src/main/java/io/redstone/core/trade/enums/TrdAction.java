@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.trade.enums;
+package io.redstone.core.trade.enums;
 
 public enum TrdAction {
 

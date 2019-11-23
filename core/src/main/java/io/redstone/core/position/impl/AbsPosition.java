@@ -1,6 +1,6 @@
-package io.ffreedom.redstone.core.position.impl;
+package io.redstone.core.position.impl;
 
-import io.ffreedom.redstone.core.position.api.Position;
+import io.redstone.core.position.api.Position;
 
 public abstract class AbsPosition implements Position {
 

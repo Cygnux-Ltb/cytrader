@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.actor;
+package io.redstone.actor;
 
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 import org.slf4j.Logger;
@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.param.JointIdUtil;
-import io.ffreedom.redstone.core.order.enums.OrdSide;
-import io.ffreedom.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.order.enums.OrdSide;
+import io.redstone.core.order.impl.ChildOrder;
 
 /**
  * 统一管理仓位信息<br>

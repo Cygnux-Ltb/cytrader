@@ -1,4 +1,4 @@
-package io.ffreedom.persistence.json.couchbean.base;
+package io.redstone.config.couchbean.base;
 
 import java.io.File;
 import java.io.FileInputStream;

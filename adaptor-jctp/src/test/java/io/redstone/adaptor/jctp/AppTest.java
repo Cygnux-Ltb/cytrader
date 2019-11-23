@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.adaptor.jctp;
+package io.redstone.adaptor.jctp;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

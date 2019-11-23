@@ -1,8 +1,8 @@
-package io.ffreedom.redstone.adaptor.jctp.converter.inbound;
+package io.redstone.adaptor.jctp.converter.inbound;
 
 import io.ffreedom.common.functional.BiConverter;
 import io.ffreedom.jctp.bean.rsp.RtnOrder;
-import io.ffreedom.redstone.core.order.impl.OrderReport;
+import io.redstone.core.order.impl.OrderReport;
 
 public class CtpInboundRtnOrderBiConverter implements BiConverter<RtnOrder, OrderReport> {
 

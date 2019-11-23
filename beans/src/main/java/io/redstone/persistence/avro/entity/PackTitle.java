@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.ffreedom.persistence.avro.entity;
+package io.redstone.persistence.avro.entity;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public enum PackTitle {

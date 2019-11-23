@@ -1,7 +1,7 @@
-package io.ffreedom.redstone.core.order.utils;
+package io.redstone.core.order.utils;
 
-import io.ffreedom.redstone.core.order.impl.ChildOrder;
-import io.ffreedom.redstone.core.order.impl.OrderReport;
+import io.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.order.impl.OrderReport;
 
 public final class OrderOperator {
 

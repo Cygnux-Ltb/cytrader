@@ -1,8 +1,8 @@
-package io.ffreedom.redstone.core.barrier;
+package io.redstone.core.barrier;
 
 import java.util.function.Predicate;
 
-import io.ffreedom.redstone.core.order.api.Order;
+import io.redstone.core.order.api.Order;
 
 @FunctionalInterface
 public interface OrderBarrier<O extends Order> extends Predicate<O> {

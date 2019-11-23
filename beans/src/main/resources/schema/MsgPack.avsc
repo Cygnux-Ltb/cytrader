@@ -1,12 +1,12 @@
 {
-    "namespace": "io.ffreedom.persistence.avro.entity",
+    "namespace": "io.redstone.persistence.avro.entity",
     "type": "record",
     "name": "TransportPack",
     "fields": [
         {
             "name": "title",
             "type": {
-                "namespace": "io.ffreedom.persistence.avro.entity",
+                "namespace": "io.redstone.persistence.avro.entity",
                 "type": "enum",
                 "name": "PackTitle",
                 "symbols": [

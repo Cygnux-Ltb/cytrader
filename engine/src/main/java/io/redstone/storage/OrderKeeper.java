@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.storage;
+package io.redstone.storage;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import io.ffreedom.common.collections.InitialCapacity;
 import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.redstone.core.order.api.Order;
+import io.redstone.core.order.api.Order;
 
 @NotThreadSafe
 public final class OrderKeeper {

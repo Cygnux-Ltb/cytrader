@@ -1,6 +1,6 @@
-package io.ffreedom.redstone.core.order.impl;
+package io.redstone.core.order.impl;
 
-import io.ffreedom.redstone.core.order.enums.OrdStatus;
+import io.redstone.core.order.enums.OrdStatus;
 
 public final class OrderReport {
 

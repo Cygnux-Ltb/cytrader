@@ -1,10 +1,10 @@
-package io.ffreedom.redstone.actor;
+package io.redstone.actor;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.ffreedom.common.collections.MutableMaps;
-import io.ffreedom.redstone.core.account.Account;
-import io.ffreedom.redstone.core.account.SubAccount;
+import io.redstone.core.account.Account;
+import io.redstone.core.account.SubAccount;
 
 public final class AccountActor {
 

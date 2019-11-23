@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.account;
+package io.redstone.core.account;
 
 import io.ffreedom.common.fsm.EnableComponent;
 

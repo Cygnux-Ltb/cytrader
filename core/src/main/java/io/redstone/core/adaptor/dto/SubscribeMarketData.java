@@ -1,9 +1,9 @@
-package io.ffreedom.redstone.core.adaptor.dto;
+package io.redstone.core.adaptor.dto;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
 import io.ffreedom.common.collections.ImmutableSets;
-import io.ffreedom.polaris.financial.Instrument;
+import io.polaris.financial.Instrument;
 
 public class SubscribeMarketData {
 

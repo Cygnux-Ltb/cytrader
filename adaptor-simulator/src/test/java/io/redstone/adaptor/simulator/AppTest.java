@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.adaptor.simulator;
+package io.redstone.adaptor.simulator;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

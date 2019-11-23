@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core;
+package io.redstone.core;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

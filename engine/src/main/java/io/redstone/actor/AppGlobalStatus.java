@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.actor;
+package io.redstone.actor;
 
 import java.time.Instant;
 import java.time.LocalDate;

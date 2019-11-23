@@ -1,13 +1,13 @@
-package io.ffreedom.redstone.actor;
+package io.redstone.actor;
 
 import org.slf4j.Logger;
 
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.polaris.market.impl.BasicMarketData;
-import io.ffreedom.redstone.core.order.api.Order;
-import io.ffreedom.redstone.core.order.impl.OrderReport;
-import io.ffreedom.redstone.storage.OrderKeeper;
-import io.ffreedom.redstone.storage.StrategyKeeper;
+import io.polaris.market.impl.BasicMarketData;
+import io.redstone.core.order.api.Order;
+import io.redstone.core.order.impl.OrderReport;
+import io.redstone.storage.OrderKeeper;
+import io.redstone.storage.StrategyKeeper;
 
 /**
  * 管理全部策略<br>

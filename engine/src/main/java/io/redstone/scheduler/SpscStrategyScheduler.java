@@ -1,12 +1,12 @@
-package io.ffreedom.redstone.scheduler;
+package io.redstone.scheduler;
 
 import io.ffreedom.common.concurrent.disruptor.BufferSize;
 import io.ffreedom.common.concurrent.disruptor.SpscQueue;
-import io.ffreedom.polaris.market.impl.BasicMarketData;
-import io.ffreedom.redstone.actor.QuoteActor;
-import io.ffreedom.redstone.actor.StrategyActor;
-import io.ffreedom.redstone.core.order.impl.OrderReport;
-import io.ffreedom.redstone.core.strategy.StrategyScheduler;
+import io.polaris.market.impl.BasicMarketData;
+import io.redstone.actor.QuoteActor;
+import io.redstone.actor.StrategyActor;
+import io.redstone.core.order.impl.OrderReport;
+import io.redstone.core.strategy.StrategyScheduler;
 
 public class SpscStrategyScheduler implements StrategyScheduler {
 

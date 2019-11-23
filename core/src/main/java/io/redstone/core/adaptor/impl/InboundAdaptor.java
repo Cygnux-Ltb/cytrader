@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.adaptor.impl;
+package io.redstone.core.adaptor.impl;
 
 public abstract class InboundAdaptor extends AbstractAdaptor {
 

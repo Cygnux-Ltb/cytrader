@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.adaptor.jctp.dto.inbound;
+package io.redstone.adaptor.jctp.dto.inbound;
 
 /**
  * 

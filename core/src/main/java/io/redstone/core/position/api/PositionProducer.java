@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.position.api;
+package io.redstone.core.position.api;
 
 @FunctionalInterface
 public interface PositionProducer<T extends Position> {

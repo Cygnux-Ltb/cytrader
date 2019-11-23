@@ -1,4 +1,4 @@
-package io.ffreedom.redstone.core.account;
+package io.redstone.core.account;
 
 public final class AccountBalance extends Balance {
 
