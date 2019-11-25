@@ -1,8 +1,8 @@
-package io.redstone.actor;
+package io.redstone.engine.actor;
 
 import com.lmax.disruptor.EventHandler;
 
-import io.polaris.market.impl.BasicMarketData;
+import io.polaris.financial.market.impl.BasicMarketData;
 
 public final class MarketDataDumpActor implements EventHandler<BasicMarketData> {
 

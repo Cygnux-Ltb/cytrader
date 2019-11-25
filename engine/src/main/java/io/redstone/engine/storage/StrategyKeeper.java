@@ -1,4 +1,4 @@
-package io.redstone.storage;
+package io.redstone.engine.storage;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import io.ffreedom.common.collections.MutableLists;
 import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.log.CommonLoggerFactory;
-import io.polaris.financial.Instrument;
+import io.polaris.financial.instrument.Instrument;
 import io.redstone.core.strategy.Strategy;
 
 @NotThreadSafe

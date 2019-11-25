@@ -1,4 +1,4 @@
-package io.redstone.barrier;
+package io.redstone.engine.barrier;
 
 import io.redstone.core.barrier.OrderBarrier;
 import io.redstone.core.order.impl.ChildOrder;

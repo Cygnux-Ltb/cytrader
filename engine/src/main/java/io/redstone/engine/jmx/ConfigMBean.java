@@ -1,4 +1,4 @@
-package io.redstone.jmx;
+package io.redstone.engine.jmx;
 
 public interface ConfigMBean {
 

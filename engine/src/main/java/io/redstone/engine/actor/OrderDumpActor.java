@@ -1,4 +1,4 @@
-package io.redstone.actor;
+package io.redstone.engine.actor;
 
 import com.lmax.disruptor.EventHandler;
 

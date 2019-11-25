@@ -1,4 +1,4 @@
-package io.redstone.actor;
+package io.redstone.engine.actor;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 

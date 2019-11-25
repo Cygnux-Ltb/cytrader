@@ -1,4 +1,4 @@
-package io.redstone.storage;
+package io.redstone.engine.storage;
 
 import java.util.function.Consumer;
 
@@ -7,7 +7,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
-import io.polaris.market.impl.Quotes;
+import io.polaris.financial.market.impl.Quotes;
 
 @NotThreadSafe
 public final class QuoteKeeper {

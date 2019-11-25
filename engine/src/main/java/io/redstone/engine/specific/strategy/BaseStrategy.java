@@ -1,4 +1,4 @@
-package io.redstone.specific.strategy;
+package io.redstone.engine.specific.strategy;
 
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
@@ -10,12 +10,9 @@ import io.ffreedom.common.collections.MutableMaps;
 import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.utils.StringUtil;
-import io.polaris.financial.Instrument;
-import io.polaris.market.api.MarketData;
-import io.polaris.market.impl.BasicMarketData;
-import io.redstone.actor.OrderExecutionActor;
-import io.redstone.actor.QuoteActor;
-import io.redstone.actor.QuoteActor.AtomicQuote;
+import io.polaris.financial.instrument.Instrument;
+import io.polaris.financial.market.api.MarketData;
+import io.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.adaptor.impl.OutboundAdaptor;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.enums.OrdSide;
@@ -28,9 +25,12 @@ import io.redstone.core.strategy.CircuitBreaker;
 import io.redstone.core.strategy.Strategy;
 import io.redstone.core.strategy.StrategyControlEvent;
 import io.redstone.core.trade.enums.TrdDirection;
-import io.redstone.storage.AccountKeeper;
-import io.redstone.storage.InstrumentKeeper;
-import io.redstone.storage.OrderKeeper;
+import io.redstone.engine.actor.OrderExecutionActor;
+import io.redstone.engine.actor.QuoteActor;
+import io.redstone.engine.actor.QuoteActor.AtomicQuote;
+import io.redstone.engine.storage.AccountKeeper;
+import io.redstone.engine.storage.InstrumentKeeper;
+import io.redstone.engine.storage.OrderKeeper;
 
 public abstract class BaseStrategy<M extends MarketData> implements Strategy, CircuitBreaker {
 

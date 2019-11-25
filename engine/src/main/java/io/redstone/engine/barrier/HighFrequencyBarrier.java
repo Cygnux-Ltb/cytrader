@@ -1,4 +1,4 @@
-package io.redstone.barrier;
+package io.redstone.engine.barrier;
 
 import org.slf4j.Logger;
 
