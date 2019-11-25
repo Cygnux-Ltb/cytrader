@@ -1,6 +1,6 @@
 package io.redstone.core.strategy;
 
-import io.polaris.market.impl.BasicMarketData;
+import io.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.order.impl.OrderReport;
 
 public interface StrategyScheduler {

@@ -4,8 +4,8 @@ import org.eclipse.collections.api.list.ImmutableList;
 
 import io.ffreedom.common.fsm.Enable;
 import io.ffreedom.common.functional.Initializer;
-import io.polaris.financial.Instrument;
-import io.polaris.market.impl.BasicMarketData;
+import io.polaris.financial.instrument.Instrument;
+import io.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.order.api.Order;
 
 public interface Strategy extends Enable {

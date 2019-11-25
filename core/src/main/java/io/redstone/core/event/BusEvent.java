@@ -1,6 +1,6 @@
 package io.redstone.core.event;
 
-import io.polaris.market.api.MarketData;
+import io.polaris.financial.market.api.MarketData;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.impl.OrderReport;
 import io.redstone.core.trade.Signal;
