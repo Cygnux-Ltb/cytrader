@@ -2,9 +2,9 @@ package io.redstone.adaptor.jctp.converter.outbound;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.ffreedom.common.functional.Converter;
-import io.redstone.actor.AppGlobalStatus;
 import io.redstone.adaptor.jctp.utils.JctpOrderRefGenerate;
 import io.redstone.core.order.api.Order;
+import io.redstone.engine.actor.AppGlobalStatus;
 
 public class CtpOutboundNewOrderConverter implements Converter<Order, CThostFtdcInputOrderField> {
 

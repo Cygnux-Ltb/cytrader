@@ -8,7 +8,7 @@ import io.ffreedom.transport.core.api.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 import io.mercury.persistence.avro.serializable.AvroBytesDeserializer;
-import io.polaris.market.impl.BasicMarketData;
+import io.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.adaptor.simulator.converter.MarketDataConverter;
 import io.redstone.adaptor.simulator.converter.OrderConverter;
 import io.redstone.core.adaptor.impl.InboundAdaptor;

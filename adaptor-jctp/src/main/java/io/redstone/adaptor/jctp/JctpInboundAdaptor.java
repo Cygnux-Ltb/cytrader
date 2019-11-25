@@ -17,7 +17,7 @@ import io.ffreedom.jctp.bean.rsp.RspOrderAction;
 import io.ffreedom.jctp.bean.rsp.RspOrderInsert;
 import io.ffreedom.jctp.bean.rsp.RtnOrder;
 import io.ffreedom.jctp.bean.rsp.RtnTrade;
-import io.polaris.market.impl.BasicMarketData;
+import io.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.adaptor.jctp.converter.inbound.CtpInboundMarketDataConverter;
 import io.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnOrderBiConverter;
 import io.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnTradeBiConverter;
