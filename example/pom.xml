@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.ffreedom</groupId>
+		<groupId>io.redstone</groupId>
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
@@ -18,13 +18,18 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.ffreedom</groupId>
+			<groupId>io.redstone</groupId>
 			<artifactId>engine</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.ffreedom</groupId>
+			<groupId>io.polaris</groupId>
+			<artifactId>indicator</artifactId>
+			<version>${polaris.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.redstone</groupId>
 			<artifactId>adaptor-jctp</artifactId>
-			<version>0.1</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

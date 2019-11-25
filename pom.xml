@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.ffreedom</groupId>
+	<groupId>io.redstone</groupId>
 	<artifactId>redstone</artifactId>
 	<version>0.1</version>
 
@@ -23,6 +23,7 @@
 		<module>core</module>
 		<module>engine</module>
 		<module>example</module>
+		<module>simulator</module>
 	</modules>
 
 	<properties>
@@ -93,38 +94,28 @@
 			<!-- polaris -->
 			<!-- see https://github.com/yellow013/polaris.git -->
 			<dependency>
-				<groupId>io.ffreedom</groupId>
-				<artifactId>polaris</artifactId>
+				<groupId>io.polaris</groupId>
+				<artifactId>financial</artifactId>
 				<version>${polaris.version}</version>
 			</dependency>
 			<!-- redstone -->
 			<dependency>
-				<groupId>io.ffreedom</groupId>
+				<groupId>io.redstone</groupId>
 				<artifactId>core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.ffreedom</groupId>
+				<groupId>io.redstone</groupId>
 				<artifactId>engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.ffreedom</groupId>
-				<artifactId>adaptor</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.ffreedom</groupId>
-				<artifactId>strategy</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.ffreedom</groupId>
+				<groupId>io.redstone</groupId>
 				<artifactId>config</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.ffreedom</groupId>
+				<groupId>io.redstone</groupId>
 				<artifactId>beans</artifactId>
 				<version>${project.version}</version>
 			</dependency>

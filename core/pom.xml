@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.ffreedom</groupId>
+		<groupId>io.redstone</groupId>
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
@@ -16,8 +16,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.ffreedom</groupId>
-			<artifactId>polaris</artifactId>
+			<groupId>io.polaris</groupId>
+			<artifactId>financial</artifactId>
 		</dependency>
 	</dependencies>
 
