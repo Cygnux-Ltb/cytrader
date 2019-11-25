@@ -11,6 +11,8 @@ public class TestPath {
 		System.out.println(System.getenv("JAVA_HOME"));
 
 		System.out.println(SystemPropertys.JAVA_IO_TMPDIR);
+		
+		System.out.println(SystemPropertys.JAVA_HOME);
 
 		//System.out.println(new File("").getAbsolutePath() + "/lib");
 

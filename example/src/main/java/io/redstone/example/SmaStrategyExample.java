@@ -1,11 +1,11 @@
 package io.redstone.example;
 
-import io.polaris.financial.Instrument;
-import io.polaris.indicators.events.SmaEvent;
-import io.polaris.indicators.impl.ma.SmaPoint;
-import io.polaris.market.impl.BasicMarketData;
+import io.polaris.financial.instrument.Instrument;
+import io.polaris.financial.market.impl.BasicMarketData;
+import io.polaris.indicator.events.SmaEvent;
+import io.polaris.indicator.impl.ma.SmaPoint;
 import io.redstone.core.adaptor.impl.OutboundAdaptor;
-import io.redstone.specific.strategy.IndicatorStrategy;
+import io.redstone.engine.specific.strategy.IndicatorStrategy;
 
 public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> implements SmaEvent {
 

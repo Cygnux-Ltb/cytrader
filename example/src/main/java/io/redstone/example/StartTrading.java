@@ -8,22 +8,22 @@ import io.ffreedom.common.datetime.DateTimeUtil;
 import io.ffreedom.common.log.LogLevel;
 import io.ffreedom.common.log.LoggerSetter;
 import io.ffreedom.common.param.ParamKeyMap;
-import io.polaris.datetime.TimePeriodPool;
-import io.polaris.datetime.TradingPeriodPool;
-import io.polaris.financial.Instrument.PriorityCloseType;
-import io.polaris.financial.futures.ChinaFutures;
-import io.polaris.financial.futures.ChinaFuturesSymbol;
-import io.polaris.indicators.api.IndicatorTimePeriod;
-import io.redstone.actor.AppGlobalStatus;
+import io.polaris.financial.instrument.Instrument.PriorityCloseType;
+import io.polaris.financial.instrument.futures.ChinaFutures;
+import io.polaris.financial.instrument.futures.ChinaFuturesSymbol;
+import io.polaris.financial.time.TimePeriodPool;
+import io.polaris.financial.time.TradingPeriodPool;
+import io.polaris.vector.TimePeriod;
 import io.redstone.adaptor.jctp.JctpAdaptorParams;
 import io.redstone.adaptor.jctp.JctpInboundAdaptor;
 import io.redstone.adaptor.jctp.JctpOutboundAdaptor;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.strategy.StrategyScheduler;
-import io.redstone.scheduler.SpscStrategyScheduler;
-import io.redstone.storage.AdaptorKeeper;
-import io.redstone.storage.InstrumentKeeper;
-import io.redstone.storage.StrategyKeeper;
+import io.redstone.engine.actor.AppGlobalStatus;
+import io.redstone.engine.scheduler.SpscStrategyScheduler;
+import io.redstone.engine.storage.AdaptorKeeper;
+import io.redstone.engine.storage.InstrumentKeeper;
+import io.redstone.engine.storage.StrategyKeeper;
 
 public final class StartTrading {
 
@@ -62,7 +62,7 @@ public final class StartTrading {
 		JctpOutboundAdaptor outboundAdaptor = new JctpOutboundAdaptor(outboundAdaptorId, outboundAdaptorName,
 				inboundAdaptor.getJctpGeteway());
 
-		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), IndicatorTimePeriod.values());
+		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(),TimePeriod.values());
 
 		TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
 
