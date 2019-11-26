@@ -1,6 +1,6 @@
 package io.redstone.example;
 
-import io.ffreedom.common.env.SystemPropertys;
+import io.ffreedom.common.env.SysPropertys;
 
 public class TestPath {
 	
@@ -10,9 +10,9 @@ public class TestPath {
 
 		System.out.println(System.getenv("JAVA_HOME"));
 
-		System.out.println(SystemPropertys.JAVA_IO_TMPDIR);
+		System.out.println(SysPropertys.JAVA_IO_TMPDIR);
 		
-		System.out.println(SystemPropertys.JAVA_HOME);
+		System.out.println(SysPropertys.JAVA_HOME);
 
 		//System.out.println(new File("").getAbsolutePath() + "/lib");
 
