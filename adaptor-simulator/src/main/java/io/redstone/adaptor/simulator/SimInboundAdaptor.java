@@ -1,16 +1,14 @@
 package io.redstone.adaptor.simulator;
 
 import java.util.List;
+import java.util.function.Function;
 
-import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.transport.core.api.Receiver;
 import io.ffreedom.transport.socket.SocketReceiver;
 import io.ffreedom.transport.socket.config.SocketConfigurator;
 import io.mercury.persistence.avro.serializable.AvroBytesDeserializer;
 import io.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.adaptor.simulator.converter.MarketDataConverter;
-import io.redstone.adaptor.simulator.converter.OrderConverter;
 import io.redstone.core.adaptor.impl.InboundAdaptor;
 import io.redstone.core.order.impl.OrderReport;
 import io.redstone.core.strategy.StrategyScheduler;
@@ -29,9 +27,15 @@ public class SimInboundAdaptor extends InboundAdaptor {
 
 	protected SocketConfigurator tdConfigurator;
 
-	private Converter<MarketDataLevel1, BasicMarketData> marketDataConverter = new MarketDataConverter();
+	private Function<MarketDataLevel1, BasicMarketData> marketDataFunction = marketDataLevel1 -> {
+		// TODO Auto-generated method stub
+		return null;
+	};
 
-	private Converter<Order, OrderReport> orderConverter = new OrderConverter();
+	private Function<Order, OrderReport> orderFunction = order -> {
+		// TODO Auto-generated method stub
+		return null;
+	};
 
 	private AvroBytesDeserializer<MarketDataLevel1> marketDataDeserializer = new AvroBytesDeserializer<>(
 			MarketDataLevel1.class);
@@ -45,13 +49,13 @@ public class SimInboundAdaptor extends InboundAdaptor {
 		this.mdReceiver = new SocketReceiver(mdConfigurator, (bytes) -> {
 			List<MarketDataLevel1> marketDatas = marketDataDeserializer.deSerializationMultiple(bytes);
 			for (MarketDataLevel1 marketData : marketDatas) {
-				scheduler.onMarketData(marketDataConverter.convert(marketData));
+				scheduler.onMarketData(marketDataFunction.apply(marketData));
 			}
 		});
 		this.tdReceiver = new SocketReceiver(tdConfigurator, (bytes) -> {
 			List<Order> orders = orderDeserializer1.deSerializationMultiple(bytes);
 			for (Order order : orders) {
-				scheduler.onOrderReport(orderConverter.convert(order));
+				scheduler.onOrderReport(orderFunction.apply(order));
 			}
 		});
 	}
