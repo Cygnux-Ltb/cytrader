@@ -1,12 +1,20 @@
 package io.redstone.adaptor.jctp;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.function.Function;
+
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
 import io.ffreedom.common.concurrent.queue.MpscArrayBlockingQueue;
-import io.ffreedom.common.functional.BiConverter;
-import io.ffreedom.common.functional.Converter;
+import io.ffreedom.common.datetime.Pattern.DatePattern;
+import io.ffreedom.common.datetime.Pattern.TimePattern;
+import io.ffreedom.common.datetime.TimeZones;
+import io.ffreedom.common.functional.ValueTransferer;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.param.ParamKeyMap;
 import io.ffreedom.jctp.JctpGateway;
@@ -17,25 +25,47 @@ import io.ffreedom.jctp.bean.rsp.RspOrderAction;
 import io.ffreedom.jctp.bean.rsp.RspOrderInsert;
 import io.ffreedom.jctp.bean.rsp.RtnOrder;
 import io.ffreedom.jctp.bean.rsp.RtnTrade;
+import io.polaris.financial.instrument.Instrument;
 import io.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.adaptor.jctp.converter.inbound.CtpInboundMarketDataConverter;
-import io.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnOrderBiConverter;
-import io.redstone.adaptor.jctp.converter.inbound.CtpInboundRtnTradeBiConverter;
 import io.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 import io.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
 import io.redstone.core.adaptor.impl.InboundAdaptor;
 import io.redstone.core.order.impl.OrderReport;
 import io.redstone.core.strategy.StrategyScheduler;
+import io.redstone.engine.storage.InstrumentKeeper;
 
 public class JctpInboundAdaptor extends InboundAdaptor {
 
 	private final Logger logger = CommonLoggerFactory.getLogger(getClass());
 
-	private Converter<RspDepthMarketData, BasicMarketData> marketDataConverter = new CtpInboundMarketDataConverter();
+	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newFormatter();
 
-	private BiConverter<RtnOrder, OrderReport> rtnOrderConverter = new CtpInboundRtnOrderBiConverter();
+	private final DateTimeFormatter actionDayformatter = DatePattern.YYYYMMDD.newFormatter();
 
-	private BiConverter<RtnTrade, OrderReport> rtnTradeConverter = new CtpInboundRtnTradeBiConverter();
+	private Function<RspDepthMarketData, BasicMarketData> marketDataConverter = (
+			RspDepthMarketData depthMarketData) -> {
+		LocalDate depthDate = LocalDate.parse(depthMarketData.getActionDay(), actionDayformatter);
+		LocalTime depthTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
+				.plusNanos(depthMarketData.getUpdateMillisec() * 1000_000);
+		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
+		logger.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]",
+				instrument.getInstrumentCode(), depthDate, depthTime);
+		return BasicMarketData.of(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST))
+				.setLastPrice(depthMarketData.getLastPrice()).setVolume(depthMarketData.getVolume())
+				.setTurnover(depthMarketData.getTurnover()).setBidPrice1(depthMarketData.getBidPrice1())
+				.setBidVolume1(depthMarketData.getBidVolume1()).setAskPrice1(depthMarketData.getAskPrice1())
+				.setAskVolume1(depthMarketData.getAskVolume1());
+	};
+
+	private ValueTransferer<RtnOrder, OrderReport> rtnOrderTransferer = (from, to) -> {
+		// TODO Auto-generated method stub
+		return to;
+	};
+
+	private ValueTransferer<RtnTrade, OrderReport> rtnTradeTransferer = (from, to) -> {
+		// TODO Auto-generated method stub
+		return to;
+	};
 
 	private final JctpGateway gateway;
 
@@ -56,18 +86,18 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
-						BasicMarketData marketData = marketDataConverter.convert(msg.getRspDepthMarketData());
+						BasicMarketData marketData = marketDataConverter.apply(msg.getRspDepthMarketData());
 						scheduler.onMarketData(marketData);
 						break;
 					case RtnOrder:
 						RtnOrder ctpRtnOrder = msg.getRtnOrder();
 						OrderReport rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
-						scheduler.onOrderReport(rtnOrderConverter.convertTo(ctpRtnOrder, rtnOrder));
+						scheduler.onOrderReport(rtnOrderTransferer.transfer(ctpRtnOrder, rtnOrder));
 						break;
 					case RtnTrade:
 						RtnTrade ctpRtnTrade = msg.getRtnTrade();
 						OrderReport rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
-						scheduler.onOrderReport(rtnTradeConverter.convertTo(ctpRtnTrade, rtnTrade));
+						scheduler.onOrderReport(rtnTradeTransferer.transfer(ctpRtnTrade, rtnTrade));
 						break;
 					case RspOrderInsert:
 						RspOrderInsert rspOrderInsert = msg.getRspOrderInsert();

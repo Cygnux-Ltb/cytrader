@@ -1,34 +1,59 @@
 package io.redstone.adaptor.jctp;
 
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
-import io.ffreedom.common.functional.Converter;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.jctp.JctpGateway;
-import io.redstone.adaptor.jctp.converter.outbound.CtpOutboundCancelOrderConverter;
-import io.redstone.adaptor.jctp.converter.outbound.CtpOutboundNewOrderConverter;
 import io.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
+import io.redstone.adaptor.jctp.utils.JctpOrderRefGenerate;
 import io.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.adaptor.impl.OutboundAdaptor;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.impl.ChildOrder;
+import io.redstone.engine.actor.AppGlobalStatus;
 
 public class JctpOutboundAdaptor extends OutboundAdaptor {
-	
+
 	private final Logger logger = CommonLoggerFactory.getLogger(getClass());
 
-	private Converter<Order, CThostFtdcInputOrderField> newOrderConverter = new CtpOutboundNewOrderConverter();
+	private Function<Order, CThostFtdcInputOrderField> newOrderFunction = order -> {
+		int orderRef = JctpOrderRefGenerate.next(AppGlobalStatus.appId());
+		char direction;
+		switch (order.getSide().direction()) {
+		case Long:
+			direction = 0;
+			break;
+		case Short:
+			direction = 1;
+			break;
+		default:
+			throw new RuntimeException(order.getSide() + " does not exist.");
+		}
+		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
+		inputOrderField.setInstrumentID(order.getInstrument().getInstrumentCode());
+		inputOrderField.setOrderRef(Integer.toString(orderRef));
+		inputOrderField.setDirection(direction);
+		inputOrderField.setLimitPrice(order.getQtyPrice().getOfferPrice());
+		inputOrderField.setVolumeTotalOriginal(Double.valueOf(order.getQtyPrice().getOfferQty()).intValue());
+		return inputOrderField;
+	};
 
-	private Converter<Order, CThostFtdcInputOrderActionField> cancelOrderConverter = new CtpOutboundCancelOrderConverter();
+	private Function<Order, CThostFtdcInputOrderActionField> cancelOrderFunction = order -> {
+
+		CThostFtdcInputOrderActionField inputOrderActionField = new CThostFtdcInputOrderActionField();
+		return inputOrderActionField;
+
+	};
 
 	private JctpGateway gateway;
-	
+
 	public JctpOutboundAdaptor(int adaptorId, String adaptorName, JctpGateway gateway) {
 		super(adaptorId, adaptorName);
 		this.gateway = gateway;
@@ -42,7 +67,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	@Override
 	public boolean newOredr(ChildOrder order) {
 		try {
-			CThostFtdcInputOrderField ctpNewOrder = newOrderConverter.convert(order);
+			CThostFtdcInputOrderField ctpNewOrder = newOrderFunction.apply(order);
 			JctpOrderRefKeeper.put(ctpNewOrder.getOrderRef(), order.getOrdSysId());
 			gateway.newOrder(ctpNewOrder);
 			return true;
@@ -55,7 +80,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	@Override
 	public boolean cancelOrder(ChildOrder order) {
 		try {
-			CThostFtdcInputOrderActionField ctpCancelOrder = cancelOrderConverter.convert(order);
+			CThostFtdcInputOrderActionField ctpCancelOrder = cancelOrderFunction.apply(order);
 			String orderRef = JctpOrderRefKeeper.getOrderRef(order.getOrdSysId());
 			ctpCancelOrder.setOrderRef(orderRef);
 			gateway.cancelOrder(ctpCancelOrder);
