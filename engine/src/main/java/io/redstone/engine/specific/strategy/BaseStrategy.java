@@ -1,5 +1,7 @@
 package io.redstone.engine.specific.strategy;
 
+import java.util.function.Supplier;
+
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
@@ -7,7 +9,6 @@ import org.slf4j.Logger;
 import io.ffreedom.common.annotations.lang.ProtectedAbstractMethod;
 import io.ffreedom.common.collections.ImmutableLists;
 import io.ffreedom.common.collections.MutableMaps;
-import io.ffreedom.common.functional.Initializer;
 import io.ffreedom.common.log.CommonLoggerFactory;
 import io.ffreedom.common.utils.StringUtil;
 import io.polaris.financial.instrument.Instrument;
@@ -60,9 +61,9 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	}
 
 	@Override
-	public void initialize(Initializer<Boolean> initializer) {
+	public void initialize(Supplier<Boolean> initializer) {
 		if (initializer != null)
-			isInitSuccess = initializer.initialize();
+			isInitSuccess = initializer.get();
 		else
 			logger.error("Initializer is null.");
 		logger.info("Initialize result isInitSuccess==[{}]", isInitSuccess);
