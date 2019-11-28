@@ -2,7 +2,7 @@ package io.redstone.engine.barrier;
 
 import org.slf4j.Logger;
 
-import io.ffreedom.common.log.CommonLoggerFactory;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.redstone.core.barrier.OrderBarrier;
 import io.redstone.core.order.impl.ChildOrder;
 

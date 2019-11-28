@@ -8,10 +8,10 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 
-import io.ffreedom.common.env.SysPropertys;
-import io.ffreedom.common.log.CommonLoggerFactory;
-import io.ffreedom.transport.http.HttpRequester;
+import io.mercury.common.env.SysPropertys;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.persistence.json.JsonParser;
+import io.mercury.transport.http.HttpRequester;
 
 public final class CouchConnector {
 

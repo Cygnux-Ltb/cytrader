@@ -2,7 +2,7 @@ package io.redstone.core.position.impl;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
-import io.ffreedom.common.collections.MutableMaps;
+import io.mercury.common.collections.MutableMaps;
 import io.redstone.core.position.api.Position;
 import io.redstone.core.position.api.PositionManager;
 import io.redstone.core.position.api.PositionProducer;

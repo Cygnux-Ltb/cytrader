@@ -2,7 +2,7 @@ package io.redstone.core.order.enums;
 
 import org.slf4j.Logger;
 
-import io.ffreedom.common.log.CommonLoggerFactory;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.redstone.core.trade.enums.TrdDirection;
 
 public enum OrdSide {

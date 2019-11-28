@@ -1,6 +1,6 @@
 package io.redstone.core.order.structure;
 
-import static io.ffreedom.common.number.DoubleArithmetic.correction8;
+import static io.mercury.common.number.DoubleArithmetic.correction8;
 
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 

@@ -2,7 +2,7 @@ package io.redstone.core.order.structure;
 
 import javax.annotation.Nullable;
 
-import io.ffreedom.common.datetime.EpochTimestamp;
+import io.mercury.common.datetime.EpochTimestamp;
 
 public final class OrdTimestamps {
 

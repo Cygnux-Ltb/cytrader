@@ -18,7 +18,7 @@
 			<artifactId>engine</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.ffreedom</groupId>
+			<groupId>io.mercury</groupId>
 			<artifactId>jctp</artifactId>
 			<version>0.1</version>
 		</dependency>

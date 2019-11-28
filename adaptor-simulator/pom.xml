@@ -18,11 +18,11 @@
 			<artifactId>beans</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.ffreedom</groupId>
+			<groupId>io.mercury</groupId>
 			<artifactId>transport-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.ffreedom</groupId>
+			<groupId>io.mercury</groupId>
 			<artifactId>transport-socket</artifactId>
 		</dependency>
 		<dependency>

@@ -2,7 +2,7 @@ package io.redstone.engine.storage;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
-import io.ffreedom.common.collections.MutableMaps;
+import io.mercury.common.collections.MutableMaps;
 import io.redstone.core.adaptor.impl.OutboundAdaptor;
 
 public class AdaptorKeeper {

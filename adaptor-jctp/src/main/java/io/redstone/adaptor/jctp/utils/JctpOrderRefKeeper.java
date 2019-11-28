@@ -3,8 +3,8 @@ package io.redstone.adaptor.jctp.utils;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 
-import io.ffreedom.common.collections.InitialCapacity;
-import io.ffreedom.common.collections.MutableMaps;
+import io.mercury.common.collections.InitialCapacity;
+import io.mercury.common.collections.MutableMaps;
 import io.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 
 /**

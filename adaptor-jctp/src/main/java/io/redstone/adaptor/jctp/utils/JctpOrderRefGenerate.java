@@ -7,8 +7,8 @@ import java.time.ZonedDateTime;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import io.ffreedom.common.datetime.EpochTime;
-import io.ffreedom.common.datetime.TimeZones;
+import io.mercury.common.datetime.EpochTime;
+import io.mercury.common.datetime.TimeZones;
 
 @NotThreadSafe
 public final class JctpOrderRefGenerate {

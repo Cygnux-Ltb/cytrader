@@ -1,6 +1,6 @@
 package io.redstone.example;
 
-import io.ffreedom.common.env.SysPropertys;
+import io.mercury.common.env.SysPropertys;
 
 public class TestPath {
 	

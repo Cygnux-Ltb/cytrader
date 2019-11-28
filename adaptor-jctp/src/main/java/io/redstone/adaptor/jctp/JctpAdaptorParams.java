@@ -1,7 +1,7 @@
 package io.redstone.adaptor.jctp;
 
-import io.ffreedom.common.param.ParamKey;
-import io.ffreedom.common.param.ParamType;
+import io.mercury.common.param.ParamKey;
+import io.mercury.common.param.ParamType;
 
 public enum JctpAdaptorParams implements ParamKey {
 
