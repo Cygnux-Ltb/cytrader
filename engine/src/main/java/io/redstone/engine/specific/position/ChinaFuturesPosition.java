@@ -88,12 +88,12 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 
 	@Override
 	public void updatePosition(Order order) {
-		OrdStatus status = order.getStatus();
-		OrdQtyPrice ordQtyPrice = order.getQtyPrice();
+		OrdStatus status = order.status();
+		OrdQtyPrice ordQtyPrice = order.qtyPrice();
 		switch (status) {
 		case PartiallyFilled:
 		case Filled:
-			switch (order.getSide().direction()) {
+			switch (order.side().direction()) {
 			case Long:
 				setCurrentQty(getCurrentQty() + ordQtyPrice.getFilledQty() - ordQtyPrice.getLastFilledQty());
 				break;

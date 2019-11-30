@@ -7,23 +7,23 @@ public final class OrderOperator {
 
 	// TODO Call this update order
 	public static void update(ChildOrder order, OrderReport report) {
-		order.setStatus(report.getOrdStatus());
-		switch (order.getStatus()) {
+		order.status(report.getOrdStatus());
+		switch (order.status()) {
 		case PartiallyFilled:
 			// Set FilledQty
-			order.getQtyPrice().setFilledQty(report.getFilledQty());
+			order.qtyPrice().setFilledQty(report.getFilledQty());
 			// Add NewTrade record
 			order.getTradeSet().addNewTrade(report.getEpochMillis(), report.getExecutePrice(),
-					report.getFilledQty() - order.getQtyPrice().getLastFilledQty());
+					report.getFilledQty() - order.qtyPrice().getLastFilledQty());
 			break;
 		case Filled:
 			// Set FilledQty
-			order.getQtyPrice().setFilledQty(report.getFilledQty());
+			order.qtyPrice().setFilledQty(report.getFilledQty());
 			// Add NewTrade Record
 			order.getTradeSet().addNewTrade(report.getEpochMillis(), report.getExecutePrice(),
-					report.getFilledQty() - order.getQtyPrice().getLastFilledQty());
+					report.getFilledQty() - order.qtyPrice().getLastFilledQty());
 			// Calculation AvgPrice
-			order.getQtyPrice().calculationAvgPrice(order.getTradeSet());
+			order.qtyPrice().calculationAvgPrice(order.getTradeSet());
 			break;
 		default:
 			break;

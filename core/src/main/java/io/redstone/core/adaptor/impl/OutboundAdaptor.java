@@ -21,7 +21,7 @@ public abstract class OutboundAdaptor extends AbstractAdaptor {
 	public abstract boolean queryBalance(Account account);
 
 	@Override
-	public AdaptorType getAdaptorType() {
+	public AdaptorType adaptorType() {
 		return AdaptorType.Outbound;
 	}
 

@@ -21,9 +21,9 @@ public final class AccountActor {
 
 	public void putAccount(Account... accounts) {
 		for (Account account : accounts) {
-			for (SubAccount subAccount : account.getSubAccounts())
+			for (SubAccount subAccount : account.subAccounts())
 				subAccountIdMap.put(subAccount.getSubAccountId(), account);
-			accountIdMap.put(account.getAccountId(), account);
+			accountIdMap.put(account.accountId(), account);
 		}
 	}
 

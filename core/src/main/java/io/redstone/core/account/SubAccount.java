@@ -18,7 +18,7 @@ public class SubAccount extends EnableComponent {
 			throw new IllegalArgumentException("Param:[account] can not be null");
 		this.account = account;
 		this.subAccountId = subAccountId;
-		String attachName = "account[" + account.getAccountId() + "]-subAccount[" + subAccountId + "]";
+		String attachName = "account[" + account.accountId() + "]-subAccount[" + subAccountId + "]";
 		if (subAccountName == null)
 			this.subAccountName = attachName;
 		else
@@ -32,13 +32,13 @@ public class SubAccount extends EnableComponent {
 		this.account = account;
 		this.subAccountId = subAccountId;
 		if (subAccountBalance == null) {
-			AccountBalance accountBalance = account.getAccountBalance();
+			AccountBalance accountBalance = account.accountBalance();
 			this.subAccountBalance = SubAccountBalance.newInstance(subAccountId);
 			this.subAccountBalance.setAvailableMargin(accountBalance.getAvailableMargin());
 			this.subAccountBalance.setAvailableCredit(accountBalance.getAvailableCredit());
 		} else
 			this.subAccountBalance = subAccountBalance;
-		String attachName = "account[" + account.getAccountId() + "]-subAccount[" + subAccountId + "]";
+		String attachName = "account[" + account.accountId() + "]-subAccount[" + subAccountId + "]";
 		if (subAccountName == null)
 			this.subAccountName = attachName;
 		else

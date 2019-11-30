@@ -12,7 +12,7 @@ public final class AccountBalance extends Balance {
 		return new AccountBalance(accountId);
 	}
 
-	public int getAccountId() {
+	public int accountId() {
 		return accountId;
 	}
 

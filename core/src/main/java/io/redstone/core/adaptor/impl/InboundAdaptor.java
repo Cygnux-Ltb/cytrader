@@ -9,7 +9,7 @@ public abstract class InboundAdaptor extends AbstractAdaptor {
 	public abstract boolean activate();
 
 	@Override
-	public AdaptorType getAdaptorType() {
+	public AdaptorType adaptorType() {
 		return AdaptorType.Inbound;
 	}
 

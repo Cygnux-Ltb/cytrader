@@ -27,7 +27,7 @@ public final class ChildOrder extends ActualOrder {
 			int strategyId, int subAccountId, StopLoss stopLoss) {
 		super(instrument, qtyPrice, ordSide, ordType, strategyId, subAccountId, stopLoss);
 		this.parentId = parentId;
-		this.tradeSet = new TradeSet(getOrdSysId());
+		this.tradeSet = new TradeSet(ordSysId());
 	}
 
 	private ChildOrder(long parentId, Instrument instrument, long offerQty, double offerPrice, OrdSide ordSide,
@@ -49,7 +49,7 @@ public final class ChildOrder extends ActualOrder {
 	}
 
 	@Override
-	public OrdSort getSort() {
+	public OrdSort sort() {
 		return OrdSort.Child;
 	}
 

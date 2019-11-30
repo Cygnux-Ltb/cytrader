@@ -50,33 +50,33 @@ public final class OrderKeeper {
 	}
 
 	public static void updateOrder(Order order) {
-		switch (order.getStatus()) {
+		switch (order.status()) {
 		case Filled:
 		case Canceled:
 		case NewRejected:
 			getAllOrders().terminatedOrder(order);
-			int subAccountId = order.getSubAccountId();
+			int subAccountId = order.subAccountId();
 			int accountId = AccountKeeper.getAccountId(subAccountId);
 			getSubAccountOrderBook(subAccountId).terminatedOrder(order);
 			getAccountOrderBook(accountId).terminatedOrder(order);
-			getStrategyOrderBook(order.getStrategyId()).terminatedOrder(order);
-			getInstrumentOrderBook(order.getInstrument().getInstrumentId()).terminatedOrder(order);
+			getStrategyOrderBook(order.strategyId()).terminatedOrder(order);
+			getInstrumentOrderBook(order.instrument().instrumentId()).terminatedOrder(order);
 			break;
 		default:
-			logger.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.getOrdSysId(),
-					order.getStatus());
+			logger.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.ordSysId(),
+					order.status());
 			break;
 		}
 	}
 
 	public static void insertOrder(Order order) {
 		getAllOrders().putOrder(order);
-		int subAccountId = order.getSubAccountId();
+		int subAccountId = order.subAccountId();
 		int accountId = AccountKeeper.getAccountId(subAccountId);
 		getSubAccountOrderBook(subAccountId).putOrder(order);
 		getAccountOrderBook(accountId).putOrder(order);
-		getStrategyOrderBook(order.getStrategyId()).putOrder(order);
-		getInstrumentOrderBook(order.getInstrument().getInstrumentId()).putOrder(order);
+		getStrategyOrderBook(order.strategyId()).putOrder(order);
+		getInstrumentOrderBook(order.instrument().instrumentId()).putOrder(order);
 	}
 
 	public static boolean containsOrder(long ordSysId) {

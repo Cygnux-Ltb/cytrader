@@ -35,11 +35,11 @@ public class OrderExecutionActor {
 
 	public ParentOrder virtualOrderToActual(VirtualOrder virtualOrder) {
 		OrderBook instrumentOrderBook = OrderKeeper
-				.getInstrumentOrderBook(virtualOrder.getInstrument().getInstrumentId());
-		OrdSide side = virtualOrder.getSide();
+				.getInstrumentOrderBook(virtualOrder.instrument().instrumentId());
+		OrdSide side = virtualOrder.side();
 		switch (side.direction()) {
 		case Long:
-			MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.getActiveShortOrders();
+			MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.activeShortOrders();
 			if (activeShortOrders.notEmpty()) {
 				// 撤单
 			} else {
@@ -47,7 +47,7 @@ public class OrderExecutionActor {
 			}
 			break;
 		case Short:
-			MutableLongObjectMap<Order> activeLongOrders = instrumentOrderBook.getActiveLongOrders();
+			MutableLongObjectMap<Order> activeLongOrders = instrumentOrderBook.activeLongOrders();
 			if (activeLongOrders.notEmpty()) {
 				// 撤单
 			} else {

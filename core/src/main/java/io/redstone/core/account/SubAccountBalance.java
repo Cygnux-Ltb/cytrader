@@ -12,7 +12,7 @@ public final class SubAccountBalance extends Balance {
 		return new SubAccountBalance(subAccountId);
 	}
 
-	public int getSubAccountId() {
+	public int subAccountId() {
 		return subAccountId;
 	}
 

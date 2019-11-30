@@ -70,57 +70,58 @@ public abstract class AbstractOrder implements Order {
 	}
 
 	@Override
-	public long getOrdSysId() {
+	public long ordSysId() {
 		return ordSysId;
 	}
 
 	@Override
-	public Instrument getInstrument() {
+	public Instrument instrument() {
 		return instrument;
 	}
 
 	@Override
-	public OrdQtyPrice getQtyPrice() {
+	public OrdQtyPrice qtyPrice() {
 		return ordQtyPrice;
 	}
 
 	@Override
-	public OrdSide getSide() {
+	public OrdSide side() {
 		return ordSide;
 	}
 
 	@Override
-	public OrdType getType() {
+	public OrdType type() {
 		return ordType;
 	}
 
 	@Override
-	public OrdStatus getStatus() {
+	public OrdStatus status() {
 		return ordStatus;
 	}
 
 	@Override
-	public OrdTimestamps getTimestamps() {
+	public OrdTimestamps timestamps() {
 		return ordTimestamps;
 	}
 
 	@Override
-	public void setStatus(OrdStatus ordStatus) {
+	public OrdStatus status(OrdStatus ordStatus) {
 		this.ordStatus = ordStatus;
+		return this.ordStatus;
 	}
 
 	@Override
-	public int getStrategyId() {
+	public int strategyId() {
 		return strategyId;
 	}
 
 	@Override
-	public int getSubAccountId() {
+	public int subAccountId() {
 		return subAccountId;
 	}
 
 	@Override
-	public StopLoss getStopLoss() {
+	public StopLoss stopLoss() {
 		return stopLoss;
 	}
 

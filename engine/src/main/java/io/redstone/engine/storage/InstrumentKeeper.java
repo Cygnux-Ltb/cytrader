@@ -39,9 +39,9 @@ public final class InstrumentKeeper {
 	}
 
 	public static void putInstrument(Instrument instrument) {
-		InnerInstance.instrumentIdMap.put(instrument.getInstrumentId(), instrument);
-		InnerInstance.instrumentCodeMap.put(instrument.getInstrumentCode(), instrument);
-		setTradable(instrument.getInstrumentId());
+		InnerInstance.instrumentIdMap.put(instrument.instrumentId(), instrument);
+		InnerInstance.instrumentCodeMap.put(instrument.instrumentCode(), instrument);
+		setTradable(instrument.instrumentId());
 	}
 
 	public static Instrument getInstrument(int instrumentId) {

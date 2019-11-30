@@ -9,7 +9,7 @@ import io.mercury.common.datetime.EpochTime;
  * Generate规则<br>
  * A方案<br>
  * 1获取当前epoch秒<br>
- * 2如果是通一秒内生成的两个id, 则自增位加一<br>
+ * 2如果是同一秒内生成的两个id, 则自增位加一<br>
  * 
  * B方案<br>
  * 1使用一个固定日期作为基准<br>

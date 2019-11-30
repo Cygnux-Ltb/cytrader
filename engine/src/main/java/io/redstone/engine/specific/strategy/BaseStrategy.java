@@ -99,8 +99,8 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 	@Override
 	public void onOrder(Order order) {
-		logger.info("handle order ordSysId==[{}]", order.getOrdSysId());
-		if (OrderKeeper.containsOrder(order.getOrdSysId())) {
+		logger.info("handle order ordSysId==[{}]", order.ordSysId());
+		if (OrderKeeper.containsOrder(order.ordSysId())) {
 			OrderKeeper.updateOrder(order);
 		} else {
 			OrderKeeper.insertOrder(order);
@@ -191,7 +191,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 		}
 		VirtualOrder newVirtualOrder = VirtualOrder.newVirtualOrder(instrument,
 				OrdQtyPrice.withOffer(targetQty, offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
-		strategyVirtualOrders.put(newVirtualOrder.getOrdSysId(), newVirtualOrder);
+		strategyVirtualOrders.put(newVirtualOrder.ordSysId(), newVirtualOrder);
 
 		ParentOrder parentOrder = OrderExecutionActor.Singleton.virtualOrderToActual(newVirtualOrder);
 

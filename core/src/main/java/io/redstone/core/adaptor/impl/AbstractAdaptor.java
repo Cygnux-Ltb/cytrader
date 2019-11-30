@@ -13,12 +13,12 @@ public abstract class AbstractAdaptor implements Adaptor {
 	}
 
 	@Override
-	public int getAdaptorId() {
+	public int adaptorId() {
 		return adaptorId;
 	}
 
 	@Override
-	public String getAdaptorName() {
+	public String adaptorName() {
 		return adaptorName;
 	}
 

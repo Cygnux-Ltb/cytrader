@@ -2,13 +2,13 @@ package io.redstone.core.adaptor.api;
 
 public interface Adaptor {
 
-	int getAdaptorId();
+	int adaptorId();
 
-	String getAdaptorName();
+	String adaptorName();
 
 	boolean close();
 	
-	AdaptorType getAdaptorType();
+	AdaptorType adaptorType();
 
 	public static enum AdaptorType {
 		Inbound, Outbound

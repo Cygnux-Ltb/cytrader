@@ -33,7 +33,7 @@ public final class StrategyKeeper {
 		logger.info("Put to strategyMap. strategyId==[{}]", strategy.getStrategyId());
 		ImmutableList<Instrument> instruments = strategy.getInstruments();
 		for (Instrument instrument : instruments) {
-			int instrumentId = instrument.getInstrumentId();
+			int instrumentId = instrument.instrumentId();
 			MutableList<Strategy> strategyList = InnerInstance.instrumentStrategyMap.get(instrumentId);
 			if (strategyList == null) {
 				strategyList = MutableLists.newFastList();

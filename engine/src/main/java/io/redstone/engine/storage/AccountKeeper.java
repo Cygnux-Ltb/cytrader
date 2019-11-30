@@ -40,7 +40,7 @@ public final class AccountKeeper {
 		for (SubAccount subAccount : subAccounts) {
 			Account account = subAccount.getAccount();
 			int subAccountId = subAccount.getSubAccountId();
-			int accountId = account.getAccountId();
+			int accountId = account.accountId();
 			InnerInstance.accountMap.put(subAccountId, account);
 			InnerInstance.accountIdMap.put(subAccountId, accountId);
 		}
@@ -86,7 +86,7 @@ public final class AccountKeeper {
 		Account account = InnerInstance.accountMap.get(accountId);
 		if (account == null)
 			return EmptySubAccountSet;
-		return account.getSubAccounts();
+		return account.subAccounts();
 	}
 
 }

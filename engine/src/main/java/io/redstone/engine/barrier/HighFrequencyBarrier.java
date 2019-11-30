@@ -12,7 +12,7 @@ public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {
 
 	@Override
 	public boolean filter(ChildOrder order) {
-		switch (order.getSide().direction()) {
+		switch (order.side().direction()) {
 		case Long:
 			
 			return false;

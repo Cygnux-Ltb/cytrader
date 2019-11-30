@@ -33,16 +33,16 @@ public final class VirtualOrder extends AbstractOrder {
 	}
 
 	public void addActualOrder(ParentOrder parentOrder) {
-		actualOrders.put(parentOrder.getOrdSysId(), parentOrder);
+		actualOrders.put(parentOrder.ordSysId(), parentOrder);
 	}
 
 	@Override
-	public OrdSort getSort() {
+	public OrdSort sort() {
 		return OrdSort.Virtual;
 	}
 
 	public long getVirtualId() {
-		return getOrdSysId();
+		return ordSysId();
 	}
 
 }

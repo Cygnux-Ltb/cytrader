@@ -31,21 +31,21 @@ public final class ParentOrder extends ActualOrder {
 	}
 
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = ChildOrder.generateChildOrder(getOrdSysId(), getInstrument(), getQtyPrice(), getSide(),
-				getType(), getStrategyId(), getSubAccountId(), getStopLoss());
+		ChildOrder childOrder = ChildOrder.generateChildOrder(ordSysId(), instrument(), qtyPrice(), side(),
+				type(), strategyId(), subAccountId(), stopLoss());
 		childOrders.add(childOrder);
 		return childOrder;
 	}
 
 	public List<ChildOrder> toChildOrder(int count) {
 		// TODO 增加拆分为多个订单的逻辑
-		OrdQtyPrice qtyPrice = getQtyPrice();
+		OrdQtyPrice qtyPrice = qtyPrice();
 		qtyPrice.getOfferQty();
 		return this.childOrders;
 	}
 
 	@Override
-	public OrdSort getSort() {
+	public OrdSort sort() {
 		return OrdSort.Parent;
 	}
 
@@ -54,7 +54,7 @@ public final class ParentOrder extends ActualOrder {
 	}
 
 	public long getParentId() {
-		return getOrdSysId();
+		return ordSysId();
 	}
 
 }

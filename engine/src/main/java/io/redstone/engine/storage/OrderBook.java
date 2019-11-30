@@ -53,36 +53,36 @@ public class OrderBook {
 	}
 
 	public Order putOrder(Order order) {
-		switch (order.getSide().direction()) {
+		switch (order.side().direction()) {
 		case Long:
-			longOrders.put(order.getOrdSysId(), order);
-			activeLongOrders.put(order.getOrdSysId(), order);
+			longOrders.put(order.ordSysId(), order);
+			activeLongOrders.put(order.ordSysId(), order);
 			break;
 		case Short:
-			shortOrders.put(order.getOrdSysId(), order);
-			activeShortOrders.put(order.getOrdSysId(), order);
+			shortOrders.put(order.ordSysId(), order);
+			activeShortOrders.put(order.ordSysId(), order);
 			break;
 		default:
 			throw new RuntimeException(
-					"OrderSysId : " + order.getOrdSysId() + ", OrdSide : " + order.getSide() + " -> is undefined.");
+					"OrderSysId : " + order.ordSysId() + ", OrdSide : " + order.side() + " -> is undefined.");
 		}
-		orders.put(order.getOrdSysId(), order);
-		return activeOrders.put(order.getOrdSysId(), order);
+		orders.put(order.ordSysId(), order);
+		return activeOrders.put(order.ordSysId(), order);
 	}
 
 	public Order terminatedOrder(Order order) {
-		switch (order.getSide().direction()) {
+		switch (order.side().direction()) {
 		case Long:
-			activeLongOrders.remove(order.getOrdSysId());
+			activeLongOrders.remove(order.ordSysId());
 			break;
 		case Short:
-			activeShortOrders.remove(order.getOrdSysId());
+			activeShortOrders.remove(order.ordSysId());
 			break;
 		default:
 			throw new RuntimeException(
-					"OrderSysId : " + order.getOrdSysId() + ", OrdSide : " + order.getSide() + " -> is undefined.");
+					"OrderSysId : " + order.ordSysId() + ", OrdSide : " + order.side() + " -> is undefined.");
 		}
-		return activeOrders.remove(order.getOrdSysId());
+		return activeOrders.remove(order.ordSysId());
 	}
 
 	public boolean containsOrder(long ordSysId) {
@@ -93,27 +93,27 @@ public class OrderBook {
 		return orders.get(orderSysId);
 	}
 
-	public MutableLongObjectMap<Order> getOrders() {
+	public MutableLongObjectMap<Order> orders() {
 		return orders;
 	}
 
-	public MutableLongObjectMap<Order> getActiveOrders() {
+	public MutableLongObjectMap<Order> activeOrders() {
 		return activeOrders;
 	}
 
-	public MutableLongObjectMap<Order> getLongOrders() {
+	public MutableLongObjectMap<Order> longOrders() {
 		return longOrders;
 	}
 
-	public MutableLongObjectMap<Order> getActiveLongOrders() {
+	public MutableLongObjectMap<Order> activeLongOrders() {
 		return activeLongOrders;
 	}
 
-	public MutableLongObjectMap<Order> getShortOrders() {
+	public MutableLongObjectMap<Order> shortOrders() {
 		return shortOrders;
 	}
 
-	public MutableLongObjectMap<Order> getActiveShortOrders() {
+	public MutableLongObjectMap<Order> activeShortOrders() {
 		return activeShortOrders;
 	}
 

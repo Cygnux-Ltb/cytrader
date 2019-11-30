@@ -51,27 +51,27 @@ public class Account extends EnableComponent {
 		this.accountBalance = accountBalance;
 	}
 
-	public int getAccountId() {
+	public int accountId() {
 		return accountId;
 	}
 
-	public String getAccountName() {
+	public String accountName() {
 		return accountName;
 	}
 
-	public String getInvestorId() {
+	public String investorId() {
 		return investorId;
 	}
 
-	public MutableSet<SubAccount> getSubAccounts() {
+	public MutableSet<SubAccount> subAccounts() {
 		return subAccounts;
 	}
 
-	public AccountBalance getAccountBalance() {
+	public AccountBalance accountBalance() {
 		return accountBalance;
 	}
 
-	public int getSubAccountCount() {
+	public int subAccountCount() {
 		return subAccounts.size();
 	}
 

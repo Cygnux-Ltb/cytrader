@@ -89,7 +89,7 @@ public class PositionsActor {
 	 * @param order
 	 */
 	public void onChildOrder(ChildOrder order) {
-		long jointId = JointIdUtil.jointId(order.getInstrument().getInstrumentId(), order.getSubAccountId());
+		long jointId = JointIdUtil.jointId(order.instrument().instrumentId(), order.subAccountId());
 		subAccountInstrumentPositions.put(jointId,
 				subAccountInstrumentPositions.get(jointId) + order.getTradeSet().lastTrade().getTradeQty());
 	}

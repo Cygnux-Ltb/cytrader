@@ -27,33 +27,33 @@ public interface Order extends Comparable<Order> {
 	 * 
 	 * @return long
 	 */
-	long getOrdSysId();
+	long ordSysId();
 
-	Instrument getInstrument();
+	Instrument instrument();
 
-	OrdQtyPrice getQtyPrice();
+	OrdQtyPrice qtyPrice();
 
-	OrdSide getSide();
+	OrdSide side();
 
-	OrdType getType();
+	OrdType type();
 
-	OrdStatus getStatus();
+	OrdStatus status();
 
-	OrdTimestamps getTimestamps();
+	OrdTimestamps timestamps();
 
-	void setStatus(OrdStatus ordStatus);
+	OrdStatus status(OrdStatus ordStatus);
 
-	int getStrategyId();
+	int strategyId();
 
-	int getSubAccountId();
+	int subAccountId();
 
-	OrdSort getSort();
+	OrdSort sort();
 
-	StopLoss getStopLoss();
+	StopLoss stopLoss();
 
 	@Override
 	default int compareTo(Order o) {
-		return getOrdSysId() < o.getOrdSysId() ? -1 : getOrdSysId() > o.getOrdSysId() ? 1 : 0;
+		return ordSysId() < o.ordSysId() ? -1 : ordSysId() > o.ordSysId() ? 1 : 0;
 	}
 
 }

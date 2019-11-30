@@ -31,12 +31,12 @@ public class QuoteActor {
 		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
 		MutableIntObjectMap<AtomicQuote> tempQuoteMap = MutableMaps.newIntObjectHashMap();
 		if (allInstrument != null)
-			allInstrument.forEach(instrument -> tempQuoteMap.put(instrument.getInstrumentId(), new AtomicQuote()));
+			allInstrument.forEach(instrument -> tempQuoteMap.put(instrument.instrumentId(), new AtomicQuote()));
 		quoteMap = tempQuoteMap.toImmutable();
 	}
 
 	public void onMarketDate(BasicMarketData marketData) {
-		AtomicQuote atomicQuote = quoteMap.get(marketData.getInstrument().getInstrumentId());
+		AtomicQuote atomicQuote = quoteMap.get(marketData.getInstrument().instrumentId());
 		atomicQuote.getAskPrice1().set(PriceUtil.doublePriceToLong(marketData.getAskPrice1()));
 		atomicQuote.getAskVolume1().set(marketData.getAskVolume1());
 		atomicQuote.getBidPrice1().set(PriceUtil.doublePriceToLong(marketData.getBidPrice1()));
@@ -44,7 +44,7 @@ public class QuoteActor {
 	}
 
 	public AtomicQuote getQuote(Instrument instrument) {
-		return quoteMap.get(instrument.getInstrumentId());
+		return quoteMap.get(instrument.instrumentId());
 	}
 
 	public static class AtomicQuote {
