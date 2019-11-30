@@ -18,14 +18,14 @@ public abstract class BaseSimAdaptor implements Adaptor {
 	}
 
 	private void initSocketConfigurator() {
-		this.mdConfigurator = SocketConfigurator.builder().setHost(paramMap.getString(SimAdaptorParams.MdHost))
-				.setPort(paramMap.getInteger(SimAdaptorParams.MdPort)).build();
-		this.tdConfigurator = SocketConfigurator.builder().setHost(paramMap.getString(SimAdaptorParams.TdHost))
-				.setPort(paramMap.getInteger(SimAdaptorParams.TdPort)).build();
+		this.mdConfigurator = SocketConfigurator.builder().host(paramMap.getString(SimAdaptorParams.MdHost))
+				.port(paramMap.getInteger(SimAdaptorParams.MdPort)).build();
+		this.tdConfigurator = SocketConfigurator.builder().host(paramMap.getString(SimAdaptorParams.TdHost))
+				.port(paramMap.getInteger(SimAdaptorParams.TdPort)).build();
 	}
 
 	@Override
-	public int getAdaptorId() {
+	public int adaptorId() {
 		return 0;
 	}
 

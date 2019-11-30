@@ -68,7 +68,7 @@ public class SimInboundAdaptor extends InboundAdaptor {
 	}
 
 	@Override
-	public String getAdaptorName() {
+	public String adaptorName() {
 		return "SimInboundAdaptor$" + this.hashCode();
 	}
 

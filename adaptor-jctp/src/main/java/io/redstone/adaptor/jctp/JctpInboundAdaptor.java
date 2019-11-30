@@ -49,7 +49,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				.plusNanos(depthMarketData.getUpdateMillisec() * 1000_000);
 		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
 		logger.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]",
-				instrument.getInstrumentCode(), depthDate, depthTime);
+				instrument.instrumentCode(), depthDate, depthTime);
 		return BasicMarketData.of(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST))
 				.setLastPrice(depthMarketData.getLastPrice()).setVolume(depthMarketData.getVolume())
 				.setTurnover(depthMarketData.getTurnover()).setBidPrice1(depthMarketData.getBidPrice1())

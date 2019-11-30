@@ -55,7 +55,7 @@ public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> imple
 	}
 
 	@Override
-	public String getEventName() {
+	public String eventName() {
 		// TODO Auto-generated method stub
 		return null;
 	}

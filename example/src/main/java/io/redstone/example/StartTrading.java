@@ -31,8 +31,8 @@ public final class StartTrading {
 
 	public static void main(String[] args) {
 		long datetime = DateTimeUtil.datetimeToSecond();
-		LoggerSetter.setLogFileName("redstone-" + appId + "-" + datetime);
-		LoggerSetter.setLogLevel(LogLevel.DEBUG);
+		LoggerSetter.logFileName("redstone-" + appId + "-" + datetime);
+		LoggerSetter.logLevel(LogLevel.DEBUG);
 
 		// Set Global AppId
 		AppGlobalStatus.setAppId(appId);
@@ -62,7 +62,7 @@ public final class StartTrading {
 		JctpOutboundAdaptor outboundAdaptor = new JctpOutboundAdaptor(outboundAdaptorId, outboundAdaptorName,
 				inboundAdaptor.getJctpGeteway());
 
-		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(),TimePeriod.values());
+		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.values());
 
 		TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
 

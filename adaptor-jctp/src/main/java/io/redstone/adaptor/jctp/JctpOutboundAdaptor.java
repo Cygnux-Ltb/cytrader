@@ -26,7 +26,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	private Function<Order, CThostFtdcInputOrderField> newOrderFunction = order -> {
 		int orderRef = JctpOrderRefGenerate.next(AppGlobalStatus.appId());
 		char direction;
-		switch (order.getSide().direction()) {
+		switch (order.side().direction()) {
 		case Long:
 			direction = 0;
 			break;
@@ -34,14 +34,14 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 			direction = 1;
 			break;
 		default:
-			throw new RuntimeException(order.getSide() + " does not exist.");
+			throw new RuntimeException(order.side() + " does not exist.");
 		}
 		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
-		inputOrderField.setInstrumentID(order.getInstrument().getInstrumentCode());
+		inputOrderField.setInstrumentID(order.instrument().instrumentCode());
 		inputOrderField.setOrderRef(Integer.toString(orderRef));
 		inputOrderField.setDirection(direction);
-		inputOrderField.setLimitPrice(order.getQtyPrice().getOfferPrice());
-		inputOrderField.setVolumeTotalOriginal(Double.valueOf(order.getQtyPrice().getOfferQty()).intValue());
+		inputOrderField.setLimitPrice(order.qtyPrice().getOfferPrice());
+		inputOrderField.setVolumeTotalOriginal(Double.valueOf(order.qtyPrice().getOfferQty()).intValue());
 		return inputOrderField;
 	};
 
@@ -68,7 +68,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	public boolean newOredr(ChildOrder order) {
 		try {
 			CThostFtdcInputOrderField ctpNewOrder = newOrderFunction.apply(order);
-			JctpOrderRefKeeper.put(ctpNewOrder.getOrderRef(), order.getOrdSysId());
+			JctpOrderRefKeeper.put(ctpNewOrder.getOrderRef(), order.ordSysId());
 			gateway.newOrder(ctpNewOrder);
 			return true;
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	public boolean cancelOrder(ChildOrder order) {
 		try {
 			CThostFtdcInputOrderActionField ctpCancelOrder = cancelOrderFunction.apply(order);
-			String orderRef = JctpOrderRefKeeper.getOrderRef(order.getOrdSysId());
+			String orderRef = JctpOrderRefKeeper.getOrderRef(order.ordSysId());
 			ctpCancelOrder.setOrderRef(orderRef);
 			gateway.cancelOrder(ctpCancelOrder);
 			return true;
@@ -97,7 +97,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	public boolean subscribeMarketData(SubscribeMarketData subscribeMarketData) {
 		try {
 			gateway.subscribeMarketData(subscribeMarketData.getInstrumentSet().stream()
-					.map(instrument -> instrument.getInstrumentCode()).collect(Collectors.toSet()));
+					.map(instrument -> instrument.instrumentCode()).collect(Collectors.toSet()));
 			return true;
 		} catch (Exception e) {
 			logger.error("subscribeMarketData throw {}", e.getClass().getSimpleName(), e);

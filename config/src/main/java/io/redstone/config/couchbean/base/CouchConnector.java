@@ -53,7 +53,7 @@ public final class CouchConnector {
 
 	private String sendGetRequest(String _database, String _id) {
 		logger.info("sendGetRequest() -> _database==[{}], _id==[{}]", _database, _id);
-		return HttpRequester.INSTANCE.httpGet(couchdbUrl + _database + _id);
+		return HttpRequester.INSTANCE.get(couchdbUrl + _database + _id);
 	}
 
 	public static void main(String[] args) {
