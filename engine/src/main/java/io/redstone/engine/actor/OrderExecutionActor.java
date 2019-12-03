@@ -36,7 +36,7 @@ public class OrderExecutionActor {
 	public ParentOrder virtualOrderToActual(VirtualOrder virtualOrder) {
 		OrderBook instrumentOrderBook = OrderKeeper
 				.getInstrumentOrderBook(virtualOrder.instrument().id());
-		OrdSide side = virtualOrder.side();
+		OrdSide side = virtualOrder.ordSide();
 		switch (side.direction()) {
 		case Long:
 			MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.activeShortOrders();

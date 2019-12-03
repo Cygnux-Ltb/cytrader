@@ -50,7 +50,7 @@ public final class OrderKeeper {
 	}
 
 	public static void updateOrder(Order order) {
-		switch (order.status()) {
+		switch (order.ordStatus()) {
 		case Filled:
 		case Canceled:
 		case NewRejected:
@@ -64,7 +64,7 @@ public final class OrderKeeper {
 			break;
 		default:
 			logger.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.ordSysId(),
-					order.status());
+					order.ordStatus());
 			break;
 		}
 	}

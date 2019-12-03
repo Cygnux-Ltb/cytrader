@@ -20,7 +20,8 @@ import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.impl.ParentOrder;
 import io.redstone.core.order.impl.VirtualOrder;
-import io.redstone.core.order.structure.OrdQtyPrice;
+import io.redstone.core.order.structure.OrdPrice;
+import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.utils.PriceUtil;
 import io.redstone.core.strategy.CircuitBreaker;
 import io.redstone.core.strategy.Strategy;
@@ -189,8 +190,8 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 		default:
 			throw new IllegalArgumentException("TrdDirection is illegal");
 		}
-		VirtualOrder newVirtualOrder = VirtualOrder.newVirtualOrder(instrument,
-				OrdQtyPrice.withOffer(targetQty, offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
+		VirtualOrder newVirtualOrder = VirtualOrder.newVirtualOrder(instrument, OrdQty.withOffer(targetQty),
+				OrdPrice.withOffer(offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
 		strategyVirtualOrders.put(newVirtualOrder.ordSysId(), newVirtualOrder);
 
 		ParentOrder parentOrder = OrderExecutionActor.Singleton.virtualOrderToActual(newVirtualOrder);

@@ -7,7 +7,8 @@ import io.mercury.common.collections.MutableMaps;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdStatus;
-import io.redstone.core.order.structure.OrdQtyPrice;
+import io.redstone.core.order.structure.OrdPrice;
+import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.position.impl.AbsT0Position;
 
 public final class ChinaFuturesPosition extends AbsT0Position {
@@ -88,17 +89,18 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 
 	@Override
 	public void updatePosition(Order order) {
-		OrdStatus status = order.status();
-		OrdQtyPrice ordQtyPrice = order.qtyPrice();
+		OrdStatus status = order.ordStatus();
+		OrdQty qty = order.ordQty();
+		OrdPrice price = order.ordPrice();
 		switch (status) {
 		case PartiallyFilled:
 		case Filled:
-			switch (order.side().direction()) {
+			switch (order.ordSide().direction()) {
 			case Long:
-				setCurrentQty(getCurrentQty() + ordQtyPrice.getFilledQty() - ordQtyPrice.getLastFilledQty());
+				setCurrentQty(getCurrentQty() + qty.filledQty() - qty.lastFilledQty());
 				break;
 			case Short:
-				setCurrentQty(getCurrentQty() - ordQtyPrice.getFilledQty() + ordQtyPrice.getLastFilledQty());
+				setCurrentQty(getCurrentQty() - qty.filledQty() + qty.lastFilledQty());
 				break;
 			default:
 				break;

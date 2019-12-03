@@ -53,7 +53,7 @@ public class OrderBook {
 	}
 
 	public Order putOrder(Order order) {
-		switch (order.side().direction()) {
+		switch (order.ordSide().direction()) {
 		case Long:
 			longOrders.put(order.ordSysId(), order);
 			activeLongOrders.put(order.ordSysId(), order);
@@ -64,14 +64,14 @@ public class OrderBook {
 			break;
 		default:
 			throw new RuntimeException(
-					"OrderSysId : " + order.ordSysId() + ", OrdSide : " + order.side() + " -> is undefined.");
+					"OrderSysId : " + order.ordSysId() + ", OrdSide : " + order.ordSide() + " -> is undefined.");
 		}
 		orders.put(order.ordSysId(), order);
 		return activeOrders.put(order.ordSysId(), order);
 	}
 
 	public Order terminatedOrder(Order order) {
-		switch (order.side().direction()) {
+		switch (order.ordSide().direction()) {
 		case Long:
 			activeLongOrders.remove(order.ordSysId());
 			break;
@@ -80,7 +80,7 @@ public class OrderBook {
 			break;
 		default:
 			throw new RuntimeException(
-					"OrderSysId : " + order.ordSysId() + ", OrdSide : " + order.side() + " -> is undefined.");
+					"OrderSysId : " + order.ordSysId() + ", OrdSide : " + order.ordSide() + " -> is undefined.");
 		}
 		return activeOrders.remove(order.ordSysId());
 	}
