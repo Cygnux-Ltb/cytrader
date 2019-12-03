@@ -48,9 +48,9 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 		io.redstone.persistence.avro.entity.Order simOrder = io.redstone.persistence.avro.entity.Order.newBuilder()
 				.setOrderRef(Long.valueOf(order.ordSysId()).intValue())
 				.setInstrumentId(order.instrument().code())
-				.setLimitPrice(order.qtyPrice().getOfferPrice())
-				.setVolumeTotalOriginal(Double.valueOf(order.qtyPrice().getOfferQty()).intValue())
-				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.side().code()).build();
+				.setLimitPrice(order.ordPrice().offerPrice())
+				.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue())
+				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.ordSide().code()).build();
 		byte[] byteMsg = serializer.serialization(simOrder);
 		tdSender.send(byteMsg);
 		return true;
@@ -61,9 +61,9 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 		io.redstone.persistence.avro.entity.Order simOrder = io.redstone.persistence.avro.entity.Order.newBuilder()
 				.setOrderRef(Long.valueOf(order.ordSysId()).intValue())
 				.setInstrumentId(cancelOrder.instrument().code())
-				.setLimitPrice(cancelOrder.qtyPrice().getOfferPrice())
-				.setVolumeTotalOriginal(Double.valueOf(cancelOrder.qtyPrice().getOfferQty()).intValue())
-				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.side().code()).build();
+				.setLimitPrice(order.ordPrice().offerPrice())
+				.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue())
+				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.ordSide().code()).build();
 		byte[] byteMsg = serializer.serialization(simOrder);
 		tdSender.send(byteMsg);
 		return true;

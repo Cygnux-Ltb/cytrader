@@ -26,7 +26,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	private Function<Order, CThostFtdcInputOrderField> newOrderFunction = order -> {
 		int orderRef = JctpOrderRefGenerate.next(AppGlobalStatus.appId());
 		char direction;
-		switch (order.side().direction()) {
+		switch (order.ordSide().direction()) {
 		case Long:
 			direction = 0;
 			break;
@@ -34,14 +34,14 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 			direction = 1;
 			break;
 		default:
-			throw new RuntimeException(order.side() + " does not exist.");
+			throw new RuntimeException(order.ordSide() + " does not exist.");
 		}
 		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
 		inputOrderField.setInstrumentID(order.instrument().code());
 		inputOrderField.setOrderRef(Integer.toString(orderRef));
 		inputOrderField.setDirection(direction);
-		inputOrderField.setLimitPrice(order.qtyPrice().getOfferPrice());
-		inputOrderField.setVolumeTotalOriginal(Double.valueOf(order.qtyPrice().getOfferQty()).intValue());
+		inputOrderField.setLimitPrice(order.ordPrice().offerPrice());
+		inputOrderField.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue());
 		return inputOrderField;
 	};
 
