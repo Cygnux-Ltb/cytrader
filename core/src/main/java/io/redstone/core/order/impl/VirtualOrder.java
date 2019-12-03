@@ -7,7 +7,8 @@ import io.polaris.financial.instrument.Instrument;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdSort;
 import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.structure.OrdQtyPrice;
+import io.redstone.core.order.structure.OrdPrice;
+import io.redstone.core.order.structure.OrdQty;
 
 /**
  * 用于记录策略在出现交易信号后需要进行的交易
@@ -18,14 +19,14 @@ public final class VirtualOrder extends AbstractOrder {
 
 	private MutableLongObjectMap<ParentOrder> actualOrders = MutableMaps.newLongObjectHashMap();
 
-	private VirtualOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
+	private VirtualOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide, OrdType ordType,
 			int strategyId, int subAccountId) {
-		super(instrument, ordQtyPrice, ordSide, ordType, strategyId, subAccountId);
+		super(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId);
 	}
 
-	public static VirtualOrder newVirtualOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide,
+	public static VirtualOrder newVirtualOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId) {
-		return new VirtualOrder(instrument, ordQtyPrice, ordSide, ordType, strategyId, subAccountId);
+		return new VirtualOrder(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId);
 	}
 
 	public MutableLongObjectMap<ParentOrder> getActualOrders() {

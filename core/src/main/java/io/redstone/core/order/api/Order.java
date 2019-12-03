@@ -5,7 +5,8 @@ import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdSort;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.structure.OrdQtyPrice;
+import io.redstone.core.order.structure.OrdPrice;
+import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.OrdTimestamps;
 import io.redstone.core.order.structure.StopLoss;
 
@@ -31,17 +32,19 @@ public interface Order extends Comparable<Order> {
 
 	Instrument instrument();
 
-	OrdQtyPrice qtyPrice();
+	OrdQty ordQty();
+	
+	OrdPrice ordPrice();
 
-	OrdSide side();
+	OrdSide ordSide();
 
-	OrdType type();
+	OrdType ordType();
 
-	OrdStatus status();
+	OrdStatus ordStatus();
 
-	OrdTimestamps timestamps();
+	OrdTimestamps ordTimestamps();
 
-	OrdStatus status(OrdStatus ordStatus);
+	OrdStatus ordStatus(OrdStatus ordStatus);
 
 	int strategyId();
 

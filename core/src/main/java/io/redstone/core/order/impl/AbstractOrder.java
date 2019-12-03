@@ -5,7 +5,8 @@ import io.redstone.core.order.api.Order;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.structure.OrdQtyPrice;
+import io.redstone.core.order.structure.OrdPrice;
+import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.OrdTimestamps;
 import io.redstone.core.order.structure.StopLoss;
 import io.redstone.core.order.utils.OrdSysIdGenerate;
@@ -15,9 +16,13 @@ public abstract class AbstractOrder implements Order {
 	private long ordSysId;
 	private Instrument instrument;
 	/**
-	 * 数量和价格
+	 * 数量
 	 */
-	private OrdQtyPrice ordQtyPrice;
+	private OrdQty ordQty;
+	/**
+	 * 价格
+	 */
+	private OrdPrice ordPrice;
 	/**
 	 * 订单方向
 	 */
@@ -47,11 +52,12 @@ public abstract class AbstractOrder implements Order {
 	 */
 	private StopLoss stopLoss;
 
-	protected AbstractOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
+	protected AbstractOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide, OrdType ordType,
 			int strategyId, int subAccountId, StopLoss stopLoss) {
 		this.ordSysId = OrdSysIdGenerate.next(strategyId);
 		this.instrument = instrument;
-		this.ordQtyPrice = ordQtyPrice;
+		this.ordQty = ordQty;
+		this.ordPrice = ordPrice;
 		this.ordSide = ordSide;
 		this.ordType = ordType;
 		this.ordStatus = OrdStatus.PendingNew;
@@ -64,9 +70,9 @@ public abstract class AbstractOrder implements Order {
 			this.stopLoss = stopLoss;
 	}
 
-	protected AbstractOrder(Instrument instrument, OrdQtyPrice ordQtyPrice, OrdSide ordSide, OrdType ordType,
+	protected AbstractOrder(Instrument instrument, OrdQty qty, OrdPrice price, OrdSide ordSide, OrdType ordType,
 			int strategyId, int subAccountId) {
-		this(instrument, ordQtyPrice, ordSide, ordType, strategyId, subAccountId, null);
+		this(instrument, qty, price, ordSide, ordType, strategyId, subAccountId, null);
 	}
 
 	@Override
@@ -80,32 +86,37 @@ public abstract class AbstractOrder implements Order {
 	}
 
 	@Override
-	public OrdQtyPrice qtyPrice() {
-		return ordQtyPrice;
+	public OrdQty ordQty() {
+		return ordQty;
 	}
 
 	@Override
-	public OrdSide side() {
+	public OrdPrice ordPrice() {
+		return ordPrice;
+	}
+
+	@Override
+	public OrdSide ordSide() {
 		return ordSide;
 	}
 
 	@Override
-	public OrdType type() {
+	public OrdType ordType() {
 		return ordType;
 	}
 
 	@Override
-	public OrdStatus status() {
+	public OrdStatus ordStatus() {
 		return ordStatus;
 	}
 
 	@Override
-	public OrdTimestamps timestamps() {
+	public OrdTimestamps ordTimestamps() {
 		return ordTimestamps;
 	}
 
 	@Override
-	public OrdStatus status(OrdStatus ordStatus) {
+	public OrdStatus ordStatus(OrdStatus ordStatus) {
 		this.ordStatus = ordStatus;
 		return this.ordStatus;
 	}

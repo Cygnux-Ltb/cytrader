@@ -9,7 +9,8 @@ import io.polaris.financial.instrument.Instrument;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdSort;
 import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.structure.OrdQtyPrice;
+import io.redstone.core.order.structure.OrdPrice;
+import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.StopLoss;
 
 /**
@@ -24,23 +25,23 @@ public final class ParentOrder extends ActualOrder {
 
 	public ParentOrder(long virtualId, Instrument instrument, long offerQty, double offerPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
-		super(instrument, OrdQtyPrice.withOffer(offerQty, offerPrice), ordSide, ordType, strategyId, subAccountId,
-				stopLoss);
+		super(instrument, OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordSide, ordType, strategyId,
+				subAccountId, stopLoss);
 		this.childOrders = MutableLists.newFastList(8);
 		this.virtualId = virtualId;
 	}
 
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = ChildOrder.generateChildOrder(ordSysId(), instrument(), qtyPrice(), side(),
-				type(), strategyId(), subAccountId(), stopLoss());
+		ChildOrder childOrder = ChildOrder.generateChildOrder(ordSysId(), instrument(), ordQty(), ordPrice(), ordSide(),
+				ordType(), strategyId(), subAccountId(), stopLoss());
 		childOrders.add(childOrder);
 		return childOrder;
 	}
 
 	public List<ChildOrder> toChildOrder(int count) {
 		// TODO 增加拆分为多个订单的逻辑
-		OrdQtyPrice qtyPrice = qtyPrice();
-		qtyPrice.getOfferQty();
+		OrdQty qty = ordQty();
+		qty.offerQty();
 		return this.childOrders;
 	}
 
