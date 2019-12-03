@@ -60,7 +60,7 @@ public final class OrderKeeper {
 			getSubAccountOrderBook(subAccountId).terminatedOrder(order);
 			getAccountOrderBook(accountId).terminatedOrder(order);
 			getStrategyOrderBook(order.strategyId()).terminatedOrder(order);
-			getInstrumentOrderBook(order.instrument().instrumentId()).terminatedOrder(order);
+			getInstrumentOrderBook(order.instrument().id()).terminatedOrder(order);
 			break;
 		default:
 			logger.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.ordSysId(),
@@ -76,7 +76,7 @@ public final class OrderKeeper {
 		getSubAccountOrderBook(subAccountId).putOrder(order);
 		getAccountOrderBook(accountId).putOrder(order);
 		getStrategyOrderBook(order.strategyId()).putOrder(order);
-		getInstrumentOrderBook(order.instrument().instrumentId()).putOrder(order);
+		getInstrumentOrderBook(order.instrument().id()).putOrder(order);
 	}
 
 	public static boolean containsOrder(long ordSysId) {

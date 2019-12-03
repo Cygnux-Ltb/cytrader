@@ -37,7 +37,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 			throw new RuntimeException(order.side() + " does not exist.");
 		}
 		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
-		inputOrderField.setInstrumentID(order.instrument().instrumentCode());
+		inputOrderField.setInstrumentID(order.instrument().code());
 		inputOrderField.setOrderRef(Integer.toString(orderRef));
 		inputOrderField.setDirection(direction);
 		inputOrderField.setLimitPrice(order.qtyPrice().getOfferPrice());
@@ -97,7 +97,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	public boolean subscribeMarketData(SubscribeMarketData subscribeMarketData) {
 		try {
 			gateway.subscribeMarketData(subscribeMarketData.getInstrumentSet().stream()
-					.map(instrument -> instrument.instrumentCode()).collect(Collectors.toSet()));
+					.map(instrument -> instrument.code()).collect(Collectors.toSet()));
 			return true;
 		} catch (Exception e) {
 			logger.error("subscribeMarketData throw {}", e.getClass().getSimpleName(), e);

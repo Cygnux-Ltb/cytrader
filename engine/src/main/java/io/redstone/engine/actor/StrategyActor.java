@@ -27,7 +27,7 @@ public final class StrategyActor {
 	}
 
 	public void onMarketData(BasicMarketData marketData) {
-		StrategyKeeper.getStrategys(marketData.getInstrument().instrumentId()).forEach(strategy -> {
+		StrategyKeeper.getStrategys(marketData.getInstrument().id()).forEach(strategy -> {
 			if (strategy.isEnabled())
 				strategy.onMarketData(marketData);
 		});
@@ -38,7 +38,7 @@ public final class StrategyActor {
 				orderReport.getOrdSysId());
 		Order order = OrderKeeper.getOrder(orderReport.getOrdSysId());
 		logger.info("Search Order OK. BrokerRtnId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
-				order.strategyId(), order.instrument().instrumentCode(), orderReport.getOrdSysId());
+				order.strategyId(), order.instrument().code(), orderReport.getOrdSysId());
 		StrategyKeeper.getStrategy(order.strategyId()).onOrder(order);
 	}
 

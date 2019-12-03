@@ -35,7 +35,7 @@ public class OrderExecutionActor {
 
 	public ParentOrder virtualOrderToActual(VirtualOrder virtualOrder) {
 		OrderBook instrumentOrderBook = OrderKeeper
-				.getInstrumentOrderBook(virtualOrder.instrument().instrumentId());
+				.getInstrumentOrderBook(virtualOrder.instrument().id());
 		OrdSide side = virtualOrder.side();
 		switch (side.direction()) {
 		case Long:
