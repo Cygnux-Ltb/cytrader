@@ -8,8 +8,8 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 
-import io.mercury.common.env.SysPropertys;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.sys.SysProperties;
 import io.mercury.persistence.json.JsonParser;
 import io.mercury.transport.http.HttpRequester;
 
@@ -24,7 +24,7 @@ public final class CouchConnector {
 	private CouchConnector() {
 		Properties properties = new Properties();
 		try {
-			File configFile = new File(SysPropertys.USER_HOME + "/config/couchdb.properties");
+			File configFile = new File(SysProperties.USER_HOME + "/config/couchdb.properties");
 			InputStream inputStream = null;
 			if (configFile.exists())
 				inputStream = new FileInputStream(configFile);
