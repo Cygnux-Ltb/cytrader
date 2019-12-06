@@ -19,22 +19,22 @@ public final class OrdTimestamps {
 		return new OrdTimestamps();
 	}
 
-	public EpochTimestamp getGenerateTime() {
+	public EpochTimestamp generateTime() {
 		return generateTime;
 	}
 
 	@Nullable
-	public EpochTimestamp getSendingTime() {
+	public EpochTimestamp sendingTime() {
 		return sendingTime;
 	}
 
 	@Nullable
-	public EpochTimestamp getFirstReportTime() {
+	public EpochTimestamp firstReportTime() {
 		return firstReportTime;
 	}
 
 	@Nullable
-	public EpochTimestamp getFinishTime() {
+	public EpochTimestamp finishTime() {
 		return finishTime;
 	}
 

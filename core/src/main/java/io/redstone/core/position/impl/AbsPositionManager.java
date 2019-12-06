@@ -19,7 +19,7 @@ public abstract class AbsPositionManager<T extends Position> implements Position
 
 	@Override
 	public void putPosition(T position) {
-		getPositionSet(position.getAccountId()).putPosition(position);
+		getPositionSet(position.accountId()).putPosition(position);
 	}
 
 	@Override

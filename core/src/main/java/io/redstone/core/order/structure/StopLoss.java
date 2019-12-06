@@ -7,7 +7,7 @@ public final class StopLoss implements Comparable<StopLoss> {
 	private long ordSysId;
 	private double stopLossPrice;
 	private boolean greaterOrEqual;
-	private boolean LessOrEqual;
+	private boolean lessOrEqual;
 
 	public StopLoss(long ordSysId, TrdDirection direction) {
 		super();
@@ -15,26 +15,26 @@ public final class StopLoss implements Comparable<StopLoss> {
 		switch (direction) {
 		case Long:
 			greaterOrEqual = false;
-			LessOrEqual = true;
+			lessOrEqual = true;
 			break;
 		case Short:
 			greaterOrEqual = true;
-			LessOrEqual = false;
+			lessOrEqual = false;
 			break;
 		default:
 			throw new RuntimeException("");
 		}
 	}
 
-	public long getOrdSysId() {
+	public long ordSysId() {
 		return ordSysId;
 	}
 
-	public double getStopLossPrice() {
+	public double stopLossPrice() {
 		return stopLossPrice;
 	}
 
-	public StopLoss setStopLossPrice(double stopLossPrice) {
+	public StopLoss stopLossPrice(double stopLossPrice) {
 		this.stopLossPrice = stopLossPrice;
 		return this;
 	}
@@ -44,7 +44,7 @@ public final class StopLoss implements Comparable<StopLoss> {
 	}
 
 	public boolean isLessOrEqual() {
-		return LessOrEqual;
+		return lessOrEqual;
 	}
 
 	@Override

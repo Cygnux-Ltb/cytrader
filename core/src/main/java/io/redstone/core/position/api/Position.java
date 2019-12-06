@@ -4,17 +4,17 @@ import io.redstone.core.order.api.Order;
 
 public interface Position extends Comparable<Position> {
 
-	int getAccountId();
+	int accountId();
 
-	int getInstrumentId();
+	int instrumentId();
 
-	long getCurrentQty();
+	long currentQty();
 
-	void setCurrentQty(long qty);
+	void currentQty(long qty);
 
-	long getTradeableQty();
+	long tradeableQty();
 
-	void setTradeableQty(long qty);
+	void tradeableQty(long qty);
 
 	void updatePosition(Order order);
 

@@ -7,13 +7,13 @@ public abstract class AbsT0Position extends AbsPosition {
 	}
 
 	@Override
-	public long getTradeableQty() {
+	public long tradeableQty() {
 		return currentQty;
 	}
 
 	@Override
-	public void setTradeableQty(long qty) {
-		setCurrentQty(qty);
+	public void tradeableQty(long qty) {
+		currentQty(qty);
 	}
 
 }

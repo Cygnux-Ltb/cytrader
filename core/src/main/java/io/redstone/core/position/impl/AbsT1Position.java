@@ -10,11 +10,12 @@ public abstract class AbsT1Position extends AbsPosition {
 	}
 
 	@Override
-	public long getTradeableQty() {
+	public long tradeableQty() {
 		return tradeableQty;
 	}
 
-	public void setTradeableQty(long tradeableQty) {
+	@Override
+	public void tradeableQty(long tradeableQty) {
 		this.tradeableQty = tradeableQty;
 	}
 

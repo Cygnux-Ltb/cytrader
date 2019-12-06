@@ -6,13 +6,13 @@ import io.redstone.core.trade.enums.TrdDirection;
 
 public interface TradeSignal {
 
-	Instrument getInstrument();
+	Instrument instrument();
 
-	int getStrategyId();
+	int strategyId();
 
-	TrdAction getAction();
+	TrdAction trdAction();
 
-	TrdDirection getDirection();
+	TrdDirection trdDirection();
 
 	public static TradeSignal openLongSignal(Instrument instrument, int strategyId) {
 		return new OpenLongSignal(instrument, strategyId);
@@ -37,12 +37,12 @@ public interface TradeSignal {
 		}
 
 		@Override
-		public TrdAction getAction() {
+		public TrdAction trdAction() {
 			return TrdAction.Open;
 		}
 
 		@Override
-		public TrdDirection getDirection() {
+		public TrdDirection trdDirection() {
 			return TrdDirection.Long;
 		}
 	}
@@ -53,12 +53,12 @@ public interface TradeSignal {
 		}
 
 		@Override
-		public TrdAction getAction() {
+		public TrdAction trdAction() {
 			return TrdAction.Open;
 		}
 
 		@Override
-		public TrdDirection getDirection() {
+		public TrdDirection trdDirection() {
 			return TrdDirection.Short;
 		}
 	}
@@ -69,12 +69,12 @@ public interface TradeSignal {
 		}
 
 		@Override
-		public TrdAction getAction() {
+		public TrdAction trdAction() {
 			return TrdAction.Close;
 		}
 
 		@Override
-		public TrdDirection getDirection() {
+		public TrdDirection trdDirection() {
 			return TrdDirection.Long;
 		}
 	}
@@ -85,12 +85,12 @@ public interface TradeSignal {
 		}
 
 		@Override
-		public TrdAction getAction() {
+		public TrdAction trdAction() {
 			return TrdAction.Close;
 		}
 
 		@Override
-		public TrdDirection getDirection() {
+		public TrdDirection trdDirection() {
 			return TrdDirection.Short;
 		}
 	}
@@ -107,12 +107,12 @@ public interface TradeSignal {
 		}
 
 		@Override
-		public int getStrategyId() {
+		public int strategyId() {
 			return strategyId;
 		}
 
 		@Override
-		public Instrument getInstrument() {
+		public Instrument instrument() {
 			return instrument;
 		}
 	}

@@ -13,31 +13,31 @@ public abstract class AbsPosition implements Position {
 	}
 
 	@Override
-	public final int getAccountId() {
+	public final int accountId() {
 		return accountId;
 	}
 
 	@Override
-	public final int getInstrumentId() {
+	public final int instrumentId() {
 		return instrumentId;
 	}
 
 	@Override
-	public final long getCurrentQty() {
+	public final long currentQty() {
 		return currentQty;
 	}
 
 	@Override
-	public final void setCurrentQty(long qty) {
+	public final void currentQty(long qty) {
 		this.currentQty = qty;
 	}
 
 	@Override
 	public int compareTo(Position pos) {
-		return this.accountId < pos.getAccountId() ? -1
-				: this.accountId > pos.getAccountId() ? 1
-						: this.instrumentId < pos.getInstrumentId() ? -1
-								: this.instrumentId > pos.getInstrumentId() ? 1 : 0;
+		return this.accountId < pos.accountId() ? -1
+				: this.accountId > pos.accountId() ? 1
+						: this.instrumentId < pos.instrumentId() ? -1
+								: this.instrumentId > pos.instrumentId() ? 1 : 0;
 	}
 
 }

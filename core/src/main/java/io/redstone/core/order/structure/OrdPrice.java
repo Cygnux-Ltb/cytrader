@@ -57,10 +57,10 @@ public final class OrdPrice {
 
 	public OrdPrice calculateAvgPrice(TradeSet tradeSet) {
 		if (!tradeSet.isEmpty()) {
-			MutableSortedSet<Trade> innerSet = tradeSet.getInnerSet();
+			MutableSortedSet<Trade> internalSet = tradeSet.internalSet();
 			double totalPrice = correction8(
-					innerSet.sumOfDouble(trade -> correction8(trade.getTradePrice() * trade.getTradeQty())));
-			long totalQty = innerSet.sumOfLong(trade -> trade.getTradeQty());
+					internalSet.sumOfDouble(trade -> correction8(trade.getTradePrice() * trade.getTradeQty())));
+			long totalQty = internalSet.sumOfLong(trade -> trade.getTradeQty());
 			if (totalQty > 0L)
 				this.avgPrice = correction8(totalPrice / totalQty);
 			return this;

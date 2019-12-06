@@ -11,13 +11,13 @@ import io.redstone.core.order.api.Order;
 
 public interface Strategy extends Enable {
 
-	int getStrategyId();
+	int strategyId();
 
-	String getStrategyName();
+	String strategyName();
 
-	int getSubAccountId();
+	int subAccountId();
 
-	ImmutableList<Instrument> getInstruments();
+	ImmutableList<Instrument> instruments();
 
 	void initialize(Supplier<Boolean> initializer);
 

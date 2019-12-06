@@ -9,34 +9,34 @@ public class TradeSet {
 	private long ordSysId;
 	private int tradingNo = -1;
 
-	private MutableSortedSet<Trade> innerSet = MutableSets.newTreeSortedSet();
+	private MutableSortedSet<Trade> internalSet = MutableSets.newTreeSortedSet();
 
 	public TradeSet(long ordSysId) {
 		this.ordSysId = ordSysId;
 	}
 
-	public long getOrdSysId() {
+	public long ordSysId() {
 		return ordSysId;
 	}
 
-	public MutableSortedSet<Trade> getInnerSet() {
-		return innerSet;
+	public MutableSortedSet<Trade> internalSet() {
+		return internalSet;
 	}
 
 	public boolean isEmpty() {
-		return innerSet.isEmpty();
+		return internalSet.isEmpty();
 	}
 
 	public Trade firstTrade() {
-		return innerSet.first();
+		return internalSet.first();
 	}
 
 	public Trade lastTrade() {
-		return innerSet.last();
+		return internalSet.last();
 	}
 
 	public void addNewTrade(long tradingEpochMillis, double price, long qty) {
-		innerSet.add(new Trade(ordSysId, ++tradingNo, tradingEpochMillis, price, qty));
+		internalSet.add(new Trade(ordSysId, ++tradingNo, tradingEpochMillis, price, qty));
 	}
 
 	public class Trade implements Comparable<Trade> {
