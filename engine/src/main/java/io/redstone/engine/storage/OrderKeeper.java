@@ -5,7 +5,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.mercury.common.collections.InitialCapacity;
+import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.redstone.core.order.api.Order;
@@ -20,7 +20,7 @@ public final class OrderKeeper {
 	/**
 	 * 存储所有的order
 	 */
-	private final OrderBook allOrders = OrderBook.newInstance(InitialCapacity.L16_Size_65536);
+	private final OrderBook allOrders = OrderBook.newInstance(Capacity.L16_SIZE_65536);
 
 	/**
 	 * 按照subAccount分组存储
@@ -94,7 +94,7 @@ public final class OrderKeeper {
 	public static OrderBook getSubAccountOrderBook(int subAccountId) {
 		OrderBook subAccountOrderBook = InnerInstance.subAccountOrderBookMap.get(subAccountId);
 		if (subAccountOrderBook == null) {
-			subAccountOrderBook = OrderBook.newInstance(InitialCapacity.L10_Size_1024);
+			subAccountOrderBook = OrderBook.newInstance(Capacity.L10_SIZE_1024);
 			InnerInstance.subAccountOrderBookMap.put(subAccountId, subAccountOrderBook);
 		}
 		return subAccountOrderBook;
@@ -103,7 +103,7 @@ public final class OrderKeeper {
 	public static OrderBook getAccountOrderBook(int accountId) {
 		OrderBook accountOrderBook = InnerInstance.accountOrderBookMap.get(accountId);
 		if (accountOrderBook == null) {
-			accountOrderBook = OrderBook.newInstance(InitialCapacity.L11_Size_2048);
+			accountOrderBook = OrderBook.newInstance(Capacity.L11_SIZE_2048);
 			InnerInstance.accountOrderBookMap.put(accountId, accountOrderBook);
 		}
 		return accountOrderBook;
@@ -112,7 +112,7 @@ public final class OrderKeeper {
 	public static OrderBook getStrategyOrderBook(int strategyId) {
 		OrderBook strategyOrderBook = InnerInstance.strategyOrderBookMap.get(strategyId);
 		if (strategyOrderBook == null) {
-			strategyOrderBook = OrderBook.newInstance(InitialCapacity.L12_Size_4096);
+			strategyOrderBook = OrderBook.newInstance(Capacity.L12_SIZE_4096);
 			InnerInstance.strategyOrderBookMap.put(strategyId, strategyOrderBook);
 		}
 		return strategyOrderBook;
@@ -121,7 +121,7 @@ public final class OrderKeeper {
 	public static OrderBook getInstrumentOrderBook(int instrumentId) {
 		OrderBook instrumentOrderBook = InnerInstance.instrumentOrderBookMap.get(instrumentId);
 		if (instrumentOrderBook == null) {
-			instrumentOrderBook = OrderBook.newInstance(InitialCapacity.L11_Size_2048);
+			instrumentOrderBook = OrderBook.newInstance(Capacity.L11_SIZE_2048);
 			InnerInstance.instrumentOrderBookMap.put(instrumentId, instrumentOrderBook);
 		}
 		return instrumentOrderBook;

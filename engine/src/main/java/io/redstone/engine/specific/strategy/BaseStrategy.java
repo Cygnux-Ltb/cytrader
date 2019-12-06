@@ -71,19 +71,19 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	}
 
 	@Override
-	public int getStrategyId() {
+	public int strategyId() {
 		return strategyId;
 	}
 
 	@Override
-	public String getStrategyName() {
+	public String strategyName() {
 		if (StringUtil.isNullOrEmpty(strategyName))
 			return defaultStrategyName;
 		return strategyName;
 	}
 
 	@Override
-	public int getSubAccountId() {
+	public int subAccountId() {
 		return subAccountId;
 	}
 
@@ -165,7 +165,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	}
 
 	@Override
-	public ImmutableList<Instrument> getInstruments() {
+	public ImmutableList<Instrument> instruments() {
 		return instruments;
 	}
 

@@ -16,9 +16,9 @@ public final class TradeSignalActor {
 	}
 
 	public void handleTradeSignal(TradeSignal signal) {
-		switch (signal.getAction()) {
+		switch (signal.trdAction()) {
 		case Open:
-			switch (signal.getDirection()) {
+			switch (signal.trdDirection()) {
 			case Long:
 				
 				break;
@@ -31,7 +31,7 @@ public final class TradeSignalActor {
 			}
 			break;
 		case Close:
-			switch (signal.getDirection()) {
+			switch (signal.trdDirection()) {
 			case Long:
 
 				break;

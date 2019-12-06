@@ -29,9 +29,9 @@ public final class StrategyKeeper {
 	}
 
 	public static void putStrategy(Strategy strategy) {
-		InnerInstance.strategyMap.put(strategy.getStrategyId(), strategy);
-		logger.info("Put to strategyMap. strategyId==[{}]", strategy.getStrategyId());
-		ImmutableList<Instrument> instruments = strategy.getInstruments();
+		InnerInstance.strategyMap.put(strategy.strategyId(), strategy);
+		logger.info("Put to strategyMap. strategyId==[{}]", strategy.strategyId());
+		ImmutableList<Instrument> instruments = strategy.instruments();
 		for (Instrument instrument : instruments) {
 			int instrumentId = instrument.id();
 			MutableList<Strategy> strategyList = InnerInstance.instrumentStrategyMap.get(instrumentId);
@@ -40,7 +40,7 @@ public final class StrategyKeeper {
 				InnerInstance.instrumentStrategyMap.put(instrumentId, strategyList);
 			}
 			strategyList.add(strategy);
-			logger.info("Put to instrumentStrategyMap. strategyId==[{}], instrumentId==[{}]", strategy.getStrategyId(),
+			logger.info("Put to instrumentStrategyMap. strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
 					instrumentId);
 		}
 		strategy.enable();

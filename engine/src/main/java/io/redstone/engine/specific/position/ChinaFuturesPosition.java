@@ -2,7 +2,7 @@ package io.redstone.engine.specific.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
-import io.mercury.common.collections.InitialCapacity;
+import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.enums.OrdSide;
@@ -14,7 +14,7 @@ import io.redstone.core.position.impl.AbsT0Position;
 public final class ChinaFuturesPosition extends AbsT0Position {
 
 	private long beforeTodayQty;
-	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(InitialCapacity.L06_Size_64);
+	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(Capacity.L06_SIZE_64);
 
 	public final static ChinaFuturesPosition EMPTY = new ChinaFuturesPosition(-1, -1);
 
@@ -97,10 +97,10 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		case Filled:
 			switch (order.ordSide().direction()) {
 			case Long:
-				setCurrentQty(getCurrentQty() + qty.filledQty() - qty.lastFilledQty());
+				currentQty(currentQty() + qty.filledQty() - qty.lastFilledQty());
 				break;
 			case Short:
-				setCurrentQty(getCurrentQty() - qty.filledQty() + qty.lastFilledQty());
+				currentQty(currentQty() - qty.filledQty() + qty.lastFilledQty());
 				break;
 			default:
 				break;

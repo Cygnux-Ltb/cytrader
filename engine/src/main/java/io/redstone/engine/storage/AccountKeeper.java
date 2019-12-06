@@ -1,6 +1,6 @@
 package io.redstone.engine.storage;
 
-import javax.annotation.Nullable;
+import javax.annotation.CheckForNull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.map.primitive.MutableIntBooleanMap;
@@ -75,7 +75,7 @@ public final class AccountKeeper {
 		return accountId > 0 ? accountId : -1;
 	}
 
-	@Nullable
+	@CheckForNull
 	public static Account getAccount(int subAccountId) {
 		return InnerInstance.accountMap.get(subAccountId);
 	}

@@ -20,7 +20,7 @@ public class ChinaStockPosition extends AbsT1Position {
 			switch (status) {
 			case PartiallyFilled:
 			case Filled:
-				setCurrentQty(getCurrentQty() + qty.filledQty() - qty.lastFilledQty());
+				currentQty(currentQty() + qty.filledQty() - qty.lastFilledQty());
 				break;
 			default:
 				break;
@@ -29,15 +29,15 @@ public class ChinaStockPosition extends AbsT1Position {
 		case Short:
 			switch (status) {
 			case PendingNew:
-				setTradeableQty(getTradeableQty() - qty.offerQty());
+				tradeableQty(tradeableQty() - qty.offerQty());
 				break;
 			case Canceled:
 			case NewRejected:
-				setTradeableQty(getTradeableQty() + qty.offerQty() - qty.lastFilledQty());
+				tradeableQty(tradeableQty() + qty.offerQty() - qty.lastFilledQty());
 				break;
 			case PartiallyFilled:
 			case Filled:
-				setCurrentQty(getCurrentQty() - qty.filledQty() + qty.lastFilledQty());
+				currentQty(currentQty() - qty.filledQty() + qty.lastFilledQty());
 				break;
 			default:
 				break;

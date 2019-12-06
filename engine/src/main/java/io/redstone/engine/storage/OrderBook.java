@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.mercury.common.collections.InitialCapacity;
+import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.redstone.core.order.api.Order;
 
@@ -28,7 +28,7 @@ public class OrderBook {
 	// 存储本OrderBook里的所有活动状态的short订单,以ordSysId索引
 	private MutableLongObjectMap<Order> activeShortOrders;
 
-	private OrderBook(InitialCapacity capacity) {
+	private OrderBook(Capacity capacity) {
 		//添加取一半, 1/4, 1/8
 //		this.orders = MutableMaps.newLongObjectHashMap(size);
 //		this.activeOrders = MutableMaps.newLongObjectHashMap(size / 4);
@@ -45,10 +45,10 @@ public class OrderBook {
 	}
 
 	public static OrderBook newInstance() {
-		return new OrderBook(InitialCapacity.L10_Size_1024);
+		return new OrderBook(Capacity.L10_SIZE_1024);
 	}
 
-	public static OrderBook newInstance(InitialCapacity capacity) {
+	public static OrderBook newInstance(Capacity capacity) {
 		return new OrderBook(capacity);
 	}
 
