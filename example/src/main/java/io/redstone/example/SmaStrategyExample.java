@@ -49,7 +49,7 @@ public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> imple
 	}
 
 	@Override
-	public String getStrategyName() {
+	public String strategyName() {
 		// TODO Auto-generated method stub
 		return null;
 	}

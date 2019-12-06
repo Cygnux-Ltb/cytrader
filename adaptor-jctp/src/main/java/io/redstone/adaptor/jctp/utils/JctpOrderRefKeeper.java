@@ -3,7 +3,7 @@ package io.redstone.adaptor.jctp.utils;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 
-import io.mercury.common.collections.InitialCapacity;
+import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 
@@ -16,9 +16,9 @@ import io.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
 
 public class JctpOrderRefKeeper {
 
-	private MutableObjectLongMap<String> orderRefToOrdSysId = MutableMaps.newObjectLongHashMap(InitialCapacity.L10_Size_1024);
+	private MutableObjectLongMap<String> orderRefToOrdSysId = MutableMaps.newObjectLongHashMap(Capacity.L10_SIZE_1024);
 
-	private MutableLongObjectMap<String> ordSysIdToOrderRef = MutableMaps.newLongObjectHashMap(InitialCapacity.L10_Size_1024);
+	private MutableLongObjectMap<String> ordSysIdToOrderRef = MutableMaps.newLongObjectHashMap(Capacity.L10_SIZE_1024);
 
 	private final static JctpOrderRefKeeper InnerInstance = new JctpOrderRefKeeper();
 
