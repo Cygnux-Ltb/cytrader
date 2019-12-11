@@ -5,19 +5,19 @@ abstract class Balance {
 	private double availableMargin;
 	private double availableCredit;
 
-	public final double getAvailableMargin() {
+	public final double availableMargin() {
 		return availableMargin;
 	}
 
-	public final void setAvailableMargin(double availableMargin) {
+	public final void availableMargin(double availableMargin) {
 		this.availableMargin = availableMargin;
 	}
 
-	public final double getAvailableCredit() {
+	public final double availableCredit() {
 		return availableCredit;
 	}
 
-	public final void setAvailableCredit(double availableCredit) {
+	public final void availableCredit(double availableCredit) {
 		this.availableCredit = availableCredit;
 	}
 

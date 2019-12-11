@@ -34,8 +34,8 @@ public class SubAccount extends EnableComponent {
 		if (subAccountBalance == null) {
 			AccountBalance accountBalance = account.accountBalance();
 			this.subAccountBalance = SubAccountBalance.newInstance(subAccountId);
-			this.subAccountBalance.setAvailableMargin(accountBalance.getAvailableMargin());
-			this.subAccountBalance.setAvailableCredit(accountBalance.getAvailableCredit());
+			this.subAccountBalance.availableMargin(accountBalance.availableMargin());
+			this.subAccountBalance.availableCredit(accountBalance.availableCredit());
 		} else
 			this.subAccountBalance = subAccountBalance;
 		String attachName = "account[" + account.accountId() + "]-subAccount[" + subAccountId + "]";

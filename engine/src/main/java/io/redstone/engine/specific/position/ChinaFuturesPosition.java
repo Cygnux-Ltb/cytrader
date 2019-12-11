@@ -35,7 +35,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		return new ChinaFuturesPosition(accountId, instrumentId, beforeTodayQty);
 	}
 
-	public long getBeforeTodayQty() {
+	public long beforeTodayQty() {
 		return beforeTodayQty;
 	}
 
