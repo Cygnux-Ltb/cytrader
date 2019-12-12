@@ -37,7 +37,7 @@ public final class OrderReport {
 	/**
 	 * order execute price
 	 */
-	private double executePrice;
+	private long executePrice;
 
 	public long getOrdSysId() {
 		return ordSysId;
@@ -59,7 +59,7 @@ public final class OrderReport {
 		return filledQty;
 	}
 
-	public double getExecutePrice() {
+	public long getExecutePrice() {
 		return executePrice;
 	}
 
@@ -88,7 +88,7 @@ public final class OrderReport {
 		return this;
 	}
 
-	public OrderReport setExecutePrice(double executePrice) {
+	public OrderReport setExecutePrice(long executePrice) {
 		this.executePrice = executePrice;
 		return this;
 	}

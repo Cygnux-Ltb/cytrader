@@ -50,7 +50,7 @@ public interface Order extends Comparable<Order> {
 
 	int subAccountId();
 
-	OrdSort sort();
+	OrdSort ordSort();
 
 	StopLoss stopLoss();
 

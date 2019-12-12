@@ -7,7 +7,7 @@ import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.StopLoss;
-import io.redstone.core.order.structure.TradeSet;
+import io.redstone.core.order.structure.TradeList;
 
 /**
  * 最小的订单执行单元
@@ -22,23 +22,23 @@ public final class ChildOrder extends ActualOrder {
 	/**
 	 * 子订单成交列表
 	 */
-	private TradeSet tradeSet;
+	private TradeList tradeList;
 
 	private ChildOrder(long parentId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
 		super(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId, stopLoss);
 		this.parentId = parentId;
-		this.tradeSet = new TradeSet(ordSysId());
+		this.tradeList = new TradeList(ordSysId());
 	}
 
-	private ChildOrder(long parentId, Instrument instrument, long offerQty, double offerPrice, OrdSide ordSide,
+	private ChildOrder(long parentId, Instrument instrument, long offerQty, long offerPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
 		this(parentId, instrument, OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordSide, ordType,
 				strategyId, subAccountId, stopLoss);
 	}
 
 	public static ChildOrder generateChildOrder(long parentOrdSysId, Instrument instrument, long offerQty,
-			double offerPrice, OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+			long offerPrice, OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
 		return new ChildOrder(parentOrdSysId, instrument, offerQty, offerPrice, ordSide, ordType, strategyId,
 				subAccountId, stopLoss);
 	}
@@ -50,16 +50,16 @@ public final class ChildOrder extends ActualOrder {
 	}
 
 	@Override
-	public OrdSort sort() {
+	public OrdSort ordSort() {
 		return OrdSort.Child;
 	}
 
-	public long getParentId() {
+	public long parentId() {
 		return parentId;
 	}
 
-	public TradeSet getTradeSet() {
-		return tradeSet;
+	public TradeList tradeList() {
+		return tradeList;
 	}
 
 }

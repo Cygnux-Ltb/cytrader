@@ -1,27 +1,29 @@
 package io.redstone.core.order.structure;
 
-import static io.mercury.common.number.DoubleArithmetic.correction8;
+import org.eclipse.collections.api.list.MutableList;
 
-import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import io.polaris.financial.instrument.Instrument.MarketConstant;
+import io.redstone.core.order.structure.TradeList.Trade;
 
-import io.redstone.core.order.structure.TradeSet.Trade;
-
+/**
+ * [offerPrice] & [avgPrice] fix use {@link MarketConstant#PriceMultiplier}
+ */
 public final class OrdPrice {
 
 	/**
 	 * 委托价格
 	 */
-	private double offerPrice;
+	private long offerPrice;
 	/**
 	 * 成交均价
 	 */
-	private double avgPrice;
+	private long avgPrice;
 	/**
 	 * 以最优价格
 	 */
 	private boolean isBestPrice;
 
-	private OrdPrice(double offerPrice) {
+	private OrdPrice(long offerPrice) {
 		this.offerPrice = offerPrice;
 	}
 
@@ -29,7 +31,7 @@ public final class OrdPrice {
 		this.isBestPrice = isBestPrice;
 	}
 
-	public static OrdPrice withOffer(double offerPrice) {
+	public static OrdPrice withOffer(long offerPrice) {
 		return new OrdPrice(offerPrice);
 	}
 
@@ -41,7 +43,7 @@ public final class OrdPrice {
 		return offerPrice;
 	}
 
-	public OrdPrice offerPrice(double offerPrice) {
+	public OrdPrice offerPrice(long offerPrice) {
 		if (this.offerPrice == 0)
 			this.offerPrice = offerPrice;
 		return this;
@@ -55,14 +57,15 @@ public final class OrdPrice {
 		return isBestPrice;
 	}
 
-	public OrdPrice calculateAvgPrice(TradeSet tradeSet) {
-		if (!tradeSet.isEmpty()) {
-			MutableSortedSet<Trade> internalSet = tradeSet.internalSet();
-			double totalPrice = correction8(
-					internalSet.sumOfDouble(trade -> correction8(trade.getTradePrice() * trade.getTradeQty())));
-			long totalQty = internalSet.sumOfLong(trade -> trade.getTradeQty());
+	public OrdPrice calculateAvgPrice(TradeList tradeList) {
+		if (!tradeList.isEmpty()) {
+			MutableList<Trade> internalList = tradeList.internalList();
+			//计算总成交金额
+			long totalTurnover = internalList.sumOfLong(trade -> trade.tradePrice() * trade.tradeQty());
+			//计算总成交量
+			long totalQty = internalList.sumOfLong(trade -> trade.tradeQty());
 			if (totalQty > 0L)
-				this.avgPrice = correction8(totalPrice / totalQty);
+				this.avgPrice = totalTurnover / totalQty;
 			return this;
 		}
 		return this;

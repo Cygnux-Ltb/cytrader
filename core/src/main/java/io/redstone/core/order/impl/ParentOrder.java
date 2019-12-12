@@ -23,7 +23,7 @@ public final class ParentOrder extends ActualOrder {
 	private MutableList<ChildOrder> childOrders;
 	private long virtualId;
 
-	public ParentOrder(long virtualId, Instrument instrument, long offerQty, double offerPrice, OrdSide ordSide,
+	public ParentOrder(long virtualId, Instrument instrument, long offerQty, long offerPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
 		super(instrument, OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordSide, ordType, strategyId,
 				subAccountId, stopLoss);
@@ -46,7 +46,7 @@ public final class ParentOrder extends ActualOrder {
 	}
 
 	@Override
-	public OrdSort sort() {
+	public OrdSort ordSort() {
 		return OrdSort.Parent;
 	}
 

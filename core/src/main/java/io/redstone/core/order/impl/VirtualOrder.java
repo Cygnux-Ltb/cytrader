@@ -38,7 +38,7 @@ public final class VirtualOrder extends AbstractOrder {
 	}
 
 	@Override
-	public OrdSort sort() {
+	public OrdSort ordSort() {
 		return OrdSort.Virtual;
 	}
 

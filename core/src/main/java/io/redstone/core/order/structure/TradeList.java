@@ -1,17 +1,20 @@
 package io.redstone.core.order.structure;
 
-import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import java.util.Optional;
 
-import io.mercury.common.collections.MutableSets;
+import org.eclipse.collections.api.list.MutableList;
 
-public class TradeSet {
+import io.mercury.common.collections.MutableLists;
+import io.polaris.financial.instrument.Instrument.MarketConstant;
+
+public final class TradeList {
 
 	private long ordSysId;
-	private int tradingNo = -1;
+	private int serial = -1;
 
-	private MutableSortedSet<Trade> internalSet = MutableSets.newTreeSortedSet();
+	private MutableList<Trade> internalList = MutableLists.newFastList(8);
 
-	public TradeSet(long ordSysId) {
+	public TradeList(long ordSysId) {
 		this.ordSysId = ordSysId;
 	}
 
@@ -19,66 +22,70 @@ public class TradeSet {
 		return ordSysId;
 	}
 
-	public MutableSortedSet<Trade> internalSet() {
-		return internalSet;
+	public MutableList<Trade> internalList() {
+		return internalList;
 	}
 
 	public boolean isEmpty() {
-		return internalSet.isEmpty();
+		return internalList.isEmpty();
 	}
 
-	public Trade firstTrade() {
-		return internalSet.first();
+	public Optional<Trade> firstTrade() {
+		return internalList.getFirstOptional();
 	}
 
-	public Trade lastTrade() {
-		return internalSet.last();
+	public Optional<Trade> lastTrade() {
+		return internalList.getLastOptional();
 	}
 
-	public void addNewTrade(long tradingEpochMillis, double price, long qty) {
-		internalSet.add(new Trade(ordSysId, ++tradingNo, tradingEpochMillis, price, qty));
+	public void addNewTrade(long epochTime, long tradePrice, long qty) {
+		internalList.add(new Trade(++serial, ordSysId, epochTime, tradePrice, qty));
 	}
 
-	public class Trade implements Comparable<Trade> {
+	/**
+	 * tradePrice fix use {@link MarketConstant#PriceMultiplier}
+	 */
+	public static class Trade implements Comparable<Trade> {
 
+		private int serial;
 		private long ordSysId;
-		private int tradingNo;
-		private long tradingEpochMillis;
-		private double tradePrice;
+		private long epochTime;
+
+		private long tradePrice;
 		private long tradeQty;
 
-		public Trade(long ordSysId, int tradingNo, long tradingEpochMillis, double tradePrice, long tradeQty) {
+		public Trade(int serial, long ordSysId, long epochTime, long tradePrice, long tradeQty) {
 			super();
 			this.ordSysId = ordSysId;
-			this.tradingNo = tradingNo;
-			this.tradingEpochMillis = tradingEpochMillis;
+			this.serial = serial;
+			this.epochTime = epochTime;
 			this.tradePrice = tradePrice;
 			this.tradeQty = tradeQty;
 		}
 
-		public long getOrdSysId() {
+		public long ordSysId() {
 			return ordSysId;
 		}
 
-		public int getTradingNo() {
-			return tradingNo;
+		public int serial() {
+			return serial;
 		}
 
-		public long getTradingEpochMillis() {
-			return tradingEpochMillis;
+		public long epochTime() {
+			return epochTime;
 		}
 
-		public double getTradePrice() {
+		public long tradePrice() {
 			return tradePrice;
 		}
 
-		public long getTradeQty() {
+		public long tradeQty() {
 			return tradeQty;
 		}
 
 		@Override
 		public int compareTo(Trade o) {
-			return this.tradingNo < o.tradingNo ? -1 : this.tradingNo > o.tradingNo ? 1 : 0;
+			return this.serial < o.serial ? -1 : this.serial > o.serial ? 1 : 0;
 		}
 
 	}

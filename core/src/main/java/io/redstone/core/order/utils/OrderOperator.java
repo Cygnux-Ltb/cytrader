@@ -13,17 +13,17 @@ public final class OrderOperator {
 			// Set FilledQty
 			order.ordQty().filledQty(report.getFilledQty());
 			// Add NewTrade record
-			order.getTradeSet().addNewTrade(report.getEpochMillis(), report.getExecutePrice(),
+			order.tradeList().addNewTrade(report.getEpochMillis(), report.getExecutePrice(),
 					report.getFilledQty() - order.ordQty().lastFilledQty());
 			break;
 		case Filled:
 			// Set FilledQty
 			order.ordQty().filledQty(report.getFilledQty());
 			// Add NewTrade Record
-			order.getTradeSet().addNewTrade(report.getEpochMillis(), report.getExecutePrice(),
+			order.tradeList().addNewTrade(report.getEpochMillis(), report.getExecutePrice(),
 					report.getFilledQty() - order.ordQty().lastFilledQty());
 			// Calculation AvgPrice
-			order.ordPrice().calculateAvgPrice(order.getTradeSet());
+			order.ordPrice().calculateAvgPrice(order.tradeList());
 			break;
 		default:
 			break;
