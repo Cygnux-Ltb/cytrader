@@ -177,15 +177,15 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 			double maxPrice) {
 		OrdSide ordSide;
 		AtomicQuote quote = QuoteActor.Singleton.getQuote(instrument);
-		double offerPrice;
+		long offerPrice = 0;
 		switch (direction) {
 		case Long:
 			ordSide = OrdSide.Buy;
-			offerPrice = PriceUtil.longPriceToDouble(quote.getAskPrice1().get());
+			//offerPrice = PriceUtil.longPriceToDouble(quote.getAskPrice1().get());
 			break;
 		case Short:
 			ordSide = OrdSide.Sell;
-			offerPrice = PriceUtil.longPriceToDouble(quote.getBidPrice1().get());
+			//offerPrice = PriceUtil.longPriceToDouble(quote.getBidPrice1().get());
 			break;
 		default:
 			throw new IllegalArgumentException("TrdDirection is illegal");

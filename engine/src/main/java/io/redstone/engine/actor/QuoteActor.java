@@ -10,7 +10,6 @@ import io.mercury.common.collections.MutableMaps;
 import io.polaris.financial.instrument.Instrument;
 import io.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.order.utils.PriceUtil;
-import io.redstone.engine.actor.QuoteActor.AtomicQuote;
 import io.redstone.engine.storage.InstrumentKeeper;
 
 /**
