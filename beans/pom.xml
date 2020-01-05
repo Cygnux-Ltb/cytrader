@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>persistence-avro</artifactId>
+			<artifactId>codec-avro</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
