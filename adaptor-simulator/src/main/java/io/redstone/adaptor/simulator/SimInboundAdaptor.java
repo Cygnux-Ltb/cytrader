@@ -3,8 +3,8 @@ package io.redstone.adaptor.simulator;
 import java.util.List;
 import java.util.function.Function;
 
+import io.mercury.codec.avro.AvroBytesDeserializer;
 import io.mercury.common.param.ParamKeyMap;
-import io.mercury.persistence.avro.serializable.AvroBytesDeserializer;
 import io.mercury.transport.core.api.Receiver;
 import io.mercury.transport.socket.SocketReceiver;
 import io.mercury.transport.socket.config.SocketConfigurator;
