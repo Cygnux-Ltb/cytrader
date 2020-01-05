@@ -2,7 +2,7 @@ package io.redstone.config.couchbean;
 
 import java.util.List;
 
-import io.mercury.persistence.json.JsonParser;
+import io.mercury.codec.json.JsonParser;
 import io.redstone.config.couchbean.base.CouchConnector;
 import io.redstone.config.couchbean.base.CouchDocumentEnum;
 

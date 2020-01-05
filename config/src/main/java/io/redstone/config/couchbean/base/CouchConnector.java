@@ -8,9 +8,9 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 
+import io.mercury.codec.json.JsonParser;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
-import io.mercury.persistence.json.JsonParser;
 import io.mercury.transport.http.HttpRequester;
 
 public final class CouchConnector {

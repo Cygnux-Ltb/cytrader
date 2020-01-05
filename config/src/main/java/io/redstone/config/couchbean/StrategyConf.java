@@ -1,6 +1,6 @@
 package io.redstone.config.couchbean;
 
-import io.mercury.persistence.json.JsonWrapper;
+import io.mercury.codec.json.JsonEncoder;
 
 public class StrategyConf {
 
@@ -32,7 +32,7 @@ public class StrategyConf {
 		conf.strategyId = 1;
 		conf.tradeables = new String[] { "1", "2", "3" };
 
-		System.out.println(JsonWrapper.toJson(conf));
+		System.out.println(JsonEncoder.toJson(conf));
 
 		System.out.println();
 
