@@ -30,7 +30,7 @@ public final class StartTrading {
 	private static int appId = 1;
 
 	public static void main(String[] args) {
-		long datetime = DateTimeUtil.datetimeToSecond();
+		long datetime = DateTimeUtil.datetimeOfSecond();
 		LoggerSetter.logFileName("redstone-" + appId + "-" + datetime);
 		LoggerSetter.logLevel(LogLevel.DEBUG);
 
