@@ -6,7 +6,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
-import io.mercury.common.annotations.lang.ProtectedAbstractMethod;
+import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.collections.ImmutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -206,6 +206,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	 * @param instrument
 	 * @return
 	 */
+	@ProtectedAbstractMethod
 	protected abstract OutboundAdaptor getOutboundAdaptor(Instrument instrument);
 
 }
