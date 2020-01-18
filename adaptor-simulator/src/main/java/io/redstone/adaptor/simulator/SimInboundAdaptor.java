@@ -49,13 +49,13 @@ public class SimInboundAdaptor extends InboundAdaptor {
 		this.mdReceiver = new SocketReceiver(mdConfigurator, (bytes) -> {
 			List<MarketDataLevel1> marketDatas = marketDataDeserializer.deSerializationMultiple(bytes);
 			for (MarketDataLevel1 marketData : marketDatas) {
-				scheduler.onMarketData(marketDataFunction.apply(marketData));
+				this.scheduler.onMarketData(marketDataFunction.apply(marketData));
 			}
 		});
 		this.tdReceiver = new SocketReceiver(tdConfigurator, (bytes) -> {
 			List<Order> orders = orderDeserializer1.deSerializationMultiple(bytes);
 			for (Order order : orders) {
-				scheduler.onOrderReport(orderFunction.apply(order));
+				this.scheduler.onOrderReport(orderFunction.apply(order));
 			}
 		});
 	}
