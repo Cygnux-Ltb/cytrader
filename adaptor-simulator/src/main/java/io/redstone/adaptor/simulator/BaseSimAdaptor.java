@@ -1,7 +1,7 @@
 package io.redstone.adaptor.simulator;
 
 import io.mercury.common.param.ParamKeyMap;
-import io.mercury.transport.socket.config.SocketConfigurator;
+import io.mercury.transport.socket.configurator.SocketConfigurator;
 import io.redstone.core.adaptor.api.Adaptor;
 
 public abstract class BaseSimAdaptor implements Adaptor {
