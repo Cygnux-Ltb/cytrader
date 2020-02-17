@@ -19,10 +19,10 @@ import io.ffreedom.jctp.bean.rsp.RspOrderInsert;
 import io.ffreedom.jctp.bean.rsp.RtnOrder;
 import io.ffreedom.jctp.bean.rsp.RtnTrade;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
-import io.mercury.common.datetime.TimeZones;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.TimePattern;
-import io.mercury.common.functional.ValueTransferer;
+import io.mercury.common.datetime.TimeZones;
+import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ParamKeyMap;
 import io.polaris.financial.instrument.Instrument;
@@ -57,12 +57,12 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				.setAskVolume1(depthMarketData.getAskVolume1());
 	};
 
-	private ValueTransferer<RtnOrder, OrderReport> rtnOrderTransferer = (from, to) -> {
+	private Converter<RtnOrder, OrderReport> rtnOrderTransferer = (from, to) -> {
 		// TODO Auto-generated method stub
 		return to;
 	};
 
-	private ValueTransferer<RtnTrade, OrderReport> rtnTradeTransferer = (from, to) -> {
+	private Converter<RtnTrade, OrderReport> rtnTradeTransferer = (from, to) -> {
 		// TODO Auto-generated method stub
 		return to;
 	};
@@ -92,12 +92,12 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 					case RtnOrder:
 						RtnOrder ctpRtnOrder = msg.getRtnOrder();
 						OrderReport rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
-						scheduler.onOrderReport(rtnOrderTransferer.transfer(ctpRtnOrder, rtnOrder));
+						scheduler.onOrderReport(rtnOrderTransferer.conversion(ctpRtnOrder, rtnOrder));
 						break;
 					case RtnTrade:
 						RtnTrade ctpRtnTrade = msg.getRtnTrade();
 						OrderReport rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
-						scheduler.onOrderReport(rtnTradeTransferer.transfer(ctpRtnTrade, rtnTrade));
+						scheduler.onOrderReport(rtnTradeTransferer.conversion(ctpRtnTrade, rtnTrade));
 						break;
 					case RspOrderInsert:
 						RspOrderInsert rspOrderInsert = msg.getRspOrderInsert();
