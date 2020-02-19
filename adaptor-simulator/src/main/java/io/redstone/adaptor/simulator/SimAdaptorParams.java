@@ -10,11 +10,11 @@ public enum SimAdaptorParams implements ParamKey {
 	 */
 	MdHost(101, ParamType.STRING),
 
-	MdPort(102, ParamType.INTEGER),
+	MdPort(102, ParamType.INT),
 
 	TdHost(103, ParamType.STRING),
 
-	TdPort(104, ParamType.INTEGER),
+	TdPort(104, ParamType.INT),
 
 	StartTradingDay(105, ParamType.DATE),
 
@@ -32,12 +32,12 @@ public enum SimAdaptorParams implements ParamKey {
 	}
 
 	@Override
-	public ParamType getParamType() {
+	public ParamType type() {
 		return paramType;
 	}
 
 	@Override
-	public int getKeyId() {
+	public int id() {
 		return keyId;
 	}
 
