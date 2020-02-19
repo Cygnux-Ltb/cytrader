@@ -34,12 +34,12 @@ public enum JctpAdaptorParams implements ParamKey {
 	}
 
 	@Override
-	public ParamType getParamType() {
+	public ParamType type() {
 		return paramType;
 	}
 
 	@Override
-	public int getKeyId() {
+	public int id() {
 		return keyId;
 	}
 
