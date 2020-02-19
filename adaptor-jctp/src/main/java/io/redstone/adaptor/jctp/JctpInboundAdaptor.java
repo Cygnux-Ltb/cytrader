@@ -13,15 +13,14 @@ import ctp.thostapi.CThostFtdcOrderActionField;
 import io.ffreedom.jctp.JctpGateway;
 import io.ffreedom.jctp.bean.config.JctpUserInfo;
 import io.ffreedom.jctp.bean.rsp.RspDepthMarketData;
-import io.ffreedom.jctp.bean.rsp.RspMsg;
 import io.ffreedom.jctp.bean.rsp.RspOrderAction;
 import io.ffreedom.jctp.bean.rsp.RspOrderInsert;
 import io.ffreedom.jctp.bean.rsp.RtnOrder;
 import io.ffreedom.jctp.bean.rsp.RtnTrade;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
-import io.mercury.common.datetime.TimeZones;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.TimePattern;
+import io.mercury.common.datetime.TimeZones;
 import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ParamKeyMap;
@@ -83,7 +82,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				.setPassword(paramMap.getString(JctpAdaptorParams.CTP_Password));
 		// 初始化Gateway
 		this.gateway = new JctpGateway("Jctp-Gateway", userInfo,
-				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, (RspMsg msg) -> {
+				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, msg -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
 						BasicMarketData marketData = marketDataConverter.apply(msg.getRspDepthMarketData());
