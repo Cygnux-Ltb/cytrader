@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 
-import io.mercury.codec.json.JsonParser;
+import io.mercury.codec.json.JsonUtil;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
 import io.mercury.transport.http.HttpRequester;
@@ -46,7 +46,7 @@ public final class CouchConnector {
 	 * @return
 	 */
 	public String getCouchBeanValue(CouchDocument document) {
-		AbsCouchBean absCouchBean = JsonParser.toObject(sendGetRequest(document._database(), document._id()),
+		AbsCouchBean absCouchBean = JsonUtil.toObject(sendGetRequest(document._database(), document._id()),
 				AbsCouchBean.class);
 		return absCouchBean.getValue();
 	}

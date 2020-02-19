@@ -2,7 +2,7 @@ package io.redstone.config.couchbean;
 
 import java.util.List;
 
-import io.mercury.codec.json.JsonParser;
+import io.mercury.codec.json.JsonUtil;
 import io.redstone.config.couchbean.base.CouchConnector;
 import io.redstone.config.couchbean.base.CouchDocumentEnum;
 
@@ -23,7 +23,7 @@ public class AppConf {
 
 		String json = CouchConnector.Singleton.getCouchBeanValue(CouchDocumentEnum.AppConf);
 
-		List<AppConf> jsonToList = JsonParser.toList(json, AppConf.class);
+		List<AppConf> jsonToList = JsonUtil.toList(json, AppConf.class);
 
 		jsonToList.forEach(appConfig -> {
 			System.out.println(appConfig.getId());
