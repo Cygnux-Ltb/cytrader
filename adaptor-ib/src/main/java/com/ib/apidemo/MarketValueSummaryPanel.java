@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.BorderLayout;
 
@@ -10,13 +10,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.ib.controller.ApiController.IMarketValueSummaryHandler;
+import com.ib.apidemo.AccountInfoPanel.MktValModel;
+import com.ib.apidemo.AccountInfoPanel.Table;
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.VerticalPanel;
+import com.ib.apidemo.util.NewTabbedPanel.NewTabPanel;
 import com.ib.controller.MarketValueTag;
-
-import apidemo.AccountInfoPanel.MktValModel;
-import apidemo.AccountInfoPanel.Table;
-import apidemo.util.HtmlButton;
-import apidemo.util.NewTabbedPanel.NewTabPanel;
-import apidemo.util.VerticalPanel;
 
 public class MarketValueSummaryPanel extends NewTabPanel implements IMarketValueSummaryHandler {
 	private MktValModel m_model = new MktValModel();

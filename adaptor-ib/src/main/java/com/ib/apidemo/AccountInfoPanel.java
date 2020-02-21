@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
  import static com.ib.controller.Formats.fmt0;
 
@@ -25,13 +25,12 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import com.ib.apidemo.util.NewTabbedPanel;
+import com.ib.apidemo.util.NewTabbedPanel.INewTab;
 import com.ib.client.Types.SecType;
 import com.ib.controller.ApiController.IAccountHandler;
 import com.ib.controller.MarketValueTag;
 import com.ib.controller.Position;
-
-import apidemo.util.NewTabbedPanel;
-import apidemo.util.NewTabbedPanel.INewTab;
 
 public class AccountInfoPanel extends JPanel implements INewTab, IAccountHandler {
 	private DefaultListModel m_acctList = new DefaultListModel();

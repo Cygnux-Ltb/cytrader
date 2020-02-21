@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -14,13 +14,12 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
 
+import com.ib.apidemo.util.HtmlButton;
 import com.ib.client.CommissionReport;
 import com.ib.client.Contract;
 import com.ib.client.Execution;
 import com.ib.client.ExecutionFilter;
 import com.ib.controller.ApiController.ITradeReportHandler;
-
-import apidemo.util.HtmlButton;
 
 public class TradesPanel extends JPanel implements ITradeReportHandler {
 	private ArrayList<FullExec> m_trades = new ArrayList<FullExec>();

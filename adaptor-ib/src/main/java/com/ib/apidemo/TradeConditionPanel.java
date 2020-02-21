@@ -1,9 +1,8 @@
-package apidemo;
+package com.ib.apidemo;
 
+import com.ib.apidemo.util.UpperField;
 import com.ib.client.ExecutionCondition;
 import com.ib.client.OrderCondition;
-
-import apidemo.util.UpperField;
 
 public class TradeConditionPanel extends OnOKPanel {
 	private ExecutionCondition m_condition;

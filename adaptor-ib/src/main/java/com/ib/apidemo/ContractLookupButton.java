@@ -1,10 +1,9 @@
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.event.MouseEvent;
 
+import com.ib.apidemo.util.HtmlButton;
 import com.ib.client.ContractLookuper;
-
-import apidemo.util.HtmlButton;
 
 public abstract class ContractLookupButton extends HtmlButton {
 

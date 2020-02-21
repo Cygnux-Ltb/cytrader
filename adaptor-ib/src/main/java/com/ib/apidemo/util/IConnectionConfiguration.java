@@ -1,4 +1,4 @@
-package apidemo.util;
+package com.ib.apidemo.util;
 
 
 /** Delegate for connection parameters */

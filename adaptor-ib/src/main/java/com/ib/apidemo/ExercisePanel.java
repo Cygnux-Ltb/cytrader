@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -13,18 +13,17 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.ib.apidemo.AccountInfoPanel.PortfolioModel;
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
+import com.ib.apidemo.util.VerticalPanel;
+import com.ib.apidemo.util.NewTabbedPanel.INewTab;
+import com.ib.apidemo.util.VerticalPanel.HorzPanel;
 import com.ib.client.Types.ExerciseType;
 import com.ib.client.Types.SecType;
 import com.ib.controller.ApiController.IAccountHandler;
 import com.ib.controller.Position;
-
-import apidemo.AccountInfoPanel.PortfolioModel;
-import apidemo.util.HtmlButton;
-import apidemo.util.NewTabbedPanel.INewTab;
-import apidemo.util.TCombo;
-import apidemo.util.UpperField;
-import apidemo.util.VerticalPanel;
-import apidemo.util.VerticalPanel.HorzPanel;
 
 
 public class ExercisePanel extends HorzPanel implements INewTab, IAccountHandler {

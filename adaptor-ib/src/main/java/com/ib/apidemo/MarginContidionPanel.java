@@ -1,4 +1,4 @@
-package apidemo;
+package com.ib.apidemo;
 
 import com.ib.client.MarginCondition;
 import com.ib.client.OrderCondition;

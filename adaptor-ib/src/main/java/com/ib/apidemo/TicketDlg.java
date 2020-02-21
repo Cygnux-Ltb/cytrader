@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import static com.ib.controller.Formats.fmt;
 
@@ -20,6 +20,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.NewTabbedPanel;
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
+import com.ib.apidemo.util.Util;
+import com.ib.apidemo.util.VerticalPanel;
+import com.ib.apidemo.util.VerticalPanel.HorzPanel;
+import com.ib.apidemo.util.VerticalPanel.StackPanel;
 import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
 import com.ib.client.ContractLookuper;
@@ -43,15 +51,6 @@ import com.ib.client.Types.TriggerMethod;
 import com.ib.client.Types.VolatilityType;
 import com.ib.controller.ApiController.IOrderHandler;
 import com.ib.controller.ApiController.ISoftDollarTiersReqHandler;
-
-import apidemo.util.HtmlButton;
-import apidemo.util.NewTabbedPanel;
-import apidemo.util.TCombo;
-import apidemo.util.UpperField;
-import apidemo.util.Util;
-import apidemo.util.VerticalPanel;
-import apidemo.util.VerticalPanel.HorzPanel;
-import apidemo.util.VerticalPanel.StackPanel;
 
 public class TicketDlg extends JDialog {
 	private boolean m_editContract;

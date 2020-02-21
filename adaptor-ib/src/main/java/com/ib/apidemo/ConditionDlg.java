@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -21,6 +21,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.ib.apidemo.util.HtmlButton;
 import com.ib.client.ContractLookuper;
 import com.ib.client.ExecutionCondition;
 import com.ib.client.MarginCondition;
@@ -30,8 +31,6 @@ import com.ib.client.PercentChangeCondition;
 import com.ib.client.PriceCondition;
 import com.ib.client.TimeCondition;
 import com.ib.client.VolumeCondition;
-
-import apidemo.util.HtmlButton;
 
 /**
  *

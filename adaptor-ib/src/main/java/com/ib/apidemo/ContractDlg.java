@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
@@ -11,9 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 
+import com.ib.apidemo.util.HtmlButton;
 import com.ib.client.Contract;
-
-import apidemo.util.HtmlButton;
 
 
 class ContractDlg extends JDialog {

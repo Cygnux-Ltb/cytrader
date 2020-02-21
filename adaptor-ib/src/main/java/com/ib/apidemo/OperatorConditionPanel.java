@@ -1,10 +1,9 @@
-package apidemo;
+package com.ib.apidemo;
 
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
 import com.ib.client.OperatorCondition;
 import com.ib.client.OrderCondition;
-
-import apidemo.util.TCombo;
-import apidemo.util.UpperField;
 
 public class  OperatorConditionPanel<T> extends OnOKPanel {
 	OperatorCondition m_condition;

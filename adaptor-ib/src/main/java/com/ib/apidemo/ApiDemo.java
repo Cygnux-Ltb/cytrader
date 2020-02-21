@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 
 import java.awt.BorderLayout;
@@ -19,6 +19,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.IConnectionConfiguration;
+import com.ib.apidemo.util.NewLookAndFeel;
+import com.ib.apidemo.util.NewTabbedPanel;
+import com.ib.apidemo.util.VerticalPanel;
+import com.ib.apidemo.util.IConnectionConfiguration.DefaultConnectionConfiguration;
 import com.ib.client.Types.NewsType;
 import com.ib.controller.ApiConnection.ILogger;
 import com.ib.controller.ApiController;
@@ -26,13 +32,6 @@ import com.ib.controller.ApiController.IBulletinHandler;
 import com.ib.controller.ApiController.IConnectionHandler;
 import com.ib.controller.ApiController.ITimeHandler;
 import com.ib.controller.Formats;
-
-import apidemo.util.HtmlButton;
-import apidemo.util.IConnectionConfiguration;
-import apidemo.util.IConnectionConfiguration.DefaultConnectionConfiguration;
-import apidemo.util.NewLookAndFeel;
-import apidemo.util.NewTabbedPanel;
-import apidemo.util.VerticalPanel;
 
 public class ApiDemo implements IConnectionHandler {
 	static { NewLookAndFeel.register(); }

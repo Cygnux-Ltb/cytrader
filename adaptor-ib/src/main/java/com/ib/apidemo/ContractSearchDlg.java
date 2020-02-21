@@ -1,4 +1,4 @@
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,12 +15,11 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.Util;
 import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
 import com.ib.client.ContractLookuper;
-
-import apidemo.util.HtmlButton;
-import apidemo.util.Util;
 
 public class ContractSearchDlg extends JDialog {
 

@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
@@ -15,15 +15,14 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
 
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.VerticalPanel;
 import com.ib.client.Contract;
 import com.ib.client.Order;
 import com.ib.client.OrderState;
 import com.ib.client.OrderStatus;
 import com.ib.client.OrderType;
 import com.ib.controller.ApiController.ILiveOrderHandler;
-
-import apidemo.util.HtmlButton;
-import apidemo.util.VerticalPanel;
 
 public class OrdersPanel extends JPanel {
 	private OrdersModel m_model = new OrdersModel();

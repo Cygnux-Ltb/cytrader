@@ -1,10 +1,9 @@
-package apidemo;
+package com.ib.apidemo;
 
+import com.ib.apidemo.util.TCombo;
 import com.ib.client.ContractLookuper;
 import com.ib.client.OrderCondition;
 import com.ib.client.PriceCondition;
-
-import apidemo.util.TCombo;
 
 public class PriceConditionPanel extends ContractConditionPanel<PriceCondition> {
 

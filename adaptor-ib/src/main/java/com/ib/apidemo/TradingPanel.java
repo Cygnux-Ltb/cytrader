@@ -1,13 +1,13 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
 
-import apidemo.util.NewTabbedPanel.NewTabPanel;
+import com.ib.apidemo.util.NewTabbedPanel.NewTabPanel;
 
 
 public class TradingPanel extends NewTabPanel {

@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.BorderLayout;
 import java.awt.Desktop;
@@ -23,6 +23,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.NewTabbedPanel;
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
+import com.ib.apidemo.util.VerticalPanel;
+import com.ib.apidemo.util.NewTabbedPanel.NewTabPanel;
+import com.ib.apidemo.util.VerticalPanel.StackPanel;
 import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
 import com.ib.client.ScannerSubscription;
@@ -40,14 +47,6 @@ import com.ib.controller.ApiController.ISecDefOptParamsReqHandler;
 import com.ib.controller.Bar;
 import com.ib.controller.Instrument;
 import com.ib.controller.ScanCode;
-
-import apidemo.util.HtmlButton;
-import apidemo.util.NewTabbedPanel;
-import apidemo.util.NewTabbedPanel.NewTabPanel;
-import apidemo.util.TCombo;
-import apidemo.util.UpperField;
-import apidemo.util.VerticalPanel;
-import apidemo.util.VerticalPanel.StackPanel;
 
 public class MarketDataPanel extends JPanel {
 	private final Contract m_contract = new Contract();

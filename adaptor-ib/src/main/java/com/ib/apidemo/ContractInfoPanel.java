@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.BorderLayout;
 import java.awt.Desktop;
@@ -16,17 +16,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import com.ib.apidemo.util.HtmlButton;
+import com.ib.apidemo.util.NewTabbedPanel;
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.VerticalPanel;
+import com.ib.apidemo.util.NewTabbedPanel.INewTab;
 import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
 import com.ib.client.Types.FundamentalType;
 import com.ib.controller.ApiController.IContractDetailsHandler;
 import com.ib.controller.ApiController.IFundamentalsHandler;
-
-import apidemo.util.HtmlButton;
-import apidemo.util.NewTabbedPanel;
-import apidemo.util.NewTabbedPanel.INewTab;
-import apidemo.util.TCombo;
-import apidemo.util.VerticalPanel;
 
 public class ContractInfoPanel extends JPanel {
 	private final Contract m_contract = new Contract();

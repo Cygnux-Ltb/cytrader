@@ -1,20 +1,19 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package apidemo;
+package com.ib.apidemo;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import com.ib.apidemo.util.TCombo;
+import com.ib.apidemo.util.UpperField;
+import com.ib.apidemo.util.VerticalPanel;
 import com.ib.client.Contract;
 import com.ib.client.Types.Right;
 import com.ib.client.Types.SecType;
-
-import apidemo.util.TCombo;
-import apidemo.util.UpperField;
-import apidemo.util.VerticalPanel;
 
 public class ContractPanel extends JPanel {
 	protected UpperField m_symbol = new UpperField();
