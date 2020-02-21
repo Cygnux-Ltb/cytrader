@@ -2,7 +2,7 @@
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 
-package TestJavaClient;
+package com.ib.gui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

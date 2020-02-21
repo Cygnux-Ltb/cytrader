@@ -1,4 +1,4 @@
-package TestJavaClient;
+package com.ib.gui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import apidemo.util.UpperField;
-import apidemo.util.VerticalPanel;
+import com.ib.apidemo.util.UpperField;
+import com.ib.apidemo.util.VerticalPanel;
 
 public class SecDefOptParamsReqDlg extends JDialog {
 	final UpperField m_idFld = new UpperField("0");

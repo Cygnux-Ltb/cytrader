@@ -1,7 +1,7 @@
 /* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
-package TestJavaClient;
+package com.ib.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -24,6 +24,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import com.ib.apidemo.AdjustedPanel;
+import com.ib.apidemo.ConditionsPanel;
+import com.ib.apidemo.OnOKPanel;
+import com.ib.apidemo.PegBenchPanel;
 import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
 import com.ib.client.ContractLookuper;
@@ -31,11 +35,6 @@ import com.ib.client.DeltaNeutralContract;
 import com.ib.client.MarketDataType;
 import com.ib.client.Order;
 import com.ib.client.TagValue;
-
-import apidemo.AdjustedPanel;
-import apidemo.ConditionsPanel;
-import apidemo.OnOKPanel;
-import apidemo.PegBenchPanel;
 
 public class OrderDlg extends JDialog {
     final static String ALL_GENERIC_TICK_TAGS = "100,101,104,105,106,107,165,221,225,233,236,258,293,294,295,318";
