@@ -1,4 +1,4 @@
-package samples.testbed.contracts;
+package com.ib.samples.testbed.contracts;
 
 import java.util.ArrayList;
 import com.ib.client.ComboLeg;

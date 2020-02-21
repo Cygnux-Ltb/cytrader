@@ -1,4 +1,4 @@
-package samples.testbed.advisor;
+package com.ib.samples.testbed.advisor;
 
 public class FAMethodSamples {
 	

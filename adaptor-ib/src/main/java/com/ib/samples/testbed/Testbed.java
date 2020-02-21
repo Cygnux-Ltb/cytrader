@@ -1,14 +1,8 @@
-package samples.testbed;
+package com.ib.samples.testbed;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import samples.testbed.advisor.FAMethodSamples;
-import samples.testbed.contracts.ContractSamples;
-import samples.testbed.orders.AvailableAlgoParams;
-import samples.testbed.orders.OrderSamples;
-import samples.testbed.scanner.ScannerSubscriptionSamples;
 
 import com.ib.client.Contract;
 import com.ib.client.EClientSocket;
@@ -18,6 +12,11 @@ import com.ib.client.ExecutionFilter;
 import com.ib.client.Order;
 import com.ib.client.Types.FADataType;
 import com.ib.controller.AccountSummaryTag;
+import com.ib.samples.testbed.advisor.FAMethodSamples;
+import com.ib.samples.testbed.contracts.ContractSamples;
+import com.ib.samples.testbed.orders.AvailableAlgoParams;
+import com.ib.samples.testbed.orders.OrderSamples;
+import com.ib.samples.testbed.scanner.ScannerSubscriptionSamples;
 
 public class Testbed {
 

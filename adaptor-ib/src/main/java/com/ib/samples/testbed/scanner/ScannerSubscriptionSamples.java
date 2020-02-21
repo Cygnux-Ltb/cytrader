@@ -1,4 +1,4 @@
-package samples.testbed.scanner;
+package com.ib.samples.testbed.scanner;
 
 import com.ib.client.ScannerSubscription;
 
