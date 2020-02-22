@@ -37,7 +37,12 @@ import com.ib.client.Order;
 import com.ib.client.TagValue;
 
 public class OrderDlg extends JDialog {
-    final static String ALL_GENERIC_TICK_TAGS = "100,101,104,105,106,107,165,221,225,233,236,258,293,294,295,318";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4976669867711857208L;
+	
+	final static String ALL_GENERIC_TICK_TAGS = "100,101,104,105,106,107,165,221,225,233,236,258,293,294,295,318";
     final static int OPERATION_INSERT = 0;
     final static int OPERATION_UPDATE = 1;
     final static int OPERATION_DELETE = 2;
@@ -99,7 +104,7 @@ public class OrderDlg extends JDialog {
     private JTextField m_exerciseActionTextField = new JTextField("1");
     private JTextField m_exerciseQuantityTextField = new JTextField("1");
     private JTextField m_overrideTextField = new JTextField("0");
-    private JComboBox m_marketDataTypeCombo = new JComboBox(MarketDataType.getFields());
+    private JComboBox<?> m_marketDataTypeCombo = new JComboBox<>(MarketDataType.getFields());
 
     private JButton	    m_sharesAlloc = new JButton("FA Allocation Info...");
     private JButton 	m_comboLegs = new JButton( "Combo Legs");
@@ -579,6 +584,7 @@ public class OrderDlg extends JDialog {
     public void show() {
         m_rc = false;
         super.show();
+        //super.setVisible(true);
     }
 
     void setIdAtLeast( int id) {

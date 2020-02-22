@@ -16,7 +16,13 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
 public class NewsBulletinDlg extends JDialog {
-    private IBGridBagPanel        m_subscriptionTypePanel = new IBGridBagPanel();
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9190655553470445628L;
+	
+	private IBGridBagPanel        m_subscriptionTypePanel = new IBGridBagPanel();
     private IBGridBagPanel        m_mainPanel = new IBGridBagPanel();
 
     private JButton 		m_btnSubscribe = new JButton( "Subscribe");

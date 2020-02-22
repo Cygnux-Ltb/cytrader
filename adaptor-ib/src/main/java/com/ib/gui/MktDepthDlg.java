@@ -25,7 +25,12 @@ import javax.swing.table.AbstractTableModel;
 import com.ib.client.EClient;
 
 public class MktDepthDlg extends JDialog {
-    final static int OPERATION_INSERT 		= 0;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4662487522022807909L;
+	
+	final static int OPERATION_INSERT 		= 0;
     final static int OPERATION_UPDATE 		= 1;
     final static int OPERATION_DELETE 		= 2;
 
@@ -151,7 +156,12 @@ public class MktDepthDlg extends JDialog {
 }
 
 class MktDepthModel extends AbstractTableModel {
-    private LinkedList<MktDepthTableRow>  m_allData = new LinkedList<MktDepthTableRow>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7498720476456886930L;
+	
+	private LinkedList<MktDepthTableRow>  m_allData = new LinkedList<MktDepthTableRow>();
 
     synchronized public void addOrderAt(int position, String marketMaker, double price, int size)
     {

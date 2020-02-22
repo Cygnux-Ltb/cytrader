@@ -11,6 +11,11 @@ import com.ib.apidemo.util.UpperField;
 import com.ib.apidemo.util.VerticalPanel;
 
 public class SecDefOptParamsReqDlg extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2506467999755816852L;
+	
 	final UpperField m_idFld = new UpperField("0");
 	final UpperField m_underlyingSymbolFld = new UpperField();
 	final UpperField m_futFopExchangeFld = new UpperField();

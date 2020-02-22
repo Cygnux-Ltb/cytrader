@@ -19,7 +19,12 @@ import javax.swing.JTextField;
 
 public class PositionsDlg extends JDialog {
 
-    public boolean m_rc;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -349001976670334726L;
+
+	public boolean m_rc;
 
     private JTextField 	m_id = new JTextField("0");
     private JTextField 	m_account = new JTextField();

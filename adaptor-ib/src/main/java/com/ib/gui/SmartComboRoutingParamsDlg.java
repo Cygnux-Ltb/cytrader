@@ -24,7 +24,12 @@ import javax.swing.table.AbstractTableModel;
 import com.ib.client.TagValue;
 
 public class SmartComboRoutingParamsDlg extends JDialog {
-    private JTextField 		m_tag = new JTextField( "");
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1205871246755898029L;
+	
+	private JTextField 		m_tag = new JTextField( "");
     private JTextField 		m_value = new JTextField( "");
     private JButton 		m_addParam = new JButton( "Add");
     private JButton	 	    m_removeParam = new JButton( "Remove");
@@ -163,7 +168,12 @@ public class SmartComboRoutingParamsDlg extends JDialog {
 }
 
 class SmartComboRoutingParamModel extends AbstractTableModel {
-    private ArrayList<TagValue> m_allData = new ArrayList<TagValue>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6208513977643301428L;
+	
+	private ArrayList<TagValue> m_allData = new ArrayList<TagValue>();
 
     synchronized public void addParam( TagValue tagValue) {
         m_allData.add( tagValue);

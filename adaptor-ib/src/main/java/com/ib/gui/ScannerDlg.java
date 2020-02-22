@@ -22,7 +22,12 @@ import com.ib.client.ScannerSubscription;
 import com.ib.client.TagValue;
 
 public class ScannerDlg extends JDialog {
-    public static final int NO_SELECTION = 0;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7115805695250912133L;
+	
+	public static final int NO_SELECTION = 0;
     public static final int SUBSCRIBE_SELECTION = 1;
     public static final int CANCEL_SELECTION = 2;
     public static final int REQUEST_PARAMETERS_SELECTION = 3;

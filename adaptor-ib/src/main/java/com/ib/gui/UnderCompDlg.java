@@ -20,6 +20,11 @@ import com.ib.client.DeltaNeutralContract;
 
 
 public class UnderCompDlg extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8261724494679741778L;
+
 	private DeltaNeutralContract m_underComp;
 
     private JTextField 	m_txtConId = new JTextField();
