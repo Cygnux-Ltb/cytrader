@@ -26,28 +26,31 @@ import static com.ib.client.Types.AlgoParam.waitForFill;
 
 public class Types {
 	public static enum ComboParam {
-		NonGuaranteed, PriceCondConid, CondPriceMax, CondPriceMin, ChangeToMktTime1, ChangeToMktTime2, DiscretionaryPct, DontLeginNext, LeginPrio, MaxSegSize,
+		NonGuaranteed, PriceCondConid, CondPriceMax, CondPriceMin, ChangeToMktTime1, ChangeToMktTime2, DiscretionaryPct,
+		DontLeginNext, LeginPrio, MaxSegSize,
 	}
 
 	public static enum AlgoParam {
-		startTime, endTime, allowPastEndTime, maxPctVol, pctVol, strategyType, noTakeLiq, riskAversion, forceCompletion, displaySize, getDone, noTradeAhead, useOddLots,
-		componentSize, timeBetweenOrders, randomizeTime20, randomizeSize55, giveUp, catchUp, waitForFill	
+		startTime, endTime, allowPastEndTime, maxPctVol, pctVol, strategyType, noTakeLiq, riskAversion, forceCompletion,
+		displaySize, getDone, noTradeAhead, useOddLots, componentSize, timeBetweenOrders, randomizeTime20,
+		randomizeSize55, giveUp, catchUp, waitForFill
 	}
 
 	public static enum AlgoStrategy implements IApiEnum {
-		None(),
-		Vwap( startTime, endTime, maxPctVol, noTakeLiq, getDone, noTradeAhead, useOddLots),
-		Twap( startTime, endTime, allowPastEndTime, strategyType),
-		ArrivalPx( startTime, endTime, allowPastEndTime, maxPctVol, riskAversion, forceCompletion),
-		DarkIce( startTime, endTime, allowPastEndTime, displaySize),
-		PctVol( startTime, endTime, pctVol, noTakeLiq),
-		AD( startTime, endTime, componentSize, timeBetweenOrders, randomizeTime20, randomizeSize55, giveUp, catchUp, waitForFill);
+		None(), Vwap(startTime, endTime, maxPctVol, noTakeLiq, getDone, noTradeAhead, useOddLots),
+		Twap(startTime, endTime, allowPastEndTime, strategyType),
+		ArrivalPx(startTime, endTime, allowPastEndTime, maxPctVol, riskAversion, forceCompletion),
+		DarkIce(startTime, endTime, allowPastEndTime, displaySize), PctVol(startTime, endTime, pctVol, noTakeLiq),
+		AD(startTime, endTime, componentSize, timeBetweenOrders, randomizeTime20, randomizeSize55, giveUp, catchUp,
+				waitForFill);
 
 		private AlgoParam[] m_params;
 
-		public AlgoParam[] params() { return m_params; }
+		public AlgoParam[] params() {
+			return m_params;
+		}
 
-		private AlgoStrategy( AlgoParam... params) {
+		private AlgoStrategy(AlgoParam... params) {
 			m_params = params;
 		}
 
@@ -55,7 +58,8 @@ public class Types {
 			return getValueOf(apiString, values(), None);
 		}
 
-		@Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return this == None ? "" : super.toString();
 		}
 	}
@@ -64,40 +68,45 @@ public class Types {
 		None, Delta, Beta, Fx, Pair;
 
 		public static HedgeType get(String apiString) {
-            return getValueOf(apiString, values(), None);
+			return getValueOf(apiString, values(), None);
 		}
 
-		@Override public String getApiString() {
-			return this == None ? "" : String.valueOf( super.toString().charAt( 0) );
+		@Override
+		public String getApiString() {
+			return this == None ? "" : String.valueOf(super.toString().charAt(0));
 		}
 	}
 
 	public static enum Right implements IApiEnum {
 		None, Put, Call;
 
-		public static Right get( String apiString) {
+		public static Right get(String apiString) {
 			if (apiString != null && apiString.length() > 0) {
-				switch( apiString.charAt( 0) ) {
-					case 'P' : return Put;
-					case 'C' : return Call;
+				switch (apiString.charAt(0)) {
+				case 'P':
+					return Put;
+				case 'C':
+					return Call;
 				}
 			}
 			return None;
 		}
 
-		@Override public String getApiString() {
-			return this == None ? "" : String.valueOf( toString().charAt( 0) );
+		@Override
+		public String getApiString() {
+			return this == None ? "" : String.valueOf(toString().charAt(0));
 		}
 	}
 
 	public static enum VolatilityType implements IApiEnum {
 		None, Daily, Annual;
 
-		public static VolatilityType get( int ordinal) {
-			return ordinal == Integer.MAX_VALUE ? None : getEnum( ordinal, values() );
+		public static VolatilityType get(int ordinal) {
+			return ordinal == Integer.MAX_VALUE ? None : getEnum(ordinal, values());
 		}
 
-		@Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return String.valueOf(ordinal());
 		}
 	}
@@ -105,28 +114,31 @@ public class Types {
 	public static enum ReferencePriceType implements IApiEnum {
 		None, Midpoint, BidOrAsk;
 
-		public static ReferencePriceType get( int ordinal) {
-			return getEnum( ordinal, values() );
+		public static ReferencePriceType get(int ordinal) {
+			return getEnum(ordinal, values());
 		}
 
-		@Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return String.valueOf(ordinal());
 		}
 	}
 
 	public static enum TriggerMethod implements IApiEnum {
-		Default( 0), DoubleBidAsk( 1), Last( 2), DoubleLast( 3), BidAsk( 4), LastOrBidAsk( 7), Midpoint( 8);
+		Default(0), DoubleBidAsk(1), Last(2), DoubleLast(3), BidAsk(4), LastOrBidAsk(7), Midpoint(8);
 
 		int m_val;
 
-		public int val() { return m_val; }
+		public int val() {
+			return m_val;
+		}
 
-		private TriggerMethod( int val) {
+		private TriggerMethod(int val) {
 			m_val = val;
 		}
 
-		public static TriggerMethod get( int val) {
-			for (TriggerMethod m : values() ) {
+		public static TriggerMethod get(int val) {
+			for (TriggerMethod m : values()) {
 				if (m.m_val == val) {
 					return m;
 				}
@@ -134,7 +146,8 @@ public class Types {
 			return null;
 		}
 
-		@Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return String.valueOf(m_val);
 		}
 	}
@@ -142,30 +155,32 @@ public class Types {
 	public static enum Action implements IApiEnum {
 		BUY, SELL, SSHORT;
 
-        public static Action get(String apiString) {
-            return getValueOf(apiString, values(), null);
-        }
+		public static Action get(String apiString) {
+			return getValueOf(apiString, values(), null);
+		}
 
-        @Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return toString();
 		}
 	}
 
 	public static enum Rule80A implements IApiEnum {
-		None(""), IndivArb("J"), IndivBigNonArb("K"), IndivSmallNonArb("I"), INST_ARB("U"), InstBigNonArb("Y"), InstSmallNonArb("A");
+		None(""), IndivArb("J"), IndivBigNonArb("K"), IndivSmallNonArb("I"), INST_ARB("U"), InstBigNonArb("Y"),
+		InstSmallNonArb("A");
 
 		private String m_apiString;
 
-		private Rule80A( String apiString) {
+		private Rule80A(String apiString) {
 			m_apiString = apiString;
 		}
 
-		public static Rule80A get( String apiString) {
-            return getValueOf(apiString, values(), None);
+		public static Rule80A get(String apiString) {
+			return getValueOf(apiString, values(), None);
 		}
 
 		@Override
-        public String getApiString() {
+		public String getApiString() {
 			return m_apiString;
 		}
 	}
@@ -173,11 +188,12 @@ public class Types {
 	public static enum OcaType implements IApiEnum {
 		None, CancelWithBlocking, ReduceWithBlocking, ReduceWithoutBlocking;
 
-		public static OcaType get( int ordinal) {
-			return getEnum( ordinal, values() );
+		public static OcaType get(int ordinal) {
+			return getEnum(ordinal, values());
 		}
 
-		@Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return String.valueOf(ordinal());
 		}
 	}
@@ -185,11 +201,12 @@ public class Types {
 	public static enum TimeInForce implements IApiEnum {
 		DAY, GTC, OPG, IOC, GTD, GTT, AUC, FOK, GTX, DTC;
 
-        public static TimeInForce get(String apiString) {
-            return getValueOf(apiString, values(), null);
-        }
+		public static TimeInForce get(String apiString) {
+			return getValueOf(apiString, values(), null);
+		}
 
-		@Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return toString();
 		}
 	}
@@ -205,30 +222,39 @@ public class Types {
 			return super.toString();
 		}
 
-		@Override public String toString() {
-			switch( this) {
-				case ReportSnapshot: 		return "Company overview";
-				case ReportsFinSummary:		return "Financial summary";
-				case ReportRatios:			return "Financial ratios";
-				case ReportsFinStatements:	return "Financial statements";
-				case RESC: 					return "Analyst estimates";
-				case CalendarReport:		return "Company calendar";
-				default:					return null;
+		@Override
+		public String toString() {
+			switch (this) {
+			case ReportSnapshot:
+				return "Company overview";
+			case ReportsFinSummary:
+				return "Financial summary";
+			case ReportRatios:
+				return "Financial ratios";
+			case ReportsFinStatements:
+				return "Financial statements";
+			case RESC:
+				return "Analyst estimates";
+			case CalendarReport:
+				return "Company calendar";
+			default:
+				return null;
 			}
 		}
 	}
 
 	public static enum WhatToShow {
 		TRADES, MIDPOINT, BID, ASK, // << only these are valid for real-time bars
-        BID_ASK, HISTORICAL_VOLATILITY, OPTION_IMPLIED_VOLATILITY, YIELD_ASK, YIELD_BID, YIELD_BID_ASK, YIELD_LAST
+		BID_ASK, HISTORICAL_VOLATILITY, OPTION_IMPLIED_VOLATILITY, YIELD_ASK, YIELD_BID, YIELD_BID_ASK, YIELD_LAST
 	}
 
 	public static enum BarSize {
-		_1_secs, _5_secs, _10_secs, _15_secs, _30_secs, _1_min, _2_mins, _3_mins, _5_mins, _10_mins, _15_mins, _20_mins, _30_mins, _1_hour, _4_hours, _1_day, _1_week;
+		_1_secs, _5_secs, _10_secs, _15_secs, _30_secs, _1_min, _2_mins, _3_mins, _5_mins, _10_mins, _15_mins, _20_mins,
+		_30_mins, _1_hour, _4_hours, _1_day, _1_week;
 
 		@Override
-        public String toString() {
-			return super.toString().substring( 1).replace( '_', ' ');
+		public String toString() {
+			return super.toString().substring(1).replace('_', ' ');
 		}
 	}
 
@@ -237,57 +263,60 @@ public class Types {
 	}
 
 	public static enum DeepType {
-	    INSERT, UPDATE, DELETE;
+		INSERT, UPDATE, DELETE;
 
-	    public static DeepType get( int ordinal) {
-	    	return getEnum( ordinal, values() );
-	    }
+		public static DeepType get(int ordinal) {
+			return getEnum(ordinal, values());
+		}
 	}
 
 	public static enum DeepSide {
-	    SELL, BUY;
+		SELL, BUY;
 
-	    public static DeepSide get( int ordinal) {
-	    	return getEnum( ordinal, values() );
-	    }
+		public static DeepSide get(int ordinal) {
+			return getEnum(ordinal, values());
+		}
 	}
 
 	public enum NewsType {
 		UNKNOWN, BBS, LIVE_EXCH, DEAD_EXCH, HTML, POPUP_TEXT, POPUP_HTML;
 
-		public static NewsType get( int ordinal) {
-			return getEnum( ordinal, values() );
+		public static NewsType get(int ordinal) {
+			return getEnum(ordinal, values());
 		}
 	}
 
 	public enum FADataType {
 		UNUSED, GROUPS, PROFILES, ALIASES;
 
-		public static FADataType get( int ordinal) {
-			return getEnum( ordinal, values() );
+		public static FADataType get(int ordinal) {
+			return getEnum(ordinal, values());
 		}
 	}
 
 	public enum SecIdType implements IApiEnum {
-	    None, CUSIP, SEDOL, ISIN, RIC;
+		None, CUSIP, SEDOL, ISIN, RIC;
 
 		public static SecIdType get(String str) {
-            return getValueOf(str, values(), None);
+			return getValueOf(str, values(), None);
 		}
 
-		@Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return this == None ? "" : super.toString();
 		}
 	}
 
 	public enum SecType implements IApiEnum {
-		None, STK, OPT, FUT, CASH, BOND, CFD, FOP, WAR, IOPT, FWD, BAG, IND, BILL, FUND, FIXED, SLB, NEWS, CMDTY, BSK, ICU, ICS;
+		None, STK, OPT, FUT, CASH, BOND, CFD, FOP, WAR, IOPT, FWD, BAG, IND, BILL, FUND, FIXED, SLB, NEWS, CMDTY, BSK,
+		ICU, ICS;
 
-        public static SecType get(String str) {
-            return getValueOf(str, values(), None);
-        }
+		public static SecType get(String str) {
+			return getValueOf(str, values(), None);
+		}
 
-		@Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return this == None ? "" : super.toString();
 		}
 	}
@@ -295,31 +324,32 @@ public class Types {
 	public enum MktDataType {
 		Unknown, Realtime, Frozen, Delayed, DelayedFrozen;
 
-		public static MktDataType get( int ordinal) {
-			return getEnum( ordinal, values() );
+		public static MktDataType get(int ordinal) {
+			return getEnum(ordinal, values());
 		}
 	}
 
 	public enum Method implements IApiEnum {
 		None, EqualQuantity, AvailableEquity, NetLiq, PctChange;
 
-	    public static Method get( String str) {
-            return getValueOf(str, values(), None);
-	    }
+		public static Method get(String str) {
+			return getValueOf(str, values(), None);
+		}
 
-	    @Override public String getApiString() {
+		@Override
+		public String getApiString() {
 			return this == None ? "" : super.toString();
 		}
 	}
 
-	public static <T extends Enum<?> & IApiEnum> T getValueOf( String v, T[] values, T defaultValue ) {
-        for( T currentEnum : values ) {
-            if( currentEnum.getApiString().equals(v) ) {
-                return currentEnum;
-            }
-        }
-        return defaultValue;
-    }
+	public static <T extends Enum<?> & IApiEnum> T getValueOf(String v, T[] values, T defaultValue) {
+		for (T currentEnum : values) {
+			if (currentEnum.getApiString().equals(v)) {
+				return currentEnum;
+			}
+		}
+		return defaultValue;
+	}
 
 	/** Lookup enum by ordinal. Use Enum.valueOf() to lookup by string. */
 	public static <T extends Enum<T>> T getEnum(int ordinal, T[] values) {
@@ -332,7 +362,8 @@ public class Types {
 				return val;
 			}
 		}
-		String str = String.format( "Error: %s is not a valid value for enum %s", ordinal, values[0].getClass().getName() );
-		throw new IllegalArgumentException( str);
+		String str = String.format("Error: %s is not a valid value for enum %s", ordinal,
+				values[0].getClass().getName());
+		throw new IllegalArgumentException(str);
 	}
 }

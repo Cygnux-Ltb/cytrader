@@ -5,16 +5,16 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 public class ExecutionCondition extends OrderCondition {
-	
+
 	public static final OrderConditionType conditionType = OrderConditionType.Execution;
-	
-	protected ExecutionCondition() { }
-	
+
+	protected ExecutionCondition() {
+	}
+
 	@Override
-	public void readExternal(ObjectInput in) throws IOException,
-			ClassNotFoundException {
+	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 		super.readExternal(in);
-		
+
 		m_secType = in.readUTF();
 		m_exchange = in.readUTF();
 		m_symbol = in.readUTF();
@@ -22,13 +22,14 @@ public class ExecutionCondition extends OrderCondition {
 
 	@Override
 	public String toString() {
-		return "trade occurs for " + m_symbol + " symbol on " + m_exchange + " exchange for " + m_secType + " security type";
+		return "trade occurs for " + m_symbol + " symbol on " + m_exchange + " exchange for " + m_secType
+				+ " security type";
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		super.writeExternal(out);
-		
+
 		out.writeUTF(m_secType);
 		out.writeUTF(m_exchange);
 		out.writeUTF(m_symbol);
@@ -60,6 +61,6 @@ public class ExecutionCondition extends OrderCondition {
 
 	public void symbol(String m_symbol) {
 		this.m_symbol = m_symbol;
-	} 
-	
+	}
+
 }

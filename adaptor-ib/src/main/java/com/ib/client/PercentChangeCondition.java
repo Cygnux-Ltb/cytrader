@@ -3,9 +3,10 @@ package com.ib.client;
 public class PercentChangeCondition extends ContractCondition {
 
 	public static final OrderConditionType conditionType = OrderConditionType.PercentChange;
-	
-	protected PercentChangeCondition() { }
-	
+
+	protected PercentChangeCondition() {
+	}
+
 	@Override
 	public String toString(ContractLookuper lookuper) {
 		return super.toString(lookuper);
@@ -34,6 +35,6 @@ public class PercentChangeCondition extends ContractCondition {
 	@Override
 	protected void valueFromString(String v) {
 		m_changePercent = Double.parseDouble(v);
-	} 
-	
+	}
+
 }

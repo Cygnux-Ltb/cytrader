@@ -1,12 +1,13 @@
 package com.ib.client;
 
 public class VolumeCondition extends ContractCondition {
-	
+
 	public static final OrderConditionType conditionType = OrderConditionType.Volume;
-	
-	protected VolumeCondition() { }
-	
-    @Override
+
+	protected VolumeCondition() {
+	}
+
+	@Override
 	public String toString() {
 		return toString(null);
 	}
@@ -35,5 +36,5 @@ public class VolumeCondition extends ContractCondition {
 	protected void valueFromString(String v) {
 		m_volume = Integer.parseInt(v);
 	}
-	
+
 }

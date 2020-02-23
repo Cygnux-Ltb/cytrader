@@ -1,11 +1,12 @@
 package com.ib.client;
 
 public class TimeCondition extends OperatorCondition {
-	
+
 	public static final OrderConditionType conditionType = OrderConditionType.Time;
 
-	protected TimeCondition() { }
-	
+	protected TimeCondition() {
+	}
+
 	@Override
 	public String toString() {
 		return "time" + super.toString();
@@ -30,5 +31,5 @@ public class TimeCondition extends OperatorCondition {
 	protected void valueFromString(String v) {
 		m_time = v;
 	}
-	
+
 }
