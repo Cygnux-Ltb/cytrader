@@ -29,6 +29,11 @@ import com.ib.controller.ApiController.IPositionMultiHandler;
 import com.ib.controller.Formats;
 
 public class AccountPositionsMultiPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1430865771165402988L;
+	
 	private final NewTabbedPanel m_requestPanel = new NewTabbedPanel();
 	private final NewTabbedPanel m_resultsPanel = new NewTabbedPanel();
 	
@@ -42,6 +47,11 @@ public class AccountPositionsMultiPanel extends JPanel {
 	}
 	
 	private class RequestPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -4947750471309185537L;
+		
 		protected UpperField m_account = new UpperField();
 		protected JTextField m_modelCode = new JTextField();
 		final JCheckBox m_ledgerAndNLV = new JCheckBox();
