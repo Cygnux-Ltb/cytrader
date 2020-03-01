@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.redstone</groupId>
+		<groupId>io.mercury.redstone</groupId>
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
@@ -16,7 +16,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.polaris</groupId>
+			<groupId>io.mercury.polaris</groupId>
 			<artifactId>financial</artifactId>
 		</dependency>
 	</dependencies>

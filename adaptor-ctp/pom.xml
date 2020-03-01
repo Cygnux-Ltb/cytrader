@@ -5,22 +5,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>io.redstone</groupId>
+		<groupId>io.mercury.redstone</groupId>
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
-	<artifactId>adaptor-jctp</artifactId>
+	
+	<artifactId>adaptor-ctp</artifactId>
 	<name>adaptor-jctp</name>
 
 	<dependencies>
 		<dependency>
-			<groupId>io.redstone</groupId>
+			<groupId>io.mercury.redstone</groupId>
 			<artifactId>engine</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>jctp</artifactId>
-			<version>0.1</version>
+			<groupId>io.mercury.gateway</groupId>
+			<artifactId>gateway-ctp</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 </project>
