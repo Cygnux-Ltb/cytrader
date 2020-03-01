@@ -1,7 +1,7 @@
 package io.redstone.engine.specific.strategy;
 
-import io.polaris.financial.instrument.Instrument;
-import io.polaris.financial.market.api.MarketData;
+import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.market.api.MarketData;
 
 public abstract class IndicatorStrategy<M extends MarketData> extends BaseStrategy<M> {
 

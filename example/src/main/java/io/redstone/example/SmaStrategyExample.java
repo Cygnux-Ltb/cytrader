@@ -1,9 +1,9 @@
 package io.redstone.example;
 
-import io.polaris.financial.instrument.Instrument;
-import io.polaris.financial.market.impl.BasicMarketData;
-import io.polaris.indicator.events.SmaEvent;
-import io.polaris.indicator.impl.ma.SmaPoint;
+import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.market.impl.BasicMarketData;
+import io.mercury.polaris.indicator.events.SmaEvent;
+import io.mercury.polaris.indicator.impl.ma.SmaPoint;
 import io.redstone.core.adaptor.impl.OutboundAdaptor;
 import io.redstone.engine.specific.strategy.IndicatorStrategy;
 

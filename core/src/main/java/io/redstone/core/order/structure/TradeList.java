@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.eclipse.collections.api.list.MutableList;
 
 import io.mercury.common.collections.MutableLists;
-import io.polaris.financial.instrument.Instrument.MarketConstant;
+import io.mercury.polaris.financial.instrument.Instrument.MarketConstant;
 
 public final class TradeList {
 

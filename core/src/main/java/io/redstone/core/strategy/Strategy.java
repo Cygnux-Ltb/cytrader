@@ -5,8 +5,8 @@ import java.util.function.Supplier;
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.mercury.common.fsm.Enable;
-import io.polaris.financial.instrument.Instrument;
-import io.polaris.financial.market.impl.BasicMarketData;
+import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.order.api.Order;
 
 public interface Strategy extends Enable {

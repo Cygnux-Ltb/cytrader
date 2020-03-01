@@ -1,6 +1,6 @@
 package io.redstone.core.trade;
 
-import io.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.instrument.Instrument;
 import io.redstone.core.trade.enums.TrdAction;
 import io.redstone.core.trade.enums.TrdDirection;
 

@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.instrument.Instrument;
 import io.redstone.core.strategy.Strategy;
 
 @NotThreadSafe

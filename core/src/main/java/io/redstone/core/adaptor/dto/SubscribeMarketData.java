@@ -3,7 +3,7 @@ package io.redstone.core.adaptor.dto;
 import org.eclipse.collections.api.set.ImmutableSet;
 
 import io.mercury.common.collections.ImmutableSets;
-import io.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.instrument.Instrument;
 
 public class SubscribeMarketData {
 
