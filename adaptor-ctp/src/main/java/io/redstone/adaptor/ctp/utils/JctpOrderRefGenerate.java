@@ -1,4 +1,4 @@
-package io.redstone.adaptor.jctp.utils;
+package io.redstone.adaptor.ctp.utils;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

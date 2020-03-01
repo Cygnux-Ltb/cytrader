@@ -1,4 +1,4 @@
-package io.redstone.adaptor.jctp;
+package io.redstone.adaptor.ctp;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -7,11 +7,11 @@ import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
-import io.ffreedom.jctp.JctpGateway;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.redstone.adaptor.jctp.exception.OrderRefNotFoundException;
-import io.redstone.adaptor.jctp.utils.JctpOrderRefGenerate;
-import io.redstone.adaptor.jctp.utils.JctpOrderRefKeeper;
+import io.mercury.gateway.ctp.JctpGateway;
+import io.redstone.adaptor.ctp.exception.OrderRefNotFoundException;
+import io.redstone.adaptor.ctp.utils.JctpOrderRefGenerate;
+import io.redstone.adaptor.ctp.utils.JctpOrderRefKeeper;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.adaptor.impl.OutboundAdaptor;

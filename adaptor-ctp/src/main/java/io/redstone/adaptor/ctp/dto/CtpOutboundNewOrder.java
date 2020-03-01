@@ -1,4 +1,4 @@
-package io.redstone.adaptor.jctp.dto.outbound;
+package io.redstone.adaptor.ctp.dto;
 
 /**
  * Mapping to CTP structure
