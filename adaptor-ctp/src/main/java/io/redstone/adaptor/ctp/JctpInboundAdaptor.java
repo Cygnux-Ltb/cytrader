@@ -17,8 +17,8 @@ import io.mercury.common.datetime.TimeZones;
 import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ParamKeyMap;
-import io.mercury.gateway.ctp.JctpGateway;
-import io.mercury.gateway.ctp.bean.config.JctpUserInfo;
+import io.mercury.gateway.ctp.CtpGateway;
+import io.mercury.gateway.ctp.bean.config.CtpConnectionInfo;
 import io.mercury.gateway.ctp.bean.rsp.RspDepthMarketData;
 import io.mercury.gateway.ctp.bean.rsp.RspOrderAction;
 import io.mercury.gateway.ctp.bean.rsp.RspOrderInsert;
@@ -69,13 +69,13 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 		return to;
 	};
 
-	private final JctpGateway gateway;
+	private final CtpGateway gateway;
 
 	public JctpInboundAdaptor(int adaptorId, String adaptorName, StrategyScheduler scheduler,
 			ParamKeyMap<JctpAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
 		// 写入Gateway用户信息
-		JctpUserInfo userInfo = JctpUserInfo.newEmpty()
+		CtpConnectionInfo userInfo = CtpConnectionInfo.newEmpty()
 				.setTraderAddress(paramMap.getString(JctpAdaptorParams.CTP_Trader_Address))
 				.setMdAddress(paramMap.getString(JctpAdaptorParams.CTP_Md_Address))
 				.setBrokerId(paramMap.getString(JctpAdaptorParams.CTP_BrokerId))
@@ -85,7 +85,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				.setPassword(paramMap.getString(JctpAdaptorParams.CTP_Password));
 		// 初始化Gateway
 
-		this.gateway = new JctpGateway("Jctp-Gateway", userInfo,
+		this.gateway = new CtpGateway("Jctp-Gateway", userInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, msg -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
@@ -130,7 +130,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 		}
 	}
 
-	public JctpGateway getJctpGeteway() {
+	public CtpGateway getJctpGeteway() {
 		return gateway;
 	}
 

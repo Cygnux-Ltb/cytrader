@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.gateway.ctp.JctpGateway;
+import io.mercury.gateway.ctp.CtpGateway;
 import io.redstone.adaptor.ctp.exception.OrderRefNotFoundException;
 import io.redstone.adaptor.ctp.utils.JctpOrderRefGenerate;
 import io.redstone.adaptor.ctp.utils.JctpOrderRefKeeper;
@@ -52,9 +52,9 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 
 	};
 
-	private JctpGateway gateway;
+	private CtpGateway gateway;
 
-	public JctpOutboundAdaptor(int adaptorId, String adaptorName, JctpGateway gateway) {
+	public JctpOutboundAdaptor(int adaptorId, String adaptorName, CtpGateway gateway) {
 		super(adaptorId, adaptorName);
 		this.gateway = gateway;
 	}
