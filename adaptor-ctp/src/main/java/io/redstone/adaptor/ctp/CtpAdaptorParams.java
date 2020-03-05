@@ -3,7 +3,7 @@ package io.redstone.adaptor.ctp;
 import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.ParamType;
 
-public enum JctpAdaptorParams implements ParamKey {
+public enum CtpAdaptorParams implements ParamKey {
 
 	/**
 	 * CTP Params
@@ -28,7 +28,7 @@ public enum JctpAdaptorParams implements ParamKey {
 
 	private ParamType paramType;
 
-	private JctpAdaptorParams(int keyId, ParamType paramType) {
+	private CtpAdaptorParams(int keyId, ParamType paramType) {
 		this.keyId = keyId;
 		this.paramType = paramType;
 	}

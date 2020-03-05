@@ -14,15 +14,15 @@ import io.redstone.adaptor.ctp.exception.OrderRefNotFoundException;
  *         TODO - Persistence
  */
 
-public class JctpOrderRefKeeper {
+public class CtpOrderRefKeeper {
 
 	private MutableObjectLongMap<String> orderRefToOrdSysId = MutableMaps.newObjectLongHashMap(Capacity.L10_SIZE_1024);
 
 	private MutableLongObjectMap<String> ordSysIdToOrderRef = MutableMaps.newLongObjectHashMap(Capacity.L10_SIZE_1024);
 
-	private final static JctpOrderRefKeeper InnerInstance = new JctpOrderRefKeeper();
+	private final static CtpOrderRefKeeper InnerInstance = new CtpOrderRefKeeper();
 
-	private JctpOrderRefKeeper() {
+	private CtpOrderRefKeeper() {
 	}
 
 	public static void put(String orderRef, long ordSysId) {

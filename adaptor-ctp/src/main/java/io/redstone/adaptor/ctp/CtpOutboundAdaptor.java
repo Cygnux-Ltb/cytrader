@@ -10,8 +10,8 @@ import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.gateway.ctp.CtpGateway;
 import io.redstone.adaptor.ctp.exception.OrderRefNotFoundException;
-import io.redstone.adaptor.ctp.utils.JctpOrderRefGenerate;
-import io.redstone.adaptor.ctp.utils.JctpOrderRefKeeper;
+import io.redstone.adaptor.ctp.utils.CtpOrderRefGenerate;
+import io.redstone.adaptor.ctp.utils.CtpOrderRefKeeper;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.adaptor.impl.OutboundAdaptor;
@@ -19,12 +19,12 @@ import io.redstone.core.order.api.Order;
 import io.redstone.core.order.impl.ChildOrder;
 import io.redstone.engine.actor.AppGlobalStatus;
 
-public class JctpOutboundAdaptor extends OutboundAdaptor {
+public class CtpOutboundAdaptor extends OutboundAdaptor {
 
 	private final Logger logger = CommonLoggerFactory.getLogger(getClass());
 
 	private Function<Order, CThostFtdcInputOrderField> newOrderFunction = order -> {
-		int orderRef = JctpOrderRefGenerate.next(AppGlobalStatus.appId());
+		int orderRef = CtpOrderRefGenerate.next(AppGlobalStatus.appId());
 		char direction;
 		switch (order.ordSide().direction()) {
 		case Long:
@@ -54,7 +54,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 
 	private CtpGateway gateway;
 
-	public JctpOutboundAdaptor(int adaptorId, String adaptorName, CtpGateway gateway) {
+	public CtpOutboundAdaptor(int adaptorId, String adaptorName, CtpGateway gateway) {
 		super(adaptorId, adaptorName);
 		this.gateway = gateway;
 	}
@@ -68,7 +68,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	public boolean newOredr(ChildOrder order) {
 		try {
 			CThostFtdcInputOrderField ctpNewOrder = newOrderFunction.apply(order);
-			JctpOrderRefKeeper.put(ctpNewOrder.getOrderRef(), order.ordSysId());
+			CtpOrderRefKeeper.put(ctpNewOrder.getOrderRef(), order.ordSysId());
 			gateway.newOrder(ctpNewOrder);
 			return true;
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public class JctpOutboundAdaptor extends OutboundAdaptor {
 	public boolean cancelOrder(ChildOrder order) {
 		try {
 			CThostFtdcInputOrderActionField ctpCancelOrder = cancelOrderFunction.apply(order);
-			String orderRef = JctpOrderRefKeeper.getOrderRef(order.ordSysId());
+			String orderRef = CtpOrderRefKeeper.getOrderRef(order.ordSysId());
 			ctpCancelOrder.setOrderRef(orderRef);
 			gateway.cancelOrder(ctpCancelOrder);
 			return true;

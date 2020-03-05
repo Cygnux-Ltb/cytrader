@@ -27,13 +27,13 @@ import io.mercury.gateway.ctp.bean.rsp.RtnTrade;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.adaptor.ctp.exception.OrderRefNotFoundException;
-import io.redstone.adaptor.ctp.utils.JctpOrderRefKeeper;
+import io.redstone.adaptor.ctp.utils.CtpOrderRefKeeper;
 import io.redstone.core.adaptor.impl.InboundAdaptor;
 import io.redstone.core.order.impl.OrderReport;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.engine.storage.InstrumentKeeper;
 
-public class JctpInboundAdaptor extends InboundAdaptor {
+public class CtpInboundAdaptor extends InboundAdaptor {
 
 	private final Logger logger = CommonLoggerFactory.getLogger(getClass());
 
@@ -53,7 +53,9 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 				instrument.code(), depthDate, depthTime);
 
 		return BasicMarketData.of(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST))
-				.setLastPrice(depthMarketData.getLastPrice()).setVolume(depthMarketData.getVolume())
+				.setLastPrice(depthMarketData.getLastPrice()
+						
+						).setVolume(depthMarketData.getVolume())
 				.setTurnover(depthMarketData.getTurnover()).setBidPrice1(depthMarketData.getBidPrice1())
 				.setBidVolume1(depthMarketData.getBidVolume1()).setAskPrice1(depthMarketData.getAskPrice1())
 				.setAskVolume1(depthMarketData.getAskVolume1());
@@ -71,18 +73,18 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 
 	private final CtpGateway gateway;
 
-	public JctpInboundAdaptor(int adaptorId, String adaptorName, StrategyScheduler scheduler,
-			ParamKeyMap<JctpAdaptorParams> paramMap) {
+	public CtpInboundAdaptor(int adaptorId, String adaptorName, StrategyScheduler scheduler,
+			ParamKeyMap<CtpAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
 		// 写入Gateway用户信息
 		CtpConnectionInfo userInfo = CtpConnectionInfo.newEmpty()
-				.setTraderAddress(paramMap.getString(JctpAdaptorParams.CTP_Trader_Address))
-				.setMdAddress(paramMap.getString(JctpAdaptorParams.CTP_Md_Address))
-				.setBrokerId(paramMap.getString(JctpAdaptorParams.CTP_BrokerId))
-				.setInvestorId(paramMap.getString(JctpAdaptorParams.CTP_InvestorId))
-				.setUserId(paramMap.getString(JctpAdaptorParams.CTP_UserId))
-				.setAccountId(paramMap.getString(JctpAdaptorParams.CTP_AccountId))
-				.setPassword(paramMap.getString(JctpAdaptorParams.CTP_Password));
+				.setTraderAddress(paramMap.getString(CtpAdaptorParams.CTP_Trader_Address))
+				.setMdAddress(paramMap.getString(CtpAdaptorParams.CTP_Md_Address))
+				.setBrokerId(paramMap.getString(CtpAdaptorParams.CTP_BrokerId))
+				.setInvestorId(paramMap.getString(CtpAdaptorParams.CTP_InvestorId))
+				.setUserId(paramMap.getString(CtpAdaptorParams.CTP_UserId))
+				.setAccountId(paramMap.getString(CtpAdaptorParams.CTP_AccountId))
+				.setPassword(paramMap.getString(CtpAdaptorParams.CTP_Password));
 		// 初始化Gateway
 
 		this.gateway = new CtpGateway("Jctp-Gateway", userInfo,
@@ -122,7 +124,7 @@ public class JctpInboundAdaptor extends InboundAdaptor {
 
 	private OrderReport checkoutCtpOrder(String orderRef) {
 		try {
-			long orderSysId = JctpOrderRefKeeper.getOrdSysId(orderRef);
+			long orderSysId = CtpOrderRefKeeper.getOrdSysId(orderRef);
 			return new OrderReport().setOrdSysId(orderSysId);
 		} catch (OrderRefNotFoundException e) {
 			logger.error(e.getMessage(), e);
