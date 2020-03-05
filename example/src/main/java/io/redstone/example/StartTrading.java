@@ -13,10 +13,10 @@ import io.mercury.polaris.financial.instrument.futures.ChinaFutures;
 import io.mercury.polaris.financial.instrument.futures.ChinaFuturesSymbol;
 import io.mercury.polaris.financial.time.TimePeriodPool;
 import io.mercury.polaris.financial.time.TradingPeriodPool;
-import io.mercury.polaris.vector.TimePeriod;
-import io.redstone.adaptor.ctp.JctpAdaptorParams;
-import io.redstone.adaptor.ctp.JctpInboundAdaptor;
-import io.redstone.adaptor.ctp.JctpOutboundAdaptor;
+import io.mercury.polaris.financial.vector.TimePeriod;
+import io.redstone.adaptor.ctp.CtpAdaptorParams;
+import io.redstone.adaptor.ctp.CtpInboundAdaptor;
+import io.redstone.adaptor.ctp.CtpOutboundAdaptor;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.engine.actor.AppGlobalStatus;
@@ -40,26 +40,26 @@ public final class StartTrading {
 		StrategyScheduler scheduler = new SpscStrategyScheduler(BufferSize.POW2_12);
 
 		// Adaptor Params
-		MutableMap<JctpAdaptorParams, Object> paramMap = MutableMaps.newUnifiedMap();
-		paramMap.put(JctpAdaptorParams.CTP_Trader_Address, "tcp://180.168.146.187:10000");
-		paramMap.put(JctpAdaptorParams.CTP_Md_Address, "tcp://180.168.146.187:10010");
-		paramMap.put(JctpAdaptorParams.CTP_BrokerId, "9999");
-		paramMap.put(JctpAdaptorParams.CTP_InvestorId, "005853");
-		paramMap.put(JctpAdaptorParams.CTP_AccountId, "005853");
-		paramMap.put(JctpAdaptorParams.CTP_UserId, "005853");
-		paramMap.put(JctpAdaptorParams.CTP_Password, "jinpengpass101");
-		ParamKeyMap<JctpAdaptorParams> adaptorParam = new ParamKeyMap<>(() -> paramMap.toImmutable());
+		MutableMap<CtpAdaptorParams, Object> paramMap = MutableMaps.newUnifiedMap();
+		paramMap.put(CtpAdaptorParams.CTP_Trader_Address, "tcp://180.168.146.187:10000");
+		paramMap.put(CtpAdaptorParams.CTP_Md_Address, "tcp://180.168.146.187:10010");
+		paramMap.put(CtpAdaptorParams.CTP_BrokerId, "9999");
+		paramMap.put(CtpAdaptorParams.CTP_InvestorId, "005853");
+		paramMap.put(CtpAdaptorParams.CTP_AccountId, "005853");
+		paramMap.put(CtpAdaptorParams.CTP_UserId, "005853");
+		paramMap.put(CtpAdaptorParams.CTP_Password, "jinpengpass101");
+		ParamKeyMap<CtpAdaptorParams> adaptorParam = new ParamKeyMap<>(() -> paramMap.toImmutable());
 
 		// 创建InboundAdaptor
 		int inboundAdaptorId = 1;
 		String inboundAdaptorName = "Ctp-InboundAdaptor";
-		JctpInboundAdaptor inboundAdaptor = new JctpInboundAdaptor(inboundAdaptorId, inboundAdaptorName, scheduler,
+		CtpInboundAdaptor inboundAdaptor = new CtpInboundAdaptor(inboundAdaptorId, inboundAdaptorName, scheduler,
 				adaptorParam);
 
 		// 创建OutboundAdaptor
 		int outboundAdaptorId = 2;
 		String outboundAdaptorName = "Ctp-InboundAdaptor";
-		JctpOutboundAdaptor outboundAdaptor = new JctpOutboundAdaptor(outboundAdaptorId, outboundAdaptorName,
+		CtpOutboundAdaptor outboundAdaptor = new CtpOutboundAdaptor(outboundAdaptorId, outboundAdaptorName,
 				inboundAdaptor.getJctpGeteway());
 
 		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.values());

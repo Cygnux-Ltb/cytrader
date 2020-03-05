@@ -9,7 +9,6 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.core.order.utils.PriceUtil;
 import io.redstone.engine.storage.InstrumentKeeper;
 
 /**
@@ -36,9 +35,9 @@ public class QuoteActor {
 
 	public void onMarketDate(BasicMarketData marketData) {
 		AtomicQuote atomicQuote = quoteMap.get(marketData.getInstrument().id());
-		atomicQuote.getAskPrice1().set(PriceUtil.doublePriceToLong(marketData.getAskPrice1()));
+		atomicQuote.getAskPrice1().set(marketData.getAskPrice1());
 		atomicQuote.getAskVolume1().set(marketData.getAskVolume1());
-		atomicQuote.getBidPrice1().set(PriceUtil.doublePriceToLong(marketData.getBidPrice1()));
+		atomicQuote.getBidPrice1().set(marketData.getBidPrice1());
 		atomicQuote.getBidVolume1().set(marketData.getBidVolume1());
 	}
 

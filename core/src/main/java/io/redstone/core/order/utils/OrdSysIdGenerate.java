@@ -18,7 +18,7 @@ import io.mercury.common.datetime.EpochTime;
  * C方案<br>
  * 
  * 
- * impl为方案A<br>
+ * implement为方案A<br>
  * 
  * @author yellow013
  * @creation 2019年4月13日
@@ -46,6 +46,7 @@ public final class OrdSysIdGenerate {
 			increment = 0;
 		}
 		return ownerId * 10_000_000_000_000_000L + lastUseEpochSeconds * 1_000_000L + ++increment;
+
 	}
 
 	public static void main(String[] args) throws InterruptedException {
