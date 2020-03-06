@@ -33,7 +33,7 @@ public final class ChildOrder extends ActualOrder {
 
 	private ChildOrder(long parentId, Instrument instrument, long offerQty, long offerPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
-		this(parentId, instrument, OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordSide, ordType,
+		this(parentId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice), ordSide, ordType,
 				strategyId, subAccountId, stopLoss);
 	}
 

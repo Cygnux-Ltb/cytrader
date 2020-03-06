@@ -25,7 +25,7 @@ public final class ParentOrder extends ActualOrder {
 
 	public ParentOrder(long virtualId, Instrument instrument, long offerQty, long offerPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
-		super(instrument, OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordSide, ordType, strategyId,
+		super(instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice), ordSide, ordType, strategyId,
 				subAccountId, stopLoss);
 		this.childOrders = MutableLists.newFastList(8);
 		this.virtualId = virtualId;

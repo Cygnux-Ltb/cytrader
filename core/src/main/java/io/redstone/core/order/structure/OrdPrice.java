@@ -39,7 +39,7 @@ public final class OrdPrice {
 		return new OrdPrice(true);
 	}
 
-	public double offerPrice() {
+	public long offerPrice() {
 		return offerPrice;
 	}
 
@@ -49,7 +49,7 @@ public final class OrdPrice {
 		return this;
 	}
 
-	public double avgPrice() {
+	public long avgPrice() {
 		return avgPrice;
 	}
 

@@ -32,12 +32,12 @@ public final class OrdQty {
 		this.isMaxQty = isMaxQty;
 	}
 
-	public static OrdQty withOffer(long offerQty) {
+	public static final OrdQty withOfferQty(long offerQty) {
 		return new OrdQty(offerQty);
 	}
 
-	public static OrdQty withMax(boolean isMaxQty) {
-		return new OrdQty(isMaxQty);
+	public static final OrdQty withMaxQty() {
+		return new OrdQty(true);
 	}
 
 	public long offerQty() {
