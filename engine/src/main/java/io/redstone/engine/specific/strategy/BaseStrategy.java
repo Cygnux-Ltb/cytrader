@@ -180,16 +180,16 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 		switch (direction) {
 		case Long:
 			ordSide = OrdSide.Buy;
-			//offerPrice = PriceUtil.longPriceToDouble(quote.getAskPrice1().get());
+			// offerPrice = PriceUtil.longPriceToDouble(quote.getAskPrice1().get());
 			break;
 		case Short:
 			ordSide = OrdSide.Sell;
-			//offerPrice = PriceUtil.longPriceToDouble(quote.getBidPrice1().get());
+			// offerPrice = PriceUtil.longPriceToDouble(quote.getBidPrice1().get());
 			break;
 		default:
 			throw new IllegalArgumentException("TrdDirection is illegal");
 		}
-		VirtualOrder newVirtualOrder = VirtualOrder.newVirtualOrder(instrument, OrdQty.withOffer(targetQty),
+		VirtualOrder newVirtualOrder = VirtualOrder.newVirtualOrder(instrument, OrdQty.withOfferQty(targetQty),
 				OrdPrice.withOffer(offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
 		strategyVirtualOrders.put(newVirtualOrder.ordSysId(), newVirtualOrder);
 
