@@ -1,5 +1,7 @@
 package io.redstone.adaptor.ctp;
 
+import static io.mercury.polaris.financial.util.PriceUtil.priceToLong4;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -13,6 +15,7 @@ import ctp.thostapi.CThostFtdcOrderActionField;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.TimePattern;
+import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZones;
 import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -46,18 +49,19 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 
 		LocalDate depthDate = LocalDate.parse(depthMarketData.getActionDay(), actionDayformatter);
 		LocalTime depthTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
-				.plusNanos(depthMarketData.getUpdateMillisec() * 1000_000);
+				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);
 
 		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
 		logger.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]",
 				instrument.code(), depthDate, depthTime);
 
-		return BasicMarketData.of(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST))
-				.setLastPrice(depthMarketData.getLastPrice()
-						
-						).setVolume(depthMarketData.getVolume())
-				.setTurnover(depthMarketData.getTurnover()).setBidPrice1(depthMarketData.getBidPrice1())
-				.setBidVolume1(depthMarketData.getBidVolume1()).setAskPrice1(depthMarketData.getAskPrice1())
+		return BasicMarketData
+				.with(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST),
+						priceToLong4(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
+						priceToLong4(depthMarketData.getTurnover()))
+				.setBidPrice1(priceToLong4(depthMarketData.getBidPrice1()))
+				.setBidVolume1(depthMarketData.getBidVolume1())
+				.setAskPrice1(priceToLong4(depthMarketData.getAskPrice1()))
 				.setAskVolume1(depthMarketData.getAskVolume1());
 	};
 
