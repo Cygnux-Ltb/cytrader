@@ -1,9 +1,10 @@
 package io.redstone.persistence.avro;
 
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-import io.mercury.codec.avro.AvroBytesDeserializer;
-import io.mercury.codec.avro.AvroBytesSerializer;
+import io.mercury.codec.avro.AvroBinaryDeserializer;
+import io.mercury.codec.avro.AvroBinarySerializer;
 import io.mercury.codec.avro.AvroTextDeserializer;
 import io.mercury.codec.avro.AvroTextSerializer;
 import io.redstone.persistence.avro.entity.MarketDataSubscribe;
@@ -16,18 +17,18 @@ public class AvroDemo {
 
 		marketDataSubscribe.setInstrumentIdList(Arrays.asList("ni1709", "al1707", "rb1710"));
 
-		AvroBytesSerializer byteSerializer = new AvroBytesSerializer();
+		AvroBinarySerializer<MarketDataSubscribe> byteSerializer = new AvroBinarySerializer<>(MarketDataSubscribe.class);
 
-		AvroBytesDeserializer<MarketDataSubscribe> byteDeserializer = new AvroBytesDeserializer<>(
+		AvroBinaryDeserializer<MarketDataSubscribe> byteDeserializer = new AvroBinaryDeserializer<>(
 				MarketDataSubscribe.class);
 
-		byte[] bytes = byteSerializer.serialization(marketDataSubscribe);
+		byte[] bytes = byteSerializer.serialization(marketDataSubscribe).array();
 
-		MarketDataSubscribe deMarketDataSubscribe0 = byteDeserializer.deSerializationSingle(bytes);
+		MarketDataSubscribe deMarketDataSubscribe0 = byteDeserializer.deserialization(ByteBuffer.wrap(bytes));
 
 		System.out.println(deMarketDataSubscribe0.toString());
 
-		AvroTextSerializer textSerializer = new AvroTextSerializer();
+		AvroTextSerializer<MarketDataSubscribe> textSerializer = new AvroTextSerializer<>(MarketDataSubscribe.class);
 
 		AvroTextDeserializer<MarketDataSubscribe> textDeserializer = new AvroTextDeserializer<>(
 				MarketDataSubscribe.class);
@@ -36,7 +37,7 @@ public class AvroDemo {
 
 		System.out.println(json);
 
-		MarketDataSubscribe deMarketDataSubscribe1 = textDeserializer.deSerializationSingle(json);
+		MarketDataSubscribe deMarketDataSubscribe1 = textDeserializer.deserialization(json);
 
 		System.out.println(deMarketDataSubscribe1);
 

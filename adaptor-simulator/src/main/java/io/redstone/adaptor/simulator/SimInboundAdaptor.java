@@ -3,7 +3,7 @@ package io.redstone.adaptor.simulator;
 import java.util.List;
 import java.util.function.Function;
 
-import io.mercury.codec.avro.AvroBytesDeserializer;
+import io.mercury.codec.avro.AvroBinaryDeserializer;
 import io.mercury.common.param.ParamKeyMap;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.mercury.transport.core.api.Receiver;
@@ -37,23 +37,23 @@ public class SimInboundAdaptor extends InboundAdaptor {
 		return null;
 	};
 
-	private AvroBytesDeserializer<MarketDataLevel1> marketDataDeserializer = new AvroBytesDeserializer<>(
+	private AvroBinaryDeserializer<MarketDataLevel1> marketDataDeserializer = new AvroBinaryDeserializer<>(
 			MarketDataLevel1.class);
 
-	private AvroBytesDeserializer<Order> orderDeserializer1 = new AvroBytesDeserializer<>(Order.class);
+	private AvroBinaryDeserializer<Order> orderDeserializer1 = new AvroBinaryDeserializer<>(Order.class);
 
 	public SimInboundAdaptor(int adaptorId, String adaptorName, ParamKeyMap<SimAdaptorParams> paramMap,
 			StrategyScheduler scheduler) {
 		super(adaptorId, adaptorName);
 		this.scheduler = scheduler;
 		this.mdReceiver = new SocketReceiver(mdConfigurator, (bytes) -> {
-			List<MarketDataLevel1> marketDatas = marketDataDeserializer.deSerializationMultiple(bytes);
+			List<MarketDataLevel1> marketDatas = marketDataDeserializer.deserializationMultiple(bytes);
 			for (MarketDataLevel1 marketData : marketDatas) {
 				this.scheduler.onMarketData(marketDataFunction.apply(marketData));
 			}
 		});
 		this.tdReceiver = new SocketReceiver(tdConfigurator, (bytes) -> {
-			List<Order> orders = orderDeserializer1.deSerializationMultiple(bytes);
+			List<Order> orders = orderDeserializer1.deserializationMultiple(bytes);
 			for (Order order : orders) {
 				this.scheduler.onOrderReport(orderFunction.apply(order));
 			}
