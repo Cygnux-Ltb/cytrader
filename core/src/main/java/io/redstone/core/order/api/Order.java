@@ -12,11 +12,11 @@ import io.redstone.core.order.structure.StopLoss;
 
 public interface Order extends Comparable<Order> {
 
-	public interface Constant {
+	public interface Const {
 
-		double OrdMinPrice = 0.0000001D;
+		long OrdMinPrice = 1L;
 
-		double OrdMaxPrice = 1_000_000D;
+		long OrdMaxPrice = 100000000;
 
 	}
 

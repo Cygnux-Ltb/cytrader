@@ -5,7 +5,7 @@ import io.redstone.core.trade.enums.TrdDirection;
 public final class StopLoss implements Comparable<StopLoss> {
 
 	private long ordSysId;
-	private double stopLossPrice;
+	private long stopLossPrice;
 	private boolean greaterOrEqual;
 	private boolean lessOrEqual;
 
@@ -34,7 +34,7 @@ public final class StopLoss implements Comparable<StopLoss> {
 		return stopLossPrice;
 	}
 
-	public StopLoss stopLossPrice(double stopLossPrice) {
+	public StopLoss stopLossPrice(long stopLossPrice) {
 		this.stopLossPrice = stopLossPrice;
 		return this;
 	}
