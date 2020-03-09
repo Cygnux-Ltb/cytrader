@@ -20,20 +20,18 @@ import io.redstone.engine.storage.OrderKeeper;
  * @author yellow013
  */
 
-public class OrderExecutionActor {
+public final class OrderExecutor {
 
-	private Logger logger = CommonLoggerFactory.getLogger(OrderExecutionActor.class);
+	private Logger logger = CommonLoggerFactory.getLogger(OrderExecutor.class);
 
-	private OrderExecutionActor() {
+	private OrderExecutor() {
 	}
 
-	public static final OrderExecutionActor Singleton = new OrderExecutionActor();
-
-	public void onOrder(Order order) {
+	public static void onOrder(Order order) {
 
 	}
 
-	public ParentOrder virtualOrderToActual(VirtualOrder virtualOrder) {
+	public static ParentOrder virtualOrderToActual(VirtualOrder virtualOrder) {
 		OrderBook instrumentOrderBook = OrderKeeper
 				.getInstrumentOrderBook(virtualOrder.instrument().id());
 		OrdSide side = virtualOrder.ordSide();
@@ -60,7 +58,7 @@ public class OrderExecutionActor {
 		return null;
 	}
 
-	public void onMarketData(BasicMarketData marketData) {
+	public static void onMarketData(BasicMarketData marketData) {
 		// TODO
 	}
 

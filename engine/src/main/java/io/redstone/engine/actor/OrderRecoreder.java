@@ -4,7 +4,7 @@ import com.lmax.disruptor.EventHandler;
 
 import io.redstone.core.order.api.Order;
 
-public final class OrderDumpActor implements EventHandler<Order> {
+public final class OrderRecoreder implements EventHandler<Order> {
 
 	@Override
 	public void onEvent(Order event, long sequence, boolean endOfBatch) throws Exception {
