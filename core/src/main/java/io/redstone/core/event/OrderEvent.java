@@ -1,5 +1,5 @@
 package io.redstone.core.event;
 
-public class OrderEvent {
+public interface OrderEvent {
 
 }
