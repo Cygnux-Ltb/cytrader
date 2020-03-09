@@ -1,5 +1,9 @@
 package io.redstone.core.adaptor.dto;
 
-public interface QueryBalance {
+public class QueryBalance extends InvestorDto {
+
+	public QueryBalance(int investorId) {
+		super(investorId);
+	}
 
 }

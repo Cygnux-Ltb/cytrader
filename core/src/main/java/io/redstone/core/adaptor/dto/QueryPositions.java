@@ -1,5 +1,9 @@
 package io.redstone.core.adaptor.dto;
 
-public interface QueryPositions {
+public class QueryPositions extends InvestorDto {
+
+	public QueryPositions(int investorId) {
+		super(investorId);
+	}
 
 }

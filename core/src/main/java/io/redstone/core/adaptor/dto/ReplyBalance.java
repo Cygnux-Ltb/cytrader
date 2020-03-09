@@ -1,5 +1,16 @@
 package io.redstone.core.adaptor.dto;
 
-public interface ReplyBalance {
+public class ReplyBalance extends InvestorDto {
+
+	private int balance;
+
+	ReplyBalance(int investorId, int balance) {
+		super(investorId);
+		this.balance = balance;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
 
 }
