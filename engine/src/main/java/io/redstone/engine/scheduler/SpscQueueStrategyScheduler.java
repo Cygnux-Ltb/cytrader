@@ -8,14 +8,14 @@ import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.engine.actor.QuoteActor;
 import io.redstone.engine.actor.StrategyActor;
 
-public class SpscStrategyScheduler implements StrategyScheduler {
+public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 
 	private SpscQueue<EnqueueMsg> msgQueue;
 
 	private static final int MarketData = 0;
 	private static final int OrderReport = 1;
 
-	public SpscStrategyScheduler(BufferSize size) {
+	public SpscQueueStrategyScheduler(BufferSize size) {
 		this.msgQueue = new SpscQueue<>("SPSCStrategyScheduler-Queue", size, true, (enqueueMsg) -> {
 			switch (enqueueMsg.mark()) {
 			case MarketData:

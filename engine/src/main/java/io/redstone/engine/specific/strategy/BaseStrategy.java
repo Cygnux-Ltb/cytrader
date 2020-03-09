@@ -26,7 +26,7 @@ import io.redstone.core.strategy.CircuitBreaker;
 import io.redstone.core.strategy.Strategy;
 import io.redstone.core.strategy.StrategyControlEvent;
 import io.redstone.core.trade.enums.TrdDirection;
-import io.redstone.engine.actor.OrderExecutionActor;
+import io.redstone.engine.actor.OrderExecutor;
 import io.redstone.engine.actor.QuoteActor;
 import io.redstone.engine.actor.QuoteActor.AtomicQuote;
 import io.redstone.engine.storage.AccountKeeper;
@@ -45,7 +45,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 	protected String strategyName;
 
-	private String defaultStrategyName;
+	private String defaultName;
 
 	// 策略订阅的合约
 	private ImmutableList<Instrument> instruments;
@@ -56,7 +56,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	protected BaseStrategy(int strategyId, int subAccountId, Instrument... instruments) {
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
-		this.defaultStrategyName = "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]";
+		this.defaultName = "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]";
 		this.instruments = ImmutableLists.newList(instruments);
 	}
 
@@ -77,7 +77,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	@Override
 	public String strategyName() {
 		if (StringUtil.isNullOrEmpty(strategyName))
-			return defaultStrategyName;
+			return defaultName;
 		return strategyName;
 	}
 
@@ -169,11 +169,11 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	}
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty) {
-		orderTarget(instrument, direction, targetQty, Order.Constant.OrdMinPrice, Order.Constant.OrdMaxPrice);
+		orderTarget(instrument, direction, targetQty, Order.Const.OrdMinPrice, Order.Const.OrdMaxPrice);
 	}
 
-	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty, double minPrice,
-			double maxPrice) {
+	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty, long minPrice,
+			long maxPrice) {
 		OrdSide ordSide;
 		AtomicQuote quote = QuoteActor.Singleton.getQuote(instrument);
 		long offerPrice = 0;
@@ -193,7 +193,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 				OrdPrice.withOffer(offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
 		strategyVirtualOrders.put(newVirtualOrder.ordSysId(), newVirtualOrder);
 
-		ParentOrder parentOrder = OrderExecutionActor.Singleton.virtualOrderToActual(newVirtualOrder);
+		ParentOrder parentOrder = OrderExecutor.virtualOrderToActual(newVirtualOrder);
 
 		OutboundAdaptor outboundAdaptor = getOutboundAdaptor(instrument);
 
