@@ -28,13 +28,13 @@ import io.mercury.gateway.ctp.bean.rsp.RspOrderInsert;
 import io.mercury.gateway.ctp.bean.rsp.RtnOrder;
 import io.mercury.gateway.ctp.bean.rsp.RtnTrade;
 import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.instrument.InstrumentKeeper;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.adaptor.ctp.exception.OrderRefNotFoundException;
 import io.redstone.adaptor.ctp.utils.CtpOrderRefKeeper;
-import io.redstone.core.adaptor.impl.InboundAdaptor;
+import io.redstone.core.adaptor.base.InboundAdaptor;
 import io.redstone.core.order.impl.OrderReport;
 import io.redstone.core.strategy.StrategyScheduler;
-import io.redstone.engine.storage.InstrumentKeeper;
 
 public class CtpInboundAdaptor extends InboundAdaptor {
 

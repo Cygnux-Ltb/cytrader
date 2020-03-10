@@ -9,7 +9,7 @@ import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.mercury.transport.core.api.Receiver;
 import io.mercury.transport.socket.SocketReceiver;
 import io.mercury.transport.socket.configurator.SocketConfigurator;
-import io.redstone.core.adaptor.impl.InboundAdaptor;
+import io.redstone.core.adaptor.base.InboundAdaptor;
 import io.redstone.core.order.impl.OrderReport;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.persistence.avro.entity.MarketDataLevel1;
