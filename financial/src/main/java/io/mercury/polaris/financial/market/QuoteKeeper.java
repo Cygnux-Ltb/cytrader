@@ -1,60 +1,80 @@
-package io.redstone.engine.storage;
+package io.mercury.polaris.financial.market;
 
-import java.util.function.Consumer;
+import java.util.concurrent.atomic.AtomicLong;
 
-import javax.annotation.concurrent.NotThreadSafe;
-
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
-import io.mercury.polaris.financial.market.impl.Quotes;
+import io.mercury.common.collections.MutableMaps;
+import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.instrument.InstrumentKeeper;
+import io.mercury.polaris.financial.market.impl.BasicMarketData;
 
-@NotThreadSafe
+/**
+ * 管理当前最新行情
+ * 
+ * @creation 2019年4月16日
+ */
 public final class QuoteKeeper {
 
-	// Map<InstrumentId, Quotes>
-	private MutableIntObjectMap<Quotes> quotesMap = IntObjectHashMap.newMap();
+	private ImmutableIntObjectMap<AtomicQuote> quoteMap;
 
-	public static final QuoteKeeper INSTANCE = new QuoteKeeper();
+	public final static QuoteKeeper Singleton = new QuoteKeeper();
 
 	private QuoteKeeper() {
 	}
 
-	public static void put(int instrumentId, Quotes quotes) {
-		INSTANCE.quotesMap.put(instrumentId, quotes);
+	public void init() {
+		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
+		MutableIntObjectMap<AtomicQuote> tempQuoteMap = MutableMaps.newIntObjectHashMap();
+		if (allInstrument != null)
+			allInstrument.forEach(instrument -> tempQuoteMap.put(instrument.id(), new AtomicQuote()));
+		quoteMap = tempQuoteMap.toImmutable();
 	}
 
-	public static Quotes getQuotes(int instrumentId) {
-		Quotes quotes = INSTANCE.quotesMap.get(instrumentId);
-		if (quotes == null) {
-			quotes = Quotes.newLevel10();
-			INSTANCE.quotesMap.put(instrumentId, quotes);
+	public void onMarketDate(BasicMarketData marketData) {
+		AtomicQuote atomicQuote = quoteMap.get(marketData.getInstrument().id());
+		atomicQuote.getAskPrice1().set(marketData.getAskPrice1());
+		atomicQuote.getAskVolume1().set(marketData.getAskVolume1());
+		atomicQuote.getBidPrice1().set(marketData.getBidPrice1());
+		atomicQuote.getBidVolume1().set(marketData.getBidVolume1());
+	}
+
+	public AtomicQuote getQuote(Instrument instrument) {
+		return quoteMap.get(instrument.id());
+	}
+
+	public static class AtomicQuote {
+
+		private AtomicLong askPrice1;
+		private AtomicLong askVolume1;
+		private AtomicLong bidPrice1;
+		private AtomicLong bidVolume1;
+
+		public AtomicQuote() {
+			super();
+			this.askPrice1 = new AtomicLong();
+			this.askVolume1 = new AtomicLong();
+			this.bidPrice1 = new AtomicLong();
+			this.bidVolume1 = new AtomicLong();
 		}
-		return quotes;
-	}
 
-	public static void updateQuotes(int instrumentId, QuotesUpdater updater) {
-		updater.update(getQuotes(instrumentId));
-	}
-
-	@FunctionalInterface
-	public interface QuotesUpdater extends Consumer<Quotes> {
-		default void update(Quotes quotes) {
-			accept(quotes);
+		public AtomicLong getAskPrice1() {
+			return askPrice1;
 		}
-	}
 
-	public static void main(String[] args) {
+		public AtomicLong getAskVolume1() {
+			return askVolume1;
+		}
 
-		MutableIntObjectMap<String> quotesMap = IntObjectHashMap.newMap();
+		public AtomicLong getBidPrice1() {
+			return bidPrice1;
+		}
 
-		String put = quotesMap.put(0, "AAA");
-		String put1 = quotesMap.put(0, "AAAXX");
-		String put2 = quotesMap.put(0, "AAAXXDD");
-
-		System.out.println(put);
-		System.out.println(put1);
-		System.out.println(put2);
+		public AtomicLong getBidVolume1() {
+			return bidVolume1;
+		}
 
 	}
 
