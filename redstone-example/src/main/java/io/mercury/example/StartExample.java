@@ -25,7 +25,7 @@ import io.redstone.engine.storage.AdaptorKeeper;
 import io.redstone.engine.storage.InstrumentKeeper;
 import io.redstone.engine.storage.StrategyKeeper;
 
-public final class StartTrading {
+public final class StartExample {
 
 	private static int appId = 1;
 
@@ -47,7 +47,7 @@ public final class StartTrading {
 		paramMap.put(CtpAdaptorParams.CTP_InvestorId, "005853");
 		paramMap.put(CtpAdaptorParams.CTP_AccountId, "005853");
 		paramMap.put(CtpAdaptorParams.CTP_UserId, "005853");
-		paramMap.put(CtpAdaptorParams.CTP_Password, "jinpengpass101");
+		paramMap.put(CtpAdaptorParams.CTP_Password, "?????");
 		ParamKeyMap<CtpAdaptorParams> adaptorParam = new ParamKeyMap<>(() -> paramMap.toImmutable());
 
 		// 创建InboundAdaptor

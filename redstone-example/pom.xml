@@ -11,8 +11,8 @@
 		<version>0.1</version>
 	</parent>
 
-	<artifactId>example</artifactId>
-	<name>example</name>
+	<artifactId>redstone-example</artifactId>
+	<name>redstone-example</name>
 
 	<packaging>jar</packaging>
 

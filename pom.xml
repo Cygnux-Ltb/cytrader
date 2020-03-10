@@ -27,7 +27,7 @@
 		<!-- Exec engine -->
 		<module>redstone-engine</module>
 		<!-- Impl example -->
-		<module>example</module>
+		<module>redstone-example</module>
 		<!-- financial -->
 		<module>financial</module>
 		<!-- indicator -->
