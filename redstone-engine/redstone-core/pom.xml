@@ -4,29 +4,17 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>io.mercury</groupId>
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
 
-	<artifactId>redstone-engine</artifactId>
-	<name>redstone-engine</name>
+	<artifactId>core</artifactId>
+	<name>core</name>
 
 	<dependencies>
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>actors</artifactId>
-			<version>0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>commons-concurrent</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>redstone-core</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>financial</artifactId>
