@@ -1,4 +1,4 @@
-package io.mercury.polaris.indicator.api;
+package io.mercury.indicator.api;
 
 /**
  * 标识指标的一个点由N个周期的点计算

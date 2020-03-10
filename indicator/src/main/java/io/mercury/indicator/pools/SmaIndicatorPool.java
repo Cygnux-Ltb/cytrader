@@ -1,12 +1,12 @@
-package io.mercury.polaris.indicator.pools;
+package io.mercury.indicator.pools;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import io.mercury.indicator.api.CalculationCycle;
+import io.mercury.indicator.impl.ma.SmaIndicator;
+import io.mercury.indicator.pools.base.MultiLayerIndicatorPool;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.indicator.api.CalculationCycle;
-import io.mercury.polaris.indicator.impl.ma.SmaIndicator;
-import io.mercury.polaris.indicator.pools.base.MultiLayerIndicatorPool;
 
 @NotThreadSafe
 public final class SmaIndicatorPool extends MultiLayerIndicatorPool<SmaIndicator> {

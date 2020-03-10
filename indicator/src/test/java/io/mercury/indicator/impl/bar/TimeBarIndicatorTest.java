@@ -1,4 +1,4 @@
-package io.polaris.indicator.impl.bar;
+package io.mercury.indicator.impl.bar;
 
 import org.junit.Test;
 

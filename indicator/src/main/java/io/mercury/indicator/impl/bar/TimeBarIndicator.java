@@ -1,16 +1,16 @@
-package io.mercury.polaris.indicator.impl.bar;
+package io.mercury.indicator.impl.bar;
 
 import java.time.ZonedDateTime;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
+import io.mercury.indicator.base.BaseTimePeriodIndicator;
+import io.mercury.indicator.event.TimeBarsEvent;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.mercury.polaris.financial.time.TimePeriodPool;
 import io.mercury.polaris.financial.vector.TimePeriod;
 import io.mercury.polaris.financial.vector.TimePeriodSerial;
-import io.mercury.polaris.indicator.base.BaseTimePeriodIndicator;
-import io.mercury.polaris.indicator.events.TimeBarsEvent;
 
 public final class TimeBarIndicator extends BaseTimePeriodIndicator<TimeBar, TimeBarsEvent> {
 

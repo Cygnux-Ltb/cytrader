@@ -1,11 +1,11 @@
-package io.mercury.polaris.indicator.base;
+package io.mercury.indicator.base;
 
 import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
+import io.mercury.indicator.api.Point;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.mercury.polaris.indicator.api.Point;
 
 abstract class BasePoint<S extends Serial<S>> implements Point<S>, Comparable<Point<S>> {
 

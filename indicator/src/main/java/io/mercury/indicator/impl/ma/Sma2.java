@@ -1,20 +1,20 @@
-package io.mercury.polaris.indicator.impl.ma;
+package io.mercury.indicator.impl.ma;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import io.mercury.indicator.api.CalculationCycle;
+import io.mercury.indicator.base.BaseTimePeriodIndicator;
+import io.mercury.indicator.event.SmaEvent;
+import io.mercury.indicator.structure.FixedHistoryPriceRecorder;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.mercury.polaris.financial.time.TradingPeriodPool;
 import io.mercury.polaris.financial.vector.TimePeriod;
 import io.mercury.polaris.financial.vector.TimePeriodSerial;
 import io.mercury.polaris.financial.vector.TradingPeriod;
-import io.mercury.polaris.indicator.api.CalculationCycle;
-import io.mercury.polaris.indicator.base.BaseTimePeriodIndicator;
-import io.mercury.polaris.indicator.events.SmaEvent;
-import io.mercury.polaris.indicator.structure.FixedHistoryPriceRecorder;
 
 public final class Sma2 extends BaseTimePeriodIndicator<SmaPoint, SmaEvent> {
 

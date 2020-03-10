@@ -1,4 +1,4 @@
-package io.mercury.polaris.indicator.impl.bar;
+package io.mercury.indicator.impl.bar;
 
 class Bar {
 

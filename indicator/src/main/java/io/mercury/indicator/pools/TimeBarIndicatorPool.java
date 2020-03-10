@@ -1,11 +1,11 @@
-package io.mercury.polaris.indicator.pools;
+package io.mercury.indicator.pools;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import io.mercury.indicator.impl.bar.TimeBarIndicator;
+import io.mercury.indicator.pools.base.SingleLayerIndicatorPool;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.indicator.impl.bar.TimeBarIndicator;
-import io.mercury.polaris.indicator.pools.base.SingleLayerIndicatorPool;
 
 @NotThreadSafe
 public final class TimeBarIndicatorPool extends SingleLayerIndicatorPool<TimeBarIndicator> {

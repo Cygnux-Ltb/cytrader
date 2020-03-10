@@ -1,10 +1,10 @@
-package io.mercury.polaris.indicator.base;
+package io.mercury.indicator.base;
 
+import io.mercury.indicator.api.CalculationCycle;
+import io.mercury.indicator.api.IndicatorEvent;
+import io.mercury.indicator.api.Point;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.vector.RandomTimeSerial;
-import io.mercury.polaris.indicator.api.CalculationCycle;
-import io.mercury.polaris.indicator.api.IndicatorEvent;
-import io.mercury.polaris.indicator.api.Point;
 
 public abstract class BaseRandomTimeIndicator<P extends Point<RandomTimeSerial>, E extends IndicatorEvent>
 		extends BaseIndicator<P, E> {

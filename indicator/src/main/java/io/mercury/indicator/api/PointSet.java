@@ -1,4 +1,4 @@
-package io.mercury.polaris.indicator.api;
+package io.mercury.indicator.api;
 
 import java.util.Optional;
 

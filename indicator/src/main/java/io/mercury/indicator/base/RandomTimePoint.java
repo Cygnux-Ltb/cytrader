@@ -1,4 +1,4 @@
-package io.mercury.polaris.indicator.base;
+package io.mercury.indicator.base;
 
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.vector.RandomTimeSerial;

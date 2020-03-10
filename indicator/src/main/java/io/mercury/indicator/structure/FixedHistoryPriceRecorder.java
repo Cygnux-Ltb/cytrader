@@ -1,4 +1,4 @@
-package io.mercury.polaris.indicator.structure;
+package io.mercury.indicator.structure;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -6,7 +6,7 @@ import org.eclipse.collections.api.list.primitive.ImmutableDoubleList;
 import org.eclipse.collections.api.list.primitive.MutableDoubleList;
 
 import io.mercury.common.collections.MutableLists;
-import io.mercury.polaris.indicator.api.CalculationCycle;
+import io.mercury.indicator.api.CalculationCycle;
 
 @NotThreadSafe
 public class FixedHistoryPriceRecorder {

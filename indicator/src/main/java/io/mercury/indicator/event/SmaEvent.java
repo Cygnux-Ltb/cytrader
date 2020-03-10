@@ -1,7 +1,7 @@
-package io.mercury.polaris.indicator.events;
+package io.mercury.indicator.event;
 
-import io.mercury.polaris.indicator.api.IndicatorEvent;
-import io.mercury.polaris.indicator.impl.ma.SmaPoint;
+import io.mercury.indicator.api.IndicatorEvent;
+import io.mercury.indicator.impl.ma.SmaPoint;
 
 public interface SmaEvent extends IndicatorEvent {
 

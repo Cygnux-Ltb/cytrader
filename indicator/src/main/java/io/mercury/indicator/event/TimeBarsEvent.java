@@ -1,7 +1,7 @@
-package io.mercury.polaris.indicator.events;
+package io.mercury.indicator.event;
 
-import io.mercury.polaris.indicator.api.IndicatorEvent;
-import io.mercury.polaris.indicator.impl.bar.TimeBar;
+import io.mercury.indicator.api.IndicatorEvent;
+import io.mercury.indicator.impl.bar.TimeBar;
 
 public interface TimeBarsEvent extends IndicatorEvent {
 

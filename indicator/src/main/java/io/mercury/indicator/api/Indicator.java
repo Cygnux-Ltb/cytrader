@@ -1,4 +1,4 @@
-package io.mercury.polaris.indicator.api;
+package io.mercury.indicator.api;
 
 import io.mercury.common.sequence.Serial;
 import io.mercury.polaris.financial.instrument.Instrument;

@@ -1,10 +1,10 @@
-package io.mercury.polaris.indicator.impl.ma.base;
+package io.mercury.indicator.impl.ma.base;
 
+import io.mercury.indicator.base.TimePeriodPoint;
+import io.mercury.indicator.structure.FixedHistoryPriceRecorder;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.vector.TimePeriod;
 import io.mercury.polaris.financial.vector.TimePeriodSerial;
-import io.mercury.polaris.indicator.base.TimePeriodPoint;
-import io.mercury.polaris.indicator.structure.FixedHistoryPriceRecorder;
 
 public abstract class MaPoint<P extends MaPoint<P>> extends TimePeriodPoint<P> {
 

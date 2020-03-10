@@ -1,11 +1,11 @@
-package io.mercury.polaris.indicator.base;
+package io.mercury.indicator.base;
 
+import io.mercury.indicator.api.CalculationCycle;
+import io.mercury.indicator.api.IndicatorEvent;
+import io.mercury.indicator.api.Point;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.vector.TimePeriod;
 import io.mercury.polaris.financial.vector.TimePeriodSerial;
-import io.mercury.polaris.indicator.api.CalculationCycle;
-import io.mercury.polaris.indicator.api.IndicatorEvent;
-import io.mercury.polaris.indicator.api.Point;
 
 public abstract class BaseTimePeriodIndicator<P extends Point<TimePeriodSerial>, E extends IndicatorEvent>
 		extends BaseIndicator<P, E> {
