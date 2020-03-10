@@ -6,17 +6,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.mercury.redstone</groupId>
+		<groupId>io.mercury</groupId>
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
 
-	<artifactId>core</artifactId>
-	<name>core</name>
+	<artifactId>redstone-core</artifactId>
+	<name>redstone-core</name>
 
 	<dependencies>
 		<dependency>
-			<groupId>io.mercury.polaris</groupId>
+			<groupId>io.mercury</groupId>
 			<artifactId>financial</artifactId>
 		</dependency>
 	</dependencies>
