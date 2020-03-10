@@ -15,18 +15,18 @@ import io.redstone.core.order.structure.OrdQty;
  * 
  * @author yellow013
  */
-public final class VirtualOrder extends AbstractOrder {
+public final class StrategyOrder extends AbstractOrder {
 
 	private MutableLongObjectMap<ParentOrder> actualOrders = MutableMaps.newLongObjectHashMap();
 
-	private VirtualOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide, OrdType ordType,
+	private StrategyOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide, OrdType ordType,
 			int strategyId, int subAccountId) {
 		super(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId);
 	}
 
-	public static VirtualOrder newVirtualOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide,
+	public static StrategyOrder newStrategyOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId) {
-		return new VirtualOrder(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId);
+		return new StrategyOrder(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId);
 	}
 
 	public MutableLongObjectMap<ParentOrder> getActualOrders() {

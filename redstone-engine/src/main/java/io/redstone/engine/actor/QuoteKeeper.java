@@ -8,21 +8,21 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.instrument.InstrumentKeeper;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.engine.storage.InstrumentKeeper;
 
 /**
  * 管理当前最新行情
  * 
  * @creation 2019年4月16日
  */
-public class QuoteActor {
+public final class QuoteKeeper {
 
 	private ImmutableIntObjectMap<AtomicQuote> quoteMap;
 
-	public final static QuoteActor Singleton = new QuoteActor();
+	public final static QuoteKeeper Singleton = new QuoteKeeper();
 
-	private QuoteActor() {
+	private QuoteKeeper() {
 	}
 
 	public void init() {

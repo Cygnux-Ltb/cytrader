@@ -2,10 +2,10 @@ package io.redstone.engine.scheduler;
 
 import io.mercury.common.concurrent.disruptor.BufferSize;
 import io.mercury.common.concurrent.disruptor.SpscQueue;
+import io.mercury.polaris.financial.market.QuoteKeeper;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.order.impl.OrderReport;
 import io.redstone.core.strategy.StrategyScheduler;
-import io.redstone.engine.actor.QuoteActor;
 import io.redstone.engine.actor.StrategyActor;
 
 public final class SpscQueueStrategyScheduler implements StrategyScheduler {
@@ -20,7 +20,7 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 			switch (enqueueMsg.mark()) {
 			case MarketData:
 				BasicMarketData marketData = enqueueMsg.getMarketData();
-				QuoteActor.Singleton.onMarketDate(marketData);
+				QuoteKeeper.Singleton.onMarketDate(marketData);
 				StrategyActor.Singleton.onMarketData(marketData);
 				break;
 			case OrderReport:

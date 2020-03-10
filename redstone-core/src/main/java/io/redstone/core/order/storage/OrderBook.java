@@ -1,4 +1,4 @@
-package io.redstone.engine.storage;
+package io.redstone.core.order.storage;
 
 import java.util.Collection;
 
@@ -8,7 +8,7 @@ import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.redstone.core.order.api.Order;
 
-public class OrderBook {
+public final class OrderBook {
 
 	// 存储本OrderBook里的所有订单,以ordSysId索引
 	private MutableLongObjectMap<Order> orders;

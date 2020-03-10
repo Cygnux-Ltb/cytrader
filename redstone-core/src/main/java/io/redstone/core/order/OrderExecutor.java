@@ -1,4 +1,6 @@
-package io.redstone.engine.actor;
+package io.redstone.core.order;
+
+import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
@@ -8,9 +10,9 @@ import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.impl.ParentOrder;
-import io.redstone.core.order.impl.VirtualOrder;
-import io.redstone.engine.storage.OrderBook;
-import io.redstone.engine.storage.OrderKeeper;
+import io.redstone.core.order.impl.StrategyOrder;
+import io.redstone.core.order.storage.OrderBook;
+import io.redstone.core.order.storage.OrderKeeper;
 
 /**
  * 统一管理订单<br>
@@ -31,10 +33,10 @@ public final class OrderExecutor {
 
 	}
 
-	public static ParentOrder virtualOrderToActual(VirtualOrder virtualOrder) {
-		OrderBook instrumentOrderBook = OrderKeeper
-				.getInstrumentOrderBook(virtualOrder.instrument().id());
-		OrdSide side = virtualOrder.ordSide();
+	public static ParentOrder onStrategyOrder(@Nonnull StrategyOrder... strategyOrders) {
+		StrategyOrder strategyOrder = strategyOrders[0];
+		OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrderBook(strategyOrder.instrument().id());
+		OrdSide side = strategyOrder.ordSide();
 		switch (side.direction()) {
 		case Long:
 			MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.activeShortOrders();

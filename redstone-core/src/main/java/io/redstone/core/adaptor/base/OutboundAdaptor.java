@@ -1,6 +1,7 @@
-package io.redstone.core.adaptor.impl;
+package io.redstone.core.adaptor.base;
 
 import io.redstone.core.account.Account;
+import io.redstone.core.adaptor.dto.QueryBalance;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.order.impl.ChildOrder;
 

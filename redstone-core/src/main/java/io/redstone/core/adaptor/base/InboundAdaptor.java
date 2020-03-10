@@ -1,4 +1,4 @@
-package io.redstone.core.adaptor.impl;
+package io.redstone.core.adaptor.base;
 
 public abstract class InboundAdaptor extends AbstractAdaptor {
 

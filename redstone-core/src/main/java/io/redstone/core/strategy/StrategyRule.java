@@ -2,18 +2,18 @@ package io.redstone.core.strategy;
 
 public interface StrategyRule {
 
-	boolean getTruth();
+	boolean judgement();
 
 	default boolean and(StrategyRule rule) {
-		return getTruth() && rule.getTruth();
+		return judgement() && rule.judgement();
 	}
 
 	default boolean or(StrategyRule rule) {
-		return getTruth() || rule.getTruth();
+		return judgement() || rule.judgement();
 	}
 
 	default boolean not() {
-		return !getTruth();
+		return !judgement();
 	}
 
 }

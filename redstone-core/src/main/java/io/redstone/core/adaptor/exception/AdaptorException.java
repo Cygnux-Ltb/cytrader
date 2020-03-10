@@ -1,4 +1,4 @@
-package io.redstone.core.exception;
+package io.redstone.core.adaptor.exception;
 
 public class AdaptorException extends RuntimeException {
 

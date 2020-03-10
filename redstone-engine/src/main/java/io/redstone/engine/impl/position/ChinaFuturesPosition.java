@@ -1,4 +1,4 @@
-package io.redstone.engine.specific.position;
+package io.redstone.engine.impl.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 

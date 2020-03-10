@@ -1,4 +1,4 @@
-package io.redstone.engine.specific.strategy;
+package io.redstone.core.strategy.base;
 
 import java.util.function.Supplier;
 
@@ -12,26 +12,25 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringUtil;
 import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.polaris.financial.instrument.InstrumentKeeper;
+import io.mercury.polaris.financial.market.QuoteKeeper;
+import io.mercury.polaris.financial.market.QuoteKeeper.AtomicQuote;
 import io.mercury.polaris.financial.market.api.MarketData;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.core.adaptor.impl.OutboundAdaptor;
+import io.redstone.core.account.AccountKeeper;
+import io.redstone.core.adaptor.base.OutboundAdaptor;
+import io.redstone.core.order.OrderExecutor;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.impl.ParentOrder;
-import io.redstone.core.order.impl.VirtualOrder;
+import io.redstone.core.order.impl.StrategyOrder;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.strategy.CircuitBreaker;
 import io.redstone.core.strategy.Strategy;
 import io.redstone.core.strategy.StrategyControlEvent;
 import io.redstone.core.trade.enums.TrdDirection;
-import io.redstone.engine.actor.OrderExecutor;
-import io.redstone.engine.actor.QuoteActor;
-import io.redstone.engine.actor.QuoteActor.AtomicQuote;
-import io.redstone.engine.storage.AccountKeeper;
-import io.redstone.engine.storage.InstrumentKeeper;
-import io.redstone.engine.storage.OrderKeeper;
 
 public abstract class BaseStrategy<M extends MarketData> implements Strategy, CircuitBreaker {
 
@@ -51,7 +50,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	private ImmutableList<Instrument> instruments;
 
 	// 记录当前策略所有订单
-	protected MutableLongObjectMap<VirtualOrder> strategyVirtualOrders = MutableMaps.newLongObjectHashMap();
+	protected MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
 
 	protected BaseStrategy(int strategyId, int subAccountId, Instrument... instruments) {
 		this.strategyId = strategyId;
@@ -88,7 +87,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
-		if (strategyVirtualOrders.notEmpty()) {
+		if (strategyOrders.notEmpty()) {
 
 		}
 		handleMarketData(marketData);
@@ -99,13 +98,10 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 	@Override
 	public void onOrder(Order order) {
-		logger.info("handle order ordSysId==[{}]", order.ordSysId());
-		if (OrderKeeper.containsOrder(order.ordSysId())) {
-			OrderKeeper.updateOrder(order);
-		} else {
-			OrderKeeper.insertOrder(order);
-		}
+		updateOrder(order);
 	}
+
+	protected abstract boolean updateOrder(Order order);
 
 	@Override
 	public void onControlEvent(StrategyControlEvent event) {
@@ -175,7 +171,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty, long minPrice,
 			long maxPrice) {
 		OrdSide ordSide;
-		AtomicQuote quote = QuoteActor.Singleton.getQuote(instrument);
+		AtomicQuote quote = QuoteKeeper.Singleton.getQuote(instrument);
 		long offerPrice = 0;
 		switch (direction) {
 		case Long:
@@ -189,11 +185,11 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 		default:
 			throw new IllegalArgumentException("TrdDirection is illegal");
 		}
-		VirtualOrder newVirtualOrder = VirtualOrder.newVirtualOrder(instrument, OrdQty.withOfferQty(targetQty),
+		StrategyOrder newVirtualOrder = StrategyOrder.newStrategyOrder(instrument, OrdQty.withOfferQty(targetQty),
 				OrdPrice.withOffer(offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
-		strategyVirtualOrders.put(newVirtualOrder.ordSysId(), newVirtualOrder);
+		strategyOrders.put(newVirtualOrder.ordSysId(), newVirtualOrder);
 
-		ParentOrder parentOrder = OrderExecutor.virtualOrderToActual(newVirtualOrder);
+		ParentOrder parentOrder = OrderExecutor.onStrategyOrder(newVirtualOrder);
 
 		OutboundAdaptor outboundAdaptor = getOutboundAdaptor(instrument);
 

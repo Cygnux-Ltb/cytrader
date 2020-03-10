@@ -1,4 +1,4 @@
-package io.redstone.engine.specific.position;
+package io.redstone.engine.impl.position;
 
 import io.redstone.core.position.api.PositionProducer;
 import io.redstone.core.position.impl.AbsPositionManager;

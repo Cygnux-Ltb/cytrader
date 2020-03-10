@@ -1,4 +1,4 @@
-package io.redstone.engine.storage;
+package io.redstone.core.account;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -11,8 +11,6 @@ import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
-import io.redstone.core.account.Account;
-import io.redstone.core.account.SubAccount;
 
 @NotThreadSafe
 public final class AccountKeeper {
