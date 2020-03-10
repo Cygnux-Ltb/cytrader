@@ -5,7 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>io.mercury.redstone</groupId>
+		<groupId>io.mercury</groupId>
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
@@ -14,8 +14,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.mercury.redstone</groupId>
-			<artifactId>engine</artifactId>
+			<groupId>io.mercury</groupId>
+			<artifactId>redstone-engine</artifactId>
 		</dependency>
 		<!-- <dependency> <groupId>de.alpharogroup</groupId> <artifactId>silly-collections</artifactId> 
 			<version>5.5.1</version> </dependency> -->

@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.mercury.redstone</groupId>
+		<groupId>io.mercury</groupId>
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
@@ -28,7 +28,7 @@
 			<plugin>
 				<groupId>org.apache.avro</groupId>
 				<artifactId>avro-maven-plugin</artifactId>
-				<version>1.9.1</version>
+				<version>1.9.2</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -62,7 +62,7 @@
 									<pluginExecutionFilter>
 										<groupId>org.apache.avro</groupId>
 										<artifactId>avro-maven-plugin</artifactId>
-										<versionRange>1.9.1</versionRange>
+										<versionRange>1.9.2</versionRange>
 										<goals>
 											<goal>schema</goal>
 											<goal>idl-protocol</goal>
@@ -80,7 +80,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-
 
 </project>

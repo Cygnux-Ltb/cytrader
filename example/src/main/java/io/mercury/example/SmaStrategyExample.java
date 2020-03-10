@@ -1,4 +1,4 @@
-package io.redstone.example;
+package io.mercury.example;
 
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
@@ -44,12 +44,6 @@ public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> imple
 
 	@Override
 	protected OutboundAdaptor getOutboundAdaptor(Instrument instrument) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String strategyName() {
 		// TODO Auto-generated method stub
 		return null;
 	}

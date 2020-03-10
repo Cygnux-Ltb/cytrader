@@ -5,10 +5,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>io.mercury.redstone</groupId>
+		<groupId>io.mercury</groupId>
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
+	
 	<artifactId>adaptor-simulator</artifactId>
 	<name>adaptor-simulator</name>
 
@@ -23,12 +24,12 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>io.mercury.redstone</groupId>
+			<groupId>io.mercury</groupId>
 			<artifactId>beans</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.mercury.redstone</groupId>
-			<artifactId>engine</artifactId>
+			<groupId>io.mercury</groupId>
+			<artifactId>redstone-engine</artifactId>
 		</dependency>
 	</dependencies>
 	

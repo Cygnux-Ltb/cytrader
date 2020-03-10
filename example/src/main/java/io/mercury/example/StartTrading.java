@@ -1,4 +1,4 @@
-package io.redstone.example;
+package io.mercury.example;
 
 import org.eclipse.collections.api.map.MutableMap;
 
@@ -20,7 +20,7 @@ import io.redstone.adaptor.ctp.CtpOutboundAdaptor;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.engine.actor.AppGlobalStatus;
-import io.redstone.engine.scheduler.SpscStrategyScheduler;
+import io.redstone.engine.scheduler.SpscQueueStrategyScheduler;
 import io.redstone.engine.storage.AdaptorKeeper;
 import io.redstone.engine.storage.InstrumentKeeper;
 import io.redstone.engine.storage.StrategyKeeper;
@@ -37,7 +37,7 @@ public final class StartTrading {
 		// Set Global AppId
 		AppGlobalStatus.setAppId(appId);
 
-		StrategyScheduler scheduler = new SpscStrategyScheduler(BufferSize.POW2_12);
+		StrategyScheduler scheduler = new SpscQueueStrategyScheduler(BufferSize.POW2_12);
 
 		// Adaptor Params
 		MutableMap<CtpAdaptorParams, Object> paramMap = MutableMaps.newUnifiedMap();

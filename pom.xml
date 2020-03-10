@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.mercury.redstone</groupId>
+	<groupId>io.mercury</groupId>
 	<artifactId>redstone</artifactId>
 	<version>0.1</version>
 
@@ -15,20 +15,28 @@
 	<url>https://github.com/yellow013/redstone.git</url>
 
 	<modules>
+		<!-- adaptor modules -->
 		<module>adaptor-ib</module>
 		<module>adaptor-ctp</module>
 		<module>adaptor-simulator</module>
 		<module>beans</module>
-		<module>config</module>
-		<module>core</module>
-		<module>engine</module>
+		<!-- Config -->
+		<module>redstone-config</module>
+		<!-- Core API -->
+		<module>redstone-core</module>
+		<!-- Exec engine -->
+		<module>redstone-engine</module>
+		<!-- Impl example -->
 		<module>example</module>
+		<!-- financial -->
+		<module>financial</module>
+		<!-- indicator -->
+		<module>indicator</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<polaris.version>0.1</polaris.version>
 		<commons.version>1.0-SNAPSHOT</commons.version>
 		<transport.version>1.0-SNAPSHOT</transport.version>
 	</properties>
@@ -65,17 +73,19 @@
 			<artifactId>commons-core</artifactId>
 			<version>${commons.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>commons-concurrent</artifactId>
-			<version>${commons.version}</version>
-		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
 			<!-- commons -->
 			<!-- see https://github.com/yellow013/commons.git -->
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>commons-concurrent</artifactId>
+				<version>${commons.version}</version>
+			</dependency>
+			<!-- commons -->
+			<!-- see https://github.com/yellow013/transport.git -->
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-core</artifactId>
@@ -91,31 +101,29 @@
 				<artifactId>transport-socket</artifactId>
 				<version>${transport.version}</version>
 			</dependency>
-			<!-- polaris -->
-			<!-- see https://github.com/yellow013/polaris.git -->
-			<dependency>
-				<groupId>io.mercury.polaris</groupId>
-				<artifactId>financial</artifactId>
-				<version>${polaris.version}</version>
-			</dependency>
 			<!-- redstone -->
 			<dependency>
-				<groupId>io.mercury.redstone</groupId>
-				<artifactId>core</artifactId>
+				<groupId>io.mercury</groupId>
+				<artifactId>redstone-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.mercury.redstone</groupId>
-				<artifactId>engine</artifactId>
+				<groupId>io.mercury</groupId>
+				<artifactId>redstone-engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.mercury.redstone</groupId>
-				<artifactId>config</artifactId>
+				<groupId>io.mercury</groupId>
+				<artifactId>redstone-config</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.mercury.redstone</groupId>
+				<groupId>io.mercury</groupId>
+				<artifactId>financial</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
 				<artifactId>beans</artifactId>
 				<version>${project.version}</version>
 			</dependency>
