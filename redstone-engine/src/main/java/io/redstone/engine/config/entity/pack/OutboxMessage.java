@@ -1,4 +1,4 @@
-package io.redstone.config.entity.pack;
+package io.redstone.engine.config.entity.pack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.annotation.JSONType;
 
-import io.redstone.config.entity.StrategySwitch;
+import io.redstone.engine.config.entity.StrategySwitch;
 
 @JSONType(orders = { "Title", "Content" })
 public class OutboxMessage<T> {

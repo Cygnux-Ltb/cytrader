@@ -51,7 +51,7 @@ public final class OrderExecutor {
 			if (activeLongOrders.notEmpty()) {
 				// 撤单
 			} else {
-
+				
 			}
 			break;
 		default:

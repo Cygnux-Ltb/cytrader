@@ -1,4 +1,4 @@
-package io.redstone.config.couchbean;
+package io.redstone.engine.config.couchbean;
 
 public class AccountConf {
 

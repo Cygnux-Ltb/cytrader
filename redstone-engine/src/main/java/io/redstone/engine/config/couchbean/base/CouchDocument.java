@@ -1,4 +1,4 @@
-package io.redstone.config.couchbean.base;
+package io.redstone.engine.config.couchbean.base;
 
 public interface CouchDocument {
 

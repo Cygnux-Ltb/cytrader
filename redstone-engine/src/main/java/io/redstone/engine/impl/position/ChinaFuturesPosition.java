@@ -14,6 +14,7 @@ import io.redstone.core.position.impl.AbsT0Position;
 public final class ChinaFuturesPosition extends AbsT0Position {
 
 	private long beforeTodayQty;
+
 	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(Capacity.L06_SIZE_64);
 
 	public final static ChinaFuturesPosition EMPTY = new ChinaFuturesPosition(-1, -1);

@@ -1,4 +1,4 @@
-package io.redstone.config.entity.pack;
+package io.redstone.engine.config.entity.pack;
 
 import java.util.HashMap;
 import java.util.Map;
