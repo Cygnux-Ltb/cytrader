@@ -11,8 +11,8 @@ import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.log.LogLevel;
 import io.mercury.common.log.LoggerSetter;
 import io.mercury.common.param.ParamKeyMap;
-import io.mercury.polaris.financial.instrument.InstrumentKeeper;
 import io.mercury.polaris.financial.instrument.Instrument.PriorityCloseType;
+import io.mercury.polaris.financial.instrument.InstrumentKeeper;
 import io.mercury.polaris.financial.instrument.futures.ChinaFutures;
 import io.mercury.polaris.financial.instrument.futures.ChinaFuturesSymbol;
 import io.mercury.polaris.financial.time.TimePeriodPool;
@@ -60,7 +60,7 @@ public final class StartExample {
 		int outboundAdaptorId = 2;
 		String outboundAdaptorName = "Ctp-InboundAdaptor";
 		CtpOutboundAdaptor outboundAdaptor = new CtpOutboundAdaptor(outboundAdaptorId, outboundAdaptorName,
-				inboundAdaptor.getJctpGeteway());
+				inboundAdaptor.getGateway());
 
 		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.values());
 
