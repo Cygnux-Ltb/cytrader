@@ -1,4 +1,4 @@
-package io.redstone.adaptor.ctp.exception;
+package io.mercury.adaptor.ctp.exception;
 
 public class OrderRefNotFoundException extends Exception {
 

@@ -18,10 +18,14 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>redstone-engine</artifactId>
 		</dependency>
+		<!-- CTP JNI API -->
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>gateway-ctp</artifactId>
-			<version>1.0</version>
+			<groupId>thostapi</groupId>
+			<artifactId>thostapi</artifactId>
+			<version>6.3.15</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/thostapi_v6_3_15.jar</systemPath>
 		</dependency>
+		
 	</dependencies>
 </project>

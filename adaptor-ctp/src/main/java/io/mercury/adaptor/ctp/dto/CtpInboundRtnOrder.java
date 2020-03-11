@@ -1,4 +1,4 @@
-package io.redstone.adaptor.ctp.dto;
+package io.mercury.adaptor.ctp.dto;
 
 /**
  * 
