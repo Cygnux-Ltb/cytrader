@@ -1,4 +1,4 @@
-package io.redstone.core.barrier;
+package io.redstone.core.risk;
 
 import java.util.function.Predicate;
 

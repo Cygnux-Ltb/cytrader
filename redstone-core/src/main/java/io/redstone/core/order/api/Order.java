@@ -1,8 +1,8 @@
 package io.redstone.core.order.api;
 
 import io.mercury.polaris.financial.instrument.Instrument;
+import io.redstone.core.order.enums.OrdLevel;
 import io.redstone.core.order.enums.OrdSide;
-import io.redstone.core.order.enums.OrdSort;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.structure.OrdPrice;
@@ -50,7 +50,7 @@ public interface Order extends Comparable<Order> {
 
 	int subAccountId();
 
-	OrdSort ordSort();
+	OrdLevel ordLevel();
 
 	StopLoss stopLoss();
 

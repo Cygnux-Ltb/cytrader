@@ -1,10 +1,11 @@
 package io.redstone.core.trade;
 
+import io.mercury.common.fsm.Signal;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.redstone.core.trade.enums.TrdAction;
 import io.redstone.core.trade.enums.TrdDirection;
 
-public interface TradeSignal {
+public interface TradeSignal extends Signal{
 
 	Instrument instrument();
 

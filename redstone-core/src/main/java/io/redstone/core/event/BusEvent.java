@@ -1,9 +1,9 @@
 package io.redstone.core.event;
 
+import io.mercury.common.fsm.Signal;
 import io.mercury.polaris.financial.market.api.MarketData;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.impl.OrderReport;
-import io.redstone.core.trade.Signal;
 
 public final class BusEvent {
 

@@ -27,7 +27,7 @@ import io.redstone.core.order.impl.ParentOrder;
 import io.redstone.core.order.impl.StrategyOrder;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.strategy.CircuitBreaker;
+import io.redstone.core.risk.CircuitBreaker;
 import io.redstone.core.strategy.Strategy;
 import io.redstone.core.strategy.StrategyControlEvent;
 import io.redstone.core.trade.enums.TrdDirection;
@@ -191,6 +191,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 		ParentOrder parentOrder = OrderExecutor.onStrategyOrder(newVirtualOrder);
 
+		//TODO 错误实现
 		OutboundAdaptor outboundAdaptor = getOutboundAdaptor(instrument);
 
 		outboundAdaptor.newOredr(parentOrder.toChildOrder());
@@ -203,6 +204,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	 * @return
 	 */
 	@ProtectedAbstractMethod
+	@Deprecated
 	protected abstract OutboundAdaptor getOutboundAdaptor(Instrument instrument);
 
 }

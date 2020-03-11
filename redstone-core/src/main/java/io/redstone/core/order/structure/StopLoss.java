@@ -22,7 +22,7 @@ public final class StopLoss implements Comparable<StopLoss> {
 			lessOrEqual = false;
 			break;
 		default:
-			throw new RuntimeException("");
+			throw new RuntimeException("direction error");
 		}
 	}
 

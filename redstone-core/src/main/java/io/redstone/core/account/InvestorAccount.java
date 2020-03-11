@@ -9,6 +9,7 @@ public class InvestorAccount extends EnableComponent {
 
 	private int accountId;
 	private String accountName;
+	
 	/**
 	 * 真实的经纪商ID
 	 */

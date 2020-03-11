@@ -1,4 +1,4 @@
-package io.redstone.core.strategy;
+package io.redstone.core.risk;
 
 public interface CircuitBreaker {
 

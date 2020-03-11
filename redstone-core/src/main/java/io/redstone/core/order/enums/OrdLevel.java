@@ -1,10 +1,10 @@
 package io.redstone.core.order.enums;
 
-public enum OrdSort {
+public enum OrdLevel {
 	
-	Virtual,
-
 	Group,
+
+	Strategy,
 
 	Parent,
 
