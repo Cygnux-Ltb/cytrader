@@ -12,7 +12,7 @@ import io.mercury.adaptor.ctp.utils.CtpOrderRefGenerate;
 import io.mercury.adaptor.ctp.utils.CtpOrderRefKeeper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.gateway.ctp.CtpGateway;
-import io.redstone.core.account.Account;
+import io.redstone.core.account.InvestorAccount;
 import io.redstone.core.adaptor.base.OutboundAdaptor;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.order.api.Order;
@@ -106,13 +106,13 @@ public class CtpOutboundAdaptor extends OutboundAdaptor {
 	}
 
 	@Override
-	public boolean queryPositions(Account account) {
+	public boolean queryPositions(InvestorAccount account) {
 		// TODO
 		return false;
 	}
 
 	@Override
-	public boolean queryBalance(Account account) {
+	public boolean queryBalance(InvestorAccount account) {
 		// TODO
 		return false;
 	}

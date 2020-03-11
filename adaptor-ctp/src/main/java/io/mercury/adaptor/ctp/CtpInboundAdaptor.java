@@ -135,8 +135,8 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 			throw new RuntimeException(e);
 		}
 	}
-
-	public CtpGateway getJctpGeteway() {
+	
+	public CtpGateway getGateway() {
 		return gateway;
 	}
 

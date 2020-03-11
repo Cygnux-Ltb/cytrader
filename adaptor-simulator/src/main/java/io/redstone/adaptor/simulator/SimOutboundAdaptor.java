@@ -7,7 +7,7 @@ import io.mercury.common.param.ParamKeyMap;
 import io.mercury.transport.core.api.Sender;
 import io.mercury.transport.socket.SocketSender;
 import io.mercury.transport.socket.configurator.SocketConfigurator;
-import io.redstone.core.account.Account;
+import io.redstone.core.account.InvestorAccount;
 import io.redstone.core.adaptor.base.OutboundAdaptor;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.order.api.Order;
@@ -102,13 +102,13 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 	}
 
 	@Override
-	public boolean queryPositions(Account account) {
+	public boolean queryPositions(InvestorAccount account) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean queryBalance(Account account) {
+	public boolean queryBalance(InvestorAccount account) {
 		// TODO Auto-generated method stub
 		return false;
 	}
