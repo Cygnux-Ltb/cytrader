@@ -3,8 +3,8 @@ package io.redstone.engine.barrier;
 import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
-import io.redstone.core.barrier.OrderBarrier;
 import io.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.risk.OrderBarrier;
 
 public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {
 

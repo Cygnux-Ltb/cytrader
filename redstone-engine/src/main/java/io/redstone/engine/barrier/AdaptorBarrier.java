@@ -1,7 +1,7 @@
 package io.redstone.engine.barrier;
 
-import io.redstone.core.barrier.OrderBarrier;
 import io.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.risk.OrderBarrier;
 
 public class AdaptorBarrier implements OrderBarrier<ChildOrder> {
 

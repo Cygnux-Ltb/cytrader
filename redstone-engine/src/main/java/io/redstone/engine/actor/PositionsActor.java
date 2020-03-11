@@ -63,7 +63,7 @@ public class PositionsActor {
 	}
 
 	/**
-	 * 根据已有持仓计算 子账户的最大持仓限制<br>
+	 * 根据已有持仓计算, 子账户的最大持仓限制<br>
 	 * 
 	 * @param subAccountId
 	 * @param instrumentId
