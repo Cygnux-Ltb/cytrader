@@ -11,10 +11,9 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.sequence.Serial;
 
 @NotThreadSafe
-public final class PointSet<P extends Point<? extends Serial<?>>> {
+public final class PointSet<P extends Point<?>> {
 
 	private MutableList<P> points;
 	private MutableLongObjectMap<P> pointMap;
@@ -24,7 +23,7 @@ public final class PointSet<P extends Point<? extends Serial<?>>> {
 		this.pointMap = MutableMaps.newLongObjectHashMap(capacity);
 	}
 
-	public static <P extends Point<? extends Serial<?>>> PointSet<P> newEmpty(Capacity capacity) {
+	public static <P extends Point<?>> PointSet<P> newEmpty(Capacity capacity) {
 		return new PointSet<>(capacity);
 	}
 

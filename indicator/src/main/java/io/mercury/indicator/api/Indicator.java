@@ -1,10 +1,9 @@
 package io.mercury.indicator.api;
 
-import io.mercury.common.sequence.Serial;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 
-public interface Indicator<P extends Point<? extends Serial<?>>, E extends IndicatorEvent> {
+public interface Indicator<P extends Point<?>, E extends IndicatorEvent> {
 
 	Instrument instrument();
 
