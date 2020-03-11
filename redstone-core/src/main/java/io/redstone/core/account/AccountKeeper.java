@@ -1,17 +1,23 @@
 package io.redstone.core.account;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.map.primitive.MutableIntBooleanMap;
-import org.eclipse.collections.api.map.primitive.MutableIntIntMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.collections.MutableSets;
+import io.mercury.common.util.Assertor;
 
+/**
+ * 
+ * 用于全局管理Account的状态
+ * 
+ * @author yellow013
+ *
+ */
 @NotThreadSafe
 public final class AccountKeeper {
 
@@ -21,26 +27,38 @@ public final class AccountKeeper {
 	// 存储subAccount的交易状态,以subAccountId索引
 	private MutableIntBooleanMap subAccountTradableMap = new IntBooleanHashMap();
 
-	// 存储account信息,一对一关系,以subAccountId索引
-	private MutableIntObjectMap<Account> accountMap = MutableMaps.newIntObjectHashMap();
+	// 存储InvestorAccount信息,一对一关系,以accountId索引
+	private MutableIntObjectMap<InvestorAccount> accountMap = MutableMaps.newIntObjectHashMap();
 
-	// 存储accountId信息,一对一关系,以subAccountId索引
-	private MutableIntIntMap accountIdMap = MutableMaps.newIntIntHashMap();
+	// 存储SubAccount信息,一对一关系,以subAccountId索引
+	private MutableIntObjectMap<SubAccount> subAccountMap = MutableMaps.newIntObjectHashMap();
+
+	// 存储InvestorAccount信息,一对一关系,以subAccountId索引
+	private MutableIntObjectMap<InvestorAccount> accountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
 
 	private final static AccountKeeper InnerInstance = new AccountKeeper();
 
 	private AccountKeeper() {
 	}
 
-	public static void put(SubAccount... subAccounts) {
-		if (subAccounts == null)
-			return;
+	public static void putAccount(@Nonnull InvestorAccount... accounts) {
+		Assertor.requiredLength(accounts, 1, "accounts");
+		for (InvestorAccount account : accounts) {
+			for (SubAccount subAccount : account.subAccounts()) {
+				InnerInstance.subAccountMap.put(subAccount.subAccountId(), subAccount);
+				InnerInstance.accountMapBySubAccountId.put(subAccount.subAccountId(), account);
+			}
+			InnerInstance.accountMap.put(account.accountId(), account);
+		}
+	}
+
+	public static void putAccount(@Nonnull SubAccount... subAccounts) {
+		Assertor.requiredLength(subAccounts, 1, "subAccounts");
 		for (SubAccount subAccount : subAccounts) {
-			Account account = subAccount.getAccount();
-			int subAccountId = subAccount.getSubAccountId();
-			int accountId = account.accountId();
-			InnerInstance.accountMap.put(subAccountId, account);
-			InnerInstance.accountIdMap.put(subAccountId, accountId);
+			InnerInstance.subAccountMap.put(subAccount.subAccountId(), subAccount);
+			InvestorAccount investorAccount = subAccount.investorAccount();
+			InnerInstance.accountMapBySubAccountId.put(subAccount.subAccountId(), investorAccount);
+			InnerInstance.accountMap.put(investorAccount.accountId(), investorAccount);
 		}
 	}
 
@@ -68,23 +86,19 @@ public final class AccountKeeper {
 		return InnerInstance.subAccountTradableMap.get(subAccountId);
 	}
 
-	public static int getAccountId(int subAccountId) {
-		int accountId = InnerInstance.accountIdMap.get(subAccountId);
-		return accountId > 0 ? accountId : -1;
+	@CheckForNull
+	public static InvestorAccount getInvestorAccountById(int accountId) {
+		return InnerInstance.accountMap.get(accountId);
 	}
 
 	@CheckForNull
-	public static Account getAccount(int subAccountId) {
-		return InnerInstance.accountMap.get(subAccountId);
+	public static InvestorAccount getInvestorAccountBySubAccountId(int subAccountId) {
+		return InnerInstance.accountMapBySubAccountId.get(subAccountId);
 	}
 
-	private static MutableSet<SubAccount> EmptySubAccountSet = MutableSets.newUnifiedSet();
-
-	public static MutableSet<SubAccount> getSubAccounts(int accountId) {
-		Account account = InnerInstance.accountMap.get(accountId);
-		if (account == null)
-			return EmptySubAccountSet;
-		return account.subAccounts();
+	@CheckForNull
+	public static SubAccount getSubAccount(int subAccountId) {
+		return InnerInstance.subAccountMap.get(subAccountId);
 	}
 
 }

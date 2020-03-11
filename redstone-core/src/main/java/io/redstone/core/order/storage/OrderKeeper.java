@@ -57,7 +57,7 @@ public final class OrderKeeper {
 		case NewRejected:
 			getAllOrders().terminatedOrder(order);
 			int subAccountId = order.subAccountId();
-			int accountId = AccountKeeper.getAccountId(subAccountId);
+			int accountId = AccountKeeper.getInvestorAccountBySubAccountId(subAccountId).accountId();
 			getSubAccountOrderBook(subAccountId).terminatedOrder(order);
 			getAccountOrderBook(accountId).terminatedOrder(order);
 			getStrategyOrderBook(order.strategyId()).terminatedOrder(order);
@@ -73,7 +73,7 @@ public final class OrderKeeper {
 	public static void insertOrder(Order order) {
 		getAllOrders().putOrder(order);
 		int subAccountId = order.subAccountId();
-		int accountId = AccountKeeper.getAccountId(subAccountId);
+		int accountId = AccountKeeper.getInvestorAccountBySubAccountId(subAccountId).accountId();
 		getSubAccountOrderBook(subAccountId).putOrder(order);
 		getAccountOrderBook(accountId).putOrder(order);
 		getStrategyOrderBook(order.strategyId()).putOrder(order);

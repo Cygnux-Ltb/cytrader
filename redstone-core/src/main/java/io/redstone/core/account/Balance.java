@@ -1,23 +1,26 @@
 package io.redstone.core.account;
 
-abstract class Balance {
+public final class Balance {
 
-	private double availableMargin;
-	private double availableCredit;
+	private long availableMargin = 0L;
+	private long availableCredit = 0L;
 
-	public final double availableMargin() {
+	Balance() {
+	}
+
+	public final long availableMargin() {
 		return availableMargin;
 	}
 
-	public final void availableMargin(double availableMargin) {
+	public final void availableMargin(long availableMargin) {
 		this.availableMargin = availableMargin;
 	}
 
-	public final double availableCredit() {
+	public final long availableCredit() {
 		return availableCredit;
 	}
 
-	public final void availableCredit(double availableCredit) {
+	public final void availableCredit(long availableCredit) {
 		this.availableCredit = availableCredit;
 	}
 

@@ -30,9 +30,9 @@ public interface TradeSignal {
 		return new CloseShortSignal(instrument, strategyId);
 	}
 
-	static class OpenLongSignal extends BaseTradeSignal {
+	public static class OpenLongSignal extends BaseTradeSignal {
 
-		public OpenLongSignal(Instrument instrument, int strategyId) {
+		private OpenLongSignal(Instrument instrument, int strategyId) {
 			super(instrument, strategyId);
 		}
 
@@ -47,8 +47,9 @@ public interface TradeSignal {
 		}
 	}
 
-	static class OpenShortSignal extends BaseTradeSignal {
-		public OpenShortSignal(Instrument instrument, int strategyId) {
+	public static class OpenShortSignal extends BaseTradeSignal {
+		
+		private OpenShortSignal(Instrument instrument, int strategyId) {
 			super(instrument, strategyId);
 		}
 
@@ -63,8 +64,9 @@ public interface TradeSignal {
 		}
 	}
 
-	static class CloseLongSignal extends BaseTradeSignal {
-		public CloseLongSignal(Instrument instrument, int strategyId) {
+	public static class CloseLongSignal extends BaseTradeSignal {
+		
+		private CloseLongSignal(Instrument instrument, int strategyId) {
 			super(instrument, strategyId);
 		}
 
@@ -79,8 +81,9 @@ public interface TradeSignal {
 		}
 	}
 
-	static class CloseShortSignal extends BaseTradeSignal {
-		public CloseShortSignal(Instrument instrument, int strategyId) {
+	public static class CloseShortSignal extends BaseTradeSignal {
+		
+		private CloseShortSignal(Instrument instrument, int strategyId) {
 			super(instrument, strategyId);
 		}
 
@@ -100,7 +103,7 @@ public interface TradeSignal {
 		private Instrument instrument;
 		private int strategyId;
 
-		public BaseTradeSignal(Instrument instrument, int strategyId) {
+		private BaseTradeSignal(Instrument instrument, int strategyId) {
 			super();
 			this.instrument = instrument;
 			this.strategyId = strategyId;

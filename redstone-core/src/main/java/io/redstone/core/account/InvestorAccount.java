@@ -5,7 +5,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableComponent;
 
-public class Account extends EnableComponent {
+public class InvestorAccount extends EnableComponent {
 
 	private int accountId;
 	private String accountName;
@@ -13,12 +13,13 @@ public class Account extends EnableComponent {
 	 * 真实的经纪商ID
 	 */
 	private String investorId;
+
 	/**
 	 * 账户余额
 	 */
-	private AccountBalance accountBalance;
+	private Balance balance;
 
-	// 备用,数组下标,用于快速访问本账户对于的仓位信息集合
+	// 备用,数组下标,用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
 
 	/**
@@ -26,29 +27,26 @@ public class Account extends EnableComponent {
 	 */
 	private MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
-	public Account(int accountId, String investorId) {
-		this(accountId, investorId, AccountBalance.newInstance(accountId));
+	public InvestorAccount(int accountId, String investorId) {
+		this(accountId, investorId, new Balance());
 	}
 
-	public Account(int accountId, String investorId, AccountBalance accountBalance) {
-		this(accountId, null, investorId, accountBalance);
+	public InvestorAccount(int accountId, String investorId, Balance balance) {
+		this(accountId, null, investorId, balance);
 	}
 
-	public Account(int accountId, String accountName, String investorId) {
-		this(accountId, accountName, investorId, AccountBalance.newInstance(accountId));
+	public InvestorAccount(int accountId, String accountName, String investorId) {
+		this(accountId, accountName, investorId, new Balance());
 	}
 
-	public Account(int accountId, String accountName, String investorId, AccountBalance accountBalance) {
+	public InvestorAccount(int accountId, String accountName, String investorId, Balance balance) {
 		super();
 		this.accountId = accountId;
-		String attachName = "investor[" + investorId + "]";
-		if (accountName == null)
-			this.accountName = attachName;
-		else
-			this.accountName = accountName + "-" + attachName;
+		String attachName = "investorId[" + investorId + "]";
+		this.accountName = accountName == null ? attachName : accountName + "-" + attachName;
 		this.accountName = accountName;
 		this.investorId = investorId;
-		this.accountBalance = accountBalance;
+		this.balance = balance;
 	}
 
 	public int accountId() {
@@ -67,8 +65,8 @@ public class Account extends EnableComponent {
 		return subAccounts;
 	}
 
-	public AccountBalance accountBalance() {
-		return accountBalance;
+	public Balance balance() {
+		return balance;
 	}
 
 	public int subAccountCount() {

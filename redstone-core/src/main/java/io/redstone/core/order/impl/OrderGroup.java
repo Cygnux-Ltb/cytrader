@@ -6,15 +6,15 @@ import io.mercury.common.collections.ImmutableSets;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.structure.OrdTimestamps;
 
-@Deprecated
-public abstract class GroupOrder {
+
+public abstract class OrderGroup {
 
 	private long groupOrdSysId;
 	private OrdTimestamps orderTimestamps;
 
 	private ImmutableSet<Order> orderSet;
 
-	public GroupOrder(Order... orders) {
+	public OrderGroup(Order... orders) {
 		this.orderSet = ImmutableSets.newSet(orders);
 		this.orderTimestamps = OrdTimestamps.generate();
 	}
