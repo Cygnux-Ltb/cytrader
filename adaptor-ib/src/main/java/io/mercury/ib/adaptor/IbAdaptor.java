@@ -1,4 +1,4 @@
-package io.redstone.adaptor.ib;
+package io.mercury.ib.adaptor;
 
 public class IbAdaptor {
 
