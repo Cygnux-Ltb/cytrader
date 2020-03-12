@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 import com.ib.client.Types.Method;
 
 public class Group {
+	
 	private String m_name;
 	private Method m_defaultMethod;
 	private ArrayList<String> m_accounts = new ArrayList<String>();

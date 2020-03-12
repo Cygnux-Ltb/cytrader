@@ -5,16 +5,25 @@ package com.ib.apidemo.util;
 
 import javax.swing.JComboBox;
 
-public class TCombo<T> extends JComboBox {
-	public TCombo( T... strs) {
-		super( strs);
+public class TCombo<T> extends JComboBox<T> {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 29655236894815143L;
+
+	@SafeVarargs
+	public TCombo(T... strs) {
+		super(strs);
 	}
 
 	public String getText() {
 		return getSelectedItem() == null ? null : getSelectedItem().toString();
 	}
-	
-	@Override public T getSelectedItem() {
-		return (T)super.getSelectedItem();
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public T getSelectedItem() {
+		return (T) super.getSelectedItem();
 	}
 }

@@ -3,7 +3,6 @@
 
 package com.ib.controller;
 
-
 import java.io.IOException;
 
 import com.ib.client.Contract;
@@ -17,6 +16,7 @@ import com.ib.client.Order;
 // NOTE: TWS 936 SERVER_VERSION is 67.
 
 public class ApiConnection extends EClientSocket {
+
 	public interface ILogger {
 		void log(String valueOf);
 	}
@@ -29,7 +29,7 @@ public class ApiConnection extends EClientSocket {
 	private static final EJavaSignal m_signal = new EJavaSignal();
 
 	public ApiConnection(EWrapper wrapper, ILogger inLogger, ILogger outLogger) {
-		super( wrapper, m_signal);
+		super(wrapper, m_signal);
 		m_inLogger = inLogger;
 		m_outLogger = outLogger;
 	}
@@ -38,43 +38,45 @@ public class ApiConnection extends EClientSocket {
 	protected void sendMsg(EMessage msg) throws IOException {
 		// TODO Auto-generated method stub
 		super.sendMsg(msg);
-		
+
 		byte[] buf = msg.getRawData();
-		
+
 		m_outLogger.log(new String(buf, 0, buf.length));
 	}
 
 	@Override
 	public int readInt() throws IOException {
 		int c = super.readInt();
-		
-		m_inLogger.log( String.valueOf( (char)c) );
-		
+
+		m_inLogger.log(String.valueOf((char) c));
+
 		return c;
 	}
 
 	@Override
 	public int read(byte[] buf, int off, int len) throws IOException {
 		int n = super.read(buf, off, len);
-		
+
 		m_inLogger.log(new String(buf, 0, n));
-		
+
 		return n;
 	}
 
 	public synchronized void placeOrder(Contract contract, Order order) {
 		// not connected?
-		if( !isConnected() ) {
-            notConnected();
+		if (!isConnected()) {
+			notConnected();
 			return;
 		}
 
-		// ApiController requires TWS 932 or higher; this limitation could be removed if needed
+		// ApiController requires TWS 932 or higher; this limitation could be removed if
+		// needed
 		if (serverVersion() < 66) {
-            error( EClientErrors.NO_VALID_ID, EClientErrors.UPDATE_TWS, "ApiController requires TWS build 932 or higher to place orders.");
-            return;
+			error(EClientErrors.NO_VALID_ID, EClientErrors.UPDATE_TWS,
+					"ApiController requires TWS build 932 or higher to place orders.");
+			return;
 		}
 
-	    placeOrder(order.orderId(), contract, order);
-	} 
+		placeOrder(order.orderId(), contract, order);
+	}
 }
