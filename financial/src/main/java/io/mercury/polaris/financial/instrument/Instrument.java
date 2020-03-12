@@ -30,9 +30,7 @@ public interface Instrument extends Enable {
 	}
 
 	public interface MarketConstant {
-
 		long PriceMultiplier = 100_000_000L;
-
 	}
 
 	public static enum InstrumentType {
@@ -56,5 +54,5 @@ public interface Instrument extends Enable {
 	public static enum PriorityCloseType {
 		NONE, BEFORE_TODAY
 	}
-
+	
 }

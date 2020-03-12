@@ -2,7 +2,13 @@ package io.mercury.polaris.financial.instrument;
 
 public abstract class AbstractInstrument implements Instrument {
 
+	/**
+	 * int 类型唯一编码
+	 */
 	private int id;
+	/**
+	 * 字符串唯一编码
+	 */
 	private String code;
 	private Symbol symbol;
 	private boolean isEnable;
@@ -46,6 +52,11 @@ public abstract class AbstractInstrument implements Instrument {
 	@Override
 	public Symbol symbol() {
 		return symbol;
+	}
+
+	@Override
+	public String toString() {
+		return code;
 	}
 
 }
