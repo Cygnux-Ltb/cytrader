@@ -19,28 +19,56 @@
 			<artifactId>actors</artifactId>
 			<version>0.1</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>codec-json</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>transport-http</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<groupId>com.alibaba.nacos</groupId>
+			<artifactId>nacos-client</artifactId>
+			<version>1.2.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.code.findbugs</groupId>
+					<artifactId>jsr305</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.alibaba</groupId>
+					<artifactId>fastjson</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>commons-lang3</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-concurrent</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>redstone-core</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>financial</artifactId>
 		</dependency>
+		
 	</dependencies>
 
 </project>

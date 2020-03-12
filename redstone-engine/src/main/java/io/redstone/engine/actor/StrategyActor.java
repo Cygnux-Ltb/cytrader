@@ -38,7 +38,7 @@ public final class StrategyActor {
 				orderReport.getOrdSysId());
 		Order order = OrderKeeper.getOrder(orderReport.getOrdSysId());
 		logger.info("Search Order OK. BrokerRtnId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
-				order.strategyId(), order.instrument().code(), orderReport.getOrdSysId());
+				orderReport.getBrokerRtnId(), order.strategyId(), order.instrument().code(), orderReport.getOrdSysId());
 		StrategyKeeper.getStrategy(order.strategyId()).onOrder(order);
 	}
 
