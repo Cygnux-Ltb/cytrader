@@ -1,4 +1,4 @@
-package io.mercury.gateway.ctp.bean.config;
+package io.mercury.ctp.gateway.bean.config;
 
 public class CtpConnectionInfo {
 

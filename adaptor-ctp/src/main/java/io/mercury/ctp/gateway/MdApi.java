@@ -1,4 +1,4 @@
-package io.mercury.gateway.ctp;
+package io.mercury.ctp.gateway;
 
 public final class MdApi {
 

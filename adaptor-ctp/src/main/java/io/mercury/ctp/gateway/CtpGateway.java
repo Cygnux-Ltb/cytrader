@@ -1,4 +1,4 @@
-package io.mercury.gateway.ctp;
+package io.mercury.ctp.gateway;
 
 import java.io.File;
 import java.util.Iterator;
@@ -40,13 +40,13 @@ import io.mercury.common.sys.SysProperties;
 import io.mercury.common.thread.ThreadUtil;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
-import io.mercury.gateway.ctp.bean.config.CtpConnectionInfo;
-import io.mercury.gateway.ctp.bean.rsp.RspDepthMarketData;
-import io.mercury.gateway.ctp.bean.rsp.RspMsg;
-import io.mercury.gateway.ctp.converter.RspOrderActionConverter;
-import io.mercury.gateway.ctp.converter.RspOrderInsertConverter;
-import io.mercury.gateway.ctp.converter.RtnOrderConverter;
-import io.mercury.gateway.ctp.converter.RtnTradeConverter;
+import io.mercury.ctp.gateway.bean.config.CtpConnectionInfo;
+import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ctp.gateway.bean.rsp.RspMsg;
+import io.mercury.ctp.gateway.converter.RspOrderActionConverter;
+import io.mercury.ctp.gateway.converter.RspOrderInsertConverter;
+import io.mercury.ctp.gateway.converter.RtnOrderConverter;
+import io.mercury.ctp.gateway.converter.RtnTradeConverter;
 
 @NotThreadSafe
 public class CtpGateway {
@@ -108,13 +108,13 @@ public class CtpGateway {
 	public CtpGateway(String gatewayId, @Nonnull CtpConnectionInfo connectionInfo,
 			@Nonnull Queue<RspMsg> inboundBuffer) {
 		this.gatewayId = gatewayId;
-		this.connectionInfo = Assertor.nonNull(connectionInfo, "userInfo");
+		this.connectionInfo = Assertor.nonNull(connectionInfo, "connectionInfo");
 		this.inboundBuffer = Assertor.nonNull(inboundBuffer, "inboundBuffer");
 	}
 
-	private File getTempDir() {
+	private File generateTempDir() {
 		// 创建临时文件存储目录
-		String tempFileHome = SysProperties.JAVA_IO_TMPDIR + File.separator + "jctp";
+		String tempFileHome = SysProperties.JAVA_IO_TMPDIR + File.separator + "ctp";
 		File tempFileDir = new File(tempFileHome + File.separator + gatewayId + File.separator + DateTimeUtil.date());
 		logger.info("Temp file dir -> {}", tempFileDir.getAbsolutePath());
 		if (!tempFileDir.exists())
@@ -125,7 +125,7 @@ public class CtpGateway {
 	public void initAndJoin() {
 		if (!isInit) {
 			// 获取临时文件目录
-			File tempDir = getTempDir();
+			File tempDir = generateTempDir();
 			logger.info("TraderApi version {}", CThostFtdcTraderApi.GetApiVersion());
 			logger.info("MdApi version {}", CThostFtdcMdApi.GetApiVersion());
 			try {

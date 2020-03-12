@@ -1,4 +1,4 @@
-package io.mercury.gateway.ctp.base;
+package io.mercury.ctp.gateway.base;
 
 import java.util.HashMap;
 import java.util.Map;

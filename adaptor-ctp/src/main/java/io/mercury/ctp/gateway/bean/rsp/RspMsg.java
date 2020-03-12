@@ -1,4 +1,4 @@
-package io.mercury.gateway.ctp.bean.rsp;
+package io.mercury.ctp.gateway.bean.rsp;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;

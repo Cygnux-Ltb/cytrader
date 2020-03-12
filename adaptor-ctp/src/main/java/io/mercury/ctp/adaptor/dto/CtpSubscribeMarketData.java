@@ -1,4 +1,4 @@
-package io.mercury.adaptor.ctp.dto;
+package io.mercury.ctp.adaptor.dto;
 
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;

@@ -1,6 +1,6 @@
-package io.mercury.gateway.ctp;
+package io.mercury.ctp.gateway;
 
-import static io.mercury.gateway.ctp.base.JctpRspValidator.validateRspInfo;
+import static io.mercury.ctp.gateway.base.JctpRspValidator.validateRspInfo;
 
 import org.slf4j.Logger;
 

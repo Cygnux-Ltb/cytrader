@@ -1,4 +1,4 @@
-package io.mercury.adaptor.ctp.dto;
+package io.mercury.ctp.adaptor.dto;
 
 public enum CtpOutboundTitle {
 

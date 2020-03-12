@@ -9,11 +9,11 @@ import org.slf4j.Logger;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadUtil;
-import io.mercury.gateway.ctp.CtpGateway;
-import io.mercury.gateway.ctp.bean.config.CtpConnectionInfo;
-import io.mercury.gateway.ctp.bean.rsp.RspDepthMarketData;
-import io.mercury.gateway.ctp.bean.rsp.RtnOrder;
-import io.mercury.gateway.ctp.bean.rsp.RtnTrade;
+import io.mercury.ctp.gateway.CtpGateway;
+import io.mercury.ctp.gateway.bean.config.CtpConnectionInfo;
+import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
+import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
 
 public class CtpGatewayTest {
 
