@@ -1,46 +1,52 @@
 package io.mercury.ctp.adaptor;
 
-import io.mercury.common.param.ParamKey;
-import io.mercury.common.param.ParamType;
+import io.mercury.common.param.api.ParamKey;
+import io.mercury.common.param.api.ParamType;
 
 public enum CtpAdaptorParams implements ParamKey {
 
 	/**
 	 * CTP Params
 	 */
-	CTP_Trader_Address(201, ParamType.STRING),
+	CTP_Trader_Address(201, "ctp.trader.address", ParamType.STRING),
 
-	CTP_Md_Address(202, ParamType.STRING),
+	CTP_Md_Address(202, "ctp.md.address", ParamType.STRING),
 
-	CTP_BrokerId(203, ParamType.STRING),
+	CTP_BrokerId(203, "ctp.broker.id", ParamType.STRING),
 
-	CTP_InvestorId(204, ParamType.STRING),
+	CTP_InvestorId(204, "ctp.investor.id", ParamType.STRING),
 
-	CTP_UserId(205, ParamType.STRING),
+	CTP_UserId(205, "ctp.user.id", ParamType.STRING),
 
-	CTP_AccountId(206, ParamType.STRING),
+	CTP_AccountId(206, "ctp.account.id", ParamType.STRING),
 
-	CTP_Password(207, ParamType.STRING),
+	CTP_Password(207, "ctp.password", ParamType.STRING),
 
 	;
 
-	private int keyId;
-
+	private int paramId;
+	private String paramName;
 	private ParamType paramType;
 
-	private CtpAdaptorParams(int keyId, ParamType paramType) {
-		this.keyId = keyId;
+	private CtpAdaptorParams(int paramId, String paramName, ParamType paramType) {
+		this.paramId = paramId;
+		this.paramName = paramName;
 		this.paramType = paramType;
 	}
 
 	@Override
-	public ParamType type() {
+	public int paramId() {
+		return paramId;
+	}
+
+	@Override
+	public ParamType paramType() {
 		return paramType;
 	}
 
 	@Override
-	public int id() {
-		return keyId;
+	public String paramName() {
+		return paramName;
 	}
 
 }

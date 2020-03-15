@@ -19,7 +19,7 @@ import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZones;
 import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.ParamKeyMap;
+import io.mercury.common.param.ImmutableParamMap;
 import io.mercury.ctp.adaptor.exception.OrderRefNotFoundException;
 import io.mercury.ctp.adaptor.utils.CtpOrderRefKeeper;
 import io.mercury.ctp.gateway.CtpGateway;
@@ -78,7 +78,7 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 	private final CtpGateway gateway;
 
 	public CtpInboundAdaptor(int adaptorId, String adaptorName, StrategyScheduler scheduler,
-			ParamKeyMap<CtpAdaptorParams> paramMap) {
+			ImmutableParamMap<CtpAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
 		// 写入Gateway用户信息
 		CtpConnectionInfo userInfo = CtpConnectionInfo.newEmpty()
