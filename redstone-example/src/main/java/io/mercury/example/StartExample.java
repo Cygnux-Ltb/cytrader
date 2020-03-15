@@ -1,5 +1,7 @@
 package io.mercury.example;
 
+import java.util.Properties;
+
 import org.eclipse.collections.api.map.MutableMap;
 
 import io.mercury.common.collections.MutableMaps;
@@ -7,7 +9,7 @@ import io.mercury.common.concurrent.disruptor.BufferSize;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.log.LogLevel;
 import io.mercury.common.log.LoggerSetter;
-import io.mercury.common.param.ParamKeyMap;
+import io.mercury.common.param.ImmutableParamMap;
 import io.mercury.ctp.adaptor.CtpAdaptorParams;
 import io.mercury.ctp.adaptor.CtpInboundAdaptor;
 import io.mercury.ctp.adaptor.CtpOutboundAdaptor;
@@ -21,6 +23,7 @@ import io.mercury.polaris.financial.vector.TimePeriod;
 import io.redstone.core.adaptor.dto.SubscribeMarketData;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.engine.actor.AppGlobalStatus;
+import io.redstone.engine.config.NacosReader;
 import io.redstone.engine.scheduler.SpscQueueStrategyScheduler;
 import io.redstone.engine.storage.AdaptorKeeper;
 import io.redstone.engine.storage.StrategyKeeper;
@@ -33,7 +36,9 @@ public final class StartExample {
 		long datetime = DateTimeUtil.datetimeOfSecond();
 		LoggerSetter.logFileName("redstone-" + appId + "-" + datetime);
 		LoggerSetter.logLevel(LogLevel.DEBUG);
-
+		
+		Properties properties = NacosReader.readWith(args);
+		
 		// Set Global AppId
 		AppGlobalStatus.setAppId(appId);
 
@@ -48,7 +53,7 @@ public final class StartExample {
 		paramMap.put(CtpAdaptorParams.CTP_AccountId, "005853");
 		paramMap.put(CtpAdaptorParams.CTP_UserId, "005853");
 		paramMap.put(CtpAdaptorParams.CTP_Password, "?????");
-		ParamKeyMap<CtpAdaptorParams> adaptorParam = new ParamKeyMap<>(() -> paramMap.toImmutable());
+		ImmutableParamMap<CtpAdaptorParams> adaptorParam = new ImmutableParamMap<>(properties);
 
 		// 创建InboundAdaptor
 		int inboundAdaptorId = 1;
