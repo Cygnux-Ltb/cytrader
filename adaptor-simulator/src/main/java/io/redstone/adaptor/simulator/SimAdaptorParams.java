@@ -1,44 +1,52 @@
 package io.redstone.adaptor.simulator;
 
-import io.mercury.common.param.ParamKey;
-import io.mercury.common.param.ParamType;
+import io.mercury.common.param.api.ParamKey;
+import io.mercury.common.param.api.ParamType;
 
 public enum SimAdaptorParams implements ParamKey {
 
 	/**
 	 * Simulator Params
 	 */
-	MdHost(101, ParamType.STRING),
+	MdHost(101, "md.host", ParamType.STRING),
 
-	MdPort(102, ParamType.INT),
+	MdPort(102, "md.port", ParamType.INT),
 
-	TdHost(103, ParamType.STRING),
+	TdHost(103, "td.host", ParamType.STRING),
 
-	TdPort(104, ParamType.INT),
+	TdPort(104, "td.port", ParamType.INT),
 
-	StartTradingDay(105, ParamType.DATE),
+	TradingDayStart(105, "trading.day.start", ParamType.DATE),
 
-	EndTradingDay(106, ParamType.DATE),
+	TradingDayEnd(106, "trading.day.end", ParamType.DATE),
 
 	;
 
-	private int keyId;
+	private int paramId;
+
+	private String paramName;
 
 	private ParamType paramType;
 
-	private SimAdaptorParams(int keyId, ParamType paramType) {
-		this.keyId = keyId;
+	private SimAdaptorParams(int paramId, String paramName, ParamType paramType) {
+		this.paramId = paramId;
+		this.paramName = paramName;
 		this.paramType = paramType;
 	}
 
 	@Override
-	public ParamType type() {
-		return paramType;
+	public int paramId() {
+		return paramId;
 	}
 
 	@Override
-	public int id() {
-		return keyId;
+	public String paramName() {
+		return paramName;
+	}
+
+	@Override
+	public ParamType paramType() {
+		return paramType;
 	}
 
 }

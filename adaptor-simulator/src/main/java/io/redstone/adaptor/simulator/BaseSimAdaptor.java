@@ -1,27 +1,27 @@
 package io.redstone.adaptor.simulator;
 
-import io.mercury.common.param.ParamKeyMap;
+import io.mercury.common.param.ImmutableParamMap;
 import io.mercury.transport.socket.configurator.SocketConfigurator;
 import io.redstone.core.adaptor.api.Adaptor;
 
 public abstract class BaseSimAdaptor implements Adaptor {
 
-	protected ParamKeyMap<SimAdaptorParams> paramMap;
+	protected ImmutableParamMap<SimAdaptorParams> paramMap;
 
 	protected SocketConfigurator mdConfigurator;
 
 	protected SocketConfigurator tdConfigurator;
 
-	public BaseSimAdaptor(ParamKeyMap<SimAdaptorParams> paramMap) {
+	public BaseSimAdaptor(ImmutableParamMap<SimAdaptorParams> paramMap) {
 		this.paramMap = paramMap;
 		initSocketConfigurator();
 	}
 
 	private void initSocketConfigurator() {
 		this.mdConfigurator = SocketConfigurator.builder().host(paramMap.getString(SimAdaptorParams.MdHost))
-				.port(paramMap.getInteger(SimAdaptorParams.MdPort)).build();
+				.port(paramMap.getInt(SimAdaptorParams.MdPort)).build();
 		this.tdConfigurator = SocketConfigurator.builder().host(paramMap.getString(SimAdaptorParams.TdHost))
-				.port(paramMap.getInteger(SimAdaptorParams.TdPort)).build();
+				.port(paramMap.getInt(SimAdaptorParams.TdPort)).build();
 	}
 
 	@Override

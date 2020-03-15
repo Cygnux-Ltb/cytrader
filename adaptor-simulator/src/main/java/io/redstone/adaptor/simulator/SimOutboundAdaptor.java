@@ -3,7 +3,7 @@ package io.redstone.adaptor.simulator;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-import io.mercury.common.param.ParamKeyMap;
+import io.mercury.common.param.ImmutableParamMap;
 import io.mercury.transport.core.api.Sender;
 import io.mercury.transport.socket.SocketSender;
 import io.mercury.transport.socket.configurator.SocketConfigurator;
@@ -21,16 +21,16 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 	private Sender<byte[]> mdSender;
 	private Sender<byte[]> tdSender;
 
-	private ParamKeyMap<SimAdaptorParams> paramMap;
+	private ImmutableParamMap<SimAdaptorParams> paramMap;
 
-	public SimOutboundAdaptor(int adaptorId, String adaptorName, ParamKeyMap<SimAdaptorParams> paramMap) {
+	public SimOutboundAdaptor(int adaptorId, String adaptorName, ImmutableParamMap<SimAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
 		this.paramMap = paramMap;
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
-				.host(paramMap.getString(SimAdaptorParams.MdHost)).port(paramMap.getInteger(SimAdaptorParams.MdPort))
+				.host(paramMap.getString(SimAdaptorParams.MdHost)).port(paramMap.getInt(SimAdaptorParams.MdPort))
 				.build();
 		SocketConfigurator tdConfigurator = SocketConfigurator.builder()
-				.host(paramMap.getString(SimAdaptorParams.TdHost)).port(paramMap.getInteger(SimAdaptorParams.TdPort))
+				.host(paramMap.getString(SimAdaptorParams.TdHost)).port(paramMap.getInt(SimAdaptorParams.TdPort))
 				.build();
 		this.mdSender = new SocketSender(mdConfigurator);
 		this.tdSender = new SocketSender(tdConfigurator);
@@ -79,8 +79,8 @@ public class SimOutboundAdaptor extends OutboundAdaptor {
 	@Override
 	public boolean subscribeMarketData(SubscribeMarketData subscribe) {
 		MarketDataSubscribe simSubscribe = MarketDataSubscribe.newBuilder().setUniqueId(Integer.valueOf(1))
-				.setStartTradingDay(paramMap.getDate(SimAdaptorParams.StartTradingDay).toString())
-				.setEndTradingDay(paramMap.getDate(SimAdaptorParams.EndTradingDay).toString())
+				.setStartTradingDay(paramMap.getString(SimAdaptorParams.TradingDayStart))
+				.setEndTradingDay(paramMap.getString(SimAdaptorParams.TradingDayEnd))
 				.setInstrumentIdList(subscribe.getInstrumentSet().stream().map(instrument -> instrument.code())
 						.collect(Collectors.toList()))
 				.build();

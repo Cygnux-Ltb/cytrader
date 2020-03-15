@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import io.mercury.codec.avro.AvroBinaryDeserializer;
-import io.mercury.common.param.ParamKeyMap;
+import io.mercury.common.param.ImmutableParamMap;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.mercury.transport.core.api.Receiver;
 import io.mercury.transport.socket.SocketReceiver;
@@ -42,7 +42,7 @@ public class SimInboundAdaptor extends InboundAdaptor {
 
 	private AvroBinaryDeserializer<Order> orderDeserializer1 = new AvroBinaryDeserializer<>(Order.class);
 
-	public SimInboundAdaptor(int adaptorId, String adaptorName, ParamKeyMap<SimAdaptorParams> paramMap,
+	public SimInboundAdaptor(int adaptorId, String adaptorName, ImmutableParamMap<SimAdaptorParams> paramMap,
 			StrategyScheduler scheduler) {
 		super(adaptorId, adaptorName);
 		this.scheduler = scheduler;
