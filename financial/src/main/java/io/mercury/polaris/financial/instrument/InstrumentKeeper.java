@@ -8,7 +8,6 @@ import org.eclipse.collections.impl.map.mutable.primitive.IntBooleanHashMap;
 
 import io.mercury.common.collections.MutableMaps;
 
-//TODO 修改为不可变类型
 public final class InstrumentKeeper {
 
 	// 存储instrument的交易状态,以instrumentId索引
@@ -35,6 +34,18 @@ public final class InstrumentKeeper {
 
 	public static boolean isTradable(int instrumentId) {
 		return InnerInstance.tradableMap.get(instrumentId);
+	}
+
+	public static void setNotTradable(Instrument instrument) {
+		getInstrument(instrument.id()).disable();
+	}
+
+	public static void setTradable(Instrument instrument) {
+		getInstrument(instrument.id()).enable();
+	}
+
+	public static boolean isTradable(Instrument instrument) {
+		return InnerInstance.tradableMap.get(instrument.id());
 	}
 
 	public static void putInstrument(Instrument instrument) {

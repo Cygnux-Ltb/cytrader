@@ -18,31 +18,31 @@ import io.mercury.polaris.financial.market.impl.BasicMarketData;
  */
 public final class QuoteKeeper {
 
-	private ImmutableIntObjectMap<AtomicQuote> quoteMap;
+	private final ImmutableIntObjectMap<AtomicQuote> QuoteMap;
 
-	public final static QuoteKeeper Singleton = new QuoteKeeper();
+	private final static QuoteKeeper InnerInstance = new QuoteKeeper();
 
 	private QuoteKeeper() {
-	}
-
-	public void init() {
-		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
 		MutableIntObjectMap<AtomicQuote> tempQuoteMap = MutableMaps.newIntObjectHashMap();
-		if (allInstrument != null)
-			allInstrument.forEach(instrument -> tempQuoteMap.put(instrument.id(), new AtomicQuote()));
-		quoteMap = tempQuoteMap.toImmutable();
+		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
+		if (allInstrument.isEmpty())
+			throw new IllegalStateException("InstrumentKeeper is uninitialized");
+		allInstrument.forEach(instrument -> tempQuoteMap.put(instrument.id(), new AtomicQuote()));
+		QuoteMap = tempQuoteMap.toImmutable();
 	}
 
-	public void onMarketDate(BasicMarketData marketData) {
-		AtomicQuote atomicQuote = quoteMap.get(marketData.getInstrument().id());
+	public static void onMarketDate(BasicMarketData marketData) {
+		AtomicQuote atomicQuote = InnerInstance.QuoteMap.get(marketData.getInstrument().id());
+		if (atomicQuote == null)
+			return;
 		atomicQuote.getAskPrice1().set(marketData.getAskPrice1());
 		atomicQuote.getAskVolume1().set(marketData.getAskVolume1());
 		atomicQuote.getBidPrice1().set(marketData.getBidPrice1());
 		atomicQuote.getBidVolume1().set(marketData.getBidVolume1());
 	}
 
-	public AtomicQuote getQuote(Instrument instrument) {
-		return quoteMap.get(instrument.id());
+	public static AtomicQuote getQuote(Instrument instrument) {
+		return InnerInstance.QuoteMap.get(instrument.id());
 	}
 
 	public static class AtomicQuote {
