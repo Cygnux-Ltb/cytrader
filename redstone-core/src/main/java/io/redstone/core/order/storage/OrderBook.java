@@ -29,7 +29,7 @@ public final class OrderBook {
 	private MutableLongObjectMap<Order> activeShortOrders;
 
 	private OrderBook(Capacity capacity) {
-		//添加取一半, 1/4, 1/8
+		// 添加取一半, 1/4, 1/8
 //		this.orders = MutableMaps.newLongObjectHashMap(size);
 //		this.activeOrders = MutableMaps.newLongObjectHashMap(size / 4);
 //		this.longOrders = MutableMaps.newLongObjectHashMap(size / 2);

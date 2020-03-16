@@ -43,7 +43,8 @@ public final class StrategyOrder extends AbstractOrder {
 		return OrdLevel.Strategy;
 	}
 
-	public long getVirtualId() {
+	@Override
+	public long strategyOrdId() {
 		return ordSysId();
 	}
 

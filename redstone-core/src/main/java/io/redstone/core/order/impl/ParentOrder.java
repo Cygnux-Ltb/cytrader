@@ -23,18 +23,17 @@ import io.redstone.core.order.structure.StopLoss;
 public final class ParentOrder extends ActualOrder {
 
 	private MutableList<ChildOrder> childOrders;
-	private long virtualId;
 
-	public ParentOrder(long virtualId, Instrument instrument, long offerQty, long offerPrice, OrdSide ordSide,
+	public ParentOrder(long strategyOrdId, Instrument instrument, long offerQty, long offerPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
-		super(instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice), ordSide, ordType, strategyId,
-				subAccountId, stopLoss);
+		super(strategyOrdId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice), ordSide,
+				ordType, strategyId, subAccountId, stopLoss);
 		this.childOrders = MutableLists.newFastList(8);
-		this.virtualId = virtualId;
+
 	}
 
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = ChildOrder.generateChildOrder(ordSysId(), instrument(), ordQty(), ordPrice(), ordSide(),
+		ChildOrder childOrder = new ChildOrder(parentId(),strategyOrdId(), instrument(), ordQty(), ordPrice(), ordSide(),
 				ordType(), strategyId(), subAccountId(), stopLoss());
 		childOrders.add(childOrder);
 		return childOrder;
@@ -52,11 +51,8 @@ public final class ParentOrder extends ActualOrder {
 		return OrdLevel.Parent;
 	}
 
-	public long getVirtualId() {
-		return virtualId;
-	}
-
-	public long getParentId() {
+	@Override
+	public long parentId() {
 		return ordSysId();
 	}
 

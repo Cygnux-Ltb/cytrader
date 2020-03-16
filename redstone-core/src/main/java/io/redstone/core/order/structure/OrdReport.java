@@ -1,9 +1,12 @@
-package io.redstone.core.order.impl;
+package io.redstone.core.order.structure;
 
+import io.mercury.common.sequence.Serial;
 import io.redstone.core.order.enums.OrdStatus;
 
-public final class OrderReport {
+public final class OrdReport implements Serial<OrdReport> {
 
+	private long serialNumber = System.nanoTime();
+	
 	/**
 	 * mapping to order ordSysId
 	 */
@@ -22,7 +25,7 @@ public final class OrderReport {
 	/**
 	 * broker return id
 	 */
-	private String brokerRtnId;
+	private String brokerUniqueId;
 
 	/**
 	 * filled quantity
@@ -51,8 +54,8 @@ public final class OrderReport {
 		return ordStatus;
 	}
 
-	public String getBrokerRtnId() {
-		return brokerRtnId;
+	public String getBrokerUniqueId() {
+		return brokerUniqueId;
 	}
 
 	public long getFilledQty() {
@@ -63,34 +66,39 @@ public final class OrderReport {
 		return executePrice;
 	}
 
-	public OrderReport setOrdSysId(long ordSysId) {
+	public OrdReport setOrdSysId(long ordSysId) {
 		this.ordSysId = ordSysId;
 		return this;
 	}
 
-	public OrderReport setEpochMillis(long epochMillis) {
+	public OrdReport setEpochMillis(long epochMillis) {
 		this.epochMillis = epochMillis;
 		return this;
 	}
 
-	public OrderReport setOrdStatus(OrdStatus ordStatus) {
+	public OrdReport setOrdStatus(OrdStatus ordStatus) {
 		this.ordStatus = ordStatus;
 		return this;
 	}
 
-	public OrderReport setBrokerRtnId(String brokerRtnId) {
-		this.brokerRtnId = brokerRtnId;
+	public OrdReport setBrokerUniqueId(String brokerUniqueId) {
+		this.brokerUniqueId = brokerUniqueId;
 		return this;
 	}
 
-	public OrderReport setFilledQty(long filledQty) {
+	public OrdReport setFilledQty(long filledQty) {
 		this.filledQty = filledQty;
 		return this;
 	}
 
-	public OrderReport setExecutePrice(long executePrice) {
+	public OrdReport setExecutePrice(long executePrice) {
 		this.executePrice = executePrice;
 		return this;
+	}
+
+	@Override
+	public long serialNumber() {
+		return serialNumber;
 	}
 
 }

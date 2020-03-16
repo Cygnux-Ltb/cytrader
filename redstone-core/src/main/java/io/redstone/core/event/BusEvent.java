@@ -3,7 +3,7 @@ package io.redstone.core.event;
 import io.mercury.common.fsm.Signal;
 import io.mercury.polaris.financial.market.api.MarketData;
 import io.redstone.core.order.api.Order;
-import io.redstone.core.order.impl.OrderReport;
+import io.redstone.core.order.structure.OrdReport;
 
 public final class BusEvent {
 
@@ -14,7 +14,7 @@ public final class BusEvent {
 	private MarketData marketData;
 	private Signal signal;
 	private Order order;
-	private OrderReport orderReport;
+	private OrdReport orderReport;
 
 	public ChannelType getChannelType() {
 		return channelType;
@@ -70,11 +70,11 @@ public final class BusEvent {
 		return this;
 	}
 
-	public OrderReport getOrderReport() {
+	public OrdReport getOrderReport() {
 		return orderReport;
 	}
 
-	public BusEvent setOrderReport(OrderReport orderReport) {
+	public BusEvent setOrderReport(OrdReport orderReport) {
 		this.orderReport = orderReport;
 		return this;
 	}

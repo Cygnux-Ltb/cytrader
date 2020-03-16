@@ -7,7 +7,7 @@ import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.StopLoss;
-import io.redstone.core.order.structure.TradeList;
+import io.redstone.core.order.structure.TradeSet;
 
 /**
  * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ParentOrder拆分而来
@@ -22,31 +22,19 @@ public final class ChildOrder extends ActualOrder {
 	/**
 	 * 子订单成交列表
 	 */
-	private TradeList tradeList;
+	private TradeSet tradeSet;
 
-	private ChildOrder(long parentId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide,
-			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
-		super(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId, stopLoss);
+	public ChildOrder(long parentId, long strategyOrdId, Instrument instrument, long offerQty, long offerPrice,
+			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+		this(parentId, strategyOrdId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice),
+				ordSide, ordType, strategyId, subAccountId, stopLoss);
+	}
+
+	public ChildOrder(long parentId, long strategyOrdId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
+			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+		super(strategyOrdId, instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId, stopLoss);
 		this.parentId = parentId;
-		this.tradeList = new TradeList(ordSysId());
-	}
-
-	private ChildOrder(long parentId, Instrument instrument, long offerQty, long offerPrice, OrdSide ordSide,
-			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
-		this(parentId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice), ordSide, ordType,
-				strategyId, subAccountId, stopLoss);
-	}
-
-	public static ChildOrder generateChildOrder(long parentOrdSysId, Instrument instrument, long offerQty,
-			long offerPrice, OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
-		return new ChildOrder(parentOrdSysId, instrument, offerQty, offerPrice, ordSide, ordType, strategyId,
-				subAccountId, stopLoss);
-	}
-
-	public static ChildOrder generateChildOrder(long parentOrdSysId, Instrument instrument, OrdQty ordQty,
-			OrdPrice ordPrice, OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
-		return new ChildOrder(parentOrdSysId, instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId,
-				stopLoss);
+		this.tradeSet = new TradeSet(ordSysId());
 	}
 
 	@Override
@@ -54,12 +42,13 @@ public final class ChildOrder extends ActualOrder {
 		return OrdLevel.Child;
 	}
 
+	@Override
 	public long parentId() {
 		return parentId;
 	}
 
-	public TradeList tradeList() {
-		return tradeList;
+	public TradeSet tradeSet() {
+		return tradeSet;
 	}
 
 }

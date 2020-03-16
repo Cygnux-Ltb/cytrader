@@ -8,52 +8,62 @@ import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.OrdTimestamps;
-import io.redstone.core.order.structure.StopLoss;
 import io.redstone.core.order.utils.OrdSysIdGenerate;
 
 public abstract class AbstractOrder implements Order {
 
+	/**
+	 * ordSysId
+	 */
 	private long ordSysId;
+
+	/**
+	 * instrument
+	 */
 	private Instrument instrument;
+
 	/**
 	 * 数量
 	 */
 	private OrdQty ordQty;
+
 	/**
 	 * 价格
 	 */
 	private OrdPrice ordPrice;
+
 	/**
 	 * 订单方向
 	 */
 	private OrdSide ordSide;
+
 	/**
 	 * 订单类型
 	 */
 	private OrdType ordType;
+
 	/**
 	 * 订单状态
 	 */
 	private OrdStatus ordStatus;
+
 	/**
 	 * 时间戳
 	 */
 	private OrdTimestamps ordTimestamps;
+
 	/**
 	 * 策略Id
 	 */
 	private int strategyId;
+
 	/**
 	 * 子账户Id
 	 */
 	private int subAccountId;
-	/**
-	 * 止损
-	 */
-	private StopLoss stopLoss;
 
 	protected AbstractOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide, OrdType ordType,
-			int strategyId, int subAccountId, StopLoss stopLoss) {
+			int strategyId, int subAccountId) {
 		this.ordSysId = OrdSysIdGenerate.next(strategyId);
 		this.instrument = instrument;
 		this.ordQty = ordQty;
@@ -64,15 +74,7 @@ public abstract class AbstractOrder implements Order {
 		this.ordTimestamps = OrdTimestamps.generate();
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
-		if (stopLoss == null)
-			this.stopLoss = new StopLoss(ordSysId, ordSide.direction());
-		else
-			this.stopLoss = stopLoss;
-	}
 
-	protected AbstractOrder(Instrument instrument, OrdQty qty, OrdPrice price, OrdSide ordSide, OrdType ordType,
-			int strategyId, int subAccountId) {
-		this(instrument, qty, price, ordSide, ordType, strategyId, subAccountId, null);
 	}
 
 	@Override
@@ -129,11 +131,6 @@ public abstract class AbstractOrder implements Order {
 	@Override
 	public int subAccountId() {
 		return subAccountId;
-	}
-
-	@Override
-	public StopLoss stopLoss() {
-		return stopLoss;
 	}
 
 }

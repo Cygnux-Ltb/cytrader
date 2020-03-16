@@ -1,13 +1,11 @@
-package io.redstone.core.order.impl;
+package io.redstone.core.order.structure;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
 import io.mercury.common.collections.ImmutableSets;
 import io.redstone.core.order.api.Order;
-import io.redstone.core.order.structure.OrdTimestamps;
 
-
-public abstract class OrderGroup {
+public final class OrderGroup {
 
 	private long groupOrdSysId;
 	private OrdTimestamps orderTimestamps;

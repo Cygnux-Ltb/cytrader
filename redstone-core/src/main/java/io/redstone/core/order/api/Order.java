@@ -30,10 +30,12 @@ public interface Order extends Comparable<Order> {
 	 */
 	long ordSysId();
 
+	long strategyOrdId();
+
 	Instrument instrument();
 
 	OrdQty ordQty();
-	
+
 	OrdPrice ordPrice();
 
 	OrdSide ordSide();
@@ -51,8 +53,6 @@ public interface Order extends Comparable<Order> {
 	int subAccountId();
 
 	OrdLevel ordLevel();
-
-	StopLoss stopLoss();
 
 	@Override
 	default int compareTo(Order o) {
