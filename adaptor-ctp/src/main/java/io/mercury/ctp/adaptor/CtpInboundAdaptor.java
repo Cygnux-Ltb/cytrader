@@ -33,7 +33,7 @@ import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.instrument.InstrumentKeeper;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.adaptor.base.InboundAdaptor;
-import io.redstone.core.order.impl.OrderReport;
+import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 
 public class CtpInboundAdaptor extends InboundAdaptor {
@@ -65,12 +65,12 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 				.setAskVolume1(depthMarketData.getAskVolume1());
 	};
 
-	private Converter<RtnOrder, OrderReport> rtnOrderConverter = (from, to) -> {
+	private Converter<RtnOrder, OrdReport> rtnOrderConverter = (from, to) -> {
 		// TODO Auto-generated method stub
 		return to;
 	};
 
-	private Converter<RtnTrade, OrderReport> rtnTradeConverter = (from, to) -> {
+	private Converter<RtnTrade, OrdReport> rtnTradeConverter = (from, to) -> {
 		// TODO Auto-generated method stub
 		return to;
 	};
@@ -100,16 +100,17 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 						break;
 					case RtnOrder:
 						RtnOrder ctpRtnOrder = msg.getRtnOrder();
-						OrderReport rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
+						OrdReport rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
 						scheduler.onOrderReport(rtnOrderConverter.conversion(ctpRtnOrder, rtnOrder));
 						break;
 					case RtnTrade:
 						RtnTrade ctpRtnTrade = msg.getRtnTrade();
-						OrderReport rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
+						OrdReport rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
 						scheduler.onOrderReport(rtnTradeConverter.conversion(ctpRtnTrade, rtnTrade));
 						break;
 					case RspOrderInsert:
 						RspOrderInsert rspOrderInsert = msg.getRspOrderInsert();
+						
 						break;
 					case RspOrderAction:
 						RspOrderAction rspOrderAction = msg.getRspOrderAction();
@@ -126,10 +127,10 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 				}));
 	}
 
-	private OrderReport checkoutCtpOrder(String orderRef) {
+	private OrdReport checkoutCtpOrder(String orderRef) {
 		try {
 			long orderSysId = CtpOrderRefKeeper.getOrdSysId(orderRef);
-			return new OrderReport().setOrdSysId(orderSysId);
+			return new OrdReport().setOrdSysId(orderSysId);
 		} catch (OrderRefNotFoundException e) {
 			logger.error(e.getMessage(), e);
 			throw new RuntimeException(e);

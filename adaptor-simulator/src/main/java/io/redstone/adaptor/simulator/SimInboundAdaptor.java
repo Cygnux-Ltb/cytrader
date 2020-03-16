@@ -10,7 +10,7 @@ import io.mercury.transport.core.api.Receiver;
 import io.mercury.transport.socket.SocketReceiver;
 import io.mercury.transport.socket.configurator.SocketConfigurator;
 import io.redstone.core.adaptor.base.InboundAdaptor;
-import io.redstone.core.order.impl.OrderReport;
+import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.persistence.avro.entity.MarketDataLevel1;
 import io.redstone.persistence.avro.entity.Order;
@@ -32,7 +32,7 @@ public class SimInboundAdaptor extends InboundAdaptor {
 		return null;
 	};
 
-	private Function<Order, OrderReport> orderFunction = order -> {
+	private Function<Order, OrdReport> orderFunction = order -> {
 		// TODO Auto-generated method stub
 		return null;
 	};
