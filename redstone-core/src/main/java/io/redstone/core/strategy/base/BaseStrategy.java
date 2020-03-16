@@ -171,7 +171,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty, long minPrice,
 			long maxPrice) {
 		OrdSide ordSide;
-		AtomicQuote quote = QuoteKeeper.Singleton.getQuote(instrument);
+		AtomicQuote quote = QuoteKeeper.getQuote(instrument);
 		long offerPrice = 0;
 		switch (direction) {
 		case Long:

@@ -4,7 +4,7 @@ import io.mercury.common.concurrent.disruptor.BufferSize;
 import io.mercury.common.concurrent.disruptor.SpscQueue;
 import io.mercury.polaris.financial.market.QuoteKeeper;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.core.order.impl.OrderReport;
+import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.engine.actor.StrategyActor;
 
@@ -20,11 +20,11 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 			switch (enqueueMsg.mark()) {
 			case MarketData:
 				BasicMarketData marketData = enqueueMsg.getMarketData();
-				QuoteKeeper.Singleton.onMarketDate(marketData);
+				QuoteKeeper.onMarketDate(marketData);
 				StrategyActor.Singleton.onMarketData(marketData);
 				break;
 			case OrderReport:
-				OrderReport orderReport = enqueueMsg.getOrderReport();
+				OrdReport orderReport = enqueueMsg.getOrderReport();
 				StrategyActor.Singleton.onOrderReport(orderReport);
 				break;
 			default:
@@ -41,7 +41,7 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 
 	// TODO add pools
 	@Override
-	public void onOrderReport(OrderReport orderReport) {
+	public void onOrderReport(OrdReport orderReport) {
 		msgQueue.enqueue(new EnqueueMsg(OrderReport, orderReport));
 	}
 
@@ -49,14 +49,14 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 
 		private int mark;
 		private BasicMarketData marketData;
-		private OrderReport orderReport;
+		private OrdReport orderReport;
 
 		EnqueueMsg(int mark, BasicMarketData marketData) {
 			this.mark = mark;
 			this.marketData = marketData;
 		}
 
-		EnqueueMsg(int mark, OrderReport orderReport) {
+		EnqueueMsg(int mark, OrdReport orderReport) {
 			this.mark = mark;
 			this.orderReport = orderReport;
 		}
@@ -69,7 +69,7 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 			return marketData;
 		}
 
-		private OrderReport getOrderReport() {
+		private OrdReport getOrderReport() {
 			return orderReport;
 		}
 

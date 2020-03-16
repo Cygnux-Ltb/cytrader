@@ -5,8 +5,8 @@ import org.slf4j.Logger;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.order.api.Order;
-import io.redstone.core.order.impl.OrderReport;
 import io.redstone.core.order.storage.OrderKeeper;
+import io.redstone.core.order.structure.OrdReport;
 import io.redstone.engine.storage.StrategyKeeper;
 
 /**
@@ -33,13 +33,16 @@ public final class StrategyActor {
 		});
 	}
 
-	public void onOrderReport(OrderReport orderReport) {
-		logger.info("Handle OrderReport, brokerRtnId==[{}], ordSysId==[{}]", orderReport.getBrokerRtnId(),
+	public void onOrderReport(OrdReport orderReport) {
+		logger.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", orderReport.getBrokerUniqueId(),
 				orderReport.getOrdSysId());
 		Order order = OrderKeeper.getOrder(orderReport.getOrdSysId());
 		logger.info("Search Order OK. BrokerRtnId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
-				orderReport.getBrokerRtnId(), order.strategyId(), order.instrument().code(), orderReport.getOrdSysId());
+				orderReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(), orderReport.getOrdSysId());
 		StrategyKeeper.getStrategy(order.strategyId()).onOrder(order);
+		
+		
+		
 	}
 
 }

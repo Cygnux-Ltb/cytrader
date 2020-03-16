@@ -1,7 +1,7 @@
 package io.redstone.engine.scheduler;
 
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.core.order.impl.OrderReport;
+import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 
 public final class ChronicleStrategyScheduler implements StrategyScheduler{
@@ -13,7 +13,7 @@ public final class ChronicleStrategyScheduler implements StrategyScheduler{
 	}
 
 	@Override
-	public void onOrderReport(OrderReport orderReport) {
+	public void onOrderReport(OrdReport orderReport) {
 		// TODO Auto-generated method stub
 		
 	}
