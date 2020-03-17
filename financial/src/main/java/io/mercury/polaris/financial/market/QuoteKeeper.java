@@ -32,7 +32,7 @@ public final class QuoteKeeper {
 	}
 
 	public static void onMarketDate(BasicMarketData marketData) {
-		AtomicQuote atomicQuote = InnerInstance.QuoteMap.get(marketData.getInstrument().id());
+		AtomicQuote atomicQuote = InnerInstance.QuoteMap.get(marketData.instrument().id());
 		if (atomicQuote == null)
 			return;
 		atomicQuote.getAskPrice1().set(marketData.getAskPrice1());

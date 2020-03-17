@@ -69,7 +69,7 @@ public final class RandomTimeSerial implements Serial<RandomTimeSerial> {
 		System.out.println(timeStarted1.epochSecond());
 		System.out.println(timeStarted1.serialNumber());
 
-		System.out.println(EpochTime.milliseconds());
+		System.out.println(EpochTime.millis());
 		System.out.println(EpochTime.seconds());
 		System.out.println(Long.MAX_VALUE);
 	}

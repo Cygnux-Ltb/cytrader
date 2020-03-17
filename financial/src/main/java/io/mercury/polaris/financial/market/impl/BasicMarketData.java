@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 import io.mercury.common.datetime.EpochTime;
-import io.mercury.common.datetime.TimeZones;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.api.MarketData;
 
@@ -21,8 +20,9 @@ import io.mercury.polaris.financial.market.api.MarketData;
 public class BasicMarketData implements MarketData {
 
 	private Instrument instrument;
+	private LocalDateTime dateTime;
+	private ZonedDateTime zonedDateTime;
 	private long epochMillis;
-	private ZonedDateTime dateTime;
 	private long lastPrice;
 	private long volume;
 	private long turnover;
@@ -71,76 +71,67 @@ public class BasicMarketData implements MarketData {
 	private long askPrice10;
 	private long askVolume10;
 
-	private BasicMarketData() {
-	}
-
-	private BasicMarketData(Instrument instrument, long epochMillis) {
+	public BasicMarketData(Instrument instrument, long epochMillis) {
+		this.instrument = instrument;
 		this.epochMillis = epochMillis;
-		this.instrument = instrument;
 	}
 
-	public BasicMarketData(Instrument instrument, ZonedDateTime dateTime) {
+	public BasicMarketData(Instrument instrument, LocalDateTime dateTime) {
 		this.instrument = instrument;
-		this.epochMillis = EpochTime.milliseconds(dateTime);
+		this.epochMillis = EpochTime.millis(dateTime);
 		this.dateTime = dateTime;
 	}
 
-	private BasicMarketData(Instrument instrument, long epochMillis, long lastPrice, long volume, long turnover) {
+	public BasicMarketData(Instrument instrument, ZonedDateTime zonedDateTime) {
+		this.instrument = instrument;
+		this.epochMillis = EpochTime.millis(zonedDateTime);
+		this.zonedDateTime = zonedDateTime;
+	}
+
+	public BasicMarketData(Instrument instrument, long epochMillis, long lastPrice, long volume, long turnover) {
+		this(instrument, epochMillis, null, null, lastPrice, volume, turnover);
+	}
+
+	public BasicMarketData(Instrument instrument, LocalDateTime dateTime, long lastPrice, long volume, long turnover) {
+		this(instrument, EpochTime.millis(dateTime), dateTime, null, lastPrice, volume, turnover);
+	}
+
+	public BasicMarketData(Instrument instrument, ZonedDateTime zonedDateTime, long lastPrice, long volume,
+			long turnover) {
+		this(instrument, EpochTime.millis(zonedDateTime), null, zonedDateTime, lastPrice, volume, turnover);
+	}
+
+	public BasicMarketData(Instrument instrument, long epochMillis, LocalDateTime dateTime,
+			ZonedDateTime zonedDateTime, long lastPrice, long volume, long turnover) {
 		this.instrument = instrument;
 		this.epochMillis = epochMillis;
+		this.dateTime = dateTime;
+		this.zonedDateTime = zonedDateTime;
 		this.lastPrice = lastPrice;
 		this.volume = volume;
 		this.turnover = turnover;
 	}
 
-	private BasicMarketData(Instrument instrument, ZonedDateTime dateTime, long lastPrice, long volume, long turnover) {
-		this(instrument, EpochTime.milliseconds(dateTime), dateTime, lastPrice, volume, turnover);
-	}
-
-	private BasicMarketData(Instrument instrument, long epochMillis, ZonedDateTime dateTime, long lastPrice,
-			long volume, long turnover) {
-		this.instrument = instrument;
-		this.epochMillis = epochMillis;
-		this.dateTime = dateTime;
-		this.lastPrice = lastPrice;
-		this.volume = volume;
-		this.turnover = turnover;
-	}
-
-	public static final BasicMarketData empty() {
-		return new BasicMarketData();
-	}
-
-	public static final BasicMarketData with(Instrument instrument, long epochMillis) {
-		return new BasicMarketData(instrument, epochMillis);
-	}
-
-	public static final BasicMarketData with(Instrument instrument, ZonedDateTime zonedDateTime) {
-		return new BasicMarketData(instrument, zonedDateTime);
-	}
-
-	public static final BasicMarketData with(Instrument instrument, long epochMillis, long lastPrice, long volume,
-			long turnover) {
-		return new BasicMarketData(instrument, epochMillis, lastPrice, volume, turnover);
-	}
-
-	public static final BasicMarketData with(Instrument instrument, ZonedDateTime dateTime, long lastPrice, long volume,
-			long turnover) {
-		return new BasicMarketData(instrument, dateTime, lastPrice, volume, turnover);
-	}
-
-	public Instrument getInstrument() {
+	public Instrument instrument() {
 		return instrument;
 	}
 
-	public long getEpochMillis() {
+	public long epochMillis() {
 		return epochMillis;
 	}
 
-	public ZonedDateTime getDateTime() {
+	public LocalDateTime dateTime() {
 		if (dateTime == null)
-			dateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), TimeZones.SYSTEM_DEFAULT);
+			dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMillis),
+					instrument.symbol().exchange().zoneId());
 		return dateTime;
+	}
+
+	public ZonedDateTime zonedDateTime() {
+		if (zonedDateTime == null)
+			zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis),
+					instrument.symbol().exchange().zoneId());
+		return zonedDateTime;
 	}
 
 	public long getLastPrice() {

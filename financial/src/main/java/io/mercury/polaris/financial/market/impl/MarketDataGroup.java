@@ -2,12 +2,13 @@ package io.mercury.polaris.financial.market.impl;
 
 import java.util.Set;
 
-public final class GroupMarketData<M extends BasicMarketData> {
+import org.eclipse.collections.api.set.MutableSet;
 
-	private Set<M> marketDataSet;
+public final class MarketDataGroup<M extends BasicMarketData> {
 
-	public GroupMarketData(Set<M> marketDataSet) {
-		super();
+	private MutableSet<M> marketDataSet;
+
+	public MarketDataGroup(MutableSet<M> marketDataSet) {
 		this.marketDataSet = marketDataSet;
 	}
 

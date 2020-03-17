@@ -13,9 +13,9 @@ public final class DepthMarketData {
 
 	private LocalDateTime datetime;
 	private Instrument instrument;
-	private double lastPrice;
-	private double volume;
-	private double turnover;
+	private long lastPrice;
+	private long volume;
+	private long turnover;
 	private Quotes quotes;
 
 	public DepthMarketData(LocalDateTime datetime, Instrument instrument, int quoteLevel) {
@@ -40,7 +40,7 @@ public final class DepthMarketData {
 		return lastPrice;
 	}
 
-	public DepthMarketData setLastPrice(double lastPrice) {
+	public DepthMarketData setLastPrice(long lastPrice) {
 		this.lastPrice = lastPrice;
 		return this;
 	}
@@ -49,7 +49,7 @@ public final class DepthMarketData {
 		return volume;
 	}
 
-	public DepthMarketData setVolume(double volume) {
+	public DepthMarketData setVolume(long volume) {
 		this.volume = volume;
 		return this;
 	}
@@ -58,7 +58,7 @@ public final class DepthMarketData {
 		return turnover;
 	}
 
-	public DepthMarketData setTurnover(double turnover) {
+	public DepthMarketData setTurnover(long turnover) {
 		this.turnover = turnover;
 		return this;
 	}
@@ -67,12 +67,12 @@ public final class DepthMarketData {
 		return quotes;
 	}
 
-	public DepthMarketData addAskQuote(int level, double price, double volume) throws QuoteLevelOverflowException {
+	public DepthMarketData addAskQuote(int level, long price, long volume) throws QuoteLevelOverflowException {
 		quotes.addAskQuote(level, price, volume);
 		return this;
 	}
 
-	public DepthMarketData addBidQuote(int level, double price, double volume) throws QuoteLevelOverflowException {
+	public DepthMarketData addBidQuote(int level, long price, long volume) throws QuoteLevelOverflowException {
 		quotes.addBidQuote(level, price, volume);
 		return this;
 	}

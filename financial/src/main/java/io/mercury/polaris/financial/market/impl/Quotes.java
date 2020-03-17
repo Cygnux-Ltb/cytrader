@@ -10,7 +10,6 @@ public final class Quotes {
 	private BidQuote[] bidQuotes;
 
 	private int askLevel;
-
 	private int bidLevel;
 
 	private Quotes(int askLevel, int bidLevel) {
@@ -22,6 +21,10 @@ public final class Quotes {
 		this.bidQuotes = new BidQuote[bidLevel];
 		for (int i = 0; i < bidQuotes.length; i++)
 			bidQuotes[i] = new BidQuote(0, 0);
+	}
+
+	public static Quotes newLevel5() {
+		return new Quotes(5, 5);
 	}
 
 	public static Quotes newLevel10() {
@@ -44,7 +47,7 @@ public final class Quotes {
 		return bidQuotes;
 	}
 
-	public Quotes addQuote(int levelIndex, double price, double volume, QuoteType type) {
+	public Quotes addQuote(int levelIndex, long price, long volume, QuoteType type) {
 		switch (type) {
 		case Bid:
 			return addBidQuote(levelIndex, price, volume);
@@ -55,14 +58,14 @@ public final class Quotes {
 		}
 	}
 
-	public Quotes addAskQuote(int levelIndex, double price, double volume) throws QuoteLevelOverflowException {
+	public Quotes addAskQuote(int levelIndex, long price, long volume) throws QuoteLevelOverflowException {
 		if (levelIndex == askLevel)
 			throw new QuoteLevelOverflowException("askLevelIndex == " + levelIndex + ", array length is " + askLevel);
 		askQuotes[levelIndex].setPrice(price).setVolume(volume);
 		return this;
 	}
 
-	public Quotes addBidQuote(int levelindex, double price, double volume) throws QuoteLevelOverflowException {
+	public Quotes addBidQuote(int levelindex, long price, long volume) throws QuoteLevelOverflowException {
 		if (levelindex == bidLevel)
 			throw new QuoteLevelOverflowException("bidLevelIndex == " + levelindex + ", array length is " + bidLevel);
 		bidQuotes[levelindex].setPrice(price).setVolume(volume);
@@ -71,7 +74,7 @@ public final class Quotes {
 
 	public static class AskQuote extends Quote<AskQuote> {
 
-		private AskQuote(double price, double volume) {
+		private AskQuote(long price, long volume) {
 			super(price, volume);
 		}
 
@@ -86,13 +89,13 @@ public final class Quotes {
 		}
 
 		@Override
-		public AskQuote setPrice(double price) {
+		public AskQuote setPrice(long price) {
 			this.price = price;
 			return null;
 		}
 
 		@Override
-		public AskQuote setVolume(double volume) {
+		public AskQuote setVolume(long volume) {
 			this.volume = volume;
 			return null;
 		}
@@ -101,7 +104,7 @@ public final class Quotes {
 
 	public static class BidQuote extends Quote<BidQuote> {
 
-		private BidQuote(double price, double volume) {
+		private BidQuote(long price, long volume) {
 			super(price, volume);
 		}
 
@@ -116,13 +119,13 @@ public final class Quotes {
 		}
 
 		@Override
-		public BidQuote setPrice(double price) {
+		public BidQuote setPrice(long price) {
 			this.price = price;
 			return this;
 		}
 
 		@Override
-		public BidQuote setVolume(double volume) {
+		public BidQuote setVolume(long volume) {
 			this.volume = volume;
 			return this;
 		}
@@ -135,25 +138,25 @@ public final class Quotes {
 
 	private static abstract class Quote<T extends Quote<T>> implements Comparable<T> {
 
-		protected double price;
-		protected double volume;
+		protected long price;
+		protected long volume;
 
-		protected Quote(double price, double volume) {
+		protected Quote(long price, long volume) {
 			this.price = price;
 			this.volume = volume;
 		}
 
-		public double getPrice() {
+		public long getPrice() {
 			return price;
 		}
 
-		public double getVolume() {
+		public long getVolume() {
 			return volume;
 		}
 
-		public abstract T setPrice(double price);
+		public abstract T setPrice(long price);
 
-		public abstract T setVolume(double volume);
+		public abstract T setVolume(long volume);
 
 		public abstract QuoteType getType();
 	}
