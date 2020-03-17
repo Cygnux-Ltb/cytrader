@@ -24,7 +24,7 @@ import io.redstone.core.order.storage.OrderKeeper;
 
 public final class OrderExecutor {
 
-	private Logger logger = CommonLoggerFactory.getLogger(OrderExecutor.class);
+	private Logger log = CommonLoggerFactory.getLogger(OrderExecutor.class);
 
 	private OrderExecutor() {
 	}

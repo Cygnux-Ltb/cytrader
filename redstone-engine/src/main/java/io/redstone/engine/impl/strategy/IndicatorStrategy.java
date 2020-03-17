@@ -14,7 +14,7 @@ public abstract class IndicatorStrategy<M extends MarketData> extends BaseStrate
 	
 	@Override
 	protected boolean updateOrder(Order order) {
-		logger.info("handle order ordSysId==[{}]", order.ordSysId());
+		log.info("handle order ordSysId==[{}]", order.ordSysId());
 		if (OrderKeeper.containsOrder(order.ordSysId())) {
 			OrderKeeper.updateOrder(order);
 		} else {

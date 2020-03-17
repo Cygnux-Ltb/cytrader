@@ -18,7 +18,7 @@ import io.redstone.core.order.impl.ChildOrder;
  */
 public class PositionsActor {
 
-	private Logger Logger = CommonLoggerFactory.getLogger(getClass());
+	private Logger Log = CommonLoggerFactory.getLogger(getClass());
 
 	/**
 	 * subAccount的instrument的最大长仓持仓限制<br>
@@ -55,10 +55,10 @@ public class PositionsActor {
 	public void setSubAccountPositionsLimit(int subAccountId, int instrumentId, long limitLongQty, long limitShortQty) {
 		long jointId = JointIdUtil.jointId(subAccountId, instrumentId);
 		subAccountInstrumentLongLimit.put(jointId, limitLongQty < 0 ? -limitLongQty : limitLongQty);
-		Logger.info("Set long positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
+		Log.info("Set long positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
 				instrumentId, subAccountInstrumentLongLimit.get(jointId));
 		subAccountInstrumentShortLimit.put(jointId, limitShortQty > 0 ? -limitShortQty : limitShortQty);
-		Logger.info("Set short positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
+		Log.info("Set short positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
 				instrumentId, subAccountInstrumentShortLimit.get(jointId));
 	}
 

@@ -8,7 +8,7 @@ import io.redstone.core.risk.OrderBarrier;
 
 public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	@Override
 	public boolean filter(ChildOrder order) {
@@ -22,7 +22,7 @@ public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {
 			return false;
 
 		default:
-			logger.error("");
+			log.error("");
 			return false;
 		}
 	}

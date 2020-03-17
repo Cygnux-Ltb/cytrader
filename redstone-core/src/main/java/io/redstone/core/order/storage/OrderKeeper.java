@@ -14,7 +14,7 @@ import io.redstone.core.order.api.Order;
 @NotThreadSafe
 public final class OrderKeeper {
 
-	private static final Logger logger = CommonLoggerFactory.getLogger(OrderKeeper.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(OrderKeeper.class);
 
 	private static final OrderKeeper InnerInstance = new OrderKeeper();
 
@@ -64,7 +64,7 @@ public final class OrderKeeper {
 			getInstrumentOrderBook(order.instrument().id()).terminatedOrder(order);
 			break;
 		default:
-			logger.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.ordSysId(),
+			log.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.ordSysId(),
 					order.ordStatus());
 			break;
 		}

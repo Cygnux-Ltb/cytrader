@@ -15,7 +15,7 @@ import io.mercury.transport.http.HttpRequester;
 
 public final class CouchConnector {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	private String couchdbUrl;
 
@@ -52,8 +52,8 @@ public final class CouchConnector {
 	}
 
 	private String sendGetRequest(String _database, String _id) {
-		logger.info("sendGetRequest() -> _database==[{}], _id==[{}]", _database, _id);
-		return HttpRequester.INSTANCE.get(couchdbUrl + _database + _id);
+		log.info("sendGetRequest() -> _database==[{}], _id==[{}]", _database, _id);
+		return HttpRequester.sentGet(couchdbUrl + _database + _id);
 	}
 
 	public static void main(String[] args) {

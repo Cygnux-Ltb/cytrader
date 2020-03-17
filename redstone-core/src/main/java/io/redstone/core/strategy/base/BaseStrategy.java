@@ -40,7 +40,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 	private boolean isInitSuccess = false;
 
-	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
+	protected Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	protected String strategyName;
 
@@ -64,8 +64,8 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 		if (initializer != null)
 			isInitSuccess = initializer.get();
 		else
-			logger.error("Initializer is null.");
-		logger.info("Initialize result isInitSuccess==[{}]", isInitSuccess);
+			log.error("Initializer is null.");
+		log.info("Initialize result isInitSuccess==[{}]", isInitSuccess);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 	@Override
 	public void onControlEvent(StrategyControlEvent event) {
-		logger.info("Handle StrategyControlEvent -> {}", event);
+		log.info("Handle StrategyControlEvent -> {}", event);
 	}
 
 	private boolean isEnable = false;
@@ -114,14 +114,14 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	public void enable() {
 		if (isInitSuccess)
 			this.isEnable = true;
-		logger.info("Enable strategy -> strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
+		log.info("Enable strategy -> strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
 				isEnable);
 	}
 
 	@Override
 	public void disable() {
 		this.isEnable = false;
-		logger.info("Disable strategy -> strategyId==[{}]", strategyId);
+		log.info("Disable strategy -> strategyId==[{}]", strategyId);
 	}
 
 	@Override
@@ -156,7 +156,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 	@Override
 	public void onError(Throwable throwable) {
-		logger.error("StrategyId -> [{}] throw exception -> [{}]", strategyId, throwable);
+		log.error("StrategyId -> [{}] throw exception -> [{}]", strategyId, throwable);
 	}
 
 	@Override

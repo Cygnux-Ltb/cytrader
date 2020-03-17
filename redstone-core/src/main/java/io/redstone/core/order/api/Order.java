@@ -8,7 +8,6 @@ import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.OrdTimestamps;
-import io.redstone.core.order.structure.StopLoss;
 
 public interface Order extends Comparable<Order> {
 

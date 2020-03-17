@@ -6,79 +6,82 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public enum OrdStatus {
 
-	Invalid(-1, false),
+	Invalid(-1, true),
 
-	PendingNew(10, true),
+	PendingNew(1, false),
 
-	New(11, true),
+	New(2, false),
 
-	NewRejected(12, false),
+	PendingCancel(4, false),
 
-	PendingCancel(20, true),
+	PartiallyFilled(8, false),
 
-	Canceled(21, false),
+	Filled(16, true),
 
-	CancelRejected(22, false),
+	Canceled(32, true),
 
-	PendingReplace(30, true),
+	NewRejected(64, true),
 
-	Replaced(31, true),
+	CancelRejected(128, true),
 
-	Suspended(41, true),
+	@Deprecated
+	PendingReplace(101, false),
 
-	PartiallyFilled(51, true),
+	@Deprecated
+	Replaced(102, true),
 
-	Filled(52, false),
+	@Deprecated
+	Suspended(103, true),
 
 	;
 
 	private int code;
-	private boolean isActive;
+	private boolean isTerminated;
 
-	private static Logger logger = CommonLoggerFactory.getLogger(OrdStatus.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
 
 	/**
 	 * @param code
 	 */
-	private OrdStatus(int code, boolean isActive) {
+	private OrdStatus(int code, boolean isTerminated) {
 		this.code = code;
-		this.isActive = isActive;
+		this.isTerminated = isTerminated;
 	}
 
 	public int code() {
 		return code;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public boolean isTerminated() {
+		return isTerminated;
 	}
 
 	public static OrdStatus valueOf(int code) {
 		switch (code) {
-		case 10:
+		case 1:
 			return PendingNew;
-		case 11:
+		case 2:
 			return New;
-		case 12:
-			return NewRejected;
-		case 20:
+		case 4:
 			return PendingCancel;
-		case 21:
-			return Canceled;
-		case 22:
-			return CancelRejected;
-		case 30:
-			return PendingReplace;
-		case 31:
-			return Replaced;
-		case 41:
-			return Suspended;
-		case 51:
+		case 8:
 			return PartiallyFilled;
-		case 52:
+		case 16:
 			return Filled;
+		case 32:
+			return Canceled;
+		case 64:
+			return NewRejected;
+		case 128:
+			return CancelRejected;
+		case 101:
+			return PendingReplace;
+		case 102:
+			return Replaced;
+		case 103:
+			return Suspended;
 		default:
-			logger.error("OrdStatus.valueOf(code=={}) -> is no matches, return OrdStatus.Invalid", code);
+			log.error("OrdStatus.valueOf(code=={}) -> is no matches, return OrdStatus.Invalid", code);
 			return Invalid;
 		}
 

@@ -9,12 +9,13 @@ import org.slf4j.Logger;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.polaris.financial.instrument.Instrument;
 import io.redstone.core.strategy.Strategy;
 
 @NotThreadSafe
 public final class StrategyKeeper {
 
-	private static final Logger logger = CommonLoggerFactory.getLogger(StrategyKeeper.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(StrategyKeeper.class);
 
 	private MutableIntObjectMap<Strategy> strategyMap = MutableMaps.newIntObjectHashMap();
 
@@ -28,23 +29,27 @@ public final class StrategyKeeper {
 
 	public static void putStrategy(Strategy strategy) {
 		InnerInstance.strategyMap.put(strategy.strategyId(), strategy);
-		logger.info("Put to strategyMap. strategyId==[{}]", strategy.strategyId());
+		log.info("Put to strategyMap. strategyId==[{}]", strategy.strategyId());
 		strategy.instruments().forEach(instrument -> {
 			InnerInstance.subscribedStrategysMap.getIfAbsentPut(instrument.id(), MutableLists::newFastList)
 					.add(strategy);
-			logger.info("Put to subscribedStrategysMap. strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
+			log.info("Put to subscribedStrategysMap. strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
 					instrument.id());
 		});
 		strategy.enable();
-		logger.info("Strategy is enable. strategyId==[{}]", strategy.strategyId());
+		log.info("Strategy is enable. strategyId==[{}]", strategy.strategyId());
 	}
 
 	public static Strategy getStrategy(int strategyId) {
 		return InnerInstance.strategyMap.get(strategyId);
 	}
 
-	public static MutableList<Strategy> subscribedStrategys(int instrumentId) {
+	public static MutableList<Strategy> getSubscribedStrategys(int instrumentId) {
 		return InnerInstance.subscribedStrategysMap.get(instrumentId);
+	}
+
+	public static MutableList<Strategy> getSubscribedStrategys(Instrument instrument) {
+		return InnerInstance.subscribedStrategysMap.get(instrument.id());
 	}
 
 }

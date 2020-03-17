@@ -18,7 +18,7 @@ import io.redstone.engine.storage.StrategyKeeper;
  */
 public final class StrategyActor {
 
-	private Logger logger = CommonLoggerFactory.getLogger(StrategyActor.class);
+	private Logger log = CommonLoggerFactory.getLogger(StrategyActor.class);
 
 	public static final StrategyActor Singleton = new StrategyActor();
 
@@ -27,22 +27,21 @@ public final class StrategyActor {
 	}
 
 	public void onMarketData(BasicMarketData marketData) {
-		StrategyKeeper.getStrategys(marketData.getInstrument().id()).forEach(strategy -> {
+		StrategyKeeper.getSubscribedStrategys(marketData.instrument().id()).forEach(strategy -> {
 			if (strategy.isEnabled())
 				strategy.onMarketData(marketData);
 		});
 	}
 
 	public void onOrderReport(OrdReport orderReport) {
-		logger.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", orderReport.getBrokerUniqueId(),
+		log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", orderReport.getBrokerUniqueId(),
 				orderReport.getOrdSysId());
 		Order order = OrderKeeper.getOrder(orderReport.getOrdSysId());
-		logger.info("Search Order OK. BrokerRtnId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
-				orderReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(), orderReport.getOrdSysId());
+		log.info("Search Order OK. BrokerRtnId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
+				orderReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
+				orderReport.getOrdSysId());
 		StrategyKeeper.getStrategy(order.strategyId()).onOrder(order);
-		
-		
-		
+
 	}
 
 }

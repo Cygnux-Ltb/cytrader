@@ -35,7 +35,7 @@ public enum OrdStatus {
 	private int code;
 	private boolean isActive;
 
-	private static Logger logger = CommonLoggerFactory.getLogger(OrdStatus.class);
+	private static Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
 
 	/**
 	 * @param code
@@ -78,7 +78,7 @@ public enum OrdStatus {
 		case 52:
 			return Filled;
 		default:
-			logger.error("OrdStatus.valueOf(code=={}) -> is no matches, return OrdStatus.Invalid", code);
+			log.error("OrdStatus.valueOf(code=={}) -> is no matches, return OrdStatus.Invalid", code);
 			return Invalid;
 		}
 
