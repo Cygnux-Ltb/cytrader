@@ -40,7 +40,7 @@ import io.mercury.common.sys.SysProperties;
 import io.mercury.common.thread.ThreadUtil;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
-import io.mercury.ctp.gateway.bean.config.CtpConnectionInfo;
+import io.mercury.ctp.gateway.bean.config.CtpConfigInfo;
 import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
 import io.mercury.ctp.gateway.bean.rsp.RspMsg;
 import io.mercury.ctp.gateway.converter.RspOrderActionConverter;
@@ -51,22 +51,22 @@ import io.mercury.ctp.gateway.converter.RtnTradeConverter;
 @NotThreadSafe
 public class CtpGateway {
 
-	private static final Logger logger = CommonLoggerFactory.getLogger(CtpGateway.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(CtpGateway.class);
 
 	private static void copyLibraryForWin64() {
-		logger.info("Copy win64 library file to [java.library.path]...");
-		logger.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
+		log.info("Copy win64 library file to [java.library.path]...");
+		log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
 		// TODO 复制到相应目录
 	}
 
 	private static void copyLibraryForLinux64() {
-		logger.info("Copy linux64 library file to [java.library.path]......");
-		logger.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
+		log.info("Copy linux64 library file to [java.library.path]......");
+		log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
 		// TODO 复制到相应目录
 	}
 
 	private synchronized static void loadCtpLibrary() {
-		logger.info("Loading CTP library...");
+		log.info("Loading CTP library...");
 		System.loadLibrary("thostapi_wrap");
 		System.loadLibrary("thosttraderapi_se");
 		System.loadLibrary("thostmduserapi_se");
@@ -80,23 +80,33 @@ public class CtpGateway {
 			else
 				copyLibraryForLinux64();
 			loadCtpLibrary();
-			logger.info("Load libs success...");
+			log.info("Load libs success...");
 		} catch (Throwable e) {
-			logger.error("Load libs error...", e);
-			logger.error("");
+			log.error("Load libs error...", e);
+			log.error("");
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 
+	/**
+	 * id
+	 */
 	private String gatewayId;
-	private CtpConnectionInfo connectionInfo;
+
+	/**
+	 * 基础配置信息
+	 */
+	private CtpConfigInfo ctpConfigInfo;
 
 	@JNI
 	private CThostFtdcTraderApi traderApi;
 	@JNI
 	private CThostFtdcMdApi mdApi;
 
-	private boolean isInit = false;
+	/**
+	 * 
+	 */
+	private volatile boolean isInitialize = false;
 	private Queue<RspMsg> inboundBuffer;
 
 	private int mdRequestId = -1;
@@ -105,45 +115,44 @@ public class CtpGateway {
 	private boolean isMdLogin;
 	private boolean isTraderLogin;
 
-	public CtpGateway(String gatewayId, @Nonnull CtpConnectionInfo connectionInfo,
-			@Nonnull Queue<RspMsg> inboundBuffer) {
+	public CtpGateway(String gatewayId, @Nonnull CtpConfigInfo ctpConfigInfo, @Nonnull Queue<RspMsg> inboundBuffer) {
 		this.gatewayId = gatewayId;
-		this.connectionInfo = Assertor.nonNull(connectionInfo, "connectionInfo");
+		this.ctpConfigInfo = Assertor.nonNull(ctpConfigInfo, "ctpConfigInfo");
 		this.inboundBuffer = Assertor.nonNull(inboundBuffer, "inboundBuffer");
 	}
 
-	private File generateTempDir() {
+	private File generateTempBaseDir() {
 		// 创建临时文件存储目录
 		String tempFileHome = SysProperties.JAVA_IO_TMPDIR + File.separator + "ctp";
 		File tempFileDir = new File(tempFileHome + File.separator + gatewayId + File.separator + DateTimeUtil.date());
-		logger.info("Temp file dir -> {}", tempFileDir.getAbsolutePath());
+		log.info("Temp file dir -> {}", tempFileDir.getAbsolutePath());
 		if (!tempFileDir.exists())
 			tempFileDir.mkdirs();
 		return tempFileDir;
 	}
 
 	public void initAndJoin() {
-		if (!isInit) {
+		if (!isInitialize) {
 			// 获取临时文件目录
-			File tempDir = generateTempDir();
-			logger.info("TraderApi version {}", CThostFtdcTraderApi.GetApiVersion());
-			logger.info("MdApi version {}", CThostFtdcMdApi.GetApiVersion());
+			File tempBaseDir = generateTempBaseDir();
+			log.info("TraderApi version {}", CThostFtdcTraderApi.GetApiVersion());
+			log.info("MdApi version {}", CThostFtdcMdApi.GetApiVersion());
 			try {
-				ThreadUtil.startNewThread(() -> mdInitAndJoin(tempDir), "Md-Spi-Thread");
+				ThreadUtil.startNewThread(() -> mdInitAndJoin(tempBaseDir), "Md-Spi-Thread");
 				ThreadUtil.sleep(2000);
-				ThreadUtil.startNewThread(() -> traderInitAndJoin(tempDir), "Trader-Spi-Thread");
-				this.isInit = true;
+				ThreadUtil.startNewThread(() -> traderInitAndJoin(tempBaseDir), "Trader-Spi-Thread");
+				this.isInitialize = true;
 			} catch (Exception e) {
-				logger.error(e.getMessage(), e);
-				this.isInit = false;
+				log.error("mrthod initAndJoin throw Exception -> {}", e.getMessage(), e);
+				throw new RuntimeException(e);
 			}
 		}
 	}
 
-	private void mdInitAndJoin(File tempDir) {
+	private void mdInitAndJoin(File tempBaseDir) {
 		// 指定md临时文件地址
-		String mdTempFilePath = new File(tempDir, "md").getAbsolutePath();
-		logger.info("{} md use temp file path : {}", gatewayId, mdTempFilePath);
+		String mdTempFilePath = new File(tempBaseDir, "md").getAbsolutePath();
+		log.info("{} md use temp file path : {}", gatewayId, mdTempFilePath);
 		// 创建mdApi
 		this.mdApi = CThostFtdcMdApi.CreateFtdcMdApi(mdTempFilePath);
 		// 创建mdSpi
@@ -151,19 +160,19 @@ public class CtpGateway {
 		// 将mdSpi注册到mdApi
 		mdApi.RegisterSpi(mdSpi);
 		// 注册到md前置机
-		mdApi.RegisterFront(connectionInfo.getMdAddress());
+		mdApi.RegisterFront(ctpConfigInfo.getMdAddress());
 		// 初始化mdApi
 		mdApi.Init();
-		logger.info("Call mdApi.Init()...");
+		log.info("Call mdApi.Init()...");
 		// 阻塞当前线程
 		mdApi.Join();
-		logger.info("Call mdApi.Join()");
+		log.info("Call mdApi.Join()");
 	}
 
-	private void traderInitAndJoin(File tempDir) {
+	private void traderInitAndJoin(File tempBaseDir) {
 		// 指定trader临时文件地址
-		String traderTempFilePath = new File(tempDir, "trader").getAbsolutePath();
-		logger.info("{} trader use temp file path : {}", gatewayId, traderTempFilePath);
+		String traderTempFilePath = new File(tempBaseDir, "trader").getAbsolutePath();
+		log.info("{} trader use temp file path : {}", gatewayId, traderTempFilePath);
 		// 创建traderApi
 		this.traderApi = CThostFtdcTraderApi.CreateFtdcTraderApi(traderTempFilePath);
 		// 创建traderSpi
@@ -171,30 +180,30 @@ public class CtpGateway {
 		// 将traderSpi注册到traderApi
 		traderApi.RegisterSpi(traderSpi);
 		// 注册到trader前置机
-		traderApi.RegisterFront(connectionInfo.getTraderAddress());
+		traderApi.RegisterFront(ctpConfigInfo.getTraderAddress());
 		// 订阅公有流
 		traderApi.SubscribePublicTopic(THOST_TE_RESUME_TYPE.THOST_TERT_QUICK);
 		// 订阅私有流
 		traderApi.SubscribePrivateTopic(THOST_TE_RESUME_TYPE.THOST_TERT_QUICK);
 		// 初始化traderApi
 		traderApi.Init();
-		logger.info("Call traderApi.Init()...");
+		log.info("Call traderApi.Init()...");
 		// 阻塞当前线程
 		traderApi.Join();
-		logger.info("Call traderApi.Join()");
+		log.info("Call traderApi.Join()");
 	}
 
 	void onMdFrontConnected() {
 		CThostFtdcReqUserLoginField reqUserLogin = new CThostFtdcReqUserLoginField();
-		reqUserLogin.setBrokerID(connectionInfo.getBrokerId());
-		reqUserLogin.setUserID(connectionInfo.getUserId());
-		reqUserLogin.setPassword(connectionInfo.getPassword());
+		reqUserLogin.setBrokerID(ctpConfigInfo.getBrokerId());
+		reqUserLogin.setUserID(ctpConfigInfo.getUserId());
+		reqUserLogin.setPassword(ctpConfigInfo.getPassword());
 		mdApi.ReqUserLogin(reqUserLogin, ++mdRequestId);
-		logger.info("Send Md ReqUserLogin OK");
+		log.info("Send Md ReqUserLogin OK");
 	}
 
 	void onMdRspUserLogin(CThostFtdcRspUserLoginField rspUserLogin) {
-		logger.info("Md UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLogin.getBrokerID(),
+		log.info("Md UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLogin.getBrokerID(),
 				rspUserLogin.getUserID());
 		this.isMdLogin = true;
 		innerSubscribeMarketData();
@@ -207,11 +216,11 @@ public class CtpGateway {
 	 */
 	public void subscribeMarketData(Set<String> inputInstruementSet) {
 		subscribeInstruementSet.addAll(inputInstruementSet);
-		logger.info("Add Subscribe Instruement set -> Count==[{}]", inputInstruementSet.size());
+		log.info("Add Subscribe Instruement set -> Count==[{}]", inputInstruementSet.size());
 		if (isMdLogin && !subscribeInstruementSet.isEmpty())
 			innerSubscribeMarketData();
 		else
-			logger.info("Cannot SubscribeMarketData -> isMdLogin==[false]");
+			log.info("Cannot SubscribeMarketData -> isMdLogin==[false]");
 	}
 
 	private void innerSubscribeMarketData() {
@@ -220,16 +229,16 @@ public class CtpGateway {
 			Iterator<String> iterator = subscribeInstruementSet.iterator();
 			for (int i = 0; i < instruementIdList.length; i++) {
 				instruementIdList[i] = iterator.next();
-				logger.info("Add Subscribe Instruement -> instruementCode==[{}]", instruementIdList[i]);
+				log.info("Add Subscribe Instruement -> instruementCode==[{}]", instruementIdList[i]);
 			}
 			mdApi.SubscribeMarketData(instruementIdList, instruementIdList.length);
 			subscribeInstruementSet.clear();
-			logger.info("Send SubscribeMarketData -> count==[{}]", instruementIdList.length);
+			log.info("Send SubscribeMarketData -> count==[{}]", instruementIdList.length);
 		}
 	}
 
 	void onRspSubMarketData(CThostFtdcSpecificInstrumentField specificInstrument) {
-		logger.info("SubscribeMarketData Success -> InstrumentCode==[{}]", specificInstrument);
+		log.info("SubscribeMarketData Success -> InstrumentCode==[{}]", specificInstrument);
 	}
 
 	private Function<CThostFtdcDepthMarketDataField, RspDepthMarketData> depthMarketDataFunction = from -> {
@@ -257,7 +266,7 @@ public class CtpGateway {
 	};
 
 	void onRtnDepthMarketData(CThostFtdcDepthMarketDataField depthMarketData) {
-		logger.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
+		log.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
 				depthMarketData.getInstrumentID(), depthMarketData.getUpdateTime(),
 				depthMarketData.getUpdateMillisec());
 		inboundBuffer.enqueue(RspMsg.ofDepthMarketData(depthMarketDataFunction.apply(depthMarketData)));
@@ -270,12 +279,12 @@ public class CtpGateway {
 		if (isTraderLogin) {
 			// set account
 			// TODO
-			inputOrder.setAccountID(connectionInfo.getAccountId());
-			inputOrder.setUserID(connectionInfo.getUserId());
-			inputOrder.setBrokerID(connectionInfo.getBrokerId());
+			inputOrder.setAccountID(ctpConfigInfo.getAccountId());
+			inputOrder.setUserID(ctpConfigInfo.getUserId());
+			inputOrder.setBrokerID(ctpConfigInfo.getBrokerId());
 			traderApi.ReqOrderInsert(inputOrder, ++traderRequestId);
 		} else
-			logger.warn("TraderApi is not login, isTraderLogin==[false]");
+			log.warn("TraderApi is not login, isTraderLogin==[false]");
 	}
 
 	private RspOrderInsertConverter orderInsertConverter = new RspOrderInsertConverter();
@@ -291,7 +300,7 @@ public class CtpGateway {
 	private RtnOrderConverter rtnOrderConverter = new RtnOrderConverter();
 
 	void onRtnOrder(CThostFtdcOrderField rtnOrder) {
-		logger.debug("Gateway onRtnOrder -> AccountID==[{}], OrderRef==[{}]", rtnOrder.getAccountID(),
+		log.debug("Gateway onRtnOrder -> AccountID==[{}], OrderRef==[{}]", rtnOrder.getAccountID(),
 				rtnOrder.getOrderRef());
 		inboundBuffer.enqueue(RspMsg.ofRtnOrder(rtnOrderConverter.apply(rtnOrder)));
 	}
@@ -299,7 +308,7 @@ public class CtpGateway {
 	private RtnTradeConverter rtnTradeConverter = new RtnTradeConverter();
 
 	void onRtnTrade(CThostFtdcTradeField rtnTrade) {
-		logger.debug("Gateway onRtnTrade -> OrderRef==[{}], Price==[{}], Volume==[{}]", rtnTrade.getOrderRef(),
+		log.debug("Gateway onRtnTrade -> OrderRef==[{}], Price==[{}], Volume==[{}]", rtnTrade.getOrderRef(),
 				rtnTrade.getPrice(), rtnTrade.getVolume());
 		inboundBuffer.enqueue(RspMsg.ofRtnTrade(rtnTradeConverter.apply(rtnTrade)));
 	}
@@ -309,12 +318,12 @@ public class CtpGateway {
 	 */
 	public void cancelOrder(CThostFtdcInputOrderActionField inputOrderAction) {
 		if (isTraderLogin) {
-			inputOrderAction.setBrokerID(connectionInfo.getBrokerId());
-			inputOrderAction.setUserID(connectionInfo.getUserId());
-			inputOrderAction.setBrokerID(connectionInfo.getBrokerId());
+			inputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
+			inputOrderAction.setUserID(ctpConfigInfo.getUserId());
+			inputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
 			traderApi.ReqOrderAction(inputOrderAction, ++traderRequestId);
 		} else
-			logger.error("Trader Error :: TraderApi is not login");
+			log.error("Trader Error :: TraderApi is not login");
 	}
 
 	private RspOrderActionConverter orderActionConverter = new RspOrderActionConverter();
@@ -328,22 +337,22 @@ public class CtpGateway {
 	}
 
 	void onRspError(CThostFtdcRspInfoField rspInfo) {
-		logger.error("Gateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfo.getErrorID(),
+		log.error("Gateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfo.getErrorID(),
 				StringUtil.conversionGbkToUtf8(rspInfo.getErrorMsg()));
 	}
 
 	void onTraderFrontConnected() {
 		CThostFtdcReqUserLoginField reqUserLogin = new CThostFtdcReqUserLoginField();
-		reqUserLogin.setBrokerID(connectionInfo.getBrokerId());
-		reqUserLogin.setUserID(connectionInfo.getUserId());
-		reqUserLogin.setPassword(connectionInfo.getPassword());
-		reqUserLogin.setUserProductInfo(connectionInfo.getUserProductInfo());
+		reqUserLogin.setBrokerID(ctpConfigInfo.getBrokerId());
+		reqUserLogin.setUserID(ctpConfigInfo.getUserId());
+		reqUserLogin.setPassword(ctpConfigInfo.getPassword());
+		reqUserLogin.setUserProductInfo(ctpConfigInfo.getUserProductInfo());
 		traderApi.ReqUserLogin(reqUserLogin, ++traderRequestId);
-		logger.info("Send Trader ReqUserLogin OK");
+		log.info("Send Trader ReqUserLogin OK");
 	}
 
 	void onTraderRspUserLogin(CThostFtdcRspUserLoginField rspUserLogin) {
-		logger.info("Trader UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLogin.getBrokerID(),
+		log.info("Trader UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLogin.getBrokerID(),
 				rspUserLogin.getUserID());
 		this.isTraderLogin = true;
 		qureyAccount();
@@ -356,16 +365,16 @@ public class CtpGateway {
 	private void innerQureyAccount() {
 		ThreadUtil.sleep(1250);
 		CThostFtdcQryTradingAccountField qryTradingAccount = new CThostFtdcQryTradingAccountField();
-		qryTradingAccount.setBrokerID(connectionInfo.getBrokerId());
-		qryTradingAccount.setInvestorID(connectionInfo.getInvestorId());
-		qryTradingAccount.setCurrencyID(connectionInfo.getCurrencyId());
+		qryTradingAccount.setBrokerID(ctpConfigInfo.getBrokerId());
+		qryTradingAccount.setInvestorID(ctpConfigInfo.getInvestorId());
+		qryTradingAccount.setCurrencyID(ctpConfigInfo.getCurrencyId());
 		int nRequestID = ++traderRequestId;
 		traderApi.ReqQryTradingAccount(qryTradingAccount, nRequestID);
-		logger.info("Send ReqQryTradingAccount OK -> nRequestID==[{}]", nRequestID);
+		log.info("Send ReqQryTradingAccount OK -> nRequestID==[{}]", nRequestID);
 	}
 
 	void onQryTradingAccount(CThostFtdcTradingAccountField tradingAccount) {
-		logger.info("onQryTradingAccount -> Balance==[{}] Available==[{}] WithdrawQuota==[{}] Credit==[{}]",
+		log.info("onQryTradingAccount -> Balance==[{}] Available==[{}] WithdrawQuota==[{}] Credit==[{}]",
 				tradingAccount.getBalance(), tradingAccount.getAvailable(), tradingAccount.getWithdrawQuota(),
 				tradingAccount.getCredit());
 		qureyPosition();
@@ -378,34 +387,34 @@ public class CtpGateway {
 	private void innerQureyPosition() {
 		ThreadUtil.sleep(1250);
 		CThostFtdcQryInvestorPositionField qryInvestorPosition = new CThostFtdcQryInvestorPositionField();
-		qryInvestorPosition.setBrokerID(connectionInfo.getBrokerId());
-		qryInvestorPosition.setInvestorID(connectionInfo.getInvestorId());
+		qryInvestorPosition.setBrokerID(ctpConfigInfo.getBrokerId());
+		qryInvestorPosition.setInvestorID(ctpConfigInfo.getInvestorId());
 		int nRequestID = ++traderRequestId;
 		traderApi.ReqQryInvestorPosition(qryInvestorPosition, nRequestID);
-		logger.info("Send ReqQryInvestorPosition OK -> nRequestID==[{}]", nRequestID);
+		log.info("Send ReqQryInvestorPosition OK -> nRequestID==[{}]", nRequestID);
 	}
 
 	void onRspQryInvestorPosition(CThostFtdcInvestorPositionField investorPosition) {
-		logger.info("onRspQryInvestorPosition -> InstrumentID==[{}] InvestorID==[{}] Position==[{}]",
+		log.info("onRspQryInvestorPosition -> InstrumentID==[{}] InvestorID==[{}] Position==[{}]",
 				investorPosition.getInstrumentID(), investorPosition.getInvestorID(), investorPosition.getPosition());
 	}
 
 	public void qureySettlementInfo() {
 		CThostFtdcQrySettlementInfoField qrySettlementInfo = new CThostFtdcQrySettlementInfoField();
-		qrySettlementInfo.setBrokerID(connectionInfo.getBrokerId());
-		qrySettlementInfo.setInvestorID(connectionInfo.getInvestorId());
-		qrySettlementInfo.setTradingDay(connectionInfo.getTradingDay());
-		qrySettlementInfo.setAccountID(connectionInfo.getAccountId());
-		qrySettlementInfo.setCurrencyID(connectionInfo.getCurrencyId());
+		qrySettlementInfo.setBrokerID(ctpConfigInfo.getBrokerId());
+		qrySettlementInfo.setInvestorID(ctpConfigInfo.getInvestorId());
+		qrySettlementInfo.setTradingDay(ctpConfigInfo.getTradingDay());
+		qrySettlementInfo.setAccountID(ctpConfigInfo.getAccountId());
+		qrySettlementInfo.setCurrencyID(ctpConfigInfo.getCurrencyId());
 		int nRequestID = ++traderRequestId;
 		traderApi.ReqQrySettlementInfo(qrySettlementInfo, nRequestID);
-		logger.info("Send ReqQrySettlementInfo OK -> nRequestID==[{}]", nRequestID);
+		log.info("Send ReqQrySettlementInfo OK -> nRequestID==[{}]", nRequestID);
 	}
 
 	public void qureyInstrument() {
 		CThostFtdcQryInstrumentField qryInstrument = new CThostFtdcQryInstrumentField();
 		traderApi.ReqQryInstrument(qryInstrument, ++traderRequestId);
-		logger.info("Send ReqQryInstrument OK");
+		log.info("Send ReqQryInstrument OK");
 	}
 
 }

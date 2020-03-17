@@ -13,7 +13,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public class MdSpiImpl0 extends CThostFtdcMdSpi {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	private CtpGateway0 gateway;
 
@@ -23,35 +23,35 @@ public class MdSpiImpl0 extends CThostFtdcMdSpi {
 
 	@Override
 	public void OnFrontConnected() {
-		logger.info("MdSpiImpl OnFrontConnected");
+		log.info("MdSpiImpl OnFrontConnected");
 		gateway.onMdFrontConnected();
 	}
 
 	@Override
 	public void OnFrontDisconnected(int nReason) {
-		logger.warn("MdSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
+		log.warn("MdSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
 	}
 
 	@Override
 	public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
 		validateRspInfo("OnRspUserLogin", pRspInfo);
-		logger.info("MdSpiImpl OnRspUserLogin");
+		log.info("MdSpiImpl OnRspUserLogin");
 		if (pRspUserLogin != null)
 			gateway.onMdRspUserLogin(pRspUserLogin);
 		else
-			logger.info("OnRspUserLogin return null");
+			log.info("OnRspUserLogin return null");
 	}
 
 	@Override
 	public void OnRspSubMarketData(CThostFtdcSpecificInstrumentField pSpecificInstrument,
 			CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
 		validateRspInfo("OnRspSubMarketData", pRspInfo);
-		logger.info("MdSpiImpl OnRspSubMarketData");
+		log.info("MdSpiImpl OnRspSubMarketData");
 		if (pSpecificInstrument != null)
 			gateway.onRspSubMarketData(pSpecificInstrument);
 		else
-			logger.info("OnRspSubMarketData return null");
+			log.info("OnRspSubMarketData return null");
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class MdSpiImpl0 extends CThostFtdcMdSpi {
 		if (pDepthMarketData != null)
 			gateway.onRtnDepthMarketData(pDepthMarketData);
 		else
-			logger.info("OnRtnDepthMarketData return null");
+			log.info("OnRtnDepthMarketData return null");
 	}
 
 }

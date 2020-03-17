@@ -116,4 +116,28 @@ public final class RspMsg {
 		return errRtnOrderAction;
 	}
 
+	public static enum RspMsgType {
+
+		DepthMarketData,
+
+		RtnOrder,
+
+		RtnTrade,
+
+		RspOrderInsert,
+
+		RspOrderAction,
+
+		ErrRtnOrderInsert,
+
+		ErrRtnOrderAction,
+		
+		
+		
+		Other,
+
+		;
+
+	}
+
 }

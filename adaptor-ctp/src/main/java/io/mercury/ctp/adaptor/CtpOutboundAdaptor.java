@@ -21,7 +21,7 @@ import io.redstone.engine.actor.AppGlobalStatus;
 
 public class CtpOutboundAdaptor extends OutboundAdaptor {
 
-	private final Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	private Function<Order, CThostFtdcInputOrderField> newOrderFunction = order -> {
 		int orderRef = CtpOrderRefGenerate.next(AppGlobalStatus.appId());
@@ -72,7 +72,7 @@ public class CtpOutboundAdaptor extends OutboundAdaptor {
 			gateway.newOrder(ctpNewOrder);
 			return true;
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 			return false;
 		}
 	}
@@ -86,7 +86,7 @@ public class CtpOutboundAdaptor extends OutboundAdaptor {
 			gateway.cancelOrder(ctpCancelOrder);
 			return true;
 		} catch (OrderRefNotFoundException e) {
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 			return false;
 		} catch (Exception e) {
 			return false;
@@ -100,7 +100,7 @@ public class CtpOutboundAdaptor extends OutboundAdaptor {
 					.map(instrument -> instrument.code()).collect(Collectors.toSet()));
 			return true;
 		} catch (Exception e) {
-			logger.error("subscribeMarketData throw {}", e.getClass().getSimpleName(), e);
+			log.error("subscribeMarketData throw {}", e.getClass().getSimpleName(), e);
 			return false;
 		}
 	}

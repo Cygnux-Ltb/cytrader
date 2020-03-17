@@ -23,7 +23,7 @@ import io.mercury.common.param.ImmutableParamMap;
 import io.mercury.ctp.adaptor.exception.OrderRefNotFoundException;
 import io.mercury.ctp.adaptor.utils.CtpOrderRefKeeper;
 import io.mercury.ctp.gateway.CtpGateway;
-import io.mercury.ctp.gateway.bean.config.CtpConnectionInfo;
+import io.mercury.ctp.gateway.bean.config.CtpConfigInfo;
 import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
 import io.mercury.ctp.gateway.bean.rsp.RspOrderAction;
 import io.mercury.ctp.gateway.bean.rsp.RspOrderInsert;
@@ -38,7 +38,7 @@ import io.redstone.core.strategy.StrategyScheduler;
 
 public class CtpInboundAdaptor extends InboundAdaptor {
 
-	private final Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newFormatter();
 
@@ -52,17 +52,15 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);
 
 		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
-		logger.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]",
+		log.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]",
 				instrument.code(), depthDate, depthTime);
 
-		return BasicMarketData
-				.with(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST),
-						priceToLong4(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
-						priceToLong4(depthMarketData.getTurnover()))
-				.setBidPrice1(priceToLong4(depthMarketData.getBidPrice1()))
-				.setBidVolume1(depthMarketData.getBidVolume1())
-				.setAskPrice1(priceToLong4(depthMarketData.getAskPrice1()))
-				.setAskVolume1(depthMarketData.getAskVolume1());
+		return new BasicMarketData(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST),
+				priceToLong4(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
+				priceToLong4(depthMarketData.getTurnover())).setBidPrice1(priceToLong4(depthMarketData.getBidPrice1()))
+						.setBidVolume1(depthMarketData.getBidVolume1())
+						.setAskPrice1(priceToLong4(depthMarketData.getAskPrice1()))
+						.setAskVolume1(depthMarketData.getAskVolume1());
 	};
 
 	private Converter<RtnOrder, OrdReport> rtnOrderConverter = (from, to) -> {
@@ -77,11 +75,11 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 
 	private final CtpGateway gateway;
 
-	public CtpInboundAdaptor(int adaptorId, String adaptorName, StrategyScheduler scheduler,
-			ImmutableParamMap<CtpAdaptorParams> paramMap) {
+	public CtpInboundAdaptor(final int adaptorId, final String adaptorName, final StrategyScheduler scheduler,
+			final ImmutableParamMap<CtpAdaptorParams> paramMap) {
 		super(adaptorId, adaptorName);
 		// 写入Gateway用户信息
-		CtpConnectionInfo userInfo = CtpConnectionInfo.newEmpty()
+		CtpConfigInfo userInfo = new CtpConfigInfo()
 				.setTraderAddress(paramMap.getString(CtpAdaptorParams.CTP_Trader_Address))
 				.setMdAddress(paramMap.getString(CtpAdaptorParams.CTP_Md_Address))
 				.setBrokerId(paramMap.getString(CtpAdaptorParams.CTP_BrokerId))
@@ -91,7 +89,7 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 				.setPassword(paramMap.getString(CtpAdaptorParams.CTP_Password));
 		// 初始化Gateway
 
-		this.gateway = new CtpGateway("Jctp-Gateway", userInfo,
+		this.gateway = new CtpGateway("CTP-Gateway", userInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, msg -> {
 					switch (msg.getType()) {
 					case DepthMarketData:
@@ -110,16 +108,18 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 						break;
 					case RspOrderInsert:
 						RspOrderInsert rspOrderInsert = msg.getRspOrderInsert();
-						
+
 						break;
 					case RspOrderAction:
 						RspOrderAction rspOrderAction = msg.getRspOrderAction();
 						break;
 					case ErrRtnOrderInsert:
 						CThostFtdcInputOrderField errRtnOrderInsert = msg.getErrRtnOrderInsert();
+
 						break;
 					case ErrRtnOrderAction:
 						CThostFtdcOrderActionField errRtnOrderAction = msg.getErrRtnOrderAction();
+
 						break;
 					default:
 						break;
@@ -132,11 +132,11 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 			long orderSysId = CtpOrderRefKeeper.getOrdSysId(orderRef);
 			return new OrdReport().setOrdSysId(orderSysId);
 		} catch (OrderRefNotFoundException e) {
-			logger.error(e.getMessage(), e);
+			log.error(e.getMessage(), e);
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public CtpGateway getGateway() {
 		return gateway;
 	}

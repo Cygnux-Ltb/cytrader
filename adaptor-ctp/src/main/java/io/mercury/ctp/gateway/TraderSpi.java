@@ -23,7 +23,7 @@ import io.mercury.common.util.StringUtil;
 
 public final class TraderSpi extends CThostFtdcTraderSpi {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	private CtpGateway gateway;
 
@@ -33,31 +33,31 @@ public final class TraderSpi extends CThostFtdcTraderSpi {
 
 	@Override
 	public void OnFrontConnected() {
-		logger.info("TraderSpiImpl OnFrontConnected");
+		log.info("TraderSpiImpl OnFrontConnected");
 		gateway.onTraderFrontConnected();
 	}
 
 	@Override
 	public void OnFrontDisconnected(int nReason) {
-		logger.warn("TraderSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
+		log.warn("TraderSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
 	}
 
 	@Override
 	public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
 		validateRspInfo("OnRspUserLogin", pRspInfo);
-		logger.info("TraderSpiImpl OnRspUserLogin");
+		log.info("TraderSpiImpl OnRspUserLogin");
 		if (pRspUserLogin != null)
 			gateway.onTraderRspUserLogin(pRspUserLogin);
 		else
-			logger.info("OnRspUserLogin return null");
+			log.info("OnRspUserLogin return null");
 	}
 
 	@Override
 	public void OnRspAuthenticate(CThostFtdcRspAuthenticateField pRspAuthenticateField, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
 		validateRspInfo("OnRspAuthenticate", pRspInfo);
-		logger.info("TraderSpiImpl OnRspAuthenticate");
+		log.info("TraderSpiImpl OnRspAuthenticate");
 		if (pRspAuthenticateField != null) {
 
 		}
@@ -67,18 +67,18 @@ public final class TraderSpi extends CThostFtdcTraderSpi {
 	public void OnRspUserLogout(CThostFtdcUserLogoutField pUserLogout, CThostFtdcRspInfoField pRspInfo, int nRequestID,
 			boolean bIsLast) {
 		validateRspInfo("OnRspUserLogout", pRspInfo);
-		logger.info("Call TraderSpiImpl OnRspUserLogout");
+		log.info("Call TraderSpiImpl OnRspUserLogout");
 	}
 
 	@Override
 	public void OnRspQryTradingAccount(CThostFtdcTradingAccountField pTradingAccount, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
 		validateRspInfo("OnRspQryTradingAccount", pRspInfo);
-		logger.info("Call TraderSpiImpl OnRspQryTradingAccount");
+		log.info("Call TraderSpiImpl OnRspQryTradingAccount");
 		if (pTradingAccount != null)
 			gateway.onQryTradingAccount(pTradingAccount);
 		else
-			logger.warn("OnRspQryTradingAccount return null");
+			log.warn("OnRspQryTradingAccount return null");
 
 	}
 
@@ -86,11 +86,11 @@ public final class TraderSpi extends CThostFtdcTraderSpi {
 	public void OnRspQryInvestorPosition(CThostFtdcInvestorPositionField pInvestorPosition,
 			CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
 		validateRspInfo("OnRspQryInvestorPosition", pRspInfo);
-		logger.info("Call TraderSpiImpl OnRspQryInvestorPosition");
+		log.info("Call TraderSpiImpl OnRspQryInvestorPosition");
 		if (pInvestorPosition != null)
 			gateway.onRspQryInvestorPosition(pInvestorPosition);
 		else
-			logger.warn("OnRspQryInvestorPosition return null");
+			log.warn("OnRspQryInvestorPosition return null");
 	}
 
 	@Override
@@ -98,10 +98,9 @@ public final class TraderSpi extends CThostFtdcTraderSpi {
 			int nRequestID, boolean bIsLast) {
 		validateRspInfo("OnRspQrySettlementInfo", pRspInfo);
 		if (pSettlementInfo != null)
-			logger.info("OnRspQrySettlementInfo -> \n {}",
-					StringUtil.conversionGbkToUtf8(pSettlementInfo.getContent()));
+			log.info("OnRspQrySettlementInfo -> \n {}", StringUtil.conversionGbkToUtf8(pSettlementInfo.getContent()));
 		else
-			logger.warn("OnRspQrySettlementInfo return null");
+			log.warn("OnRspQrySettlementInfo return null");
 	}
 
 	@Override
@@ -109,9 +108,9 @@ public final class TraderSpi extends CThostFtdcTraderSpi {
 			int nRequestID, boolean bIsLast) {
 		validateRspInfo("OnRspQryInstrument", pRspInfo);
 		if (pInstrument != null)
-			logger.info("OnRspQryInstrument -> InstrumentID==[{}]", pInstrument.getInstrumentID());
+			log.info("OnRspQryInstrument -> InstrumentID==[{}]", pInstrument.getInstrumentID());
 		else
-			logger.warn("OnRspQryInstrument return null");
+			log.warn("OnRspQryInstrument return null");
 	}
 
 	@Override
@@ -119,7 +118,7 @@ public final class TraderSpi extends CThostFtdcTraderSpi {
 		if (pOrder != null)
 			gateway.onRtnOrder(pOrder);
 		else
-			logger.warn("OnRtnOrder return null");
+			log.warn("OnRtnOrder return null");
 	}
 
 	@Override
@@ -127,7 +126,7 @@ public final class TraderSpi extends CThostFtdcTraderSpi {
 		if (pTrade != null)
 			gateway.onRtnTrade(pTrade);
 		else
-			logger.warn("OnRtnTrade return null");
+			log.warn("OnRtnTrade return null");
 	}
 
 	@Override
@@ -158,7 +157,7 @@ public final class TraderSpi extends CThostFtdcTraderSpi {
 
 	@Override
 	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		logger.info("Unhandle OnRspError");
+		log.info("Unhandle OnRspError");
 		gateway.onRspError(pRspInfo);
 	}
 

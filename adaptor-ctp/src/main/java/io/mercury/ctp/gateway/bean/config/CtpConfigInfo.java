@@ -1,6 +1,6 @@
 package io.mercury.ctp.gateway.bean.config;
 
-public class CtpConnectionInfo {
+public class CtpConfigInfo {
 
 	private String traderAddress;
 	private String mdAddress;
@@ -16,9 +16,9 @@ public class CtpConnectionInfo {
 	private String tradingDay;
 	private String currencyId;
 
-	public static final CtpConnectionInfo newEmpty() {
-		return new CtpConnectionInfo();
-	}
+//	public static final CtpConfigInfo newEmpty() {
+//		return new CtpConfigInfo();
+//	}
 
 	public String getTraderAddress() {
 		return traderAddress;
@@ -64,57 +64,57 @@ public class CtpConnectionInfo {
 		return currencyId;
 	}
 
-	public CtpConnectionInfo setTraderAddress(String traderAddress) {
+	public CtpConfigInfo setTraderAddress(String traderAddress) {
 		this.traderAddress = traderAddress;
 		return this;
 	}
 
-	public CtpConnectionInfo setMdAddress(String mdAddress) {
+	public CtpConfigInfo setMdAddress(String mdAddress) {
 		this.mdAddress = mdAddress;
 		return this;
 	}
 
-	public CtpConnectionInfo setBrokerId(String brokerId) {
+	public CtpConfigInfo setBrokerId(String brokerId) {
 		this.brokerId = brokerId;
 		return this;
 	}
 
-	public CtpConnectionInfo setInvestorId(String investorId) {
+	public CtpConfigInfo setInvestorId(String investorId) {
 		this.investorId = investorId;
 		return this;
 	}
 
-	public CtpConnectionInfo setAccountId(String accountId) {
+	public CtpConfigInfo setAccountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
 
-	public CtpConnectionInfo setUserId(String userId) {
+	public CtpConfigInfo setUserId(String userId) {
 		this.userId = userId;
 		return this;
 	}
 
-	public CtpConnectionInfo setUserProductInfo(String userProductInfo) {
+	public CtpConfigInfo setUserProductInfo(String userProductInfo) {
 		this.userProductInfo = userProductInfo;
 		return this;
 	}
 
-	public CtpConnectionInfo setPassword(String password) {
+	public CtpConfigInfo setPassword(String password) {
 		this.password = password;
 		return this;
 	}
 
-	public CtpConnectionInfo setAuthCode(String authCode) {
+	public CtpConfigInfo setAuthCode(String authCode) {
 		this.authCode = authCode;
 		return this;
 	}
 
-	public CtpConnectionInfo setTradingDay(String tradingDay) {
+	public CtpConfigInfo setTradingDay(String tradingDay) {
 		this.tradingDay = tradingDay;
 		return this;
 	}
 
-	public CtpConnectionInfo setCurrencyId(String currencyId) {
+	public CtpConfigInfo setCurrencyId(String currencyId) {
 		this.currencyId = currencyId;
 		return this;
 	}

@@ -10,14 +10,14 @@ import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadUtil;
 import io.mercury.ctp.gateway.CtpGateway;
-import io.mercury.ctp.gateway.bean.config.CtpConnectionInfo;
+import io.mercury.ctp.gateway.bean.config.CtpConfigInfo;
 import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
 import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
 import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
 
 public class CtpGatewayTest {
 
-	private final Logger logger = CommonLoggerFactory.getLogger(CtpGatewayTest.class);
+	private final Logger log = CommonLoggerFactory.getLogger(CtpGatewayTest.class);
 
 	//标准CTP
 //	private String TradeAddress = "tcp://180.168.146.187:10100";
@@ -41,7 +41,7 @@ public class CtpGatewayTest {
 	@Test
 	public void test() {
 
-		CtpConnectionInfo simnowUserInfo = CtpConnectionInfo.newEmpty().setTraderAddress(TradeAddress).setMdAddress(MdAddress)
+		CtpConfigInfo simnowUserInfo = new CtpConfigInfo().setTraderAddress(TradeAddress).setMdAddress(MdAddress)
 				.setBrokerId(BrokerId).setInvestorId(InvestorId).setUserId(UserId).setAccountId(AccountId)
 				.setPassword(Password).setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
@@ -50,7 +50,7 @@ public class CtpGatewayTest {
 					switch (msg.getType()) {
 					case DepthMarketData:
 						RspDepthMarketData depthMarketData = msg.getRspDepthMarketData();
-						logger.info(
+						log.info(
 								"Handle CThostFtdcDepthMarketDataField -> InstrumentID==[{}]  UpdateTime==[{}]  UpdateMillisec==[{}]  AskPrice1==[{}]  BidPrice1==[{}]",
 								depthMarketData.getInstrumentID(), depthMarketData.getUpdateTime(),
 								depthMarketData.getUpdateMillisec(), depthMarketData.getAskPrice1(),
@@ -58,11 +58,11 @@ public class CtpGatewayTest {
 						break;
 					case RtnOrder:
 						RtnOrder order = msg.getRtnOrder();
-						logger.info("Handle RtnOrder -> OrderRef==[{}]", order.getOrderRef());
+						log.info("Handle RtnOrder -> OrderRef==[{}]", order.getOrderRef());
 						break;
 					case RtnTrade:
 						RtnTrade trade = msg.getRtnTrade();
-						logger.info("Handle RtnTrade -> OrderRef==[{}]", trade.getOrderRef());
+						log.info("Handle RtnTrade -> OrderRef==[{}]", trade.getOrderRef());
 						break;
 					default:
 						break;
