@@ -40,7 +40,7 @@ public abstract class SingleLayerIndicatorPool<I extends BaseIndicator<?, ?>> ex
 		MutableIntObjectMap<I> indicatorMap = getIndicatorMap(period);
 		I saved = indicatorMap.get(instrument.id());
 		if (saved != null) {
-			logger.warn("Indicator existed. period==[{}], instrumentCode==[{}]", period, instrument.id());
+			log.warn("Indicator existed. period==[{}], instrumentCode==[{}]", period, instrument.id());
 			return false;
 		}
 		indicatorMap.put(instrument.id(), indicator);

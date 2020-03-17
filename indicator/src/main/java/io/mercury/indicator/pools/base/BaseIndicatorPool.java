@@ -10,7 +10,7 @@ import io.mercury.polaris.financial.market.impl.BasicMarketData;
 
 public abstract class BaseIndicatorPool<I extends BaseIndicator<?, ?>> {
 
-	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
+	protected Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	protected MutableList<I> indicators = MutableLists.newFastList();
 

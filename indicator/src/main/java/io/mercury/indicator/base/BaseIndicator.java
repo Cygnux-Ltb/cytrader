@@ -18,7 +18,7 @@ import io.mercury.polaris.financial.market.impl.BasicMarketData;
 public abstract class BaseIndicator<P extends Point<? extends Serial<?>>, E extends IndicatorEvent>
 		implements Indicator<P, E> {
 
-	protected Logger logger = CommonLoggerFactory.getLogger(getClass());
+	protected Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	// 指标对应的标的
 	protected Instrument instrument;
@@ -47,7 +47,7 @@ public abstract class BaseIndicator<P extends Point<? extends Serial<?>>, E exte
 	@Override
 	public void addIndicatorEvent(E event) {
 		if (event != null) {
-			logger.info("Add IndicatorEvent -> name==[{}]", event.eventName());
+			log.info("Add IndicatorEvent -> name==[{}]", event.eventName());
 			events.add(event);
 		}
 	}

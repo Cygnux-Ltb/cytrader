@@ -45,7 +45,7 @@ public abstract class MultiLayerIndicatorPool<I extends BaseIndicator<?, ?>> ext
 		long index = calculateIndex(cycle, instrument);
 		I saved = indicatorMap.get(index);
 		if (saved != null) {
-			logger.warn("Indicator existed. period==[{}], instrumentCode==[{}], cycle==[{}]", period,
+			log.warn("Indicator existed. period==[{}], instrumentCode==[{}], cycle==[{}]", period,
 					instrument.id(), cycle);
 			return false;
 		}
