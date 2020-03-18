@@ -4,7 +4,7 @@ import io.mercury.indicator.event.SmaEvent;
 import io.mercury.indicator.impl.ma.SmaPoint;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.core.adaptor.base.OutboundAdaptor;
+import io.redstone.core.adaptor.api.Adaptor;
 import io.redstone.engine.impl.strategy.IndicatorStrategy;
 
 public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> implements SmaEvent {
@@ -43,7 +43,7 @@ public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> imple
 	}
 
 	@Override
-	protected OutboundAdaptor getOutboundAdaptor(Instrument instrument) {
+	protected Adaptor getAdaptor(Instrument instrument) {
 		// TODO Auto-generated method stub
 		return null;
 	}
