@@ -9,14 +9,19 @@
 		<artifactId>redstone</artifactId>
 		<version>0.1</version>
 	</parent>
-	
+
 	<artifactId>adaptor-ctp</artifactId>
 	<name>adaptor-jctp</name>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>redstone-engine</artifactId>
+			<artifactId>commons-concurrent</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>redstone-core</artifactId>
 		</dependency>
 		<!-- CTP JNI API -->
 		<dependency>
@@ -26,6 +31,6 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/thostapi_v6_3_15.jar</systemPath>
 		</dependency>
-		
+
 	</dependencies>
 </project>

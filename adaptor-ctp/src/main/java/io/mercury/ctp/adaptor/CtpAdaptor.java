@@ -7,9 +7,14 @@ import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.annotation.Nonnull;
 
 import org.slf4j.Logger;
 
+import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
@@ -21,6 +26,7 @@ import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ImmutableParamMap;
 import io.mercury.ctp.adaptor.exception.OrderRefNotFoundException;
+import io.mercury.ctp.adaptor.utils.CtpOrderRefGenerate;
 import io.mercury.ctp.adaptor.utils.CtpOrderRefKeeper;
 import io.mercury.ctp.gateway.CtpGateway;
 import io.mercury.ctp.gateway.bean.config.CtpConfigInfo;
@@ -32,13 +38,16 @@ import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.instrument.InstrumentKeeper;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.core.adaptor.base.InboundAdaptor;
+import io.redstone.core.account.InvestorAccount;
+import io.redstone.core.adaptor.base.BaseAdaptor;
+import io.redstone.core.order.api.Order;
+import io.redstone.core.order.impl.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 
-public class CtpInboundAdaptor extends InboundAdaptor {
+public class CtpAdaptor extends BaseAdaptor {
 
-	private final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(CtpAdaptor.class);
 
 	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newFormatter();
 
@@ -52,8 +61,8 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);
 
 		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
-		log.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]",
-				instrument.code(), depthDate, depthTime);
+		log.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]", instrument.code(),
+				depthDate, depthTime);
 
 		return new BasicMarketData(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST),
 				priceToLong4(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
@@ -73,25 +82,27 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 		return to;
 	};
 
+	private int appId;
 	private final CtpGateway gateway;
 
-	public CtpInboundAdaptor(final int adaptorId, final String adaptorName, final StrategyScheduler scheduler,
-			final ImmutableParamMap<CtpAdaptorParams> paramMap) {
+	public CtpAdaptor(int adaptorId, String adaptorName, int appId, @Nonnull StrategyScheduler scheduler,
+			@Nonnull ImmutableParamMap<CtpAdaptorParam> paramMap) {
 		super(adaptorId, adaptorName);
-		// 写入Gateway用户信息
-		CtpConfigInfo userInfo = new CtpConfigInfo()
-				.setTraderAddress(paramMap.getString(CtpAdaptorParams.CTP_Trader_Address))
-				.setMdAddress(paramMap.getString(CtpAdaptorParams.CTP_Md_Address))
-				.setBrokerId(paramMap.getString(CtpAdaptorParams.CTP_BrokerId))
-				.setInvestorId(paramMap.getString(CtpAdaptorParams.CTP_InvestorId))
-				.setUserId(paramMap.getString(CtpAdaptorParams.CTP_UserId))
-				.setAccountId(paramMap.getString(CtpAdaptorParams.CTP_AccountId))
-				.setPassword(paramMap.getString(CtpAdaptorParams.CTP_Password));
-		// 初始化Gateway
 
-		this.gateway = new CtpGateway("CTP-Gateway", userInfo,
+		// 写入Gateway用户信息
+		CtpConfigInfo configInfo = new CtpConfigInfo()
+				.setTraderAddress(paramMap.getString(CtpAdaptorParam.CTP_Trader_Address))
+				.setMdAddress(paramMap.getString(CtpAdaptorParam.CTP_Md_Address))
+				.setBrokerId(paramMap.getString(CtpAdaptorParam.CTP_BrokerId))
+				.setInvestorId(paramMap.getString(CtpAdaptorParam.CTP_InvestorId))
+				.setUserId(paramMap.getString(CtpAdaptorParam.CTP_UserId))
+				.setAccountId(paramMap.getString(CtpAdaptorParam.CTP_AccountId))
+				.setPassword(paramMap.getString(CtpAdaptorParam.CTP_Password));
+		this.appId = appId;
+		// 初始化Gateway
+		this.gateway = new CtpGateway("CTP-Gateway", configInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, msg -> {
-					switch (msg.getType()) {
+					switch (msg.type()) {
 					case DepthMarketData:
 						BasicMarketData marketData = marketDataConverter.apply(msg.getRspDepthMarketData());
 						scheduler.onMarketData(marketData);
@@ -137,12 +148,8 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 		}
 	}
 
-	public CtpGateway getGateway() {
-		return gateway;
-	}
-
 	@Override
-	public boolean activate() {
+	public boolean startup() {
 		try {
 			gateway.initAndJoin();
 			return true;
@@ -152,11 +159,94 @@ public class CtpInboundAdaptor extends InboundAdaptor {
 	}
 
 	@Override
-	public boolean close() {
-		return true;
+	public boolean subscribeMarketData(Instrument... instruments) {
+		try {
+			gateway.subscribeMarketData(
+					Stream.of(instruments).map(instrument -> instrument.code()).collect(Collectors.toSet()));
+			return true;
+		} catch (Exception e) {
+			log.error("subscribeMarketData exception {}", e.getMessage(), e);
+			return false;
+		}
 	}
 
-	public static void main(String[] args) {
+	private Function<Order, CThostFtdcInputOrderField> newOrderFunction = order -> {
+		int orderRef = CtpOrderRefGenerate.next(appId);
+		char direction;
+		switch (order.ordSide().direction()) {
+		case Long:
+			direction = 0;
+			break;
+		case Short:
+			direction = 1;
+			break;
+		default:
+			throw new RuntimeException(order.ordSide() + " does not exist.");
+		}
+		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
+		inputOrderField.setInstrumentID(order.instrument().code());
+		inputOrderField.setOrderRef(Integer.toString(orderRef));
+		inputOrderField.setDirection(direction);
+		inputOrderField.setLimitPrice(order.ordPrice().offerPrice());
+		inputOrderField.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue());
+		return inputOrderField;
+	};
+
+	@Override
+	public boolean newOredr(ChildOrder order) {
+		try {
+			CThostFtdcInputOrderField ctpNewOrder = newOrderFunction.apply(order);
+			CtpOrderRefKeeper.put(ctpNewOrder.getOrderRef(), order.ordSysId());
+			gateway.newOrder(ctpNewOrder);
+			return true;
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return false;
+		}
+	}
+
+	private Function<Order, CThostFtdcInputOrderActionField> cancelOrderFunction = order -> {
+
+		CThostFtdcInputOrderActionField inputOrderActionField = new CThostFtdcInputOrderActionField();
+		return inputOrderActionField;
+
+	};
+
+	@Override
+	public boolean cancelOrder(ChildOrder order) {
+		try {
+			CThostFtdcInputOrderActionField ctpCancelOrder = cancelOrderFunction.apply(order);
+			String orderRef = CtpOrderRefKeeper.getOrderRef(order.ordSysId());
+			ctpCancelOrder.setOrderRef(orderRef);
+			gateway.cancelOrder(ctpCancelOrder);
+			return true;
+		} catch (OrderRefNotFoundException e) {
+			log.error(e.getMessage());
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean queryPositions(InvestorAccount account) {
+		try {
+			gateway.qureyPosition();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean queryBalance(InvestorAccount account) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void close() throws Exception {
+		// TODO Auto-generated method stub
 
 	}
 

@@ -3,7 +3,7 @@ package io.mercury.ctp.adaptor;
 import io.mercury.common.param.api.ParamKey;
 import io.mercury.common.param.api.ParamType;
 
-public enum CtpAdaptorParams implements ParamKey {
+public enum CtpAdaptorParam implements ParamKey {
 
 	/**
 	 * CTP Params
@@ -28,7 +28,7 @@ public enum CtpAdaptorParams implements ParamKey {
 	private String paramName;
 	private ParamType paramType;
 
-	private CtpAdaptorParams(int paramId, String paramName, ParamType paramType) {
+	private CtpAdaptorParam(int paramId, String paramName, ParamType paramType) {
 		this.paramId = paramId;
 		this.paramName = paramName;
 		this.paramType = paramType;

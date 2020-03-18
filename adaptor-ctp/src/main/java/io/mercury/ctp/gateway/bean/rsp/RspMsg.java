@@ -88,7 +88,7 @@ public final class RspMsg {
 		this.type = type;
 	}
 
-	public RspMsgType getType() {
+	public RspMsgType type() {
 		return type;
 	}
 
