@@ -4,6 +4,7 @@ import io.mercury.common.concurrent.disruptor.BufferSize;
 import io.mercury.common.concurrent.disruptor.SpscQueue;
 import io.mercury.polaris.financial.market.QuoteKeeper;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
+import io.redstone.core.adaptor.api.AdaptorEvent;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.engine.actor.StrategyActor;
@@ -43,6 +44,11 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 	@Override
 	public void onOrderReport(OrdReport orderReport) {
 		msgQueue.enqueue(new EnqueueMsg(OrderReport, orderReport));
+	}
+
+	@Override
+	public void onAdaptorEvent(int adaptorId, AdaptorEvent event) {
+		// TODO Auto-generated method stub
 	}
 
 	private class EnqueueMsg {
