@@ -24,7 +24,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>redstone-engine</artifactId>
+			<artifactId>redstone-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.mercury</groupId>

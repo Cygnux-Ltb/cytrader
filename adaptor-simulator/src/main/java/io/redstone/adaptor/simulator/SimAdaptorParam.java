@@ -3,7 +3,7 @@ package io.redstone.adaptor.simulator;
 import io.mercury.common.param.api.ParamKey;
 import io.mercury.common.param.api.ParamType;
 
-public enum SimAdaptorParams implements ParamKey {
+public enum SimAdaptorParam implements ParamKey {
 
 	/**
 	 * Simulator Params
@@ -28,7 +28,7 @@ public enum SimAdaptorParams implements ParamKey {
 
 	private ParamType paramType;
 
-	private SimAdaptorParams(int paramId, String paramName, ParamType paramType) {
+	private SimAdaptorParam(int paramId, String paramName, ParamType paramType) {
 		this.paramId = paramId;
 		this.paramName = paramName;
 		this.paramType = paramType;
