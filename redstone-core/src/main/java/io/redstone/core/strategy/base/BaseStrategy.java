@@ -18,7 +18,7 @@ import io.mercury.polaris.financial.market.QuoteKeeper.AtomicQuote;
 import io.mercury.polaris.financial.market.api.MarketData;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.account.AccountKeeper;
-import io.redstone.core.adaptor.base.OutboundAdaptor;
+import io.redstone.core.adaptor.api.Adaptor;
 import io.redstone.core.order.OrderExecutor;
 import io.redstone.core.order.api.Order;
 import io.redstone.core.order.enums.OrdSide;
@@ -192,9 +192,9 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 		ParentOrder parentOrder = OrderExecutor.onStrategyOrder(newVirtualOrder);
 
 		//TODO 错误实现
-		OutboundAdaptor outboundAdaptor = getOutboundAdaptor(instrument);
-
-		outboundAdaptor.newOredr(parentOrder.toChildOrder());
+		Adaptor adaptor = getAdaptor(instrument);
+		
+		adaptor.newOredr(parentOrder.toChildOrder());
 	}
 
 	/**
@@ -205,6 +205,6 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	 */
 	@ProtectedAbstractMethod
 	@Deprecated
-	protected abstract OutboundAdaptor getOutboundAdaptor(Instrument instrument);
+	protected abstract Adaptor getAdaptor(Instrument instrument);
 
 }
