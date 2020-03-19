@@ -1,4 +1,4 @@
-package io.redstone.core.order.storage;
+package io.redstone.core.order;
 
 import java.util.Collection;
 
@@ -6,7 +6,6 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
-import io.redstone.core.order.api.Order;
 
 public final class OrderBook {
 

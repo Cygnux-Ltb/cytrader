@@ -7,14 +7,14 @@ import org.eclipse.collections.api.list.MutableList;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.polaris.financial.instrument.Instrument.MarketConstant;
 
-public final class TradeSet {
+public final class OrdTradeSet {
 
 	private long ordSysId;
 	private int serial = -1;
 
-	private MutableList<Trade> allTrade = MutableLists.newFastList(8);
+	private MutableList<OrdTrade> allTrade = MutableLists.newFastList(8);
 
-	public TradeSet(long ordSysId) {
+	public OrdTradeSet(long ordSysId) {
 		this.ordSysId = ordSysId;
 	}
 
@@ -22,7 +22,7 @@ public final class TradeSet {
 		return ordSysId;
 	}
 
-	public MutableList<Trade> allTrade() {
+	public MutableList<OrdTrade> allOrdTrade() {
 		return allTrade;
 	}
 
@@ -30,22 +30,22 @@ public final class TradeSet {
 		return allTrade.isEmpty();
 	}
 
-	public Optional<Trade> firstTrade() {
+	public Optional<OrdTrade> firstTrade() {
 		return allTrade.getFirstOptional();
 	}
 
-	public Optional<Trade> lastTrade() {
+	public Optional<OrdTrade> lastTrade() {
 		return allTrade.getLastOptional();
 	}
 
 	public void addNewTrade(long epochTime, long tradePrice, long qty) {
-		allTrade.add(new Trade(++serial, ordSysId, epochTime, tradePrice, qty));
+		allTrade.add(new OrdTrade(++serial, ordSysId, epochTime, tradePrice, qty));
 	}
 
 	/**
 	 * tradePrice fix use {@link MarketConstant#PriceMultiplier}
 	 */
-	public static class Trade implements Comparable<Trade> {
+	public static class OrdTrade implements Comparable<OrdTrade> {
 
 		private int serial;
 		private long ordSysId;
@@ -54,7 +54,7 @@ public final class TradeSet {
 		private long tradePrice;
 		private long tradeQty;
 
-		public Trade(int serial, long ordSysId, long epochTime, long tradePrice, long tradeQty) {
+		public OrdTrade(int serial, long ordSysId, long epochTime, long tradePrice, long tradeQty) {
 			super();
 			this.ordSysId = ordSysId;
 			this.serial = serial;
@@ -84,7 +84,7 @@ public final class TradeSet {
 		}
 
 		@Override
-		public int compareTo(Trade o) {
+		public int compareTo(OrdTrade o) {
 			return this.serial < o.serial ? -1 : this.serial > o.serial ? 1 : 0;
 		}
 

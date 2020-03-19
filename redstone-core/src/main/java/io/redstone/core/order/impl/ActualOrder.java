@@ -1,13 +1,14 @@
 package io.redstone.core.order.impl;
 
 import io.mercury.polaris.financial.instrument.Instrument;
+import io.redstone.core.order.base.BaseOrder;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.order.structure.StopLoss;
+import io.redstone.core.order.structure.OrdStopLoss;
 
-public abstract class ActualOrder extends AbstractOrder {
+public abstract class ActualOrder extends BaseOrder {
 
 	/**
 	 * 所属策略订单
@@ -17,7 +18,7 @@ public abstract class ActualOrder extends AbstractOrder {
 	/**
 	 * 止损
 	 */
-	private StopLoss stopLoss;
+	private OrdStopLoss ordStopLoss;
 
 	protected ActualOrder(long strategyOrdId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide,
 			OrdType ordType, int strategyId, int subAccountId) {
@@ -25,13 +26,13 @@ public abstract class ActualOrder extends AbstractOrder {
 	}
 
 	protected ActualOrder(long strategyOrdId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide,
-			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+			OrdType ordType, int strategyId, int subAccountId, OrdStopLoss ordStopLoss) {
 		super(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId);
 		this.strategyOrdId = strategyOrdId;
-		if (stopLoss == null)
-			this.stopLoss = new StopLoss(ordSysId(), ordSide.direction());
+		if (ordStopLoss == null)
+			this.ordStopLoss = new OrdStopLoss(ordSysId(), ordSide.direction());
 		else
-			this.stopLoss = stopLoss;
+			this.ordStopLoss = ordStopLoss;
 	}
 
 	@Override
@@ -41,8 +42,8 @@ public abstract class ActualOrder extends AbstractOrder {
 
 	public abstract long parentId();
 
-	public StopLoss stopLoss() {
-		return stopLoss;
+	public OrdStopLoss ordStopLoss() {
+		return ordStopLoss;
 	}
 
 }

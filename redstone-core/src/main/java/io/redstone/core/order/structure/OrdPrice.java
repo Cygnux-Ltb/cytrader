@@ -3,7 +3,7 @@ package io.redstone.core.order.structure;
 import org.eclipse.collections.api.list.MutableList;
 
 import io.mercury.polaris.financial.instrument.Instrument.MarketConstant;
-import io.redstone.core.order.structure.TradeSet.Trade;
+import io.redstone.core.order.structure.OrdTradeSet.OrdTrade;
 
 /**
  * [offerPrice] & [avgPrice] fix use {@link MarketConstant#PriceMultiplier}
@@ -57,9 +57,9 @@ public final class OrdPrice {
 		return isBestPrice;
 	}
 
-	public OrdPrice calculateAvgPrice(TradeSet tradeSet) {
+	public OrdPrice calculateAvgPrice(OrdTradeSet tradeSet) {
 		if (!tradeSet.isEmpty()) {
-			MutableList<Trade> allTrade = tradeSet.allTrade();
+			MutableList<OrdTrade> allTrade = tradeSet.allOrdTrade();
 			// 计算总成交金额
 			long totalTurnover = allTrade.sumOfLong(trade -> trade.tradePrice() * trade.tradeQty());
 			// 计算总成交量

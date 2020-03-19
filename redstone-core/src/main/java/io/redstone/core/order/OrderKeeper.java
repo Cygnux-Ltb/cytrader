@@ -1,4 +1,4 @@
-package io.redstone.core.order.storage;
+package io.redstone.core.order;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -9,7 +9,6 @@ import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.redstone.core.account.AccountKeeper;
-import io.redstone.core.order.api.Order;
 
 @NotThreadSafe
 public final class OrderKeeper {
@@ -57,15 +56,14 @@ public final class OrderKeeper {
 		case NewRejected:
 			getAllOrders().terminatedOrder(order);
 			int subAccountId = order.subAccountId();
-			int accountId = AccountKeeper.getInvestorAccountBySubAccountId(subAccountId).accountId();
+			int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
 			getSubAccountOrderBook(subAccountId).terminatedOrder(order);
 			getAccountOrderBook(accountId).terminatedOrder(order);
 			getStrategyOrderBook(order.strategyId()).terminatedOrder(order);
 			getInstrumentOrderBook(order.instrument().id()).terminatedOrder(order);
 			break;
 		default:
-			log.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.ordSysId(),
-					order.ordStatus());
+			log.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.ordSysId(), order.ordStatus());
 			break;
 		}
 	}
@@ -73,7 +71,7 @@ public final class OrderKeeper {
 	public static void insertOrder(Order order) {
 		getAllOrders().putOrder(order);
 		int subAccountId = order.subAccountId();
-		int accountId = AccountKeeper.getInvestorAccountBySubAccountId(subAccountId).accountId();
+		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
 		getSubAccountOrderBook(subAccountId).putOrder(order);
 		getAccountOrderBook(accountId).putOrder(order);
 		getStrategyOrderBook(order.strategyId()).putOrder(order);

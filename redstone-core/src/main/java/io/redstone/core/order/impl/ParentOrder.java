@@ -11,7 +11,7 @@ import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.order.structure.StopLoss;
+import io.redstone.core.order.structure.OrdStopLoss;
 
 /**
  * 
@@ -25,7 +25,7 @@ public final class ParentOrder extends ActualOrder {
 	private MutableList<ChildOrder> childOrders;
 
 	public ParentOrder(long strategyOrdId, Instrument instrument, long offerQty, long offerPrice, OrdSide ordSide,
-			OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+			OrdType ordType, int strategyId, int subAccountId, OrdStopLoss stopLoss) {
 		super(strategyOrdId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice), ordSide,
 				ordType, strategyId, subAccountId, stopLoss);
 		this.childOrders = MutableLists.newFastList(8);
@@ -33,8 +33,8 @@ public final class ParentOrder extends ActualOrder {
 	}
 
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = new ChildOrder(parentId(),strategyOrdId(), instrument(), ordQty(), ordPrice(), ordSide(),
-				ordType(), strategyId(), subAccountId(), stopLoss());
+		ChildOrder childOrder = new ChildOrder(parentId(), strategyOrdId(), instrument(), ordQty(), ordPrice(),
+				ordSide(), ordType(), strategyId(), subAccountId(), ordStopLoss());
 		childOrders.add(childOrder);
 		return childOrder;
 	}

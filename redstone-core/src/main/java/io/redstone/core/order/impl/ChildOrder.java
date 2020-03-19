@@ -6,8 +6,8 @@ import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.order.structure.StopLoss;
-import io.redstone.core.order.structure.TradeSet;
+import io.redstone.core.order.structure.OrdStopLoss;
+import io.redstone.core.order.structure.OrdTradeSet;
 
 /**
  * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ParentOrder拆分而来
@@ -22,19 +22,19 @@ public final class ChildOrder extends ActualOrder {
 	/**
 	 * 子订单成交列表
 	 */
-	private TradeSet tradeSet;
+	private OrdTradeSet ordTradeSet;
 
 	public ChildOrder(long parentId, long strategyOrdId, Instrument instrument, long offerQty, long offerPrice,
-			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, OrdStopLoss stopLoss) {
 		this(parentId, strategyOrdId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice),
 				ordSide, ordType, strategyId, subAccountId, stopLoss);
 	}
 
 	public ChildOrder(long parentId, long strategyOrdId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
-			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, StopLoss stopLoss) {
+			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, OrdStopLoss stopLoss) {
 		super(strategyOrdId, instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId, stopLoss);
 		this.parentId = parentId;
-		this.tradeSet = new TradeSet(ordSysId());
+		this.ordTradeSet = new OrdTradeSet(ordSysId());
 	}
 
 	@Override
@@ -47,8 +47,8 @@ public final class ChildOrder extends ActualOrder {
 		return parentId;
 	}
 
-	public TradeSet tradeSet() {
-		return tradeSet;
+	public OrdTradeSet ordTradeSet() {
+		return ordTradeSet;
 	}
 
 }

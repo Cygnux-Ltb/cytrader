@@ -1,7 +1,7 @@
-package io.redstone.core.order.impl;
+package io.redstone.core.order.base;
 
 import io.mercury.polaris.financial.instrument.Instrument;
-import io.redstone.core.order.api.Order;
+import io.redstone.core.order.Order;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.enums.OrdType;
@@ -10,7 +10,7 @@ import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.OrdTimestamps;
 import io.redstone.core.order.utils.OrdSysIdGenerate;
 
-public abstract class AbstractOrder implements Order {
+public abstract class BaseOrder implements Order {
 
 	/**
 	 * ordSysId
@@ -62,7 +62,7 @@ public abstract class AbstractOrder implements Order {
 	 */
 	private int subAccountId;
 
-	protected AbstractOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide, OrdType ordType,
+	protected BaseOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide, OrdType ordType,
 			int strategyId, int subAccountId) {
 		this.ordSysId = OrdSysIdGenerate.next(strategyId);
 		this.instrument = instrument;

@@ -2,12 +2,12 @@ package io.redstone.core.order.structure;
 
 import io.redstone.core.trade.enums.TrdDirection;
 
-public final class StopLoss implements Comparable<StopLoss> {
+public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 
 	private long ordSysId;
 	private long stopLossPrice;
 
-	public StopLoss(long ordSysId, TrdDirection direction) {
+	public OrdStopLoss(long ordSysId, TrdDirection direction) {
 		super();
 		this.ordSysId = ordSysId;
 		switch (direction) {
@@ -30,14 +30,14 @@ public final class StopLoss implements Comparable<StopLoss> {
 		return stopLossPrice;
 	}
 
-	public StopLoss stopLossPrice(long stopLossPrice) {
+	public OrdStopLoss stopLossPrice(long stopLossPrice) {
 		this.stopLossPrice = stopLossPrice;
 		return this;
 	}
 
 
 	@Override
-	public int compareTo(StopLoss o) {
+	public int compareTo(OrdStopLoss o) {
 		return 0;
 	}
 

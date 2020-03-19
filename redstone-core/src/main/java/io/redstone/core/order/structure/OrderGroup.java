@@ -3,7 +3,7 @@ package io.redstone.core.order.structure;
 import org.eclipse.collections.api.set.ImmutableSet;
 
 import io.mercury.common.collections.ImmutableSets;
-import io.redstone.core.order.api.Order;
+import io.redstone.core.order.Order;
 
 public final class OrderGroup {
 
