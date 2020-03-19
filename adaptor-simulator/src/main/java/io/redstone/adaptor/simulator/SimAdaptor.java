@@ -15,11 +15,11 @@ import io.mercury.transport.core.api.Sender;
 import io.mercury.transport.socket.SocketReceiver;
 import io.mercury.transport.socket.SocketSender;
 import io.mercury.transport.socket.configurator.SocketConfigurator;
-import io.redstone.core.account.InvestorAccount;
+import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.BaseAdaptor;
+import io.redstone.core.order.OrderKeeper;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.impl.ChildOrder;
-import io.redstone.core.order.storage.OrderKeeper;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.persistence.avro.entity.MarketDataLevel1;
@@ -136,7 +136,7 @@ public class SimAdaptor extends BaseAdaptor {
 
 	@Override
 	public boolean cancelOrder(ChildOrder order) {
-		io.redstone.core.order.api.Order cancelOrder = OrderKeeper.getOrder(order.ordSysId());
+		io.redstone.core.order.Order cancelOrder = OrderKeeper.getOrder(order.ordSysId());
 		io.redstone.persistence.avro.entity.Order simOrder = io.redstone.persistence.avro.entity.Order.newBuilder()
 				.setOrderRef(Long.valueOf(order.ordSysId()).intValue()).setInstrumentId(cancelOrder.instrument().code())
 				.setLimitPrice(order.ordPrice().offerPrice())
@@ -153,13 +153,13 @@ public class SimAdaptor extends BaseAdaptor {
 	}
 
 	@Override
-	public boolean queryPositions(InvestorAccount account) {
+	public boolean queryPositions(Account account) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean queryBalance(InvestorAccount account) {
+	public boolean queryBalance(Account account) {
 		// TODO Auto-generated method stub
 		return false;
 	}

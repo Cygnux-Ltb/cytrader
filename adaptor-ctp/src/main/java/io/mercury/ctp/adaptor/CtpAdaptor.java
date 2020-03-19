@@ -38,9 +38,9 @@ import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.instrument.InstrumentKeeper;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.core.account.InvestorAccount;
+import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.BaseAdaptor;
-import io.redstone.core.order.api.Order;
+import io.redstone.core.order.Order;
 import io.redstone.core.order.impl.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
@@ -229,7 +229,7 @@ public class CtpAdaptor extends BaseAdaptor {
 	}
 
 	@Override
-	public boolean queryPositions(InvestorAccount account) {
+	public boolean queryPositions(Account account) {
 		try {
 			gateway.qureyPosition();
 			return true;
@@ -239,7 +239,7 @@ public class CtpAdaptor extends BaseAdaptor {
 	}
 
 	@Override
-	public boolean queryBalance(InvestorAccount account) {
+	public boolean queryBalance(Account account) {
 		// TODO Auto-generated method stub
 		return false;
 	}
