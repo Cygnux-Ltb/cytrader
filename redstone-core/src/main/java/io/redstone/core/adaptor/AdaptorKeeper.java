@@ -1,9 +1,8 @@
-package io.redstone.engine.storage;
+package io.redstone.core.adaptor;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.mercury.common.collections.MutableMaps;
-import io.redstone.core.adaptor.api.Adaptor;
 
 public class AdaptorKeeper {
 

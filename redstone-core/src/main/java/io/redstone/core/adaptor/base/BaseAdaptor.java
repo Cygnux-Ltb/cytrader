@@ -2,7 +2,7 @@ package io.redstone.core.adaptor.base;
 
 import static io.mercury.common.util.StringUtil.isNullOrEmpty;
 
-import io.redstone.core.adaptor.api.Adaptor;
+import io.redstone.core.adaptor.Adaptor;
 
 public abstract class BaseAdaptor implements Adaptor {
 

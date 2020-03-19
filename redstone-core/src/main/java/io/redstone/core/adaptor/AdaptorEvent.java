@@ -1,7 +1,27 @@
-package io.redstone.core.adaptor.api;
+package io.redstone.core.adaptor;
 
-public enum AdaptorEvent {
+public final class AdaptorEvent {
 
-	Enable, Disable
+	private int adaptorId;
+	private AdaptorEventType type;
+
+	public AdaptorEvent(int adaptorId, AdaptorEventType type) {
+		this.adaptorId = adaptorId;
+		this.type = type;
+	}
+
+	public int getAdaptorId() {
+		return adaptorId;
+	}
+
+	public AdaptorEventType getType() {
+		return type;
+	}
+
+	public static enum AdaptorEventType {
+
+		Enable, Disable
+
+	}
 
 }

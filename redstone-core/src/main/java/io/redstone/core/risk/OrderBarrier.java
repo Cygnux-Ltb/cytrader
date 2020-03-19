@@ -2,7 +2,7 @@ package io.redstone.core.risk;
 
 import java.util.function.Predicate;
 
-import io.redstone.core.order.api.Order;
+import io.redstone.core.order.Order;
 
 @FunctionalInterface
 public interface OrderBarrier<O extends Order> extends Predicate<O> {

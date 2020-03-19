@@ -5,11 +5,11 @@ import org.eclipse.collections.api.set.MutableSet;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableComponent;
 
-public class InvestorAccount extends EnableComponent {
+public class Account extends EnableComponent {
 
 	private int accountId;
 	private String accountName;
-	
+
 	/**
 	 * 真实的经纪商ID
 	 */
@@ -28,23 +28,23 @@ public class InvestorAccount extends EnableComponent {
 	 */
 	private MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
-	public InvestorAccount(int accountId, String investorId) {
+	public Account(int accountId, String investorId) {
 		this(accountId, investorId, new Balance());
 	}
 
-	public InvestorAccount(int accountId, String investorId, Balance balance) {
+	public Account(int accountId, String investorId, Balance balance) {
 		this(accountId, null, investorId, balance);
 	}
 
-	public InvestorAccount(int accountId, String accountName, String investorId) {
+	public Account(int accountId, String accountName, String investorId) {
 		this(accountId, accountName, investorId, new Balance());
 	}
 
-	public InvestorAccount(int accountId, String accountName, String investorId, Balance balance) {
+	public Account(int accountId, String accountName, String investorId, Balance balance) {
 		super();
 		this.accountId = accountId;
-		String attachName = "investorId[" + investorId + "]";
-		this.accountName = accountName == null ? attachName : accountName + "-" + attachName;
+		String suffixName = "investorId[" + investorId + "]";
+		this.accountName = accountName == null ? suffixName : accountName + "-" + suffixName;
 		this.accountName = accountName;
 		this.investorId = investorId;
 		this.balance = balance;

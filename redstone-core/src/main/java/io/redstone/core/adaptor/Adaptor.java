@@ -1,9 +1,9 @@
-package io.redstone.core.adaptor.api;
+package io.redstone.core.adaptor;
 
 import javax.annotation.Nonnull;
 
 import io.mercury.polaris.financial.instrument.Instrument;
-import io.redstone.core.account.InvestorAccount;
+import io.redstone.core.account.Account;
 import io.redstone.core.order.impl.ChildOrder;
 
 public interface Adaptor extends AutoCloseable {
@@ -44,7 +44,7 @@ public interface Adaptor extends AutoCloseable {
 	 * @param account
 	 * @return
 	 */
-	boolean queryPositions(@Nonnull InvestorAccount account);
+	boolean queryPositions(@Nonnull Account account);
 
 	/**
 	 * 查询余额
@@ -52,6 +52,6 @@ public interface Adaptor extends AutoCloseable {
 	 * @param account
 	 * @return
 	 */
-	boolean queryBalance(@Nonnull InvestorAccount account);
+	boolean queryBalance(@Nonnull Account account);
 
 }

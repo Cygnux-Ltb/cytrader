@@ -1,6 +1,6 @@
 package io.redstone.core.position.api;
 
-import io.redstone.core.order.api.Order;
+import io.redstone.core.order.Order;
 
 public interface Position extends Comparable<Position> {
 

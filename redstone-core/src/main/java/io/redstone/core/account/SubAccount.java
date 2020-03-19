@@ -10,17 +10,17 @@ public class SubAccount extends EnableComponent {
 	private final int subAccountId;
 	private final String subAccountName;
 	private final Balance balance;
-	private final InvestorAccount investorAccount;
+	private final Account investorAccount;
 
-	public SubAccount(int subAccountId, @Nonnull InvestorAccount investorAccount) {
+	public SubAccount(int subAccountId, @Nonnull Account investorAccount) {
 		this(subAccountId, null, investorAccount);
 	}
 
-	public SubAccount(int subAccountId, String subAccountName, @Nonnull InvestorAccount investorAccount) {
+	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account investorAccount) {
 		this(subAccountId, subAccountName, investorAccount, investorAccount.balance());
 	}
 
-	public SubAccount(int subAccountId, String subAccountName, @Nonnull InvestorAccount investorAccount,
+	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account investorAccount,
 			Balance balance) {
 		this.subAccountId = subAccountId;
 		this.investorAccount = Assertor.nonNull(investorAccount, "[realAccount]");
@@ -42,7 +42,7 @@ public class SubAccount extends EnableComponent {
 		return balance;
 	}
 
-	public InvestorAccount investorAccount() {
+	public Account investorAccount() {
 		return investorAccount;
 	}
 
