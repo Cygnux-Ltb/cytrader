@@ -56,9 +56,9 @@ public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> imple
 	}
 
 	@Override
-	public void onAdaptorEvent(int adaptorId, AdaptorEvent event) {
+	public void onAdaptorEvent(AdaptorEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
