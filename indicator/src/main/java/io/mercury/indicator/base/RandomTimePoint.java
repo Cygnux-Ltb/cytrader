@@ -1,5 +1,7 @@
 package io.mercury.indicator.base;
 
+import java.time.ZonedDateTime;
+
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.vector.RandomTimeSerial;
 
@@ -15,6 +17,10 @@ public abstract class RandomTimePoint<Y extends RandomTimePoint<Y>> extends Base
 	@Override
 	public RandomTimeSerial serial() {
 		return timeSerial;
+	}
+
+	public ZonedDateTime time() {
+		return timeSerial.timePoint();
 	}
 
 }
