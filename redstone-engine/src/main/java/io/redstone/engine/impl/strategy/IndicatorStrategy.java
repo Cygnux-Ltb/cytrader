@@ -2,8 +2,8 @@ package io.redstone.engine.impl.strategy;
 
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.api.MarketData;
-import io.redstone.core.order.api.Order;
-import io.redstone.core.order.storage.OrderKeeper;
+import io.redstone.core.order.Order;
+import io.redstone.core.order.OrderKeeper;
 import io.redstone.core.strategy.base.BaseStrategy;
 
 public abstract class IndicatorStrategy<M extends MarketData> extends BaseStrategy<M> {

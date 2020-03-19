@@ -2,7 +2,7 @@ package io.redstone.engine.actor;
 
 import com.lmax.disruptor.EventHandler;
 
-import io.redstone.core.order.api.Order;
+import io.redstone.core.order.Order;
 
 public final class OrderRecoreder implements EventHandler<Order> {
 

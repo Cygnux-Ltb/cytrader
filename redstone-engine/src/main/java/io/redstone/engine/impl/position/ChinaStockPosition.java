@@ -1,6 +1,6 @@
 package io.redstone.engine.impl.position;
 
-import io.redstone.core.order.api.Order;
+import io.redstone.core.order.Order;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.position.impl.AbsT1Position;

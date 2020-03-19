@@ -4,10 +4,10 @@ import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.core.order.api.Order;
-import io.redstone.core.order.storage.OrderKeeper;
+import io.redstone.core.order.Order;
+import io.redstone.core.order.OrderKeeper;
 import io.redstone.core.order.structure.OrdReport;
-import io.redstone.engine.storage.StrategyKeeper;
+import io.redstone.core.strategy.StrategyKeeper;
 
 /**
  * 管理全部策略<br>
@@ -26,6 +26,7 @@ public final class StrategyActor {
 
 	}
 
+	@Deprecated
 	public void onMarketData(BasicMarketData marketData) {
 		StrategyKeeper.getSubscribedStrategys(marketData.instrument().id()).forEach(strategy -> {
 			if (strategy.isEnabled())
@@ -33,6 +34,7 @@ public final class StrategyActor {
 		});
 	}
 
+	@Deprecated
 	public void onOrderReport(OrdReport orderReport) {
 		log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", orderReport.getBrokerUniqueId(),
 				orderReport.getOrdSysId());
@@ -41,7 +43,6 @@ public final class StrategyActor {
 				orderReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
 				orderReport.getOrdSysId());
 		StrategyKeeper.getStrategy(order.strategyId()).onOrder(order);
-
 	}
 
 }
