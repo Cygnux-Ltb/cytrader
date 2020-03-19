@@ -1,4 +1,4 @@
-package io.redstone.engine.storage;
+package io.redstone.core.strategy;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -10,7 +10,6 @@ import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.polaris.financial.instrument.Instrument;
-import io.redstone.core.strategy.Strategy;
 
 @NotThreadSafe
 public final class StrategyKeeper {

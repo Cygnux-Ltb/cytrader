@@ -1,6 +1,6 @@
 package io.redstone.core.strategy;
 
-public interface StrategyControlEvent {
+public interface StrategyEvent {
 
 	void onEvent();
 

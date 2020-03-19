@@ -18,9 +18,9 @@ import io.mercury.polaris.financial.market.QuoteKeeper.AtomicQuote;
 import io.mercury.polaris.financial.market.api.MarketData;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
 import io.redstone.core.account.AccountKeeper;
-import io.redstone.core.adaptor.api.Adaptor;
+import io.redstone.core.adaptor.Adaptor;
+import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderExecutor;
-import io.redstone.core.order.api.Order;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.impl.ParentOrder;
@@ -29,7 +29,7 @@ import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.risk.CircuitBreaker;
 import io.redstone.core.strategy.Strategy;
-import io.redstone.core.strategy.StrategyControlEvent;
+import io.redstone.core.strategy.StrategyEvent;
 import io.redstone.core.trade.enums.TrdDirection;
 
 public abstract class BaseStrategy<M extends MarketData> implements Strategy, CircuitBreaker {
@@ -49,7 +49,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	// 策略订阅的合约
 	private ImmutableList<Instrument> instruments;
 
-	// 记录当前策略所有订单
+	// 记录当前策略所有的策略订单订单
 	protected MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
 
 	protected BaseStrategy(int strategyId, int subAccountId, Instrument... instruments) {
@@ -88,7 +88,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
 		if (strategyOrders.notEmpty()) {
-
+			
 		}
 		handleMarketData(marketData);
 	}
@@ -104,7 +104,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	protected abstract boolean updateOrder(Order order);
 
 	@Override
-	public void onControlEvent(StrategyControlEvent event) {
+	public void onStrategyEvent(StrategyEvent event) {
 		log.info("Handle StrategyControlEvent -> {}", event);
 	}
 
@@ -191,9 +191,9 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 		ParentOrder parentOrder = OrderExecutor.onStrategyOrder(newVirtualOrder);
 
-		//TODO 错误实现
+		// TODO 错误实现
 		Adaptor adaptor = getAdaptor(instrument);
-		
+
 		adaptor.newOredr(parentOrder.toChildOrder());
 	}
 

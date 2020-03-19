@@ -1,4 +1,4 @@
-package io.redstone.core.exception;
+package io.redstone.core.strategy;
 
 public class StrategyException extends RuntimeException {
 

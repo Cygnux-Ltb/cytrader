@@ -7,7 +7,8 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.mercury.common.fsm.Enable;
 import io.mercury.polaris.financial.instrument.Instrument;
 import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.redstone.core.order.api.Order;
+import io.redstone.core.adaptor.AdaptorEvent;
+import io.redstone.core.order.Order;
 
 public interface Strategy extends Enable {
 
@@ -21,7 +22,9 @@ public interface Strategy extends Enable {
 
 	void initialize(Supplier<Boolean> initializer);
 
-	void onControlEvent(StrategyControlEvent event);
+	void onAdaptorEvent(AdaptorEvent event);
+
+	void onStrategyEvent(StrategyEvent event);
 
 	void onMarketData(BasicMarketData marketData);
 
