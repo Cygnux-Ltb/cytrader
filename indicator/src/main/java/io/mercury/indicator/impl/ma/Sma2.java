@@ -5,22 +5,21 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-import io.mercury.indicator.api.CalculationCycle;
-import io.mercury.indicator.base.BaseTimePeriodIndicator;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.time.TradingPeriodPool;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.financial.vector.TimePeriodSerial;
+import io.mercury.financial.vector.TradingPeriod;
+import io.mercury.indicator.base.TimePeriodIndicator;
 import io.mercury.indicator.event.SmaEvent;
 import io.mercury.indicator.structure.FixedHistoryPriceRecorder;
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.mercury.polaris.financial.time.TradingPeriodPool;
-import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.financial.vector.TimePeriodSerial;
-import io.mercury.polaris.financial.vector.TradingPeriod;
 
-public final class Sma2 extends BaseTimePeriodIndicator<SmaPoint, SmaEvent> {
+public final class Sma2 extends TimePeriodIndicator<SmaPoint, SmaEvent> {
 
 	private FixedHistoryPriceRecorder historyPriceRecorder;
 
-	public Sma2(Instrument instrument, TimePeriod period, CalculationCycle cycle) {
+	public Sma2(Instrument instrument, TimePeriod period, int cycle) {
 		super(instrument, period, cycle);
 		this.historyPriceRecorder = FixedHistoryPriceRecorder.newRecorder(cycle);
 		TradingPeriod tradingPeriod = TradingPeriodPool.Singleton.getAfterTradingPeriod(instrument, LocalTime.now());
@@ -32,7 +31,7 @@ public final class Sma2 extends BaseTimePeriodIndicator<SmaPoint, SmaEvent> {
 		currentPoint = SmaPoint.with(0, instrument, period, timePeriod, cycle, historyPriceRecorder);
 	}
 
-	public static Sma2 with(Instrument instrument, TimePeriod period, CalculationCycle cycle) {
+	public static Sma2 with(Instrument instrument, TimePeriod period, int cycle) {
 		return new Sma2(instrument, period, cycle);
 	}
 

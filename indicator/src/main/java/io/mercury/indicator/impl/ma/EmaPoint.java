@@ -1,11 +1,11 @@
 package io.mercury.indicator.impl.ma;
 
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.indicator.impl.ma.base.MaPoint;
 import io.mercury.indicator.structure.FixedHistoryPriceRecorder;
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.financial.vector.TimePeriodSerial;
 
 public final class EmaPoint extends MaPoint<EmaPoint> {
 

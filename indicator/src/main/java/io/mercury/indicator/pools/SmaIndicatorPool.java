@@ -2,14 +2,13 @@ package io.mercury.indicator.pools;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import io.mercury.indicator.api.CalculationCycle;
-import io.mercury.indicator.impl.ma.SmaIndicator;
-import io.mercury.indicator.pools.base.MultiLayerIndicatorPool;
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.vector.TimePeriod;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.indicator.impl.ma.Sma;
+import io.mercury.indicator.pools.base.MultipleIndicatorPool;
 
 @NotThreadSafe
-public final class SmaIndicatorPool extends MultiLayerIndicatorPool<SmaIndicator> {
+public final class SmaIndicatorPool extends MultipleIndicatorPool<Sma> {
 
 	public static final SmaIndicatorPool Singleton = new SmaIndicatorPool();
 
@@ -17,8 +16,8 @@ public final class SmaIndicatorPool extends MultiLayerIndicatorPool<SmaIndicator
 	}
 
 	@Override
-	protected SmaIndicator generateIndicator(TimePeriod period, CalculationCycle cycle, Instrument instrument) {
-		return SmaIndicator.with(instrument, period, cycle);
+	protected Sma generateIndicator(TimePeriod period, int cycle, Instrument instrument) {
+		return Sma.with(instrument, period, cycle);
 	}
 
 }

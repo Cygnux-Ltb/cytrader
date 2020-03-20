@@ -5,10 +5,10 @@ import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.indicator.base.BaseIndicator;
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
+import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.indicator.api.Indicator;
 
-public abstract class BaseIndicatorPool<I extends BaseIndicator<?, ?>> {
+public abstract class IndicatorPool<I extends Indicator<?, ?>> {
 
 	protected Logger log = CommonLoggerFactory.getLogger(getClass());
 

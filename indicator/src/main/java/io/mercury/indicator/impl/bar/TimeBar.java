@@ -4,11 +4,11 @@ import org.eclipse.collections.api.list.primitive.MutableDoubleList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 
 import io.mercury.common.collections.MutableLists;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.indicator.base.TimePeriodPoint;
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.financial.vector.TimePeriodSerial;
 
 public final class TimeBar extends TimePeriodPoint<TimeBar> {
 

@@ -4,15 +4,15 @@ import java.time.ZonedDateTime;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.mercury.indicator.base.BaseTimePeriodIndicator;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.time.TimePeriodPool;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.financial.vector.TimePeriodSerial;
+import io.mercury.indicator.base.TimePeriodIndicator;
 import io.mercury.indicator.event.TimeBarsEvent;
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.mercury.polaris.financial.time.TimePeriodPool;
-import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.financial.vector.TimePeriodSerial;
 
-public final class TimeBarIndicator extends BaseTimePeriodIndicator<TimeBar, TimeBarsEvent> {
+public final class TimeBarIndicator extends TimePeriodIndicator<TimeBar, TimeBarsEvent> {
 
 	public TimeBarIndicator(Instrument instrument, TimePeriod period) {
 		super(instrument, period);

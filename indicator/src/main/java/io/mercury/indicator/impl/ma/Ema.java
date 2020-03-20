@@ -1,15 +1,14 @@
 package io.mercury.indicator.impl.ma;
 
-import io.mercury.indicator.api.CalculationCycle;
-import io.mercury.indicator.base.BaseTimePeriodIndicator;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.indicator.base.TimePeriodIndicator;
 import io.mercury.indicator.event.EmaEvent;
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.mercury.polaris.financial.vector.TimePeriod;
 
-public final class EmaIndicator extends BaseTimePeriodIndicator<EmaPoint, EmaEvent> {
+public final class Ema extends TimePeriodIndicator<EmaPoint, EmaEvent> {
 
-	public EmaIndicator(Instrument instrument, TimePeriod period, CalculationCycle cycle) {
+	public Ema(Instrument instrument, TimePeriod period, int cycle) {
 		super(instrument, period);
 	}
 
@@ -18,6 +17,5 @@ public final class EmaIndicator extends BaseTimePeriodIndicator<EmaPoint, EmaEve
 		// TODO Auto-generated method stub
 
 	}
-
 
 }

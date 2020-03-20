@@ -1,33 +1,31 @@
 package io.mercury.indicator.impl.ma;
 
-import io.mercury.common.number.DoubleArithmetic;
-import io.mercury.indicator.api.CalculationCycle;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.indicator.impl.ma.base.MaPoint;
 import io.mercury.indicator.structure.FixedHistoryPriceRecorder;
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
-import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.financial.vector.TimePeriodSerial;
 
 public final class SmaPoint extends MaPoint<SmaPoint> {
 
-	private double historyPriceSum;
+	private long historyPriceSum;
 
-	private CalculationCycle cycle;
+	private int cycle;
 
 	public SmaPoint(int index, Instrument instrument, TimePeriod period, TimePeriodSerial timePeriod,
-			CalculationCycle cycle, FixedHistoryPriceRecorder historyPriceRecorder) {
+			int cycle, FixedHistoryPriceRecorder historyPriceRecorder) {
 		super(index, instrument, period, timePeriod, historyPriceRecorder);
 		this.historyPriceSum = historyPriceRecorder.sum();
 		this.cycle = cycle;
 	}
 
 	public static SmaPoint with(int indxe, Instrument instrument, TimePeriod period, TimePeriodSerial timePeriod,
-			CalculationCycle cycle, FixedHistoryPriceRecorder historyPriceRecorder) {
+			int cycle, FixedHistoryPriceRecorder historyPriceRecorder) {
 		return new SmaPoint(indxe, instrument, period, timePeriod, cycle, historyPriceRecorder);
 	}
 
-	public CalculationCycle cycle() {
+	public int cycle() {
 		return cycle;
 	}
 
@@ -35,7 +33,7 @@ public final class SmaPoint extends MaPoint<SmaPoint> {
 	protected void handleMarketData(BasicMarketData marketData) {
 		this.lastPrice = marketData.getLastPrice();
 		int count = historyPriceRecorder.count();
-		this.avgPrice = DoubleArithmetic.correction4(historyPriceSum + lastPrice / count);
+		this.avgPrice = (historyPriceSum + lastPrice) / count;
 	}
 
 	public static void main(String[] args) {

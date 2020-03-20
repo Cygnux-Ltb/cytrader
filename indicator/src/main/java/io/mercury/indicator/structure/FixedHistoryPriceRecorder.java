@@ -2,11 +2,10 @@ package io.mercury.indicator.structure;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.eclipse.collections.api.list.primitive.ImmutableDoubleList;
-import org.eclipse.collections.api.list.primitive.MutableDoubleList;
+import org.eclipse.collections.api.list.primitive.ImmutableLongList;
+import org.eclipse.collections.api.list.primitive.MutableLongList;
 
 import io.mercury.common.collections.MutableLists;
-import io.mercury.indicator.api.CalculationCycle;
 
 @NotThreadSafe
 public class FixedHistoryPriceRecorder {
@@ -16,20 +15,18 @@ public class FixedHistoryPriceRecorder {
 
 	private int capacity;
 
-	private MutableDoubleList priceList;
+	private MutableLongList priceList;
 
 	private boolean isEmpty = true;
 	private boolean isFull = false;
 
-	private final static double NothingPrice = 0.0d;
-
 	private FixedHistoryPriceRecorder(int capacity) {
 		this.capacity = capacity;
-		this.priceList = MutableLists.newDoubleArrayList(capacity);
+		this.priceList = MutableLists.newLongArrayList(capacity);
 	}
 
-	public static FixedHistoryPriceRecorder newRecorder(CalculationCycle cycle) {
-		return new FixedHistoryPriceRecorder(cycle.getCycleValue());
+	public static FixedHistoryPriceRecorder newRecorder(int cycle) {
+		return new FixedHistoryPriceRecorder(cycle);
 	}
 
 	public boolean isEmpty() {
@@ -40,41 +37,41 @@ public class FixedHistoryPriceRecorder {
 		return isFull;
 	}
 
-	public double tail() {
+	public long tail() {
 		if (isEmpty)
-			return NothingPrice;
+			return 0L;
 		return priceList.get(tail);
 	}
 
-	public double head() {
+	public long head() {
 		if (isEmpty)
-			return NothingPrice;
+			return 0L;
 		if (isFull)
 			return priceList.get(tail + 1 == capacity ? 0 : tail + 1);
 		return priceList.get(tail - count + 1);
 	}
 
-	public double sum() {
+	public long sum() {
 		return priceList.sum();
 	}
 
-	public double max() {
+	public long max() {
 		return priceList.max();
 	}
 
-	public double min() {
+	public long min() {
 		return priceList.min();
 	}
 
-	public double average() {
-		return priceList.average();
+	public long average() {
+		return (long) priceList.average();
 	}
 
-	public double median() {
-		return priceList.median();
+	public long median() {
+		return (long) priceList.median();
 	}
 
-	public ImmutableDoubleList toImmutable() {
+	public ImmutableLongList toImmutable() {
 		return priceList.toImmutable();
 	}
 
@@ -82,12 +79,12 @@ public class FixedHistoryPriceRecorder {
 		return count;
 	}
 
-	public FixedHistoryPriceRecorder addTail(double value) {
+	public FixedHistoryPriceRecorder addTail(long value) {
 		updateTail(value);
 		return this;
 	}
 
-	private void updateTail(double value) {
+	private void updateTail(long value) {
 		updateTailIndex();
 		updateCount();
 		if (isFull)
@@ -116,7 +113,7 @@ public class FixedHistoryPriceRecorder {
 
 	public static void main(String[] args) {
 
-		FixedHistoryPriceRecorder recorder = newRecorder(CalculationCycle.with(10));
+		FixedHistoryPriceRecorder recorder = newRecorder(10);
 
 		for (int i = 1; i < 30; i++) {
 			recorder.addTail(i);

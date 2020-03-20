@@ -1,7 +1,7 @@
 package io.mercury.indicator.api;
 
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.impl.BasicMarketData;
 
 public interface Indicator<P extends Point<?>, E extends IndicatorEvent> {
 

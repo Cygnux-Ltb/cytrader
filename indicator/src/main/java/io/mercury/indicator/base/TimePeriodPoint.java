@@ -2,9 +2,9 @@ package io.mercury.indicator.base;
 
 import java.time.ZonedDateTime;
 
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.financial.vector.TimePeriodSerial;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.financial.vector.TimePeriodSerial;
 
 public abstract class TimePeriodPoint<Y extends TimePeriodPoint<Y>> extends BasePoint<TimePeriodSerial> {
 
