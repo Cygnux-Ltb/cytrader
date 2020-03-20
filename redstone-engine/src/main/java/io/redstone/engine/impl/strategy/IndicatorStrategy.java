@@ -1,7 +1,7 @@
 package io.redstone.engine.impl.strategy;
 
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.market.api.MarketData;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.api.MarketData;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderKeeper;
 import io.redstone.core.strategy.base.BaseStrategy;

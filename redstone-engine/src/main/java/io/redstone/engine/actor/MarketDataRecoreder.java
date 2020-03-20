@@ -2,7 +2,7 @@ package io.redstone.engine.actor;
 
 import com.lmax.disruptor.EventHandler;
 
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
+import io.mercury.financial.market.impl.BasicMarketData;
 
 public final class MarketDataRecoreder implements EventHandler<BasicMarketData> {
 
