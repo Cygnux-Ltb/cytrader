@@ -2,6 +2,7 @@ package io.mercury.ctp.gateway.base;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import ctp.thostapi.thosttraderapiConstants;
@@ -34,13 +35,13 @@ public class CtpConstant {
 		priceTypeMap.put(Constant.PRICETYPE_LIMITPRICE, thosttraderapiConstants.THOST_FTDC_OPT_LimitPrice);
 		priceTypeMap.put(Constant.PRICETYPE_MARKETPRICE, thosttraderapiConstants.THOST_FTDC_OPT_AnyPrice);
 		priceTypeMapReverse = priceTypeMap.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 
 		// 方向类型映射
 		directionMap.put(Constant.DIRECTION_LONG, thosttraderapiConstants.THOST_FTDC_D_Buy);
 		directionMap.put(Constant.DIRECTION_SHORT, thosttraderapiConstants.THOST_FTDC_D_Sell);
 		directionMapReverse = directionMap.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 
 		// 开平类型映射
 		offsetMap.put(Constant.OFFSET_OPEN, thosttraderapiConstants.THOST_FTDC_OF_Open);
@@ -48,7 +49,7 @@ public class CtpConstant {
 		offsetMap.put(Constant.OFFSET_CLOSETODAY, thosttraderapiConstants.THOST_FTDC_OF_CloseToday);
 		offsetMap.put(Constant.OFFSET_CLOSEYESTERDAY, thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday);
 		offsetMapReverse = offsetMap.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 
 		// 交易所映射
 		exchangeMap.put(Constant.EXCHANGE_CFFEX, "CFFEX");
@@ -60,21 +61,21 @@ public class CtpConstant {
 		exchangeMap.put(Constant.EXCHANGE_INE, "INE");
 		exchangeMap.put(Constant.EXCHANGE_UNKNOWN, "");
 		exchangeMapReverse = exchangeMap.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 
 		// 持仓类型映射
 		posiDirectionMap.put(Constant.DIRECTION_NET, thosttraderapiConstants.THOST_FTDC_PD_Net);
 		posiDirectionMap.put(Constant.DIRECTION_LONG, thosttraderapiConstants.THOST_FTDC_PD_Long);
 		posiDirectionMap.put(Constant.DIRECTION_SHORT, thosttraderapiConstants.THOST_FTDC_PD_Short);
 		posiDirectionMapReverse = posiDirectionMap.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 
 		// 产品类型映射
 		productClassMap.put(Constant.PRODUCT_FUTURES, thosttraderapiConstants.THOST_FTDC_PC_Futures);
 		productClassMap.put(Constant.PRODUCT_OPTION, thosttraderapiConstants.THOST_FTDC_PC_Options);
 		productClassMap.put(Constant.PRODUCT_COMBINATION, thosttraderapiConstants.THOST_FTDC_PC_Combination);
 		productClassMapReverse = productClassMap.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 //		v6.3.11不支持个股期权
 //		productClassMapReverse.put(thosttraderapiConstants.THOST_FTDC_PC_ETFOption, RtConstant.PRODUCT_OPTION);
 //		productClassMapReverse.put(thosttraderapiConstants.THOST_FTDC_PC_S, RtConstant.PRODUCT_EQUITY);
@@ -86,7 +87,7 @@ public class CtpConstant {
 		statusMap.put(Constant.STATUS_CANCELLED, thosttraderapiConstants.THOST_FTDC_OST_Canceled);
 		statusMap.put(Constant.STATUS_UNKNOWN, thosttraderapiConstants.THOST_FTDC_OST_Unknown);
 		statusMapReverse = statusMap.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 
 	}
 }

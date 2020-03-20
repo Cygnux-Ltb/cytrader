@@ -156,7 +156,7 @@ public class CtpGateway {
 		// 创建mdApi
 		this.mdApi = CThostFtdcMdApi.CreateFtdcMdApi(mdTempFilePath);
 		// 创建mdSpi
-		CThostFtdcMdSpi mdSpi = new MdSpi(this);
+		CThostFtdcMdSpi mdSpi = new CtpMdSpi(this);
 		// 将mdSpi注册到mdApi
 		mdApi.RegisterSpi(mdSpi);
 		// 注册到md前置机
@@ -176,7 +176,7 @@ public class CtpGateway {
 		// 创建traderApi
 		this.traderApi = CThostFtdcTraderApi.CreateFtdcTraderApi(traderTempFilePath);
 		// 创建traderSpi
-		CThostFtdcTraderSpi traderSpi = new TraderSpi(this);
+		CThostFtdcTraderSpi traderSpi = new CtpTraderSpi(this);
 		// 将traderSpi注册到traderApi
 		traderApi.RegisterSpi(traderSpi);
 		// 注册到trader前置机

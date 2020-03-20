@@ -1,6 +1,6 @@
 package io.mercury.ctp.gateway.bak;
 
-import static io.mercury.ctp.gateway.base.JctpRspValidator.validateRspInfo;
+import static io.mercury.ctp.gateway.base.CtpRspValidator.validateRspInfo;
 
 import org.slf4j.Logger;
 
@@ -97,8 +97,7 @@ public class TraderSpiImpl0 extends CThostFtdcTraderSpi {
 			int nRequestID, boolean bIsLast) {
 		validateRspInfo("OnRspQrySettlementInfo", pRspInfo);
 		if (pSettlementInfo != null)
-			log.info("OnRspQrySettlementInfo -> \n {}",
-					StringUtil.conversionGbkToUtf8(pSettlementInfo.getContent()));
+			log.info("OnRspQrySettlementInfo -> \n {}", StringUtil.conversionGbkToUtf8(pSettlementInfo.getContent()));
 		else
 			log.warn("OnRspQrySettlementInfo return null");
 	}
