@@ -1,6 +1,6 @@
 package io.redstone.adaptor.simulator.dto;
 
-import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.financial.instrument.Instrument;
 
 public final class SimSubscribeMarketData {
 
