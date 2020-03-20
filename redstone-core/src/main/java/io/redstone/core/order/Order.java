@@ -1,6 +1,6 @@
 package io.redstone.core.order;
 
-import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.order.enums.OrdLevel;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdStatus;

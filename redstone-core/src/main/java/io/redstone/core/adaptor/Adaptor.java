@@ -2,7 +2,7 @@ package io.redstone.core.adaptor;
 
 import javax.annotation.Nonnull;
 
-import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.account.Account;
 import io.redstone.core.order.impl.ChildOrder;
 

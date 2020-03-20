@@ -1,6 +1,6 @@
 package io.redstone.core.strategy;
 
-import io.mercury.polaris.financial.market.impl.BasicMarketData;
+import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.adaptor.AdaptorEvent;
 import io.redstone.core.order.structure.OrdReport;
 

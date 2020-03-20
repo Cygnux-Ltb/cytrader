@@ -2,7 +2,7 @@ package io.redstone.core.order.structure;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.mercury.polaris.financial.instrument.Instrument.MarketConstant;
+import io.mercury.financial.instrument.Instrument.MarketConstant;
 import io.redstone.core.order.structure.OrdTradeSet.OrdTrade;
 
 /**

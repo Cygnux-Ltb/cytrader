@@ -1,7 +1,7 @@
 package io.redstone.core.trade;
 
 import io.mercury.common.fsm.Signal;
-import io.mercury.polaris.financial.instrument.Instrument;
+import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.trade.enums.TrdAction;
 import io.redstone.core.trade.enums.TrdDirection;
 
