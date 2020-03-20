@@ -1,7 +1,7 @@
-package io.mercury.polaris.financial.instrument.futures;
+package io.mercury.financial.instrument.futures;
 
-import io.mercury.polaris.financial.instrument.Symbol;
-import io.mercury.polaris.financial.instrument.futures.base.Futures;
+import io.mercury.financial.instrument.Symbol;
+import io.mercury.financial.instrument.futures.base.Futures;
 
 public class AmericaFutures extends Futures {
 

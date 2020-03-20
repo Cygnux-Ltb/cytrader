@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.util;
+package io.mercury.financial.util;
 
 public final class PriceUtil {
 

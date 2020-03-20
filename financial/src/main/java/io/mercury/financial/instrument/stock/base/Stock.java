@@ -1,7 +1,7 @@
-package io.mercury.polaris.financial.instrument.stock.base;
+package io.mercury.financial.instrument.stock.base;
 
-import io.mercury.polaris.financial.instrument.AbstractInstrument;
-import io.mercury.polaris.financial.instrument.Symbol;
+import io.mercury.financial.instrument.AbstractInstrument;
+import io.mercury.financial.instrument.Symbol;
 
 public abstract class Stock extends AbstractInstrument {
 

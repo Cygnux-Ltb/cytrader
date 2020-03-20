@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.instrument;
+package io.mercury.financial.instrument;
 
 public abstract class AbstractInstrument implements Instrument {
 

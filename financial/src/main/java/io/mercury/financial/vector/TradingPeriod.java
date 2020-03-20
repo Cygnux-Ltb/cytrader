@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.vector;
+package io.mercury.financial.vector;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZones;
 import io.mercury.common.sequence.Serial;
-import io.mercury.polaris.financial.vector.TimePeriodSerial;
+import io.mercury.financial.vector.TimePeriodSerial;
 
 /**
  * 指示某交易标的一段交易时间

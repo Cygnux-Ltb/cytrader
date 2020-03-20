@@ -1,7 +1,7 @@
-package io.mercury.polaris.financial.instrument.futures.base;
+package io.mercury.financial.instrument.futures.base;
 
-import io.mercury.polaris.financial.instrument.AbstractInstrument;
-import io.mercury.polaris.financial.instrument.Symbol;
+import io.mercury.financial.instrument.AbstractInstrument;
+import io.mercury.financial.instrument.Symbol;
 
 public abstract class Futures extends AbstractInstrument {
 

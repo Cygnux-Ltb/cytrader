@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.market.impl;
+package io.mercury.financial.market.impl;
 
 public final class StaticMarketData {
 

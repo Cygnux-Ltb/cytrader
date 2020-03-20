@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.market.api;
+package io.mercury.financial.market.api;
 
 public class QuoteLevelOverflowException extends RuntimeException {
 

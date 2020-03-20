@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.time;
+package io.mercury.financial.time;
 
 import java.util.stream.Collectors;
 
@@ -14,10 +14,10 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.param.JointIdUtil;
 import io.mercury.common.util.Assertor;
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.instrument.Symbol;
-import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.financial.vector.TimePeriodSerial;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.instrument.Symbol;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.financial.vector.TimePeriodSerial;
 
 @NotThreadSafe
 public final class TimePeriodPool {

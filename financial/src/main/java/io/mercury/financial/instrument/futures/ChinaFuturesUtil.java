@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.instrument.futures;
+package io.mercury.financial.instrument.futures;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

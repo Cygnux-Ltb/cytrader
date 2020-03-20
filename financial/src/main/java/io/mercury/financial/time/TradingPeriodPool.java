@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.time;
+package io.mercury.financial.time;
 
 import java.time.LocalTime;
 
@@ -9,10 +9,10 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.instrument.Symbol;
-import io.mercury.polaris.financial.instrument.futures.ChinaFuturesSymbol;
-import io.mercury.polaris.financial.vector.TradingPeriod;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.instrument.Symbol;
+import io.mercury.financial.instrument.futures.ChinaFuturesSymbol;
+import io.mercury.financial.vector.TradingPeriod;
 
 @ThreadSafe
 public final class TradingPeriodPool {

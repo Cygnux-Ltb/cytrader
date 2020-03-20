@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.vector;
+package io.mercury.financial.vector;
 
 import java.time.ZonedDateTime;
 

@@ -1,7 +1,7 @@
-package io.mercury.polaris.financial.instrument.forex.cryptocurrency;
+package io.mercury.financial.instrument.forex.cryptocurrency;
 
-import io.mercury.polaris.financial.instrument.Symbol;
-import io.mercury.polaris.financial.instrument.forex.base.Forex;
+import io.mercury.financial.instrument.Symbol;
+import io.mercury.financial.instrument.forex.base.Forex;
 
 public final class Cryptocurrency extends Forex {
 

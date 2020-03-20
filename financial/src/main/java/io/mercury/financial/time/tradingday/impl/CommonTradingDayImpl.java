@@ -1,11 +1,11 @@
-package io.mercury.polaris.financial.time.tradingday.impl;
+package io.mercury.financial.time.tradingday.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.annotation.concurrent.ThreadSafe;
 
-import io.mercury.polaris.financial.time.tradingday.api.TradingDay;
+import io.mercury.financial.time.tradingday.api.TradingDay;
 
 @Deprecated
 @ThreadSafe

@@ -1,15 +1,15 @@
-package io.mercury.polaris.financial.time.tradingday;
+package io.mercury.financial.time.tradingday;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.instrument.Symbol;
-import io.mercury.polaris.financial.instrument.futures.ChinaFutures;
-import io.mercury.polaris.financial.instrument.futures.ChinaFuturesSymbol;
-import io.mercury.polaris.financial.time.tradingday.api.TradingDay;
-import io.mercury.polaris.financial.time.tradingday.impl.ChinaFuturesTradingDayImpl;
-import io.mercury.polaris.financial.time.tradingday.impl.CommonTradingDayImpl;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.instrument.Symbol;
+import io.mercury.financial.instrument.futures.ChinaFutures;
+import io.mercury.financial.instrument.futures.ChinaFuturesSymbol;
+import io.mercury.financial.time.tradingday.api.TradingDay;
+import io.mercury.financial.time.tradingday.impl.ChinaFuturesTradingDayImpl;
+import io.mercury.financial.time.tradingday.impl.CommonTradingDayImpl;
 
 @Deprecated
 public final class TradingDayKeeper {

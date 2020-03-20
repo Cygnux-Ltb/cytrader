@@ -1,8 +1,8 @@
-package io.mercury.polaris.financial.market.impl;
+package io.mercury.financial.market.impl;
 
 import java.util.NoSuchElementException;
 
-import io.mercury.polaris.financial.market.api.QuoteLevelOverflowException;
+import io.mercury.financial.market.api.QuoteLevelOverflowException;
 
 public final class Quotes {
 

@@ -1,8 +1,8 @@
-package io.mercury.polaris.financial.instrument;
+package io.mercury.financial.instrument;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.mercury.polaris.financial.vector.TradingPeriod;
+import io.mercury.financial.vector.TradingPeriod;
 
 public interface Symbol {
 

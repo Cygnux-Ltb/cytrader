@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.instrument;
+package io.mercury.financial.instrument;
 
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.MutableMap;

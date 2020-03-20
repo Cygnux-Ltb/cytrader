@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.instrument.futures;
+package io.mercury.financial.instrument.futures;
 
 import java.time.LocalTime;
 import java.util.stream.Collectors;
@@ -12,10 +12,10 @@ import io.mercury.common.collections.ImmutableMaps;
 import io.mercury.common.collections.ImmutableSets;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.datetime.TimeZones;
-import io.mercury.polaris.financial.instrument.Exchange;
-import io.mercury.polaris.financial.instrument.Symbol;
-import io.mercury.polaris.financial.vector.TimePeriod;
-import io.mercury.polaris.financial.vector.TradingPeriod;
+import io.mercury.financial.instrument.Exchange;
+import io.mercury.financial.instrument.Symbol;
+import io.mercury.financial.vector.TimePeriod;
+import io.mercury.financial.vector.TradingPeriod;
 
 public enum ChinaFuturesSymbol implements Symbol {
 

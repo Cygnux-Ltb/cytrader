@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.time.tradingday.api;
+package io.mercury.financial.time.tradingday.api;
 
 import java.time.LocalDate;
 

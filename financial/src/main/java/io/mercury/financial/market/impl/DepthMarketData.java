@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.market.impl;
+package io.mercury.financial.market.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -6,8 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-import io.mercury.polaris.financial.instrument.Instrument;
-import io.mercury.polaris.financial.market.api.QuoteLevelOverflowException;
+import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.api.QuoteLevelOverflowException;
 
 public final class DepthMarketData {
 

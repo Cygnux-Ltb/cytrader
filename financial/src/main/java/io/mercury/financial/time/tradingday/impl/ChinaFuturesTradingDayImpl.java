@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.time.tradingday.impl;
+package io.mercury.financial.time.tradingday.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -6,8 +6,8 @@ import java.time.LocalTime;
 
 import javax.annotation.concurrent.ThreadSafe;
 
-import io.mercury.polaris.financial.instrument.futures.ChinaFuturesUtil;
-import io.mercury.polaris.financial.time.tradingday.api.TradingDay;
+import io.mercury.financial.instrument.futures.ChinaFuturesUtil;
+import io.mercury.financial.time.tradingday.api.TradingDay;
 
 /**
  * 在收盘后至15点05分之前启动获得的TradinDay将存在误差

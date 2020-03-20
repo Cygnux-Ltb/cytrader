@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial.instrument.forex.legalcurrency;
+package io.mercury.financial.instrument.forex.legalcurrency;
 
 public class LegalCurrency {
 
