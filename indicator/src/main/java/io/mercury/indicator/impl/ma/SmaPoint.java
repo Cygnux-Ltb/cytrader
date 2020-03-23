@@ -4,7 +4,6 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
-import io.mercury.indicator.impl.ma.base.MaPoint;
 import io.mercury.indicator.structure.FixedHistoryPriceRecorder;
 
 public final class SmaPoint extends MaPoint<SmaPoint> {

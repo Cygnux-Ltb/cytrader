@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.ma.base;
+package io.mercury.indicator.impl.ma;
 
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.vector.TimePeriod;

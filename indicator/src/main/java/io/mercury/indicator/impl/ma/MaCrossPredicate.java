@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.ma.base;
+package io.mercury.indicator.impl.ma;
 
 public final class MaCrossPredicate {
 
