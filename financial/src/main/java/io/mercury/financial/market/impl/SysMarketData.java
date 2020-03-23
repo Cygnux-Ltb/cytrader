@@ -1,6 +1,8 @@
 package io.mercury.financial.market.impl;
 
-public final class SysMarketData {
+import io.mercury.financial.market.api.MarketData;
+
+public final class SysMarketData implements MarketData {
 
 	// 交易日
 	private String TradingDay;

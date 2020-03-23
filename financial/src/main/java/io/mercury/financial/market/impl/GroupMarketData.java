@@ -4,11 +4,11 @@ import java.util.Set;
 
 import org.eclipse.collections.api.set.MutableSet;
 
-public final class MarketDataGroup<M extends BasicMarketData> {
+public final class GroupMarketData<M extends BasicMarketData> {
 
 	private MutableSet<M> marketDataSet;
 
-	public MarketDataGroup(MutableSet<M> marketDataSet) {
+	public GroupMarketData(MutableSet<M> marketDataSet) {
 		this.marketDataSet = marketDataSet;
 	}
 
