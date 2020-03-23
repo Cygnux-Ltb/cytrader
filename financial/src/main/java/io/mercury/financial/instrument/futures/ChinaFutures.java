@@ -1,6 +1,6 @@
 package io.mercury.financial.instrument.futures;
 
-import io.mercury.financial.instrument.futures.base.Futures;
+import io.mercury.financial.instrument.Futures;
 
 public final class ChinaFutures extends Futures {
 

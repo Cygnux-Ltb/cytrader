@@ -1,6 +1,6 @@
 package io.mercury.financial.instrument;
 
-public abstract class AbstractInstrument implements Instrument {
+abstract class BaseInstrument implements Instrument {
 
 	/**
 	 * int 类型唯一编码
@@ -13,7 +13,7 @@ public abstract class AbstractInstrument implements Instrument {
 	private Symbol symbol;
 	private boolean isEnable;
 
-	protected AbstractInstrument(int id, String code, Symbol symbol) {
+	BaseInstrument(int id, String code, Symbol symbol) {
 		this.id = id;
 		this.code = code;
 		this.symbol = symbol;

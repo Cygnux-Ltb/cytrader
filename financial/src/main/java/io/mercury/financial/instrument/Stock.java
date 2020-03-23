@@ -1,9 +1,6 @@
-package io.mercury.financial.instrument.stock.base;
+package io.mercury.financial.instrument;
 
-import io.mercury.financial.instrument.AbstractInstrument;
-import io.mercury.financial.instrument.Symbol;
-
-public abstract class Stock extends AbstractInstrument {
+public abstract class Stock extends BaseInstrument {
 
 	protected Stock(int instrumentId, String instrumentCode, Symbol symbol) {
 		super(instrumentId, instrumentCode, symbol);

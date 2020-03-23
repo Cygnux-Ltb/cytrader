@@ -1,9 +1,6 @@
-package io.mercury.financial.instrument.forex.base;
+package io.mercury.financial.instrument;
 
-import io.mercury.financial.instrument.AbstractInstrument;
-import io.mercury.financial.instrument.Symbol;
-
-public abstract class Forex extends AbstractInstrument {
+public abstract class Forex extends BaseInstrument {
 
 	private long multiplier;
 

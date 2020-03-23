@@ -1,7 +1,7 @@
 package io.mercury.financial.instrument.stock;
 
+import io.mercury.financial.instrument.Stock;
 import io.mercury.financial.instrument.Symbol;
-import io.mercury.financial.instrument.stock.base.Stock;
 
 public final class ChinaStock extends Stock {
 
