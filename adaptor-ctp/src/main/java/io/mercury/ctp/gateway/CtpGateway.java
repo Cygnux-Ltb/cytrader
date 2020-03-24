@@ -41,6 +41,7 @@ import io.mercury.common.thread.ThreadUtil;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.ctp.gateway.bean.config.CtpConfigInfo;
+import io.mercury.ctp.gateway.bean.req.ReqOrder;
 import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
 import io.mercury.ctp.gateway.bean.rsp.RspMsg;
 import io.mercury.ctp.gateway.converter.RspOrderActionConverter;
@@ -83,7 +84,6 @@ public class CtpGateway {
 			log.info("Load libs success...");
 		} catch (Throwable e) {
 			log.error("Load libs error...", e);
-			log.error("");
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
@@ -131,6 +131,9 @@ public class CtpGateway {
 		return tempFileDir;
 	}
 
+	/**
+	 * 启动并挂起线程
+	 */
 	public void initAndJoin() {
 		if (!isInitialize) {
 			// 获取临时文件目录
@@ -193,6 +196,14 @@ public class CtpGateway {
 		log.info("Call traderApi.Join()");
 	}
 
+	/*
+	 ****************************************************************
+	 * 以下是行情相关接口与回调
+	 */
+
+	/**
+	 * 行情前置连接回调
+	 */
 	void onMdFrontConnected() {
 		CThostFtdcReqUserLoginField reqUserLogin = new CThostFtdcReqUserLoginField();
 		reqUserLogin.setBrokerID(ctpConfigInfo.getBrokerId());
@@ -202,17 +213,26 @@ public class CtpGateway {
 		log.info("Send Md ReqUserLogin OK");
 	}
 
+	/**
+	 * 行情登录回调
+	 * 
+	 * @param rspUserLogin
+	 */
 	void onMdRspUserLogin(CThostFtdcRspUserLoginField rspUserLogin) {
 		log.info("Md UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLogin.getBrokerID(),
 				rspUserLogin.getUserID());
 		this.isMdLogin = true;
+		rspUserLogin.getBrokerID();
+		rspUserLogin.getUserID();
+		rspUserLogin.getMaxOrderRef();
+		// inboundBuffer.enqueue(RspMsg.)
 		innerSubscribeMarketData();
 	}
 
 	private Set<String> subscribeInstruementSet = MutableSets.newUnifiedSet();
 
 	/**
-	 * 行情相关调用和回调
+	 * 行情订阅接口
 	 */
 	public void subscribeMarketData(Set<String> inputInstruementSet) {
 		subscribeInstruementSet.addAll(inputInstruementSet);
@@ -237,8 +257,13 @@ public class CtpGateway {
 		}
 	}
 
+	/**
+	 * 订阅行情回调
+	 * 
+	 * @param specificInstrument
+	 */
 	void onRspSubMarketData(CThostFtdcSpecificInstrumentField specificInstrument) {
-		log.info("SubscribeMarketData Success -> InstrumentCode==[{}]", specificInstrument);
+		log.info("SubscribeMarketData Success -> InstrumentCode==[{}]", specificInstrument.getInstrumentID());
 	}
 
 	private Function<CThostFtdcDepthMarketDataField, RspDepthMarketData> depthMarketDataFunction = from -> {
@@ -265,6 +290,11 @@ public class CtpGateway {
 				.setActionDay(from.getActionDay());
 	};
 
+	/**
+	 * 行情推送回调
+	 * 
+	 * @param depthMarketData
+	 */
 	void onRtnDepthMarketData(CThostFtdcDepthMarketDataField depthMarketData) {
 		log.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
 				depthMarketData.getInstrumentID(), depthMarketData.getUpdateTime(),
@@ -272,75 +302,14 @@ public class CtpGateway {
 		inboundBuffer.enqueue(RspMsg.ofDepthMarketData(depthMarketDataFunction.apply(depthMarketData)));
 	}
 
-	/**
-	 * 报单相关调用和回调
+	/*
+	 ****************************************************************
+	 * 以下是报单, 撤单相关接口与回调
 	 */
-	public void newOrder(CThostFtdcInputOrderField inputOrder) {
-		if (isTraderLogin) {
-			// set account
-			// TODO
-			inputOrder.setAccountID(ctpConfigInfo.getAccountId());
-			inputOrder.setUserID(ctpConfigInfo.getUserId());
-			inputOrder.setBrokerID(ctpConfigInfo.getBrokerId());
-			traderApi.ReqOrderInsert(inputOrder, ++traderRequestId);
-		} else
-			log.warn("TraderApi is not login, isTraderLogin==[false]");
-	}
-
-	private RspOrderInsertConverter orderInsertConverter = new RspOrderInsertConverter();
-
-	void onRspOrderInsert(CThostFtdcInputOrderField rspOrderInsert) {
-		inboundBuffer.enqueue(RspMsg.ofRspOrderInsert(orderInsertConverter.apply(rspOrderInsert)));
-	}
-
-	void onErrRtnOrderInsert(CThostFtdcInputOrderField inputOrder) {
-		inboundBuffer.enqueue(RspMsg.ofErrRtnOrderInsert(inputOrder));
-	}
-
-	private RtnOrderConverter rtnOrderConverter = new RtnOrderConverter();
-
-	void onRtnOrder(CThostFtdcOrderField rtnOrder) {
-		log.debug("Gateway onRtnOrder -> AccountID==[{}], OrderRef==[{}]", rtnOrder.getAccountID(),
-				rtnOrder.getOrderRef());
-		inboundBuffer.enqueue(RspMsg.ofRtnOrder(rtnOrderConverter.apply(rtnOrder)));
-	}
-
-	private RtnTradeConverter rtnTradeConverter = new RtnTradeConverter();
-
-	void onRtnTrade(CThostFtdcTradeField rtnTrade) {
-		log.debug("Gateway onRtnTrade -> OrderRef==[{}], Price==[{}], Volume==[{}]", rtnTrade.getOrderRef(),
-				rtnTrade.getPrice(), rtnTrade.getVolume());
-		inboundBuffer.enqueue(RspMsg.ofRtnTrade(rtnTradeConverter.apply(rtnTrade)));
-	}
 
 	/**
-	 * 撤单相关调用和回调
+	 * 交易前置机连接回调
 	 */
-	public void cancelOrder(CThostFtdcInputOrderActionField inputOrderAction) {
-		if (isTraderLogin) {
-			inputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
-			inputOrderAction.setUserID(ctpConfigInfo.getUserId());
-			inputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
-			traderApi.ReqOrderAction(inputOrderAction, ++traderRequestId);
-		} else
-			log.error("Trader Error :: TraderApi is not login");
-	}
-
-	private RspOrderActionConverter orderActionConverter = new RspOrderActionConverter();
-
-	void onRspOrderAction(CThostFtdcInputOrderActionField inputOrderAction) {
-		inboundBuffer.enqueue(RspMsg.ofRspOrderAction(orderActionConverter.apply(inputOrderAction)));
-	}
-
-	void onErrRtnOrderAction(CThostFtdcOrderActionField orderAction) {
-		inboundBuffer.enqueue(RspMsg.ofErrRtnOrderAction(orderAction));
-	}
-
-	void onRspError(CThostFtdcRspInfoField rspInfo) {
-		log.error("Gateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfo.getErrorID(),
-				StringUtil.conversionGbkToUtf8(rspInfo.getErrorMsg()));
-	}
-
 	void onTraderFrontConnected() {
 		CThostFtdcReqUserLoginField reqUserLogin = new CThostFtdcReqUserLoginField();
 		reqUserLogin.setBrokerID(ctpConfigInfo.getBrokerId());
@@ -351,11 +320,121 @@ public class CtpGateway {
 		log.info("Send Trader ReqUserLogin OK");
 	}
 
+	/**
+	 * 交易登录回调
+	 * 
+	 * @param rspUserLogin
+	 */
 	void onTraderRspUserLogin(CThostFtdcRspUserLoginField rspUserLogin) {
 		log.info("Trader UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLogin.getBrokerID(),
 				rspUserLogin.getUserID());
 		this.isTraderLogin = true;
 		qureyAccount();
+	}
+
+	/****************
+	 * 报单接口
+	 */
+	public void newOrder(CThostFtdcInputOrderField ftdcInputOrder) {
+		ReqOrder order = new ReqOrder();
+		if (isTraderLogin) {
+			// set account
+			// TODO
+			ftdcInputOrder.setAccountID(ctpConfigInfo.getAccountId());
+			ftdcInputOrder.setUserID(ctpConfigInfo.getUserId());
+			ftdcInputOrder.setBrokerID(ctpConfigInfo.getBrokerId());
+			traderApi.ReqOrderInsert(ftdcInputOrder, ++traderRequestId);
+		} else
+			log.error("Trader Error :: TraderApi is not login");
+	}
+
+	private RspOrderInsertConverter orderInsertConverter = new RspOrderInsertConverter();
+
+	/**
+	 * 报单回调
+	 * 
+	 * @param rspOrderInsert
+	 */
+	void onRspOrderInsert(CThostFtdcInputOrderField rspOrderInsert) {
+		inboundBuffer.enqueue(RspMsg.ofRspOrderInsert(orderInsertConverter.apply(rspOrderInsert)));
+	}
+
+	/**
+	 * 报单错误回调
+	 * 
+	 * @param inputOrder
+	 */
+	void onErrRtnOrderInsert(CThostFtdcInputOrderField inputOrder) {
+		inboundBuffer.enqueue(RspMsg.ofErrRtnOrderInsert(inputOrder));
+	}
+
+	private RtnOrderConverter rtnOrderConverter = new RtnOrderConverter();
+
+	/**
+	 * 报单推送
+	 * 
+	 * @param rtnOrder
+	 */
+	void onRtnOrder(CThostFtdcOrderField rtnOrder) {
+		log.debug("Gateway onRtnOrder -> AccountID==[{}], OrderRef==[{}]", rtnOrder.getAccountID(),
+				rtnOrder.getOrderRef());
+		inboundBuffer.enqueue(RspMsg.ofRtnOrder(rtnOrderConverter.apply(rtnOrder)));
+	}
+
+	private RtnTradeConverter rtnTradeConverter = new RtnTradeConverter();
+
+	/**
+	 * 成交推送
+	 * 
+	 * @param rtnTrade
+	 */
+	void onRtnTrade(CThostFtdcTradeField rtnTrade) {
+		log.debug("Gateway onRtnTrade -> OrderRef==[{}], Price==[{}], Volume==[{}]", rtnTrade.getOrderRef(),
+				rtnTrade.getPrice(), rtnTrade.getVolume());
+		inboundBuffer.enqueue(RspMsg.ofRtnTrade(rtnTradeConverter.apply(rtnTrade)));
+	}
+
+	/****************
+	 * 撤单接口
+	 */
+	public void cancelOrder(CThostFtdcInputOrderActionField ftdcInputOrderAction) {
+		if (isTraderLogin) {
+			ftdcInputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
+			ftdcInputOrderAction.setUserID(ctpConfigInfo.getUserId());
+			ftdcInputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
+			traderApi.ReqOrderAction(ftdcInputOrderAction, ++traderRequestId);
+		} else
+			log.error("Trader Error :: TraderApi is not login");
+	}
+
+	private RspOrderActionConverter orderActionConverter = new RspOrderActionConverter();
+
+	/**
+	 * 撤单回调
+	 * 
+	 * @param inputOrderAction
+	 */
+	void onRspOrderAction(CThostFtdcInputOrderActionField inputOrderAction) {
+		inboundBuffer.enqueue(RspMsg.ofRspOrderAction(orderActionConverter.apply(inputOrderAction)));
+	}
+
+	/**
+	 * 撤单错误回调
+	 * 
+	 * @param orderAction
+	 */
+	void onErrRtnOrderAction(CThostFtdcOrderActionField orderAction) {
+		inboundBuffer.enqueue(RspMsg.ofErrRtnOrderAction(orderAction));
+	}
+
+	/**
+	 * 错误推送
+	 * 
+	 * @param rspInfo
+	 */
+	void onRspError(CThostFtdcRspInfoField rspInfo) {
+		log.error("Gateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfo.getErrorID(),
+				StringUtil.conversionGbkToUtf8(rspInfo.getErrorMsg()));
 	}
 
 	public void qureyAccount() {
@@ -413,6 +492,7 @@ public class CtpGateway {
 
 	public void qureyInstrument() {
 		CThostFtdcQryInstrumentField qryInstrument = new CThostFtdcQryInstrumentField();
+		
 		traderApi.ReqQryInstrument(qryInstrument, ++traderRequestId);
 		log.info("Send ReqQryInstrument OK");
 	}
