@@ -13,8 +13,8 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentKeeper;
-import io.mercury.financial.market.QuoteKeeper;
-import io.mercury.financial.market.QuoteKeeper.AtomicQuote;
+import io.mercury.financial.market.LastMarkerDataKeeper;
+import io.mercury.financial.market.LastMarkerDataKeeper.LastMarkerData;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.account.AccountKeeper;
@@ -171,7 +171,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty, long minPrice,
 			long maxPrice) {
 		OrdSide ordSide;
-		AtomicQuote quote = QuoteKeeper.getQuote(instrument);
+		LastMarkerData lastMarkerData = LastMarkerDataKeeper.get(instrument);
 		long offerPrice = 0;
 		switch (direction) {
 		case Long:

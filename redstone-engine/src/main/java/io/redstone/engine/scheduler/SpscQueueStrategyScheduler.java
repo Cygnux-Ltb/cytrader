@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import io.mercury.common.concurrent.disruptor.BufferSize;
 import io.mercury.common.concurrent.disruptor.SpscQueue;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.financial.market.QuoteKeeper;
+import io.mercury.financial.market.LastMarkerDataKeeper;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.adaptor.AdaptorEvent;
 import io.redstone.core.order.Order;
@@ -36,8 +36,8 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 			switch (enqueueMsg.mark()) {
 			case MarketData:
 				BasicMarketData marketData = enqueueMsg.getMarketData();
-				QuoteKeeper.onMarketDate(marketData);
-				StrategyKeeper.getSubscribedStrategys(marketData.instrument().id()).forEach(strategy -> {
+				LastMarkerDataKeeper.onMarketDate(marketData);
+				StrategyKeeper.getSubscribedStrategys(marketData.instrument().id()).each(strategy -> {
 					if (strategy.isEnabled())
 						strategy.onMarketData(marketData);
 				});
