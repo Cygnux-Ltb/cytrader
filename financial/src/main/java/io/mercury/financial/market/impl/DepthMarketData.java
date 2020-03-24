@@ -134,18 +134,18 @@ public final class DepthMarketData implements MarketData {
 		}
 
 		public Quotes addAskQuote(int levelIndex, long price, long volume) throws QuoteLevelOverflowException {
-			if (levelIndex == askLevel)
+			if (levelIndex >= askLevel)
 				throw new QuoteLevelOverflowException(
 						"askLevelIndex == " + levelIndex + ", array length is " + askLevel);
 			askQuotes[levelIndex].setPrice(price).setVolume(volume);
 			return this;
 		}
 
-		public Quotes addBidQuote(int levelindex, long price, long volume) throws QuoteLevelOverflowException {
-			if (levelindex == bidLevel)
+		public Quotes addBidQuote(int levelIndex, long price, long volume) throws QuoteLevelOverflowException {
+			if (levelIndex >= bidLevel)
 				throw new QuoteLevelOverflowException(
-						"bidLevelIndex == " + levelindex + ", array length is " + bidLevel);
-			bidQuotes[levelindex].setPrice(price).setVolume(volume);
+						"bidLevelIndex == " + levelIndex + ", array length is " + bidLevel);
+			bidQuotes[levelIndex].setPrice(price).setVolume(volume);
 			return this;
 		}
 

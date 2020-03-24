@@ -15,8 +15,8 @@ import io.mercury.financial.instrument.futures.ChinaFuturesUtil;
 public class CsvMarketData implements Comparable<CsvMarketData> {
 
 	private String timestamp;
-	private String instrumentID;
-	private String exchangeID;
+	private String instrumentId;
+	private String exchangeId;
 	private String last;
 	private String iopv;
 	private String bid1;
@@ -54,12 +54,12 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 		return timestamp;
 	}
 
-	public String getInstrumentID() {
-		return instrumentID;
+	public String getInstrumentId() {
+		return instrumentId;
 	}
 
-	public String getExchangeID() {
-		return exchangeID;
+	public String getExchangeId() {
+		return exchangeId;
 	}
 
 	public String getLast() {
@@ -197,15 +197,15 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 	 * @param openInterest
 	 * @param updateTime
 	 */
-	private CsvMarketData(String timestamp, String instrumentID, String symbol, String exchangeID, String last,
+	private CsvMarketData(String timestamp, String instrumentId, String symbol, String exchangeId, String last,
 			String iopv, String bid1, String bid2, String bid3, String bid4, String bid5, String ask1, String ask2,
 			String ask3, String ask4, String ask5, String bidVolume1, String bidVolume2, String bidVolume3,
 			String bidVolume4, String bidVolume5, String askVolume1, String askVolume2, String askVolume3,
 			String askVolume4, String askVolume5, String volume, String amount, String openInterest,
 			String updateTime) {
 		this.timestamp = timestamp;
-		this.instrumentID = instrumentID;
-		this.exchangeID = exchangeID;
+		this.instrumentId = instrumentId;
+		this.exchangeId = exchangeId;
 		this.symbol = symbol;
 		this.last = last;
 		this.iopv = iopv;
@@ -259,7 +259,7 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 
 	private void initStringBuffer() {
 		buffer = new StringBuffer();
-		buffer.append(timestamp).append(",").append(instrumentID).append(",").append(exchangeID).append(",")
+		buffer.append(timestamp).append(",").append(instrumentId).append(",").append(exchangeId).append(",")
 				.append(last).append(",").append(iopv).append(",").append(bid1).append(",").append(bid2).append(",")
 				.append(bid3).append(",").append(bid4).append(",").append(bid5).append(",").append(ask1).append(",")
 				.append(ask2).append(",").append(ask3).append(",").append(ask4).append(",").append(ask5).append(",")
@@ -354,7 +354,7 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 	}
 
 	public boolean equalsInstrumentId(CsvMarketData o) {
-		return instrumentID.equals(o.getInstrumentID());
+		return instrumentId.equals(o.getInstrumentId());
 	}
 
 	@Override
@@ -373,7 +373,7 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 	private String diskLocation;
 
 	private void findDiskLocation() {
-		this.diskLocation = exchangeID + "/" + symbol + "/" + tradingDay;
+		this.diskLocation = exchangeId + "/" + symbol + "/" + tradingDay;
 	}
 
 	public String getDiskLocation() {
@@ -383,9 +383,9 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 	public static CsvMarketData newFileMarketData4CsvLine(String line) {
 		String[] strArray = line.split(",");
 		String timestamp = strArray[0];
-		String instrumentID = strArray[1];
-		String symbol = ChinaFuturesUtil.analysisSymbolCode(instrumentID);
-		String exchangeID = strArray[2];
+		String instrumentId = strArray[1];
+		String symbol = ChinaFuturesUtil.analysisSymbolCode(instrumentId);
+		String exchangeId = strArray[2];
 		String last = strArray[3];
 		String iopv = strArray[4];
 		String bid1 = strArray[5];
@@ -412,7 +412,7 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 		String amount = strArray[26];
 		String openInterest = strArray[27];
 		String updateTime = strArray[28];
-		return new CsvMarketData(timestamp, instrumentID, symbol, exchangeID, last, iopv, bid1, bid2, bid3, bid4, bid5,
+		return new CsvMarketData(timestamp, instrumentId, symbol, exchangeId, last, iopv, bid1, bid2, bid3, bid4, bid5,
 				ask1, ask2, ask3, ask4, ask5, bidVolume1, bidVolume2, bidVolume3, bidVolume4, bidVolume5, askVolume1,
 				askVolume2, askVolume3, askVolume4, askVolume5, volume, amount, openInterest, updateTime);
 	}

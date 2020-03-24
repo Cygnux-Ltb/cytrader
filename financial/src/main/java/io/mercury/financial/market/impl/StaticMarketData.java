@@ -1,5 +1,7 @@
 package io.mercury.financial.market.impl;
 
-public final class StaticMarketData {
+import io.mercury.financial.market.api.MarketData;
+
+public final class StaticMarketData implements MarketData {
 
 }
