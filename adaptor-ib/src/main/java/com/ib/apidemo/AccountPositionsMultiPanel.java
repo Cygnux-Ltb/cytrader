@@ -77,11 +77,20 @@ public class AccountPositionsMultiPanel extends JPanel {
 	}
 	
 	private class PositionsMultiPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -4335232456817468798L;
 		final RequestPanel m_requestPanel = new RequestPanel();
 		
 		PositionsMultiPanel() {
 			
 			HtmlButton requestPositionsMultiButton = new HtmlButton( "Request Positions Multi") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 7926062356359986403L;
+
 				protected void actionPerformed() {
 					onRequestPositionsMulti();
 				}
@@ -106,6 +115,10 @@ public class AccountPositionsMultiPanel extends JPanel {
 		}
 	
 		private class PositionsResultsPanel extends NewTabPanel implements IPositionMultiHandler {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -4698073517923817385L;
 			HashMap<String,PositionRow> m_map = new HashMap<String,PositionRow>();
 			ArrayList<PositionRow> m_list = new ArrayList<PositionRow>();
 			PositionsModel m_model = new PositionsModel();
@@ -153,6 +166,11 @@ public class AccountPositionsMultiPanel extends JPanel {
 			}
 			
 			class PositionsModel extends AbstractTableModel {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = -6806866097059561985L;
+
 				@Override public int getRowCount() {
 					return m_map.size();
 				}
@@ -207,11 +225,20 @@ public class AccountPositionsMultiPanel extends JPanel {
 	}		
 		
 	private class AccountUpdatesMultiPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2555083282588206061L;
 		final RequestPanel m_requestPanel = new RequestPanel();
 		
 		AccountUpdatesMultiPanel() {
 			
 			HtmlButton requestAccountUpdatesMultiButton = new HtmlButton( "Request Account Updates Multi") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 8943286884170579586L;
+
 				protected void actionPerformed() {
 					onRequestAccountUpdatesMulti();
 				}
@@ -237,6 +264,10 @@ public class AccountPositionsMultiPanel extends JPanel {
 		}
 	
 		private class AccountUpdatesResultsPanel extends NewTabPanel implements IAccountUpdateMultiHandler {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 4849182491150225694L;
 			HashMap<AccountUpdateKey, AccountUpdateRow> m_map = new HashMap<AccountUpdateKey, AccountUpdateRow>();
 			ArrayList<AccountUpdateRow> m_list = new ArrayList<AccountUpdateRow>();
 			AccountUpdatesModel m_model = new AccountUpdatesModel();
@@ -284,6 +315,11 @@ public class AccountPositionsMultiPanel extends JPanel {
 			}
 			
 			class AccountUpdatesModel extends AbstractTableModel {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = -1220379899610001200L;
+
 				@Override public int getRowCount() {
 					return m_map.size();
 				}

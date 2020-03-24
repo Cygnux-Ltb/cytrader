@@ -21,7 +21,12 @@ import com.ib.client.EClient;
 
 public class GroupsDlg extends JDialog {
 
-    public boolean m_rc;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3391439157733517655L;
+
+	public boolean m_rc;
 
     public int m_reqId;
 
@@ -33,7 +38,7 @@ public class GroupsDlg extends JDialog {
     private JButton 	m_btnUnsubscribeFromGroupEvents = new JButton( "Unsubscribe From Group Events");
     private JButton 	m_btnUpdateDisplayGroup = new JButton( "Update Display Group");
 
-    private JComboBox 	m_cmbDisplayGroups = new JComboBox();
+    private JComboBox<String> 	m_cmbDisplayGroups = new JComboBox<>();
 
     private JButton 	m_btnReset = new JButton( "Reset");
     private JButton 	m_btnClose = new JButton( "Close");

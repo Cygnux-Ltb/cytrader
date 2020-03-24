@@ -22,16 +22,30 @@ import com.ib.controller.Formats;
 
 
 public class AccountSummaryPanel extends NewTabPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9131877843363663777L;
 	private SummaryModel m_model = new SummaryModel();
 	
 	AccountSummaryPanel() {
 		HtmlButton sub = new HtmlButton( "Subscribe") {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 437217637751996171L;
+
 			protected void actionPerformed() {
 				subscribe();
 			}
 		};
 		
 		HtmlButton desub = new HtmlButton( "Desubscribe") {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1153381714978992857L;
+
 			protected void actionPerformed() {
 				desubscribe();
 			}
@@ -69,6 +83,10 @@ public class AccountSummaryPanel extends NewTabPanel {
 	}
 	
 	private class SummaryModel extends AbstractTableModel implements IAccountSummaryHandler {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -4756182957462532890L;
 		ArrayList<SummaryRow> m_rows = new ArrayList<SummaryRow>();
 		HashMap<String,SummaryRow> m_map = new HashMap<String,SummaryRow>();
 		boolean m_complete;
