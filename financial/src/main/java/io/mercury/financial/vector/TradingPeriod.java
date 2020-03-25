@@ -14,7 +14,7 @@ import org.eclipse.collections.api.list.MutableList;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.datetime.TimeConst;
-import io.mercury.common.datetime.TimeZones;
+import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.sequence.Serial;
 import io.mercury.financial.vector.TimePeriodSerial;
 
@@ -127,7 +127,7 @@ public final class TradingPeriod implements Serial<TradingPeriod> {
 
 		System.out.println(tradingPeriod.isPeriod(LocalTime.of(14, 00, 00)));
 
-		tradingPeriod.segmentation(TimeZones.CST, Duration.ofMinutes(45))
+		tradingPeriod.segmentation(TimeZone.CST, Duration.ofMinutes(45))
 				.each(timePeriod -> System.out.println(timePeriod.startTime() + " - " + timePeriod.endTime()));
 
 		LocalDateTime of = LocalDateTime.of(LocalDate.now(), LocalTime.of(23, 55, 30));

@@ -2,27 +2,27 @@ package io.mercury.financial.instrument;
 
 import java.time.ZoneId;
 
-import io.mercury.common.datetime.TimeZones;
+import io.mercury.common.datetime.TimeZone;
 
 public enum Exchange {
 
 	// Shanghai Futures Exchange
-	SHFE(41, TimeZones.CST),
+	SHFE(41, TimeZone.CST),
 
 	// Zhengzhou Commodity Exchange
-	ZCE(42, TimeZones.CST),
+	ZCE(42, TimeZone.CST),
 
 	// Dalian Commodity Exchange
-	DCE(43, TimeZones.CST),
+	DCE(43, TimeZone.CST),
 
 	// China Financial Futures Exchange
-	CFFE(44, TimeZones.CST),
+	CFFE(44, TimeZone.CST),
 
 	// Shanghai International Energy Exchange
-	SIEE(45, TimeZones.CST),
+	SIEE(45, TimeZone.CST),
 
 	// Tokyo Commodity Exchange
-	TOCOM(11, TimeZones.JST),
+	TOCOM(11, TimeZone.JST),
 
 	;
 

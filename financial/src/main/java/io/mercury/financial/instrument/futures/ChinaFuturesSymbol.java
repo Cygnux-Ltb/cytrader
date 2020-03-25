@@ -11,7 +11,7 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import io.mercury.common.collections.ImmutableMaps;
 import io.mercury.common.collections.ImmutableSets;
 import io.mercury.common.collections.MutableLists;
-import io.mercury.common.datetime.TimeZones;
+import io.mercury.common.datetime.TimeZone;
 import io.mercury.financial.instrument.Exchange;
 import io.mercury.financial.instrument.Symbol;
 import io.mercury.financial.vector.TimePeriod;
@@ -239,7 +239,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	public static void main(String[] args) {
 		for (Symbol symbol : ChinaFuturesSymbol.values()) {
 			symbol.tradingPeriodSet()
-					.each(tradingPeriod -> tradingPeriod.segmentation(TimeZones.CST, TimePeriod.S30.duration())
+					.each(tradingPeriod -> tradingPeriod.segmentation(TimeZone.CST, TimePeriod.S30.duration())
 							.each(timePeriod -> System.out.println(symbol.code() + " | " + timePeriod)));
 		}
 
