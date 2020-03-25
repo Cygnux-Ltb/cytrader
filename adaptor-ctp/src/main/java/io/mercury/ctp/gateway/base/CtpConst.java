@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import ctp.thostapi.thosttraderapiConstants;
 
-public class CtpConstant {
+public class CtpConst {
 	
 	public static Map<String, Character> priceTypeMap = new HashMap<>();
 	public static Map<Character, String> priceTypeMapReverse = new HashMap<>();

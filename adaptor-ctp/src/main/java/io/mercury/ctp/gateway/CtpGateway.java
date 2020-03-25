@@ -329,13 +329,13 @@ public class CtpGateway {
 		log.info("Trader UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLogin.getBrokerID(),
 				rspUserLogin.getUserID());
 		this.isTraderLogin = true;
-		qureyAccount();
+		//TODO Inbound
 	}
 
 	/****************
 	 * 报单接口
 	 */
-	public void newOrder(CThostFtdcInputOrderField ftdcInputOrder) {
+	public void reqOrderInsert(CThostFtdcInputOrderField ftdcInputOrder) {
 		ReqOrder order = new ReqOrder();
 		if (isTraderLogin) {
 			// set account
@@ -397,7 +397,7 @@ public class CtpGateway {
 	/****************
 	 * 撤单接口
 	 */
-	public void cancelOrder(CThostFtdcInputOrderActionField ftdcInputOrderAction) {
+	public void reqOrderAction(CThostFtdcInputOrderActionField ftdcInputOrderAction) {
 		if (isTraderLogin) {
 			ftdcInputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
 			ftdcInputOrderAction.setUserID(ctpConfigInfo.getUserId());
@@ -437,12 +437,8 @@ public class CtpGateway {
 				StringUtil.conversionGbkToUtf8(rspInfo.getErrorMsg()));
 	}
 
-	public void qureyAccount() {
-		ThreadUtil.startNewThread(() -> innerQureyAccount());
-	}
-
-	private void innerQureyAccount() {
-		ThreadUtil.sleep(1250);
+	public void reqQryTradingAccount() {
+		// ThreadUtil.startNewThread(() -> innerQureyAccount());
 		CThostFtdcQryTradingAccountField qryTradingAccount = new CThostFtdcQryTradingAccountField();
 		qryTradingAccount.setBrokerID(ctpConfigInfo.getBrokerId());
 		qryTradingAccount.setInvestorID(ctpConfigInfo.getInvestorId());
@@ -452,19 +448,26 @@ public class CtpGateway {
 		log.info("Send ReqQryTradingAccount OK -> nRequestID==[{}]", nRequestID);
 	}
 
+//	private void innerQureyAccount() {
+//		ThreadUtil.sleep(1250);
+//		CThostFtdcQryTradingAccountField qryTradingAccount = new CThostFtdcQryTradingAccountField();
+//		qryTradingAccount.setBrokerID(ctpConfigInfo.getBrokerId());
+//		qryTradingAccount.setInvestorID(ctpConfigInfo.getInvestorId());
+//		qryTradingAccount.setCurrencyID(ctpConfigInfo.getCurrencyId());
+//		int nRequestID = ++traderRequestId;
+//		traderApi.ReqQryTradingAccount(qryTradingAccount, nRequestID);
+//		log.info("Send ReqQryTradingAccount OK -> nRequestID==[{}]", nRequestID);
+//	}
+
 	void onQryTradingAccount(CThostFtdcTradingAccountField tradingAccount) {
 		log.info("onQryTradingAccount -> Balance==[{}] Available==[{}] WithdrawQuota==[{}] Credit==[{}]",
 				tradingAccount.getBalance(), tradingAccount.getAvailable(), tradingAccount.getWithdrawQuota(),
 				tradingAccount.getCredit());
-		qureyPosition();
+		// TODO Inbound
 	}
 
-	public void qureyPosition() {
-		ThreadUtil.startNewThread(() -> innerQureyPosition());
-	}
-
-	private void innerQureyPosition() {
-		ThreadUtil.sleep(1250);
+	public void reqQryInvestorPosition() {
+		// ThreadUtil.startNewThread(() -> innerQureyPosition());
 		CThostFtdcQryInvestorPositionField qryInvestorPosition = new CThostFtdcQryInvestorPositionField();
 		qryInvestorPosition.setBrokerID(ctpConfigInfo.getBrokerId());
 		qryInvestorPosition.setInvestorID(ctpConfigInfo.getInvestorId());
@@ -473,12 +476,22 @@ public class CtpGateway {
 		log.info("Send ReqQryInvestorPosition OK -> nRequestID==[{}]", nRequestID);
 	}
 
+//	private void innerQureyPosition() {
+//		ThreadUtil.sleep(1250);
+//		CThostFtdcQryInvestorPositionField qryInvestorPosition = new CThostFtdcQryInvestorPositionField();
+//		qryInvestorPosition.setBrokerID(ctpConfigInfo.getBrokerId());
+//		qryInvestorPosition.setInvestorID(ctpConfigInfo.getInvestorId());
+//		int nRequestID = ++traderRequestId;
+//		traderApi.ReqQryInvestorPosition(qryInvestorPosition, nRequestID);
+//		log.info("Send ReqQryInvestorPosition OK -> nRequestID==[{}]", nRequestID);
+//	}
+
 	void onRspQryInvestorPosition(CThostFtdcInvestorPositionField investorPosition) {
 		log.info("onRspQryInvestorPosition -> InstrumentID==[{}] InvestorID==[{}] Position==[{}]",
 				investorPosition.getInstrumentID(), investorPosition.getInvestorID(), investorPosition.getPosition());
 	}
 
-	public void qureySettlementInfo() {
+	public void reqQrySettlementInfo() {
 		CThostFtdcQrySettlementInfoField qrySettlementInfo = new CThostFtdcQrySettlementInfoField();
 		qrySettlementInfo.setBrokerID(ctpConfigInfo.getBrokerId());
 		qrySettlementInfo.setInvestorID(ctpConfigInfo.getInvestorId());
@@ -490,11 +503,11 @@ public class CtpGateway {
 		log.info("Send ReqQrySettlementInfo OK -> nRequestID==[{}]", nRequestID);
 	}
 
-	public void qureyInstrument() {
+	public void reqQryInstrument() {
 		CThostFtdcQryInstrumentField qryInstrument = new CThostFtdcQryInstrumentField();
-		
-		traderApi.ReqQryInstrument(qryInstrument, ++traderRequestId);
-		log.info("Send ReqQryInstrument OK");
+		int nRequestID = ++traderRequestId;
+		traderApi.ReqQryInstrument(qryInstrument, nRequestID);
+		log.info("Send ReqQryInstrument OK -> nRequestID==[{}]", nRequestID);
 	}
 
 }

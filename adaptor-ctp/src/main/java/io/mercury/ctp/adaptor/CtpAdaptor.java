@@ -17,11 +17,12 @@ import org.slf4j.Logger;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
+import ctp.thostapi.thosttraderapiConstants;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.TimePattern;
 import io.mercury.common.datetime.TimeConst;
-import io.mercury.common.datetime.TimeZones;
+import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ImmutableParamMap;
@@ -64,7 +65,7 @@ public class CtpAdaptor extends BaseAdaptor {
 		log.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]", instrument.code(),
 				depthDate, depthTime);
 
-		return new BasicMarketData(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZones.CST),
+		return new BasicMarketData(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZone.CST),
 				priceToLong4(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
 				priceToLong4(depthMarketData.getTurnover())).setBidPrice1(priceToLong4(depthMarketData.getBidPrice1()))
 						.setBidVolume1(depthMarketData.getBidVolume1())
@@ -173,6 +174,7 @@ public class CtpAdaptor extends BaseAdaptor {
 	private Function<Order, CThostFtdcInputOrderField> newOrderFunction = order -> {
 		int orderRef = CtpOrderRefGenerate.next(appId);
 		char direction;
+		Instrument instrument = order.instrument();
 		switch (order.ordSide().direction()) {
 		case Long:
 			direction = 0;
@@ -183,21 +185,22 @@ public class CtpAdaptor extends BaseAdaptor {
 		default:
 			throw new RuntimeException(order.ordSide() + " does not exist.");
 		}
-		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
-		inputOrderField.setInstrumentID(order.instrument().code());
-		inputOrderField.setOrderRef(Integer.toString(orderRef));
-		inputOrderField.setDirection(direction);
-		inputOrderField.setLimitPrice(order.ordPrice().offerPrice());
-		inputOrderField.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue());
-		return inputOrderField;
+		CThostFtdcInputOrderField ftdcInputOrder = new CThostFtdcInputOrderField();
+		ftdcInputOrder.setExchangeID(instrument.symbol().exchange().code());
+		ftdcInputOrder.setInstrumentID(instrument.code());
+		ftdcInputOrder.setOrderRef(Integer.toString(orderRef));
+		ftdcInputOrder.setDirection(direction);
+		ftdcInputOrder.setLimitPrice(order.ordPrice().offerPrice());
+		ftdcInputOrder.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue());
+		return ftdcInputOrder;
 	};
 
 	@Override
 	public boolean newOredr(ChildOrder order) {
 		try {
-			CThostFtdcInputOrderField ctpNewOrder = newOrderFunction.apply(order);
-			CtpOrderRefKeeper.put(ctpNewOrder.getOrderRef(), order.ordSysId());
-			gateway.newOrder(ctpNewOrder);
+			CThostFtdcInputOrderField ftdcInputOrder = newOrderFunction.apply(order);
+			CtpOrderRefKeeper.put(ftdcInputOrder.getOrderRef(), order.ordSysId());
+			gateway.reqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -206,19 +209,18 @@ public class CtpAdaptor extends BaseAdaptor {
 	}
 
 	private Function<Order, CThostFtdcInputOrderActionField> cancelOrderFunction = order -> {
+		CThostFtdcInputOrderActionField ftdcInputOrderAction = new CThostFtdcInputOrderActionField();
 
-		CThostFtdcInputOrderActionField inputOrderActionField = new CThostFtdcInputOrderActionField();
-		return inputOrderActionField;
-
+		return ftdcInputOrderAction;
 	};
 
 	@Override
 	public boolean cancelOrder(ChildOrder order) {
 		try {
-			CThostFtdcInputOrderActionField ctpCancelOrder = cancelOrderFunction.apply(order);
+			CThostFtdcInputOrderActionField ftdcInputOrderAction = cancelOrderFunction.apply(order);
 			String orderRef = CtpOrderRefKeeper.getOrderRef(order.ordSysId());
-			ctpCancelOrder.setOrderRef(orderRef);
-			gateway.cancelOrder(ctpCancelOrder);
+			ftdcInputOrderAction.setOrderRef(orderRef);
+			gateway.reqOrderAction(ftdcInputOrderAction);
 			return true;
 		} catch (OrderRefNotFoundException e) {
 			log.error(e.getMessage());
@@ -231,7 +233,7 @@ public class CtpAdaptor extends BaseAdaptor {
 	@Override
 	public boolean queryPositions(Account account) {
 		try {
-			gateway.qureyPosition();
+			gateway.reqQryInvestorPosition();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -240,8 +242,13 @@ public class CtpAdaptor extends BaseAdaptor {
 
 	@Override
 	public boolean queryBalance(Account account) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			gateway.reqQryTradingAccount();
+			return true;
+		} catch (Exception e) {
+			log.error("gatewayqueryBalance ", e);
+			return false;
+		}
 	}
 
 	@Override
