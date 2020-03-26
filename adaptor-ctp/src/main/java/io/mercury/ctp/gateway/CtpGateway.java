@@ -165,11 +165,11 @@ public class CtpGateway {
 		// 注册到md前置机
 		mdApi.RegisterFront(ctpConfigInfo.getMdAddress());
 		// 初始化mdApi
-		mdApi.Init();
 		log.info("Call mdApi.Init()...");
+		mdApi.Init();
 		// 阻塞当前线程
+		log.info("Call mdApi.Join()...");
 		mdApi.Join();
-		log.info("Call mdApi.Join()");
 	}
 
 	private void traderInitAndJoin(File tempBaseDir) {
@@ -184,16 +184,18 @@ public class CtpGateway {
 		traderApi.RegisterSpi(traderSpi);
 		// 注册到trader前置机
 		traderApi.RegisterFront(ctpConfigInfo.getTraderAddress());
-		// 订阅公有流
-		traderApi.SubscribePublicTopic(THOST_TE_RESUME_TYPE.THOST_TERT_QUICK);
-		// 订阅私有流
-		traderApi.SubscribePrivateTopic(THOST_TE_RESUME_TYPE.THOST_TERT_QUICK);
+		/// THOST_TERT_RESTART:从本交易日开始重传
+		/// THOST_TERT_RESUME:从上次收到的续传
+		/// THOST_TERT_QUICK:只传送登录后私有流的内容
+		// 订阅公有流和私有流
+		traderApi.SubscribePublicTopic(THOST_TE_RESUME_TYPE.THOST_TERT_RESUME);
+		traderApi.SubscribePrivateTopic(THOST_TE_RESUME_TYPE.THOST_TERT_RESUME);
 		// 初始化traderApi
-		traderApi.Init();
 		log.info("Call traderApi.Init()...");
+		traderApi.Init();
 		// 阻塞当前线程
+		log.info("Call traderApi.Join()...");
 		traderApi.Join();
-		log.info("Call traderApi.Join()");
 	}
 
 	/*
@@ -329,20 +331,22 @@ public class CtpGateway {
 		log.info("Trader UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLogin.getBrokerID(),
 				rspUserLogin.getUserID());
 		this.isTraderLogin = true;
-		//TODO Inbound
+		// TODO Inbound
 	}
 
 	/****************
 	 * 报单接口
 	 */
 	public void reqOrderInsert(CThostFtdcInputOrderField ftdcInputOrder) {
-		ReqOrder order = new ReqOrder();
 		if (isTraderLogin) {
 			// set account
 			// TODO
 			ftdcInputOrder.setAccountID(ctpConfigInfo.getAccountId());
 			ftdcInputOrder.setUserID(ctpConfigInfo.getUserId());
 			ftdcInputOrder.setBrokerID(ctpConfigInfo.getBrokerId());
+			ftdcInputOrder.setIPAddress(ctpConfigInfo.getReportIpAddr());
+			ftdcInputOrder.setMacAddress(ctpConfigInfo.getReportMacAddr());
+
 			traderApi.ReqOrderInsert(ftdcInputOrder, ++traderRequestId);
 		} else
 			log.error("Trader Error :: TraderApi is not login");

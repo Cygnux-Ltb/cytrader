@@ -13,6 +13,9 @@ public class CtpConfigInfo {
 	private String password;
 	private String authCode;
 
+	private String reportIpAddr;
+	private String reportMacAddr;
+
 	private String tradingDay;
 	private String currencyId;
 
@@ -22,6 +25,14 @@ public class CtpConfigInfo {
 
 	public String getTraderAddress() {
 		return traderAddress;
+	}
+
+	public String getReportIpAddr() {
+		return reportIpAddr;
+	}
+
+	public String getReportMacAddr() {
+		return reportMacAddr;
 	}
 
 	public String getMdAddress() {
@@ -116,6 +127,16 @@ public class CtpConfigInfo {
 
 	public CtpConfigInfo setCurrencyId(String currencyId) {
 		this.currencyId = currencyId;
+		return this;
+	}
+
+	public CtpConfigInfo setReportIpAddr(String reportIpAddr) {
+		this.reportIpAddr = reportIpAddr;
+		return this;
+	}
+
+	public CtpConfigInfo setReportMacAddr(String reportMacAddr) {
+		this.reportMacAddr = reportMacAddr;
 		return this;
 	}
 
