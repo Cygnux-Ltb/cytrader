@@ -5,32 +5,42 @@ public final class PriceUtil {
 	/**
 	 * 
 	 */
-	private static final long LongMultiplier4 = 10000L;
+	static final long LONG_MULTIPLIER_NONE = 1L;
 
 	/**
 	 * 
 	 */
-	private static final double DoubleMultiplier4 = 10000.0D;
+	static final double DOUBLE_MULTIPLIER_NONE = 1.0D;
 
 	/**
 	 * 
 	 */
-	private static final long LongMultiplier6 = 1000000L;
+	static final long LONG_MULTIPLIER_TEN_THOUSAND = 10000L;
 
 	/**
 	 * 
 	 */
-	private static final double DoubleMultiplier6 = 1000000.0D;
+	static final double DOUBLE_MULTIPLIER_TEN_THOUSAND = 10000.0D;
 
 	/**
 	 * 
 	 */
-	private static final long LongMultiplier8 = 100000000L;
+	static final long LONG_MULTIPLIER_MILLION = 1000000L;
 
 	/**
 	 * 
 	 */
-	private static final double DoubleMultiplier8 = 100000000.0D;
+	static final double DOUBLE_MULTIPLIER_MILLION = 1000000.0D;
+
+	/**
+	 * 
+	 */
+	static final long LONG_MULTIPLIER_BILLION = 100000000L;
+
+	/**
+	 * 
+	 */
+	static final double DOUBLE_MULTIPLIER_BILLION = 100000000.0D;
 
 	/**
 	 * 
@@ -38,7 +48,7 @@ public final class PriceUtil {
 	 * @return
 	 */
 	public final static long priceToLong4(double price) {
-		return (long) (price * LongMultiplier4);
+		return (long) (price * LONG_MULTIPLIER_TEN_THOUSAND);
 	}
 
 	/**
@@ -47,7 +57,7 @@ public final class PriceUtil {
 	 * @return
 	 */
 	public final static double priceToDouble4(long price) {
-		return price / DoubleMultiplier4;
+		return price / DOUBLE_MULTIPLIER_TEN_THOUSAND;
 	}
 
 	/**
@@ -56,7 +66,7 @@ public final class PriceUtil {
 	 * @return
 	 */
 	public final static long priceToLong6(double price) {
-		return (long) (price * LongMultiplier6);
+		return (long) (price * LONG_MULTIPLIER_MILLION);
 	}
 
 	/**
@@ -65,7 +75,7 @@ public final class PriceUtil {
 	 * @return
 	 */
 	public final static double priceToDouble6(long price) {
-		return price / DoubleMultiplier6;
+		return price / DOUBLE_MULTIPLIER_MILLION;
 	}
 
 	/**
@@ -74,7 +84,7 @@ public final class PriceUtil {
 	 * @return
 	 */
 	public final static long priceToLong8(double price) {
-		return (long) (price * LongMultiplier8);
+		return (long) (price * LONG_MULTIPLIER_BILLION);
 	}
 
 	/**
@@ -83,7 +93,7 @@ public final class PriceUtil {
 	 * @return
 	 */
 	public final static double priceToDouble8(long price) {
-		return price / DoubleMultiplier8;
+		return price / DOUBLE_MULTIPLIER_BILLION;
 	}
 
 	public static void main(String[] args) {
