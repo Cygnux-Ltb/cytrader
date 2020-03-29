@@ -1,6 +1,7 @@
 package io.mercury.ctp.gateway.bak;
 
 import java.io.File;
+import java.lang.annotation.Native;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Function;
@@ -29,7 +30,6 @@ import ctp.thostapi.CThostFtdcTradeField;
 import ctp.thostapi.CThostFtdcTraderApi;
 import ctp.thostapi.CThostFtdcTradingAccountField;
 import ctp.thostapi.THOST_TE_RESUME_TYPE;
-import io.mercury.common.annotation.lang.JNI;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.collections.queue.api.Queue;
 import io.mercury.common.datetime.DateTimeUtil;
@@ -89,9 +89,9 @@ public class CtpGateway0 {
 	private String gatewayId;
 	private CtpConfigInfo ctpConfigInfo;
 
-	@JNI
+	@Native
 	private CThostFtdcTraderApi traderApi;
-	@JNI
+	@Native
 	private CThostFtdcMdApi mdApi;
 
 	private boolean isInit = false;

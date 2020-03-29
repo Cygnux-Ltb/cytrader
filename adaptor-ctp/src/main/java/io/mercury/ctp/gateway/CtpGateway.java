@@ -1,6 +1,7 @@
 package io.mercury.ctp.gateway;
 
 import java.io.File;
+import java.lang.annotation.Native;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Function;
@@ -31,7 +32,6 @@ import ctp.thostapi.CThostFtdcTraderApi;
 import ctp.thostapi.CThostFtdcTraderSpi;
 import ctp.thostapi.CThostFtdcTradingAccountField;
 import ctp.thostapi.THOST_TE_RESUME_TYPE;
-import io.mercury.common.annotation.lang.JNI;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.collections.queue.api.Queue;
 import io.mercury.common.datetime.DateTimeUtil;
@@ -41,7 +41,6 @@ import io.mercury.common.thread.ThreadUtil;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.ctp.gateway.bean.config.CtpConfigInfo;
-import io.mercury.ctp.gateway.bean.req.ReqOrder;
 import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
 import io.mercury.ctp.gateway.bean.rsp.RspMsg;
 import io.mercury.ctp.gateway.converter.RspOrderActionConverter;
@@ -98,9 +97,9 @@ public class CtpGateway {
 	 */
 	private CtpConfigInfo ctpConfigInfo;
 
-	@JNI
+	@Native
 	private CThostFtdcTraderApi traderApi;
-	@JNI
+	@Native
 	private CThostFtdcMdApi mdApi;
 
 	/**
