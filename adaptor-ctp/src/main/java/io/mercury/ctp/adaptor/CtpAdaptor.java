@@ -410,7 +410,7 @@ public class CtpAdaptor extends BaseAdaptor {
 
 	private Function<Order, CThostFtdcInputOrderActionField> cancelOrderConverter = order -> {
 		CThostFtdcInputOrderActionField ftdcInputOrderAction = new CThostFtdcInputOrderActionField();
-		
+
 		return ftdcInputOrderAction;
 	};
 
