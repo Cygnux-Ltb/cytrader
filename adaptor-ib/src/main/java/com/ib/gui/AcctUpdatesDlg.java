@@ -17,7 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class AcctUpdatesDlg extends JDialog {
-    JTextField 	m_txtAcctCode = new JTextField(10);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9174347851619150463L;
+	JTextField 	m_txtAcctCode = new JTextField(10);
     JButton 	m_btnSubscribe = new JButton("Subscribe");
     JButton 	m_btnUnSubscribe = new JButton("UnSubscribe");
     JButton 	m_btnClose = new JButton( "Close");

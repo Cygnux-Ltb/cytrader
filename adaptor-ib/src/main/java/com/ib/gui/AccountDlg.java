@@ -26,7 +26,11 @@ import com.ib.client.Contract;
 import com.ib.client.Util;
 
 public class AccountDlg extends JDialog {
-    private JTextField 		m_updateTime = new JTextField();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5043646138836506926L;
+	private JTextField 		m_updateTime = new JTextField();
     private JLabel 			m_timeLabel = new JLabel("Update time:");
     private JButton 		m_close = new JButton( "Close");
     private PortfolioTable 	m_portfolioModel = new PortfolioTable();
@@ -138,7 +142,11 @@ public class AccountDlg extends JDialog {
 
 
 class PortfolioTable extends AbstractTableModel {
-    Vector<PortfolioTableRow> m_allData = new Vector<PortfolioTableRow>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8404247716665892897L;
+	Vector<PortfolioTableRow> m_allData = new Vector<PortfolioTableRow>();
 
     void updatePortfolio(Contract contract, double position, double marketPrice, double marketValue,
                          double averageCost, double unrealizedPNL, double realizedPNL, String accountName) {
@@ -294,7 +302,11 @@ class PortfolioTable extends AbstractTableModel {
 }
 
 class AcctValueModel extends AbstractTableModel {
-    Vector<AccountTableRow> m_allData = new Vector<AccountTableRow>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4273174007713343435L;
+	Vector<AccountTableRow> m_allData = new Vector<AccountTableRow>();
 
     void updateAccountValue(String key, String val, String currency, String accountName) {
          AccountTableRow newData = new AccountTableRow(key, val, currency, accountName);

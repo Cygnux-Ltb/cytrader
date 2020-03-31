@@ -18,7 +18,12 @@ import javax.swing.JTextField;
 
 public class AccountSummary extends JDialog {
 
-    public boolean m_rc;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 782927931877537869L;
+
+	public boolean m_rc;
 
     public int m_reqId;
     public String m_groupName;

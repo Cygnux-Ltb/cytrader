@@ -19,7 +19,11 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
 class IBTextPanel extends JPanel {
-    public static final Color  textBackgroundColor = new Color(5, 5, 5);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3490511785212992506L;
+	public static final Color  textBackgroundColor = new Color(5, 5, 5);
     public static final Color  textForegroundColor = new Color(0, 245, 0);
     public static final Font   textComponentFont = new JList().getFont();
     public static final Color  textCaretColor = Color.WHITE;
