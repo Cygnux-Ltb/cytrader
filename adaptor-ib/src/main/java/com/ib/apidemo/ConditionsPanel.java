@@ -22,6 +22,10 @@ public class ConditionsPanel extends OnOKPanel {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = -3535329054318967307L;
+	/**
+	 * 
+	 */
 	private final JDialog parentDlg;
 	private final Order m_order;
 	final ConditionsModel m_conditionList;
@@ -74,7 +78,12 @@ public class ConditionsPanel extends OnOKPanel {
 		buttons.add(m_cancelOrder);
 		buttons.add(m_ignoreRth);			
 		
-		buttons.add(new HtmlButton("Add") { @Override
+		buttons.add(new HtmlButton("Add") { /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1332540787053006210L;
+
+		@Override
 			protected void actionPerformed() {
 				ConditionDlg dlg = new ConditionDlg(OrderCondition.create(OrderConditionType.Price), lookuper);
 				
@@ -89,7 +98,12 @@ public class ConditionsPanel extends OnOKPanel {
 			}
 		});
 		
-		buttons.add(new HtmlButton("Remove") { @Override
+		buttons.add(new HtmlButton("Remove") { /**
+			 * 
+			 */
+			private static final long serialVersionUID = 748268341559890142L;
+
+		@Override
 			protected void actionPerformed() {
 				int iRemove = m_conditions.getSelectedRow();
 				

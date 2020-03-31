@@ -6,6 +6,10 @@ import javax.swing.table.AbstractTableModel;
 
 public class OptParamsModel extends AbstractTableModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9193756840336575549L;
 	String[] m_expirations;
 	Double[] m_strikes;
 	

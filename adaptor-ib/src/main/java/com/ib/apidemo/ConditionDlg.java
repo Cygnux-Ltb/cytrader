@@ -38,7 +38,11 @@ import com.ib.client.VolumeCondition;
  */
 public class ConditionDlg extends JDialog implements ChangeListener, ActionListener {
 
-    private JPanel m_conditionPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2776431236880778330L;
+	private JPanel m_conditionPanel;
     private JPanel m_conditionTypePanel;
     private JRadioButton m_rbMargin;
     private JRadioButton m_rbPercent;
@@ -182,7 +186,12 @@ public class ConditionDlg extends JDialog implements ChangeListener, ActionListe
         mainPanel.add(m_tabbedPane);
         buttons.add(
         		new HtmlButton("Apply") {
-        	protected void actionPerformed() {
+        	/**
+					 * 
+					 */
+					private static final long serialVersionUID = 676704980833660858L;
+
+			protected void actionPerformed() {
         		m_isCanceled = false;
         		
         		m_conditionSubPanel.onOK();

@@ -33,6 +33,10 @@ import com.ib.controller.Profile;
 import com.ib.controller.Profile.Type;
 
 public class AdvisorPanel extends NewTabPanel implements IAdvisorHandler {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7975989031359998725L;
 	static DefaultCellEditor DEF_CELL_EDITOR = new DefaultCellEditor( new JTextField() );
 	static {
 		DEF_CELL_EDITOR.setClickCountToStart( 1);
@@ -43,12 +47,22 @@ public class AdvisorPanel extends NewTabPanel implements IAdvisorHandler {
 	private final AliasModel m_aliasModel = new AliasModel();
 	
 	private final JTable m_groupTable = new JTable( m_groupModel) {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6335037384098031315L;
+
 		public TableCellEditor getCellEditor(int row, int col) {
 			return m_groupModel.getCellEditor(row, col);
 		}
 	};
 
 	private final JTable m_profileTable = new JTable( m_profileModel) {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -5886911297351063774L;
+
 		public TableCellEditor getCellEditor(int row, int col) {
 			return m_profileModel.getCellEditor(row, col);
 		}
@@ -97,6 +111,10 @@ public class AdvisorPanel extends NewTabPanel implements IAdvisorHandler {
 	}
 	
 	private class AliasModel extends AbstractTableModel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -6873128718029333555L;
 		ArrayList<Alias> m_list = new ArrayList<Alias>();
 		
 		@Override public int getRowCount() {
@@ -132,17 +150,32 @@ public class AdvisorPanel extends NewTabPanel implements IAdvisorHandler {
 	}
 	
 	private class GroupsPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -2325446927587739513L;
+
 		GroupsPanel() {
 			JScrollPane groupScroll = new JScrollPane( m_groupTable);
 			groupScroll.setBorder( new TitledBorder( "Groups"));
 			
 			HtmlButton create = new HtmlButton( "Create Group") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 2730123518876156532L;
+
 				@Override protected void actionPerformed() {
 					onCreateGroup();
 				}
 			};
 
 			HtmlButton update = new HtmlButton( "Update") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1250056416517687756L;
+
 				@Override protected void actionPerformed() {
 					onTransmit();
 				}
@@ -174,6 +207,10 @@ public class AdvisorPanel extends NewTabPanel implements IAdvisorHandler {
 	}
 	
 	private static class GroupModel extends AbstractTableModel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6407125203564516555L;
 		TCombo<Method> combo = new TCombo<Method>(Method.values());
 		DefaultCellEditor EDITOR = new DefaultCellEditor( combo);
 		ArrayList<Group> m_groups = new ArrayList<Group>();
@@ -245,17 +282,32 @@ public class AdvisorPanel extends NewTabPanel implements IAdvisorHandler {
 	}
 	
 	private class ProfilesPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -9138692759632534293L;
+
 		ProfilesPanel() {
 			JScrollPane profileScroll = new JScrollPane( m_profileTable);
 			profileScroll.setBorder( new TitledBorder( "Profiles"));
 
 			HtmlButton create = new HtmlButton( "Create Profile") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = -4674432761408617195L;
+
 				@Override protected void actionPerformed() {
 					onCreateProfile();
 				}
 			};
 
 			HtmlButton update = new HtmlButton( "Update") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 7773918996379740308L;
+
 				@Override protected void actionPerformed() {
 					onTransmit();
 				}
@@ -287,6 +339,10 @@ public class AdvisorPanel extends NewTabPanel implements IAdvisorHandler {
 	}
 	
 	private static class ProfileModel extends AbstractTableModel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 502053553527293655L;
 		TCombo<Type> combo = new TCombo<Type>(Type.values());
 		DefaultCellEditor EDITOR = new DefaultCellEditor( combo);
 		ArrayList<Profile> m_profiles = new ArrayList<Profile>();

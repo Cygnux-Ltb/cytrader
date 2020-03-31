@@ -6,6 +6,10 @@ package com.ib.apidemo;
 import com.ib.apidemo.util.NewTabbedPanel;
 
 public class OptionsPanel extends NewTabbedPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7231300421254918261L;
 	private final OptionChainsPanel m_optionChains = new OptionChainsPanel();
 	private final ExercisePanel m_exercisePanel = new ExercisePanel();
 	

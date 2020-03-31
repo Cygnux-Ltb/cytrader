@@ -22,17 +22,31 @@ import com.ib.controller.Formats;
 
 
 public class PositionsPanel extends NewTabPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2531297693931950850L;
 	private PositionModel m_model = new PositionModel();
 	private boolean m_complete;
 
 	PositionsPanel() {
 		HtmlButton sub = new HtmlButton( "Subscribe") {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -2850908091719732178L;
+
 			protected void actionPerformed() {
 				subscribe();
 			}
 		};
 		
 		HtmlButton desub = new HtmlButton( "Desubscribe") {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 2497019211238227570L;
+
 			protected void actionPerformed() {
 				desubscribe();
 			}
@@ -70,6 +84,10 @@ public class PositionsPanel extends NewTabPanel {
 	}
 	
 	private class PositionModel extends AbstractTableModel implements IPositionHandler {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6942891432773938808L;
 		HashMap<PositionKey,PositionRow> m_map = new HashMap<PositionKey,PositionRow>();
 		ArrayList<PositionRow> m_list = new ArrayList<PositionRow>();
 

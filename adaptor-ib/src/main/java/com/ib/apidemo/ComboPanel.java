@@ -43,7 +43,16 @@ import com.ib.controller.ApiController.IEfpHandler;
 
 
 public class ComboPanel extends JPanel implements INewTab {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5287831178184860394L;
 	private final OrdersModel m_ordersModel = new OrdersModel() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -7361330483229247868L;
+
 		@Override protected boolean shouldAdd(Contract contract, Order order, OrderState orderState) {
 			return contract.isCombo();
 		}
@@ -89,6 +98,10 @@ public class ComboPanel extends JPanel implements INewTab {
 	}
 	
 	static class SpreadsPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -6822127664714095250L;
 		private final Contract m_contract = new Contract(); 
 		private final TCombo<Action> m_action = new TCombo<Action>( Action.values() );
 		private final UpperField m_ratio = new UpperField( "1");
@@ -104,30 +117,55 @@ public class ComboPanel extends JPanel implements INewTab {
 
 		SpreadsPanel() {
 			HtmlButton addLeg = new HtmlButton( "Add Leg") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = -6755960881793207666L;
+
 				@Override protected void actionPerformed() {
 					onAddLeg();
 				}
 			};
 
 			HtmlButton removeLeg = new HtmlButton( "Remove Selected Leg") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 3237341386739335087L;
+
 				@Override protected void actionPerformed() {
 					onRemoveLeg();
 				}
 			};
 
 			HtmlButton removeLegs = new HtmlButton( "Clear All Legs") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 2575858734079598784L;
+
 				@Override protected void actionPerformed() {
 					onRemoveLegs();
 				}
 			};
 
 			HtmlButton mktData = new HtmlButton( "Request Market Data") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1314414253876691579L;
+
 				@Override protected void actionPerformed() {
 					onReqMktData();
 				}
 			};
 
 			HtmlButton placeOrder = new HtmlButton( "Place Order") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 5961127823560491487L;
+
 				@Override protected void actionPerformed() {
 					onPlaceOrder();
 				}
@@ -247,6 +285,11 @@ public class ComboPanel extends JPanel implements INewTab {
 		}
 
 		class ComboContractPanel extends ContractPanel {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 7181794875886115051L;
+
 			ComboContractPanel() {
 				super( m_contract);
 				removeAll();
@@ -276,6 +319,10 @@ public class ComboPanel extends JPanel implements INewTab {
 		}
 		
 		class DnPanel extends VerticalPanel {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -1247714339779925628L;
 			UpperField m_symbol = new UpperField();
 			TCombo<SecType> m_secType = new TCombo<SecType>( SecType.values() );
 			UpperField m_lastTradeDateOrContractMonth = new UpperField();
@@ -286,6 +333,11 @@ public class ComboPanel extends JPanel implements INewTab {
 
 			DnPanel() {
 				HtmlButton but = new HtmlButton( "Set") {
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 5581329653537916100L;
+
 					@Override protected void actionPerformed() {
 						onAdd();
 					}
@@ -328,6 +380,10 @@ public class ComboPanel extends JPanel implements INewTab {
 	}
 
 	static class EfpPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -681251949527005933L;
 		private final UpperField m_symbol = new UpperField( "IBM");
 		private final UpperField m_futExch = new UpperField( "ONE");
 		private final UpperField m_lastTradeDate = new UpperField( "201309");
@@ -340,18 +396,33 @@ public class ComboPanel extends JPanel implements INewTab {
 
 		EfpPanel() {
 			HtmlButton addLeg = new HtmlButton( "Create EFP") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = -4093136610969125994L;
+
 				@Override protected void actionPerformed() {
 					onCreateEfp();
 				}
 			};
 
 			HtmlButton mktData = new HtmlButton( "Request Market Data") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 4003889972621017102L;
+
 				@Override protected void actionPerformed() {
 					onReqMktData();
 				}
 			};
 
 			HtmlButton placeOrder = new HtmlButton( "Place Order") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = -3462822946868118295L;
+
 				@Override protected void actionPerformed() {
 					onPlaceOrder();
 				}
@@ -488,6 +559,10 @@ public class ComboPanel extends JPanel implements INewTab {
 		}
 
 		static class EfpModel extends AbstractTableModel {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -967882333485570242L;
 			ArrayList<EfpRow> m_rows = new ArrayList<EfpRow>();
 
 			void addRow(Contract contract) {
@@ -578,6 +653,10 @@ public class ComboPanel extends JPanel implements INewTab {
 	}
 
 	static class LegModel extends AbstractTableModel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 4656215412234951802L;
 		ArrayList<LegRow> m_legRows;
 
 		LegModel( ArrayList<LegRow> legRows) {

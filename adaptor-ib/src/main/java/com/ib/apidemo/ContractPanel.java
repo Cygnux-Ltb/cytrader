@@ -16,6 +16,10 @@ import com.ib.client.Types.Right;
 import com.ib.client.Types.SecType;
 
 public class ContractPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6291397459783395125L;
 	protected UpperField m_symbol = new UpperField();
 	protected TCombo<SecType> m_secType = new TCombo<SecType>( SecType.values() );
 	protected UpperField m_lastTradeDateOrContractMonth = new UpperField();

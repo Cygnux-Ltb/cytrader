@@ -22,6 +22,10 @@ import com.ib.client.ExecutionFilter;
 import com.ib.controller.ApiController.ITradeReportHandler;
 
 public class TradesPanel extends JPanel implements ITradeReportHandler {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7013948866439568425L;
 	private ArrayList<FullExec> m_trades = new ArrayList<FullExec>();
 	private HashMap<String,FullExec> m_map = new HashMap<String,FullExec>();
 	private Model m_model = new Model();
@@ -31,7 +35,12 @@ public class TradesPanel extends JPanel implements ITradeReportHandler {
 		JScrollPane scroll = new JScrollPane( table);
 		scroll.setBorder( new TitledBorder( "Trade Log"));
 		
-		HtmlButton but = new HtmlButton( "Refresh") {
+		HtmlButton but = new HtmlButton("Refresh") {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 5145560445711712914L;
+
 			@Override public void actionPerformed() {
 				onRefresh();
 			}
@@ -79,6 +88,11 @@ public class TradesPanel extends JPanel implements ITradeReportHandler {
 	}
 
 	private class Model extends AbstractTableModel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -6772412361391163250L;
+
 		@Override public int getRowCount() {
 			return m_trades.size();
 		}

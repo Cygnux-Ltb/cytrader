@@ -6,6 +6,10 @@ import com.ib.client.OperatorCondition;
 import com.ib.client.OrderCondition;
 
 public class  OperatorConditionPanel<T> extends OnOKPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8423258224243201990L;
 	OperatorCondition m_condition;
 	final TCombo<String> m_operator = new TCombo<String>("<=", ">=");
 	final UpperField m_value = new UpperField();

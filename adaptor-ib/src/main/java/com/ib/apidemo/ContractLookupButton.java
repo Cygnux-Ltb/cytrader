@@ -7,6 +7,10 @@ import com.ib.client.ContractLookuper;
 
 public abstract class ContractLookupButton extends HtmlButton {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3928289256388305124L;
 	final ContractSearchDlg m_contractSearchdlg;
 			
 	public ContractLookupButton(int conId, String exchange, ContractLookuper lookuper) {

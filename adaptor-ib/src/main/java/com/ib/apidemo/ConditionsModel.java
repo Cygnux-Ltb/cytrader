@@ -10,6 +10,11 @@ import com.ib.client.OrderCondition;
 
 public class ConditionsModel extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8863694383693992945L;
+
 	@Override
 	public void setValueAt(Object val, int row, int col) {
 		if (col == 0) {

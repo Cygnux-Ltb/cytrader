@@ -13,6 +13,10 @@ public class AdjustedPanel extends OnOKPanel {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1708108253214848232L;
+	/**
+	 * 
+	 */
 	private final JDialog m_parentDlg;
 	private final Order m_order;
 	final TCombo<OrderType> m_adjustedOrderType = new TCombo<OrderType>(OrderType.None, OrderType.STP, OrderType.STP_LMT, OrderType.TRAIL, OrderType.TRAIL_LIMIT); 

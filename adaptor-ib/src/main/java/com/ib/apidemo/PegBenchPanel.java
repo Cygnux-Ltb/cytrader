@@ -12,6 +12,10 @@ public class PegBenchPanel extends OnOKPanel {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 3286509927212027924L;
+	/**
+	 * 
+	 */
 	private final JDialog m_parentDlg;
 	private final Order m_order;
 	final UpperField m_startingPrice = new UpperField();
@@ -31,6 +35,11 @@ public class PegBenchPanel extends OnOKPanel {
 		m_pegChangeType.setSelectedIndex(m_order.isPeggedChangeAmountDecrease() ? 1 : 0);
 
 		m_refCon = new ContractLookupButton(m_order.referenceContractId(), m_order.referenceExchangeId(), lookuper) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 2174136602270536778L;
+
 			@Override
 			protected void actionPerformed(int refConId, String refExchId) {
 				PegBenchPanel.this.m_order.referenceContractId(refConId);

@@ -6,6 +6,12 @@ import com.ib.client.PercentChangeCondition;
 
 public class PercentConditionPanel extends ContractConditionPanel<PercentChangeCondition> {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2933136467045351380L;
+
+
 	public PercentConditionPanel(PercentChangeCondition condition, ContractLookuper lookuper) {
 		super(condition, lookuper);
 		

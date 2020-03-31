@@ -174,6 +174,10 @@ public class ApiDemo implements IConnectionHandler {
 	}
 	
     private class ConnectionPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -7352415877275275173L;
 		private final JTextField m_host = new JTextField( m_connectionConfiguration.getDefaultHost(), 10);
 		private final JTextField m_port = new JTextField( m_connectionConfiguration.getDefaultPort(), 7);
 		private final JTextField m_connectOptionsTF = new JTextField( m_connectionConfiguration.getDefaultConnectOptions(), 30);
@@ -186,12 +190,22 @@ public class ApiDemo implements IConnectionHandler {
 		
 		public ConnectionPanel() {
 			HtmlButton connect = new HtmlButton("Connect") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 8428958399606569209L;
+
 				@Override public void actionPerformed() {
 					onConnect();
 				}
 			};
 
 			HtmlButton disconnect = new HtmlButton("Disconnect") {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 7535592472313914263L;
+
 				@Override public void actionPerformed() {
 					controller().disconnect();
 				}
