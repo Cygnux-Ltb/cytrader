@@ -7,6 +7,11 @@ import com.ib.client.PriceCondition;
 
 public class PriceConditionPanel extends ContractConditionPanel<PriceCondition> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1161650898627034994L;
+
 	static enum Method {
 		Default(0),
 		DoubleBidAsk(1),

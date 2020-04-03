@@ -5,6 +5,11 @@ import com.ib.client.OrderCondition;
 
 public class MarginContidionPanel extends OperatorConditionPanel<MarginCondition> {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8588702493163206116L;
+
 	public MarginContidionPanel(MarginCondition condition) {
 		super(condition);
 		

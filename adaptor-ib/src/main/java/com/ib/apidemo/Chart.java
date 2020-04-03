@@ -13,6 +13,10 @@ import javax.swing.JComponent;
 import com.ib.controller.Bar;
 
 public class Chart extends JComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5294696949568062459L;
 	private static final int width = 5;
 	private int height;
 	private double min;

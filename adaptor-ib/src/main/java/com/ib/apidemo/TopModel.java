@@ -21,6 +21,10 @@ import com.ib.controller.ApiController.TopMktDataAdapter;
 import com.ib.controller.Formats;
 
 class TopModel extends AbstractTableModel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1823449160797965272L;
 	private ArrayList<TopRow> m_rows = new ArrayList<TopRow>();
 
 	void addRow( Contract contract) {

@@ -5,6 +5,11 @@ import com.ib.client.TimeCondition;
 
 public class TimeConditionPanel extends OperatorConditionPanel<TimeCondition> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2932940954302798788L;
+
 	public TimeConditionPanel(TimeCondition condition) {
 		super(condition);
 

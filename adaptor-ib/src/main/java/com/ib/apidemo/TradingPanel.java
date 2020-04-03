@@ -11,6 +11,10 @@ import com.ib.apidemo.util.NewTabbedPanel.NewTabPanel;
 
 
 public class TradingPanel extends NewTabPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7045928291184444070L;
 	private final OrdersPanel m_ordersPanel = new OrdersPanel();
 	private final TradesPanel m_tradesPanel = new TradesPanel();
 	

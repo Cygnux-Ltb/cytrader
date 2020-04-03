@@ -5,6 +5,10 @@ import com.ib.client.ExecutionCondition;
 import com.ib.client.OrderCondition;
 
 public class TradeConditionPanel extends OnOKPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8830299390133866358L;
 	private ExecutionCondition m_condition;
 	private final UpperField m_secType = new UpperField();
 	private final UpperField m_exchange =  new UpperField();
