@@ -20,6 +20,10 @@ import com.ib.client.ExecutionFilter;
 
 public class ExecFilterDlg extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6319284507974251832L;
 	public int m_reqId;
     public ExecutionFilter	m_execFilter = new ExecutionFilter();
     public boolean 		m_rc;

@@ -20,7 +20,11 @@ import javax.swing.JTextField;
 import com.ib.client.Order;
 
 public class ExtOrdDlg extends JDialog {
-    public Order 		m_order = new Order();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2569251914395448690L;
+	public Order 		m_order = new Order();
     public boolean 		m_rc;
 
     private JTextField 	m_tif = new JTextField( "DAY");

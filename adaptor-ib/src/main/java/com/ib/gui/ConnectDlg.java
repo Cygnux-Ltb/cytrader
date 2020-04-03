@@ -17,7 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ConnectDlg extends JDialog {
-    public static int LAST_CLIENT_ID = 0;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7249290848026476822L;
+
+	public static int LAST_CLIENT_ID = 0;
 
     JTextField 	m_ipAddress = new JTextField();
     JTextField 	m_port = new JTextField( "7496");

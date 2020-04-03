@@ -13,7 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 public class FinancialAdvisorDlg extends JDialog {
-    private int DIALOG_WIDTH = 500;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7080802328992464465L;
+	private int DIALOG_WIDTH = 500;
     private int EDITOR_HEIGHT = 240;
     private JButton 	m_ok = new JButton( "OK");
     private JButton 	m_cancel = new JButton( "Cancel");

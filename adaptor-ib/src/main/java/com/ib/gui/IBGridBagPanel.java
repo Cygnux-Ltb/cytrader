@@ -11,7 +11,11 @@ import java.awt.Insets;
 import javax.swing.JPanel;
 
 class IBGridBagPanel extends JPanel {
-    private static final Insets oneInsets = new Insets(1, 1, 1, 1);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2640808371533066620L;
+	private static final Insets oneInsets = new Insets(1, 1, 1, 1);
     private GridBagLayout m_layout = new GridBagLayout();
 
     IBGridBagPanel() {

@@ -15,7 +15,11 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 public class FAAllocationInfoDlg extends JDialog {
-    IBGridBagPanel mainJPanel = new IBGridBagPanel();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1343239312959058838L;
+	IBGridBagPanel mainJPanel = new IBGridBagPanel();
     IBGridBagPanel faGroupJPanel = new IBGridBagPanel();
     IBGridBagPanel faProfileJPanel = new IBGridBagPanel();
 

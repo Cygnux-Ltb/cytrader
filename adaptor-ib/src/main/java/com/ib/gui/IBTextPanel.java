@@ -25,7 +25,7 @@ class IBTextPanel extends JPanel {
 	private static final long serialVersionUID = -3490511785212992506L;
 	public static final Color  textBackgroundColor = new Color(5, 5, 5);
     public static final Color  textForegroundColor = new Color(0, 245, 0);
-    public static final Font   textComponentFont = new JList().getFont();
+    public static final Font   textComponentFont = new JList<>().getFont();
     public static final Color  textCaretColor = Color.WHITE;
     public static final String lineSeparator = System.getProperty("line.separator");
 

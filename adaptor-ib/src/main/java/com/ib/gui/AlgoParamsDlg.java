@@ -25,6 +25,10 @@ import com.ib.client.Order;
 import com.ib.client.TagValue;
 
 public class AlgoParamsDlg extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5665298735845493444L;
 	private Order m_order;
     private JTextField 		m_algoStrategy = new JTextField( "");
     private JTextField 		m_tag = new JTextField( "");
@@ -173,7 +177,11 @@ public class AlgoParamsDlg extends JDialog {
 }
 
 class AlgoParamModel extends AbstractTableModel {
-    private ArrayList<TagValue> m_allData = new ArrayList<TagValue>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1529729689627799255L;
+	private ArrayList<TagValue> m_allData = new ArrayList<TagValue>();
 
     synchronized public void addParam( TagValue tagValue) {
         m_allData.add( tagValue);
