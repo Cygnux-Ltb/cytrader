@@ -27,6 +27,7 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 
 	private static final int MarketData = 0;
 	private static final int OrderReport = 1;
+	// TODO add event handle
 	private static final int AdaptorEvent = 2;
 
 	private static Logger log = CommonLoggerFactory.getLogger(SpscQueueStrategyScheduler.class);
