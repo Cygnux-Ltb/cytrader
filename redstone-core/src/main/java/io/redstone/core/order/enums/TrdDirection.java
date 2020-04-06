@@ -1,4 +1,4 @@
-package io.redstone.core.trade.enums;
+package io.redstone.core.order.enums;
 
 public enum TrdDirection {
 

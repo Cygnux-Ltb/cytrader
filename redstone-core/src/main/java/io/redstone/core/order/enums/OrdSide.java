@@ -3,8 +3,8 @@ package io.redstone.core.order.enums;
 import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
-import io.redstone.core.trade.enums.TrdDirection;
 
+@Deprecated
 public enum OrdSide {
 
 	Invalid(-1, TrdDirection.Invalid),

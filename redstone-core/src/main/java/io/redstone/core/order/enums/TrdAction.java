@@ -1,4 +1,4 @@
-package io.redstone.core.trade.enums;
+package io.redstone.core.order.enums;
 
 public enum TrdAction {
 
@@ -7,6 +7,10 @@ public enum TrdAction {
 	Open(1),
 
 	Close(2),
+
+	CloseToday(3),
+
+	CloseYesterday(4),
 
 	;
 
