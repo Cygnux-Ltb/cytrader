@@ -1,12 +1,14 @@
 package io.redstone.core.adaptor;
 
+import java.io.Closeable;
+
 import javax.annotation.Nonnull;
 
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.account.Account;
-import io.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.order.specific.ChildOrder;
 
-public interface Adaptor extends AutoCloseable {
+public interface Adaptor extends Closeable {
 
 	int adaptorId();
 
