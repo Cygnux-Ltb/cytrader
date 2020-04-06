@@ -61,4 +61,10 @@ public class SmaStrategyExample extends IndicatorStrategy<BasicMarketData> imple
 
 	}
 
+	@Override
+	public void addAdaptor(Adaptor adaptor) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
