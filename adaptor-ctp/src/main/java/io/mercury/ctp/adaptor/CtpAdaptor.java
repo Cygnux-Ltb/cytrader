@@ -2,6 +2,7 @@ package io.mercury.ctp.adaptor;
 
 import static io.mercury.financial.util.PriceUtil.priceToLong4;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -42,7 +43,7 @@ import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.BaseAdaptor;
 import io.redstone.core.order.Order;
-import io.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 
@@ -452,7 +453,7 @@ public class CtpAdaptor extends BaseAdaptor {
 	}
 
 	@Override
-	public void close() throws Exception {
+	public void close() throws IOException {
 		// TODO Auto-generated method stub
 
 	}
