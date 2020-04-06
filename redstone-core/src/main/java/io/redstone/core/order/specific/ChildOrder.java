@@ -1,12 +1,12 @@
-package io.redstone.core.order.impl;
+package io.redstone.core.order.specific;
 
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.order.enums.OrdLevel;
-import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
+import io.redstone.core.order.enums.TrdAction;
+import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.order.structure.OrdStopLoss;
 import io.redstone.core.order.structure.OrdTradeSet;
 
 /**
@@ -17,23 +17,17 @@ import io.redstone.core.order.structure.OrdTradeSet;
  */
 public final class ChildOrder extends ActualOrder {
 
-	private long parentId;
+	private long parentOrdId;
 
 	/**
 	 * 子订单成交列表
 	 */
 	private OrdTradeSet ordTradeSet;
 
-	public ChildOrder(long parentId, long strategyOrdId, Instrument instrument, long offerQty, long offerPrice,
-			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, OrdStopLoss stopLoss) {
-		this(parentId, strategyOrdId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice),
-				ordSide, ordType, strategyId, subAccountId, stopLoss);
-	}
-
-	public ChildOrder(long parentId, long strategyOrdId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
-			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId, OrdStopLoss stopLoss) {
-		super(strategyOrdId, instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId, stopLoss);
-		this.parentId = parentId;
+	public ChildOrder(int strategyId, long strategyOrdId, long parentOrdId, Instrument instrument, OrdQty ordQty,
+			OrdPrice ordPrice, TrdDirection trdDirection, OrdType ordType, TrdAction trdAction, int subAccountId) {
+		super(strategyId, strategyOrdId, instrument, ordQty, ordPrice, trdDirection, ordType, trdAction, subAccountId);
+		this.parentOrdId = parentOrdId;
 		this.ordTradeSet = new OrdTradeSet(ordSysId());
 	}
 
@@ -43,8 +37,8 @@ public final class ChildOrder extends ActualOrder {
 	}
 
 	@Override
-	public long parentId() {
-		return parentId;
+	public long parentOrdId() {
+		return parentOrdId;
 	}
 
 	public OrdTradeSet ordTradeSet() {

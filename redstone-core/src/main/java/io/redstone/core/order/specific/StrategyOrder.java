@@ -1,13 +1,14 @@
-package io.redstone.core.order.impl;
+package io.redstone.core.order.specific;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.base.BaseOrder;
+import io.redstone.core.order.OrderImpl;
 import io.redstone.core.order.enums.OrdLevel;
-import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
+import io.redstone.core.order.enums.TrdAction;
+import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 
@@ -17,26 +18,22 @@ import io.redstone.core.order.structure.OrdQty;
  * 
  * @author yellow013
  */
-public final class StrategyOrder extends BaseOrder {
+public final class StrategyOrder extends OrderImpl {
 
 	private MutableLongObjectMap<ParentOrder> actualOrders = MutableMaps.newLongObjectHashMap();
 
-	private StrategyOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide, OrdType ordType,
-			int strategyId, int subAccountId) {
-		super(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId);
+	public StrategyOrder(int strategyId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
+			TrdDirection trdDirection, OrdType ordType, int subAccountId) {
+		super(strategyId, instrument, ordQty, ordPrice, trdDirection, ordType, subAccountId);
 	}
 
-	public static StrategyOrder newStrategyOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
-			OrdSide ordSide, OrdType ordType, int strategyId, int subAccountId) {
-		return new StrategyOrder(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId);
-	}
-
-	public MutableLongObjectMap<ParentOrder> getActualOrders() {
+	public MutableLongObjectMap<ParentOrder> actualOrders() {
 		return actualOrders;
 	}
 
-	public void addActualOrder(ParentOrder parentOrder) {
+	public ParentOrder addActualOrder(ParentOrder parentOrder) {
 		actualOrders.put(parentOrder.ordSysId(), parentOrder);
+		return parentOrder;
 	}
 
 	@Override
@@ -47,6 +44,11 @@ public final class StrategyOrder extends BaseOrder {
 	@Override
 	public long strategyOrdId() {
 		return ordSysId();
+	}
+
+	public ParentOrder toOpenActualOrder(TrdDirection trdDirection, long offerQty, OrdType ordType) {
+		return addActualOrder(new ParentOrder(instrument(), offerQty, ordPrice().offerPrice(), trdDirection, ordType,
+				TrdAction.Open, strategyId(), strategyOrdId(), subAccountId()));
 	}
 
 }

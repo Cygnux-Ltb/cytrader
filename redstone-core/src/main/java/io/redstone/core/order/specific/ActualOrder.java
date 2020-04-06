@@ -1,14 +1,14 @@
-package io.redstone.core.order.impl;
+package io.redstone.core.order.specific;
 
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.base.BaseOrder;
-import io.redstone.core.order.enums.OrdSide;
+import io.redstone.core.order.OrderImpl;
 import io.redstone.core.order.enums.OrdType;
+import io.redstone.core.order.enums.TrdAction;
+import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.order.structure.OrdStopLoss;
 
-public abstract class ActualOrder extends BaseOrder {
+abstract class ActualOrder extends OrderImpl {
 
 	/**
 	 * 所属策略订单
@@ -16,23 +16,28 @@ public abstract class ActualOrder extends BaseOrder {
 	private long strategyOrdId;
 
 	/**
-	 * 止损
+	 * 
 	 */
-	private OrdStopLoss ordStopLoss;
+	private TrdAction trdAction;
 
-	protected ActualOrder(long strategyOrdId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide,
-			OrdType ordType, int strategyId, int subAccountId) {
-		this(strategyOrdId, instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId, null);
-	}
-
-	protected ActualOrder(long strategyOrdId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide,
-			OrdType ordType, int strategyId, int subAccountId, OrdStopLoss ordStopLoss) {
-		super(instrument, ordQty, ordPrice, ordSide, ordType, strategyId, subAccountId);
+	/**
+	 * 
+	 * @param instrument
+	 * @param ordQty
+	 * @param ordPrice
+	 * @param ordSide
+	 * @param ordType
+	 * @param trdAction
+	 * @param strategyId
+	 * @param strategyOrdId
+	 * @param subAccountId
+	 * @param ordStopLoss
+	 */
+	protected ActualOrder(int strategyId, long strategyOrdId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
+			TrdDirection trdDirection, OrdType ordType, TrdAction trdAction, int subAccountId) {
+		super(strategyId, instrument, ordQty, ordPrice, trdDirection, ordType, subAccountId);
 		this.strategyOrdId = strategyOrdId;
-		if (ordStopLoss == null)
-			this.ordStopLoss = new OrdStopLoss(ordSysId(), ordSide.direction());
-		else
-			this.ordStopLoss = ordStopLoss;
+		this.trdAction = trdAction;
 	}
 
 	@Override
@@ -40,10 +45,10 @@ public abstract class ActualOrder extends BaseOrder {
 		return strategyOrdId;
 	}
 
-	public abstract long parentId();
-
-	public OrdStopLoss ordStopLoss() {
-		return ordStopLoss;
+	public TrdAction trdAction() {
+		return trdAction;
 	}
+
+	public abstract long parentOrdId();
 
 }

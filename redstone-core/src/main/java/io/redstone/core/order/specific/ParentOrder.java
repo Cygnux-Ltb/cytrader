@@ -1,4 +1,4 @@
-package io.redstone.core.order.impl;
+package io.redstone.core.order.specific;
 
 import java.util.List;
 
@@ -7,11 +7,11 @@ import org.eclipse.collections.api.list.MutableList;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.order.enums.OrdLevel;
-import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
+import io.redstone.core.order.enums.TrdAction;
+import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.order.structure.OrdStopLoss;
 
 /**
  * 
@@ -24,17 +24,29 @@ public final class ParentOrder extends ActualOrder {
 
 	private MutableList<ChildOrder> childOrders;
 
-	public ParentOrder(long strategyOrdId, Instrument instrument, long offerQty, long offerPrice, OrdSide ordSide,
-			OrdType ordType, int strategyId, int subAccountId, OrdStopLoss stopLoss) {
-		super(strategyOrdId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice), ordSide,
-				ordType, strategyId, subAccountId, stopLoss);
+	/**
+	 * 
+	 * @param instrument
+	 * @param offerQty
+	 * @param offerPrice
+	 * @param ordSide
+	 * @param ordType
+	 * @param trdAction
+	 * @param strategyId
+	 * @param strategyOrdId
+	 * @param subAccountId
+	 * @param stopLoss
+	 */
+	public ParentOrder(Instrument instrument, long offerQty, long offerPrice, TrdDirection trdDirection, OrdType ordType,
+			TrdAction trdAction, int strategyId, long strategyOrdId, int subAccountId) {
+		super(strategyId, strategyOrdId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice),
+				trdDirection, ordType, trdAction, subAccountId);
 		this.childOrders = MutableLists.newFastList(8);
-
 	}
 
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = new ChildOrder(parentId(), strategyOrdId(), instrument(), ordQty(), ordPrice(),
-				ordSide(), ordType(), strategyId(), subAccountId(), ordStopLoss());
+		ChildOrder childOrder = new ChildOrder(strategyId(), parentOrdId(), strategyOrdId(), instrument(), ordQty(),
+				ordPrice(),  trdDirection(), ordType(), trdAction(), subAccountId());
 		childOrders.add(childOrder);
 		return childOrder;
 	}
@@ -52,7 +64,7 @@ public final class ParentOrder extends ActualOrder {
 	}
 
 	@Override
-	public long parentId() {
+	public long parentOrdId() {
 		return ordSysId();
 	}
 
