@@ -3,6 +3,7 @@ package io.redstone.core.strategy.base;
 import java.util.function.Supplier;
 
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
@@ -21,16 +22,15 @@ import io.redstone.core.account.AccountKeeper;
 import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderExecutor;
-import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.impl.ParentOrder;
-import io.redstone.core.order.impl.StrategyOrder;
+import io.redstone.core.order.enums.TrdDirection;
+import io.redstone.core.order.specific.ParentOrder;
+import io.redstone.core.order.specific.StrategyOrder;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.risk.CircuitBreaker;
 import io.redstone.core.strategy.Strategy;
 import io.redstone.core.strategy.StrategyEvent;
-import io.redstone.core.trade.enums.TrdDirection;
 
 public abstract class BaseStrategy<M extends MarketData> implements Strategy, CircuitBreaker {
 
@@ -170,31 +170,30 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 
 	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty, long minPrice,
 			long maxPrice) {
-		OrdSide ordSide;
 		LastMarkerData lastMarkerData = LastMarkerDataKeeper.get(instrument);
 		long offerPrice = 0;
 		switch (direction) {
 		case Long:
-			ordSide = OrdSide.Buy;
-			// offerPrice = PriceUtil.longPriceToDouble(quote.getAskPrice1().get());
+			offerPrice = lastMarkerData.askPrice1().get();
 			break;
 		case Short:
-			ordSide = OrdSide.Sell;
-			// offerPrice = PriceUtil.longPriceToDouble(quote.getBidPrice1().get());
+			offerPrice = lastMarkerData.bidPrice1().get();
 			break;
 		default:
 			throw new IllegalArgumentException("TrdDirection is illegal");
 		}
-		StrategyOrder newVirtualOrder = StrategyOrder.newStrategyOrder(instrument, OrdQty.withOfferQty(targetQty),
-				OrdPrice.withOffer(offerPrice), ordSide, OrdType.Limit, strategyId, subAccountId);
-		strategyOrders.put(newVirtualOrder.ordSysId(), newVirtualOrder);
+		StrategyOrder strategyOrder = new StrategyOrder(strategyId, instrument, OrdQty.withOfferQty(targetQty),
+				OrdPrice.withOffer(offerPrice), direction, OrdType.Limit,  subAccountId);
+		strategyOrders.put(strategyOrder.ordSysId(), strategyOrder);
 
-		ParentOrder parentOrder = OrderExecutor.onStrategyOrder(newVirtualOrder);
+		MutableList<ParentOrder> ParentOrders = OrderExecutor.onStrategyOrder(strategyOrder);
 
+		ParentOrder first = ParentOrders.getFirst();
+		
 		// TODO 错误实现
 		Adaptor adaptor = getAdaptor(instrument);
 
-		adaptor.newOredr(parentOrder.toChildOrder());
+		adaptor.newOredr(first.toChildOrder());
 	}
 
 	/**
