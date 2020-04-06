@@ -19,7 +19,7 @@ import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.BaseAdaptor;
 import io.redstone.core.order.OrderKeeper;
 import io.redstone.core.order.enums.OrdStatus;
-import io.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.persistence.avro.entity.MarketDataLevel1;
@@ -165,7 +165,7 @@ public class SimAdaptor extends BaseAdaptor {
 	}
 
 	@Override
-	public void close() throws Exception {
+	public void close() throws IOException {
 		mdSender.destroy();
 		tdSender.destroy();
 		mdReceiver.destroy();
