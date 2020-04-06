@@ -2,9 +2,9 @@ package io.redstone.core.order;
 
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.order.enums.OrdLevel;
-import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.enums.OrdType;
+import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.OrdTimestamps;
@@ -29,6 +29,8 @@ public interface Order extends Comparable<Order> {
 	 */
 	long ordSysId();
 
+	int strategyId();
+
 	long strategyOrdId();
 
 	Instrument instrument();
@@ -37,21 +39,19 @@ public interface Order extends Comparable<Order> {
 
 	OrdPrice ordPrice();
 
-	OrdSide ordSide();
+	TrdDirection trdDirection();
 
 	OrdType ordType();
 
 	OrdStatus ordStatus();
 
-	OrdTimestamps ordTimestamps();
-
-	OrdStatus ordStatus(OrdStatus ordStatus);
-
-	int strategyId();
-
-	int subAccountId();
+	OrdStatus updateOrdStatus(OrdStatus ordStatus);
 
 	OrdLevel ordLevel();
+
+	OrdTimestamps ordTimestamps();
+
+	int subAccountId();
 
 	@Override
 	default int compareTo(Order o) {

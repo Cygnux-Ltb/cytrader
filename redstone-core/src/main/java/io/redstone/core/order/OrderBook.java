@@ -52,7 +52,7 @@ public final class OrderBook {
 	}
 
 	public Order putOrder(Order order) {
-		switch (order.ordSide().direction()) {
+		switch (order.trdDirection()) {
 		case Long:
 			longOrders.put(order.ordSysId(), order);
 			activeLongOrders.put(order.ordSysId(), order);
@@ -63,14 +63,14 @@ public final class OrderBook {
 			break;
 		default:
 			throw new RuntimeException(
-					"OrderSysId : " + order.ordSysId() + ", OrdSide : " + order.ordSide() + " -> is undefined.");
+					"orderSysId : " + order.ordSysId() + ", trdDirection : " + order.trdDirection() + " -> is invalid.");
 		}
 		orders.put(order.ordSysId(), order);
 		return activeOrders.put(order.ordSysId(), order);
 	}
 
 	public Order terminatedOrder(Order order) {
-		switch (order.ordSide().direction()) {
+		switch (order.trdDirection()) {
 		case Long:
 			activeLongOrders.remove(order.ordSysId());
 			break;
@@ -79,7 +79,7 @@ public final class OrderBook {
 			break;
 		default:
 			throw new RuntimeException(
-					"OrderSysId : " + order.ordSysId() + ", OrdSide : " + order.ordSide() + " -> is undefined.");
+					"orderSysId : " + order.ordSysId() + ", trdDirection : " + order.trdDirection() + " -> is invalid.");
 		}
 		return activeOrders.remove(order.ordSysId());
 	}

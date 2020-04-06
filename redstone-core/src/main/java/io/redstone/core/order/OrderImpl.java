@@ -1,21 +1,25 @@
-package io.redstone.core.order.base;
+package io.redstone.core.order;
 
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.Order;
-import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.enums.OrdType;
+import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.OrdTimestamps;
 import io.redstone.core.order.utils.OrdSysIdGenerate;
 
-public abstract class BaseOrder implements Order {
+public abstract class OrderImpl implements Order {
 
 	/**
 	 * ordSysId
 	 */
 	private long ordSysId;
+
+	/**
+	 * 策略Id
+	 */
+	private int strategyId;
 
 	/**
 	 * instrument
@@ -35,7 +39,7 @@ public abstract class BaseOrder implements Order {
 	/**
 	 * 订单方向
 	 */
-	private OrdSide ordSide;
+	private TrdDirection trdDirection;
 
 	/**
 	 * 订单类型
@@ -53,26 +57,21 @@ public abstract class BaseOrder implements Order {
 	private OrdTimestamps ordTimestamps;
 
 	/**
-	 * 策略Id
-	 */
-	private int strategyId;
-
-	/**
 	 * 子账户Id
 	 */
 	private int subAccountId;
 
-	protected BaseOrder(Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, OrdSide ordSide, OrdType ordType,
-			int strategyId, int subAccountId) {
+	protected OrderImpl(int strategyId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, TrdDirection trdDirection,
+			OrdType ordType, int subAccountId) {
 		this.ordSysId = OrdSysIdGenerate.next(strategyId);
+		this.strategyId = strategyId;
 		this.instrument = instrument;
 		this.ordQty = ordQty;
 		this.ordPrice = ordPrice;
-		this.ordSide = ordSide;
+		this.trdDirection = trdDirection;
 		this.ordType = ordType;
 		this.ordStatus = OrdStatus.PendingNew;
 		this.ordTimestamps = OrdTimestamps.generate();
-		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
 
 	}
@@ -98,8 +97,8 @@ public abstract class BaseOrder implements Order {
 	}
 
 	@Override
-	public OrdSide ordSide() {
-		return ordSide;
+	public TrdDirection trdDirection() {
+		return trdDirection;
 	}
 
 	@Override
@@ -118,7 +117,7 @@ public abstract class BaseOrder implements Order {
 	}
 
 	@Override
-	public OrdStatus ordStatus(OrdStatus ordStatus) {
+	public OrdStatus updateOrdStatus(OrdStatus ordStatus) {
 		this.ordStatus = ordStatus;
 		return this.ordStatus;
 	}
