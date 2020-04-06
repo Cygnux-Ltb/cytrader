@@ -1,6 +1,6 @@
 package io.redstone.core.order.structure;
 
-import io.redstone.core.trade.enums.TrdDirection;
+import io.redstone.core.order.enums.TrdDirection;
 
 public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 
