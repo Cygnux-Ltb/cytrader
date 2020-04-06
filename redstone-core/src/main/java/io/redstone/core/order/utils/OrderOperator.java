@@ -1,13 +1,13 @@
 package io.redstone.core.order.utils;
 
-import io.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 
 public final class OrderOperator {
 
 	// TODO Call this update order
 	public static void update(ChildOrder order, OrdReport report) {
-		order.ordStatus(report.getOrdStatus());
+		order.updateOrdStatus(report.getOrdStatus());
 		switch (order.ordStatus()) {
 		case PartiallyFilled:
 			// Set FilledQty
