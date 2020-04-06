@@ -1,6 +1,6 @@
 package io.redstone.core.position.api;
 
-import io.redstone.core.order.impl.ChildOrder;
+import io.redstone.core.order.specific.ChildOrder;
 
 public interface PositionManager<T extends Position> {
 
