@@ -1,4 +1,4 @@
-package io.mercury.ctp.adaptor.dto;
+package io.mercury.ftdc.adaptor.dto;
 
 public class CtpInboundError {
 

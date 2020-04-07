@@ -1,4 +1,4 @@
-package io.mercury.ctp.adaptor;
+package io.mercury.ftdc.adaptor;
 
 import static io.mercury.financial.util.PriceUtil.priceToLong4;
 
@@ -27,19 +27,20 @@ import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ImmutableParamMap;
-import io.mercury.ctp.adaptor.exception.OrderRefNotFoundException;
-import io.mercury.ctp.adaptor.utils.CtpOrderRefGenerate;
-import io.mercury.ctp.adaptor.utils.CtpOrderRefKeeper;
-import io.mercury.ctp.gateway.CtpGateway;
-import io.mercury.ctp.gateway.bean.config.CtpConfigInfo;
-import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
-import io.mercury.ctp.gateway.bean.rsp.RspOrderAction;
-import io.mercury.ctp.gateway.bean.rsp.RspOrderInsert;
-import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
-import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentKeeper;
 import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
+import io.mercury.ftdc.adaptor.utils.CtpOrderRefGenerate;
+import io.mercury.ftdc.adaptor.utils.CtpOrderRefKeeper;
+import io.mercury.ftdc.gateway.FtdcGateway;
+import io.mercury.ftdc.gateway.bak.CtpGateway;
+import io.mercury.ftdc.gateway.bean.config.FtdcConfigInfo;
+import io.mercury.ftdc.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ftdc.gateway.bean.rsp.RspOrderAction;
+import io.mercury.ftdc.gateway.bean.rsp.RspOrderInsert;
+import io.mercury.ftdc.gateway.bean.rsp.RtnOrder;
+import io.mercury.ftdc.gateway.bean.rsp.RtnTrade;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.BaseAdaptor;
 import io.redstone.core.order.Order;
@@ -47,9 +48,9 @@ import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 
-public class CtpAdaptor extends BaseAdaptor {
+public class FtdcAdaptor extends BaseAdaptor {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(CtpAdaptor.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(FtdcAdaptor.class);
 
 	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newFormatter();
 
@@ -85,24 +86,24 @@ public class CtpAdaptor extends BaseAdaptor {
 	};
 
 	private int appId;
-	private final CtpGateway gateway;
+	private final FtdcGateway gateway;
 
-	public CtpAdaptor(int adaptorId, String adaptorName, int appId, @Nonnull StrategyScheduler scheduler,
-			@Nonnull ImmutableParamMap<CtpAdaptorParam> paramMap) {
+	public FtdcAdaptor(int adaptorId, String adaptorName, int appId, @Nonnull StrategyScheduler scheduler,
+			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
 		super(adaptorId, adaptorName);
 
 		// 写入Gateway用户信息
-		CtpConfigInfo configInfo = new CtpConfigInfo()
-				.setTraderAddress(paramMap.getString(CtpAdaptorParam.CTP_Trader_Address))
-				.setMdAddress(paramMap.getString(CtpAdaptorParam.CTP_Md_Address))
-				.setBrokerId(paramMap.getString(CtpAdaptorParam.CTP_BrokerId))
-				.setInvestorId(paramMap.getString(CtpAdaptorParam.CTP_InvestorId))
-				.setUserId(paramMap.getString(CtpAdaptorParam.CTP_UserId))
-				.setAccountId(paramMap.getString(CtpAdaptorParam.CTP_AccountId))
-				.setPassword(paramMap.getString(CtpAdaptorParam.CTP_Password));
+		FtdcConfigInfo configInfo = new FtdcConfigInfo()
+				.setTraderAddr(paramMap.getString(FtdcAdaptorParam.CTP_TraderAddr))
+				.setMdAddr(paramMap.getString(FtdcAdaptorParam.CTP_MdAddr))
+				.setBrokerId(paramMap.getString(FtdcAdaptorParam.CTP_BrokerId))
+				.setInvestorId(paramMap.getString(FtdcAdaptorParam.CTP_InvestorId))
+				.setUserId(paramMap.getString(FtdcAdaptorParam.CTP_UserId))
+				.setAccountId(paramMap.getString(FtdcAdaptorParam.CTP_AccountId))
+				.setPassword(paramMap.getString(FtdcAdaptorParam.CTP_Password));
 		this.appId = appId;
 		// 初始化Gateway
-		this.gateway = new CtpGateway("CTP-Gateway", configInfo,
+		this.gateway = new FtdcGateway("Ftdc-Gateway", configInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, msg -> {
 					switch (msg.type()) {
 					case DepthMarketData:
@@ -273,7 +274,7 @@ public class CtpAdaptor extends BaseAdaptor {
 		 * ///卖<br>
 		 * #define THOST_FTDC_D_Sell '1'<br>
 		 */
-		switch (order.ordSide().direction()) {
+		switch (order.trdDirection()) {
 		case Long:
 			ftdcInputOrder.setDirection(thosttraderapiConstants.THOST_FTDC_D_Buy);
 			break;
@@ -281,7 +282,7 @@ public class CtpAdaptor extends BaseAdaptor {
 			ftdcInputOrder.setDirection(thosttraderapiConstants.THOST_FTDC_D_Sell);
 			break;
 		default:
-			throw new RuntimeException(order.ordSide() + " does not exist.");
+			throw new RuntimeException(order.trdDirection() + " does not exist.");
 		}
 		/**
 		 * 设置价格

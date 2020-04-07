@@ -1,4 +1,4 @@
-package io.mercury.ctp.adaptor.exception;
+package io.mercury.ftdc.adaptor.exception;
 
 public class OrderRefNotFoundException extends Exception {
 

@@ -1,16 +1,16 @@
-package io.mercury.ctp.adaptor;
+package io.mercury.ftdc.adaptor;
 
 import io.mercury.common.param.api.ParamKey;
 import io.mercury.common.param.api.ParamType;
 
-public enum CtpAdaptorParam implements ParamKey {
+public enum FtdcAdaptorParam implements ParamKey {
 
 	/**
 	 * CTP Params
 	 */
-	CTP_Trader_Address(201, "ctp.trader.address", ParamType.STRING),
+	CTP_TraderAddr(201, "ctp.trader.addr", ParamType.STRING),
 
-	CTP_Md_Address(202, "ctp.md.address", ParamType.STRING),
+	CTP_MdAddr(202, "ctp.md.addr", ParamType.STRING),
 
 	CTP_BrokerId(203, "ctp.broker.id", ParamType.STRING),
 
@@ -28,7 +28,7 @@ public enum CtpAdaptorParam implements ParamKey {
 	private String paramName;
 	private ParamType paramType;
 
-	private CtpAdaptorParam(int paramId, String paramName, ParamType paramType) {
+	private FtdcAdaptorParam(int paramId, String paramName, ParamType paramType) {
 		this.paramId = paramId;
 		this.paramName = paramName;
 		this.paramType = paramType;
