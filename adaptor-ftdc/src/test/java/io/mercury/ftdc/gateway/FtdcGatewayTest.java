@@ -1,4 +1,4 @@
-package io.mercury.gateway.ctp;
+package io.mercury.ftdc.gateway;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,23 +9,22 @@ import org.slf4j.Logger;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadUtil;
-import io.mercury.ctp.gateway.CtpGateway;
-import io.mercury.ctp.gateway.bean.config.CtpConfigInfo;
-import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
-import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
-import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
+import io.mercury.ftdc.gateway.bean.config.FtdcConfigInfo;
+import io.mercury.ftdc.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ftdc.gateway.bean.rsp.RtnOrder;
+import io.mercury.ftdc.gateway.bean.rsp.RtnTrade;
 
-public class CtpGatewayTest {
+public class FtdcGatewayTest {
 
-	private final Logger log = CommonLoggerFactory.getLogger(CtpGatewayTest.class);
+	private final Logger log = CommonLoggerFactory.getLogger(FtdcGatewayTest.class);
 
 	// 标准CTP
 //	private String TradeAddress = "tcp://180.168.146.187:10100";
 //	private String MdAddress = "tcp://180.168.146.187:10110";
 
 	// 7*24 CTP连通测试
-	private String TradeAddress = "tcp://180.168.146.187:10130";
-	private String MdAddress = "tcp://180.168.146.187:10131";
+	private String TradeAddr = "tcp://180.168.146.187:10130";
+	private String MdAddr = "tcp://180.168.146.187:10131";
 
 	private String BrokerId = "9999";
 	private String InvestorId = "132796";
@@ -41,11 +40,11 @@ public class CtpGatewayTest {
 	@Test
 	public void test() {
 
-		CtpConfigInfo simnowUserInfo = new CtpConfigInfo().setTraderAddress(TradeAddress).setMdAddress(MdAddress)
+		FtdcConfigInfo simnowUserInfo = new FtdcConfigInfo().setTraderAddr(TradeAddr).setMdAddr(MdAddr)
 				.setBrokerId(BrokerId).setInvestorId(InvestorId).setUserId(UserId).setAccountId(AccountId)
 				.setPassword(Password).setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
-		CtpGateway gateway = new CtpGateway(GatewayId, simnowUserInfo,
+		FtdcGateway gateway = new FtdcGateway(GatewayId, simnowUserInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Simnow-Handle-Queue", 1024, msg -> {
 					switch (msg.type()) {
 					case DepthMarketData:
@@ -73,7 +72,7 @@ public class CtpGatewayTest {
 		instruementIdSet.add("rb2010");
 		gateway.subscribeMarketData(instruementIdSet);
 		ThreadUtil.join();
-		
+
 	}
 
 }
