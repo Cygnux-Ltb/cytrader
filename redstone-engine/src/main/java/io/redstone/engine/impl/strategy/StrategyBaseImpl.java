@@ -1,4 +1,4 @@
-package io.redstone.core.strategy.base;
+package io.redstone.engine.impl.strategy;
 
 import java.util.function.Supplier;
 
@@ -20,8 +20,10 @@ import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.account.AccountKeeper;
 import io.redstone.core.adaptor.Adaptor;
+import io.redstone.core.adaptor.AdaptorEvent;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderExecutor;
+import io.redstone.core.order.OrderKeeper;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.specific.ParentOrder;
@@ -32,7 +34,7 @@ import io.redstone.core.risk.CircuitBreaker;
 import io.redstone.core.strategy.Strategy;
 import io.redstone.core.strategy.StrategyEvent;
 
-public abstract class BaseStrategy<M extends MarketData> implements Strategy, CircuitBreaker {
+public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy, CircuitBreaker {
 
 	private int strategyId;
 
@@ -52,7 +54,7 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	// 记录当前策略所有的策略订单订单
 	protected MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
 
-	protected BaseStrategy(int strategyId, int subAccountId, Instrument... instruments) {
+	protected StrategyBaseImpl(int strategyId, int subAccountId, Instrument... instruments) {
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
 		this.defaultName = "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]";
@@ -88,20 +90,26 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
 		if (strategyOrders.notEmpty()) {
-			
+
 		}
-		handleMarketData(marketData);
+		marketDataExtendHandle(marketData);
 	}
 
 	@ProtectedAbstractMethod
-	protected abstract void handleMarketData(BasicMarketData marketData);
+	protected abstract void marketDataExtendHandle(BasicMarketData marketData);
 
 	@Override
 	public void onOrder(Order order) {
-		updateOrder(order);
+		log.info("handle order ordSysId==[{}]", order.ordSysId());
+		if (OrderKeeper.containsOrder(order.ordSysId())) {
+			OrderKeeper.updateOrder(order);
+		} else {
+			OrderKeeper.insertOrder(order);
+		}
+		orderExtendHandle(order);
 	}
 
-	protected abstract boolean updateOrder(Order order);
+	protected abstract void orderExtendHandle(Order order);
 
 	@Override
 	public void onStrategyEvent(StrategyEvent event) {
@@ -183,13 +191,13 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 			throw new IllegalArgumentException("TrdDirection is illegal");
 		}
 		StrategyOrder strategyOrder = new StrategyOrder(strategyId, instrument, OrdQty.withOfferQty(targetQty),
-				OrdPrice.withOffer(offerPrice), direction, OrdType.Limit,  subAccountId);
+				OrdPrice.withOffer(offerPrice), direction, OrdType.Limit, subAccountId);
 		strategyOrders.put(strategyOrder.ordSysId(), strategyOrder);
 
 		MutableList<ParentOrder> ParentOrders = OrderExecutor.onStrategyOrder(strategyOrder);
 
 		ParentOrder first = ParentOrders.getFirst();
-		
+
 		// TODO 错误实现
 		Adaptor adaptor = getAdaptor(instrument);
 
@@ -203,7 +211,20 @@ public abstract class BaseStrategy<M extends MarketData> implements Strategy, Ci
 	 * @return
 	 */
 	@ProtectedAbstractMethod
-	@Deprecated
-	protected abstract Adaptor getAdaptor(Instrument instrument);
+	protected Adaptor getAdaptor(Instrument instrument) {
+		return null;
+	}
+
+	@Override
+	public void addAdaptor(Adaptor adaptor) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onAdaptorEvent(AdaptorEvent event) {
+		// TODO Auto-generated method stub
+
+	}
 
 }
