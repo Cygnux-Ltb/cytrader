@@ -1,9 +1,10 @@
-package io.mercury.ctp.gateway.bak;
+package io.mercury.ftdc.gateway.bak;
 
 /**
  * @author Administrator
  *
  */
+@Deprecated
 public class CtpConfig {
 
 	private String mdAddress;

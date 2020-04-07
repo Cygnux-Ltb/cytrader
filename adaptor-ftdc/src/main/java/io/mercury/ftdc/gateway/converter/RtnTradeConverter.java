@@ -1,9 +1,9 @@
-package io.mercury.ctp.gateway.converter;
+package io.mercury.ftdc.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcTradeField;
-import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
+import io.mercury.ftdc.gateway.bean.rsp.RtnTrade;
 
 public class RtnTradeConverter implements Function<CThostFtdcTradeField, RtnTrade> {
 

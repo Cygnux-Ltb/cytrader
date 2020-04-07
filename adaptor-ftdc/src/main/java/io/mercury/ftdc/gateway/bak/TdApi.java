@@ -1,4 +1,4 @@
-package io.mercury.ctp.gateway.bak;
+package io.mercury.ftdc.gateway.bak;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -17,10 +17,10 @@ import ctp.thostapi.thosttraderapiConstants;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadUtil;
 import io.mercury.common.util.StringUtil;
-import io.mercury.ctp.gateway.base.Constant;
-import io.mercury.ctp.gateway.base.CtpConstant;
-import io.mercury.ctp.gateway.bean.req.ReqCancelOrder;
-import io.mercury.ctp.gateway.bean.req.ReqOrder;
+import io.mercury.ftdc.gateway.base.Constant;
+import io.mercury.ftdc.gateway.base.CtpConstant;
+import io.mercury.ftdc.gateway.bean.req.ReqCancelOrder;
+import io.mercury.ftdc.gateway.bean.req.ReqOrder;
 
 @Deprecated
 @SuppressWarnings("unused")

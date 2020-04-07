@@ -1,9 +1,9 @@
-package io.mercury.ctp.gateway.converter;
+package io.mercury.ftdc.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcOrderField;
-import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
+import io.mercury.ftdc.gateway.bean.rsp.RtnOrder;
 
 public class RtnOrderConverter implements Function<CThostFtdcOrderField, RtnOrder> {
 

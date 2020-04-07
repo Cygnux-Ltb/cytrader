@@ -1,17 +1,17 @@
-package io.mercury.ctp.gateway.bean.config;
+package io.mercury.ftdc.gateway.bean.config;
 
-public class CtpConfigInfo {
+public class FtdcConfigInfo {
 
-	private String traderAddress;
-	private String mdAddress;
+	private String traderAddr;
+	private String mdAddr;
 
 	private String brokerId;
 	private String investorId;
 	private String accountId;
 	private String userId;
 	private String userProductInfo;
-	private String password;
 	private String authCode;
+	private String password;
 
 	private String reportIpAddr;
 	private String reportMacAddr;
@@ -19,12 +19,8 @@ public class CtpConfigInfo {
 	private String tradingDay;
 	private String currencyId;
 
-//	public static final CtpConfigInfo newEmpty() {
-//		return new CtpConfigInfo();
-//	}
-
-	public String getTraderAddress() {
-		return traderAddress;
+	public String getTraderAddr() {
+		return traderAddr;
 	}
 
 	public String getReportIpAddr() {
@@ -35,8 +31,8 @@ public class CtpConfigInfo {
 		return reportMacAddr;
 	}
 
-	public String getMdAddress() {
-		return mdAddress;
+	public String getMdAddr() {
+		return mdAddr;
 	}
 
 	public String getBrokerId() {
@@ -75,67 +71,67 @@ public class CtpConfigInfo {
 		return currencyId;
 	}
 
-	public CtpConfigInfo setTraderAddress(String traderAddress) {
-		this.traderAddress = traderAddress;
+	public FtdcConfigInfo setTraderAddr(String traderAddr) {
+		this.traderAddr = traderAddr;
 		return this;
 	}
 
-	public CtpConfigInfo setMdAddress(String mdAddress) {
-		this.mdAddress = mdAddress;
+	public FtdcConfigInfo setMdAddr(String mdAddr) {
+		this.mdAddr = mdAddr;
 		return this;
 	}
 
-	public CtpConfigInfo setBrokerId(String brokerId) {
+	public FtdcConfigInfo setBrokerId(String brokerId) {
 		this.brokerId = brokerId;
 		return this;
 	}
 
-	public CtpConfigInfo setInvestorId(String investorId) {
+	public FtdcConfigInfo setInvestorId(String investorId) {
 		this.investorId = investorId;
 		return this;
 	}
 
-	public CtpConfigInfo setAccountId(String accountId) {
+	public FtdcConfigInfo setAccountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
 
-	public CtpConfigInfo setUserId(String userId) {
+	public FtdcConfigInfo setUserId(String userId) {
 		this.userId = userId;
 		return this;
 	}
 
-	public CtpConfigInfo setUserProductInfo(String userProductInfo) {
+	public FtdcConfigInfo setUserProductInfo(String userProductInfo) {
 		this.userProductInfo = userProductInfo;
 		return this;
 	}
 
-	public CtpConfigInfo setPassword(String password) {
+	public FtdcConfigInfo setPassword(String password) {
 		this.password = password;
 		return this;
 	}
 
-	public CtpConfigInfo setAuthCode(String authCode) {
+	public FtdcConfigInfo setAuthCode(String authCode) {
 		this.authCode = authCode;
 		return this;
 	}
 
-	public CtpConfigInfo setTradingDay(String tradingDay) {
+	public FtdcConfigInfo setTradingDay(String tradingDay) {
 		this.tradingDay = tradingDay;
 		return this;
 	}
 
-	public CtpConfigInfo setCurrencyId(String currencyId) {
+	public FtdcConfigInfo setCurrencyId(String currencyId) {
 		this.currencyId = currencyId;
 		return this;
 	}
 
-	public CtpConfigInfo setReportIpAddr(String reportIpAddr) {
+	public FtdcConfigInfo setReportIpAddr(String reportIpAddr) {
 		this.reportIpAddr = reportIpAddr;
 		return this;
 	}
 
-	public CtpConfigInfo setReportMacAddr(String reportMacAddr) {
+	public FtdcConfigInfo setReportMacAddr(String reportMacAddr) {
 		this.reportMacAddr = reportMacAddr;
 		return this;
 	}
