@@ -1,4 +1,4 @@
-package io.redstone.adaptor.jctp;
+package io.mercury.ftdc.adaptor;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
