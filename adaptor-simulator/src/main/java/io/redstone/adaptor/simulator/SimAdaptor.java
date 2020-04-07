@@ -123,7 +123,7 @@ public class SimAdaptor extends BaseAdaptor {
 				.setOrderRef(Long.valueOf(order.ordSysId()).intValue()).setInstrumentId(order.instrument().code())
 				.setLimitPrice(order.ordPrice().offerPrice())
 				.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue())
-				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.ordSide().code()).build();
+				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.trdDirection().code()).build();
 		byte[] byteMsg;
 		try {
 			byteMsg = simOrder.toByteBuffer().array();
@@ -141,7 +141,7 @@ public class SimAdaptor extends BaseAdaptor {
 				.setOrderRef(Long.valueOf(order.ordSysId()).intValue()).setInstrumentId(cancelOrder.instrument().code())
 				.setLimitPrice(order.ordPrice().offerPrice())
 				.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue())
-				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.ordSide().code()).build();
+				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.trdDirection().code()).build();
 		byte[] byteMsg;
 		try {
 			byteMsg = simOrder.toByteBuffer().array();
