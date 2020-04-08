@@ -101,11 +101,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	@Override
 	public void onOrder(Order order) {
 		log.info("handle order ordSysId==[{}]", order.ordSysId());
-		if (OrderKeeper.containsOrder(order.ordSysId())) {
-			OrderKeeper.updateOrder(order);
-		} else {
-			OrderKeeper.insertOrder(order);
-		}
+		OrderKeeper.updateOrder(order);
 		orderExtendHandle(order);
 	}
 

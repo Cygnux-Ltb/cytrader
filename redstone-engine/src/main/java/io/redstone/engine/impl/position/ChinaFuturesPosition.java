@@ -5,8 +5,8 @@ import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.redstone.core.order.Order;
-import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.enums.OrdStatus;
+import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.position.impl.AbsT0Position;
@@ -17,34 +17,24 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 
 	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(Capacity.L06_SIZE_64);
 
-	public final static ChinaFuturesPosition EMPTY = new ChinaFuturesPosition(-1, -1);
-
-	private ChinaFuturesPosition(int accountId, int instrumentId) {
+	ChinaFuturesPosition(int accountId, int instrumentId) {
 		this(accountId, instrumentId, 0);
 	}
 
-	private ChinaFuturesPosition(int accountId, int instrumentId, long beforeTodayQty) {
+	ChinaFuturesPosition(int accountId, int instrumentId, long beforeTodayQty) {
 		super(accountId, instrumentId);
 		this.beforeTodayQty = beforeTodayQty;
-	}
-
-	final static ChinaFuturesPosition newInstance(int accountId, int instrumentId) {
-		return new ChinaFuturesPosition(accountId, instrumentId);
-	}
-
-	final static ChinaFuturesPosition newInstance(int accountId, int instrumentId, long beforeTodayQty) {
-		return new ChinaFuturesPosition(accountId, instrumentId, beforeTodayQty);
 	}
 
 	public long beforeTodayQty() {
 		return beforeTodayQty;
 	}
 
-	public long lockBeforeTodayQty(long ordSysId, OrdSide side, long lockQty) {
+	public long lockBeforeTodayQty(long ordSysId, TrdDirection direction, long lockQty) {
 		if (beforeTodayQty == 0) {
 			return 0;
 		} else if (beforeTodayQty > 0) {
-			switch (side.direction()) {
+			switch (direction) {
 			case Short:
 				// 需要锁定的Qty小于或等于昨仓,实际锁定量等于请求量
 				if (lockQty <= beforeTodayQty) {
@@ -63,7 +53,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 				return 0;
 			}
 		} else {
-			switch (side.direction()) {
+			switch (direction) {
 			case Long:
 				// 需要锁定的Qty小于或等于昨仓,实际锁定量等于请求量
 				long absBeforeTodayQty = Math.abs(beforeTodayQty);
@@ -84,7 +74,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 	}
 
 	// TODO
-	public double unlockBeforeTodayQty(long ordSysId, OrdSide side, double unlockQty) {
+	public double unlockBeforeTodayQty(long ordSysId, TrdDirection direction, long unlockQty) {
 		return 0;
 	}
 
