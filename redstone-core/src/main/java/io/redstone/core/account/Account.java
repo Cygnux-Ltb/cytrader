@@ -41,11 +41,9 @@ public class Account extends EnableComponent {
 	}
 
 	public Account(int accountId, String accountName, String investorId, Balance balance) {
-		super();
 		this.accountId = accountId;
-		String suffixName = "investorId[" + investorId + "]";
-		this.accountName = accountName == null ? suffixName : accountName + "-" + suffixName;
-		this.accountName = accountName;
+		String suffix = "investorId[" + investorId + "]";
+		this.accountName = accountName == null ? suffix : accountName + "-" + suffix;
 		this.investorId = investorId;
 		this.balance = balance;
 	}

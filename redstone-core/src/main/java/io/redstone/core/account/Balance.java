@@ -8,19 +8,19 @@ public final class Balance {
 	Balance() {
 	}
 
-	public final long margin() {
+	public long margin() {
 		return margin;
 	}
 
-	public final void setMargin(long margin) {
+	public void setMargin(long margin) {
 		this.margin = margin;
 	}
 
-	public final long credit() {
+	public long credit() {
 		return credit;
 	}
 
-	public final void setCredit(long credit) {
+	public void setCredit(long credit) {
 		this.credit = credit;
 	}
 

@@ -1,6 +1,5 @@
 package io.redstone.core.account;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -19,16 +18,19 @@ import io.mercury.common.util.Assertor;
 @NotThreadSafe
 public final class AccountKeeper {
 
-	// 存储InvestorAccount信息,一对一关系,以accountId索引
+	// private static final Logger log =
+	// CommonLoggerFactory.getLogger(AccountKeeper.class);
+
+	// 存储Account信息, 一对一关系,以accountId索引
 	private MutableIntObjectMap<Account> accountMap = MutableMaps.newIntObjectHashMap();
 
-	// 存储SubAccount信息,一对一关系,以subAccountId索引
+	// 存储SubAccount信息, 一对一关系,以subAccountId索引
 	private MutableIntObjectMap<SubAccount> subAccountMap = MutableMaps.newIntObjectHashMap();
 
-	// 存储InvestorAccount信息,一对一关系,以subAccountId索引
+	// 存储Account信息, 一对一关系,以subAccountId索引
 	private MutableIntObjectMap<Account> accountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
 
-	private final static AccountKeeper InnerInstance = new AccountKeeper();
+	private final static AccountKeeper Singleton = new AccountKeeper();
 
 	private AccountKeeper() {
 	}
@@ -37,60 +39,72 @@ public final class AccountKeeper {
 		Assertor.requiredLength(accounts, 1, "accounts");
 		for (Account account : accounts) {
 			for (SubAccount subAccount : account.subAccounts()) {
-				InnerInstance.subAccountMap.put(subAccount.subAccountId(), subAccount);
-				InnerInstance.accountMapBySubAccountId.put(subAccount.subAccountId(), account);
+				Singleton.subAccountMap.put(subAccount.subAccountId(), subAccount);
+				Singleton.accountMapBySubAccountId.put(subAccount.subAccountId(), account);
 			}
-			InnerInstance.accountMap.put(account.accountId(), account);
+			Singleton.accountMap.put(account.accountId(), account);
 		}
 	}
 
 	public static void putAccount(@Nonnull SubAccount... subAccounts) {
 		Assertor.requiredLength(subAccounts, 1, "subAccounts");
 		for (SubAccount subAccount : subAccounts) {
-			InnerInstance.subAccountMap.put(subAccount.subAccountId(), subAccount);
-			Account investorAccount = subAccount.investorAccount();
-			InnerInstance.accountMapBySubAccountId.put(subAccount.subAccountId(), investorAccount);
-			InnerInstance.accountMap.put(investorAccount.accountId(), investorAccount);
+			Singleton.subAccountMap.put(subAccount.subAccountId(), subAccount);
+			Account account = subAccount.account();
+			Singleton.accountMapBySubAccountId.put(subAccount.subAccountId(), account);
+			Singleton.accountMap.put(account.accountId(), account);
 		}
 	}
 
+	@Nonnull
+	public static Account getAccountById(int accountId) throws AccountNotFoundException {
+		Account account = Singleton.accountMap.get(accountId);
+		if (account == null)
+			throw new AccountNotFoundException(
+					"Account not found : accountId[" + accountId + "] no mapping object");
+		return account;
+	}
+
 	public static void setAccountNotTradable(int accountId) {
-		InnerInstance.accountMap.get(accountId).disable();
+		getAccountById(accountId).disable();
 	}
 
 	public static void setAccountTradable(int accountId) {
-		InnerInstance.accountMap.get(accountId).enable();
+		getAccountById(accountId).enable();
 	}
 
 	public static boolean isAccountTradable(int accountId) {
-		return InnerInstance.accountMap.get(accountId).isEnabled();
+		return getAccountById(accountId).isEnabled();
+	}
+
+	@Nonnull
+	public static Account getAccountBySubAccountId(int subAccountId) throws AccountNotFoundException {
+		Account account = Singleton.accountMapBySubAccountId.get(subAccountId);
+		if (account == null)
+			throw new AccountNotFoundException(
+					"Account not found : subAccountId[" + subAccountId + "] no mapping object");
+		return account;
+	}
+
+	@Nonnull
+	public static SubAccount getSubAccount(int subAccountId) throws AccountNotFoundException {
+		SubAccount subAccount = Singleton.subAccountMap.get(subAccountId);
+		if (subAccount == null)
+			throw new AccountNotFoundException(
+					"SubAccount not found : subAccountId[" + subAccountId + "] no mapping object");
+		return subAccount;
 	}
 
 	public static void setSubAccountNotTradable(int subAccountId) {
-		InnerInstance.subAccountMap.get(subAccountId).disable();
+		getSubAccount(subAccountId).disable();
 	}
 
 	public static void setSubAccountTradable(int subAccountId) {
-		InnerInstance.subAccountMap.get(subAccountId).enable();
+		getSubAccount(subAccountId).enable();
 	}
 
 	public static boolean isSubAccountTradable(int subAccountId) {
-		return InnerInstance.subAccountMap.get(subAccountId).isEnabled();
-	}
-
-	@CheckForNull
-	public static Account getAccountById(int accountId) {
-		return InnerInstance.accountMap.get(accountId);
-	}
-
-	@CheckForNull
-	public static Account getAccountBySubAccountId(int subAccountId) {
-		return InnerInstance.accountMapBySubAccountId.get(subAccountId);
-	}
-
-	@CheckForNull
-	public static SubAccount getSubAccount(int subAccountId) {
-		return InnerInstance.subAccountMap.get(subAccountId);
+		return getSubAccount(subAccountId).isEnabled();
 	}
 
 }

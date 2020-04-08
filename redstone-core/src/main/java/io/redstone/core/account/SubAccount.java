@@ -10,24 +10,24 @@ public class SubAccount extends EnableComponent {
 	private final int subAccountId;
 	private final String subAccountName;
 	private final Balance balance;
-	private final Account investorAccount;
+	private final Account account;
 
-	public SubAccount(int subAccountId, @Nonnull Account investorAccount) {
-		this(subAccountId, null, investorAccount);
+	public SubAccount(int subAccountId, @Nonnull Account account) {
+		this(subAccountId, null, account, account.balance());
 	}
 
-	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account investorAccount) {
-		this(subAccountId, subAccountName, investorAccount, investorAccount.balance());
+	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account) {
+		this(subAccountId, subAccountName, account, account.balance());
 	}
 
-	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account investorAccount,
+	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account,
 			Balance balance) {
 		this.subAccountId = subAccountId;
-		this.investorAccount = Assertor.nonNull(investorAccount, "[realAccount]");
+		this.account = Assertor.nonNull(account, "[account]");
 		this.balance = Assertor.nonNull(balance, "[balance]");
-		String attachName = "account[" + investorAccount.accountName() + "]-subAccountId[" + subAccountId + "]";
+		String attachName = "account[" + account.accountName() + "]-subAccount[" + subAccountId + "]";
 		this.subAccountName = subAccountName == null ? attachName : subAccountName + "-" + attachName;
-		investorAccount.addSubAccount(this);
+		account.addSubAccount(this);
 	}
 
 	public int subAccountId() {
@@ -42,8 +42,8 @@ public class SubAccount extends EnableComponent {
 		return balance;
 	}
 
-	public Account investorAccount() {
-		return investorAccount;
+	public Account account() {
+		return account;
 	}
 
 }
