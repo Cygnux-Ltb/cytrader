@@ -541,7 +541,7 @@ public class OrderSamples {
         //! [adjustable_stop]
         Order order = new Order();
         //Attached order is a conventional STP order in opposite direction
-        order.action(parent.action().equals("BUY") ? "SELL" : "BUY");
+        order.action(parent.action().name().equals("BUY") ? "SELL" : "BUY");
         order.totalQuantity(parent.totalQuantity());
         order.auxPrice(attachedOrderStopPrice);
         order.parentId(parent.orderId());
@@ -559,7 +559,7 @@ public class OrderSamples {
     	//! [adjustable_stop_limit]
         Order order = new Order();
         //Attached order is a conventional STP order
-        order.action(parent.action().equals("BUY") ? "SELL" : "BUY");
+        order.action(parent.action().name().equals("BUY") ? "SELL" : "BUY");
         order.totalQuantity(parent.totalQuantity());
         order.auxPrice(attachedOrderStopPrice);
         order.parentId(parent.orderId());
