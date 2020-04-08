@@ -32,7 +32,7 @@ public final class OrderExecutor {
 	public static MutableList<ParentOrder> onStrategyOrder(@Nonnull StrategyOrder... strategyOrders) {
 		MutableList<ParentOrder> parentOrders = MutableLists.newFastList();
 		for (StrategyOrder strategyOrder : strategyOrders) {
-			OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrderBook(strategyOrder.instrument().id());
+			OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrders(strategyOrder.instrument().id());
 			long offerQty = strategyOrder.ordQty().offerQty();
 			switch (strategyOrder.trdDirection()) {
 			case Long:

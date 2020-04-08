@@ -6,6 +6,7 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
+import io.redstone.core.order.exception.OrderStatusException;
 
 public final class OrderBook {
 
@@ -28,13 +29,7 @@ public final class OrderBook {
 	private MutableLongObjectMap<Order> activeShortOrders;
 
 	private OrderBook(Capacity capacity) {
-		// 添加取一半, 1/4, 1/8
-//		this.orders = MutableMaps.newLongObjectHashMap(size);
-//		this.activeOrders = MutableMaps.newLongObjectHashMap(size / 4);
-//		this.longOrders = MutableMaps.newLongObjectHashMap(size / 2);
-//		this.activeLongOrders = MutableMaps.newLongObjectHashMap(size / 8);
-//		this.shortOrders = MutableMaps.newLongObjectHashMap(size / 2);
-//		this.activeShortOrders = MutableMaps.newLongObjectHashMap(size / 8);
+		// 添加取1/2, 1/4, 1/8的逻辑, 缩小Map体积
 		this.orders = MutableMaps.newLongObjectHashMap(capacity);
 		this.activeOrders = MutableMaps.newLongObjectHashMap(capacity);
 		this.longOrders = MutableMaps.newLongObjectHashMap(capacity);
@@ -44,7 +39,7 @@ public final class OrderBook {
 	}
 
 	public static OrderBook newInstance() {
-		return new OrderBook(Capacity.L10_SIZE_1024);
+		return new OrderBook(Capacity.L09_SIZE_512);
 	}
 
 	public static OrderBook newInstance(Capacity capacity) {
@@ -62,14 +57,14 @@ public final class OrderBook {
 			activeShortOrders.put(order.ordSysId(), order);
 			break;
 		default:
-			throw new RuntimeException(
-					"orderSysId : " + order.ordSysId() + ", trdDirection : " + order.trdDirection() + " -> is invalid.");
+			throw new OrderStatusException("orderSysId: [" + order.ordSysId() + "], trdDirection: ["
+					+ order.trdDirection() + "] -> direction is invalid.");
 		}
 		orders.put(order.ordSysId(), order);
 		return activeOrders.put(order.ordSysId(), order);
 	}
 
-	public Order terminatedOrder(Order order) {
+	public Order terminatedOrder(Order order) throws OrderStatusException {
 		switch (order.trdDirection()) {
 		case Long:
 			activeLongOrders.remove(order.ordSysId());
@@ -78,8 +73,8 @@ public final class OrderBook {
 			activeShortOrders.remove(order.ordSysId());
 			break;
 		default:
-			throw new RuntimeException(
-					"orderSysId : " + order.ordSysId() + ", trdDirection : " + order.trdDirection() + " -> is invalid.");
+			throw new OrderStatusException("orderSysId: [" + order.ordSysId() + "], trdDirection: ["
+					+ order.trdDirection() + "] -> direction is invalid.");
 		}
 		return activeOrders.remove(order.ordSysId());
 	}
