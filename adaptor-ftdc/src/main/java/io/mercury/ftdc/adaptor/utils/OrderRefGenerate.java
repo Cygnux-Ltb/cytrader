@@ -12,7 +12,7 @@ import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeZone;
 
 @NotThreadSafe
-public final class CtpOrderRefGenerate {
+public final class OrderRefGenerate {
 
 	private static int maxLimitOwnerId = 20;
 
@@ -58,7 +58,7 @@ public final class CtpOrderRefGenerate {
 
 		for (int i = 0; i < 10240; i++) {
 			Thread.sleep(5);
-			System.out.println(CtpOrderRefGenerate.next(5));
+			System.out.println(OrderRefGenerate.next(5));
 		}
 
 		System.out.println(Instant.now().toEpochMilli());

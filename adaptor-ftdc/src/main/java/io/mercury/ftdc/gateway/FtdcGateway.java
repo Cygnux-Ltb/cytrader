@@ -352,7 +352,7 @@ public class FtdcGateway {
 	/****************
 	 * 报单接口
 	 */
-	public void reqOrderInsert(CThostFtdcInputOrderField ftdcInputOrder) {
+	public void ReqOrderInsert(CThostFtdcInputOrderField ftdcInputOrder) {
 		if (isTraderLogin) {
 			// set account
 			// TODO
@@ -416,7 +416,7 @@ public class FtdcGateway {
 	/****************
 	 * 撤单接口
 	 */
-	public void reqOrderAction(CThostFtdcInputOrderActionField ftdcInputOrderAction) {
+	public void ReqOrderAction(CThostFtdcInputOrderActionField ftdcInputOrderAction) {
 		if (isTraderLogin) {
 			ftdcInputOrderAction.setBrokerID(ftdcConfigInfo.getBrokerId());
 			ftdcInputOrderAction.setUserID(ftdcConfigInfo.getUserId());
@@ -456,7 +456,7 @@ public class FtdcGateway {
 				StringUtil.conversionGbkToUtf8(rspInfo.getErrorMsg()));
 	}
 
-	public void reqQryTradingAccount() {
+	public void ReqQryTradingAccount() {
 		// ThreadUtil.startNewThread(() -> innerQureyAccount());
 		CThostFtdcQryTradingAccountField qryTradingAccount = new CThostFtdcQryTradingAccountField();
 		qryTradingAccount.setBrokerID(ftdcConfigInfo.getBrokerId());
@@ -485,7 +485,7 @@ public class FtdcGateway {
 		// TODO Inbound
 	}
 
-	public void reqQryInvestorPosition() {
+	public void ReqQryInvestorPosition() {
 		// ThreadUtil.startNewThread(() -> innerQureyPosition());
 		CThostFtdcQryInvestorPositionField qryInvestorPosition = new CThostFtdcQryInvestorPositionField();
 		qryInvestorPosition.setBrokerID(ftdcConfigInfo.getBrokerId());
@@ -510,7 +510,7 @@ public class FtdcGateway {
 				investorPosition.getInstrumentID(), investorPosition.getInvestorID(), investorPosition.getPosition());
 	}
 
-	public void reqQrySettlementInfo() {
+	public void ReqQrySettlementInfo() {
 		CThostFtdcQrySettlementInfoField qrySettlementInfo = new CThostFtdcQrySettlementInfoField();
 		qrySettlementInfo.setBrokerID(ftdcConfigInfo.getBrokerId());
 		qrySettlementInfo.setInvestorID(ftdcConfigInfo.getInvestorId());
@@ -522,7 +522,7 @@ public class FtdcGateway {
 		log.info("Send ReqQrySettlementInfo OK -> nRequestID==[{}]", nRequestID);
 	}
 
-	public void reqQryInstrument() {
+	public void ReqQryInstrument() {
 		CThostFtdcQryInstrumentField qryInstrument = new CThostFtdcQryInstrumentField();
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQryInstrument(qryInstrument, nRequestID);

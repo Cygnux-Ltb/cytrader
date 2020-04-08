@@ -14,31 +14,31 @@ import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
  * @TODO - Add Persistence
  */
 
-public class CtpOrderRefKeeper {
+public class OrderRefKeeper {
 
 	private MutableObjectLongMap<String> orderRefToOrdSysId = MutableMaps.newObjectLongHashMap(Capacity.L10_SIZE_1024);
 
 	private MutableLongObjectMap<String> ordSysIdToOrderRef = MutableMaps.newLongObjectHashMap(Capacity.L10_SIZE_1024);
 
-	private final static CtpOrderRefKeeper InnerInstance = new CtpOrderRefKeeper();
+	private final static OrderRefKeeper Singleton = new OrderRefKeeper();
 
-	private CtpOrderRefKeeper() {
+	private OrderRefKeeper() {
 	}
 
 	public static void put(String orderRef, long ordSysId) {
-		InnerInstance.orderRefToOrdSysId.put(orderRef, ordSysId);
-		InnerInstance.ordSysIdToOrderRef.put(ordSysId, orderRef);
+		Singleton.orderRefToOrdSysId.put(orderRef, ordSysId);
+		Singleton.ordSysIdToOrderRef.put(ordSysId, orderRef);
 	}
 
 	public static long getOrdSysId(String orderRef) throws OrderRefNotFoundException {
-		long ordSysId = InnerInstance.orderRefToOrdSysId.get(orderRef);
+		long ordSysId = Singleton.orderRefToOrdSysId.get(orderRef);
 		if (ordSysId == 0)
 			throw new OrderRefNotFoundException(orderRef);
 		return ordSysId;
 	}
 
 	public static String getOrderRef(long ordSysId) throws OrderRefNotFoundException {
-		String orderRef = InnerInstance.ordSysIdToOrderRef.get(ordSysId);
+		String orderRef = Singleton.ordSysIdToOrderRef.get(ordSysId);
 		if (orderRef == null)
 			throw new OrderRefNotFoundException(ordSysId);
 		return orderRef;
