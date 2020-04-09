@@ -40,6 +40,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnFrontDisconnected(int nReason) {
 		log.warn("TraderSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
+		gateway.onTraderFrontDisconnected();
 	}
 
 	@Override

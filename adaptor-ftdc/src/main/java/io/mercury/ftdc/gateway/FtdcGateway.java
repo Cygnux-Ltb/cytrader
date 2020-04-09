@@ -43,9 +43,9 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
-import io.mercury.ftdc.gateway.bean.config.FtdcConfigInfo;
+import io.mercury.ftdc.gateway.bean.FtdcConfigInfo;
+import io.mercury.ftdc.gateway.bean.RspMsg;
 import io.mercury.ftdc.gateway.bean.rsp.RspDepthMarketData;
-import io.mercury.ftdc.gateway.bean.rsp.RspMsg;
 import io.mercury.ftdc.gateway.converter.RspOrderActionConverter;
 import io.mercury.ftdc.gateway.converter.RspOrderInsertConverter;
 import io.mercury.ftdc.gateway.converter.RtnOrderConverter;
@@ -219,6 +219,14 @@ public class FtdcGateway {
 	}
 
 	/**
+	 * 
+	 */
+	 void onMdFrontDisconnected() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
 	 * 行情登录回调
 	 * 
 	 * @param rspUserLogin
@@ -326,18 +334,24 @@ public class FtdcGateway {
 	}
 
 	/**
+	 * 
+	 */
+	void onTraderFrontDisconnected() {
+		log.info("Send Trader ReqUserLogin OK");
+	}
+
+	/**
 	 * 交易登录回调
 	 * 
 	 * @param rspUserLogin
 	 */
-	void onTraderRspUserLogin(CThostFtdcRspUserLoginField rspUserLogin) {
-		log.info("Trader UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLogin.getBrokerID(),
-				rspUserLogin.getUserID());
+	void onTraderRspUserLogin(CThostFtdcRspUserLoginField ftdcRspUserLogin) {
+		log.info("Trader UserLogin Success -> Brokerid==[{}] UserID==[{}]", ftdcRspUserLogin.getBrokerID(),
+				ftdcRspUserLogin.getUserID());
+		int frontID = ftdcRspUserLogin.getFrontID();
+		int sessionID = ftdcRspUserLogin.getSessionID();
 		this.isTraderLogin = true;
-		authenticate();
-	}
 
-	void authenticate() {
 		if (!StringUtil.nonEmpty(ftdcConfigInfo.getAuthCode()) && !isAuth) {
 			// 验证
 			CThostFtdcReqAuthenticateField authenticateField = new CThostFtdcReqAuthenticateField();
@@ -347,6 +361,7 @@ public class FtdcGateway {
 			authenticateField.setUserProductInfo(ftdcConfigInfo.getUserProductInfo());
 			ftdcTraderApi.ReqAuthenticate(authenticateField, ++traderRequestId);
 		}
+
 	}
 
 	/****************
