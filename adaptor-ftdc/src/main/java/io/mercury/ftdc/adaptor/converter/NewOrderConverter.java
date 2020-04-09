@@ -13,7 +13,7 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 	@Override
 	public CThostFtdcInputOrderField apply(Order order) {
 		ChildOrder childOrder = (ChildOrder) order;
-		Instrument instrument = childOrder.instrument();
+		Instrument instrument = order.instrument();
 		CThostFtdcInputOrderField ftdcInputOrder = new CThostFtdcInputOrderField();
 		/**
 		 * 设置交易所ID
@@ -127,7 +127,7 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		 * ///卖<br>
 		 * #define THOST_FTDC_D_Sell '1'<br>
 		 */
-		switch (childOrder.trdDirection()) {
+		switch (order.trdDirection()) {
 		case Long:
 			ftdcInputOrder.setDirection(thosttraderapiConstants.THOST_FTDC_D_Buy);
 			break;
@@ -135,16 +135,16 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 			ftdcInputOrder.setDirection(thosttraderapiConstants.THOST_FTDC_D_Sell);
 			break;
 		default:
-			throw new RuntimeException(childOrder.trdDirection() + " does not exist.");
+			throw new RuntimeException(order.trdDirection() + " does not exist.");
 		}
 		/**
 		 * 设置价格
 		 */
-		ftdcInputOrder.setLimitPrice(childOrder.ordPrice().offerPrice());
+		ftdcInputOrder.setLimitPrice(order.ordPrice().offerPrice());
 		/**
 		 * 设置数量
 		 */
-		ftdcInputOrder.setVolumeTotalOriginal((int) childOrder.ordQty().offerQty());
+		ftdcInputOrder.setVolumeTotalOriginal((int) order.ordQty().offerQty());
 		/**
 		 * /////////////////////////////////////////////////////////////////////////<br>
 		 * ///TFtdcTimeConditionType是一个有效期类型类型<br>
