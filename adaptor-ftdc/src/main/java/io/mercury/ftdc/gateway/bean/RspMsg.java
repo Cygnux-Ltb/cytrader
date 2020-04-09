@@ -1,12 +1,20 @@
-package io.mercury.ftdc.gateway.bean.rsp;
+package io.mercury.ftdc.gateway.bean;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
+import io.mercury.ftdc.gateway.bean.rsp.RspConnectInfo;
+import io.mercury.ftdc.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ftdc.gateway.bean.rsp.RspOrderAction;
+import io.mercury.ftdc.gateway.bean.rsp.RspOrderInsert;
+import io.mercury.ftdc.gateway.bean.rsp.RtnOrder;
+import io.mercury.ftdc.gateway.bean.rsp.RtnTrade;
 
 public final class RspMsg {
 
-	private RspMsgType type;
+	private RspMsgType rspMsgType;
 	private RspDepthMarketData rspDepthMarketData;
+
+	private RspConnectInfo rspConnectInfo;
 
 	private RtnOrder rtnOrder;
 	private RtnTrade rtnTrade;
@@ -17,12 +25,48 @@ public final class RspMsg {
 	private CThostFtdcInputOrderField errRtnOrderInsert;
 	private CThostFtdcOrderActionField errRtnOrderAction;
 
-	public static final RspMsg ofDepthMarketData(RspDepthMarketData depthMarketData) {
-		return new RspMsg(RspMsgType.DepthMarketData).setRspDepthMarketData(depthMarketData);
+	private RspMsg(RspMsgType rspMsgType) {
+		this.rspMsgType = rspMsgType;
+	}
+
+	public RspMsgType getRspMsgType() {
+		return rspMsgType;
 	}
 
 	public RspDepthMarketData getRspDepthMarketData() {
 		return rspDepthMarketData;
+	}
+
+	public RspConnectInfo getRspConnectInfo() {
+		return rspConnectInfo;
+	}
+
+	public RtnOrder getRtnOrder() {
+		return rtnOrder;
+	}
+
+	public RtnTrade getRtnTrade() {
+		return rtnTrade;
+	}
+
+	public RspOrderInsert getRspOrderInsert() {
+		return rspOrderInsert;
+	}
+
+	public RspOrderAction getRspOrderAction() {
+		return rspOrderAction;
+	}
+
+	public CThostFtdcInputOrderField getErrRtnOrderInsert() {
+		return errRtnOrderInsert;
+	}
+
+	public CThostFtdcOrderActionField getErrRtnOrderAction() {
+		return errRtnOrderAction;
+	}
+
+	public static final RspMsg ofDepthMarketData(RspDepthMarketData depthMarketData) {
+		return new RspMsg(RspMsgType.DepthMarketData).setRspDepthMarketData(depthMarketData);
 	}
 
 	private RspMsg setRspDepthMarketData(RspDepthMarketData rspDepthMarketData) {
@@ -84,41 +128,11 @@ public final class RspMsg {
 		return this;
 	}
 
-	private RspMsg(RspMsgType type) {
-		this.type = type;
-	}
-
-	public RspMsgType type() {
-		return type;
-	}
-
-	public RtnOrder getRtnOrder() {
-		return rtnOrder;
-	}
-
-	public RtnTrade getRtnTrade() {
-		return rtnTrade;
-	}
-
-	public RspOrderInsert getRspOrderInsert() {
-		return rspOrderInsert;
-	}
-
-	public RspOrderAction getRspOrderAction() {
-		return rspOrderAction;
-	}
-
-	public CThostFtdcInputOrderField getErrRtnOrderInsert() {
-		return errRtnOrderInsert;
-	}
-
-	public CThostFtdcOrderActionField getErrRtnOrderAction() {
-		return errRtnOrderAction;
-	}
-
 	public static enum RspMsgType {
 
 		DepthMarketData,
+
+		RspConnectInfo,
 
 		RtnOrder,
 
@@ -131,9 +145,7 @@ public final class RspMsg {
 		ErrRtnOrderInsert,
 
 		ErrRtnOrderAction,
-		
-		
-		
+
 		Other,
 
 		;

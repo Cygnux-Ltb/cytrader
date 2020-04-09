@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway.bean.config;
+package io.mercury.ftdc.gateway.bean;
 
 public class FtdcConfigInfo {
 
