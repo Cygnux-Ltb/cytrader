@@ -1,9 +1,9 @@
-package io.mercury.ftdc.gateway.converter;
+package io.mercury.ctp.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
-import io.mercury.ftdc.gateway.bean.rsp.RspOrderAction;
+import io.mercury.ctp.gateway.bean.rsp.RspOrderAction;
 
 public class RspOrderActionConverter implements Function<CThostFtdcInputOrderActionField, RspOrderAction> {
 
@@ -17,6 +17,5 @@ public class RspOrderActionConverter implements Function<CThostFtdcInputOrderAct
 				.setVolumeChange(from.getVolumeChange()).setUserID(from.getUserID())
 				.setInstrumentID(from.getInstrumentID()).setInvestUnitID(from.getInvestUnitID())
 				.setIPAddress(from.getIPAddress()).setMacAddress(from.getMacAddress());
-
 	}
 }

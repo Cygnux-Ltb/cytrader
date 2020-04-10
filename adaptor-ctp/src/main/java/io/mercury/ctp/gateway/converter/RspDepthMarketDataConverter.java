@@ -1,9 +1,9 @@
-package io.mercury.ftdc.gateway.converter;
+package io.mercury.ctp.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
-import io.mercury.ftdc.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
 
 public class RspDepthMarketDataConverter implements Function<CThostFtdcDepthMarketDataField, RspDepthMarketData> {
 

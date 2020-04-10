@@ -1,9 +1,9 @@
-package io.mercury.ftdc.gateway.converter;
+package io.mercury.ctp.gateway.converter;
 
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
-import io.mercury.ftdc.gateway.bean.rsp.RspOrderInsert;
+import io.mercury.ctp.gateway.bean.rsp.RspOrderInsert;
 
 public class RspOrderInsertConverter implements Function<CThostFtdcInputOrderField, RspOrderInsert> {
 
