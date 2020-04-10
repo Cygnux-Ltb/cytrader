@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway;
+package io.mercury.ctp.gateway;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,14 +9,15 @@ import org.slf4j.Logger;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadUtil;
-import io.mercury.ftdc.gateway.bean.config.FtdcConfigInfo;
-import io.mercury.ftdc.gateway.bean.rsp.RspDepthMarketData;
-import io.mercury.ftdc.gateway.bean.rsp.RtnOrder;
-import io.mercury.ftdc.gateway.bean.rsp.RtnTrade;
+import io.mercury.ctp.gateway.CtpGateway;
+import io.mercury.ctp.gateway.bean.CtpConfigInfo;
+import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
+import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
 
-public class FtdcGatewayTest {
+public class CtpGatewayTest {
 
-	private final Logger log = CommonLoggerFactory.getLogger(FtdcGatewayTest.class);
+	private final Logger log = CommonLoggerFactory.getLogger(CtpGatewayTest.class);
 
 	// 标准CTP
 //	private String TradeAddress = "tcp://180.168.146.187:10100";
@@ -40,13 +41,13 @@ public class FtdcGatewayTest {
 	@Test
 	public void test() {
 
-		FtdcConfigInfo simnowUserInfo = new FtdcConfigInfo().setTraderAddr(TradeAddr).setMdAddr(MdAddr)
+		CtpConfigInfo simnowUserInfo = new CtpConfigInfo().setTraderAddr(TradeAddr).setMdAddr(MdAddr)
 				.setBrokerId(BrokerId).setInvestorId(InvestorId).setUserId(UserId).setAccountId(AccountId)
 				.setPassword(Password).setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
-		FtdcGateway gateway = new FtdcGateway(GatewayId, simnowUserInfo,
+		CtpGateway gateway = new CtpGateway(GatewayId, simnowUserInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Simnow-Handle-Queue", 1024, msg -> {
-					switch (msg.type()) {
+					switch (msg.getRspMsgType()) {
 					case DepthMarketData:
 						RspDepthMarketData depthMarketData = msg.getRspDepthMarketData();
 						log.info(
