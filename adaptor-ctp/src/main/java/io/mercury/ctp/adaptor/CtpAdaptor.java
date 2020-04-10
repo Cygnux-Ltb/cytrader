@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor;
+package io.mercury.ctp.adaptor;
 
 import static io.mercury.financial.util.PriceUtil.priceToLong4;
 
@@ -26,20 +26,22 @@ import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ImmutableParamMap;
+import io.mercury.ctp.adaptor.converter.CancelOrderConverter;
+import io.mercury.ctp.adaptor.converter.NewOrderConverter;
+import io.mercury.ctp.adaptor.exception.OrderRefNotFoundException;
+import io.mercury.ctp.adaptor.utils.OrderRefGenerate;
+import io.mercury.ctp.adaptor.utils.OrderRefKeeper;
+import io.mercury.ctp.gateway.CtpGateway;
+import io.mercury.ctp.gateway.bean.CtpConfigInfo;
+import io.mercury.ctp.gateway.bean.rsp.RspConnectInfo;
+import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ctp.gateway.bean.rsp.RspOrderAction;
+import io.mercury.ctp.gateway.bean.rsp.RspOrderInsert;
+import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
+import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentKeeper;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.mercury.ftdc.adaptor.converter.NewOrderConverter;
-import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
-import io.mercury.ftdc.adaptor.utils.OrderRefGenerate;
-import io.mercury.ftdc.adaptor.utils.OrderRefKeeper;
-import io.mercury.ftdc.gateway.FtdcGateway;
-import io.mercury.ftdc.gateway.bean.config.FtdcConfigInfo;
-import io.mercury.ftdc.gateway.bean.rsp.RspDepthMarketData;
-import io.mercury.ftdc.gateway.bean.rsp.RspOrderAction;
-import io.mercury.ftdc.gateway.bean.rsp.RspOrderInsert;
-import io.mercury.ftdc.gateway.bean.rsp.RtnOrder;
-import io.mercury.ftdc.gateway.bean.rsp.RtnTrade;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.BaseAdaptor;
 import io.redstone.core.order.Order;
@@ -47,9 +49,9 @@ import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 
-public class FtdcAdaptor extends BaseAdaptor {
+public class CtpAdaptor extends BaseAdaptor {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcAdaptor.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(CtpAdaptor.class);
 
 	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newFormatter();
 
@@ -74,63 +76,73 @@ public class FtdcAdaptor extends BaseAdaptor {
 						.setAskVolume1(depthMarketData.getAskVolume1());
 	};
 
-	private Converter<RtnOrder, OrdReport> rtnOrderConverter = (from, to) -> {
-		// TODO Auto-generated method stub
-		return to;
+	private Converter<RtnOrder, OrdReport> rtnOrderConverter = (rtnOrder, ordReport) -> {
+		return ordReport;
 	};
 
-	private Converter<RtnTrade, OrdReport> rtnTradeConverter = (from, to) -> {
-		// TODO Auto-generated method stub
-		return to;
+	private Converter<RtnTrade, OrdReport> rtnTradeConverter = (rtnTrade, ordReport) -> {
+		return ordReport;
 	};
 
 	private int appId;
-	private final FtdcGateway gateway;
+	private final CtpGateway gateway;
 
-	public FtdcAdaptor(int adaptorId, String adaptorName, int appId, @Nonnull StrategyScheduler scheduler,
-			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
+	private volatile int frontId;
+	private volatile int sessionId;
+
+	private volatile boolean isIsAvailable;
+
+	public CtpAdaptor(int adaptorId, String adaptorName, int appId, @Nonnull StrategyScheduler scheduler,
+			@Nonnull ImmutableParamMap<CtpAdaptorParam> paramMap) {
 		super(adaptorId, adaptorName);
 		this.appId = appId;
 		// 写入Gateway用户信息
-		FtdcConfigInfo configInfo = new FtdcConfigInfo()
-				.setTraderAddr(paramMap.getString(FtdcAdaptorParam.CTP_TraderAddr))
-				.setMdAddr(paramMap.getString(FtdcAdaptorParam.CTP_MdAddr))
-				.setBrokerId(paramMap.getString(FtdcAdaptorParam.CTP_BrokerId))
-				.setInvestorId(paramMap.getString(FtdcAdaptorParam.CTP_InvestorId))
-				.setUserId(paramMap.getString(FtdcAdaptorParam.CTP_UserId))
-				.setAccountId(paramMap.getString(FtdcAdaptorParam.CTP_AccountId))
-				.setPassword(paramMap.getString(FtdcAdaptorParam.CTP_Password));
+		CtpConfigInfo configInfo = new CtpConfigInfo()
+				.setTraderAddr(paramMap.getString(CtpAdaptorParam.CTP_TraderAddr))
+				.setMdAddr(paramMap.getString(CtpAdaptorParam.CTP_MdAddr))
+				.setBrokerId(paramMap.getString(CtpAdaptorParam.CTP_BrokerId))
+				.setInvestorId(paramMap.getString(CtpAdaptorParam.CTP_InvestorId))
+				.setUserId(paramMap.getString(CtpAdaptorParam.CTP_UserId))
+				.setAccountId(paramMap.getString(CtpAdaptorParam.CTP_AccountId))
+				.setPassword(paramMap.getString(CtpAdaptorParam.CTP_Password));
+
 		// 初始化Gateway
-		this.gateway = new FtdcGateway("Ftdc-Gateway", configInfo,
-				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, msg -> {
-					switch (msg.type()) {
+		this.gateway = new CtpGateway("Ftdc-Gateway", configInfo,
+				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, rspMsg -> {
+					switch (rspMsg.getRspMsgType()) {
+					case RspConnectInfo:
+						RspConnectInfo rspConnectInfo = rspMsg.getRspConnectInfo();
+						this.frontId = rspConnectInfo.getFrontID();
+						this.sessionId = rspConnectInfo.getSessionID();
+						this.isIsAvailable = rspConnectInfo.isAvailable();
+						break;
 					case DepthMarketData:
-						BasicMarketData marketData = marketDataConverter.apply(msg.getRspDepthMarketData());
+						BasicMarketData marketData = marketDataConverter.apply(rspMsg.getRspDepthMarketData());
 						scheduler.onMarketData(marketData);
 						break;
 					case RtnOrder:
-						RtnOrder ctpRtnOrder = msg.getRtnOrder();
-						OrdReport rtnOrder = checkoutCtpOrder(ctpRtnOrder.getOrderRef());
-						scheduler.onOrderReport(rtnOrderConverter.conversion(ctpRtnOrder, rtnOrder));
+						RtnOrder ftdcRtnOrder = rspMsg.getRtnOrder();
+						OrdReport rtnOrder = checkoutCtpOrder(ftdcRtnOrder.getOrderRef());
+						scheduler.onOrderReport(rtnOrderConverter.conversion(ftdcRtnOrder, rtnOrder));
 						break;
 					case RtnTrade:
-						RtnTrade ctpRtnTrade = msg.getRtnTrade();
-						OrdReport rtnTrade = checkoutCtpOrder(ctpRtnTrade.getOrderRef());
-						scheduler.onOrderReport(rtnTradeConverter.conversion(ctpRtnTrade, rtnTrade));
+						RtnTrade ftdcRtnTrade = rspMsg.getRtnTrade();
+						OrdReport rtnTrade = checkoutCtpOrder(ftdcRtnTrade.getOrderRef());
+						scheduler.onOrderReport(rtnTradeConverter.conversion(ftdcRtnTrade, rtnTrade));
 						break;
 					case RspOrderInsert:
-						RspOrderInsert rspOrderInsert = msg.getRspOrderInsert();
-
+						RspOrderInsert ftdcRspOrderInsert = rspMsg.getRspOrderInsert();
+						
 						break;
 					case RspOrderAction:
-						RspOrderAction rspOrderAction = msg.getRspOrderAction();
+						RspOrderAction ftdcRspOrderAction = rspMsg.getRspOrderAction();
 						break;
 					case ErrRtnOrderInsert:
-						CThostFtdcInputOrderField errRtnOrderInsert = msg.getErrRtnOrderInsert();
+						CThostFtdcInputOrderField errRtnOrderInsert = rspMsg.getErrRtnOrderInsert();
 
 						break;
 					case ErrRtnOrderAction:
-						CThostFtdcOrderActionField errRtnOrderAction = msg.getErrRtnOrderAction();
+						CThostFtdcOrderActionField errRtnOrderAction = rspMsg.getErrRtnOrderAction();
 
 						break;
 					default:
@@ -191,17 +203,14 @@ public class FtdcAdaptor extends BaseAdaptor {
 		}
 	}
 
-	private Function<Order, CThostFtdcInputOrderActionField> cancelOrderConverter = order -> {
-		CThostFtdcInputOrderActionField ftdcInputOrderAction = new CThostFtdcInputOrderActionField();
-
-		return ftdcInputOrderAction;
-	};
+	private Function<Order, CThostFtdcInputOrderActionField> cancelOrderConverter = new CancelOrderConverter();
 
 	@Override
 	public boolean cancelOrder(ChildOrder order) {
 		try {
 			CThostFtdcInputOrderActionField ftdcInputOrderAction = cancelOrderConverter.apply(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.ordSysId());
+
 			ftdcInputOrderAction.setOrderRef(orderRef);
 			gateway.ReqOrderAction(ftdcInputOrderAction);
 			return true;

@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor.dto;
+package io.mercury.ctp.adaptor.dto;
 
 public class CtpInboundMsg {
 

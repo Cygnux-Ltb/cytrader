@@ -1,9 +1,9 @@
-package io.mercury.ftdc.adaptor;
+package io.mercury.ctp.adaptor;
 
 import io.mercury.common.param.api.ParamKey;
 import io.mercury.common.param.api.ParamType;
 
-public enum FtdcAdaptorParam implements ParamKey {
+public enum CtpAdaptorParam implements ParamKey {
 
 	/**
 	 * CTP Params
@@ -28,7 +28,7 @@ public enum FtdcAdaptorParam implements ParamKey {
 	private String paramName;
 	private ParamType paramType;
 
-	private FtdcAdaptorParam(int paramId, String paramName, ParamType paramType) {
+	private CtpAdaptorParam(int paramId, String paramName, ParamType paramType) {
 		this.paramId = paramId;
 		this.paramName = paramName;
 		this.paramType = paramType;

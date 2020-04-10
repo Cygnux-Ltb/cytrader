@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor.utils;
+package io.mercury.ctp.adaptor.utils;
 
 import java.time.Instant;
 import java.time.LocalDate;
