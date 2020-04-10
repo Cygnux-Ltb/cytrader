@@ -16,7 +16,7 @@
 
 	<modules>
 		<!-- adaptor modules -->
-		<module>adaptor-ftdc</module>
+		<module>adaptor-ctp</module>
 		<module>adaptor-ib</module>
 		<module>adaptor-simulator</module>
 		<!-- financial -->
