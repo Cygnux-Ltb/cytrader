@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway;
+package io.mercury.ctp.gateway;
 
 import static io.mercury.common.thread.ThreadUtil.sleep;
 import static io.mercury.common.thread.ThreadUtil.startNewThread;
@@ -43,18 +43,18 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
-import io.mercury.ftdc.gateway.bean.FtdcConfigInfo;
-import io.mercury.ftdc.gateway.bean.RspMsg;
-import io.mercury.ftdc.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ctp.gateway.bean.CtpConfigInfo;
+import io.mercury.ctp.gateway.bean.RspMsg;
+import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
 import io.mercury.ftdc.gateway.converter.RspOrderActionConverter;
 import io.mercury.ftdc.gateway.converter.RspOrderInsertConverter;
 import io.mercury.ftdc.gateway.converter.RtnOrderConverter;
 import io.mercury.ftdc.gateway.converter.RtnTradeConverter;
 
 @NotThreadSafe
-public class FtdcGateway {
+public class CtpGateway {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcGateway.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(CtpGateway.class);
 
 	private static void copyLibraryForWin64() {
 		log.info("Copy win64 library file to [java.library.path]...");
@@ -98,7 +98,7 @@ public class FtdcGateway {
 	/**
 	 * 基础配置信息
 	 */
-	private FtdcConfigInfo ftdcConfigInfo;
+	private CtpConfigInfo ctpConfigInfo;
 
 	@Native
 	private CThostFtdcMdApi ftdcMdApi;
@@ -118,9 +118,9 @@ public class FtdcGateway {
 	private boolean isTraderLogin;
 	private boolean isAuth;
 
-	public FtdcGateway(String gatewayId, @Nonnull FtdcConfigInfo ftdcConfigInfo, @Nonnull Queue<RspMsg> inboundBuffer) {
+	public CtpGateway(String gatewayId, @Nonnull CtpConfigInfo ctpConfigInfo, @Nonnull Queue<RspMsg> inboundBuffer) {
 		this.gatewayId = gatewayId;
-		this.ftdcConfigInfo = Assertor.nonNull(ftdcConfigInfo, "ftdcConfigInfo");
+		this.ctpConfigInfo = Assertor.nonNull(ctpConfigInfo, "ctpConfigInfo");
 		this.inboundBuffer = Assertor.nonNull(inboundBuffer, "inboundBuffer");
 	}
 
@@ -162,11 +162,11 @@ public class FtdcGateway {
 		// 创建mdApi
 		this.ftdcMdApi = CThostFtdcMdApi.CreateFtdcMdApi(mdTempFilePath);
 		// 创建mdSpi
-		CThostFtdcMdSpi ftdcMdSpi = new FtdcMdSpiImpl(this);
+		CThostFtdcMdSpi ftdcMdSpi = new CtpMdSpiImpl(this);
 		// 将mdSpi注册到mdApi
 		ftdcMdApi.RegisterSpi(ftdcMdSpi);
 		// 注册到md前置机
-		ftdcMdApi.RegisterFront(ftdcConfigInfo.getMdAddr());
+		ftdcMdApi.RegisterFront(ctpConfigInfo.getMdAddr());
 		// 初始化mdApi
 		log.info("Call mdApi.Init()...");
 		ftdcMdApi.Init();
@@ -182,11 +182,11 @@ public class FtdcGateway {
 		// 创建traderApi
 		this.ftdcTraderApi = CThostFtdcTraderApi.CreateFtdcTraderApi(traderTempFilePath);
 		// 创建traderSpi
-		CThostFtdcTraderSpi ftdcTraderSpi = new FtdcTraderSpiImpl(this);
+		CThostFtdcTraderSpi ftdcTraderSpi = new CtpTraderSpiImpl(this);
 		// 将traderSpi注册到traderApi
 		ftdcTraderApi.RegisterSpi(ftdcTraderSpi);
 		// 注册到trader前置机
-		ftdcTraderApi.RegisterFront(ftdcConfigInfo.getTraderAddr());
+		ftdcTraderApi.RegisterFront(ctpConfigInfo.getTraderAddr());
 		/// THOST_TERT_RESTART:从本交易日开始重传
 		/// THOST_TERT_RESUME:从上次收到的续传
 		/// THOST_TERT_QUICK:只传送登录后私有流的内容
@@ -211,9 +211,9 @@ public class FtdcGateway {
 	 */
 	void onMdFrontConnected() {
 		CThostFtdcReqUserLoginField reqUserLogin = new CThostFtdcReqUserLoginField();
-		reqUserLogin.setBrokerID(ftdcConfigInfo.getBrokerId());
-		reqUserLogin.setUserID(ftdcConfigInfo.getUserId());
-		reqUserLogin.setPassword(ftdcConfigInfo.getPassword());
+		reqUserLogin.setBrokerID(ctpConfigInfo.getBrokerId());
+		reqUserLogin.setUserID(ctpConfigInfo.getUserId());
+		reqUserLogin.setPassword(ctpConfigInfo.getPassword());
 		ftdcMdApi.ReqUserLogin(reqUserLogin, ++mdRequestId);
 		log.info("Send Md ReqUserLogin OK");
 	}
@@ -221,7 +221,7 @@ public class FtdcGateway {
 	/**
 	 * 
 	 */
-	 void onMdFrontDisconnected() {
+	void onMdFrontDisconnected() {
 		// TODO Auto-generated method stub
 
 	}
@@ -325,10 +325,10 @@ public class FtdcGateway {
 	 */
 	void onTraderFrontConnected() {
 		CThostFtdcReqUserLoginField reqUserLogin = new CThostFtdcReqUserLoginField();
-		reqUserLogin.setBrokerID(ftdcConfigInfo.getBrokerId());
-		reqUserLogin.setUserID(ftdcConfigInfo.getUserId());
-		reqUserLogin.setPassword(ftdcConfigInfo.getPassword());
-		reqUserLogin.setUserProductInfo(ftdcConfigInfo.getUserProductInfo());
+		reqUserLogin.setBrokerID(ctpConfigInfo.getBrokerId());
+		reqUserLogin.setUserID(ctpConfigInfo.getUserId());
+		reqUserLogin.setPassword(ctpConfigInfo.getPassword());
+		reqUserLogin.setUserProductInfo(ctpConfigInfo.getUserProductInfo());
 		ftdcTraderApi.ReqUserLogin(reqUserLogin, ++traderRequestId);
 		log.info("Send Trader ReqUserLogin OK");
 	}
@@ -352,14 +352,16 @@ public class FtdcGateway {
 		int sessionID = ftdcRspUserLogin.getSessionID();
 		this.isTraderLogin = true;
 
-		if (!StringUtil.nonEmpty(ftdcConfigInfo.getAuthCode()) && !isAuth) {
+		if (!StringUtil.nonEmpty(ctpConfigInfo.getAuthCode()) && !isAuth) {
 			// 验证
 			CThostFtdcReqAuthenticateField authenticateField = new CThostFtdcReqAuthenticateField();
-			authenticateField.setUserID(ftdcConfigInfo.getUserId());
-			authenticateField.setBrokerID(ftdcConfigInfo.getBrokerId());
-			authenticateField.setAuthCode(ftdcConfigInfo.getAuthCode());
-			authenticateField.setUserProductInfo(ftdcConfigInfo.getUserProductInfo());
-			ftdcTraderApi.ReqAuthenticate(authenticateField, ++traderRequestId);
+			authenticateField.setUserID(ctpConfigInfo.getUserId());
+			authenticateField.setBrokerID(ctpConfigInfo.getBrokerId());
+			authenticateField.setAuthCode(ctpConfigInfo.getAuthCode());
+			authenticateField.setUserProductInfo(ctpConfigInfo.getUserProductInfo());
+			int nRequestID = ++traderRequestId;
+			ftdcTraderApi.ReqAuthenticate(authenticateField, nRequestID);
+			log.info("Send ReqAuthenticate OK -> nRequestID==[{}]", nRequestID);
 		}
 
 	}
@@ -369,15 +371,16 @@ public class FtdcGateway {
 	 */
 	public void ReqOrderInsert(CThostFtdcInputOrderField ftdcInputOrder) {
 		if (isTraderLogin) {
-			// set account
-			// TODO
-			ftdcInputOrder.setAccountID(ftdcConfigInfo.getAccountId());
-			ftdcInputOrder.setUserID(ftdcConfigInfo.getUserId());
-			ftdcInputOrder.setBrokerID(ftdcConfigInfo.getBrokerId());
-			ftdcInputOrder.setIPAddress(ftdcConfigInfo.getReportIpAddr());
-			ftdcInputOrder.setMacAddress(ftdcConfigInfo.getReportMacAddr());
-
-			ftdcTraderApi.ReqOrderInsert(ftdcInputOrder, ++traderRequestId);
+			// 设置账号信息
+			ftdcInputOrder.setAccountID(ctpConfigInfo.getAccountId());
+			ftdcInputOrder.setUserID(ctpConfigInfo.getUserId());
+			ftdcInputOrder.setBrokerID(ctpConfigInfo.getBrokerId());
+			ftdcInputOrder.setIPAddress(ctpConfigInfo.getReportIpAddr());
+			ftdcInputOrder.setMacAddress(ctpConfigInfo.getReportMacAddr());
+			int nRequestID = ++traderRequestId;
+			ftdcTraderApi.ReqOrderInsert(ftdcInputOrder, nRequestID);
+			log.info("Send ReqOrderInsert OK -> orderRef==[{}], nRequestID==[{}]", ftdcInputOrder.getOrderRef(),
+					nRequestID);
 		} else
 			log.error("Trader Error :: TraderApi is not login");
 	}
@@ -433,10 +436,16 @@ public class FtdcGateway {
 	 */
 	public void ReqOrderAction(CThostFtdcInputOrderActionField ftdcInputOrderAction) {
 		if (isTraderLogin) {
-			ftdcInputOrderAction.setBrokerID(ftdcConfigInfo.getBrokerId());
-			ftdcInputOrderAction.setUserID(ftdcConfigInfo.getUserId());
-			ftdcInputOrderAction.setBrokerID(ftdcConfigInfo.getBrokerId());
-			ftdcTraderApi.ReqOrderAction(ftdcInputOrderAction, ++traderRequestId);
+			// 设置账号信息
+			ftdcInputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
+			ftdcInputOrderAction.setUserID(ctpConfigInfo.getUserId());
+			ftdcInputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
+			ftdcInputOrderAction.setIPAddress(ctpConfigInfo.getReportIpAddr());
+			ftdcInputOrderAction.setMacAddress(ctpConfigInfo.getReportMacAddr());
+			int nRequestID = ++traderRequestId;
+			ftdcTraderApi.ReqOrderAction(ftdcInputOrderAction, nRequestID);
+			log.info("Send ReqOrderAction OK -> orderRef==[{}], nRequestID==[{}]", ftdcInputOrderAction.getOrderRef(),
+					nRequestID);
 		} else
 			log.error("Trader Error :: TraderApi is not login");
 	}
@@ -467,16 +476,15 @@ public class FtdcGateway {
 	 * @param rspInfo
 	 */
 	void onRspError(CThostFtdcRspInfoField rspInfo) {
-		log.error("Gateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfo.getErrorID(),
-				StringUtil.conversionGbkToUtf8(rspInfo.getErrorMsg()));
+		log.error("Gateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfo.getErrorID(), rspInfo.getErrorMsg());
 	}
 
 	public void ReqQryTradingAccount() {
 		// ThreadUtil.startNewThread(() -> innerQureyAccount());
 		CThostFtdcQryTradingAccountField qryTradingAccount = new CThostFtdcQryTradingAccountField();
-		qryTradingAccount.setBrokerID(ftdcConfigInfo.getBrokerId());
-		qryTradingAccount.setInvestorID(ftdcConfigInfo.getInvestorId());
-		qryTradingAccount.setCurrencyID(ftdcConfigInfo.getCurrencyId());
+		qryTradingAccount.setBrokerID(ctpConfigInfo.getBrokerId());
+		qryTradingAccount.setInvestorID(ctpConfigInfo.getInvestorId());
+		qryTradingAccount.setCurrencyID(ctpConfigInfo.getCurrencyId());
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQryTradingAccount(qryTradingAccount, nRequestID);
 		log.info("Send ReqQryTradingAccount OK -> nRequestID==[{}]", nRequestID);
@@ -503,8 +511,8 @@ public class FtdcGateway {
 	public void ReqQryInvestorPosition() {
 		// ThreadUtil.startNewThread(() -> innerQureyPosition());
 		CThostFtdcQryInvestorPositionField qryInvestorPosition = new CThostFtdcQryInvestorPositionField();
-		qryInvestorPosition.setBrokerID(ftdcConfigInfo.getBrokerId());
-		qryInvestorPosition.setInvestorID(ftdcConfigInfo.getInvestorId());
+		qryInvestorPosition.setBrokerID(ctpConfigInfo.getBrokerId());
+		qryInvestorPosition.setInvestorID(ctpConfigInfo.getInvestorId());
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQryInvestorPosition(qryInvestorPosition, nRequestID);
 		log.info("Send ReqQryInvestorPosition OK -> nRequestID==[{}]", nRequestID);
@@ -527,11 +535,11 @@ public class FtdcGateway {
 
 	public void ReqQrySettlementInfo() {
 		CThostFtdcQrySettlementInfoField qrySettlementInfo = new CThostFtdcQrySettlementInfoField();
-		qrySettlementInfo.setBrokerID(ftdcConfigInfo.getBrokerId());
-		qrySettlementInfo.setInvestorID(ftdcConfigInfo.getInvestorId());
-		qrySettlementInfo.setTradingDay(ftdcConfigInfo.getTradingDay());
-		qrySettlementInfo.setAccountID(ftdcConfigInfo.getAccountId());
-		qrySettlementInfo.setCurrencyID(ftdcConfigInfo.getCurrencyId());
+		qrySettlementInfo.setBrokerID(ctpConfigInfo.getBrokerId());
+		qrySettlementInfo.setInvestorID(ctpConfigInfo.getInvestorId());
+		qrySettlementInfo.setTradingDay(ctpConfigInfo.getTradingDay());
+		qrySettlementInfo.setAccountID(ctpConfigInfo.getAccountId());
+		qrySettlementInfo.setCurrencyID(ctpConfigInfo.getCurrencyId());
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQrySettlementInfo(qrySettlementInfo, nRequestID);
 		log.info("Send ReqQrySettlementInfo OK -> nRequestID==[{}]", nRequestID);

@@ -1,6 +1,6 @@
-package io.mercury.ftdc.gateway;
+package io.mercury.ctp.gateway;
 
-import static io.mercury.ftdc.gateway.base.CtpRspValidator.validateRspInfo;
+import static io.mercury.ctp.gateway.base.CtpRspValidator.validateRspInfo;
 
 import org.slf4j.Logger;
 
@@ -11,13 +11,13 @@ import ctp.thostapi.CThostFtdcRspUserLoginField;
 import ctp.thostapi.CThostFtdcSpecificInstrumentField;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
+public final class CtpMdSpiImpl extends CThostFtdcMdSpi {
 
 	private Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	private FtdcGateway gateway;
+	private CtpGateway gateway;
 
-	FtdcMdSpiImpl(FtdcGateway gateway) {
+	CtpMdSpiImpl(CtpGateway gateway) {
 		this.gateway = gateway;
 	}
 

@@ -1,10 +1,10 @@
-package io.mercury.ftdc.gateway.bean.rsp;
+package io.mercury.ctp.gateway.bean.rsp;
 
 public final class RspConnectInfo {
 
 	private int FrontID;
 	private int SessionID;
-	private boolean IsAvailable;
+	private boolean Available;
 
 	public int getFrontID() {
 		return FrontID;
@@ -14,8 +14,10 @@ public final class RspConnectInfo {
 		return SessionID;
 	}
 
-	public boolean isIsAvailable() {
-		return IsAvailable;
+	
+
+	public boolean isAvailable() {
+		return Available;
 	}
 
 	public RspConnectInfo setFrontID(int frontID) {
@@ -28,9 +30,12 @@ public final class RspConnectInfo {
 		return this;
 	}
 
-	public RspConnectInfo setIsAvailable(boolean isAvailable) {
-		IsAvailable = isAvailable;
+	public RspConnectInfo setAvailable(boolean available) {
+		Available = available;
 		return this;
 	}
+
+	
+
 
 }

@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway.bak;
+package io.mercury.ctp.gateway.bak;
 
 import java.util.HashSet;
 
@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import io.mercury.common.collections.queue.api.Queue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadUtil;
-import io.mercury.ftdc.gateway.bean.req.ReqCancelOrder;
-import io.mercury.ftdc.gateway.bean.req.ReqOrder;
+import io.mercury.ctp.gateway.bean.req.ReqCancelOrder;
+import io.mercury.ctp.gateway.bean.req.ReqOrder;
 
 /**
  * @author yellow013

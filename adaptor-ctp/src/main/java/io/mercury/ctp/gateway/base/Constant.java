@@ -1,4 +1,4 @@
-package io.mercury.ftdc.gateway.base;
+package io.mercury.ctp.gateway.base;
 
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;

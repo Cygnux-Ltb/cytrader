@@ -1,13 +1,13 @@
-package io.mercury.ftdc.gateway.bean;
+package io.mercury.ctp.gateway.bean;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.CThostFtdcOrderActionField;
-import io.mercury.ftdc.gateway.bean.rsp.RspConnectInfo;
-import io.mercury.ftdc.gateway.bean.rsp.RspDepthMarketData;
-import io.mercury.ftdc.gateway.bean.rsp.RspOrderAction;
-import io.mercury.ftdc.gateway.bean.rsp.RspOrderInsert;
-import io.mercury.ftdc.gateway.bean.rsp.RtnOrder;
-import io.mercury.ftdc.gateway.bean.rsp.RtnTrade;
+import io.mercury.ctp.gateway.bean.rsp.RspConnectInfo;
+import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ctp.gateway.bean.rsp.RspOrderAction;
+import io.mercury.ctp.gateway.bean.rsp.RspOrderInsert;
+import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
+import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
 
 public final class RspMsg {
 

@@ -1,6 +1,6 @@
-package io.mercury.ftdc.gateway.bean;
+package io.mercury.ctp.gateway.bean;
 
-public class FtdcConfigInfo {
+public class CtpConfigInfo {
 
 	private String traderAddr;
 	private String mdAddr;
@@ -71,67 +71,67 @@ public class FtdcConfigInfo {
 		return currencyId;
 	}
 
-	public FtdcConfigInfo setTraderAddr(String traderAddr) {
+	public CtpConfigInfo setTraderAddr(String traderAddr) {
 		this.traderAddr = traderAddr;
 		return this;
 	}
 
-	public FtdcConfigInfo setMdAddr(String mdAddr) {
+	public CtpConfigInfo setMdAddr(String mdAddr) {
 		this.mdAddr = mdAddr;
 		return this;
 	}
 
-	public FtdcConfigInfo setBrokerId(String brokerId) {
+	public CtpConfigInfo setBrokerId(String brokerId) {
 		this.brokerId = brokerId;
 		return this;
 	}
 
-	public FtdcConfigInfo setInvestorId(String investorId) {
+	public CtpConfigInfo setInvestorId(String investorId) {
 		this.investorId = investorId;
 		return this;
 	}
 
-	public FtdcConfigInfo setAccountId(String accountId) {
+	public CtpConfigInfo setAccountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
 
-	public FtdcConfigInfo setUserId(String userId) {
+	public CtpConfigInfo setUserId(String userId) {
 		this.userId = userId;
 		return this;
 	}
 
-	public FtdcConfigInfo setUserProductInfo(String userProductInfo) {
+	public CtpConfigInfo setUserProductInfo(String userProductInfo) {
 		this.userProductInfo = userProductInfo;
 		return this;
 	}
 
-	public FtdcConfigInfo setPassword(String password) {
+	public CtpConfigInfo setPassword(String password) {
 		this.password = password;
 		return this;
 	}
 
-	public FtdcConfigInfo setAuthCode(String authCode) {
+	public CtpConfigInfo setAuthCode(String authCode) {
 		this.authCode = authCode;
 		return this;
 	}
 
-	public FtdcConfigInfo setTradingDay(String tradingDay) {
+	public CtpConfigInfo setTradingDay(String tradingDay) {
 		this.tradingDay = tradingDay;
 		return this;
 	}
 
-	public FtdcConfigInfo setCurrencyId(String currencyId) {
+	public CtpConfigInfo setCurrencyId(String currencyId) {
 		this.currencyId = currencyId;
 		return this;
 	}
 
-	public FtdcConfigInfo setReportIpAddr(String reportIpAddr) {
+	public CtpConfigInfo setReportIpAddr(String reportIpAddr) {
 		this.reportIpAddr = reportIpAddr;
 		return this;
 	}
 
-	public FtdcConfigInfo setReportMacAddr(String reportMacAddr) {
+	public CtpConfigInfo setReportMacAddr(String reportMacAddr) {
 		this.reportMacAddr = reportMacAddr;
 		return this;
 	}
