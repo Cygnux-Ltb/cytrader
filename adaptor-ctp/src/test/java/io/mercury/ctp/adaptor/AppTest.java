@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor;
+package io.mercury.ctp.adaptor;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
