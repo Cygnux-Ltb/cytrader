@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadUtil;
-import io.mercury.ctp.gateway.CtpGateway;
 import io.mercury.ctp.gateway.bean.CtpConfigInfo;
 import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
 import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
