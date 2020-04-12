@@ -56,36 +56,25 @@ public class CtpGateway {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(CtpGateway.class);
 
-	private static void copyLibraryForWin64() {
-		log.info("Copy win64 library file to [java.library.path]...");
-		log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
-		// TODO 复制到相应目录
-	}
-
-	private static void copyLibraryForLinux64() {
-		log.info("Copy linux64 library file to [java.library.path]......");
-		log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
-		// TODO 复制到相应目录
-	}
-
-	private synchronized static void loadCtpLibrary() {
-		log.info("Loading CTP library...");
-		System.loadLibrary("thostapi_wrap");
-		System.loadLibrary("thosttraderapi_se");
-		System.loadLibrary("thostmduserapi_se");
-	}
-
 	static {
 		try {
 			// 根据操作系统选择加载不同库文件
-			if (SysProperties.OS_NAME.toLowerCase().startsWith("windows"))
-				copyLibraryForWin64();
-			else
-				copyLibraryForLinux64();
-			loadCtpLibrary();
-			log.info("Load libs success...");
+			if (SysProperties.OS_NAME.toLowerCase().startsWith("windows")) {
+				log.info("Copy win64 library file to [java.library.path]...");
+				log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
+				// TODO 复制到相应目录
+			} else {
+				log.info("Copy linux64 library file to [java.library.path]...");
+				log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
+				// TODO 复制到相应目录
+			}
+			log.info("Loading CTP library...");
+			System.loadLibrary("thostapi_wrap");
+			System.loadLibrary("thosttraderapi_se");
+			System.loadLibrary("thostmduserapi_se");
+			log.info("Load library success...");
 		} catch (Throwable e) {
-			log.error("Load libs error...", e);
+			log.error("Load library error...", e);
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
@@ -109,7 +98,7 @@ public class CtpGateway {
 	 * 
 	 */
 	private volatile boolean isInitialize = false;
-	private Queue<RspMsg> inboundBuffer;
+	private Queue<RspMsg> bufferQueue;
 
 	private int mdRequestId = -1;
 	private int traderRequestId = -1;
@@ -121,13 +110,13 @@ public class CtpGateway {
 	public CtpGateway(String gatewayId, @Nonnull CtpConfigInfo ctpConfigInfo, @Nonnull Queue<RspMsg> inboundBuffer) {
 		this.gatewayId = gatewayId;
 		this.ctpConfigInfo = Assertor.nonNull(ctpConfigInfo, "ctpConfigInfo");
-		this.inboundBuffer = Assertor.nonNull(inboundBuffer, "inboundBuffer");
+		this.bufferQueue = Assertor.nonNull(bufferQueue, "bufferQueue");
 	}
 
 	private File generateTempDir() {
 		// 创建临时文件存储目录
-		String tempFileHome = SysProperties.JAVA_IO_TMPDIR + File.separator + "ctp";
-		File tempDir = new File(tempFileHome + File.separator + gatewayId + File.separator + DateTimeUtil.date());
+		File tempDir = new File(
+				SysProperties.JAVA_IO_TMPDIR + File.separator + "ctp-" + gatewayId + "-" + DateTimeUtil.date());
 		log.info("Temp file dir -> {}", tempDir.getAbsolutePath());
 		if (!tempDir.exists())
 			tempDir.mkdirs();
@@ -312,7 +301,7 @@ public class CtpGateway {
 		log.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
 				depthMarketData.getInstrumentID(), depthMarketData.getUpdateTime(),
 				depthMarketData.getUpdateMillisec());
-		inboundBuffer.enqueue(RspMsg.ofDepthMarketData(depthMarketDataFunction.apply(depthMarketData)));
+		bufferQueue.enqueue(RspMsg.ofDepthMarketData(depthMarketDataFunction.apply(depthMarketData)));
 	}
 
 	/*
@@ -393,7 +382,7 @@ public class CtpGateway {
 	 * @param rspOrderInsert
 	 */
 	void onRspOrderInsert(CThostFtdcInputOrderField rspOrderInsert) {
-		inboundBuffer.enqueue(RspMsg.ofRspOrderInsert(orderInsertConverter.apply(rspOrderInsert)));
+		bufferQueue.enqueue(RspMsg.ofRspOrderInsert(orderInsertConverter.apply(rspOrderInsert)));
 	}
 
 	/**
@@ -402,7 +391,7 @@ public class CtpGateway {
 	 * @param inputOrder
 	 */
 	void onErrRtnOrderInsert(CThostFtdcInputOrderField inputOrder) {
-		inboundBuffer.enqueue(RspMsg.ofErrRtnOrderInsert(inputOrder));
+		bufferQueue.enqueue(RspMsg.ofErrRtnOrderInsert(inputOrder));
 	}
 
 	private RtnOrderConverter rtnOrderConverter = new RtnOrderConverter();
@@ -415,7 +404,7 @@ public class CtpGateway {
 	void onRtnOrder(CThostFtdcOrderField rtnOrder) {
 		log.debug("Gateway onRtnOrder -> AccountID==[{}], OrderRef==[{}]", rtnOrder.getAccountID(),
 				rtnOrder.getOrderRef());
-		inboundBuffer.enqueue(RspMsg.ofRtnOrder(rtnOrderConverter.apply(rtnOrder)));
+		bufferQueue.enqueue(RspMsg.ofRtnOrder(rtnOrderConverter.apply(rtnOrder)));
 	}
 
 	private RtnTradeConverter rtnTradeConverter = new RtnTradeConverter();
@@ -428,7 +417,7 @@ public class CtpGateway {
 	void onRtnTrade(CThostFtdcTradeField rtnTrade) {
 		log.debug("Gateway onRtnTrade -> OrderRef==[{}], Price==[{}], Volume==[{}]", rtnTrade.getOrderRef(),
 				rtnTrade.getPrice(), rtnTrade.getVolume());
-		inboundBuffer.enqueue(RspMsg.ofRtnTrade(rtnTradeConverter.apply(rtnTrade)));
+		bufferQueue.enqueue(RspMsg.ofRtnTrade(rtnTradeConverter.apply(rtnTrade)));
 	}
 
 	/****************
@@ -458,7 +447,7 @@ public class CtpGateway {
 	 * @param inputOrderAction
 	 */
 	void onRspOrderAction(CThostFtdcInputOrderActionField inputOrderAction) {
-		inboundBuffer.enqueue(RspMsg.ofRspOrderAction(orderActionConverter.apply(inputOrderAction)));
+		bufferQueue.enqueue(RspMsg.ofRspOrderAction(orderActionConverter.apply(inputOrderAction)));
 	}
 
 	/**
@@ -467,7 +456,7 @@ public class CtpGateway {
 	 * @param orderAction
 	 */
 	void onErrRtnOrderAction(CThostFtdcOrderActionField orderAction) {
-		inboundBuffer.enqueue(RspMsg.ofErrRtnOrderAction(orderAction));
+		bufferQueue.enqueue(RspMsg.ofErrRtnOrderAction(orderAction));
 	}
 
 	/**
