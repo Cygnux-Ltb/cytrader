@@ -3,13 +3,13 @@ package io.mercury.ctp.gateway.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcTradeField;
-import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
+import io.mercury.ctp.gateway.bean.FtdcTrade;
 
-public class RtnTradeConverter implements Function<CThostFtdcTradeField, RtnTrade> {
+public class FtdcTradeConverter implements Function<CThostFtdcTradeField, FtdcTrade> {
 
 	@Override
-	public RtnTrade apply(CThostFtdcTradeField from) {
-		return new RtnTrade().setBrokerID(from.getBrokerID()).setInvestorID(from.getInvestorID())
+	public FtdcTrade apply(CThostFtdcTradeField from) {
+		return new FtdcTrade().setBrokerID(from.getBrokerID()).setInvestorID(from.getInvestorID())
 				.setInstrumentID(from.getInstrumentID()).setOrderRef(from.getOrderRef()).setUserID(from.getUserID())
 				.setExchangeID(from.getExchangeID()).setTradeID(from.getTradeID()).setDirection(from.getDirection())
 				.setOrderSysID(from.getOrderSysID()).setParticipantID(from.getParticipantID())

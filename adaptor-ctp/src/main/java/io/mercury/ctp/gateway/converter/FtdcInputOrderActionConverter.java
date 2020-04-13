@@ -3,13 +3,13 @@ package io.mercury.ctp.gateway.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
-import io.mercury.ctp.gateway.bean.rsp.RspOrderAction;
+import io.mercury.ctp.gateway.bean.FtdcInputOrderAction;
 
-public class RspOrderActionConverter implements Function<CThostFtdcInputOrderActionField, RspOrderAction> {
+public class FtdcInputOrderActionConverter implements Function<CThostFtdcInputOrderActionField, FtdcInputOrderAction> {
 
 	@Override
-	public RspOrderAction apply(CThostFtdcInputOrderActionField from) {
-		return new RspOrderAction().setBrokerID(from.getBrokerID()).setInvestorID(from.getInvestorID())
+	public FtdcInputOrderAction apply(CThostFtdcInputOrderActionField from) {
+		return new FtdcInputOrderAction().setBrokerID(from.getBrokerID()).setInvestorID(from.getInvestorID())
 				.setOrderActionRef(from.getOrderActionRef()).setOrderRef(from.getOrderRef())
 				.setRequestID(from.getRequestID()).setFrontID(from.getFrontID()).setSessionID(from.getSessionID())
 				.setExchangeID(from.getExchangeID()).setOrderSysID(from.getOrderSysID())

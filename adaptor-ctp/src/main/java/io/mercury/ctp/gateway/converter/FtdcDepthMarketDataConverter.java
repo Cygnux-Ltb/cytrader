@@ -3,13 +3,13 @@ package io.mercury.ctp.gateway.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
-import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
+import io.mercury.ctp.gateway.bean.FtdcDepthMarketData;
 
-public class RspDepthMarketDataConverter implements Function<CThostFtdcDepthMarketDataField, RspDepthMarketData> {
+public class FtdcDepthMarketDataConverter implements Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> {
 
 	@Override
-	public RspDepthMarketData apply(CThostFtdcDepthMarketDataField from) {
-		return new RspDepthMarketData().setTradingDay(from.getTradingDay()).setInstrumentID(from.getInstrumentID())
+	public FtdcDepthMarketData apply(CThostFtdcDepthMarketDataField from) {
+		return new FtdcDepthMarketData().setTradingDay(from.getTradingDay()).setInstrumentID(from.getInstrumentID())
 				.setExchangeID(from.getExchangeID()).setExchangeInstID(from.getExchangeInstID())
 				.setLastPrice(from.getLastPrice()).setPreSettlementPrice(from.getPreSettlementPrice())
 				.setPreClosePrice(from.getPreClosePrice()).setPreOpenInterest(from.getPreOpenInterest())

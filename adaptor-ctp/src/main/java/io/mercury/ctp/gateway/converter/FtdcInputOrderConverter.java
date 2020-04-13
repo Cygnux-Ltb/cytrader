@@ -3,13 +3,13 @@ package io.mercury.ctp.gateway.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
-import io.mercury.ctp.gateway.bean.rsp.RspOrderInsert;
+import io.mercury.ctp.gateway.bean.FtdcInputOrder;
 
-public class RspOrderInsertConverter implements Function<CThostFtdcInputOrderField, RspOrderInsert> {
+public class FtdcInputOrderConverter implements Function<CThostFtdcInputOrderField, FtdcInputOrder> {
 
 	@Override
-	public RspOrderInsert apply(CThostFtdcInputOrderField from) {
-		return new RspOrderInsert().setBrokerID(from.getBrokerID()).setInvestorID(from.getInvestorID())
+	public FtdcInputOrder apply(CThostFtdcInputOrderField from) {
+		return new FtdcInputOrder().setBrokerID(from.getBrokerID()).setInvestorID(from.getInvestorID())
 				.setInstrumentID(from.getInstrumentID()).setOrderRef(from.getOrderRef()).setUserID(from.getUserID())
 				.setOrderPriceType(from.getOrderPriceType()).setDirection(from.getDirection())
 				.setCombOffsetFlag(from.getCombOffsetFlag()).setCombHedgeFlag(from.getCombHedgeFlag())

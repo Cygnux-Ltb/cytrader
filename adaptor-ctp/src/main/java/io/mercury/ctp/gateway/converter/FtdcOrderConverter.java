@@ -3,13 +3,13 @@ package io.mercury.ctp.gateway.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcOrderField;
-import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
+import io.mercury.ctp.gateway.bean.FtdcOrder;
 
-public class RtnOrderConverter implements Function<CThostFtdcOrderField, RtnOrder> {
+public class FtdcOrderConverter implements Function<CThostFtdcOrderField, FtdcOrder> {
 
 	@Override
-	public RtnOrder apply(CThostFtdcOrderField from) {
-		return new RtnOrder().setBrokerID(from.getBrokerID()).setInvestorID(from.getInvestorID())
+	public FtdcOrder apply(CThostFtdcOrderField from) {
+		return new FtdcOrder().setBrokerID(from.getBrokerID()).setInvestorID(from.getInvestorID())
 				.setInstrumentID(from.getInstrumentID()).setOrderRef(from.getOrderRef()).setUserID(from.getUserID())
 				.setOrderPriceType(from.getOrderPriceType()).setDirection(from.getDirection())
 				.setCombOffsetFlag(from.getCombOffsetFlag()).setCombHedgeFlag(from.getCombHedgeFlag())
