@@ -301,7 +301,7 @@ public class CtpGateway {
 		log.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
 				depthMarketData.getInstrumentID(), depthMarketData.getUpdateTime(),
 				depthMarketData.getUpdateMillisec());
-		bufferQueue.enqueue(RspMsg.ofDepthMarketData(depthMarketDataFunction.apply(depthMarketData)));
+		bufferQueue.enqueue(RspMsg.withDepthMarketData(depthMarketDataFunction.apply(depthMarketData)));
 	}
 
 	/*
@@ -317,7 +317,6 @@ public class CtpGateway {
 		reqUserLogin.setBrokerID(ctpConfigInfo.getBrokerId());
 		reqUserLogin.setUserID(ctpConfigInfo.getUserId());
 		reqUserLogin.setPassword(ctpConfigInfo.getPassword());
-		reqUserLogin.setUserProductInfo(ctpConfigInfo.getUserProductInfo());
 		ftdcTraderApi.ReqUserLogin(reqUserLogin, ++traderRequestId);
 		log.info("Send Trader ReqUserLogin OK");
 	}
@@ -347,7 +346,6 @@ public class CtpGateway {
 			authenticateField.setUserID(ctpConfigInfo.getUserId());
 			authenticateField.setBrokerID(ctpConfigInfo.getBrokerId());
 			authenticateField.setAuthCode(ctpConfigInfo.getAuthCode());
-			authenticateField.setUserProductInfo(ctpConfigInfo.getUserProductInfo());
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqAuthenticate(authenticateField, nRequestID);
 			log.info("Send ReqAuthenticate OK -> nRequestID==[{}]", nRequestID);
@@ -364,8 +362,8 @@ public class CtpGateway {
 			ftdcInputOrder.setAccountID(ctpConfigInfo.getAccountId());
 			ftdcInputOrder.setUserID(ctpConfigInfo.getUserId());
 			ftdcInputOrder.setBrokerID(ctpConfigInfo.getBrokerId());
-			ftdcInputOrder.setIPAddress(ctpConfigInfo.getReportIpAddr());
-			ftdcInputOrder.setMacAddress(ctpConfigInfo.getReportMacAddr());
+			ftdcInputOrder.setIPAddress(ctpConfigInfo.getIpAddr());
+			ftdcInputOrder.setMacAddress(ctpConfigInfo.getMacAddr());
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqOrderInsert(ftdcInputOrder, nRequestID);
 			log.info("Send ReqOrderInsert OK -> orderRef==[{}], nRequestID==[{}]", ftdcInputOrder.getOrderRef(),
@@ -382,7 +380,7 @@ public class CtpGateway {
 	 * @param rspOrderInsert
 	 */
 	void onRspOrderInsert(CThostFtdcInputOrderField rspOrderInsert) {
-		bufferQueue.enqueue(RspMsg.ofRspOrderInsert(orderInsertConverter.apply(rspOrderInsert)));
+		bufferQueue.enqueue(RspMsg.withRspOrderInsert(orderInsertConverter.apply(rspOrderInsert)));
 	}
 
 	/**
@@ -391,7 +389,7 @@ public class CtpGateway {
 	 * @param inputOrder
 	 */
 	void onErrRtnOrderInsert(CThostFtdcInputOrderField inputOrder) {
-		bufferQueue.enqueue(RspMsg.ofErrRtnOrderInsert(inputOrder));
+		bufferQueue.enqueue(RspMsg.withErrRtnOrderInsert(inputOrder));
 	}
 
 	private RtnOrderConverter rtnOrderConverter = new RtnOrderConverter();
@@ -404,7 +402,7 @@ public class CtpGateway {
 	void onRtnOrder(CThostFtdcOrderField rtnOrder) {
 		log.debug("Gateway onRtnOrder -> AccountID==[{}], OrderRef==[{}]", rtnOrder.getAccountID(),
 				rtnOrder.getOrderRef());
-		bufferQueue.enqueue(RspMsg.ofRtnOrder(rtnOrderConverter.apply(rtnOrder)));
+		bufferQueue.enqueue(RspMsg.withRtnOrder(rtnOrderConverter.apply(rtnOrder)));
 	}
 
 	private RtnTradeConverter rtnTradeConverter = new RtnTradeConverter();
@@ -414,10 +412,10 @@ public class CtpGateway {
 	 * 
 	 * @param rtnTrade
 	 */
-	void onRtnTrade(CThostFtdcTradeField rtnTrade) {
-		log.debug("Gateway onRtnTrade -> OrderRef==[{}], Price==[{}], Volume==[{}]", rtnTrade.getOrderRef(),
-				rtnTrade.getPrice(), rtnTrade.getVolume());
-		bufferQueue.enqueue(RspMsg.ofRtnTrade(rtnTradeConverter.apply(rtnTrade)));
+	void onRtnTrade(CThostFtdcTradeField ftdcTrade) {
+		log.debug("Gateway onRtnTrade -> OrderRef==[{}], Price==[{}], Volume==[{}]", ftdcTrade.getOrderRef(),
+				ftdcTrade.getPrice(), ftdcTrade.getVolume());
+		bufferQueue.enqueue(RspMsg.withRtnTrade(rtnTradeConverter.apply(ftdcTrade)));
 	}
 
 	/****************
@@ -429,8 +427,8 @@ public class CtpGateway {
 			ftdcInputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
 			ftdcInputOrderAction.setUserID(ctpConfigInfo.getUserId());
 			ftdcInputOrderAction.setBrokerID(ctpConfigInfo.getBrokerId());
-			ftdcInputOrderAction.setIPAddress(ctpConfigInfo.getReportIpAddr());
-			ftdcInputOrderAction.setMacAddress(ctpConfigInfo.getReportMacAddr());
+			ftdcInputOrderAction.setIPAddress(ctpConfigInfo.getIpAddr());
+			ftdcInputOrderAction.setMacAddress(ctpConfigInfo.getMacAddr());
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqOrderAction(ftdcInputOrderAction, nRequestID);
 			log.info("Send ReqOrderAction OK -> orderRef==[{}], nRequestID==[{}]", ftdcInputOrderAction.getOrderRef(),
@@ -447,7 +445,7 @@ public class CtpGateway {
 	 * @param inputOrderAction
 	 */
 	void onRspOrderAction(CThostFtdcInputOrderActionField inputOrderAction) {
-		bufferQueue.enqueue(RspMsg.ofRspOrderAction(orderActionConverter.apply(inputOrderAction)));
+		bufferQueue.enqueue(RspMsg.withRspOrderAction(orderActionConverter.apply(inputOrderAction)));
 	}
 
 	/**
@@ -456,7 +454,7 @@ public class CtpGateway {
 	 * @param orderAction
 	 */
 	void onErrRtnOrderAction(CThostFtdcOrderActionField orderAction) {
-		bufferQueue.enqueue(RspMsg.ofErrRtnOrderAction(orderAction));
+		bufferQueue.enqueue(RspMsg.withErrRtnOrderAction(orderAction));
 	}
 
 	/**
