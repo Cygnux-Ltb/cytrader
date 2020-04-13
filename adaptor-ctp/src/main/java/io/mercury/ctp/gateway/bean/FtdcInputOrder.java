@@ -1,6 +1,6 @@
-package io.mercury.ctp.gateway.bean.rsp;
+package io.mercury.ctp.gateway.bean;
 
-public class RspOrderInsert {
+public final class FtdcInputOrder {
 
 	private String BrokerID;
 	private String InvestorID;
@@ -153,152 +153,152 @@ public class RspOrderInsert {
 		return MacAddress;
 	}
 
-	public RspOrderInsert setBrokerID(String brokerID) {
+	public FtdcInputOrder setBrokerID(String brokerID) {
 		BrokerID = brokerID;
 		return this;
 	}
 
-	public RspOrderInsert setInvestorID(String investorID) {
+	public FtdcInputOrder setInvestorID(String investorID) {
 		InvestorID = investorID;
 		return this;
 	}
 
-	public RspOrderInsert setInstrumentID(String instrumentID) {
+	public FtdcInputOrder setInstrumentID(String instrumentID) {
 		InstrumentID = instrumentID;
 		return this;
 	}
 
-	public RspOrderInsert setOrderRef(String orderRef) {
+	public FtdcInputOrder setOrderRef(String orderRef) {
 		OrderRef = orderRef;
 		return this;
 	}
 
-	public RspOrderInsert setUserID(String userID) {
+	public FtdcInputOrder setUserID(String userID) {
 		UserID = userID;
 		return this;
 	}
 
-	public RspOrderInsert setOrderPriceType(char orderPriceType) {
+	public FtdcInputOrder setOrderPriceType(char orderPriceType) {
 		OrderPriceType = orderPriceType;
 		return this;
 	}
 
-	public RspOrderInsert setDirection(char direction) {
+	public FtdcInputOrder setDirection(char direction) {
 		Direction = direction;
 		return this;
 	}
 
-	public RspOrderInsert setCombOffsetFlag(String combOffsetFlag) {
+	public FtdcInputOrder setCombOffsetFlag(String combOffsetFlag) {
 		CombOffsetFlag = combOffsetFlag;
 		return this;
 	}
 
-	public RspOrderInsert setCombHedgeFlag(String combHedgeFlag) {
+	public FtdcInputOrder setCombHedgeFlag(String combHedgeFlag) {
 		CombHedgeFlag = combHedgeFlag;
 		return this;
 	}
 
-	public RspOrderInsert setLimitPrice(double limitPrice) {
+	public FtdcInputOrder setLimitPrice(double limitPrice) {
 		LimitPrice = limitPrice;
 		return this;
 	}
 
-	public RspOrderInsert setVolumeTotalOriginal(int volumeTotalOriginal) {
+	public FtdcInputOrder setVolumeTotalOriginal(int volumeTotalOriginal) {
 		VolumeTotalOriginal = volumeTotalOriginal;
 		return this;
 	}
 
-	public RspOrderInsert setTimeCondition(char timeCondition) {
+	public FtdcInputOrder setTimeCondition(char timeCondition) {
 		TimeCondition = timeCondition;
 		return this;
 	}
 
-	public RspOrderInsert setGTDDate(String gTDDate) {
+	public FtdcInputOrder setGTDDate(String gTDDate) {
 		GTDDate = gTDDate;
 		return this;
 	}
 
-	public RspOrderInsert setVolumeCondition(char volumeCondition) {
+	public FtdcInputOrder setVolumeCondition(char volumeCondition) {
 		VolumeCondition = volumeCondition;
 		return this;
 	}
 
-	public RspOrderInsert setMinVolume(int minVolume) {
+	public FtdcInputOrder setMinVolume(int minVolume) {
 		MinVolume = minVolume;
 		return this;
 	}
 
-	public RspOrderInsert setContingentCondition(char contingentCondition) {
+	public FtdcInputOrder setContingentCondition(char contingentCondition) {
 		ContingentCondition = contingentCondition;
 		return this;
 	}
 
-	public RspOrderInsert setStopPrice(double stopPrice) {
+	public FtdcInputOrder setStopPrice(double stopPrice) {
 		StopPrice = stopPrice;
 		return this;
 	}
 
-	public RspOrderInsert setForceCloseReason(char forceCloseReason) {
+	public FtdcInputOrder setForceCloseReason(char forceCloseReason) {
 		ForceCloseReason = forceCloseReason;
 		return this;
 	}
 
-	public RspOrderInsert setIsAutoSuspend(int isAutoSuspend) {
+	public FtdcInputOrder setIsAutoSuspend(int isAutoSuspend) {
 		IsAutoSuspend = isAutoSuspend;
 		return this;
 	}
 
-	public RspOrderInsert setBusinessUnit(String businessUnit) {
+	public FtdcInputOrder setBusinessUnit(String businessUnit) {
 		BusinessUnit = businessUnit;
 		return this;
 	}
 
-	public RspOrderInsert setRequestID(int requestID) {
+	public FtdcInputOrder setRequestID(int requestID) {
 		RequestID = requestID;
 		return this;
 	}
 
-	public RspOrderInsert setUserForceClose(int userForceClose) {
+	public FtdcInputOrder setUserForceClose(int userForceClose) {
 		UserForceClose = userForceClose;
 		return this;
 	}
 
-	public RspOrderInsert setIsSwapOrder(int isSwapOrder) {
+	public FtdcInputOrder setIsSwapOrder(int isSwapOrder) {
 		IsSwapOrder = isSwapOrder;
 		return this;
 	}
 
-	public RspOrderInsert setExchangeID(String exchangeID) {
+	public FtdcInputOrder setExchangeID(String exchangeID) {
 		ExchangeID = exchangeID;
 		return this;
 	}
 
-	public RspOrderInsert setInvestUnitID(String investUnitID) {
+	public FtdcInputOrder setInvestUnitID(String investUnitID) {
 		InvestUnitID = investUnitID;
 		return this;
 	}
 
-	public RspOrderInsert setAccountID(String accountID) {
+	public FtdcInputOrder setAccountID(String accountID) {
 		AccountID = accountID;
 		return this;
 	}
 
-	public RspOrderInsert setCurrencyID(String currencyID) {
+	public FtdcInputOrder setCurrencyID(String currencyID) {
 		CurrencyID = currencyID;
 		return this;
 	}
 
-	public RspOrderInsert setClientID(String clientID) {
+	public FtdcInputOrder setClientID(String clientID) {
 		ClientID = clientID;
 		return this;
 	}
 
-	public RspOrderInsert setIPAddress(String iPAddress) {
+	public FtdcInputOrder setIPAddress(String iPAddress) {
 		IPAddress = iPAddress;
 		return this;
 	}
 
-	public RspOrderInsert setMacAddress(String macAddress) {
+	public FtdcInputOrder setMacAddress(String macAddress) {
 		MacAddress = macAddress;
 		return this;
 	}

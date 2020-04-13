@@ -1,6 +1,6 @@
-package io.mercury.ctp.gateway.bean.rsp;
+package io.mercury.ctp.gateway.bean;
 
-public class RtnOrder {
+public class FtdcOrder {
 
 	private String BrokerID;
 	private String InvestorID;
@@ -318,317 +318,317 @@ public class RtnOrder {
 		return MacAddress;
 	}
 
-	public RtnOrder setBrokerID(String brokerID) {
+	public FtdcOrder setBrokerID(String brokerID) {
 		BrokerID = brokerID;
 		return this;
 	}
 
-	public RtnOrder setInvestorID(String investorID) {
+	public FtdcOrder setInvestorID(String investorID) {
 		InvestorID = investorID;
 		return this;
 	}
 
-	public RtnOrder setInstrumentID(String instrumentID) {
+	public FtdcOrder setInstrumentID(String instrumentID) {
 		InstrumentID = instrumentID;
 		return this;
 	}
 
-	public RtnOrder setOrderRef(String orderRef) {
+	public FtdcOrder setOrderRef(String orderRef) {
 		OrderRef = orderRef;
 		return this;
 	}
 
-	public RtnOrder setUserID(String userID) {
+	public FtdcOrder setUserID(String userID) {
 		UserID = userID;
 		return this;
 	}
 
-	public RtnOrder setOrderPriceType(char orderPriceType) {
+	public FtdcOrder setOrderPriceType(char orderPriceType) {
 		OrderPriceType = orderPriceType;
 		return this;
 	}
 
-	public RtnOrder setDirection(char direction) {
+	public FtdcOrder setDirection(char direction) {
 		Direction = direction;
 		return this;
 	}
 
-	public RtnOrder setCombOffsetFlag(String combOffsetFlag) {
+	public FtdcOrder setCombOffsetFlag(String combOffsetFlag) {
 		CombOffsetFlag = combOffsetFlag;
 		return this;
 	}
 
-	public RtnOrder setCombHedgeFlag(String combHedgeFlag) {
+	public FtdcOrder setCombHedgeFlag(String combHedgeFlag) {
 		CombHedgeFlag = combHedgeFlag;
 		return this;
 	}
 
-	public RtnOrder setLimitPrice(double limitPrice) {
+	public FtdcOrder setLimitPrice(double limitPrice) {
 		LimitPrice = limitPrice;
 		return this;
 	}
 
-	public RtnOrder setVolumeTotalOriginal(int volumeTotalOriginal) {
+	public FtdcOrder setVolumeTotalOriginal(int volumeTotalOriginal) {
 		VolumeTotalOriginal = volumeTotalOriginal;
 		return this;
 	}
 
-	public RtnOrder setTimeCondition(char timeCondition) {
+	public FtdcOrder setTimeCondition(char timeCondition) {
 		TimeCondition = timeCondition;
 		return this;
 	}
 
-	public RtnOrder setGTDDate(String gTDDate) {
+	public FtdcOrder setGTDDate(String gTDDate) {
 		GTDDate = gTDDate;
 		return this;
 	}
 
-	public RtnOrder setVolumeCondition(char volumeCondition) {
+	public FtdcOrder setVolumeCondition(char volumeCondition) {
 		VolumeCondition = volumeCondition;
 		return this;
 	}
 
-	public RtnOrder setMinVolume(int minVolume) {
+	public FtdcOrder setMinVolume(int minVolume) {
 		MinVolume = minVolume;
 		return this;
 	}
 
-	public RtnOrder setContingentCondition(char contingentCondition) {
+	public FtdcOrder setContingentCondition(char contingentCondition) {
 		ContingentCondition = contingentCondition;
 		return this;
 	}
 
-	public RtnOrder setStopPrice(double stopPrice) {
+	public FtdcOrder setStopPrice(double stopPrice) {
 		StopPrice = stopPrice;
 		return this;
 	}
 
-	public RtnOrder setForceCloseReason(char forceCloseReason) {
+	public FtdcOrder setForceCloseReason(char forceCloseReason) {
 		ForceCloseReason = forceCloseReason;
 		return this;
 	}
 
-	public RtnOrder setIsAutoSuspend(int isAutoSuspend) {
+	public FtdcOrder setIsAutoSuspend(int isAutoSuspend) {
 		IsAutoSuspend = isAutoSuspend;
 		return this;
 	}
 
-	public RtnOrder setBusinessUnit(String businessUnit) {
+	public FtdcOrder setBusinessUnit(String businessUnit) {
 		BusinessUnit = businessUnit;
 		return this;
 	}
 
-	public RtnOrder setRequestID(int requestID) {
+	public FtdcOrder setRequestID(int requestID) {
 		RequestID = requestID;
 		return this;
 	}
 
-	public RtnOrder setOrderLocalID(String orderLocalID) {
+	public FtdcOrder setOrderLocalID(String orderLocalID) {
 		OrderLocalID = orderLocalID;
 		return this;
 	}
 
-	public RtnOrder setExchangeID(String exchangeID) {
+	public FtdcOrder setExchangeID(String exchangeID) {
 		ExchangeID = exchangeID;
 		return this;
 	}
 
-	public RtnOrder setParticipantID(String participantID) {
+	public FtdcOrder setParticipantID(String participantID) {
 		ParticipantID = participantID;
 		return this;
 	}
 
-	public RtnOrder setClientID(String clientID) {
+	public FtdcOrder setClientID(String clientID) {
 		ClientID = clientID;
 		return this;
 	}
 
-	public RtnOrder setExchangeInstID(String exchangeInstID) {
+	public FtdcOrder setExchangeInstID(String exchangeInstID) {
 		ExchangeInstID = exchangeInstID;
 		return this;
 	}
 
-	public RtnOrder setTraderID(String traderID) {
+	public FtdcOrder setTraderID(String traderID) {
 		TraderID = traderID;
 		return this;
 	}
 
-	public RtnOrder setInstallID(int installID) {
+	public FtdcOrder setInstallID(int installID) {
 		InstallID = installID;
 		return this;
 	}
 
-	public RtnOrder setOrderSubmitStatus(char orderSubmitStatus) {
+	public FtdcOrder setOrderSubmitStatus(char orderSubmitStatus) {
 		OrderSubmitStatus = orderSubmitStatus;
 		return this;
 	}
 
-	public RtnOrder setNotifySequence(int notifySequence) {
+	public FtdcOrder setNotifySequence(int notifySequence) {
 		NotifySequence = notifySequence;
 		return this;
 	}
 
-	public RtnOrder setTradingDay(String tradingDay) {
+	public FtdcOrder setTradingDay(String tradingDay) {
 		TradingDay = tradingDay;
 		return this;
 	}
 
-	public RtnOrder setSettlementID(int settlementID) {
+	public FtdcOrder setSettlementID(int settlementID) {
 		SettlementID = settlementID;
 		return this;
 	}
 
-	public RtnOrder setOrderSysID(String orderSysID) {
+	public FtdcOrder setOrderSysID(String orderSysID) {
 		OrderSysID = orderSysID;
 		return this;
 	}
 
-	public RtnOrder setOrderSource(char orderSource) {
+	public FtdcOrder setOrderSource(char orderSource) {
 		OrderSource = orderSource;
 		return this;
 	}
 
-	public RtnOrder setOrderStatus(char orderStatus) {
+	public FtdcOrder setOrderStatus(char orderStatus) {
 		OrderStatus = orderStatus;
 		return this;
 	}
 
-	public RtnOrder setOrderType(char orderType) {
+	public FtdcOrder setOrderType(char orderType) {
 		OrderType = orderType;
 		return this;
 	}
 
-	public RtnOrder setVolumeTraded(int volumeTraded) {
+	public FtdcOrder setVolumeTraded(int volumeTraded) {
 		VolumeTraded = volumeTraded;
 		return this;
 	}
 
-	public RtnOrder setVolumeTotal(int volumeTotal) {
+	public FtdcOrder setVolumeTotal(int volumeTotal) {
 		VolumeTotal = volumeTotal;
 		return this;
 	}
 
-	public RtnOrder setInsertDate(String insertDate) {
+	public FtdcOrder setInsertDate(String insertDate) {
 		InsertDate = insertDate;
 		return this;
 	}
 
-	public RtnOrder setInsertTime(String insertTime) {
+	public FtdcOrder setInsertTime(String insertTime) {
 		InsertTime = insertTime;
 		return this;
 	}
 
-	public RtnOrder setActiveTime(String activeTime) {
+	public FtdcOrder setActiveTime(String activeTime) {
 		ActiveTime = activeTime;
 		return this;
 	}
 
-	public RtnOrder setSuspendTime(String suspendTime) {
+	public FtdcOrder setSuspendTime(String suspendTime) {
 		SuspendTime = suspendTime;
 		return this;
 	}
 
-	public RtnOrder setUpdateTime(String updateTime) {
+	public FtdcOrder setUpdateTime(String updateTime) {
 		UpdateTime = updateTime;
 		return this;
 	}
 
-	public RtnOrder setCancelTime(String cancelTime) {
+	public FtdcOrder setCancelTime(String cancelTime) {
 		CancelTime = cancelTime;
 		return this;
 	}
 
-	public RtnOrder setActiveTraderID(String activeTraderID) {
+	public FtdcOrder setActiveTraderID(String activeTraderID) {
 		ActiveTraderID = activeTraderID;
 		return this;
 	}
 
-	public RtnOrder setClearingPartID(String clearingPartID) {
+	public FtdcOrder setClearingPartID(String clearingPartID) {
 		ClearingPartID = clearingPartID;
 		return this;
 	}
 
-	public RtnOrder setSequenceNo(int sequenceNo) {
+	public FtdcOrder setSequenceNo(int sequenceNo) {
 		SequenceNo = sequenceNo;
 		return this;
 	}
 
-	public RtnOrder setFrontID(int frontID) {
+	public FtdcOrder setFrontID(int frontID) {
 		FrontID = frontID;
 		return this;
 	}
 
-	public RtnOrder setSessionID(int sessionID) {
+	public FtdcOrder setSessionID(int sessionID) {
 		SessionID = sessionID;
 		return this;
 	}
 
-	public RtnOrder setUserProductInfo(String userProductInfo) {
+	public FtdcOrder setUserProductInfo(String userProductInfo) {
 		UserProductInfo = userProductInfo;
 		return this;
 	}
 
-	public RtnOrder setStatusMsg(String statusMsg) {
+	public FtdcOrder setStatusMsg(String statusMsg) {
 		StatusMsg = statusMsg;
 		return this;
 	}
 
-	public RtnOrder setUserForceClose(int userForceClose) {
+	public FtdcOrder setUserForceClose(int userForceClose) {
 		UserForceClose = userForceClose;
 		return this;
 	}
 
-	public RtnOrder setActiveUserID(String activeUserID) {
+	public FtdcOrder setActiveUserID(String activeUserID) {
 		ActiveUserID = activeUserID;
 		return this;
 	}
 
-	public RtnOrder setBrokerOrderSeq(int brokerOrderSeq) {
+	public FtdcOrder setBrokerOrderSeq(int brokerOrderSeq) {
 		BrokerOrderSeq = brokerOrderSeq;
 		return this;
 	}
 
-	public RtnOrder setRelativeOrderSysID(String relativeOrderSysID) {
+	public FtdcOrder setRelativeOrderSysID(String relativeOrderSysID) {
 		RelativeOrderSysID = relativeOrderSysID;
 		return this;
 	}
 
-	public RtnOrder setZCETotalTradedVolume(int zCETotalTradedVolume) {
+	public FtdcOrder setZCETotalTradedVolume(int zCETotalTradedVolume) {
 		ZCETotalTradedVolume = zCETotalTradedVolume;
 		return this;
 	}
 
-	public RtnOrder setIsSwapOrder(int isSwapOrder) {
+	public FtdcOrder setIsSwapOrder(int isSwapOrder) {
 		IsSwapOrder = isSwapOrder;
 		return this;
 	}
 
-	public RtnOrder setBranchID(String branchID) {
+	public FtdcOrder setBranchID(String branchID) {
 		BranchID = branchID;
 		return this;
 	}
 
-	public RtnOrder setInvestUnitID(String investUnitID) {
+	public FtdcOrder setInvestUnitID(String investUnitID) {
 		InvestUnitID = investUnitID;
 		return this;
 	}
 
-	public RtnOrder setAccountID(String accountID) {
+	public FtdcOrder setAccountID(String accountID) {
 		AccountID = accountID;
 		return this;
 	}
 
-	public RtnOrder setCurrencyID(String currencyID) {
+	public FtdcOrder setCurrencyID(String currencyID) {
 		CurrencyID = currencyID;
 		return this;
 	}
 
-	public RtnOrder setIPAddress(String iPAddress) {
+	public FtdcOrder setIPAddress(String iPAddress) {
 		IPAddress = iPAddress;
 		return this;
 	}
 
-	public RtnOrder setMacAddress(String macAddress) {
+	public FtdcOrder setMacAddress(String macAddress) {
 		MacAddress = macAddress;
 		return this;
 	}

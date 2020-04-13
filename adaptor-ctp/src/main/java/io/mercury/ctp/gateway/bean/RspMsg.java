@@ -1,150 +1,118 @@
 package io.mercury.ctp.gateway.bean;
 
-import ctp.thostapi.CThostFtdcInputOrderField;
-import ctp.thostapi.CThostFtdcOrderActionField;
 import io.mercury.ctp.gateway.bean.rsp.RspConnectInfo;
-import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
-import io.mercury.ctp.gateway.bean.rsp.RspOrderAction;
-import io.mercury.ctp.gateway.bean.rsp.RspOrderInsert;
-import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
-import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
 
 public final class RspMsg {
 
-	private RspMsgType rspMsgType;
-	private RspDepthMarketData rspDepthMarketData;
+	private FtdcMsgType ftdcMsgType;
+	private FtdcDepthMarketData ftdcDepthMarketData;
 
 	private RspConnectInfo rspConnectInfo;
 
-	private RtnOrder rtnOrder;
-	private RtnTrade rtnTrade;
+	private FtdcOrder ftdcOrder;
+	private FtdcTrade ftdcTrade;
 
-	private RspOrderInsert rspOrderInsert;
-	private RspOrderAction rspOrderAction;
+	private FtdcInputOrder ftdcInputOrder;
+	private FtdcInputOrderAction ftdcInputOrderAction;
 
-	private CThostFtdcInputOrderField errRtnOrderInsert;
-	private CThostFtdcOrderActionField errRtnOrderAction;
-
-	private RspMsg(RspMsgType rspMsgType) {
-		this.rspMsgType = rspMsgType;
+	private RspMsg(FtdcMsgType ftdcMsgType, FtdcDepthMarketData ftdcDepthMarketData) {
+		this.ftdcMsgType = ftdcMsgType;
+		this.ftdcDepthMarketData = ftdcDepthMarketData;
 	}
 
-	public RspMsgType getRspMsgType() {
-		return rspMsgType;
+	private RspMsg(FtdcMsgType ftdcMsgType, FtdcOrder ftdcOrder) {
+		this.ftdcMsgType = ftdcMsgType;
+		this.ftdcOrder = ftdcOrder;
 	}
 
-	public RspDepthMarketData getRspDepthMarketData() {
-		return rspDepthMarketData;
+	private RspMsg(FtdcMsgType ftdcMsgType, FtdcTrade ftdcTrade) {
+		this.ftdcMsgType = ftdcMsgType;
+		this.ftdcTrade = ftdcTrade;
+	}
+
+	private RspMsg(FtdcMsgType ftdcMsgType, FtdcInputOrder ftdcInputOrder) {
+		this.ftdcMsgType = ftdcMsgType;
+		this.ftdcInputOrder = ftdcInputOrder;
+	}
+
+	private RspMsg(FtdcMsgType ftdcMsgType, FtdcInputOrderAction ftdcInputOrderAction) {
+		this.ftdcMsgType = ftdcMsgType;
+		this.ftdcInputOrderAction = ftdcInputOrderAction;
+	}
+
+	public FtdcMsgType getFtdcMsgType() {
+		return ftdcMsgType;
+	}
+
+	public FtdcDepthMarketData getFtdcDepthMarketData() {
+		return ftdcDepthMarketData;
 	}
 
 	public RspConnectInfo getRspConnectInfo() {
 		return rspConnectInfo;
 	}
 
-	public RtnOrder getRtnOrder() {
-		return rtnOrder;
+	public FtdcOrder getFtdcOrder() {
+		return ftdcOrder;
 	}
 
-	public RtnTrade getRtnTrade() {
-		return rtnTrade;
+	public FtdcTrade getFtdcTrade() {
+		return ftdcTrade;
 	}
 
-	public RspOrderInsert getRspOrderInsert() {
-		return rspOrderInsert;
+	public FtdcInputOrder getFtdcInputOrder() {
+		return ftdcInputOrder;
 	}
 
-	public RspOrderAction getRspOrderAction() {
-		return rspOrderAction;
+	public FtdcInputOrderAction getFtdcInputOrderAction() {
+		return ftdcInputOrderAction;
 	}
 
-	public CThostFtdcInputOrderField getErrRtnOrderInsert() {
-		return errRtnOrderInsert;
+	public static final RspMsg withDepthMarketData(FtdcDepthMarketData depthMarketData) {
+		return new RspMsg(FtdcMsgType.FtdcDepthMarketData, depthMarketData);
 	}
 
-	public CThostFtdcOrderActionField getErrRtnOrderAction() {
-		return errRtnOrderAction;
+	public static final RspMsg withFtdcOrder(FtdcOrder order) {
+		return new RspMsg(FtdcMsgType.FtdcOrder, order);
 	}
 
-	public static final RspMsg ofDepthMarketData(RspDepthMarketData depthMarketData) {
-		return new RspMsg(RspMsgType.DepthMarketData).setRspDepthMarketData(depthMarketData);
+	public static final RspMsg withFtdcTrade(FtdcTrade trade) {
+		return new RspMsg(FtdcMsgType.FtdcTrade, trade);
 	}
 
-	private RspMsg setRspDepthMarketData(RspDepthMarketData rspDepthMarketData) {
-		this.rspDepthMarketData = rspDepthMarketData;
-		return this;
+	public static final RspMsg withFtdcInputOrder(FtdcInputOrder ftdcInputOrder) {
+		return new RspMsg(FtdcMsgType.FtdcInputOrder, ftdcInputOrder);
 	}
 
-	public static final RspMsg ofRtnOrder(RtnOrder order) {
-		return new RspMsg(RspMsgType.RtnOrder).setRtnOrder(order);
+	public static final RspMsg withErrFtdcInputOrder(FtdcInputOrder ftdcInputOrder) {
+		return new RspMsg(FtdcMsgType.ErrFtdcInputOrder, ftdcInputOrder);
 	}
 
-	private RspMsg setRtnOrder(RtnOrder rtnOrder) {
-		this.rtnOrder = rtnOrder;
-		return this;
+	public static final RspMsg withFtdcInputOrderAction(FtdcInputOrderAction ftdcInputOrderAction) {
+		return new RspMsg(FtdcMsgType.FtdcInputOrderAction, ftdcInputOrderAction);
 	}
 
-	public static final RspMsg ofRtnTrade(RtnTrade trade) {
-		return new RspMsg(RspMsgType.RtnTrade).setRtnTrade(trade);
+	public static final RspMsg withErrFtdcInputOrderAction(FtdcInputOrderAction ftdcInputOrderAction) {
+		return new RspMsg(FtdcMsgType.ErrFtdcInputOrderAction, ftdcInputOrderAction);
 	}
 
-	private RspMsg setRtnTrade(RtnTrade rtnTrade) {
-		this.rtnTrade = rtnTrade;
-		return this;
-	}
+	public static enum FtdcMsgType {
 
-	public static final RspMsg ofRspOrderInsert(RspOrderInsert rspOrderInsert) {
-		return new RspMsg(RspMsgType.RspOrderInsert).setRspOrderInsert(rspOrderInsert);
-	}
-
-	private RspMsg setRspOrderInsert(RspOrderInsert rspOrderInsert) {
-		this.rspOrderInsert = rspOrderInsert;
-		return this;
-	}
-
-	public static final RspMsg ofRspOrderAction(RspOrderAction rspOrderAction) {
-		return new RspMsg(RspMsgType.RspOrderInsert).setRspOrderAction(rspOrderAction);
-	}
-
-	private RspMsg setRspOrderAction(RspOrderAction rspOrderAction) {
-		this.rspOrderAction = rspOrderAction;
-		return this;
-	}
-
-	public static final RspMsg ofErrRtnOrderInsert(CThostFtdcInputOrderField errRtnOrderInsert) {
-		return new RspMsg(RspMsgType.ErrRtnOrderInsert).setErrRtnOrderInsert(errRtnOrderInsert);
-	}
-
-	private RspMsg setErrRtnOrderInsert(CThostFtdcInputOrderField errRtnOrderInsert) {
-		this.errRtnOrderInsert = errRtnOrderInsert;
-		return this;
-	}
-
-	public static final RspMsg ofErrRtnOrderAction(CThostFtdcOrderActionField errRtnOrderAction) {
-		return new RspMsg(RspMsgType.ErrRtnOrderAction).setErrRtnOrderAction(errRtnOrderAction);
-	}
-
-	public RspMsg setErrRtnOrderAction(CThostFtdcOrderActionField errRtnOrderAction) {
-		this.errRtnOrderAction = errRtnOrderAction;
-		return this;
-	}
-
-	public static enum RspMsgType {
-
-		DepthMarketData,
+		FtdcDepthMarketData,
 
 		RspConnectInfo,
 
-		RtnOrder,
+		FtdcOrder,
 
-		RtnTrade,
+		FtdcTrade,
 
-		RspOrderInsert,
+		FtdcInputOrder,
 
-		RspOrderAction,
+		ErrFtdcInputOrder,
 
-		ErrRtnOrderInsert,
+		FtdcInputOrderAction,
 
-		ErrRtnOrderAction,
+		ErrFtdcInputOrderAction,
 
 		Other,
 

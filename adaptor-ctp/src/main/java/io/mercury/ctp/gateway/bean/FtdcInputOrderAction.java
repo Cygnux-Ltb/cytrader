@@ -1,6 +1,6 @@
-package io.mercury.ctp.gateway.bean.rsp;
+package io.mercury.ctp.gateway.bean;
 
-public class RspOrderAction {
+public class FtdcInputOrderAction {
 
 	private String BrokerID;
 	private String InvestorID;
@@ -88,87 +88,87 @@ public class RspOrderAction {
 		return MacAddress;
 	}
 
-	public RspOrderAction setBrokerID(String brokerID) {
+	public FtdcInputOrderAction setBrokerID(String brokerID) {
 		BrokerID = brokerID;
 		return this;
 	}
 
-	public RspOrderAction setInvestorID(String investorID) {
+	public FtdcInputOrderAction setInvestorID(String investorID) {
 		InvestorID = investorID;
 		return this;
 	}
 
-	public RspOrderAction setOrderActionRef(int orderActionRef) {
+	public FtdcInputOrderAction setOrderActionRef(int orderActionRef) {
 		OrderActionRef = orderActionRef;
 		return this;
 	}
 
-	public RspOrderAction setOrderRef(String orderRef) {
+	public FtdcInputOrderAction setOrderRef(String orderRef) {
 		OrderRef = orderRef;
 		return this;
 	}
 
-	public RspOrderAction setRequestID(int requestID) {
+	public FtdcInputOrderAction setRequestID(int requestID) {
 		RequestID = requestID;
 		return this;
 	}
 
-	public RspOrderAction setFrontID(int frontID) {
+	public FtdcInputOrderAction setFrontID(int frontID) {
 		FrontID = frontID;
 		return this;
 	}
 
-	public RspOrderAction setSessionID(int sessionID) {
+	public FtdcInputOrderAction setSessionID(int sessionID) {
 		SessionID = sessionID;
 		return this;
 	}
 
-	public RspOrderAction setExchangeID(String exchangeID) {
+	public FtdcInputOrderAction setExchangeID(String exchangeID) {
 		ExchangeID = exchangeID;
 		return this;
 	}
 
-	public RspOrderAction setOrderSysID(String orderSysID) {
+	public FtdcInputOrderAction setOrderSysID(String orderSysID) {
 		OrderSysID = orderSysID;
 		return this;
 	}
 
-	public RspOrderAction setActionFlag(char actionFlag) {
+	public FtdcInputOrderAction setActionFlag(char actionFlag) {
 		ActionFlag = actionFlag;
 		return this;
 	}
 
-	public RspOrderAction setLimitPrice(double limitPrice) {
+	public FtdcInputOrderAction setLimitPrice(double limitPrice) {
 		LimitPrice = limitPrice;
 		return this;
 	}
 
-	public RspOrderAction setVolumeChange(int volumeChange) {
+	public FtdcInputOrderAction setVolumeChange(int volumeChange) {
 		VolumeChange = volumeChange;
 		return this;
 	}
 
-	public RspOrderAction setUserID(String userID) {
+	public FtdcInputOrderAction setUserID(String userID) {
 		UserID = userID;
 		return this;
 	}
 
-	public RspOrderAction setInstrumentID(String instrumentID) {
+	public FtdcInputOrderAction setInstrumentID(String instrumentID) {
 		InstrumentID = instrumentID;
 		return this;
 	}
 
-	public RspOrderAction setInvestUnitID(String investUnitID) {
+	public FtdcInputOrderAction setInvestUnitID(String investUnitID) {
 		InvestUnitID = investUnitID;
 		return this;
 	}
 
-	public RspOrderAction setIPAddress(String iPAddress) {
+	public FtdcInputOrderAction setIPAddress(String iPAddress) {
 		IPAddress = iPAddress;
 		return this;
 	}
 
-	public RspOrderAction setMacAddress(String macAddress) {
+	public FtdcInputOrderAction setMacAddress(String macAddress) {
 		MacAddress = macAddress;
 		return this;
 	}

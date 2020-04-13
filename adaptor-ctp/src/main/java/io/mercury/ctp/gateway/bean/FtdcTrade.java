@@ -1,6 +1,6 @@
-package io.mercury.ctp.gateway.bean.rsp;
+package io.mercury.ctp.gateway.bean;
 
-public class RtnTrade {
+public class FtdcTrade {
 
 	private String BrokerID;
 	private String InvestorID;
@@ -158,157 +158,157 @@ public class RtnTrade {
 		return InvestUnitID;
 	}
 
-	public RtnTrade setBrokerID(String brokerID) {
+	public FtdcTrade setBrokerID(String brokerID) {
 		BrokerID = brokerID;
 		return this;
 	}
 
-	public RtnTrade setInvestorID(String investorID) {
+	public FtdcTrade setInvestorID(String investorID) {
 		InvestorID = investorID;
 		return this;
 	}
 
-	public RtnTrade setInstrumentID(String instrumentID) {
+	public FtdcTrade setInstrumentID(String instrumentID) {
 		InstrumentID = instrumentID;
 		return this;
 	}
 
-	public RtnTrade setOrderRef(String orderRef) {
+	public FtdcTrade setOrderRef(String orderRef) {
 		OrderRef = orderRef;
 		return this;
 	}
 
-	public RtnTrade setUserID(String userID) {
+	public FtdcTrade setUserID(String userID) {
 		UserID = userID;
 		return this;
 	}
 
-	public RtnTrade setExchangeID(String exchangeID) {
+	public FtdcTrade setExchangeID(String exchangeID) {
 		ExchangeID = exchangeID;
 		return this;
 	}
 
-	public RtnTrade setTradeID(String tradeID) {
+	public FtdcTrade setTradeID(String tradeID) {
 		TradeID = tradeID;
 		return this;
 	}
 
-	public RtnTrade setDirection(char direction) {
+	public FtdcTrade setDirection(char direction) {
 		Direction = direction;
 		return this;
 	}
 
-	public RtnTrade setOrderSysID(String orderSysID) {
+	public FtdcTrade setOrderSysID(String orderSysID) {
 		OrderSysID = orderSysID;
 		return this;
 	}
 
-	public RtnTrade setParticipantID(String participantID) {
+	public FtdcTrade setParticipantID(String participantID) {
 		ParticipantID = participantID;
 		return this;
 	}
 
-	public RtnTrade setClientID(String clientID) {
+	public FtdcTrade setClientID(String clientID) {
 		ClientID = clientID;
 		return this;
 	}
 
-	public RtnTrade setTradingRole(char tradingRole) {
+	public FtdcTrade setTradingRole(char tradingRole) {
 		TradingRole = tradingRole;
 		return this;
 	}
 
-	public RtnTrade setExchangeInstID(String exchangeInstID) {
+	public FtdcTrade setExchangeInstID(String exchangeInstID) {
 		ExchangeInstID = exchangeInstID;
 		return this;
 	}
 
-	public RtnTrade setOffsetFlag(char offsetFlag) {
+	public FtdcTrade setOffsetFlag(char offsetFlag) {
 		OffsetFlag = offsetFlag;
 		return this;
 	}
 
-	public RtnTrade setHedgeFlag(char hedgeFlag) {
+	public FtdcTrade setHedgeFlag(char hedgeFlag) {
 		HedgeFlag = hedgeFlag;
 		return this;
 	}
 
-	public RtnTrade setPrice(double price) {
+	public FtdcTrade setPrice(double price) {
 		Price = price;
 		return this;
 	}
 
-	public RtnTrade setVolume(int volume) {
+	public FtdcTrade setVolume(int volume) {
 		Volume = volume;
 		return this;
 	}
 
-	public RtnTrade setTradeDate(String tradeDate) {
+	public FtdcTrade setTradeDate(String tradeDate) {
 		TradeDate = tradeDate;
 		return this;
 	}
 
-	public RtnTrade setTradeTime(String tradeTime) {
+	public FtdcTrade setTradeTime(String tradeTime) {
 		TradeTime = tradeTime;
 		return this;
 	}
 
-	public RtnTrade setTradeType(char tradeType) {
+	public FtdcTrade setTradeType(char tradeType) {
 		TradeType = tradeType;
 		return this;
 	}
 
-	public RtnTrade setPriceSource(char priceSource) {
+	public FtdcTrade setPriceSource(char priceSource) {
 		PriceSource = priceSource;
 		return this;
 	}
 
-	public RtnTrade setTraderID(String traderID) {
+	public FtdcTrade setTraderID(String traderID) {
 		TraderID = traderID;
 		return this;
 	}
 
-	public RtnTrade setOrderLocalID(String orderLocalID) {
+	public FtdcTrade setOrderLocalID(String orderLocalID) {
 		OrderLocalID = orderLocalID;
 		return this;
 	}
 
-	public RtnTrade setClearingPartID(String clearingPartID) {
+	public FtdcTrade setClearingPartID(String clearingPartID) {
 		ClearingPartID = clearingPartID;
 		return this;
 	}
 
-	public RtnTrade setBusinessUnit(String businessUnit) {
+	public FtdcTrade setBusinessUnit(String businessUnit) {
 		BusinessUnit = businessUnit;
 		return this;
 	}
 
-	public RtnTrade setSequenceNo(int sequenceNo) {
+	public FtdcTrade setSequenceNo(int sequenceNo) {
 		SequenceNo = sequenceNo;
 		return this;
 	}
 
-	public RtnTrade setTradingDay(String tradingDay) {
+	public FtdcTrade setTradingDay(String tradingDay) {
 		TradingDay = tradingDay;
 		return this;
 	}
 
-	public RtnTrade setSettlementID(int settlementID) {
+	public FtdcTrade setSettlementID(int settlementID) {
 		SettlementID = settlementID;
 		return this;
 	}
 
-	public RtnTrade setBrokerOrderSeq(int brokerOrderSeq) {
+	public FtdcTrade setBrokerOrderSeq(int brokerOrderSeq) {
 		BrokerOrderSeq = brokerOrderSeq;
 		return this;
 	}
 
-	public RtnTrade setTradeSource(char tradeSource) {
+	public FtdcTrade setTradeSource(char tradeSource) {
 		TradeSource = tradeSource;
 		return this;
 	}
 
-	public RtnTrade setInvestUnitID(String investUnitID) {
+	public FtdcTrade setInvestUnitID(String investUnitID) {
 		InvestUnitID = investUnitID;
 		return this;
 	}

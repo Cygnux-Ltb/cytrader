@@ -1,6 +1,6 @@
-package io.mercury.ctp.gateway.bean.rsp;
+package io.mercury.ctp.gateway.bean;
 
-public class RspDepthMarketData {
+public final class FtdcDepthMarketData {
 
 	// 交易日
 	private String TradingDay;
@@ -245,222 +245,222 @@ public class RspDepthMarketData {
 		return ActionDay;
 	}
 
-	public RspDepthMarketData setTradingDay(String tradingDay) {
+	public FtdcDepthMarketData setTradingDay(String tradingDay) {
 		TradingDay = tradingDay;
 		return this;
 	}
 
-	public RspDepthMarketData setInstrumentID(String instrumentID) {
+	public FtdcDepthMarketData setInstrumentID(String instrumentID) {
 		InstrumentID = instrumentID;
 		return this;
 	}
 
-	public RspDepthMarketData setExchangeID(String exchangeID) {
+	public FtdcDepthMarketData setExchangeID(String exchangeID) {
 		ExchangeID = exchangeID;
 		return this;
 	}
 
-	public RspDepthMarketData setExchangeInstID(String exchangeInstID) {
+	public FtdcDepthMarketData setExchangeInstID(String exchangeInstID) {
 		ExchangeInstID = exchangeInstID;
 		return this;
 	}
 
-	public RspDepthMarketData setLastPrice(double lastPrice) {
+	public FtdcDepthMarketData setLastPrice(double lastPrice) {
 		LastPrice = lastPrice;
 		return this;
 	}
 
-	public RspDepthMarketData setPreSettlementPrice(double preSettlementPrice) {
+	public FtdcDepthMarketData setPreSettlementPrice(double preSettlementPrice) {
 		PreSettlementPrice = preSettlementPrice;
 		return this;
 	}
 
-	public RspDepthMarketData setPreClosePrice(double preClosePrice) {
+	public FtdcDepthMarketData setPreClosePrice(double preClosePrice) {
 		PreClosePrice = preClosePrice;
 		return this;
 	}
 
-	public RspDepthMarketData setPreOpenInterest(double preOpenInterest) {
+	public FtdcDepthMarketData setPreOpenInterest(double preOpenInterest) {
 		PreOpenInterest = preOpenInterest;
 		return this;
 	}
 
-	public RspDepthMarketData setOpenPrice(double openPrice) {
+	public FtdcDepthMarketData setOpenPrice(double openPrice) {
 		OpenPrice = openPrice;
 		return this;
 	}
 
-	public RspDepthMarketData setHighestPrice(double highestPrice) {
+	public FtdcDepthMarketData setHighestPrice(double highestPrice) {
 		HighestPrice = highestPrice;
 		return this;
 	}
 
-	public RspDepthMarketData setLowestPrice(double lowestPrice) {
+	public FtdcDepthMarketData setLowestPrice(double lowestPrice) {
 		LowestPrice = lowestPrice;
 		return this;
 	}
 
-	public RspDepthMarketData setVolume(int volume) {
+	public FtdcDepthMarketData setVolume(int volume) {
 		Volume = volume;
 		return this;
 	}
 
-	public RspDepthMarketData setTurnover(double turnover) {
+	public FtdcDepthMarketData setTurnover(double turnover) {
 		Turnover = turnover;
 		return this;
 	}
 
-	public RspDepthMarketData setOpenInterest(double openInterest) {
+	public FtdcDepthMarketData setOpenInterest(double openInterest) {
 		OpenInterest = openInterest;
 		return this;
 	}
 
-	public RspDepthMarketData setClosePrice(double closePrice) {
+	public FtdcDepthMarketData setClosePrice(double closePrice) {
 		ClosePrice = closePrice;
 		return this;
 	}
 
-	public RspDepthMarketData setSettlementPrice(double settlementPrice) {
+	public FtdcDepthMarketData setSettlementPrice(double settlementPrice) {
 		SettlementPrice = settlementPrice;
 		return this;
 	}
 
-	public RspDepthMarketData setUpperLimitPrice(double upperLimitPrice) {
+	public FtdcDepthMarketData setUpperLimitPrice(double upperLimitPrice) {
 		UpperLimitPrice = upperLimitPrice;
 		return this;
 	}
 
-	public RspDepthMarketData setLowerLimitPrice(double lowerLimitPrice) {
+	public FtdcDepthMarketData setLowerLimitPrice(double lowerLimitPrice) {
 		LowerLimitPrice = lowerLimitPrice;
 		return this;
 	}
 
-	public RspDepthMarketData setPreDelta(double preDelta) {
+	public FtdcDepthMarketData setPreDelta(double preDelta) {
 		PreDelta = preDelta;
 		return this;
 	}
 
-	public RspDepthMarketData setCurrDelta(double currDelta) {
+	public FtdcDepthMarketData setCurrDelta(double currDelta) {
 		CurrDelta = currDelta;
 		return this;
 	}
 
-	public RspDepthMarketData setBidPrice1(double bidPrice1) {
+	public FtdcDepthMarketData setBidPrice1(double bidPrice1) {
 		BidPrice1 = bidPrice1;
 		return this;
 	}
 
-	public RspDepthMarketData setBidVolume1(int bidVolume1) {
+	public FtdcDepthMarketData setBidVolume1(int bidVolume1) {
 		BidVolume1 = bidVolume1;
 		return this;
 	}
 
-	public RspDepthMarketData setAskPrice1(double askPrice1) {
+	public FtdcDepthMarketData setAskPrice1(double askPrice1) {
 		AskPrice1 = askPrice1;
 		return this;
 	}
 
-	public RspDepthMarketData setAskVolume1(int askVolume1) {
+	public FtdcDepthMarketData setAskVolume1(int askVolume1) {
 		AskVolume1 = askVolume1;
 		return this;
 	}
 
-	public RspDepthMarketData setBidPrice2(double bidPrice2) {
+	public FtdcDepthMarketData setBidPrice2(double bidPrice2) {
 		BidPrice2 = bidPrice2;
 		return this;
 	}
 
-	public RspDepthMarketData setBidVolume2(int bidVolume2) {
+	public FtdcDepthMarketData setBidVolume2(int bidVolume2) {
 		BidVolume2 = bidVolume2;
 		return this;
 	}
 
-	public RspDepthMarketData setAskPrice2(double askPrice2) {
+	public FtdcDepthMarketData setAskPrice2(double askPrice2) {
 		AskPrice2 = askPrice2;
 		return this;
 	}
 
-	public RspDepthMarketData setAskVolume2(int askVolume2) {
+	public FtdcDepthMarketData setAskVolume2(int askVolume2) {
 		AskVolume2 = askVolume2;
 		return this;
 	}
 
-	public RspDepthMarketData setBidPrice3(double bidPrice3) {
+	public FtdcDepthMarketData setBidPrice3(double bidPrice3) {
 		BidPrice3 = bidPrice3;
 		return this;
 	}
 
-	public RspDepthMarketData setBidVolume3(int bidVolume3) {
+	public FtdcDepthMarketData setBidVolume3(int bidVolume3) {
 		BidVolume3 = bidVolume3;
 		return this;
 	}
 
-	public RspDepthMarketData setAskPrice3(double askPrice3) {
+	public FtdcDepthMarketData setAskPrice3(double askPrice3) {
 		AskPrice3 = askPrice3;
 		return this;
 	}
 
-	public RspDepthMarketData setAskVolume3(int askVolume3) {
+	public FtdcDepthMarketData setAskVolume3(int askVolume3) {
 		AskVolume3 = askVolume3;
 		return this;
 	}
 
-	public RspDepthMarketData setBidPrice4(double bidPrice4) {
+	public FtdcDepthMarketData setBidPrice4(double bidPrice4) {
 		BidPrice4 = bidPrice4;
 		return this;
 	}
 
-	public RspDepthMarketData setBidVolume4(int bidVolume4) {
+	public FtdcDepthMarketData setBidVolume4(int bidVolume4) {
 		BidVolume4 = bidVolume4;
 		return this;
 	}
 
-	public RspDepthMarketData setAskPrice4(double askPrice4) {
+	public FtdcDepthMarketData setAskPrice4(double askPrice4) {
 		AskPrice4 = askPrice4;
 		return this;
 	}
 
-	public RspDepthMarketData setAskVolume4(int askVolume4) {
+	public FtdcDepthMarketData setAskVolume4(int askVolume4) {
 		AskVolume4 = askVolume4;
 		return this;
 	}
 
-	public RspDepthMarketData setBidPrice5(double bidPrice5) {
+	public FtdcDepthMarketData setBidPrice5(double bidPrice5) {
 		BidPrice5 = bidPrice5;
 		return this;
 	}
 
-	public RspDepthMarketData setBidVolume5(int bidVolume5) {
+	public FtdcDepthMarketData setBidVolume5(int bidVolume5) {
 		BidVolume5 = bidVolume5;
 		return this;
 	}
 
-	public RspDepthMarketData setAskPrice5(double askPrice5) {
+	public FtdcDepthMarketData setAskPrice5(double askPrice5) {
 		AskPrice5 = askPrice5;
 		return this;
 	}
 
-	public RspDepthMarketData setAskVolume5(int askVolume5) {
+	public FtdcDepthMarketData setAskVolume5(int askVolume5) {
 		AskVolume5 = askVolume5;
 		return this;
 	}
 
-	public RspDepthMarketData setAveragePrice(double averagePrice) {
+	public FtdcDepthMarketData setAveragePrice(double averagePrice) {
 		AveragePrice = averagePrice;
 		return this;
 	}
 
-	public RspDepthMarketData setUpdateTime(String updateTime) {
+	public FtdcDepthMarketData setUpdateTime(String updateTime) {
 		UpdateTime = updateTime;
 		return this;
 	}
 
-	public RspDepthMarketData setUpdateMillisec(int updateMillisec) {
+	public FtdcDepthMarketData setUpdateMillisec(int updateMillisec) {
 		UpdateMillisec = updateMillisec;
 		return this;
 	}
 
-	public RspDepthMarketData setActionDay(String actionDay) {
+	public FtdcDepthMarketData setActionDay(String actionDay) {
 		ActionDay = actionDay;
 		return this;
 	}
