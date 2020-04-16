@@ -1,4 +1,4 @@
-package io.mercury.ctp.gateway.bean;
+package io.mercury.ftdc.gateway.bean;
 
 public final class FtdcInputOrder {
 

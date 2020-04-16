@@ -1,4 +1,4 @@
-package io.mercury.ctp.gateway.bean.rsp;
+package io.mercury.ftdc.gateway.bean;
 
 public class RspOther {
 

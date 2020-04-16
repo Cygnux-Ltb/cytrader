@@ -1,4 +1,4 @@
-package io.mercury.ctp.gateway.bean.req;
+package io.mercury.ftdc.gateway.bean.req;
 
 import java.util.UUID;
 

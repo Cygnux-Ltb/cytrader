@@ -1,10 +1,8 @@
-package io.mercury.ctp.gateway.bean;
+package io.mercury.ftdc.gateway.bean;
 
-import io.mercury.ctp.gateway.bean.rsp.RspConnectInfo;
+public final class FtdcRespMsg {
 
-public final class RspMsg {
-
-	private FtdcMsgType ftdcMsgType;
+	private FtdcRespType ftdcRespType;
 	private FtdcDepthMarketData ftdcDepthMarketData;
 
 	private RspConnectInfo rspConnectInfo;
@@ -14,34 +12,40 @@ public final class RspMsg {
 
 	private FtdcInputOrder ftdcInputOrder;
 	private FtdcInputOrderAction ftdcInputOrderAction;
+	private FtdcOrderAction ftdcOrderAction;
 
-	private RspMsg(FtdcMsgType ftdcMsgType, FtdcDepthMarketData ftdcDepthMarketData) {
-		this.ftdcMsgType = ftdcMsgType;
+	private FtdcRespMsg(FtdcRespType ftdcRespType, FtdcDepthMarketData ftdcDepthMarketData) {
+		this.ftdcRespType = ftdcRespType;
 		this.ftdcDepthMarketData = ftdcDepthMarketData;
 	}
 
-	private RspMsg(FtdcMsgType ftdcMsgType, FtdcOrder ftdcOrder) {
-		this.ftdcMsgType = ftdcMsgType;
+	private FtdcRespMsg(FtdcRespType ftdcRespType, FtdcOrder ftdcOrder) {
+		this.ftdcRespType = ftdcRespType;
 		this.ftdcOrder = ftdcOrder;
 	}
 
-	private RspMsg(FtdcMsgType ftdcMsgType, FtdcTrade ftdcTrade) {
-		this.ftdcMsgType = ftdcMsgType;
+	private FtdcRespMsg(FtdcRespType ftdcRespType, FtdcTrade ftdcTrade) {
+		this.ftdcRespType = ftdcRespType;
 		this.ftdcTrade = ftdcTrade;
 	}
 
-	private RspMsg(FtdcMsgType ftdcMsgType, FtdcInputOrder ftdcInputOrder) {
-		this.ftdcMsgType = ftdcMsgType;
+	private FtdcRespMsg(FtdcRespType ftdcRespType, FtdcInputOrder ftdcInputOrder) {
+		this.ftdcRespType = ftdcRespType;
 		this.ftdcInputOrder = ftdcInputOrder;
 	}
 
-	private RspMsg(FtdcMsgType ftdcMsgType, FtdcInputOrderAction ftdcInputOrderAction) {
-		this.ftdcMsgType = ftdcMsgType;
+	private FtdcRespMsg(FtdcRespType ftdcRespType, FtdcInputOrderAction ftdcInputOrderAction) {
+		this.ftdcRespType = ftdcRespType;
 		this.ftdcInputOrderAction = ftdcInputOrderAction;
 	}
 
-	public FtdcMsgType getFtdcMsgType() {
-		return ftdcMsgType;
+	private FtdcRespMsg(FtdcRespType ftdcRespType, FtdcOrderAction ftdcOrderAction) {
+		this.ftdcRespType = ftdcRespType;
+		this.ftdcOrderAction = ftdcOrderAction;
+	}
+
+	public FtdcRespType getFtdcRespType() {
+		return ftdcRespType;
 	}
 
 	public FtdcDepthMarketData getFtdcDepthMarketData() {
@@ -68,39 +72,43 @@ public final class RspMsg {
 		return ftdcInputOrderAction;
 	}
 
-	public static final RspMsg withDepthMarketData(FtdcDepthMarketData depthMarketData) {
-		return new RspMsg(FtdcMsgType.FtdcDepthMarketData, depthMarketData);
+	public FtdcOrderAction getFtdcOrderAction() {
+		return ftdcOrderAction;
 	}
 
-	public static final RspMsg withFtdcOrder(FtdcOrder order) {
-		return new RspMsg(FtdcMsgType.FtdcOrder, order);
+	public static final FtdcRespMsg withDepthMarketData(FtdcDepthMarketData depthMarketData) {
+		return new FtdcRespMsg(FtdcRespType.FtdcDepthMarketData, depthMarketData);
 	}
 
-	public static final RspMsg withFtdcTrade(FtdcTrade trade) {
-		return new RspMsg(FtdcMsgType.FtdcTrade, trade);
+	public static final FtdcRespMsg withFtdcOrder(FtdcOrder order) {
+		return new FtdcRespMsg(FtdcRespType.FtdcOrder, order);
 	}
 
-	public static final RspMsg withFtdcInputOrder(FtdcInputOrder ftdcInputOrder) {
-		return new RspMsg(FtdcMsgType.FtdcInputOrder, ftdcInputOrder);
+	public static final FtdcRespMsg withFtdcTrade(FtdcTrade trade) {
+		return new FtdcRespMsg(FtdcRespType.FtdcTrade, trade);
 	}
 
-	public static final RspMsg withErrFtdcInputOrder(FtdcInputOrder ftdcInputOrder) {
-		return new RspMsg(FtdcMsgType.ErrFtdcInputOrder, ftdcInputOrder);
+	public static final FtdcRespMsg withFtdcInputOrder(FtdcInputOrder ftdcInputOrder) {
+		return new FtdcRespMsg(FtdcRespType.FtdcInputOrder, ftdcInputOrder);
 	}
 
-	public static final RspMsg withFtdcInputOrderAction(FtdcInputOrderAction ftdcInputOrderAction) {
-		return new RspMsg(FtdcMsgType.FtdcInputOrderAction, ftdcInputOrderAction);
+	public static final FtdcRespMsg withErrFtdcInputOrder(FtdcInputOrder ftdcInputOrder) {
+		return new FtdcRespMsg(FtdcRespType.ErrFtdcInputOrder, ftdcInputOrder);
 	}
 
-	public static final RspMsg withErrFtdcInputOrderAction(FtdcInputOrderAction ftdcInputOrderAction) {
-		return new RspMsg(FtdcMsgType.ErrFtdcInputOrderAction, ftdcInputOrderAction);
+	public static final FtdcRespMsg withFtdcInputOrderAction(FtdcInputOrderAction ftdcInputOrderAction) {
+		return new FtdcRespMsg(FtdcRespType.FtdcInputOrderAction, ftdcInputOrderAction);
 	}
 
-	public static enum FtdcMsgType {
+	public static final FtdcRespMsg withErrFtdcOrderAction(FtdcOrderAction ftdcOrderAction) {
+		return new FtdcRespMsg(FtdcRespType.ErrFtdcOrderAction, ftdcOrderAction);
+	}
+
+	public static enum FtdcRespType {
 
 		FtdcDepthMarketData,
 
-		RspConnectInfo,
+		RespConnectInfo,
 
 		FtdcOrder,
 
@@ -112,7 +120,7 @@ public final class RspMsg {
 
 		FtdcInputOrderAction,
 
-		ErrFtdcInputOrderAction,
+		ErrFtdcOrderAction,
 
 		Other,
 

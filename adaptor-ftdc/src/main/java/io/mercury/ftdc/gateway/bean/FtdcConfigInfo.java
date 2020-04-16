@@ -1,6 +1,6 @@
-package io.mercury.ctp.gateway.bean;
+package io.mercury.ftdc.gateway.bean;
 
-public class CtpConfigInfo {
+public class FtdcConfigInfo {
 
 	private String traderAddr;
 	private String mdAddr;
@@ -20,67 +20,67 @@ public class CtpConfigInfo {
 	private String tradingDay;
 	private String currencyId;
 
-	public CtpConfigInfo setTraderAddr(String traderAddr) {
+	public FtdcConfigInfo setTraderAddr(String traderAddr) {
 		this.traderAddr = traderAddr;
 		return this;
 	}
 
-	public CtpConfigInfo setMdAddr(String mdAddr) {
+	public FtdcConfigInfo setMdAddr(String mdAddr) {
 		this.mdAddr = mdAddr;
 		return this;
 	}
 
-	public CtpConfigInfo setAppId(String appId) {
+	public FtdcConfigInfo setAppId(String appId) {
 		this.appId = appId;
 		return this;
 	}
 
-	public CtpConfigInfo setBrokerId(String brokerId) {
+	public FtdcConfigInfo setBrokerId(String brokerId) {
 		this.brokerId = brokerId;
 		return this;
 	}
 
-	public CtpConfigInfo setInvestorId(String investorId) {
+	public FtdcConfigInfo setInvestorId(String investorId) {
 		this.investorId = investorId;
 		return this;
 	}
 
-	public CtpConfigInfo setAccountId(String accountId) {
+	public FtdcConfigInfo setAccountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
 
-	public CtpConfigInfo setUserId(String userId) {
+	public FtdcConfigInfo setUserId(String userId) {
 		this.userId = userId;
 		return this;
 	}
 
-	public CtpConfigInfo setPassword(String password) {
+	public FtdcConfigInfo setPassword(String password) {
 		this.password = password;
 		return this;
 	}
 
-	public CtpConfigInfo setAuthCode(String authCode) {
+	public FtdcConfigInfo setAuthCode(String authCode) {
 		this.authCode = authCode;
 		return this;
 	}
 
-	public CtpConfigInfo setIpAddr(String ipAddr) {
+	public FtdcConfigInfo setIpAddr(String ipAddr) {
 		this.ipAddr = ipAddr;
 		return this;
 	}
 
-	public CtpConfigInfo setMacAddr(String macAddr) {
+	public FtdcConfigInfo setMacAddr(String macAddr) {
 		this.macAddr = macAddr;
 		return this;
 	}
 
-	public CtpConfigInfo setTradingDay(String tradingDay) {
+	public FtdcConfigInfo setTradingDay(String tradingDay) {
 		this.tradingDay = tradingDay;
 		return this;
 	}
 
-	public CtpConfigInfo setCurrencyId(String currencyId) {
+	public FtdcConfigInfo setCurrencyId(String currencyId) {
 		this.currencyId = currencyId;
 		return this;
 	}

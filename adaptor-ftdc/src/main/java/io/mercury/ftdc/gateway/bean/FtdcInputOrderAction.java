@@ -1,6 +1,6 @@
-package io.mercury.ctp.gateway.bean;
+package io.mercury.ftdc.gateway.bean;
 
-public class FtdcInputOrderAction {
+public final class FtdcInputOrderAction {
 
 	private String BrokerID;
 	private String InvestorID;
