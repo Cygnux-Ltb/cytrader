@@ -10,8 +10,8 @@
 		<version>0.1</version>
 	</parent>
 
-	<artifactId>adaptor-ctp</artifactId>
-	<name>adaptor-ctp</name>
+	<artifactId>adaptor-ftdc</artifactId>
+	<name>adaptor-ftdc</name>
 
 	<dependencies>
 

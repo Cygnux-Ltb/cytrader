@@ -28,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>adaptor-ctp</artifactId>
+			<artifactId>adaptor-ftdc</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

@@ -10,8 +10,6 @@ import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.log.LogLevel;
 import io.mercury.common.log.LoggerSetter;
 import io.mercury.common.param.ImmutableParamMap;
-import io.mercury.ctp.adaptor.CtpAdaptor;
-import io.mercury.ctp.adaptor.CtpAdaptorParam;
 import io.mercury.financial.instrument.InstrumentKeeper;
 import io.mercury.financial.instrument.Instrument.PriorityCloseType;
 import io.mercury.financial.instrument.futures.ChinaFutures;
@@ -19,6 +17,8 @@ import io.mercury.financial.instrument.futures.ChinaFuturesSymbol;
 import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.time.TradingPeriodPool;
 import io.mercury.financial.vector.TimePeriod;
+import io.mercury.ftdc.adaptor.FtdcAdaptor;
+import io.mercury.ftdc.adaptor.FtdcAdaptorParam;
 import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.adaptor.AdaptorKeeper;
 import io.redstone.core.strategy.StrategyKeeper;
@@ -44,20 +44,20 @@ public final class StartExample {
 		StrategyScheduler scheduler = new SpscQueueStrategyScheduler(BufferSize.POW2_12);
 
 		// Adaptor Params
-		MutableMap<CtpAdaptorParam, Object> paramMap = MutableMaps.newUnifiedMap();
-		paramMap.put(CtpAdaptorParam.CTP_TraderAddr, "tcp://180.168.146.187:10000");
-		paramMap.put(CtpAdaptorParam.CTP_MdAddr, "tcp://180.168.146.187:10010");
-		paramMap.put(CtpAdaptorParam.CTP_BrokerId, "9999");
-		paramMap.put(CtpAdaptorParam.CTP_InvestorId, "005853");
-		paramMap.put(CtpAdaptorParam.CTP_AccountId, "005853");
-		paramMap.put(CtpAdaptorParam.CTP_UserId, "005853");
-		paramMap.put(CtpAdaptorParam.CTP_Password, "?????");
-		ImmutableParamMap<CtpAdaptorParam> adaptorParam = new ImmutableParamMap<>(properties);
+		MutableMap<FtdcAdaptorParam, Object> paramMap = MutableMaps.newUnifiedMap();
+		paramMap.put(FtdcAdaptorParam.CTP_TraderAddr, "tcp://180.168.146.187:10000");
+		paramMap.put(FtdcAdaptorParam.CTP_MdAddr, "tcp://180.168.146.187:10010");
+		paramMap.put(FtdcAdaptorParam.CTP_BrokerId, "9999");
+		paramMap.put(FtdcAdaptorParam.CTP_InvestorId, "005853");
+		paramMap.put(FtdcAdaptorParam.CTP_AccountId, "005853");
+		paramMap.put(FtdcAdaptorParam.CTP_UserId, "005853");
+		paramMap.put(FtdcAdaptorParam.CTP_Password, "?????");
+		ImmutableParamMap<FtdcAdaptorParam> adaptorParam = new ImmutableParamMap<>(properties);
 
 		// 创建InboundAdaptor
 		int inboundAdaptorId = 1;
 		String inboundAdaptorName = "Ctp-InboundAdaptor";
-		Adaptor adaptor = new CtpAdaptor(inboundAdaptorId, inboundAdaptorName, appId, scheduler, adaptorParam);
+		Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, appId, scheduler, adaptorParam);
 
 		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.values());
 
