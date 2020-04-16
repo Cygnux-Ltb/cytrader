@@ -1,12 +1,22 @@
-package io.mercury.ctp.gateway.base;
+package io.mercury.ftdc.gateway.base;
+
+import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcRspInfoField;
+import io.mercury.common.log.CommonLoggerFactory;
 
-public final class CtpRspValidator {
+public final class FtdcErrorValidator {
 
-	public static final void validateRspInfo(String spiMethodName, CThostFtdcRspInfoField RspInfo) {
-		if (RspInfo != null && RspInfo.getErrorID() != 0)
-			throw new CtpRspException(spiMethodName, RspInfo.getErrorID(), RspInfo.getErrorMsg());
+	private static final Logger logger = CommonLoggerFactory.getLogger(FtdcErrorValidator.class);
+
+	public static final boolean hasError(String spiFunctionName, CThostFtdcRspInfoField ftdcRspInfo) {
+		if (ftdcRspInfo != null && ftdcRspInfo.getErrorID() != 0) {
+			logger.info("SPI Function {} : ErrorID == [{}], ErrorMsg == [{}]", spiFunctionName,
+					ftdcRspInfo.getErrorID(), ftdcRspInfo.getErrorMsg());
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -1,14 +1,14 @@
-package io.mercury.ctp.gateway.base;
+package io.mercury.ftdc.gateway.base;
 
-public class CtpRspException extends RuntimeException {
+public class FtdcRespException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4330136354361431411L;
 
-	public CtpRspException(String methodName, int errorId, String errorMsg) {
-		super("Method -> " + methodName + " | ErrorId -> " + errorId + " | ErrorMsg -> " + errorMsg);
+	public FtdcRespException(String spiFunctionName, int errorId, String errorMsg) {
+		super("SPI Function -> " + spiFunctionName + " | ErrorId -> " + errorId + " | ErrorMsg -> " + errorMsg);
 	}
 
 }
