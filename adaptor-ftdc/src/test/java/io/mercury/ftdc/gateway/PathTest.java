@@ -1,4 +1,4 @@
-package io.mercury.ctp.gateway;
+package io.mercury.ftdc.gateway;
 
 import java.io.File;
 import java.util.Arrays;

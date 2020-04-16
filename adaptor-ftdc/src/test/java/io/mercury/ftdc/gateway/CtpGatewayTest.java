@@ -1,4 +1,4 @@
-package io.mercury.ctp.gateway;
+package io.mercury.ftdc.gateway;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +9,11 @@ import org.slf4j.Logger;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadUtil;
-import io.mercury.ctp.gateway.bean.CtpConfigInfo;
-import io.mercury.ctp.gateway.bean.rsp.RspDepthMarketData;
-import io.mercury.ctp.gateway.bean.rsp.RtnOrder;
-import io.mercury.ctp.gateway.bean.rsp.RtnTrade;
+import io.mercury.ftdc.gateway.FtdcGateway;
+import io.mercury.ftdc.gateway.bean.FtdcConfigInfo;
+import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
+import io.mercury.ftdc.gateway.bean.FtdcOrder;
+import io.mercury.ftdc.gateway.bean.FtdcTrade;
 
 public class CtpGatewayTest {
 
@@ -40,27 +41,27 @@ public class CtpGatewayTest {
 	@Test
 	public void test() {
 
-		CtpConfigInfo simnowUserInfo = new CtpConfigInfo().setTraderAddr(TradeAddr).setMdAddr(MdAddr)
+		FtdcConfigInfo simnowUserInfo = new FtdcConfigInfo().setTraderAddr(TradeAddr).setMdAddr(MdAddr)
 				.setBrokerId(BrokerId).setInvestorId(InvestorId).setUserId(UserId).setAccountId(AccountId)
 				.setPassword(Password).setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
-		CtpGateway gateway = new CtpGateway(GatewayId, simnowUserInfo,
+		FtdcGateway gateway = new FtdcGateway(GatewayId, simnowUserInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Simnow-Handle-Queue", 1024, msg -> {
-					switch (msg.getRspMsgType()) {
-					case DepthMarketData:
-						RspDepthMarketData depthMarketData = msg.getRspDepthMarketData();
+					switch (msg.getFtdcRespType()) {
+					case FtdcDepthMarketData:
+						FtdcDepthMarketData depthMarketData = msg.getFtdcDepthMarketData();
 						log.info(
 								"Handle CThostFtdcDepthMarketDataField -> InstrumentID==[{}]  UpdateTime==[{}]  UpdateMillisec==[{}]  AskPrice1==[{}]  BidPrice1==[{}]",
 								depthMarketData.getInstrumentID(), depthMarketData.getUpdateTime(),
 								depthMarketData.getUpdateMillisec(), depthMarketData.getAskPrice1(),
 								depthMarketData.getBidPrice1());
 						break;
-					case RtnOrder:
-						RtnOrder order = msg.getRtnOrder();
+					case FtdcOrder:
+						FtdcOrder order = msg.getFtdcOrder();
 						log.info("Handle RtnOrder -> OrderRef==[{}]", order.getOrderRef());
 						break;
-					case RtnTrade:
-						RtnTrade trade = msg.getRtnTrade();
+					case FtdcTrade:
+						FtdcTrade trade = msg.getFtdcTrade();
 						log.info("Handle RtnTrade -> OrderRef==[{}]", trade.getOrderRef());
 						break;
 					default:
