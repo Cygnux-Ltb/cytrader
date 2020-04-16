@@ -1,6 +1,6 @@
-package io.mercury.ctp.gateway;
+package io.mercury.ftdc.gateway;
 
-import static io.mercury.ctp.gateway.base.CtpRspValidator.validateRspInfo;
+import static io.mercury.ftdc.gateway.base.FtdcErrorValidator.hasError;
 
 import org.slf4j.Logger;
 
@@ -11,13 +11,13 @@ import ctp.thostapi.CThostFtdcRspUserLoginField;
 import ctp.thostapi.CThostFtdcSpecificInstrumentField;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public final class CtpMdSpiImpl extends CThostFtdcMdSpi {
+public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 
 	private Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	private CtpGateway gateway;
+	private FtdcGateway gateway;
 
-	CtpMdSpiImpl(CtpGateway gateway) {
+	FtdcMdSpiImpl(FtdcGateway gateway) {
 		this.gateway = gateway;
 	}
 
@@ -36,23 +36,23 @@ public final class CtpMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		validateRspInfo("OnRspUserLogin", pRspInfo);
+		hasError("OnRspUserLogin", pRspInfo);
 		log.info("MdSpiImpl OnRspUserLogin");
 		if (pRspUserLogin != null)
 			gateway.onMdRspUserLogin(pRspUserLogin);
 		else
-			log.info("OnRspUserLogin return null");
+			log.warn("OnRspUserLogin return null");
 	}
 
 	@Override
 	public void OnRspSubMarketData(CThostFtdcSpecificInstrumentField pSpecificInstrument,
 			CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		validateRspInfo("OnRspSubMarketData", pRspInfo);
+		hasError("OnRspSubMarketData", pRspInfo);
 		log.info("MdSpiImpl OnRspSubMarketData");
 		if (pSpecificInstrument != null)
 			gateway.onRspSubMarketData(pSpecificInstrument);
 		else
-			log.info("OnRspSubMarketData return null");
+			log.warn("OnRspSubMarketData return null");
 	}
 
 	@Override
@@ -60,7 +60,16 @@ public final class CtpMdSpiImpl extends CThostFtdcMdSpi {
 		if (pDepthMarketData != null)
 			gateway.onRtnDepthMarketData(pDepthMarketData);
 		else
-			log.info("OnRtnDepthMarketData return null");
+			log.warn("OnRtnDepthMarketData return null");
+	}
+
+	/**
+	 * 错误回调
+	 */
+	@Override
+	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
+		log.warn("Md SPI return OnRspError");
+		gateway.onRspError(pRspInfo);
 	}
 
 }
