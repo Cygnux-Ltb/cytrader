@@ -210,7 +210,6 @@ public final class FtdcConst {
 		priceTypeMapReverse = priceTypeMap.entrySet().stream()
 				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 	}
-
 	// TODO 可扩展
 	// 价格类型
 	public static final ImmutableBiMap<String, Character> PriceTypeBiMap = ImmutableBiMapFactoryImpl.INSTANCE.with(
@@ -219,6 +218,9 @@ public final class FtdcConst {
 			// 市价单
 			FtdcConst.PRICETYPE_MARKETPRICE, thosttraderapiConstants.THOST_FTDC_OPT_AnyPrice);
 
+	/**
+	 * 
+	 */
 	@Deprecated
 	public static final Map<String, Character> directionMap = new HashMap<>();
 	@Deprecated
@@ -230,7 +232,6 @@ public final class FtdcConst {
 		directionMapReverse = directionMap.entrySet().stream()
 				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 	}
-
 	// 方向类型
 	public static final ImmutableBiMap<String, Character> DirectionBiMap = ImmutableBiMapFactoryImpl.INSTANCE.with(
 			// 买
@@ -238,6 +239,9 @@ public final class FtdcConst {
 			// 卖
 			FtdcConst.DIRECTION_SHORT, thosttraderapiConstants.THOST_FTDC_D_Sell);
 
+	/**
+	 * 
+	 */
 	@Deprecated
 	public static final Map<String, Character> offsetMap = new HashMap<>();
 	@Deprecated
@@ -250,7 +254,6 @@ public final class FtdcConst {
 		offsetMap.put(FtdcConst.OFFSET_CLOSEYESTERDAY, thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday);
 		offsetMapReverse = offsetMap.entrySet().stream().collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 	}
-
 	// 开平类型
 	public static final ImmutableBiMap<String, Character> OffsetBiMap = ImmutableBiMapFactoryImpl.INSTANCE.with(
 			// 开仓
@@ -262,7 +265,12 @@ public final class FtdcConst {
 			// 平昨(上期所)
 			FtdcConst.OFFSET_CLOSEYESTERDAY, thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday);
 
+	/**
+	 * 
+	 */
+	@Deprecated
 	public static final Map<String, String> exchangeMap = new HashMap<>();
+	@Deprecated
 	public static Map<String, String> exchangeMapReverse = new HashMap<>();
 	static {
 		// 交易所映射
@@ -277,7 +285,12 @@ public final class FtdcConst {
 		exchangeMapReverse = exchangeMap.entrySet().stream().collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 	}
 
+	/**
+	 * 
+	 */
+	@Deprecated
 	public static final Map<String, Character> posiDirectionMap = new HashMap<>();
+	@Deprecated
 	public static Map<Character, String> posiDirectionMapReverse = new HashMap<>();
 	static {
 		// 持仓类型映射
@@ -287,7 +300,6 @@ public final class FtdcConst {
 		posiDirectionMapReverse = posiDirectionMap.entrySet().stream()
 				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 	}
-	
 	// 持仓类型
 	public static final ImmutableBiMap<String, Character> PosiDirectionBiMap = ImmutableBiMapFactoryImpl.INSTANCE.with(
 			//
@@ -297,7 +309,12 @@ public final class FtdcConst {
 			//
 			FtdcConst.DIRECTION_SHORT, thosttraderapiConstants.THOST_FTDC_PD_Short);
 
+	/**
+	 * 
+	 */
+	@Deprecated
 	public static final Map<String, Character> productClassMap = new HashMap<>();
+	@Deprecated
 	public static Map<Character, String> productClassMapReverse = new HashMap<>();
 	static {
 		// 产品类型映射
@@ -307,8 +324,21 @@ public final class FtdcConst {
 		productClassMapReverse = productClassMap.entrySet().stream()
 				.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
 	}
+	// 产品类型
+	public static final ImmutableBiMap<String, Character> ProductClassBiMap = ImmutableBiMapFactoryImpl.INSTANCE.with(
+			// 期货
+			FtdcConst.PRODUCT_FUTURES, thosttraderapiConstants.THOST_FTDC_PC_Futures,
+			// 期权
+			FtdcConst.PRODUCT_OPTION, thosttraderapiConstants.THOST_FTDC_PC_Options,
+			// 组合
+			FtdcConst.PRODUCT_COMBINATION, thosttraderapiConstants.THOST_FTDC_PC_Combination);
 
+	/**
+	 * 
+	 */
+	@Deprecated
 	public static final Map<String, Character> statusMap = new HashMap<>();
+	@Deprecated
 	public static Map<Character, String> statusMapReverse = new HashMap<>();
 	static {
 		// 委托状态映射
