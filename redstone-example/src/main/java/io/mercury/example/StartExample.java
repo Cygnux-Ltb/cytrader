@@ -2,16 +2,13 @@ package io.mercury.example;
 
 import java.util.Properties;
 
-import org.eclipse.collections.api.map.MutableMap;
-
-import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.concurrent.disruptor.BufferSize;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.log.LogLevel;
 import io.mercury.common.log.LoggerSetter;
 import io.mercury.common.param.ImmutableParamMap;
-import io.mercury.financial.instrument.InstrumentKeeper;
 import io.mercury.financial.instrument.Instrument.PriorityCloseType;
+import io.mercury.financial.instrument.InstrumentKeeper;
 import io.mercury.financial.instrument.futures.ChinaFutures;
 import io.mercury.financial.instrument.futures.ChinaFuturesSymbol;
 import io.mercury.financial.time.TimePeriodPool;
@@ -24,7 +21,6 @@ import io.redstone.core.adaptor.AdaptorKeeper;
 import io.redstone.core.strategy.StrategyKeeper;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.engine.actor.AppGlobalStatus;
-import io.redstone.engine.config.NacosReader;
 import io.redstone.engine.scheduler.SpscQueueStrategyScheduler;
 
 public final class StartExample {
@@ -36,23 +32,16 @@ public final class StartExample {
 		LoggerSetter.logFileName("redstone-" + appId + "-" + datetime);
 		LoggerSetter.logLevel(LogLevel.DEBUG);
 
-		Properties properties = NacosReader.readWith(args);
+		// TODO 读取配置文件
+		Properties properties = null;
 
 		// Set Global AppId
 		AppGlobalStatus.setAppId(appId);
 
 		StrategyScheduler scheduler = new SpscQueueStrategyScheduler(BufferSize.POW2_12);
 
-		// Adaptor Params
-		MutableMap<FtdcAdaptorParam, Object> paramMap = MutableMaps.newUnifiedMap();
-		paramMap.put(FtdcAdaptorParam.CTP_TraderAddr, "tcp://180.168.146.187:10000");
-		paramMap.put(FtdcAdaptorParam.CTP_MdAddr, "tcp://180.168.146.187:10010");
-		paramMap.put(FtdcAdaptorParam.CTP_BrokerId, "9999");
-		paramMap.put(FtdcAdaptorParam.CTP_InvestorId, "005853");
-		paramMap.put(FtdcAdaptorParam.CTP_AccountId, "005853");
-		paramMap.put(FtdcAdaptorParam.CTP_UserId, "005853");
-		paramMap.put(FtdcAdaptorParam.CTP_Password, "?????");
-		ImmutableParamMap<FtdcAdaptorParam> adaptorParam = new ImmutableParamMap<>(properties);
+		ImmutableParamMap<FtdcAdaptorParam> adaptorParam = new ImmutableParamMap<>(FtdcAdaptorParam.values(),
+				properties);
 
 		// 创建InboundAdaptor
 		int inboundAdaptorId = 1;
