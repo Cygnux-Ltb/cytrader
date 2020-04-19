@@ -89,7 +89,7 @@ public class FtdcAdaptor extends BaseAdaptor {
 	private volatile int frontId;
 	private volatile int sessionId;
 
-	private volatile boolean isIsAvailable;
+	private volatile boolean isAvailable;
 
 	public FtdcAdaptor(int adaptorId, String adaptorName, int appId, @Nonnull StrategyScheduler scheduler,
 			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
@@ -108,12 +108,12 @@ public class FtdcAdaptor extends BaseAdaptor {
 		// 初始化Gateway
 		this.gateway = new FtdcGateway("Ftdc-Gateway", configInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, ftdcMsg -> {
-					switch (ftdcMsg.getFtdcRespType()) {
-					case RespConnectInfo:
+					switch (ftdcMsg.getRspType()) {
+					case RspConnectInfo:
 						RspConnectInfo rspConnectInfo = ftdcMsg.getRspConnectInfo();
 						this.frontId = rspConnectInfo.getFrontID();
 						this.sessionId = rspConnectInfo.getSessionID();
-						this.isIsAvailable = rspConnectInfo.isAvailable();
+						this.isAvailable = rspConnectInfo.isAvailable();
 						break;
 					case FtdcDepthMarketData:
 						BasicMarketData marketData = marketDataConverter.apply(ftdcMsg.getFtdcDepthMarketData());
