@@ -47,7 +47,7 @@ public class CtpGatewayTest {
 
 		FtdcGateway gateway = new FtdcGateway(GatewayId, simnowUserInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Simnow-Handle-Queue", 1024, msg -> {
-					switch (msg.getFtdcRespType()) {
+					switch (msg.getRspType()) {
 					case FtdcDepthMarketData:
 						FtdcDepthMarketData depthMarketData = msg.getFtdcDepthMarketData();
 						log.info(
