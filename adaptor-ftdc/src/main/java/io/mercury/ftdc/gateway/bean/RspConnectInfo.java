@@ -14,8 +14,6 @@ public final class RspConnectInfo {
 		return SessionID;
 	}
 
-	
-
 	public boolean isAvailable() {
 		return Available;
 	}
@@ -34,8 +32,5 @@ public final class RspConnectInfo {
 		Available = available;
 		return this;
 	}
-
-	
-
 
 }
