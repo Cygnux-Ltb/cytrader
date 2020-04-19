@@ -6,12 +6,12 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 
+import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.config.ConfigFactory;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.exception.NacosException;
 
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 
 /**
@@ -27,49 +27,65 @@ public class NacosReader {
 
 	private Logger log = CommonLoggerFactory.getLogger(NacosReader.class);
 
-	public static final Properties readWith(String... args) {
-		Assertor.requiredLength(args, 3, "main input args");
-		return connection(args[0]).getProperties(args[1], args[2]);
+	public static final Properties readWith(String serverAddr, String group, String dataId) throws NacosReadException {
+		return connection(serverAddr).getProperties(group, dataId);
 	}
 
-	public static final NacosReader connection(String serverAddr) {
-		return new NacosReader(serverAddr);
+	public static final Properties readWith(String serverAddr, String namespace, String group, String dataId)
+			throws NacosReadException {
+		return connection(serverAddr, namespace).getProperties(group, dataId);
 	}
 
-	private NacosReader(String serverAddr) {
+	public static final NacosReader connection(String serverAddr) throws NacosReadException {
+		Properties properties = new Properties();
+		properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
+		return new NacosReader(properties);
+	}
+
+	public static final NacosReader connection(String serverAddr, String namespace) throws NacosReadException {
+		Properties properties = new Properties();
+		properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
+		properties.put(PropertyKeyConst.NAMESPACE, namespace);
+		return new NacosReader(properties);
+	}
+
+	private NacosReader(Properties nacosProperties) throws NacosReadException {
 		try {
-			log.info("createConfigService -> serverAddr==[{}]", serverAddr);
-			this.configService = ConfigFactory.createConfigService(serverAddr);
+			log.info("Connection ConfigService -> serverAddr==[{}]", nacosProperties.get(PropertyKeyConst.SERVER_ADDR));
+			log.info("Connection ConfigService -> namespace==[{}]", nacosProperties.get(PropertyKeyConst.NAMESPACE));
+			this.configService = ConfigFactory.createConfigService(nacosProperties);
 		} catch (NacosException e) {
 			log.error("createConfigService error -> {}", e.getMessage(), e);
-			throw new RuntimeException("createConfigService method error", e);
+			throw new NacosReadException("ConfigFactory.createConfigService call error", e);
 		}
 	}
 
-	public Properties getProperties(String group, String dataId) {
+	public Properties getProperties(String group, String dataId) throws NacosReadException {
 		try {
 			log.info("Reading nacos ->  group==[{}], dataId==[{}]", group, dataId);
-			String config = configService.getConfig(dataId, group, 5000);
+			String config = configService.getConfig(dataId, group, 8000);
 			if (StringUtil.isNullOrEmpty(config)) {
 				log.info("Read nacos config is null or empty");
-				throw new RuntimeException("read nacos error");
+				throw new NacosReadException("Read nacos config is null or empty");
 			}
-			ByteArrayInputStream inputStream = new ByteArrayInputStream(config.getBytes());
-			Properties properties = new Properties();
-			properties.load(inputStream);
-			properties.forEach((key, value) -> log.info("nacos config : key -> {}, value -> {}", key, value));
-			return properties;
+			try (ByteArrayInputStream inputStream = new ByteArrayInputStream(config.getBytes())) {
+				Properties properties = new Properties();
+				properties.load(inputStream);
+				properties.forEach((key, value) -> log.info("print nacos config : key -> {}, value -> {}", key, value));
+				return properties;
+			}
+
 		} catch (NacosException e) {
 			log.error("Read nacos error -> {}", e.getMessage());
-			throw new RuntimeException(e);
+			throw new NacosReadException("ConfigService.getConfig call error", e);
 		} catch (IOException e) {
-			log.error("Load properties error -> {}", e.getMessage());
-			throw new RuntimeException(e);
+			log.error("Throw exception -> {}", e.getMessage());
+			throw new NacosReadException(e);
 		}
 	}
 
 	public static void main(String[] args) {
-		NacosReader.readWith("203.60.2.70:8848", "data");
+		NacosReader.readWith("101.132.32.183:8848", "own", "ctp-account-hy-sim");
 	}
 
 }
