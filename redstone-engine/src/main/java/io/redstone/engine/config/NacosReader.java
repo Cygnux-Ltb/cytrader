@@ -85,7 +85,7 @@ public class NacosReader {
 	}
 
 	public static void main(String[] args) {
-		NacosReader.readWith("101.132.32.183:8848", "own", "ctp-account-hy-sim");
+		
 	}
 
 }
