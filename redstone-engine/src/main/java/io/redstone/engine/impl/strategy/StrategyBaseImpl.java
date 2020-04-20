@@ -20,7 +20,7 @@ import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.account.AccountKeeper;
 import io.redstone.core.adaptor.Adaptor;
-import io.redstone.core.adaptor.AdaptorEvent;
+import io.redstone.core.adaptor.AdaptorStatus;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderExecutor;
 import io.redstone.core.order.OrderKeeper;
@@ -218,7 +218,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	}
 
 	@Override
-	public void onAdaptorEvent(AdaptorEvent event) {
+	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
 		// TODO Auto-generated method stub
 
 	}

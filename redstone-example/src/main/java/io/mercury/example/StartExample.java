@@ -46,7 +46,7 @@ public final class StartExample {
 		// 创建InboundAdaptor
 		int inboundAdaptorId = 1;
 		String inboundAdaptorName = "Ctp-InboundAdaptor";
-		Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, appId, scheduler, adaptorParam);
+		Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, scheduler, adaptorParam);
 
 		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.values());
 
