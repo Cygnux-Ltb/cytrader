@@ -1,7 +1,7 @@
 package io.redstone.core.strategy;
 
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.redstone.core.adaptor.AdaptorEvent;
+import io.redstone.core.adaptor.AdaptorStatus;
 import io.redstone.core.order.structure.OrdReport;
 
 public interface StrategyScheduler {
@@ -10,6 +10,6 @@ public interface StrategyScheduler {
 
 	void onOrderReport(OrdReport orderReport);
 
-	void onAdaptorEvent(int adaptorId, AdaptorEvent event);
+	void onAdaptorStatus(int adaptorId, AdaptorStatus adaptorStatus);
 
 }
