@@ -71,7 +71,7 @@ public class CtpGatewayTest {
 		gateway.initAndJoin();
 		Set<String> instruementIdSet = new HashSet<>();
 		instruementIdSet.add("rb2010");
-		gateway.subscribeMarketData(instruementIdSet);
+		gateway.SubscribeMarketData(instruementIdSet);
 		ThreadUtil.join();
 
 	}
