@@ -1,27 +1,7 @@
 package io.redstone.core.adaptor;
 
-public final class AdaptorEvent {
+public enum AdaptorStatus {
 
-	private int adaptorId;
-	private AdaptorEventType type;
-
-	public AdaptorEvent(int adaptorId, AdaptorEventType type) {
-		this.adaptorId = adaptorId;
-		this.type = type;
-	}
-
-	public int getAdaptorId() {
-		return adaptorId;
-	}
-
-	public AdaptorEventType getType() {
-		return type;
-	}
-
-	public static enum AdaptorEventType {
-
-		Enable, Disable
-
-	}
+	MdEnable, MdDisable, TraderEnable, Disable
 
 }

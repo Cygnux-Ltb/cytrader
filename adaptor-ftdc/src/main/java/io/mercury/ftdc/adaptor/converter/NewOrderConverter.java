@@ -4,11 +4,37 @@ import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import ctp.thostapi.thosttraderapiConstants;
+import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.specific.ChildOrder;
 
 public final class NewOrderConverter implements Function<Order, CThostFtdcInputOrderField> {
+
+	/**
+	 * 组合开平标识, 开仓
+	 */
+	private final String CombOffsetFlag_Open = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Open);
+	/**
+	 * 组合开平标识, 平仓
+	 */
+	private final String CombOffsetFlag_Close = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Close);
+	/**
+	 * 组合开平标识, 平今
+	 */
+	private final String CombOffsetFlag_CloseToday = StringUtil
+			.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseToday);
+	/**
+	 * 组合开平标识, 平昨
+	 */
+	private final String CombOffsetFlag_CloseYesterday = StringUtil
+			.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday);
+
+	/**
+	 * 组合投机套保标识, 投机
+	 */
+	private final String CombHedgeFlag_Speculation = StringUtil
+			.toString(thosttraderapiConstants.THOST_FTDC_HF_Speculation);
 
 	@Override
 	public CThostFtdcInputOrderField apply(Order order) {
@@ -83,18 +109,16 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		 */
 		switch (childOrder.trdAction()) {
 		case Open:
-			ftdcInputOrder.setCombOffsetFlag(new String(new char[] { thosttraderapiConstants.THOST_FTDC_OF_Open }));
+			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_Open);
 			break;
 		case Close:
-			ftdcInputOrder.setCombOffsetFlag(new String(new char[] { thosttraderapiConstants.THOST_FTDC_OF_Close }));
+			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_Close);
 			break;
 		case CloseToday:
-			ftdcInputOrder
-					.setCombOffsetFlag(new String(new char[] { thosttraderapiConstants.THOST_FTDC_OF_CloseToday }));
+			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_CloseToday);
 			break;
 		case CloseYesterday:
-			ftdcInputOrder
-					.setCombOffsetFlag(new String(new char[] { thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday }));
+			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_CloseYesterday);
 			break;
 		default:
 			throw new RuntimeException(childOrder.trdAction() + " does not exist.");
@@ -117,7 +141,7 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		 * ///第一腿套保第二腿投机 大商所专用<br>
 		 * #define THOST_FTDC_HF_HedgeSpec '7'<br>
 		 */
-		ftdcInputOrder.setCombHedgeFlag(new String(new char[] { thosttraderapiConstants.THOST_FTDC_HF_Speculation }));
+		ftdcInputOrder.setCombHedgeFlag(CombHedgeFlag_Speculation);
 		/**
 		 * /////////////////////////////////////////////////////////////////////////
 		 * ///TFtdcDirectionType是一个买卖方向类型

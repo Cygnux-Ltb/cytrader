@@ -41,7 +41,7 @@ import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
-import io.mercury.ftdc.gateway.bean.RspConnectInfo;
+import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.BaseAdaptor;
 import io.redstone.core.order.Order;
@@ -83,7 +83,6 @@ public class FtdcAdaptor extends BaseAdaptor {
 		return ordReport;
 	};
 
-	private int appId;
 	private final FtdcGateway gateway;
 
 	private volatile int frontId;
@@ -91,10 +90,9 @@ public class FtdcAdaptor extends BaseAdaptor {
 
 	private volatile boolean isAvailable;
 
-	public FtdcAdaptor(int adaptorId, String adaptorName, int appId, @Nonnull StrategyScheduler scheduler,
+	public FtdcAdaptor(int adaptorId, String adaptorName, @Nonnull StrategyScheduler scheduler,
 			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
 		super(adaptorId, adaptorName);
-		this.appId = appId;
 		// 写入Gateway用户信息
 		FtdcConfigInfo configInfo = new FtdcConfigInfo()
 				.setTraderAddr(paramMap.getString(FtdcAdaptorParam.CTP_TraderAddr))
@@ -109,11 +107,14 @@ public class FtdcAdaptor extends BaseAdaptor {
 		this.gateway = new FtdcGateway("Ftdc-Gateway", configInfo,
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, ftdcMsg -> {
 					switch (ftdcMsg.getRspType()) {
-					case RspConnectInfo:
-						RspConnectInfo rspConnectInfo = ftdcMsg.getRspConnectInfo();
-						this.frontId = rspConnectInfo.getFrontID();
-						this.sessionId = rspConnectInfo.getSessionID();
-						this.isAvailable = rspConnectInfo.isAvailable();
+					case RspMdConnect:
+						
+						break;
+					case RspTraderConnect:
+						RspTraderConnect traderConnect = ftdcMsg.getRspTraderConnect();
+						this.frontId = traderConnect.getFrontID();
+						this.sessionId = traderConnect.getSessionID();
+						this.isAvailable = traderConnect.isAvailable();
 						break;
 					case FtdcDepthMarketData:
 						BasicMarketData marketData = marketDataConverter.apply(ftdcMsg.getFtdcDepthMarketData());
@@ -131,7 +132,6 @@ public class FtdcAdaptor extends BaseAdaptor {
 						break;
 					// 报单错误处理
 					case FtdcInputOrder:
-					case ErrFtdcInputOrder:
 						FtdcInputOrder ftdcInputOrder = ftdcMsg.getFtdcInputOrder();
 
 						break;
@@ -139,8 +139,8 @@ public class FtdcAdaptor extends BaseAdaptor {
 					case FtdcInputOrderAction:
 						FtdcInputOrderAction ftdcInputOrderAction = ftdcMsg.getFtdcInputOrderAction();
 						break;
-					// 撤单错误处理1
-					case ErrFtdcOrderAction:
+					// 撤单错误处理2
+					case FtdcOrderAction:
 						FtdcOrderAction errRtnOrderInsert = ftdcMsg.getFtdcOrderAction();
 						break;
 					default:
@@ -172,7 +172,7 @@ public class FtdcAdaptor extends BaseAdaptor {
 	@Override
 	public boolean subscribeMarketData(Instrument... instruments) {
 		try {
-			gateway.subscribeMarketData(
+			gateway.SubscribeMarketData(
 					Stream.of(instruments).map(instrument -> instrument.code()).collect(Collectors.toSet()));
 			return true;
 		} catch (Exception e) {
@@ -187,7 +187,7 @@ public class FtdcAdaptor extends BaseAdaptor {
 	public boolean newOredr(ChildOrder order) {
 		try {
 			CThostFtdcInputOrderField ftdcInputOrder = newOrderConverter.apply(order);
-			String orderRef = Integer.toString(OrderRefGenerate.next(appId));
+			String orderRef = Integer.toString(OrderRefGenerate.next(order.strategyId()));
 			/**
 			 * 设置OrderRef
 			 */
