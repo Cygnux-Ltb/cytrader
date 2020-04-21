@@ -1,6 +1,6 @@
 package io.redstone.engine.config.couchbean;
 
-import io.mercury.codec.json.JsonUtil;
+import io.mercury.serialization.json.JsonUtil;
 
 public class StrategyConf {
 

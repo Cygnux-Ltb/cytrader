@@ -27,13 +27,23 @@ public class NacosReader {
 
 	private Logger log = CommonLoggerFactory.getLogger(NacosReader.class);
 
-	public static final Properties readWith(String serverAddr, String group, String dataId) throws NacosReadException {
+	public static final Properties readProperties(String serverAddr, String group, String dataId)
+			throws NacosReadException {
 		return connection(serverAddr).getProperties(group, dataId);
 	}
 
-	public static final Properties readWith(String serverAddr, String namespace, String group, String dataId)
+	public static final Properties readProperties(String serverAddr, String namespace, String group, String dataId)
 			throws NacosReadException {
 		return connection(serverAddr, namespace).getProperties(group, dataId);
+	}
+
+	public static final String readSaved(String serverAddr, String group, String dataId) throws NacosReadException {
+		return connection(serverAddr).getSaved(group, dataId);
+	}
+
+	public static final String readSaved(String serverAddr, String namespace, String group, String dataId)
+			throws NacosReadException {
+		return connection(serverAddr, namespace).getSaved(group, dataId);
 	}
 
 	public static final NacosReader connection(String serverAddr) throws NacosReadException {
@@ -60,21 +70,35 @@ public class NacosReader {
 		}
 	}
 
-	public Properties getProperties(String group, String dataId) throws NacosReadException {
+	public String getSaved(String group, String dataId) throws NacosReadException {
 		try {
 			log.info("Reading nacos ->  group==[{}], dataId==[{}]", group, dataId);
-			String config = configService.getConfig(dataId, group, 8000);
-			if (StringUtil.isNullOrEmpty(config)) {
+			String saved = configService.getConfig(dataId, group, 8000);
+			if (StringUtil.isNullOrEmpty(saved)) {
 				log.info("Read nacos config is null or empty");
 				throw new NacosReadException("Read nacos config is null or empty");
 			}
-			try (ByteArrayInputStream inputStream = new ByteArrayInputStream(config.getBytes())) {
+			return saved;
+		} catch (NacosException e) {
+			log.error("Read nacos error -> {}", e.getMessage());
+			throw new NacosReadException("ConfigService.getConfig call error", e);
+		}
+	}
+
+	public Properties getProperties(String group, String dataId) throws NacosReadException {
+		try {
+			log.info("Reading nacos ->  group==[{}], dataId==[{}]", group, dataId);
+			String saved = configService.getConfig(dataId, group, 8000);
+			if (StringUtil.isNullOrEmpty(saved)) {
+				log.info("Read nacos config is null or empty");
+				throw new NacosReadException("Read nacos config is null or empty");
+			}
+			try (ByteArrayInputStream inputStream = new ByteArrayInputStream(saved.getBytes())) {
 				Properties properties = new Properties();
 				properties.load(inputStream);
 				properties.forEach((key, value) -> log.info("print nacos config : key -> {}, value -> {}", key, value));
 				return properties;
 			}
-
 		} catch (NacosException e) {
 			log.error("Read nacos error -> {}", e.getMessage());
 			throw new NacosReadException("ConfigService.getConfig call error", e);
@@ -85,7 +109,7 @@ public class NacosReader {
 	}
 
 	public static void main(String[] args) {
-		
+
 	}
 
 }
