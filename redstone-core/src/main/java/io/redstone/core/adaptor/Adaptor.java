@@ -4,11 +4,12 @@ import java.io.Closeable;
 
 import javax.annotation.Nonnull;
 
+import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.account.Account;
 import io.redstone.core.order.specific.ChildOrder;
 
-public interface Adaptor extends Closeable {
+public interface Adaptor extends Closeable, Enable {
 
 	int adaptorId();
 
@@ -39,6 +40,14 @@ public interface Adaptor extends Closeable {
 	 * @return
 	 */
 	boolean cancelOrder(@Nonnull ChildOrder order);
+
+	/**
+	 * 查询持仓
+	 * 
+	 * @param account
+	 * @return
+	 */
+	boolean queryOrder(@Nonnull Account account);
 
 	/**
 	 * 查询持仓
