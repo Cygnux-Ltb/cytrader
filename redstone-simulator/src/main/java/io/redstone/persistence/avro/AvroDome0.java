@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.List;
 
-import io.mercury.codec.avro.AvroBinaryDeserializer;
-import io.mercury.codec.avro.AvroBinarySerializer;
+import io.mercury.serialization.avro.AvroBinaryDeserializer;
+import io.mercury.serialization.avro.AvroBinarySerializer;
 import io.redstone.persistence.avro.entity.Order;
 
 public class AvroDome0 {

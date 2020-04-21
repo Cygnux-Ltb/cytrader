@@ -3,10 +3,10 @@ package io.redstone.persistence.avro;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-import io.mercury.codec.avro.AvroBinaryDeserializer;
-import io.mercury.codec.avro.AvroBinarySerializer;
-import io.mercury.codec.avro.AvroTextDeserializer;
-import io.mercury.codec.avro.AvroTextSerializer;
+import io.mercury.serialization.avro.AvroBinaryDeserializer;
+import io.mercury.serialization.avro.AvroBinarySerializer;
+import io.mercury.serialization.avro.AvroTextDeserializer;
+import io.mercury.serialization.avro.AvroTextSerializer;
 import io.redstone.persistence.avro.entity.MarketDataSubscribe;
 
 public class AvroDemo {
