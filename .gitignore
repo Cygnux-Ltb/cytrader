@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+#doc temp
+*.chw
+
 # Log file
 *.log
 
