@@ -6,17 +6,17 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import io.mercury.codec.avro.AvroBinaryDeserializer;
 import io.mercury.common.param.ImmutableParamMap;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.serialization.avro.AvroBinaryDeserializer;
 import io.mercury.transport.core.api.Receiver;
 import io.mercury.transport.core.api.Sender;
 import io.mercury.transport.socket.SocketReceiver;
 import io.mercury.transport.socket.SocketSender;
 import io.mercury.transport.socket.configurator.SocketConfigurator;
 import io.redstone.core.account.Account;
-import io.redstone.core.adaptor.base.BaseAdaptor;
+import io.redstone.core.adaptor.base.AdaptorBaseImpl;
 import io.redstone.core.order.OrderKeeper;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.specific.ChildOrder;
@@ -26,7 +26,7 @@ import io.redstone.persistence.avro.entity.MarketDataLevel1;
 import io.redstone.persistence.avro.entity.MarketDataSubscribe;
 import io.redstone.persistence.avro.entity.Order;
 
-public class SimAdaptor extends BaseAdaptor {
+public class SimAdaptor extends AdaptorBaseImpl {
 
 	private Receiver mdReceiver;
 	private Receiver tdReceiver;
@@ -150,6 +150,12 @@ public class SimAdaptor extends BaseAdaptor {
 		}
 		tdSender.send(byteMsg);
 		return true;
+	}
+
+	@Override
+	public boolean queryOrder(Account account) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
