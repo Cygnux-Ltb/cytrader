@@ -43,13 +43,13 @@ import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
 import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.redstone.core.account.Account;
-import io.redstone.core.adaptor.base.BaseAdaptor;
+import io.redstone.core.adaptor.base.AdaptorBaseImpl;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.StrategyScheduler;
 
-public class FtdcAdaptor extends BaseAdaptor {
+public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(FtdcAdaptor.class);
 
@@ -108,7 +108,7 @@ public class FtdcAdaptor extends BaseAdaptor {
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, ftdcMsg -> {
 					switch (ftdcMsg.getRspType()) {
 					case RspMdConnect:
-						
+
 						break;
 					case RspTraderConnect:
 						RspTraderConnect traderConnect = ftdcMsg.getRspTraderConnect();
@@ -218,6 +218,12 @@ public class FtdcAdaptor extends BaseAdaptor {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean queryOrder(Account account) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
