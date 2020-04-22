@@ -116,7 +116,7 @@ public class FtdcGateway {
 	private int frontID;
 	private int sessionID;
 
-	public FtdcGateway(String gatewayId, @Nonnull FtdcConfigInfo ctpConfigInfo, @Nonnull Queue<RspMsg> inboundBuffer) {
+	public FtdcGateway(String gatewayId, @Nonnull FtdcConfigInfo ctpConfigInfo, @Nonnull Queue<RspMsg> bufferQueue) {
 		this.gatewayId = gatewayId;
 		this.ctpConfigInfo = Assertor.nonNull(ctpConfigInfo, "ctpConfigInfo");
 		this.bufferQueue = Assertor.nonNull(bufferQueue, "bufferQueue");
