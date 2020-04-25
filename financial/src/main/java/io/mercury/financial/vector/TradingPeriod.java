@@ -16,7 +16,6 @@ import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.sequence.Serial;
-import io.mercury.financial.vector.TimePeriodSerial;
 
 /**
  * 指示某交易标的一段交易时间
@@ -89,10 +88,10 @@ public final class TradingPeriod implements Serial<TradingPeriod> {
 			// 如果交易周期跨天,则此分割周期等于当天开始时间至次日结束时间
 			// 如果交易周期未跨天,则此分割周期等于当天开始时间至当天结束时间
 			return MutableLists.newFastList(isCrossDay
-					? TimePeriodSerial.with(ZonedDateTime.of(DateTimeUtil.CurrentDate(), startTime, zoneId),
-							ZonedDateTime.of(DateTimeUtil.NextDate(), endTime, zoneId))
-					: TimePeriodSerial.with(ZonedDateTime.of(DateTimeUtil.CurrentDate(), startTime, zoneId),
-							ZonedDateTime.of(DateTimeUtil.CurrentDate(), endTime, zoneId)));
+					? TimePeriodSerial.with(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
+							ZonedDateTime.of(DateTimeUtil.nextDate(), endTime, zoneId))
+					: TimePeriodSerial.with(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
+							ZonedDateTime.of(DateTimeUtil.currentDate(), endTime, zoneId)));
 		} else {
 			// 获取此交易时间段的总时长
 			int totalSeconds = (int) totalDuration.getSeconds();
@@ -102,10 +101,10 @@ public final class TradingPeriod implements Serial<TradingPeriod> {
 				count++;
 			MutableList<TimePeriodSerial> list = MutableLists.newFastList(count);
 			// 计算开始时间点
-			ZonedDateTime startPoint = ZonedDateTime.of(DateTimeUtil.CurrentDate(), startTime, zoneId);
+			ZonedDateTime startPoint = ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId);
 			// 计算结束时间点,如果跨天则日期加一天
 			ZonedDateTime lastEndPoint = ZonedDateTime
-					.of(isCrossDay ? DateTimeUtil.NextDate() : DateTimeUtil.CurrentDate(), endTime, zoneId);
+					.of(isCrossDay ? DateTimeUtil.nextDate() : DateTimeUtil.currentDate(), endTime, zoneId);
 			for (int i = 0; i < count; i++) {
 				ZonedDateTime nextStartPoint = startPoint.plusSeconds(seconds);
 				if (nextStartPoint.isBefore(lastEndPoint)) {

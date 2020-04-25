@@ -12,7 +12,7 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.param.JointIdUtil;
+import io.mercury.common.param.JointIdSupporter;
 import io.mercury.common.util.Assertor;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.Symbol;
@@ -65,7 +65,7 @@ public final class TimePeriodPool {
 						timePeriodSet.add(serial);
 						timePeriodMap.put(serial.serialNumber(), serial);
 					});
-			long jointId = JointIdUtil.jointId(symbol.id(), (int) period.seconds());
+			long jointId = JointIdSupporter.jointId(symbol.id(), (int) period.seconds());
 			timePeriodSetPool.put(jointId, timePeriodSet.toImmutable());
 			timePeriodMapPool.put(jointId, timePeriodMap.toImmutable());
 		}
@@ -91,7 +91,7 @@ public final class TimePeriodPool {
 	 * @return
 	 */
 	public ImmutableSortedSet<TimePeriodSerial> getTimePeriodSet(Symbol symbol, TimePeriod period) {
-		long jointId = JointIdUtil.jointId(symbol.id(), period.seconds());
+		long jointId = JointIdSupporter.jointId(symbol.id(), period.seconds());
 		ImmutableSortedSet<TimePeriodSerial> sortedSet = timePeriodSetPool.get(jointId);
 		if (sortedSet == null) {
 			register(symbol, period);
@@ -105,7 +105,7 @@ public final class TimePeriodPool {
 	}
 
 	public ImmutableLongObjectMap<TimePeriodSerial> getTimePeriodMap(Symbol symbol, TimePeriod period) {
-		long jointId = JointIdUtil.jointId(symbol.id(), period.seconds());
+		long jointId = JointIdSupporter.jointId(symbol.id(), period.seconds());
 		ImmutableLongObjectMap<TimePeriodSerial> longObjectMap = timePeriodMapPool.get(jointId);
 		if (longObjectMap == null) {
 			register(symbol, period);

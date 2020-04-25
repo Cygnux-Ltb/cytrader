@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 import javax.annotation.concurrent.ThreadSafe;
 
-import io.mercury.financial.instrument.futures.ChinaFuturesUtil;
+import io.mercury.financial.instrument.futures.ChinaFuturesSupporter;
 import io.mercury.financial.time.tradingday.api.TradingDay;
 
 /**
@@ -24,7 +24,7 @@ public final class ChinaFuturesTradingDayImpl implements TradingDay {
 	private LocalDate date;
 
 	private ChinaFuturesTradingDayImpl(LocalDateTime datetime) {
-		this.date = ChinaFuturesUtil.analysisTradingDay(datetime);
+		this.date = ChinaFuturesSupporter.analyzeTradingDay(datetime);
 	}
 
 	public static ChinaFuturesTradingDayImpl with(LocalDateTime datetime) {

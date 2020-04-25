@@ -1,6 +1,6 @@
 package io.mercury.financial.market.impl;
 
-import static io.mercury.financial.instrument.futures.ChinaFuturesUtil.TRADING_DAY_DIVIDING_LINE;
+import static io.mercury.financial.instrument.futures.ChinaFuturesSupporter.TRADING_DAY_DIVIDING_LINE;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.PatternSymbol;
 import io.mercury.common.datetime.Pattern.TimePattern;
-import io.mercury.financial.instrument.futures.ChinaFuturesUtil;
+import io.mercury.financial.instrument.futures.ChinaFuturesSupporter;
 
 public class CsvMarketData implements Comparable<CsvMarketData> {
 
@@ -384,7 +384,7 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 		String[] strArray = line.split(",");
 		String timestamp = strArray[0];
 		String instrumentId = strArray[1];
-		String symbol = ChinaFuturesUtil.analysisSymbolCode(instrumentId);
+		String symbol = ChinaFuturesSupporter.analyzeSymbolCode(instrumentId);
 		String exchangeId = strArray[2];
 		String last = strArray[3];
 		String iopv = strArray[4];
