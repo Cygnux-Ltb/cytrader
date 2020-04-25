@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+@Deprecated
 public final class AppGlobalStatus {
 
 	private int maxLimit = 20;

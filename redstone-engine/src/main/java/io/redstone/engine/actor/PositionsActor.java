@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.JointIdUtil;
+import io.mercury.common.param.JointIdSupporter;
 import io.redstone.core.order.enums.OrdSide;
 import io.redstone.core.order.specific.ChildOrder;
 
@@ -53,7 +53,7 @@ public class PositionsActor {
 	 * @param limitQty
 	 */
 	public void setSubAccountPositionsLimit(int subAccountId, int instrumentId, long limitLongQty, long limitShortQty) {
-		long jointId = JointIdUtil.jointId(subAccountId, instrumentId);
+		long jointId = JointIdSupporter.jointId(subAccountId, instrumentId);
 		subAccountInstrumentLongLimit.put(jointId, limitLongQty < 0 ? -limitLongQty : limitLongQty);
 		Log.info("Set long positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
 				instrumentId, subAccountInstrumentLongLimit.get(jointId));
@@ -71,7 +71,7 @@ public class PositionsActor {
 	 * @return
 	 */
 	public long getSubAccountPositionsLimit(int subAccountId, int instrumentId, OrdSide side) {
-		long jointId = JointIdUtil.jointId(subAccountId, instrumentId);
+		long jointId = JointIdSupporter.jointId(subAccountId, instrumentId);
 		long currentQty = subAccountInstrumentPositions.get(jointId);
 		switch (side.direction()) {
 		case Long:
@@ -89,7 +89,7 @@ public class PositionsActor {
 	 * @param order
 	 */
 	public void onChildOrder(ChildOrder order) {
-		long jointId = JointIdUtil.jointId(order.instrument().id(), order.subAccountId());
+		long jointId = JointIdSupporter.jointId(order.instrument().id(), order.subAccountId());
 		subAccountInstrumentPositions.put(jointId,
 				subAccountInstrumentPositions.get(jointId) + order.ordTradeSet().lastTrade().get().tradeQty());
 	}

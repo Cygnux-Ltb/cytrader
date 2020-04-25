@@ -22,7 +22,6 @@ import io.redstone.core.account.AccountKeeper;
 import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.adaptor.AdaptorStatus;
 import io.redstone.core.order.Order;
-import io.redstone.core.order.OrderExecutor;
 import io.redstone.core.order.OrderKeeper;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
@@ -42,22 +41,22 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	private boolean isInitSuccess = false;
 
-	protected Logger log = CommonLoggerFactory.getLogger(getClass());
-
-	protected String strategyName;
-
-	private String defaultName;
+	private String strategyName;
 
 	// 策略订阅的合约
 	private ImmutableList<Instrument> instruments;
 
+	protected Logger log = CommonLoggerFactory.getLogger(getClass());
+
 	// 记录当前策略所有的策略订单订单
 	protected MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
 
-	protected StrategyBaseImpl(int strategyId, int subAccountId, Instrument... instruments) {
+	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, Instrument... instruments) {
 		this.strategyId = strategyId;
+		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
+				? "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]"
+				: strategyName;
 		this.subAccountId = subAccountId;
-		this.defaultName = "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]";
 		this.instruments = ImmutableLists.newList(instruments);
 	}
 
@@ -77,8 +76,6 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	@Override
 	public String strategyName() {
-		if (StringUtil.isNullOrEmpty(strategyName))
-			return defaultName;
 		return strategyName;
 	}
 
@@ -92,20 +89,20 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		if (strategyOrders.notEmpty()) {
 
 		}
-		marketDataExtendHandle(marketData);
+		handleMarketData(marketData);
 	}
 
 	@ProtectedAbstractMethod
-	protected abstract void marketDataExtendHandle(BasicMarketData marketData);
+	protected abstract void handleMarketData(BasicMarketData marketData);
 
 	@Override
 	public void onOrder(Order order) {
 		log.info("handle order ordSysId==[{}]", order.ordSysId());
 		OrderKeeper.updateOrder(order);
-		orderExtendHandle(order);
+		handleOrder(order);
 	}
 
-	protected abstract void orderExtendHandle(Order order);
+	protected abstract void handleOrder(Order order);
 
 	@Override
 	public void onStrategyEvent(StrategyEvent event) {
@@ -168,12 +165,36 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		return instruments;
 	}
 
-	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty) {
-		orderTarget(instrument, direction, targetQty, Order.Const.OrdMinPrice, Order.Const.OrdMaxPrice);
+	/**
+	 * 
+	 * @param instrument
+	 * @param direction
+	 * @param targetQty
+	 */
+	protected void orderTarget(Instrument instrument, TrdDirection direction, int targetQty) {
+		orderTarget(instrument, direction, targetQty, -1L, -1);
 	}
 
-	protected void orderTarget(Instrument instrument, TrdDirection direction, long targetQty, long minPrice,
-			long maxPrice) {
+	/**
+	 * 
+	 * @param instrument
+	 * @param direction
+	 * @param targetQty
+	 */
+	protected void orderTarget(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice) {
+		orderTarget(instrument, direction, targetQty, limitPrice, 0);
+	}
+
+	/**
+	 * 
+	 * @param instrument 交易标的
+	 * @param direction  交易方向
+	 * @param targetQty  目标数量
+	 * @param minPrice   限定价格
+	 * @param maxPrice   允许浮动点差
+	 */
+	protected void orderTarget(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice,
+			int floatTick) {
 		LastMarkerData lastMarkerData = LastMarkerDataKeeper.get(instrument);
 		long offerPrice = 0;
 		switch (direction) {
@@ -190,11 +211,10 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 				OrdPrice.withOffer(offerPrice), direction, OrdType.Limit, subAccountId);
 		strategyOrders.put(strategyOrder.ordSysId(), strategyOrder);
 
-		MutableList<ParentOrder> ParentOrders = OrderExecutor.onStrategyOrder(strategyOrder);
+		MutableList<ParentOrder> ParentOrders = OrderKeeper.onStrategyOrder(strategyOrder);
 
 		ParentOrder first = ParentOrders.getFirst();
 
-		// TODO 错误实现
 		Adaptor adaptor = getAdaptor(instrument);
 
 		adaptor.newOredr(first.toChildOrder());
@@ -207,15 +227,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @return
 	 */
 	@ProtectedAbstractMethod
-	protected Adaptor getAdaptor(Instrument instrument) {
-		return null;
-	}
-
-	@Override
-	public void addAdaptor(Adaptor adaptor) {
-		// TODO Auto-generated method stub
-
-	}
+	protected abstract Adaptor getAdaptor(Instrument instrument);
 
 	@Override
 	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
