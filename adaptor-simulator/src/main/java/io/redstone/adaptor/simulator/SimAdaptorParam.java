@@ -1,7 +1,7 @@
 package io.redstone.adaptor.simulator;
 
-import io.mercury.common.param.api.ParamKey;
-import io.mercury.common.param.api.ParamType;
+import io.mercury.common.param.ParamKey;
+import io.mercury.common.param.ParamType;
 
 public enum SimAdaptorParam implements ParamKey {
 

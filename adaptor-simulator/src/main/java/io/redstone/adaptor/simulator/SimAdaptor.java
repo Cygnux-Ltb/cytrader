@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import io.mercury.common.param.ImmutableParamMap;
+import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.serialization.avro.AvroBinaryDeserializer;
