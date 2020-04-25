@@ -10,6 +10,8 @@ public interface StrategyScheduler {
 
 	void onOrderReport(OrdReport orderReport);
 
-	void onAdaptorStatus(int adaptorId, AdaptorStatus adaptorStatus);
+	void onAdaptorStatus(int adaptorId, AdaptorStatus status);
+
+	void addStrategy(Strategy strategy);
 
 }
