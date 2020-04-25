@@ -6,14 +6,9 @@ public final class ChinaFutures extends Futures {
 
 	private PriorityCloseType priorityCloseType;
 
-	private ChinaFutures(ChinaFuturesSymbol symbol, int term, String instrumentCode,
-			PriorityCloseType priorityCloseType) {
-		super(symbol.acquireInstrumentId(term), instrumentCode, symbol);
-		this.priorityCloseType = priorityCloseType;
-	}
-
-	public static ChinaFutures build(ChinaFuturesSymbol symbol, int term, PriorityCloseType priorityCloseType) {
-		return new ChinaFutures(symbol, term, (symbol.name() + "" + term).toLowerCase(), priorityCloseType);
+	public ChinaFutures(ChinaFuturesSymbol symbol, int term) {
+		super(symbol.acquireInstrumentId(term), (symbol.name() + "" + term).toLowerCase(), symbol);
+		this.priorityCloseType = symbol.priorityCloseType();
 	}
 
 	@Override

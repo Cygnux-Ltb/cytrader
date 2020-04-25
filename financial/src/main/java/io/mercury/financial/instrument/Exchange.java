@@ -9,11 +9,11 @@ public enum Exchange {
 	// Shanghai Futures Exchange
 	SHFE(41, TimeZone.CST),
 
-	// Zhengzhou Commodity Exchange
-	ZCE(42, TimeZone.CST),
-
 	// Dalian Commodity Exchange
-	DCE(43, TimeZone.CST),
+	DCE(42, TimeZone.CST),
+
+	// Zhengzhou Commodity Exchange
+	ZCE(43, TimeZone.CST),
 
 	// China Financial Futures Exchange
 	CFFE(44, TimeZone.CST),
@@ -31,7 +31,7 @@ public enum Exchange {
 	private ZoneId zoneId;
 
 	private Exchange(int exchangeId, ZoneId zoneId) {
-		this.exchangeId = exchangeId * 10000000;
+		this.exchangeId = exchangeId * 1000000;
 		this.zoneId = zoneId;
 
 	}
