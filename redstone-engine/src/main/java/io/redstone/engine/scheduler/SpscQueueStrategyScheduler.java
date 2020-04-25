@@ -11,6 +11,7 @@ import io.redstone.core.adaptor.AdaptorStatus;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderKeeper;
 import io.redstone.core.order.structure.OrdReport;
+import io.redstone.core.strategy.Strategy;
 import io.redstone.core.strategy.StrategyKeeper;
 import io.redstone.core.strategy.StrategyScheduler;
 
@@ -75,8 +76,14 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 	}
 
 	@Override
-	public void onAdaptorStatus(int adaptorId, AdaptorStatus adaptorStatus) {
-		despatchQueue.enqueue(new DespatchMsg(adaptorId, adaptorStatus));
+	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
+		despatchQueue.enqueue(new DespatchMsg(adaptorId, status));
+	}
+
+	@Override
+	public void addStrategy(Strategy strategy) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private class DespatchMsg {
