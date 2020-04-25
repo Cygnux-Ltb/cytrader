@@ -5,25 +5,25 @@ public final class OrdQty {
 	/**
 	 * 委托数量
 	 */
-	private long offerQty;
+	private int offerQty;
 	/**
 	 * 剩余数量
 	 */
-	private long leavesQty;
+	private int leavesQty;
 	/**
 	 * 已成交数量
 	 */
-	private long filledQty;
+	private int filledQty;
 	/**
 	 * 最后一次成交数量
 	 */
-	private long lastFilledQty;
+	private int lastFilledQty;
 	/**
 	 * 是否使用最大能成交的数量
 	 */
 	private boolean isMaxQty;
 
-	private OrdQty(long offerQty) {
+	private OrdQty(int offerQty) {
 		this.offerQty = offerQty;
 		this.leavesQty = offerQty;
 	}
@@ -32,7 +32,7 @@ public final class OrdQty {
 		this.isMaxQty = isMaxQty;
 	}
 
-	public static final OrdQty withOfferQty(long offerQty) {
+	public static final OrdQty withOfferQty(int offerQty) {
 		return new OrdQty(offerQty);
 	}
 
@@ -40,11 +40,11 @@ public final class OrdQty {
 		return new OrdQty(true);
 	}
 
-	public long offerQty() {
+	public int offerQty() {
 		return offerQty;
 	}
 
-	public OrdQty offerQty(long offerQty) {
+	public OrdQty offerQty(int offerQty) {
 		if (this.offerQty == 0) {
 			this.offerQty = offerQty;
 			this.leavesQty = offerQty;
@@ -52,26 +52,26 @@ public final class OrdQty {
 		return this;
 	}
 
-	public long leavesQty() {
+	public int leavesQty() {
 		return leavesQty;
 	}
 
-	public OrdQty leavesQty(long leavesQty) {
+	public OrdQty leavesQty(int leavesQty) {
 		this.leavesQty = leavesQty;
 		return this;
 	}
 
-	public long filledQty() {
+	public int filledQty() {
 		return filledQty;
 	}
 
-	public OrdQty filledQty(long filledQty) {
+	public OrdQty filledQty(int filledQty) {
 		this.lastFilledQty = this.filledQty;
 		this.filledQty = filledQty;
 		return this;
 	}
 
-	public long lastFilledQty() {
+	public int lastFilledQty() {
 		return lastFilledQty;
 	}
 

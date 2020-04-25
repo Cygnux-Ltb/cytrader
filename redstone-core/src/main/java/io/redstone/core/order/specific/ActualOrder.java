@@ -1,14 +1,14 @@
 package io.redstone.core.order.specific;
 
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.OrderImpl;
+import io.redstone.core.order.OrderBaseImpl;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdAction;
 import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 
-abstract class ActualOrder extends OrderImpl {
+abstract class ActualOrder extends OrderBaseImpl {
 
 	/**
 	 * 所属策略订单

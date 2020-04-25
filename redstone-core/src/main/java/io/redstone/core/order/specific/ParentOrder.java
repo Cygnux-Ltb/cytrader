@@ -37,7 +37,7 @@ public final class ParentOrder extends ActualOrder {
 	 * @param subAccountId
 	 * @param stopLoss
 	 */
-	public ParentOrder(Instrument instrument, long offerQty, long offerPrice, TrdDirection trdDirection, OrdType ordType,
+	public ParentOrder(Instrument instrument, int offerQty, long offerPrice, TrdDirection trdDirection, OrdType ordType,
 			TrdAction trdAction, int strategyId, long strategyOrdId, int subAccountId) {
 		super(strategyId, strategyOrdId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice),
 				trdDirection, ordType, trdAction, subAccountId);

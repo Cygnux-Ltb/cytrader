@@ -9,7 +9,7 @@ import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.OrdTimestamps;
 import io.redstone.core.order.utils.OrdSysIdGenerate;
 
-public abstract class OrderImpl implements Order {
+public abstract class OrderBaseImpl implements Order {
 
 	/**
 	 * ordSysId
@@ -61,7 +61,7 @@ public abstract class OrderImpl implements Order {
 	 */
 	private int subAccountId;
 
-	protected OrderImpl(int strategyId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, TrdDirection trdDirection,
+	protected OrderBaseImpl(int strategyId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, TrdDirection trdDirection,
 			OrdType ordType, int subAccountId) {
 		this.ordSysId = OrdSysIdGenerate.next(strategyId);
 		this.strategyId = strategyId;

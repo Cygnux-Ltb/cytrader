@@ -30,7 +30,7 @@ public final class OrdReport implements Serial<OrdReport> {
 	/**
 	 * filled quantity
 	 */
-	private long filledQty;
+	private int filledQty;
 
 	/**
 	 * leaves quantity
@@ -58,7 +58,7 @@ public final class OrdReport implements Serial<OrdReport> {
 		return brokerUniqueId;
 	}
 
-	public long getFilledQty() {
+	public int getFilledQty() {
 		return filledQty;
 	}
 
@@ -86,7 +86,7 @@ public final class OrdReport implements Serial<OrdReport> {
 		return this;
 	}
 
-	public OrdReport setFilledQty(long filledQty) {
+	public OrdReport setFilledQty(int filledQty) {
 		this.filledQty = filledQty;
 		return this;
 	}

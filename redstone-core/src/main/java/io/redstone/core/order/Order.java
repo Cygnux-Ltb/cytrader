@@ -11,14 +11,6 @@ import io.redstone.core.order.structure.OrdTimestamps;
 
 public interface Order extends Comparable<Order> {
 
-	public interface Const {
-
-		long OrdMinPrice = 1L;
-
-		long OrdMaxPrice = 100000000;
-
-	}
-
 	/**
 	 * ordSysId构成<br>
 	 * 策略Id | 时间戳Second | 自增量Number<br>

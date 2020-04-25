@@ -1,7 +1,5 @@
 package io.redstone.core.order;
 
-import java.util.Collection;
-
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.mercury.common.collections.Capacity;
@@ -29,7 +27,7 @@ public final class OrderBook {
 	private MutableLongObjectMap<Order> activeShortOrders;
 
 	private OrderBook(Capacity capacity) {
-		// 添加取1/2, 1/4, 1/8的逻辑, 缩小Map体积
+		// TODO 添加取1/2, 1/4, 1/8的逻辑, 缩小Map体积
 		this.orders = MutableMaps.newLongObjectHashMap(capacity);
 		this.activeOrders = MutableMaps.newLongObjectHashMap(capacity);
 		this.longOrders = MutableMaps.newLongObjectHashMap(capacity);
@@ -109,30 +107,6 @@ public final class OrderBook {
 
 	public MutableLongObjectMap<Order> activeShortOrders() {
 		return activeShortOrders;
-	}
-
-	public Collection<Order> values() {
-		return orders.values();
-	}
-
-	public Collection<Order> activeValues() {
-		return activeOrders.values();
-	}
-
-	public Collection<Order> longValues() {
-		return longOrders.values();
-	}
-
-	public Collection<Order> activeLongValues() {
-		return activeLongOrders.values();
-	}
-
-	public Collection<Order> shortValues() {
-		return shortOrders.values();
-	}
-
-	public Collection<Order> activeShortValues() {
-		return activeShortOrders.values();
 	}
 
 }

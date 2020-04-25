@@ -4,7 +4,7 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.OrderImpl;
+import io.redstone.core.order.OrderBaseImpl;
 import io.redstone.core.order.enums.OrdLevel;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdAction;
@@ -18,7 +18,7 @@ import io.redstone.core.order.structure.OrdQty;
  * 
  * @author yellow013
  */
-public final class StrategyOrder extends OrderImpl {
+public final class StrategyOrder extends OrderBaseImpl {
 
 	private MutableLongObjectMap<ParentOrder> actualOrders = MutableMaps.newLongObjectHashMap();
 
@@ -46,7 +46,7 @@ public final class StrategyOrder extends OrderImpl {
 		return ordSysId();
 	}
 
-	public ParentOrder toOpenActualOrder(TrdDirection trdDirection, long offerQty, OrdType ordType) {
+	public ParentOrder toActualOrder(TrdDirection trdDirection, int offerQty, OrdType ordType) {
 		return addActualOrder(new ParentOrder(instrument(), offerQty, ordPrice().offerPrice(), trdDirection, ordType,
 				TrdAction.Open, strategyId(), strategyOrdId(), subAccountId()));
 	}
