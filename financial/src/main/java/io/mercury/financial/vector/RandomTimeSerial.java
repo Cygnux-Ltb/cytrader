@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.sequence.Serial;
+import io.mercury.common.util.Assertor;
 
 public final class RandomTimeSerial implements Serial<RandomTimeSerial> {
 
@@ -12,16 +13,13 @@ public final class RandomTimeSerial implements Serial<RandomTimeSerial> {
 	private long repeat;
 	private long serialNumber;
 
-	public static RandomTimeSerial with(ZonedDateTime dateTime) {
-		if (dateTime == null)
-			throw new IllegalArgumentException("dateTime cannot null");
-		return new RandomTimeSerial(dateTime, 0);
+	public static RandomTimeSerial newWith(ZonedDateTime dateTime) {
+		return new RandomTimeSerial(Assertor.nonNull(dateTime, "dateTime"), 0);
 	}
 
-	public static RandomTimeSerial with(RandomTimeSerial other) {
-		if (other == null)
-			throw new IllegalArgumentException("other RandomTimeSerial cannot null");
-		return new RandomTimeSerial(other.timePoint, other.repeat++);
+	public static RandomTimeSerial newWith(RandomTimeSerial lastPoint) {
+		Assertor.nonNull(lastPoint, "lastPoint");
+		return new RandomTimeSerial(lastPoint.timePoint, lastPoint.repeat + 1);
 	}
 
 	private RandomTimeSerial(ZonedDateTime timePoint, long repeat) {
@@ -36,7 +34,7 @@ public final class RandomTimeSerial implements Serial<RandomTimeSerial> {
 	}
 
 	private void initSerialNumber() {
-		this.serialNumber = epochSecond * 10000L + repeat;
+		this.serialNumber = epochSecond * 1000L + repeat;
 	}
 
 	@Override
@@ -53,18 +51,18 @@ public final class RandomTimeSerial implements Serial<RandomTimeSerial> {
 	}
 
 	public static void main(String[] args) {
-		
+
 		ZonedDateTime now = ZonedDateTime.now();
 
 		long epochSecond = now.toEpochSecond();
 		System.out.println(epochSecond);
 
-		RandomTimeSerial timeStarted0 = RandomTimeSerial.with(now);
+		RandomTimeSerial timeStarted0 = RandomTimeSerial.newWith(now);
 		System.out.println(timeStarted0.timePoint());
 		System.out.println(timeStarted0.epochSecond());
 		System.out.println(timeStarted0.serialNumber());
 
-		RandomTimeSerial timeStarted1 = RandomTimeSerial.with(timeStarted0);
+		RandomTimeSerial timeStarted1 = RandomTimeSerial.newWith(timeStarted0);
 		System.out.println(timeStarted1.timePoint());
 		System.out.println(timeStarted1.epochSecond());
 		System.out.println(timeStarted1.serialNumber());
