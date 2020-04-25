@@ -7,7 +7,7 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.param.JointIdUtil;
+import io.mercury.common.param.JointIdSupporter;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.indicator.api.Indicator;
@@ -50,7 +50,7 @@ public abstract class MultipleIndicatorPool<I extends Indicator<?, ?>> extends I
 	}
 
 	private long calculateIndex(int cycle, Instrument instrument) {
-		return JointIdUtil.jointId(cycle, instrument.id());
+		return JointIdSupporter.jointId(cycle, instrument.id());
 	}
 
 	private MutableLongObjectMap<I> getIndicatorMap(TimePeriod period) {
