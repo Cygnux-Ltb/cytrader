@@ -4,23 +4,24 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.indicator.event.SmaEvent;
 import io.mercury.indicator.impl.ma.SmaPoint;
+import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.order.Order;
 import io.redstone.engine.impl.strategy.StrategyBaseImpl;
 
 public class SmaStrategyExample extends StrategyBaseImpl<BasicMarketData> implements SmaEvent {
 
 	public SmaStrategyExample(int strategyId, int subAccountId, Instrument instrument) {
-		super(strategyId, subAccountId, instrument);
+		super(strategyId, "SmaStrategyExample", subAccountId, instrument);
 	}
 
 	@Override
-	protected void marketDataExtendHandle(BasicMarketData marketData) {
+	protected void handleMarketData(BasicMarketData marketData) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void orderExtendHandle(Order order) {
+	protected void handleOrder(Order order) {
 		// TODO Auto-generated method stub
 	}
 
@@ -44,6 +45,18 @@ public class SmaStrategyExample extends StrategyBaseImpl<BasicMarketData> implem
 
 	@Override
 	public String eventName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addAdaptor(Adaptor adaptor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Adaptor getAdaptor(Instrument instrument) {
 		// TODO Auto-generated method stub
 		return null;
 	}

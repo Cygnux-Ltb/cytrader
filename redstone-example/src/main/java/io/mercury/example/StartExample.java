@@ -6,8 +6,7 @@ import io.mercury.common.concurrent.disruptor.BufferSize;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.log.LogLevel;
 import io.mercury.common.log.LoggerSetter;
-import io.mercury.common.param.ImmutableParamMap;
-import io.mercury.financial.instrument.Instrument.PriorityCloseType;
+import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.financial.instrument.InstrumentKeeper;
 import io.mercury.financial.instrument.futures.ChinaFutures;
 import io.mercury.financial.instrument.futures.ChinaFuturesSymbol;
@@ -52,7 +51,7 @@ public final class StartExample {
 
 		TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
 
-		ChinaFutures rb1910 = ChinaFutures.build(ChinaFuturesSymbol.RB, 1910, PriorityCloseType.BEFORE_TODAY);
+		ChinaFutures rb1910 = new ChinaFutures(ChinaFuturesSymbol.RB, 1910);
 
 		InstrumentKeeper.putInstrument(rb1910);
 
