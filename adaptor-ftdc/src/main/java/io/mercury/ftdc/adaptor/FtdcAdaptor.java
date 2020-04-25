@@ -1,6 +1,6 @@
 package io.mercury.ftdc.adaptor;
 
-import static io.mercury.financial.util.PriceUtil.priceToLong4;
+import static io.mercury.financial.misc.PriceMultiplierSupporter.priceToLong4;
 
 import java.io.IOException;
 import java.time.LocalDate;
