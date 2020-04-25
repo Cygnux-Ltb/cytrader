@@ -1,16 +1,16 @@
-package io.mercury.financial.util;
+package io.mercury.financial.misc;
 
 public enum PriceMultiplier {
 
 	NONE {
 		@Override
 		public long longMultiplier() {
-			return PriceUtil.LONG_MULTIPLIER_NONE;
+			return PriceMultiplierSupporter.LONG_MULTIPLIER_NONE;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return PriceUtil.DOUBLE_MULTIPLIER_NONE;
+			return PriceMultiplierSupporter.DOUBLE_MULTIPLIER_NONE;
 		}
 
 		@Override
@@ -27,66 +27,66 @@ public enum PriceMultiplier {
 	TEN_THOUSAND {
 		@Override
 		public long longMultiplier() {
-			return PriceUtil.LONG_MULTIPLIER_TEN_THOUSAND;
+			return PriceMultiplierSupporter.LONG_MULTIPLIER_TEN_THOUSAND;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return PriceUtil.DOUBLE_MULTIPLIER_TEN_THOUSAND;
+			return PriceMultiplierSupporter.DOUBLE_MULTIPLIER_TEN_THOUSAND;
 		}
 
 		@Override
 		public long convertToLong(double price) {
-			return PriceUtil.priceToLong4(price);
+			return PriceMultiplierSupporter.priceToLong4(price);
 		}
 
 		@Override
 		public double convertToDouble(long price) {
-			return PriceUtil.priceToDouble4(price);
+			return PriceMultiplierSupporter.priceToDouble4(price);
 		}
 	},
 
 	MILLION {
 		@Override
 		public long longMultiplier() {
-			return PriceUtil.LONG_MULTIPLIER_MILLION;
+			return PriceMultiplierSupporter.LONG_MULTIPLIER_MILLION;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return PriceUtil.DOUBLE_MULTIPLIER_MILLION;
+			return PriceMultiplierSupporter.DOUBLE_MULTIPLIER_MILLION;
 		}
 
 		@Override
 		public long convertToLong(double price) {
-			return PriceUtil.priceToLong6(price);
+			return PriceMultiplierSupporter.priceToLong6(price);
 		}
 
 		@Override
 		public double convertToDouble(long price) {
-			return PriceUtil.priceToDouble6(price);
+			return PriceMultiplierSupporter.priceToDouble6(price);
 		}
 	},
 
 	BILLION {
 		@Override
 		public long longMultiplier() {
-			return PriceUtil.LONG_MULTIPLIER_BILLION;
+			return PriceMultiplierSupporter.LONG_MULTIPLIER_BILLION;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return PriceUtil.DOUBLE_MULTIPLIER_BILLION;
+			return PriceMultiplierSupporter.DOUBLE_MULTIPLIER_BILLION;
 		}
 
 		@Override
 		public long convertToLong(double price) {
-			return PriceUtil.priceToLong8(price);
+			return PriceMultiplierSupporter.priceToLong8(price);
 		}
 
 		@Override
 		public double convertToDouble(long price) {
-			return PriceUtil.priceToDouble8(price);
+			return PriceMultiplierSupporter.priceToDouble8(price);
 		}
 	},
 

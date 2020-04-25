@@ -1,6 +1,6 @@
-package io.mercury.financial.util;
+package io.mercury.financial.misc;
 
-public final class PriceUtil {
+public final class PriceMultiplierSupporter {
 
 	/**
 	 * 
@@ -98,9 +98,9 @@ public final class PriceUtil {
 
 	public static void main(String[] args) {
 
-		System.out.println(PriceUtil.priceToLong8(4.981312));
+		System.out.println(PriceMultiplierSupporter.priceToLong8(4.981312));
 
-		System.out.println(PriceUtil.priceToDouble8(4981312));
+		System.out.println(PriceMultiplierSupporter.priceToDouble8(4981312));
 
 	}
 
