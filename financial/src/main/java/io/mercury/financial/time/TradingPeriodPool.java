@@ -64,6 +64,13 @@ public final class TradingPeriodPool {
 		return getAfterTradingPeriod(instrument.symbol(), time);
 	}
 
+	/**
+	 * 获取下一个交易时段
+	 * 
+	 * @param symbol
+	 * @param time
+	 * @return
+	 */
 	public TradingPeriod getAfterTradingPeriod(Symbol symbol, LocalTime time) {
 		ImmutableSortedSet<TradingPeriod> tradingPeriodSet = getTradingPeriodSet(symbol);
 		TradingPeriod rtnTradingPeriod = null;
