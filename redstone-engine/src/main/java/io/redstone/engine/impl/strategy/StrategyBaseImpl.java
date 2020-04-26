@@ -43,21 +43,18 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	private String strategyName;
 
-	// 策略订阅的合约
-	private ImmutableList<Instrument> instruments;
-
 	protected Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	// 记录当前策略所有的策略订单订单
 	protected MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
 
-	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, Instrument... instruments) {
+	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId) {
 		this.strategyId = strategyId;
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
 				? "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]"
 				: strategyName;
 		this.subAccountId = subAccountId;
-		this.instruments = ImmutableLists.newList(instruments);
+
 	}
 
 	@Override
@@ -160,18 +157,13 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		log.error("StrategyId -> [{}] throw exception -> [{}]", strategyId, throwable);
 	}
 
-	@Override
-	public ImmutableList<Instrument> instruments() {
-		return instruments;
-	}
-
 	/**
 	 * 
 	 * @param instrument
 	 * @param direction
 	 * @param targetQty
 	 */
-	protected void orderTarget(Instrument instrument, TrdDirection direction, int targetQty) {
+	void orderTarget(Instrument instrument, TrdDirection direction, int targetQty) {
 		orderTarget(instrument, direction, targetQty, -1L, -1);
 	}
 
@@ -181,7 +173,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param direction
 	 * @param targetQty
 	 */
-	protected void orderTarget(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice) {
+	void orderTarget(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice) {
 		orderTarget(instrument, direction, targetQty, limitPrice, 0);
 	}
 
@@ -193,8 +185,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param minPrice   限定价格
 	 * @param maxPrice   允许浮动点差
 	 */
-	protected void orderTarget(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice,
-			int floatTick) {
+	void orderTarget(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
 		LastMarkerData lastMarkerData = LastMarkerDataKeeper.get(instrument);
 		long offerPrice = 0;
 		switch (direction) {
