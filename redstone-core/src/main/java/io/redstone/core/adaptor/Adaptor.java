@@ -15,6 +15,8 @@ public interface Adaptor extends Closeable, Enable {
 
 	String adaptorName();
 
+	Account account();
+
 	boolean startup();
 
 	/**
