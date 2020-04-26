@@ -2,13 +2,11 @@ package io.redstone.engine.impl.strategy;
 
 import java.util.function.Supplier;
 
-import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
-import io.mercury.common.collections.ImmutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringUtil;
@@ -84,7 +82,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
 		if (strategyOrders.notEmpty()) {
-
+			log.info("{} : StrategyOrders not empty, doing...", strategyName);
 		}
 		handleMarketData(marketData);
 	}
