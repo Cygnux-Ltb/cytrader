@@ -17,20 +17,16 @@ public final class RandomTimeSerial implements Serial<RandomTimeSerial> {
 		return new RandomTimeSerial(Assertor.nonNull(dateTime, "dateTime"), 0);
 	}
 
-	public static RandomTimeSerial newWith(RandomTimeSerial lastPoint) {
-		Assertor.nonNull(lastPoint, "lastPoint");
-		return new RandomTimeSerial(lastPoint.timePoint, lastPoint.repeat + 1);
+	public static RandomTimeSerial newWith(RandomTimeSerial previous) {
+		Assertor.nonNull(previous, "previous");
+		return new RandomTimeSerial(previous.timePoint, previous.repeat + 1);
 	}
 
 	private RandomTimeSerial(ZonedDateTime timePoint, long repeat) {
 		this.timePoint = timePoint;
-		this.repeat = repeat;
-		initEpochSecond();
-		initSerialNumber();
-	}
-
-	private void initEpochSecond() {
 		this.epochSecond = timePoint.toEpochSecond();
+		this.repeat = repeat;
+		initSerialNumber();
 	}
 
 	private void initSerialNumber() {
