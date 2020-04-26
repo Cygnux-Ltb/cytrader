@@ -10,9 +10,9 @@ import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.indicator.base.TimePeriodIndicator;
-import io.mercury.indicator.event.TimeBarsEvent;
+import io.mercury.indicator.event.TimeBarEvent;
 
-public final class TimeBarIndicator extends TimePeriodIndicator<TimeBar, TimeBarsEvent> {
+public final class TimeBarIndicator extends TimePeriodIndicator<TimeBar, TimeBarEvent> {
 
 	public TimeBarIndicator(Instrument instrument, TimePeriod period) {
 		super(instrument, period);
@@ -43,10 +43,10 @@ public final class TimeBarIndicator extends TimePeriodIndicator<TimeBar, TimeBar
 		ZonedDateTime marketDataTime = marketData.zonedDateTime();
 		if (currentPointSerial.isPeriod(marketDataTime)) {
 			currentPoint.onMarketData(marketData);
-			for (TimeBarsEvent timeBarsEvent : events)
+			for (TimeBarEvent timeBarsEvent : events)
 				timeBarsEvent.onCurrentTimeBarChanged(currentPoint);
 		} else {
-			for (TimeBarsEvent timeBarsEvent : events)
+			for (TimeBarEvent timeBarsEvent : events)
 				timeBarsEvent.onEndTimeBar(currentPoint);
 			TimeBar newBar = pointSet.nextOf(currentPoint).orElse(null);
 			if (newBar == null) {
@@ -56,9 +56,9 @@ public final class TimeBarIndicator extends TimePeriodIndicator<TimeBar, TimeBar
 			}
 			while (!newBar.serial().isPeriod(marketDataTime)) {
 				newBar.onMarketData(preMarketData);
-				for (TimeBarsEvent timeBarsEvent : events)
+				for (TimeBarEvent timeBarsEvent : events)
 					timeBarsEvent.onStartTimeBar(newBar);
-				for (TimeBarsEvent timeBarsEvent : events)
+				for (TimeBarEvent timeBarsEvent : events)
 					timeBarsEvent.onEndTimeBar(newBar);
 				newBar = pointSet.nextOf(currentPoint).orElseGet(null);
 				if (newBar == null) {
@@ -67,7 +67,7 @@ public final class TimeBarIndicator extends TimePeriodIndicator<TimeBar, TimeBar
 					break;
 				}
 			}
-			for (TimeBarsEvent timeBarsEvent : events)
+			for (TimeBarEvent timeBarsEvent : events)
 				timeBarsEvent.onStartTimeBar(newBar);
 		}
 

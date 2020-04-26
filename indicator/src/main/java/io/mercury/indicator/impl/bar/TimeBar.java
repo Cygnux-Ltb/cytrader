@@ -38,19 +38,19 @@ public final class TimeBar extends TimePeriodPoint<TimeBar> {
 	}
 
 	public double open() {
-		return bar.open;
+		return bar.open();
 	}
 
 	public double highest() {
-		return bar.highest;
+		return bar.highest();
 	}
 
 	public double lowest() {
-		return bar.lowest;
+		return bar.lowest();
 	}
 
 	public double last() {
-		return bar.last;
+		return bar.last();
 	}
 
 	public MutableDoubleList priceRecord() {
