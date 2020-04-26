@@ -90,9 +90,9 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	private volatile boolean isAvailable;
 
-	public FtdcAdaptor(int adaptorId, String adaptorName, @Nonnull StrategyScheduler scheduler,
+	public FtdcAdaptor(int adaptorId, String adaptorName, Account account, @Nonnull StrategyScheduler scheduler,
 			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
-		super(adaptorId, adaptorName);
+		super(adaptorId, adaptorName, account);
 		// 写入Gateway用户信息
 		FtdcConfigInfo configInfo = new FtdcConfigInfo()
 				.setTraderAddr(paramMap.getString(FtdcAdaptorParam.CTP_TraderAddr))
@@ -133,7 +133,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					// 报单错误处理
 					case FtdcInputOrder:
 						FtdcInputOrder ftdcInputOrder = ftdcMsg.getFtdcInputOrder();
-
+						
 						break;
 					// 撤单错误处理1
 					case FtdcInputOrderAction:
@@ -222,7 +222,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	@Override
 	public boolean queryOrder(Account account) {
-		// TODO Auto-generated method stub
+		// TODO
 		return false;
 	}
 
@@ -249,7 +249,6 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	@Override
 	public void close() throws IOException {
-		// TODO Auto-generated method stub
 
 	}
 
