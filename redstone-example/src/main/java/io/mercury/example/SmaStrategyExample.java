@@ -6,9 +6,9 @@ import io.mercury.indicator.event.SmaEvent;
 import io.mercury.indicator.impl.ma.SmaPoint;
 import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.order.Order;
-import io.redstone.engine.impl.strategy.StrategyBaseImpl;
+import io.redstone.engine.impl.strategy.SingleInstrumentStrategy;
 
-public class SmaStrategyExample extends StrategyBaseImpl<BasicMarketData> implements SmaEvent {
+public class SmaStrategyExample extends SingleInstrumentStrategy<BasicMarketData> implements SmaEvent {
 
 	public SmaStrategyExample(int strategyId, int subAccountId, Instrument instrument) {
 		super(strategyId, "SmaStrategyExample", subAccountId, instrument);
@@ -49,16 +49,5 @@ public class SmaStrategyExample extends StrategyBaseImpl<BasicMarketData> implem
 		return null;
 	}
 
-	@Override
-	public void addAdaptor(Adaptor adaptor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected Adaptor getAdaptor(Instrument instrument) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
