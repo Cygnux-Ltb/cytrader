@@ -9,7 +9,7 @@ public interface Indicator<P extends Point<?>, E extends IndicatorEvent> {
 
 	void onMarketData(BasicMarketData marketData);
 
-	void addIndicatorEvent(E event);
+	void addEvent(E event);
 
 	P getPoint(int index);
 

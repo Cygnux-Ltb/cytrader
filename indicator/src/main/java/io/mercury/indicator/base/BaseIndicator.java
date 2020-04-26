@@ -45,7 +45,7 @@ public abstract class BaseIndicator<P extends Point<? extends Serial<?>>, E exte
 	}
 
 	@Override
-	public void addIndicatorEvent(E event) {
+	public void addEvent(E event) {
 		if (event != null) {
 			log.info("Add IndicatorEvent -> name==[{}]", event.eventName());
 			events.add(event);
