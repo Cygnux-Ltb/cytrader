@@ -15,7 +15,7 @@ abstract class BasePoint<S extends Serial<S>> implements Point<S>, Comparable<Po
 	protected BasicMarketData preMarketData;
 
 	protected BasePoint(int index, Instrument instrument) {
-		this.index = Assertor.greaterThan(index, 0, "index");
+		this.index = Assertor.greaterThan(index, -1, "index");
 		this.instrument = instrument;
 	}
 
