@@ -31,6 +31,10 @@
 			<artifactId>adaptor-ftdc</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>redstone-runtime</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

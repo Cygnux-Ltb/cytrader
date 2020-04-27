@@ -1,4 +1,4 @@
-package io.mercury.example;
+package io.redstone.example;
 
 import io.mercury.common.sys.SysProperties;
 

@@ -1,4 +1,4 @@
-package io.mercury.example;
+package io.redstone.example;
 
 import java.util.Properties;
 
@@ -19,7 +19,6 @@ import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.adaptor.AdaptorKeeper;
 import io.redstone.core.strategy.StrategyKeeper;
 import io.redstone.core.strategy.StrategyScheduler;
-import io.redstone.engine.actor.AppGlobalStatus;
 import io.redstone.engine.scheduler.SpscQueueStrategyScheduler;
 
 public final class StartExample {
@@ -35,7 +34,6 @@ public final class StartExample {
 		Properties properties = null;
 
 		// Set Global AppId
-		AppGlobalStatus.setAppId(appId);
 
 		StrategyScheduler scheduler = new SpscQueueStrategyScheduler(BufferSize.POW2_12);
 
@@ -45,7 +43,9 @@ public final class StartExample {
 		// 创建InboundAdaptor
 		int inboundAdaptorId = 1;
 		String inboundAdaptorName = "Ctp-InboundAdaptor";
-		Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, scheduler, adaptorParam);
+		// TODO ADD ACCOUNT
+
+		Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, null, scheduler, adaptorParam);
 
 		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.values());
 
