@@ -18,7 +18,6 @@
 		<!-- adaptor modules -->
 		<module>adaptor-ftdc</module>
 		<module>adaptor-ib</module>
-		<module>adaptor-simulator</module>
 		<!-- financial -->
 		<module>financial</module>
 		<!-- indicator -->
@@ -31,6 +30,7 @@
 		<module>redstone-example</module>
 		<!-- exchange simulator -->
 		<module>redstone-simulator</module>
+		<module>redstone-runtime</module>
 	</modules>
 
 	<properties>
@@ -38,6 +38,8 @@
 		<java.version>1.8</java.version>
 		<commons.version>1.0-SNAPSHOT</commons.version>
 		<transport.version>1.0-SNAPSHOT</transport.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<build>
@@ -115,7 +117,7 @@
 			</dependency>
 			<dependency>
 				<groupId>io.mercury</groupId>
-				<artifactId>redstone-simulator</artifactId>
+				<artifactId>redstone-runtime</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
