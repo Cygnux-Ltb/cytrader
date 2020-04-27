@@ -28,12 +28,6 @@
 
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>transport-http</artifactId>
-			<version>${transport.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.mercury</groupId>
 			<artifactId>financial</artifactId>
 		</dependency>
 
@@ -42,36 +36,6 @@
 			<artifactId>serialization-json</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.alibaba.nacos</groupId>
-			<artifactId>nacos-client</artifactId>
-			<version>1.2.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.code.findbugs</groupId>
-					<artifactId>jsr305</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.alibaba</groupId>
-					<artifactId>fastjson</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.commons</groupId>
-					<artifactId>commons-lang3</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-io</groupId>
-					<artifactId>commons-io</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-
 
 	</dependencies>
 
