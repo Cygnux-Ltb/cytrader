@@ -24,6 +24,12 @@
 			<artifactId>redstone-core</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>redstone-runtime</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
 		<!-- PROD CTP JNI API -->
 		<!-- <dependency>
 			<groupId>thostapi</groupId>
