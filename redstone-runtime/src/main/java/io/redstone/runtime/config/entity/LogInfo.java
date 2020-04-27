@@ -1,4 +1,4 @@
-package io.redstone.engine.config.entity;
+package io.redstone.runtime.config.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

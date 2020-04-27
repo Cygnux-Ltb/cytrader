@@ -1,4 +1,4 @@
-package io.redstone.engine.config.entity;
+package io.redstone.runtime.config.entity;
 
 import java.util.Set;
 import java.util.TreeSet;

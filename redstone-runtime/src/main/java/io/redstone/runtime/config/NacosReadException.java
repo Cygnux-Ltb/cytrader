@@ -1,4 +1,4 @@
-package io.redstone.engine.config;
+package io.redstone.runtime.config;
 
 public final class NacosReadException extends RuntimeException {
 

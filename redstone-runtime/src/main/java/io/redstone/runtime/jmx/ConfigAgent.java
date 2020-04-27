@@ -1,4 +1,4 @@
-package io.redstone.engine.jmx;
+package io.redstone.runtime.jmx;
 
 import java.lang.management.ManagementFactory;
 

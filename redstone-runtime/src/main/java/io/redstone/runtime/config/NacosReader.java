@@ -1,4 +1,4 @@
-package io.redstone.engine.config;
+package io.redstone.runtime.config;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

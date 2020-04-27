@@ -1,4 +1,4 @@
-package io.redstone.engine.config.couchbean;
+package io.redstone.runtime.config.couchbean;
 
 import io.mercury.serialization.json.JsonUtil;
 

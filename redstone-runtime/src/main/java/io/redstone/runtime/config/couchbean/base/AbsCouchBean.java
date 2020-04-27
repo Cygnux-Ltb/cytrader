@@ -1,4 +1,4 @@
-package io.redstone.engine.config.couchbean.base;
+package io.redstone.runtime.config.couchbean.base;
 
 public class AbsCouchBean {
 
