@@ -1,12 +1,13 @@
 package io.redstone.engine.actor;
 
-import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
+import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.JointIdSupporter;
-import io.redstone.core.order.enums.OrdSide;
+import io.mercury.financial.instrument.Instrument;
+import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.specific.ChildOrder;
 
 /**
@@ -16,31 +17,29 @@ import io.redstone.core.order.specific.ChildOrder;
  * 
  * @author yellow013
  */
-public class PositionsActor {
+public final class PositionsKeeper {
 
-	private Logger Log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger Log = CommonLoggerFactory.getLogger(PositionsKeeper.class);
 
 	/**
 	 * subAccount的instrument的最大长仓持仓限制<br>
 	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
-	private MutableLongLongMap subAccountInstrumentLongLimit = MutableMaps.newLongLongHashMap();
+	private static final MutableLongIntMap subAccountInstrumentLongLimit = MutableMaps.newLongIntHashMap();
 
 	/**
 	 * subAccount的instrument最大短仓持仓限制<br>
 	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
-	private MutableLongLongMap subAccountInstrumentShortLimit = MutableMaps.newLongLongHashMap();
+	private static final MutableLongIntMap subAccountInstrumentShortLimit = MutableMaps.newLongIntHashMap();
 
 	/**
 	 * subAccount的instrument持仓数量<br>
 	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
-	private MutableLongLongMap subAccountInstrumentPositions = MutableMaps.newLongLongHashMap();
+	private static final MutableLongIntMap subAccountInstrumentPositions = MutableMaps.newLongIntHashMap();
 
-	public final static PositionsActor Singleton = new PositionsActor();
-
-	private PositionsActor() {
+	private PositionsKeeper() {
 	}
 
 	/**
@@ -52,7 +51,9 @@ public class PositionsActor {
 	 * @param side
 	 * @param limitQty
 	 */
-	public void setSubAccountPositionsLimit(int subAccountId, int instrumentId, long limitLongQty, long limitShortQty) {
+	public static void setSubAccountPositionsLimit(int subAccountId, Instrument instrument, int limitLongQty,
+			int limitShortQty) {
+		int instrumentId = instrument.id();
 		long jointId = JointIdSupporter.jointId(subAccountId, instrumentId);
 		subAccountInstrumentLongLimit.put(jointId, limitLongQty < 0 ? -limitLongQty : limitLongQty);
 		Log.info("Set long positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
@@ -70,10 +71,11 @@ public class PositionsActor {
 	 * @param side
 	 * @return
 	 */
-	public long getSubAccountPositionsLimit(int subAccountId, int instrumentId, OrdSide side) {
+	public long getSubAccountPositionsLimit(int subAccountId, Instrument instrument, TrdDirection direction) {
+		int instrumentId = instrument.id();
 		long jointId = JointIdSupporter.jointId(subAccountId, instrumentId);
 		long currentQty = subAccountInstrumentPositions.get(jointId);
-		switch (side.direction()) {
+		switch (direction) {
 		case Long:
 			return subAccountInstrumentLongLimit.get(jointId) - currentQty;
 		case Short:
@@ -88,10 +90,11 @@ public class PositionsActor {
 	 * 
 	 * @param order
 	 */
-	public void onChildOrder(ChildOrder order) {
-		long jointId = JointIdSupporter.jointId(order.instrument().id(), order.subAccountId());
-		subAccountInstrumentPositions.put(jointId,
-				subAccountInstrumentPositions.get(jointId) + order.ordTradeSet().lastTrade().get().tradeQty());
+	public static void updatePosition(ChildOrder order) {
+		long jointId = JointIdSupporter.jointId(order.subAccountId(), order.instrument().id());
+		int currentPos = subAccountInstrumentPositions.get(jointId);
+		
+		subAccountInstrumentPositions.put(jointId, +order.ordTradeSet().lastTrade().get().tradeQty());
 	}
 
 	public static void main(String[] args) {

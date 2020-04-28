@@ -13,7 +13,7 @@ import io.redstone.core.position.impl.AbsT0Position;
 
 public final class ChinaFuturesPosition extends AbsT0Position {
 
-	private long beforeTodayQty;
+	private int beforeTodayQty;
 
 	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(Capacity.L06_SIZE_64);
 
@@ -21,7 +21,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		this(accountId, instrumentId, 0);
 	}
 
-	ChinaFuturesPosition(int accountId, int instrumentId, long beforeTodayQty) {
+	ChinaFuturesPosition(int accountId, int instrumentId, int beforeTodayQty) {
 		super(accountId, instrumentId);
 		this.beforeTodayQty = beforeTodayQty;
 	}
@@ -36,7 +36,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		} else if (beforeTodayQty > 0) {
 			switch (direction) {
 			case Short:
-				// 需要锁定的Qty小于或等于昨仓,实际锁定量等于请求量
+				// 需要锁定的Qty小于或等于昨仓, 实际锁定量等于请求量
 				if (lockQty <= beforeTodayQty) {
 					// 记录此订单锁定量
 					beforeTodayQtyLockRecord.put(ordSysId, lockQty);
@@ -55,7 +55,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		} else {
 			switch (direction) {
 			case Long:
-				// 需要锁定的Qty小于或等于昨仓,实际锁定量等于请求量
+				// 需要锁定的Qty小于或等于昨仓, 实际锁定量等于请求量
 				long absBeforeTodayQty = Math.abs(beforeTodayQty);
 				if (lockQty <= absBeforeTodayQty) {
 					// 记录此订单锁定量
@@ -74,7 +74,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 	}
 
 	// TODO
-	public double unlockBeforeTodayQty(long ordSysId, TrdDirection direction, long unlockQty) {
+	public int unlockBeforeTodayQty(long ordSysId, TrdDirection direction, int unlockQty) {
 		return 0;
 	}
 
@@ -88,10 +88,10 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		case Filled:
 			switch (order.trdDirection()) {
 			case Long:
-				currentQty(currentQty() + qty.filledQty() - qty.lastFilledQty());
+				setCurrentQty(currentQty() + qty.filledQty() - qty.lastFilledQty());
 				break;
 			case Short:
-				currentQty(currentQty() - qty.filledQty() + qty.lastFilledQty());
+				setCurrentQty(currentQty() - qty.filledQty() + qty.lastFilledQty());
 				break;
 			default:
 				break;
