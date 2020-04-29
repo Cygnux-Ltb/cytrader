@@ -405,4 +405,10 @@ public final class SysMarketData implements MarketData {
 		return this;
 	}
 
+	@Override
+	public MarketDataType marketDataType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

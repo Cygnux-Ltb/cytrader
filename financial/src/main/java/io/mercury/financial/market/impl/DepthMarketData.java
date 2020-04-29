@@ -69,14 +69,19 @@ public final class DepthMarketData implements MarketData {
 		return quotes;
 	}
 
-	public DepthMarketData addAskQuote(int level, long price, long volume) throws QuoteLevelOverflowException {
+	public DepthMarketData addAskQuote(int level, long price, int volume) throws QuoteLevelOverflowException {
 		quotes.addAskQuote(level, price, volume);
 		return this;
 	}
 
-	public DepthMarketData addBidQuote(int level, long price, long volume) throws QuoteLevelOverflowException {
+	public DepthMarketData addBidQuote(int level, long price, int volume) throws QuoteLevelOverflowException {
 		quotes.addBidQuote(level, price, volume);
 		return this;
+	}
+
+	@Override
+	public MarketDataType marketDataType() {
+		return MarketDataType.Depth;
 	}
 
 	public static final class Quotes {
@@ -84,34 +89,28 @@ public final class DepthMarketData implements MarketData {
 		private AskQuote[] askQuotes;
 		private BidQuote[] bidQuotes;
 
-		private int askLevel;
-		private int bidLevel;
+		private int level;
 
-		private Quotes(int askLevel, int bidLevel) {
-			this.askLevel = askLevel;
-			this.bidLevel = bidLevel;
-			this.askQuotes = new AskQuote[askLevel];
+		private Quotes(int level) {
+			this.level = level;
+			this.askQuotes = new AskQuote[level];
 			for (int i = 0; i < askQuotes.length; i++)
 				askQuotes[i] = new AskQuote(0, 0);
-			this.bidQuotes = new BidQuote[bidLevel];
+			this.bidQuotes = new BidQuote[level];
 			for (int i = 0; i < bidQuotes.length; i++)
 				bidQuotes[i] = new BidQuote(0, 0);
 		}
 
 		public static Quotes newLevel5() {
-			return new Quotes(5, 5);
+			return new Quotes(5);
 		}
 
 		public static Quotes newLevel10() {
-			return new Quotes(10, 10);
+			return new Quotes(10);
 		}
 
 		public static Quotes newQuotes(int level) {
-			return new Quotes(level, level);
-		}
-
-		public static Quotes newQuotes(int askLevel, int bidLevel) {
-			return new Quotes(askLevel, bidLevel);
+			return new Quotes(level);
 		}
 
 		public AskQuote[] getAskQuotes() {
@@ -122,7 +121,11 @@ public final class DepthMarketData implements MarketData {
 			return bidQuotes;
 		}
 
-		public Quotes addQuote(int levelIndex, long price, long volume, QuoteType type) {
+		public int getLevel() {
+			return level;
+		}
+
+		public Quotes addQuote(int levelIndex, long price, int volume, QuoteType type) {
 			switch (type) {
 			case Bid:
 				return addBidQuote(levelIndex, price, volume);
@@ -133,18 +136,18 @@ public final class DepthMarketData implements MarketData {
 			}
 		}
 
-		public Quotes addAskQuote(int levelIndex, long price, long volume) throws QuoteLevelOverflowException {
-			if (levelIndex >= askLevel)
+		public Quotes addAskQuote(int levelIndex, long price, int volume) throws QuoteLevelOverflowException {
+			if (levelIndex >= level)
 				throw new QuoteLevelOverflowException(
-						"askLevelIndex == " + levelIndex + ", array length is " + askLevel);
+						"Get askLevelIndex == " + levelIndex + ", array length is " + level);
 			askQuotes[levelIndex].setPrice(price).setVolume(volume);
 			return this;
 		}
 
-		public Quotes addBidQuote(int levelIndex, long price, long volume) throws QuoteLevelOverflowException {
-			if (levelIndex >= bidLevel)
+		public Quotes addBidQuote(int levelIndex, long price, int volume) throws QuoteLevelOverflowException {
+			if (levelIndex >= level)
 				throw new QuoteLevelOverflowException(
-						"bidLevelIndex == " + levelIndex + ", array length is " + bidLevel);
+						"Get bidLevelIndex == " + levelIndex + ", array length is " + level);
 			bidQuotes[levelIndex].setPrice(price).setVolume(volume);
 			return this;
 		}
@@ -158,9 +161,9 @@ public final class DepthMarketData implements MarketData {
 	private static abstract class Quote<T extends Quote<T>> implements Comparable<T> {
 
 		protected long price;
-		protected long volume;
+		protected int volume;
 
-		protected Quote(long price, long volume) {
+		protected Quote(long price, int volume) {
 			this.price = price;
 			this.volume = volume;
 		}
@@ -169,20 +172,20 @@ public final class DepthMarketData implements MarketData {
 			return price;
 		}
 
-		public long getVolume() {
+		public int getVolume() {
 			return volume;
 		}
 
 		public abstract T setPrice(long price);
 
-		public abstract T setVolume(long volume);
+		public abstract T setVolume(int volume);
 
 		public abstract QuoteType getType();
 	}
 
 	public static final class AskQuote extends Quote<AskQuote> {
 
-		private AskQuote(long price, long volume) {
+		private AskQuote(long price, int volume) {
 			super(price, volume);
 		}
 
@@ -203,7 +206,7 @@ public final class DepthMarketData implements MarketData {
 		}
 
 		@Override
-		public AskQuote setVolume(long volume) {
+		public AskQuote setVolume(int volume) {
 			this.volume = volume;
 			return null;
 		}
@@ -212,7 +215,7 @@ public final class DepthMarketData implements MarketData {
 
 	public static final class BidQuote extends Quote<BidQuote> {
 
-		private BidQuote(long price, long volume) {
+		private BidQuote(long price, int volume) {
 			super(price, volume);
 		}
 
@@ -233,7 +236,7 @@ public final class DepthMarketData implements MarketData {
 		}
 
 		@Override
-		public BidQuote setVolume(long volume) {
+		public BidQuote setVolume(int volume) {
 			this.volume = volume;
 			return this;
 		}
