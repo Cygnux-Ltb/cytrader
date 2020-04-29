@@ -30,7 +30,7 @@ public final class RabbitmqStrategyScheduler implements StrategyScheduler {
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	private static Logger log = CommonLoggerFactory.getLogger(RabbitmqStrategyScheduler.class);
+	private Logger log = CommonLoggerFactory.getLogger(RabbitmqStrategyScheduler.class);
 
 	public RabbitmqStrategyScheduler(BufferSize size) {
 		this.despatchQueue = new SpscQueue<>("SPSCStrategyScheduler-Queue", size, true, despatchMsg -> {
@@ -56,7 +56,7 @@ public final class RabbitmqStrategyScheduler implements StrategyScheduler {
 			case AdaptorEvent:
 				int adaptorId = despatchMsg.getAdaptorId();
 				AdaptorStatus adaptorStatus = despatchMsg.getAdaptorStatus();
-				
+
 				break;
 			default:
 				throw new IllegalStateException("mark illegal");
