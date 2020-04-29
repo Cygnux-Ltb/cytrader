@@ -16,8 +16,8 @@ import io.mercury.financial.vector.TimePeriod;
 import io.mercury.ftdc.adaptor.FtdcAdaptor;
 import io.mercury.ftdc.adaptor.FtdcAdaptorParam;
 import io.redstone.core.adaptor.Adaptor;
-import io.redstone.core.adaptor.AdaptorKeeper;
-import io.redstone.core.strategy.StrategyKeeper;
+import io.redstone.core.keeper.AdaptorKeeper;
+import io.redstone.core.keeper.StrategyKeeper;
 import io.redstone.core.strategy.StrategyScheduler;
 import io.redstone.engine.scheduler.SpscQueueStrategyScheduler;
 
@@ -62,7 +62,7 @@ public final class StartExample {
 		example.initialize(() -> true);
 
 		StrategyKeeper.putStrategy(example);
-		AdaptorKeeper.putAdaptor(subAccountId, adaptor);
+		AdaptorKeeper.putAdaptor(adaptor);
 
 		adaptor.startup();
 
