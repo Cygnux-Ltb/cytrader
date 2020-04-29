@@ -6,18 +6,17 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-@Deprecated
-public final class AppGlobalStatus {
+public final class ApplicationStatus {
 
-	private int maxLimit = 20;
+	private final int maxLimit = 20;
 
-	private int appId = 0;
+	private volatile int appId = 0;
 
 	private AppStatus currentStatus = AppStatus.Unknown;
 
-	private final static AppGlobalStatus INSTANCE = new AppGlobalStatus();
+	private final static ApplicationStatus INSTANCE = new ApplicationStatus();
 
-	private AppGlobalStatus() {
+	private ApplicationStatus() {
 	}
 
 	public static int appId() {
@@ -37,7 +36,7 @@ public final class AppGlobalStatus {
 			if (appId > 0 && appId < maxLimit)
 				this.appId = appId;
 			else
-				throw new RuntimeException("AppId is illegal.");
+				throw new RuntimeException("appId :" + appId + "is illegal.");
 		}
 	}
 

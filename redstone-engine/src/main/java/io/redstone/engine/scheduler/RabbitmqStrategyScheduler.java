@@ -22,7 +22,7 @@ import io.redstone.core.strategy.StrategyScheduler;
  *         策略执行引擎与整体框架分离
  *
  */
-public final class SpscQueueStrategyScheduler implements StrategyScheduler {
+public final class RabbitmqStrategyScheduler implements StrategyScheduler {
 
 	private SpscQueue<DespatchMsg> despatchQueue;
 
@@ -30,9 +30,9 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	private static Logger log = CommonLoggerFactory.getLogger(SpscQueueStrategyScheduler.class);
+	private static Logger log = CommonLoggerFactory.getLogger(RabbitmqStrategyScheduler.class);
 
-	public SpscQueueStrategyScheduler(BufferSize size) {
+	public RabbitmqStrategyScheduler(BufferSize size) {
 		this.despatchQueue = new SpscQueue<>("SPSCStrategyScheduler-Queue", size, true, despatchMsg -> {
 			switch (despatchMsg.mark()) {
 			case MarketData:

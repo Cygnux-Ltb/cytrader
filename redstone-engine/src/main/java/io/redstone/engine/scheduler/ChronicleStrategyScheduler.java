@@ -1,7 +1,7 @@
 package io.redstone.engine.scheduler;
 
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.redstone.core.adaptor.AdaptorStatus;
+import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.Strategy;
 import io.redstone.core.strategy.StrategyScheduler;
