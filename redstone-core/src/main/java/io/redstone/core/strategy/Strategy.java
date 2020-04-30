@@ -8,7 +8,7 @@ import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.adaptor.Adaptor;
-import io.redstone.core.adaptor.AdaptorStatus;
+import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
 import io.redstone.core.order.Order;
 
 public interface Strategy extends Enable {
