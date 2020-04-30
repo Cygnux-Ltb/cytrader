@@ -2,8 +2,8 @@ package io.redstone.core.account;
 
 public final class Balance {
 
-	private long margin = 0L;
-	private long credit = 0L;
+	private int margin = 0;
+	private int credit = 0;
 
 	Balance() {
 	}
@@ -12,7 +12,7 @@ public final class Balance {
 		return margin;
 	}
 
-	public void setMargin(long margin) {
+	public void setMargin(int margin) {
 		this.margin = margin;
 	}
 
@@ -20,7 +20,7 @@ public final class Balance {
 		return credit;
 	}
 
-	public void setCredit(long credit) {
+	public void setCredit(int credit) {
 		this.credit = credit;
 	}
 
