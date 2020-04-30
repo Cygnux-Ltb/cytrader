@@ -1,4 +1,4 @@
-package io.redstone.core.order.utils;
+package io.redstone.core.order;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -24,7 +24,7 @@ import io.mercury.common.datetime.EpochTime;
  * @creation 2019年4月13日
  */
 @NotThreadSafe
-public final class OrdSysIdGenerate {
+public final class OrdSysIdGenerator {
 
 	private static int increment;
 
@@ -59,7 +59,7 @@ public final class OrdSysIdGenerate {
 
 		for (int i = 0; i < 1000000; i++) {
 
-			System.out.println(OrdSysIdGenerate.next(100));
+			System.out.println(OrdSysIdGenerator.next(100));
 		}
 
 	}

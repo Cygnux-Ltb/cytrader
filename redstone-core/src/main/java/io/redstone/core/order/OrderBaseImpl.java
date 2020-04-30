@@ -7,7 +7,6 @@ import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.OrdTimestamps;
-import io.redstone.core.order.utils.OrdSysIdGenerate;
 
 public abstract class OrderBaseImpl implements Order {
 
@@ -63,7 +62,7 @@ public abstract class OrderBaseImpl implements Order {
 
 	protected OrderBaseImpl(int strategyId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, TrdDirection trdDirection,
 			OrdType ordType, int subAccountId) {
-		this.ordSysId = OrdSysIdGenerate.next(strategyId);
+		this.ordSysId = OrdSysIdGenerator.next(strategyId);
 		this.strategyId = strategyId;
 		this.instrument = instrument;
 		this.ordQty = ordQty;

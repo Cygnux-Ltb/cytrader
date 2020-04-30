@@ -5,16 +5,15 @@ import java.util.Optional;
 import org.eclipse.collections.api.list.MutableList;
 
 import io.mercury.common.collections.MutableLists;
-import io.mercury.financial.instrument.Instrument.MarketConstant;
 
-public final class OrdTradeSet {
+public final class TrdList {
 
 	private long ordSysId;
 	private int serial = -1;
 
-	private MutableList<OrdTrade> allTrade = MutableLists.newFastList(8);
+	private MutableList<TrdRecord> records = MutableLists.newFastList(8);
 
-	public OrdTradeSet(long ordSysId) {
+	public TrdList(long ordSysId) {
 		this.ordSysId = ordSysId;
 	}
 
@@ -22,39 +21,39 @@ public final class OrdTradeSet {
 		return ordSysId;
 	}
 
-	public MutableList<OrdTrade> allOrdTrade() {
-		return allTrade;
+	public MutableList<TrdRecord> records() {
+		return records;
 	}
 
 	public boolean isEmpty() {
-		return allTrade.isEmpty();
+		return records.isEmpty();
 	}
 
-	public Optional<OrdTrade> firstTrade() {
-		return allTrade.getFirstOptional();
+	public Optional<TrdRecord> first() {
+		return records.getFirstOptional();
 	}
 
-	public Optional<OrdTrade> lastTrade() {
-		return allTrade.getLastOptional();
+	public Optional<TrdRecord> last() {
+		return records.getLastOptional();
 	}
 
-	public void addNewTrade(long epochTime, long tradePrice, long qty) {
-		allTrade.add(new OrdTrade(++serial, ordSysId, epochTime, tradePrice, qty));
+	public void addNewRecord(long epochTime, long tradePrice, int qty) {
+		records.add(new TrdRecord(++serial, ordSysId, epochTime, tradePrice, qty));
 	}
 
 	/**
 	 * tradePrice fix use {@link MarketConstant#PriceMultiplier}
 	 */
-	public static class OrdTrade implements Comparable<OrdTrade> {
+	public static class TrdRecord implements Comparable<TrdRecord> {
 
 		private int serial;
 		private long ordSysId;
 		private long epochTime;
 
 		private long tradePrice;
-		private long tradeQty;
+		private int tradeQty;
 
-		public OrdTrade(int serial, long ordSysId, long epochTime, long tradePrice, long tradeQty) {
+		public TrdRecord(int serial, long ordSysId, long epochTime, long tradePrice, int tradeQty) {
 			super();
 			this.ordSysId = ordSysId;
 			this.serial = serial;
@@ -79,12 +78,12 @@ public final class OrdTradeSet {
 			return tradePrice;
 		}
 
-		public long tradeQty() {
+		public int tradeQty() {
 			return tradeQty;
 		}
 
 		@Override
-		public int compareTo(OrdTrade o) {
+		public int compareTo(TrdRecord o) {
 			return this.serial < o.serial ? -1 : this.serial > o.serial ? 1 : 0;
 		}
 

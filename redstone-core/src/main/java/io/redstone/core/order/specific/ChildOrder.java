@@ -7,7 +7,7 @@ import io.redstone.core.order.enums.TrdAction;
 import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.order.structure.OrdTradeSet;
+import io.redstone.core.order.structure.TrdList;
 
 /**
  * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ParentOrder拆分而来
@@ -22,13 +22,13 @@ public final class ChildOrder extends ActualOrder {
 	/**
 	 * 子订单成交列表
 	 */
-	private OrdTradeSet ordTradeSet;
+	private TrdList trdList;
 
 	public ChildOrder(int strategyId, long strategyOrdId, long parentOrdId, Instrument instrument, OrdQty ordQty,
 			OrdPrice ordPrice, TrdDirection trdDirection, OrdType ordType, TrdAction trdAction, int subAccountId) {
 		super(strategyId, strategyOrdId, instrument, ordQty, ordPrice, trdDirection, ordType, trdAction, subAccountId);
 		this.parentOrdId = parentOrdId;
-		this.ordTradeSet = new OrdTradeSet(ordSysId());
+		this.trdList = new TrdList(ordSysId());
 	}
 
 	@Override
@@ -41,8 +41,8 @@ public final class ChildOrder extends ActualOrder {
 		return parentOrdId;
 	}
 
-	public OrdTradeSet ordTradeSet() {
-		return ordTradeSet;
+	public TrdList trdList() {
+		return trdList;
 	}
 
 }
