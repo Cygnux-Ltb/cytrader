@@ -30,6 +30,7 @@
 		<module>redstone-example</module>
 		<!-- exchange simulator -->
 		<module>redstone-simulator</module>
+		<!-- runtime -->
 		<module>redstone-runtime</module>
 	</modules>
 
