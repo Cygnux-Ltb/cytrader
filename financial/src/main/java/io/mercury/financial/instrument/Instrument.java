@@ -29,8 +29,8 @@ public interface Instrument extends Enable {
 		return PriorityCloseType.NONE;
 	}
 
-	public interface MarketConstant {
-		long PriceMultiplier = 100_000_000L;
+	default PriceMultiplier priceMultiplier() {
+		return symbol().priceMultiplier();
 	}
 
 	public static enum InstrumentType {
@@ -45,8 +45,6 @@ public interface Instrument extends Enable {
 
 		FOREX,
 
-		FUND,
-
 		;
 
 	}
@@ -54,5 +52,5 @@ public interface Instrument extends Enable {
 	public static enum PriorityCloseType {
 		NONE, BEFORE_TODAY
 	}
-	
+
 }

@@ -7,11 +7,13 @@ import io.mercury.financial.vector.TradingPeriod;
 public interface Symbol {
 
 	int id();
-	
+
 	String code();
 
 	ImmutableSortedSet<TradingPeriod> tradingPeriodSet();
 
 	Exchange exchange();
+
+	PriceMultiplier priceMultiplier();
 
 }
