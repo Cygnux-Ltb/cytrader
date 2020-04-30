@@ -1,6 +1,6 @@
 package io.mercury.ftdc.adaptor;
 
-import static io.mercury.financial.misc.PriceMultiplierSupporter.priceToLong4;
+import static io.mercury.financial.instrument.PriceMultiplier.PriceSupporter.priceToLong4;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -26,7 +26,6 @@ import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.instrument.InstrumentKeeper;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.CancelOrderConverter;
 import io.mercury.ftdc.adaptor.converter.NewOrderConverter;
@@ -44,6 +43,7 @@ import io.mercury.ftdc.gateway.bean.FtdcTrade;
 import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.AdaptorBaseImpl;
+import io.redstone.core.keeper.InstrumentKeeper;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
@@ -68,6 +68,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				depthDate, depthTime);
 
 		return new BasicMarketData(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZone.CST),
+				
+				
 				priceToLong4(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
 				priceToLong4(depthMarketData.getTurnover())).setBidPrice1(priceToLong4(depthMarketData.getBidPrice1()))
 						.setBidVolume1(depthMarketData.getBidVolume1())

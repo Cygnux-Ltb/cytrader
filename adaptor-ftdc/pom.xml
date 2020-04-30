@@ -27,7 +27,6 @@
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>redstone-runtime</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		
 		<!-- PROD CTP JNI API -->

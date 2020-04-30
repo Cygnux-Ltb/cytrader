@@ -4,7 +4,7 @@ public final class FtdcAdaptorStartup {
 
 
 	public static void main(String[] args) {
-//		
+		
 //		Assertor.requiredLength(args, 4, "input args");
 //		String confAddr = args[0];
 //		String group = args[1];
