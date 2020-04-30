@@ -8,13 +8,13 @@ public interface Position extends Comparable<Position> {
 
 	int instrumentId();
 
-	long currentQty();
+	int currentQty();
 
-	void currentQty(long qty);
+	void setCurrentQty(int qty);
 
-	long tradeableQty();
+	int tradeableQty();
 
-	void tradeableQty(long qty);
+	void setTradeableQty(int qty);
 
 	void updatePosition(Order order);
 

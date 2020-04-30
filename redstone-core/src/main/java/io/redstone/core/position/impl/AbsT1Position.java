@@ -2,20 +2,20 @@ package io.redstone.core.position.impl;
 
 public abstract class AbsT1Position extends AbsPosition {
 
-	private long tradeableQty;
+	private int tradeableQty;
 
-	public AbsT1Position(int accountId, int instrumentId, long tradeableQty) {
+	public AbsT1Position(int accountId, int instrumentId, int tradeableQty) {
 		super(accountId, instrumentId);
 		this.tradeableQty = tradeableQty;
 	}
 
 	@Override
-	public long tradeableQty() {
+	public int tradeableQty() {
 		return tradeableQty;
 	}
 
 	@Override
-	public void tradeableQty(long tradeableQty) {
+	public void setTradeableQty(int tradeableQty) {
 		this.tradeableQty = tradeableQty;
 	}
 

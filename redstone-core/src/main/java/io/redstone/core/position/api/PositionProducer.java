@@ -4,9 +4,9 @@ package io.redstone.core.position.api;
 public interface PositionProducer<T extends Position> {
 
 	default T produce(int accountId, int instrumentId) {
-		return produce(accountId, instrumentId, 0L);
+		return produce(accountId, instrumentId, 0);
 	}
 
-	T produce(int accountId, int instrumentId, long qty);
+	T produce(int accountId, int instrumentId, int qty);
 
 }
