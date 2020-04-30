@@ -1,12 +1,17 @@
-package io.redstone.core.account;
+package io.redstone.core.keeper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
+import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
+import io.redstone.core.account.Account;
+import io.redstone.core.account.AccountNotFoundException;
+import io.redstone.core.account.SubAccount;
 
 /**
  * 
@@ -18,19 +23,16 @@ import io.mercury.common.util.Assertor;
 @NotThreadSafe
 public final class AccountKeeper {
 
-	// private static final Logger log =
-	// CommonLoggerFactory.getLogger(AccountKeeper.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(AccountKeeper.class);
 
 	// 存储Account信息, 一对一关系,以accountId索引
-	private MutableIntObjectMap<Account> accountMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<Account> AccountMap = MutableMaps.newIntObjectHashMap();
 
 	// 存储SubAccount信息, 一对一关系,以subAccountId索引
-	private MutableIntObjectMap<SubAccount> subAccountMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
 
 	// 存储Account信息, 一对一关系,以subAccountId索引
-	private MutableIntObjectMap<Account> accountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
-
-	private final static AccountKeeper Singleton = new AccountKeeper();
+	private static final MutableIntObjectMap<Account> AccountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
 
 	private AccountKeeper() {
 	}
@@ -39,29 +41,28 @@ public final class AccountKeeper {
 		Assertor.requiredLength(accounts, 1, "accounts");
 		for (Account account : accounts) {
 			for (SubAccount subAccount : account.subAccounts()) {
-				Singleton.subAccountMap.put(subAccount.subAccountId(), subAccount);
-				Singleton.accountMapBySubAccountId.put(subAccount.subAccountId(), account);
+				SubAccountMap.put(subAccount.subAccountId(), subAccount);
+				AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
 			}
-			Singleton.accountMap.put(account.accountId(), account);
+			AccountMap.put(account.accountId(), account);
 		}
 	}
 
 	public static void putAccount(@Nonnull SubAccount... subAccounts) {
 		Assertor.requiredLength(subAccounts, 1, "subAccounts");
 		for (SubAccount subAccount : subAccounts) {
-			Singleton.subAccountMap.put(subAccount.subAccountId(), subAccount);
+			SubAccountMap.put(subAccount.subAccountId(), subAccount);
 			Account account = subAccount.account();
-			Singleton.accountMapBySubAccountId.put(subAccount.subAccountId(), account);
-			Singleton.accountMap.put(account.accountId(), account);
+			AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
+			AccountMap.put(account.accountId(), account);
 		}
 	}
 
 	@Nonnull
 	public static Account getAccountById(int accountId) throws AccountNotFoundException {
-		Account account = Singleton.accountMap.get(accountId);
+		Account account = AccountMap.get(accountId);
 		if (account == null)
-			throw new AccountNotFoundException(
-					"Account not found : accountId[" + accountId + "] no mapping object");
+			throw new AccountNotFoundException("Account not found : accountId[" + accountId + "] no mapping object");
 		return account;
 	}
 
@@ -79,7 +80,7 @@ public final class AccountKeeper {
 
 	@Nonnull
 	public static Account getAccountBySubAccountId(int subAccountId) throws AccountNotFoundException {
-		Account account = Singleton.accountMapBySubAccountId.get(subAccountId);
+		Account account = AccountMapBySubAccountId.get(subAccountId);
 		if (account == null)
 			throw new AccountNotFoundException(
 					"Account not found : subAccountId[" + subAccountId + "] no mapping object");
@@ -88,7 +89,7 @@ public final class AccountKeeper {
 
 	@Nonnull
 	public static SubAccount getSubAccount(int subAccountId) throws AccountNotFoundException {
-		SubAccount subAccount = Singleton.subAccountMap.get(subAccountId);
+		SubAccount subAccount = SubAccountMap.get(subAccountId);
 		if (subAccount == null)
 			throw new AccountNotFoundException(
 					"SubAccount not found : subAccountId[" + subAccountId + "] no mapping object");

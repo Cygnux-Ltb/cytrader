@@ -1,4 +1,4 @@
-package io.redstone.core.order;
+package io.redstone.core.keeper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -14,7 +14,8 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.redstone.core.account.AccountKeeper;
+import io.redstone.core.order.Order;
+import io.redstone.core.order.OrderBook;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.specific.ParentOrder;
@@ -36,35 +37,32 @@ public final class OrderKeeper {
 	/**
 	 * 存储所有的order
 	 */
-	private final OrderBook allOrders = OrderBook.newInstance(Capacity.L16_SIZE_65536);
+	private static final OrderBook AllOrders = OrderBook.newInstance(Capacity.L12_SIZE_4096);
 
 	/**
 	 * 按照subAccount分组存储
 	 */
-	private final MutableIntObjectMap<OrderBook> subAccountOrderBookMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<OrderBook> SubAccountOrderBooks = MutableMaps.newIntObjectHashMap();
 
 	/**
 	 * 按照account分组存储
 	 */
-	private final MutableIntObjectMap<OrderBook> accountOrderBookMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<OrderBook> AccountOrderBooks = MutableMaps.newIntObjectHashMap();
 
 	/**
 	 * 按照strategy分组存储
 	 */
-	private final MutableIntObjectMap<OrderBook> strategyOrderBookMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<OrderBook> StrategyOrderBooks = MutableMaps.newIntObjectHashMap();
 
 	/**
 	 * 按照instrument分组存储
 	 */
-	private final MutableIntObjectMap<OrderBook> instrumentOrderBookMap = MutableMaps.newIntObjectHashMap();
-
-	private static final OrderKeeper Singleton = new OrderKeeper();
+	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = MutableMaps.newIntObjectHashMap();
 
 	private OrderKeeper() {
 	}
 
 	public static void updateOrder(Order order) {
-		OrderBook allOrders = getAllOrders();
 		int subAccountId = order.subAccountId();
 		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
 		OrderBook subAccountOrders = getSubAccountOrders(subAccountId);
@@ -73,7 +71,7 @@ public final class OrderKeeper {
 		OrderBook instrumentOrders = getInstrumentOrders(order.instrument());
 		switch (order.ordStatus()) {
 		case PendingNew:
-			allOrders.putOrder(order);
+			AllOrders.putOrder(order);
 			subAccountOrders.putOrder(order);
 			accountOrders.putOrder(order);
 			strategyOrders.putOrder(order);
@@ -83,7 +81,7 @@ public final class OrderKeeper {
 		case Canceled:
 		case NewRejected:
 		case CancelRejected:
-			allOrders.terminatedOrder(order);
+			AllOrders.terminatedOrder(order);
 			subAccountOrders.terminatedOrder(order);
 			accountOrders.terminatedOrder(order);
 			strategyOrders.terminatedOrder(order);
@@ -96,32 +94,30 @@ public final class OrderKeeper {
 	}
 
 	public static boolean containsOrder(long ordSysId) {
-		return Singleton.allOrders.containsOrder(ordSysId);
+		return AllOrders.containsOrder(ordSysId);
 	}
 
 	public static Order getOrder(long ordSysId) {
-		return Singleton.allOrders.getOrder(ordSysId);
+		return AllOrders.getOrder(ordSysId);
 	}
 
-	public static OrderBook getAllOrders() {
-		return Singleton.allOrders;
-	}
+
 
 	public static OrderBook getSubAccountOrders(int subAccountId) {
-		return Singleton.subAccountOrderBookMap.getIfAbsentPut(subAccountId,
+		return SubAccountOrderBooks.getIfAbsentPut(subAccountId,
 				OrderBook.newInstance(Capacity.L07_SIZE_128));
 	}
 
 	public static OrderBook getAccountOrders(int accountId) {
-		return Singleton.accountOrderBookMap.getIfAbsentPut(accountId, OrderBook.newInstance(Capacity.L08_SIZE_256));
+		return AccountOrderBooks.getIfAbsentPut(accountId, OrderBook.newInstance(Capacity.L08_SIZE_256));
 	}
 
 	public static OrderBook getStrategyOrders(int strategyId) {
-		return Singleton.strategyOrderBookMap.getIfAbsentPut(strategyId, OrderBook.newInstance(Capacity.L10_SIZE_1024));
+		return StrategyOrderBooks.getIfAbsentPut(strategyId, OrderBook.newInstance(Capacity.L10_SIZE_1024));
 	}
 
 	public static OrderBook getInstrumentOrders(Instrument instrument) {
-		return Singleton.instrumentOrderBookMap.getIfAbsentPut(instrument.id(),
+		return InstrumentOrderBooks.getIfAbsentPut(instrument.id(),
 				OrderBook.newInstance(Capacity.L11_SIZE_2048));
 	}
 

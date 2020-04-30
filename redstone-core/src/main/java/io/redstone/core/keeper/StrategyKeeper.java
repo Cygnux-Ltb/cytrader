@@ -1,4 +1,4 @@
-package io.redstone.core.strategy;
+package io.redstone.core.keeper;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -10,45 +10,49 @@ import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
+import io.redstone.core.strategy.Strategy;
 
 @NotThreadSafe
 public final class StrategyKeeper {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(StrategyKeeper.class);
 
-	private MutableIntObjectMap<Strategy> strategyMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<Strategy> Strategys = MutableMaps.newIntObjectHashMap();
 
 	// Map<instrumentId, List<Strategy>>
-	private MutableIntObjectMap<MutableList<Strategy>> subscribedStrategysMap = MutableMaps.newIntObjectHashMap();
-
-	public static final StrategyKeeper InnerInstance = new StrategyKeeper();
+	private static final MutableIntObjectMap<MutableList<Strategy>> SubscribedInstrumentList = MutableMaps
+			.newIntObjectHashMap();
 
 	private StrategyKeeper() {
 	}
 
+	/**
+	 * 添加策略并置为激活, 同时添加策略订阅的Instrument
+	 * 
+	 * @param strategy
+	 */
 	public static void putStrategy(Strategy strategy) {
-		InnerInstance.strategyMap.put(strategy.strategyId(), strategy);
-		log.info("Put to strategyMap. strategyId==[{}]", strategy.strategyId());
+		Strategys.put(strategy.strategyId(), strategy);
+		log.info("StrategyKeeper :: Put strategy, strategyId==[{}]", strategy.strategyId());
 		strategy.instruments().forEach(instrument -> {
-			InnerInstance.subscribedStrategysMap.getIfAbsentPut(instrument.id(), MutableLists::newFastList)
-					.add(strategy);
-			log.info("Put to subscribedStrategysMap. strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
-					instrument.id());
+			SubscribedInstrumentList.getIfAbsentPut(instrument.id(), MutableLists::newFastList).add(strategy);
+			log.info("StrategyKeeper :: Add subscribed instrument, strategyId==[{}], instrumentId==[{}]",
+					strategy.strategyId(), instrument.id());
 		});
 		strategy.enable();
-		log.info("Strategy is enable. strategyId==[{}]", strategy.strategyId());
+		log.info("StrategyKeeper :: Strategy is enable, strategyId==[{}]", strategy.strategyId());
 	}
 
 	public static Strategy getStrategy(int strategyId) {
-		return InnerInstance.strategyMap.get(strategyId);
+		return Strategys.get(strategyId);
 	}
 
 	public static MutableList<Strategy> getSubscribedStrategys(int instrumentId) {
-		return InnerInstance.subscribedStrategysMap.get(instrumentId);
+		return SubscribedInstrumentList.get(instrumentId);
 	}
 
 	public static MutableList<Strategy> getSubscribedStrategys(Instrument instrument) {
-		return InnerInstance.subscribedStrategysMap.get(instrument.id());
+		return SubscribedInstrumentList.get(instrument.id());
 	}
 
 }
