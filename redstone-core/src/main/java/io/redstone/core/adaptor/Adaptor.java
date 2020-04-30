@@ -67,4 +67,10 @@ public interface Adaptor extends Closeable, Enable {
 	 */
 	boolean queryBalance(@Nonnull Account account);
 
+	public static enum AdaptorStatus {
+
+		MdEnable, MdDisable, TdEnable, TdDisable
+
+	}
+
 }

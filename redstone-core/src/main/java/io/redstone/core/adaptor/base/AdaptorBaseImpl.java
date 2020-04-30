@@ -11,14 +11,14 @@ import io.redstone.core.adaptor.Adaptor;
 
 public abstract class AdaptorBaseImpl extends EnableComponent implements Adaptor {
 
-	private int adaptorId;
 	private Account account;
 
+	private int adaptorId;
 	private String adaptorName;
 
 	public AdaptorBaseImpl(int adaptorId, String adaptorName, @Nonnull Account account) {
-		this.adaptorId = adaptorId;
 		this.account = Assertor.nonNull(account, "account");
+		this.adaptorId = adaptorId;
 		this.adaptorName = isNullOrEmpty(adaptorName) ? "Adaptor-" + adaptorId : adaptorName;
 	}
 

@@ -2,13 +2,18 @@ package io.redstone.core.adaptor.dto;
 
 import java.util.List;
 
-public class ReplyPositions extends InvestorDto {
+public final class ReplyPositions {
 
+	private int investorId;
 	private List<ReplyPosition> positions;
 
 	public ReplyPositions(int investorId, List<ReplyPosition> positions) {
-		super(investorId);
+		this.investorId = investorId;
 		this.positions = positions;
+	}
+
+	public int getInvestorId() {
+		return investorId;
 	}
 
 	public List<ReplyPosition> getPositions() {
