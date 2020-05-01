@@ -2,6 +2,8 @@ package io.redstone.engine.impl.strategy;
 
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
@@ -9,17 +11,17 @@ import org.slf4j.Logger;
 import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.adaptor.Adaptor;
-import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
 import io.redstone.core.keeper.AccountKeeper;
 import io.redstone.core.keeper.InstrumentKeeper;
 import io.redstone.core.keeper.LastMarkerDataKeeper;
-import io.redstone.core.keeper.OrderKeeper;
 import io.redstone.core.keeper.LastMarkerDataKeeper.LastMarkerData;
+import io.redstone.core.keeper.OrderKeeper;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
@@ -35,16 +37,18 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	private int strategyId;
 
-	private int subAccountId;
-
-	private boolean isInitSuccess = false;
-
 	private String strategyName;
 
-	protected Logger log = CommonLoggerFactory.getLogger(getClass());
+	private int subAccountId;
+
+	private boolean initSuccess = false;
+
+	private boolean isEnable = false;
+
+	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	// 记录当前策略所有的策略订单订单
-	protected MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
+	protected final MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
 
 	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId) {
 		this.strategyId = strategyId;
@@ -52,16 +56,12 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 				? "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]"
 				: strategyName;
 		this.subAccountId = subAccountId;
-
 	}
 
 	@Override
-	public void initialize(Supplier<Boolean> initializer) {
-		if (initializer != null)
-			isInitSuccess = initializer.get();
-		else
-			log.error("Initializer is null.");
-		log.info("Initialize result isInitSuccess==[{}]", isInitSuccess);
+	public void initialize(@Nonnull Supplier<Boolean> initializer) {
+		initSuccess = Assertor.nonNull(initializer, "initializer").get();
+		log.info("Initialize result initSuccess==[{}]", initSuccess);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
 		if (strategyOrders.notEmpty()) {
-			log.info("{} : StrategyOrders not empty, doing...", strategyName);
+			log.info("{} :: StrategyOrders not empty, doing...", strategyName);
 		}
 		handleMarketData(marketData);
 	}
@@ -92,7 +92,10 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	@Override
 	public void onOrder(Order order) {
-		log.info("handle order ordSysId==[{}]", order.ordSysId());
+		log.info(
+				"{} :: On order callback, ordSysId==[{}], ordStatus==[{}], trdDirection==[{}], instrument -> {}, ordPrice -> {}, ordQty -> {}",
+				strategyName, order.ordSysId(), order.ordStatus(), order.trdDirection(), order.instrument(),
+				order.ordPrice(), order.ordQty());
 		OrderKeeper.updateOrder(order);
 		handleOrder(order);
 	}
@@ -104,20 +107,22 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		log.info("Handle StrategyControlEvent -> {}", event);
 	}
 
-	private boolean isEnable = false;
-
 	@Override
 	public void enable() {
-		if (isInitSuccess)
+		if (initSuccess) {
 			this.isEnable = true;
-		log.info("Enable strategy -> strategyId==[{}], isInitSuccess==[{}], isEnable==[]", strategyId, isInitSuccess,
-				isEnable);
+			log.info("{} :: Enable strategy, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
+					strategyId, initSuccess, isEnable);
+		} else {
+			log.info("{} :: Enable strategy fail, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
+					strategyId, initSuccess, isEnable);
+		}
 	}
 
 	@Override
 	public void disable() {
 		this.isEnable = false;
-		log.info("Disable strategy -> strategyId==[{}]", strategyId);
+		log.info("{} :: Disable strategy -> strategyId==[{}], isEnable==[{}]", strategyName, strategyId, isEnable);
 	}
 
 	@Override
@@ -217,11 +222,5 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 */
 	@ProtectedAbstractMethod
 	protected abstract Adaptor getAdaptor(Instrument instrument);
-
-	@Override
-	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
