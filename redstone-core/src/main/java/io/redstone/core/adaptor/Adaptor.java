@@ -3,6 +3,9 @@ package io.redstone.core.adaptor;
 import java.io.Closeable;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 
 import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
@@ -15,7 +18,7 @@ public interface Adaptor extends Closeable, Enable {
 
 	String adaptorName();
 
-	Account account();
+	ImmutableIntObjectMap<Account> accounts();
 
 	boolean startup();
 
@@ -49,7 +52,7 @@ public interface Adaptor extends Closeable, Enable {
 	 * @param account
 	 * @return
 	 */
-	boolean queryOrder(@Nonnull Account account);
+	boolean queryOrder(@Nullable Account account);
 
 	/**
 	 * 查询持仓
@@ -57,7 +60,7 @@ public interface Adaptor extends Closeable, Enable {
 	 * @param account
 	 * @return
 	 */
-	boolean queryPositions(@Nonnull Account account);
+	boolean queryPositions(@Nullable Account account);
 
 	/**
 	 * 查询余额
@@ -65,7 +68,7 @@ public interface Adaptor extends Closeable, Enable {
 	 * @param account
 	 * @return
 	 */
-	boolean queryBalance(@Nonnull Account account);
+	boolean queryBalance(@Nullable Account account);
 
 	public static enum AdaptorStatus {
 
