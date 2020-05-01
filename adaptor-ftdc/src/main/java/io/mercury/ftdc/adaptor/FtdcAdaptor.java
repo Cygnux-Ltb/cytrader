@@ -25,6 +25,7 @@ import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
+import io.mercury.common.thread.ThreadUtil;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.CancelOrderConverter;
@@ -68,8 +69,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				depthDate, depthTime);
 
 		return new BasicMarketData(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZone.CST),
-				
-				
+				// TODO 修改价格转换模式
 				priceToLong4(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
 				priceToLong4(depthMarketData.getTurnover())).setBidPrice1(priceToLong4(depthMarketData.getBidPrice1()))
 						.setBidVolume1(depthMarketData.getBidVolume1())
@@ -77,16 +77,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						.setAskVolume1(depthMarketData.getAskVolume1());
 	};
 
+	// TODO 转换报单回报
 	private Converter<FtdcOrder, OrdReport> rtnOrderConverter = (ftdcOrder, ordReport) -> {
 		return ordReport;
 	};
 
+	// TODO 转换报单回报
 	private Converter<FtdcTrade, OrdReport> rtnTradeConverter = (ftdcTrade, ordReport) -> {
 		return ordReport;
 	};
 
 	private final FtdcGateway gateway;
 
+	// TODO int类型可以合并
 	private volatile int frontId;
 	private volatile int sessionId;
 
@@ -135,7 +138,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					// 报单错误处理
 					case FtdcInputOrder:
 						FtdcInputOrder ftdcInputOrder = ftdcMsg.getFtdcInputOrder();
-						
+
 						break;
 					// 撤单错误处理1
 					case FtdcInputOrderAction:
@@ -222,16 +225,25 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		}
 	}
 
+	private final Object mutex = new Object();
+
 	@Override
 	public boolean queryOrder(Account account) {
-		// TODO
+		// TODO 查询订单
 		return false;
 	}
 
 	@Override
 	public boolean queryPositions(Account account) {
 		try {
-			gateway.ReqQryInvestorPosition();
+			ThreadUtil.startNewThread(() -> {
+				synchronized (mutex) {
+					log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition");
+					ThreadUtil.sleep(1500);
+					gateway.ReqQryInvestorPosition();
+					log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
+				}
+			}, "QueryPositions-SubThread");
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -241,7 +253,14 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean queryBalance(Account account) {
 		try {
-			gateway.ReqQryTradingAccount();
+			ThreadUtil.startNewThread(() -> {
+				synchronized (mutex) {
+					log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount");
+					ThreadUtil.sleep(1500);
+					gateway.ReqQryTradingAccount();
+					log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
+				}
+			}, "QueryBalance-SubThread");
 			return true;
 		} catch (Exception e) {
 			log.error("gatewayqueryBalance ", e);
