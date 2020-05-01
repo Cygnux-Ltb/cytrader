@@ -16,8 +16,4 @@ public abstract class Futures extends BaseInstrument {
 		return true;
 	}
 
-	@Override
-	public boolean isNakedShort() {
-		return true;
-	}
 }

@@ -16,4 +16,9 @@ public final class ChinaFutures extends Futures {
 		return priorityCloseType;
 	}
 
+	@Override
+	public String toString() {
+		return code();
+	}
+
 }

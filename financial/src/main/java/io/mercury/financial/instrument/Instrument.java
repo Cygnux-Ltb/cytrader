@@ -23,8 +23,6 @@ public interface Instrument extends Enable {
 
 	boolean isAvailableNow();
 
-	boolean isNakedShort();
-
 	default PriorityCloseType priorityCloseType() {
 		return PriorityCloseType.NONE;
 	}
@@ -52,5 +50,5 @@ public interface Instrument extends Enable {
 	public static enum PriorityCloseType {
 		NONE, BEFORE_TODAY
 	}
-
+	
 }

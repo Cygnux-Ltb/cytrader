@@ -1,4 +1,4 @@
-package io.mercury.polaris.financial;
+package io.mercury.financial;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

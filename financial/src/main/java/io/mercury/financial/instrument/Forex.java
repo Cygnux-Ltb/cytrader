@@ -18,11 +18,6 @@ public abstract class Forex extends BaseInstrument {
 		return true;
 	}
 
-	@Override
-	public boolean isNakedShort() {
-		return true;
-	}
-
 	public long multiplier() {
 		return multiplier;
 	}

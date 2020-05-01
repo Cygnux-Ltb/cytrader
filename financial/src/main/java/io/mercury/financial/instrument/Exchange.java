@@ -33,7 +33,6 @@ public enum Exchange {
 	private Exchange(int exchangeId, ZoneId zoneId) {
 		this.exchangeId = exchangeId * 1000000;
 		this.zoneId = zoneId;
-
 	}
 
 	public int id() {

@@ -14,9 +14,4 @@ public final class ChinaStock extends Stock {
 		return false;
 	}
 
-	@Override
-	public boolean isNakedShort() {
-		return false;
-	}
-
 }
