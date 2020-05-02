@@ -25,7 +25,7 @@ import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
-import io.mercury.common.thread.ThreadUtil;
+import io.mercury.common.thread.ThreadHelper;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.CancelOrderConverter;
@@ -89,7 +89,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	private final FtdcGateway gateway;
 
-	// TODO int类型可以合并
+	// TODO 两个int类型可以合并
 	private volatile int frontId;
 	private volatile int sessionId;
 
@@ -236,10 +236,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean queryPositions(Account account) {
 		try {
-			ThreadUtil.startNewThread(() -> {
+			ThreadHelper.startNewThread(() -> {
 				synchronized (mutex) {
 					log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition");
-					ThreadUtil.sleep(1500);
+					ThreadHelper.sleep(1500);
 					gateway.ReqQryInvestorPosition();
 					log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 				}
@@ -253,10 +253,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean queryBalance(Account account) {
 		try {
-			ThreadUtil.startNewThread(() -> {
+			ThreadHelper.startNewThread(() -> {
 				synchronized (mutex) {
 					log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount");
-					ThreadUtil.sleep(1500);
+					ThreadHelper.sleep(1500);
 					gateway.ReqQryTradingAccount();
 					log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
 				}

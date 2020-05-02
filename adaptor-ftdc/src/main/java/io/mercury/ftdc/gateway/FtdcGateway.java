@@ -1,7 +1,7 @@
 package io.mercury.ftdc.gateway;
 
-import static io.mercury.common.thread.ThreadUtil.sleep;
-import static io.mercury.common.thread.ThreadUtil.startNewThread;
+import static io.mercury.common.thread.ThreadHelper.sleep;
+import static io.mercury.common.thread.ThreadHelper.startNewThread;
 
 import java.io.File;
 import java.lang.annotation.Native;

@@ -1,4 +1,4 @@
-package io.mercury.launch;
+package io.mercury.ftdc.launch;
 
 public final class FtdcAdaptorStartup {
 

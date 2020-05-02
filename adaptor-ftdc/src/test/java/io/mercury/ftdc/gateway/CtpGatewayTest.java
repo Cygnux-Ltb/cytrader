@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.thread.ThreadUtil;
+import io.mercury.common.thread.ThreadHelper;
 import io.mercury.ftdc.gateway.FtdcGateway;
 import io.mercury.ftdc.gateway.bean.FtdcConfigInfo;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
@@ -72,7 +72,7 @@ public class CtpGatewayTest {
 		Set<String> instruementIdSet = new HashSet<>();
 		instruementIdSet.add("rb2010");
 		gateway.SubscribeMarketData(instruementIdSet);
-		ThreadUtil.join();
+		ThreadHelper.join();
 
 	}
 
