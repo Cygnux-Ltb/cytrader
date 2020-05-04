@@ -7,7 +7,6 @@ import io.mercury.common.collections.MutableMaps;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.enums.TrdDirection;
-import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.position.impl.AbsT0Position;
 
@@ -26,11 +25,11 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		this.beforeTodayQty = beforeTodayQty;
 	}
 
-	public long beforeTodayQty() {
+	public int beforeTodayQty() {
 		return beforeTodayQty;
 	}
 
-	public long lockBeforeTodayQty(long ordSysId, TrdDirection direction, long lockQty) {
+	public int lockBeforeTodayQty(long ordSysId, TrdDirection direction, int lockQty) {
 		if (beforeTodayQty == 0) {
 			return 0;
 		} else if (beforeTodayQty > 0) {
@@ -56,7 +55,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 			switch (direction) {
 			case Long:
 				// 需要锁定的Qty小于或等于昨仓, 实际锁定量等于请求量
-				long absBeforeTodayQty = Math.abs(beforeTodayQty);
+				int absBeforeTodayQty = Math.abs(beforeTodayQty);
 				if (lockQty <= absBeforeTodayQty) {
 					// 记录此订单锁定量
 					beforeTodayQtyLockRecord.put(ordSysId, lockQty);
@@ -73,7 +72,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		}
 	}
 
-	// TODO
+	// TODO 解锁可用仓位
 	public int unlockBeforeTodayQty(long ordSysId, TrdDirection direction, int unlockQty) {
 		return 0;
 	}
@@ -82,7 +81,6 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 	public void updatePosition(Order order) {
 		OrdStatus status = order.ordStatus();
 		OrdQty qty = order.ordQty();
-		OrdPrice price = order.ordPrice();
 		switch (status) {
 		case PartiallyFilled:
 		case Filled:
