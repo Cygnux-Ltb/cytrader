@@ -3,7 +3,8 @@ package io.redstone.engine.scheduler;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
 import io.redstone.core.keeper.OrderKeeper;
-import io.redstone.core.order.OrderSupporter;
+import io.redstone.core.order.Order;
+import io.redstone.core.order.OrderUpdater;
 import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 import io.redstone.core.strategy.Strategy;
@@ -21,10 +22,14 @@ public class SingleStrategyScheduler implements StrategyScheduler {
 	@Override
 	public void onOrderReport(OrdReport ordReport) {
 		// 根据订单回报查找所属订单
-		ChildOrder order = (ChildOrder) OrderKeeper.getOrder(ordReport.getOrdSysId());
+		Order order = OrderKeeper.getOrder(ordReport.getOrdSysId());
+		if (order == null) {
+			// TODO 必须处理手动下单后收到报单回报的情况
+		}
+		ChildOrder childOrder = (ChildOrder) order;
 		// 更新订单状态
-		OrderSupporter.updateOrderWithReport(order, ordReport);
-		// 调用策略回调函数
+		OrderUpdater.updateOrderWithReport(childOrder, ordReport);
+		// 调用策略实现的订单回调函数
 		strategy.onOrder(order);
 	}
 
