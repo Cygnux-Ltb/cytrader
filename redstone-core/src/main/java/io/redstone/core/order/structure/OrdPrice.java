@@ -2,8 +2,6 @@ package io.redstone.core.order.structure;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.redstone.core.order.structure.TrdList.TrdRecord;
-
 /**
  * [offerPrice] & [avgPrice] fix use {@link MarketConstant#PriceMultiplier}
  */
@@ -16,7 +14,7 @@ public final class OrdPrice {
 	/**
 	 * 成交均价
 	 */
-	private long avgPrice;
+	private long trdAvgPrice;
 	/**
 	 * 以最优价格
 	 */
@@ -48,8 +46,8 @@ public final class OrdPrice {
 		return this;
 	}
 
-	public long avgPrice() {
-		return avgPrice;
+	public long trdAvgPrice() {
+		return trdAvgPrice;
 	}
 
 	public boolean isBestPrice() {
@@ -60,11 +58,11 @@ public final class OrdPrice {
 		if (!trdList.isEmpty()) {
 			MutableList<TrdRecord> records = trdList.records();
 			// 计算总成交金额
-			long totalTurnover = records.sumOfLong(trade -> trade.tradePrice() * trade.tradeQty());
+			long totalTurnover = records.sumOfLong(trade -> trade.trdPrice() * trade.trdQty());
 			// 计算总成交量
-			long totalQty = records.sumOfInt(trade -> trade.tradeQty());
+			long totalQty = records.sumOfInt(trade -> trade.trdQty());
 			if (totalQty > 0L)
-				this.avgPrice = totalTurnover / totalQty;
+				this.trdAvgPrice = totalTurnover / totalQty;
 			return this;
 		}
 		return this;

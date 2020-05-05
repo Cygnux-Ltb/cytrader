@@ -60,8 +60,13 @@ public abstract class OrderBaseImpl implements Order {
 	 */
 	private int subAccountId;
 
-	protected OrderBaseImpl(int strategyId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice, TrdDirection trdDirection,
-			OrdType ordType, int subAccountId) {
+	/**
+	 * 订单备注
+	 */
+	private String remark;
+
+	protected OrderBaseImpl(int strategyId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
+			TrdDirection trdDirection, OrdType ordType, int subAccountId) {
 		this.ordSysId = OrdSysIdGenerator.next(strategyId);
 		this.strategyId = strategyId;
 		this.instrument = instrument;
@@ -69,10 +74,9 @@ public abstract class OrderBaseImpl implements Order {
 		this.ordPrice = ordPrice;
 		this.trdDirection = trdDirection;
 		this.ordType = ordType;
+		this.subAccountId = subAccountId;
 		this.ordStatus = OrdStatus.PendingNew;
 		this.ordTimestamps = OrdTimestamps.generate();
-		this.subAccountId = subAccountId;
-
 	}
 
 	@Override
@@ -116,9 +120,8 @@ public abstract class OrderBaseImpl implements Order {
 	}
 
 	@Override
-	public OrdStatus updateOrdStatus(OrdStatus ordStatus) {
+	public void setOrdStatus(OrdStatus ordStatus) {
 		this.ordStatus = ordStatus;
-		return this.ordStatus;
 	}
 
 	@Override
@@ -129,6 +132,16 @@ public abstract class OrderBaseImpl implements Order {
 	@Override
 	public int subAccountId() {
 		return subAccountId;
+	}
+
+	@Override
+	public String remark() {
+		return remark == null ? "NONE" : remark;
+	}
+
+	@Override
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

@@ -3,11 +3,11 @@ package io.redstone.core.order;
 import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
 
-public final class OrderSupporter {
+public final class OrderUpdater {
 
 	// TODO Call this update order
 	public static void updateOrderWithReport(ChildOrder order, OrdReport report) {
-		order.updateOrdStatus(report.getOrdStatus());
+		order.setOrdStatus(report.getOrdStatus());
 		switch (order.ordStatus()) {
 		case PartiallyFilled:
 			// Set FilledQty

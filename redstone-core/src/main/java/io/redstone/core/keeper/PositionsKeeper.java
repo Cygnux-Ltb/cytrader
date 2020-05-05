@@ -51,16 +51,17 @@ public final class PositionsKeeper {
 	 * @param side
 	 * @param limitQty
 	 */
-	public static void setSubAccountPositionsLimit(int subAccountId, Instrument instrument, int limitLongQty,
-			int limitShortQty) {
+	public static void setPositionsLimit(int subAccountId, Instrument instrument, int limitLongQty, int limitShortQty) {
 		int instrumentId = instrument.id();
 		long jointId = JointIdSupporter.jointId(subAccountId, instrumentId);
 		SubAccountInsLimitLong.put(jointId, limitLongQty < 0 ? -limitLongQty : limitLongQty);
-		log.info("Set long positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
-				instrumentId, SubAccountInsLimitLong.get(jointId));
+		log.info(
+				"PositionsKeeper :: Set long positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]",
+				subAccountId, instrumentId, SubAccountInsLimitLong.get(jointId));
 		SubAccountInsLimitShort.put(jointId, limitShortQty > 0 ? -limitShortQty : limitShortQty);
-		log.info("Set short positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]", subAccountId,
-				instrumentId, SubAccountInsLimitShort.get(jointId));
+		log.info(
+				"PositionsKeeper :: Set short positions limit -> subAccountId==[{}], instrumentId==[{}], limitQty==[{}]",
+				subAccountId, instrumentId, SubAccountInsLimitShort.get(jointId));
 	}
 
 	/**
@@ -71,7 +72,7 @@ public final class PositionsKeeper {
 	 * @param side
 	 * @return
 	 */
-	public long getSubAccountPositionsLimit(int subAccountId, Instrument instrument, TrdDirection direction) {
+	public long getPositionsLimit(int subAccountId, Instrument instrument, TrdDirection direction) {
 		int instrumentId = instrument.id();
 		long jointId = JointIdSupporter.jointId(subAccountId, instrumentId);
 		long currentQty = SubAccountInstrumentPos.get(jointId);
@@ -93,7 +94,8 @@ public final class PositionsKeeper {
 	public static void updatePosition(ChildOrder order) {
 		long jointId = JointIdSupporter.jointId(order.subAccountId(), order.instrument().id());
 		int currentPos = SubAccountInstrumentPos.get(jointId);
-		SubAccountInstrumentPos.put(jointId, currentPos + order.trdList().last().get().tradeQty());
+		log.info("");
+		SubAccountInstrumentPos.put(jointId, currentPos + order.lastTrdRecord().trdQty());
 	}
 
 	public static void main(String[] args) {

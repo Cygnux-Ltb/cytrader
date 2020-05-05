@@ -8,9 +8,10 @@ import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 import io.redstone.core.order.structure.TrdList;
+import io.redstone.core.order.structure.TrdRecord;
 
 /**
- * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ParentOrder拆分而来
+ * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ParentOrder拆分出多个ChildOrder
  * 
  * @author yellow013
  * @creation 2018年1月14日
@@ -43,6 +44,10 @@ public final class ChildOrder extends ActualOrder {
 
 	public TrdList trdList() {
 		return trdList;
+	}
+
+	public TrdRecord lastTrdRecord() {
+		return trdList.last().get();
 	}
 
 }

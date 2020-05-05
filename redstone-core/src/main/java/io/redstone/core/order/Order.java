@@ -37,13 +37,17 @@ public interface Order extends Comparable<Order> {
 
 	OrdStatus ordStatus();
 
-	OrdStatus updateOrdStatus(OrdStatus ordStatus);
+	void setOrdStatus(OrdStatus ordStatus);
 
 	OrdLevel ordLevel();
 
 	OrdTimestamps ordTimestamps();
 
 	int subAccountId();
+
+	String remark();
+
+	void setRemark(String remark);
 
 	@Override
 	default int compareTo(Order o) {

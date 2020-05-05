@@ -35,7 +35,6 @@ public final class OrdReport implements Serial<OrdReport> {
 	/**
 	 * leaves quantity
 	 */
-	// private long leavesQty;
 
 	/**
 	 * order execute price

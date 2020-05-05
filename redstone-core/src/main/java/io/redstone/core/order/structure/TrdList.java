@@ -41,52 +41,6 @@ public final class TrdList {
 		records.add(new TrdRecord(++serial, ordSysId, epochTime, tradePrice, qty));
 	}
 
-	/**
-	 * tradePrice fix use {@link MarketConstant#PriceMultiplier}
-	 */
-	public static class TrdRecord implements Comparable<TrdRecord> {
 
-		private int serial;
-		private long ordSysId;
-		private long epochTime;
-
-		private long tradePrice;
-		private int tradeQty;
-
-		public TrdRecord(int serial, long ordSysId, long epochTime, long tradePrice, int tradeQty) {
-			super();
-			this.ordSysId = ordSysId;
-			this.serial = serial;
-			this.epochTime = epochTime;
-			this.tradePrice = tradePrice;
-			this.tradeQty = tradeQty;
-		}
-
-		public long ordSysId() {
-			return ordSysId;
-		}
-
-		public int serial() {
-			return serial;
-		}
-
-		public long epochTime() {
-			return epochTime;
-		}
-
-		public long tradePrice() {
-			return tradePrice;
-		}
-
-		public int tradeQty() {
-			return tradeQty;
-		}
-
-		@Override
-		public int compareTo(TrdRecord o) {
-			return this.serial < o.serial ? -1 : this.serial > o.serial ? 1 : 0;
-		}
-
-	}
 
 }
