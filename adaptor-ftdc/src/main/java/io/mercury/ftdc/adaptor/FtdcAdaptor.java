@@ -79,6 +79,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	// TODO 转换报单回报
 	private Converter<FtdcOrder, OrdReport> rtnOrderConverter = (ftdcOrder, ordReport) -> {
+		
+		
 		return ordReport;
 	};
 
