@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor.utils;
+package io.mercury.ftdc.adaptor;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;

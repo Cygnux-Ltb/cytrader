@@ -31,8 +31,6 @@ import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.CancelOrderConverter;
 import io.mercury.ftdc.adaptor.converter.NewOrderConverter;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
-import io.mercury.ftdc.adaptor.utils.OrderRefGenerate;
-import io.mercury.ftdc.adaptor.utils.OrderRefKeeper;
 import io.mercury.ftdc.gateway.FtdcGateway;
 import io.mercury.ftdc.gateway.bean.FtdcConfigInfo;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
@@ -41,6 +39,8 @@ import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
+import io.mercury.ftdc.gateway.bean.RspMdConnect;
+import io.mercury.ftdc.gateway.bean.RspMsg;
 import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.AdaptorBaseImpl;
@@ -79,8 +79,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	// TODO 转换报单回报
 	private Converter<FtdcOrder, OrdReport> rtnOrderConverter = (ftdcOrder, ordReport) -> {
-		
-		
+
 		return ordReport;
 	};
 
@@ -95,7 +94,9 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private volatile int frontId;
 	private volatile int sessionId;
 
-	private volatile boolean isAvailable;
+	private volatile boolean traderIsAvailable;
+
+	private volatile boolean mdIsAvailable;
 
 	public FtdcAdaptor(int adaptorId, String adaptorName, Account account, @Nonnull StrategyScheduler scheduler,
 			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
@@ -115,13 +116,22 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, ftdcMsg -> {
 					switch (ftdcMsg.getRspType()) {
 					case RspMdConnect:
-
+						RspMdConnect rspMdConnect = ftdcMsg.getRspMdConnect();
+						this.mdIsAvailable = rspMdConnect.isAvailable();
+						if (rspMdConnect.isAvailable())
+							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.MdEnable);
+						else
+							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.MdDisable);
 						break;
 					case RspTraderConnect:
 						RspTraderConnect traderConnect = ftdcMsg.getRspTraderConnect();
 						this.frontId = traderConnect.getFrontID();
 						this.sessionId = traderConnect.getSessionID();
-						this.isAvailable = traderConnect.isAvailable();
+						this.traderIsAvailable = traderConnect.isAvailable();
+						if (traderConnect.isAvailable())
+							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.TraderEnable);
+						else
+							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.TraderDisable);
 						break;
 					case FtdcDepthMarketData:
 						BasicMarketData marketData = marketDataConverter.apply(ftdcMsg.getFtdcDepthMarketData());
@@ -158,8 +168,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	private OrdReport checkoutCtpOrder(String orderRef) {
 		try {
-			long orderSysId = OrderRefKeeper.getOrdSysId(orderRef);
-			return new OrdReport().setOrdSysId(orderSysId);
+			long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
+			// TODO 需要处理手动下单的情况
+			if(ordSysId == 0L) {
+				
+			}
+			return new OrdReport(ordSysId);
 		} catch (OrderRefNotFoundException e) {
 			log.error(e.getMessage(), e);
 			throw new RuntimeException(e);
@@ -179,9 +193,13 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean subscribeMarketData(Instrument... instruments) {
 		try {
-			gateway.SubscribeMarketData(
-					Stream.of(instruments).map(instrument -> instrument.code()).collect(Collectors.toSet()));
-			return true;
+			if (mdIsAvailable) {
+				gateway.SubscribeMarketData(
+						Stream.of(instruments).map(instrument -> instrument.code()).collect(Collectors.toSet()));
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			log.error("subscribeMarketData exception {}", e.getMessage(), e);
 			return false;
@@ -194,7 +212,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	public boolean newOredr(ChildOrder order) {
 		try {
 			CThostFtdcInputOrderField ftdcInputOrder = newOrderConverter.apply(order);
-			String orderRef = Integer.toString(OrderRefGenerate.next(order.strategyId()));
+			String orderRef = Integer.toString(OrderRefGenerator.next(order.strategyId()));
 			/**
 			 * 设置OrderRef
 			 */
@@ -255,15 +273,18 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean queryBalance(Account account) {
 		try {
-			ThreadHelper.startNewThread(() -> {
-				synchronized (mutex) {
-					log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount");
-					ThreadHelper.sleep(1500);
-					gateway.ReqQryTradingAccount();
-					log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
-				}
-			}, "QueryBalance-SubThread");
-			return true;
+			if (traderIsAvailable) {
+				ThreadHelper.startNewThread(() -> {
+					synchronized (mutex) {
+						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount");
+						ThreadHelper.sleep(1500);
+						gateway.ReqQryTradingAccount();
+						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
+					}
+				}, "QueryBalance-SubThread");
+				return true;
+			} else
+				return false;
 		} catch (Exception e) {
 			log.error("gatewayqueryBalance ", e);
 			return false;

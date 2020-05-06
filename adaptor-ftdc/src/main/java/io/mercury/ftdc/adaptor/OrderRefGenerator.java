@@ -1,4 +1,4 @@
-package io.mercury.ftdc.adaptor.utils;
+package io.mercury.ftdc.adaptor;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeZone;
 
 @NotThreadSafe
-public final class OrderRefGenerate {
+public final class OrderRefGenerator {
 
 	private static int maxLimitOwnerId = 20;
 
@@ -58,7 +58,7 @@ public final class OrderRefGenerate {
 
 		for (int i = 0; i < 10240; i++) {
 			Thread.sleep(5);
-			System.out.println(OrderRefGenerate.next(5));
+			System.out.println(OrderRefGenerator.next(5));
 		}
 
 		System.out.println(Instant.now().toEpochMilli());
