@@ -460,6 +460,19 @@ public class FtdcGateway {
 	void onRspError(CThostFtdcRspInfoField rspInfo) {
 		log.error("Gateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfo.getErrorID(), rspInfo.getErrorMsg());
 	}
+	
+	
+	public void ReqQryOrder() {
+		// ThreadUtil.startNewThread(() -> innerQureyAccount());
+		CThostFtdcQryTradingAccountField qryTradingAccount = new CThostFtdcQryTradingAccountField();
+		qryTradingAccount.setBrokerID(ctpConfigInfo.getBrokerId());
+		qryTradingAccount.setInvestorID(ctpConfigInfo.getInvestorId());
+		qryTradingAccount.setCurrencyID(ctpConfigInfo.getCurrencyId());
+		int nRequestID = ++traderRequestId;
+		ftdcTraderApi.ReqQryOrder(arg0, arg1)
+		log.info("Send ReqQryTradingAccount OK -> nRequestID==[{}]", nRequestID);
+	}
+	
 
 	public void ReqQryTradingAccount() {
 		// ThreadUtil.startNewThread(() -> innerQureyAccount());

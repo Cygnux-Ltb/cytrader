@@ -78,15 +78,30 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	};
 
 	// TODO 转换报单回报
-	private Converter<FtdcOrder, OrdReport> rtnOrderConverter = (ftdcOrder, ordReport) -> {
-
+	private Function<FtdcOrder, OrdReport> rtnOrderConverter = ftdcOrder -> {
+		OrdReport ordReport = checkoutCtpOrder(ftdcOrder.getOrderRef());
 		return ordReport;
 	};
 
 	// TODO 转换报单回报
-	private Converter<FtdcTrade, OrdReport> rtnTradeConverter = (ftdcTrade, ordReport) -> {
+	private Function<FtdcTrade, OrdReport> rtnTradeConverter = ftdcTrade -> {
+		OrdReport ordReport = checkoutCtpOrder(ftdcTrade.getOrderRef());
 		return ordReport;
 	};
+
+	private OrdReport checkoutCtpOrder(String orderRef) {
+		try {
+			long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
+			// TODO 需要处理手动下单的情况
+			if (ordSysId == 0L) {
+
+			}
+			return new OrdReport(ordSysId);
+		} catch (OrderRefNotFoundException e) {
+			log.error(e.getMessage(), e);
+			throw new RuntimeException(e);
+		}
+	}
 
 	private final FtdcGateway gateway;
 
@@ -139,13 +154,14 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						break;
 					case FtdcOrder:
 						FtdcOrder ftdcOrder = ftdcMsg.getFtdcOrder();
-						OrdReport rtnOrder = checkoutCtpOrder(ftdcOrder.getOrderRef());
-						scheduler.onOrderReport(rtnOrderConverter.conversion(ftdcOrder, rtnOrder));
+						OrdReport rtnOrder = rtnOrderConverter.apply(ftdcOrder);
+
+						scheduler.onOrderReport(rtnOrder);
 						break;
 					case FtdcTrade:
 						FtdcTrade ftdcTrade = ftdcMsg.getFtdcTrade();
-						OrdReport rtnTrade = checkoutCtpOrder(ftdcTrade.getOrderRef());
-						scheduler.onOrderReport(rtnTradeConverter.conversion(ftdcTrade, rtnTrade));
+						OrdReport rtnTrade = rtnTradeConverter.apply(ftdcTrade);
+						scheduler.onOrderReport(rtnTrade);
 						break;
 					// 报单错误处理
 					case FtdcInputOrder:
@@ -164,20 +180,6 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						break;
 					}
 				}));
-	}
-
-	private OrdReport checkoutCtpOrder(String orderRef) {
-		try {
-			long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
-			// TODO 需要处理手动下单的情况
-			if(ordSysId == 0L) {
-				
-			}
-			return new OrdReport(ordSysId);
-		} catch (OrderRefNotFoundException e) {
-			log.error(e.getMessage(), e);
-			throw new RuntimeException(e);
-		}
 	}
 
 	@Override
@@ -249,8 +251,20 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	@Override
 	public boolean queryOrder(Account account) {
-		// TODO 查询订单
-		return false;
+		try {
+			ThreadHelper.startNewThread(() -> {
+				synchronized (mutex) {
+					log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition");
+					ThreadHelper.sleep(1500);
+
+					log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
+				}
+			}, "QueryOrder-SubThread");
+			return true;
+		} catch (Exception e) {
+			log.error("FtdcAdaptor :: queryOrder exception -> {}", e.getMessage(), e);
+			return false;
+		}
 	}
 
 	@Override
@@ -266,6 +280,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			}, "QueryPositions-SubThread");
 			return true;
 		} catch (Exception e) {
+			log.error("FtdcAdaptor :: queryPositions exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}
@@ -286,7 +301,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			} else
 				return false;
 		} catch (Exception e) {
-			log.error("gatewayqueryBalance ", e);
+			log.error("FtdcAdaptor :: queryBalance exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}
