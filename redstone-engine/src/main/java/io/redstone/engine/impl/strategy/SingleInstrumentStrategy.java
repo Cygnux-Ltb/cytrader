@@ -51,7 +51,7 @@ public abstract class SingleInstrumentStrategy<M extends MarketData> extends Str
 			adaptor.subscribeMarketData(instrument);
 			log.info("{} :: call subscribeMarketData, instrument -> {}", strategyName(), instrument);
 			break;
-		case TdEnable:
+		case TraderEnable:
 			log.info("{} :: handle adaptor TdEnable, adaptorId==[{}]", strategyName(), adaptorId);
 			adaptor.queryOrder(null);
 			log.info("{} :: call queryOrder, adaptodId==[{}], account is default", strategyName(), adaptorId);
