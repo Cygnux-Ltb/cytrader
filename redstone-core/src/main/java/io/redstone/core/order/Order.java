@@ -1,5 +1,6 @@
 package io.redstone.core.order;
 
+import io.mercury.common.thread.ThreadHelper;
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.order.enums.OrdLevel;
 import io.redstone.core.order.enums.OrdStatus;
@@ -52,6 +53,22 @@ public interface Order extends Comparable<Order> {
 	@Override
 	default int compareTo(Order o) {
 		return ordSysId() < o.ordSysId() ? -1 : ordSysId() > o.ordSysId() ? 1 : 0;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println(Long.MAX_VALUE);
+		
+		long seed = System.nanoTime();
+		long seed1 = System.currentTimeMillis();
+		System.out.println(seed);
+		System.out.println(seed1);
+		for (;;) {
+			System.out.println((System.nanoTime() - seed) / 100000);
+			ThreadHelper.sleep(20);
+		}
+		
+		
 	}
 
 }
