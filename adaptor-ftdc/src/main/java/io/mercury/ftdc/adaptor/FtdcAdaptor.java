@@ -22,7 +22,6 @@ import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.TimePattern;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
-import io.mercury.common.functional.Converter;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.common.thread.ThreadHelper;
@@ -31,8 +30,8 @@ import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.CancelOrderConverter;
 import io.mercury.ftdc.adaptor.converter.NewOrderConverter;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
+import io.mercury.ftdc.gateway.FtdcConfig;
 import io.mercury.ftdc.gateway.FtdcGateway;
-import io.mercury.ftdc.gateway.bean.FtdcConfigInfo;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrder;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
@@ -40,7 +39,6 @@ import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
 import io.mercury.ftdc.gateway.bean.RspMdConnect;
-import io.mercury.ftdc.gateway.bean.RspMsg;
 import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.AdaptorBaseImpl;
@@ -117,8 +115,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
 		super(adaptorId, adaptorName, account);
 		// 写入Gateway用户信息
-		FtdcConfigInfo configInfo = new FtdcConfigInfo()
-				.setTraderAddr(paramMap.getString(FtdcAdaptorParam.CTP_TraderAddr))
+		FtdcConfig configInfo = new FtdcConfig().setTraderAddr(paramMap.getString(FtdcAdaptorParam.CTP_TraderAddr))
 				.setMdAddr(paramMap.getString(FtdcAdaptorParam.CTP_MdAddr))
 				.setBrokerId(paramMap.getString(FtdcAdaptorParam.CTP_BrokerId))
 				.setInvestorId(paramMap.getString(FtdcAdaptorParam.CTP_InvestorId))
@@ -255,8 +252,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			ThreadHelper.startNewThread(() -> {
 				synchronized (mutex) {
 					log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition");
-					ThreadHelper.sleep(1500);
-
+					ThreadHelper.sleep(1250);
+					gateway.ReqQryOrder();
 					log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 				}
 			}, "QueryOrder-SubThread");
@@ -273,7 +270,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			ThreadHelper.startNewThread(() -> {
 				synchronized (mutex) {
 					log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition");
-					ThreadHelper.sleep(1500);
+					ThreadHelper.sleep(1250);
 					gateway.ReqQryInvestorPosition();
 					log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 				}
@@ -292,7 +289,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				ThreadHelper.startNewThread(() -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount");
-						ThreadHelper.sleep(1500);
+						ThreadHelper.sleep(1250);
 						gateway.ReqQryTradingAccount();
 						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
 					}

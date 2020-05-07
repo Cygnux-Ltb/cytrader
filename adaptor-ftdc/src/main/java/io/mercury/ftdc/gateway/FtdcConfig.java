@@ -1,6 +1,6 @@
-package io.mercury.ftdc.gateway.bean;
+package io.mercury.ftdc.gateway;
 
-public class FtdcConfigInfo {
+public class FtdcConfig {
 
 	private String traderAddr;
 	private String mdAddr;
@@ -20,67 +20,67 @@ public class FtdcConfigInfo {
 	private String tradingDay;
 	private String currencyId;
 
-	public FtdcConfigInfo setTraderAddr(String traderAddr) {
+	public FtdcConfig setTraderAddr(String traderAddr) {
 		this.traderAddr = traderAddr;
 		return this;
 	}
 
-	public FtdcConfigInfo setMdAddr(String mdAddr) {
+	public FtdcConfig setMdAddr(String mdAddr) {
 		this.mdAddr = mdAddr;
 		return this;
 	}
 
-	public FtdcConfigInfo setAppId(String appId) {
+	public FtdcConfig setAppId(String appId) {
 		this.appId = appId;
 		return this;
 	}
 
-	public FtdcConfigInfo setBrokerId(String brokerId) {
+	public FtdcConfig setBrokerId(String brokerId) {
 		this.brokerId = brokerId;
 		return this;
 	}
 
-	public FtdcConfigInfo setInvestorId(String investorId) {
+	public FtdcConfig setInvestorId(String investorId) {
 		this.investorId = investorId;
 		return this;
 	}
 
-	public FtdcConfigInfo setAccountId(String accountId) {
+	public FtdcConfig setAccountId(String accountId) {
 		this.accountId = accountId;
 		return this;
 	}
 
-	public FtdcConfigInfo setUserId(String userId) {
+	public FtdcConfig setUserId(String userId) {
 		this.userId = userId;
 		return this;
 	}
 
-	public FtdcConfigInfo setPassword(String password) {
+	public FtdcConfig setPassword(String password) {
 		this.password = password;
 		return this;
 	}
 
-	public FtdcConfigInfo setAuthCode(String authCode) {
+	public FtdcConfig setAuthCode(String authCode) {
 		this.authCode = authCode;
 		return this;
 	}
 
-	public FtdcConfigInfo setIpAddr(String ipAddr) {
+	public FtdcConfig setIpAddr(String ipAddr) {
 		this.ipAddr = ipAddr;
 		return this;
 	}
 
-	public FtdcConfigInfo setMacAddr(String macAddr) {
+	public FtdcConfig setMacAddr(String macAddr) {
 		this.macAddr = macAddr;
 		return this;
 	}
 
-	public FtdcConfigInfo setTradingDay(String tradingDay) {
+	public FtdcConfig setTradingDay(String tradingDay) {
 		this.tradingDay = tradingDay;
 		return this;
 	}
 
-	public FtdcConfigInfo setCurrencyId(String currencyId) {
+	public FtdcConfig setCurrencyId(String currencyId) {
 		this.currencyId = currencyId;
 		return this;
 	}

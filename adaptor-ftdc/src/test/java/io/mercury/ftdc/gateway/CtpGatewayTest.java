@@ -10,7 +10,6 @@ import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadHelper;
 import io.mercury.ftdc.gateway.FtdcGateway;
-import io.mercury.ftdc.gateway.bean.FtdcConfigInfo;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
@@ -41,7 +40,7 @@ public class CtpGatewayTest {
 	@Test
 	public void test() {
 
-		FtdcConfigInfo simnowUserInfo = new FtdcConfigInfo().setTraderAddr(TradeAddr).setMdAddr(MdAddr)
+		FtdcConfig simnowUserInfo = new FtdcConfig().setTraderAddr(TradeAddr).setMdAddr(MdAddr)
 				.setBrokerId(BrokerId).setInvestorId(InvestorId).setUserId(UserId).setAccountId(AccountId)
 				.setPassword(Password).setTradingDay(TradingDay).setCurrencyId(CurrencyId);
 
