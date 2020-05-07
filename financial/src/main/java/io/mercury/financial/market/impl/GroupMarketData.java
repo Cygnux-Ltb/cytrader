@@ -1,7 +1,5 @@
 package io.mercury.financial.market.impl;
 
-import java.util.Set;
-
 import org.eclipse.collections.api.set.MutableSet;
 
 public final class GroupMarketData<M extends BasicMarketData> {
@@ -12,7 +10,7 @@ public final class GroupMarketData<M extends BasicMarketData> {
 		this.marketDataSet = marketDataSet;
 	}
 
-	public Set<M> getMarketDataSet() {
+	public MutableSet<M> getMarketDataSet() {
 		return marketDataSet;
 	}
 

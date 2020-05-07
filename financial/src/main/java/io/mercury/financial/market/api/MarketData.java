@@ -5,7 +5,7 @@ public interface MarketData {
 	MarketDataType marketDataType();
 
 	public static enum MarketDataType {
-		Basic, Depth, Group
+		Basic, Depth, Static, Group
 	}
 
 }
