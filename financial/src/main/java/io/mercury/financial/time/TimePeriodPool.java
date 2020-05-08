@@ -63,7 +63,7 @@ public final class TimePeriodPool {
 					tradingPeriod -> tradingPeriod.segmentation(symbol.exchange().zoneId(), period.duration()).stream())
 					.collect(Collectors.toList()).forEach(serial -> {
 						timePeriodSet.add(serial);
-						timePeriodMap.put(serial.serialNumber(), serial);
+						timePeriodMap.put(serial.serialId(), serial);
 					});
 			long jointId = JointIdSupporter.jointId(symbol.id(), (int) period.seconds());
 			timePeriodSetPool.put(jointId, timePeriodSet.toImmutable());
@@ -121,7 +121,7 @@ public final class TimePeriodPool {
 	@CheckForNull
 	public TimePeriodSerial getNextTimePeriod(Symbol symbol, TimePeriod period, TimePeriodSerial serial) {
 		ImmutableLongObjectMap<TimePeriodSerial> longObjectMap = getTimePeriodMap(symbol, period);
-		return longObjectMap.get(serial.serialNumber() + period.seconds());
+		return longObjectMap.get(serial.serialId() + period.seconds());
 	}
 
 }

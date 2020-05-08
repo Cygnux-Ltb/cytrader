@@ -29,7 +29,7 @@ public final class TimePeriodSerial implements Serial<TimePeriodSerial> {
 	}
 
 	@Override
-	public long serialNumber() {
+	public long serialId() {
 		return epochSecond;
 	}
 

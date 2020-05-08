@@ -24,7 +24,7 @@ import io.mercury.common.sequence.Serial;
  */
 public final class TradingPeriod implements Serial<TradingPeriod> {
 
-	private int serialNumber;
+	private int serialId;
 	private LocalTime startTime;
 	private int startSecondOfDay;
 	private LocalTime endTime;
@@ -36,8 +36,8 @@ public final class TradingPeriod implements Serial<TradingPeriod> {
 		return new TradingPeriod(serialNumber, startTime, endTime);
 	}
 
-	private TradingPeriod(int serialNumber, LocalTime startTime, LocalTime endTime) {
-		this.serialNumber = serialNumber;
+	private TradingPeriod(int serialId, LocalTime startTime, LocalTime endTime) {
+		this.serialId = serialId;
 		this.startTime = startTime;
 		this.startSecondOfDay = startTime.toSecondOfDay();
 		this.endTime = endTime;
@@ -68,8 +68,8 @@ public final class TradingPeriod implements Serial<TradingPeriod> {
 	}
 
 	@Override
-	public long serialNumber() {
-		return serialNumber;
+	public long serialId() {
+		return serialId;
 	}
 
 	public boolean isPeriod(LocalTime time) {
