@@ -7,7 +7,6 @@ import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.sequence.Serial;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.indicator.api.Indicator;
@@ -15,7 +14,7 @@ import io.mercury.indicator.api.IndicatorEvent;
 import io.mercury.indicator.api.Point;
 import io.mercury.indicator.api.PointSet;
 
-public abstract class BaseIndicator<P extends Point<? extends Serial<?>>, E extends IndicatorEvent>
+public abstract class BaseIndicator<P extends Point<?>, E extends IndicatorEvent>
 		implements Indicator<P, E> {
 
 	protected Logger log = CommonLoggerFactory.getLogger(getClass());

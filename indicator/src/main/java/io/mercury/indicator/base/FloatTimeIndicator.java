@@ -5,10 +5,10 @@ import io.mercury.financial.vector.RandomTimeSerial;
 import io.mercury.indicator.api.IndicatorEvent;
 import io.mercury.indicator.api.Point;
 
-public abstract class RandomTimeIndicator<P extends Point<RandomTimeSerial>, E extends IndicatorEvent>
+public abstract class FloatTimeIndicator<P extends Point<RandomTimeSerial>, E extends IndicatorEvent>
 		extends BaseIndicator<P, E> {
 
-	public RandomTimeIndicator(Instrument instrument) {
+	public FloatTimeIndicator(Instrument instrument) {
 		super(instrument);
 	}
 

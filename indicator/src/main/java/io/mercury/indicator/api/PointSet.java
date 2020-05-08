@@ -28,10 +28,10 @@ public final class PointSet<P extends Point<?>> {
 	}
 
 	public boolean add(P point) {
-		long serialNumber = point.serial().serialNumber();
-		if (pointMap.containsKey(serialNumber))
+		long serialId = point.serial().serialId();
+		if (pointMap.containsKey(serialId))
 			return false;
-		pointMap.put(serialNumber, point);
+		pointMap.put(serialId, point);
 		return points.add(point);
 	}
 
@@ -57,8 +57,8 @@ public final class PointSet<P extends Point<?>> {
 	}
 
 	@CheckForNull
-	public P getPoint(long serialNumber) {
-		return pointMap.get(serialNumber);
+	public P getPoint(long serialId) {
+		return pointMap.get(serialId);
 	}
 
 	public MutableList<P> getPoints() {

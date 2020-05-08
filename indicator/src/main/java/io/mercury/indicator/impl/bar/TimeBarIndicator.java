@@ -9,10 +9,10 @@ import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
-import io.mercury.indicator.base.TimePeriodIndicator;
+import io.mercury.indicator.base.FixedPeriodIndicator;
 import io.mercury.indicator.event.TimeBarEvent;
 
-public final class TimeBarIndicator extends TimePeriodIndicator<TimeBar, TimeBarEvent> {
+public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBarEvent> {
 
 	public TimeBarIndicator(Instrument instrument, TimePeriod period) {
 		super(instrument, period);

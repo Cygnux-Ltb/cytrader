@@ -11,11 +11,11 @@ import io.mercury.financial.time.TradingPeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.financial.vector.TradingPeriod;
-import io.mercury.indicator.base.TimePeriodIndicator;
+import io.mercury.indicator.base.FixedPeriodIndicator;
 import io.mercury.indicator.event.SmaEvent;
 import io.mercury.indicator.structure.FixedHistoryPriceRecorder;
 
-public final class Sma2 extends TimePeriodIndicator<SmaPoint, SmaEvent> {
+public final class Sma2 extends FixedPeriodIndicator<SmaPoint, SmaEvent> {
 
 	private FixedHistoryPriceRecorder historyPriceRecorder;
 

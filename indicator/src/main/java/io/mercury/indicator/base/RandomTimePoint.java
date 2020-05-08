@@ -20,7 +20,7 @@ public abstract class RandomTimePoint<Y extends RandomTimePoint<Y>> extends Base
 	}
 
 	public ZonedDateTime time() {
-		return timeSerial.timePoint();
+		return timeSerial.time();
 	}
 
 }
