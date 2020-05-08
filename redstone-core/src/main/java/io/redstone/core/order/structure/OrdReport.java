@@ -5,7 +5,7 @@ import io.redstone.core.order.enums.OrdStatus;
 
 public final class OrdReport implements Serial<OrdReport> {
 
-	private long serialNumber = System.nanoTime();
+	private long serialId = System.nanoTime();
 
 	/**
 	 * mapping to order ordSysId
@@ -95,8 +95,8 @@ public final class OrdReport implements Serial<OrdReport> {
 	}
 
 	@Override
-	public long serialNumber() {
-		return serialNumber;
+	public long serialId() {
+		return serialId;
 	}
 
 }

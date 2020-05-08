@@ -43,18 +43,22 @@ public final class AccountKeeper {
 			for (SubAccount subAccount : account.subAccounts()) {
 				SubAccountMap.put(subAccount.subAccountId(), subAccount);
 				AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
+				log.info("AccountKeeper :: Put account, accountId==[{}], subAccountId==[{}]", account.accountId(),
+						subAccount.subAccountId());
 			}
 			AccountMap.put(account.accountId(), account);
 		}
 	}
 
-	public static void putAccount(@Nonnull SubAccount... subAccounts) {
+	public static void putSubAccount(@Nonnull SubAccount... subAccounts) {
 		Assertor.requiredLength(subAccounts, 1, "subAccounts");
 		for (SubAccount subAccount : subAccounts) {
 			SubAccountMap.put(subAccount.subAccountId(), subAccount);
 			Account account = subAccount.account();
 			AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
 			AccountMap.put(account.accountId(), account);
+			log.info("AccountKeeper :: Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(),
+					account.accountId());
 		}
 	}
 
