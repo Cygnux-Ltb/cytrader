@@ -16,4 +16,6 @@ public interface Symbol {
 
 	PriceMultiplier priceMultiplier();
 
+	String fmtText();
+
 }

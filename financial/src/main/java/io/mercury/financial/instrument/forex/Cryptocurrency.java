@@ -16,4 +16,10 @@ public final class Cryptocurrency extends Forex {
 		return null;
 	}
 
+	@Override
+	public String fmtText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

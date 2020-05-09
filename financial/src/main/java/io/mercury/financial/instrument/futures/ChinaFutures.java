@@ -21,4 +21,10 @@ public final class ChinaFutures extends Futures {
 		return code();
 	}
 
+	@Override
+	public String fmtText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

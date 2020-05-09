@@ -325,4 +325,10 @@ public enum ChinaFuturesSymbol implements Symbol {
 
 	}
 
+	@Override
+	public String fmtText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

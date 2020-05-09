@@ -14,4 +14,10 @@ public final class ChinaStock extends Stock {
 		return false;
 	}
 
+	@Override
+	public String fmtText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

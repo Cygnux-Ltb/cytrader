@@ -50,5 +50,7 @@ public interface Instrument extends Enable {
 	public static enum PriorityCloseType {
 		NONE, BEFORE_TODAY
 	}
-	
+
+	String fmtText();
+
 }

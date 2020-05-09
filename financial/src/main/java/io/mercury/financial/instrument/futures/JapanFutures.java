@@ -9,4 +9,10 @@ public class JapanFutures extends Futures {
 		super(id, code, symbol);
 	}
 
+	@Override
+	public String fmtText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
