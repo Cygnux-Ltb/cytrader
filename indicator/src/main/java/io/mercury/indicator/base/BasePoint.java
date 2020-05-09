@@ -7,7 +7,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.indicator.api.Point;
 
-abstract class BasePoint<S extends Serial<S>> implements Point<S>, Comparable<Point<S>> {
+abstract class BasePoint<S extends Serial<S>> implements Point<S, BasicMarketData>, Comparable<BasePoint<S>> {
 
 	protected int index;
 	protected Instrument instrument;
@@ -30,7 +30,7 @@ abstract class BasePoint<S extends Serial<S>> implements Point<S>, Comparable<Po
 	}
 
 	@Override
-	public int compareTo(Point<S> o) {
+	public int compareTo(BasePoint<S> o) {
 		return serial().compareTo(o.serial());
 	}
 

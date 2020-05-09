@@ -2,9 +2,9 @@ package io.mercury.indicator.api;
 
 import io.mercury.common.sequence.Serial;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.market.api.MarketData;
 
-public interface Point<S extends Serial<S>> {
+public interface Point<S extends Serial<S>, M extends MarketData> {
 
 	int index();
 
@@ -12,6 +12,6 @@ public interface Point<S extends Serial<S>> {
 
 	S serial();
 
-	void onMarketData(BasicMarketData marketData);
+	void onMarketData(M marketData);
 
 }

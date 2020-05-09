@@ -3,7 +3,7 @@ package io.mercury.indicator.api;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 
-public interface Indicator<P extends Point<?>, E extends IndicatorEvent> {
+public interface Indicator<P extends Point<?, ?>, E extends IndicatorEvent> {
 
 	Instrument instrument();
 

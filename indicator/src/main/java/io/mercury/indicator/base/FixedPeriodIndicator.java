@@ -2,11 +2,9 @@ package io.mercury.indicator.base;
 
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.vector.TimePeriod;
-import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.indicator.api.IndicatorEvent;
-import io.mercury.indicator.api.Point;
 
-public abstract class FixedPeriodIndicator<P extends Point<TimePeriodSerial>, E extends IndicatorEvent>
+public abstract class FixedPeriodIndicator<P extends FixedPeriodPoint, E extends IndicatorEvent>
 		extends BaseIndicator<P, E> {
 
 	protected TimePeriod period;

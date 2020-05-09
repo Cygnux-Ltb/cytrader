@@ -3,10 +3,10 @@ package io.mercury.indicator.impl.ma;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
-import io.mercury.indicator.base.TimePeriodPoint;
+import io.mercury.indicator.base.FixedPeriodPoint;
 import io.mercury.indicator.structure.FixedHistoryPriceRecorder;
 
-public abstract class MaPoint<P extends MaPoint<P>> extends TimePeriodPoint<P> {
+public abstract class MaPoint extends FixedPeriodPoint {
 
 	protected FixedHistoryPriceRecorder historyPriceRecorder;
 	protected long avgPrice;
