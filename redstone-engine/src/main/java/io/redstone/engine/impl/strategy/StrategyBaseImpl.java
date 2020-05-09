@@ -193,10 +193,10 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		long offerPrice = 0;
 		switch (direction) {
 		case Long:
-			offerPrice = lastMarkerData.askPrice1().get();
+			offerPrice = lastMarkerData.askPrice1();
 			break;
 		case Short:
-			offerPrice = lastMarkerData.bidPrice1().get();
+			offerPrice = lastMarkerData.bidPrice1();
 			break;
 		default:
 			throw new IllegalArgumentException("TrdDirection is illegal");

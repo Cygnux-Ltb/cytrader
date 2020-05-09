@@ -62,12 +62,10 @@ public class SimAdaptor extends AdaptorBaseImpl {
 		super(adaptorId, adaptorName, account);
 		this.paramMap = paramMap;
 		this.scheduler = scheduler;
-
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
 				.host(paramMap.getString(SimAdaptorParam.MdHost)).port(paramMap.getInt(SimAdaptorParam.MdPort)).build();
 		SocketConfigurator tdConfigurator = SocketConfigurator.builder()
 				.host(paramMap.getString(SimAdaptorParam.TdHost)).port(paramMap.getInt(SimAdaptorParam.TdPort)).build();
-
 		this.mdReceiver = new SocketReceiver(mdConfigurator, (bytes) -> {
 			List<MarketDataLevel1> marketDatas = marketDataDeserializer.deserializationMultiple(bytes);
 			for (MarketDataLevel1 marketData : marketDatas) {
