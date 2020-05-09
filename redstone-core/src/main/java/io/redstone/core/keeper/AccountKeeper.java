@@ -15,7 +15,7 @@ import io.redstone.core.account.SubAccount;
 
 /**
  * 
- * 用于全局管理Account的状态
+ * 用于全局管理Account
  * 
  * @author yellow013
  *

@@ -2,6 +2,7 @@ package io.redstone.core.strategy;
 
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.redstone.core.keeper.LastMarkerDataKeeper;
 import io.redstone.core.order.structure.OrdReport;
 
 public interface StrategyScheduler {

@@ -17,10 +17,21 @@ public final class StrategyKeeper {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(StrategyKeeper.class);
 
-	private static final MutableIntObjectMap<Strategy> Strategys = MutableMaps.newIntObjectHashMap();
+	/**
+	 * 策略列表
+	 */
+	private static final MutableIntObjectMap<Strategy> StrategyMap = MutableMaps.newIntObjectHashMap();
 
-	// Map<instrumentId, List<Strategy>>
-	private static final MutableIntObjectMap<MutableList<Strategy>> SubscribedInstrumentList = MutableMaps
+	/**
+	 * 子账户与策略的对应关系
+	 */
+	private static final MutableIntObjectMap<MutableList<Strategy>> SubAccountStrategysMap = MutableMaps
+			.newIntObjectHashMap();
+
+	/**
+	 * 订阅合约的策略列表
+	 */
+	private static final MutableIntObjectMap<MutableList<Strategy>> SubscribedInstrumentMap = MutableMaps
 			.newIntObjectHashMap();
 
 	private StrategyKeeper() {
@@ -32,27 +43,29 @@ public final class StrategyKeeper {
 	 * @param strategy
 	 */
 	public static void putStrategy(Strategy strategy) {
-		Strategys.put(strategy.strategyId(), strategy);
+		StrategyMap.put(strategy.strategyId(), strategy);
 		log.info("StrategyKeeper :: Put strategy, strategyId==[{}]", strategy.strategyId());
 		strategy.instruments().forEach(instrument -> {
-			SubscribedInstrumentList.getIfAbsentPut(instrument.id(), MutableLists::newFastList).add(strategy);
-			log.info("StrategyKeeper :: Add subscribed instrument, strategyId==[{}], instrumentId==[{}]",
+			SubscribedInstrumentMap.getIfAbsentPut(instrument.id(), MutableLists::newFastList).add(strategy);
+			log.info("StrategyKeeper :: Add subscribe instrument, strategyId==[{}], instrumentId==[{}]",
 					strategy.strategyId(), instrument.id());
 		});
+		SubAccountStrategysMap.getIfAbsentPut(key, function)
+		strategy.subAccountId();
 		strategy.enable();
 		log.info("StrategyKeeper :: Strategy is enable, strategyId==[{}]", strategy.strategyId());
 	}
 
 	public static Strategy getStrategy(int strategyId) {
-		return Strategys.get(strategyId);
-	}
-
-	public static MutableList<Strategy> getSubscribedStrategys(int instrumentId) {
-		return SubscribedInstrumentList.get(instrumentId);
+		return StrategyMap.get(strategyId);
 	}
 
 	public static MutableList<Strategy> getSubscribedStrategys(Instrument instrument) {
-		return SubscribedInstrumentList.get(instrument.id());
+		return getSubscribedStrategys(instrument.id());
+	}
+
+	public static MutableList<Strategy> getSubscribedStrategys(int instrumentId) {
+		return SubscribedInstrumentMap.get(instrumentId);
 	}
 
 }

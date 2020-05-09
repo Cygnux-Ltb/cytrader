@@ -5,8 +5,6 @@ import java.io.Closeable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
-
 import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.account.Account;
@@ -18,7 +16,7 @@ public interface Adaptor extends Closeable, Enable {
 
 	String adaptorName();
 
-	ImmutableIntObjectMap<Account> accounts();
+	Account account();
 
 	boolean startup();
 

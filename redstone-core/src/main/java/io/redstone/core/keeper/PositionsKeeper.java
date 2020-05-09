@@ -1,5 +1,7 @@
 package io.redstone.core.keeper;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
 import org.slf4j.Logger;
 
@@ -17,6 +19,8 @@ import io.redstone.core.order.specific.ChildOrder;
  * 
  * @author yellow013
  */
+
+@NotThreadSafe
 public final class PositionsKeeper {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(PositionsKeeper.class);

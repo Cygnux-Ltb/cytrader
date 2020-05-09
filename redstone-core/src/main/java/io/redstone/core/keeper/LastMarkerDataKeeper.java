@@ -2,20 +2,34 @@ package io.redstone.core.keeper;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
+import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 
 /**
- * 管理当前最新行情
+ * 管理当前最新行情<br>
+ * 
+ * 仅在初始化时使用InstrumentKeeper加载一次Instrument<br>
+ * 
+ * 无论修改最新行情或查询最新行情都使用Get方法获取对象<br>
+ * 对象使用原子类型保证
  * 
  * @creation 2019年4月16日
+ * 
+ * @author yellow013
  */
+@ThreadSafe
 public final class LastMarkerDataKeeper {
+
+	private static final Logger log = CommonLoggerFactory.getLogger(LastMarkerDataKeeper.class);
 
 	private final ImmutableIntObjectMap<LastMarkerData> quoteMap;
 
@@ -31,13 +45,13 @@ public final class LastMarkerDataKeeper {
 	}
 
 	public static void onMarketDate(BasicMarketData marketData) {
-		LastMarkerData lastMarkerData = InnerInstance.quoteMap.get(marketData.instrument().id());
-		if (lastMarkerData == null)
-			return;
-		lastMarkerData.askPrice1().set(marketData.getAskPrice1());
-		lastMarkerData.askVolume1().set(marketData.getAskVolume1());
-		lastMarkerData.bidPrice1().set(marketData.getBidPrice1());
-		lastMarkerData.bidVolume1().set(marketData.getBidVolume1());
+		Instrument instrument = marketData.instrument();
+		LastMarkerData lastMarkerData = InnerInstance.quoteMap.get(instrument.id());
+		if (lastMarkerData == null) {
+			log.warn("LastMarkerDataKeeper :: Instrument unregistered, instrument -> {}", instrument);
+		}
+		lastMarkerData.setAskPrice1(marketData.getAskPrice1()).setAskVolume1(marketData.getAskVolume1())
+				.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());
 	}
 
 	public static LastMarkerData get(Instrument instrument) {
@@ -46,32 +60,48 @@ public final class LastMarkerDataKeeper {
 
 	public static class LastMarkerData {
 
-		private AtomicLong askPrice1;
-		private AtomicLong askVolume1;
-		private AtomicLong bidPrice1;
-		private AtomicLong bidVolume1;
+		private volatile long askPrice1;
+		private volatile int askVolume1;
+		private volatile long bidPrice1;
+		private volatile int bidVolume1;
 
-		public LastMarkerData() {
-			this.askPrice1 = new AtomicLong();
-			this.askVolume1 = new AtomicLong();
-			this.bidPrice1 = new AtomicLong();
-			this.bidVolume1 = new AtomicLong();
+		private LastMarkerData() {
 		}
 
-		public AtomicLong askPrice1() {
+		public long askPrice1() {
 			return askPrice1;
 		}
 
-		public AtomicLong askVolume1() {
+		public int askVolume1() {
 			return askVolume1;
 		}
 
-		public AtomicLong bidPrice1() {
+		public long bidPrice1() {
 			return bidPrice1;
 		}
 
-		public AtomicLong bidVolume1() {
+		public int bidVolume1() {
 			return bidVolume1;
+		}
+
+		private LastMarkerData setAskPrice1(long askPrice1) {
+			this.askPrice1 = askPrice1;
+			return this;
+		}
+
+		private LastMarkerData setAskVolume1(int askVolume1) {
+			this.askVolume1 = askVolume1;
+			return this;
+		}
+
+		private LastMarkerData setBidPrice1(long bidPrice1) {
+			this.bidPrice1 = bidPrice1;
+			return this;
+		}
+
+		private LastMarkerData setBidVolume1(int bidVolume1) {
+			this.bidVolume1 = bidVolume1;
+			return this;
 		}
 
 	}
