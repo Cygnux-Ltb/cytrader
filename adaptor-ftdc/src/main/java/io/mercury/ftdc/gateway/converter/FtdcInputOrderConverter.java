@@ -9,23 +9,45 @@ public class FtdcInputOrderConverter implements Function<CThostFtdcInputOrderFie
 
 	@Override
 	public FtdcInputOrder apply(CThostFtdcInputOrderField from) {
-		return new FtdcInputOrder().setBrokerID(from.getBrokerID()).setInvestorID(from.getInvestorID())
+		return new FtdcInputOrder()
 				
-				.setInstrumentID(from.getInstrumentID()).setOrderRef(from.getOrderRef()).setUserID(from.getUserID())
+				.setBrokerID(from.getBrokerID())
 				
-				.setOrderPriceType(from.getOrderPriceType()).setDirection(from.getDirection())
+				.setInvestorID(from.getInvestorID())
 				
-				.setCombOffsetFlag(from.getCombOffsetFlag()).setCombHedgeFlag(from.getCombHedgeFlag())
+				.setInstrumentID(from.getInstrumentID())
 				
-				.setLimitPrice(from.getLimitPrice()).setVolumeTotalOriginal(from.getVolumeTotalOriginal())
+				.setOrderRef(from.getOrderRef())
 				
-				.setTimeCondition(from.getTimeCondition()).setGTDDate(from.getGTDDate())
+				.setUserID(from.getUserID())
 				
-				.setVolumeCondition(from.getVolumeCondition()).setMinVolume(from.getMinVolume())
+				.setOrderPriceType(from.getOrderPriceType())
 				
-				.setContingentCondition(from.getContingentCondition()).setStopPrice(from.getStopPrice())
+				.setDirection(from.getDirection())
 				
-				.setForceCloseReason(from.getForceCloseReason()).setIsAutoSuspend(from.getIsAutoSuspend())
+				.setCombOffsetFlag(from.getCombOffsetFlag())
+				
+				.setCombHedgeFlag(from.getCombHedgeFlag())
+				
+				.setLimitPrice(from.getLimitPrice())
+				
+				.setVolumeTotalOriginal(from.getVolumeTotalOriginal())
+				
+				.setTimeCondition(from.getTimeCondition())
+				
+				.setGTDDate(from.getGTDDate())
+				
+				.setVolumeCondition(from.getVolumeCondition())
+				
+				.setMinVolume(from.getMinVolume())
+				
+				.setContingentCondition(from.getContingentCondition())
+				
+				.setStopPrice(from.getStopPrice())
+				
+				.setForceCloseReason(from.getForceCloseReason())
+				
+				.setIsAutoSuspend(from.getIsAutoSuspend())
 				
 				.setBusinessUnit(from.getBusinessUnit())
 				

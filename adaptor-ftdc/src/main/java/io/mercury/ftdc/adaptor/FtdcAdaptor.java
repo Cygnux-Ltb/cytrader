@@ -78,6 +78,11 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	// TODO 转换报单回报
 	private Function<FtdcOrder, OrdReport> rtnOrderConverter = ftdcOrder -> {
 		OrdReport ordReport = checkoutCtpOrder(ftdcOrder.getOrderRef());
+		
+		ftdcOrder.getOrderRef();
+		ftdcOrder.getVolumeTotal();
+		ftdcOrder.getOrderStatus();
+		
 		return ordReport;
 	};
 
@@ -146,31 +151,33 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.TraderDisable);
 						break;
 					case FtdcDepthMarketData:
+						// 行情处理
 						BasicMarketData marketData = marketDataConverter.apply(ftdcMsg.getFtdcDepthMarketData());
 						scheduler.onMarketData(marketData);
 						break;
 					case FtdcOrder:
+						// 报单回报处理
 						FtdcOrder ftdcOrder = ftdcMsg.getFtdcOrder();
 						OrdReport rtnOrder = rtnOrderConverter.apply(ftdcOrder);
-
 						scheduler.onOrderReport(rtnOrder);
 						break;
 					case FtdcTrade:
+						// 成交回报处理
 						FtdcTrade ftdcTrade = ftdcMsg.getFtdcTrade();
 						OrdReport rtnTrade = rtnTradeConverter.apply(ftdcTrade);
 						scheduler.onOrderReport(rtnTrade);
 						break;
-					// 报单错误处理
 					case FtdcInputOrder:
+						// 报单错误处理
 						FtdcInputOrder ftdcInputOrder = ftdcMsg.getFtdcInputOrder();
 
 						break;
-					// 撤单错误处理1
 					case FtdcInputOrderAction:
+						// 撤单错误处理1
 						FtdcInputOrderAction ftdcInputOrderAction = ftdcMsg.getFtdcInputOrderAction();
 						break;
-					// 撤单错误处理2
 					case FtdcOrderAction:
+						// 撤单错误处理2
 						FtdcOrderAction errRtnOrderInsert = ftdcMsg.getFtdcOrderAction();
 						break;
 					default:
