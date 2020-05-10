@@ -1,5 +1,6 @@
 package io.redstone.engine.impl.strategy;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
@@ -9,6 +10,7 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
+import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
@@ -23,6 +25,7 @@ import io.redstone.core.keeper.LastMarkerDataKeeper;
 import io.redstone.core.keeper.LastMarkerDataKeeper.LastMarkerData;
 import io.redstone.core.keeper.OrderKeeper;
 import io.redstone.core.order.Order;
+import io.redstone.core.order.OrderBook;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.specific.ParentOrder;
@@ -93,10 +96,9 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	@Override
 	public void onOrder(Order order) {
 		log.info(
-				"{} :: On order callback, ordSysId==[{}], ordStatus==[{}], trdDirection==[{}], instrument -> {}, ordPrice -> {}, ordQty -> {}",
-				strategyName, order.ordSysId(), order.ordStatus(), order.trdDirection(), order.instrument(),
-				order.ordPrice(), order.ordQty());
-		OrderKeeper.updateOrder(order);
+				"{} :: On order callback, ordSysId==[{}], ordStatus==[{}], trdDirection==[{}], ordPrice -> {}, ordQty -> {}, instrument -> {}",
+				strategyName, order.ordSysId(), order.ordStatus(), order.trdDirection(), order.ordPrice(),
+				order.ordQty(), order.instrument());
 		handleOrder(order);
 	}
 
@@ -198,14 +200,14 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		case Short:
 			offerPrice = lastMarkerData.bidPrice1();
 			break;
-		default:
-			throw new IllegalArgumentException("TrdDirection is illegal");
+		case Invalid:
+			throw new IllegalArgumentException("TrdDirection is invalid");
 		}
 		StrategyOrder strategyOrder = new StrategyOrder(strategyId, instrument, OrdQty.withOfferQty(targetQty),
 				OrdPrice.withOffer(offerPrice), direction, OrdType.Limit, subAccountId);
 		strategyOrders.put(strategyOrder.ordSysId(), strategyOrder);
 
-		MutableList<ParentOrder> ParentOrders = OrderKeeper.onStrategyOrder(strategyOrder);
+		MutableList<ParentOrder> ParentOrders = strategyOrderConverter.apply(strategyOrder);
 
 		ParentOrder first = ParentOrders.getFirst();
 
@@ -213,6 +215,42 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 		adaptor.newOredr(first.toChildOrder());
 	}
+
+	/**
+	 * 将StrategyOrder转换为需要执行的实际订单
+	 */
+	private Function<StrategyOrder, MutableList<ParentOrder>> strategyOrderConverter = strategyOrder -> {
+		MutableList<ParentOrder> parentOrders = MutableLists.newFastList();
+		OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrders(strategyOrder.instrument());
+		int offerQty = strategyOrder.ordQty().offerQty();
+		switch (strategyOrder.trdDirection()) {
+		case Long:
+			MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.activeShortOrders();
+			if (activeShortOrders.notEmpty()) {
+				// TODO 当有活动的反向订单时选择撤单
+			}
+			// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
+			// TODO 计算平仓后还需要开仓的数量
+			int needOpenLong = offerQty - 0;
+			ParentOrder openLongOrder = strategyOrder.toActualOrder(TrdDirection.Long, needOpenLong, OrdType.Limit);
+			parentOrders.add(openLongOrder);
+			break;
+		case Short:
+			MutableLongObjectMap<Order> activeLongOrders = instrumentOrderBook.activeLongOrders();
+			if (activeLongOrders.notEmpty()) {
+				// TODO 当有活动的反向订单时选择撤单
+			}
+			// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
+			// TODO 计算平仓后还需要开仓的数量
+			int needOpenShort = offerQty - 0;
+			ParentOrder openShortOrder = strategyOrder.toActualOrder(TrdDirection.Short, needOpenShort, OrdType.Limit);
+			parentOrders.add(openShortOrder);
+			break;
+		default:
+			break;
+		}
+		return parentOrders;
+	};
 
 	/**
 	 * 由策略自行决定在交易不同Instrument时使用哪个Adaptor
