@@ -50,7 +50,8 @@ public final class StrategyKeeper {
 			log.info("StrategyKeeper :: Add subscribe instrument, strategyId==[{}], instrumentId==[{}]",
 					strategy.strategyId(), instrument.id());
 		});
-		SubAccountStrategysMap.getIfAbsentPut(key, function)
+		SubAccountStrategysMap.getIfAbsentPut(strategy.subAccountId(), MutableLists::newFastList).add(strategy);
+		
 		strategy.subAccountId();
 		strategy.enable();
 		log.info("StrategyKeeper :: Strategy is enable, strategyId==[{}]", strategy.strategyId());

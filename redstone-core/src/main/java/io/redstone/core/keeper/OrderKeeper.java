@@ -1,30 +1,25 @@
 package io.redstone.core.keeper;
 
-import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.Capacity;
-import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderBook;
-import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.enums.TrdDirection;
-import io.redstone.core.order.specific.ParentOrder;
-import io.redstone.core.order.specific.StrategyOrder;
+import io.redstone.core.order.OrderUpdater;
+import io.redstone.core.order.specific.ChildOrder;
+import io.redstone.core.order.structure.OrdReport;
 
 /**
  * 统一管理订单<br>
- * 1对订单止损进行管理<br>
- * 2...<br>
+ * OrderKeeper只对订单进行存储<br>
+ * 不处理订单<br>
  * 
  * @author yellow013
  */
@@ -37,7 +32,7 @@ public final class OrderKeeper {
 	/**
 	 * 存储所有的order
 	 */
-	private static final OrderBook AllOrders = OrderBook.newInstance(Capacity.L12_SIZE_4096);
+	private static final OrderBook AllOrders = new OrderBook(Capacity.L10_SIZE_1024);
 
 	/**
 	 * 按照subAccount分组存储
@@ -62,35 +57,52 @@ public final class OrderKeeper {
 	private OrderKeeper() {
 	}
 
-	public static void updateOrder(Order order) {
+	public static void onOrder(Order order) {
 		int subAccountId = order.subAccountId();
 		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
-		OrderBook subAccountOrders = getSubAccountOrders(subAccountId);
-		OrderBook accountOrders = getAccountOrders(accountId);
-		OrderBook strategyOrders = getStrategyOrders(order.strategyId());
-		OrderBook instrumentOrders = getInstrumentOrders(order.instrument());
 		switch (order.ordStatus()) {
 		case PendingNew:
 			AllOrders.putOrder(order);
-			subAccountOrders.putOrder(order);
-			accountOrders.putOrder(order);
-			strategyOrders.putOrder(order);
-			instrumentOrders.putOrder(order);
+			getSubAccountOrders(subAccountId).putOrder(order);
+			getAccountOrders(accountId).putOrder(order);
+			getStrategyOrders(order.strategyId()).putOrder(order);
+			getInstrumentOrders(order.instrument()).putOrder(order);
 			break;
 		case Filled:
 		case Canceled:
 		case NewRejected:
 		case CancelRejected:
-			AllOrders.terminatedOrder(order);
-			subAccountOrders.terminatedOrder(order);
-			accountOrders.terminatedOrder(order);
-			strategyOrders.terminatedOrder(order);
-			instrumentOrders.terminatedOrder(order);
+			AllOrders.finishOrder(order);
+			getSubAccountOrders(subAccountId).finishOrder(order);
+			getAccountOrders(accountId).finishOrder(order);
+			getStrategyOrders(order.strategyId()).finishOrder(order);
+			getInstrumentOrders(order.instrument()).finishOrder(order);
 			break;
 		default:
-			log.info("Not need processed -> OrdSysId==[{}], OrdStatus==[{}]", order.ordSysId(), order.ordStatus());
+			log.info("OrderKeeper :: Not need processed, ordSysId==[{}], ordStatus==[{}]", order.ordSysId(),
+					order.ordStatus());
 			break;
 		}
+	}
+
+	/**
+	 * 处理订单回报
+	 * 
+	 * @param report
+	 * @return
+	 */
+	public static ChildOrder onOrdReport(OrdReport report) {
+		// 根据订单回报查找所属订单
+		Order order = getOrder(report.getOrdSysId());
+		if (order == null) {
+			// TODO 处理订单由外部系统发出而收到报单回报
+			log.warn("OrderKeeper :: Received other source order, ordSysId==[{}]", report.getOrdSysId());
+		}
+		ChildOrder childOrder = (ChildOrder) order;
+		// 更新订单状态
+		OrderUpdater.updateOrderWithReport(childOrder, report);
+		onOrder(childOrder);
+		return childOrder;
 	}
 
 	public static boolean containsOrder(long ordSysId) {
@@ -101,60 +113,20 @@ public final class OrderKeeper {
 		return AllOrders.getOrder(ordSysId);
 	}
 
-
-
 	public static OrderBook getSubAccountOrders(int subAccountId) {
-		return SubAccountOrderBooks.getIfAbsentPut(subAccountId,
-				OrderBook.newInstance(Capacity.L07_SIZE_128));
+		return SubAccountOrderBooks.getIfAbsentPut(subAccountId, OrderBook::new);
 	}
 
 	public static OrderBook getAccountOrders(int accountId) {
-		return AccountOrderBooks.getIfAbsentPut(accountId, OrderBook.newInstance(Capacity.L08_SIZE_256));
+		return AccountOrderBooks.getIfAbsentPut(accountId, OrderBook::new);
 	}
 
 	public static OrderBook getStrategyOrders(int strategyId) {
-		return StrategyOrderBooks.getIfAbsentPut(strategyId, OrderBook.newInstance(Capacity.L10_SIZE_1024));
+		return StrategyOrderBooks.getIfAbsentPut(strategyId, OrderBook::new);
 	}
 
 	public static OrderBook getInstrumentOrders(Instrument instrument) {
-		return InstrumentOrderBooks.getIfAbsentPut(instrument.id(),
-				OrderBook.newInstance(Capacity.L11_SIZE_2048));
-	}
-
-	public static MutableList<ParentOrder> onStrategyOrder(@Nonnull StrategyOrder... strategyOrders) {
-		MutableList<ParentOrder> parentOrders = MutableLists.newFastList(strategyOrders.length);
-		for (StrategyOrder strategyOrder : strategyOrders) {
-			OrderBook instrumentOrderBook = getInstrumentOrders(strategyOrder.instrument());
-			int offerQty = strategyOrder.ordQty().offerQty();
-			switch (strategyOrder.trdDirection()) {
-			case Long:
-				MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.activeShortOrders();
-				if (activeShortOrders.notEmpty()) {
-					// TODO 当有活动的反向订单时选择撤单
-				}
-				// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
-				// TODO 计算平仓后还需要开仓的数量
-				int needOpenLong = offerQty - 0;
-				ParentOrder openLongOrder = strategyOrder.toActualOrder(TrdDirection.Long, needOpenLong, OrdType.Limit);
-				parentOrders.add(openLongOrder);
-				break;
-			case Short:
-				MutableLongObjectMap<Order> activeLongOrders = instrumentOrderBook.activeLongOrders();
-				if (activeLongOrders.notEmpty()) {
-					// TODO 当有活动的反向订单时选择撤单
-				}
-				// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
-				// TODO 计算平仓后还需要开仓的数量
-				int needOpenShort = offerQty - 0;
-				ParentOrder openShortOrder = strategyOrder.toActualOrder(TrdDirection.Short, needOpenShort,
-						OrdType.Limit);
-				parentOrders.add(openShortOrder);
-				break;
-			default:
-				break;
-			}
-		}
-		return parentOrders;
+		return InstrumentOrderBooks.getIfAbsentPut(instrument.id(), OrderBook::new);
 	}
 
 	public static void onMarketData(BasicMarketData marketData) {

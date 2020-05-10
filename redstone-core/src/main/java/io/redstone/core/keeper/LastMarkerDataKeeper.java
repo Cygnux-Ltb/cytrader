@@ -1,7 +1,5 @@
 package io.redstone.core.keeper;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 import javax.annotation.concurrent.ThreadSafe;
 
 import org.eclipse.collections.api.list.ImmutableList;
@@ -33,20 +31,24 @@ public final class LastMarkerDataKeeper {
 
 	private final ImmutableIntObjectMap<LastMarkerData> quoteMap;
 
-	private final static LastMarkerDataKeeper InnerInstance = new LastMarkerDataKeeper();
+	private final static LastMarkerDataKeeper StaticInstance = new LastMarkerDataKeeper();
 
 	private LastMarkerDataKeeper() {
 		MutableIntObjectMap<LastMarkerData> tempQuoteMap = MutableMaps.newIntObjectHashMap();
 		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
 		if (allInstrument.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
-		allInstrument.each(instrument -> tempQuoteMap.put(instrument.id(), new LastMarkerData()));
+		allInstrument.each(instrument -> {
+			tempQuoteMap.put(instrument.id(), new LastMarkerData());
+			log.info("LastMarkerDataKeeper :: Add instrument, instrumentId==[{}], instrument -> {}", instrument.id(),
+					instrument);
+		});
 		quoteMap = tempQuoteMap.toImmutable();
 	}
 
 	public static void onMarketDate(BasicMarketData marketData) {
 		Instrument instrument = marketData.instrument();
-		LastMarkerData lastMarkerData = InnerInstance.quoteMap.get(instrument.id());
+		LastMarkerData lastMarkerData = get(instrument);
 		if (lastMarkerData == null) {
 			log.warn("LastMarkerDataKeeper :: Instrument unregistered, instrument -> {}", instrument);
 		}
@@ -55,7 +57,7 @@ public final class LastMarkerDataKeeper {
 	}
 
 	public static LastMarkerData get(Instrument instrument) {
-		return InnerInstance.quoteMap.get(instrument.id());
+		return StaticInstance.quoteMap.get(instrument.id());
 	}
 
 	public static class LastMarkerData {
