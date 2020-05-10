@@ -24,29 +24,36 @@ import io.mercury.common.datetime.EpochTime;
  * @creation 2019年4月13日
  */
 @NotThreadSafe
-public final class OrdSysIdGenerator {
+public final class OrdSysIdAllocator {
 
-	private static int increment;
-
-	private static long lastUseEpochSeconds;
-
-	private static int maxLimitOwnerId = 921;
+	private static final int maxLimitOwnerId = 920;
 
 	/**
 	 * 
-	 * @param ownerId min value 100 max value 921
+	 * @param strategyId min value 1 max value 920
 	 * @return
 	 */
-	public static long next(int ownerId) {
-		if (ownerId < 100 || ownerId > maxLimitOwnerId)
-			throw new RuntimeException("OwnerId is illegal.");
+	public static long allocate(int strategyId) {
+		if (strategyId < 0 || strategyId > maxLimitOwnerId)
+			throw new RuntimeException("strategyId is illegal.");
+		return generate(strategyId);
+	}
+
+	public static long allocateFromThird() {
+		return generate(921);
+	}
+
+	private static volatile int increment;
+
+	private static volatile long lastUseEpochSeconds;
+
+	private static long generate(int highPos) {
 		long nowEpochSeconds = EpochTime.seconds();
 		if (nowEpochSeconds != lastUseEpochSeconds) {
 			lastUseEpochSeconds = nowEpochSeconds;
 			increment = 0;
 		}
-		return ownerId * 10_000_000_000_000_000L + lastUseEpochSeconds * 1_000_000L + ++increment;
-
+		return highPos * 10_000_000_000_000_000L + lastUseEpochSeconds * 1_000_000L + ++increment;
 	}
 
 	public static void main(String[] args) throws InterruptedException {
@@ -54,13 +61,8 @@ public final class OrdSysIdGenerator {
 		System.out.println(9219999999999999999L);
 		System.out.println(Long.MAX_VALUE);
 		System.out.println("000" + EpochTime.seconds() + "000000");
-
+		System.out.println(allocate(921));
 		System.out.println("OrdSysId");
-
-		for (int i = 0; i < 1000000; i++) {
-
-			System.out.println(OrdSysIdGenerator.next(100));
-		}
 
 	}
 

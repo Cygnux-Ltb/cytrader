@@ -5,7 +5,11 @@ import io.redstone.core.order.structure.OrdReport;
 
 public final class OrderUpdater {
 
-	// TODO Call this update order
+	/**
+	 * 根据订单回报处理订单状态
+	 * @param order
+	 * @param report
+	 */
 	public static void updateOrderWithReport(ChildOrder order, OrdReport report) {
 		order.setOrdStatus(report.getOrdStatus());
 		switch (order.ordStatus()) {
