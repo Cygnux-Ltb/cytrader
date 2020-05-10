@@ -70,6 +70,12 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		hasError("OnRspUserLogout", pRspInfo);
 		log.info("Call TraderSpiImpl OnRspUserLogout");
 	}
+	
+	@Override
+	public void OnRspQryOrder(CThostFtdcOrderField pOrder, CThostFtdcRspInfoField pRspInfo, int arg2, boolean arg3) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void OnRspQryTradingAccount(CThostFtdcTradingAccountField pTradingAccount, CThostFtdcRspInfoField pRspInfo,

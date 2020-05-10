@@ -43,6 +43,7 @@ import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.base.AdaptorBaseImpl;
 import io.redstone.core.keeper.InstrumentKeeper;
+import io.redstone.core.order.OrdSysIdAllocator;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.specific.ChildOrder;
 import io.redstone.core.order.structure.OrdReport;
@@ -78,11 +79,11 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	// TODO 转换报单回报
 	private Function<FtdcOrder, OrdReport> rtnOrderConverter = ftdcOrder -> {
 		OrdReport ordReport = checkoutCtpOrder(ftdcOrder.getOrderRef());
-		
+
 		ftdcOrder.getOrderRef();
 		ftdcOrder.getVolumeTotal();
 		ftdcOrder.getOrderStatus();
-		
+
 		return ordReport;
 	};
 
@@ -95,11 +96,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private OrdReport checkoutCtpOrder(String orderRef) {
 		try {
 			long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
-			// TODO 需要处理手动下单的情况
 			if (ordSysId == 0L) {
-
-			}
-			return new OrdReport(ordSysId);
+				// 处理其他来源的订单
+				long thirdOrdSysId = OrdSysIdAllocator.allocateFromThird();
+				return new OrdReport(thirdOrdSysId);
+			} else
+				return new OrdReport(ordSysId);
 		} catch (OrderRefNotFoundException e) {
 			log.error(e.getMessage(), e);
 			throw new RuntimeException(e);
@@ -112,9 +114,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private volatile int frontId;
 	private volatile int sessionId;
 
-	private volatile boolean traderIsAvailable;
-
 	private volatile boolean mdIsAvailable;
+	private volatile boolean traderIsAvailable;
 
 	public FtdcAdaptor(int adaptorId, String adaptorName, Account account, @Nonnull StrategyScheduler scheduler,
 			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
@@ -130,7 +131,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 		// 初始化Gateway
 		this.gateway = new FtdcGateway("Ftdc-Gateway", configInfo,
-				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 1024, ftdcMsg -> {
+				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 256, ftdcMsg -> {
 					switch (ftdcMsg.getRspType()) {
 					case RspMdConnect:
 						RspMdConnect rspMdConnect = ftdcMsg.getRspMdConnect();
@@ -170,15 +171,17 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					case FtdcInputOrder:
 						// 报单错误处理
 						FtdcInputOrder ftdcInputOrder = ftdcMsg.getFtdcInputOrder();
-
+						log.warn("");
 						break;
 					case FtdcInputOrderAction:
 						// 撤单错误处理1
 						FtdcInputOrderAction ftdcInputOrderAction = ftdcMsg.getFtdcInputOrderAction();
+						log.warn("");
 						break;
 					case FtdcOrderAction:
 						// 撤单错误处理2
 						FtdcOrderAction errRtnOrderInsert = ftdcMsg.getFtdcOrderAction();
+						log.warn("");
 						break;
 					default:
 						break;
