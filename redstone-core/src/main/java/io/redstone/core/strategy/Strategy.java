@@ -11,7 +11,7 @@ import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
 import io.redstone.core.order.Order;
 
-public interface Strategy extends Enable {
+public interface Strategy extends Enable<Strategy> {
 
 	int strategyId();
 

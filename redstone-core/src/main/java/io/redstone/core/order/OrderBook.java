@@ -6,6 +6,12 @@ import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.redstone.core.order.exception.OrderStatusException;
 
+/**
+ * 订单存储组件
+ * 
+ * @author yellow013
+ *
+ */
 public final class OrderBook {
 
 	/**

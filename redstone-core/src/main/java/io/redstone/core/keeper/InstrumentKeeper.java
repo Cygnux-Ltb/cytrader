@@ -36,11 +36,11 @@ public final class InstrumentKeeper {
 		setTradable(instrument.id());
 	}
 
-	public static void setTradable(int instrumentId) {
+	public static Instrument setTradable(int instrumentId) {
 		Instrument instrument = getInstrument(instrumentId);
-		instrument.enable();
 		log.info("InstrumentKeeper :: Instrument enable, instrumentId==[{}], instrument -> {}", instrumentId,
 				instrument);
+		return instrument.enable();
 	}
 
 	public static void setNotTradable(Instrument instrument) {

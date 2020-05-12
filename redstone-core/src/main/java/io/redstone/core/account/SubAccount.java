@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
 
-public class SubAccount extends EnableComponent {
+public class SubAccount extends EnableComponent<SubAccount> {
 
 	private final int subAccountId;
 	private final String subAccountName;
@@ -20,8 +20,7 @@ public class SubAccount extends EnableComponent {
 		this(subAccountId, subAccountName, account, account.balance());
 	}
 
-	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account,
-			Balance balance) {
+	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account, Balance balance) {
 		this.subAccountId = subAccountId;
 		this.account = Assertor.nonNull(account, "[account]");
 		this.balance = Assertor.nonNull(balance, "[balance]");
@@ -44,6 +43,11 @@ public class SubAccount extends EnableComponent {
 
 	public Account account() {
 		return account;
+	}
+
+	@Override
+	protected SubAccount returnThis() {
+		return this;
 	}
 
 }

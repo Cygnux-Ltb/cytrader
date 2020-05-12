@@ -70,12 +70,12 @@ public final class AccountKeeper {
 		return account;
 	}
 
-	public static void setAccountNotTradable(int accountId) {
-		getAccountById(accountId).disable();
+	public static Account setAccountNotTradable(int accountId) {
+		return getAccountById(accountId).disable();
 	}
 
-	public static void setAccountTradable(int accountId) {
-		getAccountById(accountId).enable();
+	public static Account setAccountTradable(int accountId) {
+		return getAccountById(accountId).enable();
 	}
 
 	public static boolean isAccountTradable(int accountId) {
@@ -100,12 +100,12 @@ public final class AccountKeeper {
 		return subAccount;
 	}
 
-	public static void setSubAccountNotTradable(int subAccountId) {
-		getSubAccount(subAccountId).disable();
+	public static SubAccount setSubAccountNotTradable(int subAccountId) {
+		return getSubAccount(subAccountId).disable();
 	}
 
-	public static void setSubAccountTradable(int subAccountId) {
-		getSubAccount(subAccountId).enable();
+	public static SubAccount setSubAccountTradable(int subAccountId) {
+		return getSubAccount(subAccountId).enable();
 	}
 
 	public static boolean isSubAccountTradable(int subAccountId) {

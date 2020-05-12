@@ -10,7 +10,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.account.Account;
 import io.redstone.core.order.specific.ChildOrder;
 
-public interface Adaptor extends Closeable, Enable {
+public interface Adaptor extends Closeable, Enable<Adaptor> {
 
 	int adaptorId();
 

@@ -15,25 +15,13 @@ public final class OrdPrice {
 	 * 成交均价
 	 */
 	private long trdAvgPrice;
-	/**
-	 * 以最优价格
-	 */
-	private boolean isBestPrice;
 
 	private OrdPrice(long offerPrice) {
 		this.offerPrice = offerPrice;
 	}
 
-	private OrdPrice(boolean isBestPrice) {
-		this.isBestPrice = isBestPrice;
-	}
-
 	public static OrdPrice withOffer(long offerPrice) {
 		return new OrdPrice(offerPrice);
-	}
-
-	public static OrdPrice withBestPrice() {
-		return new OrdPrice(true);
 	}
 
 	public long offerPrice() {
@@ -50,10 +38,6 @@ public final class OrdPrice {
 		return trdAvgPrice;
 	}
 
-	public boolean isBestPrice() {
-		return isBestPrice;
-	}
-
 	public OrdPrice calculateAvgPrice(TrdList trdList) {
 		if (!trdList.isEmpty()) {
 			MutableList<TrdRecord> records = trdList.records();
@@ -66,6 +50,27 @@ public final class OrdPrice {
 			return this;
 		}
 		return this;
+	}
+
+	private static final String str0 = "{\"offerPrice\" : ";
+	private static final String str1 = ", \"trdAvgPrice\" : ";
+	private static final String str2 = "}";
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder(75);
+		builder.append(str0);
+		builder.append(offerPrice);
+		builder.append(str1);
+		builder.append(trdAvgPrice);
+		builder.append(str2);
+		return builder.toString();
+	}
+
+	public static void main(String[] args) {
+		
+		System.out.println(OrdPrice.withOffer(2560));
+		
 	}
 
 }

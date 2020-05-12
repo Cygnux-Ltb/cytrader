@@ -5,7 +5,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableComponent;
 
-public class Account extends EnableComponent {
+public class Account extends EnableComponent<Account> {
 
 	private int accountId;
 	private String accountName;
@@ -76,6 +76,9 @@ public class Account extends EnableComponent {
 		subAccounts.add(subAccount);
 	}
 
-
+	@Override
+	protected Account returnThis() {
+		return this;
+	}
 
 }

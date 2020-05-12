@@ -18,26 +18,14 @@ public final class OrdQty {
 	 * 最后一次成交数量
 	 */
 	private int lastFilledQty;
-	/**
-	 * 是否使用最大能成交的数量
-	 */
-	private boolean isMaxQty;
 
 	private OrdQty(int offerQty) {
 		this.offerQty = offerQty;
 		this.leavesQty = offerQty;
 	}
 
-	private OrdQty(boolean isMaxQty) {
-		this.isMaxQty = isMaxQty;
-	}
-
 	public static final OrdQty withOfferQty(int offerQty) {
 		return new OrdQty(offerQty);
-	}
-
-	public static final OrdQty withMaxQty() {
-		return new OrdQty(true);
 	}
 
 	public int offerQty() {
@@ -75,8 +63,31 @@ public final class OrdQty {
 		return lastFilledQty;
 	}
 
-	public boolean isMaxQty() {
-		return isMaxQty;
+	private static final String str0 = "{\"offerQty\" : ";
+	private static final String str1 = ", \"leavesQty\" : ";
+	private static final String str2 = ", \"filledQty\" : ";
+	private static final String str3 = ", \"lastFilledQty\" : ";
+	private static final String str4 = "}";
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder(90);
+		builder.append(str0);
+		builder.append(offerQty);
+		builder.append(str1);
+		builder.append(leavesQty);
+		builder.append(str2);
+		builder.append(filledQty);
+		builder.append(str3);
+		builder.append(lastFilledQty);
+		builder.append(str4);
+		return builder.toString();
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println(OrdQty.withOfferQty(2));
+
 	}
 
 }
