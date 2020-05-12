@@ -7,7 +7,7 @@
 	<!-- This is parent redstone pom.xml -->
 	<groupId>io.mercury</groupId>
 	<artifactId>redstone</artifactId>
-	<version>0.1</version>
+	<version>1.0</version>
 
 	<packaging>pom</packaging>
 	<name>redstone</name>

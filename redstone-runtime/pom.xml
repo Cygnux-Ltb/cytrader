@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>redstone</artifactId>
 		<groupId>io.mercury</groupId>
-		<version>0.1</version>
+		<artifactId>redstone</artifactId>
+		<version>1.0</version>
 	</parent>
 
 	<artifactId>redstone-runtime</artifactId>
