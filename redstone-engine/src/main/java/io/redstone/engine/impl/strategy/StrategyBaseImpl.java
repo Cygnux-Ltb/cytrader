@@ -110,7 +110,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	}
 
 	@Override
-	public void enable() {
+	public Strategy enable() {
 		if (initSuccess) {
 			this.isEnable = true;
 			log.info("{} :: Enable strategy, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
@@ -119,12 +119,14 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 			log.info("{} :: Enable strategy fail, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
 					strategyId, initSuccess, isEnable);
 		}
+		return this;
 	}
 
 	@Override
-	public void disable() {
+	public Strategy disable() {
 		this.isEnable = false;
 		log.info("{} :: Disable strategy -> strategyId==[{}], isEnable==[{}]", strategyName, strategyId, isEnable);
+		return this;
 	}
 
 	@Override

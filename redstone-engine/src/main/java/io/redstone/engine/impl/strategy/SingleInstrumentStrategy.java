@@ -7,6 +7,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.redstone.core.order.enums.TrdDirection;
 
 public abstract class SingleInstrumentStrategy<M extends MarketData> extends StrategyBaseImpl<M> {
 
@@ -40,6 +41,18 @@ public abstract class SingleInstrumentStrategy<M extends MarketData> extends Str
 	@Override
 	protected Adaptor getAdaptor(Instrument instrument) {
 		return adaptor;
+	}
+
+	protected void orderTarget(TrdDirection direction, int targetQty) {
+		super.orderTarget(instrument, direction, targetQty);
+	}
+
+	protected void orderTarget(TrdDirection direction, int targetQty, long limitPrice) {
+		super.orderTarget(instrument, direction, targetQty, limitPrice);
+	}
+
+	protected void orderTarget(TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
+		super.orderTarget(instrument, direction, targetQty, limitPrice, floatTick);
 	}
 
 	@Override
