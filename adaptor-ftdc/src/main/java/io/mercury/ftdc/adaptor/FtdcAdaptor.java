@@ -263,7 +263,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				synchronized (mutex) {
 					log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition");
 					ThreadHelper.sleep(1250);
-					gateway.ReqQryOrder();
+					// TODO 写入ExchangeId
+					gateway.ReqQryOrder("SHFE");
 					log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 				}
 			}, "QueryOrder-SubThread");

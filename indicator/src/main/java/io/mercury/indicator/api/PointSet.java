@@ -51,6 +51,12 @@ public final class PointSet<P extends Point<?, ?>> {
 		return index < points.size() ? Optional.ofNullable(points.get(index)) : Optional.empty();
 	}
 
+	/**
+	 * TODO 需要修改
+	 * 
+	 * @param point
+	 * @return
+	 */
 	public Optional<P> nextOf(P point) {
 		int index = point.index();
 		return get(++index);

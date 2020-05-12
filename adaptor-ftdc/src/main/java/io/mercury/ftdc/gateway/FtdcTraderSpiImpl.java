@@ -70,11 +70,13 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		hasError("OnRspUserLogout", pRspInfo);
 		log.info("Call TraderSpiImpl OnRspUserLogout");
 	}
-	
+
 	@Override
-	public void OnRspQryOrder(CThostFtdcOrderField pOrder, CThostFtdcRspInfoField pRspInfo, int arg2, boolean arg3) {
+	public void OnRspQryOrder(CThostFtdcOrderField pOrder, CThostFtdcRspInfoField pRspInfo, int nRequestID,
+			boolean bIsLast) {
+		hasError("OnRspQryOrder", pRspInfo);
 		// TODO Auto-generated method stub
-		
+		gateway.onRspQryOrder(pOrder, bIsLast);
 	}
 
 	@Override
@@ -83,7 +85,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		hasError("OnRspQryTradingAccount", pRspInfo);
 		log.info("Call TraderSpiImpl OnRspQryTradingAccount");
 		if (pTradingAccount != null)
-			gateway.onQryTradingAccount(pTradingAccount);
+			gateway.onQryTradingAccount(pTradingAccount, bIsLast);
 		else
 			log.warn("OnRspQryTradingAccount return null");
 
@@ -95,7 +97,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		hasError("OnRspQryInvestorPosition", pRspInfo);
 		log.info("Call TraderSpiImpl OnRspQryInvestorPosition");
 		if (pInvestorPosition != null)
-			gateway.onRspQryInvestorPosition(pInvestorPosition);
+			gateway.onRspQryInvestorPosition(pInvestorPosition, bIsLast);
 		else
 			log.warn("OnRspQryInvestorPosition return null");
 	}
