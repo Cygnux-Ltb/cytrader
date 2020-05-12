@@ -1,6 +1,6 @@
 package io.mercury.financial.instrument;
 
-abstract class BaseInstrument implements Instrument {
+public abstract class BaseInstrument implements Instrument {
 
 	/**
 	 * int 类型唯一编码
@@ -20,13 +20,15 @@ abstract class BaseInstrument implements Instrument {
 	}
 
 	@Override
-	public void disable() {
+	public Instrument disable() {
 		this.isEnable = false;
+		return this;
 	}
 
 	@Override
-	public void enable() {
+	public Instrument enable() {
 		this.isEnable = true;
+		return this;
 	}
 
 	@Override

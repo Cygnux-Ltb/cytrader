@@ -2,7 +2,7 @@ package io.mercury.financial.instrument;
 
 import io.mercury.common.fsm.Enable;
 
-public interface Instrument extends Enable {
+public interface Instrument extends Enable<Instrument> {
 
 	/**
 	 * STOCK : exchange|symbol<br>
@@ -52,5 +52,5 @@ public interface Instrument extends Enable {
 	}
 
 	String fmtText();
-
+	
 }

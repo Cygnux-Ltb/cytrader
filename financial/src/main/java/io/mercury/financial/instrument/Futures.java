@@ -15,5 +15,5 @@ public abstract class Futures extends BaseInstrument {
 	public boolean isAvailableNow() {
 		return true;
 	}
-
+	
 }
