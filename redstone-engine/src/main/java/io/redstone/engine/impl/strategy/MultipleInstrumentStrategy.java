@@ -23,7 +23,6 @@ public abstract class MultipleInstrumentStrategy<M extends MarketData> extends S
 	@Override
 	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

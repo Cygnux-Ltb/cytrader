@@ -18,15 +18,18 @@ import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.impl.BasicMarketData;
+import io.redstone.core.account.SubAccount;
 import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.keeper.AccountKeeper;
 import io.redstone.core.keeper.InstrumentKeeper;
 import io.redstone.core.keeper.LastMarkerDataKeeper;
 import io.redstone.core.keeper.LastMarkerDataKeeper.LastMarkerData;
 import io.redstone.core.keeper.OrderKeeper;
+import io.redstone.core.keeper.PositionsKeeper;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderBook;
 import io.redstone.core.order.enums.OrdType;
+import io.redstone.core.order.enums.TrdAction;
 import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.specific.ParentOrder;
 import io.redstone.core.order.specific.StrategyOrder;
@@ -50,6 +53,8 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
+	protected final SubAccount subAccount;
+
 	// 记录当前策略所有的策略订单订单
 	protected final MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
 
@@ -59,6 +64,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 				? "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]"
 				: strategyName;
 		this.subAccountId = subAccountId;
+		this.subAccount = AccountKeeper.getSubAccount(subAccountId);
 	}
 
 	@Override
@@ -219,7 +225,15 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	}
 
 	void closeAllPositions(Instrument instrument) {
+		int position = PositionsKeeper.getPosition(subAccountId, instrument);
+		if (position == 0) {
+			log.warn("");
+		} else if (position > 0) {
 
+		} else {
+			
+			
+		}
 	}
 
 	void closePositions(Instrument instrument, int closeQty) {
