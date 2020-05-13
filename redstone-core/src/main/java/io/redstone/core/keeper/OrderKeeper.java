@@ -92,11 +92,18 @@ public final class OrderKeeper {
 	 * @return
 	 */
 	public static ChildOrder onOrdReport(OrdReport report) {
+		log.info(
+				"Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}], executePrice==[{}], filledQty==[{}], instrument -> {}",
+				report.getBrokerUniqueId(), report.getOrdSysId(), report.getExecutePrice(), report.getFilledQty(),
+				report.getInstrument());
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
 		if (order == null) {
 			// TODO 处理订单由外部系统发出而收到报单回报
 			log.warn("OrderKeeper :: Received other source order, ordSysId==[{}]", report.getOrdSysId());
+		} else {
+			log.info("OrderKeeper :: Search order OK, strategyId==[{}], subAccountId==[{}]", order.strategyId(),
+					order.subAccountId());
 		}
 		ChildOrder childOrder = (ChildOrder) order;
 		// 更新订单状态
