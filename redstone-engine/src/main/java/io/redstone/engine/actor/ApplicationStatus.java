@@ -5,43 +5,33 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.concurrent.atomic.AtomicReference;
 
 public final class ApplicationStatus {
 
-	private final int maxLimit = 20;
-
-	private volatile int appId = 0;
-
-	private AppStatus currentStatus = AppStatus.Unknown;
-
-	private final static ApplicationStatus INSTANCE = new ApplicationStatus();
+	private static final AtomicReference<AppStatus> CurrentStatus = new AtomicReference<AppStatus>(AppStatus.Unknown);
 
 	private ApplicationStatus() {
 	}
 
-	public static int appId() {
-		return INSTANCE.appId;
+	public static AppStatus currentStatus() {
+		return CurrentStatus.get();
 	}
 
-	public static AppStatus appStatus() {
-		return INSTANCE.currentStatus;
+	public static void setInitialization() {
+		CurrentStatus.set(AppStatus.Initialization);
 	}
 
-	public static void setAppId(int appId) {
-		INSTANCE.setAppId0(appId);
+	public static void setOffline() {
+		CurrentStatus.set(AppStatus.Offline);
 	}
 
-	public void setAppId0(int appId) {
-		if (this.appId == 0) {
-			if (appId > 0 && appId < maxLimit)
-				this.appId = appId;
-			else
-				throw new RuntimeException("appId :" + appId + "is illegal.");
-		}
+	public static void setOnline() {
+		CurrentStatus.set(AppStatus.Online);
 	}
 
-	public static void setStatus(AppStatus status) {
-		INSTANCE.currentStatus = status;
+	public static void setUnknown() {
+		CurrentStatus.set(AppStatus.Unknown);
 	}
 
 	public static enum AppStatus {

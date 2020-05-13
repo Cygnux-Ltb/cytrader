@@ -1,6 +1,7 @@
 package io.redstone.core.order.structure;
 
 import io.mercury.common.sequence.Serial;
+import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.order.enums.OrdStatus;
 
 public final class OrdReport implements Serial<OrdReport> {
@@ -26,6 +27,11 @@ public final class OrdReport implements Serial<OrdReport> {
 	 * broker return id
 	 */
 	private String brokerUniqueId;
+
+	/**
+	 * instrument
+	 */
+	private Instrument instrument;
 
 	/**
 	 * filled quantity
@@ -61,6 +67,10 @@ public final class OrdReport implements Serial<OrdReport> {
 		return brokerUniqueId;
 	}
 
+	public Instrument getInstrument() {
+		return instrument;
+	}
+
 	public int getFilledQty() {
 		return filledQty;
 	}
@@ -81,6 +91,11 @@ public final class OrdReport implements Serial<OrdReport> {
 
 	public OrdReport setBrokerUniqueId(String brokerUniqueId) {
 		this.brokerUniqueId = brokerUniqueId;
+		return this;
+	}
+
+	public OrdReport setInstrument(Instrument instrument) {
+		this.instrument = instrument;
 		return this;
 	}
 

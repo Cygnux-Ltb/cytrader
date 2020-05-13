@@ -55,6 +55,14 @@ public abstract class SingleInstrumentStrategy<M extends MarketData> extends Str
 		super.orderTarget(instrument, direction, targetQty, limitPrice, floatTick);
 	}
 
+	protected void closeAllPositions() {
+		super.closeAllPositions(instrument);
+	}
+
+	protected void closeAllPositions(int closeQty) {
+		super.closePositions(instrument, closeQty);
+	}
+
 	@Override
 	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
 		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", strategyName(), adaptorId, status);
