@@ -217,9 +217,13 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 		adaptor.newOredr(first.toChildOrder());
 	}
-	
-	protected void close() {
-		
+
+	void closeAllPositions(Instrument instrument) {
+
+	}
+
+	void closePositions(Instrument instrument, int closeQty) {
+
 	}
 
 	/**
