@@ -8,6 +8,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 
@@ -19,21 +20,33 @@ import io.mercury.financial.instrument.Instrument;
  *
  */
 @NotThreadSafe
-public final class InstrumentKeeper {
+public final class InstrumentKeeper implements Dumper<String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6884791803809601376L;
+
+	/**
+	 * Logger
+	 */
 	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentKeeper.class);
 
-	// 存储instrument,以instrumentId索引
+	/**
+	 * 存储instrument,以instrumentId索引
+	 */
 	private static final MutableIntObjectMap<Instrument> InstrumentMapById = MutableMaps.newIntObjectHashMap();
 
-	// 存储instrument,以instrumentCode索引
+	/**
+	 * 存储instrument,以instrumentCode索引
+	 */
 	private static final MutableMap<String, Instrument> InstrumentMapByCode = MutableMaps.newUnifiedMap();
 
 	private InstrumentKeeper() {
 	}
 
-	public static void setTradable(Instrument instrument) {
-		setTradable(instrument.id());
+	public static Instrument setTradable(Instrument instrument) {
+		return setTradable(instrument.id());
 	}
 
 	public static Instrument setTradable(int instrumentId) {
@@ -43,15 +56,15 @@ public final class InstrumentKeeper {
 		return instrument.enable();
 	}
 
-	public static void setNotTradable(Instrument instrument) {
-		setNotTradable(instrument.id());
+	public static Instrument setNotTradable(Instrument instrument) {
+		return setNotTradable(instrument.id());
 	}
 
-	public static void setNotTradable(int instrumentId) {
+	public static Instrument setNotTradable(int instrumentId) {
 		Instrument instrument = getInstrument(instrumentId);
-		instrument.disable();
 		log.info("InstrumentKeeper :: Instrument disable, instrumentId==[{}], instrument -> {}", instrumentId,
 				instrument);
+		return instrument.disable();
 	}
 
 	public static boolean isTradable(Instrument instrument) {
@@ -86,6 +99,12 @@ public final class InstrumentKeeper {
 
 	public static ImmutableList<Instrument> getAllInstrument() {
 		return InstrumentMapById.toList().toImmutable();
+	}
+
+	@Override
+	public String dump() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

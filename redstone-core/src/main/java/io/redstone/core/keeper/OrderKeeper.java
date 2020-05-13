@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
@@ -25,8 +26,16 @@ import io.redstone.core.order.structure.OrdReport;
  */
 
 @NotThreadSafe
-public final class OrderKeeper {
+public final class OrderKeeper implements Dumper<String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8581377004396461013L;
+
+	/**
+	 * Logger
+	 */
 	private static final Logger log = CommonLoggerFactory.getLogger(OrderKeeper.class);
 
 	/**
@@ -138,6 +147,12 @@ public final class OrderKeeper {
 
 	public static void onMarketData(BasicMarketData marketData) {
 		// TODO
+	}
+
+	@Override
+	public String dump() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -8,13 +8,22 @@ import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.strategy.Strategy;
 
 @NotThreadSafe
-public final class StrategyKeeper {
+public final class StrategyKeeper implements Dumper<String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4657849933310280319L;
+
+	/**
+	 * Logger
+	 */
 	private static final Logger log = CommonLoggerFactory.getLogger(StrategyKeeper.class);
 
 	/**
@@ -51,7 +60,7 @@ public final class StrategyKeeper {
 					strategy.strategyId(), instrument.id());
 		});
 		SubAccountStrategysMap.getIfAbsentPut(strategy.subAccountId(), MutableLists::newFastList).add(strategy);
-		
+
 		strategy.subAccountId();
 		strategy.enable();
 		log.info("StrategyKeeper :: Strategy is enable, strategyId==[{}]", strategy.strategyId());
@@ -67,6 +76,12 @@ public final class StrategyKeeper {
 
 	public static MutableList<Strategy> getSubscribedStrategys(int instrumentId) {
 		return SubscribedInstrumentMap.get(instrumentId);
+	}
+
+	@Override
+	public String dump() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

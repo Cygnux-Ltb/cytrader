@@ -7,6 +7,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.redstone.core.account.Account;
 import io.redstone.core.adaptor.Adaptor;
@@ -26,14 +27,26 @@ import io.redstone.core.adaptor.Adaptor;
  *       目前无法保证这一过程的访问安全
  */
 @NotThreadSafe
-public final class AdaptorKeeper {
+public final class AdaptorKeeper implements Dumper<String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1199809125474119945L;
+
+	/**
+	 * Logger
+	 */
 	private static final Logger log = CommonLoggerFactory.getLogger(AdaptorKeeper.class);
 
-	// 存储Adaptor, 使用accountId索引
+	/**
+	 * 存储Adaptor, 使用accountId索引
+	 */
 	private static final MutableIntObjectMap<Adaptor> AccountAdaptorMap = MutableMaps.newIntObjectHashMap();
 
-	// 存储Adaptor, 使用subAccountId索引
+	/**
+	 * 存储Adaptor, 使用subAccountId索引
+	 */
 	private static final MutableIntObjectMap<Adaptor> SubAccountAdaptorMap = MutableMaps.newIntObjectHashMap();
 
 	private AdaptorKeeper() {
@@ -60,6 +73,12 @@ public final class AdaptorKeeper {
 					subAccount.subAccountId(), subAccount.subAccountName(), adaptor.adaptorId(), adaptor.adaptorName());
 		});
 
+	}
+
+	@Override
+	public String dump() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

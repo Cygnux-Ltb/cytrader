@@ -7,6 +7,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
 import io.redstone.core.account.Account;
@@ -21,17 +22,31 @@ import io.redstone.core.account.SubAccount;
  *
  */
 @NotThreadSafe
-public final class AccountKeeper {
+public final class AccountKeeper implements Dumper<String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6883109944757142986L;
+
+	/**
+	 * Logger
+	 */
 	private static final Logger log = CommonLoggerFactory.getLogger(AccountKeeper.class);
 
-	// 存储Account信息, 一对一关系,以accountId索引
+	/**
+	 * 存储Account信息, 一对一关系,以accountId索引
+	 */
 	private static final MutableIntObjectMap<Account> AccountMap = MutableMaps.newIntObjectHashMap();
 
-	// 存储SubAccount信息, 一对一关系,以subAccountId索引
+	/**
+	 * 存储SubAccount信息, 一对一关系,以subAccountId索引
+	 */
 	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
 
-	// 存储Account信息, 一对一关系,以subAccountId索引
+	/**
+	 * 存储Account信息, 一对一关系,以subAccountId索引
+	 */
 	private static final MutableIntObjectMap<Account> AccountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
 
 	private AccountKeeper() {
@@ -110,6 +125,12 @@ public final class AccountKeeper {
 
 	public static boolean isSubAccountTradable(int subAccountId) {
 		return getSubAccount(subAccountId).isEnabled();
+	}
+
+	@Override
+	public String dump() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

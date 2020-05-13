@@ -8,6 +8,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
@@ -25,25 +26,36 @@ import io.mercury.financial.market.impl.BasicMarketData;
  * @author yellow013
  */
 @ThreadSafe
-public final class LastMarkerDataKeeper {
+public final class LastMarkerDataKeeper implements Dumper<String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2145644316828652275L;
+
+	/**
+	 * Logger
+	 */
 	private static final Logger log = CommonLoggerFactory.getLogger(LastMarkerDataKeeper.class);
 
-	private final ImmutableIntObjectMap<LastMarkerData> quoteMap;
+	/**
+	 * LastMarkerData Map
+	 */
+	private final ImmutableIntObjectMap<LastMarkerData> immutableQuoteMap;
 
 	private final static LastMarkerDataKeeper StaticInstance = new LastMarkerDataKeeper();
 
 	private LastMarkerDataKeeper() {
-		MutableIntObjectMap<LastMarkerData> tempQuoteMap = MutableMaps.newIntObjectHashMap();
+		MutableIntObjectMap<LastMarkerData> mutableQuoteMap = MutableMaps.newIntObjectHashMap();
 		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
 		if (allInstrument.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		allInstrument.each(instrument -> {
-			tempQuoteMap.put(instrument.id(), new LastMarkerData());
+			mutableQuoteMap.put(instrument.id(), new LastMarkerData());
 			log.info("LastMarkerDataKeeper :: Add instrument, instrumentId==[{}], instrument -> {}", instrument.id(),
 					instrument);
 		});
-		quoteMap = tempQuoteMap.toImmutable();
+		immutableQuoteMap = mutableQuoteMap.toImmutable();
 	}
 
 	public static void onMarketDate(BasicMarketData marketData) {
@@ -57,7 +69,7 @@ public final class LastMarkerDataKeeper {
 	}
 
 	public static LastMarkerData get(Instrument instrument) {
-		return StaticInstance.quoteMap.get(instrument.id());
+		return StaticInstance.immutableQuoteMap.get(instrument.id());
 	}
 
 	public static class LastMarkerData {
@@ -106,6 +118,12 @@ public final class LastMarkerDataKeeper {
 			return this;
 		}
 
+	}
+
+	@Override
+	public String dump() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
