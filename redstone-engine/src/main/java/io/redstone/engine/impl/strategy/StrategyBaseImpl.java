@@ -176,8 +176,8 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param direction
 	 * @param targetQty
 	 */
-	void orderTarget(Instrument instrument, TrdDirection direction, int targetQty) {
-		orderTarget(instrument, direction, targetQty, -1L, -1);
+	void orderWatermark(Instrument instrument, TrdDirection direction, int targetQty) {
+		orderWatermark(instrument, direction, targetQty, -1L, -1);
 	}
 
 	/**
@@ -186,8 +186,8 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param direction
 	 * @param targetQty
 	 */
-	void orderTarget(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice) {
-		orderTarget(instrument, direction, targetQty, limitPrice, 0);
+	void orderWatermark(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice) {
+		orderWatermark(instrument, direction, targetQty, limitPrice, 0);
 	}
 
 	/**
@@ -198,18 +198,22 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param minPrice   限定价格
 	 * @param maxPrice   允许浮动点差
 	 */
-	void orderTarget(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
+	void orderWatermark(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
 		LastMarkerData lastMarkerData = LastMarkerDataKeeper.get(instrument);
-		long offerPrice = 0;
-		switch (direction) {
-		case Long:
-			offerPrice = lastMarkerData.askPrice1();
-			break;
-		case Short:
-			offerPrice = lastMarkerData.bidPrice1();
-			break;
-		case Invalid:
-			throw new IllegalArgumentException("TrdDirection is invalid");
+		long offerPrice = 0L;
+		if (limitPrice > 0) {
+			offerPrice = limitPrice;
+		} else {
+			switch (direction) {
+			case Long:
+				offerPrice = lastMarkerData.askPrice1();
+				break;
+			case Short:
+				offerPrice = lastMarkerData.bidPrice1();
+				break;
+			case Invalid:
+				throw new IllegalArgumentException("TrdDirection is invalid");
+			}
 		}
 		StrategyOrder strategyOrder = new StrategyOrder(strategyId, instrument, OrdQty.withOfferQty(targetQty),
 				OrdPrice.withOffer(offerPrice), direction, OrdType.Limit, subAccountId);
@@ -222,22 +226,6 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		Adaptor adaptor = getAdaptor(instrument);
 
 		adaptor.newOredr(first.toChildOrder());
-	}
-
-	void closeAllPositions(Instrument instrument) {
-		int position = PositionsKeeper.getPosition(subAccountId, instrument);
-		if (position == 0) {
-			log.warn("");
-		} else if (position > 0) {
-
-		} else {
-			
-			
-		}
-	}
-
-	void closePositions(Instrument instrument, int closeQty) {
-
 	}
 
 	/**
@@ -275,6 +263,22 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		}
 		return parentOrders;
 	};
+
+	void closeAllPositions(Instrument instrument) {
+		int position = PositionsKeeper.getPosition(subAccountId, instrument);
+		if (position == 0) {
+			log.warn("StrategyBaseImpl :: No position, subAccountId==[{}], instrument -> {}", subAccountId, instrument);
+			return;
+		} else if (position > 0) {
+			
+		} else {
+
+		}
+	}
+
+	void closePositions(Instrument instrument, int closeQty) {
+		
+	}
 
 	/**
 	 * 由策略自行决定在交易不同Instrument时使用哪个Adaptor

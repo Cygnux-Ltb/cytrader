@@ -43,16 +43,16 @@ public abstract class SingleInstrumentStrategy<M extends MarketData> extends Str
 		return adaptor;
 	}
 
-	protected void orderTarget(TrdDirection direction, int targetQty) {
-		super.orderTarget(instrument, direction, targetQty);
+	protected void orderWatermark(TrdDirection direction, int targetQty) {
+		super.orderWatermark(instrument, direction, targetQty);
 	}
 
-	protected void orderTarget(TrdDirection direction, int targetQty, long limitPrice) {
-		super.orderTarget(instrument, direction, targetQty, limitPrice);
+	protected void orderWatermark(TrdDirection direction, int targetQty, long limitPrice) {
+		super.orderWatermark(instrument, direction, targetQty, limitPrice);
 	}
 
-	protected void orderTarget(TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
-		super.orderTarget(instrument, direction, targetQty, limitPrice, floatTick);
+	protected void orderWatermark(TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
+		super.orderWatermark(instrument, direction, targetQty, limitPrice, floatTick);
 	}
 
 	protected void closeAllPositions() {
