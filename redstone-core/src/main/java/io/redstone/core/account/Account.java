@@ -1,9 +1,12 @@
 package io.redstone.core.account;
 
+import javax.annotation.Nonnull;
+
 import org.eclipse.collections.api.set.MutableSet;
 
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableComponent;
+import io.mercury.common.util.StringUtil;
 
 public class Account extends EnableComponent<Account> {
 
@@ -29,7 +32,7 @@ public class Account extends EnableComponent<Account> {
 	private MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
 	public Account(int accountId, String investorId) {
-		this(accountId, investorId, new Balance());
+		this(accountId, investorId, new Balance(0));
 	}
 
 	public Account(int accountId, String investorId, Balance balance) {
@@ -37,13 +40,12 @@ public class Account extends EnableComponent<Account> {
 	}
 
 	public Account(int accountId, String accountName, String investorId) {
-		this(accountId, accountName, investorId, new Balance());
+		this(accountId, accountName, investorId, new Balance(0));
 	}
 
-	public Account(int accountId, String accountName, String investorId, Balance balance) {
+	public Account(int accountId, String accountName, @Nonnull String investorId, @Nonnull Balance balance) {
 		this.accountId = accountId;
-		String suffix = "investorId[" + investorId + "]";
-		this.accountName = accountName == null ? suffix : accountName + "-" + suffix;
+		this.accountName = StringUtil.nonEmpty(accountName) ? accountName : "use-investorId[" + investorId + "]";
 		this.investorId = investorId;
 		this.balance = balance;
 	}
@@ -79,6 +81,35 @@ public class Account extends EnableComponent<Account> {
 	@Override
 	protected Account returnThis() {
 		return this;
+	}
+
+	private static final String str0 = "{\"accountId\" : ";
+	private static final String str1 = ", \"accountName\" : ";
+	private static final String str2 = ", \"investorId\" : ";
+	private static final String str3 = ", \"balance\" : ";
+	private static final String str4 = ", \"subAccountsCount\" : ";
+	private static final String str5 = "}";
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder(90);
+		builder.append(str0);
+		builder.append(accountId);
+		builder.append(str1);
+		builder.append(StringUtil.toText(accountName));
+		builder.append(str2);
+		builder.append(investorId);
+		builder.append(str3);
+		builder.append(balance);
+		builder.append(str4);
+		builder.append(subAccounts.size());
+		builder.append(str5);
+		return builder.toString();
+	}
+
+	public static void main(String[] args) {
+		System.out.println(StringUtil.toText(null));
+		System.out.println(new Account(1, "2005"));
 	}
 
 }

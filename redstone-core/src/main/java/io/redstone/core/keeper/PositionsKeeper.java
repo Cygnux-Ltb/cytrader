@@ -96,14 +96,27 @@ public final class PositionsKeeper {
 	 * @param order
 	 */
 	public static void updatePosition(ChildOrder order) {
-		long jointId = JointIdSupporter.jointId(order.subAccountId(), order.instrument().id());
+		int subAccountId = order.subAccountId();
+		Instrument instrument = order.instrument();
+		long jointId = JointIdSupporter.jointId(subAccountId, order.instrument().id());
 		int currentPos = SubAccountInstrumentPos.get(jointId);
-		log.info("");
-		SubAccountInstrumentPos.put(jointId, currentPos + order.lastTrdRecord().trdQty());
+		int trdQty = order.lastTrdRecord().trdQty();
+		log.info(
+				"PositionsKeeper :: Update position, subAccountId==[{}], instrumentCode==[{}], currentPos==[{}], trdQty==[{}]",
+				subAccountId, instrument.code(), currentPos, trdQty);
+		SubAccountInstrumentPos.put(jointId, currentPos + trdQty);
+	}
+
+	public static int getPosition(int subAccountId, Instrument instrument) {
+		long jointId = JointIdSupporter.jointId(subAccountId, instrument.id());
+		int currentPos = SubAccountInstrumentPos.get(jointId);
+		log.info("PositionsKeeper :: Get position, subAccountId==[{}], instrumentCode==[{}], currentPos==[{}]",
+				subAccountId, instrument.code(), currentPos);
+		return currentPos;
 	}
 
 	public static void main(String[] args) {
-		System.out.println(-10 - 5);
+		System.out.println(-10 + -5);
 	}
 
 }
