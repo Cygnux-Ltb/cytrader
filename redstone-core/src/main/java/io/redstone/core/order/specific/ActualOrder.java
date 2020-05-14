@@ -8,47 +8,44 @@ import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
 
-abstract class ActualOrder extends OrderBaseImpl {
-
-	/**
-	 * 所属策略订单
-	 */
-	private long strategyOrdId;
+public abstract class ActualOrder extends OrderBaseImpl {
 
 	/**
 	 * 
 	 */
-	private TrdAction trdAction;
+	private final TrdAction action;
+
+	/**
+	 * 所属上级OrderId
+	 */
+	private final long ownerOrdId;
 
 	/**
 	 * 
+	 * @param strategyId
+	 * @param subAccountId
 	 * @param instrument
 	 * @param ordQty
 	 * @param ordPrice
-	 * @param ordSide
 	 * @param ordType
-	 * @param trdAction
-	 * @param strategyId
-	 * @param strategyOrdId
-	 * @param subAccountId
-	 * @param ordStopLoss
+	 * @param direction
+	 * @param action
+	 * @param ownerOrdId
 	 */
-	protected ActualOrder(int strategyId, long strategyOrdId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
-			TrdDirection trdDirection, OrdType ordType, TrdAction trdAction, int subAccountId) {
-		super(strategyId, instrument, ordQty, ordPrice, trdDirection, ordType, subAccountId);
-		this.strategyOrdId = strategyOrdId;
-		this.trdAction = trdAction;
+	protected ActualOrder(int strategyId, int subAccountId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
+			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
+		super(strategyId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
+		this.action = action;
+		this.ownerOrdId = ownerOrdId != 0L ? ownerOrdId : ordSysId();
 	}
 
 	@Override
-	public long strategyOrdId() {
-		return strategyOrdId;
+	public long ownerOrdId() {
+		return ownerOrdId;
 	}
 
-	public TrdAction trdAction() {
-		return trdAction;
+	public TrdAction action() {
+		return action;
 	}
-
-	public abstract long parentOrdId();
 
 }

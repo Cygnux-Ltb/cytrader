@@ -3,10 +3,11 @@ package io.redstone.core.order.specific;
 import java.util.List;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableLists;
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.enums.OrdLevel;
+import io.redstone.core.order.OrderOutputText;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdAction;
 import io.redstone.core.order.enums.TrdDirection;
@@ -26,32 +27,35 @@ public final class ParentOrder extends ActualOrder {
 
 	/**
 	 * 
+	 * @param strategyId
+	 * @param subAccountId
 	 * @param instrument
 	 * @param offerQty
 	 * @param offerPrice
-	 * @param ordSide
 	 * @param ordType
-	 * @param trdAction
-	 * @param strategyId
-	 * @param strategyOrdId
-	 * @param subAccountId
-	 * @param stopLoss
+	 * @param direction
+	 * @param action
+	 * @param ownerOrdId
 	 */
-	public ParentOrder(Instrument instrument, int offerQty, long offerPrice, TrdDirection trdDirection, OrdType ordType,
-			TrdAction trdAction, int strategyId, long strategyOrdId, int subAccountId) {
-		super(strategyId, strategyOrdId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice),
-				trdDirection, ordType, trdAction, subAccountId);
+	public ParentOrder(int strategyId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
+			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
+		super(strategyId, subAccountId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice),
+				ordType, direction, action, ownerOrdId);
 		this.childOrders = MutableLists.newFastList(8);
 	}
 
+	/**
+	 * 
+	 * @return ChildOrder
+	 */
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = new ChildOrder(strategyId(), parentOrdId(), strategyOrdId(), instrument(), ordQty(),
-				ordPrice(),  trdDirection(), ordType(), trdAction(), subAccountId());
+		ChildOrder childOrder = new ChildOrder(strategyId(), subAccountId(), instrument(), ordQty(), ordPrice(),
+				ordType(), direction(), action(), ordSysId());
 		childOrders.add(childOrder);
 		return childOrder;
 	}
 
-	public List<ChildOrder> toChildOrder(int count) {
+	public List<ChildOrder> splitChildOrder(int count) {
 		// TODO 增加拆分为多个订单的逻辑
 		OrdQty qty = ordQty();
 		qty.offerQty();
@@ -59,13 +63,14 @@ public final class ParentOrder extends ActualOrder {
 	}
 
 	@Override
-	public OrdLevel ordLevel() {
-		return OrdLevel.Parent;
+	public int ordLevel() {
+		return 1;
 	}
 
 	@Override
-	public long parentOrdId() {
-		return ordSysId();
+	public void outputInfoLog(Logger log, String objName, String msg) {
+		log.info(OrderOutputText.ParentOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(),
+				direction(), action(), ordType(), instrument(), ordPrice(), ordQty(), ordTimestamps());
 	}
 
 }

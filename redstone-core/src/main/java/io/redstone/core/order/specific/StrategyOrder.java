@@ -5,7 +5,6 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.order.OrderBaseImpl;
-import io.redstone.core.order.enums.OrdLevel;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdAction;
 import io.redstone.core.order.enums.TrdDirection;
@@ -18,37 +17,48 @@ import io.redstone.core.order.structure.OrdQty;
  * 
  * @author yellow013
  */
+
 public final class StrategyOrder extends OrderBaseImpl {
 
-	private MutableLongObjectMap<ParentOrder> actualOrders = MutableMaps.newLongObjectHashMap();
+	private MutableLongObjectMap<ParentOrder> ownOrders = MutableMaps.newLongObjectHashMap();
 
-	public StrategyOrder(int strategyId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
-			TrdDirection trdDirection, OrdType ordType, int subAccountId) {
-		super(strategyId, instrument, ordQty, ordPrice, trdDirection, ordType, subAccountId);
+	/**
+	 * 
+	 * @param strategyId
+	 * @param subAccountId
+	 * @param instrument
+	 * @param ordQty
+	 * @param ordPrice
+	 * @param ordType
+	 * @param direction
+	 */
+	public StrategyOrder(int strategyId, int subAccountId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
+			OrdType ordType, TrdDirection direction) {
+		super(strategyId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
 	}
 
-	public MutableLongObjectMap<ParentOrder> actualOrders() {
-		return actualOrders;
+	public MutableLongObjectMap<ParentOrder> ownOrders() {
+		return ownOrders;
 	}
 
-	public ParentOrder addActualOrder(ParentOrder parentOrder) {
-		actualOrders.put(parentOrder.ordSysId(), parentOrder);
-		return parentOrder;
+	public ParentOrder addOwnOrder(ParentOrder order) {
+		ownOrders.put(order.ordSysId(), order);
+		return order;
 	}
 
 	@Override
-	public OrdLevel ordLevel() {
-		return OrdLevel.Strategy;
+	public int ordLevel() {
+		return 2;
 	}
 
 	@Override
-	public long strategyOrdId() {
+	public long ownerOrdId() {
 		return ordSysId();
 	}
 
-	public ParentOrder toActualOrder(TrdDirection trdDirection, int offerQty, OrdType ordType) {
-		return addActualOrder(new ParentOrder(instrument(), offerQty, ordPrice().offerPrice(), trdDirection, ordType,
-				TrdAction.Open, strategyId(), strategyOrdId(), subAccountId()));
+	public ParentOrder toActualOrder(TrdDirection direction, int offerQty, OrdType ordType) {
+		return addOwnOrder(new ParentOrder(strategyId(), subAccountId(), instrument(), offerQty,
+				ordPrice().offerPrice(), ordType, direction, TrdAction.Open, ordSysId()));
 	}
 
 }

@@ -58,7 +58,7 @@ public final class OrderBook {
 	}
 
 	public Order putOrder(Order order) {
-		switch (order.trdDirection()) {
+		switch (order.direction()) {
 		case Long:
 			longOrders.put(order.ordSysId(), order);
 			activeLongOrders.put(order.ordSysId(), order);
@@ -68,24 +68,22 @@ public final class OrderBook {
 			activeShortOrders.put(order.ordSysId(), order);
 			break;
 		default:
-			throw new OrderStatusException("orderSysId: [" + order.ordSysId() + "], trdDirection: ["
-					+ order.trdDirection() + "] -> direction is invalid.");
+			throw new OrderStatusException("orderSysId: [" + order.ordSysId() + "], direction is invalid.");
 		}
 		orders.put(order.ordSysId(), order);
 		return activeOrders.put(order.ordSysId(), order);
 	}
 
 	public Order finishOrder(Order order) throws OrderStatusException {
-		switch (order.trdDirection()) {
+		switch (order.direction()) {
 		case Long:
 			activeLongOrders.remove(order.ordSysId());
 			break;
 		case Short:
 			activeShortOrders.remove(order.ordSysId());
 			break;
-		default:
-			throw new OrderStatusException("orderSysId: [" + order.ordSysId() + "], trdDirection: ["
-					+ order.trdDirection() + "] -> direction is invalid.");
+		case Invalid:
+			throw new OrderStatusException("orderSysId: [" + order.ordSysId() + "], direction is invalid.");
 		}
 		return activeOrders.remove(order.ordSysId());
 	}

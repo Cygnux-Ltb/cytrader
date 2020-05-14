@@ -1,8 +1,9 @@
 package io.redstone.core.order;
 
+import org.slf4j.Logger;
+
 import io.mercury.common.thread.ThreadHelper;
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.enums.OrdLevel;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
@@ -24,7 +25,7 @@ public interface Order extends Comparable<Order> {
 
 	int strategyId();
 
-	long strategyOrdId();
+	int subAccountId();
 
 	Instrument instrument();
 
@@ -32,33 +33,36 @@ public interface Order extends Comparable<Order> {
 
 	OrdPrice ordPrice();
 
-	TrdDirection trdDirection();
-
 	OrdType ordType();
+
+	TrdDirection direction();
+
+	OrdTimestamps ordTimestamps();
 
 	OrdStatus ordStatus();
 
 	void setOrdStatus(OrdStatus ordStatus);
 
-	OrdLevel ordLevel();
-
-	OrdTimestamps ordTimestamps();
-
-	int subAccountId();
-
 	String remark();
 
 	void setRemark(String remark);
 
+	int ordLevel();
+
+	long ownerOrdId();
+
+	void outputInfoLog(Logger log, String objName, String msg);
+
 	@Override
 	default int compareTo(Order o) {
-		return ordSysId() < o.ordSysId() ? -1 : ordSysId() > o.ordSysId() ? 1 : 0;
+		return ordLevel() < o.ordLevel() ? -1
+				: ordLevel() < o.ordLevel() ? 1 : ordSysId() < o.ordSysId() ? -1 : ordSysId() > o.ordSysId() ? 1 : 0;
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 		System.out.println(Long.MAX_VALUE);
-		
+
 		long seed = System.nanoTime();
 		long seed1 = System.currentTimeMillis();
 		System.out.println(seed);
@@ -67,8 +71,7 @@ public interface Order extends Comparable<Order> {
 			System.out.println((System.nanoTime() - seed) / 100000);
 			ThreadHelper.sleep(20);
 		}
-		
-		
+
 	}
 
 }

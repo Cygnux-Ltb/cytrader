@@ -1,7 +1,9 @@
 package io.redstone.core.order.specific;
 
+import org.slf4j.Logger;
+
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.enums.OrdLevel;
+import io.redstone.core.order.OrderOutputText;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdAction;
 import io.redstone.core.order.enums.TrdDirection;
@@ -18,28 +20,20 @@ import io.redstone.core.order.structure.TrdRecord;
  */
 public final class ChildOrder extends ActualOrder {
 
-	private long parentOrdId;
-
 	/**
 	 * 子订单成交列表
 	 */
-	private TrdList trdList;
+	private final TrdList trdList;
 
-	public ChildOrder(int strategyId, long strategyOrdId, long parentOrdId, Instrument instrument, OrdQty ordQty,
-			OrdPrice ordPrice, TrdDirection trdDirection, OrdType ordType, TrdAction trdAction, int subAccountId) {
-		super(strategyId, strategyOrdId, instrument, ordQty, ordPrice, trdDirection, ordType, trdAction, subAccountId);
-		this.parentOrdId = parentOrdId;
+	public ChildOrder(int strategyId, int subAccountId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
+			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
+		super(strategyId, subAccountId, instrument, ordQty, ordPrice, ordType, direction, action, ownerOrdId);
 		this.trdList = new TrdList(ordSysId());
 	}
 
 	@Override
-	public OrdLevel ordLevel() {
-		return OrdLevel.Child;
-	}
-
-	@Override
-	public long parentOrdId() {
-		return parentOrdId;
+	public int ordLevel() {
+		return 0;
 	}
 
 	public TrdList trdList() {
@@ -48,6 +42,12 @@ public final class ChildOrder extends ActualOrder {
 
 	public TrdRecord lastTrdRecord() {
 		return trdList.last().get();
+	}
+
+	@Override
+	public void outputInfoLog(Logger log, String objName, String msg) {
+		log.info(OrderOutputText.ChildOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(),
+				action(), ordType(), instrument(), ordPrice(), ordQty(), ordTimestamps(), trdList);
 	}
 
 }

@@ -1,5 +1,7 @@
 package io.redstone.core.order;
 
+import org.slf4j.Logger;
+
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.order.enums.OrdStatus;
 import io.redstone.core.order.enums.OrdType;
@@ -13,75 +15,88 @@ public abstract class OrderBaseImpl implements Order {
 	/**
 	 * ordSysId
 	 */
-	private long ordSysId;
+	private final long ordSysId;
 
 	/**
 	 * 策略Id
 	 */
-	private int strategyId;
-
-	/**
-	 * instrument
-	 */
-	private Instrument instrument;
-
-	/**
-	 * 数量
-	 */
-	private OrdQty ordQty;
-
-	/**
-	 * 价格
-	 */
-	private OrdPrice ordPrice;
-
-	/**
-	 * 订单方向
-	 */
-	private TrdDirection trdDirection;
-
-	/**
-	 * 订单类型
-	 */
-	private OrdType ordType;
-
-	/**
-	 * 订单状态
-	 */
-	private OrdStatus ordStatus;
-
-	/**
-	 * 时间戳
-	 */
-	private OrdTimestamps ordTimestamps;
+	private final int strategyId;
 
 	/**
 	 * 子账户Id
 	 */
-	private int subAccountId;
+	private final int subAccountId;
 
 	/**
-	 * 订单备注
+	 * instrument
+	 */
+	private final Instrument instrument;
+
+	/**
+	 * 数量
+	 */
+	private final OrdQty ordQty;
+
+	/**
+	 * 价格
+	 */
+	private final OrdPrice ordPrice;
+
+	/**
+	 * 订单类型
+	 */
+	private final OrdType ordType;
+
+	/**
+	 * 订单方向
+	 */
+	private final TrdDirection direction;
+
+	/**
+	 * 时间戳
+	 */
+	private final OrdTimestamps ordTimestamps;
+
+	/**
+	 * 订单状态(可变)
+	 */
+	private OrdStatus ordStatus;
+
+	/**
+	 * 订单备注(可变)
 	 */
 	private String remark;
 
-	protected OrderBaseImpl(int strategyId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
-			TrdDirection trdDirection, OrdType ordType, int subAccountId) {
+	private static final String defRemark = "none";
+
+	protected OrderBaseImpl(int strategyId, int subAccountId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
+			OrdType ordType, TrdDirection direction) {
 		this.ordSysId = OrdSysIdAllocator.allocate(strategyId);
 		this.strategyId = strategyId;
+		this.subAccountId = subAccountId;
 		this.instrument = instrument;
 		this.ordQty = ordQty;
 		this.ordPrice = ordPrice;
-		this.trdDirection = trdDirection;
 		this.ordType = ordType;
-		this.subAccountId = subAccountId;
-		this.ordStatus = OrdStatus.PendingNew;
+		this.direction = direction;
 		this.ordTimestamps = OrdTimestamps.generate();
+		this.ordStatus = OrdStatus.PendingNew;
+		this.remark = defRemark;
 	}
 
 	@Override
 	public long ordSysId() {
 		return ordSysId;
+	}
+
+	@Override
+	public int strategyId() {
+		return strategyId;
+	}
+
+	@Override
+	public int subAccountId() {
+		return subAccountId;
 	}
 
 	@Override
@@ -100,8 +115,8 @@ public abstract class OrderBaseImpl implements Order {
 	}
 
 	@Override
-	public TrdDirection trdDirection() {
-		return trdDirection;
+	public TrdDirection direction() {
+		return direction;
 	}
 
 	@Override
@@ -110,13 +125,13 @@ public abstract class OrderBaseImpl implements Order {
 	}
 
 	@Override
-	public OrdStatus ordStatus() {
-		return ordStatus;
+	public OrdTimestamps ordTimestamps() {
+		return ordTimestamps;
 	}
 
 	@Override
-	public OrdTimestamps ordTimestamps() {
-		return ordTimestamps;
+	public OrdStatus ordStatus() {
+		return ordStatus;
 	}
 
 	@Override
@@ -125,23 +140,19 @@ public abstract class OrderBaseImpl implements Order {
 	}
 
 	@Override
-	public int strategyId() {
-		return strategyId;
-	}
-
-	@Override
-	public int subAccountId() {
-		return subAccountId;
-	}
-
-	@Override
 	public String remark() {
-		return remark == null ? "NONE" : remark;
+		return remark;
 	}
 
 	@Override
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	@Override
+	public void outputInfoLog(Logger log, String objName, String msg) {
+		log.info(OrderOutputText.OrderOutputText, objName, msg, ordSysId(), ordStatus(), direction(), ordType(),
+				instrument(), ordPrice(), ordQty(), ordTimestamps());
 	}
 
 }

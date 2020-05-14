@@ -35,13 +35,13 @@ public final class PositionKeeper implements Dumper<String> {
 	private static final Logger log = CommonLoggerFactory.getLogger(PositionKeeper.class);
 
 	/**
-	 * subAccount的instrument的最大长仓持仓限制<br>
+	 * [subAccount]的[instrument]最大多仓持仓限制<br>
 	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
 	private static final MutableLongIntMap SubAccountInstrumentLongLimit = MutableMaps.newLongIntHashMap();
 
 	/**
-	 * subAccount的instrument最大短仓持仓限制<br>
+	 * [subAccount]的[instrument]最大空仓持仓限制<br>
 	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
 	 */
 	private static final MutableLongIntMap SubAccountInstrumentShortLimit = MutableMaps.newLongIntHashMap();
@@ -71,10 +71,10 @@ public final class PositionKeeper implements Dumper<String> {
 	public static void setPositionsLimit(int subAccountId, Instrument instrument, int limitLongQty, int limitShortQty) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
 		SubAccountInstrumentLongLimit.put(positionKey, limitLongQty < 0 ? -limitLongQty : limitLongQty);
-		log.info("PositionsKeeper :: Set long positions limit -> subAccountId==[{}], instrument -> {}, limitQty==[{}]",
+		log.info("PositionKeeper :: Set long positions limit -> subAccountId==[{}], instrument -> {}, limitQty==[{}]",
 				subAccountId, instrument, SubAccountInstrumentLongLimit.get(positionKey));
 		SubAccountInstrumentShortLimit.put(positionKey, limitShortQty > 0 ? -limitShortQty : limitShortQty);
-		log.info("PositionsKeeper :: Set short positions limit -> subAccountId==[{}], instrument -> {}, limitQty==[{}]",
+		log.info("PositionKeeper :: Set short positions limit -> subAccountId==[{}], instrument -> {}, limitQty==[{}]",
 				subAccountId, instrument, SubAccountInstrumentShortLimit.get(positionKey));
 	}
 
@@ -110,26 +110,28 @@ public final class PositionKeeper implements Dumper<String> {
 		long positionsKey = mergePositionKey(subAccountId, instrument);
 		int currentPositions = SubAccountInstrumentPosition.get(positionsKey);
 		int trdQty = order.lastTrdRecord().trdQty();
+		order.direction();
+		order.action();
 		log.info(
-				"PositionsKeeper :: Update position, subAccountId==[{}], instrumentCode==[{}], currentPositions==[{}], trdQty==[{}]",
+				"PositionKeeper :: Update position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}], trdQty==[{}]",
 				subAccountId, instrument.code(), currentPositions, trdQty);
 		SubAccountInstrumentPosition.put(positionsKey, currentPositions + trdQty);
-	}
-	
-	public static int setCurrentPosition(int subAccountId, Instrument instrument, int positionQty) {
-		long positionKey = mergePositionKey(subAccountId, instrument);
-		int currentPosition = SubAccountInstrumentPosition.get(positionKey);
-		log.info("PositionsKeeper :: Get position, subAccountId==[{}], instrumentCode==[{}], currentPositions==[{}]",
-				subAccountId, instrument.code(), currentPosition);
-		return currentPosition;
 	}
 
 	public static int getCurrentPosition(int subAccountId, Instrument instrument) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
 		int currentPosition = SubAccountInstrumentPosition.get(positionKey);
-		log.info("PositionsKeeper :: Get position, subAccountId==[{}], instrumentCode==[{}], currentPositions==[{}]",
+		log.info(
+				"PositionKeeper :: Get current position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}]",
 				subAccountId, instrument.code(), currentPosition);
 		return currentPosition;
+	}
+
+	public static void setCurrentPosition(int subAccountId, Instrument instrument, int positionQty) {
+		long positionKey = mergePositionKey(subAccountId, instrument);
+		SubAccountInstrumentPosition.put(positionKey, positionQty);
+		log.info("PositionKeeper :: Set current position, subAccountId==[{}], instrumentCode==[{}], positionQty==[{}]",
+				subAccountId, instrument.code(), positionQty);
 	}
 
 	public static void main(String[] args) {
