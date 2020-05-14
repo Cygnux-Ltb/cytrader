@@ -107,7 +107,7 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		 * ///本地强平<br>
 		 * #define THOST_FTDC_OF_LocalForceClose '6'
 		 */
-		switch (childOrder.trdAction()) {
+		switch (childOrder.action()) {
 		case Open:
 			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_Open);
 			break;
@@ -121,7 +121,7 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_CloseYesterday);
 			break;
 		default:
-			throw new RuntimeException(childOrder.trdAction() + " does not exist.");
+			throw new RuntimeException(childOrder.action() + " does not exist.");
 		}
 
 		/**
@@ -151,15 +151,15 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		 * ///卖<br>
 		 * #define THOST_FTDC_D_Sell '1'<br>
 		 */
-		switch (order.trdDirection()) {
+		switch (order.direction()) {
 		case Long:
 			ftdcInputOrder.setDirection(thosttraderapiConstants.THOST_FTDC_D_Buy);
 			break;
 		case Short:
 			ftdcInputOrder.setDirection(thosttraderapiConstants.THOST_FTDC_D_Sell);
 			break;
-		default:
-			throw new RuntimeException(order.trdDirection() + " does not exist.");
+		case Invalid:
+			throw new RuntimeException(order.direction() + " is Invalid.");
 		}
 		/**
 		 * 设置价格
