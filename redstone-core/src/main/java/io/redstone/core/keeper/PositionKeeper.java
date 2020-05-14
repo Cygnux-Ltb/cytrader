@@ -36,19 +36,25 @@ public final class PositionKeeper implements Dumper<String> {
 
 	/**
 	 * [subAccount]的[instrument]最大多仓持仓限制<br>
-	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
+	 * 使用jointId作为主键<br>
+	 * 高位subAccountId<br>
+	 * 低位instrumentId
 	 */
 	private static final MutableLongIntMap SubAccountInstrumentLongLimit = MutableMaps.newLongIntHashMap();
 
 	/**
 	 * [subAccount]的[instrument]最大空仓持仓限制<br>
-	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
+	 * 使用jointId作为主键<br>
+	 * 高位subAccountId<br>
+	 * 低位instrumentId
 	 */
 	private static final MutableLongIntMap SubAccountInstrumentShortLimit = MutableMaps.newLongIntHashMap();
 
 	/**
-	 * subAccount的instrument持仓数量<br>
-	 * 使用jointId作为主键, 高位subAccountId, 低位instrumentId
+	 * [subAccount]的[instrument]持仓数量<br>
+	 * 使用jointId作为主键<br>
+	 * 高位subAccountId<br>
+	 * 低位instrumentId
 	 */
 	private static final MutableLongIntMap SubAccountInstrumentPosition = MutableMaps.newLongIntHashMap();
 
@@ -63,17 +69,17 @@ public final class PositionKeeper implements Dumper<String> {
 	 * 在初始化时设置子账户最大持仓限制<br>
 	 * 需要分别设置多空两个方向的持仓限制
 	 * 
-	 * @param subAccountId
-	 * @param instrumentId
-	 * @param side
-	 * @param limitQty
+	 * @param subAccountId  子账户ID
+	 * @param instrument
+	 * @param limitLongQty  多仓限制
+	 * @param limitShortQty 空仓限制
 	 */
 	public static void setPositionsLimit(int subAccountId, Instrument instrument, int limitLongQty, int limitShortQty) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
-		SubAccountInstrumentLongLimit.put(positionKey, limitLongQty < 0 ? -limitLongQty : limitLongQty);
+		SubAccountInstrumentLongLimit.put(positionKey, Math.abs(limitLongQty));
 		log.info("PositionKeeper :: Set long positions limit -> subAccountId==[{}], instrument -> {}, limitQty==[{}]",
 				subAccountId, instrument, SubAccountInstrumentLongLimit.get(positionKey));
-		SubAccountInstrumentShortLimit.put(positionKey, limitShortQty > 0 ? -limitShortQty : limitShortQty);
+		SubAccountInstrumentShortLimit.put(positionKey, Math.abs(limitShortQty));
 		log.info("PositionKeeper :: Set short positions limit -> subAccountId==[{}], instrument -> {}, limitQty==[{}]",
 				subAccountId, instrument, SubAccountInstrumentShortLimit.get(positionKey));
 	}
@@ -134,14 +140,14 @@ public final class PositionKeeper implements Dumper<String> {
 				subAccountId, instrument.code(), positionQty);
 	}
 
-	public static void main(String[] args) {
-		System.out.println(-10 + -5);
-	}
-
 	@Override
 	public String dump() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(-10 + -5);
 	}
 
 }

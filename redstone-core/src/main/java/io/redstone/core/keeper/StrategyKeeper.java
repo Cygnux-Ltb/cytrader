@@ -34,8 +34,9 @@ public final class StrategyKeeper implements Dumper<String> {
 	/**
 	 * 子账户与策略的对应关系
 	 */
-	private static final MutableIntObjectMap<MutableList<Strategy>> SubAccountStrategysMap = MutableMaps
-			.newIntObjectHashMap();
+//	@Deprecated
+//	private static final MutableIntObjectMap<MutableList<Strategy>> SubAccountStrategysMap = MutableMaps
+//			.newIntObjectHashMap();
 
 	/**
 	 * 订阅合约的策略列表
@@ -59,9 +60,7 @@ public final class StrategyKeeper implements Dumper<String> {
 			log.info("StrategyKeeper :: Add subscribe instrument, strategyId==[{}], instrumentId==[{}]",
 					strategy.strategyId(), instrument.id());
 		});
-		SubAccountStrategysMap.getIfAbsentPut(strategy.subAccountId(), MutableLists::newFastList).add(strategy);
-
-		strategy.subAccountId();
+		//SubAccountStrategysMap.getIfAbsentPut(strategy.subAccountId(), MutableLists::newFastList).add(strategy);
 		strategy.enable();
 		log.info("StrategyKeeper :: Strategy is enable, strategyId==[{}]", strategy.strategyId());
 	}
