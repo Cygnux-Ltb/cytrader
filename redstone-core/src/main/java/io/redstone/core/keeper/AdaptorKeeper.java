@@ -49,6 +49,8 @@ public final class AdaptorKeeper implements Dumper<String> {
 	 */
 	private static final MutableIntObjectMap<Adaptor> SubAccountAdaptorMap = MutableMaps.newIntObjectHashMap();
 
+	private static final String KeeperName = "AdaptorKeeper";
+
 	private AdaptorKeeper() {
 	}
 
@@ -64,13 +66,14 @@ public final class AdaptorKeeper implements Dumper<String> {
 		Account account = adaptor.account();
 		AccountAdaptorMap.put(account.accountId(), adaptor);
 		log.info(
-				"AdaptorKeeper :: Put adaptor to AccountAdaptorMap, accountId==[{}], accountName==[{}] adaptorId==[{}], adaptorName==[{}]",
-				account.accountId(), account.accountName(), adaptor.adaptorId(), adaptor.adaptorName());
+				"{} :: Put adaptor to AccountAdaptorMap, accountId==[{}], accountName==[{}] adaptorId==[{}], adaptorName==[{}]",
+				KeeperName, account.accountId(), account.accountName(), adaptor.adaptorId(), adaptor.adaptorName());
 		account.subAccounts().each(subAccount -> {
 			SubAccountAdaptorMap.put(subAccount.subAccountId(), adaptor);
 			log.info(
-					"AdaptorKeeper :: Put adaptor to SubAccountAdaptorMap, subAccountId==[{}], subAccountName==[{}] adaptorId==[{}], adaptorName==[{}]",
-					subAccount.subAccountId(), subAccount.subAccountName(), adaptor.adaptorId(), adaptor.adaptorName());
+					"{} :: Put adaptor to SubAccountAdaptorMap, subAccountId==[{}], subAccountName==[{}] adaptorId==[{}], adaptorName==[{}]",
+					KeeperName, subAccount.subAccountId(), subAccount.subAccountName(), adaptor.adaptorId(),
+					adaptor.adaptorName());
 		});
 
 	}

@@ -44,6 +44,8 @@ public final class StrategyKeeper implements Dumper<String> {
 	private static final MutableIntObjectMap<MutableList<Strategy>> SubscribedInstrumentMap = MutableMaps
 			.newIntObjectHashMap();
 
+	private static final String KeeperName = "StrategyKeeper";
+
 	private StrategyKeeper() {
 	}
 
@@ -54,15 +56,16 @@ public final class StrategyKeeper implements Dumper<String> {
 	 */
 	public static void putStrategy(Strategy strategy) {
 		StrategyMap.put(strategy.strategyId(), strategy);
-		log.info("StrategyKeeper :: Put strategy, strategyId==[{}]", strategy.strategyId());
+		log.info("{} :: Put strategy, strategyId==[{}]", KeeperName, strategy.strategyId());
 		strategy.instruments().forEach(instrument -> {
 			SubscribedInstrumentMap.getIfAbsentPut(instrument.id(), MutableLists::newFastList).add(strategy);
-			log.info("StrategyKeeper :: Add subscribe instrument, strategyId==[{}], instrumentId==[{}]",
+			log.info("{} :: Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", KeeperName,
 					strategy.strategyId(), instrument.id());
 		});
-		//SubAccountStrategysMap.getIfAbsentPut(strategy.subAccountId(), MutableLists::newFastList).add(strategy);
+		// SubAccountStrategysMap.getIfAbsentPut(strategy.subAccountId(),
+		// MutableLists::newFastList).add(strategy);
 		strategy.enable();
-		log.info("StrategyKeeper :: Strategy is enable, strategyId==[{}]", strategy.strategyId());
+		log.info("{} :: Strategy is enable, strategyId==[{}]", KeeperName, strategy.strategyId());
 	}
 
 	public static Strategy getStrategy(int strategyId) {

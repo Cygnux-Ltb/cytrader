@@ -63,6 +63,8 @@ public final class OrderKeeper implements Dumper<String> {
 	 */
 	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = MutableMaps.newIntObjectHashMap();
 
+	private static final String KeeperName = "OrderKeeper";
+
 	private OrderKeeper() {
 	}
 
@@ -88,7 +90,7 @@ public final class OrderKeeper implements Dumper<String> {
 			getInstrumentOrders(order.instrument()).finishOrder(order);
 			break;
 		default:
-			log.info("OrderKeeper :: Not need processed, ordSysId==[{}], ordStatus==[{}]", order.ordSysId(),
+			log.info("{} :: Not need processed, ordSysId==[{}], ordStatus==[{}]", KeeperName, order.ordSysId(),
 					order.ordStatus());
 			break;
 		}
@@ -102,16 +104,16 @@ public final class OrderKeeper implements Dumper<String> {
 	 */
 	public static ChildOrder onOrdReport(OrdReport report) {
 		log.info(
-				"Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}], executePrice==[{}], filledQty==[{}], instrument -> {}",
-				report.getBrokerUniqueId(), report.getOrdSysId(), report.getExecutePrice(), report.getFilledQty(),
-				report.getInstrument());
+				"{} :: Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}], executePrice==[{}], filledQty==[{}], instrument -> {}",
+				KeeperName, report.getBrokerUniqueId(), report.getOrdSysId(), report.getExecutePrice(),
+				report.getFilledQty(), report.getInstrument());
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
 		if (order == null) {
 			// TODO 处理订单由外部系统发出而收到报单回报
-			log.warn("OrderKeeper :: Received other source order, ordSysId==[{}]", report.getOrdSysId());
+			log.warn("{} :: Received other source order, ordSysId==[{}]", KeeperName, report.getOrdSysId());
 		} else {
-			log.info("OrderKeeper :: Search order OK, strategyId==[{}], subAccountId==[{}]", order.strategyId(),
+			log.info("{} :: Search order OK, strategyId==[{}], subAccountId==[{}]", KeeperName, order.strategyId(),
 					order.subAccountId());
 		}
 		ChildOrder childOrder = (ChildOrder) order;
