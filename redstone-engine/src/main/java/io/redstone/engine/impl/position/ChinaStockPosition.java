@@ -15,7 +15,7 @@ public class ChinaStockPosition extends AbsT1Position {
 	public void updatePosition(Order order) {
 		OrdStatus status = order.ordStatus();
 		OrdQty qty = order.ordQty();
-		switch (order.trdDirection()) {
+		switch (order.direction()) {
 		case Long:
 			switch (status) {
 			case PartiallyFilled:

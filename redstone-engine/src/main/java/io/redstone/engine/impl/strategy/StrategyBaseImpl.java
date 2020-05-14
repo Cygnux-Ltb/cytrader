@@ -25,12 +25,12 @@ import io.redstone.core.keeper.InstrumentKeeper;
 import io.redstone.core.keeper.LastMarkerDataKeeper;
 import io.redstone.core.keeper.LastMarkerDataKeeper.LastMarkerData;
 import io.redstone.core.keeper.OrderKeeper;
-import io.redstone.core.keeper.PositionsKeeper;
+import io.redstone.core.keeper.PositionKeeper;
 import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderBook;
 import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.enums.TrdAction;
 import io.redstone.core.order.enums.TrdDirection;
+import io.redstone.core.order.specific.ActualOrder;
 import io.redstone.core.order.specific.ParentOrder;
 import io.redstone.core.order.specific.StrategyOrder;
 import io.redstone.core.order.structure.OrdPrice;
@@ -55,7 +55,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	protected final SubAccount subAccount;
 
-	// 记录当前策略所有的策略订单订单
+	// 记录当前策略所有的实际订单
 	protected final MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
 
 	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId) {
@@ -91,7 +91,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
 		if (strategyOrders.notEmpty()) {
-			log.info("{} :: StrategyOrders not empty, doing...", strategyName);
+			log.info("{} :: strategyOrders not empty, doing...", strategyName);
 		}
 		handleMarketData(marketData);
 	}
@@ -101,10 +101,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	@Override
 	public void onOrder(Order order) {
-		log.info(
-				"{} :: On order callback, ordSysId==[{}], ordStatus==[{}], trdDirection==[{}], ordPrice -> {}, ordQty -> {}, instrument -> {}",
-				strategyName, order.ordSysId(), order.ordStatus(), order.trdDirection(), order.ordPrice(),
-				order.ordQty(), order.instrument());
+		order.outputInfoLog(log, strategyName, "On order callback");
 		handleOrder(order);
 	}
 
@@ -215,8 +212,8 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 				throw new IllegalArgumentException("TrdDirection is invalid");
 			}
 		}
-		StrategyOrder strategyOrder = new StrategyOrder(strategyId, instrument, OrdQty.withOfferQty(targetQty),
-				OrdPrice.withOffer(offerPrice), direction, OrdType.Limit, subAccountId);
+		StrategyOrder strategyOrder = new StrategyOrder(strategyId, subAccountId, instrument,
+				OrdQty.withOfferQty(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
 		strategyOrders.put(strategyOrder.ordSysId(), strategyOrder);
 
 		MutableList<ParentOrder> ParentOrders = strategyOrderConverter.apply(strategyOrder);
@@ -235,7 +232,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		MutableList<ParentOrder> parentOrders = MutableLists.newFastList();
 		OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrders(strategyOrder.instrument());
 		int offerQty = strategyOrder.ordQty().offerQty();
-		switch (strategyOrder.trdDirection()) {
+		switch (strategyOrder.direction()) {
 		case Long:
 			MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.activeShortOrders();
 			if (activeShortOrders.notEmpty()) {
@@ -265,19 +262,19 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	};
 
 	void closeAllPositions(Instrument instrument) {
-		int position = PositionsKeeper.getPosition(subAccountId, instrument);
+		int position = PositionKeeper.getCurrentPosition(subAccountId, instrument);
 		if (position == 0) {
 			log.warn("StrategyBaseImpl :: No position, subAccountId==[{}], instrument -> {}", subAccountId, instrument);
 			return;
 		} else if (position > 0) {
-			
+
 		} else {
 
 		}
 	}
 
 	void closePositions(Instrument instrument, int closeQty) {
-		
+
 	}
 
 	/**

@@ -84,7 +84,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		switch (status) {
 		case PartiallyFilled:
 		case Filled:
-			switch (order.trdDirection()) {
+			switch (order.direction()) {
 			case Long:
 				setCurrentQty(currentQty() + qty.filledQty() - qty.lastFilledQty());
 				break;
