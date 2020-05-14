@@ -9,7 +9,7 @@ import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.order.structure.OrdTimestamps;
+import io.redstone.core.order.structure.OrdTimestamp;
 
 public interface Order extends Comparable<Order> {
 
@@ -37,7 +37,7 @@ public interface Order extends Comparable<Order> {
 
 	TrdDirection direction();
 
-	OrdTimestamps ordTimestamps();
+	OrdTimestamp ordTimestamp();
 
 	OrdStatus ordStatus();
 
@@ -56,7 +56,9 @@ public interface Order extends Comparable<Order> {
 	@Override
 	default int compareTo(Order o) {
 		return ordLevel() < o.ordLevel() ? -1
-				: ordLevel() < o.ordLevel() ? 1 : ordSysId() < o.ordSysId() ? -1 : ordSysId() > o.ordSysId() ? 1 : 0;
+				: ordLevel() < o.ordLevel() ? 1 
+						: ordSysId() < o.ordSysId() ? -1 
+								: ordSysId() > o.ordSysId() ? 1 : 0;
 	}
 
 	public static void main(String[] args) {

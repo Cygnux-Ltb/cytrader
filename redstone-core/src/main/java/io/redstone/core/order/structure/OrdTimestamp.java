@@ -4,19 +4,19 @@ import javax.annotation.Nullable;
 
 import io.mercury.common.datetime.EpochTimestamp;
 
-public final class OrdTimestamps {
+public final class OrdTimestamp {
 
 	private EpochTimestamp generateTime;
 	private EpochTimestamp sendingTime;
 	private EpochTimestamp firstReportTime;
 	private EpochTimestamp finishTime;
 
-	private OrdTimestamps() {
+	private OrdTimestamp() {
 		this.generateTime = EpochTimestamp.now();
 	}
 
-	public static OrdTimestamps generate() {
-		return new OrdTimestamps();
+	public static OrdTimestamp generate() {
+		return new OrdTimestamp();
 	}
 
 	public EpochTimestamp generateTime() {
@@ -38,17 +38,17 @@ public final class OrdTimestamps {
 		return finishTime;
 	}
 
-	public OrdTimestamps fillSendingTime() {
+	public OrdTimestamp fillSendingTime() {
 		this.sendingTime = EpochTimestamp.now();
 		return this;
 	}
 
-	public OrdTimestamps fillFirstReportTime() {
+	public OrdTimestamp fillFirstReportTime() {
 		this.firstReportTime = EpochTimestamp.now();
 		return this;
 	}
 
-	public OrdTimestamps fillFinishTime() {
+	public OrdTimestamp fillFinishTime() {
 		this.finishTime = EpochTimestamp.now();
 		return this;
 	}

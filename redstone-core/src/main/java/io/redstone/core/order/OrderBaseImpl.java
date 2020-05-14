@@ -8,7 +8,7 @@ import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.structure.OrdPrice;
 import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.order.structure.OrdTimestamps;
+import io.redstone.core.order.structure.OrdTimestamp;
 
 public abstract class OrderBaseImpl implements Order {
 
@@ -55,7 +55,7 @@ public abstract class OrderBaseImpl implements Order {
 	/**
 	 * 时间戳
 	 */
-	private final OrdTimestamps ordTimestamps;
+	private final OrdTimestamp ordTimestamp;
 
 	/**
 	 * 订单状态(可变)
@@ -79,7 +79,7 @@ public abstract class OrderBaseImpl implements Order {
 		this.ordPrice = ordPrice;
 		this.ordType = ordType;
 		this.direction = direction;
-		this.ordTimestamps = OrdTimestamps.generate();
+		this.ordTimestamp = OrdTimestamp.generate();
 		this.ordStatus = OrdStatus.PendingNew;
 		this.remark = defRemark;
 	}
@@ -125,8 +125,8 @@ public abstract class OrderBaseImpl implements Order {
 	}
 
 	@Override
-	public OrdTimestamps ordTimestamps() {
-		return ordTimestamps;
+	public OrdTimestamp ordTimestamp() {
+		return ordTimestamp;
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public abstract class OrderBaseImpl implements Order {
 	@Override
 	public void outputInfoLog(Logger log, String objName, String msg) {
 		log.info(OrderOutputText.OrderOutputText, objName, msg, ordSysId(), ordStatus(), direction(), ordType(),
-				instrument(), ordPrice(), ordQty(), ordTimestamps());
+				instrument(), ordPrice(), ordQty(), ordTimestamp());
 	}
 
 }

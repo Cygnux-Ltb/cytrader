@@ -4,18 +4,18 @@ import org.eclipse.collections.api.set.ImmutableSet;
 
 import io.mercury.common.collections.ImmutableSets;
 import io.redstone.core.order.Order;
-import io.redstone.core.order.structure.OrdTimestamps;
+import io.redstone.core.order.structure.OrdTimestamp;
 
 public final class OrderGroup {
 
 	private long groupOrdSysId;
-	private OrdTimestamps orderTimestamps;
+	private OrdTimestamp ordTimestamp;
 
 	private ImmutableSet<Order> orderSet;
 
 	public OrderGroup(Order... orders) {
 		this.orderSet = ImmutableSets.newSet(orders);
-		this.orderTimestamps = OrdTimestamps.generate();
+		this.ordTimestamp = OrdTimestamp.generate();
 	}
 
 	public long getGroupOrdSysId() {
@@ -26,8 +26,8 @@ public final class OrderGroup {
 		return orderSet;
 	}
 
-	public OrdTimestamps getOrderTimestamps() {
-		return orderTimestamps;
+	public OrdTimestamp getOrderTimestamps() {
+		return ordTimestamp;
 	}
 
 }
