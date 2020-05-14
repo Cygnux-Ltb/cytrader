@@ -1,4 +1,4 @@
-package io.mercury.financial.instrument.futures;
+package io.mercury.financial.instrument.futures.misc;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import io.mercury.common.util.StringUtil;
+import io.mercury.financial.instrument.futures.impl.ChinaFuturesSymbol;
 
 public final class ChinaFuturesSupporter {
 

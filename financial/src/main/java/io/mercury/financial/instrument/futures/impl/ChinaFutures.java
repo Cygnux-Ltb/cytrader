@@ -1,24 +1,19 @@
-package io.mercury.financial.instrument.futures;
+package io.mercury.financial.instrument.futures.impl;
 
-import io.mercury.financial.instrument.Futures;
+import io.mercury.financial.instrument.futures.api.Futures;
 
 public final class ChinaFutures extends Futures {
 
-	private PriorityCloseType priorityCloseType;
+	private PriorityClose priorityClose;
 
 	public ChinaFutures(ChinaFuturesSymbol symbol, int term) {
 		super(symbol.acquireInstrumentId(term), (symbol.name() + term).toLowerCase(), symbol);
-		this.priorityCloseType = symbol.priorityCloseType();
+		this.priorityClose = symbol.priorityClose();
 	}
 
 	@Override
-	public PriorityCloseType priorityCloseType() {
-		return priorityCloseType;
-	}
-
-	@Override
-	public String toString() {
-		return code();
+	public PriorityClose priorityClose() {
+		return priorityClose;
 	}
 
 	@Override

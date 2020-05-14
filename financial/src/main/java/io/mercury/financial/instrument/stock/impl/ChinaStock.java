@@ -1,7 +1,7 @@
-package io.mercury.financial.instrument.stock;
+package io.mercury.financial.instrument.stock.impl;
 
-import io.mercury.financial.instrument.Stock;
 import io.mercury.financial.instrument.Symbol;
+import io.mercury.financial.instrument.stock.api.Stock;
 
 public final class ChinaStock extends Stock {
 
@@ -10,7 +10,7 @@ public final class ChinaStock extends Stock {
 	}
 
 	@Override
-	public boolean isAvailableNow() {
+	public boolean isAvailableImmediately() {
 		return false;
 	}
 

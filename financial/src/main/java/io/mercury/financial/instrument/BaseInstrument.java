@@ -13,7 +13,7 @@ public abstract class BaseInstrument implements Instrument {
 	private Symbol symbol;
 	private boolean isEnable;
 
-	BaseInstrument(int id, String code, Symbol symbol) {
+	protected BaseInstrument(int id, String code, Symbol symbol) {
 		this.id = id;
 		this.code = code;
 		this.symbol = symbol;

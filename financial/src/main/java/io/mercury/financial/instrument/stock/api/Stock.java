@@ -1,4 +1,8 @@
-package io.mercury.financial.instrument;
+package io.mercury.financial.instrument.stock.api;
+
+import io.mercury.financial.instrument.BaseInstrument;
+import io.mercury.financial.instrument.InstrumentType;
+import io.mercury.financial.instrument.Symbol;
 
 public abstract class Stock extends BaseInstrument {
 

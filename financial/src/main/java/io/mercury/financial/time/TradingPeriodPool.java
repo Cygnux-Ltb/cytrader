@@ -11,7 +11,7 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.Symbol;
-import io.mercury.financial.instrument.futures.ChinaFuturesSymbol;
+import io.mercury.financial.instrument.futures.impl.ChinaFuturesSymbol;
 import io.mercury.financial.vector.TradingPeriod;
 
 @ThreadSafe

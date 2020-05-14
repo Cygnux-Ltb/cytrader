@@ -21,36 +21,20 @@ public interface Instrument extends Enable<Instrument> {
 
 	Symbol symbol();
 
-	boolean isAvailableNow();
+	boolean isAvailableImmediately();
 
-	default PriorityCloseType priorityCloseType() {
-		return PriorityCloseType.NONE;
+	default PriorityClose priorityClose() {
+		return PriorityClose.NONE;
 	}
 
 	default PriceMultiplier priceMultiplier() {
 		return symbol().priceMultiplier();
 	}
 
-	public static enum InstrumentType {
-
-		BOND,
-
-		OPTION,
-
-		STOCK,
-
-		FUTURES,
-
-		FOREX,
-
-		;
-
-	}
-
-	public static enum PriorityCloseType {
-		NONE, BEFORE_TODAY
+	public static enum PriorityClose {
+		NONE, BEFORE_TODAY, TODAY
 	}
 
 	String fmtText();
-	
+
 }

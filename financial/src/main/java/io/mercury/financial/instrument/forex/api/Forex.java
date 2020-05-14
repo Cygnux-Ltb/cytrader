@@ -1,4 +1,8 @@
-package io.mercury.financial.instrument;
+package io.mercury.financial.instrument.forex.api;
+
+import io.mercury.financial.instrument.BaseInstrument;
+import io.mercury.financial.instrument.InstrumentType;
+import io.mercury.financial.instrument.Symbol;
 
 public abstract class Forex extends BaseInstrument {
 
@@ -14,7 +18,7 @@ public abstract class Forex extends BaseInstrument {
 	}
 
 	@Override
-	public boolean isAvailableNow() {
+	public boolean isAvailableImmediately() {
 		return true;
 	}
 

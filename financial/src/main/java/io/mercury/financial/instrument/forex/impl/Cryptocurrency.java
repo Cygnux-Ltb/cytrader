@@ -1,7 +1,7 @@
-package io.mercury.financial.instrument.forex;
+package io.mercury.financial.instrument.forex.impl;
 
-import io.mercury.financial.instrument.Forex;
 import io.mercury.financial.instrument.Symbol;
+import io.mercury.financial.instrument.forex.api.Forex;
 
 public final class Cryptocurrency extends Forex {
 

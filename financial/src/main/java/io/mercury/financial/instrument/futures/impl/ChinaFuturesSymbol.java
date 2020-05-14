@@ -1,4 +1,4 @@
-package io.mercury.financial.instrument.futures;
+package io.mercury.financial.instrument.futures.impl;
 
 import java.time.LocalTime;
 import java.util.stream.Collectors;
@@ -13,9 +13,9 @@ import io.mercury.common.collections.ImmutableSets;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.financial.instrument.Exchange;
+import io.mercury.financial.instrument.Instrument.PriorityClose;
 import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.financial.instrument.Symbol;
-import io.mercury.financial.instrument.Instrument.PriorityCloseType;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TradingPeriod;
 
@@ -25,7 +25,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 铜 cu
 	 */
-	CU(1, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	CU(1, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 铜期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -34,7 +34,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 铝 al
 	 */
-	AL(2, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	AL(2, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 铝期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -43,7 +43,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 锌 zn
 	 */
-	ZN(3, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	ZN(3, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 锌期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -53,7 +53,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 镍
 	 */
-	NI(5, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	NI(5, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 镍期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -62,7 +62,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 锡
 	 */
-	SN(6, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	SN(6, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 锡期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -71,7 +71,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 黄金
 	 */
-	AU(7, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.TEN_THOUSAND,
+	AU(7, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.TEN_THOUSAND,
 			// 黄金期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -80,7 +80,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 白银
 	 */
-	AG(8, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	AG(8, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 白银期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -89,7 +89,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 螺纹钢
 	 */
-	RB(9, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	RB(9, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 螺纹钢期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -98,7 +98,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 热卷扎板
 	 */
-	HC(10, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	HC(10, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 热卷扎板期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -116,7 +116,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 橡胶
 	 */
-	RU(12, Exchange.SHFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	RU(12, Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 橡胶期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -127,7 +127,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 原油
 	 */
-	SC(1, Exchange.SIEE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	SC(1, Exchange.SIEE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 原油期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -138,21 +138,21 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 上证300期货
 	 */
-	IF(1, Exchange.CFFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	IF(1, Exchange.CFFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 股指期货交易时段
 			TradingPeriod.with(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 			TradingPeriod.with(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 	/**
 	 * 中证500期货
 	 */
-	IC(2, Exchange.CFFE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	IC(2, Exchange.CFFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 股指期货交易时段
 			TradingPeriod.with(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 			TradingPeriod.with(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 	/**
 	 * 债券期货
 	 */
-	TF(3, Exchange.CFFE, PriorityCloseType.NONE, PriceMultiplier.TEN_THOUSAND,
+	TF(3, Exchange.CFFE, PriorityClose.NONE, PriceMultiplier.TEN_THOUSAND,
 			// 股指期货交易时段
 			TradingPeriod.with(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 			TradingPeriod.with(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
@@ -161,7 +161,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 大豆 a
 	 */
-	A(3, Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	A(3, Exchange.DCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 大豆期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -171,7 +171,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 豆粕 m
 	 */
-	M(3, Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	M(3, Exchange.DCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 豆粕期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -181,7 +181,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 豆油 y
 	 */
-	Y(3, Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	Y(3, Exchange.DCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 豆油期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -191,7 +191,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 棕榈油 p
 	 */
-	P(3, Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	P(3, Exchange.DCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 棕榈油期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -201,7 +201,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 铁矿石 i
 	 */
-	I(3, Exchange.DCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	I(3, Exchange.DCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 铁矿石期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -212,7 +212,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 棉花 cf
 	 */
-	CF(1, Exchange.ZCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	CF(1, Exchange.ZCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 铁矿石期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -222,7 +222,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 白糖 sr
 	 */
-	SR(2, Exchange.ZCE, PriorityCloseType.NONE, PriceMultiplier.NONE,
+	SR(2, Exchange.ZCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 铁矿石期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(0, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -234,17 +234,17 @@ public enum ChinaFuturesSymbol implements Symbol {
 
 	private Exchange exchange;
 
-	private PriorityCloseType priorityCloseType;
+	private PriorityClose priorityClose;
 
 	private PriceMultiplier priceMultiplier;
 
 	private ImmutableSortedSet<TradingPeriod> tradingPeriodSet;
 
-	private ChinaFuturesSymbol(int exchangeSerial, Exchange exchange, PriorityCloseType priorityCloseType,
+	private ChinaFuturesSymbol(int exchangeSerial, Exchange exchange, PriorityClose priorityClose,
 			PriceMultiplier priceMultiplier, TradingPeriod... tradingPeriods) {
 		this.symbolId = exchange.id() + exchangeSerial * 10000;
 		this.exchange = exchange;
-		this.priorityCloseType = priorityCloseType;
+		this.priorityClose = priorityClose;
 		this.priceMultiplier = priceMultiplier;
 		this.tradingPeriodSet = ImmutableSets.newSortedSet(tradingPeriods);
 	}
@@ -264,8 +264,8 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return exchange;
 	}
 
-	public PriorityCloseType priorityCloseType() {
-		return priorityCloseType;
+	public PriorityClose priorityClose() {
+		return priorityClose;
 	}
 
 	@Override
