@@ -13,6 +13,8 @@ import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.JointIdSupporter;
 import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.instrument.futures.ChinaFutures;
+import io.mercury.financial.instrument.futures.ChinaFuturesSymbol;
 import io.redstone.core.order.enums.TrdDirection;
 import io.redstone.core.order.specific.ChildOrder;
 
@@ -61,8 +63,6 @@ public final class PositionKeeper implements Dumper<String> {
 	 */
 	private static final MutableLongIntMap SubAccountInstrumentPosition = MutableMaps.newLongIntHashMap();
 
-	private static final String KeeperName = "PositionKeeper";
-
 	private PositionKeeper() {
 	}
 
@@ -82,11 +82,11 @@ public final class PositionKeeper implements Dumper<String> {
 	public static void setPositionsLimit(int subAccountId, Instrument instrument, int limitLongQty, int limitShortQty) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
 		SubAccountInstrumentLongLimit.put(positionKey, abs(limitLongQty));
-		log.info("{} :: Set long positions limit -> subAccountId==[{}], instrument -> {}, limitQty==[{}]", KeeperName,
-				subAccountId, instrument, SubAccountInstrumentLongLimit.get(positionKey));
+		log.info("Set long positions limit -> subAccountId==[{}], instrument -> {}, longLimitQty==[{}]", subAccountId,
+				instrument, SubAccountInstrumentLongLimit.get(positionKey));
 		SubAccountInstrumentShortLimit.put(positionKey, -abs(limitShortQty));
-		log.info("{} :: Set short positions limit -> subAccountId==[{}], instrument -> {}, limitQty==[{}]", KeeperName,
-				subAccountId, instrument, SubAccountInstrumentShortLimit.get(positionKey));
+		log.info("Set short positions limit -> subAccountId==[{}], instrument -> {}, shortLimitQty==[{}]", subAccountId,
+				instrument, SubAccountInstrumentShortLimit.get(positionKey));
 	}
 
 	/**
@@ -133,8 +133,8 @@ public final class PositionKeeper implements Dumper<String> {
 				trdQty = -abs(trdQty);
 				break;
 			case Invalid:
-				log.error("{} :: Order action is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
-						KeeperName, subAccountId, order.ordSysId(), instrument.code());
+				log.error("Order action is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
+						subAccountId, order.ordSysId(), instrument.code());
 				break;
 			}
 			break;
@@ -149,26 +149,26 @@ public final class PositionKeeper implements Dumper<String> {
 				trdQty = abs(trdQty);
 				break;
 			case Invalid:
-				log.error("{} :: Order action is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
-						KeeperName, subAccountId, order.ordSysId(), instrument.code());
+				log.error("Order action is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
+						subAccountId, order.ordSysId(), instrument.code());
 				break;
 			}
 			break;
 		case Invalid:
-			log.error("{} :: Order direction is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
-					KeeperName, subAccountId, order.ordSysId(), instrument.code());
+			log.error("Order direction is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
+					subAccountId, order.ordSysId(), instrument.code());
 			break;
 		}
-		log.info("{} :: Update position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}], trdQty==[{}]",
-				KeeperName, subAccountId, instrument.code(), currentPosition, trdQty);
+		log.info("Update position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}], trdQty==[{}]",
+				subAccountId, instrument.code(), currentPosition, trdQty);
 		SubAccountInstrumentPosition.put(positionsKey, currentPosition + trdQty);
 	}
 
 	public static int getCurrentPosition(int subAccountId, Instrument instrument) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
 		int currentPosition = SubAccountInstrumentPosition.get(positionKey);
-		log.info("{} :: Get current position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}]",
-				KeeperName, subAccountId, instrument.code(), currentPosition);
+		log.info("Get current position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}]", subAccountId,
+				instrument.code(), currentPosition);
 		return currentPosition;
 	}
 
@@ -176,24 +176,44 @@ public final class PositionKeeper implements Dumper<String> {
 	 * 
 	 * @param subAccountId 子账户ID
 	 * @param instrument
-	 * @param positionQty  仓位数量
+	 * @param qty          仓位数量
 	 */
-	public static void addCurrentPosition(int subAccountId, Instrument instrument, int positionQty) {
+	public static void addCurrentPosition(int subAccountId, Instrument instrument, TrdDirection direction, int qty) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
-		SubAccountInstrumentPosition.put(positionKey, positionQty);
-		log.info("{} :: Set current position, subAccountId==[{}], instrumentCode==[{}], positionQty==[{}]", KeeperName,
-				subAccountId, instrument.code(), positionQty);
+		int beforePosition = SubAccountInstrumentPosition.get(positionKey);
+		switch (direction) {
+		case Long:
+			qty = abs(qty);
+			break;
+		case Short:
+			qty = -abs(qty);
+			break;
+		case Invalid:
+			log.info(
+					"Add current position, direction is [Invalid], subAccountId==[{}], instrumentCode==[{}], qty==[{}]",
+					subAccountId, instrument.code(), qty);
+			break;
+		}
+		SubAccountInstrumentPosition.put(positionKey, beforePosition + qty);
+		log.info(
+				"Add current position, subAccountId==[{}], instrumentCode==[{}], beforePosition==[{}], qty==[{}], afterPosition==[{}]",
+				subAccountId, instrument.code(), beforePosition, qty, SubAccountInstrumentPosition.get(positionKey));
 	}
 
 	@Override
 	public String dump() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	public static void main(String[] args) {
+		
+		int subAccountId = 10;
+		ChinaFutures rb2010 = new ChinaFutures(ChinaFuturesSymbol.RB, 2010);
 
-		// PositionKeeper.setCurrentPosition(subAccountId, instrument, positionQty);
+		PositionKeeper.setPositionsLimit(subAccountId, rb2010, 10, 10);
+
+		PositionKeeper.addCurrentPosition(subAccountId, rb2010, TrdDirection.Long, 10);
+		PositionKeeper.addCurrentPosition(subAccountId, rb2010, TrdDirection.Short, 5);
 
 	}
 

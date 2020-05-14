@@ -55,6 +55,11 @@ public final class ParentOrder extends ActualOrder {
 		return childOrder;
 	}
 
+	/**
+	 * 
+	 * @param count 数量
+	 * @return
+	 */
 	public List<ChildOrder> splitChildOrder(int count) {
 		// TODO 增加拆分为多个订单的逻辑
 		OrdQty qty = ordQty();
