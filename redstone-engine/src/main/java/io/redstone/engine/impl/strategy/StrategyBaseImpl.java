@@ -30,7 +30,6 @@ import io.redstone.core.order.Order;
 import io.redstone.core.order.OrderBook;
 import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
-import io.redstone.core.order.specific.ActualOrder;
 import io.redstone.core.order.specific.ParentOrder;
 import io.redstone.core.order.specific.StrategyOrder;
 import io.redstone.core.order.structure.OrdPrice;
@@ -41,11 +40,11 @@ import io.redstone.core.strategy.StrategyEvent;
 
 public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy, CircuitBreaker {
 
-	private int strategyId;
+	private final int strategyId;
 
-	private String strategyName;
+	private final String strategyName;
 
-	private int subAccountId;
+	private final int subAccountId;
 
 	private boolean initSuccess = false;
 
