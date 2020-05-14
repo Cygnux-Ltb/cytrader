@@ -9,14 +9,14 @@ import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
 import io.redstone.core.order.enums.TrdDirection;
 
-public abstract class SingleInstrumentStrategy<M extends MarketData> extends StrategyBaseImpl<M> {
+public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends StrategyBaseImpl<M> {
 
 	// 策略订阅的合约
 	protected Instrument instrument;
 
 	private ImmutableList<Instrument> instruments;
 
-	protected SingleInstrumentStrategy(int strategyId, String strategyName, int subAccountId, Instrument instrument) {
+	protected StrategySingleInstrumentImpl(int strategyId, String strategyName, int subAccountId, Instrument instrument) {
 		super(strategyId, strategyName, subAccountId);
 		this.instrument = instrument;
 		this.instruments = ImmutableLists.newList(instrument);
@@ -59,7 +59,7 @@ public abstract class SingleInstrumentStrategy<M extends MarketData> extends Str
 		super.closeAllPositions(instrument);
 	}
 
-	protected void closeAllPositions(int closeQty) {
+	protected void closePositions(int closeQty) {
 		super.closePositions(instrument, closeQty);
 	}
 

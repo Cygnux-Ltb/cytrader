@@ -46,13 +46,13 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	private final int subAccountId;
 
-	private boolean initSuccess = false;
-
-	private boolean isEnable = false;
-
 	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	protected final SubAccount subAccount;
+
+	private boolean initSuccess = false;
+
+	private boolean isEnable = false;
 
 	// 记录当前策略所有的实际订单
 	protected final MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
@@ -108,14 +108,14 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	@Override
 	public void onStrategyEvent(StrategyEvent event) {
-		log.info("Handle StrategyControlEvent -> {}", event);
+		log.info("{} :: Handle StrategyControlEvent -> {}", strategyName, event);
 	}
 
 	@Override
 	public Strategy enable() {
 		if (initSuccess) {
 			this.isEnable = true;
-			log.info("{} :: Enable strategy, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
+			log.info("{} :: Enable strategy success, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
 					strategyId, initSuccess, isEnable);
 		} else {
 			log.info("{} :: Enable strategy fail, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
@@ -260,15 +260,19 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		return parentOrders;
 	};
 
+	void openPositions(Instrument instrument, int openQty) {
+
+	}
+
 	void closeAllPositions(Instrument instrument) {
 		int position = PositionKeeper.getCurrentPosition(subAccountId, instrument);
 		if (position == 0) {
-			log.warn("StrategyBaseImpl :: No position, subAccountId==[{}], instrument -> {}", subAccountId, instrument);
+			log.warn("{} :: No position, subAccountId==[{}], instrument -> {}", strategyName, subAccountId, instrument);
 			return;
-		} else if (position > 0) {
-
 		} else {
-
+			log.info("{} :: Execution closeAllPositions, subAccountId==[{}] instrumentCode==[{}], position==[{}]",
+					strategyName, instrument.code(), position);
+			closePositions(instrument, position);
 		}
 	}
 
