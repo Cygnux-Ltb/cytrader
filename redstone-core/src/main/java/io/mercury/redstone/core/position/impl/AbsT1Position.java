@@ -1,4 +1,4 @@
-package io.redstone.core.position.impl;
+package io.mercury.redstone.core.position.impl;
 
 public abstract class AbsT1Position extends AbsPosition {
 

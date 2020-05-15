@@ -1,4 +1,4 @@
-package io.redstone.core.account;
+package io.mercury.redstone.core.account;
 
 public final class Balance {
 

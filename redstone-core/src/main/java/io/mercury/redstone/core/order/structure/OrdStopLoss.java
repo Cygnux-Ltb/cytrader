@@ -1,6 +1,6 @@
-package io.redstone.core.order.structure;
+package io.mercury.redstone.core.order.structure;
 
-import io.redstone.core.order.enums.TrdDirection;
+import io.mercury.redstone.core.order.enums.TrdDirection;
 
 public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 

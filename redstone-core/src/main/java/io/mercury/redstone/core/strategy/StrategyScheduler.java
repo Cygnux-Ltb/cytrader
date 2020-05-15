@@ -1,8 +1,8 @@
-package io.redstone.core.strategy;
+package io.mercury.redstone.core.strategy;
 
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
-import io.redstone.core.order.structure.OrdReport;
+import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.mercury.redstone.core.order.structure.OrdReport;
 
 public interface StrategyScheduler {
 

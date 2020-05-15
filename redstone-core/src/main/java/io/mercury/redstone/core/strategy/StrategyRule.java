@@ -1,4 +1,4 @@
-package io.redstone.core.strategy;
+package io.mercury.redstone.core.strategy;
 
 public interface StrategyRule {
 

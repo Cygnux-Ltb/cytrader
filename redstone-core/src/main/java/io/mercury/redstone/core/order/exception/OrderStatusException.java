@@ -1,4 +1,4 @@
-package io.redstone.core.order.exception;
+package io.mercury.redstone.core.order.exception;
 
 public class OrderStatusException extends RuntimeException {
 

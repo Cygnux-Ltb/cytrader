@@ -1,4 +1,4 @@
-package io.redstone.core.order.structure;
+package io.mercury.redstone.core.order.structure;
 
 public final class OrdQty {
 
@@ -24,7 +24,7 @@ public final class OrdQty {
 		this.leavesQty = offerQty;
 	}
 
-	public static final OrdQty withOfferQty(int offerQty) {
+	public static final OrdQty withOffer(int offerQty) {
 		return new OrdQty(offerQty);
 	}
 
@@ -86,7 +86,7 @@ public final class OrdQty {
 
 	public static void main(String[] args) {
 
-		System.out.println(OrdQty.withOfferQty(2));
+		System.out.println(OrdQty.withOffer(2));
 
 	}
 

@@ -1,4 +1,4 @@
-package io.redstone.core.order.structure;
+package io.mercury.redstone.core.order.structure;
 
 import java.util.Optional;
 

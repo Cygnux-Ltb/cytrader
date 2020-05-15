@@ -1,4 +1,4 @@
-package io.redstone.core.risk;
+package io.mercury.redstone.core.risk;
 
 public interface CircuitBreaker {
 

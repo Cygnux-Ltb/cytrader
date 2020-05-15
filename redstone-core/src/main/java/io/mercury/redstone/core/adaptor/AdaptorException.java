@@ -1,4 +1,4 @@
-package io.redstone.core.adaptor;
+package io.mercury.redstone.core.adaptor;
 
 public class AdaptorException extends RuntimeException {
 

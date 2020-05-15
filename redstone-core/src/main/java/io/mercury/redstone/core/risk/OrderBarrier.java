@@ -1,8 +1,8 @@
-package io.redstone.core.risk;
+package io.mercury.redstone.core.risk;
 
 import java.util.function.Predicate;
 
-import io.redstone.core.order.Order;
+import io.mercury.redstone.core.order.Order;
 
 @FunctionalInterface
 public interface OrderBarrier<O extends Order> extends Predicate<O> {

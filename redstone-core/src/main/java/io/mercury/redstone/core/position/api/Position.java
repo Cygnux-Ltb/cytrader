@@ -1,6 +1,6 @@
-package io.redstone.core.position.api;
+package io.mercury.redstone.core.position.api;
 
-import io.redstone.core.order.Order;
+import io.mercury.redstone.core.order.Order;
 
 public interface Position extends Comparable<Position> {
 

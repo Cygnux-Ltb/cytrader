@@ -1,8 +1,8 @@
-package io.redstone.core.order.structure;
+package io.mercury.redstone.core.order.structure;
 
 import io.mercury.common.sequence.Serial;
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.enums.OrdStatus;
+import io.mercury.redstone.core.order.enums.OrdStatus;
 
 public final class OrdReport implements Serial<OrdReport> {
 

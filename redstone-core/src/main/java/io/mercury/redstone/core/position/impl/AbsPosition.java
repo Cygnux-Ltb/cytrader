@@ -1,6 +1,6 @@
-package io.redstone.core.position.impl;
+package io.mercury.redstone.core.position.impl;
 
-import io.redstone.core.position.api.Position;
+import io.mercury.redstone.core.position.api.Position;
 
 public abstract class AbsPosition implements Position {
 

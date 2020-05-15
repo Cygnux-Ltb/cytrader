@@ -1,4 +1,4 @@
-package io.redstone.core.order.specific;
+package io.mercury.redstone.core.order.specific;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableLists;
 import io.mercury.financial.instrument.Instrument;
-import io.redstone.core.order.OrderOutputText;
-import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.enums.TrdAction;
-import io.redstone.core.order.enums.TrdDirection;
-import io.redstone.core.order.structure.OrdPrice;
-import io.redstone.core.order.structure.OrdQty;
+import io.mercury.redstone.core.order.OrderOutputText;
+import io.mercury.redstone.core.order.enums.OrdType;
+import io.mercury.redstone.core.order.enums.TrdAction;
+import io.mercury.redstone.core.order.enums.TrdDirection;
+import io.mercury.redstone.core.order.structure.OrdPrice;
+import io.mercury.redstone.core.order.structure.OrdQty;
 
 /**
  * 
@@ -39,7 +39,7 @@ public final class ParentOrder extends ActualOrder {
 	 */
 	public ParentOrder(int strategyId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
 			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(strategyId, subAccountId, instrument, OrdQty.withOfferQty(offerQty), OrdPrice.withOffer(offerPrice),
+		super(strategyId, subAccountId, instrument, OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice),
 				ordType, direction, action, ownerOrdId);
 		this.childOrders = MutableLists.newFastList(8);
 	}

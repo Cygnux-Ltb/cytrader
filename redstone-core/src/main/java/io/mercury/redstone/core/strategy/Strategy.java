@@ -1,4 +1,4 @@
-package io.redstone.core.strategy;
+package io.mercury.redstone.core.strategy;
 
 import java.util.function.Supplier;
 
@@ -7,9 +7,9 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.redstone.core.adaptor.Adaptor;
-import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
-import io.redstone.core.order.Order;
+import io.mercury.redstone.core.adaptor.Adaptor;
+import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.mercury.redstone.core.order.Order;
 
 public interface Strategy extends Enable<Strategy> {
 

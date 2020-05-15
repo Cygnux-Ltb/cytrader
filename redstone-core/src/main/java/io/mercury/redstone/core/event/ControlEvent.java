@@ -1,4 +1,4 @@
-package io.redstone.core.event;
+package io.mercury.redstone.core.event;
 
 public interface ControlEvent {
 

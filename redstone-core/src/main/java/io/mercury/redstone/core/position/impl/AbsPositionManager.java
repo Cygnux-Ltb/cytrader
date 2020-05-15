@@ -1,11 +1,11 @@
-package io.redstone.core.position.impl;
+package io.mercury.redstone.core.position.impl;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.mercury.common.collections.MutableMaps;
-import io.redstone.core.position.api.Position;
-import io.redstone.core.position.api.PositionManager;
-import io.redstone.core.position.api.PositionProducer;
+import io.mercury.redstone.core.position.api.Position;
+import io.mercury.redstone.core.position.api.PositionManager;
+import io.mercury.redstone.core.position.api.PositionProducer;
 
 public abstract class AbsPositionManager<T extends Position> implements PositionManager<T> {
 
