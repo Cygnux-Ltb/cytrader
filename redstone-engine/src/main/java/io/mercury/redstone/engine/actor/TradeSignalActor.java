@@ -1,9 +1,9 @@
-package io.redstone.engine.actor;
+package io.mercury.redstone.engine.actor;
 
 import org.eclipse.collections.api.list.MutableList;
 
 import io.mercury.common.collections.MutableLists;
-import io.redstone.core.trade.TradeSignal;
+import io.mercury.redstone.core.trade.TradeSignal;
 
 public final class TradeSignalActor {
 

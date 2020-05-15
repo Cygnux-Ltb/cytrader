@@ -1,4 +1,4 @@
-package io.redstone.engine.impl.strategy;
+package io.mercury.redstone.engine.impl.strategy;
 
 import java.util.Collection;
 
@@ -7,7 +7,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.mercury.common.collections.ImmutableLists;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
-import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
 
 public abstract class StrategyMultipleInstrumentImpl<M extends MarketData> extends StrategyBaseImpl<M> {
 

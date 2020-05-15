@@ -1,21 +1,24 @@
-package io.redstone.engine.impl.strategy;
+package io.mercury.redstone.engine.impl.strategy;
 
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.mercury.common.collections.ImmutableLists;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
-import io.redstone.core.adaptor.Adaptor;
-import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
-import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.enums.TrdDirection;
+import io.mercury.redstone.core.adaptor.Adaptor;
+import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.mercury.redstone.core.order.enums.OrdType;
+import io.mercury.redstone.core.order.enums.TrdDirection;
 
 public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends StrategyBaseImpl<M> {
 
 	// 策略订阅的合约
 	protected Instrument instrument;
 
-	private ImmutableList<Instrument> instruments;
+	/**
+	 * 
+	 */
+	protected ImmutableList<Instrument> instruments;
 
 	protected StrategySingleInstrumentImpl(int strategyId, String strategyName, int subAccountId,
 			Instrument instrument) {
@@ -55,37 +58,61 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 		super.orderWatermark(instrument, direction, targetQty);
 	}
 
+	/**
+	 * 
+	 * @param direction
+	 * @param targetQty
+	 * @param limitPrice
+	 */
 	protected void orderWatermark(TrdDirection direction, int targetQty, long limitPrice) {
 		super.orderWatermark(instrument, direction, targetQty, limitPrice);
 	}
 
+	/**
+	 * 
+	 * @param direction
+	 * @param targetQty
+	 * @param limitPrice
+	 * @param floatTick
+	 */
 	protected void orderWatermark(TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
 		super.orderWatermark(instrument, direction, targetQty, limitPrice, floatTick);
 	}
 
+	/**************************** 交易指令 ******************************/
 	/**
+	 * 开仓
 	 * 
 	 * @param ordType
 	 * @param offerQty
 	 */
-	protected void openPositions(TrdDirection direction, OrdType ordType, int offerQty) {
-		super.openPositions(instrument, direction, ordType, offerQty);
+	protected void openPositions(int offerQty, OrdType ordType, TrdDirection direction) {
+		super.openPositions(instrument, offerQty, ordType, direction);
 	}
 
 	/**
+	 * 开仓
 	 * 
 	 * @param ordType
 	 * @param offerQty
 	 * @param offerPrice
 	 */
-	protected void openPositions(TrdDirection direction, OrdType ordType, int offerQty, long offerPrice) {
-		super.openPositions(instrument, direction, ordType, offerQty, offerPrice);
+	protected void openPositions(int offerQty, long offerPrice, OrdType ordType, TrdDirection direction) {
+		super.openPositions(instrument, offerQty, offerPrice, ordType, direction);
 	}
 
-	protected void closePositions() {
+	/**
+	 * 全部平仓
+	 */
+	protected void closeAllPositions() {
 		super.closeAllPositions(instrument);
 	}
 
+	/**
+	 * 平仓指定数量
+	 * 
+	 * @param closeQty
+	 */
 	protected void closePositions(int closeQty) {
 		super.closePositions(instrument, closeQty);
 	}

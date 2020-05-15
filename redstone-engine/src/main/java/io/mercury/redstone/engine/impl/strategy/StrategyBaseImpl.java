@@ -1,4 +1,4 @@
-package io.redstone.engine.impl.strategy;
+package io.mercury.redstone.engine.impl.strategy;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -18,25 +18,26 @@ import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.redstone.core.account.SubAccount;
-import io.redstone.core.adaptor.Adaptor;
-import io.redstone.core.keeper.AccountKeeper;
-import io.redstone.core.keeper.InstrumentKeeper;
-import io.redstone.core.keeper.LastMarkerDataKeeper;
-import io.redstone.core.keeper.LastMarkerDataKeeper.LastMarkerData;
-import io.redstone.core.keeper.OrderKeeper;
-import io.redstone.core.keeper.PositionKeeper;
-import io.redstone.core.order.Order;
-import io.redstone.core.order.OrderBook;
-import io.redstone.core.order.enums.OrdType;
-import io.redstone.core.order.enums.TrdDirection;
-import io.redstone.core.order.specific.ParentOrder;
-import io.redstone.core.order.specific.StrategyOrder;
-import io.redstone.core.order.structure.OrdPrice;
-import io.redstone.core.order.structure.OrdQty;
-import io.redstone.core.risk.CircuitBreaker;
-import io.redstone.core.strategy.Strategy;
-import io.redstone.core.strategy.StrategyEvent;
+import io.mercury.redstone.core.account.SubAccount;
+import io.mercury.redstone.core.adaptor.Adaptor;
+import io.mercury.redstone.core.keeper.AccountKeeper;
+import io.mercury.redstone.core.keeper.InstrumentKeeper;
+import io.mercury.redstone.core.keeper.LastMarkerDataKeeper;
+import io.mercury.redstone.core.keeper.OrderKeeper;
+import io.mercury.redstone.core.keeper.PositionKeeper;
+import io.mercury.redstone.core.keeper.LastMarkerDataKeeper.LastMarkerData;
+import io.mercury.redstone.core.order.Order;
+import io.mercury.redstone.core.order.OrderBook;
+import io.mercury.redstone.core.order.enums.OrdType;
+import io.mercury.redstone.core.order.enums.TrdAction;
+import io.mercury.redstone.core.order.enums.TrdDirection;
+import io.mercury.redstone.core.order.specific.ParentOrder;
+import io.mercury.redstone.core.order.specific.StrategyOrder;
+import io.mercury.redstone.core.order.structure.OrdPrice;
+import io.mercury.redstone.core.order.structure.OrdQty;
+import io.mercury.redstone.core.risk.CircuitBreaker;
+import io.mercury.redstone.core.strategy.Strategy;
+import io.mercury.redstone.core.strategy.StrategyEvent;
 
 public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy, CircuitBreaker {
 
@@ -46,13 +47,13 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	private final int subAccountId;
 
-	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
-
-	protected final SubAccount subAccount;
-
 	private boolean initSuccess = false;
 
 	private boolean isEnable = false;
+
+	protected final SubAccount subAccount;
+
+	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	/**
 	 * 记录当前策略所有的实际订单
@@ -62,7 +63,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId) {
 		this.strategyId = strategyId;
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
-				? "strategyId[" + strategyId + "]subAccountId[" + subAccountId + "]"
+				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
 				: strategyName;
 		this.subAccountId = subAccountId;
 		this.subAccount = AccountKeeper.getSubAccount(subAccountId);
@@ -106,6 +107,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		handleOrder(order);
 	}
 
+	@ProtectedAbstractMethod
 	protected abstract void handleOrder(Order order);
 
 	@Override
@@ -191,7 +193,6 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	}
 
 	/**
-	 * 
 	 * 做市策略使用, 维持指定价位的挂单数量
 	 * 
 	 * @param instrument 交易标的
@@ -201,7 +202,6 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param maxPrice   允许浮动点差
 	 */
 	void orderWatermark(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
-
 		long offerPrice = 0L;
 		if (limitPrice > 0) {
 			offerPrice = limitPrice;
@@ -209,16 +209,16 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 			offerPrice = getLevel1Price(instrument, direction);
 		}
 		StrategyOrder strategyOrder = new StrategyOrder(strategyId, subAccountId, instrument,
-				OrdQty.withOfferQty(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
+				OrdQty.withOffer(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
+
 		strategyOrders.put(strategyOrder.ordSysId(), strategyOrder);
 
-		MutableList<ParentOrder> ParentOrders = strategyOrderConverter.apply(strategyOrder);
+		MutableList<ParentOrder> parentOrders = strategyOrderConverter.apply(strategyOrder);
 
-		ParentOrder first = ParentOrders.getFirst();
+		// TODO 未完成全部逻辑
+		ParentOrder first = parentOrders.getFirst();
 
-		Adaptor adaptor = getAdaptor(instrument);
-
-		adaptor.newOredr(first.toChildOrder());
+		getAdaptor(instrument).newOredr(first.toChildOrder());
 	}
 
 	/**
@@ -258,29 +258,24 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	};
 
 	private long getLevel1Price(Instrument instrument, TrdDirection direction) {
-		LastMarkerData lastMarkerData = LastMarkerDataKeeper.get(instrument);
-		long level1Price = 0L;
+		LastMarkerData markerData = LastMarkerDataKeeper.get(instrument);
 		switch (direction) {
 		case Long:
-			level1Price = lastMarkerData.askPrice1();
-			break;
+			return markerData.askPrice1();
 		case Short:
-			level1Price = lastMarkerData.bidPrice1();
-			break;
-		case Invalid:
-			throw new IllegalArgumentException("TrdDirection is invalid");
+			return markerData.bidPrice1();
+		default:
+			throw new IllegalArgumentException("TrdDirection is [Invalid]");
 		}
-		return level1Price;
 	}
 
-	void openPositions(Instrument instrument, TrdDirection direction, OrdType ordType, int offerQty) {
-		this.openPositions(instrument, direction, ordType, offerQty, getLevel1Price(instrument, direction));
+	void openPositions(Instrument instrument, int offerQty, OrdType ordType, TrdDirection direction) {
+		this.openPositions(instrument, offerQty, getLevel1Price(instrument, direction), ordType, direction);
 	}
 
-	void openPositions(Instrument instrument, TrdDirection direction, OrdType ordType, int offerQty, long offerPrice) {
-		
-		
-		
+	void openPositions(Instrument instrument, int offerQty, long offerPrice, OrdType ordType, TrdDirection direction) {
+		new ParentOrder(strategyId, subAccountId, instrument, offerQty, offerPrice, ordType, direction, TrdAction.Open,
+				0L);
 	}
 
 	void closeAllPositions(Instrument instrument) {
