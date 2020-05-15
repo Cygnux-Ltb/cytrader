@@ -1,5 +1,5 @@
 {
-    "namespace": "io.redstone.persistence.avro.entity",
+    "namespace": "io.mercury.simulator.persistence.avro.entity",
     "type": "record",
     "name": "MarketDataLevel1",
     "fields": [

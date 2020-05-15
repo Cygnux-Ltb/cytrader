@@ -1,4 +1,4 @@
-package io.redstone.persistence.avro;
+package io.mercury.simulator.persistence.avro;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
@@ -7,7 +7,7 @@ import io.mercury.serialization.avro.AvroBinaryDeserializer;
 import io.mercury.serialization.avro.AvroBinarySerializer;
 import io.mercury.serialization.avro.AvroTextDeserializer;
 import io.mercury.serialization.avro.AvroTextSerializer;
-import io.redstone.persistence.avro.entity.MarketDataSubscribe;
+import io.mercury.simulator.persistence.avro.entity.MarketDataSubscribe;
 
 public class AvroDemo {
 
