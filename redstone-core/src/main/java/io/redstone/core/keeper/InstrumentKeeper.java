@@ -42,8 +42,6 @@ public final class InstrumentKeeper implements Dumper<String> {
 	 */
 	private static final MutableMap<String, Instrument> InstrumentMapByCode = MutableMaps.newUnifiedMap();
 
-	private static final String KeeperName = "InstrumentKeeper";
-
 	private InstrumentKeeper() {
 	}
 
@@ -53,7 +51,7 @@ public final class InstrumentKeeper implements Dumper<String> {
 
 	public static Instrument setTradable(int instrumentId) {
 		Instrument instrument = getInstrument(instrumentId);
-		log.info("{} :: Instrument enable, instrumentId==[{}], instrument -> {}", KeeperName, instrumentId, instrument);
+		log.info("Instrument enable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
 		return instrument.enable();
 	}
 
@@ -63,8 +61,7 @@ public final class InstrumentKeeper implements Dumper<String> {
 
 	public static Instrument setNotTradable(int instrumentId) {
 		Instrument instrument = getInstrument(instrumentId);
-		log.info("{} :: Instrument disable, instrumentId==[{}], instrument -> {}", KeeperName, instrumentId,
-				instrument);
+		log.info("Instrument disable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
 		return instrument.disable();
 	}
 
@@ -77,8 +74,8 @@ public final class InstrumentKeeper implements Dumper<String> {
 	}
 
 	public static void putInstrument(Instrument instrument) {
-		log.info("{} :: Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", KeeperName,
-				instrument.id(), instrument.code(), instrument);
+		log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", instrument.id(),
+				instrument.code(), instrument);
 		InstrumentMapById.put(instrument.id(), instrument);
 		InstrumentMapByCode.put(instrument.code(), instrument);
 		setTradable(instrument.id());

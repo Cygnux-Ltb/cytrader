@@ -55,7 +55,7 @@ public interface Order extends Comparable<Order> {
 
 	@Override
 	default int compareTo(Order o) {
-		return ordLevel() < o.ordLevel() ? -1
+		return ordLevel() > o.ordLevel() ? -1
 				: ordLevel() < o.ordLevel() ? 1 
 						: ordSysId() < o.ordSysId() ? -1 
 								: ordSysId() > o.ordSysId() ? 1 : 0;

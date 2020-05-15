@@ -45,8 +45,6 @@ public final class LastMarkerDataKeeper implements Dumper<String> {
 
 	private final static LastMarkerDataKeeper StaticInstance = new LastMarkerDataKeeper();
 
-	private final static String KeeperName = "LastMarkerDataKeeper";
-
 	private LastMarkerDataKeeper() {
 		MutableIntObjectMap<LastMarkerData> mutableQuoteMap = MutableMaps.newIntObjectHashMap();
 		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
@@ -54,8 +52,7 @@ public final class LastMarkerDataKeeper implements Dumper<String> {
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		allInstrument.each(instrument -> {
 			mutableQuoteMap.put(instrument.id(), new LastMarkerData());
-			log.info("{} :: Add instrument, instrumentId==[{}], instrument -> {}", KeeperName, instrument.id(),
-					instrument);
+			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.id(), instrument);
 		});
 		immutableQuoteMap = mutableQuoteMap.toImmutable();
 	}
@@ -64,10 +61,11 @@ public final class LastMarkerDataKeeper implements Dumper<String> {
 		Instrument instrument = marketData.instrument();
 		LastMarkerData lastMarkerData = get(instrument);
 		if (lastMarkerData == null) {
-			log.warn("{} :: Instrument unregistered, instrument -> {}", KeeperName, instrument);
+			log.warn("Instrument unregistered, instrument -> {}", instrument);
+		} else {
+			lastMarkerData.setAskPrice1(marketData.getAskPrice1()).setAskVolume1(marketData.getAskVolume1())
+					.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());
 		}
-		lastMarkerData.setAskPrice1(marketData.getAskPrice1()).setAskVolume1(marketData.getAskVolume1())
-				.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());
 	}
 
 	public static LastMarkerData get(Instrument instrument) {

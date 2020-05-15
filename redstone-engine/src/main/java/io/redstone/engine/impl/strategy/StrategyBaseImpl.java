@@ -54,8 +54,10 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	private boolean isEnable = false;
 
-	// 记录当前策略所有的实际订单
-	protected final MutableLongObjectMap<StrategyOrder> strategyOrders = MutableMaps.newLongObjectHashMap();
+	/**
+	 * 记录当前策略所有的实际订单
+	 */
+	protected final MutableLongObjectMap<Order> strategyOrders = MutableMaps.newLongObjectHashMap();
 
 	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId) {
 		this.strategyId = strategyId;
@@ -167,6 +169,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	}
 
 	/**
+	 * 做市策略使用, 维持指定价位的挂单数量
 	 * 
 	 * @param instrument
 	 * @param direction
@@ -177,6 +180,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	}
 
 	/**
+	 * 做市策略使用, 维持指定价位的挂单数量
 	 * 
 	 * @param instrument
 	 * @param direction
@@ -188,6 +192,8 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	/**
 	 * 
+	 * 做市策略使用, 维持指定价位的挂单数量
+	 * 
 	 * @param instrument 交易标的
 	 * @param direction  交易方向
 	 * @param targetQty  目标数量
@@ -195,21 +201,12 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param maxPrice   允许浮动点差
 	 */
 	void orderWatermark(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
-		LastMarkerData lastMarkerData = LastMarkerDataKeeper.get(instrument);
+
 		long offerPrice = 0L;
 		if (limitPrice > 0) {
 			offerPrice = limitPrice;
 		} else {
-			switch (direction) {
-			case Long:
-				offerPrice = lastMarkerData.askPrice1();
-				break;
-			case Short:
-				offerPrice = lastMarkerData.bidPrice1();
-				break;
-			case Invalid:
-				throw new IllegalArgumentException("TrdDirection is invalid");
-			}
+			offerPrice = getLevel1Price(instrument, direction);
 		}
 		StrategyOrder strategyOrder = new StrategyOrder(strategyId, subAccountId, instrument,
 				OrdQty.withOfferQty(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
@@ -260,8 +257,30 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		return parentOrders;
 	};
 
-	void openPositions(Instrument instrument, int openQty) {
+	private long getLevel1Price(Instrument instrument, TrdDirection direction) {
+		LastMarkerData lastMarkerData = LastMarkerDataKeeper.get(instrument);
+		long level1Price = 0L;
+		switch (direction) {
+		case Long:
+			level1Price = lastMarkerData.askPrice1();
+			break;
+		case Short:
+			level1Price = lastMarkerData.bidPrice1();
+			break;
+		case Invalid:
+			throw new IllegalArgumentException("TrdDirection is invalid");
+		}
+		return level1Price;
+	}
 
+	void openPositions(Instrument instrument, TrdDirection direction, OrdType ordType, int offerQty) {
+		this.openPositions(instrument, direction, ordType, offerQty, getLevel1Price(instrument, direction));
+	}
+
+	void openPositions(Instrument instrument, TrdDirection direction, OrdType ordType, int offerQty, long offerPrice) {
+		
+		
+		
 	}
 
 	void closeAllPositions(Instrument instrument) {
@@ -270,7 +289,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 			log.warn("{} :: No position, subAccountId==[{}], instrument -> {}", strategyName, subAccountId, instrument);
 			return;
 		} else {
-			log.info("{} :: Execution closeAllPositions, subAccountId==[{}] instrumentCode==[{}], position==[{}]",
+			log.info("{} :: Execution close all positions, subAccountId==[{}] instrumentCode==[{}], position==[{}]",
 					strategyName, instrument.code(), position);
 			closePositions(instrument, position);
 		}

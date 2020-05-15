@@ -7,6 +7,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.redstone.core.adaptor.Adaptor;
 import io.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.redstone.core.order.enums.OrdType;
 import io.redstone.core.order.enums.TrdDirection;
 
 public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends StrategyBaseImpl<M> {
@@ -16,7 +17,8 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 
 	private ImmutableList<Instrument> instruments;
 
-	protected StrategySingleInstrumentImpl(int strategyId, String strategyName, int subAccountId, Instrument instrument) {
+	protected StrategySingleInstrumentImpl(int strategyId, String strategyName, int subAccountId,
+			Instrument instrument) {
 		super(strategyId, strategyName, subAccountId);
 		this.instrument = instrument;
 		this.instruments = ImmutableLists.newList(instrument);
@@ -43,6 +45,12 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 		return adaptor;
 	}
 
+	/************************* 做市指令 *******************************/
+	/**
+	 * 
+	 * @param direction
+	 * @param targetQty
+	 */
 	protected void orderWatermark(TrdDirection direction, int targetQty) {
 		super.orderWatermark(instrument, direction, targetQty);
 	}
@@ -55,7 +63,26 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 		super.orderWatermark(instrument, direction, targetQty, limitPrice, floatTick);
 	}
 
-	protected void closeAllPositions() {
+	/**
+	 * 
+	 * @param ordType
+	 * @param offerQty
+	 */
+	protected void openPositions(TrdDirection direction, OrdType ordType, int offerQty) {
+		super.openPositions(instrument, direction, ordType, offerQty);
+	}
+
+	/**
+	 * 
+	 * @param ordType
+	 * @param offerQty
+	 * @param offerPrice
+	 */
+	protected void openPositions(TrdDirection direction, OrdType ordType, int offerQty, long offerPrice) {
+		super.openPositions(instrument, direction, ordType, offerQty, offerPrice);
+	}
+
+	protected void closePositions() {
 		super.closeAllPositions(instrument);
 	}
 

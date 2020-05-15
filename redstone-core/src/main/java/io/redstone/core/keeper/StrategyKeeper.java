@@ -13,6 +13,11 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.redstone.core.strategy.Strategy;
 
+/**
+ * 可以使用在 #StrategyScheduler 中进行行情分发的管理
+ * 
+ * @author yellow013
+ */
 @NotThreadSafe
 public final class StrategyKeeper implements Dumper<String> {
 

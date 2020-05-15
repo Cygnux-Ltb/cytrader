@@ -34,6 +34,11 @@ public final class OrdReport implements Serial<OrdReport> {
 	private Instrument instrument;
 
 	/**
+	 * offer quantity
+	 */
+	private int offerQty;
+
+	/**
 	 * filled quantity
 	 */
 	private int filledQty;
@@ -42,6 +47,10 @@ public final class OrdReport implements Serial<OrdReport> {
 	 * leaves quantity
 	 */
 
+	/**
+	 * offer price
+	 */
+	private long offerPrice;
 	/**
 	 * order execute price
 	 */
@@ -71,8 +80,16 @@ public final class OrdReport implements Serial<OrdReport> {
 		return instrument;
 	}
 
+	public int getOfferQty() {
+		return offerQty;
+	}
+
 	public int getFilledQty() {
 		return filledQty;
+	}
+
+	public long getOfferPrice() {
+		return offerPrice;
 	}
 
 	public long getExecutePrice() {
@@ -99,8 +116,18 @@ public final class OrdReport implements Serial<OrdReport> {
 		return this;
 	}
 
+	public OrdReport setOfferQty(int offerQty) {
+		this.offerQty = offerQty;
+		return this;
+	}
+
 	public OrdReport setFilledQty(int filledQty) {
 		this.filledQty = filledQty;
+		return this;
+	}
+
+	public OrdReport setOfferPrice(long offerPrice) {
+		this.offerPrice = offerPrice;
 		return this;
 	}
 
