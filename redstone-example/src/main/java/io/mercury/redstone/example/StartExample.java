@@ -59,7 +59,7 @@ public final class StartExample {
 		int subAccountId = 1;
 
 		SmaStrategyExample example = new SmaStrategyExample(strategyId, subAccountId, rb1910);
-		example.initialize(() -> true);
+		example.initialization(() -> true);
 
 		StrategyKeeper.putStrategy(example);
 		AdaptorKeeper.putAdaptor(adaptor);

@@ -8,6 +8,10 @@ public final class AdaptorEvent {
 
 	private AdaptorStatus adaptorStatus;
 
+	public AdaptorEvent(int adaptorId) {
+		this.adaptorId = adaptorId;
+	}
+
 	public int adaptorId() {
 		return adaptorId;
 	}

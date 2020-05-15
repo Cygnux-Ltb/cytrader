@@ -42,6 +42,7 @@ import io.mercury.ftdc.gateway.bean.FtdcTrade;
 import io.mercury.ftdc.gateway.bean.RspMdConnect;
 import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.mercury.redstone.core.account.Account;
+import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.adaptor.base.AdaptorBaseImpl;
 import io.mercury.redstone.core.keeper.InstrumentKeeper;
 import io.mercury.redstone.core.order.OrdSysIdAllocator;
@@ -138,20 +139,26 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					case RspMdConnect:
 						RspMdConnect rspMdConnect = ftdcMsg.getRspMdConnect();
 						this.isMdAvailable = rspMdConnect.isAvailable();
-						if (rspMdConnect.isAvailable())
-							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.MdEnable);
-						else
-							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.MdDisable);
+						AdaptorEvent mdEvent = new AdaptorEvent(adaptorId);
+						if (rspMdConnect.isAvailable()) {
+							mdEvent.setAdaptorStatus(AdaptorStatus.MdEnable);
+						} else {
+							mdEvent.setAdaptorStatus(AdaptorStatus.MdDisable);
+						}
+						scheduler.onAdaptorEvent(mdEvent);
 						break;
 					case RspTraderConnect:
 						RspTraderConnect traderConnect = ftdcMsg.getRspTraderConnect();
 						this.frontId = traderConnect.getFrontID();
 						this.sessionId = traderConnect.getSessionID();
 						this.isTraderAvailable = traderConnect.isAvailable();
-						if (traderConnect.isAvailable())
-							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.TraderEnable);
-						else
-							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.TraderDisable);
+						AdaptorEvent traderEvent = new AdaptorEvent(adaptorId);
+						if (traderConnect.isAvailable()) {
+							traderEvent.setAdaptorStatus(AdaptorStatus.TraderDisable);
+						} else {
+							traderEvent.setAdaptorStatus(AdaptorStatus.TraderEnable);
+						}
+						scheduler.onAdaptorEvent(traderEvent);
 						break;
 					case FtdcDepthMarketData:
 						// 行情处理
