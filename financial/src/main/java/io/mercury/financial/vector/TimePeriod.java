@@ -1,5 +1,8 @@
 package io.mercury.financial.vector;
 
+import static java.time.Duration.ofMinutes;
+import static java.time.Duration.ofSeconds;
+
 import java.time.Duration;
 import java.time.LocalTime;
 
@@ -10,51 +13,51 @@ import java.time.LocalTime;
  */
 public enum TimePeriod {
 
-	S1(Duration.ofSeconds(1)),
+	S1(ofSeconds(1)),
 
-	S2(Duration.ofSeconds(2)),
+	S2(ofSeconds(2)),
 
-	S3(Duration.ofSeconds(3)),
+	S3(ofSeconds(3)),
 
-	S4(Duration.ofSeconds(4)),
+	S4(ofSeconds(4)),
 
-	S5(Duration.ofSeconds(5)),
+	S5(ofSeconds(5)),
 
-	S6(Duration.ofSeconds(6)),
+	S6(ofSeconds(6)),
 
-	S10(Duration.ofSeconds(10)),
+	S10(ofSeconds(10)),
 
-	S12(Duration.ofSeconds(12)),
+	S12(ofSeconds(12)),
 
-	S15(Duration.ofSeconds(15)),
+	S15(ofSeconds(15)),
 
-	S20(Duration.ofSeconds(20)),
+	S20(ofSeconds(20)),
 
-	S30(Duration.ofSeconds(30)),
+	S30(ofSeconds(30)),
 
-	M1(Duration.ofMinutes(1)),
+	M1(ofMinutes(1)),
 
-	M2(Duration.ofMinutes(2)),
+	M2(ofMinutes(2)),
 
-	M3(Duration.ofMinutes(3)),
+	M3(ofMinutes(3)),
 
-	M4(Duration.ofMinutes(4)),
+	M4(ofMinutes(4)),
 
-	M5(Duration.ofMinutes(5)),
+	M5(ofMinutes(5)),
 
-	M6(Duration.ofMinutes(6)),
+	M6(ofMinutes(6)),
 
-	M10(Duration.ofMinutes(10)),
+	M10(ofMinutes(10)),
 
-	M12(Duration.ofMinutes(12)),
+	M12(ofMinutes(12)),
 
-	M15(Duration.ofMinutes(15)),
+	M15(ofMinutes(15)),
 
-	M20(Duration.ofMinutes(20)),
+	M20(ofMinutes(20)),
 
-	M30(Duration.ofMinutes(30)),
+	M30(ofMinutes(30)),
 
-	M60(Duration.ofMinutes(60)),
+	M60(ofMinutes(60)),
 
 	;
 

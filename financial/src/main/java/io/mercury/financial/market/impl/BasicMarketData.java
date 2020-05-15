@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
+import io.mercury.serialization.json.JsonUtil;
 
 /**
  * @author yellow013
@@ -20,8 +21,8 @@ import io.mercury.financial.market.api.MarketData;
 public class BasicMarketData implements MarketData {
 
 	private Instrument instrument;
-	private LocalDateTime dateTime;
-	private ZonedDateTime zonedDateTime;
+	private LocalDateTime datetime;
+	private ZonedDateTime zonedDatetime;
 	private long epochMillis;
 	private long lastPrice;
 	private int volume;
@@ -76,17 +77,17 @@ public class BasicMarketData implements MarketData {
 		this.epochMillis = epochMillis;
 	}
 
-	public BasicMarketData(Instrument instrument, LocalDateTime dateTime) {
+	public BasicMarketData(Instrument instrument, LocalDateTime datetime) {
 		this.instrument = instrument;
 		// TODO 添加时区
-		this.epochMillis = EpochTime.millis(dateTime);
-		this.dateTime = dateTime;
+		this.epochMillis = EpochTime.millis(datetime);
+		this.datetime = datetime;
 	}
 
-	public BasicMarketData(Instrument instrument, ZonedDateTime zonedDateTime) {
+	public BasicMarketData(Instrument instrument, ZonedDateTime zonedDatetime) {
 		this.instrument = instrument;
-		this.epochMillis = EpochTime.millis(zonedDateTime);
-		this.zonedDateTime = zonedDateTime;
+		this.epochMillis = EpochTime.millis(zonedDatetime);
+		this.zonedDatetime = zonedDatetime;
 	}
 
 	public BasicMarketData(Instrument instrument, long epochMillis, long lastPrice, int volume, long turnover) {
@@ -102,12 +103,12 @@ public class BasicMarketData implements MarketData {
 		this(instrument, EpochTime.millis(zonedDateTime), null, zonedDateTime, lastPrice, volume, turnover);
 	}
 
-	public BasicMarketData(Instrument instrument, long epochMillis, LocalDateTime dateTime, ZonedDateTime zonedDateTime,
+	public BasicMarketData(Instrument instrument, long epochMillis, LocalDateTime datetime, ZonedDateTime zonedDatetime,
 			long lastPrice, int volume, long turnover) {
 		this.instrument = instrument;
 		this.epochMillis = epochMillis;
-		this.dateTime = dateTime;
-		this.zonedDateTime = zonedDateTime;
+		this.datetime = datetime;
+		this.zonedDatetime = zonedDatetime;
 		this.lastPrice = lastPrice;
 		this.volume = volume;
 		this.turnover = turnover;
@@ -121,18 +122,18 @@ public class BasicMarketData implements MarketData {
 		return epochMillis;
 	}
 
-	public LocalDateTime dateTime() {
-		if (dateTime == null)
-			dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMillis),
+	public LocalDateTime datetime() {
+		if (datetime == null)
+			datetime = LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMillis),
 					instrument.symbol().exchange().zoneId());
-		return dateTime;
+		return datetime;
 	}
 
-	public ZonedDateTime zonedDateTime() {
-		if (zonedDateTime == null)
-			zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis),
+	public ZonedDateTime zonedDatetime() {
+		if (zonedDatetime == null)
+			zonedDatetime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis),
 					instrument.symbol().exchange().zoneId());
-		return zonedDateTime;
+		return zonedDatetime;
 	}
 
 	public long getLastPrice() {
@@ -525,6 +526,11 @@ public class BasicMarketData implements MarketData {
 	@Override
 	public MarketDataType marketDataType() {
 		return MarketDataType.Basic;
+	}
+
+	@Override
+	public String toString() {
+		return JsonUtil.toJson(this);
 	}
 
 	public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package io.mercury.redstone.engine.scheduler;
 
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.keeper.LastMarkerDataKeeper;
 import io.mercury.redstone.core.keeper.OrderKeeper;
 import io.mercury.redstone.core.order.Order;
@@ -27,8 +27,8 @@ public class SingleStrategyScheduler implements StrategyScheduler {
 	}
 
 	@Override
-	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
-		strategy.onAdaptorStatus(adaptorId, status);
+	public void onAdaptorEvent(AdaptorEvent event) {
+		strategy.onAdaptorEvent(event);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.adaptor.Adaptor;
-import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.Order;
 
 public interface Strategy extends Enable<Strategy> {
@@ -23,9 +23,9 @@ public interface Strategy extends Enable<Strategy> {
 
 	void addAdaptor(Adaptor adaptor);
 
-	void initialize(Supplier<Boolean> initializer);
+	void initialization(Supplier<Boolean> initializer);
 
-	void onAdaptorStatus(int adaptorId, AdaptorStatus status);
+	void onAdaptorEvent(AdaptorEvent event);
 
 	void onStrategyEvent(StrategyEvent event);
 

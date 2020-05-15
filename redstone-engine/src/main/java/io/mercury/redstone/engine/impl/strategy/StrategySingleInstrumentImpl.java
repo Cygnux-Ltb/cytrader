@@ -6,7 +6,7 @@ import io.mercury.common.collections.ImmutableLists;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.adaptor.Adaptor;
-import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdDirection;
 
@@ -86,8 +86,8 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 	 * @param ordType
 	 * @param offerQty
 	 */
-	protected void openPositions(int offerQty, OrdType ordType, TrdDirection direction) {
-		super.openPositions(instrument, offerQty, ordType, direction);
+	protected void openPosition(int offerQty, OrdType ordType, TrdDirection direction) {
+		super.openPosition(instrument, offerQty, ordType, direction);
 	}
 
 	/**
@@ -97,15 +97,15 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 	 * @param offerQty
 	 * @param offerPrice
 	 */
-	protected void openPositions(int offerQty, long offerPrice, OrdType ordType, TrdDirection direction) {
-		super.openPositions(instrument, offerQty, offerPrice, ordType, direction);
+	protected void openPosition(int offerQty, long offerPrice, OrdType ordType, TrdDirection direction) {
+		super.openPosition(instrument, offerQty, offerPrice, ordType, direction);
 	}
 
 	/**
 	 * 全部平仓
 	 */
-	protected void closeAllPositions() {
-		super.closeAllPositions(instrument);
+	protected void closeAllPosition() {
+		super.closeAllPosition(instrument);
 	}
 
 	/**
@@ -113,27 +113,29 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 	 * 
 	 * @param closeQty
 	 */
-	protected void closePositions(int closeQty) {
-		super.closePositions(instrument, closeQty);
+	protected void closePosition(int offerQty, long offerPrice) {
+		super.closePosition(instrument, offerQty, offerPrice);
 	}
 
 	@Override
-	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
-		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", strategyName(), adaptorId, status);
-		switch (status) {
+	public void onAdaptorEvent(AdaptorEvent event) {
+		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", strategyName(), event.adaptorId(),
+				event.adaptorStatus());
+		switch (event.adaptorStatus()) {
 		case MdEnable:
-			log.info("{} :: handle adaptor MdEnable, adaptorId==[{}]", strategyName(), adaptorId);
+			log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", strategyName(), event.adaptorId());
 			adaptor.subscribeMarketData(instrument);
-			log.info("{} :: call subscribeMarketData, instrument -> {}", strategyName(), instrument);
+			log.info("{} :: Call subscribeMarketData, instrument -> {}", strategyName(), instrument);
 			break;
 		case TraderEnable:
-			log.info("{} :: handle adaptor TdEnable, adaptorId==[{}]", strategyName(), adaptorId);
+			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", strategyName(), event.adaptorId());
 			adaptor.queryOrder(null);
-			log.info("{} :: call queryOrder, adaptodId==[{}], account is default", strategyName(), adaptorId);
+			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", strategyName(), event.adaptorId());
 			adaptor.queryPositions(null);
-			log.info("{} :: call queryPositions, adaptodId==[{}], account is default", strategyName(), adaptorId);
+			log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", strategyName(),
+					event.adaptorId());
 			adaptor.queryBalance(null);
-			log.info("{} :: call queryBalance, adaptodId==[{}], account is default", strategyName(), adaptorId);
+			log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", strategyName(), event.adaptorId());
 			break;
 		default:
 			break;

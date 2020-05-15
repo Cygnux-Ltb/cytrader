@@ -11,8 +11,8 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>redstone-simulator</artifactId>
-	<name>redstone-simulator</name>
+	<artifactId>simulator</artifactId>
+	<name>simulator</name>
 
 	<dependencies>
 		<dependency>

@@ -39,9 +39,25 @@ public final class ParentOrder extends ActualOrder {
 	 */
 	public ParentOrder(int strategyId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
 			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(strategyId, subAccountId, instrument, OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice),
-				ordType, direction, action, ownerOrdId);
+		super(strategyId, subAccountId, instrument, OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordType,
+				direction, action, ownerOrdId);
 		this.childOrders = MutableLists.newFastList(8);
+	}
+
+	/**
+	 * 
+	 * @param strategyId
+	 * @param subAccountId
+	 * @param instrument
+	 * @param offerQty
+	 * @param offerPrice
+	 * @param ordType
+	 * @param direction
+	 * @param action
+	 */
+	public ParentOrder(int strategyId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
+			OrdType ordType, TrdDirection direction, TrdAction action) {
+		this(strategyId, subAccountId, instrument, offerQty, offerPrice, ordType, direction, action, 0L);
 	}
 
 	/**

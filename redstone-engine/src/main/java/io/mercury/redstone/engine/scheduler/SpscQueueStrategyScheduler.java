@@ -6,6 +6,7 @@ import io.mercury.common.concurrent.disruptor.BufferSize;
 import io.mercury.common.concurrent.disruptor.SpscQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
 import io.mercury.redstone.core.keeper.LastMarkerDataKeeper;
 import io.mercury.redstone.core.keeper.OrderKeeper;
@@ -77,8 +78,8 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 	}
 
 	@Override
-	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
-		despatchQueue.enqueue(new DespatchMsg(adaptorId, status));
+	public void onAdaptorEvent(AdaptorEvent event){
+		despatchQueue.enqueue(new DespatchMsg(event.adaptorId(), event.adaptorStatus()));
 	}
 
 	@Override

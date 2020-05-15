@@ -1,6 +1,7 @@
 package io.mercury.redstone.engine.scheduler;
 
 import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
 import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.Strategy;
@@ -21,7 +22,7 @@ public final class ChronicleStrategyScheduler implements StrategyScheduler {
 	}
 
 	@Override
-	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
+	public void onAdaptorEvent(AdaptorEvent event) {
 		// TODO Auto-generated method stub
 	}
 

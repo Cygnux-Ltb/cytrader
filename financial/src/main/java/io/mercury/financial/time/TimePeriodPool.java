@@ -54,6 +54,10 @@ public final class TimePeriodPool {
 			generateTimePeriod(symbols, period);
 	}
 
+	public long mergeSymbolTimeKey(Symbol symbol, TimePeriod period) {
+		return JointIdSupporter.jointId(symbol.id(), period.seconds());
+	}
+
 	private void generateTimePeriod(Symbol[] symbols, TimePeriod period) {
 		for (Symbol symbol : symbols) {
 			MutableSortedSet<TimePeriodSerial> timePeriodSet = MutableSets.newTreeSortedSet();
@@ -65,9 +69,9 @@ public final class TimePeriodPool {
 						timePeriodSet.add(serial);
 						timePeriodMap.put(serial.serialId(), serial);
 					});
-			long jointId = JointIdSupporter.jointId(symbol.id(), (int) period.seconds());
-			timePeriodSetPool.put(jointId, timePeriodSet.toImmutable());
-			timePeriodMapPool.put(jointId, timePeriodMap.toImmutable());
+			long symbolTimeKey = mergeSymbolTimeKey(symbol, period);
+			timePeriodSetPool.put(symbolTimeKey, timePeriodSet.toImmutable());
+			timePeriodMapPool.put(symbolTimeKey, timePeriodMap.toImmutable());
 		}
 	}
 
@@ -91,11 +95,11 @@ public final class TimePeriodPool {
 	 * @return
 	 */
 	public ImmutableSortedSet<TimePeriodSerial> getTimePeriodSet(Symbol symbol, TimePeriod period) {
-		long jointId = JointIdSupporter.jointId(symbol.id(), period.seconds());
-		ImmutableSortedSet<TimePeriodSerial> sortedSet = timePeriodSetPool.get(jointId);
+		long symbolTimeKey = mergeSymbolTimeKey(symbol, period);
+		ImmutableSortedSet<TimePeriodSerial> sortedSet = timePeriodSetPool.get(symbolTimeKey);
 		if (sortedSet == null) {
 			register(symbol, period);
-			sortedSet = timePeriodSetPool.get(jointId);
+			sortedSet = timePeriodSetPool.get(symbolTimeKey);
 		}
 		return sortedSet;
 	}
@@ -105,11 +109,11 @@ public final class TimePeriodPool {
 	}
 
 	public ImmutableLongObjectMap<TimePeriodSerial> getTimePeriodMap(Symbol symbol, TimePeriod period) {
-		long jointId = JointIdSupporter.jointId(symbol.id(), period.seconds());
-		ImmutableLongObjectMap<TimePeriodSerial> longObjectMap = timePeriodMapPool.get(jointId);
+		long symbolTimeKey = mergeSymbolTimeKey(symbol, period);
+		ImmutableLongObjectMap<TimePeriodSerial> longObjectMap = timePeriodMapPool.get(symbolTimeKey);
 		if (longObjectMap == null) {
 			register(symbol, period);
-			longObjectMap = timePeriodMapPool.get(jointId);
+			longObjectMap = timePeriodMapPool.get(symbolTimeKey);
 		}
 		return longObjectMap;
 	}

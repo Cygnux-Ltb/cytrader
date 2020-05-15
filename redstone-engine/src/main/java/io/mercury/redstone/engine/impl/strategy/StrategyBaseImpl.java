@@ -1,5 +1,7 @@
 package io.mercury.redstone.engine.impl.strategy;
 
+import static java.lang.Math.abs;
+
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -31,6 +33,7 @@ import io.mercury.redstone.core.order.OrderBook;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
+import io.mercury.redstone.core.order.specific.ChildOrder;
 import io.mercury.redstone.core.order.specific.ParentOrder;
 import io.mercury.redstone.core.order.specific.StrategyOrder;
 import io.mercury.redstone.core.order.structure.OrdPrice;
@@ -58,7 +61,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	/**
 	 * 记录当前策略所有的实际订单
 	 */
-	protected final MutableLongObjectMap<Order> strategyOrders = MutableMaps.newLongObjectHashMap();
+	protected final MutableLongObjectMap<Order> orders = MutableMaps.newLongObjectHashMap();
 
 	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId) {
 		this.strategyId = strategyId;
@@ -70,7 +73,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	}
 
 	@Override
-	public void initialize(@Nonnull Supplier<Boolean> initializer) {
+	public void initialization(@Nonnull Supplier<Boolean> initializer) {
 		initSuccess = Assertor.nonNull(initializer, "initializer").get();
 		log.info("Initialize result initSuccess==[{}]", initSuccess);
 	}
@@ -92,7 +95,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
-		if (strategyOrders.notEmpty()) {
+		if (orders.notEmpty()) {
 			log.info("{} :: strategyOrders not empty, doing...", strategyName);
 		}
 		handleMarketData(marketData);
@@ -211,7 +214,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		StrategyOrder strategyOrder = new StrategyOrder(strategyId, subAccountId, instrument,
 				OrdQty.withOffer(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
 
-		strategyOrders.put(strategyOrder.ordSysId(), strategyOrder);
+		orders.put(strategyOrder.ordSysId(), strategyOrder);
 
 		MutableList<ParentOrder> parentOrders = strategyOrderConverter.apply(strategyOrder);
 
@@ -257,6 +260,12 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		return parentOrders;
 	};
 
+	/**
+	 * 
+	 * @param instrument
+	 * @param direction
+	 * @return
+	 */
 	private long getLevel1Price(Instrument instrument, TrdDirection direction) {
 		LastMarkerData markerData = LastMarkerDataKeeper.get(instrument);
 		switch (direction) {
@@ -269,16 +278,44 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		}
 	}
 
-	void openPositions(Instrument instrument, int offerQty, OrdType ordType, TrdDirection direction) {
-		this.openPositions(instrument, offerQty, getLevel1Price(instrument, direction), ordType, direction);
+	/**
+	 * 
+	 * @param instrument
+	 * @param offerQty
+	 * @param ordType
+	 * @param direction
+	 */
+	void openPosition(Instrument instrument, int offerQty, OrdType ordType, TrdDirection direction) {
+		openPosition(instrument, offerQty, getLevel1Price(instrument, direction), ordType, direction);
 	}
 
-	void openPositions(Instrument instrument, int offerQty, long offerPrice, OrdType ordType, TrdDirection direction) {
-		new ParentOrder(strategyId, subAccountId, instrument, offerQty, offerPrice, ordType, direction, TrdAction.Open,
-				0L);
+	/**
+	 * 
+	 * @param instrument
+	 * @param offerQty
+	 * @param offerPrice
+	 * @param ordType
+	 * @param direction
+	 */
+	void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType, TrdDirection direction) {
+		ParentOrder parentOrder = new ParentOrder(strategyId, subAccountId, instrument, abs(offerQty), offerPrice,
+				ordType, direction, TrdAction.Open);
+		parentOrder.outputInfoLog(log, strategyName, "Open position generate ParentOrder");
+		putOrder(parentOrder);
+
+		ChildOrder childOrder = parentOrder.toChildOrder();
+		childOrder.outputInfoLog(log, strategyName, "Open position generate ChildOrder");
+		putOrder(childOrder);
+
+		getAdaptor(instrument).newOredr(childOrder);
+
 	}
 
-	void closeAllPositions(Instrument instrument) {
+	/**
+	 * 
+	 * @param instrument
+	 */
+	void closeAllPosition(Instrument instrument) {
 		int position = PositionKeeper.getCurrentPosition(subAccountId, instrument);
 		if (position == 0) {
 			log.warn("{} :: No position, subAccountId==[{}], instrument -> {}", strategyName, subAccountId, instrument);
@@ -286,12 +323,58 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		} else {
 			log.info("{} :: Execution close all positions, subAccountId==[{}] instrumentCode==[{}], position==[{}]",
 					strategyName, instrument.code(), position);
-			closePositions(instrument, position);
+			LastMarkerData markerData = LastMarkerDataKeeper.get(instrument);
+			long offerPrice = 0L;
+			if (position > 0) {
+				// 获取当前卖一价
+				offerPrice = markerData.askPrice1();
+			} else {
+				// 获取当前买一价
+				offerPrice = markerData.bidPrice1();
+			}
+			closePosition(instrument, position, offerPrice);
 		}
 	}
 
-	void closePositions(Instrument instrument, int closeQty) {
+	/**
+	 * 
+	 * @param instrument
+	 * @param offerPrice
+	 */
+	void closeAllPosition(Instrument instrument, long offerPrice) {
+		int position = PositionKeeper.getCurrentPosition(subAccountId, instrument);
+		if (position == 0) {
+			log.warn("{} :: No position, subAccountId==[{}], instrument -> {}", strategyName, subAccountId, instrument);
+			return;
+		} else {
+			log.info("{} :: Execution close all positions, subAccountId==[{}] instrumentCode==[{}], position==[{}]",
+					strategyName, instrument.code(), position);
+			closePosition(instrument, position, offerPrice);
+		}
+	}
 
+	/**
+	 * 
+	 * @param instrument
+	 * @param offerQty
+	 * @param offerPrice
+	 */
+	void closePosition(Instrument instrument, final int offerQty, long offerPrice) {
+		ParentOrder parentOrder = new ParentOrder(strategyId, subAccountId, instrument, abs(offerQty), offerPrice,
+				OrdType.Limit, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short, TrdAction.Close);
+		parentOrder.outputInfoLog(log, strategyName, "Close position generate ParentOrder");
+		putOrder(parentOrder);
+
+		ChildOrder childOrder = parentOrder.toChildOrder();
+		childOrder.outputInfoLog(log, strategyName, "Close position generate ChildOrder");
+		putOrder(childOrder);
+
+		getAdaptor(instrument).newOredr(childOrder);
+
+	}
+
+	private void putOrder(Order order) {
+		orders.put(order.ordSysId(), order);
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package io.mercury.ftdc.adaptor;
 
+import static io.mercury.common.thread.ThreadHelper.sleep;
+import static io.mercury.common.thread.ThreadHelper.startNewThread;
 import static io.mercury.financial.instrument.PriceMultiplier.PriceSupporter.priceToLong4;
 
 import java.io.IOException;
@@ -24,7 +26,6 @@ import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
-import io.mercury.common.thread.ThreadHelper;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.CancelOrderConverter;
@@ -40,14 +41,14 @@ import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
 import io.mercury.ftdc.gateway.bean.RspMdConnect;
 import io.mercury.ftdc.gateway.bean.RspTraderConnect;
-import io.redstone.core.account.Account;
-import io.redstone.core.adaptor.base.AdaptorBaseImpl;
-import io.redstone.core.keeper.InstrumentKeeper;
-import io.redstone.core.order.OrdSysIdAllocator;
-import io.redstone.core.order.Order;
-import io.redstone.core.order.specific.ChildOrder;
-import io.redstone.core.order.structure.OrdReport;
-import io.redstone.core.strategy.StrategyScheduler;
+import io.mercury.redstone.core.account.Account;
+import io.mercury.redstone.core.adaptor.base.AdaptorBaseImpl;
+import io.mercury.redstone.core.keeper.InstrumentKeeper;
+import io.mercury.redstone.core.order.OrdSysIdAllocator;
+import io.mercury.redstone.core.order.Order;
+import io.mercury.redstone.core.order.specific.ChildOrder;
+import io.mercury.redstone.core.order.structure.OrdReport;
+import io.mercury.redstone.core.strategy.StrategyScheduler;
 
 public class FtdcAdaptor extends AdaptorBaseImpl {
 
@@ -78,7 +79,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	// TODO 转换报单回报
 	private Function<FtdcOrder, OrdReport> rtnOrderConverter = ftdcOrder -> {
-		OrdReport ordReport = checkoutCtpOrder(ftdcOrder.getOrderRef());
+		OrdReport ordReport = findCtpOrder(ftdcOrder.getOrderRef());
 
 		ftdcOrder.getOrderRef();
 		ftdcOrder.getVolumeTotal();
@@ -89,16 +90,17 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	// TODO 转换报单回报
 	private Function<FtdcTrade, OrdReport> rtnTradeConverter = ftdcTrade -> {
-		OrdReport ordReport = checkoutCtpOrder(ftdcTrade.getOrderRef());
+		OrdReport ordReport = findCtpOrder(ftdcTrade.getOrderRef());
 		return ordReport;
 	};
 
-	private OrdReport checkoutCtpOrder(String orderRef) {
+	private OrdReport findCtpOrder(String orderRef) {
 		try {
 			long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
 			if (ordSysId == 0L) {
 				// 处理其他来源的订单
 				long thirdOrdSysId = OrdSysIdAllocator.allocateFromThird();
+				log.info("Handle third order, allocate ");
 				return new OrdReport(thirdOrdSysId);
 			} else
 				return new OrdReport(ordSysId);
@@ -114,8 +116,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private volatile int frontId;
 	private volatile int sessionId;
 
-	private volatile boolean mdIsAvailable;
-	private volatile boolean traderIsAvailable;
+	private volatile boolean isMdAvailable;
+	private volatile boolean isTraderAvailable;
 
 	public FtdcAdaptor(int adaptorId, String adaptorName, Account account, @Nonnull StrategyScheduler scheduler,
 			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
@@ -135,7 +137,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					switch (ftdcMsg.getRspType()) {
 					case RspMdConnect:
 						RspMdConnect rspMdConnect = ftdcMsg.getRspMdConnect();
-						this.mdIsAvailable = rspMdConnect.isAvailable();
+						this.isMdAvailable = rspMdConnect.isAvailable();
 						if (rspMdConnect.isAvailable())
 							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.MdEnable);
 						else
@@ -145,7 +147,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						RspTraderConnect traderConnect = ftdcMsg.getRspTraderConnect();
 						this.frontId = traderConnect.getFrontID();
 						this.sessionId = traderConnect.getSessionID();
-						this.traderIsAvailable = traderConnect.isAvailable();
+						this.isTraderAvailable = traderConnect.isAvailable();
 						if (traderConnect.isAvailable())
 							scheduler.onAdaptorStatus(adaptorId, AdaptorStatus.TraderEnable);
 						else
@@ -202,9 +204,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean subscribeMarketData(Instrument... instruments) {
 		try {
-			if (mdIsAvailable) {
-				gateway.SubscribeMarketData(
-						Stream.of(instruments).map(instrument -> instrument.code()).collect(Collectors.toSet()));
+			if (isMdAvailable) {
+				gateway.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
 				return true;
 			} else {
 				return false;
@@ -259,16 +260,20 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean queryOrder(Account account) {
 		try {
-			ThreadHelper.startNewThread(() -> {
-				synchronized (mutex) {
-					log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition");
-					ThreadHelper.sleep(1250);
-					// TODO 写入ExchangeId
-					gateway.ReqQryOrder("SHFE");
-					log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
-				}
-			}, "QueryOrder-SubThread");
-			return true;
+			if (isTraderAvailable) {
+				startNewThread(() -> {
+					synchronized (mutex) {
+						log.info("Ready to sent ReqQryInvestorPosition");
+						sleep(1250);
+						// TODO 写入ExchangeId
+						gateway.ReqQryOrder("SHFE");
+						log.info("Has been sent ReqQryInvestorPosition");
+					}
+				}, "QueryOrder-SubThread");
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			log.error("FtdcAdaptor :: queryOrder exception -> {}", e.getMessage(), e);
 			return false;
@@ -278,15 +283,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean queryPositions(Account account) {
 		try {
-			ThreadHelper.startNewThread(() -> {
-				synchronized (mutex) {
-					log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition");
-					ThreadHelper.sleep(1250);
-					gateway.ReqQryInvestorPosition();
-					log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
-				}
-			}, "QueryPositions-SubThread");
-			return true;
+			if (isTraderAvailable) {
+				startNewThread(() -> {
+					synchronized (mutex) {
+						log.info("Ready to sent ReqQryInvestorPosition");
+						sleep(1250);
+						gateway.ReqQryInvestorPosition();
+						log.info("Has been sent ReqQryInvestorPosition");
+					}
+				}, "QueryPositions-SubThread");
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			log.error("FtdcAdaptor :: queryPositions exception -> {}", e.getMessage(), e);
 			return false;
@@ -296,18 +305,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean queryBalance(Account account) {
 		try {
-			if (traderIsAvailable) {
-				ThreadHelper.startNewThread(() -> {
+			if (isTraderAvailable) {
+				startNewThread(() -> {
 					synchronized (mutex) {
-						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount");
-						ThreadHelper.sleep(1250);
+						log.info("Ready to sent ReqQryTradingAccount");
+						sleep(1250);
 						gateway.ReqQryTradingAccount();
-						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
+						log.info("Has been sent ReqQryTradingAccount");
 					}
 				}, "QueryBalance-SubThread");
 				return true;
-			} else
+			} else {
 				return false;
+			}
 		} catch (Exception e) {
 			log.error("FtdcAdaptor :: queryBalance exception -> {}", e.getMessage(), e);
 			return false;
@@ -316,7 +326,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	@Override
 	public void close() throws IOException {
-
+		// TODO close adaptor
 	}
 
 }

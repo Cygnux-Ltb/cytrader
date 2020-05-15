@@ -40,8 +40,8 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBa
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
 		TimePeriodSerial currentPointSerial = currentPoint.serial();
-		ZonedDateTime marketDataTime = marketData.zonedDateTime();
-		if (currentPointSerial.isPeriod(marketDataTime)) {
+		ZonedDateTime marketDatatime = marketData.zonedDatetime();
+		if (currentPointSerial.isPeriod(marketDatatime)) {
 			currentPoint.onMarketData(marketData);
 			for (TimeBarEvent timeBarsEvent : events)
 				timeBarsEvent.onCurrentTimeBarChanged(currentPoint);
@@ -54,7 +54,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBa
 						currentPointSerial.endTime());
 				return;
 			}
-			while (!newBar.serial().isPeriod(marketDataTime)) {
+			while (!newBar.serial().isPeriod(marketDatatime)) {
 				newBar.onMarketData(preMarketData);
 				for (TimeBarEvent timeBarsEvent : events)
 					timeBarsEvent.onStartTimeBar(newBar);

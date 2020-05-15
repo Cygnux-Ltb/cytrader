@@ -7,7 +7,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.mercury.common.collections.ImmutableLists;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
-import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
+import io.mercury.redstone.core.adaptor.AdaptorEvent;
 
 public abstract class StrategyMultipleInstrumentImpl<M extends MarketData> extends StrategyBaseImpl<M> {
 
@@ -21,8 +21,9 @@ public abstract class StrategyMultipleInstrumentImpl<M extends MarketData> exten
 	}
 	
 	@Override
-	public void onAdaptorStatus(int adaptorId, AdaptorStatus status) {
+	public void onAdaptorEvent(AdaptorEvent event) {
 		// TODO Auto-generated method stub
+		
 	}
 
 }
