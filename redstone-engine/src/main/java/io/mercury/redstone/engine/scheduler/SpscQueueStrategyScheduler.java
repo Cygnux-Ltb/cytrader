@@ -57,10 +57,11 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 			case AdaptorEvent:
 				int adaptorId = despatchMsg.getAdaptorId();
 				AdaptorStatus adaptorStatus = despatchMsg.getAdaptorStatus();
+				AdaptorEvent event = new AdaptorEvent(adaptorId).setAdaptorStatus(adaptorStatus);
 				
 				break;
 			default:
-				throw new IllegalStateException("mark illegal");
+				throw new IllegalStateException("scheduler mark illegal");
 			}
 		});
 	}
@@ -73,12 +74,12 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 
 	// TODO add pools
 	@Override
-	public void onOrderReport(OrdReport ordReport) {
+	public void onOrdReport(OrdReport ordReport) {
 		despatchQueue.enqueue(new DespatchMsg(ordReport));
 	}
 
 	@Override
-	public void onAdaptorEvent(AdaptorEvent event){
+	public void onAdaptorEvent(AdaptorEvent event) {
 		despatchQueue.enqueue(new DespatchMsg(event.adaptorId(), event.adaptorStatus()));
 	}
 

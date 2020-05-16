@@ -7,8 +7,6 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
-import io.mercury.redstone.core.order.enums.OrdType;
-import io.mercury.redstone.core.order.enums.TrdDirection;
 
 public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends StrategyBaseImpl<M> {
 
@@ -48,75 +46,6 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 		return adaptor;
 	}
 
-	/************************* 做市指令 *******************************/
-	/**
-	 * 
-	 * @param direction
-	 * @param targetQty
-	 */
-	protected void orderWatermark(TrdDirection direction, int targetQty) {
-		super.orderWatermark(instrument, direction, targetQty);
-	}
-
-	/**
-	 * 
-	 * @param direction
-	 * @param targetQty
-	 * @param limitPrice
-	 */
-	protected void orderWatermark(TrdDirection direction, int targetQty, long limitPrice) {
-		super.orderWatermark(instrument, direction, targetQty, limitPrice);
-	}
-
-	/**
-	 * 
-	 * @param direction
-	 * @param targetQty
-	 * @param limitPrice
-	 * @param floatTick
-	 */
-	protected void orderWatermark(TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
-		super.orderWatermark(instrument, direction, targetQty, limitPrice, floatTick);
-	}
-
-	/**************************** 交易指令 ******************************/
-	/**
-	 * 开仓
-	 * 
-	 * @param ordType
-	 * @param offerQty
-	 */
-	protected void openPosition(int offerQty, OrdType ordType, TrdDirection direction) {
-		super.openPosition(instrument, offerQty, ordType, direction);
-	}
-
-	/**
-	 * 开仓
-	 * 
-	 * @param ordType
-	 * @param offerQty
-	 * @param offerPrice
-	 */
-	protected void openPosition(int offerQty, long offerPrice, OrdType ordType, TrdDirection direction) {
-		super.openPosition(instrument, offerQty, offerPrice, ordType, direction);
-	}
-
-	/**
-	 * 全部平仓
-	 */
-	protected void closeAllPosition() {
-		super.closeAllPosition(instrument);
-	}
-
-	/**
-	 * 平仓指定数量
-	 * 
-	 * @param closeQty
-	 */
-	protected void closePosition(int offerQty, long offerPrice) {
-		super.closePosition(instrument, offerQty, offerPrice);
-	}
-
 	@Override
 	public void onAdaptorEvent(AdaptorEvent event) {
 		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", strategyName(), event.adaptorId(),
@@ -129,12 +58,12 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 			break;
 		case TraderEnable:
 			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", strategyName(), event.adaptorId());
-			adaptor.queryOrder(null);
+			adaptor.queryOrder();
 			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", strategyName(), event.adaptorId());
-			adaptor.queryPositions(null);
+			adaptor.queryPositions();
 			log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", strategyName(),
 					event.adaptorId());
-			adaptor.queryBalance(null);
+			adaptor.queryBalance();
 			log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", strategyName(), event.adaptorId());
 			break;
 		default:

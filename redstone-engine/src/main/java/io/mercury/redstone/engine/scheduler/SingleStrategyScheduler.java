@@ -20,7 +20,7 @@ public class SingleStrategyScheduler implements StrategyScheduler {
 	}
 
 	@Override
-	public void onOrderReport(OrdReport report) {
+	public void onOrdReport(OrdReport report) {
 		Order order = OrderKeeper.onOrdReport(report);
 		// 调用策略实现的订单回调函数
 		strategy.onOrder(order);

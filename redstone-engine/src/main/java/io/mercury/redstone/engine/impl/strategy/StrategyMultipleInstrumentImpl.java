@@ -1,6 +1,6 @@
 package io.mercury.redstone.engine.impl.strategy;
 
-import java.util.Collection;
+import java.util.Set;
 
 import org.eclipse.collections.api.list.ImmutableList;
 
@@ -15,7 +15,7 @@ public abstract class StrategyMultipleInstrumentImpl<M extends MarketData> exten
 	protected ImmutableList<Instrument> instruments;
 
 	protected StrategyMultipleInstrumentImpl(int strategyId, String strategyName, int subAccountId,
-			Collection<Instrument> instruments) {
+			Set<Instrument> instruments) {
 		super(strategyId, strategyName, subAccountId);
 		this.instruments = ImmutableLists.newList(instruments);
 	}
@@ -23,7 +23,6 @@ public abstract class StrategyMultipleInstrumentImpl<M extends MarketData> exten
 	@Override
 	public void onAdaptorEvent(AdaptorEvent event) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

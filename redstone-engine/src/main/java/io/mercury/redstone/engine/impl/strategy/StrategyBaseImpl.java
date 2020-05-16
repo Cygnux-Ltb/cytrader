@@ -266,12 +266,14 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param direction
 	 * @return
 	 */
-	private long getLevel1Price(Instrument instrument, TrdDirection direction) {
+	protected long getLevel1Price(Instrument instrument, TrdDirection direction) {
 		LastMarkerData markerData = LastMarkerDataKeeper.get(instrument);
 		switch (direction) {
 		case Long:
+			// 获取当前卖一价
 			return markerData.askPrice1();
 		case Short:
+			// 获取当前买一价
 			return markerData.bidPrice1();
 		default:
 			throw new IllegalArgumentException("TrdDirection is [Invalid]");
@@ -280,24 +282,38 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	/**
 	 * 
+	 * @param subAccountId
 	 * @param instrument
-	 * @param offerQty
-	 * @param ordType
-	 * @param direction
+	 * @return
 	 */
-	void openPosition(Instrument instrument, int offerQty, OrdType ordType, TrdDirection direction) {
-		openPosition(instrument, offerQty, getLevel1Price(instrument, direction), ordType, direction);
+	protected int getCurrentPosition(int subAccountId, Instrument instrument) {
+		int position = PositionKeeper.getCurrentPosition(subAccountId, instrument);
+		if (position == 0)
+			log.warn("{} :: No position, subAccountId==[{}], instrument -> {}", strategyName, subAccountId, instrument);
+		return position;
 	}
 
 	/**
 	 * 
 	 * @param instrument
 	 * @param offerQty
-	 * @param offerPrice
 	 * @param ordType
 	 * @param direction
 	 */
-	void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType, TrdDirection direction) {
+	protected void openPosition(Instrument instrument, int offerQty, OrdType ordType, TrdDirection direction) {
+		openPosition(instrument, offerQty, getLevel1Price(instrument, direction), ordType, direction);
+	}
+
+	/**
+	 * 
+	 * @param instrument 交易标的
+	 * @param offerQty   委托数量
+	 * @param offerPrice 委托价格
+	 * @param ordType    订单类型
+	 * @param direction  多空方向
+	 */
+	protected void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType,
+			TrdDirection direction) {
 		ParentOrder parentOrder = new ParentOrder(strategyId, subAccountId, instrument, abs(offerQty), offerPrice,
 				ordType, direction, TrdAction.Open);
 		parentOrder.outputInfoLog(log, strategyName, "Open position generate ParentOrder");
@@ -308,60 +324,78 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		putOrder(childOrder);
 
 		getAdaptor(instrument).newOredr(childOrder);
-
 	}
 
 	/**
 	 * 
-	 * @param instrument
+	 * @param instrument 交易标的
 	 */
-	void closeAllPosition(Instrument instrument) {
-		int position = PositionKeeper.getCurrentPosition(subAccountId, instrument);
+	protected void closeAllPosition(Instrument instrument) {
+		closeAllPosition(instrument, OrdType.Limit);
+	}
+
+	/**
+	 * 
+	 * @param instrument 交易标的
+	 * @param ordType    订单类型
+	 */
+	protected void closeAllPosition(Instrument instrument, OrdType ordType) {
+		int position = getCurrentPosition(subAccountId, instrument);
 		if (position == 0) {
-			log.warn("{} :: No position, subAccountId==[{}], instrument -> {}", strategyName, subAccountId, instrument);
-			return;
+			log.warn(
+					"{} :: Terminate execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
+					strategyName, subAccountId, instrument.code(), position);
 		} else {
-			log.info("{} :: Execution close all positions, subAccountId==[{}] instrumentCode==[{}], position==[{}]",
-					strategyName, instrument.code(), position);
-			LastMarkerData markerData = LastMarkerDataKeeper.get(instrument);
+			log.info("{} :: Execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
+					strategyName, subAccountId, instrument.code(), position);
 			long offerPrice = 0L;
-			if (position > 0) {
-				// 获取当前卖一价
-				offerPrice = markerData.askPrice1();
-			} else {
-				// 获取当前买一价
-				offerPrice = markerData.bidPrice1();
-			}
-			closePosition(instrument, position, offerPrice);
+			if (position > 0)
+				offerPrice = getLevel1Price(instrument, TrdDirection.Long);
+			else
+				offerPrice = getLevel1Price(instrument, TrdDirection.Short);
+			closePosition(instrument, position, offerPrice, ordType);
 		}
 	}
 
 	/**
 	 * 
-	 * @param instrument
-	 * @param offerPrice
+	 * @param instrument 交易标的
+	 * @param offerPrice 委托价格
+	 * @param ordType    订单类型
 	 */
-	void closeAllPosition(Instrument instrument, long offerPrice) {
-		int position = PositionKeeper.getCurrentPosition(subAccountId, instrument);
+	protected void closeAllPosition(Instrument instrument, long offerPrice, OrdType ordType) {
+		int position = getCurrentPosition(subAccountId, instrument);
 		if (position == 0) {
-			log.warn("{} :: No position, subAccountId==[{}], instrument -> {}", strategyName, subAccountId, instrument);
-			return;
+			log.warn(
+					"{} :: Terminate execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
+					strategyName, subAccountId, instrument.code(), position);
 		} else {
-			log.info("{} :: Execution close all positions, subAccountId==[{}] instrumentCode==[{}], position==[{}]",
-					strategyName, instrument.code(), position);
-			closePosition(instrument, position, offerPrice);
+			log.info("{} :: Execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
+					strategyName, subAccountId, instrument.code(), position);
+			closePosition(instrument, position, offerPrice, ordType);
 		}
 	}
 
 	/**
 	 * 
-	 * @param instrument
-	 * @param offerQty
-	 * @param offerPrice
+	 * @param instrument 交易标的
+	 * @param offerQty   委托数量
+	 * @param offerPrice 委托价格
 	 */
-	void closePosition(Instrument instrument, final int offerQty, long offerPrice) {
+	protected void closePosition(Instrument instrument, int offerQty, long offerPrice) {
+		closePosition(instrument, offerQty, offerPrice, OrdType.Limit);
+	}
+
+	/**
+	 * 
+	 * @param instrument 交易标的
+	 * @param offerQty   委托数量
+	 * @param offerPrice 委托价格
+	 * @param ordType    订单类型
+	 */
+	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
 		ParentOrder parentOrder = new ParentOrder(strategyId, subAccountId, instrument, abs(offerQty), offerPrice,
-				OrdType.Limit, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short, TrdAction.Close);
+				ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short, TrdAction.Close);
 		parentOrder.outputInfoLog(log, strategyName, "Close position generate ParentOrder");
 		putOrder(parentOrder);
 

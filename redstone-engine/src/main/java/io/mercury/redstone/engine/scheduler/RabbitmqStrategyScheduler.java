@@ -57,6 +57,7 @@ public final class RabbitmqStrategyScheduler implements StrategyScheduler {
 			case AdaptorEvent:
 				int adaptorId = despatchMsg.getAdaptorId();
 				AdaptorStatus adaptorStatus = despatchMsg.getAdaptorStatus();
+				AdaptorEvent event = new AdaptorEvent(adaptorId).setAdaptorStatus(adaptorStatus);
 
 				break;
 			default:
@@ -73,7 +74,7 @@ public final class RabbitmqStrategyScheduler implements StrategyScheduler {
 
 	// TODO add pools
 	@Override
-	public void onOrderReport(OrdReport ordReport) {
+	public void onOrdReport(OrdReport ordReport) {
 		despatchQueue.enqueue(new DespatchMsg(ordReport));
 	}
 
