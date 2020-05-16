@@ -8,7 +8,7 @@ public interface StrategyScheduler {
 
 	void onMarketData(BasicMarketData marketData);
 
-	void onOrderReport(OrdReport report);
+	void onOrdReport(OrdReport report);
 
 	void onAdaptorEvent(AdaptorEvent event);
 

@@ -98,9 +98,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	boolean queryBalance(@Nullable Account account);
 
 	public static enum AdaptorStatus {
-
 		MdEnable, MdDisable, TraderEnable, TraderDisable
-
 	}
 
 }

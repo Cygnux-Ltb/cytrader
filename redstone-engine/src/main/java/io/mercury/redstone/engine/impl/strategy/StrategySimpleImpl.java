@@ -8,7 +8,7 @@ import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 
-public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends StrategyBaseImpl<M> {
+public abstract class StrategySimpleImpl<M extends MarketData> extends StrategyBaseImpl<M> {
 
 	// 策略订阅的合约
 	protected Instrument instrument;
@@ -18,7 +18,7 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 	 */
 	protected ImmutableList<Instrument> instruments;
 
-	protected StrategySingleInstrumentImpl(int strategyId, String strategyName, int subAccountId,
+	protected StrategySimpleImpl(int strategyId, String strategyName, int subAccountId,
 			Instrument instrument) {
 		super(strategyId, strategyName, subAccountId);
 		this.instrument = instrument;
@@ -28,10 +28,6 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData> extends
 	@Override
 	public ImmutableList<Instrument> instruments() {
 		return instruments;
-	}
-
-	public Instrument instrument() {
-		return instrument;
 	}
 
 	private Adaptor adaptor;

@@ -75,7 +75,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 		this.tdReceiver = new SocketReceiver(tdConfigurator, (bytes) -> {
 			List<Order> orders = orderDeserializer1.deserializationMultiple(bytes);
 			for (Order order : orders) {
-				this.scheduler.onOrderReport(orderFunction.apply(order));
+				this.scheduler.onOrdReport(orderFunction.apply(order));
 			}
 		});
 

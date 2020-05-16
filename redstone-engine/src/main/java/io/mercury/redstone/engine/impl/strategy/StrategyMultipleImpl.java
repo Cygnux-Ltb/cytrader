@@ -9,17 +9,16 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 
-public abstract class StrategyMultipleInstrumentImpl<M extends MarketData> extends StrategyBaseImpl<M> {
+public abstract class StrategyMultipleImpl<M extends MarketData> extends StrategyBaseImpl<M> {
 
 	// 策略订阅的合约
 	protected ImmutableList<Instrument> instruments;
 
-	protected StrategyMultipleInstrumentImpl(int strategyId, String strategyName, int subAccountId,
-			Set<Instrument> instruments) {
+	protected StrategyMultipleImpl(int strategyId, String strategyName, int subAccountId, Set<Instrument> instruments) {
 		super(strategyId, strategyName, subAccountId);
 		this.instruments = ImmutableLists.newList(instruments);
 	}
-	
+
 	@Override
 	public void onAdaptorEvent(AdaptorEvent event) {
 		// TODO Auto-generated method stub

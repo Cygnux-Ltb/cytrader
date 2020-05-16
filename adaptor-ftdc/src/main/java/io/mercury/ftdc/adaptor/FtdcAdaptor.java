@@ -169,13 +169,13 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						// 报单回报处理
 						FtdcOrder ftdcOrder = ftdcMsg.getFtdcOrder();
 						OrdReport rtnOrder = rtnOrderConverter.apply(ftdcOrder);
-						scheduler.onOrderReport(rtnOrder);
+						scheduler.onOrdReport(rtnOrder);
 						break;
 					case FtdcTrade:
 						// 成交回报处理
 						FtdcTrade ftdcTrade = ftdcMsg.getFtdcTrade();
 						OrdReport rtnTrade = rtnTradeConverter.apply(ftdcTrade);
-						scheduler.onOrderReport(rtnTrade);
+						scheduler.onOrdReport(rtnTrade);
 						break;
 					case FtdcInputOrder:
 						// 报单错误处理
