@@ -14,7 +14,7 @@ public final class ChronicleStrategyScheduler implements StrategyScheduler {
 	}
 
 	@Override
-	public void onOrdReport(OrdReport orderReport) {
+	public void onOrdReport(OrdReport ordReport) {
 		// TODO Auto-generated method stub
 	}
 

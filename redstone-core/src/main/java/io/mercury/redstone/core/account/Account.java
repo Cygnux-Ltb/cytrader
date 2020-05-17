@@ -23,7 +23,7 @@ public class Account extends EnableComponent<Account> {
 	 */
 	private Balance balance;
 
-	// 备用,数组下标,用于快速访问本账户对应的仓位信息集合
+	// TODO 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
 
 	/**

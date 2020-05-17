@@ -49,8 +49,6 @@ public final class AccountKeeper implements Dumper<String> {
 	 */
 	private static final MutableIntObjectMap<Account> AccountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
 
-	private static final String KeeperName = "AccountKeeper";
-
 	private AccountKeeper() {
 	}
 
@@ -60,7 +58,7 @@ public final class AccountKeeper implements Dumper<String> {
 			for (SubAccount subAccount : account.subAccounts()) {
 				SubAccountMap.put(subAccount.subAccountId(), subAccount);
 				AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
-				log.info("{} :: Put account, accountId==[{}], subAccountId==[{}]", KeeperName, account.accountId(),
+				log.info("Put account, accountId==[{}], subAccountId==[{}]", account.accountId(),
 						subAccount.subAccountId());
 			}
 			AccountMap.put(account.accountId(), account);
@@ -70,11 +68,11 @@ public final class AccountKeeper implements Dumper<String> {
 	public static void putSubAccount(@Nonnull SubAccount... subAccounts) {
 		Assertor.requiredLength(subAccounts, 1, "subAccounts");
 		for (SubAccount subAccount : subAccounts) {
-			SubAccountMap.put(subAccount.subAccountId(), subAccount);
 			Account account = subAccount.account();
-			AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
+			SubAccountMap.put(subAccount.subAccountId(), subAccount);
 			AccountMap.put(account.accountId(), account);
-			log.info("{} :: Put subAccount, subAccountId==[{}], accountId==[{}]", KeeperName, subAccount.subAccountId(),
+			AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
+			log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(),
 					account.accountId());
 		}
 	}
@@ -131,8 +129,7 @@ public final class AccountKeeper implements Dumper<String> {
 
 	@Override
 	public String dump() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 }

@@ -101,8 +101,7 @@ public final class InstrumentKeeper implements Dumper<String> {
 
 	@Override
 	public String dump() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 }

@@ -7,6 +7,7 @@ import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.Adaptor;
+import io.mercury.redstone.core.keeper.AdaptorKeeper;
 
 public abstract class AdaptorBaseImpl extends EnableComponent<Adaptor> implements Adaptor {
 
@@ -19,6 +20,7 @@ public abstract class AdaptorBaseImpl extends EnableComponent<Adaptor> implement
 		this.adaptorId = adaptorId;
 		this.adaptorName = StringUtil.isNullOrEmpty(adaptorName) ? "Adaptor-" + adaptorId : adaptorName;
 		this.account = Assertor.nonNull(account, "account");
+		AdaptorKeeper.putAdaptor(this);
 	}
 
 	@Override

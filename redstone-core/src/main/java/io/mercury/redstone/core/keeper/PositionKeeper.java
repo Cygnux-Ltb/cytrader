@@ -61,11 +61,18 @@ public final class PositionKeeper implements Dumper<String> {
 	 * 高位subAccountId<br>
 	 * 低位instrumentId
 	 */
-	private static final MutableLongIntMap SubAccountInstrumentPosition = MutableMaps.newLongIntHashMap();
+	private static final MutableLongIntMap SubAccountInstrumentPos = MutableMaps.newLongIntHashMap();
 
 	private PositionKeeper() {
 	}
 
+	/**
+	 * 合并持仓主键
+	 * 
+	 * @param subAccountId
+	 * @param instrument
+	 * @return
+	 */
 	private static long mergePositionKey(int subAccountId, Instrument instrument) {
 		return JointIdSupporter.mergeJointId(subAccountId, instrument.id());
 	}
@@ -99,7 +106,7 @@ public final class PositionKeeper implements Dumper<String> {
 	 */
 	public static int getPositionLimit(int subAccountId, Instrument instrument, TrdDirection direction) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
-		int currentQty = SubAccountInstrumentPosition.get(positionKey);
+		int currentQty = SubAccountInstrumentPos.get(positionKey);
 		switch (direction) {
 		case Long:
 			return SubAccountInstrumentLongLimit.get(positionKey) - currentQty;
@@ -119,7 +126,7 @@ public final class PositionKeeper implements Dumper<String> {
 		int subAccountId = order.subAccountId();
 		Instrument instrument = order.instrument();
 		long positionsKey = mergePositionKey(subAccountId, instrument);
-		int currentPosition = SubAccountInstrumentPosition.get(positionsKey);
+		int currentPosition = SubAccountInstrumentPos.get(positionsKey);
 		int trdQty = order.lastTrdRecord().trdQty();
 		switch (order.direction()) {
 		case Long:
@@ -161,26 +168,34 @@ public final class PositionKeeper implements Dumper<String> {
 		}
 		log.info("Update position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}], trdQty==[{}]",
 				subAccountId, instrument.code(), currentPosition, trdQty);
-		SubAccountInstrumentPosition.put(positionsKey, currentPosition + trdQty);
+		SubAccountInstrumentPos.put(positionsKey, currentPosition + trdQty);
 	}
 
+	/**
+	 * 获取当前头寸数量
+	 * 
+	 * @param subAccountId
+	 * @param instrument
+	 * @return
+	 */
 	public static int getCurrentPosition(int subAccountId, Instrument instrument) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
-		int currentPosition = SubAccountInstrumentPosition.get(positionKey);
+		int currentPosition = SubAccountInstrumentPos.get(positionKey);
 		log.info("Get current position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}]", subAccountId,
 				instrument.code(), currentPosition);
 		return currentPosition;
 	}
 
 	/**
+	 * 添加当前头寸
 	 * 
 	 * @param subAccountId 子账户ID
-	 * @param instrument
+	 * @param instrument   交易标的
 	 * @param qty          仓位数量
 	 */
 	public static void addCurrentPosition(int subAccountId, Instrument instrument, TrdDirection direction, int qty) {
 		long positionKey = mergePositionKey(subAccountId, instrument);
-		int beforePosition = SubAccountInstrumentPosition.get(positionKey);
+		int beforePosition = SubAccountInstrumentPos.get(positionKey);
 		switch (direction) {
 		case Long:
 			qty = abs(qty);
@@ -194,10 +209,10 @@ public final class PositionKeeper implements Dumper<String> {
 					subAccountId, instrument.code(), qty);
 			break;
 		}
-		SubAccountInstrumentPosition.put(positionKey, beforePosition + qty);
+		SubAccountInstrumentPos.put(positionKey, beforePosition + qty);
 		log.info(
 				"Add current position, subAccountId==[{}], instrumentCode==[{}], beforePosition==[{}], qty==[{}], afterPosition==[{}]",
-				subAccountId, instrument.code(), beforePosition, qty, SubAccountInstrumentPosition.get(positionKey));
+				subAccountId, instrument.code(), beforePosition, qty, SubAccountInstrumentPos.get(positionKey));
 	}
 
 	@Override

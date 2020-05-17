@@ -88,8 +88,7 @@ public final class OrderKeeper implements Dumper<String> {
 			getInstrumentOrders(order.instrument()).finishOrder(order);
 			break;
 		default:
-			log.info("Not need processed, ordSysId==[{}], ordStatus==[{}]",  order.ordSysId(),
-					order.ordStatus());
+			log.info("Not need processed, ordSysId==[{}], ordStatus==[{}]", order.ordSysId(), order.ordStatus());
 			break;
 		}
 	}
@@ -103,17 +102,16 @@ public final class OrderKeeper implements Dumper<String> {
 	public static ChildOrder onOrdReport(OrdReport report) {
 		log.info(
 				"Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}], executePrice==[{}], filledQty==[{}], instrument -> {}",
-				 report.getBrokerUniqueId(), report.getOrdSysId(), report.getExecutePrice(),
-				report.getFilledQty(), report.getInstrument());
+				report.getBrokerUniqueId(), report.getOrdSysId(), report.getExecutePrice(), report.getFilledQty(),
+				report.getInstrument());
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
 		if (order == null) {
 			// TODO 处理订单由外部系统发出而收到报单回报
-			
-			log.warn("Received other source order, ordSysId==[{}]",  report.getOrdSysId());
+
+			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
 		} else {
-			log.info("Search order OK, strategyId==[{}], subAccountId==[{}]",  order.strategyId(),
-					order.subAccountId());
+			log.info("Search order OK, strategyId==[{}], subAccountId==[{}]", order.strategyId(), order.subAccountId());
 		}
 		ChildOrder childOrder = (ChildOrder) order;
 		// 更新订单状态
@@ -147,13 +145,12 @@ public final class OrderKeeper implements Dumper<String> {
 	}
 
 	public static void onMarketData(BasicMarketData marketData) {
-		// TODO
+		// TODO 处理行情
 	}
 
 	@Override
 	public String dump() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 }
