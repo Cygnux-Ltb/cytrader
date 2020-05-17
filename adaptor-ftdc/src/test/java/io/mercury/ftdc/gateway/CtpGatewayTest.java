@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.thread.ThreadHelper;
-import io.mercury.ftdc.gateway.FtdcGateway;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;

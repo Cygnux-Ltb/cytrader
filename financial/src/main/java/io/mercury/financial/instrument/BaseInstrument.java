@@ -13,6 +13,12 @@ public abstract class BaseInstrument implements Instrument {
 	private Symbol symbol;
 	private boolean isEnable;
 
+	/**
+	 * 
+	 * @param id
+	 * @param code
+	 * @param symbol
+	 */
 	protected BaseInstrument(int id, String code, Symbol symbol) {
 		this.id = id;
 		this.code = code;

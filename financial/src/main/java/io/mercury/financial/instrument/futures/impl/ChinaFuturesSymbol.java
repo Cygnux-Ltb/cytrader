@@ -287,10 +287,10 @@ public enum ChinaFuturesSymbol implements Symbol {
 					ChinaFuturesSymbol::id, symbol -> symbol);
 
 	public static ChinaFuturesSymbol of(int symbolId) {
-		ChinaFuturesSymbol chinaFuturesSymbol = SymbolIdMap.get(symbolId);
-		if (chinaFuturesSymbol == null)
+		ChinaFuturesSymbol symbol = SymbolIdMap.get(symbolId);
+		if (symbol == null)
 			throw new IllegalArgumentException("Symbol Id -> " + symbolId + " is no mapping object");
-		return chinaFuturesSymbol;
+		return symbol;
 	}
 
 	// 建立SymbolNeam -> Symbol的映射
@@ -302,10 +302,10 @@ public enum ChinaFuturesSymbol implements Symbol {
 
 	public static ChinaFuturesSymbol of(String symbolCode) {
 		String key = symbolCode.toUpperCase();
-		ChinaFuturesSymbol chinaFuturesSymbol = SymbolCodeMap.get(key);
-		if (chinaFuturesSymbol == null)
+		ChinaFuturesSymbol symbol = SymbolCodeMap.get(key);
+		if (symbol == null)
 			throw new IllegalArgumentException("Symbol Code -> " + symbolCode + " is no mapping object");
-		return chinaFuturesSymbol;
+		return symbol;
 	}
 
 	public int acquireInstrumentId(int term) {
@@ -322,13 +322,11 @@ public enum ChinaFuturesSymbol implements Symbol {
 		}
 		System.out.println(ChinaFuturesSymbol.AG.exchange.id());
 		System.out.println(ChinaFuturesSymbol.AG.symbolId);
-
 	}
 
 	@Override
 	public String fmtText() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 }

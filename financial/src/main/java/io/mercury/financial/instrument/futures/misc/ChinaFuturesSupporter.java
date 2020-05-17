@@ -54,7 +54,6 @@ public final class ChinaFuturesSupporter {
 	}
 
 	public static void main(String[] args) {
-
 		System.out.println(Integer.MAX_VALUE);
 
 		System.out.println(ChinaFuturesSymbol.AG.exchange().id());
@@ -64,9 +63,8 @@ public final class ChinaFuturesSupporter {
 		System.out.println(analyzeSymbolCode("rb1901"));
 		System.out.println(analyzeInstrumentTerm("rb1901"));
 		ChinaFuturesSymbol of = ChinaFuturesSymbol.of(analyzeSymbolCode("rb1901"));
-
+		
 		System.out.println(of);
-
 	}
 
 }
