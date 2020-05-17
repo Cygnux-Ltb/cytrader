@@ -50,7 +50,7 @@ public abstract class MultipleIndicatorPool<I extends Indicator<?, ?>> extends I
 	}
 
 	private long calculateIndex(int cycle, Instrument instrument) {
-		return JointIdSupporter.jointId(cycle, instrument.id());
+		return JointIdSupporter.mergeJointId(cycle, instrument.id());
 	}
 
 	private MutableLongObjectMap<I> getIndicatorMap(TimePeriod period) {

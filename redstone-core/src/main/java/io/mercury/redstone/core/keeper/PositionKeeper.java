@@ -67,7 +67,7 @@ public final class PositionKeeper implements Dumper<String> {
 	}
 
 	private static long mergePositionKey(int subAccountId, Instrument instrument) {
-		return JointIdSupporter.jointId(subAccountId, instrument.id());
+		return JointIdSupporter.mergeJointId(subAccountId, instrument.id());
 	}
 
 	/**

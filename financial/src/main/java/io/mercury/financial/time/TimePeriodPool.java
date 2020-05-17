@@ -55,7 +55,7 @@ public final class TimePeriodPool {
 	}
 
 	public long mergeSymbolTimeKey(Symbol symbol, TimePeriod period) {
-		return JointIdSupporter.jointId(symbol.id(), period.seconds());
+		return JointIdSupporter.mergeJointId(symbol.id(), period.seconds());
 	}
 
 	private void generateTimePeriod(Symbol[] symbols, TimePeriod period) {
