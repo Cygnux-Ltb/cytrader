@@ -7,7 +7,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.indicator.api.Point;
 
-abstract class BasePoint<S extends Serial<S>> implements Point<S, BasicMarketData>, Comparable<BasePoint<S>> {
+public abstract class BasePoint<S extends Serial<S>> implements Point<S, BasicMarketData>, Comparable<BasePoint<S>> {
 
 	protected int index;
 	protected Instrument instrument;
