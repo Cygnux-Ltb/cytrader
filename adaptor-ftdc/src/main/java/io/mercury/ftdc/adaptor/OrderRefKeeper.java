@@ -16,9 +16,11 @@ import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
 
 public class OrderRefKeeper {
 
-	private MutableObjectLongMap<String> refMappingSysId = MutableMaps.newObjectLongHashMap(Capacity.L10_SIZE_1024);
+	private final MutableObjectLongMap<String> RefMappingSysId = MutableMaps
+			.newObjectLongHashMap(Capacity.L10_SIZE_1024);
 
-	private MutableLongObjectMap<String> sysIdMappingRef = MutableMaps.newLongObjectHashMap(Capacity.L10_SIZE_1024);
+	private final MutableLongObjectMap<String> SysIdMappingRef = MutableMaps
+			.newLongObjectHashMap(Capacity.L10_SIZE_1024);
 
 	private final static OrderRefKeeper Singleton = new OrderRefKeeper();
 
@@ -26,19 +28,19 @@ public class OrderRefKeeper {
 	}
 
 	public static void put(String orderRef, long ordSysId) {
-		Singleton.refMappingSysId.put(orderRef, ordSysId);
-		Singleton.sysIdMappingRef.put(ordSysId, orderRef);
+		Singleton.RefMappingSysId.put(orderRef, ordSysId);
+		Singleton.SysIdMappingRef.put(ordSysId, orderRef);
 	}
 
 	public static long getOrdSysId(String orderRef) throws OrderRefNotFoundException {
-		long ordSysId = Singleton.refMappingSysId.get(orderRef);
+		long ordSysId = Singleton.RefMappingSysId.get(orderRef);
 		if (ordSysId == 0)
 			throw new OrderRefNotFoundException(orderRef);
 		return ordSysId;
 	}
 
 	public static String getOrderRef(long ordSysId) throws OrderRefNotFoundException {
-		String orderRef = Singleton.sysIdMappingRef.get(ordSysId);
+		String orderRef = Singleton.SysIdMappingRef.get(ordSysId);
 		if (orderRef == null)
 			throw new OrderRefNotFoundException(ordSysId);
 		return orderRef;

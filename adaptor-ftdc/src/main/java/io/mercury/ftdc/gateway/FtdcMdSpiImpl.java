@@ -13,9 +13,9 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 
-	private Logger log = CommonLoggerFactory.getLogger(getClass());
+	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	private FtdcGateway gateway;
+	private final FtdcGateway gateway;
 
 	FtdcMdSpiImpl(FtdcGateway gateway) {
 		this.gateway = gateway;
@@ -36,7 +36,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("OnRspUserLogin", pRspInfo);
+		hasError("SPI :: OnRspUserLogin", pRspInfo);
 		log.info("MdSpiImpl OnRspUserLogin");
 		if (pRspUserLogin != null)
 			gateway.onMdRspUserLogin(pRspUserLogin);
@@ -47,7 +47,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRspSubMarketData(CThostFtdcSpecificInstrumentField pSpecificInstrument,
 			CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		hasError("OnRspSubMarketData", pRspInfo);
+		hasError("SPI :: OnRspSubMarketData", pRspInfo);
 		log.info("MdSpiImpl OnRspSubMarketData");
 		if (pSpecificInstrument != null)
 			gateway.onRspSubMarketData(pSpecificInstrument);
@@ -68,7 +68,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	 */
 	@Override
 	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		log.warn("Md SPI return OnRspError");
+		log.warn("Md Spi Handle OnRspError");
 		gateway.onRspError(pRspInfo);
 	}
 

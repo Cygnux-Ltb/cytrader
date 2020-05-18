@@ -23,9 +23,9 @@ import io.mercury.common.util.StringUtil;
 
 public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 
-	private Logger log = CommonLoggerFactory.getLogger(getClass());
+	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	private FtdcGateway gateway;
+	private final FtdcGateway gateway;
 
 	FtdcTraderSpiImpl(FtdcGateway gateway) {
 		this.gateway = gateway;
@@ -46,7 +46,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("OnRspUserLogin", pRspInfo);
+		hasError("SPI :: OnRspUserLogin", pRspInfo);
 		log.info("TraderSpiImpl OnRspUserLogin");
 		if (pRspUserLogin != null)
 			gateway.onTraderRspUserLogin(pRspUserLogin);
@@ -57,32 +57,35 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRspAuthenticate(CThostFtdcRspAuthenticateField pRspAuthenticateField, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("OnRspAuthenticate", pRspInfo);
+		hasError("SPI :: OnRspAuthenticate", pRspInfo);
 		log.info("TraderSpiImpl OnRspAuthenticate");
-		if (pRspAuthenticateField != null) {
-
-		}
+		if (pRspAuthenticateField != null)
+			gateway.onRspAuthenticate(pRspAuthenticateField);
+		else
+			log.warn("OnRspAuthenticate return null");
 	}
 
 	@Override
 	public void OnRspUserLogout(CThostFtdcUserLogoutField pUserLogout, CThostFtdcRspInfoField pRspInfo, int nRequestID,
 			boolean bIsLast) {
-		hasError("OnRspUserLogout", pRspInfo);
+		hasError("SPI :: OnRspUserLogout", pRspInfo);
 		log.info("Call TraderSpiImpl OnRspUserLogout");
 	}
 
 	@Override
 	public void OnRspQryOrder(CThostFtdcOrderField pOrder, CThostFtdcRspInfoField pRspInfo, int nRequestID,
 			boolean bIsLast) {
-		hasError("OnRspQryOrder", pRspInfo);
-		// TODO Auto-generated method stub
-		gateway.onRspQryOrder(pOrder, bIsLast);
+		hasError("SPI :: OnRspQryOrder", pRspInfo);
+		if (pOrder != null) {
+			gateway.onRspQryOrder(pOrder, bIsLast);
+		} else
+			log.warn("OnRspQryOrder return null");
 	}
 
 	@Override
 	public void OnRspQryTradingAccount(CThostFtdcTradingAccountField pTradingAccount, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("OnRspQryTradingAccount", pRspInfo);
+		hasError("SPI :: OnRspQryTradingAccount", pRspInfo);
 		log.info("Call TraderSpiImpl OnRspQryTradingAccount");
 		if (pTradingAccount != null)
 			gateway.onQryTradingAccount(pTradingAccount, bIsLast);
@@ -94,7 +97,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRspQryInvestorPosition(CThostFtdcInvestorPositionField pInvestorPosition,
 			CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		hasError("OnRspQryInvestorPosition", pRspInfo);
+		hasError("SPI :: OnRspQryInvestorPosition", pRspInfo);
 		log.info("Call TraderSpiImpl OnRspQryInvestorPosition");
 		if (pInvestorPosition != null)
 			gateway.onRspQryInvestorPosition(pInvestorPosition, bIsLast);
@@ -105,7 +108,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRspQrySettlementInfo(CThostFtdcSettlementInfoField pSettlementInfo, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("OnRspQrySettlementInfo", pRspInfo);
+		hasError("SPI :: OnRspQrySettlementInfo", pRspInfo);
 		if (pSettlementInfo != null)
 			log.info("OnRspQrySettlementInfo -> \n {}", StringUtil.conversionGbkToUtf8(pSettlementInfo.getContent()));
 		else
@@ -115,7 +118,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRspQryInstrument(CThostFtdcInstrumentField pInstrument, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("OnRspQryInstrument", pRspInfo);
+		hasError("SPI :: OnRspQryInstrument", pRspInfo);
 		if (pInstrument != null)
 			log.info("OnRspQryInstrument -> InstrumentID==[{}]", pInstrument.getInstrumentID());
 		else
@@ -144,7 +147,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRspOrderInsert(CThostFtdcInputOrderField pInputOrder, CThostFtdcRspInfoField pRspInfo, int nRequestID,
 			boolean bIsLast) {
-		hasError("OnRspOrderInsert", pRspInfo);
+		hasError("SPI :: OnRspOrderInsert", pRspInfo);
 		gateway.onRspOrderInsert(pInputOrder);
 	}
 
@@ -153,7 +156,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	 */
 	@Override
 	public void OnErrRtnOrderInsert(CThostFtdcInputOrderField pInputOrder, CThostFtdcRspInfoField pRspInfo) {
-		hasError("OnErrRtnOrderInsert", pRspInfo);
+		hasError("SPI :: OnErrRtnOrderInsert", pRspInfo);
 		gateway.onErrRtnOrderInsert(pInputOrder);
 	}
 
@@ -163,7 +166,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	@Override
 	public void OnRspOrderAction(CThostFtdcInputOrderActionField pInputOrderAction, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("OnRspOrderAction", pRspInfo);
+		hasError("SPI :: OnRspOrderAction", pRspInfo);
 		gateway.onRspOrderAction(pInputOrderAction);
 	}
 
@@ -172,7 +175,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	 */
 	@Override
 	public void OnErrRtnOrderAction(CThostFtdcOrderActionField pOrderAction, CThostFtdcRspInfoField pRspInfo) {
-		hasError("OnErrRtnOrderAction", pRspInfo);
+		hasError("SPI :: OnErrRtnOrderAction", pRspInfo);
 		gateway.onErrRtnOrderAction(pOrderAction);
 	}
 
@@ -181,7 +184,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	 */
 	@Override
 	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		log.info("Unhandle OnRspError");
+		log.info("Trader Spi Handle OnRspError");
 		gateway.onRspError(pRspInfo);
 	}
 

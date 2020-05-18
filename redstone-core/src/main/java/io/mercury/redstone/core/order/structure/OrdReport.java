@@ -24,6 +24,11 @@ public final class OrdReport implements Serial<OrdReport> {
 	private OrdStatus ordStatus;
 
 	/**
+	 * CTP orderRef
+	 */
+	private String orderRef;
+
+	/**
 	 * broker return id
 	 */
 	private String brokerUniqueId;
@@ -44,17 +49,24 @@ public final class OrdReport implements Serial<OrdReport> {
 	private int filledQty;
 
 	/**
-	 * leaves quantity
-	 */
-
-	/**
 	 * offer price
 	 */
 	private long offerPrice;
+
 	/**
 	 * order execute price
 	 */
 	private long executePrice;
+
+	/**
+	 * offer time
+	 */
+	private String offerTime;
+
+	/**
+	 * last update time
+	 */
+	private String lastUpdateTime;
 
 	public OrdReport(long ordSysId) {
 		this.ordSysId = ordSysId;
@@ -70,6 +82,10 @@ public final class OrdReport implements Serial<OrdReport> {
 
 	public OrdStatus getOrdStatus() {
 		return ordStatus;
+	}
+
+	public String getOrderRef() {
+		return orderRef;
 	}
 
 	public String getBrokerUniqueId() {
@@ -96,6 +112,14 @@ public final class OrdReport implements Serial<OrdReport> {
 		return executePrice;
 	}
 
+	public String getOfferTime() {
+		return offerTime;
+	}
+
+	public String getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+
 	public OrdReport setEpochMillis(long epochMillis) {
 		this.epochMillis = epochMillis;
 		return this;
@@ -103,6 +127,11 @@ public final class OrdReport implements Serial<OrdReport> {
 
 	public OrdReport setOrdStatus(OrdStatus ordStatus) {
 		this.ordStatus = ordStatus;
+		return this;
+	}
+
+	public OrdReport setOrderRef(String orderRef) {
+		this.orderRef = orderRef;
 		return this;
 	}
 
@@ -133,6 +162,16 @@ public final class OrdReport implements Serial<OrdReport> {
 
 	public OrdReport setExecutePrice(long executePrice) {
 		this.executePrice = executePrice;
+		return this;
+	}
+
+	public OrdReport setOfferTime(String offerTime) {
+		this.offerTime = offerTime;
+		return this;
+	}
+
+	public OrdReport setLastUpdateTime(String lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
 		return this;
 	}
 

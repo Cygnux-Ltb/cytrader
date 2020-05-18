@@ -82,6 +82,20 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private Function<FtdcOrder, OrdReport> rtnOrderConverter = ftdcOrder -> {
 		OrdReport ordReport = findCtpOrder(ftdcOrder.getOrderRef());
 
+		ordReport.setEpochMillis(System.currentTimeMillis());
+		// 报单编号
+		ordReport.setBrokerUniqueId(ftdcOrder.getOrderSysID());
+		// 委托数量
+		ordReport.setOfferQty(ftdcOrder.getVolumeTotalOriginal());
+		// 完成数量
+		ordReport.setFilledQty(ftdcOrder.getVolumeTraded());
+
+		String instrumentID = ftdcOrder.getInstrumentID();
+		
+		// 报单状态
+		ftdcOrder.getOrderStatus();
+
+		/*** LIST ***/
 		// 经纪公司代码
 		ftdcOrder.getBrokerID();
 		// 投资者代码
@@ -215,6 +229,70 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	// TODO 转换报单回报
 	private Function<FtdcTrade, OrdReport> rtnTradeConverter = ftdcTrade -> {
 		OrdReport ordReport = findCtpOrder(ftdcTrade.getOrderRef());
+
+		// 经纪公司代码
+		ftdcTrade.getBrokerID();
+		// 投资者代码
+		ftdcTrade.getInvestorID();
+		// 合约代码
+		ftdcTrade.getInstrumentID();
+		// 报单引用
+		ftdcTrade.getOrderRef();
+		// 用户代码
+		ftdcTrade.getUserID();
+		// 交易所代码
+		ftdcTrade.getExchangeID();
+		// 成交编号
+		ftdcTrade.getTradeID();
+		// 买卖方向
+		ftdcTrade.getDirection();
+		// 报单编号
+		ftdcTrade.getOrderSysID();
+		// 会员代码
+		ftdcTrade.getParticipantID();
+		// 客户代码
+		ftdcTrade.getClientID();
+		// 交易角色
+		ftdcTrade.getTradingRole();
+		// 合约在交易所的代码
+		ftdcTrade.getExchangeInstID();
+		// 开平标志
+		ftdcTrade.getOffsetFlag();
+		// 投机套保标志
+		ftdcTrade.getHedgeFlag();
+		// 价格
+		ftdcTrade.getPrice();
+		// 数量
+		ftdcTrade.getVolume();
+		// 成交时期
+		ftdcTrade.getTradeDate();
+		// 成交时间
+		ftdcTrade.getTradeTime();
+		// 成交类型
+		ftdcTrade.getTradeType();
+		// 成交价来源
+		ftdcTrade.getPriceSource();
+		// 交易所交易员代码
+		ftdcTrade.getTraderID();
+		// 本地报单编号
+		ftdcTrade.getOrderLocalID();
+		// 结算会员编号
+		ftdcTrade.getClearingPartID();
+		// 业务单元
+		ftdcTrade.getBusinessUnit();
+		// 序号
+		ftdcTrade.getSequenceNo();
+		// 交易日
+		ftdcTrade.getTradingDay();
+		// 结算编号
+		ftdcTrade.getSettlementID();
+		// 经纪公司报单编号
+		ftdcTrade.getBrokerOrderSeq();
+		// 成交来源
+		ftdcTrade.getTradeSource();
+		// 投资单元代码
+		ftdcTrade.getInvestUnitID();
+
 		return ordReport;
 	};
 
@@ -223,13 +301,11 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
 			if (ordSysId == 0L) {
 				// 处理其他来源的订单
-				long thirdOrdSysId = OrdSysIdAllocator.allocateFromThird();
-				log.info("Handle third order, allocate ");
-				return new OrdReport(thirdOrdSysId);
-			} else
-				return new OrdReport(ordSysId);
+				ordSysId = OrdSysIdAllocator.allocateFromThird();
+				log.info("Handle third order, allocate third ordSysId==[{}], orderRef==[{}]", ordSysId, orderRef);
+			}
+			return new OrdReport(ordSysId).setOrderRef(orderRef);
 		} catch (OrderRefNotFoundException e) {
-			log.error(e.getMessage(), e);
 			throw new RuntimeException(e);
 		}
 	}

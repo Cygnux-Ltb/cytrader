@@ -64,7 +64,7 @@ public class FtdcGateway {
 
 	static {
 		try {
-			log.info("Trying to load libs file.....");
+			log.info("Trying to load library.....");
 			// 根据操作系统选择加载不同库文件
 			if (SysProperties.OS_NAME.toLowerCase().startsWith("windows")) {
 				log.info("Copy win64 library file to [java.library.path]...");
@@ -78,14 +78,14 @@ public class FtdcGateway {
 				log.info("Copy linux64 library file to [java.library.path]...");
 				log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
 				// TODO 复制到相应目录
-				System.loadLibrary("libthostapi_wrap");
-				System.loadLibrary("libthosttraderapi_se");
-				System.loadLibrary("libthostmduserapi_se");
+				//
+				System.load("/usr/lib/libthostapi_wrap.so");
+				System.load("/usr/lib/libthosttraderapi_se.so");
+				System.load("/usr/lib/libthostmduserapi_se.so");
 			}
-			log.info("Loading CTP library...");
 			log.info("Load library success...");
 		} catch (Throwable e) {
-			log.error("Load library error...", e);
+			log.error("Load library failure...", e);
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
@@ -110,8 +110,8 @@ public class FtdcGateway {
 	 */
 	private volatile boolean isInitialize = false;
 
-	private volatile boolean isMdConnect;
-	private volatile boolean isTraderConnect;
+	// private volatile boolean isMdConnect;
+	// private volatile boolean isTraderConnect;
 
 	private volatile boolean isMdLogin;
 	private volatile boolean isTraderLogin;
@@ -229,21 +229,23 @@ public class FtdcGateway {
 	 * 行情前置连接回调
 	 */
 	void onMdFrontConnected() {
-		this.isMdConnect = true;
+		log.info("Callback onMdFrontConnected");
+		// this.isMdConnect = true;
 		CThostFtdcReqUserLoginField reqUserLoginField = new CThostFtdcReqUserLoginField();
 		reqUserLoginField.setBrokerID(ftdcConfig.getBrokerId());
 		reqUserLoginField.setUserID(ftdcConfig.getUserId());
 		reqUserLoginField.setPassword(ftdcConfig.getPassword());
-		ftdcMdApi.ReqUserLogin(reqUserLoginField, ++mdRequestId);
-		log.info("Send Md ReqUserLogin OK");
+		int nRequestID = ++mdRequestId;
+		ftdcMdApi.ReqUserLogin(reqUserLoginField, nRequestID);
+		log.info("Send Md ReqUserLogin OK -> nRequestID==[{}]", nRequestID);
 	}
 
 	/**
 	 * 行情前置断开回调
 	 */
 	void onMdFrontDisconnected() {
-		log.warn("Md front disconnected");
-		this.isMdConnect = false;
+		log.warn("Callback onMdFrontDisconnected");
+		// this.isMdConnect = false;
 		// TODO 行情断开处理逻辑
 	}
 
@@ -253,8 +255,9 @@ public class FtdcGateway {
 	 * @param rspUserLogin
 	 */
 	void onMdRspUserLogin(CThostFtdcRspUserLoginField rspUserLoginField) {
-		log.info("Md UserLogin Success -> Brokerid==[{}] UserID==[{}]", rspUserLoginField.getBrokerID(),
-				rspUserLoginField.getUserID());
+		log.info("Callback onMdRspUserLogin -> Brokerid==[{}], UserID==[{}], LoginTime==[{}], TradingDay==[{}]",
+				rspUserLoginField.getBrokerID(), rspUserLoginField.getUserID(), rspUserLoginField.getLoginTime(),
+				rspUserLoginField.getTradingDay());
 		this.isMdLogin = true;
 	}
 
@@ -292,7 +295,7 @@ public class FtdcGateway {
 	 * @param specificInstrument
 	 */
 	void onRspSubMarketData(CThostFtdcSpecificInstrumentField specificInstrumentField) {
-		log.info("SubscribeMarketData Success -> InstrumentCode==[{}]", specificInstrumentField.getInstrumentID());
+		log.info("Callback onRspSubMarketData -> InstrumentCode==[{}]", specificInstrumentField.getInstrumentID());
 	}
 
 	private Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> depthMarketDataConverter = new FtdcDepthMarketDataConverter();
@@ -318,7 +321,8 @@ public class FtdcGateway {
 	 * 交易前置机连接回调
 	 */
 	void onTraderFrontConnected() {
-		this.isTraderConnect = true;
+		log.info("Callback onTraderFrontConnected");
+		// this.isTraderConnect = true;
 		if (!StringUtil.nonEmpty(ftdcConfig.getAuthCode()) && !isAuthenticate) {
 			// 验证
 			CThostFtdcReqAuthenticateField authenticateField = new CThostFtdcReqAuthenticateField();
@@ -338,30 +342,19 @@ public class FtdcGateway {
 	 * 交易前置断开回调
 	 */
 	void onTraderFrontDisconnected() {
-		log.warn("Trader front disconnected");
-		this.isTraderConnect = false;
+		log.warn("Callback onTraderFrontDisconnected");
+		// this.isTraderConnect = false;
 		this.isTraderLogin = false;
 		this.isAuthenticate = false;
 		// TODO 交易前置断开处理
 	}
 
 	/**
-	 * 交易登录回调
+	 * 认证回调
 	 * 
-	 * @param rspUserLogin
+	 * @param rspAuthenticateField
 	 */
-	void onTraderRspUserLogin(CThostFtdcRspUserLoginField ftdcRspUserLogin) {
-		log.info("Trader UserLogin Success -> Brokerid==[{}] UserID==[{}]", ftdcRspUserLogin.getBrokerID(),
-				ftdcRspUserLogin.getUserID());
-		this.frontID = ftdcRspUserLogin.getFrontID();
-		this.sessionID = ftdcRspUserLogin.getSessionID();
-		this.isTraderLogin = true;
-		bufferQueue.enqueue(
-				new RspMsg(new RspTraderConnect().setAvailable(true).setFrontID(frontID).setSessionID(sessionID)));
-	}
-
 	void onRspAuthenticate(CThostFtdcRspAuthenticateField rspAuthenticateField) {
-		// rspAuthenticateField.get
 		log.info("Callback onRspAuthenticate");
 		this.isAuthenticate = true;
 		CThostFtdcReqUserLoginField reqUserLoginField = new CThostFtdcReqUserLoginField();
@@ -371,11 +364,30 @@ public class FtdcGateway {
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqUserLogin(reqUserLoginField, nRequestID);
 		log.info("Send Trader ReqUserLogin OK -> nRequestID == {}", nRequestID);
-
 	}
 
-	/****************
+	/**
+	 * 交易登录回调
+	 * 
+	 * @param rspUserLoginField
+	 */
+	void onTraderRspUserLogin(CThostFtdcRspUserLoginField rspUserLoginField) {
+		log.info(
+				"Callback onTraderRspUserLogin -> Brokerid==[{}], UserID==[{}], LoginTime==[{}], "
+						+ "TradingDay==[{}], MaxOrderRef==[{}]",
+				rspUserLoginField.getBrokerID(), rspUserLoginField.getUserID(), rspUserLoginField.getLoginTime(),
+				rspUserLoginField.getTradingDay(), rspUserLoginField.getMaxOrderRef());
+		this.frontID = rspUserLoginField.getFrontID();
+		this.sessionID = rspUserLoginField.getSessionID();
+		this.isTraderLogin = true;
+		bufferQueue.enqueue(
+				new RspMsg(new RspTraderConnect().setAvailable(true).setFrontID(frontID).setSessionID(sessionID)));
+	}
+
+	/**
 	 * 报单接口
+	 * 
+	 * @param inputOrderField
 	 */
 	public void ReqOrderInsert(CThostFtdcInputOrderField inputOrderField) {
 		if (isTraderLogin) {
@@ -389,8 +401,9 @@ public class FtdcGateway {
 			ftdcTraderApi.ReqOrderInsert(inputOrderField, nRequestID);
 			log.info("Send ReqOrderInsert OK -> orderRef==[{}], nRequestID==[{}]", inputOrderField.getOrderRef(),
 					nRequestID);
-		} else
+		} else {
 			log.error("Trader error :: TraderApi is not login");
+		}
 	}
 
 	private FtdcInputOrderConverter ftdcInputOrderConverter = new FtdcInputOrderConverter();
@@ -401,6 +414,7 @@ public class FtdcGateway {
 	 * @param rspOrderInsert
 	 */
 	void onRspOrderInsert(CThostFtdcInputOrderField inputOrderField) {
+		log.info("Callback onRspOrderInsert -> OrderRef==[{}]", inputOrderField.getOrderRef());
 		bufferQueue.enqueue(new RspMsg(ftdcInputOrderConverter.apply(inputOrderField)));
 	}
 
@@ -410,6 +424,7 @@ public class FtdcGateway {
 	 * @param inputOrder
 	 */
 	void onErrRtnOrderInsert(CThostFtdcInputOrderField inputOrderField) {
+		log.info("Callback onErrRtnOrderInsert -> OrderRef==[{}]", inputOrderField.getOrderRef());
 		bufferQueue.enqueue(new RspMsg(ftdcInputOrderConverter.apply(inputOrderField)));
 	}
 
@@ -421,8 +436,8 @@ public class FtdcGateway {
 	 * @param rtnOrder
 	 */
 	void onRtnOrder(CThostFtdcOrderField orderField) {
-		log.info("Callback onRtnOrder -> AccountID==[{}], OrderRef==[{}]", orderField.getAccountID(),
-				orderField.getOrderRef());
+		log.info("Callback onRtnOrder -> AccountID==[{}], OrderRef==[{}], InstrumentID==[{}]",
+				orderField.getAccountID(), orderField.getOrderRef(), orderField.getInstrumentID());
 		bufferQueue.enqueue(new RspMsg(ftdcOrderConverter.apply(orderField)));
 	}
 
@@ -454,8 +469,9 @@ public class FtdcGateway {
 			ftdcTraderApi.ReqOrderAction(inputOrderActionField, nRequestID);
 			log.info("Send ReqOrderAction OK -> orderRef==[{}], nRequestID==[{}]", inputOrderActionField.getOrderRef(),
 					nRequestID);
-		} else
+		} else {
 			log.error("Trader error :: TraderApi is not login");
+		}
 	}
 
 	private Function<CThostFtdcInputOrderActionField, FtdcInputOrderAction> ftdcInputOrderActionConverter = new FtdcInputOrderActionConverter();
@@ -466,6 +482,8 @@ public class FtdcGateway {
 	 * @param inputOrderAction
 	 */
 	void onRspOrderAction(CThostFtdcInputOrderActionField inputOrderActionField) {
+		log.info("Callback onRspOrderAction -> OrderRef==[{}], OrderSysID==[{}]", inputOrderActionField.getOrderRef(),
+				inputOrderActionField.getOrderSysID());
 		bufferQueue.enqueue(new RspMsg(ftdcInputOrderActionConverter.apply(inputOrderActionField)));
 	}
 
@@ -477,6 +495,8 @@ public class FtdcGateway {
 	 * @param orderAction
 	 */
 	void onErrRtnOrderAction(CThostFtdcOrderActionField orderActionField) {
+		log.info("Callback onErrRtnOrderAction -> OrderRef==[{}], OrderSysID==[{}]", orderActionField.getOrderRef(),
+				orderActionField.getOrderSysID());
 		bufferQueue.enqueue(new RspMsg(ftdcOrderActionConverter.apply(orderActionField)));
 	}
 
@@ -501,8 +521,8 @@ public class FtdcGateway {
 	}
 
 	void onRspQryOrder(CThostFtdcOrderField orderField, boolean isLast) {
-		log.info("Callback onRspQryOrder -> AccountID==[{}], OrderRef==[{}]", orderField.getAccountID(),
-				orderField.getOrderRef());
+		log.info("Callback onRspQryOrder -> AccountID==[{}], OrderRef==[{}], isLast==[{}]", orderField.getAccountID(),
+				orderField.getOrderRef(), isLast);
 		bufferQueue.enqueue(new RspMsg(ftdcOrderConverter.apply(orderField)));
 	}
 
