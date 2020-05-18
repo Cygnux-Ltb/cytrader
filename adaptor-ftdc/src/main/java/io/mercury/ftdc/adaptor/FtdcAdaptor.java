@@ -82,133 +82,132 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private Function<FtdcOrder, OrdReport> rtnOrderConverter = ftdcOrder -> {
 		OrdReport ordReport = findCtpOrder(ftdcOrder.getOrderRef());
 
-		//经纪公司代码
+		// 经纪公司代码
 		ftdcOrder.getBrokerID();
-		//投资者代码
+		// 投资者代码
 		ftdcOrder.getInvestorID();
-		//合约代码
+		// 合约代码
 		ftdcOrder.getInstrumentID();
-		//报单引用
+		// 报单引用
 		ftdcOrder.getOrderRef();
-		//用户代码
+		// 用户代码
 		ftdcOrder.getUserID();
-		//报单价格条件
+		// 报单价格条件
 		ftdcOrder.getOrderPriceType();
-		//买卖方向
+		// 买卖方向
 		ftdcOrder.getDirection();
-		//组合开平标志
+		// 组合开平标志
 		ftdcOrder.getCombOffsetFlag();
-		//组合投机套保标志
+		// 组合投机套保标志
 		ftdcOrder.getCombHedgeFlag();
-		//价格
+		// 价格
 		ftdcOrder.getLimitPrice();
-		//数量
+		// 数量
 		ftdcOrder.getVolumeTotalOriginal();
-		//有效期类型
+		// 有效期类型
 		ftdcOrder.getTimeCondition();
-		//GTD日期
+		// GTD日期
 		ftdcOrder.getGTDDate();
-		//成交量类型
+		// 成交量类型
 		ftdcOrder.getVolumeCondition();
-		//最小成交量
+		// 最小成交量
 		ftdcOrder.getMinVolume();
-		//触发条件
+		// 触发条件
 		ftdcOrder.getContingentCondition();
-		//止损价
+		// 止损价
 		ftdcOrder.getStopPrice();
-		//强平原因
+		// 强平原因
 		ftdcOrder.getForceCloseReason();
-		//自动挂起标志
+		// 自动挂起标志
 		ftdcOrder.getIsAutoSuspend();
-		//业务单元
+		// 业务单元
 		ftdcOrder.getBusinessUnit();
-		//请求编号
+		// 请求编号
 		ftdcOrder.getRequestID();
-		//本地报单编号
+		// 本地报单编号
 		ftdcOrder.getOrderLocalID();
-		//交易所代码
+		// 交易所代码
 		ftdcOrder.getExchangeID();
-		//会员代码
+		// 会员代码
 		ftdcOrder.getParticipantID();
-		//客户代码
+		// 客户代码
 		ftdcOrder.getClientID();
-		//合约在交易所的代码
+		// 合约在交易所的代码
 		ftdcOrder.getExchangeInstID();
-		//交易所交易员代码
+		// 交易所交易员代码
 		ftdcOrder.getTraderID();
-		//安装编号
+		// 安装编号
 		ftdcOrder.getInstallID();
-		//报单提交状态
+		// 报单提交状态
 		ftdcOrder.getOrderSubmitStatus();
-		//报单提示序号
+		// 报单提示序号
 		ftdcOrder.getNotifySequence();
-		//交易日
+		// 交易日
 		ftdcOrder.getTradingDay();
-		//结算编号
+		// 结算编号
 		ftdcOrder.getSettlementID();
-		//报单编号
+		// 报单编号
 		ftdcOrder.getOrderSysID();
-		//报单来源
+		// 报单来源
 		ftdcOrder.getOrderSource();
-		//报单状态
+		// 报单状态
 		ftdcOrder.getOrderStatus();
-		//报单类型
+		// 报单类型
 		ftdcOrder.getOrderType();
-		//今成交数量
+		// 今成交数量
 		ftdcOrder.getVolumeTraded();
-		//剩余数量
+		// 剩余数量
 		ftdcOrder.getVolumeTotal();
-		//报单日期
+		// 报单日期
 		ftdcOrder.getInsertDate();
-		//委托时间
+		// 委托时间
 		ftdcOrder.getInsertTime();
-		//激活时间
+		// 激活时间
 		ftdcOrder.getActiveTime();
-		//挂起时间
+		// 挂起时间
 		ftdcOrder.getSuspendTime();
-		//最后修改时间
+		// 最后修改时间
 		ftdcOrder.getUpdateTime();
-		//撤销时间
+		// 撤销时间
 		ftdcOrder.getCancelTime();
-		//最后修改交易所交易员代码
+		// 最后修改交易所交易员代码
 		ftdcOrder.getActiveTraderID();
-		//结算会员编号
+		// 结算会员编号
 		ftdcOrder.getClearingPartID();
-		//序号
+		// 序号
 		ftdcOrder.getSequenceNo();
-		//前置编号
+		// 前置编号
 		ftdcOrder.getFrontID();
-		//会话编号
+		// 会话编号
 		ftdcOrder.getSessionID();
-		//用户端产品信息
+		// 用户端产品信息
 		ftdcOrder.getUserProductInfo();
-		//状态信息
+		// 状态信息
 		ftdcOrder.getStatusMsg();
-		//用户强评标志
+		// 用户强评标志
 		ftdcOrder.getUserForceClose();
-		//操作用户代码
+		// 操作用户代码
 		ftdcOrder.getActiveUserID();
-		//经纪公司报单编号
+		// 经纪公司报单编号
 		ftdcOrder.getBrokerOrderSeq();
-		//相关报单
+		// 相关报单
 		ftdcOrder.getRelativeOrderSysID();
-		//郑商所成交数量
+		// 郑商所成交数量
 		ftdcOrder.getZCETotalTradedVolume();
-		//互换单标志
+		// 互换单标志
 		ftdcOrder.getIsSwapOrder();
-		//营业部编号
+		// 营业部编号
 		ftdcOrder.getBranchID();
-		//投资单元代码
+		// 投资单元代码
 		ftdcOrder.getInvestUnitID();
-		//资金账号
+		// 资金账号
 		ftdcOrder.getAccountID();
-		//币种代码
+		// 币种代码
 		ftdcOrder.getCurrencyID();
-		//IP地址
+		// IP地址
 		ftdcOrder.getIPAddress();
-		//Mac地址
+		// Mac地址
 		ftdcOrder.getMacAddress();
-		
 
 		return ordReport;
 	};
@@ -320,6 +319,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						break;
 					}
 				}));
+		this.newOrderConverter = new NewOrderConverter();
+		this.cancelOrderConverter = new CancelOrderConverter();
 	}
 
 	@Override
@@ -347,7 +348,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		}
 	}
 
-	private Function<Order, CThostFtdcInputOrderField> newOrderConverter = new NewOrderConverter();
+	private final Function<Order, CThostFtdcInputOrderField> newOrderConverter;
 
 	@Override
 	public boolean newOredr(ChildOrder order) {
@@ -367,7 +368,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		}
 	}
 
-	private Function<Order, CThostFtdcInputOrderActionField> cancelOrderConverter = new CancelOrderConverter();
+	private final Function<Order, CThostFtdcInputOrderActionField> cancelOrderConverter;
 
 	@Override
 	public boolean cancelOrder(ChildOrder order) {
