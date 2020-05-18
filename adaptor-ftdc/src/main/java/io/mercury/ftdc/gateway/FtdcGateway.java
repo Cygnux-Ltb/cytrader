@@ -64,20 +64,25 @@ public class FtdcGateway {
 
 	static {
 		try {
+			log.info("Trying to load libs file.....");
 			// 根据操作系统选择加载不同库文件
 			if (SysProperties.OS_NAME.toLowerCase().startsWith("windows")) {
 				log.info("Copy win64 library file to [java.library.path]...");
 				log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
 				// TODO 复制到相应目录
+				// 加载dll文件
+				System.loadLibrary("thostapi_wrap");
+				System.loadLibrary("thostmduserapi_se");
+				System.loadLibrary("thostmduserapi_se");
 			} else {
 				log.info("Copy linux64 library file to [java.library.path]...");
 				log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
 				// TODO 复制到相应目录
+				System.loadLibrary("libthostapi_wrap");
+				System.loadLibrary("libthosttraderapi_se");
+				System.loadLibrary("libthostmduserapi_se");
 			}
 			log.info("Loading CTP library...");
-			System.loadLibrary("thostapi_wrap");
-			System.loadLibrary("thosttraderapi_se");
-			System.loadLibrary("thostmduserapi_se");
 			log.info("Load library success...");
 		} catch (Throwable e) {
 			log.error("Load library error...", e);
