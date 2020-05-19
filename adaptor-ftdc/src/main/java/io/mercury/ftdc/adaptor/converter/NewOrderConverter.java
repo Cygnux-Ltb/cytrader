@@ -168,7 +168,7 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		/**
 		 * 设置数量
 		 */
-		ftdcInputOrder.setVolumeTotalOriginal((int) order.ordQty().offerQty());
+		ftdcInputOrder.setVolumeTotalOriginal(order.ordQty().offerQty());
 		/**
 		 * /////////////////////////////////////////////////////////////////////////<br>
 		 * ///TFtdcTimeConditionType是一个有效期类型类型<br>
