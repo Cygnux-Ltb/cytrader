@@ -5,8 +5,8 @@ import static io.mercury.common.thread.ThreadHelper.startNewThread;
 
 import java.io.File;
 import java.lang.annotation.Native;
-import java.util.Set;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.function.Function;
 
 import javax.annotation.Nonnull;
@@ -46,16 +46,19 @@ import io.mercury.common.sys.SysProperties;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
+import io.mercury.ftdc.gateway.bean.FtdcInputOrder;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
+import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
+import io.mercury.ftdc.gateway.bean.FtdcTrade;
 import io.mercury.ftdc.gateway.bean.RspMsg;
 import io.mercury.ftdc.gateway.bean.RspTraderConnect;
-import io.mercury.ftdc.gateway.converter.FtdcDepthMarketDataConverter;
-import io.mercury.ftdc.gateway.converter.FtdcInputOrderActionConverter;
-import io.mercury.ftdc.gateway.converter.FtdcInputOrderConverter;
-import io.mercury.ftdc.gateway.converter.FtdcOrderActionConverter;
-import io.mercury.ftdc.gateway.converter.FtdcOrderConverter;
-import io.mercury.ftdc.gateway.converter.FtdcTradeConverter;
+import io.mercury.ftdc.gateway.converter.CThostFtdcDepthMarketDataConverter;
+import io.mercury.ftdc.gateway.converter.CThostFtdcInputOrderActionConverter;
+import io.mercury.ftdc.gateway.converter.CThostFtdcInputOrderConverter;
+import io.mercury.ftdc.gateway.converter.CThostFtdcOrderActionConverter;
+import io.mercury.ftdc.gateway.converter.CThostFtdcOrderConverter;
+import io.mercury.ftdc.gateway.converter.CThostFtdcTradeConverter;
 
 @NotThreadSafe
 public class FtdcGateway {
@@ -298,7 +301,7 @@ public class FtdcGateway {
 		log.info("Callback onRspSubMarketData -> InstrumentCode==[{}]", specificInstrumentField.getInstrumentID());
 	}
 
-	private Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> depthMarketDataConverter = new FtdcDepthMarketDataConverter();
+	private Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> depthMarketDataConverter = new CThostFtdcDepthMarketDataConverter();
 
 	/**
 	 * 行情推送回调
@@ -406,7 +409,7 @@ public class FtdcGateway {
 		}
 	}
 
-	private FtdcInputOrderConverter ftdcInputOrderConverter = new FtdcInputOrderConverter();
+	private Function<CThostFtdcInputOrderField, FtdcInputOrder> ftdcInputOrderConverter = new CThostFtdcInputOrderConverter();
 
 	/**
 	 * 报单回调
@@ -428,7 +431,7 @@ public class FtdcGateway {
 		bufferQueue.enqueue(new RspMsg(ftdcInputOrderConverter.apply(inputOrderField)));
 	}
 
-	private FtdcOrderConverter ftdcOrderConverter = new FtdcOrderConverter();
+	private Function<CThostFtdcOrderField, FtdcOrder> ftdcOrderConverter = new CThostFtdcOrderConverter();
 
 	/**
 	 * 报单推送
@@ -441,7 +444,7 @@ public class FtdcGateway {
 		bufferQueue.enqueue(new RspMsg(ftdcOrderConverter.apply(orderField)));
 	}
 
-	private FtdcTradeConverter ftdcTradeConverter = new FtdcTradeConverter();
+	private Function<CThostFtdcTradeField, FtdcTrade> ftdcTradeConverter = new CThostFtdcTradeConverter();
 
 	/**
 	 * 成交推送
@@ -474,7 +477,7 @@ public class FtdcGateway {
 		}
 	}
 
-	private Function<CThostFtdcInputOrderActionField, FtdcInputOrderAction> ftdcInputOrderActionConverter = new FtdcInputOrderActionConverter();
+	private Function<CThostFtdcInputOrderActionField, FtdcInputOrderAction> ftdcInputOrderActionConverter = new CThostFtdcInputOrderActionConverter();
 
 	/**
 	 * 撤单回调
@@ -487,7 +490,7 @@ public class FtdcGateway {
 		bufferQueue.enqueue(new RspMsg(ftdcInputOrderActionConverter.apply(inputOrderActionField)));
 	}
 
-	private Function<CThostFtdcOrderActionField, FtdcOrderAction> ftdcOrderActionConverter = new FtdcOrderActionConverter();
+	private Function<CThostFtdcOrderActionField, FtdcOrderAction> ftdcOrderActionConverter = new CThostFtdcOrderActionConverter();
 
 	/**
 	 * 撤单错误回调

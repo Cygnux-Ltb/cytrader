@@ -5,7 +5,7 @@ import java.util.function.Function;
 import ctp.thostapi.CThostFtdcDepthMarketDataField;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
 
-public final class FtdcDepthMarketDataConverter implements Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> {
+public final class CThostFtdcDepthMarketDataConverter implements Function<CThostFtdcDepthMarketDataField, FtdcDepthMarketData> {
 
 	@Override
 	public FtdcDepthMarketData apply(CThostFtdcDepthMarketDataField from) {

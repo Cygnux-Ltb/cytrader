@@ -5,7 +5,7 @@ import java.util.function.Function;
 import ctp.thostapi.CThostFtdcOrderActionField;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 
-public class FtdcOrderActionConverter implements Function<CThostFtdcOrderActionField, FtdcOrderAction> {
+public class CThostFtdcOrderActionConverter implements Function<CThostFtdcOrderActionField, FtdcOrderAction> {
 
 	@Override
 	public FtdcOrderAction apply(CThostFtdcOrderActionField from) {

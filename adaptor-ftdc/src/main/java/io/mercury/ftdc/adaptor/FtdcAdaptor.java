@@ -2,13 +2,8 @@ package io.mercury.ftdc.adaptor;
 
 import static io.mercury.common.thread.ThreadHelper.sleep;
 import static io.mercury.common.thread.ThreadHelper.startNewThread;
-import static io.mercury.financial.instrument.PriceMultiplier.PriceSupporter.priceToLong4;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,15 +15,14 @@ import org.slf4j.Logger;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
-import io.mercury.common.datetime.Pattern.DatePattern;
-import io.mercury.common.datetime.Pattern.TimePattern;
-import io.mercury.common.datetime.TimeConst;
-import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.CancelOrderConverter;
+import io.mercury.ftdc.adaptor.converter.FtdcDepthMarketDataConverter;
+import io.mercury.ftdc.adaptor.converter.FtdcOrderConverter;
+import io.mercury.ftdc.adaptor.converter.FtdcTradeConverter;
 import io.mercury.ftdc.adaptor.converter.NewOrderConverter;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
 import io.mercury.ftdc.gateway.FtdcConfig;
@@ -44,8 +38,6 @@ import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.adaptor.base.AdaptorBaseImpl;
-import io.mercury.redstone.core.keeper.InstrumentKeeper;
-import io.mercury.redstone.core.order.OrdSysIdAllocator;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.specific.ChildOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
@@ -53,269 +45,22 @@ import io.mercury.redstone.core.strategy.StrategyScheduler;
 
 public class FtdcAdaptor extends AdaptorBaseImpl {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(FtdcAdaptor.class);
+	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newFormatter();
+	/**
+	 * 转换行情
+	 */
+	private Function<FtdcDepthMarketData, BasicMarketData> ftdcDepthMarketDataConverter = new FtdcDepthMarketDataConverter();
 
-	private final DateTimeFormatter actionDayformatter = DatePattern.YYYYMMDD.newFormatter();
+	/**
+	 * 转换报单回报
+	 */
+	private Function<FtdcOrder, OrdReport> ftdcOrderConverter = new FtdcOrderConverter();
 
-	private Function<FtdcDepthMarketData, BasicMarketData> marketDataConverter = depthMarketData -> {
-
-		LocalDate depthDate = LocalDate.parse(depthMarketData.getActionDay(), actionDayformatter);
-		LocalTime depthTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
-				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);
-
-		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
-		log.info("Convert depthMarketData -> InstrumentCode==[{}], depthDate==[{}], depthTime==[{}]", instrument.code(),
-				depthDate, depthTime);
-
-		return new BasicMarketData(instrument, ZonedDateTime.of(depthDate, depthTime, TimeZone.CST),
-				// TODO 修改价格转换模式
-				priceToLong4(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
-				priceToLong4(depthMarketData.getTurnover())).setBidPrice1(priceToLong4(depthMarketData.getBidPrice1()))
-						.setBidVolume1(depthMarketData.getBidVolume1())
-						.setAskPrice1(priceToLong4(depthMarketData.getAskPrice1()))
-						.setAskVolume1(depthMarketData.getAskVolume1());
-	};
-
-	// TODO 转换报单回报
-	private Function<FtdcOrder, OrdReport> rtnOrderConverter = ftdcOrder -> {
-		OrdReport ordReport = findCtpOrder(ftdcOrder.getOrderRef());
-
-		ordReport.setEpochMillis(System.currentTimeMillis());
-		// 报单编号
-		ordReport.setBrokerUniqueId(ftdcOrder.getOrderSysID());
-		// 委托数量
-		ordReport.setOfferQty(ftdcOrder.getVolumeTotalOriginal());
-		// 完成数量
-		ordReport.setFilledQty(ftdcOrder.getVolumeTraded());
-
-		Instrument instrument = InstrumentKeeper.getInstrument(ftdcOrder.getInstrumentID());
-		ordReport.setInstrument(instrument);
-		
-		
-		
-		// 报单状态
-		ftdcOrder.getOrderStatus();
-		
-		
-		;
-
-
-		/*** LIST ***/
-		// 经纪公司代码
-		ftdcOrder.getBrokerID();
-		// 投资者代码
-		ftdcOrder.getInvestorID();
-		// 合约代码
-		ftdcOrder.getInstrumentID();
-		// 报单引用
-		ftdcOrder.getOrderRef();
-		// 用户代码
-		ftdcOrder.getUserID();
-		// 报单价格条件
-		ftdcOrder.getOrderPriceType();
-		// 买卖方向
-		ftdcOrder.getDirection();
-		// 组合开平标志
-		ftdcOrder.getCombOffsetFlag();
-		// 组合投机套保标志
-		ftdcOrder.getCombHedgeFlag();
-		// 价格
-		ftdcOrder.getLimitPrice();
-		// 数量
-		ftdcOrder.getVolumeTotalOriginal();
-		// 有效期类型
-		ftdcOrder.getTimeCondition();
-		// GTD日期
-		ftdcOrder.getGTDDate();
-		// 成交量类型
-		ftdcOrder.getVolumeCondition();
-		// 最小成交量
-		ftdcOrder.getMinVolume();
-		// 触发条件
-		ftdcOrder.getContingentCondition();
-		// 止损价
-		ftdcOrder.getStopPrice();
-		// 强平原因
-		ftdcOrder.getForceCloseReason();
-		// 自动挂起标志
-		ftdcOrder.getIsAutoSuspend();
-		// 业务单元
-		ftdcOrder.getBusinessUnit();
-		// 请求编号
-		ftdcOrder.getRequestID();
-		// 本地报单编号
-		ftdcOrder.getOrderLocalID();
-		// 交易所代码
-		ftdcOrder.getExchangeID();
-		// 会员代码
-		ftdcOrder.getParticipantID();
-		// 客户代码
-		ftdcOrder.getClientID();
-		// 合约在交易所的代码
-		ftdcOrder.getExchangeInstID();
-		// 交易所交易员代码
-		ftdcOrder.getTraderID();
-		// 安装编号
-		ftdcOrder.getInstallID();
-		// 报单提交状态
-		ftdcOrder.getOrderSubmitStatus();
-		// 报单提示序号
-		ftdcOrder.getNotifySequence();
-		// 交易日
-		ftdcOrder.getTradingDay();
-		// 结算编号
-		ftdcOrder.getSettlementID();
-		// 报单编号
-		ftdcOrder.getOrderSysID();
-		// 报单来源
-		ftdcOrder.getOrderSource();
-		// 报单状态
-		ftdcOrder.getOrderStatus();
-		// 报单类型
-		ftdcOrder.getOrderType();
-		// 今成交数量
-		ftdcOrder.getVolumeTraded();
-		// 剩余数量
-		ftdcOrder.getVolumeTotal();
-		// 报单日期
-		ftdcOrder.getInsertDate();
-		// 委托时间
-		ftdcOrder.getInsertTime();
-		// 激活时间
-		ftdcOrder.getActiveTime();
-		// 挂起时间
-		ftdcOrder.getSuspendTime();
-		// 最后修改时间
-		ftdcOrder.getUpdateTime();
-		// 撤销时间
-		ftdcOrder.getCancelTime();
-		// 最后修改交易所交易员代码
-		ftdcOrder.getActiveTraderID();
-		// 结算会员编号
-		ftdcOrder.getClearingPartID();
-		// 序号
-		ftdcOrder.getSequenceNo();
-		// 前置编号
-		ftdcOrder.getFrontID();
-		// 会话编号
-		ftdcOrder.getSessionID();
-		// 用户端产品信息
-		ftdcOrder.getUserProductInfo();
-		// 状态信息
-		ftdcOrder.getStatusMsg();
-		// 用户强评标志
-		ftdcOrder.getUserForceClose();
-		// 操作用户代码
-		ftdcOrder.getActiveUserID();
-		// 经纪公司报单编号
-		ftdcOrder.getBrokerOrderSeq();
-		// 相关报单
-		ftdcOrder.getRelativeOrderSysID();
-		// 郑商所成交数量
-		ftdcOrder.getZCETotalTradedVolume();
-		// 互换单标志
-		ftdcOrder.getIsSwapOrder();
-		// 营业部编号
-		ftdcOrder.getBranchID();
-		// 投资单元代码
-		ftdcOrder.getInvestUnitID();
-		// 资金账号
-		ftdcOrder.getAccountID();
-		// 币种代码
-		ftdcOrder.getCurrencyID();
-		// IP地址
-		ftdcOrder.getIPAddress();
-		// Mac地址
-		ftdcOrder.getMacAddress();
-
-		return ordReport;
-	};
-
-	// TODO 转换报单回报
-	private Function<FtdcTrade, OrdReport> rtnTradeConverter = ftdcTrade -> {
-		OrdReport ordReport = findCtpOrder(ftdcTrade.getOrderRef());
-
-		// 经纪公司代码
-		ftdcTrade.getBrokerID();
-		// 投资者代码
-		ftdcTrade.getInvestorID();
-		// 合约代码
-		ftdcTrade.getInstrumentID();
-		// 报单引用
-		ftdcTrade.getOrderRef();
-		// 用户代码
-		ftdcTrade.getUserID();
-		// 交易所代码
-		ftdcTrade.getExchangeID();
-		// 成交编号
-		ftdcTrade.getTradeID();
-		// 买卖方向
-		ftdcTrade.getDirection();
-		// 报单编号
-		ftdcTrade.getOrderSysID();
-		// 会员代码
-		ftdcTrade.getParticipantID();
-		// 客户代码
-		ftdcTrade.getClientID();
-		// 交易角色
-		ftdcTrade.getTradingRole();
-		// 合约在交易所的代码
-		ftdcTrade.getExchangeInstID();
-		// 开平标志
-		ftdcTrade.getOffsetFlag();
-		// 投机套保标志
-		ftdcTrade.getHedgeFlag();
-		// 价格
-		ftdcTrade.getPrice();
-		// 数量
-		ftdcTrade.getVolume();
-		// 成交时期
-		ftdcTrade.getTradeDate();
-		// 成交时间
-		ftdcTrade.getTradeTime();
-		// 成交类型
-		ftdcTrade.getTradeType();
-		// 成交价来源
-		ftdcTrade.getPriceSource();
-		// 交易所交易员代码
-		ftdcTrade.getTraderID();
-		// 本地报单编号
-		ftdcTrade.getOrderLocalID();
-		// 结算会员编号
-		ftdcTrade.getClearingPartID();
-		// 业务单元
-		ftdcTrade.getBusinessUnit();
-		// 序号
-		ftdcTrade.getSequenceNo();
-		// 交易日
-		ftdcTrade.getTradingDay();
-		// 结算编号
-		ftdcTrade.getSettlementID();
-		// 经纪公司报单编号
-		ftdcTrade.getBrokerOrderSeq();
-		// 成交来源
-		ftdcTrade.getTradeSource();
-		// 投资单元代码
-		ftdcTrade.getInvestUnitID();
-
-		return ordReport;
-	};
-
-	private OrdReport findCtpOrder(String orderRef) {
-		try {
-			long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
-			if (ordSysId == 0L) {
-				// 处理其他来源的订单
-				ordSysId = OrdSysIdAllocator.allocateFromThird();
-				log.info("Handle third order, allocate third ordSysId==[{}], orderRef==[{}]", ordSysId, orderRef);
-			}
-			return 
-		} catch (OrderRefNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-	}
+	/**
+	 * 转换成交回报
+	 */
+	private Function<FtdcTrade, OrdReport> ftdcTradeConverter = new FtdcTradeConverter();
 
 	private final FtdcGateway gateway;
 
@@ -368,19 +113,20 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						break;
 					case FtdcDepthMarketData:
 						// 行情处理
-						BasicMarketData marketData = marketDataConverter.apply(ftdcMsg.getFtdcDepthMarketData());
+						BasicMarketData marketData = ftdcDepthMarketDataConverter
+								.apply(ftdcMsg.getFtdcDepthMarketData());
 						scheduler.onMarketData(marketData);
 						break;
 					case FtdcOrder:
 						// 报单回报处理
 						FtdcOrder ftdcOrder = ftdcMsg.getFtdcOrder();
-						OrdReport rtnOrder = rtnOrderConverter.apply(ftdcOrder);
+						OrdReport rtnOrder = ftdcOrderConverter.apply(ftdcOrder);
 						scheduler.onOrdReport(rtnOrder);
 						break;
 					case FtdcTrade:
 						// 成交回报处理
 						FtdcTrade ftdcTrade = ftdcMsg.getFtdcTrade();
-						OrdReport rtnTrade = rtnTradeConverter.apply(ftdcTrade);
+						OrdReport rtnTrade = ftdcTradeConverter.apply(ftdcTrade);
 						scheduler.onOrdReport(rtnTrade);
 						break;
 					case FtdcInputOrder:

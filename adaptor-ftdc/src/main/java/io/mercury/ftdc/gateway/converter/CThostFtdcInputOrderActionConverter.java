@@ -5,7 +5,7 @@ import java.util.function.Function;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
 
-public final class FtdcInputOrderActionConverter
+public final class CThostFtdcInputOrderActionConverter
 		implements Function<CThostFtdcInputOrderActionField, FtdcInputOrderAction> {
 
 	@Override

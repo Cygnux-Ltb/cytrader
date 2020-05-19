@@ -37,7 +37,7 @@ public class OrderRefKeeper {
 		Singleton.SysIdMappingRef.put(ordSysId, orderRef);
 	}
 
-	public static long getOrdSysId(String orderRef) throws OrderRefNotFoundException {
+	public static long getOrdSysId(String orderRef) {
 		long ordSysId = Singleton.RefMappingSysId.get(orderRef);
 		if (ordSysId == 0L) {
 			// 处理其他来源的订单
