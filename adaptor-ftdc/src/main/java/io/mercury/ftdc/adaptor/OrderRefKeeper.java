@@ -2,10 +2,13 @@ package io.mercury.ftdc.adaptor;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
+import org.slf4j.Logger;
 
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
+import io.mercury.redstone.core.order.OrdSysIdAllocator;
 
 /**
  * 
@@ -15,6 +18,8 @@ import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
  */
 
 public class OrderRefKeeper {
+
+	private static final Logger log = CommonLoggerFactory.getLogger(OrderRefKeeper.class);
 
 	private final MutableObjectLongMap<String> RefMappingSysId = MutableMaps
 			.newObjectLongHashMap(Capacity.L10_SIZE_1024);
@@ -34,8 +39,11 @@ public class OrderRefKeeper {
 
 	public static long getOrdSysId(String orderRef) throws OrderRefNotFoundException {
 		long ordSysId = Singleton.RefMappingSysId.get(orderRef);
-		if (ordSysId == 0)
-			throw new OrderRefNotFoundException(orderRef);
+		if (ordSysId == 0L) {
+			// 处理其他来源的订单
+			ordSysId = OrdSysIdAllocator.allocateFromThird();
+			log.warn("Handle third order, allocate third ordSysId==[{}], orderRef==[{}]", ordSysId, orderRef);
+		}
 		return ordSysId;
 	}
 

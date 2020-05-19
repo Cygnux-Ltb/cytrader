@@ -19,7 +19,6 @@ import org.slf4j.Logger;
 
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
-import ctp.thostapi.thosttraderapiConstants;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.datetime.Pattern.DatePattern;
 import io.mercury.common.datetime.Pattern.TimePattern;
@@ -100,24 +99,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		ftdcOrder.getOrderStatus();
 		
 		
-		///全部成交
-		char a = thosttraderapiConstants.THOST_FTDC_OST_AllTraded;
-		///部分成交还在队列中
-		THOST_FTDC_OST_PartTradedQueueing;
-		///部分成交不在队列中
-		THOST_FTDC_OST_PartTradedNotQueueing;
-		///未成交还在队列中
-		THOST_FTDC_OST_NoTradeQueueing;
-		///未成交不在队列中
-		THOST_FTDC_OST_NoTradeNotQueueing;
-		///撤单
-		THOST_FTDC_OST_Canceled;
-		///未知
-		THOST_FTDC_OST_Unknown;
-		///尚未触发
-		#define THOST_FTDC_OST_NotTouched;
-		///已触发
-		#define THOST_FTDC_OST_Touched;
+		;
 
 
 		/*** LIST ***/
@@ -329,7 +311,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				ordSysId = OrdSysIdAllocator.allocateFromThird();
 				log.info("Handle third order, allocate third ordSysId==[{}], orderRef==[{}]", ordSysId, orderRef);
 			}
-			return new OrdReport(ordSysId).setOrderRef(orderRef);
+			return 
 		} catch (OrderRefNotFoundException e) {
 			throw new RuntimeException(e);
 		}
