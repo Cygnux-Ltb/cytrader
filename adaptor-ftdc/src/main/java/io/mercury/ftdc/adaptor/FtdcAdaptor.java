@@ -70,27 +70,39 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	private volatile boolean isMdAvailable;
 	private volatile boolean isTraderAvailable;
+	
+	private final StrategyScheduler scheduler;
 
 	public FtdcAdaptor(int adaptorId, String adaptorName, Account account, @Nonnull StrategyScheduler scheduler,
-			@Nonnull ImmutableParamMap<FtdcAdaptorParam> paramMap) {
+			@Nonnull ImmutableParamMap<FtdcAdaptorParam> params) {
 		super(adaptorId, adaptorName, account);
-		// 写入Gateway用户信息
-		FtdcConfig configInfo = new FtdcConfig().setTraderAddr(paramMap.getString(FtdcAdaptorParam.CTP_TraderAddr))
-				.setMdAddr(paramMap.getString(FtdcAdaptorParam.CTP_MdAddr))
-				.setBrokerId(paramMap.getString(FtdcAdaptorParam.CTP_BrokerId))
-				.setInvestorId(paramMap.getString(FtdcAdaptorParam.CTP_InvestorId))
-				.setUserId(paramMap.getString(FtdcAdaptorParam.CTP_UserId))
-				.setAccountId(paramMap.getString(FtdcAdaptorParam.CTP_AccountId))
-				.setPassword(paramMap.getString(FtdcAdaptorParam.CTP_Password));
-
-		// 初始化Gateway
-		this.gateway = new FtdcGateway("Ftdc-Gateway", configInfo,
+		this.scheduler = scheduler;
+		// 创建配置信息
+		FtdcConfig configInfo = createFtdcConfig(params);
+		// 创建Gateway
+		this.gateway = createFtdcGateway(configInfo);
+		this.newOrderConverter = new NewOrderConverter();
+		this.cancelOrderConverter = new CancelOrderConverter();
+	}
+	
+	private FtdcConfig createFtdcConfig(ImmutableParamMap<FtdcAdaptorParam> params) {
+		return new FtdcConfig().setTraderAddr(params.getString(FtdcAdaptorParam.CTP_TraderAddr))
+		.setMdAddr(params.getString(FtdcAdaptorParam.CTP_MdAddr))
+		.setBrokerId(params.getString(FtdcAdaptorParam.CTP_BrokerId))
+		.setInvestorId(params.getString(FtdcAdaptorParam.CTP_InvestorId))
+		.setUserId(params.getString(FtdcAdaptorParam.CTP_UserId))
+		.setAccountId(params.getString(FtdcAdaptorParam.CTP_AccountId))
+		.setPassword(params.getString(FtdcAdaptorParam.CTP_Password));
+	}
+	
+	private FtdcGateway createFtdcGateway(FtdcConfig ftdcConfig) {
+		return new FtdcGateway("Ftdc-Gateway", ftdcConfig,
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 256, ftdcMsg -> {
 					switch (ftdcMsg.getRspType()) {
 					case RspMdConnect:
 						RspMdConnect rspMdConnect = ftdcMsg.getRspMdConnect();
 						this.isMdAvailable = rspMdConnect.isAvailable();
-						AdaptorEvent mdEvent = new AdaptorEvent(adaptorId);
+						AdaptorEvent mdEvent = new AdaptorEvent(adaptorId());
 						if (rspMdConnect.isAvailable()) {
 							mdEvent.setAdaptorStatus(AdaptorStatus.MdEnable);
 						} else {
@@ -103,7 +115,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						this.frontId = traderConnect.getFrontID();
 						this.sessionId = traderConnect.getSessionID();
 						this.isTraderAvailable = traderConnect.isAvailable();
-						AdaptorEvent traderEvent = new AdaptorEvent(adaptorId);
+						AdaptorEvent traderEvent = new AdaptorEvent(adaptorId());
 						if (traderConnect.isAvailable()) {
 							traderEvent.setAdaptorStatus(AdaptorStatus.TraderDisable);
 						} else {
@@ -148,9 +160,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						break;
 					}
 				}));
-		this.newOrderConverter = new NewOrderConverter();
-		this.cancelOrderConverter = new CancelOrderConverter();
 	}
+	
 
 	@Override
 	public boolean startup() {

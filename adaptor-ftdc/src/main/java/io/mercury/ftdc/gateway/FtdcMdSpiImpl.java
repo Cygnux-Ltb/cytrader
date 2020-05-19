@@ -36,7 +36,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("SPI :: OnRspUserLogin", pRspInfo);
+		hasError("MdSpi :: OnRspUserLogin", pRspInfo);
 		log.info("MdSpiImpl OnRspUserLogin");
 		if (pRspUserLogin != null)
 			gateway.onMdRspUserLogin(pRspUserLogin);
@@ -47,7 +47,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	@Override
 	public void OnRspSubMarketData(CThostFtdcSpecificInstrumentField pSpecificInstrument,
 			CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		hasError("SPI :: OnRspSubMarketData", pRspInfo);
+		hasError("MdSpi :: OnRspSubMarketData", pRspInfo);
 		log.info("MdSpiImpl OnRspSubMarketData");
 		if (pSpecificInstrument != null)
 			gateway.onRspSubMarketData(pSpecificInstrument);

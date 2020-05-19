@@ -6,8 +6,6 @@ public final class OrdStatusMapper {
 
 	public static final OrdStatus ofFtdcOrderStatus(char ftdcOrderStatus) {
 		
-		
-		
 		return OrdStatus.Canceled;
 
 	}

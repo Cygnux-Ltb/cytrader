@@ -375,11 +375,9 @@ public class FtdcGateway {
 	 * @param rspUserLoginField
 	 */
 	void onTraderRspUserLogin(CThostFtdcRspUserLoginField rspUserLoginField) {
-		log.info(
-				"Callback onTraderRspUserLogin -> Brokerid==[{}], UserID==[{}], LoginTime==[{}], "
-						+ "TradingDay==[{}], MaxOrderRef==[{}]",
+		log.info("Callback onTraderRspUserLogin -> Brokerid==[{}], UserID==[{}], LoginTime==[{}], MaxOrderRef==[{}]",
 				rspUserLoginField.getBrokerID(), rspUserLoginField.getUserID(), rspUserLoginField.getLoginTime(),
-				rspUserLoginField.getTradingDay(), rspUserLoginField.getMaxOrderRef());
+				rspUserLoginField.getMaxOrderRef());
 		this.frontID = rspUserLoginField.getFrontID();
 		this.sessionID = rspUserLoginField.getSessionID();
 		this.isTraderLogin = true;
