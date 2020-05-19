@@ -14,8 +14,10 @@ public final class FtdcErrorValidator {
 			logger.error("SPI ERROR -> {} : ErrorID == [{}], ErrorMsg == [{}]", spiFunctionName,
 					ftdcRspInfo.getErrorID(), ftdcRspInfo.getErrorMsg());
 			return true;
-		} else
+		} else {
 			return false;
+		}
+		
 	}
 
 }

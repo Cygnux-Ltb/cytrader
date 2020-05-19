@@ -9,6 +9,7 @@ import ctp.thostapi.CThostFtdcMdSpi;
 import ctp.thostapi.CThostFtdcRspInfoField;
 import ctp.thostapi.CThostFtdcRspUserLoginField;
 import ctp.thostapi.CThostFtdcSpecificInstrumentField;
+import ctp.thostapi.CThostFtdcUserLogoutField;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
@@ -23,13 +24,13 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 
 	@Override
 	public void OnFrontConnected() {
-		log.info("MdSpiImpl OnFrontConnected");
+		log.info("MdSpiImpl :: OnFrontConnected");
 		gateway.onMdFrontConnected();
 	}
 
 	@Override
 	public void OnFrontDisconnected(int nReason) {
-		log.error("MdSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
+		log.error("MdSpiImpl :: OnFrontDisconnected, nReason==[{}]", nReason);
 		gateway.onMdFrontDisconnected();
 	}
 
@@ -43,6 +44,21 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 			else
 				log.error("OnRspUserLogin return null");
 		}
+	}
+
+	@Override
+	public void OnRspUserLogout(CThostFtdcUserLogoutField pUserLogout, CThostFtdcRspInfoField pRspInfo, int nRequestID,
+			boolean bIsLast) {
+		log.info("MdSpiImpl :: OnRspUserLogout");
+		if (!hasError("MdSpi :: OnRspUserLogout", pRspInfo)) {
+			if (pUserLogout != null)
+				// TODO 处理用户登出
+				log.info("Output :: OnRspUserLogout -> BrokerID==[{}], UserID==[{}]", pUserLogout.getBrokerID(),
+						pUserLogout.getUserID());
+			else
+				log.error("OnRspUserLogin return null");
+		}
+
 	}
 
 	@Override

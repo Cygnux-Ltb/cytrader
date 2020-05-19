@@ -113,9 +113,6 @@ public class FtdcGateway {
 	 */
 	private volatile boolean isInitialize = false;
 
-	// private volatile boolean isMdConnect;
-	// private volatile boolean isTraderConnect;
-
 	private volatile boolean isMdLogin;
 	private volatile boolean isTraderLogin;
 	private volatile boolean isAuthenticate;
@@ -238,6 +235,8 @@ public class FtdcGateway {
 		reqUserLoginField.setBrokerID(ftdcConfig.getBrokerId());
 		reqUserLoginField.setUserID(ftdcConfig.getUserId());
 		reqUserLoginField.setPassword(ftdcConfig.getPassword());
+//		reqUserLoginField.setClientIPAddress(ftdcConfig.getIpAddr());
+//		reqUserLoginField.setMacAddress(ftdcConfig.getMacAddr());
 		int nRequestID = ++mdRequestId;
 		ftdcMdApi.ReqUserLogin(reqUserLoginField, nRequestID);
 		log.info("Send Md ReqUserLogin OK -> nRequestID==[{}]", nRequestID);
@@ -325,10 +324,10 @@ public class FtdcGateway {
 	 */
 	void onTraderFrontConnected() {
 		log.info("Callback onTraderFrontConnected");
-		// this.isTraderConnect = true;
 		if (!StringUtil.nonEmpty(ftdcConfig.getAuthCode()) && !isAuthenticate) {
 			// 验证
 			CThostFtdcReqAuthenticateField authenticateField = new CThostFtdcReqAuthenticateField();
+			authenticateField.setAppID(ftdcConfig.getAppId());
 			authenticateField.setUserID(ftdcConfig.getUserId());
 			authenticateField.setBrokerID(ftdcConfig.getBrokerId());
 			authenticateField.setAuthCode(ftdcConfig.getAuthCode());
@@ -364,6 +363,8 @@ public class FtdcGateway {
 		reqUserLoginField.setBrokerID(ftdcConfig.getBrokerId());
 		reqUserLoginField.setUserID(ftdcConfig.getUserId());
 		reqUserLoginField.setPassword(ftdcConfig.getPassword());
+//		reqUserLoginField.setClientIPAddress(ftdcConfig.getIpAddr());
+//		reqUserLoginField.setMacAddress(ftdcConfig.getMacAddr());
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqUserLogin(reqUserLoginField, nRequestID);
 		log.info("Send Trader ReqUserLogin OK -> nRequestID == {}", nRequestID);
