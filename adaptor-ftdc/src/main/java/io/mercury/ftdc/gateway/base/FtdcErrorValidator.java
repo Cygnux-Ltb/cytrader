@@ -11,12 +11,11 @@ public final class FtdcErrorValidator {
 
 	public static final boolean hasError(String spiFunctionName, CThostFtdcRspInfoField ftdcRspInfo) {
 		if (ftdcRspInfo != null && ftdcRspInfo.getErrorID() != 0) {
-			logger.info("SPI ERROR -> {} : ErrorID == [{}], ErrorMsg == [{}]", spiFunctionName,
+			logger.error("SPI ERROR -> {} : ErrorID == [{}], ErrorMsg == [{}]", spiFunctionName,
 					ftdcRspInfo.getErrorID(), ftdcRspInfo.getErrorMsg());
 			return true;
-		} else {
+		} else
 			return false;
-		}
 	}
 
 }

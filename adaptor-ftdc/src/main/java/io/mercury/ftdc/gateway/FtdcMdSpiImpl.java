@@ -29,30 +29,32 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 
 	@Override
 	public void OnFrontDisconnected(int nReason) {
-		log.warn("MdSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
+		log.error("MdSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
 		gateway.onMdFrontDisconnected();
 	}
 
 	@Override
 	public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("MdSpi :: OnRspUserLogin", pRspInfo);
-		log.info("MdSpiImpl OnRspUserLogin");
-		if (pRspUserLogin != null)
-			gateway.onMdRspUserLogin(pRspUserLogin);
-		else
-			log.warn("OnRspUserLogin return null");
+		log.info("MdSpiImpl :: OnRspUserLogin");
+		if (!hasError("MdSpi :: OnRspUserLogin", pRspInfo)) {
+			if (pRspUserLogin != null)
+				gateway.onMdRspUserLogin(pRspUserLogin);
+			else
+				log.error("OnRspUserLogin return null");
+		}
 	}
 
 	@Override
 	public void OnRspSubMarketData(CThostFtdcSpecificInstrumentField pSpecificInstrument,
 			CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		hasError("MdSpi :: OnRspSubMarketData", pRspInfo);
-		log.info("MdSpiImpl OnRspSubMarketData");
-		if (pSpecificInstrument != null)
-			gateway.onRspSubMarketData(pSpecificInstrument);
-		else
-			log.warn("OnRspSubMarketData return null");
+		log.info("MdSpiImpl :: OnRspSubMarketData");
+		if (!hasError("MdSpi :: OnRspSubMarketData", pRspInfo)) {
+			if (pSpecificInstrument != null)
+				gateway.onRspSubMarketData(pSpecificInstrument);
+			else
+				log.error("OnRspSubMarketData return null");
+		}
 	}
 
 	@Override
@@ -60,7 +62,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 		if (pDepthMarketData != null)
 			gateway.onRtnDepthMarketData(pDepthMarketData);
 		else
-			log.warn("OnRtnDepthMarketData return null");
+			log.error("OnRtnDepthMarketData return null");
 	}
 
 	/**
@@ -68,7 +70,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 	 */
 	@Override
 	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		log.warn("Md Spi Handle OnRspError");
+		log.error("MdSpiImpl :: OnRspError, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		gateway.onRspError(pRspInfo);
 	}
 

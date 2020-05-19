@@ -39,30 +39,32 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 
 	@Override
 	public void OnFrontDisconnected(int nReason) {
-		log.warn("TraderSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
+		log.error("TraderSpiImpl OnFrontDisconnected -> Reason==[{}]", nReason);
 		gateway.onTraderFrontDisconnected();
-	}
-
-	@Override
-	public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
-			int nRequestID, boolean bIsLast) {
-		hasError("TraderSpi :: OnRspUserLogin", pRspInfo);
-		log.info("TraderSpiImpl OnRspUserLogin");
-		if (pRspUserLogin != null)
-			gateway.onTraderRspUserLogin(pRspUserLogin);
-		else
-			log.info("OnRspUserLogin return null");
 	}
 
 	@Override
 	public void OnRspAuthenticate(CThostFtdcRspAuthenticateField pRspAuthenticateField, CThostFtdcRspInfoField pRspInfo,
 			int nRequestID, boolean bIsLast) {
-		hasError("TraderSpi :: OnRspAuthenticate", pRspInfo);
-		log.info("Call TraderSpiImpl OnRspAuthenticate");
-		if (pRspAuthenticateField != null)
-			gateway.onRspAuthenticate(pRspAuthenticateField);
-		else
-			log.warn("OnRspAuthenticate return null");
+		log.info("TraderSpiImpl :: OnRspAuthenticate");
+		if (hasError("TraderSpi :: OnRspAuthenticate", pRspInfo)) {
+			if (pRspAuthenticateField != null)
+				gateway.onRspAuthenticate(pRspAuthenticateField);
+			else
+				log.warn("OnRspAuthenticate return null");
+		}
+	}
+
+	@Override
+	public void OnRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
+			int nRequestID, boolean bIsLast) {
+		log.info("TraderSpiImpl :: OnRspUserLogin");
+		if (!hasError("TraderSpi :: OnRspUserLogin", pRspInfo)) {
+			if (pRspUserLogin != null)
+				gateway.onTraderRspUserLogin(pRspUserLogin);
+			else
+				log.info("OnRspUserLogin return null");
+		}
 	}
 
 	@Override
@@ -184,7 +186,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 	 */
 	@Override
 	public void OnRspError(CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-		log.info("Trader Spi Handle OnRspError");
+		log.info("TraderSpiImpl :: OnRspError, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		gateway.onRspError(pRspInfo);
 	}
 
