@@ -325,7 +325,7 @@ public class FtdcGateway {
 	 */
 	void onTraderFrontConnected() {
 		log.info("Callback onTraderFrontConnected");
-		if (!StringUtil.nonEmpty(ftdcConfig.getAuthCode()) && !isAuthenticate) {
+		if (StringUtil.nonEmpty(ftdcConfig.getAuthCode()) && !isAuthenticate) {
 			// 验证
 			CThostFtdcReqAuthenticateField authenticateField = new CThostFtdcReqAuthenticateField();
 			authenticateField.setAppID(ftdcConfig.getAppId());
@@ -339,7 +339,7 @@ public class FtdcGateway {
 					nRequestID, authenticateField.getBrokerID(), authenticateField.getUserID(),
 					authenticateField.getAppID(), authenticateField.getAuthCode());
 		} else {
-			log.warn("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]", ftdcConfig.getAuthCode(),
+			log.error("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]", ftdcConfig.getAuthCode(),
 					isAuthenticate);
 		}
 	}
