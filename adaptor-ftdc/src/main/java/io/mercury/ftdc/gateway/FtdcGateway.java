@@ -51,6 +51,7 @@ import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
+import io.mercury.ftdc.gateway.bean.RspMdConnect;
 import io.mercury.ftdc.gateway.bean.RspMsg;
 import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.mercury.ftdc.gateway.converter.CThostFtdcDepthMarketDataConverter;
@@ -261,6 +262,7 @@ public class FtdcGateway {
 				rspUserLoginField.getBrokerID(), rspUserLoginField.getUserID(), rspUserLoginField.getLoginTime(),
 				rspUserLoginField.getTradingDay());
 		this.isMdLogin = true;
+		bufferQueue.enqueue(new RspMsg(new RspMdConnect().setAvailable(isMdLogin)));
 	}
 
 	private Set<String> subscribeInstruementSet = MutableSets.newUnifiedSet();
@@ -333,7 +335,10 @@ public class FtdcGateway {
 			authenticateField.setAuthCode(ftdcConfig.getAuthCode());
 			int nRequestID = ++traderRequestId;
 			ftdcTraderApi.ReqAuthenticate(authenticateField, nRequestID);
-			log.info("Send ReqAuthenticate OK -> nRequestID==[{}]", nRequestID);
+			log.info(
+					"Send ReqAuthenticate OK -> nRequestID==[{}], BrokerID==[{}], UserID==[{}], AppID==[{}], AuthCode==[{}]",
+					nRequestID, authenticateField.getBrokerID(), authenticateField.getUserID(),
+					authenticateField.getAppID(), authenticateField.getAuthCode());
 		} else {
 			log.warn("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]", ftdcConfig.getAuthCode(),
 					isAuthenticate);
@@ -357,7 +362,6 @@ public class FtdcGateway {
 	 * @param rspAuthenticateField
 	 */
 	void onRspAuthenticate(CThostFtdcRspAuthenticateField rspAuthenticateField) {
-		log.info("Callback onRspAuthenticate");
 		this.isAuthenticate = true;
 		CThostFtdcReqUserLoginField reqUserLoginField = new CThostFtdcReqUserLoginField();
 		reqUserLoginField.setBrokerID(ftdcConfig.getBrokerId());
@@ -382,8 +386,8 @@ public class FtdcGateway {
 		this.frontID = rspUserLoginField.getFrontID();
 		this.sessionID = rspUserLoginField.getSessionID();
 		this.isTraderLogin = true;
-		bufferQueue.enqueue(
-				new RspMsg(new RspTraderConnect().setAvailable(true).setFrontID(frontID).setSessionID(sessionID)));
+		bufferQueue.enqueue(new RspMsg(
+				new RspTraderConnect().setAvailable(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 	}
 
 	/**
