@@ -45,6 +45,10 @@ public class Account extends EnableComponent<Account> {
 		this(accountId, accountName, investorId, 0, 0);
 	}
 
+	public Account(int accountId, @Nonnull String investorId, int balance, int credit) {
+		this(accountId, null, investorId, balance, credit);
+	}
+
 	public Account(int accountId, String accountName, @Nonnull String investorId, int balance, int credit) {
 		this.accountId = accountId;
 		this.investorId = Assertor.nonEmpty(investorId, "investorId");
@@ -100,12 +104,27 @@ public class Account extends EnableComponent<Account> {
 		return this;
 	}
 
+	public final static class AccountNotFoundException extends RuntimeException {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -6421678546942382394L;
+
+		public AccountNotFoundException(String message) {
+			super(message);
+		}
+
+	}
+
 	private static final String str0 = "{\"accountId\" : ";
 	private static final String str1 = ", \"accountName\" : ";
 	private static final String str2 = ", \"investorId\" : ";
 	private static final String str3 = ", \"balance\" : ";
-	private static final String str4 = ", \"subAccountsCount\" : ";
-	private static final String str5 = "}";
+	private static final String str4 = ", \"credit\" : ";
+	private static final String str5 = ", \"subAccountsCount\" : ";
+	private static final String str6 = ", \"isEnabled\" : ";
+	private static final String str7 = "}";
 
 	@Override
 	public String toString() {
@@ -119,8 +138,13 @@ public class Account extends EnableComponent<Account> {
 		builder.append(str3);
 		builder.append(balance);
 		builder.append(str4);
-		builder.append(subAccounts.size());
+		builder.append(credit);
 		builder.append(str5);
+		builder.append(subAccounts.size());
+		builder.append(str6);
+		builder.append(isEnabled());
+		builder.append(str7);
+
 		return builder.toString();
 	}
 

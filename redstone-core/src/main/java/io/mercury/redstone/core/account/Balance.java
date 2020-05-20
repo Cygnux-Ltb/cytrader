@@ -1,5 +1,11 @@
 package io.mercury.redstone.core.account;
 
+/**
+ * 
+ * @author yellow013
+ * 
+ */
+
 @Deprecated
 public final class Balance {
 

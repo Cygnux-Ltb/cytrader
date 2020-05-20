@@ -7,7 +7,7 @@ import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.Adaptor;
-import io.mercury.redstone.core.keeper.AdaptorKeeper;
+import io.mercury.redstone.core.adaptor.AdaptorKeeper;
 
 public abstract class AdaptorBaseImpl extends EnableComponent<Adaptor> implements Adaptor {
 

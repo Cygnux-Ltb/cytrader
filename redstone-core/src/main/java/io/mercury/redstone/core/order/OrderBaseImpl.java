@@ -71,7 +71,7 @@ public abstract class OrderBaseImpl implements Order {
 
 	protected OrderBaseImpl(int strategyId, int subAccountId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
 			OrdType ordType, TrdDirection direction) {
-		this.ordSysId = OrdSysIdAllocator.allocate(strategyId);
+		this.ordSysId = OrdSysIdSupporter.allocateId(strategyId);
 		this.strategyId = strategyId;
 		this.subAccountId = subAccountId;
 		this.instrument = instrument;

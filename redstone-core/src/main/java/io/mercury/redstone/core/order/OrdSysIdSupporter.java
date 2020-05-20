@@ -3,6 +3,7 @@ package io.mercury.redstone.core.order;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import io.mercury.common.datetime.EpochTime;
+import io.mercury.common.datetime.TimeConst;
 
 /**
  * 
@@ -24,7 +25,7 @@ import io.mercury.common.datetime.EpochTime;
  * @creation 2019年4月13日
  */
 @NotThreadSafe
-public final class OrdSysIdAllocator {
+public final class OrdSysIdSupporter {
 
 	private static final int maxLimitOwnerId = 920;
 
@@ -33,13 +34,13 @@ public final class OrdSysIdAllocator {
 	 * @param strategyId min value 1 max value 920
 	 * @return
 	 */
-	public static long allocate(int strategyId) {
+	public static long allocateId(int strategyId) {
 		if (strategyId < 0 || strategyId > maxLimitOwnerId)
 			throw new RuntimeException("strategyId is illegal.");
 		return generate(strategyId);
 	}
 
-	public static long allocateFromThird() {
+	public static long allocateIdForThird() {
 		return generate(921);
 	}
 
@@ -56,12 +57,30 @@ public final class OrdSysIdAllocator {
 		return highPos * 10_000_000_000_000_000L + lastUseEpochSeconds * 1_000_000L + ++increment;
 	}
 
+	private static final long Baseline_2020_SECONDS = 1577836800L;
+	private static final long Baseline_2020_MILLIS = Baseline_2020_SECONDS * TimeConst.MILLIS_PER_SECONDS;
+
+	private static final long Baseline_2010_SECONDS = 1262304000L;
+	private static final long Baseline_2010_MILLIS = Baseline_2010_SECONDS * TimeConst.MILLIS_PER_SECONDS;
+
+	private static final long Baseline_2000_SECONDS = 946684800L;
+	private static final long Baseline_2000_MILLIS = Baseline_2000_SECONDS * TimeConst.MILLIS_PER_SECONDS;
+
+	public static int analyzeStrategyId(long ordSysId) {
+		return 0;
+	}
+
+	public static long analyzeEpochSeconds(long ordSysId) {
+		return 0;
+	}
+
 	public static void main(String[] args) throws InterruptedException {
 
 		System.out.println(9219999999999999999L);
 		System.out.println(Long.MAX_VALUE);
 		System.out.println("000" + EpochTime.seconds() + "000000");
-		System.out.println(allocate(921));
+		System.out.println("000" + EpochTime.millis() + "000000");
+		System.out.println(allocateId(921));
 		System.out.println("OrdSysId");
 
 	}

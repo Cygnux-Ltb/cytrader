@@ -22,25 +22,18 @@ public class SubAccount extends EnableComponent<SubAccount> {
 	private int credit;
 
 	public SubAccount(int subAccountId, @Nonnull Account account) {
-		this(subAccountId, null, account, account.balance());
-	}
-
-	public SubAccount(int subAccountId, @Nonnull Account account, @Nonnull int balance) {
-		this(subAccountId, null, account, balance);
+		this(subAccountId, null, account, account.balance(), account.credit());
 	}
 
 	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account) {
-		this(subAccountId, subAccountName, account, account.balance());
+		this(subAccountId, subAccountName, account, account.balance(), account.credit());
 	}
 
-	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account, int balance) {
-	}
-
-	public SubAccount(int subAccountId, String subAccountName, Account account, int balance, int credit) {
+	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account, int balance, int credit) {
 		this.subAccountId = subAccountId;
 		this.account = Assertor.nonNull(account, "account");
-		this.balance = balance;
-		this.credit = credit;
+		this.balance = balance != 0 ? balance : account.balance();
+		this.credit = credit != 0 ? credit : account.credit();
 		this.subAccountName = StringUtil.nonEmpty(subAccountName) ? subAccountName
 				: "account[" + account.accountId() + "]-subAccount[" + subAccountId + "]";
 		account.addSubAccount(this);
@@ -73,9 +66,11 @@ public class SubAccount extends EnableComponent<SubAccount> {
 
 	private static final String str0 = "{\"subAccountId\" : ";
 	private static final String str1 = ", \"subAccountName\" : ";
-	private static final String str2 = ", \"balance\" : ";
-	private static final String str3 = ", \"account\" : ";
-	private static final String str4 = "}";
+	private static final String str2 = ", \"account\" : ";
+	private static final String str3 = ", \"balance\" : ";
+	private static final String str4 = ", \"credit\" : ";
+	private static final String str5 = ", \"isEnabled\" : ";
+	private static final String str6 = "}";
 
 	@Override
 	public String toString() {
@@ -85,15 +80,19 @@ public class SubAccount extends EnableComponent<SubAccount> {
 		builder.append(str1);
 		builder.append(StringUtil.toText(subAccountName));
 		builder.append(str2);
-		builder.append(balance);
-		builder.append(str3);
 		builder.append(account);
+		builder.append(str3);
+		builder.append(balance);
 		builder.append(str4);
+		builder.append(credit);
+		builder.append(str5);
+		builder.append(isEnabled());
+		builder.append(str6);
 		return builder.toString();
 	}
 
 	public static void main(String[] args) {
-		SubAccount subAccount = new SubAccount(10, new Account(1, "2005"), new Balance(100000).setCredit(10000));
+		SubAccount subAccount = new SubAccount(10, new Account(1, "2005", 100000, 0));
 		System.out.println(subAccount);
 	}
 
