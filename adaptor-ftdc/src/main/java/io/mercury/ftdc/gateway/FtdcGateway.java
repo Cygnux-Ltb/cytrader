@@ -247,8 +247,9 @@ public class FtdcGateway {
 	 */
 	void onMdFrontDisconnected() {
 		log.warn("Callback onMdFrontDisconnected");
-		// this.isMdConnect = false;
-		// TODO 行情断开处理逻辑
+		// 行情断开处理逻辑
+		this.isMdLogin = false;
+		bufferQueue.enqueue(new RspMsg(new RspMdConnect(isMdLogin)));
 	}
 
 	/**
@@ -261,7 +262,7 @@ public class FtdcGateway {
 				rspUserLoginField.getBrokerID(), rspUserLoginField.getUserID(), rspUserLoginField.getLoginTime(),
 				rspUserLoginField.getTradingDay());
 		this.isMdLogin = true;
-		bufferQueue.enqueue(new RspMsg(new RspMdConnect().setAvailable(isMdLogin)));
+		bufferQueue.enqueue(new RspMsg(new RspMdConnect(isMdLogin)));
 	}
 
 	private Set<String> subscribeInstruementSet = MutableSets.newUnifiedSet();
@@ -326,18 +327,18 @@ public class FtdcGateway {
 	void onTraderFrontConnected() {
 		log.info("Callback onTraderFrontConnected");
 		if (StringUtil.nonEmpty(ftdcConfig.getAuthCode()) && !isAuthenticate) {
-			// 验证
-			CThostFtdcReqAuthenticateField authenticateField = new CThostFtdcReqAuthenticateField();
-			authenticateField.setAppID(ftdcConfig.getAppId());
-			authenticateField.setUserID(ftdcConfig.getUserId());
-			authenticateField.setBrokerID(ftdcConfig.getBrokerId());
-			authenticateField.setAuthCode(ftdcConfig.getAuthCode());
+			// 发送认证请求
+			CThostFtdcReqAuthenticateField reqAuthenticateField = new CThostFtdcReqAuthenticateField();
+			reqAuthenticateField.setAppID(ftdcConfig.getAppId());
+			reqAuthenticateField.setUserID(ftdcConfig.getUserId());
+			reqAuthenticateField.setBrokerID(ftdcConfig.getBrokerId());
+			reqAuthenticateField.setAuthCode(ftdcConfig.getAuthCode());
 			int nRequestID = ++traderRequestId;
-			ftdcTraderApi.ReqAuthenticate(authenticateField, nRequestID);
+			ftdcTraderApi.ReqAuthenticate(reqAuthenticateField, nRequestID);
 			log.info(
 					"Send ReqAuthenticate OK -> nRequestID==[{}], BrokerID==[{}], UserID==[{}], AppID==[{}], AuthCode==[{}]",
-					nRequestID, authenticateField.getBrokerID(), authenticateField.getUserID(),
-					authenticateField.getAppID(), authenticateField.getAuthCode());
+					nRequestID, reqAuthenticateField.getBrokerID(), reqAuthenticateField.getUserID(),
+					reqAuthenticateField.getAppID(), reqAuthenticateField.getAuthCode());
 		} else {
 			log.error("Unable to send ReqAuthenticate, authCode==[{}], isAuthenticate==[{}]", ftdcConfig.getAuthCode(),
 					isAuthenticate);
@@ -349,10 +350,11 @@ public class FtdcGateway {
 	 */
 	void onTraderFrontDisconnected() {
 		log.warn("Callback onTraderFrontDisconnected");
-		// this.isTraderConnect = false;
 		this.isTraderLogin = false;
 		this.isAuthenticate = false;
-		// TODO 交易前置断开处理
+		// 交易前置断开处理
+		bufferQueue
+				.enqueue(new RspMsg(new RspTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 	}
 
 	/**
@@ -385,8 +387,8 @@ public class FtdcGateway {
 		this.frontID = rspUserLoginField.getFrontID();
 		this.sessionID = rspUserLoginField.getSessionID();
 		this.isTraderLogin = true;
-		bufferQueue.enqueue(new RspMsg(
-				new RspTraderConnect().setAvailable(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+		bufferQueue
+				.enqueue(new RspMsg(new RspTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 	}
 
 	/**
@@ -441,8 +443,12 @@ public class FtdcGateway {
 	 * @param rtnOrder
 	 */
 	void onRtnOrder(CThostFtdcOrderField orderField) {
-		log.info("Callback onRtnOrder -> AccountID==[{}], OrderRef==[{}], InstrumentID==[{}]",
-				orderField.getAccountID(), orderField.getOrderRef(), orderField.getInstrumentID());
+		log.info(
+				"Callback onRtnOrder -> AccountID==[{}], OrderRef==[{}], OrderSysID==[{}], InstrumentID==[{}], "
+						+ "OrderStatus==[{}], Direction==[{}], VolumeTotalOriginal==[{}], LimitPrice==[{}]",
+				orderField.getAccountID(), orderField.getOrderRef(), orderField.getOrderSysID(),
+				orderField.getInstrumentID(), orderField.getOrderStatus(), orderField.getDirection(),
+				orderField.getVolumeTotalOriginal(), orderField.getLimitPrice());
 		bufferQueue.enqueue(new RspMsg(ftdcOrderConverter.apply(orderField)));
 	}
 
@@ -454,8 +460,11 @@ public class FtdcGateway {
 	 * @param rtnTrade
 	 */
 	void onRtnTrade(CThostFtdcTradeField tradeField) {
-		log.info("Callback onRtnTrade -> OrderRef==[{}], Price==[{}], Volume==[{}]", tradeField.getOrderRef(),
-				tradeField.getPrice(), tradeField.getVolume());
+		log.info(
+				"Callback onRtnTrade -> OrderRef==[{}], OrderSysID==[{}], InstrumentID==[{}], "
+						+ "Direction==[{}], Price==[{}], Volume==[{}]",
+				tradeField.getOrderRef(), tradeField.getOrderSysID(), tradeField.getInstrumentID(),
+				tradeField.getDirection(), tradeField.getPrice(), tradeField.getVolume());
 		bufferQueue.enqueue(new RspMsg(ftdcTradeConverter.apply(tradeField)));
 	}
 

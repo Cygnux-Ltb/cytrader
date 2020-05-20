@@ -6,6 +6,10 @@ public final class RspTraderConnect {
 	private int SessionID;
 	private boolean Available;
 
+	public RspTraderConnect(boolean Available) {
+		this.Available = Available;
+	}
+
 	public int getFrontID() {
 		return FrontID;
 	}
@@ -25,11 +29,6 @@ public final class RspTraderConnect {
 
 	public RspTraderConnect setSessionID(int sessionID) {
 		SessionID = sessionID;
-		return this;
-	}
-
-	public RspTraderConnect setAvailable(boolean available) {
-		Available = available;
 		return this;
 	}
 

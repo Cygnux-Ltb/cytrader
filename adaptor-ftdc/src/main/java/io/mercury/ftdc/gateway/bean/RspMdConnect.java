@@ -4,13 +4,12 @@ public class RspMdConnect {
 
 	private boolean Available;
 
-	public boolean isAvailable() {
-		return Available;
+	public RspMdConnect(boolean Available) {
+		this.Available = Available;
 	}
 
-	public RspMdConnect setAvailable(boolean available) {
-		Available = available;
-		return this;
+	public boolean isAvailable() {
+		return Available;
 	}
 
 }

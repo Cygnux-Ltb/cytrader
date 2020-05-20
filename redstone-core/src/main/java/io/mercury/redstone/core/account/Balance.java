@@ -1,5 +1,6 @@
 package io.mercury.redstone.core.account;
 
+@Deprecated
 public final class Balance {
 
 	private int margin = 0;
@@ -44,7 +45,7 @@ public final class Balance {
 
 	public static void main(String[] args) {
 
-		System.out.println(new Balance(1000));
+		System.out.println(Integer.MAX_VALUE);
 
 	}
 

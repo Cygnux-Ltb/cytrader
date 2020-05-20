@@ -10,25 +10,37 @@ public class SubAccount extends EnableComponent<SubAccount> {
 
 	private final int subAccountId;
 	private final String subAccountName;
-	private final Balance balance;
 	private final Account account;
+	/**
+	 * 账户余额
+	 */
+	private int balance;
+
+	/**
+	 * 可用信用额
+	 */
+	private int credit;
 
 	public SubAccount(int subAccountId, @Nonnull Account account) {
 		this(subAccountId, null, account, account.balance());
 	}
 
-	public SubAccount(int subAccountId, @Nonnull Account account, @Nonnull Balance balance) {
-		this(subAccountId, null, account, account.balance());
+	public SubAccount(int subAccountId, @Nonnull Account account, @Nonnull int balance) {
+		this(subAccountId, null, account, balance);
 	}
 
 	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account) {
 		this(subAccountId, subAccountName, account, account.balance());
 	}
 
-	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account, @Nonnull Balance balance) {
+	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account, int balance) {
+	}
+
+	public SubAccount(int subAccountId, String subAccountName, Account account, int balance, int credit) {
 		this.subAccountId = subAccountId;
 		this.account = Assertor.nonNull(account, "account");
-		this.balance = Assertor.nonNull(balance, "balance");
+		this.balance = balance;
+		this.credit = credit;
 		this.subAccountName = StringUtil.nonEmpty(subAccountName) ? subAccountName
 				: "account[" + account.accountId() + "]-subAccount[" + subAccountId + "]";
 		account.addSubAccount(this);
@@ -42,8 +54,12 @@ public class SubAccount extends EnableComponent<SubAccount> {
 		return subAccountName;
 	}
 
-	public Balance balance() {
+	public int balance() {
 		return balance;
+	}
+
+	public int credit() {
+		return credit;
 	}
 
 	public Account account() {

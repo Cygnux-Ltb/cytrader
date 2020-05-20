@@ -6,22 +6,28 @@ import org.eclipse.collections.api.set.MutableSet;
 
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableComponent;
+import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 
 public class Account extends EnableComponent<Account> {
 
-	private int accountId;
-	private String accountName;
+	private final int accountId;
+	private final String accountName;
 
 	/**
 	 * 真实的经纪商ID
 	 */
-	private String investorId;
+	private final String investorId;
 
 	/**
 	 * 账户余额
 	 */
-	private Balance balance;
+	private int balance;
+
+	/**
+	 * 可用信用额
+	 */
+	private int credit;
 
 	// TODO 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
@@ -29,25 +35,22 @@ public class Account extends EnableComponent<Account> {
 	/**
 	 * 子账户集合
 	 */
-	private MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
+	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
-	public Account(int accountId, String investorId) {
-		this(accountId, investorId, new Balance(0));
+	public Account(int accountId, @Nonnull String investorId) {
+		this(accountId, null, investorId, 0, 0);
 	}
 
-	public Account(int accountId, String investorId, Balance balance) {
-		this(accountId, null, investorId, balance);
+	public Account(int accountId, String accountName, @Nonnull String investorId) {
+		this(accountId, accountName, investorId, 0, 0);
 	}
 
-	public Account(int accountId, String accountName, String investorId) {
-		this(accountId, accountName, investorId, new Balance(0));
-	}
-
-	public Account(int accountId, String accountName, @Nonnull String investorId, @Nonnull Balance balance) {
+	public Account(int accountId, String accountName, @Nonnull String investorId, int balance, int credit) {
 		this.accountId = accountId;
-		this.accountName = StringUtil.nonEmpty(accountName) ? accountName : "use-investorId[" + investorId + "]";
-		this.investorId = investorId;
+		this.investorId = Assertor.nonEmpty(investorId, "investorId");
 		this.balance = balance;
+		this.credit = credit;
+		this.accountName = StringUtil.nonEmpty(accountName) ? accountName : "use-investorId[" + investorId + "]";
 	}
 
 	public int accountId() {
@@ -66,8 +69,22 @@ public class Account extends EnableComponent<Account> {
 		return subAccounts;
 	}
 
-	public Balance balance() {
+	public Account setBalance(int balance) {
+		this.balance = balance;
+		return this;
+	}
+
+	public int balance() {
 		return balance;
+	}
+
+	public Account setCredit(int credit) {
+		this.credit = credit;
+		return this;
+	}
+
+	public int credit() {
+		return credit;
 	}
 
 	public int subAccountCount() {

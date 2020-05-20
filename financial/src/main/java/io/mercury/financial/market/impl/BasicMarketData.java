@@ -16,7 +16,7 @@ import io.mercury.serialization.json.JsonUtil;
 /**
  * @author yellow013
  * @creation 2019年5月24日
- * @description 价格全部*10000转换为long类型
+ * @description 价格转换使用对应
  */
 public class BasicMarketData implements MarketData {
 
