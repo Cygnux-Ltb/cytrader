@@ -4,6 +4,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeConst;
+import io.mercury.common.util.BitOperator;
 
 /**
  * 
@@ -17,7 +18,7 @@ import io.mercury.common.datetime.TimeConst;
  * 2使一个较长的自增位<br>
  * 
  * C方案<br>
- * 
+ * 1使用位运算合并long类型, 分配64位
  * 
  * implement为方案A<br>
  * 
@@ -80,8 +81,14 @@ public final class OrdSysIdSupporter {
 		System.out.println(Long.MAX_VALUE);
 		System.out.println("000" + EpochTime.seconds() + "000000");
 		System.out.println("000" + EpochTime.millis() + "000000");
-		System.out.println(allocateId(921));
+		System.out.println(allocateId(920));
 		System.out.println("OrdSysId");
+
+		System.out.println(BitOperator.longBinaryFormat(Long.MAX_VALUE));
+		System.out.println(Short.MAX_VALUE);
+		System.out.println(BitOperator.intBinaryFormat(Short.MAX_VALUE));
+
+		System.out.println(BitOperator.intBinaryFormat(999));
 
 	}
 
