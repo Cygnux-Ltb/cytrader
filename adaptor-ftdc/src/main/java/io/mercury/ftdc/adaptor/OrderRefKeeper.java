@@ -8,7 +8,7 @@ import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
-import io.mercury.redstone.core.order.OrdSysIdAllocator;
+import io.mercury.redstone.core.order.OrdSysIdSupporter;
 
 /**
  * 
@@ -41,7 +41,7 @@ public class OrderRefKeeper {
 		long ordSysId = Singleton.RefMappingSysId.get(orderRef);
 		if (ordSysId == 0L) {
 			// 处理其他来源的订单
-			ordSysId = OrdSysIdAllocator.allocateFromThird();
+			ordSysId = OrdSysIdSupporter.allocateIdForThird();
 			log.warn("Handle third order, allocate third ordSysId==[{}], orderRef==[{}]", ordSysId, orderRef);
 		}
 		return ordSysId;
