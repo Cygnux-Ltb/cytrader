@@ -70,7 +70,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	private volatile boolean isMdAvailable;
 	private volatile boolean isTraderAvailable;
-	
+
 	private final StrategyScheduler scheduler;
 
 	public FtdcAdaptor(int adaptorId, String adaptorName, Account account, @Nonnull StrategyScheduler scheduler,
@@ -84,17 +84,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		this.newOrderConverter = new NewOrderConverter();
 		this.cancelOrderConverter = new CancelOrderConverter();
 	}
-	
+
 	private FtdcConfig createFtdcConfig(ImmutableParamMap<FtdcAdaptorParam> params) {
 		return new FtdcConfig().setTraderAddr(params.getString(FtdcAdaptorParam.CTP_TraderAddr))
-		.setMdAddr(params.getString(FtdcAdaptorParam.CTP_MdAddr))
-		.setBrokerId(params.getString(FtdcAdaptorParam.CTP_BrokerId))
-		.setInvestorId(params.getString(FtdcAdaptorParam.CTP_InvestorId))
-		.setUserId(params.getString(FtdcAdaptorParam.CTP_UserId))
-		.setAccountId(params.getString(FtdcAdaptorParam.CTP_AccountId))
-		.setPassword(params.getString(FtdcAdaptorParam.CTP_Password));
+				.setMdAddr(params.getString(FtdcAdaptorParam.CTP_MdAddr))
+				.setBrokerId(params.getString(FtdcAdaptorParam.CTP_BrokerId))
+				.setInvestorId(params.getString(FtdcAdaptorParam.CTP_InvestorId))
+				.setUserId(params.getString(FtdcAdaptorParam.CTP_UserId))
+				.setAccountId(params.getString(FtdcAdaptorParam.CTP_AccountId))
+				.setPassword(params.getString(FtdcAdaptorParam.CTP_Password))
+				.setAppId(params.getString(FtdcAdaptorParam.CTP_AppId))
+				.setAuthCode(params.getString(FtdcAdaptorParam.CTP_AuthCode));
 	}
-	
+
 	private FtdcGateway createFtdcGateway(FtdcConfig ftdcConfig) {
 		return new FtdcGateway("Ftdc-Gateway", ftdcConfig,
 				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 256, ftdcMsg -> {
@@ -161,7 +163,6 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					}
 				}));
 	}
-	
 
 	@Override
 	public boolean startup() {

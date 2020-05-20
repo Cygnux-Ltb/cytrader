@@ -138,8 +138,7 @@ public class FtdcGateway {
 	 */
 	private File generateTempDir() {
 		// 创建临时文件存储目录
-		File tempDir = new File(
-				SysProperties.JAVA_IO_TMPDIR + File.separator + "ctp-" + gatewayId + "-" + DateTimeUtil.date());
+		File tempDir = new File(SysProperties.JAVA_IO_TMPDIR + File.separator + gatewayId + "-" + DateTimeUtil.date());
 		log.info("Temp file dir is -> {}", tempDir.getAbsolutePath());
 		if (!tempDir.exists())
 			tempDir.mkdirs();
