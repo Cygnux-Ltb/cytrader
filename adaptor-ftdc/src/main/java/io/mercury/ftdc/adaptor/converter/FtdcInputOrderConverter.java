@@ -7,6 +7,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.ftdc.adaptor.FtdcConst;
 import io.mercury.ftdc.adaptor.consts.FtdcDirectionConst;
 import io.mercury.ftdc.adaptor.consts.FtdcOrderPriceTypeConst;
+import io.mercury.ftdc.adaptor.consts.FtdcVolumeConditionConst;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.specific.ChildOrder;
 
@@ -103,18 +104,8 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 		ftdcInputOrder.setVolumeTotalOriginal(order.ordQty().offerQty());
 
 		ftdcInputOrder.setTimeCondition(FtdcOrderPriceTypeConst.LimitPrice);
-		/**
-		 * /////////////////////////////////////////////////////////////////////////<br>
-		 * ///TFtdcVolumeConditionType是一个成交量类型类型<br>
-		 * /////////////////////////////////////////////////////////////////////////<br>
-		 * ///任何数量<br>
-		 * #define THOST_FTDC_VC_AV '1'<br>
-		 * ///最小数量<br>
-		 * #define THOST_FTDC_VC_MV '2'<br>
-		 * ///全部数量<br>
-		 * #define THOST_FTDC_VC_CV '3'<br>
-		 */
-		ftdcInputOrder.setVolumeCondition(thosttraderapiConstants.THOST_FTDC_VC_AV);
+		
+		ftdcInputOrder.setVolumeCondition(FtdcVolumeConditionConst.AV);
 		/**
 		 * 设置最小成交数量
 		 */
