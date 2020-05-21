@@ -1,6 +1,6 @@
 package io.mercury.redstone.engine.scheduler;
 
-import io.mercury.financial.market.LastMarkerDataKeeper;
+import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.Order;
@@ -19,7 +19,7 @@ public class SingleStrategyScheduler implements StrategyScheduler {
 
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
-		LastMarkerDataKeeper.onMarketDate(marketData);
+		MarkerDataKeeper.onMarketDate(marketData);
 		strategy.onMarketData(marketData);
 	}
 

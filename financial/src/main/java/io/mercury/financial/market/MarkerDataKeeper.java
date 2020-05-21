@@ -19,7 +19,7 @@ import io.mercury.financial.market.impl.BasicMarketData;
  * 
  * 仅在初始化时使用InstrumentKeeper加载一次Instrument<br>
  * 
- * 无论修改最新行情或查询最新行情都使用Get方法获取对象<br>
+ * 无论修改最新行情或查询最新行情都使用GetLast方法获取对象<br>
  * 对象使用原子类型保证
  * 
  * @creation 2019年4月16日
@@ -27,7 +27,7 @@ import io.mercury.financial.market.impl.BasicMarketData;
  * @author yellow013
  */
 @ThreadSafe
-public final class LastMarkerDataKeeper implements Dumper<String> {
+public final class MarkerDataKeeper implements Dumper<String> {
 
 	/**
 	 * 
@@ -37,16 +37,16 @@ public final class LastMarkerDataKeeper implements Dumper<String> {
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(LastMarkerDataKeeper.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(MarkerDataKeeper.class);
 
 	/**
 	 * LastMarkerData Map
 	 */
-	private final ImmutableIntObjectMap<LastMarkerData> immutableQuoteMap;
+	private final ImmutableIntObjectMap<LastMarkerData> QuoteMap;
 
-	private final static LastMarkerDataKeeper StaticInstance = new LastMarkerDataKeeper();
+	private final static MarkerDataKeeper StaticInstance = new MarkerDataKeeper();
 
-	private LastMarkerDataKeeper() {
+	private MarkerDataKeeper() {
 		MutableIntObjectMap<LastMarkerData> mutableQuoteMap = MutableMaps.newIntObjectHashMap();
 		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
 		if (allInstrument.isEmpty())
@@ -55,22 +55,21 @@ public final class LastMarkerDataKeeper implements Dumper<String> {
 			mutableQuoteMap.put(instrument.id(), new LastMarkerData());
 			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.id(), instrument);
 		});
-		immutableQuoteMap = mutableQuoteMap.toImmutable();
+		QuoteMap = mutableQuoteMap.toImmutable();
 	}
 
 	public static void onMarketDate(BasicMarketData marketData) {
 		Instrument instrument = marketData.instrument();
-		LastMarkerData lastMarkerData = get(instrument);
-		if (lastMarkerData == null) {
+		LastMarkerData lastMarkerData = getLast(instrument);
+		if (lastMarkerData == null)
 			log.warn("Instrument unregistered, instrument -> {}", instrument);
-		} else {
+		else
 			lastMarkerData.setAskPrice1(marketData.getAskPrice1()).setAskVolume1(marketData.getAskVolume1())
 					.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());
-		}
 	}
 
-	public static LastMarkerData get(Instrument instrument) {
-		return StaticInstance.immutableQuoteMap.get(instrument.id());
+	public static LastMarkerData getLast(Instrument instrument) {
+		return StaticInstance.QuoteMap.get(instrument.id());
 	}
 
 	public static class LastMarkerData {

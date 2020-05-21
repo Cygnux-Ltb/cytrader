@@ -104,6 +104,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					case RspMdConnect:
 						RspMdConnect rspMdConnect = ftdcMsg.getRspMdConnect();
 						this.isMdAvailable = rspMdConnect.isAvailable();
+						log.info("Handle RspMdConnect, isMdAvailable==[{}]", isMdAvailable);
 						AdaptorEvent mdEvent = new AdaptorEvent(adaptorId());
 						if (rspMdConnect.isAvailable()) {
 							mdEvent.setAdaptorStatus(AdaptorStatus.MdEnable);
@@ -114,14 +115,16 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						break;
 					case RspTraderConnect:
 						RspTraderConnect traderConnect = ftdcMsg.getRspTraderConnect();
+						this.isTraderAvailable = traderConnect.isAvailable();
 						this.frontId = traderConnect.getFrontID();
 						this.sessionId = traderConnect.getSessionID();
-						this.isTraderAvailable = traderConnect.isAvailable();
+						log.info("Handle RspTraderConnect, isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
+								isTraderAvailable, frontId, sessionId);
 						AdaptorEvent traderEvent = new AdaptorEvent(adaptorId());
 						if (traderConnect.isAvailable()) {
-							traderEvent.setAdaptorStatus(AdaptorStatus.TraderDisable);
-						} else {
 							traderEvent.setAdaptorStatus(AdaptorStatus.TraderEnable);
+						} else {
+							traderEvent.setAdaptorStatus(AdaptorStatus.TraderDisable);
 						}
 						scheduler.onAdaptorEvent(traderEvent);
 						break;

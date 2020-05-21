@@ -19,8 +19,8 @@ import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentKeeper;
-import io.mercury.financial.market.LastMarkerDataKeeper;
-import io.mercury.financial.market.LastMarkerDataKeeper.LastMarkerData;
+import io.mercury.financial.market.MarkerDataKeeper;
+import io.mercury.financial.market.MarkerDataKeeper.LastMarkerData;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.account.AccountKeeper;
@@ -267,7 +267,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @return
 	 */
 	protected long getLevel1Price(Instrument instrument, TrdDirection direction) {
-		LastMarkerData markerData = LastMarkerDataKeeper.get(instrument);
+		LastMarkerData markerData = MarkerDataKeeper.getLast(instrument);
 		switch (direction) {
 		case Long:
 			// 获取当前卖一价
