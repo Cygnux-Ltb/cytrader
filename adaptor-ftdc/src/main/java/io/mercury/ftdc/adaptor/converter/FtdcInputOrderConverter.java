@@ -5,9 +5,11 @@ import java.util.function.Function;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.ftdc.adaptor.FtdcConst;
-import io.mercury.ftdc.adaptor.consts.FtdcDirectionConst;
-import io.mercury.ftdc.adaptor.consts.FtdcOrderPriceTypeConst;
-import io.mercury.ftdc.adaptor.consts.FtdcVolumeConditionConst;
+import io.mercury.ftdc.adaptor.consts.ContingentConditionConst;
+import io.mercury.ftdc.adaptor.consts.DirectionConst;
+import io.mercury.ftdc.adaptor.consts.ForceCloseReason;
+import io.mercury.ftdc.adaptor.consts.OrderPriceTypeConst;
+import io.mercury.ftdc.adaptor.consts.VolumeConditionConst;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.specific.ChildOrder;
 
@@ -27,7 +29,7 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 		 */
 		ftdcInputOrder.setInstrumentID(instrument.code());
 
-		ftdcInputOrder.setOrderPriceType(FtdcOrderPriceTypeConst.LimitPrice);
+		ftdcInputOrder.setOrderPriceType(OrderPriceTypeConst.LimitPrice);
 
 		/**
 		 * /////////////////////////////////////////////////////////////////////////
@@ -86,10 +88,10 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 
 		switch (order.direction()) {
 		case Long:
-			ftdcInputOrder.setDirection(FtdcDirectionConst.Buy);
+			ftdcInputOrder.setDirection(DirectionConst.Buy);
 			break;
 		case Short:
-			ftdcInputOrder.setDirection(FtdcDirectionConst.Sell);
+			ftdcInputOrder.setDirection(DirectionConst.Sell);
 			break;
 		case Invalid:
 			throw new RuntimeException(order.direction() + " is Invalid.");
@@ -103,77 +105,32 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 		 */
 		ftdcInputOrder.setVolumeTotalOriginal(order.ordQty().offerQty());
 
-		ftdcInputOrder.setTimeCondition(FtdcOrderPriceTypeConst.LimitPrice);
+		/**
+		 * 
+		 */
+		ftdcInputOrder.setTimeCondition(OrderPriceTypeConst.LimitPrice);
 		
-		ftdcInputOrder.setVolumeCondition(FtdcVolumeConditionConst.AV);
+		/**
+		 * 
+		 */
+		ftdcInputOrder.setVolumeCondition(VolumeConditionConst.AV);
 		/**
 		 * 设置最小成交数量
 		 */
 		ftdcInputOrder.setMinVolume(1);
+		
 		/**
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///TFtdcContingentConditionType是一个触发条件类型
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///立即<br>
-		 * #define THOST_FTDC_CC_Immediately '1'<br>
-		 * ///止损<br>
-		 * #define THOST_FTDC_CC_Touch '2'<br>
-		 * ///止赢<br>
-		 * #define THOST_FTDC_CC_TouchProfit '3'<br>
-		 * ///预埋单<br>
-		 * #define THOST_FTDC_CC_ParkedOrder '4'<br>
-		 * ///最新价大于条件价<br>
-		 * #define THOST_FTDC_CC_LastPriceGreaterThanStopPrice '5'<br>
-		 * ///最新价大于等于条件价<br>
-		 * #define THOST_FTDC_CC_LastPriceGreaterEqualStopPrice '6'<br>
-		 * ///最新价小于条件价<br>
-		 * #define THOST_FTDC_CC_LastPriceLesserThanStopPrice '7'<br>
-		 * ///最新价小于等于条件价<br>
-		 * #define THOST_FTDC_CC_LastPriceLesserEqualStopPrice '8'<br>
-		 * ///卖一价大于条件价<br>
-		 * #define THOST_FTDC_CC_AskPriceGreaterThanStopPrice '9'<br>
-		 * ///卖一价大于等于条件价<br>
-		 * #define THOST_FTDC_CC_AskPriceGreaterEqualStopPrice 'A'<br>
-		 * ///卖一价小于条件价<br>
-		 * #define THOST_FTDC_CC_AskPriceLesserThanStopPrice 'B'<br>
-		 * ///卖一价小于等于条件价<br>
-		 * #define THOST_FTDC_CC_AskPriceLesserEqualStopPrice 'C'<br>
-		 * ///买一价大于条件价<br>
-		 * #define THOST_FTDC_CC_BidPriceGreaterThanStopPrice 'D'<br>
-		 * ///买一价大于等于条件价<br>
-		 * #define THOST_FTDC_CC_BidPriceGreaterEqualStopPrice 'E'<br>
-		 * ///买一价小于条件价<br>
-		 * #define THOST_FTDC_CC_BidPriceLesserThanStopPrice 'F'<br>
-		 * ///买一价小于等于条件价<br>
-		 * #define THOST_FTDC_CC_BidPriceLesserEqualStopPrice 'H'<br>
+		 * 设置触发条件
 		 */
-		ftdcInputOrder.setContingentCondition(thosttraderapiConstants.THOST_FTDC_CC_Immediately);
+		ftdcInputOrder.setContingentCondition(ContingentConditionConst.Immediately);
 		/**
 		 * 设置止损价格
 		 */
 		ftdcInputOrder.setStopPrice(0.0D);
 		/**
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///TFtdcForceCloseReasonType是一个强平原因类型
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///非强平<br>
-		 * #define THOST_FTDC_FCC_NotForceClose '0'<br>
-		 * ///资金不足<br>
-		 * #define THOST_FTDC_FCC_LackDeposit '1'<br>
-		 * ///客户超仓<br>
-		 * #define THOST_FTDC_FCC_ClientOverPositionLimit '2'<br>
-		 * ///会员超仓<br>
-		 * #define THOST_FTDC_FCC_MemberOverPositionLimit '3'<br>
-		 * ///持仓非整数倍<br>
-		 * #define THOST_FTDC_FCC_NotMultiple '4'<br>
-		 * ///违规<br>
-		 * #define THOST_FTDC_FCC_Violation '5'<br>
-		 * ///其它<br>
-		 * #define THOST_FTDC_FCC_Other '6'<br>
-		 * ///自然人临近交割<br>
-		 * #define THOST_FTDC_FCC_PersonDeliv '7'<br>
+		 * 
 		 */
-		ftdcInputOrder.setForceCloseReason(thosttraderapiConstants.THOST_FTDC_FCC_NotForceClose);
+		ftdcInputOrder.setForceCloseReason(ForceCloseReason.NotForceClose);
 		/**
 		 * 设置自动挂起标识
 		 */

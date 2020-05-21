@@ -27,9 +27,7 @@ public interface FtdcConst {
 	
 	
 	
-	char DirectionBuy = thosttraderapiConstants.THOST_FTDC_D_Buy;
-	
-	char DirectionSell = thosttraderapiConstants.THOST_FTDC_D_Sell;
+
 	
 	
 	

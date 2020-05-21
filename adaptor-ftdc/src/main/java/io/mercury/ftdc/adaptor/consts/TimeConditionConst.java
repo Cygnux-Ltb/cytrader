@@ -21,6 +21,6 @@ package io.mercury.ftdc.adaptor.consts;
  * ///集合竞价有效<br>
  * #define THOST_FTDC_TC_GFA '6'<br>
  */
-public interface FtdcTimeConditionConst {
+public interface TimeConditionConst {
 
 }
