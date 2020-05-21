@@ -514,24 +514,15 @@ public class FtdcGateway {
 		bufferQueue.enqueue(new RspMsg(ftdcOrderActionConverter.apply(orderActionField)));
 	}
 
-	/**
-	 * 错误推送
-	 * 
-	 * @param rspInfoField
-	 */
-	void onRspError(CThostFtdcRspInfoField rspInfoField) {
-		log.error("Gateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfoField.getErrorID(),
-				rspInfoField.getErrorMsg());
-	}
-
 	public void ReqQryOrder(String exchangeId) {
-		int nRequestID = ++traderRequestId;
 		CThostFtdcQryOrderField qryOrderField = new CThostFtdcQryOrderField();
 		qryOrderField.setBrokerID(ftdcConfig.getBrokerId());
 		qryOrderField.setInvestorID(ftdcConfig.getInvestorId());
 		qryOrderField.setExchangeID(exchangeId);
+		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQryOrder(qryOrderField, nRequestID);
-		log.info("Send ReqQryOrder OK -> nRequestID==[{}]", nRequestID);
+		log.info("Send ReqQryOrder OK -> nRequestID==[{}], BrokerID==[{}], InvestorID==[{}], ExchangeID==[{}]",
+				nRequestID, qryOrderField.getBrokerID(), qryOrderField.getInvestorID(), qryOrderField.getExchangeID());
 	}
 
 	void onRspQryOrder(CThostFtdcOrderField orderField, boolean isLast) {
@@ -547,7 +538,11 @@ public class FtdcGateway {
 		qryTradingAccountField.setCurrencyID(ftdcConfig.getCurrencyId());
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQryTradingAccount(qryTradingAccountField, nRequestID);
-		log.info("Send ReqQryTradingAccount OK -> nRequestID==[{}]", nRequestID);
+		log.info(
+				"Send ReqQryTradingAccount OK -> nRequestID==[{}], BrokerID==[{}], "
+						+ "AccountID==[{}], InvestorID==[{}], CurrencyID==[{}]",
+				nRequestID, qryTradingAccountField.getBrokerID(), qryTradingAccountField.getAccountID(),
+				qryTradingAccountField.getInvestorID(), qryTradingAccountField.getCurrencyID());
 	}
 
 	void onQryTradingAccount(CThostFtdcTradingAccountField tradingAccountField, boolean bIsLast) {
@@ -568,7 +563,8 @@ public class FtdcGateway {
 		qryInvestorPositionField.setInvestorID(ftdcConfig.getInvestorId());
 		int nRequestID = ++traderRequestId;
 		ftdcTraderApi.ReqQryInvestorPosition(qryInvestorPositionField, nRequestID);
-		log.info("Send ReqQryInvestorPosition OK -> nRequestID==[{}]", nRequestID);
+		log.info("Send ReqQryInvestorPosition OK -> nRequestID==[{}], BrokerID==[{}], InvestorID==[{}]", nRequestID,
+				qryInvestorPositionField.getBrokerID(), qryInvestorPositionField.getInvestorID());
 	}
 
 	/**
@@ -577,10 +573,12 @@ public class FtdcGateway {
 	 * @param isLast
 	 */
 	void onRspQryInvestorPosition(CThostFtdcInvestorPositionField investorPositionField, boolean isLast) {
-		log.info("onRspQryInvestorPosition -> InstrumentID==[{}] InvestorID==[{}] Position==[{}]",
-				investorPositionField.getInstrumentID(), investorPositionField.getInvestorID(),
-				investorPositionField.getPosition());
-		// TODO Inbound
+		if (investorPositionField != null) {
+			log.info("onRspQryInvestorPosition -> InstrumentID==[{}] InvestorID==[{}] Position==[{}]",
+					investorPositionField.getInstrumentID(), investorPositionField.getInvestorID(),
+					investorPositionField.getPosition());
+			// TODO Inbound
+		}
 	}
 
 	/**
@@ -601,11 +599,24 @@ public class FtdcGateway {
 	/**
 	 * 查询标的
 	 */
-	public void ReqQryInstrument() {
+	public void ReqQryInstrument(String exchangeId, String instrumentId) {
 		CThostFtdcQryInstrumentField qryInstrument = new CThostFtdcQryInstrumentField();
 		int nRequestID = ++traderRequestId;
+		qryInstrument.setExchangeID(exchangeId);
+		qryInstrument.setInstrumentID(instrumentId);
 		ftdcTraderApi.ReqQryInstrument(qryInstrument, nRequestID);
-		log.info("Send ReqQryInstrument OK -> nRequestID==[{}]", nRequestID);
+		log.info("Send ReqQryInstrument OK -> nRequestID==[{}], ExchangeID==[{}], InstrumentID==[{}]", nRequestID,
+				qryInstrument.getExchangeID(), qryInstrument.getInstrumentID());
+	}
+
+	/**
+	 * 错误推送
+	 * 
+	 * @param rspInfoField
+	 */
+	void onRspError(CThostFtdcRspInfoField rspInfoField) {
+		log.error("FtdcGateway onRspError -> ErrorID==[{}], ErrorMsg==[{}]", rspInfoField.getErrorID(),
+				rspInfoField.getErrorMsg());
 	}
 
 }

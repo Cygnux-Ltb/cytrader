@@ -42,7 +42,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 			if (pRspUserLogin != null)
 				gateway.onMdRspUserLogin(pRspUserLogin);
 			else
-				log.error("OnRspUserLogin return null");
+				log.error("FtdcMdSpiImpl :: OnRspUserLogin return null");
 		}
 	}
 
@@ -56,7 +56,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 				log.info("Output :: OnRspUserLogout -> BrokerID==[{}], UserID==[{}]", pUserLogout.getBrokerID(),
 						pUserLogout.getUserID());
 			else
-				log.error("OnRspUserLogin return null");
+				log.error("FtdcMdSpiImpl :: OnRspUserLogin return null");
 		}
 
 	}
@@ -69,7 +69,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 			if (pSpecificInstrument != null)
 				gateway.onRspSubMarketData(pSpecificInstrument);
 			else
-				log.error("OnRspSubMarketData return null");
+				log.error("FtdcMdSpiImpl :: OnRspSubMarketData return null");
 		}
 	}
 
@@ -78,7 +78,7 @@ public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 		if (pDepthMarketData != null)
 			gateway.onRtnDepthMarketData(pDepthMarketData);
 		else
-			log.error("OnRtnDepthMarketData return null");
+			log.error("FtdcMdSpiImpl :: OnRtnDepthMarketData return null");
 	}
 
 	/**

@@ -50,7 +50,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			if (pRspAuthenticateField != null)
 				gateway.onRspAuthenticate(pRspAuthenticateField);
 			else
-				log.warn("OnRspAuthenticate return null");
+				log.warn("TraderSpiImpl :: OnRspAuthenticate return null");
 		}
 	}
 
@@ -62,7 +62,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			if (pRspUserLogin != null)
 				gateway.onTraderRspUserLogin(pRspUserLogin);
 			else
-				log.error("OnRspUserLogin return null");
+				log.error("TraderSpiImpl :: OnRspUserLogin return null");
 		}
 	}
 
@@ -76,7 +76,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 				log.info("Output :: OnRspUserLogout -> BrokerID==[{}], UserID==[{}]", pUserLogout.getBrokerID(),
 						pUserLogout.getUserID());
 			} else {
-				log.error("OnRspUserLogout return null");
+				log.error("TraderSpiImpl :: OnRspUserLogout return null");
 			}
 		}
 	}
@@ -89,7 +89,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			if (pOrder != null)
 				gateway.onRspQryOrder(pOrder, bIsLast);
 			else
-				log.error("OnRspQryOrder return null");
+				log.error("TraderSpiImpl :: OnRspQryOrder return null");
 
 		}
 	}
@@ -102,7 +102,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			if (pTradingAccount != null)
 				gateway.onQryTradingAccount(pTradingAccount, bIsLast);
 			else
-				log.error("OnRspQryTradingAccount return null");
+				log.error("TraderSpiImpl :: OnRspQryTradingAccount return null");
 		}
 	}
 
@@ -111,10 +111,11 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
 		log.info("TraderSpiImpl :: OnRspQryInvestorPosition, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		hasError("TraderSpi :: OnRspQryInvestorPosition", pRspInfo);
-		if (pInvestorPosition != null)
+		if (pInvestorPosition != null) {
 			gateway.onRspQryInvestorPosition(pInvestorPosition, bIsLast);
-		else
-			log.error("OnRspQryInvestorPosition return null");
+		} else {
+			log.error("TraderSpiImpl :: OnRspQryInvestorPosition return null");
+		}
 	}
 
 	@Override
@@ -122,7 +123,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			int nRequestID, boolean bIsLast) {
 		log.info("TraderSpiImpl :: OnRspQrySettlementInfo, nRequestID==[{}], bIsLast==[{}]", nRequestID, bIsLast);
 		if (!hasError("TraderSpi :: OnRspQrySettlementInfo", pRspInfo)) {
-			if (pSettlementInfo != null)
+			if (pSettlementInfo != null) {
 				log.info(
 						"Output :: OnRspQrySettlementInfo -> BrokerID==[{}], AccountID==[{}], "
 								+ "InvestorID==[{}], SettlementID==[{}], TradingDay==[{}], CurrencyID==[{}], "
@@ -130,8 +131,9 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 						pSettlementInfo.getBrokerID(), pSettlementInfo.getAccountID(), pSettlementInfo.getInvestorID(),
 						pSettlementInfo.getSettlementID(), pSettlementInfo.getTradingDay(),
 						pSettlementInfo.getCurrencyID(), pSettlementInfo.getContent());
-			else
-				log.error("OnRspQrySettlementInfo return null");
+			} else {
+				log.error("TraderSpiImpl :: OnRspQrySettlementInfo return null");
+			}
 		}
 	}
 
@@ -144,7 +146,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 				log.info("Output :: OnRspQryInstrument, ExchangeID==[{}], InstrumentID==[{}]",
 						pInstrument.getExchangeID(), pInstrument.getInstrumentID());
 			else
-				log.error("OnRspQryInstrument return null");
+				log.error("TraderSpiImpl :: OnRspQryInstrument return null");
 		}
 	}
 
@@ -153,7 +155,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		if (pOrder != null)
 			gateway.onRtnOrder(pOrder);
 		else
-			log.error("OnRtnOrder return null");
+			log.error("TraderSpiImpl :: OnRtnOrder return null");
 	}
 
 	@Override
@@ -161,7 +163,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 		if (pTrade != null)
 			gateway.onRtnTrade(pTrade);
 		else
-			log.error("OnRtnTrade return null");
+			log.error("TraderSpiImpl :: OnRtnTrade return null");
 	}
 
 	/**
@@ -175,7 +177,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			if (pInputOrder != null)
 				gateway.onRspOrderInsert(pInputOrder);
 			else
-				log.error("OnRspOrderInsert return null");
+				log.error("TraderSpiImpl :: OnRspOrderInsert return null");
 		}
 	}
 
@@ -189,7 +191,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			if (pInputOrder != null)
 				gateway.onErrRtnOrderInsert(pInputOrder);
 			else
-				log.error("OnErrRtnOrderInsert return null");
+				log.error("TraderSpiImpl :: OnErrRtnOrderInsert return null");
 		}
 	}
 
@@ -204,7 +206,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			if (pInputOrderAction != null)
 				gateway.onRspOrderAction(pInputOrderAction);
 			else
-				log.error("OnRspOrderAction return null");
+				log.error("TraderSpiImpl :: OnRspOrderAction return null");
 		}
 	}
 
@@ -218,7 +220,7 @@ public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 			if (pOrderAction != null)
 				gateway.onErrRtnOrderAction(pOrderAction);
 			else
-				log.error("OnErrRtnOrderAction return null");
+				log.error("TraderSpiImpl :: OnErrRtnOrderAction return null");
 		}
 	}
 

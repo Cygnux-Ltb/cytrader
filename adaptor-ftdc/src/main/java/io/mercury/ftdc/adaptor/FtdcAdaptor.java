@@ -17,6 +17,7 @@ import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
+import io.mercury.financial.instrument.Exchange;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.CancelOrderConverter;
@@ -42,6 +43,7 @@ import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.specific.ChildOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
+import io.mercury.serialization.json.JsonUtil;
 
 public class FtdcAdaptor extends AdaptorBaseImpl {
 
@@ -104,7 +106,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					case RspMdConnect:
 						RspMdConnect rspMdConnect = ftdcMsg.getRspMdConnect();
 						this.isMdAvailable = rspMdConnect.isAvailable();
-						log.info("Handle RspMdConnect, isMdAvailable==[{}]", isMdAvailable);
+						log.info("Queue Processor Handle RspMdConnect, isMdAvailable==[{}]", isMdAvailable);
 						AdaptorEvent mdEvent = new AdaptorEvent(adaptorId());
 						if (rspMdConnect.isAvailable()) {
 							mdEvent.setAdaptorStatus(AdaptorStatus.MdEnable);
@@ -118,7 +120,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						this.isTraderAvailable = traderConnect.isAvailable();
 						this.frontId = traderConnect.getFrontID();
 						this.sessionId = traderConnect.getSessionID();
-						log.info("Handle RspTraderConnect, isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
+						log.info(
+								"Queue Processor Handle RspTraderConnect, isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
 								isTraderAvailable, frontId, sessionId);
 						AdaptorEvent traderEvent = new AdaptorEvent(adaptorId());
 						if (traderConnect.isAvailable()) {
@@ -137,29 +140,38 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					case FtdcOrder:
 						// 报单回报处理
 						FtdcOrder ftdcOrder = ftdcMsg.getFtdcOrder();
+						log.info(
+								"Queue Processor Handle FtdcOrder, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
+								ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef());
 						OrdReport rtnOrder = ftdcOrderConverter.apply(ftdcOrder);
 						scheduler.onOrdReport(rtnOrder);
 						break;
 					case FtdcTrade:
 						// 成交回报处理
 						FtdcTrade ftdcTrade = ftdcMsg.getFtdcTrade();
+						log.info(
+								"Queue Processor Handle FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
+								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
 						OrdReport rtnTrade = ftdcTradeConverter.apply(ftdcTrade);
 						scheduler.onOrdReport(rtnTrade);
 						break;
 					case FtdcInputOrder:
 						// 报单错误处理
 						FtdcInputOrder ftdcInputOrder = ftdcMsg.getFtdcInputOrder();
-						log.warn("");
+						log.info("Queue Processor Handle FtdcInputOrder, FtdcInputOrder -> {}",
+								JsonUtil.toJson(ftdcInputOrder));
 						break;
 					case FtdcInputOrderAction:
 						// 撤单错误处理1
 						FtdcInputOrderAction ftdcInputOrderAction = ftdcMsg.getFtdcInputOrderAction();
-						log.warn("");
+						log.info("Queue Processor Handle FtdcInputOrderAction, FtdcInputOrderAction -> {}",
+								JsonUtil.toJson(ftdcInputOrderAction));
 						break;
 					case FtdcOrderAction:
 						// 撤单错误处理2
-						FtdcOrderAction errRtnOrderInsert = ftdcMsg.getFtdcOrderAction();
-						log.warn("");
+						FtdcOrderAction ftdcOrderAction = ftdcMsg.getFtdcOrderAction();
+						log.info("Queue Processor Handle FtdcOrderAction, FtdcOrderAction -> {}",
+								JsonUtil.toJson(ftdcOrderAction));
 						break;
 					default:
 						break;
@@ -239,11 +251,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			if (isTraderAvailable) {
 				startNewThread(() -> {
 					synchronized (mutex) {
-						log.info("Ready to sent ReqQryInvestorPosition");
+						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						// TODO 写入ExchangeId
-						gateway.ReqQryOrder("SHFE");
-						log.info("Has been sent ReqQryInvestorPosition");
+						gateway.ReqQryOrder(Exchange.SHFE.code());
+						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryOrder-SubThread");
 				return true;
@@ -262,10 +273,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			if (isTraderAvailable) {
 				startNewThread(() -> {
 					synchronized (mutex) {
-						log.info("Ready to sent ReqQryInvestorPosition");
+						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
 						gateway.ReqQryInvestorPosition();
-						log.info("Has been sent ReqQryInvestorPosition");
+						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryPositions-SubThread");
 				return true;
@@ -284,10 +295,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			if (isTraderAvailable) {
 				startNewThread(() -> {
 					synchronized (mutex) {
-						log.info("Ready to sent ReqQryTradingAccount");
+						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount, Waiting...");
 						sleep(1250);
 						gateway.ReqQryTradingAccount();
-						log.info("Has been sent ReqQryTradingAccount");
+						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
 					}
 				}, "QueryBalance-SubThread");
 				return true;
