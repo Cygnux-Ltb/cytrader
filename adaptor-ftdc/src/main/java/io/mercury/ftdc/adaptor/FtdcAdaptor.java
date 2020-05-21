@@ -20,11 +20,11 @@ import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.financial.instrument.Exchange;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.mercury.ftdc.adaptor.converter.CancelOrderConverter;
 import io.mercury.ftdc.adaptor.converter.FtdcDepthMarketDataConverter;
+import io.mercury.ftdc.adaptor.converter.FtdcInputOrderActionConverter;
+import io.mercury.ftdc.adaptor.converter.FtdcInputOrderConverter;
 import io.mercury.ftdc.adaptor.converter.FtdcOrderConverter;
 import io.mercury.ftdc.adaptor.converter.FtdcTradeConverter;
-import io.mercury.ftdc.adaptor.converter.NewOrderConverter;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
 import io.mercury.ftdc.gateway.FtdcConfig;
 import io.mercury.ftdc.gateway.FtdcGateway;
@@ -52,19 +52,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	/**
 	 * 转换行情
 	 */
-	private Function<FtdcDepthMarketData, BasicMarketData> ftdcDepthMarketDataConverter = new FtdcDepthMarketDataConverter();
+	private final Function<FtdcDepthMarketData, BasicMarketData> ftdcDepthMarketDataConverter = new FtdcDepthMarketDataConverter();
 
 	/**
 	 * 转换报单回报
 	 */
-	private Function<FtdcOrder, OrdReport> ftdcOrderConverter = new FtdcOrderConverter();
+	private final Function<FtdcOrder, OrdReport> ftdcOrderConverter = new FtdcOrderConverter();
 
 	/**
 	 * 转换成交回报
 	 */
-	private Function<FtdcTrade, OrdReport> ftdcTradeConverter = new FtdcTradeConverter();
+	private final Function<FtdcTrade, OrdReport> ftdcTradeConverter = new FtdcTradeConverter();
 
-	private final FtdcGateway gateway;
+	private final FtdcGateway ftdcGateway;
 
 	// TODO 两个int类型可以合并
 	private volatile int frontId;
@@ -80,28 +80,40 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		super(adaptorId, adaptorName, account);
 		this.scheduler = scheduler;
 		// 创建配置信息
-		FtdcConfig configInfo = createFtdcConfig(params);
+		FtdcConfig ftdcConfig = createFtdcConfig(params);
 		// 创建Gateway
-		this.gateway = createFtdcGateway(configInfo);
-		this.newOrderConverter = new NewOrderConverter();
-		this.cancelOrderConverter = new CancelOrderConverter();
+		this.ftdcGateway = createFtdcGateway(ftdcConfig);
+		this.ftdcInputOrderConverter = new FtdcInputOrderConverter();
+		this.ftdcInputOrderActionConverter = new FtdcInputOrderActionConverter();
 	}
 
+	/**
+	 * 
+	 * @param params
+	 * @return
+	 */
 	private FtdcConfig createFtdcConfig(ImmutableParamMap<FtdcAdaptorParam> params) {
 		return new FtdcConfig().setTraderAddr(params.getString(FtdcAdaptorParam.CTP_TraderAddr))
 				.setMdAddr(params.getString(FtdcAdaptorParam.CTP_MdAddr))
+				.setAppId(params.getString(FtdcAdaptorParam.CTP_AppId))
 				.setBrokerId(params.getString(FtdcAdaptorParam.CTP_BrokerId))
 				.setInvestorId(params.getString(FtdcAdaptorParam.CTP_InvestorId))
-				.setUserId(params.getString(FtdcAdaptorParam.CTP_UserId))
 				.setAccountId(params.getString(FtdcAdaptorParam.CTP_AccountId))
+				.setUserId(params.getString(FtdcAdaptorParam.CTP_UserId))
 				.setPassword(params.getString(FtdcAdaptorParam.CTP_Password))
-				.setAppId(params.getString(FtdcAdaptorParam.CTP_AppId))
-				.setAuthCode(params.getString(FtdcAdaptorParam.CTP_AuthCode));
+				.setAuthCode(params.getString(FtdcAdaptorParam.CTP_AuthCode))
+				.setIpAddr(params.getString(FtdcAdaptorParam.CTP_IpAddr))
+				.setMacAddr(params.getString(FtdcAdaptorParam.CTP_MacAddr));
 	}
 
+	/**
+	 * 
+	 * @param ftdcConfig
+	 * @return
+	 */
 	private FtdcGateway createFtdcGateway(FtdcConfig ftdcConfig) {
 		return new FtdcGateway("Ftdc-Gateway", ftdcConfig,
-				MpscArrayBlockingQueue.autoStartQueue("Gateway-Handle-Queue", 256, ftdcMsg -> {
+				MpscArrayBlockingQueue.autoStartQueue("FtdcGateway-Buffer", 256, ftdcMsg -> {
 					switch (ftdcMsg.getRspType()) {
 					case RspMdConnect:
 						RspMdConnect rspMdConnect = ftdcMsg.getRspMdConnect();
@@ -182,7 +194,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public boolean startup() {
 		try {
-			gateway.initAndJoin();
+			ftdcGateway.initAndJoin();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -193,7 +205,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	public boolean subscribeMarketData(Instrument... instruments) {
 		try {
 			if (isMdAvailable) {
-				gateway.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
+				ftdcGateway
+						.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
 				return true;
 			} else {
 				return false;
@@ -204,19 +217,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		}
 	}
 
-	private final Function<Order, CThostFtdcInputOrderField> newOrderConverter;
+	private final Function<Order, CThostFtdcInputOrderField> ftdcInputOrderConverter;
 
 	@Override
 	public boolean newOredr(ChildOrder order) {
 		try {
-			CThostFtdcInputOrderField ftdcInputOrder = newOrderConverter.apply(order);
+			CThostFtdcInputOrderField ftdcInputOrder = ftdcInputOrderConverter.apply(order);
 			String orderRef = Integer.toString(OrderRefGenerator.next(order.strategyId()));
 			/**
 			 * 设置OrderRef
 			 */
 			ftdcInputOrder.setOrderRef(orderRef);
 			OrderRefKeeper.put(orderRef, order.ordSysId());
-			gateway.ReqOrderInsert(ftdcInputOrder);
+			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -224,16 +237,16 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		}
 	}
 
-	private final Function<Order, CThostFtdcInputOrderActionField> cancelOrderConverter;
+	private final Function<Order, CThostFtdcInputOrderActionField> ftdcInputOrderActionConverter;
 
 	@Override
 	public boolean cancelOrder(ChildOrder order) {
 		try {
-			CThostFtdcInputOrderActionField ftdcInputOrderAction = cancelOrderConverter.apply(order);
+			CThostFtdcInputOrderActionField ftdcInputOrderAction = ftdcInputOrderActionConverter.apply(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.ordSysId());
 
 			ftdcInputOrderAction.setOrderRef(orderRef);
-			gateway.ReqOrderAction(ftdcInputOrderAction);
+			ftdcGateway.ReqOrderAction(ftdcInputOrderAction);
 			return true;
 		} catch (OrderRefNotFoundException e) {
 			log.error(e.getMessage());
@@ -253,7 +266,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						gateway.ReqQryOrder(Exchange.SHFE.code());
+						ftdcGateway.ReqQryOrder(Exchange.SHFE.code());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryOrder-SubThread");
@@ -275,7 +288,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						gateway.ReqQryInvestorPosition();
+						ftdcGateway.ReqQryInvestorPosition();
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryPositions-SubThread");
@@ -297,7 +310,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount, Waiting...");
 						sleep(1250);
-						gateway.ReqQryTradingAccount();
+						ftdcGateway.ReqQryTradingAccount();
 						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
 					}
 				}, "QueryBalance-SubThread");

@@ -3,38 +3,14 @@ package io.mercury.ftdc.adaptor.converter;
 import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
-import ctp.thostapi.thosttraderapiConstants;
-import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
+import io.mercury.ftdc.adaptor.FtdcConst;
+import io.mercury.ftdc.adaptor.consts.FtdcDirectionConst;
+import io.mercury.ftdc.adaptor.consts.FtdcOrderPriceTypeConst;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.specific.ChildOrder;
 
-public final class NewOrderConverter implements Function<Order, CThostFtdcInputOrderField> {
-
-	/**
-	 * 组合开平标识, 开仓
-	 */
-	private final String CombOffsetFlag_Open = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Open);
-	/**
-	 * 组合开平标识, 平仓
-	 */
-	private final String CombOffsetFlag_Close = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Close);
-	/**
-	 * 组合开平标识, 平今
-	 */
-	private final String CombOffsetFlag_CloseToday = StringUtil
-			.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseToday);
-	/**
-	 * 组合开平标识, 平昨
-	 */
-	private final String CombOffsetFlag_CloseYesterday = StringUtil
-			.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday);
-
-	/**
-	 * 组合投机套保标识, 投机
-	 */
-	private final String CombHedgeFlag_Speculation = StringUtil
-			.toString(thosttraderapiConstants.THOST_FTDC_HF_Speculation);
+public final class FtdcInputOrderConverter implements Function<Order, CThostFtdcInputOrderField> {
 
 	@Override
 	public CThostFtdcInputOrderField apply(Order order) {
@@ -49,44 +25,8 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		 * 设置交易标的
 		 */
 		ftdcInputOrder.setInstrumentID(instrument.code());
-		/**
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///TFtdcOrderPriceTypeType是一个报单价格条件类型
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///任意价<br>
-		 * #define THOST_FTDC_OPT_AnyPrice '1'<br>
-		 * ///限价<br>
-		 * #define THOST_FTDC_OPT_LimitPrice '2'<br>
-		 * ///最优价<br>
-		 * #define THOST_FTDC_OPT_BestPrice '3'<br>
-		 * ///最新价<br>
-		 * #define THOST_FTDC_OPT_LastPrice '4'<br>
-		 * ///最新价浮动上浮1个ticks<br>
-		 * #define THOST_FTDC_OPT_LastPricePlusOneTicks '5'<br>
-		 * ///最新价浮动上浮2个ticks<br>
-		 * #define THOST_FTDC_OPT_LastPricePlusTwoTicks '6'<br>
-		 * ///最新价浮动上浮3个ticks<br>
-		 * #define THOST_FTDC_OPT_LastPricePlusThreeTicks '7'<br>
-		 * ///卖一价<br>
-		 * #define THOST_FTDC_OPT_AskPrice1 '8'<br>
-		 * ///卖一价浮动上浮1个ticks<br>
-		 * #define THOST_FTDC_OPT_AskPrice1PlusOneTicks '9'<br>
-		 * ///卖一价浮动上浮2个ticks<br>
-		 * #define THOST_FTDC_OPT_AskPrice1PlusTwoTicks 'A'<br>
-		 * ///卖一价浮动上浮3个ticks<br>
-		 * #define THOST_FTDC_OPT_AskPrice1PlusThreeTicks 'B'<br>
-		 * ///买一价<br>
-		 * #define THOST_FTDC_OPT_BidPrice1 'C'<br>
-		 * ///买一价浮动上浮1个ticks<br>
-		 * #define THOST_FTDC_OPT_BidPrice1PlusOneTicks 'D'<br>
-		 * ///买一价浮动上浮2个ticks<br>
-		 * #define THOST_FTDC_OPT_BidPrice1PlusTwoTicks 'E'<br>
-		 * ///买一价浮动上浮3个ticks<br>
-		 * #define THOST_FTDC_OPT_BidPrice1PlusThreeTicks 'F'<br>
-		 * ///五档价<br>
-		 * #define THOST_FTDC_OPT_FiveLevelPrice 'G'<br>
-		 */
-		ftdcInputOrder.setOrderPriceType(thosttraderapiConstants.THOST_FTDC_OPT_LimitPrice);
+
+		ftdcInputOrder.setOrderPriceType(FtdcOrderPriceTypeConst.LimitPrice);
 
 		/**
 		 * /////////////////////////////////////////////////////////////////////////
@@ -109,16 +49,16 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		 */
 		switch (childOrder.action()) {
 		case Open:
-			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_Open);
+			ftdcInputOrder.setCombOffsetFlag(FtdcConst.CombOffsetFlagOpenStr);
 			break;
 		case Close:
-			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_Close);
+			ftdcInputOrder.setCombOffsetFlag(FtdcConst.CombOffsetFlagCloseStr);
 			break;
 		case CloseToday:
-			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_CloseToday);
+			ftdcInputOrder.setCombOffsetFlag(FtdcConst.CombOffsetFlagCloseTodayStr);
 			break;
 		case CloseYesterday:
-			ftdcInputOrder.setCombOffsetFlag(CombOffsetFlag_CloseYesterday);
+			ftdcInputOrder.setCombOffsetFlag(FtdcConst.CombOffsetFlagCloseYesterdayStr);
 			break;
 		default:
 			throw new RuntimeException(childOrder.action() + " does not exist.");
@@ -141,22 +81,14 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		 * ///第一腿套保第二腿投机 大商所专用<br>
 		 * #define THOST_FTDC_HF_HedgeSpec '7'<br>
 		 */
-		ftdcInputOrder.setCombHedgeFlag(CombHedgeFlag_Speculation);
-		/**
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///TFtdcDirectionType是一个买卖方向类型
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///买<br>
-		 * #define THOST_FTDC_D_Buy '0'<br>
-		 * ///卖<br>
-		 * #define THOST_FTDC_D_Sell '1'<br>
-		 */
+		ftdcInputOrder.setCombHedgeFlag(FtdcConst.CombHedgeFlagSpeculationStr);
+
 		switch (order.direction()) {
 		case Long:
-			ftdcInputOrder.setDirection(thosttraderapiConstants.THOST_FTDC_D_Buy);
+			ftdcInputOrder.setDirection(FtdcDirectionConst.Buy);
 			break;
 		case Short:
-			ftdcInputOrder.setDirection(thosttraderapiConstants.THOST_FTDC_D_Sell);
+			ftdcInputOrder.setDirection(FtdcDirectionConst.Sell);
 			break;
 		case Invalid:
 			throw new RuntimeException(order.direction() + " is Invalid.");
@@ -169,24 +101,8 @@ public final class NewOrderConverter implements Function<Order, CThostFtdcInputO
 		 * 设置数量
 		 */
 		ftdcInputOrder.setVolumeTotalOriginal(order.ordQty().offerQty());
-		/**
-		 * /////////////////////////////////////////////////////////////////////////<br>
-		 * ///TFtdcTimeConditionType是一个有效期类型类型<br>
-		 * /////////////////////////////////////////////////////////////////////////<br>
-		 * ///立即完成，否则撤销<br>
-		 * #define THOST_FTDC_TC_IOC '1'<br>
-		 * ///本节有效<br>
-		 * #define THOST_FTDC_TC_GFS '2'<br>
-		 * ///当日有效<br>
-		 * #define THOST_FTDC_TC_GFD '3'<br>
-		 * ///指定日期前有效<br>
-		 * #define THOST_FTDC_TC_GTD '4'<br>
-		 * ///撤销前有效<br>
-		 * #define THOST_FTDC_TC_GTC '5'<br>
-		 * ///集合竞价有效<br>
-		 * #define THOST_FTDC_TC_GFA '6'<br>
-		 */
-		ftdcInputOrder.setTimeCondition(thosttraderapiConstants.THOST_FTDC_TC_GFD);
+
+		ftdcInputOrder.setTimeCondition(FtdcOrderPriceTypeConst.LimitPrice);
 		/**
 		 * /////////////////////////////////////////////////////////////////////////<br>
 		 * ///TFtdcVolumeConditionType是一个成交量类型类型<br>

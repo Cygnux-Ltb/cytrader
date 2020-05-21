@@ -5,7 +5,7 @@ import java.util.function.Function;
 import ctp.thostapi.CThostFtdcInputOrderActionField;
 import io.mercury.redstone.core.order.Order;
 
-public final class CancelOrderConverter implements Function<Order, CThostFtdcInputOrderActionField>{
+public final class FtdcInputOrderActionConverter implements Function<Order, CThostFtdcInputOrderActionField>{
 
 	@Override
 	public CThostFtdcInputOrderActionField apply(Order order) {

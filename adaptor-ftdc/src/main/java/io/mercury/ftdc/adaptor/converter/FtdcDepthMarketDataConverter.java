@@ -29,13 +29,12 @@ public final class FtdcDepthMarketDataConverter implements Function<FtdcDepthMar
 
 	@Override
 	public BasicMarketData apply(FtdcDepthMarketData depthMarketData) {
-
 		LocalDate actionDay = LocalDate.parse(depthMarketData.getActionDay(), actionDayformatter);
 		LocalTime updateTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
 				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);
 
 		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
-		log.info("Convert depthMarketData -> InstrumentCode==[{}], actionDay==[{}], updateTime==[{}]",
+		log.info("Convert depthMarketData apply -> InstrumentCode==[{}], actionDay==[{}], updateTime==[{}]",
 				instrument.code(), actionDay, updateTime);
 
 		PriceMultiplier multiplier = instrument.symbol().priceMultiplier();
@@ -43,10 +42,37 @@ public final class FtdcDepthMarketDataConverter implements Function<FtdcDepthMar
 		return new BasicMarketData(instrument, ZonedDateTime.of(actionDay, updateTime, TimeZone.CST),
 				multiplier.convertToLong(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
 				multiplier.convertToLong(depthMarketData.getTurnover()))
+
 						.setBidPrice1(multiplier.convertToLong(depthMarketData.getBidPrice1()))
 						.setBidVolume1(depthMarketData.getBidVolume1())
+
+						.setBidPrice2(multiplier.convertToLong(depthMarketData.getBidPrice2()))
+						.setBidVolume2(depthMarketData.getBidVolume2())
+
+						.setBidPrice3(multiplier.convertToLong(depthMarketData.getBidPrice3()))
+						.setBidVolume3(depthMarketData.getBidVolume3())
+
+						.setBidPrice4(multiplier.convertToLong(depthMarketData.getBidPrice4()))
+						.setBidVolume4(depthMarketData.getBidVolume4())
+
+						.setBidPrice5(multiplier.convertToLong(depthMarketData.getBidPrice5()))
+						.setBidVolume5(depthMarketData.getBidVolume5())
+
 						.setAskPrice1(multiplier.convertToLong(depthMarketData.getAskPrice1()))
-						.setAskVolume1(depthMarketData.getAskVolume1());
+						.setAskVolume1(depthMarketData.getAskVolume1())
+
+						.setAskPrice2(multiplier.convertToLong(depthMarketData.getAskPrice2()))
+						.setAskVolume2(depthMarketData.getAskVolume2())
+
+						.setAskPrice3(multiplier.convertToLong(depthMarketData.getAskPrice3()))
+						.setAskVolume3(depthMarketData.getAskVolume3())
+
+						.setAskPrice4(multiplier.convertToLong(depthMarketData.getAskPrice4()))
+						.setAskVolume4(depthMarketData.getAskVolume4())
+
+						.setAskPrice5(multiplier.convertToLong(depthMarketData.getAskPrice5()))
+						.setAskVolume5(depthMarketData.getAskVolume5());
+
 	}
 
 }
