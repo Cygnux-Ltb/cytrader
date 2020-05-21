@@ -4,12 +4,14 @@ import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.ftdc.adaptor.FtdcConst;
-import io.mercury.ftdc.adaptor.consts.ContingentConditionConst;
-import io.mercury.ftdc.adaptor.consts.DirectionConst;
-import io.mercury.ftdc.adaptor.consts.ForceCloseReason;
-import io.mercury.ftdc.adaptor.consts.OrderPriceTypeConst;
-import io.mercury.ftdc.adaptor.consts.VolumeConditionConst;
+import io.mercury.ftdc.adaptor.consts.FtdcCombHedgeFlag;
+import io.mercury.ftdc.adaptor.consts.FtdcCombOffsetFlag;
+import io.mercury.ftdc.adaptor.consts.FtdcContingentCondition;
+import io.mercury.ftdc.adaptor.consts.FtdcDirection;
+import io.mercury.ftdc.adaptor.consts.FtdcForceCloseReason;
+import io.mercury.ftdc.adaptor.consts.FtdcOrderPriceType;
+import io.mercury.ftdc.adaptor.consts.FtdcTimeCondition;
+import io.mercury.ftdc.adaptor.consts.FtdcVolumeCondition;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.specific.ChildOrder;
 
@@ -19,79 +21,55 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 	public CThostFtdcInputOrderField apply(Order order) {
 		ChildOrder childOrder = (ChildOrder) order;
 		Instrument instrument = order.instrument();
-		CThostFtdcInputOrderField ftdcInputOrder = new CThostFtdcInputOrderField();
+		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
 		/**
 		 * 设置交易所ID
 		 */
-		ftdcInputOrder.setExchangeID(instrument.symbol().exchange().code());
+		inputOrderField.setExchangeID(instrument.symbol().exchange().code());
 		/**
 		 * 设置交易标的
 		 */
-		ftdcInputOrder.setInstrumentID(instrument.code());
-
-		ftdcInputOrder.setOrderPriceType(OrderPriceTypeConst.LimitPrice);
+		inputOrderField.setInstrumentID(instrument.code());
 
 		/**
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///TFtdcOffsetFlagType是一个开平标志类型
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///开仓<br>
-		 * #define THOST_FTDC_OF_Open '0' <br>
-		 * ///平仓<br>
-		 * #define THOST_FTDC_OF_Close '1'<br>
-		 * ///强平<br>
-		 * #define THOST_FTDC_OF_ForceClose '2' <br>
-		 * ///平今<br>
-		 * #define THOST_FTDC_OF_CloseToday '3'<br>
-		 * ///平昨<br>
-		 * #define THOST_FTDC_OF_CloseYesterday '4' <br>
-		 * ///强减<br>
-		 * #define THOST_FTDC_OF_ForceOff '5'<br>
-		 * ///本地强平<br>
-		 * #define THOST_FTDC_OF_LocalForceClose '6'
+		 * 设置报单价格
+		 */
+		inputOrderField.setOrderPriceType(FtdcOrderPriceType.LimitPrice);
+
+		/**
+		 * 设置开平标识
 		 */
 		switch (childOrder.action()) {
 		case Open:
-			ftdcInputOrder.setCombOffsetFlag(FtdcConst.CombOffsetFlagOpenStr);
+			inputOrderField.setCombOffsetFlag(FtdcCombOffsetFlag.OpenStr);
 			break;
 		case Close:
-			ftdcInputOrder.setCombOffsetFlag(FtdcConst.CombOffsetFlagCloseStr);
+			inputOrderField.setCombOffsetFlag(FtdcCombOffsetFlag.CloseStr);
 			break;
 		case CloseToday:
-			ftdcInputOrder.setCombOffsetFlag(FtdcConst.CombOffsetFlagCloseTodayStr);
+			inputOrderField.setCombOffsetFlag(FtdcCombOffsetFlag.CloseTodayStr);
 			break;
 		case CloseYesterday:
-			ftdcInputOrder.setCombOffsetFlag(FtdcConst.CombOffsetFlagCloseYesterdayStr);
+			inputOrderField.setCombOffsetFlag(FtdcCombOffsetFlag.CloseYesterdayStr);
 			break;
 		default:
 			throw new RuntimeException(childOrder.action() + " does not exist.");
 		}
 
 		/**
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///TFtdcHedgeFlagType是一个投机套保标志类型
-		 * /////////////////////////////////////////////////////////////////////////
-		 * ///投机<br>
-		 * #define THOST_FTDC_HF_Speculation '1'<br>
-		 * ///套利<br>
-		 * #define THOST_FTDC_HF_Arbitrage '2'<br>
-		 * ///套保<br>
-		 * #define THOST_FTDC_HF_Hedge '3'<br>
-		 * ///做市商<br>
-		 * #define THOST_FTDC_HF_MarketMaker '5'<br>
-		 * ///第一腿投机第二腿套保 大商所专用<br>
-		 * #define THOST_FTDC_HF_SpecHedge '6'<br>
-		 * ///第一腿套保第二腿投机 大商所专用<br>
-		 * #define THOST_FTDC_HF_HedgeSpec '7'<br>
+		 * 设置投机标识
 		 */
-		ftdcInputOrder.setCombHedgeFlag(FtdcConst.CombHedgeFlagSpeculationStr);
+		inputOrderField.setCombHedgeFlag(FtdcCombHedgeFlag.SpeculationStr);
 
+		/**
+		 * 设置买卖方向
+		 */
 		switch (order.direction()) {
 		case Long:
-			ftdcInputOrder.setDirection(DirectionConst.Buy);
+			inputOrderField.setDirection(FtdcDirection.Buy);
 			break;
 		case Short:
-			ftdcInputOrder.setDirection(DirectionConst.Sell);
+			inputOrderField.setDirection(FtdcDirection.Sell);
 			break;
 		case Invalid:
 			throw new RuntimeException(order.direction() + " is Invalid.");
@@ -99,43 +77,43 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 		/**
 		 * 设置价格
 		 */
-		ftdcInputOrder.setLimitPrice(order.ordPrice().offerPrice());
+		inputOrderField.setLimitPrice(order.ordPrice().offerPrice());
 		/**
 		 * 设置数量
 		 */
-		ftdcInputOrder.setVolumeTotalOriginal(order.ordQty().offerQty());
+		inputOrderField.setVolumeTotalOriginal(order.ordQty().offerQty());
 
 		/**
-		 * 
+		 * 设置有效期类型
 		 */
-		ftdcInputOrder.setTimeCondition(OrderPriceTypeConst.LimitPrice);
-		
+		inputOrderField.setTimeCondition(FtdcTimeCondition.GFD);
+
 		/**
-		 * 
+		 * 设置成交量类型
 		 */
-		ftdcInputOrder.setVolumeCondition(VolumeConditionConst.AV);
+		inputOrderField.setVolumeCondition(FtdcVolumeCondition.AV);
 		/**
 		 * 设置最小成交数量
 		 */
-		ftdcInputOrder.setMinVolume(1);
-		
+		inputOrderField.setMinVolume(1);
 		/**
 		 * 设置触发条件
 		 */
-		ftdcInputOrder.setContingentCondition(ContingentConditionConst.Immediately);
+		inputOrderField.setContingentCondition(FtdcContingentCondition.Immediately);
 		/**
 		 * 设置止损价格
 		 */
-		ftdcInputOrder.setStopPrice(0.0D);
+		inputOrderField.setStopPrice(0.0D);
 		/**
-		 * 
+		 * 设置强平原因: 此处固定为非强平
 		 */
-		ftdcInputOrder.setForceCloseReason(ForceCloseReason.NotForceClose);
+		inputOrderField.setForceCloseReason(FtdcForceCloseReason.NotForceClose);
 		/**
 		 * 设置自动挂起标识
 		 */
-		ftdcInputOrder.setIsAutoSuspend(0);
-		return ftdcInputOrder;
+		inputOrderField.setIsAutoSuspend(0);
+
+		return inputOrderField;
 	}
 
 }

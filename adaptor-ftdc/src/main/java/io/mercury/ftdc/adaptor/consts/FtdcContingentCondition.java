@@ -53,7 +53,7 @@ import ctp.thostapi.thosttraderapiConstants;
  * ///买一价小于等于条件价<br>
  * #define THOST_FTDC_CC_BidPriceLesserEqualStopPrice 'H'<br>
  */
-public interface ContingentConditionConst {
+public interface FtdcContingentCondition {
 
 	char Immediately = thosttraderapiConstants.THOST_FTDC_CC_Immediately;
 

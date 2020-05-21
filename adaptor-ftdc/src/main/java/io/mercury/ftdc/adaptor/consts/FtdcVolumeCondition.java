@@ -14,7 +14,7 @@ import ctp.thostapi.thosttraderapiConstants;
  * ///全部数量<br>
  * #define THOST_FTDC_VC_CV '3'<br>
  */
-public interface VolumeConditionConst {
+public interface FtdcVolumeCondition {
 
 	/**
 	 * 任何数量

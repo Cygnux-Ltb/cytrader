@@ -1,5 +1,7 @@
 package io.mercury.ftdc.adaptor.consts;
 
+import ctp.thostapi.thosttraderapiConstants;
+
 /**
  * ///TFtdcTimeConditionType是一个有效期类型类型<br>
  * <br>
@@ -21,6 +23,8 @@ package io.mercury.ftdc.adaptor.consts;
  * ///集合竞价有效<br>
  * #define THOST_FTDC_TC_GFA '6'<br>
  */
-public interface TimeConditionConst {
+public interface FtdcTimeCondition {
+
+	char GFD = thosttraderapiConstants.THOST_FTDC_TC_GFD;
 
 }
