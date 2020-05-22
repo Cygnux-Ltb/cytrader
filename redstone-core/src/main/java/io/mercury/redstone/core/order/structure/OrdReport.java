@@ -3,6 +3,8 @@ package io.mercury.redstone.core.order.structure;
 import io.mercury.common.sequence.Serial;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.redstone.core.order.enums.OrdStatus;
+import io.mercury.redstone.core.order.enums.TrdAction;
+import io.mercury.redstone.core.order.enums.TrdDirection;
 
 public final class OrdReport implements Serial<OrdReport> {
 
@@ -37,6 +39,16 @@ public final class OrdReport implements Serial<OrdReport> {
 	 * instrument
 	 */
 	private Instrument instrument;
+
+	/**
+	 * direction
+	 */
+	private TrdDirection direction;
+
+	/**
+	 * action
+	 */
+	private TrdAction action;
 
 	/**
 	 * offer quantity
@@ -96,6 +108,14 @@ public final class OrdReport implements Serial<OrdReport> {
 		return instrument;
 	}
 
+	public TrdDirection getDirection() {
+		return direction;
+	}
+
+	public TrdAction getAction() {
+		return action;
+	}
+
 	public int getOfferQty() {
 		return offerQty;
 	}
@@ -142,6 +162,16 @@ public final class OrdReport implements Serial<OrdReport> {
 
 	public OrdReport setInstrument(Instrument instrument) {
 		this.instrument = instrument;
+		return this;
+	}
+
+	public OrdReport setDirection(TrdDirection direction) {
+		this.direction = direction;
+		return this;
+	}
+
+	public OrdReport setAction(TrdAction action) {
+		this.action = action;
 		return this;
 	}
 
