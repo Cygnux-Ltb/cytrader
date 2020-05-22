@@ -83,11 +83,9 @@ public final class OrdSysIdSupporter {
 		System.out.println("000" + EpochTime.millis() + "000000");
 		System.out.println(allocateId(920));
 		System.out.println("OrdSysId");
-
 		System.out.println(BitOperator.longBinaryFormat(Long.MAX_VALUE));
 		System.out.println(Short.MAX_VALUE);
 		System.out.println(BitOperator.intBinaryFormat(Short.MAX_VALUE));
-
 		System.out.println(BitOperator.intBinaryFormat(999));
 
 	}

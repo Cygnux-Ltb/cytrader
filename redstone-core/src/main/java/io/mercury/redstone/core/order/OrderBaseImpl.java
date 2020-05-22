@@ -13,6 +13,11 @@ import io.mercury.redstone.core.order.structure.OrdTimestamp;
 public abstract class OrderBaseImpl implements Order {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3444258095612091354L;
+
+	/**
 	 * ordSysId
 	 */
 	private final long ordSysId;
@@ -21,6 +26,11 @@ public abstract class OrderBaseImpl implements Order {
 	 * 策略Id
 	 */
 	private final int strategyId;
+
+	/**
+	 * 子账户Id
+	 */
+	private int accountId;
 
 	/**
 	 * 子账户Id
@@ -92,6 +102,10 @@ public abstract class OrderBaseImpl implements Order {
 	@Override
 	public int strategyId() {
 		return strategyId;
+	}
+
+	public int accountId() {
+		return accountId;
 	}
 
 	@Override

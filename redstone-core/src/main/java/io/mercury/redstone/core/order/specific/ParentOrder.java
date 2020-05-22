@@ -23,6 +23,14 @@ import io.mercury.redstone.core.order.structure.OrdQty;
  */
 public final class ParentOrder extends ActualOrder {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5096106824571703291L;
+
+	/**
+	 * 所属子订单
+	 */
 	private MutableList<ChildOrder> childOrders;
 
 	/**

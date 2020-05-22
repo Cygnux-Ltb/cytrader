@@ -20,6 +20,14 @@ import io.mercury.redstone.core.order.structure.OrdQty;
 
 public final class StrategyOrder extends OrderBaseImpl {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1630590012253172782L;
+
+	/**
+	 * 所属实际订单
+	 */
 	private MutableLongObjectMap<ParentOrder> ownOrders = MutableMaps.newLongObjectHashMap();
 
 	/**

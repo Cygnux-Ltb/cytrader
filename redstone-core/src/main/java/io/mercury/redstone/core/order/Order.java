@@ -1,5 +1,7 @@
 package io.mercury.redstone.core.order;
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 
 import io.mercury.common.thread.ThreadHelper;
@@ -11,7 +13,7 @@ import io.mercury.redstone.core.order.structure.OrdPrice;
 import io.mercury.redstone.core.order.structure.OrdQty;
 import io.mercury.redstone.core.order.structure.OrdTimestamp;
 
-public interface Order extends Comparable<Order> {
+public interface Order extends Comparable<Order>, Serializable {
 
 	/**
 	 * ordSysId构成<br>
@@ -56,9 +58,7 @@ public interface Order extends Comparable<Order> {
 	@Override
 	default int compareTo(Order o) {
 		return ordLevel() > o.ordLevel() ? -1
-				: ordLevel() < o.ordLevel() ? 1 
-						: ordSysId() < o.ordSysId() ? -1 
-								: ordSysId() > o.ordSysId() ? 1 : 0;
+				: ordLevel() < o.ordLevel() ? 1 : ordSysId() < o.ordSysId() ? -1 : ordSysId() > o.ordSysId() ? 1 : 0;
 	}
 
 	public static void main(String[] args) {

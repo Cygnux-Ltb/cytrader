@@ -21,6 +21,10 @@ import io.mercury.redstone.core.order.structure.TrdRecord;
 public final class ChildOrder extends ActualOrder {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3863592977001402228L;
+	/**
 	 * 子订单成交列表
 	 */
 	private final TrdList trdList;

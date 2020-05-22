@@ -13,6 +13,11 @@ public abstract class ActualOrder extends OrderBaseImpl {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 6034876220144503779L;
+
+	/**
+	 * 
+	 */
 	private final TrdAction action;
 
 	/**

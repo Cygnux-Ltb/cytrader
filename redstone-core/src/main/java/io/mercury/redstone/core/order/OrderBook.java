@@ -68,7 +68,7 @@ public final class OrderBook {
 			activeShortOrders.put(order.ordSysId(), order);
 			break;
 		default:
-			throw new OrderStatusException("orderSysId: [" + order.ordSysId() + "], direction is invalid.");
+			throw new OrderStatusException("ordSysId: [" + order.ordSysId() + "], direction is invalid");
 		}
 		orders.put(order.ordSysId(), order);
 		return activeOrders.put(order.ordSysId(), order);
@@ -92,8 +92,8 @@ public final class OrderBook {
 		return orders.containsKey(ordSysId);
 	}
 
-	public Order getOrder(long orderSysId) {
-		return orders.get(orderSysId);
+	public Order getOrder(long ordSysId) {
+		return orders.get(ordSysId);
 	}
 
 	public MutableLongObjectMap<Order> orders() {

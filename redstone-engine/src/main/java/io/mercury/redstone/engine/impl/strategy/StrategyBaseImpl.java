@@ -206,22 +206,30 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 */
 	void orderWatermark(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
 		long offerPrice = 0L;
-		if (limitPrice > 0) {
+		if (limitPrice > 0)
 			offerPrice = limitPrice;
-		} else {
+		else
 			offerPrice = getLevel1Price(instrument, direction);
-		}
+
+		// 创建策略订单
 		StrategyOrder strategyOrder = new StrategyOrder(strategyId, subAccountId, instrument,
 				OrdQty.withOffer(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
-
 		orders.put(strategyOrder.ordSysId(), strategyOrder);
 
+		// 转换为实际订单
 		MutableList<ParentOrder> parentOrders = strategyOrderConverter.apply(strategyOrder);
 
+		// 存储订单
 		// TODO 未完成全部逻辑
-		ParentOrder first = parentOrders.getFirst();
+		ParentOrder parentOrder = parentOrders.getFirst();
+		orders.put(parentOrder.ordSysId(), parentOrder);
 
-		getAdaptor(instrument).newOredr(first.toChildOrder());
+		// 转为实际执行的子订单
+		ChildOrder childOrder = parentOrder.toChildOrder();
+		orders.put(childOrder.ordSysId(), childOrder);
+
+		getAdaptor(instrument).newOredr(childOrder);
+
 	}
 
 	/**
