@@ -24,15 +24,15 @@ import io.mercury.common.util.StringUtil;
  * ///第一腿套保第二腿投机 大商所专用<br>
  * #define THOST_FTDC_HF_HedgeSpec '7'<br>
  */
-public interface FtdcCombHedgeFlag {
+public final class FtdcCombHedgeFlag {
 
 	/**
 	 * 组合投机套保标识, 投机, [char]
 	 */
-	char Speculation = thosttraderapiConstants.THOST_FTDC_HF_Speculation;
+	public static final char Speculation = thosttraderapiConstants.THOST_FTDC_HF_Speculation;
 	/**
 	 * 组合投机套保标识, 投机, [String]
 	 */
-	String SpeculationStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_HF_Speculation);
+	public static final String SpeculationStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_HF_Speculation);
 
 }

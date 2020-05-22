@@ -30,8 +30,11 @@ import ctp.thostapi.thosttraderapiConstants;
  * #define THOST_FTDC_FCC_PersonDeliv '7'<br>
  */
 
-public interface FtdcForceCloseReason {
+public final class FtdcForceCloseReason {
 
-	char NotForceClose = thosttraderapiConstants.THOST_FTDC_FCC_NotForceClose;
+	/**
+	 * 非强平
+	 */
+	public static final char NotForceClose = thosttraderapiConstants.THOST_FTDC_FCC_NotForceClose;
 
 }

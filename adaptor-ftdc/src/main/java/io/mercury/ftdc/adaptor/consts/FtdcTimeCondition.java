@@ -23,8 +23,16 @@ import ctp.thostapi.thosttraderapiConstants;
  * ///集合竞价有效<br>
  * #define THOST_FTDC_TC_GFA '6'<br>
  */
-public interface FtdcTimeCondition {
+public final class FtdcTimeCondition {
 
-	char GFD = thosttraderapiConstants.THOST_FTDC_TC_GFD;
+	/**
+	 * 立即完成，否则撤销
+	 */
+	public static final char IOC = thosttraderapiConstants.THOST_FTDC_TC_IOC;
+
+	/**
+	 * 当日有效
+	 */
+	public static final char GFD = thosttraderapiConstants.THOST_FTDC_TC_GFD;
 
 }

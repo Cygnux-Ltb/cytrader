@@ -21,24 +21,23 @@ public class OrderRefKeeper {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrderRefKeeper.class);
 
-	private final MutableObjectLongMap<String> RefMappingSysId = MutableMaps
-			.newObjectLongHashMap(Capacity.L10_SIZE_1024);
+	private final MutableObjectLongMap<String> MappingSysId = MutableMaps.newObjectLongHashMap(Capacity.L10_SIZE_1024);
 
-	private final MutableLongObjectMap<String> SysIdMappingRef = MutableMaps
+	private final MutableLongObjectMap<String> MappingOrderRef = MutableMaps
 			.newLongObjectHashMap(Capacity.L10_SIZE_1024);
 
-	private final static OrderRefKeeper Singleton = new OrderRefKeeper();
+	private final static OrderRefKeeper StaticInstance = new OrderRefKeeper();
 
 	private OrderRefKeeper() {
 	}
 
 	public static void put(String orderRef, long ordSysId) {
-		Singleton.RefMappingSysId.put(orderRef, ordSysId);
-		Singleton.SysIdMappingRef.put(ordSysId, orderRef);
+		StaticInstance.MappingSysId.put(orderRef, ordSysId);
+		StaticInstance.MappingOrderRef.put(ordSysId, orderRef);
 	}
 
 	public static long getOrdSysId(String orderRef) {
-		long ordSysId = Singleton.RefMappingSysId.get(orderRef);
+		long ordSysId = StaticInstance.MappingSysId.get(orderRef);
 		if (ordSysId == 0L) {
 			// 处理其他来源的订单
 			ordSysId = OrdSysIdSupporter.allocateIdForThird();
@@ -48,7 +47,7 @@ public class OrderRefKeeper {
 	}
 
 	public static String getOrderRef(long ordSysId) throws OrderRefNotFoundException {
-		String orderRef = Singleton.SysIdMappingRef.get(ordSysId);
+		String orderRef = StaticInstance.MappingOrderRef.get(ordSysId);
 		if (orderRef == null)
 			throw new OrderRefNotFoundException(ordSysId);
 		return orderRef;

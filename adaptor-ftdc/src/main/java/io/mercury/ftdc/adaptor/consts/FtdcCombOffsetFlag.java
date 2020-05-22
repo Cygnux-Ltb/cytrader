@@ -22,43 +22,43 @@ import io.mercury.common.util.StringUtil;
  * ///本地强平<br>
  * #define THOST_FTDC_OF_LocalForceClose '6'
  */
-public interface FtdcCombOffsetFlag {
-	
+public final class FtdcCombOffsetFlag {
+
 	/**
 	 * 组合开平标识, 开仓, [char]
 	 */
-	char Open = thosttraderapiConstants.THOST_FTDC_OF_Open;
+	public static final char Open = thosttraderapiConstants.THOST_FTDC_OF_Open;
 	/**
 	 * 组合开平标识, 开仓, [String]
 	 */
-	String OpenStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Open);
+	public static final String OpenStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Open);
 
 	/**
 	 * 组合开平标识, 平仓, [char]
 	 */
-	char Close = thosttraderapiConstants.THOST_FTDC_OF_Close;
+	public static final char Close = thosttraderapiConstants.THOST_FTDC_OF_Close;
 	/**
 	 * 组合开平标识, 平仓, [String]
 	 */
-	String CloseStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Close);
+	public static final String CloseStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_Close);
 
 	/**
 	 * 组合开平标识, 平今, [char]
 	 */
-	char CloseToday = thosttraderapiConstants.THOST_FTDC_OF_CloseToday;
+	public static final char CloseToday = thosttraderapiConstants.THOST_FTDC_OF_CloseToday;
 	/**
 	 * 组合开平标识, 平今, [String]
 	 */
-	String CloseTodayStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseToday);
+	public static final String CloseTodayStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseToday);
 
 	/**
 	 * 组合开平标识, 平昨, [char]
 	 */
-	char CloseYesterday = thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday;
+	public static final char CloseYesterday = thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday;
 	/**
 	 * 组合开平标识, 平昨, [String]
 	 */
-	String CloseYesterdayStr = StringUtil.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday);
-
+	public static final String CloseYesterdayStr = StringUtil
+			.toString(thosttraderapiConstants.THOST_FTDC_OF_CloseYesterday);
 
 }
