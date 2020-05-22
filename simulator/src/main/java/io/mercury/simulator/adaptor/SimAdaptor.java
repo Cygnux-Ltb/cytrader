@@ -150,13 +150,13 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	public boolean queryOrder(Account account) {
+	public boolean queryOrder(Account account, Instrument instrument) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean queryPositions(Account account) {
+	public boolean queryPositions(Account account, Instrument instrument) {
 		// TODO Auto-generated method stub
 		return false;
 	}

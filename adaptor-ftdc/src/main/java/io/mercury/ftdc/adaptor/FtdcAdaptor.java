@@ -17,7 +17,6 @@ import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
-import io.mercury.financial.instrument.Exchange;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.FtdcDepthMarketDataConverter;
@@ -103,7 +102,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				.setPassword(params.getString(FtdcAdaptorParam.CTP_Password))
 				.setAuthCode(params.getString(FtdcAdaptorParam.CTP_AuthCode))
 				.setIpAddr(params.getString(FtdcAdaptorParam.CTP_IpAddr))
-				.setMacAddr(params.getString(FtdcAdaptorParam.CTP_MacAddr));
+				.setMacAddr(params.getString(FtdcAdaptorParam.CTP_MacAddr))
+				.setCurrencyId(params.getString(FtdcAdaptorParam.CTP_CurrencyId));
 	}
 
 	/**
@@ -259,14 +259,14 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private final Object mutex = new Object();
 
 	@Override
-	public boolean queryOrder(Account account) {
+	public boolean queryOrder(Account account, @Nonnull Instrument instrument) {
 		try {
 			if (isTraderAvailable) {
 				startNewThread(() -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						ftdcGateway.ReqQryOrder(Exchange.SHFE.code());
+						ftdcGateway.ReqQryOrder(instrument.symbol().exchange().code());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryOrder-SubThread");
@@ -281,14 +281,14 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	public boolean queryPositions(Account account) {
+	public boolean queryPositions(Account account, @Nonnull Instrument instrument) {
 		try {
 			if (isTraderAvailable) {
 				startNewThread(() -> {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						ftdcGateway.ReqQryInvestorPosition();
+						ftdcGateway.ReqQryInvestorPosition(instrument.symbol().exchange().code(), instrument.code());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryPositions-SubThread");

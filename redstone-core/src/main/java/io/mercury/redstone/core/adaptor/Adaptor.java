@@ -50,8 +50,8 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param account
 	 * @return
 	 */
-	default boolean queryOrder() {
-		return queryOrder(null);
+	default boolean queryOrder(@Nonnull Instrument instrument) {
+		return queryOrder(null, instrument);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param account
 	 * @return
 	 */
-	boolean queryOrder(@Nullable Account account);
+	boolean queryOrder(@Nullable Account account, @Nonnull Instrument instrument);
 
 	/**
 	 * 查询持仓
@@ -68,8 +68,8 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param account
 	 * @return
 	 */
-	default boolean queryPositions() {
-		return queryPositions(null);
+	default boolean queryPositions(@Nonnull Instrument instrument) {
+		return queryPositions(null, instrument);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param account
 	 * @return
 	 */
-	boolean queryPositions(@Nullable Account account);
+	boolean queryPositions(@Nullable Account account, @Nonnull Instrument instrument);
 
 	/**
 	 * 查询余额

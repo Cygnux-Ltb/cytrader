@@ -30,6 +30,8 @@ public enum FtdcAdaptorParam implements ParamKey {
 
 	CTP_MacAddr(211, "macAddr", ParamType.STRING),
 
+	CTP_CurrencyId(212, "currencyId", ParamType.STRING),
+
 	;
 
 	private int paramId;
@@ -48,13 +50,13 @@ public enum FtdcAdaptorParam implements ParamKey {
 	}
 
 	@Override
-	public ParamType paramType() {
-		return paramType;
+	public String paramName() {
+		return paramName;
 	}
 
 	@Override
-	public String paramName() {
-		return paramName;
+	public ParamType paramType() {
+		return paramType;
 	}
 
 }

@@ -54,9 +54,9 @@ public abstract class StrategySimpleImpl<M extends MarketData> extends StrategyB
 			break;
 		case TraderEnable:
 			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", strategyName(), event.adaptorId());
-			adaptor.queryOrder();
+			adaptor.queryOrder(instrument);
 			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", strategyName(), event.adaptorId());
-			adaptor.queryPositions();
+			adaptor.queryPositions(instrument);
 			log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", strategyName(),
 					event.adaptorId());
 			adaptor.queryBalance();
