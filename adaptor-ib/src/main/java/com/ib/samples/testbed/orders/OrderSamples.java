@@ -428,7 +428,7 @@ public class OrderSamples {
 		order.totalQuantity(quantity);
 		order.orderComboLegs(new ArrayList<OrderComboLeg>());
 		
-		for(double price : legPrices) {
+		for (double price : legPrices) {
 			OrderComboLeg comboLeg = new OrderComboLeg();
 			comboLeg.price(5.0);
 			order.orderComboLegs().add(comboLeg);
