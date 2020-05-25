@@ -106,7 +106,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	@Override
 	public void onOrder(Order order) {
-		order.outputInfoLog(log, strategyName, "On order callback");
+		order.outputLog(log, strategyName, "On order callback");
 		handleOrder(order);
 	}
 
@@ -324,12 +324,12 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 			TrdDirection direction) {
 		ParentOrder parentOrder = new ParentOrder(strategyId, subAccountId, instrument, abs(offerQty), offerPrice,
 				ordType, direction, TrdAction.Open);
-		parentOrder.outputInfoLog(log, strategyName, "Open position generate ParentOrder");
-		putOrder(parentOrder);
+		parentOrder.outputLog(log, strategyName, "Open position generate ParentOrder");
+		saveOrder(parentOrder);
 
 		ChildOrder childOrder = parentOrder.toChildOrder();
-		childOrder.outputInfoLog(log, strategyName, "Open position generate ChildOrder");
-		putOrder(childOrder);
+		childOrder.outputLog(log, strategyName, "Open position generate ChildOrder");
+		saveOrder(childOrder);
 
 		getAdaptor(instrument).newOredr(childOrder);
 	}
@@ -422,19 +422,25 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
 		ParentOrder parentOrder = new ParentOrder(strategyId, subAccountId, instrument, abs(offerQty), offerPrice,
 				ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short, TrdAction.Close);
-		parentOrder.outputInfoLog(log, strategyName, "Close position generate ParentOrder");
-		putOrder(parentOrder);
+		parentOrder.outputLog(log, strategyName, "Close position generate ParentOrder");
+		saveOrder(parentOrder);
 
 		ChildOrder childOrder = parentOrder.toChildOrder();
-		childOrder.outputInfoLog(log, strategyName, "Close position generate ChildOrder");
-		putOrder(childOrder);
+		childOrder.outputLog(log, strategyName, "Close position generate ChildOrder");
+		saveOrder(childOrder);
 
 		getAdaptor(instrument).newOredr(childOrder);
 
 	}
 
-	private void putOrder(Order order) {
+	/**
+	 * 订单写入策略
+	 * 
+	 * @param order
+	 */
+	private void saveOrder(Order order) {
 		orders.put(order.ordSysId(), order);
+		OrderKeeper.onOrder(order);
 	}
 
 	/**

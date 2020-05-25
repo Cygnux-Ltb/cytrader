@@ -164,7 +164,7 @@ public abstract class OrderBaseImpl implements Order {
 	}
 
 	@Override
-	public void outputInfoLog(Logger log, String objName, String msg) {
+	public void outputLog(Logger log, String objName, String msg) {
 		log.info(OrderOutputText.OrderOutputText, objName, msg, ordSysId(), ordStatus(), direction(), ordType(),
 				instrument(), ordPrice(), ordQty(), ordTimestamp());
 	}

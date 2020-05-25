@@ -99,14 +99,11 @@ public final class OrderKeeper implements Dumper<String> {
 	 */
 	public static ChildOrder onOrdReport(OrdReport report) {
 		log.info(
-				"Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}], executePrice==[{}], filledQty==[{}], instrument -> {}",
-				report.getBrokerUniqueId(), report.getOrdSysId(), report.getExecutePrice(), report.getFilledQty(),
-				report.getInstrument());
+				"Handle OrdReport, ");
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
 		if (order == null) {
 			// TODO 处理订单由外部系统发出而收到报单回报
-			
 			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
 		} else {
 			log.info("Search order OK, strategyId==[{}], subAccountId==[{}]", order.strategyId(), order.subAccountId());

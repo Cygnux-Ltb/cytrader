@@ -155,8 +155,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						log.info(
 								"Queue Processor Handle FtdcOrder, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef());
-						OrdReport rtnOrder = ftdcOrderConverter.apply(ftdcOrder);
-						scheduler.onOrdReport(rtnOrder);
+						OrdReport ordReport = ftdcOrderConverter.apply(ftdcOrder);
+						scheduler.onOrdReport(ordReport);
 						break;
 					case FtdcTrade:
 						// 成交回报处理
@@ -164,8 +164,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						log.info(
 								"Queue Processor Handle FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
-						OrdReport rtnTrade = ftdcTradeConverter.apply(ftdcTrade);
-						scheduler.onOrdReport(rtnTrade);
+						OrdReport trdReport = ftdcTradeConverter.apply(ftdcTrade);
+						scheduler.onOrdReport(trdReport);
 						break;
 					case FtdcInputOrder:
 						// 报单错误处理

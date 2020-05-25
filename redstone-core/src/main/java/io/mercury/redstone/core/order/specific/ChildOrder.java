@@ -49,7 +49,7 @@ public final class ChildOrder extends ActualOrder {
 	}
 
 	@Override
-	public void outputInfoLog(Logger log, String objName, String msg) {
+	public void outputLog(Logger log, String objName, String msg) {
 		log.info(OrderOutputText.ChildOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(),
 				action(), ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp(), trdList);
 	}

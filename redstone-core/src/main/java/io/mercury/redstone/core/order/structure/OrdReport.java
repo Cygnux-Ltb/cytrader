@@ -5,6 +5,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.redstone.core.order.enums.OrdStatus;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
+import io.mercury.serialization.json.JsonUtil;
 
 public final class OrdReport implements Serial<OrdReport> {
 
@@ -203,6 +204,11 @@ public final class OrdReport implements Serial<OrdReport> {
 	public OrdReport setLastUpdateTime(String lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return JsonUtil.toJson(this);
 	}
 
 	@Override

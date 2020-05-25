@@ -97,7 +97,7 @@ public final class ParentOrder extends ActualOrder {
 	}
 
 	@Override
-	public void outputInfoLog(Logger log, String objName, String msg) {
+	public void outputLog(Logger log, String objName, String msg) {
 		log.info(OrderOutputText.ParentOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(),
 				direction(), action(), ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp());
 	}
