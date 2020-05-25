@@ -18,7 +18,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.instrument.InstrumentKeeper;
+import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.financial.market.MarkerDataKeeper.LastMarkerData;
 import io.mercury.financial.market.api.MarketData;
@@ -160,12 +160,12 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	@Override
 	public void enableInstrument(int instrumentId) {
-		InstrumentKeeper.setTradable(instrumentId);
+		InstrumentManager.setTradable(instrumentId);
 	}
 
 	@Override
 	public void disableInstrument(int instrumentId) {
-		InstrumentKeeper.setNotTradable(instrumentId);
+		InstrumentManager.setNotTradable(instrumentId);
 	}
 
 	@Override

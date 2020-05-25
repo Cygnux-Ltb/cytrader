@@ -11,27 +11,33 @@ import javax.annotation.concurrent.NotThreadSafe;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeZone;
 
+/**
+ * 生成
+ * 
+ * @author yellow013
+ *
+ */
 @NotThreadSafe
 public final class OrderRefGenerator {
 
-	private static int maxLimitOwnerId = 20;
+	private static final int maxLimitOwnerId = 213;
 
-	private static int increment;
-
-	private static long epochSecondsBenchmarkPoint = ZonedDateTime
+	private static final long epochSecondsBenchmarkPoint = ZonedDateTime
 			.of(LocalDate.now().minusDays(1), LocalTime.of(19, 00), TimeZone.CST).toEpochSecond();
 
-	private static long lastUseEpochSecondsDifference;
+	private static long lastEpochSecondsDiff;
+
+	private static int increment;
 
 	public static int next(int ownerId) {
 		if (ownerId < 1 || ownerId > maxLimitOwnerId)
 			throw new IllegalArgumentException("ownerId is illegal.");
 		long nowEpochSecondsDifference = EpochTime.seconds() - epochSecondsBenchmarkPoint;
-		if (nowEpochSecondsDifference != lastUseEpochSecondsDifference) {
-			lastUseEpochSecondsDifference = nowEpochSecondsDifference;
+		if (nowEpochSecondsDifference != lastEpochSecondsDiff) {
+			lastEpochSecondsDiff = nowEpochSecondsDifference;
 			increment = 0;
 		}
-		return ownerId * 100_000_000 + (int) lastUseEpochSecondsDifference * 1_000 + ++increment;
+		return ownerId * 100_000_000 + (int) lastEpochSecondsDiff * 1_000 + ++increment;
 	}
 
 	public static void main(String[] args) throws InterruptedException {

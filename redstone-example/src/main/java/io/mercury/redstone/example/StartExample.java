@@ -7,7 +7,7 @@ import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.log.LogLevel;
 import io.mercury.common.log.LoggerSetter;
 import io.mercury.common.param.map.ImmutableParamMap;
-import io.mercury.financial.instrument.InstrumentKeeper;
+import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.instrument.futures.impl.ChinaFutures;
 import io.mercury.financial.instrument.futures.impl.ChinaFuturesSymbol;
 import io.mercury.financial.time.TimePeriodPool;
@@ -53,7 +53,7 @@ public final class StartExample {
 
 		ChinaFutures rb1910 = new ChinaFutures(ChinaFuturesSymbol.RB, 1910);
 
-		InstrumentKeeper.putInstrument(rb1910);
+		InstrumentManager.initInstrument(rb1910);
 
 		int strategyId = 1;
 		int subAccountId = 1;

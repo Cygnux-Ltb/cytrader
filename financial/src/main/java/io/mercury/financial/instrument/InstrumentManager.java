@@ -1,5 +1,6 @@
 package io.mercury.financial.instrument;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.list.ImmutableList;
@@ -19,7 +20,7 @@ import io.mercury.common.log.CommonLoggerFactory;
  *
  */
 @NotThreadSafe
-public final class InstrumentKeeper implements Dumper<String> {
+public final class InstrumentManager implements Dumper<String> {
 
 	/**
 	 * 
@@ -29,7 +30,7 @@ public final class InstrumentKeeper implements Dumper<String> {
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentKeeper.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentManager.class);
 
 	/**
 	 * 存储instrument,以instrumentId索引
@@ -41,7 +42,23 @@ public final class InstrumentKeeper implements Dumper<String> {
 	 */
 	private static final MutableMap<String, Instrument> InstrumentMapByCode = MutableMaps.newUnifiedMap();
 
-	private InstrumentKeeper() {
+	private InstrumentManager() {
+	}
+
+	private static final boolean isInit = false;
+
+	public static void initInstrument(@Nonnull Instrument... instruments) {
+		if (!isInit) {
+			for (Instrument instrument : instruments) {
+				log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", instrument.id(),
+						instrument.code(), instrument);
+				InstrumentMapById.put(instrument.id(), instrument);
+				InstrumentMapByCode.put(instrument.code(), instrument);
+				setTradable(instrument.id());
+			}
+		} else {
+			log.error("InstrumentManager Has been initialized, cannot be initialization again");
+		}
 	}
 
 	public static Instrument setTradable(Instrument instrument) {
@@ -70,14 +87,6 @@ public final class InstrumentKeeper implements Dumper<String> {
 
 	public static boolean isTradable(int instrumentId) {
 		return getInstrument(instrumentId).isEnabled();
-	}
-
-	public static void putInstrument(Instrument instrument) {
-		log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", instrument.id(),
-				instrument.code(), instrument);
-		InstrumentMapById.put(instrument.id(), instrument);
-		InstrumentMapByCode.put(instrument.code(), instrument);
-		setTradable(instrument.id());
 	}
 
 	public static Instrument getInstrument(int instrumentId) {

@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.instrument.InstrumentKeeper;
+import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.ftdc.adaptor.FtdcConstMapper;
 import io.mercury.ftdc.adaptor.OrderRefKeeper;
@@ -29,7 +29,7 @@ public final class FtdcOrderConverter implements Function<FtdcOrder, OrdReport> 
 		report.setBrokerUniqueId(ftdcOrder.getOrderSysID());
 
 		// 合约代码
-		Instrument instrument = InstrumentKeeper.getInstrument(ftdcOrder.getInstrumentID());
+		Instrument instrument = InstrumentManager.getInstrument(ftdcOrder.getInstrumentID());
 		report.setInstrument(instrument);
 		// 报单状态
 		OrdStatus ordStatus = FtdcConstMapper.fromOrderStatus(ftdcOrder.getOrderStatus());

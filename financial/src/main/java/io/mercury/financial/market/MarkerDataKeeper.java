@@ -11,7 +11,7 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.instrument.InstrumentKeeper;
+import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.market.impl.BasicMarketData;
 
 /**
@@ -48,7 +48,7 @@ public final class MarkerDataKeeper implements Dumper<String> {
 
 	private MarkerDataKeeper() {
 		MutableIntObjectMap<LastMarkerData> mutableQuoteMap = MutableMaps.newIntObjectHashMap();
-		ImmutableList<Instrument> allInstrument = InstrumentKeeper.getAllInstrument();
+		ImmutableList<Instrument> allInstrument = InstrumentManager.getAllInstrument();
 		if (allInstrument.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		allInstrument.each(instrument -> {

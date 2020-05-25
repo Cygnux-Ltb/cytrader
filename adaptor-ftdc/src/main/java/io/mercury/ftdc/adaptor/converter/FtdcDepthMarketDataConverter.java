@@ -14,7 +14,7 @@ import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.instrument.InstrumentKeeper;
+import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
@@ -33,7 +33,7 @@ public final class FtdcDepthMarketDataConverter implements Function<FtdcDepthMar
 		LocalTime updateTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
 				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);
 
-		Instrument instrument = InstrumentKeeper.getInstrument(depthMarketData.getInstrumentID());
+		Instrument instrument = InstrumentManager.getInstrument(depthMarketData.getInstrumentID());
 		log.info("Convert depthMarketData apply -> InstrumentCode==[{}], actionDay==[{}], updateTime==[{}]",
 				instrument.code(), actionDay, updateTime);
 
