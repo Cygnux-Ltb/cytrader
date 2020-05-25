@@ -303,10 +303,10 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 
 	/**
 	 * 
-	 * @param instrument
-	 * @param offerQty
-	 * @param ordType
-	 * @param direction
+	 * @param instrument 交易标的
+	 * @param offerQty   委托数量
+	 * @param ordType    订单类型
+	 * @param direction  多空方向
 	 */
 	protected void openPosition(Instrument instrument, int offerQty, OrdType ordType, TrdDirection direction) {
 		openPosition(instrument, offerQty, getLevel1Price(instrument, direction), ordType, direction);
@@ -362,6 +362,24 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 			else
 				offerPrice = getLevel1Price(instrument, TrdDirection.Short);
 			closePosition(instrument, position, offerPrice, ordType);
+		}
+	}
+
+	/**
+	 * 
+	 * @param instrument
+	 * @param offerPrice
+	 */
+	protected void closeAllPosition(Instrument instrument, long offerPrice) {
+		int position = getCurrentPosition(subAccountId, instrument);
+		if (position == 0) {
+			log.warn(
+					"{} :: Terminate execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
+					strategyName, subAccountId, instrument.code(), position);
+		} else {
+			log.info("{} :: Execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
+					strategyName, subAccountId, instrument.code(), position);
+			closePosition(instrument, position, offerPrice, OrdType.Limit);
 		}
 	}
 
