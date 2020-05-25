@@ -21,7 +21,8 @@ public class OrderRefKeeper {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrderRefKeeper.class);
 
-	private final MutableObjectLongMap<String> MappingSysId = MutableMaps.newObjectLongHashMap(Capacity.L10_SIZE_1024);
+	private final MutableObjectLongMap<String> MappingOrdSysId = MutableMaps
+			.newObjectLongHashMap(Capacity.L10_SIZE_1024);
 
 	private final MutableLongObjectMap<String> MappingOrderRef = MutableMaps
 			.newLongObjectHashMap(Capacity.L10_SIZE_1024);
@@ -32,12 +33,13 @@ public class OrderRefKeeper {
 	}
 
 	public static void put(String orderRef, long ordSysId) {
-		StaticInstance.MappingSysId.put(orderRef, ordSysId);
+		log.info("orderRef==[{}] Mapping to ordSysId==[{}]", orderRef, ordSysId);
+		StaticInstance.MappingOrdSysId.put(orderRef, ordSysId);
 		StaticInstance.MappingOrderRef.put(ordSysId, orderRef);
 	}
 
 	public static long getOrdSysId(String orderRef) {
-		long ordSysId = StaticInstance.MappingSysId.get(orderRef);
+		long ordSysId = StaticInstance.MappingOrdSysId.get(orderRef);
 		if (ordSysId == 0L) {
 			// 处理其他来源的订单
 			ordSysId = OrdSysIdSupporter.allocateIdForThird();
