@@ -40,9 +40,9 @@ public final class StrategyOrder extends OrderBaseImpl {
 	 * @param ordType
 	 * @param direction
 	 */
-	public StrategyOrder(int strategyId, int subAccountId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
-			OrdType ordType, TrdDirection direction) {
-		super(strategyId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
+	public StrategyOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, OrdQty ordQty,
+			OrdPrice ordPrice, OrdType ordType, TrdDirection direction) {
+		super(strategyId, accountId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
 	}
 
 	public MutableLongObjectMap<ParentOrder> ownOrders() {
@@ -65,7 +65,7 @@ public final class StrategyOrder extends OrderBaseImpl {
 	}
 
 	public ParentOrder toActualOrder(TrdDirection direction, int offerQty, OrdType ordType) {
-		return addOwnOrder(new ParentOrder(strategyId(), subAccountId(), instrument(), offerQty,
+		return addOwnOrder(new ParentOrder(strategyId(), accountId(), subAccountId(), instrument(), offerQty,
 				ordPrice().offerPrice(), ordType, direction, TrdAction.Open, ordSysId()));
 	}
 

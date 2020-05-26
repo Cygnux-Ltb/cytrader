@@ -5,7 +5,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
 
-public interface TradeSignal extends Signal{
+public interface TradeSignal extends Signal {
 
 	Instrument instrument();
 
@@ -49,7 +49,7 @@ public interface TradeSignal extends Signal{
 	}
 
 	public static class OpenShortSignal extends BaseTradeSignal {
-		
+
 		private OpenShortSignal(Instrument instrument, int strategyId) {
 			super(instrument, strategyId);
 		}
@@ -66,7 +66,7 @@ public interface TradeSignal extends Signal{
 	}
 
 	public static class CloseLongSignal extends BaseTradeSignal {
-		
+
 		private CloseLongSignal(Instrument instrument, int strategyId) {
 			super(instrument, strategyId);
 		}
@@ -83,7 +83,7 @@ public interface TradeSignal extends Signal{
 	}
 
 	public static class CloseShortSignal extends BaseTradeSignal {
-		
+
 		private CloseShortSignal(Instrument instrument, int strategyId) {
 			super(instrument, strategyId);
 		}
@@ -99,7 +99,7 @@ public interface TradeSignal extends Signal{
 		}
 	}
 
-	abstract class BaseTradeSignal implements TradeSignal {
+	public abstract class BaseTradeSignal implements TradeSignal {
 
 		private Instrument instrument;
 		private int strategyId;

@@ -18,7 +18,7 @@ public final class OrderGroup {
 		this.ordTimestamp = OrdTimestamp.generate();
 	}
 
-	public long getGroupOrdSysId() {
+	public long groupOrdSysId() {
 		return groupOrdSysId;
 	}
 
@@ -26,7 +26,7 @@ public final class OrderGroup {
 		return orderSet;
 	}
 
-	public OrdTimestamp getOrderTimestamps() {
+	public OrdTimestamp ordTimestamp() {
 		return ordTimestamp;
 	}
 

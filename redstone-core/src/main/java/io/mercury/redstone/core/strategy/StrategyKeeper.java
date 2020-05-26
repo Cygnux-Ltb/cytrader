@@ -59,13 +59,11 @@ public final class StrategyKeeper implements Dumper<String> {
 	public static void putStrategy(Strategy strategy) {
 		StrategyMap.put(strategy.strategyId(), strategy);
 		log.info("Put strategy, strategyId==[{}]", strategy.strategyId());
-		strategy.instruments().forEach(instrument -> {
+		strategy.instruments().each(instrument -> {
 			SubscribedInstrumentMap.getIfAbsentPut(instrument.id(), MutableLists::newFastList).add(strategy);
 			log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
 					instrument.id());
 		});
-		// SubAccountStrategysMap.getIfAbsentPut(strategy.subAccountId(),
-		// MutableLists::newFastList).add(strategy);
 		strategy.enable();
 		log.info("Strategy is enable, strategyId==[{}]", strategy.strategyId());
 	}

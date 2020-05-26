@@ -225,7 +225,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 			offerPrice = getLevel1Price(instrument, direction);
 
 		// 创建策略订单
-		StrategyOrder strategyOrder = new StrategyOrder(strategyId, subAccountId, instrument,
+		StrategyOrder strategyOrder = new StrategyOrder(strategyId, accountId, subAccountId, instrument,
 				OrdQty.withOffer(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
 		orders.put(strategyOrder.ordSysId(), strategyOrder);
 
@@ -335,8 +335,8 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 */
 	protected void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType,
 			TrdDirection direction) {
-		ParentOrder parentOrder = new ParentOrder(strategyId, subAccountId, instrument, abs(offerQty), offerPrice,
-				ordType, direction, TrdAction.Open);
+		ParentOrder parentOrder = new ParentOrder(strategyId, accountId, subAccountId, instrument, abs(offerQty),
+				offerPrice, ordType, direction, TrdAction.Open);
 		parentOrder.outputLog(log, strategyName, "Open position generate ParentOrder");
 		saveOrder(parentOrder);
 
@@ -433,8 +433,8 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param ordType    订单类型
 	 */
 	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
-		ParentOrder parentOrder = new ParentOrder(strategyId, subAccountId, instrument, abs(offerQty), offerPrice,
-				ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short, TrdAction.Close);
+		ParentOrder parentOrder = new ParentOrder(strategyId, accountId, subAccountId, instrument, abs(offerQty),
+				offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short, TrdAction.Close);
 		parentOrder.outputLog(log, strategyName, "Close position generate ParentOrder");
 		saveOrder(parentOrder);
 
@@ -443,7 +443,6 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		saveOrder(childOrder);
 
 		getAdaptor(instrument).newOredr(childOrder);
-
 	}
 
 	/**

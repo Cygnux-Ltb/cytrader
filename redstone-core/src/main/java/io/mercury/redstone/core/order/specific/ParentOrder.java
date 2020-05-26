@@ -35,37 +35,39 @@ public final class ParentOrder extends ActualOrder {
 
 	/**
 	 * 
-	 * @param strategyId
-	 * @param subAccountId
-	 * @param instrument
-	 * @param offerQty
-	 * @param offerPrice
-	 * @param ordType
-	 * @param direction
-	 * @param action
-	 * @param ownerOrdId
+	 * @param strategyId   策略Id
+	 * @param accountId    实际账户Id
+	 * @param subAccountId 子账户Id
+	 * @param instrument   交易标的
+	 * @param offerQty     委托数量
+	 * @param offerPrice   委托价格
+	 * @param ordType      订单类型
+	 * @param direction    交易方向
+	 * @param action       交易动作
+	 * @param ownerOrdId   所属上级订单Id
 	 */
-	public ParentOrder(int strategyId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
-			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(strategyId, subAccountId, instrument, OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordType,
-				direction, action, ownerOrdId);
+	public ParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
+			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
+		super(strategyId, accountId, subAccountId, instrument, OrdQty.withOffer(offerQty),
+				OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
 		this.childOrders = MutableLists.newFastList(8);
 	}
 
 	/**
 	 * 
-	 * @param strategyId
-	 * @param subAccountId
-	 * @param instrument
-	 * @param offerQty
-	 * @param offerPrice
-	 * @param ordType
-	 * @param direction
-	 * @param action
+	 * @param strategyId   策略Id
+	 * @param accountId    实际账户Id
+	 * @param subAccountId 子账户Id
+	 * @param instrument   交易标的
+	 * @param offerQty     委托数量
+	 * @param offerPrice   委托价格
+	 * @param ordType      订单类型
+	 * @param direction    交易方向
+	 * @param action       交易动作
 	 */
-	public ParentOrder(int strategyId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
-			OrdType ordType, TrdDirection direction, TrdAction action) {
-		this(strategyId, subAccountId, instrument, offerQty, offerPrice, ordType, direction, action, 0L);
+	public ParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
+			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action) {
+		this(strategyId, accountId, subAccountId, instrument, offerQty, offerPrice, ordType, direction, action, 0L);
 	}
 
 	/**
@@ -73,8 +75,8 @@ public final class ParentOrder extends ActualOrder {
 	 * @return ChildOrder
 	 */
 	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = new ChildOrder(strategyId(), subAccountId(), instrument(), ordQty(), ordPrice(),
-				ordType(), direction(), action(), ordSysId());
+		ChildOrder childOrder = new ChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
+				ordQty().offerQty(), ordPrice().offerPrice(), ordType(), direction(), action(), ordSysId());
 		childOrders.add(childOrder);
 		return childOrder;
 	}

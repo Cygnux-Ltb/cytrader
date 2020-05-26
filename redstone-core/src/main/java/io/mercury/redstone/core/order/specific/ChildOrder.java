@@ -24,14 +24,29 @@ public final class ChildOrder extends ActualOrder {
 	 * 
 	 */
 	private static final long serialVersionUID = 3863592977001402228L;
+
 	/**
 	 * 子订单成交列表
 	 */
 	private final TrdList trdList;
 
-	public ChildOrder(int strategyId, int subAccountId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
-			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(strategyId, subAccountId, instrument, ordQty, ordPrice, ordType, direction, action, ownerOrdId);
+	/**
+	 * 
+	 * @param strategyId   策略Id
+	 * @param accountId    实际账户Id
+	 * @param subAccountId 子账户Id
+	 * @param instrument   交易标的
+	 * @param ordQty       委托数量
+	 * @param ordPrice     委托价格
+	 * @param ordType      订单类型
+	 * @param direction    交易方向
+	 * @param action       交易动作
+	 * @param ownerOrdId   所属上级订单
+	 */
+	public ChildOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
+			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
+		super(strategyId, accountId, subAccountId, instrument, OrdQty.withOffer(offerQty),
+				OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
 		this.trdList = new TrdList(ordSysId());
 	}
 

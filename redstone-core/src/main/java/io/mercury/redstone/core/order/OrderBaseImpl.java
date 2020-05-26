@@ -28,9 +28,9 @@ public abstract class OrderBaseImpl implements Order {
 	private final int strategyId;
 
 	/**
-	 * 子账户Id
+	 * 实际账户Id
 	 */
-	private int accountId;
+	private final int accountId;
 
 	/**
 	 * 子账户Id
@@ -58,14 +58,14 @@ public abstract class OrderBaseImpl implements Order {
 	private final OrdType ordType;
 
 	/**
-	 * 订单方向
-	 */
-	private final TrdDirection direction;
-
-	/**
 	 * 时间戳
 	 */
 	private final OrdTimestamp ordTimestamp;
+
+	/**
+	 * 订单方向
+	 */
+	private final TrdDirection direction;
 
 	/**
 	 * 订单状态(可变)
@@ -79,17 +79,18 @@ public abstract class OrderBaseImpl implements Order {
 
 	private static final String defRemark = "none";
 
-	protected OrderBaseImpl(int strategyId, int subAccountId, Instrument instrument, OrdQty ordQty, OrdPrice ordPrice,
-			OrdType ordType, TrdDirection direction) {
+	protected OrderBaseImpl(int strategyId, int accountId, int subAccountId, Instrument instrument, OrdQty ordQty,
+			OrdPrice ordPrice, OrdType ordType, TrdDirection direction) {
 		this.ordSysId = OrdSysIdSupporter.allocateId(strategyId);
 		this.strategyId = strategyId;
+		this.accountId = accountId;
 		this.subAccountId = subAccountId;
 		this.instrument = instrument;
 		this.ordQty = ordQty;
 		this.ordPrice = ordPrice;
 		this.ordType = ordType;
-		this.direction = direction;
 		this.ordTimestamp = OrdTimestamp.generate();
+		this.direction = direction;
 		this.ordStatus = OrdStatus.PendingNew;
 		this.remark = defRemark;
 	}
@@ -104,6 +105,7 @@ public abstract class OrderBaseImpl implements Order {
 		return strategyId;
 	}
 
+	@Override
 	public int accountId() {
 		return accountId;
 	}
@@ -129,11 +131,6 @@ public abstract class OrderBaseImpl implements Order {
 	}
 
 	@Override
-	public TrdDirection direction() {
-		return direction;
-	}
-
-	@Override
 	public OrdType ordType() {
 		return ordType;
 	}
@@ -141,6 +138,11 @@ public abstract class OrderBaseImpl implements Order {
 	@Override
 	public OrdTimestamp ordTimestamp() {
 		return ordTimestamp;
+	}
+
+	@Override
+	public TrdDirection direction() {
+		return direction;
 	}
 
 	@Override
