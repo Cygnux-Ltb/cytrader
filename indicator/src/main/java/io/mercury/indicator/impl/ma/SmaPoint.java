@@ -1,10 +1,10 @@
 package io.mercury.indicator.impl.ma;
 
+import io.mercury.common.collections.list.FixedLengthRecorder;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
-import io.mercury.indicator.structure.FixedHistoryPriceRecorder;
 
 public final class SmaPoint extends MaPoint {
 
@@ -13,14 +13,14 @@ public final class SmaPoint extends MaPoint {
 	private int cycle;
 
 	public SmaPoint(int index, Instrument instrument, TimePeriod period, TimePeriodSerial timePeriod,
-			int cycle, FixedHistoryPriceRecorder historyPriceRecorder) {
+			int cycle, FixedLengthRecorder historyPriceRecorder) {
 		super(index, instrument, period, timePeriod, historyPriceRecorder);
 		this.historyPriceSum = historyPriceRecorder.sum();
 		this.cycle = cycle;
 	}
 
 	public static SmaPoint with(int indxe, Instrument instrument, TimePeriod period, TimePeriodSerial timePeriod,
-			int cycle, FixedHistoryPriceRecorder historyPriceRecorder) {
+			int cycle, FixedLengthRecorder historyPriceRecorder) {
 		return new SmaPoint(indxe, instrument, period, timePeriod, cycle, historyPriceRecorder);
 	}
 
