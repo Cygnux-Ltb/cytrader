@@ -42,22 +42,22 @@ public final class OrderKeeper implements Dumper<String> {
 	private static final OrderBook AllOrders = new OrderBook(Capacity.L10_SIZE_1024);
 
 	/**
-	 * 按照subAccount分组存储
+	 * 按照subAccountId分组存储
 	 */
 	private static final MutableIntObjectMap<OrderBook> SubAccountOrderBooks = MutableMaps.newIntObjectHashMap();
 
 	/**
-	 * 按照account分组存储
+	 * 按照accountId分组存储
 	 */
 	private static final MutableIntObjectMap<OrderBook> AccountOrderBooks = MutableMaps.newIntObjectHashMap();
 
 	/**
-	 * 按照strategy分组存储
+	 * 按照strategyId分组存储
 	 */
 	private static final MutableIntObjectMap<OrderBook> StrategyOrderBooks = MutableMaps.newIntObjectHashMap();
 
 	/**
-	 * 按照instrument分组存储
+	 * 按照instrumentId分组存储
 	 */
 	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = MutableMaps.newIntObjectHashMap();
 
@@ -98,19 +98,18 @@ public final class OrderKeeper implements Dumper<String> {
 	 * @return
 	 */
 	public static ChildOrder onOrdReport(OrdReport report) {
-		log.info(
-				"Handle OrdReport, ");
+		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
-		if (order == null) {
+		if (order != null) {
 			// TODO 处理订单由外部系统发出而收到报单回报
-			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
-		} else {
 			log.info("Search order OK, strategyId==[{}], subAccountId==[{}]", order.strategyId(), order.subAccountId());
+		} else {
+			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
 		}
 		ChildOrder childOrder = (ChildOrder) order;
 		// 更新订单状态
-		OrderUpdater.updateOrderWithReport(childOrder, report);
+		OrderUpdater.updateWithOrdReport(childOrder, report);
 		onOrder(childOrder);
 		return childOrder;
 	}

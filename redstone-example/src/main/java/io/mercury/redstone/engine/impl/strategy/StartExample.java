@@ -1,5 +1,6 @@
-package io.mercury.redstone.example;
+package io.mercury.redstone.engine.impl.strategy;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import io.mercury.common.concurrent.disruptor.BufferSize;
@@ -16,8 +17,6 @@ import io.mercury.financial.vector.TimePeriod;
 import io.mercury.ftdc.adaptor.FtdcAdaptor;
 import io.mercury.ftdc.adaptor.FtdcAdaptorParam;
 import io.mercury.redstone.core.adaptor.Adaptor;
-import io.mercury.redstone.core.adaptor.AdaptorKeeper;
-import io.mercury.redstone.core.strategy.StrategyKeeper;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
 import io.mercury.redstone.engine.scheduler.SpscQueueStrategyScheduler;
 
@@ -45,26 +44,25 @@ public final class StartExample {
 		String inboundAdaptorName = "Ctp-InboundAdaptor";
 		// TODO ADD ACCOUNT
 
-		Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, null, scheduler, adaptorParam);
+		try (Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, null, scheduler, adaptorParam)) {
+			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.values());
 
-		TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.values());
+			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
 
-		TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
+			ChinaFutures rb1910 = new ChinaFutures(ChinaFuturesSymbol.RB, 1910);
 
-		ChinaFutures rb1910 = new ChinaFutures(ChinaFuturesSymbol.RB, 1910);
+			InstrumentManager.initialize(rb1910);
 
-		InstrumentManager.initInstrument(rb1910);
+			int strategyId = 1;
+			int subAccountId = 1;
 
-		int strategyId = 1;
-		int subAccountId = 1;
+			SmaStrategyExample example = new SmaStrategyExample(strategyId, subAccountId, rb1910);
+			example.initialize(() -> true);
 
-		SmaStrategyExample example = new SmaStrategyExample(strategyId, subAccountId, rb1910);
-		example.initialization(() -> true);
-
-		StrategyKeeper.putStrategy(example);
-		AdaptorKeeper.putAdaptor(adaptor);
-
-		adaptor.startup();
+			adaptor.startup();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

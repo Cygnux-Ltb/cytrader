@@ -18,8 +18,7 @@ public abstract class StrategySimpleImpl<M extends MarketData> extends StrategyB
 	 */
 	protected ImmutableList<Instrument> instruments;
 
-	protected StrategySimpleImpl(int strategyId, String strategyName, int subAccountId,
-			Instrument instrument) {
+	protected StrategySimpleImpl(int strategyId, String strategyName, int subAccountId, Instrument instrument) {
 		super(strategyId, strategyName, subAccountId);
 		this.instrument = instrument;
 		this.instruments = ImmutableLists.newList(instrument);

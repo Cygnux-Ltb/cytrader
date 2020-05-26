@@ -23,7 +23,7 @@ public interface Strategy extends Enable<Strategy> {
 
 	void addAdaptor(Adaptor adaptor);
 
-	void initialization(Supplier<Boolean> initializer);
+	void initialize(Supplier<Boolean> initializer);
 
 	void onAdaptorEvent(AdaptorEvent event);
 

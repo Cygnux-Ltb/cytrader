@@ -32,7 +32,7 @@ public interface Instrument extends Enable<Instrument> {
 	}
 
 	public static enum PriorityClose {
-		NONE, BEFORE_TODAY, TODAY
+		NONE, YESTERDAY, TODAY
 	}
 
 	String fmtText();

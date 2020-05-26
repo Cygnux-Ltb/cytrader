@@ -13,7 +13,7 @@ public final class OrderUpdater {
 	 * @param order
 	 * @param report
 	 */
-	public static void updateOrderWithReport(@Nonnull ChildOrder order, @Nonnull OrdReport report) {
+	public static void updateWithOrdReport(@Nonnull ChildOrder order, @Nonnull OrdReport report) {
 		order.setOrdStatus(report.getOrdStatus());
 		switch (order.ordStatus()) {
 		case PartiallyFilled:

@@ -18,7 +18,7 @@ public abstract class AdaptorBaseImpl extends EnableComponent<Adaptor> implement
 
 	public AdaptorBaseImpl(int adaptorId, String adaptorName, @Nonnull Account account) {
 		this.adaptorId = adaptorId;
-		this.adaptorName = StringUtil.isNullOrEmpty(adaptorName) ? "Adaptor-" + adaptorId : adaptorName;
+		this.adaptorName = StringUtil.isNullOrEmpty(adaptorName) ? "Adaptor[" + adaptorId + "]" : adaptorName;
 		this.account = Assertor.nonNull(account, "account");
 		AdaptorKeeper.putAdaptor(this);
 	}

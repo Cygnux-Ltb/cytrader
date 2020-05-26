@@ -5,7 +5,7 @@ import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
 public final class AdaptorEvent {
 
 	private int adaptorId;
-
+	
 	private AdaptorStatus adaptorStatus;
 
 	public AdaptorEvent(int adaptorId) {

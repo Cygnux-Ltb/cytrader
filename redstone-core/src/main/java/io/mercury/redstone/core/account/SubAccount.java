@@ -15,7 +15,6 @@ public class SubAccount extends EnableComponent<SubAccount> {
 	 * 账户余额
 	 */
 	private int balance;
-
 	/**
 	 * 可用信用额
 	 */

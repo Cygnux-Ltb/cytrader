@@ -4,7 +4,7 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.redstone.core.order.exception.OrderStatusException;
+import io.mercury.redstone.core.order.exception.OrdStatusException;
 
 /**
  * 订单存储组件
@@ -68,13 +68,13 @@ public final class OrderBook {
 			activeShortOrders.put(order.ordSysId(), order);
 			break;
 		default:
-			throw new OrderStatusException("ordSysId: [" + order.ordSysId() + "], direction is invalid");
+			throw new OrdStatusException("ordSysId: [" + order.ordSysId() + "], direction is invalid");
 		}
 		orders.put(order.ordSysId(), order);
 		return activeOrders.put(order.ordSysId(), order);
 	}
 
-	public Order finishOrder(Order order) throws OrderStatusException {
+	public Order finishOrder(Order order) throws OrdStatusException {
 		switch (order.direction()) {
 		case Long:
 			activeLongOrders.remove(order.ordSysId());
@@ -83,7 +83,7 @@ public final class OrderBook {
 			activeShortOrders.remove(order.ordSysId());
 			break;
 		case Invalid:
-			throw new OrderStatusException("orderSysId: [" + order.ordSysId() + "], direction is invalid.");
+			throw new OrdStatusException("orderSysId: [" + order.ordSysId() + "], direction is invalid.");
 		}
 		return activeOrders.remove(order.ordSysId());
 	}

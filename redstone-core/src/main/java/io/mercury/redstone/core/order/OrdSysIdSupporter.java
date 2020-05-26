@@ -9,17 +9,19 @@ import io.mercury.common.util.BitOperator;
 /**
  * 
  * Generate规则<br>
+ * <br>
  * A方案<br>
- * 1获取当前epoch秒<br>
- * 2如果是同一秒内生成的两个id, 则自增位加一<br>
- * 
+ * 1.获取当前epoch秒<br>
+ * 2.如果是同一秒内生成的两个id, 则自增位加一<br>
+ * <br>
  * B方案<br>
- * 1使用一个固定日期作为基准<br>
- * 2使一个较长的自增位<br>
- * 
+ * 1.使用一个固定日期作为基准<br>
+ * 2.使用一个较长的自增位<br>
+ * <br>
  * C方案<br>
- * 1使用位运算合并long类型, 分配64位
- * 
+ * 1.使用位运算合并long类型, 分配64位<br>
+ * 2.最高位使用strategyId <br>
+ * <br>
  * implement为方案A<br>
  * 
  * @author yellow013
@@ -28,7 +30,7 @@ import io.mercury.common.util.BitOperator;
 @NotThreadSafe
 public final class OrdSysIdSupporter {
 
-	private static final int maxLimitOwnerId = 920;
+	private static final int MaxLimitOwnerId = 899;
 
 	/**
 	 * 
@@ -36,23 +38,22 @@ public final class OrdSysIdSupporter {
 	 * @return
 	 */
 	public static long allocateId(int strategyId) {
-		if (strategyId < 0 || strategyId > maxLimitOwnerId)
+		if (strategyId < 0 || strategyId > MaxLimitOwnerId)
 			throw new RuntimeException("strategyId is illegal.");
 		return generate(strategyId);
 	}
 
 	public static long allocateIdForThird() {
-		return generate(921);
+		return generate(910);
 	}
 
 	private static volatile int increment;
-
 	private static volatile long lastUseEpochSeconds;
 
 	private static long generate(int highPos) {
-		long nowEpochSeconds = EpochTime.seconds();
-		if (nowEpochSeconds != lastUseEpochSeconds) {
-			lastUseEpochSeconds = nowEpochSeconds;
+		long epochSeconds = EpochTime.seconds();
+		if (epochSeconds != lastUseEpochSeconds) {
+			lastUseEpochSeconds = epochSeconds;
 			increment = 0;
 		}
 		return highPos * 10_000_000_000_000_000L + lastUseEpochSeconds * 1_000_000L + ++increment;
@@ -81,13 +82,20 @@ public final class OrdSysIdSupporter {
 		System.out.println(Long.MAX_VALUE);
 		System.out.println("000" + EpochTime.seconds() + "000000");
 		System.out.println("000" + EpochTime.millis() + "000000");
-		System.out.println(allocateId(920));
+		System.out.println(allocateId(800));
 		System.out.println("OrdSysId");
 		System.out.println(BitOperator.longBinaryFormat(Long.MAX_VALUE));
 		System.out.println(Short.MAX_VALUE);
 		System.out.println(BitOperator.intBinaryFormat(Short.MAX_VALUE));
 		System.out.println(BitOperator.intBinaryFormat(999));
-
+		
+		System.out.println(Long.MAX_VALUE);
+		System.out.println(Long.SIZE);
+		System.out.println(Short.MAX_VALUE);
+		System.out.println(Short.SIZE);
+		
+		System.out.println(24 * 60 * 60);
+		
 	}
 
 }

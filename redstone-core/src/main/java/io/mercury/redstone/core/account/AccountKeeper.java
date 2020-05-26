@@ -38,40 +38,33 @@ public final class AccountKeeper implements Dumper<String> {
 	private static final MutableIntObjectMap<Account> AccountMap = MutableMaps.newIntObjectHashMap();
 
 	/**
-	 * 存储SubAccount信息, 一对一关系,以subAccountId索引
+	 * 存储SubAccount信息, 一对一关系, 以subAccountId索引
 	 */
 	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
 
 	/**
-	 * 存储Account信息, 一对一关系,以subAccountId索引
+	 * 存储Account信息, 一对一关系, 以subAccountId索引
 	 */
 	private static final MutableIntObjectMap<Account> AccountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
 
 	private AccountKeeper() {
 	}
 
-	public static void putAccount(@Nonnull Account... accounts) {
-		Assertor.requiredLength(accounts, 1, "accounts");
-		for (Account account : accounts) {
-			for (SubAccount subAccount : account.subAccounts()) {
-				SubAccountMap.put(subAccount.subAccountId(), subAccount);
-				AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
-				log.info("Put account, accountId==[{}], subAccountId==[{}]", account.accountId(),
-						subAccount.subAccountId());
-			}
-			AccountMap.put(account.accountId(), account);
-		}
-	}
+	private static final boolean isInit = false;
 
-	public static void putSubAccount(@Nonnull SubAccount... subAccounts) {
-		Assertor.requiredLength(subAccounts, 1, "subAccounts");
-		for (SubAccount subAccount : subAccounts) {
-			Account account = subAccount.account();
-			SubAccountMap.put(subAccount.subAccountId(), subAccount);
-			AccountMap.put(account.accountId(), account);
-			AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
-			log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(),
-					account.accountId());
+	public static void initialize(@Nonnull SubAccount... subAccounts) {
+		if (!isInit) {
+			Assertor.requiredLength(subAccounts, 1, "subAccounts");
+			for (SubAccount subAccount : subAccounts) {
+				Account account = subAccount.account();
+				AccountMap.put(account.accountId(), account);
+				AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
+				SubAccountMap.put(subAccount.subAccountId(), subAccount);
+				log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(),
+						account.accountId());
+			}
+		} else {
+			log.error("AccountKeeper Has been initialized, cannot be initialize again");
 		}
 	}
 

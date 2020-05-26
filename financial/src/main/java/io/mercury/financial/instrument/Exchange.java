@@ -26,17 +26,17 @@ public enum Exchange {
 
 	;
 
-	private int exchangeId;
+	private int id;
 
 	private ZoneId zoneId;
 
-	private Exchange(int exchangeId, ZoneId zoneId) {
-		this.exchangeId = exchangeId * 1000000;
+	private Exchange(int id, ZoneId zoneId) {
+		this.id = id * 1000000;
 		this.zoneId = zoneId;
 	}
 
 	public int id() {
-		return exchangeId;
+		return id;
 	}
 
 	public String code() {

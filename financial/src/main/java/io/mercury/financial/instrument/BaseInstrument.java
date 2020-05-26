@@ -3,15 +3,17 @@ package io.mercury.financial.instrument;
 public abstract class BaseInstrument implements Instrument {
 
 	/**
-	 * int 类型唯一编码
+	 * [int]类型唯一编码
 	 */
-	private int id;
+	private final int id;
 	/**
 	 * 字符串唯一编码
 	 */
-	private String code;
-	private Symbol symbol;
-	private boolean isEnable;
+	private final String code;
+	/**
+	 * Symbol
+	 */
+	private final Symbol symbol;
 
 	/**
 	 * 
@@ -24,6 +26,8 @@ public abstract class BaseInstrument implements Instrument {
 		this.code = code;
 		this.symbol = symbol;
 	}
+
+	private boolean isEnable;
 
 	@Override
 	public Instrument disable() {

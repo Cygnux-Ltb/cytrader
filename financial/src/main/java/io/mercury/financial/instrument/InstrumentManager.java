@@ -47,7 +47,7 @@ public final class InstrumentManager implements Dumper<String> {
 
 	private static final boolean isInit = false;
 
-	public static void initInstrument(@Nonnull Instrument... instruments) {
+	public static void initialize(@Nonnull Instrument... instruments) {
 		if (!isInit) {
 			for (Instrument instrument : instruments) {
 				log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", instrument.id(),
@@ -57,7 +57,7 @@ public final class InstrumentManager implements Dumper<String> {
 				setTradable(instrument.id());
 			}
 		} else {
-			log.error("InstrumentManager Has been initialized, cannot be initialization again");
+			log.error("InstrumentManager Has been initialized, cannot be initialize again");
 		}
 	}
 

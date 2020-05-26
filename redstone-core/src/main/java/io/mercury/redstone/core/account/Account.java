@@ -144,7 +144,6 @@ public class Account extends EnableComponent<Account> {
 		builder.append(str6);
 		builder.append(isEnabled());
 		builder.append(str7);
-
 		return builder.toString();
 	}
 

@@ -82,7 +82,7 @@ public final class PositionKeeper implements Dumper<String> {
 	 * 需要分别设置多空两个方向的持仓限制
 	 * 
 	 * @param subAccountId  子账户ID
-	 * @param instrument
+	 * @param instrument    交易标的
 	 * @param limitLongQty  多仓限制
 	 * @param limitShortQty 空仓限制
 	 */
@@ -99,9 +99,9 @@ public final class PositionKeeper implements Dumper<String> {
 	/**
 	 * 根据已有持仓计算, 子账户的最大持仓限制<br>
 	 * 
-	 * @param subAccountId
-	 * @param instrument
-	 * @param direction
+	 * @param subAccountId 子账户ID
+	 * @param instrument   交易标的
+	 * @param direction    交易方向
 	 * @return
 	 */
 	public static int getPositionLimit(int subAccountId, Instrument instrument, TrdDirection direction) {
@@ -174,8 +174,8 @@ public final class PositionKeeper implements Dumper<String> {
 	/**
 	 * 获取当前头寸数量
 	 * 
-	 * @param subAccountId
-	 * @param instrument
+	 * @param subAccountId 子账户ID
+	 * @param instrument   交易标的
 	 * @return
 	 */
 	public static int getCurrentPosition(int subAccountId, Instrument instrument) {
@@ -221,15 +221,11 @@ public final class PositionKeeper implements Dumper<String> {
 	}
 
 	public static void main(String[] args) {
-
 		int subAccountId = 10;
 		ChinaFutures rb2010 = new ChinaFutures(ChinaFuturesSymbol.RB, 2010);
-
 		PositionKeeper.setPositionsLimit(subAccountId, rb2010, 10, 10);
-
 		PositionKeeper.addCurrentPosition(subAccountId, rb2010, TrdDirection.Long, 10);
 		PositionKeeper.addCurrentPosition(subAccountId, rb2010, TrdDirection.Short, 15);
-
 	}
 
 }

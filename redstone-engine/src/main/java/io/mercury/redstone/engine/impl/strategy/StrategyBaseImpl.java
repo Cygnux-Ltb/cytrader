@@ -23,6 +23,7 @@ import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.financial.market.MarkerDataKeeper.LastMarkerData;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.account.AccountKeeper;
 import io.mercury.redstone.core.account.SubAccount;
 import io.mercury.redstone.core.adaptor.Adaptor;
@@ -41,22 +42,31 @@ import io.mercury.redstone.core.position.PositionKeeper;
 import io.mercury.redstone.core.risk.CircuitBreaker;
 import io.mercury.redstone.core.strategy.Strategy;
 import io.mercury.redstone.core.strategy.StrategyEvent;
+import io.mercury.redstone.core.strategy.StrategyKeeper;
 
 public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy, CircuitBreaker {
 
+	/**
+	 * 策略ID
+	 */
 	private final int strategyId;
-
+	/**
+	 * 策略名称
+	 */
 	private final String strategyName;
 
-	private final int subAccountId;
-
-	private boolean initSuccess = false;
-
-	private boolean isEnable = false;
-
+	// 子账号
 	protected final SubAccount subAccount;
+	protected final int subAccountId;
+
+	// 实际账号
+	protected final Account account;
+	protected final int accountId;
 
 	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
+
+	private boolean initSuccess = false;
+	private boolean isEnable = false;
 
 	/**
 	 * 记录当前策略所有的实际订单
@@ -68,14 +78,17 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
 				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
 				: strategyName;
-		this.subAccountId = subAccountId;
 		this.subAccount = AccountKeeper.getSubAccount(subAccountId);
+		this.subAccountId = subAccountId;
+		this.account = AccountKeeper.getAccountBySubAccountId(subAccountId);
+		this.accountId = account.accountId();
 	}
 
 	@Override
-	public void initialization(@Nonnull Supplier<Boolean> initializer) {
+	public void initialize(@Nonnull Supplier<Boolean> initializer) {
 		initSuccess = Assertor.nonNull(initializer, "initializer").get();
 		log.info("Initialize result initSuccess==[{}]", initSuccess);
+		StrategyKeeper.putStrategy(this);
 	}
 
 	@Override
@@ -96,7 +109,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
 		if (orders.notEmpty()) {
-			log.info("{} :: strategyOrders not empty, doing...", strategyName);
+			log.info("{} :: strategyOrders not empty, doing....", strategyName);
 		}
 		handleMarketData(marketData);
 	}
