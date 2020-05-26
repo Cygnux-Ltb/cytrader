@@ -250,7 +250,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 */
 	private Function<StrategyOrder, MutableList<ParentOrder>> strategyOrderConverter = strategyOrder -> {
 		MutableList<ParentOrder> parentOrders = MutableLists.newFastList();
-		OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrders(strategyOrder.instrument());
+		OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrderBook(strategyOrder.instrument());
 		int offerQty = strategyOrder.ordQty().offerQty();
 		switch (strategyOrder.direction()) {
 		case Long:
