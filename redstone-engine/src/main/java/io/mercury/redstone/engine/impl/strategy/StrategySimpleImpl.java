@@ -14,7 +14,7 @@ public abstract class StrategySimpleImpl<M extends MarketData> extends StrategyB
 	protected Instrument instrument;
 
 	/**
-	 * 
+	 * 策略订阅的合约列表
 	 */
 	protected ImmutableList<Instrument> instruments;
 

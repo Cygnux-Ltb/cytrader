@@ -59,7 +59,6 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 				AdaptorStatus adaptorStatus = despatchMsg.getAdaptorStatus();
 				AdaptorEvent event = new AdaptorEvent(adaptorId).setAdaptorStatus(adaptorStatus);
 				
-				
 				break;
 			default:
 				throw new IllegalStateException("scheduler mark illegal");

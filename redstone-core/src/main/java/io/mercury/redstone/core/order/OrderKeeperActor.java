@@ -13,19 +13,21 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.account.AccountKeeper;
 import io.mercury.redstone.core.order.specific.ChildOrder;
-import io.mercury.redstone.core.order.specific.ParentOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
 
 /**
  * 统一管理订单<br>
  * OrderKeeper只对订单进行存储<br>
  * 不处理订单<br>
+ * <br>
+ * 
+ * 改造为Actor模型
  * 
  * @author yellow013
  */
 
 @NotThreadSafe
-public final class OrderKeeper implements Dumper<String> {
+public final class OrderKeeperActor implements Dumper<String> {
 
 	/**
 	 * 
@@ -35,7 +37,7 @@ public final class OrderKeeper implements Dumper<String> {
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderKeeper.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(OrderKeeperActor.class);
 
 	/**
 	 * 存储所有的order
@@ -62,7 +64,7 @@ public final class OrderKeeper implements Dumper<String> {
 	 */
 	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = MutableMaps.newIntObjectHashMap();
 
-	private OrderKeeper() {
+	private OrderKeeperActor() {
 	}
 
 	public static void onOrder(Order order) {
@@ -141,11 +143,6 @@ public final class OrderKeeper implements Dumper<String> {
 
 	public static void onMarketData(BasicMarketData marketData) {
 		// TODO 处理行情
-	}
-
-	public static ParentOrder createParentOrder() {
-
-		return null;
 	}
 
 	@Override

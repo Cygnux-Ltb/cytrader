@@ -16,12 +16,12 @@ public abstract class ActualOrder extends OrderBaseImpl {
 	private static final long serialVersionUID = 6034876220144503779L;
 
 	/**
-	 * 
+	 * 交易动作
 	 */
 	private final TrdAction action;
 
 	/**
-	 * 所属上级OrderId
+	 * 所属上级ordId
 	 */
 	private final long ownerOrdId;
 

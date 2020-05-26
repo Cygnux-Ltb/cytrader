@@ -68,7 +68,7 @@ public final class OrderBook {
 			activeShortOrders.put(order.ordSysId(), order);
 			break;
 		default:
-			throw new OrdStatusException("ordSysId: [" + order.ordSysId() + "], direction is invalid");
+			throw new IllegalStateException("ordSysId: [" + order.ordSysId() + "], direction is invalid");
 		}
 		orders.put(order.ordSysId(), order);
 		return activeOrders.put(order.ordSysId(), order);
