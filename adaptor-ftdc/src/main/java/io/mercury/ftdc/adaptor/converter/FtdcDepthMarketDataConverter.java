@@ -40,37 +40,37 @@ public final class FtdcDepthMarketDataConverter implements Function<FtdcDepthMar
 		PriceMultiplier multiplier = instrument.symbol().priceMultiplier();
 
 		return new BasicMarketData(instrument, ZonedDateTime.of(actionDay, updateTime, TimeZone.CST),
-				multiplier.convertToLong(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
-				multiplier.convertToLong(depthMarketData.getTurnover()))
+				multiplier.toLong(depthMarketData.getLastPrice()), depthMarketData.getVolume(),
+				multiplier.toLong(depthMarketData.getTurnover()))
 
-						.setBidPrice1(multiplier.convertToLong(depthMarketData.getBidPrice1()))
+						.setBidPrice1(multiplier.toLong(depthMarketData.getBidPrice1()))
 						.setBidVolume1(depthMarketData.getBidVolume1())
 
-						.setBidPrice2(multiplier.convertToLong(depthMarketData.getBidPrice2()))
+						.setBidPrice2(multiplier.toLong(depthMarketData.getBidPrice2()))
 						.setBidVolume2(depthMarketData.getBidVolume2())
 
-						.setBidPrice3(multiplier.convertToLong(depthMarketData.getBidPrice3()))
+						.setBidPrice3(multiplier.toLong(depthMarketData.getBidPrice3()))
 						.setBidVolume3(depthMarketData.getBidVolume3())
 
-						.setBidPrice4(multiplier.convertToLong(depthMarketData.getBidPrice4()))
+						.setBidPrice4(multiplier.toLong(depthMarketData.getBidPrice4()))
 						.setBidVolume4(depthMarketData.getBidVolume4())
 
-						.setBidPrice5(multiplier.convertToLong(depthMarketData.getBidPrice5()))
+						.setBidPrice5(multiplier.toLong(depthMarketData.getBidPrice5()))
 						.setBidVolume5(depthMarketData.getBidVolume5())
 
-						.setAskPrice1(multiplier.convertToLong(depthMarketData.getAskPrice1()))
+						.setAskPrice1(multiplier.toLong(depthMarketData.getAskPrice1()))
 						.setAskVolume1(depthMarketData.getAskVolume1())
 
-						.setAskPrice2(multiplier.convertToLong(depthMarketData.getAskPrice2()))
+						.setAskPrice2(multiplier.toLong(depthMarketData.getAskPrice2()))
 						.setAskVolume2(depthMarketData.getAskVolume2())
 
-						.setAskPrice3(multiplier.convertToLong(depthMarketData.getAskPrice3()))
+						.setAskPrice3(multiplier.toLong(depthMarketData.getAskPrice3()))
 						.setAskVolume3(depthMarketData.getAskVolume3())
 
-						.setAskPrice4(multiplier.convertToLong(depthMarketData.getAskPrice4()))
+						.setAskPrice4(multiplier.toLong(depthMarketData.getAskPrice4()))
 						.setAskVolume4(depthMarketData.getAskVolume4())
 
-						.setAskPrice5(multiplier.convertToLong(depthMarketData.getAskPrice5()))
+						.setAskPrice5(multiplier.toLong(depthMarketData.getAskPrice5()))
 						.setAskVolume5(depthMarketData.getAskVolume5());
 
 	}

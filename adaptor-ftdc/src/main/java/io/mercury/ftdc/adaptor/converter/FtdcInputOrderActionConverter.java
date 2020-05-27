@@ -9,9 +9,16 @@ public final class FtdcInputOrderActionConverter implements Function<Order, CTho
 
 	@Override
 	public CThostFtdcInputOrderActionField apply(Order order) {
-		CThostFtdcInputOrderActionField ftdcInputOrderAction = new CThostFtdcInputOrderActionField();
-
-		return ftdcInputOrderAction;
+		CThostFtdcInputOrderActionField inputOrderActionField = new CThostFtdcInputOrderActionField();
+		
+		
+		
+		
+		
+		
+		
+		
+		return inputOrderActionField;
 	}
 
 }

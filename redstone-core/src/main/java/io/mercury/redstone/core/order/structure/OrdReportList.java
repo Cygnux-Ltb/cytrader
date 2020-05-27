@@ -20,7 +20,7 @@ public final class OrdReportList {
 		return ordSysId;
 	}
 
-	public MutableList<OrdReport> all() {
+	public MutableList<OrdReport> allReport() {
 		return allReport;
 	}
 
@@ -28,11 +28,11 @@ public final class OrdReportList {
 		return allReport.isEmpty();
 	}
 
-	public Optional<OrdReport> firstReport() {
+	public Optional<OrdReport> first() {
 		return allReport.getFirstOptional();
 	}
 
-	public Optional<OrdReport> lastReport() {
+	public Optional<OrdReport> last() {
 		return allReport.getLastOptional();
 	}
 

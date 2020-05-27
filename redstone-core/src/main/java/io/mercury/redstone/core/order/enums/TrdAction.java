@@ -8,14 +8,18 @@ public enum TrdAction {
 
 	Close(2),
 
-	CloseToday(3),
+	CloseToday(4),
 
-	CloseYesterday(4),
+	CloseYesterday(8),
 
 	;
 
 	private int code;
 
+	/**
+	 * 
+	 * @param code 代码
+	 */
 	private TrdAction(int code) {
 		this.code = code;
 	}

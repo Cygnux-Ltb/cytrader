@@ -9,7 +9,7 @@ import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
 import io.mercury.redstone.core.order.structure.OrdPrice;
 import io.mercury.redstone.core.order.structure.OrdQty;
-import io.mercury.redstone.core.order.structure.TrdList;
+import io.mercury.redstone.core.order.structure.TrdRecordList;
 import io.mercury.redstone.core.order.structure.TrdRecord;
 
 /**
@@ -28,7 +28,7 @@ public final class ChildOrder extends ActualOrder {
 	/**
 	 * 子订单成交列表
 	 */
-	private final TrdList trdList;
+	private final TrdRecordList trdRecordList;
 
 	/**
 	 * 
@@ -47,7 +47,7 @@ public final class ChildOrder extends ActualOrder {
 			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
 		super(strategyId, accountId, subAccountId, instrument, OrdQty.withOffer(offerQty),
 				OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
-		this.trdList = new TrdList(ordSysId());
+		this.trdRecordList = new TrdRecordList(ordSysId());
 	}
 
 	@Override
@@ -55,18 +55,22 @@ public final class ChildOrder extends ActualOrder {
 		return 0;
 	}
 
-	public TrdList trdList() {
-		return trdList;
+	public TrdRecordList trdRecordList() {
+		return trdRecordList;
+	}
+	
+	public TrdRecord firstTrdRecord() {
+		return trdRecordList.first().get();
 	}
 
 	public TrdRecord lastTrdRecord() {
-		return trdList.last().get();
+		return trdRecordList.last().get();
 	}
 
 	@Override
 	public void outputLog(Logger log, String objName, String msg) {
 		log.info(OrderOutputText.ChildOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(),
-				action(), ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp(), trdList);
+				action(), ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp(), trdRecordList);
 	}
 
 }

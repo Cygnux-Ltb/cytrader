@@ -14,12 +14,12 @@ public enum PriceMultiplier {
 		}
 
 		@Override
-		public long convertToLong(double price) {
+		public long toLong(double price) {
 			return (long) price;
 		}
 
 		@Override
-		public double convertToDouble(long price) {
+		public double toDouble(long price) {
 			return (double) price;
 		}
 	},
@@ -36,12 +36,12 @@ public enum PriceMultiplier {
 		}
 
 		@Override
-		public long convertToLong(double price) {
+		public long toLong(double price) {
 			return PriceSupporter.priceToLong4(price);
 		}
 
 		@Override
-		public double convertToDouble(long price) {
+		public double toDouble(long price) {
 			return PriceSupporter.priceToDouble4(price);
 		}
 	},
@@ -58,12 +58,12 @@ public enum PriceMultiplier {
 		}
 
 		@Override
-		public long convertToLong(double price) {
+		public long toLong(double price) {
 			return PriceSupporter.priceToLong6(price);
 		}
 
 		@Override
-		public double convertToDouble(long price) {
+		public double toDouble(long price) {
 			return PriceSupporter.priceToDouble6(price);
 		}
 	},
@@ -80,12 +80,12 @@ public enum PriceMultiplier {
 		}
 
 		@Override
-		public long convertToLong(double price) {
+		public long toLong(double price) {
 			return PriceSupporter.priceToLong8(price);
 		}
 
 		@Override
-		public double convertToDouble(long price) {
+		public double toDouble(long price) {
 			return PriceSupporter.priceToDouble8(price);
 		}
 	},
@@ -99,9 +99,9 @@ public enum PriceMultiplier {
 
 	public abstract double doubleMultiplier();
 
-	public abstract long convertToLong(double price);
+	public abstract long toLong(double price);
 
-	public abstract double convertToDouble(long price);
+	public abstract double toDouble(long price);
 
 	public static final class PriceSupporter {
 

@@ -3,7 +3,7 @@ package io.mercury.redstone.core.order.structure;
 /**
  * tradePrice fix use {@link MarketConstant#PriceMultiplier}
  */
-public  class TrdRecord implements Comparable<TrdRecord> {
+public class TrdRecord implements Comparable<TrdRecord> {
 
 	private int serial;
 	private long ordSysId;
@@ -43,7 +43,11 @@ public  class TrdRecord implements Comparable<TrdRecord> {
 
 	@Override
 	public int compareTo(TrdRecord o) {
-		return this.serial < o.serial ? -1 : this.serial > o.serial ? 1 : 0;
+		return this.ordSysId < o.ordSysId ? -1
+				: this.ordSysId > o.ordSysId ? 1 
+						: this.serial < o.serial ? -1 
+								: this.serial > o.serial ? 1 
+										: 0;
 	}
 
 }

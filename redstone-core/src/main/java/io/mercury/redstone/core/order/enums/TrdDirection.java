@@ -12,6 +12,10 @@ public enum TrdDirection {
 
 	private int code;
 
+	/**
+	 * 
+	 * @param code 代码
+	 */
 	private TrdDirection(int code) {
 		this.code = code;
 	}

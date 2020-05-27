@@ -38,13 +38,13 @@ public final class OrdPrice {
 		return trdAvgPrice;
 	}
 
-	public OrdPrice calculateAvgPrice(TrdList trdList) {
-		if (!trdList.isEmpty()) {
-			MutableList<TrdRecord> records = trdList.records();
+	public OrdPrice calculateAvgPrice(TrdRecordList trdRecordList) {
+		if (!trdRecordList.isEmpty()) {
+			MutableList<TrdRecord> allRecord = trdRecordList.allRecord();
 			// 计算总成交金额
-			long totalTurnover = records.sumOfLong(trade -> trade.trdPrice() * trade.trdQty());
+			long totalTurnover = allRecord.sumOfLong(trade -> trade.trdPrice() * trade.trdQty());
 			// 计算总成交量
-			long totalQty = records.sumOfInt(trade -> trade.trdQty());
+			long totalQty = allRecord.sumOfInt(trade -> trade.trdQty());
 			if (totalQty > 0L)
 				this.trdAvgPrice = totalTurnover / totalQty;
 			return this;
@@ -68,9 +68,9 @@ public final class OrdPrice {
 	}
 
 	public static void main(String[] args) {
-		
+
 		System.out.println(OrdPrice.withOffer(2560));
-		
+
 	}
 
 }

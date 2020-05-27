@@ -10,19 +10,21 @@ public enum OrdStatus {
 
 	PendingNew(1, false),
 
-	New(2, false),
+	New(1 << 1, false),
 
-	PendingCancel(4, false),
+	PendingCancel(1 << 2, false),
 
-	PartiallyFilled(8, false),
+	PartiallyFilled(1 << 3, false),
 
-	Filled(16, true),
+	Filled(1 << 4, true),
 
-	Canceled(32, true),
+	Canceled(1 << 5, true),
 
-	NewRejected(64, true),
+	NewRejected(1 << 6, true),
 
-	CancelRejected(128, true),
+	CancelRejected(1 << 7, true),
+
+	NotProvided(1 << 8, false),
 
 	@Deprecated
 	PendingReplace(101, false),
@@ -36,44 +38,48 @@ public enum OrdStatus {
 	;
 
 	private int code;
-	private boolean isTerminated;
-
-	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
+	private boolean isFinished;
 
 	/**
-	 * @param code
+	 * 
+	 * @param code       代码
+	 * @param isFinished 是否为已结束状态
 	 */
-	private OrdStatus(int code, boolean isTerminated) {
+	private OrdStatus(int code, boolean isFinished) {
 		this.code = code;
-		this.isTerminated = isTerminated;
+		this.isFinished = isFinished;
 	}
 
 	public int code() {
 		return code;
 	}
 
-	public boolean isTerminated() {
-		return isTerminated;
+	public boolean isFinished() {
+		return isFinished;
 	}
+
+	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);
 
 	public static OrdStatus valueOf(int code) {
 		switch (code) {
 		case 1:
 			return PendingNew;
-		case 2:
+		case 1 << 1:
 			return New;
-		case 4:
+		case 1 << 2:
 			return PendingCancel;
-		case 8:
+		case 1 << 3:
 			return PartiallyFilled;
-		case 16:
+		case 1 << 4:
 			return Filled;
-		case 32:
+		case 1 << 5:
 			return Canceled;
-		case 64:
+		case 1 << 6:
 			return NewRejected;
-		case 128:
+		case 1 << 7:
 			return CancelRejected;
+		case 1 << 8:
+			return NotProvided;
 		case 101:
 			return PendingReplace;
 		case 102:

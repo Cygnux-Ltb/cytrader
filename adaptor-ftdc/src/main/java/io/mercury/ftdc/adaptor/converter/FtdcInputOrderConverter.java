@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.ftdc.adaptor.consts.FtdcContingentCondition;
 import io.mercury.ftdc.adaptor.consts.FtdcDirection;
 import io.mercury.ftdc.adaptor.consts.FtdcForceCloseReason;
@@ -30,12 +31,10 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 		 * 设置交易标的
 		 */
 		inputOrderField.setInstrumentID(instrument.code());
-
 		/**
 		 * 设置报单价格
 		 */
 		inputOrderField.setOrderPriceType(FtdcOrderPriceType.LimitPrice);
-
 		/**
 		 * 设置开平标识
 		 */
@@ -53,14 +52,12 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseYesterdayStr);
 			break;
 		default:
-			throw new RuntimeException(childOrder.action() + " does not exist.");
+			throw new RuntimeException(childOrder.action() + " does not exist");
 		}
-
 		/**
 		 * 设置投机标识
 		 */
 		inputOrderField.setCombHedgeFlag(FtdcHedgeFlag.SpeculationStr);
-
 		/**
 		 * 设置买卖方向
 		 */
@@ -77,17 +74,16 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 		/**
 		 * 设置价格
 		 */
-		inputOrderField.setLimitPrice(order.ordPrice().offerPrice());
+		PriceMultiplier multiplier = instrument.symbol().priceMultiplier();
+		inputOrderField.setLimitPrice(multiplier.toDouble(order.ordPrice().offerPrice()));
 		/**
 		 * 设置数量
 		 */
 		inputOrderField.setVolumeTotalOriginal(order.ordQty().offerQty());
-
 		/**
 		 * 设置有效期类型
 		 */
 		inputOrderField.setTimeCondition(FtdcTimeCondition.GFD);
-
 		/**
 		 * 设置成交量类型
 		 */

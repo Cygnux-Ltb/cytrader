@@ -11,6 +11,6 @@ public interface OrderOutputText {
 
 	String ChildOrderOutputText = "{} :: {}, ChildOrder : ordSysId==[{}], ownerOrdId==[{}] ordStatus==[{}], "
 			+ "direction==[{}], action==[{}], ordType==[{}], instrument -> {}, ordPrice -> {}, ordQty -> {}, "
-			+ "ordTimestamps -> {} trdList -> {}";
+			+ "ordTimestamps -> {} trdRecordList -> {}";
 
 }

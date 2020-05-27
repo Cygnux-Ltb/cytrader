@@ -26,7 +26,7 @@ import ctp.thostapi.thosttraderapiConstants;
 public final class FtdcTimeCondition {
 
 	/**
-	 * 立即完成，否则撤销
+	 * 立即完成, 否则撤销
 	 */
 	public static final char IOC = thosttraderapiConstants.THOST_FTDC_TC_IOC;
 
