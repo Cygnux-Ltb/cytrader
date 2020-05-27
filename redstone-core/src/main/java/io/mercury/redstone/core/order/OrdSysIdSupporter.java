@@ -22,7 +22,7 @@ import io.mercury.common.util.BitOperator;
  * 1.使用位运算合并long类型, 分配64位<br>
  * 2.最高位使用strategyId <br>
  * <br>
- * implement为方案A<br>
+ * 当前实现为方案A<br>
  * 
  * @author yellow013
  * @creation 2019年4月13日
@@ -88,14 +88,14 @@ public final class OrdSysIdSupporter {
 		System.out.println(Short.MAX_VALUE);
 		System.out.println(BitOperator.intBinaryFormat(Short.MAX_VALUE));
 		System.out.println(BitOperator.intBinaryFormat(999));
-		
+
 		System.out.println(Long.MAX_VALUE);
 		System.out.println(Long.SIZE);
 		System.out.println(Short.MAX_VALUE);
 		System.out.println(Short.SIZE);
-		
+
 		System.out.println(24 * 60 * 60);
-		
+
 	}
 
 }
