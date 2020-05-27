@@ -67,9 +67,9 @@ public final class OrdReport implements Serial<OrdReport> {
 	private long offerPrice;
 
 	/**
-	 * order execute price
+	 * order trade price
 	 */
-	private long executePrice;
+	private long tradePrice;
 
 	/**
 	 * offer time
@@ -129,8 +129,8 @@ public final class OrdReport implements Serial<OrdReport> {
 		return offerPrice;
 	}
 
-	public long getExecutePrice() {
-		return executePrice;
+	public long getTradePrice() {
+		return tradePrice;
 	}
 
 	public String getOfferTime() {
@@ -191,8 +191,8 @@ public final class OrdReport implements Serial<OrdReport> {
 		return this;
 	}
 
-	public OrdReport setExecutePrice(long executePrice) {
-		this.executePrice = executePrice;
+	public OrdReport setTradePrice(long tradePrice) {
+		this.tradePrice = tradePrice;
 		return this;
 	}
 

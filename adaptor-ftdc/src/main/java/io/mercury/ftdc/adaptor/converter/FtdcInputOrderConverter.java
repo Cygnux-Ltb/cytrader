@@ -4,11 +4,11 @@ import java.util.function.Function;
 
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.ftdc.adaptor.consts.FtdcCombHedgeFlag;
-import io.mercury.ftdc.adaptor.consts.FtdcCombOffsetFlag;
 import io.mercury.ftdc.adaptor.consts.FtdcContingentCondition;
 import io.mercury.ftdc.adaptor.consts.FtdcDirection;
 import io.mercury.ftdc.adaptor.consts.FtdcForceCloseReason;
+import io.mercury.ftdc.adaptor.consts.FtdcHedgeFlag;
+import io.mercury.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.mercury.ftdc.adaptor.consts.FtdcOrderPriceType;
 import io.mercury.ftdc.adaptor.consts.FtdcTimeCondition;
 import io.mercury.ftdc.adaptor.consts.FtdcVolumeCondition;
@@ -41,16 +41,16 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 		 */
 		switch (childOrder.action()) {
 		case Open:
-			inputOrderField.setCombOffsetFlag(FtdcCombOffsetFlag.OpenStr);
+			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.OpenStr);
 			break;
 		case Close:
-			inputOrderField.setCombOffsetFlag(FtdcCombOffsetFlag.CloseStr);
+			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseStr);
 			break;
 		case CloseToday:
-			inputOrderField.setCombOffsetFlag(FtdcCombOffsetFlag.CloseTodayStr);
+			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseTodayStr);
 			break;
 		case CloseYesterday:
-			inputOrderField.setCombOffsetFlag(FtdcCombOffsetFlag.CloseYesterdayStr);
+			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseYesterdayStr);
 			break;
 		default:
 			throw new RuntimeException(childOrder.action() + " does not exist.");
@@ -59,7 +59,7 @@ public final class FtdcInputOrderConverter implements Function<Order, CThostFtdc
 		/**
 		 * 设置投机标识
 		 */
-		inputOrderField.setCombHedgeFlag(FtdcCombHedgeFlag.SpeculationStr);
+		inputOrderField.setCombHedgeFlag(FtdcHedgeFlag.SpeculationStr);
 
 		/**
 		 * 设置买卖方向

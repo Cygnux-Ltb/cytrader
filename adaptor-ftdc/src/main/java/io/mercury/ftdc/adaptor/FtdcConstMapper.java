@@ -2,8 +2,8 @@ package io.mercury.ftdc.adaptor;
 
 import javax.annotation.Nonnull;
 
-import io.mercury.ftdc.adaptor.consts.FtdcCombOffsetFlag;
 import io.mercury.ftdc.adaptor.consts.FtdcDirection;
+import io.mercury.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.mercury.ftdc.adaptor.consts.FtdcOrderStatusType;
 import io.mercury.redstone.core.order.enums.OrdStatus;
 import io.mercury.redstone.core.order.enums.TrdAction;
@@ -12,7 +12,6 @@ import io.mercury.redstone.core.order.enums.TrdDirection;
 public final class FtdcConstMapper {
 
 	public static final OrdStatus fromOrderStatus(char orderStatus) {
-
 		if (FtdcOrderStatusType.NoTradeNotQueueing == orderStatus || FtdcOrderStatusType.NoTradeQueueing == orderStatus)
 			return OrdStatus.New;
 		else if (FtdcOrderStatusType.PartTradedNotQueueing == orderStatus
@@ -27,19 +26,21 @@ public final class FtdcConstMapper {
 
 	}
 
-	public static final TrdAction fromCombOffsetFlag(@Nonnull String combOffsetFlag) {
-		char charAt = combOffsetFlag.charAt(0);
-		if (FtdcCombOffsetFlag.Open == charAt)
+	public static final TrdAction fromOffsetFlag(@Nonnull String combOffsetFlag) {
+		return fromOffsetFlag(combOffsetFlag.charAt(0));
+	}
+
+	public static final TrdAction fromOffsetFlag(@Nonnull char offsetFlag) {
+		if (FtdcOffsetFlag.Open == offsetFlag)
 			return TrdAction.Open;
-		else if (FtdcCombOffsetFlag.Close == charAt)
+		else if (FtdcOffsetFlag.Close == offsetFlag)
 			return TrdAction.Close;
-		else if (FtdcCombOffsetFlag.CloseToday == charAt)
+		else if (FtdcOffsetFlag.CloseToday == offsetFlag)
 			return TrdAction.CloseToday;
-		else if (FtdcCombOffsetFlag.CloseYesterday == charAt)
+		else if (FtdcOffsetFlag.CloseYesterday == offsetFlag)
 			return TrdAction.CloseYesterday;
 		else
 			return TrdAction.Invalid;
-
 	}
 
 	public static final TrdDirection fromDirection(char direction) {

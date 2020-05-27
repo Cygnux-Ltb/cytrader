@@ -20,14 +20,14 @@ public final class OrderUpdater {
 			// Set FilledQty
 			order.ordQty().filledQty(report.getFilledQty());
 			// Add NewTrade record
-			order.trdList().addNewRecord(report.getEpochMillis(), report.getExecutePrice(),
+			order.trdList().addNewRecord(report.getEpochMillis(), report.getTradePrice(),
 					report.getFilledQty() - order.ordQty().lastFilledQty());
 			break;
 		case Filled:
 			// Set FilledQty
 			order.ordQty().filledQty(report.getFilledQty());
 			// Add NewTrade Record
-			order.trdList().addNewRecord(report.getEpochMillis(), report.getExecutePrice(),
+			order.trdList().addNewRecord(report.getEpochMillis(), report.getTradePrice(),
 					report.getFilledQty() - order.ordQty().lastFilledQty());
 			// Calculation AvgPrice
 			order.ordPrice().calculateAvgPrice(order.trdList());

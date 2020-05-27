@@ -6,13 +6,13 @@ import org.eclipse.collections.api.list.MutableList;
 
 import io.mercury.common.collections.MutableLists;
 
-public final class OrdReportSet {
+public final class OrdReportList {
 
 	private long ordSysId;
 
 	private MutableList<OrdReport> allReport = MutableLists.newFastList(8);
 
-	public OrdReportSet(long ordSysId) {
+	public OrdReportList(long ordSysId) {
 		this.ordSysId = ordSysId;
 	}
 
@@ -20,7 +20,7 @@ public final class OrdReportSet {
 		return ordSysId;
 	}
 
-	public MutableList<OrdReport> allReport() {
+	public MutableList<OrdReport> all() {
 		return allReport;
 	}
 
@@ -36,7 +36,7 @@ public final class OrdReportSet {
 		return allReport.getLastOptional();
 	}
 
-	public void addReport(OrdReport ordReport) {
+	public void add(OrdReport ordReport) {
 		allReport.add(ordReport);
 	}
 

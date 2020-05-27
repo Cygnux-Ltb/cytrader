@@ -37,8 +37,8 @@ public final class TrdList {
 		return records.getLastOptional();
 	}
 
-	public void addNewRecord(long epochTime, long tradePrice, int qty) {
-		records.add(new TrdRecord(++serial, ordSysId, epochTime, tradePrice, qty));
+	public void addNewRecord(long epochTime, long trdPrice, int qty) {
+		records.add(new TrdRecord(++serial, ordSysId, epochTime, trdPrice, qty));
 	}
 
 
