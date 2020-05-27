@@ -18,14 +18,14 @@ public final class OrderUpdater {
 		switch (order.ordStatus()) {
 		case PartiallyFilled:
 			// Set FilledQty
-			order.ordQty().filledQty(report.getFilledQty());
+			order.ordQty().setFilledQty(report.getFilledQty());
 			// Add NewTrade record
 			order.trdRecordList().add(report.getEpochMillis(), report.getTradePrice(),
 					report.getFilledQty() - order.ordQty().lastFilledQty());
 			break;
 		case Filled:
 			// Set FilledQty
-			order.ordQty().filledQty(report.getFilledQty());
+			order.ordQty().setFilledQty(report.getFilledQty());
 			// Add NewTrade Record
 			order.trdRecordList().add(report.getEpochMillis(), report.getTradePrice(),
 					report.getFilledQty() - order.ordQty().lastFilledQty());

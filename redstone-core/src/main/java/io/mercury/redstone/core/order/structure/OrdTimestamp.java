@@ -23,24 +23,14 @@ public final class OrdTimestamp {
 		return generateTime;
 	}
 
-	@Nullable
-	public EpochTimestamp sendingTime() {
-		return sendingTime;
-	}
-
-	@Nullable
-	public EpochTimestamp firstReportTime() {
-		return firstReportTime;
-	}
-
-	@Nullable
-	public EpochTimestamp finishTime() {
-		return finishTime;
-	}
-
 	public OrdTimestamp fillSendingTime() {
 		this.sendingTime = EpochTimestamp.now();
 		return this;
+	}
+
+	@Nullable
+	public EpochTimestamp sendingTime() {
+		return sendingTime;
 	}
 
 	public OrdTimestamp fillFirstReportTime() {
@@ -48,9 +38,19 @@ public final class OrdTimestamp {
 		return this;
 	}
 
+	@Nullable
+	public EpochTimestamp firstReportTime() {
+		return firstReportTime;
+	}
+
 	public OrdTimestamp fillFinishTime() {
 		this.finishTime = EpochTimestamp.now();
 		return this;
+	}
+
+	@Nullable
+	public EpochTimestamp finishTime() {
+		return finishTime;
 	}
 
 }

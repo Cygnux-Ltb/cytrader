@@ -6,14 +6,17 @@ public final class OrdQty {
 	 * 委托数量
 	 */
 	private int offerQty;
+
 	/**
 	 * 剩余数量
 	 */
 	private int leavesQty;
+
 	/**
 	 * 已成交数量
 	 */
 	private int filledQty;
+
 	/**
 	 * 最后一次成交数量
 	 */
@@ -32,7 +35,7 @@ public final class OrdQty {
 		return offerQty;
 	}
 
-	public OrdQty offerQty(int offerQty) {
+	public OrdQty setOfferQty(int offerQty) {
 		if (this.offerQty == 0) {
 			this.offerQty = offerQty;
 			this.leavesQty = offerQty;
@@ -44,7 +47,7 @@ public final class OrdQty {
 		return leavesQty;
 	}
 
-	public OrdQty leavesQty(int leavesQty) {
+	public OrdQty setLeavesQty(int leavesQty) {
 		this.leavesQty = leavesQty;
 		return this;
 	}
@@ -53,7 +56,7 @@ public final class OrdQty {
 		return filledQty;
 	}
 
-	public OrdQty filledQty(int filledQty) {
+	public OrdQty setFilledQty(int filledQty) {
 		this.lastFilledQty = this.filledQty;
 		this.filledQty = filledQty;
 		return this;

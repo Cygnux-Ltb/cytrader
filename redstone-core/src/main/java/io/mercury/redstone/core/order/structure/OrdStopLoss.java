@@ -26,7 +26,7 @@ public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 		return ordSysId;
 	}
 
-	public double stopLossPrice() {
+	public long stopLossPrice() {
 		return stopLossPrice;
 	}
 

@@ -5,7 +5,6 @@ import static java.lang.Math.abs;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
-
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
@@ -13,8 +12,6 @@ import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.JointIdSupporter;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.instrument.futures.impl.ChinaFutures;
-import io.mercury.financial.instrument.futures.impl.ChinaFuturesSymbol;
 import io.mercury.redstone.core.order.enums.TrdDirection;
 import io.mercury.redstone.core.order.specific.ChildOrder;
 
@@ -218,14 +215,6 @@ public final class PositionKeeper implements Dumper<String> {
 	@Override
 	public String dump() {
 		return "";
-	}
-
-	public static void main(String[] args) {
-		int subAccountId = 10;
-		ChinaFutures rb2010 = new ChinaFutures(ChinaFuturesSymbol.RB, 2010);
-		PositionKeeper.setPositionsLimit(subAccountId, rb2010, 10, 10);
-		PositionKeeper.addCurrentPosition(subAccountId, rb2010, TrdDirection.Long, 10);
-		PositionKeeper.addCurrentPosition(subAccountId, rb2010, TrdDirection.Short, 15);
 	}
 
 }
