@@ -13,14 +13,14 @@ import io.mercury.ftdc.adaptor.consts.FtdcOffsetFlag;
 import io.mercury.ftdc.adaptor.consts.FtdcOrderPriceType;
 import io.mercury.ftdc.adaptor.consts.FtdcTimeCondition;
 import io.mercury.ftdc.adaptor.consts.FtdcVolumeCondition;
+import io.mercury.redstone.core.order.ActChildOrder;
 import io.mercury.redstone.core.order.Order;
-import io.mercury.redstone.core.order.specific.ChildOrder;
 
 public final class FtdcInputOrderConverter implements Function<Order, CThostFtdcInputOrderField> {
 
 	@Override
 	public CThostFtdcInputOrderField apply(Order order) {
-		ChildOrder childOrder = (ChildOrder) order;
+		ActChildOrder childOrder = (ActChildOrder) order;
 		Instrument instrument = order.instrument();
 		CThostFtdcInputOrderField inputOrderField = new CThostFtdcInputOrderField();
 		/**
