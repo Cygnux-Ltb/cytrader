@@ -2,7 +2,6 @@ package io.mercury.redstone.core.order;
 
 import javax.annotation.Nonnull;
 
-import io.mercury.redstone.core.order.specific.ChildOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
 
 public final class OrderUpdater {
@@ -13,7 +12,7 @@ public final class OrderUpdater {
 	 * @param order
 	 * @param report
 	 */
-	public static void updateWithOrdReport(@Nonnull ChildOrder order, @Nonnull OrdReport report) {
+	public static void updateWithOrdReport(@Nonnull ActChildOrder order, @Nonnull OrdReport report) {
 		order.setOrdStatus(report.getOrdStatus());
 		switch (order.ordStatus()) {
 		case PartiallyFilled:

@@ -39,7 +39,7 @@ public final class OrdSysIdSupporter {
 	 */
 	public static long allocateId(int strategyId) {
 		if (strategyId < 0 || strategyId > MaxLimitOwnerId)
-			throw new RuntimeException("strategyId is illegal.");
+			throw new RuntimeException("strategyId is illegal");
 		return generate(strategyId);
 	}
 

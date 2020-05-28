@@ -1,9 +1,8 @@
-package io.mercury.redstone.core.order.specific;
+package io.mercury.redstone.core.order;
 
 import org.slf4j.Logger;
 
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.redstone.core.order.OrderOutputText;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
@@ -18,7 +17,7 @@ import io.mercury.redstone.core.order.structure.TrdRecord;
  * @author yellow013
  * @creation 2018年1月14日
  */
-public final class ChildOrder extends ActualOrder {
+public final class ActChildOrder extends ActualOrder {
 
 	/**
 	 * 
@@ -43,8 +42,8 @@ public final class ChildOrder extends ActualOrder {
 	 * @param action       交易动作
 	 * @param ownerOrdId   所属上级订单
 	 */
-	public ChildOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
-			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
+	ActChildOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
+			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
 		super(strategyId, accountId, subAccountId, instrument, OrdQty.withOffer(offerQty),
 				OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
 		this.trdRecordList = new TrdRecordList(ordSysId());
@@ -58,7 +57,7 @@ public final class ChildOrder extends ActualOrder {
 	public TrdRecordList trdRecordList() {
 		return trdRecordList;
 	}
-	
+
 	public TrdRecord firstTrdRecord() {
 		return trdRecordList.first().get();
 	}
@@ -67,10 +66,14 @@ public final class ChildOrder extends ActualOrder {
 		return trdRecordList.last().get();
 	}
 
+	private static final String ChildOrderOutputText = "{} :: {}, ChildOrder : ordSysId==[{}], ownerOrdId==[{}], "
+			+ "ordStatus==[{}], direction==[{}], action==[{}], ordType==[{}], instrument -> {}, ordPrice -> {}, "
+			+ "ordQty -> {}, ordTimestamps -> {}, trdRecordList -> {}";
+
 	@Override
 	public void outputLog(Logger log, String objName, String msg) {
-		log.info(OrderOutputText.ChildOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(),
-				action(), ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp(), trdRecordList);
+		log.info(ChildOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(), action(),
+				ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp(), trdRecordList);
 	}
 
 }

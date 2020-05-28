@@ -165,10 +165,13 @@ public abstract class OrderBaseImpl implements Order {
 		this.remark = remark;
 	}
 
+	private static final String OrderOutputText = "{} :: {}, Order : ordSysId==[{}], ordStatus==[{}], "
+			+ "direction==[{}], ordType==[{}], instrument -> {}, ordPrice -> {}, ordQty -> {}, ordTimestamps -> {}";
+
 	@Override
 	public void outputLog(Logger log, String objName, String msg) {
-		log.info(OrderOutputText.OrderOutputText, objName, msg, ordSysId(), ordStatus(), direction(), ordType(),
-				instrument(), ordPrice(), ordQty(), ordTimestamp());
+		log.info(OrderOutputText, objName, msg, ordSysId(), ordStatus(), direction(), ordType(), instrument(),
+				ordPrice(), ordQty(), ordTimestamp());
 	}
 
 }

@@ -1,7 +1,6 @@
-package io.mercury.redstone.core.order.specific;
+package io.mercury.redstone.core.order;
 
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.redstone.core.order.OrderBaseImpl;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;

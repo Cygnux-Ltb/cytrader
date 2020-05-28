@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.redstone.core.account.Account;
-import io.mercury.redstone.core.order.specific.ChildOrder;
+import io.mercury.redstone.core.order.ActChildOrder;
 
 public interface Adaptor extends Closeable, Enable<Adaptor> {
 
@@ -34,7 +34,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param order
 	 * @return
 	 */
-	boolean newOredr(@Nonnull ChildOrder order);
+	boolean newOredr(@Nonnull ActChildOrder order);
 
 	/**
 	 * 发送撤单请求
@@ -42,7 +42,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param order
 	 * @return
 	 */
-	boolean cancelOrder(@Nonnull ChildOrder order);
+	boolean cancelOrder(@Nonnull ActChildOrder order);
 
 	/**
 	 * 查询持仓

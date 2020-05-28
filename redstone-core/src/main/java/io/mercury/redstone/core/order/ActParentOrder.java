@@ -1,13 +1,10 @@
-package io.mercury.redstone.core.order.specific;
-
-import java.util.List;
+package io.mercury.redstone.core.order;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableLists;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.redstone.core.order.OrderOutputText;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
@@ -21,7 +18,7 @@ import io.mercury.redstone.core.order.structure.OrdQty;
  * @author yellow013
  * @creation 2018年7月9日
  */
-public final class ParentOrder extends ActualOrder {
+public final class ActParentOrder extends ActualOrder {
 
 	/**
 	 * 
@@ -31,7 +28,7 @@ public final class ParentOrder extends ActualOrder {
 	/**
 	 * 所属子订单
 	 */
-	private MutableList<ChildOrder> childOrders;
+	private MutableList<ActChildOrder> childOrders;
 
 	/**
 	 * 
@@ -46,7 +43,7 @@ public final class ParentOrder extends ActualOrder {
 	 * @param action       交易动作
 	 * @param ownerOrdId   所属上级订单Id
 	 */
-	public ParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
+	ActParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
 		super(strategyId, accountId, subAccountId, instrument, OrdQty.withOffer(offerQty),
 				OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
@@ -65,7 +62,7 @@ public final class ParentOrder extends ActualOrder {
 	 * @param direction    交易方向
 	 * @param action       交易动作
 	 */
-	public ParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
+	ActParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action) {
 		this(strategyId, accountId, subAccountId, instrument, offerQty, offerPrice, ordType, direction, action, 0L);
 	}
@@ -74,8 +71,8 @@ public final class ParentOrder extends ActualOrder {
 	 * 
 	 * @return ChildOrder
 	 */
-	public ChildOrder toChildOrder() {
-		ChildOrder childOrder = new ChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
+	ActChildOrder toChildOrder() {
+		ActChildOrder childOrder = new ActChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
 				ordQty().offerQty(), ordPrice().offerPrice(), ordType(), direction(), action(), ordSysId());
 		childOrders.add(childOrder);
 		return childOrder;
@@ -86,7 +83,7 @@ public final class ParentOrder extends ActualOrder {
 	 * @param count 数量
 	 * @return
 	 */
-	public List<ChildOrder> splitChildOrder(int count) {
+	MutableList<ActChildOrder> splitChildOrder(int count) {
 		// TODO 增加拆分为多个订单的逻辑
 		OrdQty qty = ordQty();
 		qty.offerQty();
@@ -98,10 +95,14 @@ public final class ParentOrder extends ActualOrder {
 		return 1;
 	}
 
+	private static final String ParentOrderOutputText = "{} :: {}, ParentOrder : ordSysId==[{}], ownerOrdId==[{}], "
+			+ "ordStatus==[{}], direction==[{}], action==[{}], ordType==[{}], instrument -> {}, "
+			+ "ordPrice -> {}, ordQty -> {}, ordTimestamps -> {}";
+
 	@Override
 	public void outputLog(Logger log, String objName, String msg) {
-		log.info(OrderOutputText.ParentOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(),
-				direction(), action(), ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp());
+		log.info(ParentOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(), action(),
+				ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp());
 	}
 
 }

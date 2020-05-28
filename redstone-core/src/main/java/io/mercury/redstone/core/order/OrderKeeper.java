@@ -2,6 +2,7 @@ package io.mercury.redstone.core.order;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
@@ -12,8 +13,9 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.account.AccountKeeper;
-import io.mercury.redstone.core.order.specific.ChildOrder;
-import io.mercury.redstone.core.order.specific.ParentOrder;
+import io.mercury.redstone.core.order.enums.OrdType;
+import io.mercury.redstone.core.order.enums.TrdAction;
+import io.mercury.redstone.core.order.enums.TrdDirection;
 import io.mercury.redstone.core.order.structure.OrdReport;
 
 /**
@@ -98,7 +100,7 @@ public final class OrderKeeper implements Dumper<String> {
 	 * @param report
 	 * @return
 	 */
-	public static ChildOrder onOrdReport(OrdReport report) {
+	public static ActChildOrder onOrdReport(OrdReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
@@ -108,7 +110,7 @@ public final class OrderKeeper implements Dumper<String> {
 		} else {
 			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
 		}
-		ChildOrder childOrder = (ChildOrder) order;
+		ActChildOrder childOrder = (ActChildOrder) order;
 		// 更新订单状态
 		OrderUpdater.updateWithOrdReport(childOrder, report);
 		onOrder(childOrder);
@@ -143,9 +145,45 @@ public final class OrderKeeper implements Dumper<String> {
 		// TODO 处理行情
 	}
 
-	public static ParentOrder createParentOrder() {
+	/**
+	 * 创建[ParentOrder], 并存入Keeper
+	 * 
+	 * @param strategyId
+	 * @param accountId
+	 * @param subAccountId
+	 * @param instrument
+	 * @param offerQty
+	 * @param offerPrice
+	 * @param ordType
+	 * @param direction
+	 * @param action
+	 * @return
+	 */
+	public static ActParentOrder createParentOrder(int strategyId, int accountId, int subAccountId,
+			Instrument instrument, int offerQty, long offerPrice, OrdType ordType, TrdDirection direction,
+			TrdAction action) {
+		ActParentOrder parentOrder = new ActParentOrder(strategyId, accountId, subAccountId, instrument, offerQty,
+				offerPrice, ordType, direction, action);
+		onOrder(parentOrder);
+		return parentOrder;
+	}
 
-		return null;
+	/**
+	 * 将[ParentOrder]转换为[ChildOrder], 并存入Keeper
+	 * 
+	 * @param parentOrder
+	 * @return
+	 */
+	public static ActChildOrder toChildOrder(ActParentOrder parentOrder) {
+		ActChildOrder childOrder = parentOrder.toChildOrder();
+		onOrder(childOrder);
+		return childOrder;
+	}
+
+	public static MutableList<ActChildOrder> splitChildOrder(ActParentOrder parentOrder, int count) {
+		MutableList<ActChildOrder> childOrders = parentOrder.splitChildOrder(count);
+		childOrders.each(OrderKeeper::onOrder);
+		return childOrders;
 	}
 
 	@Override

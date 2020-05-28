@@ -1,6 +1,6 @@
 package io.mercury.redstone.engine.barrier;
 
-import io.mercury.redstone.core.order.specific.ChildOrder;
+import io.mercury.redstone.core.order.ChildOrder;
 import io.mercury.redstone.core.risk.OrderBarrier;
 
 public class AccountBarrier implements OrderBarrier<ChildOrder> {

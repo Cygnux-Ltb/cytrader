@@ -27,15 +27,17 @@ import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.account.AccountKeeper;
 import io.mercury.redstone.core.account.SubAccount;
 import io.mercury.redstone.core.adaptor.Adaptor;
+import io.mercury.redstone.core.order.ActChildOrder;
+import io.mercury.redstone.core.order.ActParentOrder;
+import io.mercury.redstone.core.order.ChildOrder;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.OrderBook;
 import io.mercury.redstone.core.order.OrderKeeper;
+import io.mercury.redstone.core.order.ParentOrder;
+import io.mercury.redstone.core.order.StrategyOrder;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
-import io.mercury.redstone.core.order.specific.ChildOrder;
-import io.mercury.redstone.core.order.specific.ParentOrder;
-import io.mercury.redstone.core.order.specific.StrategyOrder;
 import io.mercury.redstone.core.order.structure.OrdPrice;
 import io.mercury.redstone.core.order.structure.OrdQty;
 import io.mercury.redstone.core.position.PositionKeeper;
@@ -230,26 +232,26 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		orders.put(strategyOrder.ordSysId(), strategyOrder);
 
 		// 转换为实际订单
-		MutableList<ParentOrder> parentOrders = strategyOrderConverter.apply(strategyOrder);
+		MutableList<ActParentOrder> parentOrders = strategyOrderConverter.apply(strategyOrder);
 
 		// 存储订单
 		// TODO 未完成全部逻辑
-		ParentOrder parentOrder = parentOrders.getFirst();
+		ActParentOrder parentOrder = parentOrders.getFirst();
 		orders.put(parentOrder.ordSysId(), parentOrder);
 
 		// 转为实际执行的子订单
-		ChildOrder childOrder = parentOrder.toChildOrder();
-		orders.put(childOrder.ordSysId(), childOrder);
+		// ActChildOrder childOrder = parentOrder.toChildOrder();
+		// orders.put(childOrder.ordSysId(), childOrder);
 
-		getAdaptor(instrument).newOredr(childOrder);
+		// getAdaptor(instrument).newOredr(childOrder);
 
 	}
 
 	/**
 	 * 将StrategyOrder转换为需要执行的实际订单
 	 */
-	private Function<StrategyOrder, MutableList<ParentOrder>> strategyOrderConverter = strategyOrder -> {
-		MutableList<ParentOrder> parentOrders = MutableLists.newFastList();
+	private Function<StrategyOrder, MutableList<ActParentOrder>> strategyOrderConverter = strategyOrder -> {
+		MutableList<ActParentOrder> parentOrders = MutableLists.newFastList();
 		OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrderBook(strategyOrder.instrument());
 		int offerQty = strategyOrder.ordQty().offerQty();
 		switch (strategyOrder.direction()) {
@@ -261,7 +263,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 			// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
 			// TODO 计算平仓后还需要开仓的数量
 			int needOpenLong = offerQty - 0;
-			ParentOrder openLongOrder = strategyOrder.toActualOrder(TrdDirection.Long, needOpenLong, OrdType.Limit);
+			ActParentOrder openLongOrder = strategyOrder.toActualOrder(TrdDirection.Long, needOpenLong, OrdType.Limit);
 			parentOrders.add(openLongOrder);
 			break;
 		case Short:
@@ -272,7 +274,8 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 			// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
 			// TODO 计算平仓后还需要开仓的数量
 			int needOpenShort = offerQty - 0;
-			ParentOrder openShortOrder = strategyOrder.toActualOrder(TrdDirection.Short, needOpenShort, OrdType.Limit);
+			ActParentOrder openShortOrder = strategyOrder.toActualOrder(TrdDirection.Short, needOpenShort,
+					OrdType.Limit);
 			parentOrders.add(openShortOrder);
 			break;
 		default:
@@ -312,6 +315,10 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		if (position == 0)
 			log.warn("{} :: No position, subAccountId==[{}], instrument -> {}", strategyName, subAccountId, instrument);
 		return position;
+	}
+
+	protected void openPosition(Instrument instrument, int offerQty, TrdDirection direction) {
+		openPosition(instrument, offerQty, getLevel1Price(instrument, direction), OrdType.Limit, direction);
 	}
 
 	/**
@@ -433,12 +440,13 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 * @param ordType    订单类型
 	 */
 	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
-		ParentOrder parentOrder = new ParentOrder(strategyId, accountId, subAccountId, instrument, abs(offerQty),
-				offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short, TrdAction.Close);
+		ActParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
+				abs(offerQty), offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short,
+				TrdAction.Close);
 		parentOrder.outputLog(log, strategyName, "Close position generate ParentOrder");
 		saveOrder(parentOrder);
 
-		ChildOrder childOrder = parentOrder.toChildOrder();
+		ActChildOrder childOrder = parentOrder.toChildOrder();
 		childOrder.outputLog(log, strategyName, "Close position generate ChildOrder");
 		saveOrder(childOrder);
 
@@ -452,7 +460,6 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 */
 	private void saveOrder(Order order) {
 		orders.put(order.ordSysId(), order);
-		OrderKeeper.onOrder(order);
 	}
 
 	/**

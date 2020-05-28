@@ -12,7 +12,6 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.account.AccountKeeper;
-import io.mercury.redstone.core.order.specific.ChildOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
 
 /**
@@ -100,7 +99,7 @@ public final class OrderKeeperActor implements Dumper<String> {
 	 * @param report
 	 * @return
 	 */
-	public static ChildOrder onOrdReport(OrdReport report) {
+	public static ActChildOrder onOrdReport(OrdReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
@@ -110,7 +109,7 @@ public final class OrderKeeperActor implements Dumper<String> {
 		} else {
 			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
 		}
-		ChildOrder childOrder = (ChildOrder) order;
+		ActChildOrder childOrder = (ActChildOrder) order;
 		// 更新订单状态
 		OrderUpdater.updateWithOrdReport(childOrder, report);
 		onOrder(childOrder);

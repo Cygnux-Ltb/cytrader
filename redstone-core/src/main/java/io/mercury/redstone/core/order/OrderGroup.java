@@ -1,9 +1,8 @@
-package io.mercury.redstone.core.order.specific;
+package io.mercury.redstone.core.order;
 
 import org.eclipse.collections.api.set.ImmutableSet;
 
 import io.mercury.common.collections.ImmutableSets;
-import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.structure.OrdTimestamp;
 
 public final class OrderGroup {

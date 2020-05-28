@@ -1,10 +1,9 @@
-package io.mercury.redstone.core.order.specific;
+package io.mercury.redstone.core.order;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.redstone.core.order.OrderBaseImpl;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
@@ -18,6 +17,7 @@ import io.mercury.redstone.core.order.structure.OrdQty;
  * @author yellow013
  */
 
+@Deprecated
 public final class StrategyOrder extends OrderBaseImpl {
 
 	/**
@@ -28,7 +28,7 @@ public final class StrategyOrder extends OrderBaseImpl {
 	/**
 	 * 所属实际订单
 	 */
-	private MutableLongObjectMap<ParentOrder> ownOrders = MutableMaps.newLongObjectHashMap();
+	private MutableLongObjectMap<ActParentOrder> ownOrders = MutableMaps.newLongObjectHashMap();
 
 	/**
 	 * 
@@ -45,11 +45,11 @@ public final class StrategyOrder extends OrderBaseImpl {
 		super(strategyId, accountId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
 	}
 
-	public MutableLongObjectMap<ParentOrder> ownOrders() {
+	public MutableLongObjectMap<ActParentOrder> ownOrders() {
 		return ownOrders;
 	}
 
-	public ParentOrder addOwnOrder(ParentOrder order) {
+	public ActParentOrder addOwnOrder(ActParentOrder order) {
 		ownOrders.put(order.ordSysId(), order);
 		return order;
 	}
@@ -64,8 +64,8 @@ public final class StrategyOrder extends OrderBaseImpl {
 		return ordSysId();
 	}
 
-	public ParentOrder toActualOrder(TrdDirection direction, int offerQty, OrdType ordType) {
-		return addOwnOrder(new ParentOrder(strategyId(), accountId(), subAccountId(), instrument(), offerQty,
+	public ActParentOrder toActualOrder(TrdDirection direction, int offerQty, OrdType ordType) {
+		return addOwnOrder(new ActParentOrder(strategyId(), accountId(), subAccountId(), instrument(), offerQty,
 				ordPrice().offerPrice(), ordType, direction, TrdAction.Open, ordSysId()));
 	}
 

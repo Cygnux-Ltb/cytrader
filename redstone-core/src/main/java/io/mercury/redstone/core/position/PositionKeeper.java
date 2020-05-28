@@ -12,8 +12,8 @@ import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.JointIdSupporter;
 import io.mercury.financial.instrument.Instrument;
+import io.mercury.redstone.core.order.ActChildOrder;
 import io.mercury.redstone.core.order.enums.TrdDirection;
-import io.mercury.redstone.core.order.specific.ChildOrder;
 
 /**
  * 统一管理仓位信息<br>
@@ -119,7 +119,7 @@ public final class PositionKeeper implements Dumper<String> {
 	 * 
 	 * @param order 子订单
 	 */
-	public static void updatePosition(ChildOrder order) {
+	public static void updatePosition(ActChildOrder order) {
 		int subAccountId = order.subAccountId();
 		Instrument instrument = order.instrument();
 		long positionsKey = mergePositionKey(subAccountId, instrument);
