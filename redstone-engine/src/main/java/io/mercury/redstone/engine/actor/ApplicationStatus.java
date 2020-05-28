@@ -22,12 +22,12 @@ public final class ApplicationStatus {
 		CurrentStatus.set(AppStatus.Initialization);
 	}
 
-	public static void setOffline() {
-		CurrentStatus.set(AppStatus.Offline);
-	}
-
 	public static void setOnline() {
 		CurrentStatus.set(AppStatus.Online);
+	}
+
+	public static void setOffline() {
+		CurrentStatus.set(AppStatus.Offline);
 	}
 
 	public static void setUnknown() {

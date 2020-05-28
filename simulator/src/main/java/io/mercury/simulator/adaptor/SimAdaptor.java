@@ -84,7 +84,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	public boolean startup() {
+	public boolean innerStartup() {
 		mdReceiver.receive();
 		tdReceiver.receive();
 		return mdReceiver.isConnected() && tdReceiver.isConnected();

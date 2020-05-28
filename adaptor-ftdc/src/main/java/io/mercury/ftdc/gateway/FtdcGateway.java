@@ -74,7 +74,7 @@ public class FtdcGateway {
 				log.info("Copy win64 library file to [java.library.path]...");
 				log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
 				// TODO 复制到相应目录
-				// 加载dll文件
+				// 加载.dll文件
 				System.loadLibrary("thostapi_wrap");
 				System.loadLibrary("thostmduserapi_se");
 				System.loadLibrary("thostmduserapi_se");
@@ -82,7 +82,7 @@ public class FtdcGateway {
 				log.info("Copy linux64 library file to [java.library.path]...");
 				log.info("java.library.path -> {}", SysProperties.JAVA_LIBRARY_PATH);
 				// TODO 复制到相应目录
-				//
+				// 加载.so文件
 				System.load("/usr/lib/libthostapi_wrap.so");
 				System.load("/usr/lib/libthosttraderapi_se.so");
 				System.load("/usr/lib/libthostmduserapi_se.so");
@@ -155,9 +155,9 @@ public class FtdcGateway {
 			log.info("TraderApi version {}", CThostFtdcTraderApi.GetApiVersion());
 			log.info("MdApi version {}", CThostFtdcMdApi.GetApiVersion());
 			try {
-				startNewThread(() -> mdInitAndJoin(tempDir), "Md-Spi-Thread");
-				sleep(2000);
 				startNewThread(() -> traderInitAndJoin(tempDir), "Trader-Spi-Thread");
+				sleep(2000);
+				startNewThread(() -> mdInitAndJoin(tempDir), "Md-Spi-Thread");
 				this.isInitialize = true;
 			} catch (Exception e) {
 				log.error("Method initAndJoin throw Exception -> {}", e.getMessage(), e);

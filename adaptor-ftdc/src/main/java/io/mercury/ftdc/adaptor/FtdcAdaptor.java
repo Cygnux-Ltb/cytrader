@@ -192,7 +192,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	public boolean startup() {
+	protected boolean innerStartup() {
 		try {
 			ftdcGateway.initAndJoin();
 			return true;
@@ -206,13 +206,14 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		try {
 			if (isMdAvailable) {
 				ftdcGateway
-						.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
+						.SubscribeMarketData(Stream.of(instruments).map(Instrument::code)
+								.collect(Collectors.toSet()));
 				return true;
 			} else {
 				return false;
 			}
 		} catch (Exception e) {
-			log.error("subscribeMarketData exception {}", e.getMessage(), e);
+			log.error("ftdcGateway.SubscribeMarketData exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}
@@ -232,7 +233,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error("ftdcGateway.ReqOrderInsert exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}
@@ -249,9 +250,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			ftdcGateway.ReqOrderAction(ftdcInputOrderAction);
 			return true;
 		} catch (OrderRefNotFoundException e) {
-			log.error(e.getMessage());
+			log.error(e.getMessage(), e);
 			return false;
 		} catch (Exception e) {
+			log.error("ftdcGateway.ReqOrderAction exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}
@@ -275,7 +277,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				return false;
 			}
 		} catch (Exception e) {
-			log.error("FtdcAdaptor :: queryOrder exception -> {}", e.getMessage(), e);
+			log.error("ftdcGateway.ReqQryOrder exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}
@@ -297,7 +299,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				return false;
 			}
 		} catch (Exception e) {
-			log.error("FtdcAdaptor :: queryPositions exception -> {}", e.getMessage(), e);
+			log.error("ftdcGateway.ReqQryInvestorPosition exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}
@@ -319,7 +321,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				return false;
 			}
 		} catch (Exception e) {
-			log.error("FtdcAdaptor :: queryBalance exception -> {}", e.getMessage(), e);
+			log.error("ftdcGateway.ReqQryTradingAccount exception -> {}", e.getMessage(), e);
 			return false;
 		}
 	}

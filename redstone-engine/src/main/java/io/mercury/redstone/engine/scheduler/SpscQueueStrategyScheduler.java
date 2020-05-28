@@ -31,7 +31,7 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	private static Logger log = CommonLoggerFactory.getLogger(SpscQueueStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(SpscQueueStrategyScheduler.class);
 
 	public SpscQueueStrategyScheduler(BufferSize size) {
 		this.despatchQueue = new SpscQueue<>("SPSCStrategyScheduler-Queue", size, true, despatchMsg -> {
@@ -58,7 +58,6 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 				int adaptorId = despatchMsg.getAdaptorId();
 				AdaptorStatus adaptorStatus = despatchMsg.getAdaptorStatus();
 				AdaptorEvent event = new AdaptorEvent(adaptorId).setAdaptorStatus(adaptorStatus);
-				
 				break;
 			default:
 				throw new IllegalStateException("scheduler mark illegal");
@@ -86,7 +85,7 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 	@Override
 	public void addStrategy(Strategy strategy) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	private class DespatchMsg {

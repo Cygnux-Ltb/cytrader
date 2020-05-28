@@ -29,11 +29,9 @@ import io.mercury.redstone.core.account.SubAccount;
 import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.order.ActChildOrder;
 import io.mercury.redstone.core.order.ActParentOrder;
-import io.mercury.redstone.core.order.ChildOrder;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.OrderBook;
 import io.mercury.redstone.core.order.OrderKeeper;
-import io.mercury.redstone.core.order.ParentOrder;
 import io.mercury.redstone.core.order.StrategyOrder;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
@@ -46,6 +44,7 @@ import io.mercury.redstone.core.strategy.Strategy;
 import io.mercury.redstone.core.strategy.StrategyEvent;
 import io.mercury.redstone.core.strategy.StrategyKeeper;
 
+@SuppressWarnings("deprecation")
 public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy, CircuitBreaker {
 
 	/**
@@ -342,16 +341,17 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 */
 	protected void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType,
 			TrdDirection direction) {
-		ParentOrder parentOrder = new ParentOrder(strategyId, accountId, subAccountId, instrument, abs(offerQty),
-				offerPrice, ordType, direction, TrdAction.Open);
-		parentOrder.outputLog(log, strategyName, "Open position generate ParentOrder");
+		ActParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
+				abs(offerQty), offerPrice, ordType, direction, TrdAction.Open);
+		parentOrder.outputLog(log, strategyName, "Open position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
-		ChildOrder childOrder = parentOrder.toChildOrder();
-		childOrder.outputLog(log, strategyName, "Open position generate ChildOrder");
+		ActChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
+		childOrder.outputLog(log, strategyName, "Open position generate [ChildOrder]");
 		saveOrder(childOrder);
 
 		getAdaptor(instrument).newOredr(childOrder);
+		childOrder.outputLog(log, strategyName, "Open position [ChildOrder] has been sent");
 	}
 
 	/**
@@ -443,14 +443,15 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		ActParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
 				abs(offerQty), offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short,
 				TrdAction.Close);
-		parentOrder.outputLog(log, strategyName, "Close position generate ParentOrder");
+		parentOrder.outputLog(log, strategyName, "Close position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
-		ActChildOrder childOrder = parentOrder.toChildOrder();
-		childOrder.outputLog(log, strategyName, "Close position generate ChildOrder");
+		ActChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
+		childOrder.outputLog(log, strategyName, "Close position generate [ChildOrder]");
 		saveOrder(childOrder);
 
 		getAdaptor(instrument).newOredr(childOrder);
+		childOrder.outputLog(log, strategyName, "Close position [ChildOrder] has been sent");
 	}
 
 	/**
