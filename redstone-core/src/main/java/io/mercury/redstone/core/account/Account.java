@@ -1,5 +1,7 @@
 package io.mercury.redstone.core.account;
 
+import static io.mercury.common.util.StringUtil.toText;
+
 import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.set.MutableSet;
@@ -29,7 +31,7 @@ public class Account extends EnableComponent<Account> {
 	 */
 	private int credit;
 
-	// TODO 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
+	// 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
 
 	/**
@@ -37,24 +39,16 @@ public class Account extends EnableComponent<Account> {
 	 */
 	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
-	public Account(int accountId, @Nonnull String investorId) {
-		this(accountId, null, investorId, 0, 0);
-	}
-
 	public Account(int accountId, String accountName, @Nonnull String investorId) {
 		this(accountId, accountName, investorId, 0, 0);
 	}
 
-	public Account(int accountId, @Nonnull String investorId, int balance, int credit) {
-		this(accountId, null, investorId, balance, credit);
-	}
-
 	public Account(int accountId, String accountName, @Nonnull String investorId, int balance, int credit) {
 		this.accountId = accountId;
+		this.accountName = StringUtil.nonEmpty(accountName) ? accountName : "use-investorId[" + investorId + "]";
 		this.investorId = Assertor.nonEmpty(investorId, "investorId");
 		this.balance = balance;
 		this.credit = credit;
-		this.accountName = StringUtil.nonEmpty(accountName) ? accountName : "use-investorId[" + investorId + "]";
 	}
 
 	public int accountId() {
@@ -132,7 +126,7 @@ public class Account extends EnableComponent<Account> {
 		builder.append(str0);
 		builder.append(accountId);
 		builder.append(str1);
-		builder.append(StringUtil.toText(accountName));
+		builder.append(toText(accountName));
 		builder.append(str2);
 		builder.append(investorId);
 		builder.append(str3);
@@ -149,7 +143,7 @@ public class Account extends EnableComponent<Account> {
 
 	public static void main(String[] args) {
 		System.out.println(StringUtil.toText(null));
-		System.out.println(new Account(1, "2005"));
+		System.out.println(new Account(1, "", "2005"));
 	}
 
 }

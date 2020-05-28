@@ -1,5 +1,7 @@
 package io.mercury.redstone.core.account;
 
+import static io.mercury.common.util.StringUtil.toText;
+
 import javax.annotation.Nonnull;
 
 import io.mercury.common.fsm.EnableComponent;
@@ -36,6 +38,7 @@ public class SubAccount extends EnableComponent<SubAccount> {
 		this.subAccountName = StringUtil.nonEmpty(subAccountName) ? subAccountName
 				: "account[" + account.accountId() + "]-subAccount[" + subAccountId + "]";
 		account.addSubAccount(this);
+		AccountKeeper.initialize(this);
 	}
 
 	public int subAccountId() {
@@ -77,7 +80,7 @@ public class SubAccount extends EnableComponent<SubAccount> {
 		builder.append(str0);
 		builder.append(subAccountId);
 		builder.append(str1);
-		builder.append(StringUtil.toText(subAccountName));
+		builder.append(toText(subAccountName));
 		builder.append(str2);
 		builder.append(account);
 		builder.append(str3);
@@ -91,7 +94,7 @@ public class SubAccount extends EnableComponent<SubAccount> {
 	}
 
 	public static void main(String[] args) {
-		SubAccount subAccount = new SubAccount(10, new Account(1, "2005", 100000, 0));
+		SubAccount subAccount = new SubAccount(10, new Account(1, "", "2005", 100000, 0));
 		System.out.println(subAccount);
 	}
 

@@ -63,12 +63,12 @@ public final class AdaptorKeeper implements Dumper<String> {
 		Account account = adaptor.account();
 		AccountAdaptorMap.put(account.accountId(), adaptor);
 		log.info(
-				"Put adaptor to AccountAdaptorMap, accountId==[{}], accountName==[{}] adaptorId==[{}], adaptorName==[{}]",
+				"Put adaptor to AccountAdaptorMap, accountId==[{}], accountName==[{}], adaptorId==[{}], adaptorName==[{}]",
 				account.accountId(), account.accountName(), adaptor.adaptorId(), adaptor.adaptorName());
 		account.subAccounts().each(subAccount -> {
 			SubAccountAdaptorMap.put(subAccount.subAccountId(), adaptor);
 			log.info(
-					"Put adaptor to SubAccountAdaptorMap, subAccountId==[{}], subAccountName==[{}] adaptorId==[{}], adaptorName==[{}]",
+					"Put adaptor to SubAccountAdaptorMap, subAccountId==[{}], subAccountName==[{}], adaptorId==[{}], adaptorName==[{}]",
 					subAccount.subAccountId(), subAccount.subAccountName(), adaptor.adaptorId(), adaptor.adaptorName());
 		});
 	}

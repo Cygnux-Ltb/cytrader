@@ -1,6 +1,6 @@
 package io.mercury.redstone.core.adaptor;
 
-public class AdaptorException extends RuntimeException {
+public class AdaptorException extends Exception {
 
 	/**
 	 * 

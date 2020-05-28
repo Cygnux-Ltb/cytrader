@@ -33,6 +33,6 @@ public interface Strategy extends Enable<Strategy> {
 
 	void onOrder(Order order);
 
-	void onError(Throwable throwable);
+	void onError(Throwable throwable) throws StrategyException;
 
 }

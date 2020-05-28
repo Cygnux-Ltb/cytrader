@@ -57,15 +57,19 @@ public final class StrategyKeeper implements Dumper<String> {
 	 * @param strategy
 	 */
 	public static void putStrategy(Strategy strategy) {
-		StrategyMap.put(strategy.strategyId(), strategy);
-		log.info("Put strategy, strategyId==[{}]", strategy.strategyId());
-		strategy.instruments().each(instrument -> {
-			SubscribedInstrumentMap.getIfAbsentPut(instrument.id(), MutableLists::newFastList).add(strategy);
-			log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
-					instrument.id());
-		});
-		strategy.enable();
-		log.info("Strategy is enable, strategyId==[{}]", strategy.strategyId());
+		if (StrategyMap.containsKey(strategy.strategyId())) {
+			log.error("Strategy id is existed, Have stored or have duplicate strategy id");
+		} else {
+			StrategyMap.put(strategy.strategyId(), strategy);
+			log.info("Put strategy, strategyId==[{}]", strategy.strategyId());
+			strategy.instruments().each(instrument -> {
+				SubscribedInstrumentMap.getIfAbsentPut(instrument.id(), MutableLists::newFastList).add(strategy);
+				log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
+						instrument.id());
+			});
+			strategy.enable();
+			log.info("Strategy is enable, strategyId==[{}]", strategy.strategyId());
+		}
 	}
 
 	public static Strategy getStrategy(int strategyId) {

@@ -50,10 +50,10 @@ public final class AccountKeeper implements Dumper<String> {
 	private AccountKeeper() {
 	}
 
-	private static final boolean isInit = false;
+	private static boolean isInitialized = false;
 
 	public static void initialize(@Nonnull SubAccount... subAccounts) {
-		if (!isInit) {
+		if (!isInitialized) {
 			Assertor.requiredLength(subAccounts, 1, "subAccounts");
 			for (SubAccount subAccount : subAccounts) {
 				Account account = subAccount.account();
@@ -63,9 +63,14 @@ public final class AccountKeeper implements Dumper<String> {
 				log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(),
 						account.accountId());
 			}
+			isInitialized = true;
 		} else {
 			log.error("AccountKeeper Has been initialized, cannot be initialize again");
 		}
+	}
+
+	public static boolean isInitialized() {
+		return isInitialized;
 	}
 
 	@Nonnull

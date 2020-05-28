@@ -67,7 +67,7 @@ public final class OrderKeeper implements Dumper<String> {
 	private OrderKeeper() {
 	}
 
-	public static void onOrder(Order order) {
+	static void onOrder(Order order) {
 		int subAccountId = order.subAccountId();
 		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
 		switch (order.ordStatus()) {
