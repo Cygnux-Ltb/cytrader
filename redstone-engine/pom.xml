@@ -25,12 +25,10 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>redstone-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>financial</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-json</artifactId>

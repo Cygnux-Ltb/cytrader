@@ -1,4 +1,4 @@
-package io.mercury.redstone.engine.impl.strategy;
+package io.mercury.redstone.launch;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -19,6 +19,7 @@ import io.mercury.ftdc.adaptor.FtdcAdaptorParam;
 import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
 import io.mercury.redstone.engine.scheduler.SpscQueueStrategyScheduler;
+import io.mercury.redstone.strategy.SmaStrategyExample;
 
 public final class StartExample {
 

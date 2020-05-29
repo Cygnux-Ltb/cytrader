@@ -18,10 +18,8 @@
 		<!-- adaptor modules -->
 		<module>adaptor-ftdc</module>
 		<module>adaptor-ib</module>
-		<!-- financial -->
+		<!-- financial & indicator -->
 		<module>financial</module>
-		<!-- indicator -->
-		<module>indicator</module>
 		<!-- core api -->
 		<module>redstone-core</module>
 		<!-- execution engine -->

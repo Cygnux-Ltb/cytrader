@@ -19,17 +19,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>redstone-engine</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>indicator</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.mercury</groupId>
 			<artifactId>adaptor-ftdc</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>redstone-engine</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.mercury</groupId>
