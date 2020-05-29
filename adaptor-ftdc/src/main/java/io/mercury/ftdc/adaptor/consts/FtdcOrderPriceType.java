@@ -53,11 +53,11 @@ import ctp.thostapi.thosttraderapiConstants;
  * ///五档价<br>
  * #define THOST_FTDC_OPT_FiveLevelPrice 'G'<br>
  */
-public final class FtdcOrderPriceType {
+public interface FtdcOrderPriceType {
 
 	/**
 	 * 限价
 	 */
-	public static final char LimitPrice = thosttraderapiConstants.THOST_FTDC_OPT_LimitPrice;
+	char LimitPrice = thosttraderapiConstants.THOST_FTDC_OPT_LimitPrice;
 
 }

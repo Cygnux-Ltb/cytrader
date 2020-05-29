@@ -5,7 +5,7 @@ import java.util.function.Function;
 import ctp.thostapi.CThostFtdcTradeField;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
 
-public class CThostFtdcTradeConverter implements Function<CThostFtdcTradeField, FtdcTrade> {
+public class FromCThostFtdcTrade implements Function<CThostFtdcTradeField, FtdcTrade> {
 
 	@Override
 	public FtdcTrade apply(CThostFtdcTradeField from) {

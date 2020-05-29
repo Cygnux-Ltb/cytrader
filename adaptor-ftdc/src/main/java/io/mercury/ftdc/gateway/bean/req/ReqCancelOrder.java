@@ -1,5 +1,6 @@
 package io.mercury.ftdc.gateway.bean.req;
 
+@Deprecated
 public class ReqCancelOrder {
 
 	private String gatewayID; // 网关

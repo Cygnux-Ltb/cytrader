@@ -35,43 +35,43 @@ import ctp.thostapi.thosttraderapiConstants;
  * @author yellow013
  *
  */
-public final class FtdcOrderStatusType {
+public interface FtdcOrderStatusType {
 
 	/**
 	 * 全部成交
 	 */
-	public static final char AllTraded = thosttraderapiConstants.THOST_FTDC_OST_AllTraded;
+	char AllTraded = thosttraderapiConstants.THOST_FTDC_OST_AllTraded;
 	/**
 	 * 部分成交还在队列中
 	 */
-	public static final char PartTradedQueueing = thosttraderapiConstants.THOST_FTDC_OST_PartTradedQueueing;
+	char PartTradedQueueing = thosttraderapiConstants.THOST_FTDC_OST_PartTradedQueueing;
 	/**
 	 * 部分成交不在队列中
 	 */
-	public static final char PartTradedNotQueueing = thosttraderapiConstants.THOST_FTDC_OST_PartTradedNotQueueing;
+	char PartTradedNotQueueing = thosttraderapiConstants.THOST_FTDC_OST_PartTradedNotQueueing;
 	/**
 	 * 未成交还在队列中
 	 */
-	public static final char NoTradeQueueing = thosttraderapiConstants.THOST_FTDC_OST_NoTradeQueueing;
+	char NoTradeQueueing = thosttraderapiConstants.THOST_FTDC_OST_NoTradeQueueing;
 	/**
 	 * 未成交不在队列中
 	 */
-	public static final char NoTradeNotQueueing = thosttraderapiConstants.THOST_FTDC_OST_NoTradeNotQueueing;
+	char NoTradeNotQueueing = thosttraderapiConstants.THOST_FTDC_OST_NoTradeNotQueueing;
 	/**
 	 * 撤单
 	 */
-	public static final char Canceled = thosttraderapiConstants.THOST_FTDC_OST_Canceled;
+	char Canceled = thosttraderapiConstants.THOST_FTDC_OST_Canceled;
 	/**
 	 * 未知
 	 */
-	public static final char Unknown = thosttraderapiConstants.THOST_FTDC_OST_Unknown;
+	char Unknown = thosttraderapiConstants.THOST_FTDC_OST_Unknown;
 	/**
 	 * 尚未触发
 	 */
-	public static final char NotTouched = thosttraderapiConstants.THOST_FTDC_OST_NotTouched;
+	char NotTouched = thosttraderapiConstants.THOST_FTDC_OST_NotTouched;
 	/**
 	 * 已触发
 	 */
-	public static final char Touched = thosttraderapiConstants.THOST_FTDC_OST_Touched;
+	char Touched = thosttraderapiConstants.THOST_FTDC_OST_Touched;
 
 }

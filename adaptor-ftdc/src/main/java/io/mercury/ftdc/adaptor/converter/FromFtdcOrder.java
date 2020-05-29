@@ -15,7 +15,7 @@ import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
 import io.mercury.redstone.core.order.structure.OrdReport;
 
-public final class FtdcOrderConverter implements Function<FtdcOrder, OrdReport> {
+public final class FromFtdcOrder implements Function<FtdcOrder, OrdReport> {
 
 	@Override
 	public OrdReport apply(FtdcOrder ftdcOrder) {

@@ -11,16 +11,16 @@ import ctp.thostapi.thosttraderapiConstants;
  * ///卖<br>
  * #define THOST_FTDC_D_Sell '1'<br>
  */
-public final class FtdcDirection {
+public interface FtdcDirection {
 
 	/**
 	 * 买
 	 */
-	public static final char Buy = thosttraderapiConstants.THOST_FTDC_D_Buy;
+	char Buy = thosttraderapiConstants.THOST_FTDC_D_Buy;
 
 	/**
 	 * 卖
 	 */
-	public static final char Sell = thosttraderapiConstants.THOST_FTDC_D_Sell;
+	char Sell = thosttraderapiConstants.THOST_FTDC_D_Sell;
 
 }

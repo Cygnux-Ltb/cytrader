@@ -16,7 +16,7 @@ import io.mercury.ftdc.adaptor.consts.FtdcVolumeCondition;
 import io.mercury.redstone.core.order.ActChildOrder;
 import io.mercury.redstone.core.order.Order;
 
-public final class FtdcInputOrderConverter implements Function<Order, CThostFtdcInputOrderField> {
+public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOrderField> {
 
 	@Override
 	public CThostFtdcInputOrderField apply(Order order) {

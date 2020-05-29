@@ -2,6 +2,7 @@ package io.mercury.ftdc.gateway.bean.req;
 
 import java.util.UUID;
 
+@Deprecated
 public class ReqOrder {
 
 	private String gatewayID; // 网关

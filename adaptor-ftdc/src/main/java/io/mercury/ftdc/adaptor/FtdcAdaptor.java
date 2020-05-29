@@ -4,7 +4,6 @@ import static io.mercury.common.thread.ThreadHelper.sleep;
 import static io.mercury.common.thread.ThreadHelper.startNewThread;
 
 import java.io.IOException;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,15 +18,14 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.mercury.ftdc.adaptor.converter.FtdcDepthMarketDataConverter;
-import io.mercury.ftdc.adaptor.converter.FtdcInputOrderActionConverter;
-import io.mercury.ftdc.adaptor.converter.FtdcInputOrderConverter;
-import io.mercury.ftdc.adaptor.converter.FtdcOrderConverter;
-import io.mercury.ftdc.adaptor.converter.FtdcTradeConverter;
+import io.mercury.ftdc.adaptor.converter.FromFtdcDepthMarketData;
+import io.mercury.ftdc.adaptor.converter.FromFtdcOrder;
+import io.mercury.ftdc.adaptor.converter.FromFtdcTrade;
+import io.mercury.ftdc.adaptor.converter.ToFtdcInputOrder;
+import io.mercury.ftdc.adaptor.converter.ToFtdcInputOrderAction;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
 import io.mercury.ftdc.gateway.FtdcConfig;
 import io.mercury.ftdc.gateway.FtdcGateway;
-import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrder;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
@@ -39,7 +37,6 @@ import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.adaptor.base.AdaptorBaseImpl;
 import io.mercury.redstone.core.order.ActChildOrder;
-import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
 import io.mercury.serialization.json.JsonUtil;
@@ -51,17 +48,17 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	/**
 	 * 转换行情
 	 */
-	private final Function<FtdcDepthMarketData, BasicMarketData> ftdcDepthMarketDataConverter = new FtdcDepthMarketDataConverter();
+	private final FromFtdcDepthMarketData fromFtdcDepthMarketData = new FromFtdcDepthMarketData();
 
 	/**
 	 * 转换报单回报
 	 */
-	private final Function<FtdcOrder, OrdReport> ftdcOrderConverter = new FtdcOrderConverter();
+	private final FromFtdcOrder fromFtdcOrder = new FromFtdcOrder();
 
 	/**
 	 * 转换成交回报
 	 */
-	private final Function<FtdcTrade, OrdReport> ftdcTradeConverter = new FtdcTradeConverter();
+	private final FromFtdcTrade fromFtdcTrade = new FromFtdcTrade();
 
 	private final FtdcGateway ftdcGateway;
 
@@ -82,8 +79,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		FtdcConfig ftdcConfig = createFtdcConfig(params);
 		// 创建Gateway
 		this.ftdcGateway = createFtdcGateway(ftdcConfig);
-		this.ftdcInputOrderConverter = new FtdcInputOrderConverter();
-		this.ftdcInputOrderActionConverter = new FtdcInputOrderActionConverter();
+		this.toFtdcInputOrder = new ToFtdcInputOrder();
+		this.toFtdcInputOrderAction = new ToFtdcInputOrderAction();
 	}
 
 	/**
@@ -145,7 +142,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						break;
 					case FtdcDepthMarketData:
 						// 行情处理
-						BasicMarketData marketData = ftdcDepthMarketDataConverter
+						BasicMarketData marketData = fromFtdcDepthMarketData
 								.apply(ftdcMsg.getFtdcDepthMarketData());
 						scheduler.onMarketData(marketData);
 						break;
@@ -155,7 +152,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						log.info(
 								"Queue Processor Handle FtdcOrder, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef());
-						OrdReport ordReport = ftdcOrderConverter.apply(ftdcOrder);
+						OrdReport ordReport = fromFtdcOrder.apply(ftdcOrder);
 						scheduler.onOrdReport(ordReport);
 						break;
 					case FtdcTrade:
@@ -164,7 +161,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						log.info(
 								"Queue Processor Handle FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
-						OrdReport trdReport = ftdcTradeConverter.apply(ftdcTrade);
+						OrdReport trdReport = fromFtdcTrade.apply(ftdcTrade);
 						scheduler.onOrdReport(trdReport);
 						break;
 					case FtdcInputOrder:
@@ -206,8 +203,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		try {
 			if (isMdAvailable) {
 				ftdcGateway
-						.SubscribeMarketData(Stream.of(instruments).map(Instrument::code)
-								.collect(Collectors.toSet()));
+						.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
 				return true;
 			} else {
 				return false;
@@ -218,12 +214,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		}
 	}
 
-	private final Function<Order, CThostFtdcInputOrderField> ftdcInputOrderConverter;
+	private final ToFtdcInputOrder toFtdcInputOrder;
 
 	@Override
 	public boolean newOredr(ActChildOrder order) {
 		try {
-			CThostFtdcInputOrderField ftdcInputOrder = ftdcInputOrderConverter.apply(order);
+			CThostFtdcInputOrderField ftdcInputOrder = toFtdcInputOrder.apply(order);
 			String orderRef = Integer.toString(OrderRefGenerator.next(order.strategyId()));
 			/**
 			 * 设置OrderRef
@@ -238,15 +234,16 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		}
 	}
 
-	private final Function<Order, CThostFtdcInputOrderActionField> ftdcInputOrderActionConverter;
+	private final ToFtdcInputOrderAction toFtdcInputOrderAction;
 
 	@Override
 	public boolean cancelOrder(ActChildOrder order) {
 		try {
-			CThostFtdcInputOrderActionField ftdcInputOrderAction = ftdcInputOrderActionConverter.apply(order);
+			CThostFtdcInputOrderActionField ftdcInputOrderAction = toFtdcInputOrderAction.apply(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.ordSysId());
 
 			ftdcInputOrderAction.setOrderRef(orderRef);
+			ftdcInputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.strategyId()));
 			ftdcGateway.ReqOrderAction(ftdcInputOrderAction);
 			return true;
 		} catch (OrderRefNotFoundException e) {

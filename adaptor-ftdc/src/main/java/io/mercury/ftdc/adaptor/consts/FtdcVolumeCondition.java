@@ -14,21 +14,21 @@ import ctp.thostapi.thosttraderapiConstants;
  * ///全部数量<br>
  * #define THOST_FTDC_VC_CV '3'<br>
  */
-public final class FtdcVolumeCondition {
+public interface FtdcVolumeCondition {
 
 	/**
 	 * 任何数量
 	 */
-	public static final char AV = thosttraderapiConstants.THOST_FTDC_VC_AV;
+	char AV = thosttraderapiConstants.THOST_FTDC_VC_AV;
 
 	/**
 	 * 最小数量
 	 */
-	public static final char MV = thosttraderapiConstants.THOST_FTDC_VC_MV;
+	char MV = thosttraderapiConstants.THOST_FTDC_VC_MV;
 
 	/**
 	 * 全部数量
 	 */
-	public static final char CV = thosttraderapiConstants.THOST_FTDC_VC_CV;
+	char CV = thosttraderapiConstants.THOST_FTDC_VC_CV;
 
 }

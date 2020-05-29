@@ -19,7 +19,7 @@ import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
 
-public final class FtdcDepthMarketDataConverter implements Function<FtdcDepthMarketData, BasicMarketData> {
+public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketData, BasicMarketData> {
 
 	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
@@ -29,6 +29,7 @@ public final class FtdcDepthMarketDataConverter implements Function<FtdcDepthMar
 
 	@Override
 	public BasicMarketData apply(FtdcDepthMarketData depthMarketData) {
+
 		LocalDate actionDay = LocalDate.parse(depthMarketData.getActionDay(), actionDayformatter);
 		LocalTime updateTime = LocalTime.parse(depthMarketData.getUpdateTime(), updateTimeformatter)
 				.plusNanos(depthMarketData.getUpdateMillisec() * TimeConst.NANOS_PER_MILLIS);

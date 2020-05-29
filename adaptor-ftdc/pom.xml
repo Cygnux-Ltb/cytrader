@@ -30,16 +30,15 @@
 		</dependency>
 
 		<!-- PROD CTP JNI API -->
-		<!-- <dependency> <groupId>ctp</groupId> <artifactId>thostapi</artifactId> 
-			<version>6.3.15</version> <scope>system</scope> <systemPath>${project.basedir}/lib/6.3.15/thostapi_v6_3_15.jar</systemPath> 
-			</dependency> -->
-
-		<!-- SIM CTP JNI API -->
 		<dependency>
 			<groupId>ctp</groupId>
 			<artifactId>thostapi</artifactId>
-			<version>6.3.13</version>
+			<version>6.3.15</version>
 		</dependency>
+
+		<!-- SIM CTP JNI API -->
+		<!-- <dependency> <groupId>ctp</groupId> <artifactId>thostapi</artifactId> 
+			<version>6.3.13</version> </dependency> -->
 
 	</dependencies>
 </project>
