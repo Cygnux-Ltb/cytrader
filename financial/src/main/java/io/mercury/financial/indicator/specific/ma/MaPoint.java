@@ -1,10 +1,10 @@
-package io.mercury.indicator.impl.ma;
+package io.mercury.financial.indicator.specific.ma;
 
 import io.mercury.common.collections.list.FixedLengthRecorder;
+import io.mercury.financial.indicator.base.FixedPeriodPoint;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
-import io.mercury.indicator.base.FixedPeriodPoint;
 
 public abstract class MaPoint extends FixedPeriodPoint {
 

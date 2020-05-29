@@ -1,11 +1,11 @@
-package io.mercury.indicator.base;
+package io.mercury.financial.indicator.base;
 
 import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
+import io.mercury.financial.indicator.api.Point;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.mercury.indicator.api.Point;
 
 public abstract class BasePoint<S extends Serial<S>> implements Point<S, BasicMarketData>, Comparable<BasePoint<S>> {
 

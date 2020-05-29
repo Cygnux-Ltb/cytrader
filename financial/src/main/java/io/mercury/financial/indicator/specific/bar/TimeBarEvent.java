@@ -1,7 +1,6 @@
-package io.mercury.indicator.event;
+package io.mercury.financial.indicator.specific.bar;
 
-import io.mercury.indicator.api.IndicatorEvent;
-import io.mercury.indicator.impl.bar.TimeBar;
+import io.mercury.financial.indicator.api.IndicatorEvent;
 
 public interface TimeBarEvent extends IndicatorEvent {
 

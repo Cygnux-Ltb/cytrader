@@ -1,20 +1,20 @@
-package io.mercury.financial.indicator.specific.ma;
+package io.mercury.financial.indicator.specific.macd;
 
 import io.mercury.financial.indicator.base.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 
-public final class Ema extends FixedPeriodIndicator<EmaPoint, EmaEvent> {
+public final class MacdIndicator extends FixedPeriodIndicator<MacdPoint, MacdEvent> {
 
-	public Ema(Instrument instrument, TimePeriod period, int cycle) {
-		super(instrument, period);
+	public MacdIndicator(Instrument instrument, TimePeriod timePeriod) {
+		super(instrument, timePeriod);
 	}
+
 
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

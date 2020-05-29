@@ -1,16 +1,15 @@
-package io.mercury.indicator.impl.bar;
+package io.mercury.financial.indicator.specific.bar;
 
 import java.time.ZonedDateTime;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
+import io.mercury.financial.indicator.base.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
-import io.mercury.indicator.base.FixedPeriodIndicator;
-import io.mercury.indicator.event.TimeBarEvent;
 
 public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBarEvent> {
 

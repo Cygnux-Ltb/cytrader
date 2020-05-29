@@ -1,7 +1,6 @@
-package io.mercury.indicator.event;
+package io.mercury.financial.indicator.specific.ma;
 
-import io.mercury.indicator.api.IndicatorEvent;
-import io.mercury.indicator.impl.ma.SmaPoint;
+import io.mercury.financial.indicator.api.IndicatorEvent;
 
 public interface SmaEvent extends IndicatorEvent {
 

@@ -1,8 +1,8 @@
-package io.mercury.indicator.event;
+package io.mercury.financial.indicator.event;
 
 import java.time.temporal.TemporalAdjuster;
 
-import io.mercury.indicator.api.IndicatorEvent;
+import io.mercury.financial.indicator.api.IndicatorEvent;
 
 public interface TimeEvent<T extends TemporalAdjuster> extends IndicatorEvent {
 

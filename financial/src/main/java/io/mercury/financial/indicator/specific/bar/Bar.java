@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.bar;
+package io.mercury.financial.indicator.specific.bar;
 
 public class Bar {
 

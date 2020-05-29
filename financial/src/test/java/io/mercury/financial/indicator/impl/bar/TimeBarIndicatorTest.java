@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.bar;
+package io.mercury.financial.indicator.impl.bar;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package io.mercury.indicator.base;
+package io.mercury.financial.indicator.base;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
@@ -7,16 +7,16 @@ import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.financial.indicator.api.Indicator;
+import io.mercury.financial.indicator.api.IndicatorEvent;
+import io.mercury.financial.indicator.api.PointSet;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.mercury.indicator.api.Indicator;
-import io.mercury.indicator.api.IndicatorEvent;
-import io.mercury.indicator.api.PointSet;
 
 public abstract class BaseIndicator<P extends BasePoint<?>, E extends IndicatorEvent>
 		implements Indicator<P, E> {
 
-	protected Logger log = CommonLoggerFactory.getLogger(getClass());
+	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	// 指标对应的标的
 	protected Instrument instrument;

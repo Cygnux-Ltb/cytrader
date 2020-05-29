@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.ma;
+package io.mercury.financial.indicator.specific.ma;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -6,14 +6,13 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import io.mercury.common.collections.list.FixedLengthRecorder;
+import io.mercury.financial.indicator.base.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TradingPeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.financial.vector.TradingPeriod;
-import io.mercury.indicator.base.FixedPeriodIndicator;
-import io.mercury.indicator.event.SmaEvent;
 
 public final class Sma2 extends FixedPeriodIndicator<SmaPoint, SmaEvent> {
 

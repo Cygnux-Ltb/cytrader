@@ -1,4 +1,4 @@
-package io.mercury.indicator.api;
+package io.mercury.financial.indicator.api;
 
 import java.util.Optional;
 

@@ -15,10 +15,20 @@
 	<name>financial</name>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-json</artifactId>
 			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+		<!-- The Apache Commons Math project is a library of lightweight, self-contained 
+			mathematics and statistics components addressing the most common practical 
+			problems not immediately available in the Java programming language or commons-lang. -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6.1</version>
 		</dependency>
 	</dependencies>
 

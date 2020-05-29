@@ -1,13 +1,13 @@
-package io.mercury.indicator.pools.base;
+package io.mercury.financial.indicator.pools.base;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.financial.indicator.api.Indicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.vector.TimePeriod;
-import io.mercury.indicator.api.Indicator;
 
 public abstract class SingleIndicatorPool<I extends Indicator<?, ?>> extends IndicatorPool<I> {
 

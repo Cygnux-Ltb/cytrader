@@ -1,19 +1,18 @@
-package io.mercury.financial.indicator.specific.ma;
+package io.mercury.financial.indicator.specific.bollinger;
 
 import io.mercury.financial.indicator.base.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 
-public final class Ema extends FixedPeriodIndicator<EmaPoint, EmaEvent> {
+public final class BollingerBandsIndicator extends FixedPeriodIndicator<BollingerBandsPoint, BollingerBandsEvent> {
 
-	public Ema(Instrument instrument, TimePeriod period, int cycle) {
-		super(instrument, period);
+	public BollingerBandsIndicator(Instrument instrument, TimePeriod period, int cycle) {
+		super(instrument, period, cycle);
 	}
 
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
-		// TODO Auto-generated method stub
 
 	}
 

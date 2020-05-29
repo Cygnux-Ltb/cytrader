@@ -1,14 +1,14 @@
-package io.mercury.indicator.impl.bar;
+package io.mercury.financial.indicator.specific.bar;
 
 import org.eclipse.collections.api.list.primitive.MutableDoubleList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 
 import io.mercury.common.collections.MutableLists;
+import io.mercury.financial.indicator.base.FixedPeriodPoint;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
-import io.mercury.indicator.base.FixedPeriodPoint;
 
 public final class TimeBar extends FixedPeriodPoint {
 
