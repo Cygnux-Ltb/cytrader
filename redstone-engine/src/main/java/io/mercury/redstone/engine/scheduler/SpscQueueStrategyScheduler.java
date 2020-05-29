@@ -45,13 +45,13 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 				});
 				break;
 			case OrderReport:
-				OrdReport orderReport = despatchMsg.getOrdReport();
-				log.info("Handle OrdReport, brokerUniqueId==[{}], ordSysId==[{}]", orderReport.getBrokerUniqueId(),
-						orderReport.getOrdSysId());
-				Order order = OrderKeeper.getOrder(orderReport.getOrdSysId());
+				OrdReport ordReport = despatchMsg.getOrdReport();
+				log.info("Handle OrdReport, brokerUniqueId==[{}], ordSysId==[{}]", ordReport.getBrokerUniqueId(),
+						ordReport.getOrdSysId());
+				Order order = OrderKeeper.getOrder(ordReport.getOrdSysId());
 				log.info("Search Order OK. BrokerRtnId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
-						orderReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
-						orderReport.getOrdSysId());
+						ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
+						ordReport.getOrdSysId());
 				StrategyKeeper.getStrategy(order.strategyId()).onOrder(order);
 				break;
 			case AdaptorEvent:

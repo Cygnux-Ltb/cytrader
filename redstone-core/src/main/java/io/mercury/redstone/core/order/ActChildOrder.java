@@ -8,8 +8,8 @@ import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
 import io.mercury.redstone.core.order.structure.OrdPrice;
 import io.mercury.redstone.core.order.structure.OrdQty;
-import io.mercury.redstone.core.order.structure.TrdRecordList;
 import io.mercury.redstone.core.order.structure.TrdRecord;
+import io.mercury.redstone.core.order.structure.TrdRecordList;
 
 /**
  * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ParentOrder拆分出多个ChildOrder
@@ -23,6 +23,11 @@ public final class ActChildOrder extends ActualOrder {
 	 * 
 	 */
 	private static final long serialVersionUID = 3863592977001402228L;
+
+	/**
+	 * 经纪商提供的唯一码, 可能有多个, 使用数组实现
+	 */
+	private final String[] brokerIdentifier = new String[4];
 
 	/**
 	 * 子订单成交列表
@@ -52,6 +57,10 @@ public final class ActChildOrder extends ActualOrder {
 	@Override
 	public int ordLevel() {
 		return 0;
+	}
+
+	public String[] brokerIdentifier() {
+		return brokerIdentifier;
 	}
 
 	public TrdRecordList trdRecordList() {
