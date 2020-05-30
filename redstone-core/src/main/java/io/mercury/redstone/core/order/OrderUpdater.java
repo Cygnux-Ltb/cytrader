@@ -17,6 +17,7 @@ public final class OrderUpdater {
 		if (report.getOrdStatus() == OrdStatus.NotProvided) {
 			int filledQty = report.getFilledQty();
 			// TODO
+			order.ordQty().offerQty();
 		} else {
 			order.setOrdStatus(report.getOrdStatus());
 		}

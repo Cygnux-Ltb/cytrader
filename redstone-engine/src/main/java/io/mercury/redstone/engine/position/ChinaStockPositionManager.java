@@ -1,4 +1,4 @@
-package io.mercury.redstone.engine.impl.position;
+package io.mercury.redstone.engine.position;
 
 import io.mercury.redstone.core.position.impl.AbsPositionManager;
 

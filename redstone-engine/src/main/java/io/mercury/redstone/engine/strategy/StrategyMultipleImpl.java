@@ -1,4 +1,4 @@
-package io.mercury.redstone.engine.impl.strategy;
+package io.mercury.redstone.engine.strategy;
 
 import java.util.Set;
 

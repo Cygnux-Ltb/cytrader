@@ -5,7 +5,7 @@ import io.mercury.financial.indicator.specific.ma.SmaPoint;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.order.Order;
-import io.mercury.redstone.engine.impl.strategy.StrategySimpleImpl;
+import io.mercury.redstone.engine.strategy.StrategySimpleImpl;
 
 public class SmaStrategyExample extends StrategySimpleImpl<BasicMarketData> implements SmaEvent {
 
