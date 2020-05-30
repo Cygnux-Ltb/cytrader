@@ -15,29 +15,27 @@ import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.time.TradingPeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.ftdc.adaptor.FtdcAdaptor;
-import io.mercury.ftdc.adaptor.FtdcAdaptorParam;
+import io.mercury.ftdc.adaptor.FtdcAdaptorParamKey;
 import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
-import io.mercury.redstone.engine.scheduler.SpscQueueStrategyScheduler;
+import io.mercury.redstone.engine.scheduler.QueueStrategyScheduler;
 import io.mercury.redstone.strategy.SmaStrategyExample;
 
 public final class StartExample {
 
-	private static int appId = 1;
-
 	public static void main(String[] args) {
 		long datetime = DateTimeUtil.datetimeOfSecond();
-		LoggerSetter.logFileName("redstone-" + appId + "-" + datetime);
-		LoggerSetter.logLevel(LogLevel.DEBUG);
+		LoggerSetter.logFileName("redstone-example-" + datetime);
+		LoggerSetter.logLevel(LogLevel.INFO);
 
 		// TODO 读取配置文件
 		Properties properties = null;
 
 		// Set Global AppId
 
-		StrategyScheduler scheduler = new SpscQueueStrategyScheduler(BufferSize.POW2_12);
+		StrategyScheduler scheduler = new QueueStrategyScheduler(BufferSize.POW2_12);
 
-		ImmutableParamMap<FtdcAdaptorParam> adaptorParam = new ImmutableParamMap<>(FtdcAdaptorParam.values(),
+		ImmutableParamMap<FtdcAdaptorParamKey> adaptorParam = new ImmutableParamMap<>(FtdcAdaptorParamKey.values(),
 				properties);
 
 		// 创建InboundAdaptor

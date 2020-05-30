@@ -15,6 +15,7 @@ import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
@@ -43,9 +44,11 @@ import io.mercury.redstone.core.risk.CircuitBreaker;
 import io.mercury.redstone.core.strategy.Strategy;
 import io.mercury.redstone.core.strategy.StrategyEvent;
 import io.mercury.redstone.core.strategy.StrategyKeeper;
+import io.mercury.redstone.core.strategy.StrategyParamKey;
 
 @SuppressWarnings("deprecation")
-public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy, CircuitBreaker {
+public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyParamKey>
+		implements Strategy, CircuitBreaker {
 
 	/**
 	 * 策略ID
@@ -74,7 +77,9 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 	 */
 	protected final MutableLongObjectMap<Order> orders = MutableMaps.newLongObjectHashMap();
 
-	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId) {
+	protected final ImmutableParamMap<P> strategyParam;
+
+	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<P> strategyParam) {
 		this.strategyId = strategyId;
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
 				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
@@ -83,6 +88,7 @@ public abstract class StrategyBaseImpl<M extends MarketData> implements Strategy
 		this.subAccountId = subAccountId;
 		this.account = AccountKeeper.getAccountBySubAccountId(subAccountId);
 		this.accountId = account.accountId();
+		this.strategyParam = strategyParam;
 	}
 
 	@Override

@@ -1,9 +1,9 @@
 package io.mercury.simulator.adaptor;
 
-import io.mercury.common.param.ParamKey;
+import io.mercury.common.param.AdaptorParamKey;
 import io.mercury.common.param.ParamType;
 
-public enum SimAdaptorParam implements ParamKey {
+public enum SimAdaptorParamKey implements AdaptorParamKey {
 
 	/**
 	 * Simulator Params
@@ -22,31 +22,36 @@ public enum SimAdaptorParam implements ParamKey {
 
 	;
 
-	private int paramId;
+	private int id;
 
-	private String paramName;
+	private String key;
 
-	private ParamType paramType;
+	private ParamType type;
 
-	private SimAdaptorParam(int paramId, String paramName, ParamType paramType) {
-		this.paramId = paramId;
-		this.paramName = paramName;
-		this.paramType = paramType;
+	private SimAdaptorParamKey(int id, String key, ParamType type) {
+		this.id = id;
+		this.key = key;
+		this.type = type;
 	}
 
 	@Override
-	public int paramId() {
-		return paramId;
+	public int id() {
+		return id;
 	}
 
 	@Override
-	public String paramName() {
-		return paramName;
+	public String key() {
+		return key;
 	}
 
 	@Override
-	public ParamType paramType() {
-		return paramType;
+	public ParamType type() {
+		return type;
+	}
+
+	@Override
+	public String adaptorName() {
+		return "SimAdaptor";
 	}
 
 }

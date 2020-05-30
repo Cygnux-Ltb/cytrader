@@ -7,7 +7,6 @@ import io.mercury.common.concurrent.disruptor.SpscQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.OrderKeeper;
@@ -23,7 +22,7 @@ import io.mercury.redstone.core.strategy.StrategyScheduler;
  *         策略执行引擎与整体框架分离
  *
  */
-public final class SpscQueueStrategyScheduler implements StrategyScheduler {
+public final class QueueStrategyScheduler implements StrategyScheduler {
 
 	private SpscQueue<DespatchMsg> despatchQueue;
 
@@ -31,9 +30,9 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	private static final Logger log = CommonLoggerFactory.getLogger(SpscQueueStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(QueueStrategyScheduler.class);
 
-	public SpscQueueStrategyScheduler(BufferSize size) {
+	public QueueStrategyScheduler(BufferSize size) {
 		this.despatchQueue = new SpscQueue<>("SPSCStrategyScheduler-Queue", size, true, despatchMsg -> {
 			switch (despatchMsg.mark()) {
 			case MarketData:
@@ -55,9 +54,7 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 				StrategyKeeper.getStrategy(order.strategyId()).onOrder(order);
 				break;
 			case AdaptorEvent:
-				int adaptorId = despatchMsg.getAdaptorId();
-				AdaptorStatus adaptorStatus = despatchMsg.getAdaptorStatus();
-				AdaptorEvent event = new AdaptorEvent(adaptorId).setAdaptorStatus(adaptorStatus);
+				despatchMsg.getAdaptorEvent();
 				break;
 			default:
 				throw new IllegalStateException("scheduler mark illegal");
@@ -77,15 +74,16 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 		despatchQueue.enqueue(new DespatchMsg(ordReport));
 	}
 
+	// TODO add pools
 	@Override
 	public void onAdaptorEvent(AdaptorEvent event) {
-		despatchQueue.enqueue(new DespatchMsg(event.adaptorId(), event.adaptorStatus()));
+		despatchQueue.enqueue(new DespatchMsg(event));
 	}
 
 	@Override
 	public void addStrategy(Strategy strategy) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private class DespatchMsg {
@@ -93,8 +91,7 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 		private int mark;
 		private BasicMarketData marketData;
 		private OrdReport ordReport;
-		private int adaptorId;
-		private AdaptorStatus adaptorStatus;
+		private AdaptorEvent adaptorEvent;
 
 		DespatchMsg(BasicMarketData marketData) {
 			this.mark = MarketData;
@@ -106,9 +103,9 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 			this.ordReport = ordReport;
 		}
 
-		DespatchMsg(int adaptorId, AdaptorStatus adaptorStatus) {
-			this.adaptorId = adaptorId;
-			this.adaptorStatus = adaptorStatus;
+		DespatchMsg(AdaptorEvent adaptorEvent) {
+			this.mark = AdaptorEvent;
+			this.adaptorEvent = adaptorEvent;
 		}
 
 		private int mark() {
@@ -123,12 +120,8 @@ public final class SpscQueueStrategyScheduler implements StrategyScheduler {
 			return ordReport;
 		}
 
-		private int getAdaptorId() {
-			return adaptorId;
-		}
-
-		private AdaptorStatus getAdaptorStatus() {
-			return adaptorStatus;
+		private AdaptorEvent getAdaptorEvent() {
+			return adaptorEvent;
 		}
 
 	}

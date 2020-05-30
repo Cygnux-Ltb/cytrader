@@ -5,12 +5,13 @@ import io.mercury.financial.indicator.specific.ma.SmaPoint;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.order.Order;
+import io.mercury.redstone.core.strategy.StrategyParamKey;
 import io.mercury.redstone.engine.strategy.StrategySimpleImpl;
 
-public class SmaStrategyExample extends StrategySimpleImpl<BasicMarketData> implements SmaEvent {
+public class SmaStrategyExample extends StrategySimpleImpl<BasicMarketData, StrategyParamKey> implements SmaEvent {
 
 	public SmaStrategyExample(int strategyId, int subAccountId, Instrument instrument) {
-		super(strategyId, "SmaStrategyExample", subAccountId, instrument);
+		super(strategyId, "SmaStrategyExample", subAccountId, instrument, null);
 	}
 
 	@Override
@@ -43,6 +44,5 @@ public class SmaStrategyExample extends StrategySimpleImpl<BasicMarketData> impl
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

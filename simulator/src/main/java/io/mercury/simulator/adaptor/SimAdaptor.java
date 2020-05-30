@@ -36,7 +36,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 
 	private StrategyScheduler scheduler;
 
-	protected ImmutableParamMap<SimAdaptorParam> paramMap;
+	protected ImmutableParamMap<SimAdaptorParamKey> paramMap;
 
 	protected SocketConfigurator mdConfigurator;
 
@@ -57,15 +57,15 @@ public class SimAdaptor extends AdaptorBaseImpl {
 
 	private AvroBinaryDeserializer<Order> orderDeserializer1 = new AvroBinaryDeserializer<>(Order.class);
 
-	public SimAdaptor(int adaptorId, String adaptorName, Account account, ImmutableParamMap<SimAdaptorParam> paramMap,
+	public SimAdaptor(int adaptorId, String adaptorName, Account account, ImmutableParamMap<SimAdaptorParamKey> paramMap,
 			StrategyScheduler scheduler) {
 		super(adaptorId, adaptorName, account);
 		this.paramMap = paramMap;
 		this.scheduler = scheduler;
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
-				.host(paramMap.getString(SimAdaptorParam.MdHost)).port(paramMap.getInt(SimAdaptorParam.MdPort)).build();
+				.host(paramMap.getString(SimAdaptorParamKey.MdHost)).port(paramMap.getInt(SimAdaptorParamKey.MdPort)).build();
 		SocketConfigurator tdConfigurator = SocketConfigurator.builder()
-				.host(paramMap.getString(SimAdaptorParam.TdHost)).port(paramMap.getInt(SimAdaptorParam.TdPort)).build();
+				.host(paramMap.getString(SimAdaptorParamKey.TdHost)).port(paramMap.getInt(SimAdaptorParamKey.TdPort)).build();
 		this.mdReceiver = new SocketReceiver(mdConfigurator, (bytes) -> {
 			List<MarketDataLevel1> marketDatas = marketDataDeserializer.deserializationMultiple(bytes);
 			for (MarketDataLevel1 marketData : marketDatas) {
@@ -99,8 +99,8 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	public boolean subscribeMarketData(Instrument... instruments) {
 
 		MarketDataSubscribe simSubscribe = MarketDataSubscribe.newBuilder().setUniqueId(Integer.valueOf(1))
-				.setStartTradingDay(paramMap.getString(SimAdaptorParam.TradingDayStart))
-				.setEndTradingDay(paramMap.getString(SimAdaptorParam.TradingDayEnd))
+				.setStartTradingDay(paramMap.getString(SimAdaptorParamKey.TradingDayStart))
+				.setEndTradingDay(paramMap.getString(SimAdaptorParamKey.TradingDayEnd))
 				.setInstrumentIdList(
 						Stream.of(instruments).map(instrument -> instrument.code()).collect(Collectors.toList()))
 				.build();
