@@ -18,7 +18,7 @@ public final class OrdQty {
 	private int filledQty;
 
 	/**
-	 * 最后一次成交数量
+	 * 上一次成交数量
 	 */
 	private int lastFilledQty;
 
@@ -68,8 +68,8 @@ public final class OrdQty {
 
 	private static final String str0 = "{\"offerQty\" : ";
 	private static final String str1 = ", \"leavesQty\" : ";
-	private static final String str2 = ", \"filledQty\" : ";
-	private static final String str3 = ", \"lastFilledQty\" : ";
+	private static final String str2 = ", \"lastFilledQty\" : ";
+	private static final String str3 = ", \"filledQty\" : ";
 	private static final String str4 = "}";
 
 	@Override
@@ -80,9 +80,9 @@ public final class OrdQty {
 		builder.append(str1);
 		builder.append(leavesQty);
 		builder.append(str2);
-		builder.append(filledQty);
-		builder.append(str3);
 		builder.append(lastFilledQty);
+		builder.append(str3);
+		builder.append(filledQty);
 		builder.append(str4);
 		return builder.toString();
 	}
