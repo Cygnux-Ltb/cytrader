@@ -72,7 +72,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private final StrategyScheduler scheduler;
 
 	public FtdcAdaptor(int adaptorId, String adaptorName, Account account, @Nonnull StrategyScheduler scheduler,
-			@Nonnull ImmutableParamMap<FtdcAdaptorParam> params) {
+			@Nonnull ImmutableParamMap<FtdcAdaptorParamKey> params) {
 		super(adaptorId, adaptorName, account);
 		this.scheduler = scheduler;
 		// 创建配置信息
@@ -88,19 +88,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	 * @param params
 	 * @return
 	 */
-	private FtdcConfig createFtdcConfig(ImmutableParamMap<FtdcAdaptorParam> params) {
-		return new FtdcConfig().setTraderAddr(params.getString(FtdcAdaptorParam.CTP_TraderAddr))
-				.setMdAddr(params.getString(FtdcAdaptorParam.CTP_MdAddr))
-				.setAppId(params.getString(FtdcAdaptorParam.CTP_AppId))
-				.setBrokerId(params.getString(FtdcAdaptorParam.CTP_BrokerId))
-				.setInvestorId(params.getString(FtdcAdaptorParam.CTP_InvestorId))
-				.setAccountId(params.getString(FtdcAdaptorParam.CTP_AccountId))
-				.setUserId(params.getString(FtdcAdaptorParam.CTP_UserId))
-				.setPassword(params.getString(FtdcAdaptorParam.CTP_Password))
-				.setAuthCode(params.getString(FtdcAdaptorParam.CTP_AuthCode))
-				.setIpAddr(params.getString(FtdcAdaptorParam.CTP_IpAddr))
-				.setMacAddr(params.getString(FtdcAdaptorParam.CTP_MacAddr))
-				.setCurrencyId(params.getString(FtdcAdaptorParam.CTP_CurrencyId));
+	private FtdcConfig createFtdcConfig(ImmutableParamMap<FtdcAdaptorParamKey> params) {
+		return new FtdcConfig().setTraderAddr(params.getString(FtdcAdaptorParamKey.TraderAddr))
+				.setMdAddr(params.getString(FtdcAdaptorParamKey.MdAddr))
+				.setAppId(params.getString(FtdcAdaptorParamKey.AppId))
+				.setBrokerId(params.getString(FtdcAdaptorParamKey.BrokerId))
+				.setInvestorId(params.getString(FtdcAdaptorParamKey.InvestorId))
+				.setAccountId(params.getString(FtdcAdaptorParamKey.AccountId))
+				.setUserId(params.getString(FtdcAdaptorParamKey.UserId))
+				.setPassword(params.getString(FtdcAdaptorParamKey.Password))
+				.setAuthCode(params.getString(FtdcAdaptorParamKey.AuthCode))
+				.setIpAddr(params.getString(FtdcAdaptorParamKey.IpAddr))
+				.setMacAddr(params.getString(FtdcAdaptorParamKey.MacAddr))
+				.setCurrencyId(params.getString(FtdcAdaptorParamKey.CurrencyId));
 	}
 
 	/**

@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
-import io.mercury.common.util.StringUtil;
 
 public class SubAccount extends EnableComponent<SubAccount> {
 
@@ -23,22 +22,16 @@ public class SubAccount extends EnableComponent<SubAccount> {
 	private int credit;
 
 	public SubAccount(int subAccountId, @Nonnull Account account) {
-		this(subAccountId, null, account, account.balance(), account.credit());
+		this(subAccountId, account, account.balance(), account.credit());
 	}
 
-	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account) {
-		this(subAccountId, subAccountName, account, account.balance(), account.credit());
-	}
-
-	public SubAccount(int subAccountId, String subAccountName, @Nonnull Account account, int balance, int credit) {
+	public SubAccount(int subAccountId, @Nonnull Account account, int balance, int credit) {
 		this.subAccountId = subAccountId;
 		this.account = Assertor.nonNull(account, "account");
-		this.balance = balance != 0 ? balance : account.balance();
-		this.credit = credit != 0 ? credit : account.credit();
-		this.subAccountName = StringUtil.nonEmpty(subAccountName) ? subAccountName
-				: "account[" + account.accountId() + "]-subAccount[" + subAccountId + "]";
+		this.balance = balance;
+		this.credit = credit;
+		this.subAccountName = "SA-Account[" + account.accountName() + "]-SubAccount[" + subAccountId + "]";
 		account.addSubAccount(this);
-		AccountKeeper.initialize(this);
 	}
 
 	public int subAccountId() {
@@ -94,7 +87,7 @@ public class SubAccount extends EnableComponent<SubAccount> {
 	}
 
 	public static void main(String[] args) {
-		SubAccount subAccount = new SubAccount(10, new Account(1, "", "2005", 100000, 0));
+		SubAccount subAccount = new SubAccount(10, new Account(1, "Test-A", "200500", 100000, 0));
 		System.out.println(subAccount);
 	}
 

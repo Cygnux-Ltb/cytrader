@@ -1,5 +1,6 @@
 package io.mercury.redstone.core.account;
 
+import static io.mercury.common.util.Assertor.nonEmpty;
 import static io.mercury.common.util.StringUtil.toText;
 
 import javax.annotation.Nonnull;
@@ -8,7 +9,6 @@ import org.eclipse.collections.api.set.MutableSet;
 
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableComponent;
-import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 
 public class Account extends EnableComponent<Account> {
@@ -45,8 +45,8 @@ public class Account extends EnableComponent<Account> {
 
 	public Account(int accountId, String accountName, @Nonnull String investorId, int balance, int credit) {
 		this.accountId = accountId;
-		this.accountName = StringUtil.nonEmpty(accountName) ? accountName : "use-investorId[" + investorId + "]";
-		this.investorId = Assertor.nonEmpty(investorId, "investorId");
+		this.accountName = nonEmpty(accountName, "accountName");
+		this.investorId = nonEmpty(investorId, "investorId");
 		this.balance = balance;
 		this.credit = credit;
 	}
@@ -143,7 +143,7 @@ public class Account extends EnableComponent<Account> {
 
 	public static void main(String[] args) {
 		System.out.println(StringUtil.toText(null));
-		System.out.println(new Account(1, "", "2005"));
+		System.out.println(new Account(1, "", "200500"));
 	}
 
 }

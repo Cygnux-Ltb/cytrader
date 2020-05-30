@@ -1,62 +1,67 @@
 package io.mercury.ftdc.adaptor;
 
-import io.mercury.common.param.ParamKey;
+import io.mercury.common.param.AdaptorParamKey;
 import io.mercury.common.param.ParamType;
 
-public enum FtdcAdaptorParam implements ParamKey {
+public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 
 	/**
 	 * CTP Params
 	 */
-	CTP_TraderAddr(201, "traderAddr", ParamType.STRING),
+	TraderAddr(101, "traderAddr", ParamType.STRING),
 
-	CTP_MdAddr(202, "mdAddr", ParamType.STRING),
+	MdAddr(102, "mdAddr", ParamType.STRING),
 
-	CTP_AppId(203, "appId", ParamType.STRING),
+	AppId(103, "appId", ParamType.STRING),
 
-	CTP_BrokerId(204, "brokerId", ParamType.STRING),
+	BrokerId(104, "brokerId", ParamType.STRING),
 
-	CTP_InvestorId(205, "investorId", ParamType.STRING),
+	InvestorId(105, "investorId", ParamType.STRING),
 
-	CTP_AccountId(206, "accountId", ParamType.STRING),
+	AccountId(106, "accountId", ParamType.STRING),
 
-	CTP_UserId(207, "userId", ParamType.STRING),
+	UserId(107, "userId", ParamType.STRING),
 
-	CTP_Password(208, "password", ParamType.STRING),
+	Password(108, "password", ParamType.STRING),
 
-	CTP_AuthCode(209, "authCode", ParamType.STRING),
+	AuthCode(109, "authCode", ParamType.STRING),
 
-	CTP_IpAddr(210, "ipAddr", ParamType.STRING),
+	IpAddr(110, "ipAddr", ParamType.STRING),
 
-	CTP_MacAddr(211, "macAddr", ParamType.STRING),
+	MacAddr(111, "macAddr", ParamType.STRING),
 
-	CTP_CurrencyId(212, "currencyId", ParamType.STRING),
+	CurrencyId(112, "currencyId", ParamType.STRING),
 
 	;
 
-	private int paramId;
-	private String paramName;
-	private ParamType paramType;
+	private int id;
+	private String key;
+	private ParamType type;
 
-	private FtdcAdaptorParam(int paramId, String paramName, ParamType paramType) {
-		this.paramId = paramId;
-		this.paramName = paramName;
-		this.paramType = paramType;
+	private FtdcAdaptorParamKey(int id, String key, ParamType type) {
+		this.id = id;
+		this.key = key;
+		this.type = type;
 	}
 
 	@Override
-	public int paramId() {
-		return paramId;
+	public int id() {
+		return id;
 	}
 
 	@Override
-	public String paramName() {
-		return paramName;
+	public String key() {
+		return key;
 	}
 
 	@Override
-	public ParamType paramType() {
-		return paramType;
+	public ParamType type() {
+		return type;
+	}
+
+	@Override
+	public String adaptorName() {
+		return "FtdcAdaptor";
 	}
 
 }
