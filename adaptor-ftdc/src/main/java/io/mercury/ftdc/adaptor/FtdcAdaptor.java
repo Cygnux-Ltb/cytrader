@@ -32,7 +32,7 @@ import io.mercury.ftdc.gateway.bean.FtdcMdConnect;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
-import io.mercury.ftdc.gateway.bean.RspTraderConnect;
+import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.adaptor.base.AdaptorBaseImpl;
@@ -113,11 +113,11 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 				MpscArrayBlockingQueue.autoStartQueue("FtdcGateway-Buffer", 256, ftdcRspMsg -> {
 					switch (ftdcRspMsg.getRspType()) {
 					case FtdcMdConnect:
-						FtdcMdConnect rspMdConnect = ftdcRspMsg.getRspMdConnect();
-						this.isMdAvailable = rspMdConnect.isAvailable();
-						log.info("Queue Processor Handle RspMdConnect, isMdAvailable==[{}]", isMdAvailable);
+						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();
+						this.isMdAvailable = mdConnect.isAvailable();
+						log.info("Swap Queue Processor Handle FtdcMdConnect, isMdAvailable==[{}]", isMdAvailable);
 						AdaptorEvent mdEvent = new AdaptorEvent(adaptorId());
-						if (rspMdConnect.isAvailable()) {
+						if (mdConnect.isAvailable()) {
 							mdEvent.setAdaptorStatus(AdaptorStatus.MdEnable);
 						} else {
 							mdEvent.setAdaptorStatus(AdaptorStatus.MdDisable);
@@ -125,12 +125,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						scheduler.onAdaptorEvent(mdEvent);
 						break;
 					case FtdcTraderConnect:
-						RspTraderConnect traderConnect = ftdcRspMsg.getRspTraderConnect();
+						FtdcTraderConnect traderConnect = ftdcRspMsg.getFtdcTraderConnect();
 						this.isTraderAvailable = traderConnect.isAvailable();
 						this.frontId = traderConnect.getFrontID();
 						this.sessionId = traderConnect.getSessionID();
 						log.info(
-								"Queue Processor Handle RspTraderConnect, isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
+								"Swap Queue Processor Handle FtdcTraderConnect, isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
 								isTraderAvailable, frontId, sessionId);
 						AdaptorEvent traderEvent = new AdaptorEvent(adaptorId());
 						if (traderConnect.isAvailable()) {
@@ -142,44 +142,43 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						break;
 					case FtdcDepthMarketData:
 						// 行情处理
-						BasicMarketData marketData = fromFtdcDepthMarketData
-								.apply(ftdcMsg.getFtdcDepthMarketData());
+						BasicMarketData marketData = fromFtdcDepthMarketData.apply(ftdcRspMsg.getFtdcDepthMarketData());
 						scheduler.onMarketData(marketData);
 						break;
 					case FtdcOrder:
 						// 报单回报处理
-						FtdcOrder ftdcOrder = ftdcMsg.getFtdcOrder();
+						FtdcOrder ftdcOrder = ftdcRspMsg.getFtdcOrder();
 						log.info(
-								"Queue Processor Handle FtdcOrder, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
+								"Swap Queue Processor Handle FtdcOrder, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcOrder.getInstrumentID(), ftdcOrder.getInvestorID(), ftdcOrder.getOrderRef());
 						OrdReport ordReport = fromFtdcOrder.apply(ftdcOrder);
 						scheduler.onOrdReport(ordReport);
 						break;
 					case FtdcTrade:
 						// 成交回报处理
-						FtdcTrade ftdcTrade = ftdcMsg.getFtdcTrade();
+						FtdcTrade ftdcTrade = ftdcRspMsg.getFtdcTrade();
 						log.info(
-								"Queue Processor Handle FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
+								"Swap Queue Processor Handle FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
 								ftdcTrade.getInstrumentID(), ftdcTrade.getInvestorID(), ftdcTrade.getOrderRef());
 						OrdReport trdReport = fromFtdcTrade.apply(ftdcTrade);
 						scheduler.onOrdReport(trdReport);
 						break;
 					case FtdcInputOrder:
 						// 报单错误处理
-						FtdcInputOrder ftdcInputOrder = ftdcMsg.getFtdcInputOrder();
-						log.info("Queue Processor Handle FtdcInputOrder, FtdcInputOrder -> {}",
+						FtdcInputOrder ftdcInputOrder = ftdcRspMsg.getFtdcInputOrder();
+						log.info("Swap Queue Processor Handle FtdcInputOrder, FtdcInputOrder -> {}",
 								JsonUtil.toJson(ftdcInputOrder));
 						break;
 					case FtdcInputOrderAction:
 						// 撤单错误处理1
-						FtdcInputOrderAction ftdcInputOrderAction = ftdcMsg.getFtdcInputOrderAction();
-						log.info("Queue Processor Handle FtdcInputOrderAction, FtdcInputOrderAction -> {}",
+						FtdcInputOrderAction ftdcInputOrderAction = ftdcRspMsg.getFtdcInputOrderAction();
+						log.info("Swap Queue Processor Handle FtdcInputOrderAction, FtdcInputOrderAction -> {}",
 								JsonUtil.toJson(ftdcInputOrderAction));
 						break;
 					case FtdcOrderAction:
 						// 撤单错误处理2
-						FtdcOrderAction ftdcOrderAction = ftdcMsg.getFtdcOrderAction();
-						log.info("Queue Processor Handle FtdcOrderAction, FtdcOrderAction -> {}",
+						FtdcOrderAction ftdcOrderAction = ftdcRspMsg.getFtdcOrderAction();
+						log.info("Swap Queue Processor Handle FtdcOrderAction, FtdcOrderAction -> {}",
 								JsonUtil.toJson(ftdcOrderAction));
 						break;
 					default:

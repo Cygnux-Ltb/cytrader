@@ -85,7 +85,7 @@ public final class FtdcRspMsg {
 		return ftdcTraderConnect;
 	}
 
-	public FtdcMdConnect getRspMdConnect() {
+	public FtdcMdConnect getFtdcMdConnect() {
 		return ftdcMdConnect;
 	}
 
