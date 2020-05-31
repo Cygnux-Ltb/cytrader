@@ -1,383 +1,569 @@
 package io.mercury.ftdc.gateway.bean;
 
 public final class FtdcInvestorPosition {
-	
-	
-	public void setInstrumentID(String var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_InstrumentID_set(this.swigCPtr, this, var1);
-	}
+
+	/// 合约代码
+	private String InstrumentID;
+
+	/// 经纪公司代码
+	private String BrokerID;
+
+	/// 投资者代码
+	private String InvestorID;
+
+	/// 持仓多空方向
+	private char PosiDirection;
+
+	/// 投机套保标志
+	private char HedgeFlag;
+
+	/// 持仓日期
+	private char PositionDate;
+
+	/// 上日持仓
+	private int YdPosition;
+
+	/// 今日持仓
+	private int Position;
+
+	/// 多头冻结
+	private int LongFrozen;
+
+	/// 空头冻结
+	private int ShortFrozen;
+
+	/// 开仓冻结金额
+	private double LongFrozenAmount;
+
+	/// 开仓冻结金额
+	private double ShortFrozenAmount;
+
+	/// 开仓量
+	private int OpenVolume;
+
+	/// 平仓量
+	private int CloseVolume;
+
+	/// 开仓金额
+	private double OpenAmount;
+
+	/// 平仓金额
+	private double CloseAmount;
+
+	/// 持仓成本
+	private double PositionCost;
+
+	/// 上次占用的保证金
+	private double PreMargin;
+
+	/// 占用的保证金
+	private double UseMargin;
+
+	/// 冻结的保证金
+	private double FrozenMargin;
+
+	/// 冻结的资金
+	private double FrozenCash;
+
+	/// 冻结的手续费
+	private double FrozenCommission;
+
+	/// 资金差额
+	private double CashIn;
+
+	/// 手续费
+	private double Commission;
+
+	/// 平仓盈亏
+	private double CloseProfit;
+
+	/// 持仓盈亏
+	private double PositionProfit;
+
+	/// 上次结算价
+	private double PreSettlementPrice;
+
+	/// 本次结算价
+	private double SettlementPrice;
+
+	/// 交易日
+	private String TradingDay;
+
+	/// 结算编号
+	private int SettlementID;
+
+	/// 开仓成本
+	private double OpenCost;
+
+	/// 交易所保证金
+	private double ExchangeMargin;
+
+	/// 组合成交形成的持仓
+	private int CombPosition;
+
+	/// 组合多头冻结
+	private int CombLongFrozen;
+
+	/// 组合空头冻结
+	private int CombShortFrozen;
+
+	/// 逐日盯市平仓盈亏
+	private double CloseProfitByDate;
+
+	/// 逐笔对冲平仓盈亏
+	private double CloseProfitByTrade;
+
+	/// 今日持仓
+	private int TodayPosition;
+
+	/// 保证金率
+	private double MarginRateByMoney;
+
+	/// 保证金率(按手数)
+	private double MarginRateByVolume;
+
+	/// 执行冻结
+	private int StrikeFrozen;
+
+	/// 执行冻结金额
+	private double StrikeFrozenAmount;
+
+	/// 放弃执行冻结
+	private int AbandonFrozen;
+
+	/// 交易所代码
+	private String ExchangeID;
+
+	/// 执行冻结的昨仓
+	private int YdStrikeFrozen;
+
+	/// 投资单元代码
+	private String InvestUnitID;
+
+	/// 大商所持仓成本差值，只有大商所使用
+	private double PositionCostOffset;
 
 	public String getInstrumentID() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_InstrumentID_get(this.swigCPtr, this);
-	}
-
-	public void setBrokerID(String var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_BrokerID_set(this.swigCPtr, this, var1);
+		return InstrumentID;
 	}
 
 	public String getBrokerID() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_BrokerID_get(this.swigCPtr, this);
-	}
-
-	public void setInvestorID(String var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_InvestorID_set(this.swigCPtr, this, var1);
+		return BrokerID;
 	}
 
 	public String getInvestorID() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_InvestorID_get(this.swigCPtr, this);
-	}
-
-	public void setPosiDirection(char var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_PosiDirection_set(this.swigCPtr, this, var1);
+		return InvestorID;
 	}
 
 	public char getPosiDirection() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_PosiDirection_get(this.swigCPtr, this);
-	}
-
-	public void setHedgeFlag(char var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_HedgeFlag_set(this.swigCPtr, this, var1);
+		return PosiDirection;
 	}
 
 	public char getHedgeFlag() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_HedgeFlag_get(this.swigCPtr, this);
-	}
-
-	public void setPositionDate(char var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_PositionDate_set(this.swigCPtr, this, var1);
+		return HedgeFlag;
 	}
 
 	public char getPositionDate() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_PositionDate_get(this.swigCPtr, this);
-	}
-
-	public void setYdPosition(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_YdPosition_set(this.swigCPtr, this, var1);
+		return PositionDate;
 	}
 
 	public int getYdPosition() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_YdPosition_get(this.swigCPtr, this);
-	}
-
-	public void setPosition(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_Position_set(this.swigCPtr, this, var1);
+		return YdPosition;
 	}
 
 	public int getPosition() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_Position_get(this.swigCPtr, this);
-	}
-
-	public void setLongFrozen(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_LongFrozen_set(this.swigCPtr, this, var1);
+		return Position;
 	}
 
 	public int getLongFrozen() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_LongFrozen_get(this.swigCPtr, this);
-	}
-
-	public void setShortFrozen(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_ShortFrozen_set(this.swigCPtr, this, var1);
+		return LongFrozen;
 	}
 
 	public int getShortFrozen() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_ShortFrozen_get(this.swigCPtr, this);
-	}
-
-	public void setLongFrozenAmount(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_LongFrozenAmount_set(this.swigCPtr, this, var1);
+		return ShortFrozen;
 	}
 
 	public double getLongFrozenAmount() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_LongFrozenAmount_get(this.swigCPtr, this);
-	}
-
-	public void setShortFrozenAmount(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_ShortFrozenAmount_set(this.swigCPtr, this, var1);
+		return LongFrozenAmount;
 	}
 
 	public double getShortFrozenAmount() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_ShortFrozenAmount_get(this.swigCPtr, this);
-	}
-
-	public void setOpenVolume(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_OpenVolume_set(this.swigCPtr, this, var1);
+		return ShortFrozenAmount;
 	}
 
 	public int getOpenVolume() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_OpenVolume_get(this.swigCPtr, this);
-	}
-
-	public void setCloseVolume(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseVolume_set(this.swigCPtr, this, var1);
+		return OpenVolume;
 	}
 
 	public int getCloseVolume() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseVolume_get(this.swigCPtr, this);
-	}
-
-	public void setOpenAmount(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_OpenAmount_set(this.swigCPtr, this, var1);
+		return CloseVolume;
 	}
 
 	public double getOpenAmount() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_OpenAmount_get(this.swigCPtr, this);
-	}
-
-	public void setCloseAmount(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseAmount_set(this.swigCPtr, this, var1);
+		return OpenAmount;
 	}
 
 	public double getCloseAmount() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseAmount_get(this.swigCPtr, this);
-	}
-
-	public void setPositionCost(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_PositionCost_set(this.swigCPtr, this, var1);
+		return CloseAmount;
 	}
 
 	public double getPositionCost() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_PositionCost_get(this.swigCPtr, this);
-	}
-
-	public void setPreMargin(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_PreMargin_set(this.swigCPtr, this, var1);
+		return PositionCost;
 	}
 
 	public double getPreMargin() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_PreMargin_get(this.swigCPtr, this);
-	}
-
-	public void setUseMargin(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_UseMargin_set(this.swigCPtr, this, var1);
+		return PreMargin;
 	}
 
 	public double getUseMargin() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_UseMargin_get(this.swigCPtr, this);
-	}
-
-	public void setFrozenMargin(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_FrozenMargin_set(this.swigCPtr, this, var1);
+		return UseMargin;
 	}
 
 	public double getFrozenMargin() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_FrozenMargin_get(this.swigCPtr, this);
-	}
-
-	public void setFrozenCash(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_FrozenCash_set(this.swigCPtr, this, var1);
+		return FrozenMargin;
 	}
 
 	public double getFrozenCash() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_FrozenCash_get(this.swigCPtr, this);
-	}
-
-	public void setFrozenCommission(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_FrozenCommission_set(this.swigCPtr, this, var1);
+		return FrozenCash;
 	}
 
 	public double getFrozenCommission() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_FrozenCommission_get(this.swigCPtr, this);
-	}
-
-	public void setCashIn(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_CashIn_set(this.swigCPtr, this, var1);
+		return FrozenCommission;
 	}
 
 	public double getCashIn() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_CashIn_get(this.swigCPtr, this);
-	}
-
-	public void setCommission(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_Commission_set(this.swigCPtr, this, var1);
+		return CashIn;
 	}
 
 	public double getCommission() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_Commission_get(this.swigCPtr, this);
-	}
-
-	public void setCloseProfit(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseProfit_set(this.swigCPtr, this, var1);
+		return Commission;
 	}
 
 	public double getCloseProfit() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseProfit_get(this.swigCPtr, this);
-	}
-
-	public void setPositionProfit(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_PositionProfit_set(this.swigCPtr, this, var1);
+		return CloseProfit;
 	}
 
 	public double getPositionProfit() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_PositionProfit_get(this.swigCPtr, this);
-	}
-
-	public void setPreSettlementPrice(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_PreSettlementPrice_set(this.swigCPtr, this, var1);
+		return PositionProfit;
 	}
 
 	public double getPreSettlementPrice() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_PreSettlementPrice_get(this.swigCPtr, this);
-	}
-
-	public void setSettlementPrice(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_SettlementPrice_set(this.swigCPtr, this, var1);
+		return PreSettlementPrice;
 	}
 
 	public double getSettlementPrice() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_SettlementPrice_get(this.swigCPtr, this);
-	}
-
-	public void setTradingDay(String var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_TradingDay_set(this.swigCPtr, this, var1);
+		return SettlementPrice;
 	}
 
 	public String getTradingDay() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_TradingDay_get(this.swigCPtr, this);
-	}
-
-	public void setSettlementID(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_SettlementID_set(this.swigCPtr, this, var1);
+		return TradingDay;
 	}
 
 	public int getSettlementID() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_SettlementID_get(this.swigCPtr, this);
-	}
-
-	public void setOpenCost(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_OpenCost_set(this.swigCPtr, this, var1);
+		return SettlementID;
 	}
 
 	public double getOpenCost() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_OpenCost_get(this.swigCPtr, this);
-	}
-
-	public void setExchangeMargin(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_ExchangeMargin_set(this.swigCPtr, this, var1);
+		return OpenCost;
 	}
 
 	public double getExchangeMargin() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_ExchangeMargin_get(this.swigCPtr, this);
-	}
-
-	public void setCombPosition(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_CombPosition_set(this.swigCPtr, this, var1);
+		return ExchangeMargin;
 	}
 
 	public int getCombPosition() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_CombPosition_get(this.swigCPtr, this);
-	}
-
-	public void setCombLongFrozen(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_CombLongFrozen_set(this.swigCPtr, this, var1);
+		return CombPosition;
 	}
 
 	public int getCombLongFrozen() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_CombLongFrozen_get(this.swigCPtr, this);
-	}
-
-	public void setCombShortFrozen(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_CombShortFrozen_set(this.swigCPtr, this, var1);
+		return CombLongFrozen;
 	}
 
 	public int getCombShortFrozen() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_CombShortFrozen_get(this.swigCPtr, this);
-	}
-
-	public void setCloseProfitByDate(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseProfitByDate_set(this.swigCPtr, this, var1);
+		return CombShortFrozen;
 	}
 
 	public double getCloseProfitByDate() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseProfitByDate_get(this.swigCPtr, this);
-	}
-
-	public void setCloseProfitByTrade(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseProfitByTrade_set(this.swigCPtr, this, var1);
+		return CloseProfitByDate;
 	}
 
 	public double getCloseProfitByTrade() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_CloseProfitByTrade_get(this.swigCPtr, this);
-	}
-
-	public void setTodayPosition(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_TodayPosition_set(this.swigCPtr, this, var1);
+		return CloseProfitByTrade;
 	}
 
 	public int getTodayPosition() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_TodayPosition_get(this.swigCPtr, this);
-	}
-
-	public void setMarginRateByMoney(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_MarginRateByMoney_set(this.swigCPtr, this, var1);
+		return TodayPosition;
 	}
 
 	public double getMarginRateByMoney() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_MarginRateByMoney_get(this.swigCPtr, this);
-	}
-
-	public void setMarginRateByVolume(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_MarginRateByVolume_set(this.swigCPtr, this, var1);
+		return MarginRateByMoney;
 	}
 
 	public double getMarginRateByVolume() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_MarginRateByVolume_get(this.swigCPtr, this);
-	}
-
-	public void setStrikeFrozen(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_StrikeFrozen_set(this.swigCPtr, this, var1);
+		return MarginRateByVolume;
 	}
 
 	public int getStrikeFrozen() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_StrikeFrozen_get(this.swigCPtr, this);
-	}
-
-	public void setStrikeFrozenAmount(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_StrikeFrozenAmount_set(this.swigCPtr, this, var1);
+		return StrikeFrozen;
 	}
 
 	public double getStrikeFrozenAmount() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_StrikeFrozenAmount_get(this.swigCPtr, this);
-	}
-
-	public void setAbandonFrozen(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_AbandonFrozen_set(this.swigCPtr, this, var1);
+		return StrikeFrozenAmount;
 	}
 
 	public int getAbandonFrozen() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_AbandonFrozen_get(this.swigCPtr, this);
-	}
-
-	public void setExchangeID(String var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_ExchangeID_set(this.swigCPtr, this, var1);
+		return AbandonFrozen;
 	}
 
 	public String getExchangeID() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_ExchangeID_get(this.swigCPtr, this);
-	}
-
-	public void setYdStrikeFrozen(int var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_YdStrikeFrozen_set(this.swigCPtr, this, var1);
+		return ExchangeID;
 	}
 
 	public int getYdStrikeFrozen() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_YdStrikeFrozen_get(this.swigCPtr, this);
-	}
-
-	public void setInvestUnitID(String var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_InvestUnitID_set(this.swigCPtr, this, var1);
+		return YdStrikeFrozen;
 	}
 
 	public String getInvestUnitID() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_InvestUnitID_get(this.swigCPtr, this);
-	}
-
-	public void setPositionCostOffset(double var1) {
-		thosttraderapiJNI.CThostFtdcInvestorPositionField_PositionCostOffset_set(this.swigCPtr, this, var1);
+		return InvestUnitID;
 	}
 
 	public double getPositionCostOffset() {
-		return thosttraderapiJNI.CThostFtdcInvestorPositionField_PositionCostOffset_get(this.swigCPtr, this);
+		return PositionCostOffset;
 	}
 
+	public FtdcInvestorPosition setInstrumentID(String instrumentID) {
+		InstrumentID = instrumentID;
+		return this;
+	}
+
+	public FtdcInvestorPosition setBrokerID(String brokerID) {
+		BrokerID = brokerID;
+		return this;
+	}
+
+	public FtdcInvestorPosition setInvestorID(String investorID) {
+		InvestorID = investorID;
+		return this;
+	}
+
+	public FtdcInvestorPosition setPosiDirection(char posiDirection) {
+		PosiDirection = posiDirection;
+		return this;
+	}
+
+	public FtdcInvestorPosition setHedgeFlag(char hedgeFlag) {
+		HedgeFlag = hedgeFlag;
+		return this;
+	}
+
+	public FtdcInvestorPosition setPositionDate(char positionDate) {
+		PositionDate = positionDate;
+		return this;
+	}
+
+	public FtdcInvestorPosition setYdPosition(int ydPosition) {
+		YdPosition = ydPosition;
+		return this;
+	}
+
+	public FtdcInvestorPosition setPosition(int position) {
+		Position = position;
+		return this;
+	}
+
+	public FtdcInvestorPosition setLongFrozen(int longFrozen) {
+		LongFrozen = longFrozen;
+		return this;
+	}
+
+	public FtdcInvestorPosition setShortFrozen(int shortFrozen) {
+		ShortFrozen = shortFrozen;
+		return this;
+	}
+
+	public FtdcInvestorPosition setLongFrozenAmount(double longFrozenAmount) {
+		LongFrozenAmount = longFrozenAmount;
+		return this;
+	}
+
+	public FtdcInvestorPosition setShortFrozenAmount(double shortFrozenAmount) {
+		ShortFrozenAmount = shortFrozenAmount;
+		return this;
+	}
+
+	public FtdcInvestorPosition setOpenVolume(int openVolume) {
+		OpenVolume = openVolume;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCloseVolume(int closeVolume) {
+		CloseVolume = closeVolume;
+		return this;
+	}
+
+	public FtdcInvestorPosition setOpenAmount(double openAmount) {
+		OpenAmount = openAmount;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCloseAmount(double closeAmount) {
+		CloseAmount = closeAmount;
+		return this;
+	}
+
+	public FtdcInvestorPosition setPositionCost(double positionCost) {
+		PositionCost = positionCost;
+		return this;
+	}
+
+	public FtdcInvestorPosition setPreMargin(double preMargin) {
+		PreMargin = preMargin;
+		return this;
+	}
+
+	public FtdcInvestorPosition setUseMargin(double useMargin) {
+		UseMargin = useMargin;
+		return this;
+	}
+
+	public FtdcInvestorPosition setFrozenMargin(double frozenMargin) {
+		FrozenMargin = frozenMargin;
+		return this;
+	}
+
+	public FtdcInvestorPosition setFrozenCash(double frozenCash) {
+		FrozenCash = frozenCash;
+		return this;
+	}
+
+	public FtdcInvestorPosition setFrozenCommission(double frozenCommission) {
+		FrozenCommission = frozenCommission;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCashIn(double cashIn) {
+		CashIn = cashIn;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCommission(double commission) {
+		Commission = commission;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCloseProfit(double closeProfit) {
+		CloseProfit = closeProfit;
+		return this;
+	}
+
+	public FtdcInvestorPosition setPositionProfit(double positionProfit) {
+		PositionProfit = positionProfit;
+		return this;
+	}
+
+	public FtdcInvestorPosition setPreSettlementPrice(double preSettlementPrice) {
+		PreSettlementPrice = preSettlementPrice;
+		return this;
+	}
+
+	public FtdcInvestorPosition setSettlementPrice(double settlementPrice) {
+		SettlementPrice = settlementPrice;
+		return this;
+	}
+
+	public FtdcInvestorPosition setTradingDay(String tradingDay) {
+		TradingDay = tradingDay;
+		return this;
+	}
+
+	public FtdcInvestorPosition setSettlementID(int settlementID) {
+		SettlementID = settlementID;
+		return this;
+	}
+
+	public FtdcInvestorPosition setOpenCost(double openCost) {
+		OpenCost = openCost;
+		return this;
+	}
+
+	public FtdcInvestorPosition setExchangeMargin(double exchangeMargin) {
+		ExchangeMargin = exchangeMargin;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCombPosition(int combPosition) {
+		CombPosition = combPosition;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCombLongFrozen(int combLongFrozen) {
+		CombLongFrozen = combLongFrozen;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCombShortFrozen(int combShortFrozen) {
+		CombShortFrozen = combShortFrozen;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCloseProfitByDate(double closeProfitByDate) {
+		CloseProfitByDate = closeProfitByDate;
+		return this;
+	}
+
+	public FtdcInvestorPosition setCloseProfitByTrade(double closeProfitByTrade) {
+		CloseProfitByTrade = closeProfitByTrade;
+		return this;
+	}
+
+	public FtdcInvestorPosition setTodayPosition(int todayPosition) {
+		TodayPosition = todayPosition;
+		return this;
+	}
+
+	public FtdcInvestorPosition setMarginRateByMoney(double marginRateByMoney) {
+		MarginRateByMoney = marginRateByMoney;
+		return this;
+	}
+
+	public FtdcInvestorPosition setMarginRateByVolume(double marginRateByVolume) {
+		MarginRateByVolume = marginRateByVolume;
+		return this;
+	}
+
+	public FtdcInvestorPosition setStrikeFrozen(int strikeFrozen) {
+		StrikeFrozen = strikeFrozen;
+		return this;
+	}
+
+	public FtdcInvestorPosition setStrikeFrozenAmount(double strikeFrozenAmount) {
+		StrikeFrozenAmount = strikeFrozenAmount;
+		return this;
+	}
+
+	public FtdcInvestorPosition setAbandonFrozen(int abandonFrozen) {
+		AbandonFrozen = abandonFrozen;
+		return this;
+	}
+
+	public FtdcInvestorPosition setExchangeID(String exchangeID) {
+		ExchangeID = exchangeID;
+		return this;
+	}
+
+	public FtdcInvestorPosition setYdStrikeFrozen(int ydStrikeFrozen) {
+		YdStrikeFrozen = ydStrikeFrozen;
+		return this;
+	}
+
+	public FtdcInvestorPosition setInvestUnitID(String investUnitID) {
+		InvestUnitID = investUnitID;
+		return this;
+	}
+
+	public FtdcInvestorPosition setPositionCostOffset(double positionCostOffset) {
+		PositionCostOffset = positionCostOffset;
+		return this;
+	}
 
 }
