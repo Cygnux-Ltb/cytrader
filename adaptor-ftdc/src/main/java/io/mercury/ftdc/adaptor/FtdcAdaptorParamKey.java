@@ -3,50 +3,51 @@ package io.mercury.ftdc.adaptor;
 import io.mercury.common.param.AdaptorParamKey;
 import io.mercury.common.param.ParamType;
 
+/**
+ * 用于读取FTDC配置信息
+ * 
+ * @author yellow013
+ *
+ */
 public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 
-	/**
-	 * CTP Params
-	 */
-	TraderAddr(101, "traderAddr", ParamType.STRING),
+	TraderAddr("traderAddr", ParamType.STRING),
 
-	MdAddr(102, "mdAddr", ParamType.STRING),
+	MdAddr("mdAddr", ParamType.STRING),
 
-	AppId(103, "appId", ParamType.STRING),
+	AppId("appId", ParamType.STRING),
 
-	BrokerId(104, "brokerId", ParamType.STRING),
+	BrokerId("brokerId", ParamType.STRING),
 
-	InvestorId(105, "investorId", ParamType.STRING),
+	InvestorId("investorId", ParamType.STRING),
 
-	AccountId(106, "accountId", ParamType.STRING),
+	AccountId("accountId", ParamType.STRING),
 
-	UserId(107, "userId", ParamType.STRING),
+	UserId("userId", ParamType.STRING),
 
-	Password(108, "password", ParamType.STRING),
+	Password("password", ParamType.STRING),
 
-	AuthCode(109, "authCode", ParamType.STRING),
+	AuthCode("authCode", ParamType.STRING),
 
-	IpAddr(110, "ipAddr", ParamType.STRING),
+	IpAddr("ipAddr", ParamType.STRING),
 
-	MacAddr(111, "macAddr", ParamType.STRING),
+	MacAddr("macAddr", ParamType.STRING),
 
-	CurrencyId(112, "currencyId", ParamType.STRING),
+	CurrencyId("currencyId", ParamType.STRING),
 
 	;
 
-	private int id;
 	private String key;
 	private ParamType type;
 
-	private FtdcAdaptorParamKey(int id, String key, ParamType type) {
-		this.id = id;
+	private FtdcAdaptorParamKey(String key, ParamType type) {
 		this.key = key;
 		this.type = type;
 	}
 
 	@Override
 	public int id() {
-		return id;
+		return ordinal();
 	}
 
 	@Override
@@ -62,6 +63,14 @@ public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 	@Override
 	public String adaptorName() {
 		return "FtdcAdaptor";
+	}
+
+	public static void main(String[] args) {
+
+		for (FtdcAdaptorParamKey key : FtdcAdaptorParamKey.values()) {
+			System.out.println(key + " -> " + key.ordinal());
+		}
+
 	}
 
 }

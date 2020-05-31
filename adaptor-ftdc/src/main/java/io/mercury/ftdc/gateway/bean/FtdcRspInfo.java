@@ -1,6 +1,6 @@
-package io.mercury.ftdc.adaptor.dto;
+package io.mercury.ftdc.gateway.bean;
 
-public class CtpInboundError {
+public class FtdcRspInfo {
 
 	// 错误编码
 	private int ErrorID;
@@ -12,7 +12,7 @@ public class CtpInboundError {
 		return ErrorID;
 	}
 
-	public CtpInboundError setErrorID(int errorID) {
+	public FtdcRspInfo setErrorID(int errorID) {
 		ErrorID = errorID;
 		return this;
 	}
@@ -21,7 +21,7 @@ public class CtpInboundError {
 		return ErrorMsg;
 	}
 
-	public CtpInboundError setErrorMsg(String errorMsg) {
+	public FtdcRspInfo setErrorMsg(String errorMsg) {
 		ErrorMsg = errorMsg;
 		return this;
 	}
