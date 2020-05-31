@@ -1,10 +1,10 @@
 package io.mercury.ftdc.gateway.bean;
 
-public class RspMdConnect {
+public class FtdcMdConnect {
 
 	private boolean Available;
 
-	public RspMdConnect(boolean Available) {
+	public FtdcMdConnect(boolean Available) {
 		this.Available = Available;
 	}
 

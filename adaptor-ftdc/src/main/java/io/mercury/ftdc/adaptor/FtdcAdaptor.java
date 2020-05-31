@@ -28,10 +28,10 @@ import io.mercury.ftdc.gateway.FtdcConfig;
 import io.mercury.ftdc.gateway.FtdcGateway;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrder;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
+import io.mercury.ftdc.gateway.bean.FtdcMdConnect;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
-import io.mercury.ftdc.gateway.bean.RspMdConnect;
 import io.mercury.ftdc.gateway.bean.RspTraderConnect;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
@@ -110,10 +110,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	 */
 	private FtdcGateway createFtdcGateway(FtdcConfig ftdcConfig) {
 		return new FtdcGateway("Ftdc-Gateway", ftdcConfig,
-				MpscArrayBlockingQueue.autoStartQueue("FtdcGateway-Buffer", 256, ftdcMsg -> {
-					switch (ftdcMsg.getRspType()) {
-					case RspMdConnect:
-						RspMdConnect rspMdConnect = ftdcMsg.getRspMdConnect();
+				MpscArrayBlockingQueue.autoStartQueue("FtdcGateway-Buffer", 256, ftdcRspMsg -> {
+					switch (ftdcRspMsg.getRspType()) {
+					case FtdcMdConnect:
+						FtdcMdConnect rspMdConnect = ftdcRspMsg.getRspMdConnect();
 						this.isMdAvailable = rspMdConnect.isAvailable();
 						log.info("Queue Processor Handle RspMdConnect, isMdAvailable==[{}]", isMdAvailable);
 						AdaptorEvent mdEvent = new AdaptorEvent(adaptorId());
@@ -124,8 +124,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						}
 						scheduler.onAdaptorEvent(mdEvent);
 						break;
-					case RspTraderConnect:
-						RspTraderConnect traderConnect = ftdcMsg.getRspTraderConnect();
+					case FtdcTraderConnect:
+						RspTraderConnect traderConnect = ftdcRspMsg.getRspTraderConnect();
 						this.isTraderAvailable = traderConnect.isAvailable();
 						this.frontId = traderConnect.getFrontID();
 						this.sessionId = traderConnect.getSessionID();

@@ -1,13 +1,22 @@
-package io.mercury.ftdc.gateway.bean;
+package io.mercury.ftdc.gateway;
 
-public final class RspMsg {
+import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
+import io.mercury.ftdc.gateway.bean.FtdcInputOrder;
+import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
+import io.mercury.ftdc.gateway.bean.FtdcMdConnect;
+import io.mercury.ftdc.gateway.bean.FtdcOrder;
+import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
+import io.mercury.ftdc.gateway.bean.FtdcTrade;
+import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
+
+public final class FtdcRspMsg {
 
 	private RspType rspType;
 
 	// 返回交易接口连接信息
-	private RspTraderConnect rspTraderConnect;
+	private FtdcTraderConnect ftdcTraderConnect;
 	// 返回行情接口连接信息
-	private RspMdConnect rspMdConnect;
+	private FtdcMdConnect ftdcMdConnect;
 
 	// 返回行情
 	private FtdcDepthMarketData ftdcDepthMarketData;
@@ -24,42 +33,42 @@ public final class RspMsg {
 	// 返回撤单错误
 	private FtdcOrderAction ftdcOrderAction;
 
-	public RspMsg(RspTraderConnect rspTraderConnect) {
-		this.rspType = RspType.RspTraderConnect;
-		this.rspTraderConnect = rspTraderConnect;
+	public FtdcRspMsg(FtdcTraderConnect ftdcTraderConnect) {
+		this.rspType = RspType.FtdcTraderConnect;
+		this.ftdcTraderConnect = ftdcTraderConnect;
 	}
 
-	public RspMsg(RspMdConnect rspMdConnect) {
-		this.rspType = RspType.RspMdConnect;
-		this.rspMdConnect = rspMdConnect;
+	public FtdcRspMsg(FtdcMdConnect ftdcMdConnect) {
+		this.rspType = RspType.FtdcMdConnect;
+		this.ftdcMdConnect = ftdcMdConnect;
 	}
 
-	public RspMsg(FtdcDepthMarketData ftdcDepthMarketData) {
+	public FtdcRspMsg(FtdcDepthMarketData ftdcDepthMarketData) {
 		this.rspType = RspType.FtdcDepthMarketData;
 		this.ftdcDepthMarketData = ftdcDepthMarketData;
 	}
 
-	public RspMsg(FtdcOrder ftdcOrder) {
+	public FtdcRspMsg(FtdcOrder ftdcOrder) {
 		this.rspType = RspType.FtdcOrder;
 		this.ftdcOrder = ftdcOrder;
 	}
 
-	public RspMsg(FtdcTrade ftdcTrade) {
+	public FtdcRspMsg(FtdcTrade ftdcTrade) {
 		this.rspType = RspType.FtdcTrade;
 		this.ftdcTrade = ftdcTrade;
 	}
 
-	public RspMsg(FtdcInputOrder ftdcInputOrder) {
+	public FtdcRspMsg(FtdcInputOrder ftdcInputOrder) {
 		this.rspType = RspType.FtdcInputOrder;
 		this.ftdcInputOrder = ftdcInputOrder;
 	}
 
-	public RspMsg(FtdcInputOrderAction ftdcInputOrderAction) {
+	public FtdcRspMsg(FtdcInputOrderAction ftdcInputOrderAction) {
 		this.rspType = RspType.FtdcInputOrderAction;
 		this.ftdcInputOrderAction = ftdcInputOrderAction;
 	}
 
-	public RspMsg(FtdcOrderAction ftdcOrderAction) {
+	public FtdcRspMsg(FtdcOrderAction ftdcOrderAction) {
 		this.rspType = RspType.FtdcOrderAction;
 		this.ftdcOrderAction = ftdcOrderAction;
 	}
@@ -72,12 +81,12 @@ public final class RspMsg {
 		return ftdcDepthMarketData;
 	}
 
-	public RspTraderConnect getRspTraderConnect() {
-		return rspTraderConnect;
+	public FtdcTraderConnect getFtdcTraderConnect() {
+		return ftdcTraderConnect;
 	}
 
-	public RspMdConnect getRspMdConnect() {
-		return rspMdConnect;
+	public FtdcMdConnect getRspMdConnect() {
+		return ftdcMdConnect;
 	}
 
 	public FtdcOrder getFtdcOrder() {
@@ -104,9 +113,9 @@ public final class RspMsg {
 
 		FtdcDepthMarketData,
 
-		RspTraderConnect,
+		FtdcTraderConnect,
 
-		RspMdConnect,
+		FtdcMdConnect,
 
 		FtdcOrder,
 

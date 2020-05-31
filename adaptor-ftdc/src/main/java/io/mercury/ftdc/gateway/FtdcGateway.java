@@ -44,9 +44,8 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
-import io.mercury.ftdc.gateway.bean.RspMdConnect;
-import io.mercury.ftdc.gateway.bean.RspMsg;
-import io.mercury.ftdc.gateway.bean.RspTraderConnect;
+import io.mercury.ftdc.gateway.bean.FtdcMdConnect;
+import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
 import io.mercury.ftdc.gateway.converter.FromCThostFtdcDepthMarketData;
 import io.mercury.ftdc.gateway.converter.FromCThostFtdcInputOrder;
 import io.mercury.ftdc.gateway.converter.FromCThostFtdcInputOrderAction;
@@ -117,9 +116,9 @@ public class FtdcGateway {
 	private int mdRequestId = -1;
 	private int traderRequestId = -1;
 
-	private Queue<RspMsg> bufferQueue;
+	private Queue<FtdcRspMsg> bufferQueue;
 
-	public FtdcGateway(String gatewayId, @Nonnull FtdcConfig ftdcConfig, @Nonnull Queue<RspMsg> bufferQueue) {
+	public FtdcGateway(String gatewayId, @Nonnull FtdcConfig ftdcConfig, @Nonnull Queue<FtdcRspMsg> bufferQueue) {
 		this.gatewayId = gatewayId;
 		this.ftdcConfig = Assertor.nonNull(ftdcConfig, "ftdcConfig");
 		this.bufferQueue = Assertor.nonNull(bufferQueue, "bufferQueue");
@@ -242,7 +241,7 @@ public class FtdcGateway {
 		log.warn("Callback onMdFrontDisconnected");
 		// 行情断开处理逻辑
 		this.isMdLogin = false;
-		bufferQueue.enqueue(new RspMsg(new RspMdConnect(isMdLogin)));
+		bufferQueue.enqueue(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
 	}
 
 	/**
@@ -254,7 +253,7 @@ public class FtdcGateway {
 		log.info("Callback onMdRspUserLogin -> FrontID==[{}], SessionID==[{}], TradingDay==[{}]",
 				rspUserLoginField.getFrontID(), rspUserLoginField.getSessionID(), rspUserLoginField.getTradingDay());
 		this.isMdLogin = true;
-		bufferQueue.enqueue(new RspMsg(new RspMdConnect(isMdLogin)));
+		bufferQueue.enqueue(new FtdcRspMsg(new FtdcMdConnect(isMdLogin)));
 	}
 
 	private Set<String> subscribeInstruementSet = MutableSets.newUnifiedSet();
@@ -305,7 +304,7 @@ public class FtdcGateway {
 		log.debug("Gateway onRtnDepthMarketData -> InstrumentID == [{}], UpdateTime==[{}], UpdateMillisec==[{}]",
 				depthMarketDataField.getInstrumentID(), depthMarketDataField.getUpdateTime(),
 				depthMarketDataField.getUpdateMillisec());
-		bufferQueue.enqueue(new RspMsg(fromCThostFtdcDepthMarketData.apply(depthMarketDataField)));
+		bufferQueue.enqueue(new FtdcRspMsg(fromCThostFtdcDepthMarketData.apply(depthMarketDataField)));
 	}
 
 	/*
@@ -346,7 +345,7 @@ public class FtdcGateway {
 		this.isAuthenticate = false;
 		// 交易前置断开处理
 		bufferQueue
-				.enqueue(new RspMsg(new RspTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+				.enqueue(new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 	}
 
 	/**
@@ -380,7 +379,7 @@ public class FtdcGateway {
 		this.sessionID = rspUserLoginField.getSessionID();
 		this.isTraderLogin = true;
 		bufferQueue
-				.enqueue(new RspMsg(new RspTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
+				.enqueue(new FtdcRspMsg(new FtdcTraderConnect(isTraderLogin).setFrontID(frontID).setSessionID(sessionID)));
 	}
 
 	/**
@@ -419,7 +418,7 @@ public class FtdcGateway {
 	 */
 	void onRspOrderInsert(CThostFtdcInputOrderField inputOrderField) {
 		log.info("Callback onRspOrderInsert -> OrderRef==[{}]", inputOrderField.getOrderRef());
-		bufferQueue.enqueue(new RspMsg(fromCThostFtdcInputOrder.apply(inputOrderField)));
+		bufferQueue.enqueue(new FtdcRspMsg(fromCThostFtdcInputOrder.apply(inputOrderField)));
 	}
 
 	/**
@@ -429,7 +428,7 @@ public class FtdcGateway {
 	 */
 	void onErrRtnOrderInsert(CThostFtdcInputOrderField inputOrderField) {
 		log.info("Callback onErrRtnOrderInsert -> OrderRef==[{}]", inputOrderField.getOrderRef());
-		bufferQueue.enqueue(new RspMsg(fromCThostFtdcInputOrder.apply(inputOrderField)));
+		bufferQueue.enqueue(new FtdcRspMsg(fromCThostFtdcInputOrder.apply(inputOrderField)));
 	}
 
 	private FromCThostFtdcOrder fromCThostFtdcOrder = new FromCThostFtdcOrder();
@@ -446,7 +445,7 @@ public class FtdcGateway {
 				orderField.getAccountID(), orderField.getOrderRef(), orderField.getOrderSysID(),
 				orderField.getInstrumentID(), orderField.getOrderStatus(), orderField.getDirection(),
 				orderField.getVolumeTotalOriginal(), orderField.getLimitPrice());
-		bufferQueue.enqueue(new RspMsg(fromCThostFtdcOrder.apply(orderField)));
+		bufferQueue.enqueue(new FtdcRspMsg(fromCThostFtdcOrder.apply(orderField)));
 	}
 
 	private FromCThostFtdcTrade fromCThostFtdcTrade = new FromCThostFtdcTrade();
@@ -462,7 +461,7 @@ public class FtdcGateway {
 						+ "Direction==[{}], Price==[{}], Volume==[{}]",
 				tradeField.getOrderRef(), tradeField.getOrderSysID(), tradeField.getInstrumentID(),
 				tradeField.getDirection(), tradeField.getPrice(), tradeField.getVolume());
-		bufferQueue.enqueue(new RspMsg(fromCThostFtdcTrade.apply(tradeField)));
+		bufferQueue.enqueue(new FtdcRspMsg(fromCThostFtdcTrade.apply(tradeField)));
 	}
 
 	/****************
@@ -501,7 +500,7 @@ public class FtdcGateway {
 				"Callback onRspOrderAction -> OrderRef==[{}], OrderSysID==[{}], OrderActionRef==[{}], InstrumentID==[{}]",
 				inputOrderActionField.getOrderRef(), inputOrderActionField.getOrderSysID(),
 				inputOrderActionField.getOrderActionRef(), inputOrderActionField.getInstrumentID());
-		bufferQueue.enqueue(new RspMsg(fromCThostFtdcInputOrderAction.apply(inputOrderActionField)));
+		bufferQueue.enqueue(new FtdcRspMsg(fromCThostFtdcInputOrderAction.apply(inputOrderActionField)));
 	}
 
 	private FromCThostFtdcOrderAction fromCThostFtdcOrderAction = new FromCThostFtdcOrderAction();
@@ -516,7 +515,7 @@ public class FtdcGateway {
 				"Callback onErrRtnOrderAction -> OrderRef==[{}], OrderSysID==[{}], OrderActionRef==[{}], InstrumentID==[{}]",
 				orderActionField.getOrderRef(), orderActionField.getOrderSysID(), orderActionField.getOrderActionRef(),
 				orderActionField.getInstrumentID());
-		bufferQueue.enqueue(new RspMsg(fromCThostFtdcOrderAction.apply(orderActionField)));
+		bufferQueue.enqueue(new FtdcRspMsg(fromCThostFtdcOrderAction.apply(orderActionField)));
 	}
 
 	/**
@@ -542,7 +541,7 @@ public class FtdcGateway {
 	void onRspQryOrder(CThostFtdcOrderField orderField, boolean isLast) {
 		log.info("Callback onRspQryOrder -> AccountID==[{}], OrderRef==[{}], isLast==[{}]", orderField.getAccountID(),
 				orderField.getOrderRef(), isLast);
-		bufferQueue.enqueue(new RspMsg(fromCThostFtdcOrder.apply(orderField)));
+		bufferQueue.enqueue(new FtdcRspMsg(fromCThostFtdcOrder.apply(orderField)));
 	}
 
 	/**

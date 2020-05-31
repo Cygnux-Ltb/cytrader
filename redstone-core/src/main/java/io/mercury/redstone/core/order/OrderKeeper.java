@@ -112,7 +112,7 @@ public final class OrderKeeper implements Dumper<String> {
 		}
 		ActChildOrder childOrder = (ActChildOrder) order;
 		// 更新订单状态
-		OrderUpdater.updateWithOrdReport(childOrder, report);
+		OrderUpdater.updateWithReport(childOrder, report);
 		onOrder(childOrder);
 		return childOrder;
 	}

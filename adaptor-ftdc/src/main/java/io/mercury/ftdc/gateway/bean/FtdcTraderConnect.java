@@ -1,12 +1,12 @@
 package io.mercury.ftdc.gateway.bean;
 
-public final class RspTraderConnect {
+public final class FtdcTraderConnect {
 
 	private int FrontID;
 	private int SessionID;
 	private boolean Available;
 
-	public RspTraderConnect(boolean Available) {
+	public FtdcTraderConnect(boolean Available) {
 		this.Available = Available;
 	}
 
@@ -22,12 +22,12 @@ public final class RspTraderConnect {
 		return Available;
 	}
 
-	public RspTraderConnect setFrontID(int frontID) {
+	public FtdcTraderConnect setFrontID(int frontID) {
 		FrontID = frontID;
 		return this;
 	}
 
-	public RspTraderConnect setSessionID(int sessionID) {
+	public FtdcTraderConnect setSessionID(int sessionID) {
 		SessionID = sessionID;
 		return this;
 	}

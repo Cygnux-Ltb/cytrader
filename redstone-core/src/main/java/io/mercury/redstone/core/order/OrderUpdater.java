@@ -22,12 +22,13 @@ public final class OrderUpdater {
 	 * @param order
 	 * @param report
 	 */
-	public static void updateWithOrdReport(@Nonnull ActChildOrder order, @Nonnull OrdReport report) {
+	public static void updateWithReport(@Nonnull ActChildOrder order, @Nonnull OrdReport report) {
 		OrdQty ordQty = order.ordQty();
 		int filledQty = report.getFilledQty();
-		log.info("OrdReport report.getOrdStatus==[{}], report.getFilledQty()==[{}], ordQty -> {}",
-				report.getOrdStatus(), filledQty, ordQty);
+		log.info("OrdReport ordStatus==[{}], filledQty()==[{}], tradePrice==[{}], ordQty -> {}", report.getOrdStatus(),
+				report.getTradePrice(), filledQty, ordQty);
 		if (report.getOrdStatus() == OrdStatus.NotProvided) {
+			// 处理未返回订单状态的情况, 根据成交数量判断
 			int offerQty = ordQty.offerQty();
 			order.setOrdStatus(
 					// 成交数量等于委托数量, 状态为全部成交
@@ -36,24 +37,29 @@ public final class OrderUpdater {
 							: filledQty < offerQty && filledQty > 0 ? OrdStatus.PartiallyFilled
 									// 成交数量等于0, 状态为New
 									: OrdStatus.New);
-
 		} else {
+			// 已返回订单状态, 直接读取
 			order.setOrdStatus(report.getOrdStatus());
 		}
 		switch (order.ordStatus()) {
 		case PartiallyFilled:
+			// 处理部分成交, 设置已成交数量
 			// Set FilledQty
 			order.ordQty().setFilledQty(filledQty);
+			// 新增订单成交记录
 			// Add NewTrade record
 			order.trdRecordList().add(report.getEpochMillis(), report.getTradePrice(),
 					filledQty - order.ordQty().lastFilledQty());
 			break;
 		case Filled:
+			// 处理全部成交, 设置已成交数量
 			// Set FilledQty
 			order.ordQty().setFilledQty(filledQty);
+			// 新增订单成交记录
 			// Add NewTrade Record
 			order.trdRecordList().add(report.getEpochMillis(), report.getTradePrice(),
 					filledQty - order.ordQty().lastFilledQty());
+			// 计算此订单成交均价
 			// Calculation AvgPrice
 			order.ordPrice().calculateAvgPrice(order.trdRecordList());
 			break;
