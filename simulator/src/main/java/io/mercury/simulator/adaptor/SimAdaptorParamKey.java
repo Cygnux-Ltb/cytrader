@@ -8,35 +8,32 @@ public enum SimAdaptorParamKey implements AdaptorParamKey {
 	/**
 	 * Simulator Params
 	 */
-	MdHost(101, "md.host", ParamType.STRING),
+	MdHost("md.host", ParamType.STRING),
 
-	MdPort(102, "md.port", ParamType.INT),
+	MdPort("md.port", ParamType.INT),
 
-	TdHost(103, "td.host", ParamType.STRING),
+	TdHost("td.host", ParamType.STRING),
 
-	TdPort(104, "td.port", ParamType.INT),
+	TdPort("td.port", ParamType.INT),
 
-	TradingDayStart(105, "trading.day.start", ParamType.DATE),
+	TradingDayStart("trading.day.start", ParamType.DATE),
 
-	TradingDayEnd(106, "trading.day.end", ParamType.DATE),
+	TradingDayEnd("trading.day.end", ParamType.DATE),
 
 	;
-
-	private int id;
 
 	private String key;
 
 	private ParamType type;
 
-	private SimAdaptorParamKey(int id, String key, ParamType type) {
-		this.id = id;
+	private SimAdaptorParamKey(String key, ParamType type) {
 		this.key = key;
 		this.type = type;
 	}
 
 	@Override
 	public int id() {
-		return id;
+		return ordinal();
 	}
 
 	@Override
