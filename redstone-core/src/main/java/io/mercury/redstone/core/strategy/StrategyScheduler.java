@@ -1,17 +1,17 @@
 package io.mercury.redstone.core.strategy;
 
-import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.structure.OrdReport;
 
-public interface StrategyScheduler {
+public interface StrategyScheduler<M extends MarketData> {
 
-	void onMarketData(BasicMarketData marketData);
+	void onMarketData(M marketData);
 
 	void onOrdReport(OrdReport report);
 
 	void onAdaptorEvent(AdaptorEvent event);
 
-	void addStrategy(Strategy strategy);
+	void addStrategy(Strategy<M> strategy);
 
 }

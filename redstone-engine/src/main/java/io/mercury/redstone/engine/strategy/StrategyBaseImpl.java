@@ -23,7 +23,6 @@ import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.financial.market.MarkerDataKeeper.LastMarkerData;
 import io.mercury.financial.market.api.MarketData;
-import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.account.AccountKeeper;
 import io.mercury.redstone.core.account.SubAccount;
@@ -43,12 +42,11 @@ import io.mercury.redstone.core.position.PositionKeeper;
 import io.mercury.redstone.core.risk.CircuitBreaker;
 import io.mercury.redstone.core.strategy.Strategy;
 import io.mercury.redstone.core.strategy.StrategyEvent;
-import io.mercury.redstone.core.strategy.StrategyKeeper;
 import io.mercury.redstone.core.strategy.StrategyParamKey;
 
 @SuppressWarnings("deprecation")
 public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyParamKey>
-		implements Strategy, CircuitBreaker {
+		implements Strategy<M>, CircuitBreaker {
 
 	/**
 	 * 策略ID
@@ -79,7 +77,8 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 
 	protected final ImmutableParamMap<P> strategyParam;
 
-	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<P> strategyParam) {
+	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId,
+			ImmutableParamMap<P> strategyParam) {
 		this.strategyId = strategyId;
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
 				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
@@ -95,7 +94,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	public void initialize(@Nonnull Supplier<Boolean> initializer) {
 		initSuccess = Assertor.nonNull(initializer, "initializer").get();
 		log.info("Initialize result initSuccess==[{}]", initSuccess);
-		StrategyKeeper.putStrategy(this);
+		// StrategyKeeper.putStrategy(this);
 	}
 
 	@Override
@@ -114,7 +113,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	}
 
 	@Override
-	public void onMarketData(BasicMarketData marketData) {
+	public void onMarketData(M marketData) {
 		if (orders.notEmpty()) {
 			log.info("{} :: strategyOrders not empty, doing....", strategyName);
 		}
@@ -122,7 +121,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	}
 
 	@ProtectedAbstractMethod
-	protected abstract void handleMarketData(BasicMarketData marketData);
+	protected abstract void handleMarketData(M marketData);
 
 	@Override
 	public void onOrder(Order order) {
@@ -139,7 +138,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	}
 
 	@Override
-	public Strategy enable() {
+	public Strategy<M> enable() {
 		if (initSuccess) {
 			this.isEnable = true;
 			log.info("{} :: Enable strategy success, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
@@ -152,7 +151,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	}
 
 	@Override
-	public Strategy disable() {
+	public Strategy<M> disable() {
 		this.isEnable = false;
 		log.info("{} :: Disable strategy -> strategyId==[{}], isEnable==[{}]", strategyName, strategyId, isEnable);
 		return this;

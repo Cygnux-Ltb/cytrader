@@ -6,12 +6,12 @@ import org.eclipse.collections.api.list.ImmutableList;
 
 import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.Order;
 
-public interface Strategy extends Enable<Strategy> {
+public interface Strategy<M extends MarketData> extends Enable<Strategy<?>> {
 
 	int strategyId();
 
@@ -29,7 +29,7 @@ public interface Strategy extends Enable<Strategy> {
 
 	void onStrategyEvent(StrategyEvent event);
 
-	void onMarketData(BasicMarketData marketData);
+	void onMarketData(M marketData);
 
 	void onOrder(Order order);
 

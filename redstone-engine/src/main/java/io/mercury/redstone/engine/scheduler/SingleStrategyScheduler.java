@@ -9,11 +9,11 @@ import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.Strategy;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
 
-public class SingleStrategyScheduler implements StrategyScheduler {
+public class SingleStrategyScheduler implements StrategyScheduler<BasicMarketData> {
 
-	private final Strategy strategy;
+	private final Strategy<BasicMarketData> strategy;
 
-	public SingleStrategyScheduler(Strategy strategy) {
+	public SingleStrategyScheduler(Strategy<BasicMarketData> strategy) {
 		this.strategy = strategy;
 	}
 
@@ -36,7 +36,7 @@ public class SingleStrategyScheduler implements StrategyScheduler {
 	}
 
 	@Override
-	public void addStrategy(Strategy strategy) {
+	public void addStrategy(Strategy<BasicMarketData> strategy) {
 		throw new IllegalStateException("Unable to add strategy, This scheduler only supports single strategy");
 	}
 
