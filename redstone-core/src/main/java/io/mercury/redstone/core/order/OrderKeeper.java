@@ -12,6 +12,7 @@ import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.account.AccountKeeper;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
@@ -67,17 +68,20 @@ public final class OrderKeeper implements Dumper<String> {
 	private OrderKeeper() {
 	}
 
+	static void putOrder(Order order) {
+		int subAccountId = order.subAccountId();
+		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
+		AllOrders.putOrder(order);
+		getSubAccountOrderBook(subAccountId).putOrder(order);
+		getAccountOrderBook(accountId).putOrder(order);
+		getStrategyOrderBook(order.strategyId()).putOrder(order);
+		getInstrumentOrderBook(order.instrument()).putOrder(order);
+	}
+
 	static void onOrder(Order order) {
 		int subAccountId = order.subAccountId();
 		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
 		switch (order.ordStatus()) {
-		case PendingNew:
-			AllOrders.putOrder(order);
-			getSubAccountOrderBook(subAccountId).putOrder(order);
-			getAccountOrderBook(accountId).putOrder(order);
-			getStrategyOrderBook(order.strategyId()).putOrder(order);
-			getInstrumentOrderBook(order.instrument()).putOrder(order);
-			break;
 		case Filled:
 		case Canceled:
 		case NewRejected:
@@ -104,11 +108,15 @@ public final class OrderKeeper implements Dumper<String> {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
-		if (order != null) {
-			// TODO 处理订单由外部系统发出而收到报单回报
-			log.info("Search order OK, strategyId==[{}], subAccountId==[{}]", order.strategyId(), order.subAccountId());
-		} else {
+		if (order == null) {
+			// 处理订单由外部系统发出而收到报单回报的情况
 			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
+			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
+			order = new ActChildOrder(report.getOrdSysId(), account.accountId(), report.getInstrument(),
+					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
+			putOrder(order);
+		} else {
+			order.outputLog(log, "OrderKeeper", "Search order OK");
 		}
 		ActChildOrder childOrder = (ActChildOrder) order;
 		// 更新订单状态
@@ -164,7 +172,7 @@ public final class OrderKeeper implements Dumper<String> {
 			TrdAction action) {
 		ActParentOrder parentOrder = new ActParentOrder(strategyId, accountId, subAccountId, instrument, offerQty,
 				offerPrice, ordType, direction, action);
-		onOrder(parentOrder);
+		putOrder(parentOrder);
 		return parentOrder;
 	}
 
@@ -176,13 +184,20 @@ public final class OrderKeeper implements Dumper<String> {
 	 */
 	public static ActChildOrder toChildOrder(ActParentOrder parentOrder) {
 		ActChildOrder childOrder = parentOrder.toChildOrder();
-		onOrder(childOrder);
+		putOrder(childOrder);
 		return childOrder;
 	}
 
+	/**
+	 * 将[ParentOrder]拆分为多个[ChildOrder], 并存入Keeper
+	 * 
+	 * @param parentOrder
+	 * @param count
+	 * @return
+	 */
 	public static MutableList<ActChildOrder> splitChildOrder(ActParentOrder parentOrder, int count) {
 		MutableList<ActChildOrder> childOrders = parentOrder.splitChildOrder(count);
-		childOrders.each(OrderKeeper::onOrder);
+		childOrders.each(OrderKeeper::putOrder);
 		return childOrders;
 	}
 

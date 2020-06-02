@@ -7,6 +7,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.util.BitOperator;
+import io.mercury.redstone.core.strategy.Strategy;
 
 /**
  * 
@@ -32,21 +33,19 @@ import io.mercury.common.util.BitOperator;
 @NotThreadSafe
 public final class OrdSysIdSupporter {
 
-	private static final int MaxLimitOwnerId = 899;
-
 	/**
 	 * 
 	 * @param strategyId min value 1 max value 920
 	 * @return
 	 */
 	public static long allocateId(int strategyId) {
-		if (strategyId < 0 || strategyId > MaxLimitOwnerId)
+		if (strategyId < 0 || strategyId > Strategy.MaxStrategyId)
 			throw new RuntimeException("strategyId is illegal");
 		return generate(strategyId);
 	}
 
-	public static long allocateIdForThird() {
-		return generate(910);
+	public static long allocateIdForExternal() {
+		return generate(Strategy.ExternalStrategyId);
 	}
 
 	private static volatile int increment;

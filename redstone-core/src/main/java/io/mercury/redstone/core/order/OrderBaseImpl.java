@@ -79,9 +79,9 @@ public abstract class OrderBaseImpl implements Order {
 
 	private static final String defRemark = "none";
 
-	protected OrderBaseImpl(int strategyId, int accountId, int subAccountId, Instrument instrument, OrdQty ordQty,
-			OrdPrice ordPrice, OrdType ordType, TrdDirection direction) {
-		this.ordSysId = OrdSysIdSupporter.allocateId(strategyId);
+	protected OrderBaseImpl(long ordSysId, int strategyId, int accountId, int subAccountId, Instrument instrument,
+			OrdQty ordQty, OrdPrice ordPrice, OrdType ordType, TrdDirection direction) {
+		this.ordSysId = ordSysId;
 		this.strategyId = strategyId;
 		this.accountId = accountId;
 		this.subAccountId = subAccountId;

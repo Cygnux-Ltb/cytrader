@@ -3,6 +3,7 @@ package io.mercury.redstone.core.order.structure;
 import io.mercury.common.sequence.Serial;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.redstone.core.order.enums.OrdStatus;
+import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
 import io.mercury.serialization.json.JsonUtil;
@@ -20,6 +21,16 @@ public final class OrdReport implements Serial<OrdReport> {
 	 * report epoch milliseconds
 	 */
 	private long epochMillis;
+
+	/**
+	 * investorId
+	 */
+	private String investorId;
+
+	/**
+	 * ordType
+	 */
+	private OrdType ordType;
 
 	/**
 	 * order status of now report
@@ -93,6 +104,14 @@ public final class OrdReport implements Serial<OrdReport> {
 		return epochMillis;
 	}
 
+	public String getInvestorId() {
+		return investorId;
+	}
+
+	public OrdType getOrdType() {
+		return ordType;
+	}
+
 	public OrdStatus getOrdStatus() {
 		return ordStatus;
 	}
@@ -143,6 +162,16 @@ public final class OrdReport implements Serial<OrdReport> {
 
 	public OrdReport setEpochMillis(long epochMillis) {
 		this.epochMillis = epochMillis;
+		return this;
+	}
+
+	public OrdReport setInvestorId(String investorId) {
+		this.investorId = investorId;
+		return this;
+	}
+
+	public OrdReport setOrdType(OrdType ordType) {
+		this.ordType = ordType;
 		return this;
 	}
 

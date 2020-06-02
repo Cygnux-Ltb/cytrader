@@ -42,7 +42,7 @@ public final class StrategyOrder extends OrderBaseImpl {
 	 */
 	public StrategyOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, OrdQty ordQty,
 			OrdPrice ordPrice, OrdType ordType, TrdDirection direction) {
-		super(strategyId, accountId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
+		super(0L, strategyId, accountId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
 	}
 
 	public MutableLongObjectMap<ActParentOrder> ownOrders() {
