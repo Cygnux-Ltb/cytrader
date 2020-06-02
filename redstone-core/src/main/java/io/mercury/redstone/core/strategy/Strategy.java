@@ -13,6 +13,10 @@ import io.mercury.redstone.core.order.Order;
 
 public interface Strategy<M extends MarketData> extends Enable<Strategy<?>> {
 
+	int MaxStrategyId = 899;
+
+	int ExternalStrategyId = 910;
+
 	int strategyId();
 
 	String strategyName();
