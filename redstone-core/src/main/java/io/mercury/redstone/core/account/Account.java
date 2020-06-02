@@ -11,13 +11,20 @@ import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.StringUtil;
 
-public class Account extends EnableComponent<Account> {
+public final class Account extends EnableComponent<Account> implements Comparable<Account> {
 
+	/**
+	 * 账户ID
+	 */
 	private final int accountId;
+	
+	/**
+	 * 账户名
+	 */
 	private final String accountName;
 
 	/**
-	 * 真实的经纪商ID
+	 * 经纪商提供的投资者ID
 	 */
 	private final String investorId;
 
@@ -27,7 +34,7 @@ public class Account extends EnableComponent<Account> {
 	private int balance;
 
 	/**
-	 * 可用信用额
+	 * 信用额度
 	 */
 	private int credit;
 
@@ -98,14 +105,14 @@ public class Account extends EnableComponent<Account> {
 		return this;
 	}
 
-	public final static class AccountNotFoundException extends RuntimeException {
+	public final static class AccountException extends RuntimeException {
 
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = -6421678546942382394L;
 
-		public AccountNotFoundException(String message) {
+		public AccountException(String message) {
 			super(message);
 		}
 
@@ -139,6 +146,11 @@ public class Account extends EnableComponent<Account> {
 		builder.append(isEnabled());
 		builder.append(str7);
 		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(Account o) {
+		return this.accountId < o.accountId ? -1 : this.accountId > o.accountId ? 1 : 0;
 	}
 
 	public static void main(String[] args) {

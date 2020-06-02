@@ -1,16 +1,21 @@
 package io.mercury.redstone.core.account;
 
+import java.util.stream.Stream;
+
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
+import org.eclipse.collections.impl.collector.Collectors2;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
-import io.mercury.redstone.core.account.Account.AccountNotFoundException;
+import io.mercury.redstone.core.account.Account.AccountException;
+import io.mercury.redstone.core.account.SubAccount.SubAccountException;
 
 /**
  * 
@@ -43,7 +48,12 @@ public final class AccountKeeper implements Dumper<String> {
 	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
 
 	/**
-	 * 存储Account信息, 一对一关系, 以subAccountId索引
+	 * 存储Account信息, 一对一关系, 以investorId索引
+	 */
+	private static final MutableMap<String, Account> AccountMapByInvestorId = MutableMaps.newUnifiedMap();
+
+	/**
+	 * 存储Account信息, 多对一关系, 以subAccountId索引
 	 */
 	private static final MutableIntObjectMap<Account> AccountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
 
@@ -55,18 +65,31 @@ public final class AccountKeeper implements Dumper<String> {
 	public static void initialize(@Nonnull SubAccount... subAccounts) {
 		if (!isInitialized) {
 			Assertor.requiredLength(subAccounts, 1, "subAccounts");
-			for (SubAccount subAccount : subAccounts) {
-				Account account = subAccount.account();
-				AccountMap.put(account.accountId(), account);
-				AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
-				SubAccountMap.put(subAccount.subAccountId(), subAccount);
-				log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(),
-						account.accountId());
-			}
+			// 建立subAccount相关索引
+			Stream.of(subAccounts).collect(Collectors2.toSet()).each(AccountKeeper::putSubAccount);
+			// 建立account相关索引
+			Stream.of(subAccounts).map(SubAccount::account).collect(Collectors2.toSet())
+					.each(AccountKeeper::putAccount);
 			isInitialized = true;
 		} else {
-			log.error("AccountKeeper Has been initialized, cannot be initialize again");
+			IllegalStateException e = new IllegalStateException(
+					"AccountKeeper Has been initialized, cannot be initialize again");
+			log.error("AccountKeeper :: IllegalStateException", e);
+			throw e;
 		}
+	}
+
+	private static void putSubAccount(SubAccount subAccount) {
+		Account account = subAccount.account();
+		SubAccountMap.put(subAccount.subAccountId(), subAccount);
+		AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
+		log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(), account.accountId());
+	}
+
+	private static void putAccount(Account account) {
+		AccountMap.put(account.accountId(), account);
+		AccountMapByInvestorId.put(account.investorId(), account);
+		log.info("Put account, accountId==[{}], investorId==[{}]", account.accountId(), account.investorId());
 	}
 
 	public static boolean isInitialized() {
@@ -74,41 +97,49 @@ public final class AccountKeeper implements Dumper<String> {
 	}
 
 	@Nonnull
-	public static Account getAccountById(int accountId) throws AccountNotFoundException {
+	public static Account getAccount(int accountId) throws AccountException {
 		Account account = AccountMap.get(accountId);
 		if (account == null)
-			throw new AccountNotFoundException("Account not found : accountId[" + accountId + "] no mapping object");
+			throw new AccountException("Account error in mapping : accountId[" + accountId + "] no mapped instance");
 		return account;
+	}
+
+	@Nonnull
+	public static Account getAccountBySubAccountId(int subAccountId) throws AccountException {
+		Account account = AccountMapBySubAccountId.get(subAccountId);
+		if (account == null)
+			throw new AccountException(
+					"Account error in mapping : subAccountId[" + subAccountId + "] no mapped instance");
+		return account;
+	}
+
+	@Nonnull
+	public static Account getAccountByInvestorId(String investorId) throws AccountException {
+		Account account = AccountMapByInvestorId.get(investorId);
+		if (account == null)
+			throw new AccountException("Account error in mapping : investorId[" + investorId + "] no mapped instance");
+		return account;
+	}
+
+	@Nonnull
+	public static SubAccount getSubAccount(int subAccountId) throws SubAccountException {
+		SubAccount subAccount = SubAccountMap.get(subAccountId);
+		if (subAccount == null)
+			throw new SubAccountException(
+					"SubAccount error in mapping : subAccountId[" + subAccountId + "] no mapped instance");
+		return subAccount;
 	}
 
 	public static Account setAccountNotTradable(int accountId) {
-		return getAccountById(accountId).disable();
+		return getAccount(accountId).disable();
 	}
 
 	public static Account setAccountTradable(int accountId) {
-		return getAccountById(accountId).enable();
+		return getAccount(accountId).enable();
 	}
 
 	public static boolean isAccountTradable(int accountId) {
-		return getAccountById(accountId).isEnabled();
-	}
-
-	@Nonnull
-	public static Account getAccountBySubAccountId(int subAccountId) throws AccountNotFoundException {
-		Account account = AccountMapBySubAccountId.get(subAccountId);
-		if (account == null)
-			throw new AccountNotFoundException(
-					"Account not found : subAccountId[" + subAccountId + "] no mapping object");
-		return account;
-	}
-
-	@Nonnull
-	public static SubAccount getSubAccount(int subAccountId) throws AccountNotFoundException {
-		SubAccount subAccount = SubAccountMap.get(subAccountId);
-		if (subAccount == null)
-			throw new AccountNotFoundException(
-					"SubAccount not found : subAccountId[" + subAccountId + "] no mapping object");
-		return subAccount;
+		return getAccount(accountId).isEnabled();
 	}
 
 	public static SubAccount setSubAccountNotTradable(int subAccountId) {

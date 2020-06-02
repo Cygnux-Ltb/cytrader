@@ -7,17 +7,33 @@ import javax.annotation.Nonnull;
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
 
-public class SubAccount extends EnableComponent<SubAccount> {
+public final class SubAccount extends EnableComponent<SubAccount> implements Comparable<SubAccount> {
 
+	public static final int MaxSubAccountId = 899;
+
+	public static final int ExternalSubAccountId = 900;
+
+	/**
+	 * 子账户ID
+	 */
 	private final int subAccountId;
+
+	/**
+	 * 子账户名称
+	 */
 	private final String subAccountName;
+
+	/**
+	 * 多属账户
+	 */
 	private final Account account;
+
 	/**
 	 * 账户余额
 	 */
 	private int balance;
 	/**
-	 * 可用信用额
+	 * 信用额度
 	 */
 	private int credit;
 
@@ -59,6 +75,19 @@ public class SubAccount extends EnableComponent<SubAccount> {
 		return this;
 	}
 
+	public static class SubAccountException extends RuntimeException {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -8903289183998546839L;
+
+		public SubAccountException(String message) {
+			super(message);
+		}
+
+	}
+
 	private static final String str0 = "{\"subAccountId\" : ";
 	private static final String str1 = ", \"subAccountName\" : ";
 	private static final String str2 = ", \"account\" : ";
@@ -84,6 +113,11 @@ public class SubAccount extends EnableComponent<SubAccount> {
 		builder.append(isEnabled());
 		builder.append(str6);
 		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(SubAccount o) {
+		return this.subAccountId < o.subAccountId ? -1 : this.subAccountId > o.subAccountId ? 1 : 0;
 	}
 
 	public static void main(String[] args) {
