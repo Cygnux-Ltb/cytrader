@@ -42,7 +42,7 @@ public class OrderRefKeeper {
 		long ordSysId = StaticInstance.MappingOrdSysId.get(orderRef);
 		if (ordSysId == 0L) {
 			// 处理其他来源的订单
-			ordSysId = OrdSysIdSupporter.allocateIdForThird();
+			ordSysId = OrdSysIdSupporter.allocateIdForExternal();
 			log.warn("Handle third order, allocate third ordSysId==[{}], orderRef==[{}]", ordSysId, orderRef);
 		}
 		return ordSysId;

@@ -69,14 +69,15 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private volatile boolean isMdAvailable;
 	private volatile boolean isTraderAvailable;
 
-	private final StrategyScheduler scheduler;
+	private final StrategyScheduler<BasicMarketData> scheduler;
 
-	public FtdcAdaptor(int adaptorId, String adaptorName, Account account, @Nonnull StrategyScheduler scheduler,
-			@Nonnull ImmutableParamMap<FtdcAdaptorParamKey> params) {
+	public FtdcAdaptor(int adaptorId, String adaptorName, Account account,
+			@Nonnull StrategyScheduler<BasicMarketData> scheduler,
+			@Nonnull ImmutableParamMap<FtdcAdaptorParamKey> paramMap) {
 		super(adaptorId, adaptorName, account);
 		this.scheduler = scheduler;
 		// 创建配置信息
-		FtdcConfig ftdcConfig = createFtdcConfig(params);
+		FtdcConfig ftdcConfig = createFtdcConfig(paramMap);
 		// 创建Gateway
 		this.ftdcGateway = createFtdcGateway(ftdcConfig);
 		this.toFtdcInputOrder = new ToFtdcInputOrder();
@@ -88,19 +89,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	 * @param params
 	 * @return
 	 */
-	private FtdcConfig createFtdcConfig(ImmutableParamMap<FtdcAdaptorParamKey> params) {
-		return new FtdcConfig().setTraderAddr(params.getString(FtdcAdaptorParamKey.TraderAddr))
-				.setMdAddr(params.getString(FtdcAdaptorParamKey.MdAddr))
-				.setAppId(params.getString(FtdcAdaptorParamKey.AppId))
-				.setBrokerId(params.getString(FtdcAdaptorParamKey.BrokerId))
-				.setInvestorId(params.getString(FtdcAdaptorParamKey.InvestorId))
-				.setAccountId(params.getString(FtdcAdaptorParamKey.AccountId))
-				.setUserId(params.getString(FtdcAdaptorParamKey.UserId))
-				.setPassword(params.getString(FtdcAdaptorParamKey.Password))
-				.setAuthCode(params.getString(FtdcAdaptorParamKey.AuthCode))
-				.setIpAddr(params.getString(FtdcAdaptorParamKey.IpAddr))
-				.setMacAddr(params.getString(FtdcAdaptorParamKey.MacAddr))
-				.setCurrencyId(params.getString(FtdcAdaptorParamKey.CurrencyId));
+	private FtdcConfig createFtdcConfig(ImmutableParamMap<FtdcAdaptorParamKey> paramMap) {
+		return new FtdcConfig().setTraderAddr(paramMap.getString(FtdcAdaptorParamKey.TraderAddr))
+				.setMdAddr(paramMap.getString(FtdcAdaptorParamKey.MdAddr))
+				.setAppId(paramMap.getString(FtdcAdaptorParamKey.AppId))
+				.setBrokerId(paramMap.getString(FtdcAdaptorParamKey.BrokerId))
+				.setInvestorId(paramMap.getString(FtdcAdaptorParamKey.InvestorId))
+				.setAccountId(paramMap.getString(FtdcAdaptorParamKey.AccountId))
+				.setUserId(paramMap.getString(FtdcAdaptorParamKey.UserId))
+				.setPassword(paramMap.getString(FtdcAdaptorParamKey.Password))
+				.setAuthCode(paramMap.getString(FtdcAdaptorParamKey.AuthCode))
+				.setIpAddr(paramMap.getString(FtdcAdaptorParamKey.IpAddr))
+				.setMacAddr(paramMap.getString(FtdcAdaptorParamKey.MacAddr))
+				.setCurrencyId(paramMap.getString(FtdcAdaptorParamKey.CurrencyId));
 	}
 
 	/**

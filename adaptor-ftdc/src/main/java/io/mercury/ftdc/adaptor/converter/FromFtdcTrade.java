@@ -23,6 +23,10 @@ public final class FromFtdcTrade implements Function<FtdcTrade, OrdReport> {
 		long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
 		OrdReport report = new OrdReport(ordSysId);
 		/**
+		 * 投资者ID
+		 */
+		report.setInvestorId(ftdcTrade.getInvestorID());
+		/**
 		 * 报单引用
 		 */
 		report.setOrderRef(orderRef);
