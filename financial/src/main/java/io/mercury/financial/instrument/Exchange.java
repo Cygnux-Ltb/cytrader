@@ -6,37 +6,39 @@ import io.mercury.common.datetime.TimeZone;
 
 public enum Exchange {
 
-	// Shanghai Futures Exchange
-	SHFE(41, TimeZone.CST),
+	TOCOM(11, "Tokyo Commodity Exchange", TimeZone.JST),
 
-	// Dalian Commodity Exchange
-	DCE(42, TimeZone.CST),
+	TFX(12, "Tokyo Financial Exchange", TimeZone.JST),
 
-	// Zhengzhou Commodity Exchange
-	ZCE(43, TimeZone.CST),
+	LME(22, "London Metal Exchange", TimeZone.UTC),
+	
+	SHFE(41, "Shanghai Futures Exchange", TimeZone.CST),
 
-	// China Financial Futures Exchange
-	CFFE(44, TimeZone.CST),
+	DCE(42, "Dalian Commodity Exchange", TimeZone.CST),
 
-	// Shanghai International Energy Exchange
-	SIEE(45, TimeZone.CST),
+	ZCE(43, "Zhengzhou Commodity Exchange", TimeZone.CST),
 
-	// Tokyo Commodity Exchange
-	TOCOM(11, TimeZone.JST),
+	CFFEX(44, "China Financial Futures Exchange", TimeZone.CST),
+
+	SHINE(45, "Shanghai International Energy Exchange", TimeZone.CST),
 
 	;
 
 	private int id;
-
+	private String desc;
 	private ZoneId zoneId;
 
-	private Exchange(int id, ZoneId zoneId) {
+	private Exchange(int id, String desc, ZoneId zoneId) {
 		this.id = id * 1000000;
 		this.zoneId = zoneId;
 	}
 
 	public int id() {
 		return id;
+	}
+
+	public String desc() {
+		return desc;
 	}
 
 	public String code() {

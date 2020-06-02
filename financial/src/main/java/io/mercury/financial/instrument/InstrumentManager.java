@@ -1,5 +1,7 @@
 package io.mercury.financial.instrument;
 
+import java.util.stream.Stream;
+
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -11,6 +13,7 @@ import org.slf4j.Logger;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.util.Assertor;
 
 /**
  * 
@@ -49,19 +52,25 @@ public final class InstrumentManager implements Dumper<String> {
 
 	public static void initialize(@Nonnull Instrument... instruments) {
 		if (!isInitialized) {
-			for (Instrument instrument : instruments) {
-				log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", instrument.id(),
-						instrument.code(), instrument);
-				InstrumentMapById.put(instrument.id(), instrument);
-				InstrumentMapByCode.put(instrument.code(), instrument);
-				setTradable(instrument.id());
-			}
+			Assertor.requiredLength(instruments, 1, "instruments");
+			Stream.of(instruments).forEach(InstrumentManager::putInstrument);
 			isInitialized = true;
 		} else {
-			log.error("InstrumentManager Has been initialized, cannot be initialize again");
+			IllegalStateException e = new IllegalStateException(
+					"InstrumentManager Has been initialized, cannot be initialize again");
+			log.error("", e);
+			throw e;
 		}
 	}
-	
+
+	private static void putInstrument(Instrument instrument) {
+		log.info("Put instrument, instrumentId==[{}], instrumentCode==[{}], instrument -> {}", instrument.id(),
+				instrument.code(), instrument);
+		InstrumentMapById.put(instrument.id(), instrument);
+		InstrumentMapByCode.put(instrument.code(), instrument);
+		setTradable(instrument.id());
+	}
+
 	public static boolean isInitialized() {
 		return isInitialized;
 	}
@@ -108,8 +117,12 @@ public final class InstrumentManager implements Dumper<String> {
 		return instrument;
 	}
 
+	private static volatile ImmutableList<Instrument> allInstrument;
+
 	public static ImmutableList<Instrument> getAllInstrument() {
-		return InstrumentMapById.toList().toImmutable();
+		if (allInstrument == null)
+			allInstrument = InstrumentMapById.toList().toImmutable();
+		return allInstrument;
 	}
 
 	@Override

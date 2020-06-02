@@ -127,7 +127,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 原油
 	 */
-	SC(1, Exchange.SIEE, PriorityClose.NONE, PriceMultiplier.NONE,
+	SC(1, Exchange.SHINE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 原油期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
@@ -138,21 +138,21 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 上证300期货
 	 */
-	IF(1, Exchange.CFFE, PriorityClose.NONE, PriceMultiplier.NONE,
+	IF(1, Exchange.CFFEX, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 股指期货交易时段
 			TradingPeriod.with(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 			TradingPeriod.with(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 	/**
 	 * 中证500期货
 	 */
-	IC(2, Exchange.CFFE, PriorityClose.NONE, PriceMultiplier.NONE,
+	IC(2, Exchange.CFFEX, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 股指期货交易时段
 			TradingPeriod.with(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 			TradingPeriod.with(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 	/**
 	 * 债券期货
 	 */
-	TF(3, Exchange.CFFE, PriorityClose.NONE, PriceMultiplier.TEN_THOUSAND,
+	TF(3, Exchange.CFFEX, PriorityClose.NONE, PriceMultiplier.TEN_THOUSAND,
 			// 股指期货交易时段
 			TradingPeriod.with(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
 			TradingPeriod.with(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
@@ -278,12 +278,12 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return tradingPeriodSet;
 	}
 
-	// 建立SymbolId -> Symbol的映射
+	// 建立symbolId -> symbol的映射
 	private final static ImmutableIntObjectMap<ChinaFuturesSymbol> SymbolIdMap = ImmutableMaps.IntObjectMapFactory()
 			.from(
 					// 将ChinaFuturesSymbol转换为Iterable
 					MutableLists.newFastList(ChinaFuturesSymbol.values()),
-					// 取SymbolId为Key
+					// 取Symbol::id为Key
 					ChinaFuturesSymbol::id, symbol -> symbol);
 
 	public static ChinaFuturesSymbol of(int symbolId) {
@@ -293,12 +293,12 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return symbol;
 	}
 
-	// 建立SymbolNeam -> Symbol的映射
+	// 建立symbolCode -> symbol的映射
 	private final static ImmutableMap<String, ChinaFuturesSymbol> SymbolCodeMap = ImmutableMaps.newMap(
 			// 将ChinaFuturesSymbol转换为Map
 			Stream.of(ChinaFuturesSymbol.values()).collect(Collectors.toMap(
-					// 取SymbolName为Key
-					ChinaFuturesSymbol::name, symbol -> symbol)));
+					// 取Symbol::code为Key
+					ChinaFuturesSymbol::code, symbol -> symbol)));
 
 	public static ChinaFuturesSymbol of(String symbolCode) {
 		String key = symbolCode.toUpperCase();
