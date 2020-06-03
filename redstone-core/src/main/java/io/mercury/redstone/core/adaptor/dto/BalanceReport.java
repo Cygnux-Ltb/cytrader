@@ -1,11 +1,11 @@
 package io.mercury.redstone.core.adaptor.dto;
 
-public final class ReplyBalance {
+public final class BalanceReport {
 
 	private int investorId;
 	private int balance;
 
-	public ReplyBalance(int investorId, int balance) {
+	public BalanceReport(int investorId, int balance) {
 		this.investorId = investorId;
 		this.balance = balance;
 	}

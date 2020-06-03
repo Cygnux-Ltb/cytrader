@@ -2,12 +2,12 @@ package io.mercury.redstone.core.adaptor.dto;
 
 import java.util.List;
 
-public final class ReplyPositions {
+public final class PositionsReport {
 
 	private int investorId;
-	private List<ReplyPosition> positions;
+	private List<Position> positions;
 
-	public ReplyPositions(int investorId, List<ReplyPosition> positions) {
+	public PositionsReport(int investorId, List<Position> positions) {
 		this.investorId = investorId;
 		this.positions = positions;
 	}
@@ -16,31 +16,26 @@ public final class ReplyPositions {
 		return investorId;
 	}
 
-	public List<ReplyPosition> getPositions() {
+	public List<Position> getPositions() {
 		return positions;
 	}
 
-	public static class ReplyPosition {
+	public static class Position {
 
-		private String instrumentName;
+		private String instrumentCode;
 		private int currentQty;
 
-		public String getInstrumentName() {
-			return instrumentName;
+		public Position(String instrumentCode, int currentQty) {
+			this.instrumentCode = instrumentCode;
+			this.currentQty = currentQty;
 		}
 
-		public ReplyPosition setInstrumentName(String instrumentName) {
-			this.instrumentName = instrumentName;
-			return this;
+		public String getInstrumentCode() {
+			return instrumentCode;
 		}
 
 		public int getCurrentQty() {
 			return currentQty;
-		}
-
-		public ReplyPosition setCurrentQty(int currentQty) {
-			this.currentQty = currentQty;
-			return this;
 		}
 
 	}

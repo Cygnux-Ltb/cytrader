@@ -23,9 +23,13 @@ public final class OrderWatermark {
 		System.out.println(currentTimeMillis << Byte.SIZE);
 		System.out.println(Long.MAX_VALUE);
 
+		System.out.println(Short.BYTES);
 		System.out.println(BitOperator.longBinaryFormat(currentTimeMillis));
 		System.out.println(BitOperator.longBinaryFormat(currentTimeMillis << Byte.SIZE));
+		System.out.println(BitOperator.longBinaryFormat(currentTimeMillis << Short.SIZE));
 		System.out.println(BitOperator.longBinaryFormat(currentTimeMillis << (Byte.SIZE * 2)));
+		
+		
 		
 		System.out.println(BitOperator.longBinaryFormat(toEpochSecond));
 		
