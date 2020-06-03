@@ -34,7 +34,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	private Sender<byte[]> mdSender;
 	private Sender<byte[]> tdSender;
 
-	private StrategyScheduler scheduler;
+	private StrategyScheduler<BasicMarketData> scheduler;
 
 	protected ImmutableParamMap<SimAdaptorParamKey> paramMap;
 
@@ -43,29 +43,29 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	protected SocketConfigurator tdConfigurator;
 
 	private Function<MarketDataLevel1, BasicMarketData> marketDataFunction = marketDataLevel1 -> {
-		// TODO Auto-generated method stub
 		return null;
 	};
 
 	private Function<Order, OrdReport> orderFunction = order -> {
-		// TODO Auto-generated method stub
 		return null;
 	};
 
 	private AvroBinaryDeserializer<MarketDataLevel1> marketDataDeserializer = new AvroBinaryDeserializer<>(
 			MarketDataLevel1.class);
 
-	private AvroBinaryDeserializer<Order> orderDeserializer1 = new AvroBinaryDeserializer<>(Order.class);
+	private AvroBinaryDeserializer<Order> orderDeserializer = new AvroBinaryDeserializer<>(Order.class);
 
-	public SimAdaptor(int adaptorId, String adaptorName, Account account, ImmutableParamMap<SimAdaptorParamKey> paramMap,
-			StrategyScheduler scheduler) {
+	public SimAdaptor(int adaptorId, String adaptorName, Account account,
+			ImmutableParamMap<SimAdaptorParamKey> paramMap, StrategyScheduler<BasicMarketData> scheduler) {
 		super(adaptorId, adaptorName, account);
 		this.paramMap = paramMap;
 		this.scheduler = scheduler;
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
-				.host(paramMap.getString(SimAdaptorParamKey.MdHost)).port(paramMap.getInt(SimAdaptorParamKey.MdPort)).build();
+				.host(paramMap.getString(SimAdaptorParamKey.MdHost)).port(paramMap.getInt(SimAdaptorParamKey.MdPort))
+				.build();
 		SocketConfigurator tdConfigurator = SocketConfigurator.builder()
-				.host(paramMap.getString(SimAdaptorParamKey.TdHost)).port(paramMap.getInt(SimAdaptorParamKey.TdPort)).build();
+				.host(paramMap.getString(SimAdaptorParamKey.TdHost)).port(paramMap.getInt(SimAdaptorParamKey.TdPort))
+				.build();
 		this.mdReceiver = new SocketReceiver(mdConfigurator, (bytes) -> {
 			List<MarketDataLevel1> marketDatas = marketDataDeserializer.deserializationMultiple(bytes);
 			for (MarketDataLevel1 marketData : marketDatas) {
@@ -73,7 +73,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 			}
 		});
 		this.tdReceiver = new SocketReceiver(tdConfigurator, (bytes) -> {
-			List<Order> orders = orderDeserializer1.deserializationMultiple(bytes);
+			List<Order> orders = orderDeserializer.deserializationMultiple(bytes);
 			for (Order order : orders) {
 				this.scheduler.onOrdReport(orderFunction.apply(order));
 			}
