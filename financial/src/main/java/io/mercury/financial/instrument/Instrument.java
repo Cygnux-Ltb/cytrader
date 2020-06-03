@@ -1,8 +1,9 @@
 package io.mercury.financial.instrument;
 
 import io.mercury.common.fsm.Enable;
+import io.mercury.financial.FinancialProduct;
 
-public interface Instrument extends Enable<Instrument> {
+public interface Instrument extends Enable<Instrument>, FinancialProduct {
 
 	/**
 	 * STOCK : exchange|symbol<br>
@@ -13,13 +14,9 @@ public interface Instrument extends Enable<Instrument> {
 	 * 
 	 * @return int
 	 */
-	int id();
+	Symbol symbol();
 
 	InstrumentType type();
-
-	String code();
-
-	Symbol symbol();
 
 	boolean isAvailableImmediately();
 

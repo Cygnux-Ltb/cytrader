@@ -188,7 +188,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	/**
 	 * 铁矿石 i
 	 */
-	I(3, Exchange.DCE, "i", PriorityClose.NONE, PriceMultiplier.NONE,
+	I(3, Exchange.DCE, "i", PriorityClose.NONE, PriceMultiplier.HUNDRED,
 			// 铁矿石期货交易时段
 			TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
 			TradingPeriod.with(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),

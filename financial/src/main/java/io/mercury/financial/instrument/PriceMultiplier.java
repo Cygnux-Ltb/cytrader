@@ -1,16 +1,18 @@
 package io.mercury.financial.instrument;
 
+import io.mercury.common.number.DecimalSupporter;
+
 public enum PriceMultiplier {
 
 	NONE {
 		@Override
 		public long longMultiplier() {
-			return PriceSupporter.LONG_MULTIPLIER_NONE;
+			return DecimalSupporter.LONG_MULTIPLIER_1;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return PriceSupporter.DOUBLE_MULTIPLIER_NONE;
+			return DecimalSupporter.DOUBLE_MULTIPLIER_1;
 		}
 
 		@Override
@@ -24,69 +26,94 @@ public enum PriceMultiplier {
 		}
 	},
 
-	TEN_THOUSAND {
+	HUNDRED {
+
 		@Override
 		public long longMultiplier() {
-			return PriceSupporter.LONG_MULTIPLIER_TEN_THOUSAND;
+
+			return DecimalSupporter.LONG_MULTIPLIER_100;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return PriceSupporter.DOUBLE_MULTIPLIER_TEN_THOUSAND;
+			return DecimalSupporter.DOUBLE_MULTIPLIER_100;
 		}
 
 		@Override
 		public long toLong(double price) {
-			return PriceSupporter.priceToLong4(price);
+			return DecimalSupporter.doubleToLong2(price);
 		}
 
 		@Override
 		public double toDouble(long price) {
-			return PriceSupporter.priceToDouble4(price);
+			return DecimalSupporter.longToDouble2(price);
+		}
+
+	},
+
+	TEN_THOUSAND {
+		@Override
+		public long longMultiplier() {
+			return DecimalSupporter.LONG_MULTIPLIER_10000;
+		}
+
+		@Override
+		public double doubleMultiplier() {
+			return DecimalSupporter.DOUBLE_MULTIPLIER_10000;
+		}
+
+		@Override
+		public long toLong(double price) {
+			return DecimalSupporter.doubleToLong4(price);
+		}
+
+		@Override
+		public double toDouble(long price) {
+			return DecimalSupporter.longToDouble4(price);
 		}
 	},
 
 	MILLION {
 		@Override
 		public long longMultiplier() {
-			return PriceSupporter.LONG_MULTIPLIER_MILLION;
+			return DecimalSupporter.LONG_MULTIPLIER_1000000;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return PriceSupporter.DOUBLE_MULTIPLIER_MILLION;
+			return DecimalSupporter.DOUBLE_MULTIPLIER_1000000;
 		}
 
 		@Override
 		public long toLong(double price) {
-			return PriceSupporter.priceToLong6(price);
+			return DecimalSupporter.doubleToLong6(price);
 		}
 
 		@Override
 		public double toDouble(long price) {
-			return PriceSupporter.priceToDouble6(price);
+			return DecimalSupporter.longToDouble6(price);
 		}
 	},
 
 	BILLION {
 		@Override
 		public long longMultiplier() {
-			return PriceSupporter.LONG_MULTIPLIER_BILLION;
+			return DecimalSupporter.LONG_MULTIPLIER_100000000;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return PriceSupporter.DOUBLE_MULTIPLIER_BILLION;
+			return DecimalSupporter.DOUBLE_MULTIPLIER_100000000;
 		}
 
 		@Override
 		public long toLong(double price) {
-			return PriceSupporter.priceToLong8(price);
+			return DecimalSupporter.doubleToLong8(price);
 		}
 
 		@Override
 		public double toDouble(long price) {
-			return PriceSupporter.priceToDouble8(price);
+			return DecimalSupporter.longToDouble8(price);
 		}
 	},
 
@@ -102,111 +129,5 @@ public enum PriceMultiplier {
 	public abstract long toLong(double price);
 
 	public abstract double toDouble(long price);
-
-	public static final class PriceSupporter {
-
-		/**
-		 * 
-		 */
-		public static final long LONG_MULTIPLIER_NONE = 1L;
-
-		/**
-		 * 
-		 */
-		public static final double DOUBLE_MULTIPLIER_NONE = 1.0D;
-
-		/**
-		 * 
-		 */
-		public static final long LONG_MULTIPLIER_TEN_THOUSAND = 10000L;
-
-		/**
-		 * 
-		 */
-		public static final double DOUBLE_MULTIPLIER_TEN_THOUSAND = 10000.0D;
-
-		/**
-		 * 
-		 */
-		public static final long LONG_MULTIPLIER_MILLION = 1000000L;
-
-		/**
-		 * 
-		 */
-		public static final double DOUBLE_MULTIPLIER_MILLION = 1000000.0D;
-
-		/**
-		 * 
-		 */
-		public static final long LONG_MULTIPLIER_BILLION = 100000000L;
-
-		/**
-		 * 
-		 */
-		public static final double DOUBLE_MULTIPLIER_BILLION = 100000000.0D;
-
-		/**
-		 * 
-		 * @param price
-		 * @return
-		 */
-		public final static long priceToLong4(double price) {
-			return (long) (price * LONG_MULTIPLIER_TEN_THOUSAND);
-		}
-
-		/**
-		 * 
-		 * @param price
-		 * @return
-		 */
-		public final static double priceToDouble4(long price) {
-			return price / DOUBLE_MULTIPLIER_TEN_THOUSAND;
-		}
-
-		/**
-		 * 
-		 * @param price
-		 * @return
-		 */
-		public final static long priceToLong6(double price) {
-			return (long) (price * LONG_MULTIPLIER_MILLION);
-		}
-
-		/**
-		 * 
-		 * @param price
-		 * @return
-		 */
-		public final static double priceToDouble6(long price) {
-			return price / DOUBLE_MULTIPLIER_MILLION;
-		}
-
-		/**
-		 * 
-		 * @param price
-		 * @return
-		 */
-		public final static long priceToLong8(double price) {
-			return (long) (price * LONG_MULTIPLIER_BILLION);
-		}
-
-		/**
-		 * 
-		 * @param price
-		 * @return
-		 */
-		public final static double priceToDouble8(long price) {
-			return price / DOUBLE_MULTIPLIER_BILLION;
-		}
-
-	}
-
-	public static void main(String[] args) {
-
-		System.out.println(PriceSupporter.priceToLong8(4.981312));
-
-		System.out.println(PriceSupporter.priceToDouble8(4981312));
-
-	}
 
 }

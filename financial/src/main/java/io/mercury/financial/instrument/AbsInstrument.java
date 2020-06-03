@@ -1,19 +1,15 @@
 package io.mercury.financial.instrument;
 
-public abstract class BaseInstrument implements Instrument {
+public abstract class AbsInstrument implements Instrument {
 
 	/**
-	 * [int]类型唯一编码
+	 * 唯一编码
 	 */
 	private final int id;
 	/**
-	 * 字符串唯一编码
+	 * String唯一编码
 	 */
 	private final String code;
-	/**
-	 * Symbol
-	 */
-	private final Symbol symbol;
 
 	/**
 	 * 
@@ -21,10 +17,9 @@ public abstract class BaseInstrument implements Instrument {
 	 * @param code
 	 * @param symbol
 	 */
-	protected BaseInstrument(int id, String code, Symbol symbol) {
+	protected AbsInstrument(int id, String code) {
 		this.id = id;
 		this.code = code;
-		this.symbol = symbol;
 	}
 
 	private boolean isEnable;
@@ -61,10 +56,6 @@ public abstract class BaseInstrument implements Instrument {
 		return code;
 	}
 
-	@Override
-	public Symbol symbol() {
-		return symbol;
-	}
 
 	@Override
 	public String toString() {

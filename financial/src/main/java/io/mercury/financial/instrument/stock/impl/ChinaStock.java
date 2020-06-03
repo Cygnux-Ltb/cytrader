@@ -1,12 +1,16 @@
 package io.mercury.financial.instrument.stock.impl;
 
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+
+import io.mercury.financial.instrument.Exchange;
 import io.mercury.financial.instrument.Symbol;
 import io.mercury.financial.instrument.stock.api.Stock;
+import io.mercury.financial.vector.TradingPeriod;
 
 public final class ChinaStock extends Stock {
 
-	protected ChinaStock(int instrumentId, String instrumentCode, Symbol symbol) {
-		super(instrumentId, instrumentCode, symbol);
+	protected ChinaStock(int instrumentId, String instrumentCode) {
+		super(instrumentId, instrumentCode);
 	}
 
 	@Override
@@ -17,6 +21,24 @@ public final class ChinaStock extends Stock {
 	@Override
 	public String fmtText() {
 		return "";
+	}
+
+	@Override
+	public ImmutableSortedSet<TradingPeriod> tradingPeriodSet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Exchange exchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Symbol symbol() {
+		// TODO Auto-generated method stub
+		return this;
 	}
 
 }
