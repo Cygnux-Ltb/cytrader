@@ -1,6 +1,6 @@
 package io.mercury.ftdc.gateway.bean;
 
-public class FtdcRspInfo {
+public final class FtdcRspInfo {
 
 	/// 错误代码
 	private int ErrorID;

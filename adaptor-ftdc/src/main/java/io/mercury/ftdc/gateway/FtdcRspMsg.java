@@ -3,6 +3,7 @@ package io.mercury.ftdc.gateway;
 import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrder;
 import io.mercury.ftdc.gateway.bean.FtdcInputOrderAction;
+import io.mercury.ftdc.gateway.bean.FtdcInvestorPosition;
 import io.mercury.ftdc.gateway.bean.FtdcMdConnect;
 import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
@@ -21,6 +22,9 @@ public final class FtdcRspMsg {
 	// 返回行情
 	private FtdcDepthMarketData ftdcDepthMarketData;
 
+	// 返回持仓
+	private FtdcInvestorPosition ftdcInvestorPosition;
+
 	// 报单推送
 	private FtdcOrder ftdcOrder;
 	// 成交推送
@@ -32,6 +36,9 @@ public final class FtdcRspMsg {
 	private FtdcInputOrderAction ftdcInputOrderAction;
 	// 返回撤单错误
 	private FtdcOrderAction ftdcOrderAction;
+
+	// 是否最后一条
+	private boolean isLast = true;
 
 	public FtdcRspMsg(FtdcTraderConnect ftdcTraderConnect) {
 		this.rspType = RspType.FtdcTraderConnect;
@@ -48,9 +55,15 @@ public final class FtdcRspMsg {
 		this.ftdcDepthMarketData = ftdcDepthMarketData;
 	}
 
-	public FtdcRspMsg(FtdcOrder ftdcOrder) {
+	public FtdcRspMsg(FtdcInvestorPosition ftdcInvestorPosition, boolean isLast) {
+		this.ftdcInvestorPosition = ftdcInvestorPosition;
+		this.isLast = isLast;
+	}
+
+	public FtdcRspMsg(FtdcOrder ftdcOrder, boolean isLast) {
 		this.rspType = RspType.FtdcOrder;
 		this.ftdcOrder = ftdcOrder;
+		this.isLast = isLast;
 	}
 
 	public FtdcRspMsg(FtdcTrade ftdcTrade) {
@@ -77,16 +90,20 @@ public final class FtdcRspMsg {
 		return rspType;
 	}
 
-	public FtdcDepthMarketData getFtdcDepthMarketData() {
-		return ftdcDepthMarketData;
-	}
-
 	public FtdcTraderConnect getFtdcTraderConnect() {
 		return ftdcTraderConnect;
 	}
 
 	public FtdcMdConnect getFtdcMdConnect() {
 		return ftdcMdConnect;
+	}
+
+	public FtdcDepthMarketData getFtdcDepthMarketData() {
+		return ftdcDepthMarketData;
+	}
+
+	public FtdcInvestorPosition getFtdcInvestorPosition() {
+		return ftdcInvestorPosition;
 	}
 
 	public FtdcOrder getFtdcOrder() {
@@ -109,6 +126,10 @@ public final class FtdcRspMsg {
 		return ftdcOrderAction;
 	}
 
+	public boolean isLast() {
+		return isLast;
+	}
+
 	public static enum RspType {
 
 		FtdcDepthMarketData,
@@ -116,6 +137,8 @@ public final class FtdcRspMsg {
 		FtdcTraderConnect,
 
 		FtdcMdConnect,
+
+		FtdcInvestorPosition,
 
 		FtdcOrder,
 

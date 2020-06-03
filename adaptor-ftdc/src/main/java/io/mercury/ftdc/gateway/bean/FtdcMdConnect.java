@@ -1,6 +1,6 @@
 package io.mercury.ftdc.gateway.bean;
 
-public class FtdcMdConnect {
+public final class FtdcMdConnect {
 
 	private boolean Available;
 
