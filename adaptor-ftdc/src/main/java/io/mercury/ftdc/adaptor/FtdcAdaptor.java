@@ -1,7 +1,7 @@
 package io.mercury.ftdc.adaptor;
 
-import static io.mercury.common.thread.ThreadHelper.sleep;
-import static io.mercury.common.thread.ThreadHelper.startNewThread;
+import static io.mercury.common.thread.ThreadTool.sleep;
+import static io.mercury.common.thread.ThreadTool.startNewThread;
 
 import java.io.IOException;
 import java.util.stream.Collectors;

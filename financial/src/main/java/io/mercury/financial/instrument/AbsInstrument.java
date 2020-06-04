@@ -1,5 +1,7 @@
 package io.mercury.financial.instrument;
 
+import io.mercury.common.util.StringUtil;
+
 public abstract class AbsInstrument implements Instrument {
 
 	/**
@@ -56,10 +58,18 @@ public abstract class AbsInstrument implements Instrument {
 		return code;
 	}
 
-
 	@Override
 	public String toString() {
 		return code;
+	}
+
+	private String fmtText;
+
+	@Override
+	public String fmtText() {
+		if (fmtText == null)
+			this.fmtText = "{\"type\" : " + StringUtil.toText(type()) + ", \"id\" : " + id + "" + "}";
+		return fmtText;
 	}
 
 }

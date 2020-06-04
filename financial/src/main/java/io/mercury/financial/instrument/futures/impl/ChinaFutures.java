@@ -7,7 +7,7 @@ public final class ChinaFutures extends Futures {
 	private PriorityClose priorityClose;
 
 	public ChinaFutures(ChinaFuturesSymbol symbol, int term) {
-		super(symbol.acquireInstrumentId(term), (symbol.name() + term).toLowerCase(), symbol);
+		super(symbol.acquireInstrumentId(term), symbol.code() + term, symbol);
 		this.priorityClose = symbol.priorityClose();
 	}
 

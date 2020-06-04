@@ -7,12 +7,10 @@ public class LegalCurrency extends Forex {
 
 	protected LegalCurrency(int instrumentId, String instrumentCode, Symbol symbol) {
 		super(instrumentId, instrumentCode, symbol);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String fmtText() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

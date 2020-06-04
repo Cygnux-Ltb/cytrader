@@ -1,15 +1,16 @@
 package io.mercury.financial.instrument.forex.api;
 
-import io.mercury.financial.instrument.BaseInstrument;
+import io.mercury.financial.instrument.AbsInstrument;
 import io.mercury.financial.instrument.InstrumentType;
 import io.mercury.financial.instrument.Symbol;
 
-public abstract class Forex extends BaseInstrument {
+public abstract class Forex extends AbsInstrument {
 
-	private long multiplier;
+	private Symbol symbol;
 
 	protected Forex(int instrumentId, String instrumentCode, Symbol symbol) {
-		super(instrumentId, instrumentCode, symbol);
+		super(instrumentId, instrumentCode);
+		this.symbol = symbol;
 	}
 
 	@Override
@@ -22,8 +23,9 @@ public abstract class Forex extends BaseInstrument {
 		return true;
 	}
 
-	public long multiplier() {
-		return multiplier;
+	@Override
+	public Symbol symbol() {
+		return symbol;
 	}
 
 }

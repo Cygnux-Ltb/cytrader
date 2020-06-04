@@ -11,7 +11,7 @@ import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.Order;
 
-public interface Strategy<M extends MarketData> extends Enable<Strategy<?>> {
+public interface Strategy<M extends MarketData> extends Enable<Strategy<M>>, Comparable<Strategy<M>> {
 
 	int MaxStrategyId = 899;
 
@@ -38,5 +38,10 @@ public interface Strategy<M extends MarketData> extends Enable<Strategy<?>> {
 	void onOrder(Order order);
 
 	void onError(Throwable throwable) throws StrategyException;
+
+	@Override
+	default int compareTo(Strategy<M> o) {
+		return this.strategyId() < o.strategyId() ? -1 : this.strategyId() > o.strategyId() ? 1 : 0;
+	}
 
 }
