@@ -15,10 +15,17 @@
 
 
 	<dependencies>
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-concurrent</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-rabbitmq</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>redstone-core</artifactId>
