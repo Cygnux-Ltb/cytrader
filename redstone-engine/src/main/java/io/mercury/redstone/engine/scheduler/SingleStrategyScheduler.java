@@ -1,6 +1,7 @@
 package io.mercury.redstone.engine.scheduler;
 
 import io.mercury.financial.market.MarkerDataKeeper;
+import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.Order;
@@ -9,16 +10,16 @@ import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.Strategy;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
 
-public class SingleStrategyScheduler implements StrategyScheduler<BasicMarketData> {
+public class SingleStrategyScheduler<M extends MarketData> implements StrategyScheduler<M> {
 
-	private final Strategy<BasicMarketData> strategy;
+	private final Strategy<M> strategy;
 
-	public SingleStrategyScheduler(Strategy<BasicMarketData> strategy) {
+	public SingleStrategyScheduler(Strategy<M> strategy) {
 		this.strategy = strategy;
 	}
 
 	@Override
-	public void onMarketData(BasicMarketData marketData) {
+	public void onMarketData(M marketData) {
 		MarkerDataKeeper.onMarketDate(marketData);
 		strategy.onMarketData(marketData);
 	}
@@ -36,7 +37,7 @@ public class SingleStrategyScheduler implements StrategyScheduler<BasicMarketDat
 	}
 
 	@Override
-	public void addStrategy(Strategy<BasicMarketData> strategy) {
+	public void addStrategy(Strategy<M> strategy) {
 		throw new IllegalStateException("Unable to add strategy, This scheduler only supports single strategy");
 	}
 

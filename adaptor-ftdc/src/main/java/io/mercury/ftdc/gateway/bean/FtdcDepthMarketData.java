@@ -1,8 +1,6 @@
 package io.mercury.ftdc.gateway.bean;
 
-import io.mercury.financial.market.api.MarketData;
-
-public final class FtdcDepthMarketData implements MarketData {
+public final class FtdcDepthMarketData  {
 
 	// 交易日
 	private String TradingDay;
@@ -495,9 +493,7 @@ public final class FtdcDepthMarketData implements MarketData {
 		return this;
 	}
 
-	@Override
-	public MarketDataType marketDataType() {
-		return MarketDataType.Depth;
-	}
+	
+
 
 }
