@@ -16,7 +16,7 @@ public final class DepthMarketData implements MarketData {
 	private LocalDateTime datetime;
 	private Instrument instrument;
 	private long lastPrice;
-	private long volume;
+	private int volume;
 	private long turnover;
 	private Quotes quotes;
 
@@ -38,7 +38,7 @@ public final class DepthMarketData implements MarketData {
 		return instrument;
 	}
 
-	public double getLastPrice() {
+	public long getLastPrice() {
 		return lastPrice;
 	}
 
@@ -47,16 +47,16 @@ public final class DepthMarketData implements MarketData {
 		return this;
 	}
 
-	public double getVolume() {
+	public int getVolume() {
 		return volume;
 	}
 
-	public DepthMarketData setVolume(long volume) {
+	public DepthMarketData setVolume(int volume) {
 		this.volume = volume;
 		return this;
 	}
 
-	public double getTurnover() {
+	public long getTurnover() {
 		return turnover;
 	}
 
@@ -80,8 +80,38 @@ public final class DepthMarketData implements MarketData {
 	}
 
 	@Override
-	public MarketDataType marketDataType() {
+	public MarketDataType getMarketDataType() {
 		return MarketDataType.Depth;
+	}
+
+	@Override
+	public long getEpochMillis() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getBidPrice1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getBidVolume1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getAskPrice1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getAskVolume1() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	public static final class Quotes {

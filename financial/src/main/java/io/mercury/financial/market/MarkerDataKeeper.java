@@ -12,7 +12,7 @@ import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentManager;
-import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.market.api.MarketData;
 
 /**
  * 管理当前最新行情<br>
@@ -58,8 +58,8 @@ public final class MarkerDataKeeper implements Dumper<String> {
 		QuoteMap = mutableQuoteMap.toImmutable();
 	}
 
-	public static void onMarketDate(BasicMarketData marketData) {
-		Instrument instrument = marketData.instrument();
+	public static void onMarketDate(MarketData marketData) {
+		Instrument instrument = marketData.getInstrument();
 		LastMarkerData lastMarkerData = getLast(instrument);
 		if (lastMarkerData == null)
 			log.warn("Instrument unregistered, instrument -> {}", instrument);

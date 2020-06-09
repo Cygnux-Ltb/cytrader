@@ -1,5 +1,6 @@
 package io.mercury.financial.market.impl;
 
+import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 
 public final class SysMarketData implements MarketData {
@@ -409,6 +410,48 @@ public final class SysMarketData implements MarketData {
 	public MarketDataType marketDataType() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public MarketDataType getMarketDataType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Instrument getInstrument() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getEpochMillis() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getLastPrice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getTurnover() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getBidPrice1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getAskPrice1() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

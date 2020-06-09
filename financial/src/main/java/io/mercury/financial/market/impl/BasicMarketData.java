@@ -114,11 +114,18 @@ public class BasicMarketData implements MarketData {
 		this.turnover = turnover;
 	}
 
-	public Instrument instrument() {
+	@Override
+	public MarketDataType getMarketDataType() {
+		return MarketDataType.Basic;
+	}
+
+	@Override
+	public Instrument getInstrument() {
 		return instrument;
 	}
 
-	public long epochMillis() {
+	@Override
+	public long getEpochMillis() {
 		return epochMillis;
 	}
 
@@ -136,22 +143,27 @@ public class BasicMarketData implements MarketData {
 		return zonedDatetime;
 	}
 
+	@Override
 	public long getLastPrice() {
 		return lastPrice;
 	}
 
+	@Override
 	public int getVolume() {
 		return volume;
 	}
 
+	@Override
 	public long getTurnover() {
 		return turnover;
 	}
 
+	@Override
 	public long getBidPrice1() {
 		return bidPrice1;
 	}
 
+	@Override
 	public int getBidVolume1() {
 		return bidVolume1;
 	}
@@ -228,10 +240,12 @@ public class BasicMarketData implements MarketData {
 		return bidVolume10;
 	}
 
+	@Override
 	public long getAskPrice1() {
 		return askPrice1;
 	}
 
+	@Override
 	public int getAskVolume1() {
 		return askVolume1;
 	}
@@ -521,11 +535,6 @@ public class BasicMarketData implements MarketData {
 	public BasicMarketData setAskVolume10(int askVolume10) {
 		this.askVolume10 = askVolume10;
 		return this;
-	}
-
-	@Override
-	public MarketDataType marketDataType() {
-		return MarketDataType.Basic;
 	}
 
 	@Override
