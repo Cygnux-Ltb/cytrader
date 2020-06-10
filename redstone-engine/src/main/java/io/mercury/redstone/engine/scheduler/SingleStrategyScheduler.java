@@ -1,8 +1,7 @@
 package io.mercury.redstone.engine.scheduler;
 
-import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.financial.market.api.MarketData;
-import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.OrderKeeper;
