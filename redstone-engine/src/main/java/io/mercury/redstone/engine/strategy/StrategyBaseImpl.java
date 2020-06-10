@@ -57,17 +57,26 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	 */
 	private final String strategyName;
 
-	// 子账号
+	/**
+	 * 子账号和ID
+	 */
 	protected final SubAccount subAccount;
 	protected final int subAccountId;
 
-	// 实际账号
+	/**
+	 * 实际账号和ID
+	 */
 	protected final Account account;
 	protected final int accountId;
 
-	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
-
+	/**
+	 * 是否初始化成功
+	 */
 	private boolean initSuccess = false;
+
+	/**
+	 * 是否激活
+	 */
 	private boolean isEnable = false;
 
 	/**
@@ -75,10 +84,14 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	 */
 	protected final MutableLongObjectMap<Order> orders = MutableMaps.newLongObjectHashMap();
 
-	protected final ImmutableParamMap<P> strategyParam;
+	/**
+	 * 
+	 */
+	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId,
-			ImmutableParamMap<P> strategyParam) {
+	protected final ImmutableParamMap<P> param;
+
+	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<P> param) {
 		this.strategyId = strategyId;
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
 				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
@@ -87,12 +100,12 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 		this.subAccountId = subAccountId;
 		this.account = AccountKeeper.getAccountBySubAccountId(subAccountId);
 		this.accountId = account.accountId();
-		this.strategyParam = strategyParam;
+		this.param = param;
 	}
 
 	@Override
 	public void initialize(@Nonnull Supplier<Boolean> initializer) {
-		initSuccess = Assertor.nonNull(initializer, "initializer").get();
+		this.initSuccess = Assertor.nonNull(initializer, "initializer").get();
 		log.info("Initialize result initSuccess==[{}]", initSuccess);
 		// StrategyKeeper.putStrategy(this);
 	}
@@ -110,6 +123,11 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	@Override
 	public int subAccountId() {
 		return subAccountId;
+	}
+
+	@Override
+	public int accountId() {
+		return accountId;
 	}
 
 	@Override
@@ -188,7 +206,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	}
 
 	@Override
-	public void onError(Throwable throwable) {
+	public void onThrowable(Throwable throwable) {
 		log.error("StrategyId -> [{}] throw exception -> [{}]", strategyId, throwable);
 	}
 

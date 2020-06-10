@@ -47,7 +47,7 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 			case MarketData:
 				BasicMarketData marketData = despatchMsg.getMarketData();
 				MarkerDataKeeper.onMarketDate(marketData);
-				subscribedInstrumentMap.get(marketData.instrument().id()).each(strategy -> {
+				subscribedInstrumentMap.get(marketData.getInstrument().id()).each(strategy -> {
 					if (strategy.isEnabled())
 						strategy.onMarketData(marketData);
 				});
