@@ -23,6 +23,8 @@ public interface Strategy<M extends MarketData> extends Enable<Strategy<M>>, Com
 
 	int subAccountId();
 
+	int accountId();
+
 	ImmutableList<Instrument> instruments();
 
 	void addAdaptor(Adaptor adaptor);
@@ -37,7 +39,7 @@ public interface Strategy<M extends MarketData> extends Enable<Strategy<M>>, Com
 
 	void onOrder(Order order);
 
-	void onError(Throwable throwable) throws StrategyException;
+	void onThrowable(Throwable throwable) throws StrategyException;
 
 	@Override
 	default int compareTo(Strategy<M> o) {
