@@ -38,6 +38,7 @@ public final class DepthMarketData implements MarketData {
 		return instrument;
 	}
 
+	@Override
 	public long getLastPrice() {
 		return lastPrice;
 	}
@@ -47,6 +48,7 @@ public final class DepthMarketData implements MarketData {
 		return this;
 	}
 
+	@Override
 	public int getVolume() {
 		return volume;
 	}
@@ -56,6 +58,7 @@ public final class DepthMarketData implements MarketData {
 		return this;
 	}
 
+	@Override
 	public long getTurnover() {
 		return turnover;
 	}
@@ -77,6 +80,11 @@ public final class DepthMarketData implements MarketData {
 	public DepthMarketData addBidQuote(int level, long price, int volume) throws QuoteLevelOverflowException {
 		quotes.addBidQuote(level, price, volume);
 		return this;
+	}
+
+	@Override
+	public String getInstrumentCode() {
+		return instrument.code();
 	}
 
 	@Override

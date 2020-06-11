@@ -119,9 +119,13 @@ public class BasicMarketData implements MarketData {
 		return MarketDataType.Basic;
 	}
 
-	@Override
 	public Instrument getInstrument() {
 		return instrument;
+	}
+
+	@Override
+	public String getInstrumentCode() {
+		return instrument.code();
 	}
 
 	@Override

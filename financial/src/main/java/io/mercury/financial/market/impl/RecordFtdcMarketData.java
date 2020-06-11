@@ -3,7 +3,7 @@ package io.mercury.financial.market.impl;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 
-public final class SysMarketData implements MarketData {
+public final class RecordFtdcMarketData implements MarketData {
 
 	// 交易日
 	private String TradingDay;
@@ -57,7 +57,7 @@ public final class SysMarketData implements MarketData {
 	private long AskPrice5;
 	private int AskVolume5;
 	/* 五档买价卖价及买量卖量 ^ */
-	
+
 	// 平均价格
 	private long AveragePrice;
 	// 更新时间
@@ -67,12 +67,11 @@ public final class SysMarketData implements MarketData {
 
 	@Override
 	public MarketDataType getMarketDataType() {
-		// TODO Auto-generated method stub
-		return null;
+		return MarketDataType.Record;
 	}
 
 	@Override
-	public Instrument getInstrument() {
+	public String getInstrumentCode() {
 		// TODO Auto-generated method stub
 		return null;
 	}

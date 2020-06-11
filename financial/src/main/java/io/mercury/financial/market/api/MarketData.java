@@ -1,12 +1,10 @@
 package io.mercury.financial.market.api;
 
-import io.mercury.financial.instrument.Instrument;
-
 public interface MarketData {
 
 	MarketDataType getMarketDataType();
 
-	Instrument getInstrument();
+	String getInstrumentCode();
 
 	long getEpochMillis();
 
@@ -25,7 +23,7 @@ public interface MarketData {
 	int getAskVolume1();
 
 	public static enum MarketDataType {
-		Basic, Depth, Static, Group
+		Record, Basic, Depth, Static, Group
 	}
 
 }

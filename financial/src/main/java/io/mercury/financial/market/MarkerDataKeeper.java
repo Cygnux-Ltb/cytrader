@@ -3,8 +3,8 @@ package io.mercury.financial.market;
 import javax.annotation.concurrent.ThreadSafe;
 
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
+import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MutableMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
@@ -42,34 +42,38 @@ public final class MarkerDataKeeper implements Dumper<String> {
 	/**
 	 * LastMarkerData Map
 	 */
-	private final ImmutableIntObjectMap<LastMarkerData> QuoteMap;
+	private final ImmutableMap<String, LastMarkerData> QuoteMap;
 
 	private final static MarkerDataKeeper StaticInstance = new MarkerDataKeeper();
 
 	private MarkerDataKeeper() {
-		MutableIntObjectMap<LastMarkerData> mutableQuoteMap = MutableMaps.newIntObjectHashMap();
+		MutableMap<String, LastMarkerData> mutableQuoteMap = MutableMaps.newUnifiedMap();
 		ImmutableList<Instrument> allInstrument = InstrumentManager.getAllInstrument();
 		if (allInstrument.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		allInstrument.each(instrument -> {
-			mutableQuoteMap.put(instrument.id(), new LastMarkerData());
+			mutableQuoteMap.put(instrument.code(), new LastMarkerData());
 			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.id(), instrument);
 		});
 		QuoteMap = mutableQuoteMap.toImmutable();
 	}
 
 	public static void onMarketDate(MarketData marketData) {
-		Instrument instrument = marketData.getInstrument();
-		LastMarkerData lastMarkerData = getLast(instrument);
+		String instrumentCode = marketData.getInstrumentCode();
+		LastMarkerData lastMarkerData = getLast(instrumentCode);
 		if (lastMarkerData == null)
-			log.warn("Instrument unregistered, instrument -> {}", instrument);
+			log.warn("Instrument unregistered, instrumentCode -> {}", instrumentCode);
 		else
 			lastMarkerData.setAskPrice1(marketData.getAskPrice1()).setAskVolume1(marketData.getAskVolume1())
 					.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());
 	}
 
 	public static LastMarkerData getLast(Instrument instrument) {
-		return StaticInstance.QuoteMap.get(instrument.id());
+		return getLast(instrument.code());
+	}
+
+	public static LastMarkerData getLast(String instrumentCode) {
+		return StaticInstance.QuoteMap.get(instrumentCode);
 	}
 
 	public static class LastMarkerData {
