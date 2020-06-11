@@ -1,7 +1,7 @@
 package io.mercury.ftdc.adaptor;
 
-import io.mercury.common.param.AdaptorParamKey;
 import io.mercury.common.param.ParamType;
+import io.mercury.redstone.core.adaptor.AdaptorParamKey;
 
 /**
  * 用于读取FTDC配置信息
