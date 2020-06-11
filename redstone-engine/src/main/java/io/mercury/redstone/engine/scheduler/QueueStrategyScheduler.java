@@ -1,10 +1,5 @@
 package io.mercury.redstone.engine.scheduler;
 
-import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-
-import io.mercury.common.collections.MutableLists;
-import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.concurrent.disruptor.BufferSize;
 import io.mercury.common.concurrent.disruptor.SpscQueue;
 import io.mercury.financial.market.MarkerDataKeeper;
@@ -13,7 +8,6 @@ import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.ActChildOrder;
 import io.mercury.redstone.core.order.OrderKeeper;
 import io.mercury.redstone.core.order.structure.OrdReport;
-import io.mercury.redstone.core.strategy.Strategy;
 
 /**
  * 
@@ -30,24 +24,13 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	/**
-	 * 策略列表
-	 */
-	private final MutableIntObjectMap<Strategy<BasicMarketData>> strategyMap = MutableMaps.newIntObjectHashMap();
-
-	/**
-	 * 订阅合约的策略列表
-	 */
-	private final MutableIntObjectMap<MutableList<Strategy<BasicMarketData>>> subscribedInstrumentMap = MutableMaps
-			.newIntObjectHashMap();
-
 	public QueueStrategyScheduler(BufferSize size) {
 		this.despatchQueue = new SpscQueue<>("SPSCStrategyScheduler-Queue", size, true, despatchMsg -> {
 			switch (despatchMsg.mark()) {
 			case MarketData:
 				BasicMarketData marketData = despatchMsg.getMarketData();
 				MarkerDataKeeper.onMarketDate(marketData);
-				subscribedInstrumentMap.get(marketData.getInstrument().id()).each(strategy -> {
+				subscribedMap.get(marketData.getInstrument().id()).each(strategy -> {
 					if (strategy.isEnabled())
 						strategy.onMarketData(marketData);
 				});
@@ -87,17 +70,6 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 	@Override
 	public void onAdaptorEvent(AdaptorEvent event) {
 		despatchQueue.enqueue(new DespatchMsg(event));
-	}
-
-	@Override
-	public void addStrategy(Strategy<BasicMarketData> strategy) {
-		strategyMap.put(strategy.strategyId(), strategy);
-		strategy.instruments().each(instrument -> {
-			subscribedInstrumentMap.getIfAbsentPut(instrument.id(), MutableLists::newFastList).add(strategy);
-			log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
-					instrument.id());
-		});
-		strategy.enable();
 	}
 
 	private class DespatchMsg {
