@@ -11,6 +11,7 @@ import io.mercury.common.io.Dumper;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.account.AccountKeeper;
 import io.mercury.redstone.core.order.structure.OrdReport;
 
@@ -26,6 +27,7 @@ import io.mercury.redstone.core.order.structure.OrdReport;
  */
 
 @NotThreadSafe
+@Deprecated
 public final class OrderKeeperActor implements Dumper<String> {
 
 	/**
@@ -66,32 +68,36 @@ public final class OrderKeeperActor implements Dumper<String> {
 	private OrderKeeperActor() {
 	}
 
-	public static void onOrder(Order order) {
+	static void putOrder(Order order) {
+		int subAccountId = order.subAccountId();
+		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
+		AllOrders.putOrder(order);
+		getSubAccountOrderBook(subAccountId).putOrder(order);
+		getAccountOrderBook(accountId).putOrder(order);
+		getStrategyOrderBook(order.strategyId()).putOrder(order);
+		getInstrumentOrderBook(order.instrument()).putOrder(order);
+	}
+
+	static void onOrder(Order order) {
 		int subAccountId = order.subAccountId();
 		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
 		switch (order.ordStatus()) {
-		case PendingNew:
-			AllOrders.putOrder(order);
-			getSubAccountOrders(subAccountId).putOrder(order);
-			getAccountOrders(accountId).putOrder(order);
-			getStrategyOrders(order.strategyId()).putOrder(order);
-			getInstrumentOrders(order.instrument()).putOrder(order);
-			break;
 		case Filled:
 		case Canceled:
 		case NewRejected:
 		case CancelRejected:
 			AllOrders.finishOrder(order);
-			getSubAccountOrders(subAccountId).finishOrder(order);
-			getAccountOrders(accountId).finishOrder(order);
-			getStrategyOrders(order.strategyId()).finishOrder(order);
-			getInstrumentOrders(order.instrument()).finishOrder(order);
+			getSubAccountOrderBook(subAccountId).finishOrder(order);
+			getAccountOrderBook(accountId).finishOrder(order);
+			getStrategyOrderBook(order.strategyId()).finishOrder(order);
+			getInstrumentOrderBook(order.instrument()).finishOrder(order);
 			break;
 		default:
 			log.info("Not need processed, ordSysId==[{}], ordStatus==[{}]", order.ordSysId(), order.ordStatus());
 			break;
 		}
 	}
+
 
 	/**
 	 * 处理订单回报
@@ -103,11 +109,15 @@ public final class OrderKeeperActor implements Dumper<String> {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
-		if (order != null) {
-			// TODO 处理订单由外部系统发出而收到报单回报
-			log.info("Search order OK, strategyId==[{}], subAccountId==[{}]", order.strategyId(), order.subAccountId());
-		} else {
+		if (order == null) {
+			// 处理订单由外部系统发出而收到报单回报的情况
 			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
+			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
+			order = new ActChildOrder(report.getOrdSysId(), account.accountId(), report.getInstrument(),
+					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
+			putOrder(order);
+		} else {
+			order.outputLog(log, "OrderKeeper", "Search order OK");
 		}
 		ActChildOrder childOrder = (ActChildOrder) order;
 		// 更新订单状态
@@ -124,19 +134,19 @@ public final class OrderKeeperActor implements Dumper<String> {
 		return AllOrders.getOrder(ordSysId);
 	}
 
-	public static OrderBook getSubAccountOrders(int subAccountId) {
+	public static OrderBook getSubAccountOrderBook(int subAccountId) {
 		return SubAccountOrderBooks.getIfAbsentPut(subAccountId, OrderBook::new);
 	}
 
-	public static OrderBook getAccountOrders(int accountId) {
+	public static OrderBook getAccountOrderBook(int accountId) {
 		return AccountOrderBooks.getIfAbsentPut(accountId, OrderBook::new);
 	}
 
-	public static OrderBook getStrategyOrders(int strategyId) {
+	public static OrderBook getStrategyOrderBook(int strategyId) {
 		return StrategyOrderBooks.getIfAbsentPut(strategyId, OrderBook::new);
 	}
 
-	public static OrderBook getInstrumentOrders(Instrument instrument) {
+	public static OrderBook getInstrumentOrderBook(Instrument instrument) {
 		return InstrumentOrderBooks.getIfAbsentPut(instrument.id(), OrderBook::new);
 	}
 
