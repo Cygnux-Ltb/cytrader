@@ -77,49 +77,43 @@ public final class RecordFtdcMarketData implements MarketData {
 	@Override
 	public long getEpochMillis() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 0L;
 	}
 
 	@Override
 	public long getLastPrice() {
 		// TODO Auto-generated method stub
-		return 0;
+		return LastPrice;
 	}
 
 	@Override
 	public int getVolume() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Volume;
 	}
 
 	@Override
 	public long getTurnover() {
-		// TODO Auto-generated method stub
 		return Turnover;
 	}
 
 	@Override
 	public long getBidPrice1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return BidPrice1;
 	}
 
 	@Override
 	public int getBidVolume1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return BidVolume1;
 	}
 
 	@Override
 	public long getAskPrice1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return AskPrice1;
 	}
 
 	@Override
 	public int getAskVolume1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return AskVolume1;
 	}
 
 	public String getTradingDay() {
