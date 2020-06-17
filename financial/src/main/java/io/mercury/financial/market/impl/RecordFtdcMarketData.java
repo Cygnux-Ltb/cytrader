@@ -95,7 +95,7 @@ public final class RecordFtdcMarketData implements MarketData {
 	@Override
 	public long getTurnover() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Turnover;
 	}
 
 	@Override
@@ -121,5 +121,131 @@ public final class RecordFtdcMarketData implements MarketData {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public String getTradingDay() {
+		return TradingDay;
+	}
+
+	public String getInstrumentID() {
+		return InstrumentID;
+	}
+
+	public String getExchangeID() {
+		return ExchangeID;
+	}
+
+	public double getPreSettlementPrice() {
+		return PreSettlementPrice;
+	}
+
+	public double getPreClosePrice() {
+		return PreClosePrice;
+	}
+
+	public double getPreOpenInterest() {
+		return PreOpenInterest;
+	}
+
+	public double getOpenPrice() {
+		return OpenPrice;
+	}
+
+	public double getHighestPrice() {
+		return HighestPrice;
+	}
+
+	public double getLowestPrice() {
+		return LowestPrice;
+	}
+
+	public double getOpenInterest() {
+		return OpenInterest;
+	}
+
+	public double getUpperLimitPrice() {
+		return UpperLimitPrice;
+	}
+
+	public double getLowerLimitPrice() {
+		return LowerLimitPrice;
+	}
+
+	public long getBidPrice2() {
+		return BidPrice2;
+	}
+
+	public int getBidVolume2() {
+		return BidVolume2;
+	}
+
+	public long getAskPrice2() {
+		return AskPrice2;
+	}
+
+	public int getAskVolume2() {
+		return AskVolume2;
+	}
+
+	public long getBidPrice3() {
+		return BidPrice3;
+	}
+
+	public int getBidVolume3() {
+		return BidVolume3;
+	}
+
+	public long getAskPrice3() {
+		return AskPrice3;
+	}
+
+	public int getAskVolume3() {
+		return AskVolume3;
+	}
+
+	public long getBidPrice4() {
+		return BidPrice4;
+	}
+
+	public int getBidVolume4() {
+		return BidVolume4;
+	}
+
+	public long getAskPrice4() {
+		return AskPrice4;
+	}
+
+	public int getAskVolume4() {
+		return AskVolume4;
+	}
+
+	public long getBidPrice5() {
+		return BidPrice5;
+	}
+
+	public int getBidVolume5() {
+		return BidVolume5;
+	}
+
+	public long getAskPrice5() {
+		return AskPrice5;
+	}
+
+	public int getAskVolume5() {
+		return AskVolume5;
+	}
+
+	public long getAveragePrice() {
+		return AveragePrice;
+	}
+
+	public String getUpdateTime() {
+		return UpdateTime;
+	}
+
+	public int getUpdateMillisec() {
+		return UpdateMillisec;
+	}
+	
+	
 
 }
