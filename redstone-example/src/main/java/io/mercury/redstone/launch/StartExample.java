@@ -36,7 +36,7 @@ public final class StartExample {
 		InstrumentManager.initialize(rb2010);
 
 		SmaStrategyExample strategyExample = new SmaStrategyExample(strategyId, subAccountId, rb2010);
-		StrategyScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler(strategyExample);
+		StrategyScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(strategyExample);
 		strategyExample.initialize(() -> true);
 
 		// Set Global AppId

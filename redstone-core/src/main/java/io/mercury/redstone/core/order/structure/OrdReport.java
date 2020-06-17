@@ -1,5 +1,7 @@
 package io.mercury.redstone.core.order.structure;
 
+import static java.lang.Math.abs;
+
 import io.mercury.common.sequence.Serial;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.redstone.core.order.enums.OrdStatus;
@@ -10,7 +12,7 @@ import io.mercury.serialization.json.JsonUtil;
 
 public final class OrdReport implements Serial<OrdReport> {
 
-	private long serialId = System.nanoTime();
+	private long serialId = abs(System.nanoTime());
 
 	/**
 	 * mapping to order ordSysId
