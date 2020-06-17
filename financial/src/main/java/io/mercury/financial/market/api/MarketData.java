@@ -4,7 +4,7 @@ public interface MarketData {
 
 	MarketDataType getMarketDataType();
 
-	String getInstrumentCode();
+	String getInstrumentId();
 
 	long getEpochMillis();
 

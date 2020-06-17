@@ -4,15 +4,18 @@ import io.mercury.common.number.DecimalSupporter;
 
 public enum PriceMultiplier {
 
+	/**
+	 * 1L
+	 */
 	NONE {
 		@Override
 		public long longMultiplier() {
-			return DecimalSupporter.LONG_MULTIPLIER_1;
+			return DecimalSupporter.L_MULTIPLIER_1;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_1;
+			return DecimalSupporter.D_MULTIPLIER_1;
 		}
 
 		@Override
@@ -26,17 +29,19 @@ public enum PriceMultiplier {
 		}
 	},
 
+	/**
+	 * 100L
+	 */
 	HUNDRED {
 
 		@Override
 		public long longMultiplier() {
-
-			return DecimalSupporter.LONG_MULTIPLIER_100;
+			return DecimalSupporter.L_MULTIPLIER_100;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_100;
+			return DecimalSupporter.D_MULTIPLIER_100;
 		}
 
 		@Override
@@ -48,18 +53,20 @@ public enum PriceMultiplier {
 		public double toDouble(long price) {
 			return DecimalSupporter.longToDouble2(price);
 		}
-
 	},
 
+	/**
+	 * 10000L
+	 */
 	TEN_THOUSAND {
 		@Override
 		public long longMultiplier() {
-			return DecimalSupporter.LONG_MULTIPLIER_10000;
+			return DecimalSupporter.L_MULTIPLIER_10000;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_10000;
+			return DecimalSupporter.D_MULTIPLIER_10000;
 		}
 
 		@Override
@@ -73,15 +80,18 @@ public enum PriceMultiplier {
 		}
 	},
 
+	/**
+	 * 1000000L
+	 */
 	MILLION {
 		@Override
 		public long longMultiplier() {
-			return DecimalSupporter.LONG_MULTIPLIER_1000000;
+			return DecimalSupporter.L_MULTIPLIER_1000000;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_1000000;
+			return DecimalSupporter.D_MULTIPLIER_1000000;
 		}
 
 		@Override
@@ -95,15 +105,18 @@ public enum PriceMultiplier {
 		}
 	},
 
+	/**
+	 * 100000000L
+	 */
 	BILLION {
 		@Override
 		public long longMultiplier() {
-			return DecimalSupporter.LONG_MULTIPLIER_100000000;
+			return DecimalSupporter.L_MULTIPLIER_100000000;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.DOUBLE_MULTIPLIER_100000000;
+			return DecimalSupporter.D_MULTIPLIER_100000000;
 		}
 
 		@Override

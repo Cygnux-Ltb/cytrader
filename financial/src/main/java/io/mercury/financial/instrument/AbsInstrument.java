@@ -24,6 +24,9 @@ public abstract class AbsInstrument implements Instrument {
 		this.code = code;
 	}
 
+	/**
+	 * 
+	 */
 	private boolean isEnable;
 
 	@Override

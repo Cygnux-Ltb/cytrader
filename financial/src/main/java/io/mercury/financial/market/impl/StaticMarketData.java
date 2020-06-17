@@ -11,7 +11,7 @@ public final class StaticMarketData implements MarketData {
 	}
 
 	@Override
-	public String getInstrumentCode() {
+	public String getInstrumentId() {
 		// TODO Auto-generated method stub
 		return null;
 	}

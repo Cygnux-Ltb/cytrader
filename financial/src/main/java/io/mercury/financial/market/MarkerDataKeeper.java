@@ -59,10 +59,10 @@ public final class MarkerDataKeeper implements Dumper<String> {
 	}
 
 	public static void onMarketDate(MarketData marketData) {
-		String instrumentCode = marketData.getInstrumentCode();
-		LastMarkerData lastMarkerData = getLast(instrumentCode);
+		String instrumentId = marketData.getInstrumentId();
+		LastMarkerData lastMarkerData = getLast(instrumentId);
 		if (lastMarkerData == null)
-			log.warn("Instrument unregistered, instrumentCode -> {}", instrumentCode);
+			log.warn("Instrument unregistered, instrumentCode -> {}", instrumentId);
 		else
 			lastMarkerData.setAskPrice1(marketData.getAskPrice1()).setAskVolume1(marketData.getAskVolume1())
 					.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());

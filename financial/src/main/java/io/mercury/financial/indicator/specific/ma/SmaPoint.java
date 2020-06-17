@@ -6,7 +6,7 @@ import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 
-public final class SmaPoint extends MaPoint {
+public final class SmaPoint extends MaPoint  {
 
 	private long historyPriceSum;
 

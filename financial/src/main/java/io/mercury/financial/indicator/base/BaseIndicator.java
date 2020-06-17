@@ -11,10 +11,10 @@ import io.mercury.financial.indicator.api.Indicator;
 import io.mercury.financial.indicator.api.IndicatorEvent;
 import io.mercury.financial.indicator.api.PointSet;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.financial.market.api.MarketData;
 
-public abstract class BaseIndicator<P extends BasePoint<?>, E extends IndicatorEvent>
-		implements Indicator<P, E> {
+public abstract class BaseIndicator<P extends BasePoint<?, M>, M extends MarketData, E extends IndicatorEvent>
+		implements Indicator<P, M, E> {
 
 	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
@@ -28,7 +28,7 @@ public abstract class BaseIndicator<P extends BasePoint<?>, E extends IndicatorE
 	protected P currentPoint;
 
 	// 前一笔行情
-	protected BasicMarketData preMarketData;
+	protected M preMarketData;
 
 	// 存储事件的集合
 	protected MutableList<E> events = MutableLists.newFastList(8);
@@ -51,13 +51,13 @@ public abstract class BaseIndicator<P extends BasePoint<?>, E extends IndicatorE
 	}
 
 	@Override
-	public void onMarketData(BasicMarketData marketData) {
+	public void onMarketData(M marketData) {
 		handleMarketData(marketData);
 		this.preMarketData = marketData;
 	}
 
 	@ProtectedAbstractMethod
-	protected abstract void handleMarketData(BasicMarketData marketData);
+	protected abstract void handleMarketData(M marketData);
 
 	@Override
 	public Instrument instrument() {

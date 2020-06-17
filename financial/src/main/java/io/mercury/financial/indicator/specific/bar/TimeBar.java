@@ -10,7 +10,7 @@ import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 
-public final class TimeBar extends FixedPeriodPoint {
+public final class TimeBar extends FixedPeriodPoint<BasicMarketData>  {
 
 	// 存储开高低收价格和成交量以及成交金额的字段
 	private Bar bar = new Bar();

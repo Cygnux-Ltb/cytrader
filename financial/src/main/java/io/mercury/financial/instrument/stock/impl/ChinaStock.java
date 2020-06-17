@@ -3,6 +3,7 @@ package io.mercury.financial.instrument.stock.impl;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.mercury.financial.instrument.Exchange;
+import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.financial.instrument.Symbol;
 import io.mercury.financial.instrument.stock.api.Stock;
 import io.mercury.financial.vector.TradingPeriod;
@@ -39,6 +40,12 @@ public final class ChinaStock extends Stock {
 	public Symbol symbol() {
 		// TODO Auto-generated method stub
 		return this;
+	}
+
+	@Override
+	public PriceMultiplier priceMultiplier() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

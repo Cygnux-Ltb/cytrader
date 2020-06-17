@@ -1,6 +1,5 @@
 package io.mercury.financial.market.impl;
 
-import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 
 public final class RecordFtdcMarketData implements MarketData {
@@ -71,9 +70,8 @@ public final class RecordFtdcMarketData implements MarketData {
 	}
 
 	@Override
-	public String getInstrumentCode() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getInstrumentId() {
+		return InstrumentID;
 	}
 
 	@Override
