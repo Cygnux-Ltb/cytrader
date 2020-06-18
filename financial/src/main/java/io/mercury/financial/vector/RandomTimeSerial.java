@@ -6,7 +6,7 @@ import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
 
-public final class RandomTimeSerial implements Serial<RandomTimeSerial> {
+public final class RandomTimeSerial implements Serial {
 
 	private ZonedDateTime timePoint;
 	private long epochSecond;

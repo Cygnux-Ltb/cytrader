@@ -4,7 +4,7 @@ import java.time.ZonedDateTime;
 
 import io.mercury.common.sequence.Serial;
 
-public final class TimePeriodSerial implements Serial<TimePeriodSerial> {
+public final class TimePeriodSerial implements Serial {
 
 	private long epochSecond;
 	private ZonedDateTime startTime;

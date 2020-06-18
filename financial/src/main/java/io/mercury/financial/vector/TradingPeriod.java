@@ -22,7 +22,7 @@ import io.mercury.common.sequence.Serial;
  * 
  * @author yellow013
  */
-public final class TradingPeriod implements Serial<TradingPeriod> {
+public final class TradingPeriod implements Serial {
 
 	private int serialId;
 	private LocalTime startTime;

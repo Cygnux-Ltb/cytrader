@@ -10,7 +10,7 @@ import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
 import io.mercury.serialization.json.JsonUtil;
 
-public final class OrdReport implements Serial<OrdReport> {
+public final class OrdReport implements Serial {
 
 	private long serialId = abs(System.nanoTime());
 

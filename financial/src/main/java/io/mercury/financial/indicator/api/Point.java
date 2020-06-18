@@ -4,14 +4,19 @@ import io.mercury.common.sequence.Serial;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 
-public interface Point<S extends Serial<S>, M extends MarketData> {
+public interface Point<ST extends Serial, MT extends MarketData> extends Comparable<Point<ST, MT>> {
 
 	int index();
 
 	Instrument instrument();
 
-	S serial();
+	ST serial();
 
-	void onMarketData(M marketData);
+	void onMarketData(MT marketData);
+
+	@Override
+	default int compareTo(Point<ST, MT> o) {
+		return serial().compareTo(o.serial());
+	}
 
 }
