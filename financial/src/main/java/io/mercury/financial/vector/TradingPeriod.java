@@ -80,18 +80,18 @@ public final class TradingPeriod implements Serial {
 			return (startSecondOfDay <= secondOfDay || endSecondOfDay >= secondOfDay) ? true : false;
 	}
 
-	public MutableList<TimePeriodSerial> segmentation(@Nonnull ZoneId zoneId, @Nonnull Duration duration) {
+	public MutableList<TimePeriodSerial> segmentation(@Nonnull ZoneId zoneId, @Nonnull TimePeriod period) {
 		// 获取分割参数的秒数
-		int seconds = (int) duration.getSeconds();
+		int seconds = period.seconds();
 		// 判断分割段是否大于半天
 		if (seconds > TimeConst.SECONDS_PER_HALF_DAY) {
 			// 如果交易周期跨天,则此分割周期等于当天开始时间至次日结束时间
 			// 如果交易周期未跨天,则此分割周期等于当天开始时间至当天结束时间
 			return MutableLists.newFastList(isCrossDay
-					? TimePeriodSerial.with(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
-							ZonedDateTime.of(DateTimeUtil.nextDate(), endTime, zoneId))
-					: TimePeriodSerial.with(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
-							ZonedDateTime.of(DateTimeUtil.currentDate(), endTime, zoneId)));
+					? TimePeriodSerial.newWith(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
+							ZonedDateTime.of(DateTimeUtil.nextDate(), endTime, zoneId), period)
+					: TimePeriodSerial.newWith(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
+							ZonedDateTime.of(DateTimeUtil.currentDate(), endTime, zoneId), period));
 		} else {
 			// 获取此交易时间段的总时长
 			int totalSeconds = (int) totalDuration.getSeconds();
@@ -109,9 +109,9 @@ public final class TradingPeriod implements Serial {
 				ZonedDateTime nextStartPoint = startPoint.plusSeconds(seconds);
 				if (nextStartPoint.isBefore(lastEndPoint)) {
 					ZonedDateTime endPoint = nextStartPoint.minusNanos(1);
-					list.add(TimePeriodSerial.with(startPoint, endPoint));
+					list.add(TimePeriodSerial.newWith(startPoint, endPoint, period));
 				} else {
-					list.add(TimePeriodSerial.with(startPoint, lastEndPoint));
+					list.add(TimePeriodSerial.newWith(startPoint, lastEndPoint, period));
 					break;
 				}
 				startPoint = nextStartPoint;
@@ -126,7 +126,7 @@ public final class TradingPeriod implements Serial {
 
 		System.out.println(tradingPeriod.isPeriod(LocalTime.of(14, 00, 00)));
 
-		tradingPeriod.segmentation(TimeZone.CST, Duration.ofMinutes(45))
+		tradingPeriod.segmentation(TimeZone.CST, new TimePeriod(Duration.ofMinutes(45)))
 				.each(timePeriod -> System.out.println(timePeriod.startTime() + " - " + timePeriod.endTime()));
 
 		LocalDateTime of = LocalDateTime.of(LocalDate.now(), LocalTime.of(23, 55, 30));

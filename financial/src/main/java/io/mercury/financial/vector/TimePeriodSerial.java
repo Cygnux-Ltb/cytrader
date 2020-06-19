@@ -7,20 +7,22 @@ import io.mercury.common.sequence.Serial;
 public final class TimePeriodSerial implements Serial {
 
 	private long epochSecond;
+	private TimePeriod period;
 	private ZonedDateTime startTime;
 	private ZonedDateTime endTime;
 
-	public static TimePeriodSerial with(ZonedDateTime startTime, ZonedDateTime endTime) {
+	public static TimePeriodSerial newWith(ZonedDateTime startTime, ZonedDateTime endTime, TimePeriod period) {
 		if (startTime == null)
 			throw new IllegalArgumentException("startTime cannot null");
 		if (endTime == null)
 			throw new IllegalArgumentException("endTime cannot null");
-		return new TimePeriodSerial(startTime, endTime);
+		return new TimePeriodSerial(startTime, endTime, period);
 	}
 
-	private TimePeriodSerial(ZonedDateTime startTime, ZonedDateTime endTime) {
+	private TimePeriodSerial(ZonedDateTime startTime, ZonedDateTime endTime, TimePeriod period) {
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.period = period;
 		initEpochSecond();
 	}
 
@@ -36,9 +38,9 @@ public final class TimePeriodSerial implements Serial {
 	public long epochSecond() {
 		return epochSecond;
 	}
-
-	public boolean isPeriod(ZonedDateTime time) {
-		return startTime.isBefore(time) && endTime.isAfter(time) ? true : false;
+	
+	public TimePeriod period() {
+		return period;
 	}
 
 	public ZonedDateTime startTime() {
@@ -47,6 +49,10 @@ public final class TimePeriodSerial implements Serial {
 
 	public ZonedDateTime endTime() {
 		return endTime;
+	}
+
+	public boolean isPeriod(ZonedDateTime time) {
+		return startTime.isBefore(time) && endTime.isAfter(time) ? true : false;
 	}
 
 	private String toStringCache;
