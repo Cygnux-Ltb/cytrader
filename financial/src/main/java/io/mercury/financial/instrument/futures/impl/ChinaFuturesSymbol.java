@@ -1,5 +1,6 @@
 package io.mercury.financial.instrument.futures.impl;
 
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -366,7 +367,8 @@ public enum ChinaFuturesSymbol implements Symbol {
 	public static void main(String[] args) {
 		for (Symbol symbol : ChinaFuturesSymbol.values()) {
 			symbol.tradingPeriodSet()
-					.each(tradingPeriod -> tradingPeriod.segmentation(TimeZone.CST, TimePeriod.S30.duration())
+					.each(tradingPeriod -> tradingPeriod
+							.segmentation(TimeZone.CST, new TimePeriod(Duration.ofSeconds(30)))
 							.each(timePeriod -> System.out.println(symbol.code() + " | " + timePeriod)));
 		}
 		System.out.println(ChinaFuturesSymbol.AG.exchange.id());

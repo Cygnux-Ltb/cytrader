@@ -1,6 +1,7 @@
 package io.mercury.redstone.launch;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 import io.mercury.common.datetime.DateTimeUtil;
@@ -51,7 +52,7 @@ public final class StartExample {
 
 		try (Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, null, scheduler, adaptorParam)) {
 
-			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.values());
+			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), new TimePeriod(Duration.ofSeconds(15)));
 			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
 
 			adaptor.startup();
