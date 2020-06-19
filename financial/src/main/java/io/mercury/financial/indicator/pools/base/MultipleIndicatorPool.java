@@ -10,9 +10,12 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.param.JointIdSupporter;
 import io.mercury.financial.indicator.api.Indicator;
 import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.vector.TimePeriod;
 
-public abstract class MultipleIndicatorPool<I extends Indicator<?, ?>> extends IndicatorPool<I> {
+@Deprecated
+public abstract class MultipleIndicatorPool<I extends Indicator<?, ?, M>, M extends MarketData>
+		extends IndicatorPool<I, M> {
 
 	private MutableLongObjectMap<I> s1IndicatorMap = MutableMaps.newLongObjectHashMap(Capacity.L04_SIZE_16);
 	private MutableLongObjectMap<I> s2IndicatorMap = MutableMaps.newLongObjectHashMap(Capacity.L04_SIZE_16);
@@ -54,32 +57,8 @@ public abstract class MultipleIndicatorPool<I extends Indicator<?, ?>> extends I
 	}
 
 	private MutableLongObjectMap<I> getIndicatorMap(TimePeriod period) {
-		switch (period) {
-		case S1:
-			return s1IndicatorMap;
-		case S2:
-			return s2IndicatorMap;
-		case S5:
-			return s5IndicatorMap;
-		case S10:
-			return s10IndicatorMap;
-		case S15:
-			return s15IndicatorMap;
-		case S30:
-			return s30IndicatorMap;
-		case M1:
-			return m1IndicatorMap;
-		case M2:
-			return m2IndicatorMap;
-		case M5:
-			return m5IndicatorMap;
-		case M10:
-			return m10IndicatorMap;
-		case M15:
-			return m15IndicatorMap;
-		default:
-			throw new IllegalArgumentException("period : " + period.name() + " is not found");
-		}
+		// TODO
+		throw new IllegalArgumentException("period : " + period.seconds() + " is not found");
 	}
 
 }

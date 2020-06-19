@@ -5,10 +5,11 @@ import javax.annotation.concurrent.NotThreadSafe;
 import io.mercury.financial.indicator.pools.base.MultipleIndicatorPool;
 import io.mercury.financial.indicator.specific.ma.Sma;
 import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 
 @NotThreadSafe
-public final class SmaIndicatorPool extends MultipleIndicatorPool<Sma> {
+public final class SmaIndicatorPool extends MultipleIndicatorPool<Sma, BasicMarketData> {
 
 	public static final SmaIndicatorPool Singleton = new SmaIndicatorPool();
 
