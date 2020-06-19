@@ -5,7 +5,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 
-public final class Ema extends FixedPeriodIndicator<EmaPoint, EmaEvent> {
+public final class Ema extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {
 
 	public Ema(Instrument instrument, TimePeriod period, int cycle) {
 		super(instrument, period);

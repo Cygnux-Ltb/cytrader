@@ -5,12 +5,10 @@ import org.eclipse.collections.api.list.primitive.MutableLongList;
 
 import io.mercury.common.collections.MutableLists;
 import io.mercury.financial.indicator.base.FixedPeriodPoint;
-import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
-import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 
-public final class TimeBar extends FixedPeriodPoint<BasicMarketData>  {
+public final class TimeBar extends FixedPeriodPoint<BasicMarketData> {
 
 	// 存储开高低收价格和成交量以及成交金额的字段
 	private Bar bar = new Bar();
@@ -24,17 +22,18 @@ public final class TimeBar extends FixedPeriodPoint<BasicMarketData>  {
 	private MutableDoubleList priceRecord = MutableLists.newDoubleArrayList(64);
 	private MutableLongList volumeRecord = MutableLists.newLongArrayList(64);
 
-	private TimeBar(int index, Instrument instrument, TimePeriod period, TimePeriodSerial timePeriod) {
-		super(index, instrument, period, timePeriod);
+	private TimeBar(int index, TimePeriodSerial serial) {
+		super(index, serial);
 	}
 
-	public static TimeBar with(int index, Instrument instrument, TimePeriod period, TimePeriodSerial timePeriod) {
-		return new TimeBar(index, instrument, period, timePeriod);
+	public static TimeBar newWith(int index, TimePeriodSerial timePeriod) {
+		return new TimeBar(index, timePeriod);
 	}
 
 	public TimeBar generateNext() {
-		return new TimeBar(index + 1, instrument, period, TimePeriodSerial.with(
-				serial.startTime().plusSeconds(period.seconds()), serial.endTime().plusSeconds(period.seconds())));
+		return new TimeBar(index + 1,
+				TimePeriodSerial.newWith(serial.startTime().plusSeconds(serial.period().seconds()),
+						serial.endTime().plusSeconds(serial.period().seconds()), serial.period()));
 	}
 
 	public double open() {

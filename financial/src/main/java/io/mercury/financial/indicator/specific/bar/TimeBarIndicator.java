@@ -11,7 +11,7 @@ import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 
-public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBarEvent> {
+public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBarEvent, BasicMarketData> {
 
 	public TimeBarIndicator(Instrument instrument, TimePeriod period) {
 		super(instrument, period);
@@ -20,7 +20,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBa
 				period);
 		int i = -1;
 		for (TimePeriodSerial timePeriod : timePeriodSet)
-			pointSet.add(TimeBar.with(++i, instrument, period, timePeriod));
+			pointSet.add(TimeBar.newWith(++i, timePeriod));
 		currentPoint = pointSet.getFirst();
 	}
 
@@ -42,11 +42,13 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBa
 		ZonedDateTime marketDatatime = marketData.zonedDatetime();
 		if (currentPointSerial.isPeriod(marketDatatime)) {
 			currentPoint.onMarketData(marketData);
-			for (TimeBarEvent timeBarsEvent : events)
+			for (TimeBarEvent timeBarsEvent : events) {
 				timeBarsEvent.onCurrentTimeBarChanged(currentPoint);
+			}
 		} else {
-			for (TimeBarEvent timeBarsEvent : events)
+			for (TimeBarEvent timeBarsEvent : events) {
 				timeBarsEvent.onEndTimeBar(currentPoint);
+			}
 			TimeBar newBar = pointSet.nextOf(currentPoint).orElse(null);
 			if (newBar == null) {
 				log.error("TimeBar [{}-{}] next is null.", currentPointSerial.startTime(),
@@ -55,10 +57,12 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBa
 			}
 			while (!newBar.serial().isPeriod(marketDatatime)) {
 				newBar.onMarketData(preMarketData);
-				for (TimeBarEvent timeBarsEvent : events)
+				for (TimeBarEvent timeBarsEvent : events) {
 					timeBarsEvent.onStartTimeBar(newBar);
-				for (TimeBarEvent timeBarsEvent : events)
+				}
+				for (TimeBarEvent timeBarsEvent : events) {
 					timeBarsEvent.onEndTimeBar(newBar);
+				}
 				newBar = pointSet.nextOf(currentPoint).orElseGet(null);
 				if (newBar == null) {
 					log.error("TimeBar [{}-{}] next is null.", currentPointSerial.startTime(),
@@ -66,8 +70,9 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBa
 					break;
 				}
 			}
-			for (TimeBarEvent timeBarsEvent : events)
+			for (TimeBarEvent timeBarsEvent : events) {
 				timeBarsEvent.onStartTimeBar(newBar);
+			}
 		}
 
 	}

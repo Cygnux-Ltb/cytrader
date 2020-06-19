@@ -14,10 +14,11 @@ import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.financial.vector.TradingPeriod;
 
-public final class Sma2 extends FixedPeriodIndicator<SmaPoint, SmaEvent> {
+public final class Sma2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
 
 	private FixedLengthRecorder historyPriceRecorder;
 
+	// TODO
 	public Sma2(Instrument instrument, TimePeriod period, int cycle) {
 		super(instrument, period, cycle);
 		this.historyPriceRecorder = FixedLengthRecorder.newRecorder(cycle);
@@ -25,8 +26,8 @@ public final class Sma2 extends FixedPeriodIndicator<SmaPoint, SmaEvent> {
 		LocalDate nowDate = LocalDate.now();
 		ZoneId zoneId = instrument.symbol().exchange().zoneId();
 		TimePeriodSerial timePeriod = TimePeriodSerial
-				.with(ZonedDateTime.of(nowDate, tradingPeriod.startTime(), zoneId), ZonedDateTime.of(nowDate,
-						tradingPeriod.startTime().plusSeconds(period.seconds()).minusNanos(1), zoneId));
+				.newWith(ZonedDateTime.of(nowDate, tradingPeriod.startTime(), zoneId), ZonedDateTime.of(nowDate,
+						tradingPeriod.startTime().plusSeconds(period.seconds()).minusNanos(1), zoneId), period);
 		currentPoint = SmaPoint.with(0, instrument, period, timePeriod, cycle, historyPriceRecorder);
 	}
 

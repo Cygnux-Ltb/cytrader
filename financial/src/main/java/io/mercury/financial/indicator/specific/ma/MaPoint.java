@@ -15,7 +15,7 @@ public abstract class MaPoint extends FixedPeriodPoint<BasicMarketData> {
 
 	protected MaPoint(int index, Instrument instrument, TimePeriod period, TimePeriodSerial timePeriod,
 			FixedLengthRecorder historyPriceRecorder) {
-		super(index, instrument, period, timePeriod);
+		super(index,  timePeriod);
 		this.historyPriceRecorder = historyPriceRecorder;
 	}
 
