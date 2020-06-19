@@ -4,19 +4,18 @@ import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
 import io.mercury.financial.indicator.api.Point;
-import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 
 public abstract class BasePoint<ST extends Serial, MT extends MarketData> implements Point<ST, MT> {
 
 	protected int index;
-	protected Instrument instrument;
 
+	protected ST serial;
 	protected MT preMarketData;
 
-	protected BasePoint(int index, Instrument instrument) {
+	protected BasePoint(int index, ST serial) {
 		this.index = Assertor.greaterThan(index, -1, "index");
-		this.instrument = instrument;
+		this.serial = Assertor.nonNull(serial, "serial");
 	}
 
 	@Override
@@ -25,8 +24,8 @@ public abstract class BasePoint<ST extends Serial, MT extends MarketData> implem
 	}
 
 	@Override
-	public Instrument instrument() {
-		return instrument;
+	public ST serial() {
+		return serial;
 	}
 
 	@Override

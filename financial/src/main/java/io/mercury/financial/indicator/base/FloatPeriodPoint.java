@@ -2,26 +2,17 @@ package io.mercury.financial.indicator.base;
 
 import java.time.ZonedDateTime;
 
-import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
-import io.mercury.financial.vector.RandomTimeSerial;
+import io.mercury.financial.vector.TimePointSerial;
 
-public abstract class FloatPeriodPoint<M extends MarketData> extends BasePoint<RandomTimeSerial, M> {
+public abstract class FloatPeriodPoint<M extends MarketData> extends BasePoint<TimePointSerial, M> {
 
-	protected RandomTimeSerial timeSerial;
-
-	protected FloatPeriodPoint(int index, Instrument instrument, RandomTimeSerial timeSerial) {
-		super(index, instrument);
-		this.timeSerial = timeSerial;
-	}
-
-	@Override
-	public RandomTimeSerial serial() {
-		return timeSerial;
+	protected FloatPeriodPoint(int index, TimePointSerial serial) {
+		super(index, serial);
 	}
 
 	public ZonedDateTime timePoint() {
-		return timeSerial.timePoint();
+		return serial.timePoint();
 	}
 
 }

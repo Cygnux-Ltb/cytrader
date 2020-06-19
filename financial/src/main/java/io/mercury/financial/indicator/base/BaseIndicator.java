@@ -13,8 +13,8 @@ import io.mercury.financial.indicator.api.PointSet;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 
-public abstract class BaseIndicator<P extends BasePoint<?, M>, M extends MarketData, E extends IndicatorEvent>
-		implements Indicator<P, M, E> {
+public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends IndicatorEvent, M extends MarketData>
+		implements Indicator<P, E, M> {
 
 	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 

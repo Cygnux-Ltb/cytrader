@@ -2,29 +2,13 @@ package io.mercury.financial.indicator.base;
 
 import java.time.ZonedDateTime;
 
-import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
-import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 
 public abstract class FixedPeriodPoint<M extends MarketData> extends BasePoint<TimePeriodSerial, M> {
 
-	protected TimePeriod period;
-	protected TimePeriodSerial serial;
-
-	protected FixedPeriodPoint(int index, Instrument instrument, TimePeriod period, TimePeriodSerial serial) {
-		super(index, instrument);
-		this.period = period;
-		this.serial = serial;
-	}
-
-	public TimePeriod getPeriod() {
-		return period;
-	}
-
-	@Override
-	public TimePeriodSerial serial() {
-		return serial;
+	protected FixedPeriodPoint(int index, TimePeriodSerial serial) {
+		super(index, serial);
 	}
 
 	public ZonedDateTime startTime() {
