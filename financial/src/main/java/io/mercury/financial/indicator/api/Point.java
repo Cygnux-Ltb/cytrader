@@ -1,14 +1,11 @@
 package io.mercury.financial.indicator.api;
 
 import io.mercury.common.sequence.Serial;
-import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 
 public interface Point<ST extends Serial, MT extends MarketData> extends Comparable<Point<ST, MT>> {
 
 	int index();
-
-	Instrument instrument();
 
 	ST serial();
 

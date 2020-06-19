@@ -3,7 +3,15 @@ package io.mercury.financial.indicator.api;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 
-public interface Indicator<P extends Point<?, M>, M extends MarketData, E extends IndicatorEvent> {
+/**
+ * 
+ * @author yellow013
+ *
+ * @param <P> Point 类型
+ * @param <E> IndicatorEvent 类型
+ * @param <M> MarketData 类型
+ */
+public interface Indicator<P extends Point<?, M>, E extends IndicatorEvent, M extends MarketData> {
 
 	Instrument instrument();
 
