@@ -25,13 +25,7 @@ public final class ChinaStock extends Stock {
 	}
 
 	@Override
-	public ImmutableSortedSet<TradingPeriod> tradingPeriodSet() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Exchange exchange() {
+	public PriceMultiplier priceMultiplier() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -39,11 +33,17 @@ public final class ChinaStock extends Stock {
 	@Override
 	public Symbol symbol() {
 		// TODO Auto-generated method stub
-		return this;
+		return null;
 	}
 
 	@Override
-	public PriceMultiplier priceMultiplier() {
+	public ImmutableSortedSet<TradingPeriod> tradingPeriodSet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Exchange exchange() {
 		// TODO Auto-generated method stub
 		return null;
 	}
