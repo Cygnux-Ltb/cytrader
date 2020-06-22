@@ -21,10 +21,10 @@ public interface Indicator<P extends Point<?, M>, E extends IndicatorEvent, M ex
 
 	P getPoint(int index);
 
-	P fastPoint();
+	P getFastPoint();
 
-	P currentPoint();
+	P getCurrentPoint();
 
-	PointSet<P> pointSet();
+	PointSet<P> getPointSet();
 
 }
