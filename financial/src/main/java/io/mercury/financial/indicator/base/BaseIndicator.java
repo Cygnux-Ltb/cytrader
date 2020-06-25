@@ -65,14 +65,14 @@ public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends Indicat
 	}
 
 	@Override
-	public P fastPoint() {
+	public P getFastPoint() {
 		if (pointSet.size() == 0)
 			return currentPoint;
 		return pointSet.getFirst();
 	}
 
 	@Override
-	public P currentPoint() {
+	public P getCurrentPoint() {
 		return currentPoint;
 	}
 
@@ -86,7 +86,7 @@ public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends Indicat
 	}
 
 	@Override
-	public PointSet<P> pointSet() {
+	public PointSet<P> getPointSet() {
 		return pointSet;
 	}
 
