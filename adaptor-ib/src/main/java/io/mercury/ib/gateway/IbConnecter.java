@@ -1,5 +1,5 @@
 package io.mercury.ib.gateway;
 
-public class IbConnecter {
+public final class IbConnecter {
 
 }

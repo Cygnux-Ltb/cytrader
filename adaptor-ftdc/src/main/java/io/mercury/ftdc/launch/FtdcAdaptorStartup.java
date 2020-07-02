@@ -5,7 +5,7 @@ import com.rabbitmq.client.MessageProperties;
 import io.mercury.common.util.Assertor;
 import io.mercury.transport.rabbitmq.configurator.RmqConnection;
 import io.mercury.transport.rabbitmq.configurator.RmqPublisherConfigurator;
-import io.mercury.transport.rabbitmq.declare.ExchangeRelation;
+import io.mercury.transport.rabbitmq.declare.ExchangeRelationship;
 
 public final class FtdcAdaptorStartup {
 
@@ -15,7 +15,7 @@ public final class FtdcAdaptorStartup {
 		RmqConnection connection = RmqConnection.configuration(args[0], Integer.parseInt(args[1]), args[2], args[3])
 				.build();
 
-		ExchangeRelation directExchange = ExchangeRelation.fanout("test");
+		ExchangeRelationship directExchange = ExchangeRelationship.fanout("test");
 
 		RmqPublisherConfigurator build = RmqPublisherConfigurator.configuration(connection, directExchange)
 				.setMsgPropsSupplier(() -> MessageProperties.PERSISTENT_BASIC.builder()
