@@ -1,6 +1,6 @@
 package io.mercury.financial.indicator.specific.bar;
 
-public class Bar {
+public final class Bar {
 
 	// 存储开高低收价格
 	private long open = 0L;
@@ -57,7 +57,7 @@ public class Bar {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new Bar().onPrice(100000));
+		System.out.println(new Bar().onPrice(100000).onPrice(100L).onPrice(10000000L));
 	}
 
 }

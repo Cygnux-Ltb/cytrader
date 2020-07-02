@@ -6,7 +6,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import io.mercury.common.collections.list.FixedLengthRecorder;
-import io.mercury.financial.indicator.base.FixedPeriodIndicator;
+import io.mercury.financial.indicator.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TradingPeriodPool;
@@ -14,12 +14,12 @@ import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.financial.vector.TradingPeriod;
 
-public final class Sma2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
+public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
 
 	private FixedLengthRecorder historyPriceRecorder;
 
 	// TODO
-	public Sma2(Instrument instrument, TimePeriod period, int cycle) {
+	public SmaIndicator2(Instrument instrument, TimePeriod period, int cycle) {
 		super(instrument, period, cycle);
 		this.historyPriceRecorder = FixedLengthRecorder.newRecorder(cycle);
 		TradingPeriod tradingPeriod = TradingPeriodPool.Singleton.getAfterTradingPeriod(instrument, LocalTime.now());
@@ -31,8 +31,8 @@ public final class Sma2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMa
 		currentPoint = SmaPoint.with(0, instrument, period, timePeriod, cycle, historyPriceRecorder);
 	}
 
-	public static Sma2 with(Instrument instrument, TimePeriod period, int cycle) {
-		return new Sma2(instrument, period, cycle);
+	public static SmaIndicator2 with(Instrument instrument, TimePeriod period, int cycle) {
+		return new SmaIndicator2(instrument, period, cycle);
 	}
 
 	@Override

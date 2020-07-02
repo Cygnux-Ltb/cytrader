@@ -4,7 +4,7 @@ import org.eclipse.collections.api.list.primitive.MutableDoubleList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 
 import io.mercury.common.collections.MutableLists;
-import io.mercury.financial.indicator.base.FixedPeriodPoint;
+import io.mercury.financial.indicator.FixedPeriodPoint;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriodSerial;
 

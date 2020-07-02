@@ -3,18 +3,18 @@ package io.mercury.financial.indicator.specific.ma;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.mercury.common.collections.list.FixedLengthRecorder;
-import io.mercury.financial.indicator.base.FixedPeriodIndicator;
+import io.mercury.financial.indicator.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 
-public final class Sma extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
+public final class SmaIndicator extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
 
 	private FixedLengthRecorder historyPriceRecorder;
 
-	public Sma(Instrument instrument, TimePeriod period, int cycle) {
+	public SmaIndicator(Instrument instrument, TimePeriod period, int cycle) {
 		super(instrument, period, cycle);
 
 		this.historyPriceRecorder = FixedLengthRecorder.newRecorder(cycle);
@@ -26,8 +26,8 @@ public final class Sma extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMar
 
 	}
 
-	public static Sma with(Instrument instrument, TimePeriod period, int cycle) {
-		return new Sma(instrument, period, cycle);
+	public static SmaIndicator with(Instrument instrument, TimePeriod period, int cycle) {
+		return new SmaIndicator(instrument, period, cycle);
 	}
 
 	@Override

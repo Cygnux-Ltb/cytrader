@@ -1,6 +1,6 @@
 package io.mercury.financial.indicator.specific.bollinger;
 
-import io.mercury.financial.indicator.base.FixedPeriodPoint;
+import io.mercury.financial.indicator.FixedPeriodPoint;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriodSerial;
 
