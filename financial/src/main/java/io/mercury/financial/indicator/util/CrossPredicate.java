@@ -1,19 +1,11 @@
-package io.mercury.financial.indicator.specific.ma;
+package io.mercury.financial.indicator.util;
 
-public final class MaCrossPredicate {
+import org.eclipse.collections.api.block.predicate.primitive.LongLongPredicate;
 
-	public static boolean isUpCross(double shortMa, double longMa) {
-		if (!Double.isNaN(shortMa) && !Double.isNaN(longMa) && shortMa > longMa)
-			return true;
-		else
-			return false;
-	}
+public final class CrossPredicate {
 
-	public static boolean isDownCross(double shortMa, double longMa) {
-		if (!Double.isNaN(shortMa) && !Double.isNaN(longMa) && shortMa < longMa)
-			return true;
-		else
-			return false;
-	}
+	public static final LongLongPredicate UpCross = (s, l) -> s > l;
+
+	public static final LongLongPredicate DownCross = (s, l) -> s < l;
 
 }

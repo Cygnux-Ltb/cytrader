@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.base;
+package io.mercury.financial.indicator;
 
 import java.time.ZonedDateTime;
 

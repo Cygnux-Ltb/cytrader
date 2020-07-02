@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.base;
+package io.mercury.financial.indicator;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;

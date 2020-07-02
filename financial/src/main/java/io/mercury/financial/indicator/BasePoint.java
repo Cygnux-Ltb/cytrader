@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.base;
+package io.mercury.financial.indicator;
 
 import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
 import io.mercury.common.sequence.Serial;

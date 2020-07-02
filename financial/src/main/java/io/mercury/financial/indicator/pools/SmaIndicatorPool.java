@@ -3,13 +3,13 @@ package io.mercury.financial.indicator.pools;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import io.mercury.financial.indicator.pools.base.MultipleIndicatorPool;
-import io.mercury.financial.indicator.specific.ma.Sma;
+import io.mercury.financial.indicator.specific.ma.SmaIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
 
 @NotThreadSafe
-public final class SmaIndicatorPool extends MultipleIndicatorPool<Sma, BasicMarketData> {
+public final class SmaIndicatorPool extends MultipleIndicatorPool<SmaIndicator, BasicMarketData> {
 
 	public static final SmaIndicatorPool Singleton = new SmaIndicatorPool();
 
@@ -17,8 +17,8 @@ public final class SmaIndicatorPool extends MultipleIndicatorPool<Sma, BasicMark
 	}
 
 	@Override
-	protected Sma generateIndicator(TimePeriod period, int cycle, Instrument instrument) {
-		return Sma.with(instrument, period, cycle);
+	protected SmaIndicator generateIndicator(TimePeriod period, int cycle, Instrument instrument) {
+		return SmaIndicator.with(instrument, period, cycle);
 	}
 
 }

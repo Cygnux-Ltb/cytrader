@@ -10,20 +10,30 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.vector.TimePeriod;
 
-@Deprecated
 public abstract class SingleIndicatorPool<I extends Indicator<?, ?, M>, M extends MarketData>
 		extends IndicatorPool<I, M> {
 
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> s1IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> s2IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> s5IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> s10IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> s15IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> s30IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> m1IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> m2IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> m5IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> m10IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
+	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> m15IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
 
 	@ProtectedAbstractMethod
