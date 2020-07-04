@@ -2,7 +2,7 @@ package io.mercury.financial.indicator.pools.base;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
-import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
+import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.financial.indicator.api.Indicator;
@@ -36,7 +36,7 @@ public abstract class SingleIndicatorPool<I extends Indicator<?, ?, M>, M extend
 	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> m15IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
 
-	@ProtectedAbstractMethod
+	@AbstractFunction
 	protected abstract I generateIndicator(TimePeriod period, Instrument instrument);
 
 	public I getIndicator(TimePeriod period, Instrument instrument) {

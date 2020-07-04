@@ -1,6 +1,6 @@
 package io.mercury.financial.indicator;
 
-import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
+import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
 import io.mercury.financial.indicator.api.Point;
@@ -38,7 +38,7 @@ public abstract class BasePoint<ST extends Serial, MT extends MarketData> implem
 		this.preMarketData = marketData;
 	}
 
-	@ProtectedAbstractMethod
+	@AbstractFunction
 	protected abstract void handleMarketData(MT marketData);
 
 }

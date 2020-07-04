@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
+import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.param.JointIdSupporter;
@@ -40,7 +40,7 @@ public abstract class MultipleIndicatorPool<I extends Indicator<?, ?, M>, M exte
 	private MutableLongObjectMap<I> m15IndicatorMap = MutableMaps.newLongObjectHashMap(Capacity.L04_SIZE_16);
 
 	@Nonnull
-	@ProtectedAbstractMethod
+	@AbstractFunction
 	protected abstract I generateIndicator(TimePeriod period, int cycle, Instrument instrument);
 
 	public I getIndicator(TimePeriod period, int cycle, Instrument instrument) {
