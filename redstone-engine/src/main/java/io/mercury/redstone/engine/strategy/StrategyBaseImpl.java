@@ -11,7 +11,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
-import io.mercury.common.annotation.lang.ProtectedAbstractMethod;
+import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -44,7 +44,6 @@ import io.mercury.redstone.core.strategy.Strategy;
 import io.mercury.redstone.core.strategy.StrategyEvent;
 import io.mercury.redstone.core.strategy.StrategyParamKey;
 
-@SuppressWarnings("deprecation")
 public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyParamKey>
 		implements Strategy<M>, CircuitBreaker {
 
@@ -138,7 +137,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 		handleMarketData(marketData);
 	}
 
-	@ProtectedAbstractMethod
+	@AbstractFunction
 	protected abstract void handleMarketData(M marketData);
 
 	@Override
@@ -147,7 +146,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 		handleOrder(order);
 	}
 
-	@ProtectedAbstractMethod
+	@AbstractFunction
 	protected abstract void handleOrder(Order order);
 
 	@Override
@@ -492,7 +491,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	 * @param instrument
 	 * @return
 	 */
-	@ProtectedAbstractMethod
+	@AbstractFunction
 	protected abstract Adaptor getAdaptor(Instrument instrument);
 
 }

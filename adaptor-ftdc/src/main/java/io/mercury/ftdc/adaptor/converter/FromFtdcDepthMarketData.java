@@ -23,9 +23,9 @@ public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketDa
 
 	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newFormatter();
+	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newDateTimeFormatter();
 
-	private final DateTimeFormatter actionDayformatter = DatePattern.YYYYMMDD.newFormatter();
+	private final DateTimeFormatter actionDayformatter = DatePattern.YYYYMMDD.newDateTimeFormatter();
 
 	@Override
 	public BasicMarketData apply(FtdcDepthMarketData depthMarketData) {
