@@ -15,11 +15,11 @@ import io.mercury.common.collections.MutableMaps;
 @NotThreadSafe
 public final class PointSet<P extends Point<?, ?>> {
 
-	private MutableList<P> points;
+	private MutableList<P> pointList;
 	private MutableLongObjectMap<P> pointMap;
 
 	private PointSet(Capacity capacity) {
-		this.points = MutableLists.newFastList(capacity.size());
+		this.pointList = MutableLists.newFastList(capacity.size());
 		this.pointMap = MutableMaps.newLongObjectHashMap(capacity);
 	}
 
@@ -32,23 +32,23 @@ public final class PointSet<P extends Point<?, ?>> {
 		if (pointMap.containsKey(serialId))
 			return false;
 		pointMap.put(serialId, point);
-		return points.add(point);
+		return pointList.add(point);
 	}
 
 	public int size() {
-		return points.size();
+		return pointList.size();
 	}
 
 	public P getLast() {
-		return points.getLast();
+		return pointList.getLast();
 	}
 
 	public P getFirst() {
-		return points.getFirst();
+		return pointList.getFirst();
 	}
 
 	public Optional<P> get(int index) {
-		return index < points.size() ? Optional.ofNullable(points.get(index)) : Optional.empty();
+		return index < pointList.size() ? Optional.ofNullable(pointList.get(index)) : Optional.empty();
 	}
 
 	/**
@@ -67,12 +67,12 @@ public final class PointSet<P extends Point<?, ?>> {
 		return pointMap.get(serialId);
 	}
 
-	public MutableList<P> getPoints() {
-		return points;
+	public MutableList<P> getPointList() {
+		return pointList;
 	}
 
-	public MutableList<P> getSubPoints(int fromIndex, int toIndex) {
-		return points.subList(fromIndex, toIndex);
+	public MutableList<P> getSubPointList(int fromIndex, int toIndex) {
+		return pointList.subList(fromIndex, toIndex);
 	}
 
 }

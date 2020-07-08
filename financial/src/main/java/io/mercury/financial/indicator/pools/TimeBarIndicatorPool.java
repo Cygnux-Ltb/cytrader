@@ -17,7 +17,7 @@ public final class TimeBarIndicatorPool extends SingleIndicatorPool<TimeBarIndic
 	}
 
 	@Override
-	protected TimeBarIndicator generateIndicator(TimePeriod period, Instrument instrument) {
+	protected TimeBarIndicator newIndicator(TimePeriod period, Instrument instrument) {
 		return new TimeBarIndicator(instrument, period);
 	}
 

@@ -17,7 +17,7 @@ public final class SmaIndicatorPool extends MultipleIndicatorPool<SmaIndicator, 
 	}
 
 	@Override
-	protected SmaIndicator generateIndicator(TimePeriod period, int cycle, Instrument instrument) {
+	protected SmaIndicator newIndicator(TimePeriod period, int cycle, Instrument instrument) {
 		return SmaIndicator.with(instrument, period, cycle);
 	}
 

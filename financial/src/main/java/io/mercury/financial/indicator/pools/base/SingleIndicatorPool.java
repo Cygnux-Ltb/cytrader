@@ -1,10 +1,12 @@
 package io.mercury.financial.indicator.pools.base;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
+import org.slf4j.Logger;
 
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.indicator.api.Indicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
@@ -12,6 +14,8 @@ import io.mercury.financial.vector.TimePeriod;
 
 public abstract class SingleIndicatorPool<I extends Indicator<?, ?, M>, M extends MarketData>
 		extends IndicatorPool<I, M> {
+	
+	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
 	@SuppressWarnings("unused")
 	private MutableIntObjectMap<I> s1IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
@@ -37,13 +41,13 @@ public abstract class SingleIndicatorPool<I extends Indicator<?, ?, M>, M extend
 	private MutableIntObjectMap<I> m15IndicatorMap = MutableMaps.newIntObjectHashMap(Capacity.L04_SIZE_16);
 
 	@AbstractFunction
-	protected abstract I generateIndicator(TimePeriod period, Instrument instrument);
+	protected abstract I newIndicator(TimePeriod period, Instrument instrument);
 
 	public I getIndicator(TimePeriod period, Instrument instrument) {
 		MutableIntObjectMap<I> indicatorMap = getIndicatorMap(period);
 		I saved = indicatorMap.get(instrument.id());
 		if (saved == null) {
-			saved = generateIndicator(period, instrument);
+			saved = newIndicator(period, instrument);
 			indicatorMap.put(instrument.id(), saved);
 		}
 		return saved;
