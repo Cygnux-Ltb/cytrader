@@ -11,15 +11,15 @@ import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.strategy.StrategyParamKey;
 
-public abstract class StrategyMultipleImpl<M extends MarketData, P extends StrategyParamKey>
+public abstract class StrategyMultipleInstrumentImpl<M extends MarketData, P extends StrategyParamKey>
 		extends StrategyBaseImpl<M, P> {
 
 	// 策略订阅的合约
 	protected ImmutableList<Instrument> instruments;
 
-	protected StrategyMultipleImpl(int strategyId, String strategyName, int subAccountId, Set<Instrument> instruments,
-			ImmutableParamMap<P> paramMap) {
-		super(strategyId, strategyName, subAccountId, paramMap);
+	protected StrategyMultipleInstrumentImpl(int strategyId, String strategyName, int subAccountId, Set<Instrument> instruments,
+			ImmutableParamMap<P> param) {
+		super(strategyId, strategyName, subAccountId, param);
 		this.instruments = ImmutableLists.newList(instruments);
 	}
 

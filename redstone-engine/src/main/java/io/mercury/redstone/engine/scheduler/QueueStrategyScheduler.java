@@ -25,7 +25,7 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 	private static final int AdaptorEvent = 2;
 
 	public QueueStrategyScheduler(BufferSize size) {
-		this.despatchQueue = new SpscQueue<>("SPSCStrategyScheduler-Queue", size, true, despatchMsg -> {
+		this.despatchQueue = new SpscQueue<>("QueueStrategyScheduler-Despatch", size, true, despatchMsg -> {
 			switch (despatchMsg.mark()) {
 			case MarketData:
 				BasicMarketData marketData = despatchMsg.getMarketData();

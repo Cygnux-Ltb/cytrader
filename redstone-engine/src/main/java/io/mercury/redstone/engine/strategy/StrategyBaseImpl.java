@@ -37,7 +37,7 @@ import io.mercury.redstone.core.strategy.Strategy;
 import io.mercury.redstone.core.strategy.StrategyEvent;
 import io.mercury.redstone.core.strategy.StrategyParamKey;
 
-public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyParamKey>
+public abstract class StrategyBaseImpl<M extends MarketData, PK extends StrategyParamKey>
 		implements Strategy<M>, CircuitBreaker {
 
 	/**
@@ -81,9 +81,9 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	 */
 	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	protected final ImmutableParamMap<P> paramMap;
+	protected final ImmutableParamMap<PK> param;
 
-	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<P> paramMap) {
+	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<PK> param) {
 		this.strategyId = strategyId;
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
 				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
@@ -92,7 +92,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 		this.subAccountId = subAccountId;
 		this.account = AccountKeeper.getAccountBySubAccountId(subAccountId);
 		this.accountId = account.accountId();
-		this.paramMap = paramMap;
+		this.param = param;
 	}
 
 	@Override
