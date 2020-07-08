@@ -6,7 +6,6 @@ public final class StaticMarketData implements MarketData {
 
 	@Override
 	public MarketDataType getMarketDataType() {
-		// TODO Auto-generated method stub
 		return MarketDataType.Static;
 	}
 
