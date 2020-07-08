@@ -113,13 +113,13 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 	}
 
 	@Override
-	public int subAccountId() {
-		return subAccountId;
+	public SubAccount getSubAccount() {
+		return subAccount;
 	}
 
 	@Override
-	public int accountId() {
-		return accountId;
+	public Account getAccount() {
+		return account;
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 
 	@Override
 	public void onOrder(Order order) {
-		order.outputLog(log, strategyName, "On order callback");
+		order.writeLog(log, strategyName, "On order callback");
 		handleOrder(order);
 	}
 
@@ -153,11 +153,12 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 			this.isEnable = true;
 			log.info("{} :: Enable strategy success, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
 					strategyId, initSuccess, isEnable);
+			return this;
 		} else {
 			log.info("{} :: Enable strategy fail, strategyId==[{}], initSuccess==[{}], isEnable==[{}]", strategyName,
 					strategyId, initSuccess, isEnable);
+			throw new IllegalStateException("Strategy has been initialized");
 		}
-		return this;
 	}
 
 	@Override
@@ -358,15 +359,15 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 			TrdDirection direction) {
 		ActParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
 				abs(offerQty), offerPrice, ordType, direction, TrdAction.Open);
-		parentOrder.outputLog(log, strategyName, "Open position generate [ParentOrder]");
+		parentOrder.writeLog(log, strategyName, "Open position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
 		ActChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
-		childOrder.outputLog(log, strategyName, "Open position generate [ChildOrder]");
+		childOrder.writeLog(log, strategyName, "Open position generate [ChildOrder]");
 		saveOrder(childOrder);
 
 		getAdaptor(instrument).newOredr(childOrder);
-		childOrder.outputLog(log, strategyName, "Open position [ChildOrder] has been sent");
+		childOrder.writeLog(log, strategyName, "Open position [ChildOrder] has been sent");
 	}
 
 	/**
@@ -458,15 +459,15 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 		ActParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
 				abs(offerQty), offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short,
 				TrdAction.Close);
-		parentOrder.outputLog(log, strategyName, "Close position generate [ParentOrder]");
+		parentOrder.writeLog(log, strategyName, "Close position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
 		ActChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
-		childOrder.outputLog(log, strategyName, "Close position generate [ChildOrder]");
+		childOrder.writeLog(log, strategyName, "Close position generate [ChildOrder]");
 		saveOrder(childOrder);
 
 		getAdaptor(instrument).newOredr(childOrder);
-		childOrder.outputLog(log, strategyName, "Close position [ChildOrder] has been sent");
+		childOrder.writeLog(log, strategyName, "Close position [ChildOrder] has been sent");
 	}
 
 	/**

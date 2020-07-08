@@ -32,8 +32,8 @@ public abstract class MultipleStrategyScheduler<M extends MarketData> implements
 
 	@Override
 	public void addStrategy(Strategy<M> strategy) {
-		log.info("Add strategy -> strategyId==[{}], strategyName==[{}], subAccountId==[{}]", strategy.strategyId(),
-				strategy.strategyName(), strategy.subAccountId());
+		log.info("Add strategy -> strategyId==[{}], strategyName==[{}], subAccount==[{}]", strategy.strategyId(),
+				strategy.strategyName(), strategy.getSubAccount());
 		strategyMap.put(strategy.strategyId(), strategy);
 		strategy.instruments().each(instrument -> this.subscribeInstrument(instrument, strategy));
 		strategy.enable();

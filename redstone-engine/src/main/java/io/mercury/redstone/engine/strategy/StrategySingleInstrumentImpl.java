@@ -37,6 +37,8 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData, PK exte
 
 	@Override
 	public void addAdaptor(Adaptor adaptor) {
+		if (this.adaptor != null)
+			throw new IllegalStateException("adaptor is not null");
 		this.adaptor = adaptor;
 	}
 
