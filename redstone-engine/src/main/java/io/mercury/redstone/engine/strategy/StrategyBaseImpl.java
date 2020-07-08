@@ -2,17 +2,14 @@ package io.mercury.redstone.engine.strategy;
 
 import static java.lang.Math.abs;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 
-import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.annotation.lang.AbstractFunction;
-import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.map.ImmutableParamMap;
@@ -30,14 +27,10 @@ import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.order.ActChildOrder;
 import io.mercury.redstone.core.order.ActParentOrder;
 import io.mercury.redstone.core.order.Order;
-import io.mercury.redstone.core.order.OrderBook;
 import io.mercury.redstone.core.order.OrderKeeper;
-import io.mercury.redstone.core.order.StrategyOrder;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
-import io.mercury.redstone.core.order.structure.OrdPrice;
-import io.mercury.redstone.core.order.structure.OrdQty;
 import io.mercury.redstone.core.position.PositionKeeper;
 import io.mercury.redstone.core.risk.CircuitBreaker;
 import io.mercury.redstone.core.strategy.Strategy;
@@ -88,9 +81,9 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	 */
 	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	protected final ImmutableParamMap<P> param;
+	protected final ImmutableParamMap<P> paramMap;
 
-	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<P> param) {
+	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<P> paramMap) {
 		this.strategyId = strategyId;
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
 				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
@@ -99,7 +92,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 		this.subAccountId = subAccountId;
 		this.account = AccountKeeper.getAccountBySubAccountId(subAccountId);
 		this.accountId = account.accountId();
-		this.param = param;
+		this.paramMap = paramMap;
 	}
 
 	@Override
@@ -241,24 +234,24 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	 * @param maxPrice   允许浮动点差
 	 */
 	void orderWatermark(Instrument instrument, TrdDirection direction, int targetQty, long limitPrice, int floatTick) {
-		long offerPrice = 0L;
-		if (limitPrice > 0)
-			offerPrice = limitPrice;
-		else
-			offerPrice = getLevel1Price(instrument, direction);
+//		long offerPrice = 0L;
+//		if (limitPrice > 0)
+//			offerPrice = limitPrice;
+//		else
+//			offerPrice = getLevel1Price(instrument, direction);
 
 		// 创建策略订单
-		StrategyOrder strategyOrder = new StrategyOrder(strategyId, accountId, subAccountId, instrument,
-				OrdQty.withOffer(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
-		orders.put(strategyOrder.ordSysId(), strategyOrder);
+//		StrategyOrder strategyOrder = new StrategyOrder(strategyId, accountId, subAccountId, instrument,
+//				OrdQty.withOffer(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
+//		orders.put(strategyOrder.ordSysId(), strategyOrder);
 
 		// 转换为实际订单
-		MutableList<ActParentOrder> parentOrders = strategyOrderConverter.apply(strategyOrder);
+//		MutableList<ActParentOrder> parentOrders = strategyOrderConverter.apply(strategyOrder);
 
 		// 存储订单
 		// TODO 未完成全部逻辑
-		ActParentOrder parentOrder = parentOrders.getFirst();
-		orders.put(parentOrder.ordSysId(), parentOrder);
+//		ActParentOrder parentOrder = parentOrders.getFirst();
+//		orders.put(parentOrder.ordSysId(), parentOrder);
 
 		// 转为实际执行的子订单
 		// ActChildOrder childOrder = parentOrder.toChildOrder();
@@ -271,39 +264,39 @@ public abstract class StrategyBaseImpl<M extends MarketData, P extends StrategyP
 	/**
 	 * 将StrategyOrder转换为需要执行的实际订单
 	 */
-	private Function<StrategyOrder, MutableList<ActParentOrder>> strategyOrderConverter = strategyOrder -> {
-		MutableList<ActParentOrder> parentOrders = MutableLists.newFastList();
-		OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrderBook(strategyOrder.instrument());
-		int offerQty = strategyOrder.ordQty().offerQty();
-		switch (strategyOrder.direction()) {
-		case Long:
-			MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.activeShortOrders();
-			if (activeShortOrders.notEmpty()) {
-				// TODO 当有活动的反向订单时选择撤单
-			}
-			// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
-			// TODO 计算平仓后还需要开仓的数量
-			int needOpenLong = offerQty - 0;
-			ActParentOrder openLongOrder = strategyOrder.toActualOrder(TrdDirection.Long, needOpenLong, OrdType.Limit);
-			parentOrders.add(openLongOrder);
-			break;
-		case Short:
-			MutableLongObjectMap<Order> activeLongOrders = instrumentOrderBook.activeLongOrders();
-			if (activeLongOrders.notEmpty()) {
-				// TODO 当有活动的反向订单时选择撤单
-			}
-			// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
-			// TODO 计算平仓后还需要开仓的数量
-			int needOpenShort = offerQty - 0;
-			ActParentOrder openShortOrder = strategyOrder.toActualOrder(TrdDirection.Short, needOpenShort,
-					OrdType.Limit);
-			parentOrders.add(openShortOrder);
-			break;
-		default:
-			break;
-		}
-		return parentOrders;
-	};
+//	private Function<StrategyOrder, MutableList<ActParentOrder>> strategyOrderConverter = strategyOrder -> {
+//		MutableList<ActParentOrder> parentOrders = MutableLists.newFastList();
+//		OrderBook instrumentOrderBook = OrderKeeper.getInstrumentOrderBook(strategyOrder.instrument());
+//		int offerQty = strategyOrder.ordQty().offerQty();
+//		switch (strategyOrder.direction()) {
+//		case Long:
+//			MutableLongObjectMap<Order> activeShortOrders = instrumentOrderBook.activeShortOrders();
+//			if (activeShortOrders.notEmpty()) {
+//				// TODO 当有活动的反向订单时选择撤单
+//			}
+//			// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
+//			// TODO 计算平仓后还需要开仓的数量
+//			int needOpenLong = offerQty - 0;
+//			ActParentOrder openLongOrder = strategyOrder.toActualOrder(TrdDirection.Long, needOpenLong, OrdType.Limit);
+//			parentOrders.add(openLongOrder);
+//			break;
+//		case Short:
+//			MutableLongObjectMap<Order> activeLongOrders = instrumentOrderBook.activeLongOrders();
+//			if (activeLongOrders.notEmpty()) {
+//				// TODO 当有活动的反向订单时选择撤单
+//			}
+//			// TODO 检查当前头寸, 如果有反向头寸, 选择平仓
+//			// TODO 计算平仓后还需要开仓的数量
+//			int needOpenShort = offerQty - 0;
+//			ActParentOrder openShortOrder = strategyOrder.toActualOrder(TrdDirection.Short, needOpenShort,
+//					OrdType.Limit);
+//			parentOrders.add(openShortOrder);
+//			break;
+//		default:
+//			break;
+//		}
+//		return parentOrders;
+//	};
 
 	/**
 	 * 

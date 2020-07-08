@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.slf4j.Logger;
 
-import io.mercury.common.thread.ThreadTool;
+import io.mercury.common.thread.Threads;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.redstone.core.order.enums.OrdStatus;
 import io.mercury.redstone.core.order.enums.OrdType;
@@ -73,7 +73,7 @@ public interface Order extends Comparable<Order>, Serializable {
 		System.out.println(seed1);
 		for (;;) {
 			System.out.println((System.nanoTime() - seed) / 100000);
-			ThreadTool.sleep(20);
+			Threads.sleep(20);
 		}
 
 	}
