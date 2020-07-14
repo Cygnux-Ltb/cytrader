@@ -169,8 +169,8 @@ public abstract class OrderBaseImpl implements Order {
 			+ "direction==[{}], ordType==[{}], instrument -> {}, ordPrice -> {}, ordQty -> {}, ordTimestamps -> {}";
 
 	@Override
-	public void outputLog(Logger log, String objName, String msg) {
-		log.info(OrderOutputText, objName, msg, ordSysId(), ordStatus(), direction(), ordType(), instrument(),
+	public void writeLog(Logger logger, String objName, String msg) {
+		logger.info(OrderOutputText, objName, msg, ordSysId(), ordStatus(), direction(), ordType(), instrument(),
 				ordPrice(), ordQty(), ordTimestamp());
 	}
 

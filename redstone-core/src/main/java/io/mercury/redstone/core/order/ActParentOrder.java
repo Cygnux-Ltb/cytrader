@@ -95,13 +95,13 @@ public final class ActParentOrder extends ActualOrder {
 		return 1;
 	}
 
-	private static final String ParentOrderOutputText = "{} :: {}, ParentOrder : ordSysId==[{}], ownerOrdId==[{}], "
+	private static final String ParentOrderText = "{} :: {}, ParentOrder : ordSysId==[{}], ownerOrdId==[{}], "
 			+ "ordStatus==[{}], direction==[{}], action==[{}], ordType==[{}], instrument -> {}, "
 			+ "ordPrice -> {}, ordQty -> {}, ordTimestamps -> {}";
 
 	@Override
-	public void outputLog(Logger log, String objName, String msg) {
-		log.info(ParentOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(), action(),
+	public void writeLog(Logger logger, String objName, String msg) {
+		logger.info(ParentOrderText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(), action(),
 				ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp());
 	}
 

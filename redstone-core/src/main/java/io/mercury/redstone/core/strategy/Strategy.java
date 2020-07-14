@@ -2,11 +2,15 @@ package io.mercury.redstone.core.strategy;
 
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
+import io.mercury.redstone.core.account.Account;
+import io.mercury.redstone.core.account.SubAccount;
 import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.order.Order;
@@ -21,15 +25,15 @@ public interface Strategy<M extends MarketData> extends Enable<Strategy<M>>, Com
 
 	String strategyName();
 
-	int subAccountId();
+	SubAccount getSubAccount();
 
-	int accountId();
+	Account getAccount();
 
 	ImmutableList<Instrument> instruments();
 
-	void addAdaptor(Adaptor adaptor);
+	void addAdaptor(@Nonnull Adaptor adaptor);
 
-	void initialize(Supplier<Boolean> initializer);
+	void initialize(@Nonnull Supplier<Boolean> initializer);
 
 	void onAdaptorEvent(AdaptorEvent event);
 

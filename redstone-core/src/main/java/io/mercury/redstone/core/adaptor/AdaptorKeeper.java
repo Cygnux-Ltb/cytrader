@@ -7,7 +7,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.io.Dumper;
+import io.mercury.common.io.Dumpable;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.redstone.core.account.Account;
 
@@ -26,7 +26,7 @@ import io.mercury.redstone.core.account.Account;
  *       目前无法保证这一过程的访问安全
  */
 @NotThreadSafe
-public final class AdaptorKeeper implements Dumper<String> {
+public final class AdaptorKeeper implements Dumpable<String> {
 
 	/**
 	 * 

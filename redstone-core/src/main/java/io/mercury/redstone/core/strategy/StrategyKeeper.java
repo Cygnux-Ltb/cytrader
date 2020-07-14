@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.io.Dumper;
+import io.mercury.common.io.Dumpable;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 
@@ -19,7 +19,7 @@ import io.mercury.financial.instrument.Instrument;
  */
 @NotThreadSafe
 @Deprecated
-public final class StrategyKeeper implements Dumper<String> {
+public final class StrategyKeeper implements Dumpable<String> {
 
 	/**
 	 * 

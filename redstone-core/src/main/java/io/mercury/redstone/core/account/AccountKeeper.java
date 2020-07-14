@@ -11,7 +11,7 @@ import org.eclipse.collections.impl.collector.Collectors2;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.io.Dumper;
+import io.mercury.common.io.Dumpable;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
 import io.mercury.redstone.core.account.Account.AccountException;
@@ -25,7 +25,7 @@ import io.mercury.redstone.core.account.SubAccount.SubAccountException;
  *
  */
 @NotThreadSafe
-public final class AccountKeeper implements Dumper<String> {
+public final class AccountKeeper implements Dumpable<String> {
 
 	/**
 	 * 

@@ -55,7 +55,7 @@ public interface Order extends Comparable<Order>, Serializable {
 
 	long ownerOrdId();
 
-	void outputLog(Logger log, String objName, String msg);
+	void writeLog(Logger logger, String objName, String msg);
 
 	@Override
 	default int compareTo(Order o) {

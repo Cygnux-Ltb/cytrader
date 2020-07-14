@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.io.Dumper;
+import io.mercury.common.io.Dumpable;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
@@ -28,7 +28,7 @@ import io.mercury.redstone.core.order.structure.OrdReport;
  */
 
 @NotThreadSafe
-public final class OrderKeeper implements Dumper<String> {
+public final class OrderKeeper implements Dumpable<String> {
 
 	/**
 	 * 
@@ -116,7 +116,7 @@ public final class OrderKeeper implements Dumper<String> {
 					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
 			putOrder(order);
 		} else {
-			order.outputLog(log, "OrderKeeper", "Search order OK");
+			order.writeLog(log, "OrderKeeper", "Search order OK");
 		}
 		ActChildOrder childOrder = (ActChildOrder) order;
 		// 更新订单状态

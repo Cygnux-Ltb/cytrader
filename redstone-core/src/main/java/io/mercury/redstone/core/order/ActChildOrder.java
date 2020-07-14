@@ -97,13 +97,13 @@ public final class ActChildOrder extends ActualOrder {
 		return trdRecordList.last().get();
 	}
 
-	private static final String ChildOrderOutputText = "{} :: {}, ChildOrder : ordSysId==[{}], ownerOrdId==[{}], "
+	private static final String ChildOrderText = "{} :: {}, ChildOrder : ordSysId==[{}], ownerOrdId==[{}], "
 			+ "ordStatus==[{}], direction==[{}], action==[{}], ordType==[{}], instrument -> {}, ordPrice -> {}, "
 			+ "ordQty -> {}, ordTimestamps -> {}, trdRecordList -> {}";
 
 	@Override
-	public void outputLog(Logger log, String objName, String msg) {
-		log.info(ChildOrderOutputText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(), action(),
+	public void writeLog(Logger logger, String objName, String msg) {
+		logger.info(ChildOrderText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(), action(),
 				ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp(), trdRecordList);
 	}
 

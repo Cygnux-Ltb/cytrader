@@ -8,9 +8,9 @@ import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.io.Dumper;
+import io.mercury.common.io.Dumpable;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.JointIdSupporter;
+import io.mercury.common.param.JointKeySupporter;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.redstone.core.order.ActChildOrder;
 import io.mercury.redstone.core.order.enums.TrdDirection;
@@ -24,7 +24,7 @@ import io.mercury.redstone.core.order.enums.TrdDirection;
  */
 
 @NotThreadSafe
-public final class PositionKeeper implements Dumper<String> {
+public final class PositionKeeper implements Dumpable<String> {
 
 	/**
 	 * 
@@ -71,7 +71,7 @@ public final class PositionKeeper implements Dumper<String> {
 	 * @return
 	 */
 	private static long mergePositionKey(int subAccountId, Instrument instrument) {
-		return JointIdSupporter.mergeJointId(subAccountId, instrument.id());
+		return JointKeySupporter.mergeJointKey(subAccountId, instrument.id());
 	}
 
 	/**
