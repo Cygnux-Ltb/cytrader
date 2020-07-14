@@ -7,7 +7,7 @@ import io.mercury.financial.market.api.MarketData;
 public abstract class FloatPeriodIndicator<P extends FloatPeriodPoint<M>, E extends IndicatorEvent, M extends MarketData>
 		extends BaseIndicator<P, E, M> {
 
-	public FloatPeriodIndicator(Instrument instrument) {
+	protected FloatPeriodIndicator(Instrument instrument) {
 		super(instrument);
 	}
 

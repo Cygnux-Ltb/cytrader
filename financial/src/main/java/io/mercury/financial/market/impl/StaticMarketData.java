@@ -11,19 +11,16 @@ public final class StaticMarketData implements MarketData {
 
 	@Override
 	public String getInstrumentId() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public long getEpochMillis() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public long getLastPrice() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

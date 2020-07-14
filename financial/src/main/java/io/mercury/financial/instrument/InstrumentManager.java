@@ -11,7 +11,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.io.Dumper;
+import io.mercury.common.io.Dumpable;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.Assertor;
 
@@ -23,7 +23,7 @@ import io.mercury.common.util.Assertor;
  *
  */
 @NotThreadSafe
-public final class InstrumentManager implements Dumper<String> {
+public final class InstrumentManager implements Dumpable<String> {
 
 	/**
 	 * 
@@ -125,7 +125,6 @@ public final class InstrumentManager implements Dumper<String> {
 		return allInstrument;
 	}
 
-	@Override
 	public String dump() {
 		return "";
 	}

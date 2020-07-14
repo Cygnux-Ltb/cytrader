@@ -8,7 +8,7 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.io.Dumper;
+import io.mercury.common.io.Dumpable;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentManager;
@@ -27,7 +27,7 @@ import io.mercury.financial.market.api.MarketData;
  * @author yellow013
  */
 @ThreadSafe
-public final class MarkerDataKeeper implements Dumper<String> {
+public final class MarkerDataKeeper implements Dumpable<String> {
 
 	/**
 	 * 
