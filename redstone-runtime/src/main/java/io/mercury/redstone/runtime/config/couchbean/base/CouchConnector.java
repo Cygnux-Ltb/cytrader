@@ -15,7 +15,7 @@ import io.mercury.transport.http.HttpRequester;
 
 public final class CouchConnector {
 
-	private Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(CouchConnector.class);
 
 	private String couchdbUrl;
 

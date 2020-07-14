@@ -25,7 +25,7 @@ public class NacosReader {
 
 	private ConfigService configService;
 
-	private Logger log = CommonLoggerFactory.getLogger(NacosReader.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(NacosReader.class);
 
 	public static final Properties readProperties(String serverAddr, String group, String dataId)
 			throws NacosReadException {
