@@ -5,8 +5,8 @@ import java.time.Duration;
 import java.util.Properties;
 
 import io.mercury.common.datetime.DateTimeUtil;
-import io.mercury.common.log.LogLevel;
-import io.mercury.common.log.LoggerSetter;
+import io.mercury.common.log.LogConfigurator;
+import io.mercury.common.log.LogConfigurator.LogLevel;
 import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.instrument.futures.impl.ChinaFutures;
@@ -26,8 +26,8 @@ public final class StartExample {
 
 	public static void main(String[] args) {
 		long datetime = DateTimeUtil.datetimeOfSecond();
-		LoggerSetter.logFileName("redstone-example-" + datetime);
-		LoggerSetter.logLevel(LogLevel.INFO);
+		LogConfigurator.logFileName("redstone-example-" + datetime);
+		LogConfigurator.logLevel(LogLevel.INFO);
 
 		// TODO 读取配置文件
 		Properties properties = null;
