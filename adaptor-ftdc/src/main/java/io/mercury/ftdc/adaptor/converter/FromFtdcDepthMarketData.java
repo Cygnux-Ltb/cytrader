@@ -21,7 +21,7 @@ import io.mercury.ftdc.gateway.bean.FtdcDepthMarketData;
 
 public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketData, BasicMarketData> {
 
-	private final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(FromFtdcDepthMarketData.class);
 
 	private final DateTimeFormatter updateTimeformatter = TimePattern.HH_MM_SS.newDateTimeFormatter();
 

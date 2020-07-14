@@ -22,7 +22,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FtdcTraderSpiImpl extends CThostFtdcTraderSpi {
 
-	private final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(FtdcTraderSpiImpl.class);
 
 	private final FtdcGateway gateway;
 

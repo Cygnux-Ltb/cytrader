@@ -15,7 +15,7 @@ import io.mercury.ftdc.gateway.bean.FtdcTrade;
 
 public class CtpGatewayTest {
 
-	private final Logger log = CommonLoggerFactory.getLogger(CtpGatewayTest.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(CtpGatewayTest.class);
 
 	// 标准CTP
 //	private String TradeAddress = "tcp://180.168.146.187:10100";

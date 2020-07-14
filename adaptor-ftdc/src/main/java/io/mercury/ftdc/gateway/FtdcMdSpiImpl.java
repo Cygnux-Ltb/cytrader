@@ -14,7 +14,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public final class FtdcMdSpiImpl extends CThostFtdcMdSpi {
 
-	private final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(FtdcMdSpiImpl.class);
 
 	private final FtdcGateway gateway;
 

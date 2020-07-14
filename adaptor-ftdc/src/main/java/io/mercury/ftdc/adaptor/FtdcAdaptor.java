@@ -43,7 +43,7 @@ import io.mercury.serialization.json.JsonUtil;
 
 public class FtdcAdaptor extends AdaptorBaseImpl {
 
-	private final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(FtdcAdaptor.class);
 
 	/**
 	 * 转换行情
