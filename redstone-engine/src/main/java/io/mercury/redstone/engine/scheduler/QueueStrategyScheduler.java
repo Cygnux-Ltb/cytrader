@@ -1,6 +1,6 @@
 package io.mercury.redstone.engine.scheduler;
 
-import io.mercury.common.concurrent.disruptor.BufferSize;
+import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.disruptor.SpscQueue;
 import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.financial.market.impl.BasicMarketData;
@@ -24,7 +24,7 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	public QueueStrategyScheduler(BufferSize size) {
+	public QueueStrategyScheduler(Capacity size) {
 		this.despatchQueue = new SpscQueue<>("QueueStrategyScheduler-Despatch", size, true, despatchMsg -> {
 			switch (despatchMsg.mark()) {
 			case MarketData:

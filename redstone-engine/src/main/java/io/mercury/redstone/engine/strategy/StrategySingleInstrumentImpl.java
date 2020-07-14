@@ -22,8 +22,8 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData, PK exte
 	protected ImmutableList<Instrument> instruments;
 
 	protected StrategySingleInstrumentImpl(int strategyId, String strategyName, int subAccountId, Instrument instrument,
-			ImmutableParamMap<PK> param) {
-		super(strategyId, strategyName, subAccountId, param);
+			ImmutableParamMap<PK> paramMap) {
+		super(strategyId, strategyName, subAccountId, paramMap);
 		this.instrument = instrument;
 		this.instruments = ImmutableLists.newList(instrument);
 	}

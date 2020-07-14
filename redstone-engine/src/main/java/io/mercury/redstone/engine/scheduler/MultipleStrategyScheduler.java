@@ -15,6 +15,11 @@ import io.mercury.redstone.core.strategy.StrategyScheduler;
 public abstract class MultipleStrategyScheduler<M extends MarketData> implements StrategyScheduler<M> {
 
 	/**
+	 * Logger
+	 */
+	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
+
+	/**
 	 * 策略列表
 	 */
 	protected final MutableIntObjectMap<Strategy<M>> strategyMap = MutableMaps.newIntObjectHashMap();
@@ -24,11 +29,6 @@ public abstract class MultipleStrategyScheduler<M extends MarketData> implements
 	 * instrumentId -> Set::[Strategy]
 	 */
 	protected final MutableIntObjectMap<MutableSet<Strategy<M>>> subscribedMap = MutableMaps.newIntObjectHashMap();
-
-	/**
-	 * Logger
-	 */
-	protected final Logger log = CommonLoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public void addStrategy(Strategy<M> strategy) {

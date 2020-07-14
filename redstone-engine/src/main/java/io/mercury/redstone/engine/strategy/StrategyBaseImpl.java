@@ -41,6 +41,11 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 		implements Strategy<M>, CircuitBreaker {
 
 	/**
+	 * 子类共用日志记录器
+	 */
+	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
+
+	/**
 	 * 策略ID
 	 */
 	private final int strategyId;
@@ -77,13 +82,11 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 	protected final MutableLongObjectMap<Order> orders = MutableMaps.newLongObjectHashMap();
 
 	/**
-	 * 
+	 * 策略参数Map
 	 */
-	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
+	protected final ImmutableParamMap<PK> paramMap;
 
-	protected final ImmutableParamMap<PK> param;
-
-	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<PK> param) {
+	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<PK> paramMap) {
 		this.strategyId = strategyId;
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
 				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
@@ -92,7 +95,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 		this.subAccountId = subAccountId;
 		this.account = AccountKeeper.getAccountBySubAccountId(subAccountId);
 		this.accountId = account.accountId();
-		this.param = param;
+		this.paramMap = paramMap;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import io.mercury.redstone.core.risk.OrderBarrier;
 
 public final class HighFrequencyBarrier implements OrderBarrier<ActChildOrder> {
 
-	private Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(HighFrequencyBarrier.class);
 
 	@Override
 	public boolean filter(ActChildOrder order) {
