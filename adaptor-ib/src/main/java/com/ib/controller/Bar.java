@@ -7,8 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Bar {
-	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyyMMdd HH:mm:ss"); // format for historical
-																								// query
+
+	/**
+	 * format for historical query
+	 */
+	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
 
 	private final long m_time;
 	private final double m_high;

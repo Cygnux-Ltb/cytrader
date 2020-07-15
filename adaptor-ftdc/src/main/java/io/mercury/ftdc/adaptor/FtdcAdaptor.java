@@ -34,8 +34,8 @@ import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
 import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
 import io.mercury.redstone.core.account.Account;
+import io.mercury.redstone.core.adaptor.AdaptorBaseImpl;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
-import io.mercury.redstone.core.adaptor.base.AdaptorBaseImpl;
 import io.mercury.redstone.core.order.ActChildOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
@@ -71,10 +71,9 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	private final StrategyScheduler<BasicMarketData> scheduler;
 
-	public FtdcAdaptor(int adaptorId, String adaptorName, Account account,
-			@Nonnull StrategyScheduler<BasicMarketData> scheduler,
+	public FtdcAdaptor(int adaptorId, Account account, @Nonnull StrategyScheduler<BasicMarketData> scheduler,
 			@Nonnull ImmutableParamMap<FtdcAdaptorParamKey> paramMap) {
-		super(adaptorId, adaptorName, account);
+		super(adaptorId, account);
 		this.scheduler = scheduler;
 		// 创建配置信息
 		FtdcConfig ftdcConfig = createFtdcConfig(paramMap);
@@ -117,12 +116,11 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						FtdcMdConnect mdConnect = ftdcRspMsg.getFtdcMdConnect();
 						this.isMdAvailable = mdConnect.isAvailable();
 						log.info("Swap Queue Processor Handle FtdcMdConnect, isMdAvailable==[{}]", isMdAvailable);
-						AdaptorEvent mdEvent = new AdaptorEvent(adaptorId());
-						if (mdConnect.isAvailable()) {
-							mdEvent.setAdaptorStatus(AdaptorStatus.MdEnable);
-						} else {
-							mdEvent.setAdaptorStatus(AdaptorStatus.MdDisable);
-						}
+						AdaptorEvent mdEvent;
+						if (mdConnect.isAvailable())
+							mdEvent = new AdaptorEvent(adaptorId(), AdaptorStatus.MdEnable);
+						else
+							mdEvent = new AdaptorEvent(adaptorId(), AdaptorStatus.MdDisable);
 						scheduler.onAdaptorEvent(mdEvent);
 						break;
 					case FtdcTraderConnect:
@@ -133,12 +131,11 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						log.info(
 								"Swap Queue Processor Handle FtdcTraderConnect, isTraderAvailable==[{}], frontId==[{}], sessionId==[{}]",
 								isTraderAvailable, frontId, sessionId);
-						AdaptorEvent traderEvent = new AdaptorEvent(adaptorId());
-						if (traderConnect.isAvailable()) {
-							traderEvent.setAdaptorStatus(AdaptorStatus.TraderEnable);
-						} else {
-							traderEvent.setAdaptorStatus(AdaptorStatus.TraderDisable);
-						}
+						AdaptorEvent traderEvent;
+						if (traderConnect.isAvailable())
+							traderEvent = new AdaptorEvent(adaptorId(), AdaptorStatus.TraderEnable);
+						else
+							traderEvent = new AdaptorEvent(adaptorId(), AdaptorStatus.TraderDisable);
 						scheduler.onAdaptorEvent(traderEvent);
 						break;
 					case FtdcDepthMarketData:

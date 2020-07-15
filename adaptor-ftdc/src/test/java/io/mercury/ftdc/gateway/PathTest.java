@@ -14,8 +14,9 @@ public class PathTest {
 		System.out.println(new File("").getAbsolutePath() + "/lib");
 		
 		File file = new File(new File("").getAbsolutePath() + "/lib/6.3.15/linux");
-
-		System.out.println(Arrays.asList(file.list()));
+		
+		if(file.list() != null)
+			System.out.println(Arrays.asList());		
 		
 	}
 
