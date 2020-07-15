@@ -52,7 +52,7 @@ public final class StartExample {
 
 		try (Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, null, scheduler, adaptorParam)) {
 
-			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), new TimePeriod(Duration.ofSeconds(15)));
+			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.newWith(Duration.ofSeconds(15)));
 			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
 
 			adaptor.startup();
