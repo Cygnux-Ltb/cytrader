@@ -2,8 +2,8 @@ package io.mercury.redstone.core.adaptor.dto;
 
 public final class BalanceReport {
 
-	private int investorId;
-	private int balance;
+	private final int investorId;
+	private final int balance;
 
 	public BalanceReport(int investorId, int balance) {
 		this.investorId = investorId;

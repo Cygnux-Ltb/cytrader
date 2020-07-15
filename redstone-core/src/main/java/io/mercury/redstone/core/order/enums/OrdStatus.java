@@ -38,24 +38,24 @@ public enum OrdStatus {
 	;
 
 	private int code;
-	private boolean isFinished;
+	private boolean finished;
 
 	/**
 	 * 
 	 * @param code       代码
 	 * @param isFinished 是否为已结束状态
 	 */
-	private OrdStatus(int code, boolean isFinished) {
+	private OrdStatus(int code, boolean finished) {
 		this.code = code;
-		this.isFinished = isFinished;
+		this.finished = finished;
 	}
 
 	public int code() {
 		return code;
 	}
 
-	public boolean isFinished() {
-		return isFinished;
+	public boolean finished() {
+		return finished;
 	}
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrdStatus.class);

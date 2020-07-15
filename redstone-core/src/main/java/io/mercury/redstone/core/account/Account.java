@@ -17,14 +17,19 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	 * 账户ID
 	 */
 	private final int accountId;
-	
+
 	/**
 	 * 账户名
 	 */
 	private final String accountName;
 
 	/**
-	 * 经纪商提供的投资者ID
+	 * 经纪商-名称
+	 */
+	private final String brokerName;
+
+	/**
+	 * 经纪商-投资者ID
 	 */
 	private final String investorId;
 
@@ -46,13 +51,15 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	 */
 	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
-	public Account(int accountId, String accountName, @Nonnull String investorId) {
-		this(accountId, accountName, investorId, 0, 0);
+	public Account(int accountId, String accountName, @Nonnull String brokerName, @Nonnull String investorId) {
+		this(accountId, accountName, brokerName, investorId, 0, 0);
 	}
 
-	public Account(int accountId, String accountName, @Nonnull String investorId, int balance, int credit) {
+	public Account(int accountId, String accountName, @Nonnull String brokerName, @Nonnull String investorId,
+			int balance, int credit) {
 		this.accountId = accountId;
 		this.accountName = nonEmpty(accountName, "accountName");
+		this.brokerName = nonEmpty(brokerName, "brokerName");
 		this.investorId = nonEmpty(investorId, "investorId");
 		this.balance = balance;
 		this.credit = credit;
@@ -64,6 +71,10 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 
 	public String accountName() {
 		return accountName;
+	}
+
+	public String brokerName() {
+		return brokerName;
 	}
 
 	public String investorId() {
@@ -155,7 +166,7 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 
 	public static void main(String[] args) {
 		System.out.println(StringUtil.toText(null));
-		System.out.println(new Account(1, "", "200500"));
+		System.out.println(new Account(1, "TEST[1]", "ZSQH", "200500"));
 	}
 
 }

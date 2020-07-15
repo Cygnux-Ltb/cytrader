@@ -5,7 +5,7 @@ public class StrategyException extends Exception {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1875202743194241352L;
+	private static final long serialVersionUID = 8145540141394714301L;
 
 	public StrategyException(int strategyId, String message) {
 		super("strategy id -> [" + strategyId + "] throw StrategyException, message -> [" + message + "]");

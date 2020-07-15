@@ -10,6 +10,7 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.io.Dumpable;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.redstone.core.account.Account;
+import io.mercury.redstone.core.account.SubAccount;
 
 /**
  * @topic 存储Adaptor和Mapping关系<br>
@@ -51,8 +52,16 @@ public final class AdaptorKeeper implements Dumpable<String> {
 	private AdaptorKeeper() {
 	}
 
-	public static Adaptor getAdaptorByAccount(int accountId) {
+	public static Adaptor getAdaptorByAccount(Account account) {
+		return AccountAdaptorMap.get(account.accountId());
+	}
+
+	public static Adaptor getAdaptorByAccountId(int accountId) {
 		return AccountAdaptorMap.get(accountId);
+	}
+
+	public static Adaptor getAdaptorBySubAccount(SubAccount subAccount) {
+		return SubAccountAdaptorMap.get(subAccount.subAccountId());
 	}
 
 	public static Adaptor getAdaptorBySubAccountId(int subAccountId) {

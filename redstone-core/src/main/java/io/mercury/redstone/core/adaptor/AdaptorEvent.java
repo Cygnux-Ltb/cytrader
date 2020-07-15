@@ -5,17 +5,18 @@ import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
 public final class AdaptorEvent {
 
 	/**
-	 * 
+	 * adaptorId
 	 */
 	private int adaptorId;
-	
+
 	/**
-	 * 
+	 * adaptorStatus
 	 */
 	private AdaptorStatus adaptorStatus;
 
-	public AdaptorEvent(int adaptorId) {
+	public AdaptorEvent(int adaptorId, AdaptorStatus adaptorStatus) {
 		this.adaptorId = adaptorId;
+		this.adaptorStatus = adaptorStatus;
 	}
 
 	public int adaptorId() {
@@ -24,16 +25,6 @@ public final class AdaptorEvent {
 
 	public AdaptorStatus adaptorStatus() {
 		return adaptorStatus;
-	}
-
-	public AdaptorEvent setAdaptorId(int adaptorId) {
-		this.adaptorId = adaptorId;
-		return this;
-	}
-
-	public AdaptorEvent setAdaptorStatus(AdaptorStatus adaptorStatus) {
-		this.adaptorStatus = adaptorStatus;
-		return this;
 	}
 
 }

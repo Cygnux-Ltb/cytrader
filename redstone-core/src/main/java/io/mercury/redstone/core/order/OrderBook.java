@@ -44,10 +44,17 @@ public final class OrderBook {
 	 */
 	private MutableLongObjectMap<Order> activeShortOrders;
 
+	/**
+	 * 
+	 */
 	public OrderBook() {
 		this(Capacity.L09_SIZE_512);
 	}
 
+	/**
+	 * 
+	 * @param capacity
+	 */
 	public OrderBook(Capacity capacity) {
 		this.orders = MutableMaps.newLongObjectHashMap(capacity);
 		this.longOrders = MutableMaps.newLongObjectHashMap(capacity.half());

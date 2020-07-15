@@ -31,9 +31,9 @@ public interface Strategy<M extends MarketData> extends Enable<Strategy<M>>, Com
 
 	ImmutableList<Instrument> instruments();
 
-	void addAdaptor(@Nonnull Adaptor adaptor);
-
 	void initialize(@Nonnull Supplier<Boolean> initializer);
+
+	void addAdaptor(@Nonnull Adaptor adaptor);
 
 	void onAdaptorEvent(AdaptorEvent event);
 

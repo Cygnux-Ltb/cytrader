@@ -121,7 +121,7 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 	}
 
 	public static void main(String[] args) {
-		SubAccount subAccount = new SubAccount(10, new Account(1, "Test-A", "200500", 100000, 0));
+		SubAccount subAccount = new SubAccount(10, new Account(1, "Test-A", "", "200500", 100000, 0));
 		System.out.println(subAccount);
 	}
 
