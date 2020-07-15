@@ -13,10 +13,14 @@ public final class TimePeriod {
 	private int seconds;
 	private String name;
 
-	public TimePeriod(Duration duration) {
+	private TimePeriod(Duration duration) {
 		this.duration = duration;
 		this.seconds = (int) duration.getSeconds();
 		this.name = "TimePeriod:[Seconds==" + seconds + "]";
+	}
+
+	public static final TimePeriod newWith(Duration duration) {
+		return new TimePeriod(duration);
 	}
 
 	public Duration duration() {

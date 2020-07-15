@@ -10,22 +10,22 @@ public enum PriceMultiplier {
 	NONE {
 		@Override
 		public long longMultiplier() {
-			return DecimalSupporter.L_MULTIPLIER_1;
+			return DecimalSupporter.LONG_MULTIPLIER_1L;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.D_MULTIPLIER_1;
+			return DecimalSupporter.DOUBLE_MULTIPLIER_1D;
 		}
 
 		@Override
-		public long toLong(double price) {
-			return (long) price;
+		public long toLong(double d) {
+			return (long) d;
 		}
 
 		@Override
-		public double toDouble(long price) {
-			return (double) price;
+		public double toDouble(long l) {
+			return (double) l;
 		}
 	},
 
@@ -36,22 +36,22 @@ public enum PriceMultiplier {
 
 		@Override
 		public long longMultiplier() {
-			return DecimalSupporter.L_MULTIPLIER_100;
+			return DecimalSupporter.LONG_MULTIPLIER_100L;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.D_MULTIPLIER_100;
+			return DecimalSupporter.DOUBLE_MULTIPLIER_100D;
 		}
 
 		@Override
-		public long toLong(double price) {
-			return DecimalSupporter.doubleToLong2(price);
+		public long toLong(double d) {
+			return DecimalSupporter.doubleToLong2(d);
 		}
 
 		@Override
-		public double toDouble(long price) {
-			return DecimalSupporter.longToDouble2(price);
+		public double toDouble(long l) {
+			return DecimalSupporter.longToDouble2(l);
 		}
 	},
 
@@ -61,22 +61,22 @@ public enum PriceMultiplier {
 	TEN_THOUSAND {
 		@Override
 		public long longMultiplier() {
-			return DecimalSupporter.L_MULTIPLIER_10000;
+			return DecimalSupporter.LONG_MULTIPLIER_10000L;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.D_MULTIPLIER_10000;
+			return DecimalSupporter.DOUBLE_MULTIPLIER_10000D;
 		}
 
 		@Override
-		public long toLong(double price) {
-			return DecimalSupporter.doubleToLong4(price);
+		public long toLong(double d) {
+			return DecimalSupporter.doubleToLong4(d);
 		}
 
 		@Override
-		public double toDouble(long price) {
-			return DecimalSupporter.longToDouble4(price);
+		public double toDouble(long l) {
+			return DecimalSupporter.longToDouble4(l);
 		}
 	},
 
@@ -86,22 +86,22 @@ public enum PriceMultiplier {
 	MILLION {
 		@Override
 		public long longMultiplier() {
-			return DecimalSupporter.L_MULTIPLIER_1000000;
+			return DecimalSupporter.LONG_MULTIPLIER_1000000L;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.D_MULTIPLIER_1000000;
+			return DecimalSupporter.DOUBLE_MULTIPLIER_1000000D;
 		}
 
 		@Override
-		public long toLong(double price) {
-			return DecimalSupporter.doubleToLong6(price);
+		public long toLong(double d) {
+			return DecimalSupporter.doubleToLong6(d);
 		}
 
 		@Override
-		public double toDouble(long price) {
-			return DecimalSupporter.longToDouble6(price);
+		public double toDouble(long l) {
+			return DecimalSupporter.longToDouble6(l);
 		}
 	},
 
@@ -111,22 +111,22 @@ public enum PriceMultiplier {
 	BILLION {
 		@Override
 		public long longMultiplier() {
-			return DecimalSupporter.L_MULTIPLIER_100000000;
+			return DecimalSupporter.LONG_MULTIPLIER_100000000L;
 		}
 
 		@Override
 		public double doubleMultiplier() {
-			return DecimalSupporter.D_MULTIPLIER_100000000;
+			return DecimalSupporter.DOUBLE_MULTIPLIER_100000000D;
 		}
 
 		@Override
-		public long toLong(double price) {
-			return DecimalSupporter.doubleToLong8(price);
+		public long toLong(double d) {
+			return DecimalSupporter.doubleToLong8(d);
 		}
 
 		@Override
-		public double toDouble(long price) {
-			return DecimalSupporter.longToDouble8(price);
+		public double toDouble(long l) {
+			return DecimalSupporter.longToDouble8(l);
 		}
 	},
 
@@ -139,8 +139,8 @@ public enum PriceMultiplier {
 
 	public abstract double doubleMultiplier();
 
-	public abstract long toLong(double price);
+	public abstract long toLong(double d);
 
-	public abstract double toDouble(long price);
+	public abstract double toDouble(long l);
 
 }

@@ -11,7 +11,7 @@ public enum Exchange {
 	TFX(12, "Tokyo Financial Exchange", TimeZone.JST),
 
 	LME(22, "London Metal Exchange", TimeZone.UTC),
-	
+
 	SHFE(41, "Shanghai Futures Exchange", TimeZone.CST),
 
 	DCE(42, "Dalian Commodity Exchange", TimeZone.CST),
@@ -21,6 +21,10 @@ public enum Exchange {
 	CFFEX(44, "China Financial Futures Exchange", TimeZone.CST),
 
 	SHINE(45, "Shanghai International Energy Exchange", TimeZone.CST),
+
+	SSE(46, "Shanghai Stock Exchange", TimeZone.CST),
+
+	SZSE(47, "Shenzhen Stock Exchange", TimeZone.CST),
 
 	;
 

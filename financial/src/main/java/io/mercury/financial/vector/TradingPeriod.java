@@ -30,10 +30,10 @@ public final class TradingPeriod implements Serial {
 	private LocalTime endTime;
 	private int endSecondOfDay;
 	private boolean isCrossDay;
-	private Duration totalDuration;
+	private Duration duration;
 
-	public static TradingPeriod with(int serialNumber, LocalTime startTime, LocalTime endTime) {
-		return new TradingPeriod(serialNumber, startTime, endTime);
+	public static TradingPeriod newWith(int serialId, LocalTime startTime, LocalTime endTime) {
+		return new TradingPeriod(serialId, startTime, endTime);
 	}
 
 	private TradingPeriod(int serialId, LocalTime startTime, LocalTime endTime) {
@@ -44,10 +44,10 @@ public final class TradingPeriod implements Serial {
 		this.endSecondOfDay = endTime.toSecondOfDay();
 		if (startSecondOfDay > endSecondOfDay) {
 			isCrossDay = true;
-			totalDuration = Duration.ofSeconds(endSecondOfDay - startSecondOfDay + TimeConst.SECONDS_PER_DAY);
+			duration = Duration.ofSeconds(endSecondOfDay - startSecondOfDay + TimeConst.SECONDS_PER_DAY);
 		} else {
 			isCrossDay = false;
-			totalDuration = Duration.ofSeconds(endSecondOfDay - startSecondOfDay);
+			duration = Duration.ofSeconds(endSecondOfDay - startSecondOfDay);
 		}
 	}
 
@@ -94,7 +94,7 @@ public final class TradingPeriod implements Serial {
 							ZonedDateTime.of(DateTimeUtil.currentDate(), endTime, zoneId), period));
 		} else {
 			// 获取此交易时间段的总时长
-			int totalSeconds = (int) totalDuration.getSeconds();
+			int totalSeconds = (int) duration.getSeconds();
 			// 计算按照分割参数总的段数
 			int count = totalSeconds / seconds;
 			if (totalSeconds % seconds > 0)
@@ -122,11 +122,11 @@ public final class TradingPeriod implements Serial {
 
 	public static void main(String[] args) {
 
-		TradingPeriod tradingPeriod = TradingPeriod.with(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00));
+		TradingPeriod tradingPeriod = TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00));
 
 		System.out.println(tradingPeriod.isPeriod(LocalTime.of(14, 00, 00)));
 
-		tradingPeriod.segmentation(TimeZone.CST, new TimePeriod(Duration.ofMinutes(45)))
+		tradingPeriod.segmentation(TimeZone.CST, TimePeriod.newWith(Duration.ofMinutes(45)))
 				.each(timePeriod -> System.out.println(timePeriod.startTime() + " - " + timePeriod.endTime()));
 
 		LocalDateTime of = LocalDateTime.of(LocalDate.now(), LocalTime.of(23, 55, 30));

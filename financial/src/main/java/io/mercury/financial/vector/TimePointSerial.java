@@ -26,11 +26,7 @@ public final class TimePointSerial implements Serial {
 		this.timePoint = timePoint;
 		this.epochSecond = timePoint.toEpochSecond();
 		this.repeat = repeat;
-		initSerialId();
-	}
-
-	private void initSerialId() {
-		this.serialId = epochSecond * 1000L + repeat;
+		this.serialId = (epochSecond * 1000L) + repeat;
 	}
 
 	@Override

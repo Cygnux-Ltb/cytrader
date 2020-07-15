@@ -22,4 +22,9 @@ public abstract class Stock extends AbsInstrument implements Symbol {
 		return super.priceMultiplier();
 	}
 
+	@Override
+	public Symbol symbol() {
+		return this;
+	}
+
 }

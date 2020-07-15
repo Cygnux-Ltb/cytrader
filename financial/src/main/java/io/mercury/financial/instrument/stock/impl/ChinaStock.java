@@ -4,7 +4,6 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.mercury.financial.instrument.Exchange;
 import io.mercury.financial.instrument.PriceMultiplier;
-import io.mercury.financial.instrument.Symbol;
 import io.mercury.financial.instrument.stock.api.Stock;
 import io.mercury.financial.vector.TradingPeriod;
 
@@ -31,12 +30,6 @@ public final class ChinaStock extends Stock {
 	}
 
 	@Override
-	public Symbol symbol() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public ImmutableSortedSet<TradingPeriod> tradingPeriodSet() {
 		// TODO Auto-generated method stub
 		return null;
@@ -45,7 +38,7 @@ public final class ChinaStock extends Stock {
 	@Override
 	public Exchange exchange() {
 		// TODO Auto-generated method stub
-		return null;
+		return Exchange.SHFE;
 	}
 
 }

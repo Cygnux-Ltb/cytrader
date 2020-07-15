@@ -23,10 +23,6 @@ public final class TimePeriodSerial implements Serial {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.period = period;
-		initEpochSecond();
-	}
-
-	private void initEpochSecond() {
 		this.epochSecond = startTime.toEpochSecond();
 	}
 
@@ -38,7 +34,7 @@ public final class TimePeriodSerial implements Serial {
 	public long epochSecond() {
 		return epochSecond;
 	}
-	
+
 	public TimePeriod period() {
 		return period;
 	}
