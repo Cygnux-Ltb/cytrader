@@ -55,9 +55,9 @@ public class SimAdaptor extends AdaptorBaseImpl {
 
 	private AvroBinaryDeserializer<Order> orderDeserializer = new AvroBinaryDeserializer<>(Order.class);
 
-	public SimAdaptor(int adaptorId, String adaptorName, Account account,
-			ImmutableParamMap<SimAdaptorParamKey> paramMap, StrategyScheduler<BasicMarketData> scheduler) {
-		super(adaptorId, adaptorName, account);
+	public SimAdaptor(int adaptorId, Account account, ImmutableParamMap<SimAdaptorParamKey> paramMap,
+			StrategyScheduler<BasicMarketData> scheduler) {
+		super(adaptorId, account);
 		this.paramMap = paramMap;
 		this.scheduler = scheduler;
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()

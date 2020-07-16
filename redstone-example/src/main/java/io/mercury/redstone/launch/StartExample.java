@@ -50,7 +50,7 @@ public final class StartExample {
 		String inboundAdaptorName = "Ctp-InboundAdaptor";
 		// TODO ADD ACCOUNT
 
-		try (Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, inboundAdaptorName, null, scheduler, adaptorParam)) {
+		try (Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, null, scheduler, adaptorParam)) {
 
 			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.newWith(Duration.ofSeconds(15)));
 			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
