@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.specific.ma;
+package io.mercury.financial.indicator.impl.ma;
 
 import io.mercury.financial.indicator.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;

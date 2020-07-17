@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.specific.bar;
+package io.mercury.financial.indicator.impl.bar;
 
 import org.eclipse.collections.api.list.primitive.MutableDoubleList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;

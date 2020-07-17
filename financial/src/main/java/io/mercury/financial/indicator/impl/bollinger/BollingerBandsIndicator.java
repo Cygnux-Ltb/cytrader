@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.specific.bollinger;
+package io.mercury.financial.indicator.impl.bollinger;
 
 import io.mercury.financial.indicator.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;

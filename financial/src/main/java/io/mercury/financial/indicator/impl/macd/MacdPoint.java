@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.specific.macd;
+package io.mercury.financial.indicator.impl.macd;
 
 import io.mercury.financial.indicator.FixedPeriodPoint;
 import io.mercury.financial.market.impl.BasicMarketData;

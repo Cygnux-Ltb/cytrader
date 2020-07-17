@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.specific.ma;
+package io.mercury.financial.indicator.impl.ma;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
