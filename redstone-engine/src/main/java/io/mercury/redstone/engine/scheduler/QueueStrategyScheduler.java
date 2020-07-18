@@ -24,8 +24,8 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	public QueueStrategyScheduler(Capacity size) {
-		this.despatchQueue = new SpscQueue<>("QueueStrategyScheduler-Despatch", size, true, despatchMsg -> {
+	public QueueStrategyScheduler(Capacity capacity) {
+		this.despatchQueue = new SpscQueue<>("QueueStrategyScheduler-Despatch", capacity, true, despatchMsg -> {
 			switch (despatchMsg.mark()) {
 			case MarketData:
 				BasicMarketData marketData = despatchMsg.getMarketData();
@@ -62,8 +62,8 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 
 	// TODO add pools
 	@Override
-	public void onOrdReport(OrdReport ordReport) {
-		despatchQueue.enqueue(new DespatchMsg(ordReport));
+	public void onOrdReport(OrdReport report) {
+		despatchQueue.enqueue(new DespatchMsg(report));
 	}
 
 	// TODO add pools

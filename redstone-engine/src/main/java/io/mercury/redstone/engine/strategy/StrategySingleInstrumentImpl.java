@@ -50,8 +50,8 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData, PK exte
 	@Override
 	public void onAdaptorEvent(AdaptorEvent event) {
 		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", strategyName(), event.adaptorId(),
-				event.adaptorStatus());
-		switch (event.adaptorStatus()) {
+				event.status());
+		switch (event.status()) {
 		case MdEnable:
 			log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", strategyName(), event.adaptorId());
 			adaptor.subscribeMarketData(instrument);
