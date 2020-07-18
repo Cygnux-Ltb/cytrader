@@ -43,11 +43,6 @@ public final class AccountKeeper implements Dumpable<String> {
 	private static final MutableIntObjectMap<Account> AccountMap = MutableMaps.newIntObjectHashMap();
 
 	/**
-	 * 存储SubAccount信息, 一对一关系, 以subAccountId索引
-	 */
-	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
-
-	/**
 	 * 存储Account信息, 一对一关系, 以investorId索引
 	 */
 	private static final MutableMap<String, Account> AccountMapByInvestorId = MutableMaps.newUnifiedMap();
@@ -56,6 +51,11 @@ public final class AccountKeeper implements Dumpable<String> {
 	 * 存储Account信息, 多对一关系, 以subAccountId索引
 	 */
 	private static final MutableIntObjectMap<Account> AccountMapBySubAccountId = MutableMaps.newIntObjectHashMap();
+
+	/**
+	 * 存储SubAccount信息, 一对一关系, 以subAccountId索引
+	 */
+	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
 
 	private AccountKeeper() {
 	}
@@ -72,24 +72,24 @@ public final class AccountKeeper implements Dumpable<String> {
 					.each(AccountKeeper::putAccount);
 			isInitialized = true;
 		} else {
-			IllegalStateException e = new IllegalStateException(
+			IllegalStateException exception = new IllegalStateException(
 					"AccountKeeper Has been initialized, cannot be initialize again");
-			log.error("AccountKeeper :: IllegalStateException", e);
-			throw e;
+			log.error("AccountKeeper :: IllegalStateException", exception);
+			throw exception;
 		}
 	}
 
-	private static void putSubAccount(SubAccount subAccount) {
-		Account account = subAccount.account();
-		SubAccountMap.put(subAccount.subAccountId(), subAccount);
-		AccountMapBySubAccountId.put(subAccount.subAccountId(), account);
-		log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(), account.accountId());
-	}
-
-	private static void putAccount(Account account) {
+	public static void putAccount(Account account) {
 		AccountMap.put(account.accountId(), account);
 		AccountMapByInvestorId.put(account.investorId(), account);
 		log.info("Put account, accountId==[{}], investorId==[{}]", account.accountId(), account.investorId());
+	}
+
+	public static void putSubAccount(SubAccount subAccount) {
+		SubAccountMap.put(subAccount.subAccountId(), subAccount);
+		AccountMapBySubAccountId.put(subAccount.subAccountId(), subAccount.account());
+		log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(),
+				subAccount.account().accountId());
 	}
 
 	public static boolean isInitialized() {

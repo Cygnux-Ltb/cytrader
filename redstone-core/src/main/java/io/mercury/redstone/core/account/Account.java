@@ -131,31 +131,34 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 
 	private static final String str0 = "{\"accountId\" : ";
 	private static final String str1 = ", \"accountName\" : ";
-	private static final String str2 = ", \"investorId\" : ";
-	private static final String str3 = ", \"balance\" : ";
-	private static final String str4 = ", \"credit\" : ";
-	private static final String str5 = ", \"subAccountsCount\" : ";
-	private static final String str6 = ", \"isEnabled\" : ";
-	private static final String str7 = "}";
+	private static final String str2 = ", \"brokerName\" : ";
+	private static final String str3 = ", \"investorId\" : ";
+	private static final String str4 = ", \"balance\" : ";
+	private static final String str5 = ", \"credit\" : ";
+	private static final String str6 = ", \"subAccountsCount\" : ";
+	private static final String str7 = ", \"isEnabled\" : ";
+	private static final String str8 = "}";
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder(90);
+		StringBuilder builder = new StringBuilder(200);
 		builder.append(str0);
 		builder.append(accountId);
 		builder.append(str1);
 		builder.append(toText(accountName));
 		builder.append(str2);
-		builder.append(investorId);
+		builder.append(toText(brokerName));
 		builder.append(str3);
-		builder.append(balance);
+		builder.append(investorId);
 		builder.append(str4);
-		builder.append(credit);
+		builder.append(balance);
 		builder.append(str5);
-		builder.append(subAccounts.size());
+		builder.append(credit);
 		builder.append(str6);
-		builder.append(isEnabled());
+		builder.append(subAccounts.size());
 		builder.append(str7);
+		builder.append(isEnabled());
+		builder.append(str8);
 		return builder.toString();
 	}
 
