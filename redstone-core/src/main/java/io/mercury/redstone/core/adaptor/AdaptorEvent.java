@@ -12,19 +12,19 @@ public final class AdaptorEvent {
 	/**
 	 * adaptorStatus
 	 */
-	private AdaptorStatus adaptorStatus;
+	private AdaptorStatus status;
 
-	public AdaptorEvent(int adaptorId, AdaptorStatus adaptorStatus) {
+	public AdaptorEvent(int adaptorId, AdaptorStatus status) {
 		this.adaptorId = adaptorId;
-		this.adaptorStatus = adaptorStatus;
+		this.status = status;
 	}
 
 	public int adaptorId() {
 		return adaptorId;
 	}
 
-	public AdaptorStatus adaptorStatus() {
-		return adaptorStatus;
+	public AdaptorStatus status() {
+		return status;
 	}
 
 }
