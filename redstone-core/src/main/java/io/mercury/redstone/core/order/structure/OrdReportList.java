@@ -6,6 +6,7 @@ import org.eclipse.collections.api.list.MutableList;
 
 import io.mercury.common.collections.MutableLists;
 
+@Deprecated
 public final class OrdReportList {
 
 	private long ordSysId;

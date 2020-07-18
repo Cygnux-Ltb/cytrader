@@ -13,7 +13,6 @@ public class TrdRecord implements Comparable<TrdRecord> {
 	private int trdQty;
 
 	public TrdRecord(int serial, long ordSysId, long epochTime, long trdPrice, int trdQty) {
-		super();
 		this.ordSysId = ordSysId;
 		this.serial = serial;
 		this.epochTime = epochTime;

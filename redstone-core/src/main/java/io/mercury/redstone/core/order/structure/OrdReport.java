@@ -94,6 +94,10 @@ public final class OrdReport implements Serial {
 	 */
 	private String lastUpdateTime;
 
+	/**
+	 * 
+	 * @param ordSysId
+	 */
 	public OrdReport(long ordSysId) {
 		this.ordSysId = ordSysId;
 	}
