@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>redstone-engine</artifactId>
+			<artifactId>redstone-core</artifactId>
 		</dependency>
 		<!-- <dependency> <groupId>de.alpharogroup</groupId> <artifactId>silly-collections</artifactId> 
 			<version>5.5.1</version> </dependency> -->

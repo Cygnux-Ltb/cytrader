@@ -1,2 +1,2 @@
-mvn install:install-file -Dfile=twsapi.jar -DgroupId=ib -DartifactId=twsapi -Dversion=6.3.13 -Dpackaging=jar
+mvn install:install-file -Dfile=twsapi.jar -DgroupId=com.interactivebrokers -DartifactId=twsapi -Dversion=9.76  -Dpackaging=jar
 
