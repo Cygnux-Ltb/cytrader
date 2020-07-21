@@ -10,6 +10,7 @@ import com.ib.client.OrderCondition;
 import com.ib.client.OrderType;
 
 public class AdjustedPanel extends OnOKPanel {
+
 	/**
 	 * 
 	 */

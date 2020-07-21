@@ -25,6 +25,7 @@ import io.mercury.redstone.strategy.SmaStrategyExample;
 public final class StartExample {
 
 	public static void main(String[] args) {
+		
 		long datetime = DateTimeUtil.datetimeOfSecond();
 		LogConfigurator.logFileName("redstone-example-" + datetime);
 		LogConfigurator.logLevel(LogLevel.INFO);
