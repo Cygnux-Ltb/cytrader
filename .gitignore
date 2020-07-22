@@ -14,7 +14,6 @@
 *.war
 *.ear
 *.zip
-*.tar.gz
 *.rar
 
 # Eclipse
@@ -40,25 +39,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-persistence-db/.factorypath
-actor/.factorypath
-adaptor/.factorypath
-center-data/.factorypath
-core/.factorypath
-launch/.factorypath
-persistence-avro/.factorypath
-persistence-json/.factorypath
-persistence-service/.factorypath
-restful-client/.factorypath
-restful-service/.factorypath
-simulator/.factorypath
-simulator-latency/.factorypath
-simulator-pingpong/.factorypath
-strategy/.factorypath
 
 #user add
-adaptor-jctp/.factorypath
-adaptor-ib/.factorypath
-adaptor-simulator/.factorypath
-engine/.factorypath
-example/.factorypath
+*/.factorypath
