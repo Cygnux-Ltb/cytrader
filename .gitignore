@@ -11,10 +11,11 @@
 *.ctxt
 
 # Package Files #
-*.war
-*.ear
-*.zip
-*.rar
+*/target/*.war
+*/target/*.ear
+*/target/*.zip
+*/target/*.rar
+*/target/*.tar.gz
 
 # Eclipse
 *.classpath
