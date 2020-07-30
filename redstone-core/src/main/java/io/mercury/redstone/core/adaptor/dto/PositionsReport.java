@@ -13,12 +13,12 @@ public final class PositionsReport {
 
 	public PositionsReport(int investorId, Position position) {
 		this.investorId = investorId;
-		this.positions = ImmutableLists.newList(position);
+		this.positions = ImmutableLists.newImmutableList(position);
 	}
 
 	public PositionsReport(int investorId, List<Position> positions) {
 		this.investorId = investorId;
-		this.positions = ImmutableLists.newList(positions);
+		this.positions = ImmutableLists.newImmutableList(positions);
 	}
 
 	public int getInvestorId() {

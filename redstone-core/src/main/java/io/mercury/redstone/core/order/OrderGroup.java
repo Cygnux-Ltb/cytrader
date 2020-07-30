@@ -13,7 +13,7 @@ public final class OrderGroup {
 	private ImmutableSet<Order> orderSet;
 
 	public OrderGroup(Order... orders) {
-		this.orderSet = ImmutableSets.newSet(orders);
+		this.orderSet = ImmutableSets.newImmutableSet(orders);
 		this.ordTimestamp = OrdTimestamp.generate();
 	}
 
