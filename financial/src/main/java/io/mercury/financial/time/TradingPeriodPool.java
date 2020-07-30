@@ -88,7 +88,6 @@ public final class TradingPeriodPool {
 	}
 
 	public static void main(String[] args) {
-
 		Singleton.register(ChinaFuturesSymbol.values());
 
 		TradingPeriod afterTradingPeriod = Singleton.getAfterTradingPeriod(ChinaFuturesSymbol.RB, LocalTime.now());

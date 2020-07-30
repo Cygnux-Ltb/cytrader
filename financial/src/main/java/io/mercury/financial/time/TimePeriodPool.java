@@ -43,10 +43,20 @@ public final class TimePeriodPool {
 	private MutableLongObjectMap<ImmutableLongObjectMap<TimePeriodSerial>> timePeriodMapPool = MutableMaps
 			.newLongObjectHashMap();
 
+	/**
+	 * 
+	 * @param symbol
+	 * @param periods
+	 */
 	public void register(Symbol symbol, TimePeriod... periods) {
 		register(new Symbol[] { symbol }, periods);
 	}
 
+	/**
+	 * 
+	 * @param symbols
+	 * @param periods
+	 */
 	public void register(Symbol[] symbols, TimePeriod... periods) {
 		Assertor.requiredLength(symbols, 1, "symbols");
 		Assertor.requiredLength(periods, 1, "periods");
@@ -54,7 +64,13 @@ public final class TimePeriodPool {
 			generateTimePeriod(symbols, period);
 	}
 
-	public long mergeSymbolTimeKey(Symbol symbol, TimePeriod period) {
+	/**
+	 * 
+	 * @param symbol
+	 * @param period
+	 * @return
+	 */
+	private long mergeSymbolTimeKey(Symbol symbol, TimePeriod period) {
 		return JointKeySupporter.mergeJointKey(symbol.id(), period.seconds());
 	}
 
@@ -104,10 +120,22 @@ public final class TimePeriodPool {
 		return sortedSet;
 	}
 
+	/**
+	 * 
+	 * @param instrument
+	 * @param period
+	 * @return
+	 */
 	public ImmutableLongObjectMap<TimePeriodSerial> getTimePeriodMap(Instrument instrument, TimePeriod period) {
 		return getTimePeriodMap(instrument.symbol(), period);
 	}
 
+	/**
+	 * 
+	 * @param symbol
+	 * @param period
+	 * @return
+	 */
 	public ImmutableLongObjectMap<TimePeriodSerial> getTimePeriodMap(Symbol symbol, TimePeriod period) {
 		long symbolTimeKey = mergeSymbolTimeKey(symbol, period);
 		ImmutableLongObjectMap<TimePeriodSerial> longObjectMap = timePeriodMapPool.get(symbolTimeKey);
@@ -118,6 +146,13 @@ public final class TimePeriodPool {
 		return longObjectMap;
 	}
 
+	/**
+	 * 
+	 * @param instrument
+	 * @param period
+	 * @param serial
+	 * @return
+	 */
 	public TimePeriodSerial getNextTimePeriod(Instrument instrument, TimePeriod period, TimePeriodSerial serial) {
 		return getNextTimePeriod(instrument.symbol(), period, serial);
 	}
