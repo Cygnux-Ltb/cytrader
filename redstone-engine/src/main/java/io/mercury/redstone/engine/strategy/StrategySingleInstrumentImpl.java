@@ -25,7 +25,7 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData, PK exte
 			ImmutableParamMap<PK> paramMap) {
 		super(strategyId, strategyName, subAccountId, paramMap);
 		this.instrument = instrument;
-		this.instruments = ImmutableLists.newList(instrument);
+		this.instruments = ImmutableLists.newImmutableList(instrument);
 	}
 
 	@Override

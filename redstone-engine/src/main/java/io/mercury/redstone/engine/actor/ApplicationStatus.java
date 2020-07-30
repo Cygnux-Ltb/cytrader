@@ -45,11 +45,12 @@ public final class ApplicationStatus {
 
 		long zoned2018_1 = ZonedDateTime.of(LocalDate.of(2018, 11, 8), LocalTime.MIN, ZoneId.systemDefault())
 				.toInstant().getEpochSecond();
+
 		System.out.println(zoned2018_1);
 
 		long epochMilli = Instant.now().getEpochSecond();
-		System.out.println(epochMilli);
 
+		System.out.println(epochMilli);
 		System.out.println(epochMilli - zoned2018_1);
 
 	}

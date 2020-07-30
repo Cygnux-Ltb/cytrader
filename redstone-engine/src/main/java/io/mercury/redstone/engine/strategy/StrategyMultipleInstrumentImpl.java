@@ -20,7 +20,7 @@ public abstract class StrategyMultipleInstrumentImpl<M extends MarketData, PK ex
 	protected StrategyMultipleInstrumentImpl(int strategyId, String strategyName, int subAccountId,
 			Set<Instrument> instruments, ImmutableParamMap<PK> paramMap) {
 		super(strategyId, strategyName, subAccountId, paramMap);
-		this.instruments = ImmutableLists.newList(instruments);
+		this.instruments = ImmutableLists.newImmutableList(instruments);
 	}
 
 	@Override
