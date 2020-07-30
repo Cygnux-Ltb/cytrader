@@ -25,7 +25,7 @@ import io.mercury.redstone.strategy.SmaStrategyExample;
 public final class StartExample {
 
 	public static void main(String[] args) {
-		
+
 		long datetime = DateTimeUtil.datetimeOfSecond();
 		LogConfigurator.logFileName("redstone-example-" + datetime);
 		LogConfigurator.logLevel(LogLevel.INFO);
@@ -42,21 +42,21 @@ public final class StartExample {
 		strategyExample.initialize(() -> true);
 
 		// Set Global AppId
-
 		ImmutableParamMap<FtdcAdaptorParamKey> adaptorParam = new ImmutableParamMap<>(FtdcAdaptorParamKey.values(),
 				properties);
 
 		// 创建InboundAdaptor
 		int inboundAdaptorId = 1;
 		String inboundAdaptorName = "Ctp-InboundAdaptor";
-		// TODO ADD ACCOUNT
 
+		// TODO ADD ACCOUNT
 		try (Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, null, scheduler, adaptorParam)) {
 
 			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.newWith(Duration.ofSeconds(15)));
 			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
 
 			adaptor.startup();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
