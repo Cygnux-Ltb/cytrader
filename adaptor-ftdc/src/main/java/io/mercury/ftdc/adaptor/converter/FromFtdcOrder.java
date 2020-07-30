@@ -69,7 +69,7 @@ public final class FromFtdcOrder implements Function<FtdcOrder, OrdReport> {
 		/**
 		 * 委托价格
 		 */
-		PriceMultiplier multiplier = instrument.symbol().priceMultiplier();
+		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
 		report.setOfferPrice(multiplier.toLong(ftdcOrder.getLimitPrice()));
 		/**
 		 * 报单日期 + 委托时间

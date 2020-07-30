@@ -38,7 +38,7 @@ public final class FromFtdcDepthMarketData implements Function<FtdcDepthMarketDa
 		log.info("Convert depthMarketData apply -> InstrumentCode==[{}], actionDay==[{}], updateTime==[{}]",
 				instrument.code(), actionDay, updateTime);
 
-		PriceMultiplier multiplier = instrument.symbol().priceMultiplier();
+		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
 
 		return new BasicMarketData(instrument, ZonedDateTime.of(actionDay, updateTime, TimeZone.CST),
 				multiplier.toLong(depthMarketData.getLastPrice()), depthMarketData.getVolume(),

@@ -21,7 +21,7 @@ public final class ToFtdcInputOrderAction implements Function<Order, CThostFtdcI
 
 		inputOrderActionField.setInstrumentID(instrument.code());
 
-		PriceMultiplier multiplier = instrument.symbol().priceMultiplier();
+		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
 		inputOrderActionField.setLimitPrice(multiplier.toDouble(order.ordPrice().offerPrice()));
 
 		inputOrderActionField.setVolumeChange(order.ordQty().leavesQty());

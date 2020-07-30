@@ -64,7 +64,7 @@ public final class FromFtdcTrade implements Function<FtdcTrade, OrdReport> {
 		/**
 		 * 成交价格
 		 */
-		PriceMultiplier multiplier = instrument.symbol().priceMultiplier();
+		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
 		report.setTradePrice(multiplier.toLong(ftdcTrade.getPrice()));
 		/**
 		 * 最后修改时间

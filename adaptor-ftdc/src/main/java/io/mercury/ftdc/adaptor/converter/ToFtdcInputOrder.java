@@ -74,7 +74,7 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 		/**
 		 * 设置价格
 		 */
-		PriceMultiplier multiplier = instrument.symbol().priceMultiplier();
+		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
 		inputOrderField.setLimitPrice(multiplier.toDouble(order.ordPrice().offerPrice()));
 		/**
 		 * 设置数量
