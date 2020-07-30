@@ -1,9 +1,9 @@
 package io.mercury.financial.instrument;
 
 import io.mercury.common.fsm.Enable;
-import io.mercury.financial.FinancialProduct;
+import io.mercury.financial.FinancialObject;
 
-public interface Instrument extends Enable<Instrument>, FinancialProduct {
+public interface Instrument extends Enable<Instrument>, FinancialObject {
 
 	/**
 	 * STOCK : exchange|symbol<br>
@@ -20,12 +20,12 @@ public interface Instrument extends Enable<Instrument>, FinancialProduct {
 
 	boolean isAvailableImmediately();
 
-	default PriorityClose priorityClose() {
+	default PriorityClose getPriorityClose() {
 		return PriorityClose.NONE;
 	}
 
-	default PriceMultiplier priceMultiplier() {
-		return symbol().priceMultiplier();
+	default PriceMultiplier getPriceMultiplier() {
+		return symbol().getPriceMultiplier();
 	}
 
 	public static enum PriorityClose {

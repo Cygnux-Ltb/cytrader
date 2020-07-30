@@ -287,16 +287,22 @@ public enum ChinaFuturesSymbol implements Symbol {
 
 	;
 
+	// ID
 	private int id;
 
+	// 交易所
 	private Exchange exchange;
 
+	// 代码
 	private String code;
 
+	// 优先平仓类型
 	private PriorityClose priorityClose;
 
+	// 价格乘数
 	private PriceMultiplier priceMultiplier;
 
+	// 交易时间段
 	private ImmutableSortedSet<TradingPeriod> tradingPeriodSet;
 
 	private ChinaFuturesSymbol(int exchangeSerial, String code, Exchange exchange, PriorityClose priorityClose,
@@ -306,7 +312,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 		this.exchange = exchange;
 		this.priorityClose = priorityClose;
 		this.priceMultiplier = priceMultiplier;
-		this.tradingPeriodSet = ImmutableSets.newSortedSet(tradingPeriods);
+		this.tradingPeriodSet = ImmutableSets.newImmutableSortedSet(tradingPeriods);
 	}
 
 	@Override
@@ -324,12 +330,12 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return exchange;
 	}
 
-	public PriorityClose priorityClose() {
+	public PriorityClose getPriorityClose() {
 		return priorityClose;
 	}
 
 	@Override
-	public PriceMultiplier priceMultiplier() {
+	public PriceMultiplier getPriceMultiplier() {
 		return priceMultiplier;
 	}
 
@@ -339,13 +345,25 @@ public enum ChinaFuturesSymbol implements Symbol {
 	}
 
 	// 建立symbolId -> symbol的映射
-	private final static ImmutableIntObjectMap<ChinaFuturesSymbol> SymbolIdMap = ImmutableMaps.IntObjectMapFactory()
+	private final static ImmutableIntObjectMap<ChinaFuturesSymbol> SymbolIdMap = ImmutableMaps.getIntObjectMapFactory()
 			.from(
 					// 将ChinaFuturesSymbol转换为Iterable
 					MutableLists.newFastList(ChinaFuturesSymbol.values()),
 					// 取Symbol::id为Key
 					ChinaFuturesSymbol::id, symbol -> symbol);
 
+	// 建立symbolCode -> symbol的映射
+	private final static ImmutableMap<String, ChinaFuturesSymbol> SymbolCodeMap = ImmutableMaps.newImmutableMap(
+			// 将ChinaFuturesSymbol转换为Map
+			Stream.of(ChinaFuturesSymbol.values()).collect(Collectors.toMap(
+					// 取Symbol::code为Key
+					ChinaFuturesSymbol::code, symbol -> symbol)));
+
+	/**
+	 * 
+	 * @param symbolId
+	 * @return
+	 */
 	public static ChinaFuturesSymbol of(int symbolId) {
 		ChinaFuturesSymbol symbol = SymbolIdMap.get(symbolId);
 		if (symbol == null)
@@ -353,13 +371,11 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return symbol;
 	}
 
-	// 建立symbolCode -> symbol的映射
-	private final static ImmutableMap<String, ChinaFuturesSymbol> SymbolCodeMap = ImmutableMaps.newMap(
-			// 将ChinaFuturesSymbol转换为Map
-			Stream.of(ChinaFuturesSymbol.values()).collect(Collectors.toMap(
-					// 取Symbol::code为Key
-					ChinaFuturesSymbol::code, symbol -> symbol)));
-
+	/**
+	 * 
+	 * @param symbolCode
+	 * @return
+	 */
 	public static ChinaFuturesSymbol of(String symbolCode) {
 		String key = symbolCode.toUpperCase();
 		ChinaFuturesSymbol symbol = SymbolCodeMap.get(key);
@@ -368,6 +384,11 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return symbol;
 	}
 
+	/**
+	 * 
+	 * @param term
+	 * @return
+	 */
 	public int acquireInstrumentId(int term) {
 		if (term > 9999)
 			throw new IllegalArgumentException("Term > 9999, Is too much.");
@@ -382,10 +403,9 @@ public enum ChinaFuturesSymbol implements Symbol {
 							.each(timePeriod -> System.out.println(symbol.code() + " | " + timePeriod)));
 
 			symbol.tradingPeriodSet().stream().map(tradingPeriod -> tradingPeriod
-					.segmentation(symbol.exchange().zoneId(), TimePeriod.newWith(Duration.ofSeconds(30))))
-
-			;
+					.segmentation(symbol.exchange().zoneId(), TimePeriod.newWith(Duration.ofSeconds(30))));
 		}
+
 		System.out.println(ChinaFuturesSymbol.AG.exchange.id());
 		System.out.println(ChinaFuturesSymbol.AG.id());
 	}

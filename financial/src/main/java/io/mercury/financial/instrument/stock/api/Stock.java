@@ -17,9 +17,9 @@ public abstract class Stock extends AbsInstrument implements Symbol {
 	}
 
 	@Override
-	public PriceMultiplier priceMultiplier() {
+	public PriceMultiplier getPriceMultiplier() {
 		// TODO Auto-generated method stub
-		return super.priceMultiplier();
+		return super.getPriceMultiplier();
 	}
 
 	@Override

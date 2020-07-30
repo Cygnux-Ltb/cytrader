@@ -25,15 +25,9 @@ public abstract class AbsInstrument implements Instrument {
 	}
 
 	/**
-	 * 
+	 * 激活标识
 	 */
 	private boolean isEnable;
-
-	@Override
-	public Instrument disable() {
-		this.isEnable = false;
-		return this;
-	}
 
 	@Override
 	public Instrument enable() {
@@ -42,13 +36,19 @@ public abstract class AbsInstrument implements Instrument {
 	}
 
 	@Override
-	public boolean isDisabled() {
-		return !isEnable;
+	public Instrument disable() {
+		this.isEnable = false;
+		return this;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		return isEnable;
+	}
+
+	@Override
+	public boolean isDisabled() {
+		return !isEnable;
 	}
 
 	@Override

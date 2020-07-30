@@ -7,10 +7,16 @@ import io.mercury.financial.instrument.Symbol;
 public abstract class Futures extends AbsInstrument {
 
 	/**
-	 * Symbol
+	 * symbol
 	 */
-	private final Symbol symbol;
+	protected final Symbol symbol;
 
+	/**
+	 * 
+	 * @param instrumentId
+	 * @param instrumentCode
+	 * @param symbol
+	 */
 	protected Futures(int instrumentId, String instrumentCode, Symbol symbol) {
 		super(instrumentId, instrumentCode);
 		this.symbol = symbol;

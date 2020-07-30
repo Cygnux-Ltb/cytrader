@@ -8,11 +8,11 @@ public final class ChinaFutures extends Futures {
 
 	public ChinaFutures(ChinaFuturesSymbol symbol, int term) {
 		super(symbol.acquireInstrumentId(term), symbol.code() + term, symbol);
-		this.priorityClose = symbol.priorityClose();
+		this.priorityClose = symbol.getPriorityClose();
 	}
 
 	@Override
-	public PriorityClose priorityClose() {
+	public PriorityClose getPriorityClose() {
 		return priorityClose;
 	}
 
