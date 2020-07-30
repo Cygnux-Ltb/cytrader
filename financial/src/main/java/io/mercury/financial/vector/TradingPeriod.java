@@ -16,6 +16,7 @@ import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.sequence.Serial;
+import io.mercury.common.util.Assertor;
 
 /**
  * 指示某交易标的一段交易时间
@@ -33,6 +34,8 @@ public final class TradingPeriod implements Serial {
 	private Duration duration;
 
 	public static TradingPeriod newWith(int serialId, LocalTime startTime, LocalTime endTime) {
+		Assertor.nonNull(startTime, "startTime");
+		Assertor.nonNull(endTime, "endTime");
 		return new TradingPeriod(serialId, startTime, endTime);
 	}
 

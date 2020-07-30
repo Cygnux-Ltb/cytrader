@@ -3,6 +3,7 @@ package io.mercury.financial.vector;
 import java.time.ZonedDateTime;
 
 import io.mercury.common.sequence.Serial;
+import io.mercury.common.util.Assertor;
 
 public final class TimePeriodSerial implements Serial {
 
@@ -12,10 +13,8 @@ public final class TimePeriodSerial implements Serial {
 	private ZonedDateTime endTime;
 
 	public static TimePeriodSerial newWith(ZonedDateTime startTime, ZonedDateTime endTime, TimePeriod period) {
-		if (startTime == null)
-			throw new IllegalArgumentException("startTime cannot null");
-		if (endTime == null)
-			throw new IllegalArgumentException("endTime cannot null");
+		Assertor.nonNull(startTime, "startTime");
+		Assertor.nonNull(endTime, "endTime");
 		return new TimePeriodSerial(startTime, endTime, period);
 	}
 

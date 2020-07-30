@@ -2,6 +2,8 @@ package io.mercury.financial.vector;
 
 import java.time.Duration;
 
+import io.mercury.common.util.Assertor;
+
 /**
  * 指标时间周期
  * 
@@ -20,6 +22,7 @@ public final class TimePeriod {
 	}
 
 	public static final TimePeriod newWith(Duration duration) {
+		Assertor.nonNull(duration, "duration");
 		return new TimePeriod(duration);
 	}
 
@@ -41,9 +44,7 @@ public final class TimePeriod {
 	}
 
 	public static void main(String[] args) {
-
 		System.out.println(new TimePeriod(Duration.ofHours(1)));
-
 	}
 
 }

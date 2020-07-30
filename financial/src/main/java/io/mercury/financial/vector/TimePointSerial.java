@@ -14,7 +14,8 @@ public final class TimePointSerial implements Serial {
 	private long serialId;
 
 	public static TimePointSerial newWith(ZonedDateTime timePoint) {
-		return new TimePointSerial(Assertor.nonNull(timePoint, "timePoint"), 0);
+		Assertor.nonNull(timePoint, "timePoint");
+		return new TimePointSerial(timePoint, 0);
 	}
 
 	public static TimePointSerial newWith(TimePointSerial previous) {
