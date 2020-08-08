@@ -8,8 +8,8 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.io.Dumpable;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.serialization.Dumpable;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.market.api.MarketData;
