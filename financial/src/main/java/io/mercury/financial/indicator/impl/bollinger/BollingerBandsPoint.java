@@ -12,7 +12,6 @@ public final class BollingerBandsPoint extends FixedPeriodPoint<BasicMarketData>
 
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
-		// TODO Auto-generated method stub
 
 	}
 
