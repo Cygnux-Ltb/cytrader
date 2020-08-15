@@ -17,33 +17,32 @@ public final class SmaStrategyExample extends StrategySingleInstrumentImpl<Basic
 
 	@Override
 	public String eventName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void handleOrder(Order order) {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void onCurrentPointAvgPriceChanged(SmaPoint point) {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void onStartSmaPoint(SmaPoint point) {
-		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void onEndSmaPoint(SmaPoint point) {
-		// TODO Auto-generated method stub
+
 	}
 
 }
