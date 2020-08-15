@@ -15,6 +15,7 @@ public class AdjustedPanel extends OnOKPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1708108253214848232L;
+
 	/**
 	 * 
 	 */
@@ -29,10 +30,11 @@ public class AdjustedPanel extends OnOKPanel {
 	final TCombo<AmntUnit> m_adjustedTrailingAmountUnit = new TCombo<AmntUnit>(AmntUnit.values());
 
 	public AdjustedPanel(JDialog parentDlg, Order order) {
+		
 		m_parentDlg = parentDlg;
 		m_order = order;
+		
 		m_adjustedOrderType.setSelectedItem(m_order.adjustedOrderType());
-
 		m_triggerPrice.setText(m_order.triggerPrice());
 		m_adjustedStopPrice.setText(m_order.adjustedStopPrice());
 		m_adjustedStopLimitPrice.setText(m_order.adjustedStopLimitPrice());
@@ -54,7 +56,6 @@ public class AdjustedPanel extends OnOKPanel {
 		m_order.adjustedStopLimitPrice(m_adjustedStopLimitPrice.getDouble());
 		m_order.adjustedTrailingAmount(m_adjustedTrailingAmount.getDouble());
 		m_order.adjustableTrailingUnit(m_adjustedTrailingAmountUnit.getSelectedItem().m_val);
-
 		return null;
 	}
 }

@@ -9,10 +9,12 @@ import com.ib.client.Order;
 import com.ib.client.OrderCondition;
 
 public class PegBenchPanel extends OnOKPanel {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3286509927212027924L;
+
 	/**
 	 * 
 	 */
@@ -24,7 +26,7 @@ public class PegBenchPanel extends OnOKPanel {
 	final UpperField m_pegChangeAmount = new UpperField();
 	final UpperField m_refChangeAmount = new UpperField();
 	final TCombo<String> m_pegChangeType = new TCombo<String>("increase", "decrease");
-	
+
 	public PegBenchPanel(JDialog parentDlg, Order order, ContractLookuper lookuper) {
 		m_parentDlg = parentDlg;
 		m_order = order;
@@ -44,9 +46,10 @@ public class PegBenchPanel extends OnOKPanel {
 			protected void actionPerformed(int refConId, String refExchId) {
 				PegBenchPanel.this.m_order.referenceContractId(refConId);
 				PegBenchPanel.this.m_order.referenceExchangeId(refExchId);
-			}; 
+			}
+			
 		};
-		
+
 		add("Starting price", m_startingPrice);
 		add("Reference contract", m_refCon);
 		add("Starting reference price", m_startingRefPrice);
@@ -54,7 +57,7 @@ public class PegBenchPanel extends OnOKPanel {
 		add("Pegged change type", m_pegChangeType);
 		add("Reference change amount", m_refChangeAmount);
 	}
-	
+
 	public OrderCondition onOK() {
 		m_order.startingPrice(m_startingPrice.getDouble());
 		m_order.stockRefPrice(m_startingRefPrice.getDouble());

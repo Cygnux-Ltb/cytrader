@@ -272,6 +272,7 @@ public class ApiDemo implements IConnectionHandler {
 	}
 
 	private static class Logger implements ILogger {
+
 		final private JTextArea m_area;
 
 		Logger(JTextArea area) {
