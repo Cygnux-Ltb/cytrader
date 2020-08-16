@@ -36,7 +36,7 @@ import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorBaseImpl;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
-import io.mercury.redstone.core.order.ActChildOrder;
+import io.mercury.redstone.core.order.ActualChildOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
 import io.mercury.serialization.json.JsonUtil;
@@ -214,7 +214,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private final ToFtdcInputOrder toFtdcInputOrder;
 
 	@Override
-	public boolean newOredr(ActChildOrder order) {
+	public boolean newOredr(ActualChildOrder order) {
 		try {
 			CThostFtdcInputOrderField ftdcInputOrder = toFtdcInputOrder.apply(order);
 			String orderRef = Integer.toString(OrderRefGenerator.next(order.strategyId()));
@@ -234,7 +234,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private final ToFtdcInputOrderAction toFtdcInputOrderAction;
 
 	@Override
-	public boolean cancelOrder(ActChildOrder order) {
+	public boolean cancelOrder(ActualChildOrder order) {
 		try {
 			CThostFtdcInputOrderActionField ftdcInputOrderAction = toFtdcInputOrderAction.apply(order);
 			String orderRef = OrderRefKeeper.getOrderRef(order.ordSysId());
