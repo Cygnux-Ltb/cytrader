@@ -5,7 +5,7 @@ import io.mercury.common.concurrent.disruptor.SpscQueue;
 import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
-import io.mercury.redstone.core.order.ActChildOrder;
+import io.mercury.redstone.core.order.ActualChildOrder;
 import io.mercury.redstone.core.order.OrderKeeper;
 import io.mercury.redstone.core.order.structure.OrdReport;
 
@@ -39,7 +39,7 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 				OrdReport ordReport = despatchMsg.getOrdReport();
 				log.info("Handle OrdReport, brokerUniqueId==[{}], ordSysId==[{}]", ordReport.getBrokerUniqueId(),
 						ordReport.getOrdSysId());
-				ActChildOrder order = OrderKeeper.onOrdReport(ordReport);
+				ActualChildOrder order = OrderKeeper.onOrdReport(ordReport);
 				log.info("Search Order OK. BrokerRtnId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
 						ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
 						ordReport.getOrdSysId());

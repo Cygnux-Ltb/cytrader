@@ -24,8 +24,8 @@ import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.account.AccountKeeper;
 import io.mercury.redstone.core.account.SubAccount;
 import io.mercury.redstone.core.adaptor.Adaptor;
-import io.mercury.redstone.core.order.ActChildOrder;
-import io.mercury.redstone.core.order.ActParentOrder;
+import io.mercury.redstone.core.order.ActualChildOrder;
+import io.mercury.redstone.core.order.ActualParentOrder;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.OrderKeeper;
 import io.mercury.redstone.core.order.enums.OrdType;
@@ -360,12 +360,12 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 	 */
 	protected void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType,
 			TrdDirection direction) {
-		ActParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
+		ActualParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
 				abs(offerQty), offerPrice, ordType, direction, TrdAction.Open);
 		parentOrder.writeLog(log, strategyName, "Open position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
-		ActChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
+		ActualChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
 		childOrder.writeLog(log, strategyName, "Open position generate [ChildOrder]");
 		saveOrder(childOrder);
 
@@ -459,13 +459,13 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 	 * @param ordType    订单类型
 	 */
 	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
-		ActParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
+		ActualParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
 				abs(offerQty), offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short,
 				TrdAction.Close);
 		parentOrder.writeLog(log, strategyName, "Close position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
-		ActChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
+		ActualChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
 		childOrder.writeLog(log, strategyName, "Close position generate [ChildOrder]");
 		saveOrder(childOrder);
 
