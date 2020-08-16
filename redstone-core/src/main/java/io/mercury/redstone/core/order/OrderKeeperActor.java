@@ -105,7 +105,7 @@ public final class OrderKeeperActor implements Dumpable<String> {
 	 * @param report
 	 * @return
 	 */
-	public static ActChildOrder onOrdReport(OrdReport report) {
+	public static ActualChildOrder onOrdReport(OrdReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
@@ -113,13 +113,13 @@ public final class OrderKeeperActor implements Dumpable<String> {
 			// 处理订单由外部系统发出而收到报单回报的情况
 			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
 			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
-			order = new ActChildOrder(report.getOrdSysId(), account.accountId(), report.getInstrument(),
+			order = new ActualChildOrder(report.getOrdSysId(), account.accountId(), report.getInstrument(),
 					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
 			putOrder(order);
 		} else {
 			order.writeLog(log, "OrderKeeper", "Search order OK");
 		}
-		ActChildOrder childOrder = (ActChildOrder) order;
+		ActualChildOrder childOrder = (ActualChildOrder) order;
 		// 更新订单状态
 		OrderUpdater.updateWithReport(childOrder, report);
 		onOrder(childOrder);

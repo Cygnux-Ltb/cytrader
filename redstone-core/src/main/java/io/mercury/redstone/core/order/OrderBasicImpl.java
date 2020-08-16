@@ -10,7 +10,7 @@ import io.mercury.redstone.core.order.structure.OrdPrice;
 import io.mercury.redstone.core.order.structure.OrdQty;
 import io.mercury.redstone.core.order.structure.OrdTimestamp;
 
-public abstract class OrderBaseImpl implements Order {
+public abstract class OrderBasicImpl implements Order {
 
 	/**
 	 * 
@@ -79,7 +79,7 @@ public abstract class OrderBaseImpl implements Order {
 
 	private static final String defRemark = "none";
 
-	protected OrderBaseImpl(long ordSysId, int strategyId, int accountId, int subAccountId, Instrument instrument,
+	protected OrderBasicImpl(long ordSysId, int strategyId, int accountId, int subAccountId, Instrument instrument,
 			OrdQty ordQty, OrdPrice ordPrice, OrdType ordType, TrdDirection direction) {
 		this.ordSysId = ordSysId;
 		this.strategyId = strategyId;

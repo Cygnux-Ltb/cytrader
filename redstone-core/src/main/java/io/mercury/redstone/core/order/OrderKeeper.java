@@ -104,7 +104,7 @@ public final class OrderKeeper implements Dumpable<String> {
 	 * @param report
 	 * @return
 	 */
-	public static ActChildOrder onOrdReport(OrdReport report) {
+	public static ActualChildOrder onOrdReport(OrdReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
 		Order order = getOrder(report.getOrdSysId());
@@ -112,13 +112,13 @@ public final class OrderKeeper implements Dumpable<String> {
 			// 处理订单由外部系统发出而收到报单回报的情况
 			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
 			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
-			order = new ActChildOrder(report.getOrdSysId(), account.accountId(), report.getInstrument(),
+			order = new ActualChildOrder(report.getOrdSysId(), account.accountId(), report.getInstrument(),
 					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
 			putOrder(order);
 		} else {
 			order.writeLog(log, "OrderKeeper", "Search order OK");
 		}
-		ActChildOrder childOrder = (ActChildOrder) order;
+		ActualChildOrder childOrder = (ActualChildOrder) order;
 		// 更新订单状态
 		OrderUpdater.updateWithReport(childOrder, report);
 		onOrder(childOrder);
@@ -167,10 +167,10 @@ public final class OrderKeeper implements Dumpable<String> {
 	 * @param action
 	 * @return
 	 */
-	public static ActParentOrder createParentOrder(int strategyId, int accountId, int subAccountId,
+	public static ActualParentOrder createParentOrder(int strategyId, int accountId, int subAccountId,
 			Instrument instrument, int offerQty, long offerPrice, OrdType ordType, TrdDirection direction,
 			TrdAction action) {
-		ActParentOrder parentOrder = new ActParentOrder(strategyId, accountId, subAccountId, instrument, offerQty,
+		ActualParentOrder parentOrder = new ActualParentOrder(strategyId, accountId, subAccountId, instrument, offerQty,
 				offerPrice, ordType, direction, action);
 		putOrder(parentOrder);
 		return parentOrder;
@@ -182,8 +182,8 @@ public final class OrderKeeper implements Dumpable<String> {
 	 * @param parentOrder
 	 * @return
 	 */
-	public static ActChildOrder toChildOrder(ActParentOrder parentOrder) {
-		ActChildOrder childOrder = parentOrder.toChildOrder();
+	public static ActualChildOrder toChildOrder(ActualParentOrder parentOrder) {
+		ActualChildOrder childOrder = parentOrder.toChildOrder();
 		putOrder(childOrder);
 		return childOrder;
 	}
@@ -195,8 +195,8 @@ public final class OrderKeeper implements Dumpable<String> {
 	 * @param count
 	 * @return
 	 */
-	public static MutableList<ActChildOrder> splitChildOrder(ActParentOrder parentOrder, int count) {
-		MutableList<ActChildOrder> childOrders = parentOrder.splitChildOrder(count);
+	public static MutableList<ActualChildOrder> splitChildOrder(ActualParentOrder parentOrder, int count) {
+		MutableList<ActualChildOrder> childOrders = parentOrder.splitChildOrder(count);
 		childOrders.each(OrderKeeper::putOrder);
 		return childOrders;
 	}

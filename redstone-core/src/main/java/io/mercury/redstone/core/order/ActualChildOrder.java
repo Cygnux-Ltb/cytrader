@@ -19,7 +19,7 @@ import io.mercury.redstone.core.strategy.Strategy;
  * @author yellow013
  * @creation 2018年1月14日
  */
-public final class ActChildOrder extends ActualOrder {
+public final class ActualChildOrder extends ActualOrder {
 
 	/**
 	 * 
@@ -49,7 +49,7 @@ public final class ActChildOrder extends ActualOrder {
 	 * @param action       交易动作
 	 * @param ownerOrdId   所属上级订单
 	 */
-	ActChildOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
+	ActualChildOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
 			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
 		super(OrdSysIdSupporter.allocateId(strategyId), strategyId, accountId, subAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
@@ -69,7 +69,7 @@ public final class ActChildOrder extends ActualOrder {
 	 * @param direction  交易方向
 	 * @param action     交易动作
 	 */
-	ActChildOrder(long ordSysId, int accountId, Instrument instrument, int offerQty, long offerPrice,
+	ActualChildOrder(long ordSysId, int accountId, Instrument instrument, int offerQty, long offerPrice,
 			TrdDirection direction, TrdAction action) {
 		super(ordSysId, Strategy.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction, action, 0L);

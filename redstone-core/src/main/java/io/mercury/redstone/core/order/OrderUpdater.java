@@ -22,7 +22,7 @@ public final class OrderUpdater {
 	 * @param order
 	 * @param report
 	 */
-	public static void updateWithReport(@Nonnull ActChildOrder order, @Nonnull OrdReport report) {
+	public static void updateWithReport(@Nonnull ActualChildOrder order, @Nonnull OrdReport report) {
 		OrdQty ordQty = order.ordQty();
 		int filledQty = report.getFilledQty();
 		log.info("OrdReport ordStatus==[{}], filledQty()==[{}], tradePrice==[{}], ordQty -> {}", report.getOrdStatus(),

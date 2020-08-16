@@ -7,7 +7,7 @@ import io.mercury.redstone.core.order.enums.TrdDirection;
 import io.mercury.redstone.core.order.structure.OrdPrice;
 import io.mercury.redstone.core.order.structure.OrdQty;
 
-public abstract class ActualOrder extends OrderBaseImpl {
+public abstract class ActualOrder extends OrderBasicImpl {
 
 	/**
 	 * 

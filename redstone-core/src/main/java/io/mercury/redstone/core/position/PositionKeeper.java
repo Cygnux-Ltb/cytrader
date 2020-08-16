@@ -12,7 +12,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.JointKeySupporter;
 import io.mercury.common.serialization.Dumpable;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.redstone.core.order.ActChildOrder;
+import io.mercury.redstone.core.order.ActualChildOrder;
 import io.mercury.redstone.core.order.enums.TrdDirection;
 
 /**
@@ -119,7 +119,7 @@ public final class PositionKeeper implements Dumpable<String> {
 	 * 
 	 * @param order 子订单
 	 */
-	public static void updatePosition(ActChildOrder order) {
+	public static void updatePosition(ActualChildOrder order) {
 		int subAccountId = order.subAccountId();
 		Instrument instrument = order.instrument();
 		long positionsKey = mergePositionKey(subAccountId, instrument);

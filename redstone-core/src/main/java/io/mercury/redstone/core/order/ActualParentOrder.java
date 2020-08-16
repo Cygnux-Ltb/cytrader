@@ -18,7 +18,7 @@ import io.mercury.redstone.core.order.structure.OrdQty;
  * @author yellow013
  * @creation 2018年7月9日
  */
-public final class ActParentOrder extends ActualOrder {
+public final class ActualParentOrder extends ActualOrder {
 
 	/**
 	 * 
@@ -28,7 +28,7 @@ public final class ActParentOrder extends ActualOrder {
 	/**
 	 * 所属子订单
 	 */
-	private MutableList<ActChildOrder> childOrders;
+	private MutableList<ActualChildOrder> childOrders;
 
 	/**
 	 * 
@@ -43,7 +43,7 @@ public final class ActParentOrder extends ActualOrder {
 	 * @param action       交易动作
 	 * @param ownerOrdId   所属上级订单Id
 	 */
-	ActParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
+	ActualParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
 		super(OrdSysIdSupporter.allocateId(strategyId), strategyId, accountId, subAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
@@ -62,7 +62,7 @@ public final class ActParentOrder extends ActualOrder {
 	 * @param direction    交易方向
 	 * @param action       交易动作
 	 */
-	ActParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
+	ActualParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action) {
 		this(strategyId, accountId, subAccountId, instrument, offerQty, offerPrice, ordType, direction, action, 0L);
 	}
@@ -71,8 +71,8 @@ public final class ActParentOrder extends ActualOrder {
 	 * 
 	 * @return ChildOrder
 	 */
-	ActChildOrder toChildOrder() {
-		ActChildOrder childOrder = new ActChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
+	ActualChildOrder toChildOrder() {
+		ActualChildOrder childOrder = new ActualChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
 				ordQty().offerQty(), ordPrice().offerPrice(), ordType(), direction(), action(), ordSysId());
 		childOrders.add(childOrder);
 		return childOrder;
@@ -83,7 +83,7 @@ public final class ActParentOrder extends ActualOrder {
 	 * @param count 数量
 	 * @return
 	 */
-	MutableList<ActChildOrder> splitChildOrder(int count) {
+	MutableList<ActualChildOrder> splitChildOrder(int count) {
 		// TODO 增加拆分为多个订单的逻辑
 		OrdQty qty = ordQty();
 		qty.offerQty();

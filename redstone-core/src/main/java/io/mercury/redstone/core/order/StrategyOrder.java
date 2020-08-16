@@ -18,7 +18,7 @@ import io.mercury.redstone.core.order.structure.OrdQty;
  */
 
 @Deprecated
-public final class StrategyOrder extends OrderBaseImpl {
+public final class StrategyOrder extends OrderBasicImpl {
 
 	/**
 	 * 
@@ -28,7 +28,7 @@ public final class StrategyOrder extends OrderBaseImpl {
 	/**
 	 * 所属实际订单
 	 */
-	private MutableLongObjectMap<ActParentOrder> ownOrders = MutableMaps.newLongObjectHashMap();
+	private MutableLongObjectMap<ActualParentOrder> ownOrders = MutableMaps.newLongObjectHashMap();
 
 	/**
 	 * 
@@ -45,11 +45,11 @@ public final class StrategyOrder extends OrderBaseImpl {
 		super(0L, strategyId, accountId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
 	}
 
-	public MutableLongObjectMap<ActParentOrder> ownOrders() {
+	public MutableLongObjectMap<ActualParentOrder> ownOrders() {
 		return ownOrders;
 	}
 
-	public ActParentOrder addOwnOrder(ActParentOrder order) {
+	public ActualParentOrder addOwnOrder(ActualParentOrder order) {
 		ownOrders.put(order.ordSysId(), order);
 		return order;
 	}
@@ -64,8 +64,8 @@ public final class StrategyOrder extends OrderBaseImpl {
 		return ordSysId();
 	}
 
-	public ActParentOrder toActualOrder(TrdDirection direction, int offerQty, OrdType ordType) {
-		return addOwnOrder(new ActParentOrder(strategyId(), accountId(), subAccountId(), instrument(), offerQty,
+	public ActualParentOrder toActualOrder(TrdDirection direction, int offerQty, OrdType ordType) {
+		return addOwnOrder(new ActualParentOrder(strategyId(), accountId(), subAccountId(), instrument(), offerQty,
 				ordPrice().offerPrice(), ordType, direction, TrdAction.Open, ordSysId()));
 	}
 
