@@ -1,16 +1,25 @@
 package io.mercury.redstone.core.order.enums;
 
-@Deprecated
 public enum OrdLevel {
-	
-	Group,
 
-	Strategy,
+	Group(0b0001),
 
-	Parent,
+	Strategy(0b0010),
 
-	Child,
+	Parent(0b0100),
+
+	Child(0b1000),
 
 	;
+
+	private int code;
+
+	private OrdLevel(int code) {
+		this.code = code;
+	}
+
+	public int code() {
+		return code;
+	}
 
 }

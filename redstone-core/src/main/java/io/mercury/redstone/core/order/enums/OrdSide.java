@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
 
-@Deprecated
 public enum OrdSide {
 
 	Invalid(-1, TrdDirection.Invalid),
