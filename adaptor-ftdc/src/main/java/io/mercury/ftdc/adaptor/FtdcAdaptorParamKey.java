@@ -37,11 +37,11 @@ public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 
 	;
 
-	private String key;
+	private String kname;
 	private ParamType type;
 
-	private FtdcAdaptorParamKey(String key, ParamType type) {
-		this.key = key;
+	private FtdcAdaptorParamKey(String kname, ParamType type) {
+		this.kname = kname;
 		this.type = type;
 	}
 
@@ -51,8 +51,8 @@ public enum FtdcAdaptorParamKey implements AdaptorParamKey {
 	}
 
 	@Override
-	public String key() {
-		return key;
+	public String kname() {
+		return kname;
 	}
 
 	@Override
