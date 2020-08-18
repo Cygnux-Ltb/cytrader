@@ -22,7 +22,7 @@ import io.mercury.redstone.core.strategy.StrategyScheduler;
 import io.mercury.redstone.engine.scheduler.SingleStrategyScheduler;
 import io.mercury.redstone.strategy.SmaStrategyExample;
 
-public final class ExampleWithProperties {
+public class ExampleWithNacos {
 
 	public static void main(String[] args) {
 
