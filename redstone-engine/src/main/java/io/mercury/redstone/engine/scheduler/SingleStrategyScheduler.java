@@ -9,7 +9,7 @@ import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.Strategy;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
 
-public class SingleStrategyScheduler<M extends MarketData> implements StrategyScheduler<M> {
+public final class SingleStrategyScheduler<M extends MarketData> implements StrategyScheduler<M> {
 
 	private final Strategy<M> strategy;
 
