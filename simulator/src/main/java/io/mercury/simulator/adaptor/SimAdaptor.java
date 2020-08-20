@@ -11,7 +11,7 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorBaseImpl;
-import io.mercury.redstone.core.order.ActChildOrder;
+import io.mercury.redstone.core.order.ActualChildOrder;
 import io.mercury.redstone.core.order.OrderKeeper;
 import io.mercury.redstone.core.order.enums.OrdStatus;
 import io.mercury.redstone.core.order.structure.OrdReport;
@@ -115,7 +115,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	public boolean newOredr(ActChildOrder order) {
+	public boolean newOredr(ActualChildOrder order) {
 		io.mercury.simulator.persistence.avro.entity.Order simOrder = io.mercury.simulator.persistence.avro.entity.Order
 				.newBuilder().setOrderRef(Long.valueOf(order.ordSysId()).intValue())
 				.setInstrumentId(order.instrument().code()).setLimitPrice(order.ordPrice().offerPrice())
@@ -132,7 +132,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	public boolean cancelOrder(ActChildOrder order) {
+	public boolean cancelOrder(ActualChildOrder order) {
 		io.mercury.redstone.core.order.Order cancelOrder = OrderKeeper.getOrder(order.ordSysId());
 		io.mercury.simulator.persistence.avro.entity.Order simOrder = io.mercury.simulator.persistence.avro.entity.Order
 				.newBuilder().setOrderRef(Long.valueOf(order.ordSysId()).intValue())
