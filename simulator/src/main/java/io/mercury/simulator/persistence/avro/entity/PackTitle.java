@@ -6,8 +6,8 @@
 package io.mercury.simulator.persistence.avro.entity;
 @org.apache.avro.specific.AvroGenerated
 public enum PackTitle implements org.apache.avro.generic.GenericEnumSymbol<PackTitle> {
-  T_MarketDataSubscribe, T_MarketDataLevel1, T_Order, T_Next  ;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"PackTitle\",\"namespace\":\"io.mercury.simulator.persistence.avro.entity\",\"symbols\":[\"T_MarketDataSubscribe\",\"T_MarketDataLevel1\",\"T_Order\",\"T_Next\"]}");
+  MarketDataSubscribe, MarketDataLevel1, Order, Next  ;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"PackTitle\",\"namespace\":\"io.mercury.simulator.persistence.avro.entity\",\"symbols\":[\"MarketDataSubscribe\",\"MarketDataLevel1\",\"Order\",\"Next\"]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
 }

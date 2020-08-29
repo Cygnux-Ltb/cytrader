@@ -11,15 +11,17 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorBaseImpl;
+import io.mercury.redstone.core.adaptor.Command;
 import io.mercury.redstone.core.order.ActualChildOrder;
+import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.order.OrderKeeper;
 import io.mercury.redstone.core.order.enums.OrdStatus;
 import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
 import io.mercury.serialization.avro.AvroBinaryDeserializer;
+import io.mercury.simulator.persistence.avro.entity.ExOrder;
 import io.mercury.simulator.persistence.avro.entity.MarketDataLevel1;
 import io.mercury.simulator.persistence.avro.entity.MarketDataSubscribe;
-import io.mercury.simulator.persistence.avro.entity.Order;
 import io.mercury.transport.core.api.Receiver;
 import io.mercury.transport.core.api.Sender;
 import io.mercury.transport.socket.SocketReceiver;
@@ -46,14 +48,14 @@ public class SimAdaptor extends AdaptorBaseImpl {
 		return null;
 	};
 
-	private Function<Order, OrdReport> orderFunction = order -> {
+	private Function<ExOrder, OrdReport> orderFunction = order -> {
 		return null;
 	};
 
 	private AvroBinaryDeserializer<MarketDataLevel1> marketDataDeserializer = new AvroBinaryDeserializer<>(
 			MarketDataLevel1.class);
 
-	private AvroBinaryDeserializer<Order> orderDeserializer = new AvroBinaryDeserializer<>(Order.class);
+	private AvroBinaryDeserializer<ExOrder> orderDeserializer = new AvroBinaryDeserializer<>(ExOrder.class);
 
 	public SimAdaptor(int adaptorId, Account account, ImmutableParamMap<SimAdaptorParamKey> paramMap,
 			StrategyScheduler<BasicMarketData> scheduler) {
@@ -73,8 +75,8 @@ public class SimAdaptor extends AdaptorBaseImpl {
 			}
 		});
 		this.tdReceiver = new SocketReceiver(tdConfigurator, (bytes) -> {
-			List<Order> orders = orderDeserializer.deserializationMultiple(bytes);
-			for (Order order : orders) {
+			List<ExOrder> orders = orderDeserializer.deserializationMultiple(bytes);
+			for (ExOrder order : orders) {
 				this.scheduler.onOrdReport(orderFunction.apply(order));
 			}
 		});
@@ -115,11 +117,10 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	public boolean newOredr(ActualChildOrder order) {
-		io.mercury.simulator.persistence.avro.entity.Order simOrder = io.mercury.simulator.persistence.avro.entity.Order
-				.newBuilder().setOrderRef(Long.valueOf(order.ordSysId()).intValue())
-				.setInstrumentId(order.instrument().code()).setLimitPrice(order.ordPrice().offerPrice())
-				.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue())
+	public boolean newOredr(Account account, ActualChildOrder order) {
+		ExOrder simOrder = ExOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
+				.setInstrumentId(order.instrument().code()).setLimitPrice(order.price().offerPrice())
+				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.direction().code()).build();
 		byte[] byteMsg;
 		try {
@@ -132,12 +133,11 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	public boolean cancelOrder(ActualChildOrder order) {
-		io.mercury.redstone.core.order.Order cancelOrder = OrderKeeper.getOrder(order.ordSysId());
-		io.mercury.simulator.persistence.avro.entity.Order simOrder = io.mercury.simulator.persistence.avro.entity.Order
-				.newBuilder().setOrderRef(Long.valueOf(order.ordSysId()).intValue())
-				.setInstrumentId(cancelOrder.instrument().code()).setLimitPrice(order.ordPrice().offerPrice())
-				.setVolumeTotalOriginal(Double.valueOf(order.ordQty().offerQty()).intValue())
+	public boolean cancelOrder(Account account, ActualChildOrder order) {
+		Order cancelOrder = OrderKeeper.getOrder(order.uniqueId());
+		ExOrder simOrder = ExOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
+				.setInstrumentId(cancelOrder.instrument().code()).setLimitPrice(order.price().offerPrice())
+				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.direction().code()).build();
 		byte[] byteMsg;
 		try {
@@ -173,6 +173,18 @@ public class SimAdaptor extends AdaptorBaseImpl {
 		tdSender.destroy();
 		mdReceiver.destroy();
 		tdReceiver.destroy();
+	}
+
+	@Override
+	public List<Account> accounts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean sendCommand(Command command) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

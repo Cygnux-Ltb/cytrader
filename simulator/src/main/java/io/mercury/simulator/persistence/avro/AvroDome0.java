@@ -6,17 +6,17 @@ import java.util.List;
 
 import io.mercury.serialization.avro.AvroBinaryDeserializer;
 import io.mercury.serialization.avro.AvroBinarySerializer;
-import io.mercury.simulator.persistence.avro.entity.Order;
+import io.mercury.simulator.persistence.avro.entity.ExOrder;
 
 public class AvroDome0 {
 
 	public static void main(String[] args) throws IOException {
 
-		AvroBinarySerializer<Order> serializer = new AvroBinarySerializer<>(Order.class);
-		AvroBinaryDeserializer<Order> deserializer = new AvroBinaryDeserializer<>(Order.class);
+		AvroBinarySerializer<ExOrder> serializer = new AvroBinarySerializer<>(ExOrder.class);
+		AvroBinaryDeserializer<ExOrder> deserializer = new AvroBinaryDeserializer<>(ExOrder.class);
 
 		for (int i = 0; i < 1000; i++) {
-			Order simOrder1 = Order.newBuilder().setOrderSysId("1").setStrategyId(1).setBrokerId("1").setInvestorId("1")
+			ExOrder simOrder1 = ExOrder.newBuilder().setOrderSysId("1").setStrategyId(1).setBrokerId("1").setInvestorId("1")
 					.setInstrumentId("ag1712").setOrderMsgType(1).setOrderRef(0).setUserId("1").setDirection(1)
 					.setOffset(1).setVolumeFilled(1).setVolumeRemained(1).setVolumeTotalOriginal(1).setTradeId("1")
 					.setTradingDay("1").setOrderStatus(1).setOrderType(1).setPrice(1).setOrdRejReason(1)
@@ -26,7 +26,7 @@ public class AvroDome0 {
 					.setVolume(1).build();
 			ByteBuffer serialization1 = serializer.serialization(simOrder1);
 
-			Order simOrder2 = Order.newBuilder().setOrderSysId("2").setStrategyId(2).setBrokerId("2").setInvestorId("1")
+			ExOrder simOrder2 = ExOrder.newBuilder().setOrderSysId("2").setStrategyId(2).setBrokerId("2").setInvestorId("1")
 					.setInstrumentId("ag1712").setOrderMsgType(1).setOrderRef(0).setUserId("1").setDirection(1)
 					.setOffset(1).setVolumeFilled(1).setVolumeRemained(1).setVolumeTotalOriginal(1).setTradeId("1")
 					.setTradingDay("1").setOrderStatus(1).setOrderType(1).setPrice(1).setOrdRejReason(1)
@@ -36,7 +36,7 @@ public class AvroDome0 {
 					.setVolume(1).build();
 			ByteBuffer serialization2 = serializer.serialization(simOrder2);
 
-			Order simOrder3 = Order.newBuilder().setOrderSysId("3").setStrategyId(2).setBrokerId("3").setInvestorId("1")
+			ExOrder simOrder3 = ExOrder.newBuilder().setOrderSysId("3").setStrategyId(2).setBrokerId("3").setInvestorId("1")
 					.setInstrumentId("ag1712").setOrderMsgType(1).setOrderRef(0).setUserId("1").setDirection(1)
 					.setOffset(1).setVolumeFilled(1).setVolumeRemained(1).setVolumeTotalOriginal(1).setTradeId("1")
 					.setTradingDay("1").setOrderStatus(1).setOrderType(1).setPrice(1).setOrdRejReason(1)
@@ -57,7 +57,7 @@ public class AvroDome0 {
 
 			System.arraycopy(serialization2, 0, newBytes, 74, serialization2.array().length - 37);
 
-			List<Order> deSerializationToList = deserializer.deserializationMultiple(newBytes);
+			List<ExOrder> deSerializationToList = deserializer.deserializationMultiple(newBytes);
 			System.out.println(deSerializationToList);
 
 			byte[] newBytes2 = new byte[(int) (serialization2.array().length * 1.5)];
@@ -66,7 +66,7 @@ public class AvroDome0 {
 
 			System.arraycopy(serialization3, 0, newBytes2, 37, serialization3.array().length);
 
-			List<Order> deSerializationToList2 = deserializer.deserializationMultiple(newBytes2);
+			List<ExOrder> deSerializationToList2 = deserializer.deserializationMultiple(newBytes2);
 			System.out.println(deSerializationToList2);
 		}
 

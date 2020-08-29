@@ -10,10 +10,10 @@
                 "type": "enum",
                 "name": "PackTitle",
                 "symbols": [
-                    "T_MarketDataSubscribe",
-                    "T_MarketDataLevel1",
-                    "T_Order",
-                    "T_Next"
+                    "MarketDataSubscribe",
+                    "MarketDataLevel1",
+                    "Order",
+                    "Next"
                 ]
             }
         },
