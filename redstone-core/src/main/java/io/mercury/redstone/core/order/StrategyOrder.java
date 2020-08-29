@@ -50,7 +50,7 @@ public final class StrategyOrder extends OrderBasicImpl {
 	}
 
 	public ActualParentOrder addOwnOrder(ActualParentOrder order) {
-		ownOrders.put(order.ordSysId(), order);
+		ownOrders.put(uniqueId(), order);
 		return order;
 	}
 
@@ -60,13 +60,13 @@ public final class StrategyOrder extends OrderBasicImpl {
 	}
 
 	@Override
-	public long ownerOrdId() {
-		return ordSysId();
+	public long ownerUniqueId() {
+		return uniqueId();
 	}
 
 	public ActualParentOrder toActualOrder(TrdDirection direction, int offerQty, OrdType ordType) {
 		return addOwnOrder(new ActualParentOrder(strategyId(), accountId(), subAccountId(), instrument(), offerQty,
-				ordPrice().offerPrice(), ordType, direction, TrdAction.Open, ordSysId()));
+				price().offerPrice(), ordType, direction, TrdAction.Open, uniqueId()));
 	}
 
 }

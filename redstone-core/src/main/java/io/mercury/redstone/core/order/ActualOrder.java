@@ -22,11 +22,11 @@ public abstract class ActualOrder extends OrderBasicImpl {
 	/**
 	 * 所属上级ordId
 	 */
-	private final long ownerOrdId;
+	private final long ownerUniqueId;
 
 	/**
 	 * 
-	 * @param ordSysId
+	 * @param uniqueId
 	 * @param strategyId
 	 * @param accountId
 	 * @param subAccountId
@@ -38,17 +38,17 @@ public abstract class ActualOrder extends OrderBasicImpl {
 	 * @param action
 	 * @param ownerOrdId
 	 */
-	protected ActualOrder(long ordSysId, int strategyId, int accountId, int subAccountId, Instrument instrument,
+	protected ActualOrder(long uniqueId, int strategyId, int accountId, int subAccountId, Instrument instrument,
 			OrdQty ordQty, OrdPrice ordPrice, OrdType ordType, TrdDirection direction, TrdAction action,
-			long ownerOrdId) {
-		super(ordSysId, strategyId, accountId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
+			long ownerUniqueId) {
+		super(uniqueId, strategyId, accountId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
 		this.action = action;
-		this.ownerOrdId = ownerOrdId != 0L ? ownerOrdId : ordSysId();
+		this.ownerUniqueId = ownerUniqueId != 0L ? ownerUniqueId : uniqueId();
 	}
 
 	@Override
-	public long ownerOrdId() {
-		return ownerOrdId;
+	public long ownerUniqueId() {
+		return ownerUniqueId;
 	}
 
 	public TrdAction action() {

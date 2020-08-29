@@ -31,7 +31,7 @@ import io.mercury.redstone.core.strategy.Strategy;
  * @creation 2019年4月13日
  */
 @NotThreadSafe
-public final class OrdSysIdSupporter {
+public final class UniqueIdSupporter {
 
 	/**
 	 * 
@@ -69,11 +69,11 @@ public final class OrdSysIdSupporter {
 	private static final long Baseline_2000_SECONDS = 946684800L;
 	private static final long Baseline_2000_MILLIS = Baseline_2000_SECONDS * TimeConst.MILLIS_PER_SECONDS;
 
-	public static int analyzeStrategyId(long ordSysId) {
+	public static int analyzeStrategyId(long uniqueId) {
 		return 0;
 	}
 
-	public static long analyzeEpochSeconds(long ordSysId) {
+	public static long analyzeEpochSeconds(long uniqueId) {
 		return 0;
 	}
 
@@ -84,7 +84,7 @@ public final class OrdSysIdSupporter {
 		System.out.println("000" + EpochTime.seconds() + "000000");
 		System.out.println("000" + EpochTime.millis() + "000000");
 		System.out.println(allocateId(800));
-		System.out.println("OrdSysId");
+		System.out.println("uniqueId");
 		System.out.println(BitOperator.longBinaryFormat(Long.MAX_VALUE));
 		System.out.println(Short.MAX_VALUE);
 		System.out.println(BitOperator.intBinaryFormat(Short.MAX_VALUE));

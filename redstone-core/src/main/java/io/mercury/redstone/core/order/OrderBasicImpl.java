@@ -18,9 +18,9 @@ public abstract class OrderBasicImpl implements Order {
 	private static final long serialVersionUID = -3444258095612091354L;
 
 	/**
-	 * ordSysId
+	 * uniqueId
 	 */
-	private final long ordSysId;
+	private final long uniqueId;
 
 	/**
 	 * 策略Id
@@ -45,22 +45,22 @@ public abstract class OrderBasicImpl implements Order {
 	/**
 	 * 数量
 	 */
-	private final OrdQty ordQty;
+	private final OrdQty qty;
 
 	/**
 	 * 价格
 	 */
-	private final OrdPrice ordPrice;
+	private final OrdPrice price;
 
 	/**
 	 * 订单类型
 	 */
-	private final OrdType ordType;
+	private final OrdType type;
 
 	/**
 	 * 时间戳
 	 */
-	private final OrdTimestamp ordTimestamp;
+	private final OrdTimestamp timestamp;
 
 	/**
 	 * 订单方向
@@ -70,7 +70,7 @@ public abstract class OrderBasicImpl implements Order {
 	/**
 	 * 订单状态(可变)
 	 */
-	private OrdStatus ordStatus;
+	private OrdStatus status;
 
 	/**
 	 * 订单备注(可变)
@@ -79,25 +79,25 @@ public abstract class OrderBasicImpl implements Order {
 
 	private static final String defRemark = "none";
 
-	protected OrderBasicImpl(long ordSysId, int strategyId, int accountId, int subAccountId, Instrument instrument,
-			OrdQty ordQty, OrdPrice ordPrice, OrdType ordType, TrdDirection direction) {
-		this.ordSysId = ordSysId;
+	protected OrderBasicImpl(long uniqueId, int strategyId, int accountId, int subAccountId, Instrument instrument,
+			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction) {
+		this.uniqueId = uniqueId;
 		this.strategyId = strategyId;
 		this.accountId = accountId;
 		this.subAccountId = subAccountId;
 		this.instrument = instrument;
-		this.ordQty = ordQty;
-		this.ordPrice = ordPrice;
-		this.ordType = ordType;
-		this.ordTimestamp = OrdTimestamp.generate();
+		this.qty = qty;
+		this.price = price;
+		this.type = type;
+		this.timestamp = OrdTimestamp.generate();
 		this.direction = direction;
-		this.ordStatus = OrdStatus.PendingNew;
+		this.status = OrdStatus.PendingNew;
 		this.remark = defRemark;
 	}
 
 	@Override
-	public long ordSysId() {
-		return ordSysId;
+	public long uniqueId() {
+		return uniqueId;
 	}
 
 	@Override
@@ -121,23 +121,23 @@ public abstract class OrderBasicImpl implements Order {
 	}
 
 	@Override
-	public OrdQty ordQty() {
-		return ordQty;
+	public OrdQty qty() {
+		return qty;
 	}
 
 	@Override
-	public OrdPrice ordPrice() {
-		return ordPrice;
+	public OrdPrice price() {
+		return price;
 	}
 
 	@Override
-	public OrdType ordType() {
-		return ordType;
+	public OrdType type() {
+		return type;
 	}
 
 	@Override
-	public OrdTimestamp ordTimestamp() {
-		return ordTimestamp;
+	public OrdTimestamp timestamp() {
+		return timestamp;
 	}
 
 	@Override
@@ -146,13 +146,13 @@ public abstract class OrderBasicImpl implements Order {
 	}
 
 	@Override
-	public OrdStatus ordStatus() {
-		return ordStatus;
+	public OrdStatus status() {
+		return status;
 	}
 
 	@Override
-	public void setOrdStatus(OrdStatus ordStatus) {
-		this.ordStatus = ordStatus;
+	public void setStatus(OrdStatus status) {
+		this.status = status;
 	}
 
 	@Override
@@ -165,13 +165,13 @@ public abstract class OrderBasicImpl implements Order {
 		this.remark = remark;
 	}
 
-	private static final String OrderOutputText = "{} :: {}, Order : ordSysId==[{}], ordStatus==[{}], "
-			+ "direction==[{}], ordType==[{}], instrument -> {}, ordPrice -> {}, ordQty -> {}, ordTimestamps -> {}";
+	private static final String OrderOutputText = "{} :: {}, Order : uniqueId==[{}], status==[{}], "
+			+ "direction==[{}], type==[{}], instrument -> {}, price -> {}, qty -> {}, timestamp -> {}";
 
 	@Override
-	public void writeLog(Logger logger, String objName, String msg) {
-		logger.info(OrderOutputText, objName, msg, ordSysId(), ordStatus(), direction(), ordType(), instrument(),
-				ordPrice(), ordQty(), ordTimestamp());
+	public void writeLog(Logger log, String objName, String msg) {
+		log.info(OrderOutputText, objName, msg, uniqueId(), status(), direction(), type(), instrument(),
+				price(), qty(), timestamp());
 	}
 
 }

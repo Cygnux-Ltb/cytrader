@@ -1,5 +1,7 @@
 package io.mercury.redstone.core.order;
 
+import java.util.function.Function;
+
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
@@ -45,7 +47,7 @@ public final class ActualParentOrder extends ActualOrder {
 	 */
 	ActualParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
 			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(OrdSysIdSupporter.allocateId(strategyId), strategyId, accountId, subAccountId, instrument,
+		super(UniqueIdSupporter.allocateId(strategyId), strategyId, accountId, subAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
 		this.childOrders = MutableLists.newFastList(8);
 	}
@@ -73,21 +75,29 @@ public final class ActualParentOrder extends ActualOrder {
 	 */
 	ActualChildOrder toChildOrder() {
 		ActualChildOrder childOrder = new ActualChildOrder(strategyId(), accountId(), subAccountId(), instrument(),
-				ordQty().offerQty(), ordPrice().offerPrice(), ordType(), direction(), action(), ordSysId());
+				qty().offerQty(), price().offerPrice(), type(), direction(), action(), uniqueId());
 		childOrders.add(childOrder);
 		return childOrder;
 	}
 
 	/**
+	 * 由外部传入拆分为多个订单的逻辑
 	 * 
-	 * @param count 数量
+	 * @param splitFunc
 	 * @return
 	 */
-	MutableList<ActualChildOrder> splitChildOrder(int count) {
-		// TODO 增加拆分为多个订单的逻辑
-		OrdQty qty = ordQty();
-		qty.offerQty();
+	MutableList<ActualChildOrder> splitChildOrder(
+			Function<ActualParentOrder, MutableList<ActualChildOrder>> splitFunc) {
+		this.childOrders.addAll(splitFunc.apply(this));
 		return this.childOrders;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public MutableList<ActualChildOrder> getChildOrders() {
+		return childOrders;
 	}
 
 	@Override
@@ -95,14 +105,14 @@ public final class ActualParentOrder extends ActualOrder {
 		return 1;
 	}
 
-	private static final String ParentOrderText = "{} :: {}, ParentOrder : ordSysId==[{}], ownerOrdId==[{}], "
-			+ "ordStatus==[{}], direction==[{}], action==[{}], ordType==[{}], instrument -> {}, "
-			+ "ordPrice -> {}, ordQty -> {}, ordTimestamps -> {}";
+	private static final String ParentOrderText = "{} :: {}, ParentOrder : uniqueId==[{}], ownerUniqueId==[{}], "
+			+ "status==[{}], direction==[{}], action==[{}], type==[{}], instrument -> {}, "
+			+ "price -> {}, qty -> {}, timestamp -> {}";
 
 	@Override
-	public void writeLog(Logger logger, String objName, String msg) {
-		logger.info(ParentOrderText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(), action(),
-				ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp());
+	public void writeLog(Logger log, String objName, String msg) {
+		log.info(ParentOrderText, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(),
+				type(), instrument(), price(), qty(), timestamp());
 	}
 
 }

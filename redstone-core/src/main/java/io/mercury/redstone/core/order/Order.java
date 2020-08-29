@@ -16,14 +16,14 @@ import io.mercury.redstone.core.order.structure.OrdTimestamp;
 public interface Order extends Comparable<Order>, Serializable {
 
 	/**
-	 * ordSysId构成<br>
+	 * uniqueId构成<br>
 	 * 策略Id | 时间戳Second | 自增量Number<br>
 	 * strategyId | epochSecond| increment<br>
 	 * 922 | 3372036854 | 775807<br>
 	 * 
 	 * @return long
 	 */
-	long ordSysId();
+	long uniqueId();
 
 	int strategyId();
 
@@ -33,19 +33,19 @@ public interface Order extends Comparable<Order>, Serializable {
 
 	Instrument instrument();
 
-	OrdQty ordQty();
+	OrdQty qty();
 
-	OrdPrice ordPrice();
+	OrdPrice price();
 
-	OrdType ordType();
+	OrdType type();
 
 	TrdDirection direction();
 
-	OrdTimestamp ordTimestamp();
+	OrdTimestamp timestamp();
 
-	OrdStatus ordStatus();
+	OrdStatus status();
 
-	void setOrdStatus(OrdStatus ordStatus);
+	void setStatus(OrdStatus ordStatus);
 
 	String remark();
 
@@ -53,14 +53,14 @@ public interface Order extends Comparable<Order>, Serializable {
 
 	int ordLevel();
 
-	long ownerOrdId();
+	long ownerUniqueId();
 
-	void writeLog(Logger logger, String objName, String msg);
+	void writeLog(Logger log, String objName, String msg);
 
 	@Override
 	default int compareTo(Order o) {
 		return ordLevel() > o.ordLevel() ? -1
-				: ordLevel() < o.ordLevel() ? 1 : ordSysId() < o.ordSysId() ? -1 : ordSysId() > o.ordSysId() ? 1 : 0;
+				: ordLevel() < o.ordLevel() ? 1 : uniqueId() < o.uniqueId() ? -1 : uniqueId() > o.uniqueId() ? 1 : 0;
 	}
 
 	public static void main(String[] args) {

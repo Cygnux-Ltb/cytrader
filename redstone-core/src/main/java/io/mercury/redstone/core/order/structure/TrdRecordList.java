@@ -8,17 +8,17 @@ import io.mercury.common.collections.MutableLists;
 
 public final class TrdRecordList {
 
-	private long ordSysId;
+	private long uniqueId;
 	private int serial = -1;
 
 	private MutableList<TrdRecord> allRecord = MutableLists.newFastList(8);
 
-	public TrdRecordList(long ordSysId) {
-		this.ordSysId = ordSysId;
+	public TrdRecordList(long uniqueId) {
+		this.uniqueId = uniqueId;
 	}
 
-	public long ordSysId() {
-		return ordSysId;
+	public long uniqueId() {
+		return uniqueId;
 	}
 
 	public MutableList<TrdRecord> allRecord() {
@@ -38,7 +38,7 @@ public final class TrdRecordList {
 	}
 
 	public void add(long epochTime, long trdPrice, int trdQty) {
-		allRecord.add(new TrdRecord(++serial, ordSysId, epochTime, trdPrice, trdQty));
+		allRecord.add(new TrdRecord(++serial, uniqueId, epochTime, trdPrice, trdQty));
 	}
 
 }

@@ -23,14 +23,14 @@ public final class OrderUpdater {
 	 * @param report
 	 */
 	public static void updateWithReport(@Nonnull ActualChildOrder order, @Nonnull OrdReport report) {
-		OrdQty ordQty = order.ordQty();
+		OrdQty qty = order.qty();
 		int filledQty = report.getFilledQty();
-		log.info("OrdReport ordStatus==[{}], filledQty()==[{}], tradePrice==[{}], ordQty -> {}", report.getOrdStatus(),
-				report.getTradePrice(), filledQty, ordQty);
+		log.info("OrdReport ordStatus==[{}], filledQty()==[{}], tradePrice==[{}], qty -> {}", report.getOrdStatus(),
+				report.getTradePrice(), filledQty, qty);
 		if (report.getOrdStatus() == OrdStatus.NotProvided) {
 			// 处理未返回订单状态的情况, 根据成交数量判断
-			int offerQty = ordQty.offerQty();
-			order.setOrdStatus(
+			int offerQty = qty.offerQty();
+			order.setStatus(
 					// 成交数量等于委托数量, 状态为全部成交
 					filledQty == offerQty ? OrdStatus.Filled
 							// 成交数量小于委托数量同时成交数量大于0, 状态为部分成交
@@ -39,29 +39,29 @@ public final class OrderUpdater {
 									: OrdStatus.New);
 		} else {
 			// 已返回订单状态, 直接读取
-			order.setOrdStatus(report.getOrdStatus());
+			order.setStatus(report.getOrdStatus());
 		}
-		switch (order.ordStatus()) {
+		switch (order.status()) {
 		case PartiallyFilled:
 			// 处理部分成交, 设置已成交数量
 			// Set FilledQty
-			order.ordQty().setFilledQty(filledQty);
+			order.qty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade record
 			order.trdRecordList().add(report.getEpochMillis(), report.getTradePrice(),
-					filledQty - order.ordQty().lastFilledQty());
+					filledQty - order.qty().lastFilledQty());
 			break;
 		case Filled:
 			// 处理全部成交, 设置已成交数量
 			// Set FilledQty
-			order.ordQty().setFilledQty(filledQty);
+			order.qty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade Record
 			order.trdRecordList().add(report.getEpochMillis(), report.getTradePrice(),
-					filledQty - order.ordQty().lastFilledQty());
+					filledQty - order.qty().lastFilledQty());
 			// 计算此订单成交均价
 			// Calculation AvgPrice
-			order.ordPrice().calculateAvgPrice(order.trdRecordList());
+			order.price().calculateAvgPrice(order.trdRecordList());
 			break;
 		default:
 			break;

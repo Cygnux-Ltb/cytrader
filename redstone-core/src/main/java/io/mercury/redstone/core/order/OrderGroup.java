@@ -7,7 +7,7 @@ import io.mercury.redstone.core.order.structure.OrdTimestamp;
 
 public final class OrderGroup {
 
-	private long groupOrdSysId;
+	private long groupUniqueId;
 	private OrdTimestamp ordTimestamp;
 
 	private ImmutableSet<Order> orderSet;
@@ -17,8 +17,8 @@ public final class OrderGroup {
 		this.ordTimestamp = OrdTimestamp.generate();
 	}
 
-	public long groupOrdSysId() {
-		return groupOrdSysId;
+	public long groupUniqueId() {
+		return groupUniqueId;
 	}
 
 	public ImmutableSet<Order> getOrderSet() {

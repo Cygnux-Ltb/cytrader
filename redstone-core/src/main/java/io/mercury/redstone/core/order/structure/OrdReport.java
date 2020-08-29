@@ -15,9 +15,9 @@ public final class OrdReport implements Serial {
 	private long serialId = abs(System.nanoTime());
 
 	/**
-	 * mapping to order ordSysId
+	 * mapping to order uniqueId
 	 */
-	private long ordSysId;
+	private long uniqueId;
 
 	/**
 	 * report epoch milliseconds
@@ -96,14 +96,14 @@ public final class OrdReport implements Serial {
 
 	/**
 	 * 
-	 * @param ordSysId
+	 * @param uniqueId
 	 */
-	public OrdReport(long ordSysId) {
-		this.ordSysId = ordSysId;
+	public OrdReport(long uniqueId) {
+		this.uniqueId = uniqueId;
 	}
 
-	public long getOrdSysId() {
-		return ordSysId;
+	public long getUniqueId() {
+		return uniqueId;
 	}
 
 	public long getEpochMillis() {

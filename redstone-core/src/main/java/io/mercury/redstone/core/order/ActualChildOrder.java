@@ -32,7 +32,7 @@ public final class ActualChildOrder extends ActualOrder {
 	private final String[] brokerIdentifier = new String[4];
 
 	/**
-	 * 子订单成交列表
+	 * 订单成交列表
 	 */
 	private final TrdRecordList trdRecordList;
 
@@ -49,18 +49,18 @@ public final class ActualChildOrder extends ActualOrder {
 	 * @param action       交易动作
 	 * @param ownerOrdId   所属上级订单
 	 */
-	ActualChildOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty, long offerPrice,
-			OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(OrdSysIdSupporter.allocateId(strategyId), strategyId, accountId, subAccountId, instrument,
+	ActualChildOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
+			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
+		super(UniqueIdSupporter.allocateId(strategyId), strategyId, accountId, subAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
-		this.trdRecordList = new TrdRecordList(ordSysId());
+		this.trdRecordList = new TrdRecordList(uniqueId());
 	}
 
 	/**
 	 * 
 	 * 用于构建外部来源的订单
 	 * 
-	 * @param ordSysId   外部传入的ordSysId, 用于处理非系统订单
+	 * @param uniqueId   外部传入的uniqueId, 用于处理非系统订单
 	 * @param accountId  实际账户Id
 	 * @param instrument 交易标的
 	 * @param ordQty     委托数量
@@ -69,11 +69,11 @@ public final class ActualChildOrder extends ActualOrder {
 	 * @param direction  交易方向
 	 * @param action     交易动作
 	 */
-	ActualChildOrder(long ordSysId, int accountId, Instrument instrument, int offerQty, long offerPrice,
+	ActualChildOrder(long uniqueId, int accountId, Instrument instrument, int offerQty, long offerPrice,
 			TrdDirection direction, TrdAction action) {
-		super(ordSysId, Strategy.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
+		super(uniqueId, Strategy.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction, action, 0L);
-		this.trdRecordList = new TrdRecordList(ordSysId());
+		this.trdRecordList = new TrdRecordList(uniqueId());
 	}
 
 	@Override
@@ -97,14 +97,14 @@ public final class ActualChildOrder extends ActualOrder {
 		return trdRecordList.last().get();
 	}
 
-	private static final String ChildOrderText = "{} :: {}, ChildOrder : ordSysId==[{}], ownerOrdId==[{}], "
-			+ "ordStatus==[{}], direction==[{}], action==[{}], ordType==[{}], instrument -> {}, ordPrice -> {}, "
-			+ "ordQty -> {}, ordTimestamps -> {}, trdRecordList -> {}";
+	private static final String ChildOrderText = "{} :: {}, ChildOrder : uniqueId==[{}], ownerUniqueId==[{}], "
+			+ "status==[{}], direction==[{}], action==[{}], type==[{}], instrument -> {}, price -> {}, "
+			+ "qty -> {}, timestamp -> {}, trdRecordList -> {}";
 
 	@Override
-	public void writeLog(Logger logger, String objName, String msg) {
-		logger.info(ChildOrderText, objName, msg, ordSysId(), ownerOrdId(), ordStatus(), direction(), action(),
-				ordType(), instrument(), ordPrice(), ordQty(), ordTimestamp(), trdRecordList);
+	public void writeLog(Logger log, String objName, String msg) {
+		log.info(ChildOrderText, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(), type(),
+				instrument(), price(), qty(), timestamp(), trdRecordList);
 	}
 
 }

@@ -1,5 +1,7 @@
 package io.mercury.redstone.core.order;
 
+import java.util.function.Function;
+
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.list.MutableList;
@@ -81,7 +83,7 @@ public final class OrderKeeper implements Dumpable<String> {
 	static void onOrder(Order order) {
 		int subAccountId = order.subAccountId();
 		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
-		switch (order.ordStatus()) {
+		switch (order.status()) {
 		case Filled:
 		case Canceled:
 		case NewRejected:
@@ -93,7 +95,7 @@ public final class OrderKeeper implements Dumpable<String> {
 			getInstrumentOrderBook(order.instrument()).finishOrder(order);
 			break;
 		default:
-			log.info("Not need processed, ordSysId==[{}], ordStatus==[{}]", order.ordSysId(), order.ordStatus());
+			log.info("Not need processed, uniqueId==[{}], status==[{}]", order.uniqueId(), order.status());
 			break;
 		}
 	}
@@ -107,12 +109,12 @@ public final class OrderKeeper implements Dumpable<String> {
 	public static ActualChildOrder onOrdReport(OrdReport report) {
 		log.info("Handle OrdReport, report -> {}", report);
 		// 根据订单回报查找所属订单
-		Order order = getOrder(report.getOrdSysId());
+		Order order = getOrder(report.getUniqueId());
 		if (order == null) {
 			// 处理订单由外部系统发出而收到报单回报的情况
-			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
+			log.warn("Received other source order, uniqueId==[{}]", report.getUniqueId());
 			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
-			order = new ActualChildOrder(report.getOrdSysId(), account.accountId(), report.getInstrument(),
+			order = new ActualChildOrder(report.getUniqueId(), account.accountId(), report.getInstrument(),
 					report.getOfferQty(), report.getOfferPrice(), report.getDirection(), report.getAction());
 			putOrder(order);
 		} else {
@@ -125,12 +127,12 @@ public final class OrderKeeper implements Dumpable<String> {
 		return childOrder;
 	}
 
-	public static boolean containsOrder(long ordSysId) {
-		return AllOrders.containsOrder(ordSysId);
+	public static boolean containsOrder(long uniqueId) {
+		return AllOrders.containsOrder(uniqueId);
 	}
 
-	public static Order getOrder(long ordSysId) {
-		return AllOrders.getOrder(ordSysId);
+	public static Order getOrder(long uniqueId) {
+		return AllOrders.getOrder(uniqueId);
 	}
 
 	public static OrderBook getSubAccountOrderBook(int subAccountId) {
@@ -189,6 +191,13 @@ public final class OrderKeeper implements Dumpable<String> {
 	}
 
 	/**
+	 * 
+	 */
+	static Function<ActualParentOrder, MutableList<ActualChildOrder>> SplitChildOrderWithCount = order -> {
+		return null;
+	};
+
+	/**
 	 * 将[ParentOrder]拆分为多个[ChildOrder], 并存入Keeper
 	 * 
 	 * @param parentOrder
@@ -196,7 +205,7 @@ public final class OrderKeeper implements Dumpable<String> {
 	 * @return
 	 */
 	public static MutableList<ActualChildOrder> splitChildOrder(ActualParentOrder parentOrder, int count) {
-		MutableList<ActualChildOrder> childOrders = parentOrder.splitChildOrder(count);
+		MutableList<ActualChildOrder> childOrders = parentOrder.splitChildOrder(SplitChildOrderWithCount);
 		childOrders.each(OrderKeeper::putOrder);
 		return childOrders;
 	}

@@ -6,22 +6,22 @@ package io.mercury.redstone.core.order.structure;
 public class TrdRecord implements Comparable<TrdRecord> {
 
 	private int serial;
-	private long ordSysId;
+	private long uniqueId;
 	private long epochTime;
 
 	private long trdPrice;
 	private int trdQty;
 
-	public TrdRecord(int serial, long ordSysId, long epochTime, long trdPrice, int trdQty) {
-		this.ordSysId = ordSysId;
+	public TrdRecord(int serial, long uniqueId, long epochTime, long trdPrice, int trdQty) {
+		this.uniqueId = uniqueId;
 		this.serial = serial;
 		this.epochTime = epochTime;
 		this.trdPrice = trdPrice;
 		this.trdQty = trdQty;
 	}
 
-	public long ordSysId() {
-		return ordSysId;
+	public long uniqueId() {
+		return uniqueId;
 	}
 
 	public int serial() {
@@ -42,8 +42,8 @@ public class TrdRecord implements Comparable<TrdRecord> {
 
 	@Override
 	public int compareTo(TrdRecord o) {
-		return this.ordSysId < o.ordSysId ? -1
-				: this.ordSysId > o.ordSysId ? 1 
+		return this.uniqueId < o.uniqueId ? -1
+				: this.uniqueId > o.uniqueId ? 1 
 						: this.serial < o.serial ? -1 
 								: this.serial > o.serial ? 1 
 										: 0;

@@ -4,12 +4,12 @@ import io.mercury.redstone.core.order.enums.TrdDirection;
 
 public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 
-	private long ordSysId;
+	private long uniqueId;
 	private long stopLossPrice;
 
-	public OrdStopLoss(long ordSysId, TrdDirection direction) {
+	public OrdStopLoss(long uniqueId, TrdDirection direction) {
 		super();
-		this.ordSysId = ordSysId;
+		this.uniqueId = uniqueId;
 		switch (direction) {
 		case Long:
 			stopLossPrice = Long.MAX_VALUE;
@@ -22,8 +22,8 @@ public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 		}
 	}
 
-	public long ordSysId() {
-		return ordSysId;
+	public long uniqueId() {
+		return uniqueId;
 	}
 
 	public long stopLossPrice() {

@@ -9,16 +9,16 @@ import io.mercury.common.collections.MutableLists;
 @Deprecated
 public final class OrdReportList {
 
-	private long ordSysId;
+	private long uniqueId;
 
 	private MutableList<OrdReport> allReport = MutableLists.newFastList(8);
 
-	public OrdReportList(long ordSysId) {
-		this.ordSysId = ordSysId;
+	public OrdReportList(long uniqueId) {
+		this.uniqueId = uniqueId;
 	}
 
-	public long ordSysId() {
-		return ordSysId;
+	public long uniqueId() {
+		return uniqueId;
 	}
 
 	public MutableList<OrdReport> allReport() {

@@ -37,8 +37,9 @@ public enum OrdStatus {
 
 	;
 
-	private int code;
-	private boolean finished;
+	private final int code;
+	private final boolean finished;
+	private final String fullStr;
 
 	/**
 	 * 
@@ -48,6 +49,7 @@ public enum OrdStatus {
 	private OrdStatus(int code, boolean finished) {
 		this.code = code;
 		this.finished = finished;
+		this.fullStr = name() + "[" + code + "]";
 	}
 
 	public int code() {
@@ -90,7 +92,15 @@ public enum OrdStatus {
 			log.error("OrdStatus.valueOf(code=={}) -> is no matches, return OrdStatus.Invalid", code);
 			return Invalid;
 		}
+	}
 
+	@Override
+	public String toString() {
+		return fullStr;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(NotProvided);
 	}
 
 }
