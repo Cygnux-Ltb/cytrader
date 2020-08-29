@@ -137,8 +137,8 @@ public final class PositionKeeper implements Dumpable<String> {
 				trdQty = -abs(trdQty);
 				break;
 			case Invalid:
-				log.error("Order action is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
-						subAccountId, order.ordSysId(), instrument.code());
+				log.error("Order action is [Invalid], subAccountId==[{}], uniqueId==[{}], instrumentCode==[{}]",
+						subAccountId, order.uniqueId(), instrument.code());
 				break;
 			}
 			break;
@@ -153,14 +153,14 @@ public final class PositionKeeper implements Dumpable<String> {
 				trdQty = abs(trdQty);
 				break;
 			case Invalid:
-				log.error("Order action is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
-						subAccountId, order.ordSysId(), instrument.code());
+				log.error("Order action is [Invalid], subAccountId==[{}], uniqueId==[{}], instrumentCode==[{}]",
+						subAccountId, order.uniqueId(), instrument.code());
 				break;
 			}
 			break;
 		case Invalid:
-			log.error("Order direction is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
-					subAccountId, order.ordSysId(), instrument.code());
+			log.error("Order direction is [Invalid], subAccountId==[{}], uniqueId==[{}], instrumentCode==[{}]",
+					subAccountId, order.uniqueId(), instrument.code());
 			break;
 		}
 		log.info("Update position, subAccountId==[{}], instrumentCode==[{}], currentPosition==[{}], trdQty==[{}]",
