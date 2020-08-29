@@ -20,8 +20,8 @@ public final class FromFtdcTrade implements Function<FtdcTrade, OrdReport> {
 	@Override
 	public OrdReport apply(FtdcTrade ftdcTrade) {
 		String orderRef = ftdcTrade.getOrderRef();
-		long ordSysId = OrderRefKeeper.getOrdSysId(orderRef);
-		OrdReport report = new OrdReport(ordSysId);
+		long uniqueId = OrderRefKeeper.getUniqueId(orderRef);
+		OrdReport report = new OrdReport(uniqueId);
 		/**
 		 * 投资者ID
 		 */

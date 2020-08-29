@@ -36,6 +36,7 @@ import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorBaseImpl;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
+import io.mercury.redstone.core.adaptor.Command;
 import io.mercury.redstone.core.order.ActualChildOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
 import io.mercury.redstone.core.strategy.StrategyScheduler;
@@ -214,7 +215,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private final ToFtdcInputOrder toFtdcInputOrder;
 
 	@Override
-	public boolean newOredr(ActualChildOrder order) {
+	public boolean newOredr(Account account, ActualChildOrder order) {
 		try {
 			CThostFtdcInputOrderField ftdcInputOrder = toFtdcInputOrder.apply(order);
 			String orderRef = Integer.toString(OrderRefGenerator.next(order.strategyId()));
@@ -222,7 +223,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			 * 设置OrderRef
 			 */
 			ftdcInputOrder.setOrderRef(orderRef);
-			OrderRefKeeper.put(orderRef, order.ordSysId());
+			OrderRefKeeper.put(orderRef, order.uniqueId());
 			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
@@ -234,10 +235,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private final ToFtdcInputOrderAction toFtdcInputOrderAction;
 
 	@Override
-	public boolean cancelOrder(ActualChildOrder order) {
+	public boolean cancelOrder(Account account, ActualChildOrder order) {
 		try {
 			CThostFtdcInputOrderActionField ftdcInputOrderAction = toFtdcInputOrderAction.apply(order);
-			String orderRef = OrderRefKeeper.getOrderRef(order.ordSysId());
+			String orderRef = OrderRefKeeper.getOrderRef(order.uniqueId());
 
 			ftdcInputOrderAction.setOrderRef(orderRef);
 			ftdcInputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.strategyId()));
@@ -323,6 +324,12 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	@Override
 	public void close() throws IOException {
 		// TODO close adaptor
+	}
+
+	@Override
+	public boolean sendCommand(Command command) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
