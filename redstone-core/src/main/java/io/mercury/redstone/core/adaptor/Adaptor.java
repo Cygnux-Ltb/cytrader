@@ -1,6 +1,7 @@
 package io.mercury.redstone.core.adaptor;
 
 import java.io.Closeable;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -18,7 +19,21 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 
 	Account account();
 
+	List<Account> accounts();
+
+	/**
+	 * Adaptor 启动函数
+	 * 
+	 * @return
+	 */
 	boolean startup();
+
+	/**
+	 * 
+	 * @param command
+	 * @return
+	 */
+	boolean sendCommand(Command command);
 
 	/**
 	 * 订阅行情
@@ -34,7 +49,17 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param order
 	 * @return
 	 */
-	boolean newOredr(@Nonnull ActualChildOrder order);
+	default boolean newOredr(@Nonnull ActualChildOrder order) {
+		return newOredr(null, order);
+	}
+
+	/**
+	 * 发送新订单
+	 * 
+	 * @param order
+	 * @return
+	 */
+	boolean newOredr(@Nullable Account account, @Nonnull ActualChildOrder order);
 
 	/**
 	 * 发送撤单请求
@@ -42,10 +67,20 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * @param order
 	 * @return
 	 */
-	boolean cancelOrder(@Nonnull ActualChildOrder order);
+	default boolean cancelOrder(@Nonnull ActualChildOrder order) {
+		return cancelOrder(null, order);
+	}
 
 	/**
-	 * 查询持仓
+	 * 发送撤单请求
+	 * 
+	 * @param order
+	 * @return
+	 */
+	boolean cancelOrder(@Nullable Account account, @Nonnull ActualChildOrder order);
+
+	/**
+	 * 查询订单
 	 * 
 	 * @param account
 	 * @return
@@ -55,7 +90,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	}
 
 	/**
-	 * 查询持仓
+	 * 查询订单
 	 * 
 	 * @param account
 	 * @return

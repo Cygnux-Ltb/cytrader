@@ -1,7 +1,10 @@
 package io.mercury.redstone.core.adaptor;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
+import io.mercury.common.collections.MutableLists;
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
 import io.mercury.financial.instrument.InstrumentManager;
@@ -13,10 +16,13 @@ public abstract class AdaptorBaseImpl extends EnableComponent<Adaptor> implement
 	private final int adaptorId;
 	private final String adaptorName;
 	private final Account account;
+	private final List<Account> accounts;
 
-	public AdaptorBaseImpl(int adaptorId, @Nonnull Account account) {
+	public AdaptorBaseImpl(int adaptorId, @Nonnull Account... accounts) {
+		Assertor.requiredLength(accounts, 1, "accounts");
 		this.adaptorId = adaptorId;
-		this.account = Assertor.nonNull(account, "account");
+		this.account = accounts[0];
+		this.accounts = MutableLists.newFastList(accounts);
 		this.adaptorName = "Broker[ " + account.brokerName() + "]-InvestorId[" + account.investorId() + "]";
 		AdaptorKeeper.putAdaptor(this);
 	}
@@ -34,6 +40,11 @@ public abstract class AdaptorBaseImpl extends EnableComponent<Adaptor> implement
 	@Override
 	public Account account() {
 		return account;
+	}
+
+	@Override
+	public List<Account> accounts() {
+		return accounts;
 	}
 
 	@Override
