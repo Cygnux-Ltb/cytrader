@@ -428,7 +428,7 @@ public class OrderSamples {
 		order.totalQuantity(quantity);
 		order.orderComboLegs(new ArrayList<OrderComboLeg>());
 		
-		for (double price : legPrices) {
+		for (@SuppressWarnings("unused") double price : legPrices) {
 			OrderComboLeg comboLeg = new OrderComboLeg();
 			comboLeg.price(5.0);
 			order.orderComboLegs().add(comboLeg);
@@ -439,12 +439,12 @@ public class OrderSamples {
 			List<TagValue> smartComboRoutingParams = new ArrayList<TagValue>();
 			smartComboRoutingParams.add(new TagValue("NonGuaranteed", "1"));
 		}
-		// ! [limitordercombolegprices]
+		// ! [limitOrderCombolegPrices]
 		return order;
 	}
 	
 	public static Order RelativeLimitCombo(String action, double quantity, boolean nonGuaranteed, double limitPrice) {
-		// ! [relativelimitcombo]
+		// ! [relativeLimitCombo]
 		Order order = new Order();
 		order.action(action);
 		order.orderType("REL + LMT");
@@ -455,12 +455,12 @@ public class OrderSamples {
 			List<TagValue> smartComboRoutingParams = new ArrayList<TagValue>();
 			smartComboRoutingParams.add(new TagValue("NonGuaranteed", "1"));
 		}
-		// ! [relativelimitcombo]
+		// ! [relativeLimitCombo]
 		return order;
 	}
 	
 	public static Order RelativeMarketCombo(String action, double quantity, boolean nonGuaranteed) {
-		// ! [relativemarketcombo]
+		// ! [relativeMarketCombo]
 		Order order = new Order();
 		order.action(action);
 		order.orderType("REL + MKT");
@@ -470,11 +470,11 @@ public class OrderSamples {
 			List<TagValue> smartComboRoutingParams = new ArrayList<TagValue>();
 			smartComboRoutingParams.add(new TagValue("NonGuaranteed", "1"));
 		}
-		// ! [relativemarketcombo]
+		// ! [relativeMarketCombo]
 		return order;
 	}
 	
-	// ! [oca]
+	// ! [oneCancelAll]
 	public static List<Order> OneCancelsAll(String ocaGroup, List<Order> ocaOrders, int ocaType) {
 		
 		for (Order o : ocaOrders) {

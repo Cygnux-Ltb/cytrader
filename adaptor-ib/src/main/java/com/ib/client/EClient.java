@@ -2977,6 +2977,7 @@ public abstract class EClient {
 	protected abstract void closeAndSend(Builder buf) throws IOException;
 
 	private void sendV100APIHeader() throws IOException {
+		@SuppressWarnings("resource")
 		Builder bos = new Builder(1024);
 		bos.send("API\0".getBytes());
 

@@ -90,6 +90,7 @@ public class Builder implements ObjectOutput {
 			super(capacity);
 		}
 
+		@SuppressWarnings("unused")
 		public void updateLength(int lengthHeaderPosition) {
 			int len = this.count - EMPTY_LENGTH_HEADER.length - lengthHeaderPosition;
 			if (PADDING_SIZE > 1) {

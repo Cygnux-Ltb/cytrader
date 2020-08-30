@@ -60,6 +60,7 @@ public class Testbed {
 		m_client.eDisconnect();
 	}
 
+	@SuppressWarnings("unused")
 	private static void orderOperations(EClientSocket client, int nextOrderId) throws InterruptedException {
 
 		/*** Requesting the next valid id ***/
@@ -137,6 +138,7 @@ public class Testbed {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void OcaSample(EClientSocket client, int nextOrderId) {
 
 		// OCA order
@@ -154,6 +156,7 @@ public class Testbed {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void tickDataOperations(EClientSocket client) throws InterruptedException {
 
 		/*** Requesting real time market data ***/
@@ -197,6 +200,7 @@ public class Testbed {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void historicalDataRequests(EClientSocket client) throws InterruptedException {
 
 		/*** Requesting historical data ***/
@@ -216,6 +220,7 @@ public class Testbed {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void realTimeBars(EClientSocket client) throws InterruptedException {
 
 		/*** Requesting real time bars ***/
@@ -230,82 +235,85 @@ public class Testbed {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void marketDepthOperations(EClientSocket client) throws InterruptedException {
 
 		/*** Requesting the Deep Book ***/
-		// ! [reqmarketdepth]
+		// ! [reqMarketDepth]
 		client.reqMktDepth(2001, ContractSamples.EurGbpFx(), 5, null);
-		// ! [reqmarketdepth]
+		// ! [reqMarketDepth]
 		Thread.sleep(2000);
 		/*** Canceling the Deep Book request ***/
-		// ! [cancelmktdepth]
+		// ! [cancelMktDepth]
 		client.cancelMktDepth(2001);
-		// ! [cancelmktdepth]
+		// ! [cancelMktDepth]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void accountOperations(EClientSocket client) throws InterruptedException {
 
 		// client.reqAccountUpdatesMulti(9002, null, "EUstocks", true);
-		// ! [reqpositionsmulti]
+		// ! [reqPositionsMulti]
 		client.reqPositionsMulti(9003, "DU74649", "EUstocks");
-		// ! [reqpositionsmulti]
+		// ! [reqPositionsMulti]
 		Thread.sleep(10000);
 
 		/*** Requesting managed accounts ***/
-		// ! [reqmanagedaccts]
+		// ! [reqManagedAccts]
 		client.reqManagedAccts();
-		// ! [reqmanagedaccts]
+		// ! [reqManagedAccts]
 		/*** Requesting accounts' summary ***/
 		Thread.sleep(2000);
-		// ! [reqaaccountsummary]
+		// ! [reqAccountSummary]
 		client.reqAccountSummary(9001, "All",
 				"AccountType,NetLiquidation,TotalCashValue,SettledCash,AccruedCash,BuyingPower,EquityWithLoanValue,PreviousEquityWithLoanValue,GrossPositionValue,ReqTEquity,ReqTMargin,SMA,InitMarginReq,MaintMarginReq,AvailableFunds,ExcessLiquidity,Cushion,FullInitMarginReq,FullMaintMarginReq,FullAvailableFunds,FullExcessLiquidity,LookAheadNextChange,LookAheadInitMarginReq ,LookAheadMaintMarginReq,LookAheadAvailableFunds,LookAheadExcessLiquidity,HighestSeverity,DayTradesRemaining,Leverage");
-		// ! [reqaaccountsummary]
+		// ! [reqAccountSummary]
 
-		// ! [reqaaccountsummaryledger]
+		// ! [reqAccountSummaryLedger]
 		client.reqAccountSummary(9002, "All", "$LEDGER");
-		// ! [reqaaccountsummaryledger]
+		// ! [reqAccountSummaryLedger]
 		Thread.sleep(2000);
-		// ! [reqaaccountsummaryledgercurrency]
+		// ! [reqAccountSummaryLedgerCurrency]
 		client.reqAccountSummary(9003, "All", "$LEDGER:EUR");
-		// ! [reqaaccountsummaryledgercurrency]
+		// ! [reqAccountSummaryLedgerCurrency]
 		Thread.sleep(2000);
-		// ! [reqaaccountsummaryledgerall]
+		// ! [reqAccountSummaryLedgerAll]
 		client.reqAccountSummary(9004, "All", "$LEDGER:ALL");
-		// ! [reqaaccountsummaryledgerall]
+		// ! [reqAccountSummaryLedgerAll]
 
-		// ! [cancelaaccountsummary]
+		// ! [cancelAcountSummary]
 		client.cancelAccountSummary(9001);
 		client.cancelAccountSummary(9002);
 		client.cancelAccountSummary(9003);
 		client.cancelAccountSummary(9004);
-		// ! [cancelaaccountsummary]
+		// ! [cancelAccountSummary]
 
 		/*** Subscribing to an account's information. Only one at a time! ***/
 		Thread.sleep(2000);
-		// ! [reqaaccountupdates]
+		// ! [reqAccountUpdates]
 		client.reqAccountUpdates(true, "U150462");
-		// ! [reqaaccountupdates]
+		// ! [reqAccountUpdates]
 		Thread.sleep(2000);
-		// ! [cancelaaccountupdates]
+		// ! [cancelAccountUpdates]
 		client.reqAccountUpdates(false, "U150462");
-		// ! [cancelaaccountupdates]
+		// ! [cancelAccountUpdates]
 
-		// ! [reqaaccountupdatesmulti]
+		// ! [reqAccountUpdatesMulti]
 		client.reqAccountUpdatesMulti(9002, "U150462", "EUstocks", true);
-		// ! [reqaaccountupdatesmulti]
+		// ! [reqAccountUpdatesMulti]
 		Thread.sleep(2000);
 		/*** Requesting all accounts' positions. ***/
-		// ! [reqpositions]
+		// ! [reqPositions]
 		client.reqPositions();
-		// ! [reqpositions]
+		// ! [reqPositions]
 		Thread.sleep(2000);
-		// ! [cancelpositions]
+		// ! [cancelPositions]
 		client.cancelPositions();
-		// ! [cancelpositions]
+		// ! [cancelPositions]
 	}
 
+	@SuppressWarnings("unused")
 	private static void conditionSamples(EClientSocket client, int nextOrderId) {
 
 		// ! [order_conditioning_activate]
@@ -333,26 +341,29 @@ public class Testbed {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void contractOperations(EClientSocket client) {
 
-		// ! [reqcontractdetails]
+		// ! [reqContractDetails]
 		client.reqContractDetails(210, ContractSamples.OptionForQuery());
-		// ! [reqcontractdetails]
+		// ! [reqContractDetails]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void contractNewsFeed(EClientSocket client) {
 
-		// ! [reqcontractdetailsnews]
+		// ! [reqContractDetailsnews]
 		client.reqContractDetails(211, ContractSamples.NewsFeedForQuery());
-		// ! [reqcontractdetailsnews]
+		// ! [reqContractDetailsnews]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void hedgeSample(EClientSocket client, int nextOrderId) throws InterruptedException {
 
 		// F Hedge order
-		// ! [hedgesubmit]
+		// ! [hedgeSubmit]
 		// Parent order on a contract which currency differs from your base currency
 		Order parent = OrderSamples.LimitOrder("BUY", 100, 10);
 		parent.orderId(nextOrderId++);
@@ -362,28 +373,29 @@ public class Testbed {
 		client.placeOrder(parent.orderId(), ContractSamples.EuropeanStock(), parent);
 		// Then the hedge order
 		client.placeOrder(nextOrderId++, ContractSamples.EurGbpFx(), hedge);
-		// ! [hedgesubmit]
+		// ! [hedgeSubmit]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void testAlgoSamples(EClientSocket client, int nextOrderId) throws InterruptedException {
 
 		// ! [algo_base_order]
 		Order baseOrder = OrderSamples.LimitOrder("BUY", 1000, 1);
 		// ! [algo_base_order]
 
-		// ! [arrivalpx]
+		// ! [arrivalPx]
 		AvailableAlgoParams.FillArrivalPriceParams(baseOrder, 0.1, "Aggressive", "09:00:00 CET", "16:00:00 CET", true,
 				true);
 		client.placeOrder(nextOrderId++, ContractSamples.USStockAtSmart(), baseOrder);
-		// ! [arrivalpx]
+		// ! [arrivalPx]
 
 		Thread.sleep(500);
 
-		// ! [darkice]
+		// ! [darkIce]
 		AvailableAlgoParams.FillDarkIceParams(baseOrder, 10, "09:00:00 CET", "16:00:00 CET", true);
 		client.placeOrder(nextOrderId++, ContractSamples.USStockAtSmart(), baseOrder);
-		// ! [darkice]
+		// ! [darkIce]
 
 		Thread.sleep(500);
 
@@ -409,17 +421,17 @@ public class Testbed {
 
 		Thread.sleep(500);
 
-		// ! [balanceimpactrisk]
+		// ! [balanceImpactRisk]
 		AvailableAlgoParams.FillBalanceImpactRiskParams(baseOrder, 0.1, "Aggressive", true);
 		client.placeOrder(nextOrderId++, ContractSamples.USOptionContract(), baseOrder);
-		// ! [balanceimpactrisk]
+		// ! [balanceImpactRisk]
 
 		Thread.sleep(500);
 
-		// ! [minimpact]
+		// ! [minImpact]
 		AvailableAlgoParams.FillMinImpactParams(baseOrder, 0.3);
 		client.placeOrder(nextOrderId++, ContractSamples.USOptionContract(), baseOrder);
-		// ! [minimpact]
+		// ! [minImpact]
 
 		// ! [adaptive]
 		AvailableAlgoParams.FillAdaptiveParams(baseOrder, "Normal");
@@ -428,6 +440,7 @@ public class Testbed {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void bracketSample(EClientSocket client, int nextOrderId) throws InterruptedException {
 
 		// BRACKET ORDER
@@ -440,151 +453,158 @@ public class Testbed {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void bulletins(EClientSocket client) throws InterruptedException {
 
-		// ! [reqnewsbulletins]
+		// ! [reqNewsBulletins]
 		client.reqNewsBulletins(true);
-		// ! [reqnewsbulletins]
+		// ! [reqNewsBulletins]
 
 		Thread.sleep(2000);
 
-		// ! [cancelnewsbulletins]
+		// ! [cancelNewsBulletins]
 		client.cancelNewsBulletins();
-		// ! [cancelnewsbulletins]
+		// ! [cancelNewsBulletins]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void reutersFundamentals(EClientSocket client) throws InterruptedException {
 
-		// ! [reqfundamentaldata]
+		// ! [reqFundamentalData]
 		client.reqFundamentalData(8001, ContractSamples.USStock(), "ReportsFinSummary");
-		// ! [reqfundamentaldata]
+		// ! [reqFundamentalData]
 
 		Thread.sleep(2000);
 
-		// ! [fundamentalexamples]
+		// ! [fundamentalExamples]
 		client.reqFundamentalData(8002, ContractSamples.USStock(), "ReportSnapshot"); // for company overview
 		client.reqFundamentalData(8003, ContractSamples.USStock(), "ReportRatios"); // for financial ratios
 		client.reqFundamentalData(8004, ContractSamples.USStock(), "ReportsFinStatements"); // for financial statements
 		client.reqFundamentalData(8005, ContractSamples.USStock(), "RESC"); // for analyst estimates
 		client.reqFundamentalData(8006, ContractSamples.USStock(), "CalendarReport"); // for company calendar
-		// ! [fundamentalexamples]
+		// ! [fundamentalExamples]
 
-		// ! [cancelfundamentaldata]
+		// ! [cancelFundamentalData]
 		client.cancelFundamentalData(8001);
-		// ! [cancelfundamentaldata]
+		// ! [cancelFundamentalData]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void marketScanners(EClientSocket client) throws InterruptedException {
 
 		/***
 		 * Requesting all available parameters which can be used to build a scanner
 		 * request
 		 ***/
-		// ! [reqscannerparameters]
+		// ! [reqScannerParameters]
 		client.reqScannerParameters();
-		// ! [reqscannerparameters]
+		// ! [reqScannerParameters]
 		Thread.sleep(2000);
 
 		/*** Triggering a scanner subscription ***/
-		// ! [reqscannersubscription]
+		// ! [reqScannerSubscription]
 		client.reqScannerSubscription(7001, ScannerSubscriptionSamples.HighOptVolumePCRatioUSIndexes(), null);
-		// ! [reqscannersubscription]
+		// ! [reqScannerSubscription]
 
 		Thread.sleep(2000);
 		/*** Canceling the scanner subscription ***/
-		// ! [cancelscannersubscription]
+		// ! [cancelScannerSubscription]
 		client.cancelScannerSubscription(7001);
-		// ! [cancelscannersubscription]
+		// ! [cancelScannerSubscription]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void financialAdvisorOperations(EClientSocket client) {
 
 		/*** Requesting FA information ***/
-		// ! [requestfaaliases]
+		// ! [requestFaaliases]
 		client.requestFA(FADataType.ALIASES.ordinal());
-		// ! [requestfaaliases]
+		// ! [requestFaaliases]
 
-		// ! [requestfagroups]
+		// ! [requestFagroups]
 		client.requestFA(FADataType.GROUPS.ordinal());
-		// ! [requestfagroups]
+		// ! [requestFagroups]
 
-		// ! [requestfaprofiles]
+		// ! [requestFaprofiles]
 		client.requestFA(FADataType.PROFILES.ordinal());
-		// ! [requestfaprofiles]
+		// ! [requestFaprofiles]
 
 		/*** Replacing FA information - Fill in with the appropriate XML string. ***/
-		// ! [replacefaonegroup]
+		// ! [replaceFaonegroup]
 		client.replaceFA(FADataType.GROUPS.ordinal(), FAMethodSamples.FaOneGroup);
-		// ! [replacefaonegroup]
+		// ! [replaceFaonegroup]
 
-		// ! [replacefatwogroups]
+		// ! [replaceFatwogroups]
 		client.replaceFA(FADataType.GROUPS.ordinal(), FAMethodSamples.FaTwoGroups);
-		// ! [replacefatwogroups]
+		// ! [replaceFatwogroups]
 
-		// ! [replacefaoneprofile]
+		// ! [replaceFaoneprofile]
 		client.replaceFA(FADataType.PROFILES.ordinal(), FAMethodSamples.FaOneProfile);
-		// ! [replacefaoneprofile]
+		// ! [replaceFaoneprofile]
 
-		// ! [replacefatwoprofiles]
+		// ! [replaceFatwoprofiles]
 		client.replaceFA(FADataType.PROFILES.ordinal(), FAMethodSamples.FaTwoProfiles);
-		// ! [replacefatwoprofiles]
+		// ! [replaceFatwoprofiles]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void testDisplayGroups(EClientSocket client) throws InterruptedException {
 
-		// ! [querydisplaygroups]
+		// ! [queryDisplayGroups]
 		client.queryDisplayGroups(9001);
-		// ! [querydisplaygroups]
+		// ! [queryDisplayGroups]
 
 		Thread.sleep(500);
 
-		// ! [subscribetogroupevents]
+		// ! [subscribeToGroupEvents]
 		client.subscribeToGroupEvents(9002, 1);
-		// ! [subscribetogroupevents]
+		// ! [subscribeToGroupEvents]
 
 		Thread.sleep(500);
 
-		// ! [updatedisplaygroup]
+		// ! [updateDisplayGroup]
 		client.updateDisplayGroup(9002, "8314@SMART");
-		// ! [updatedisplaygroup]
+		// ! [updateDisplayGroup]
 
 		Thread.sleep(500);
 
-		// ! [subscribefromgroupevents]
+		// ! [subscribeFromGroupEvents]
 		client.unsubscribeFromGroupEvents(9002);
-		// ! [subscribefromgroupevents]
+		// ! [subscribeFromGroupEvents]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void marketDataType(EClientSocket client) {
 
-		// ! [reqmarketdatatype]
+		// ! [reqMarketDataType]
 		/*** Switch to live (1) frozen (2) delayed (3) or delayed frozen (4) ***/
 		client.reqMarketDataType(2);
-		// ! [reqmarketdatatype]
+		// ! [reqMarketDataType]
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void optionsOperations(EClientSocket client) {
 
-		// ! [reqsecdefoptparams]
+		// ! [reqSecDefOptParams]
 		client.reqSecDefOptParams(0, "IBM", "", "STK", 8314);
-		// ! [reqsecdefoptparams]
+		// ! [reqSecDefOptParams]
 
-		// ! [calculateimpliedvolatility]
+		// ! [calculateImpliedVolatility]
 		client.calculateImpliedVolatility(5001, ContractSamples.OptionAtBOX(), 5, 85);
-		// ! [calculateimpliedvolatility]
+		// ! [calculateImpliedVolatility]
 
 		// ** Canceling implied volatility ***
 		client.cancelCalculateImpliedVolatility(5001);
 
-		// ! [calculateoptionprice]
+		// ! [calculateOptionPrice]
 		client.calculateOptionPrice(5002, ContractSamples.OptionAtBOX(), 0.22, 85);
-		// ! [calculateoptionprice]
+		// ! [calculateOptionPrice]
 
 		// ** Canceling option's price calculation ***
 		client.cancelCalculateOptionPrice(5002);
