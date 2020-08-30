@@ -10,7 +10,7 @@ import io.mercury.redstone.core.adaptor.Adaptor;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
 import io.mercury.redstone.core.strategy.StrategyParamKey;
 
-public abstract class StrategySingleInstrumentImpl<M extends MarketData, PK extends StrategyParamKey>
+public abstract class StrategySingleInstrument<M extends MarketData, PK extends StrategyParamKey>
 		extends StrategyBaseImpl<M, PK> {
 
 	// 策略订阅的合约
@@ -21,7 +21,7 @@ public abstract class StrategySingleInstrumentImpl<M extends MarketData, PK exte
 	 */
 	protected ImmutableList<Instrument> instruments;
 
-	protected StrategySingleInstrumentImpl(int strategyId, String strategyName, int subAccountId, Instrument instrument,
+	protected StrategySingleInstrument(int strategyId, String strategyName, int subAccountId, Instrument instrument,
 			ImmutableParamMap<PK> paramMap) {
 		super(strategyId, strategyName, subAccountId, paramMap);
 		this.instrument = instrument;

@@ -13,8 +13,8 @@ public class ChinaStockPosition extends AbsT1Position {
 
 	@Override
 	public void updatePosition(Order order) {
-		OrdStatus status = order.ordStatus();
-		OrdQty qty = order.ordQty();
+		OrdStatus status = order.status();
+		OrdQty qty = order.qty();
 		switch (order.direction()) {
 		case Long:
 			switch (status) {

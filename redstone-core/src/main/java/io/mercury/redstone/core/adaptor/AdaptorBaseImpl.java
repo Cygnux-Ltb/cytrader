@@ -18,12 +18,12 @@ public abstract class AdaptorBaseImpl extends EnableComponent<Adaptor> implement
 	private final Account account;
 	private final List<Account> accounts;
 
-	public AdaptorBaseImpl(int adaptorId, @Nonnull Account... accounts) {
+	protected AdaptorBaseImpl(int adaptorId, @Nonnull String adaptorName, @Nonnull Account... accounts) {
 		Assertor.requiredLength(accounts, 1, "accounts");
 		this.adaptorId = adaptorId;
+		this.adaptorName = adaptorName;
 		this.account = accounts[0];
 		this.accounts = MutableLists.newFastList(accounts);
-		this.adaptorName = "Broker[ " + account.brokerName() + "]-InvestorId[" + account.investorId() + "]";
 		AdaptorKeeper.putAdaptor(this);
 	}
 
@@ -58,9 +58,9 @@ public abstract class AdaptorBaseImpl extends EnableComponent<Adaptor> implement
 			throw new IllegalStateException("Account Keeper uninitialized");
 		if (!InstrumentManager.isInitialized())
 			throw new IllegalStateException("Instrument Manager uninitialized");
-		return innerStartup();
+		return startup0();
 	}
 
-	protected abstract boolean innerStartup();
+	protected abstract boolean startup0();
 
 }

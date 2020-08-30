@@ -247,7 +247,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 		// 创建策略订单
 //		StrategyOrder strategyOrder = new StrategyOrder(strategyId, accountId, subAccountId, instrument,
 //				OrdQty.withOffer(targetQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction);
-//		orders.put(strategyOrder.ordSysId(), strategyOrder);
+//		orders.put(strategyOrder.uniqueId(), strategyOrder);
 
 		// 转换为实际订单
 //		MutableList<ActParentOrder> parentOrders = strategyOrderConverter.apply(strategyOrder);
@@ -255,11 +255,11 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 		// 存储订单
 		// TODO 未完成全部逻辑
 //		ActParentOrder parentOrder = parentOrders.getFirst();
-//		orders.put(parentOrder.ordSysId(), parentOrder);
+//		orders.put(parentOrder.uniqueId(), parentOrder);
 
 		// 转为实际执行的子订单
 		// ActChildOrder childOrder = parentOrder.toChildOrder();
-		// orders.put(childOrder.ordSysId(), childOrder);
+		// orders.put(childOrder.uniqueId(), childOrder);
 
 		// getAdaptor(instrument).newOredr(childOrder);
 
@@ -479,7 +479,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 	 * @param order
 	 */
 	private void saveOrder(Order order) {
-		orders.put(order.ordSysId(), order);
+		orders.put(order.uniqueId(), order);
 	}
 
 	/**

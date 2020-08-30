@@ -38,12 +38,12 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 				break;
 			case OrderReport:
 				OrdReport ordReport = despatchMsg.getOrdReport();
-				log.info("Handle OrdReport, brokerUniqueId==[{}], ordSysId==[{}]", ordReport.getBrokerUniqueId(),
-						ordReport.getOrdSysId());
+				log.info("Handle OrdReport, brokerUniqueId==[{}], uniqueId==[{}]", ordReport.getBrokerUniqueId(),
+						ordReport.getUniqueId());
 				ActualChildOrder order = OrderKeeper.onOrdReport(ordReport);
-				log.info("Search Order OK. BrokerRtnId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
+				log.info("Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], uniqueId==[{}]",
 						ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
-						ordReport.getOrdSysId());
+						ordReport.getUniqueId());
 				strategyMap.get(order.strategyId()).onOrder(order);
 				break;
 			case AdaptorEvent:

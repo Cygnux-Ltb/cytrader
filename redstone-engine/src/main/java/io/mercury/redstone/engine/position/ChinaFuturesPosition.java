@@ -29,7 +29,7 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 		return beforeTodayQty;
 	}
 
-	public int lockBeforeTodayQty(long ordSysId, TrdDirection direction, int lockQty) {
+	public int lockBeforeTodayQty(long uniqueId, TrdDirection direction, int lockQty) {
 		if (beforeTodayQty == 0) {
 			return 0;
 		} else if (beforeTodayQty > 0) {
@@ -38,13 +38,13 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 				// 需要锁定的Qty小于或等于昨仓, 实际锁定量等于请求量
 				if (lockQty <= beforeTodayQty) {
 					// 记录此订单锁定量
-					beforeTodayQtyLockRecord.put(ordSysId, lockQty);
+					beforeTodayQtyLockRecord.put(uniqueId, lockQty);
 					beforeTodayQty -= lockQty;
 					return lockQty;
 				}
 				// 需要锁定的Qty大于昨仓,实际锁定量等于全部剩余量
 				else {
-					beforeTodayQtyLockRecord.put(ordSysId, beforeTodayQty);
+					beforeTodayQtyLockRecord.put(uniqueId, beforeTodayQty);
 					beforeTodayQty = 0;
 					return beforeTodayQty;
 				}
@@ -58,11 +58,11 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 				int absBeforeTodayQty = Math.abs(beforeTodayQty);
 				if (lockQty <= absBeforeTodayQty) {
 					// 记录此订单锁定量
-					beforeTodayQtyLockRecord.put(ordSysId, lockQty);
+					beforeTodayQtyLockRecord.put(uniqueId, lockQty);
 					beforeTodayQty += lockQty;
 					return lockQty;
 				} else {
-					beforeTodayQtyLockRecord.put(ordSysId, absBeforeTodayQty);
+					beforeTodayQtyLockRecord.put(uniqueId, absBeforeTodayQty);
 					beforeTodayQty = 0;
 					return absBeforeTodayQty;
 				}
@@ -73,14 +73,14 @@ public final class ChinaFuturesPosition extends AbsT0Position {
 	}
 
 	// TODO 解锁可用仓位
-	public int unlockBeforeTodayQty(long ordSysId, TrdDirection direction, int unlockQty) {
+	public int unlockBeforeTodayQty(long uniqueId, TrdDirection direction, int unlockQty) {
 		return 0;
 	}
 
 	@Override
 	public void updatePosition(Order order) {
-		OrdStatus status = order.ordStatus();
-		OrdQty qty = order.ordQty();
+		OrdStatus status = order.status();
+		OrdQty qty = order.qty();
 		switch (status) {
 		case PartiallyFilled:
 		case Filled:
