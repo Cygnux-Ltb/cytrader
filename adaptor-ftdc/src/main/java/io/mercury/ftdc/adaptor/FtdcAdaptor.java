@@ -61,7 +61,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	 */
 	private final FromFtdcTrade fromFtdcTrade = new FromFtdcTrade();
 
-	private final FtdcGateway ftdcGateway;
+	/**
+	 * 
+	 */
+	private final FtdcGateway gateway;
 
 	// TODO 两个int类型可以合并
 	private volatile int frontId;
@@ -72,14 +75,15 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 	private final StrategyScheduler<BasicMarketData> scheduler;
 
-	public FtdcAdaptor(int adaptorId, Account account, @Nonnull StrategyScheduler<BasicMarketData> scheduler,
+	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull StrategyScheduler<BasicMarketData> scheduler,
 			@Nonnull ImmutableParamMap<FtdcAdaptorParamKey> paramMap) {
-		super(adaptorId, account);
+		super(adaptorId, "FtdcAdaptor-Broker[ " + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
+				account);
 		this.scheduler = scheduler;
 		// 创建配置信息
 		FtdcConfig ftdcConfig = createFtdcConfig(paramMap);
 		// 创建Gateway
-		this.ftdcGateway = createFtdcGateway(ftdcConfig);
+		this.gateway = createFtdcGateway(ftdcConfig);
 		this.toFtdcInputOrder = new ToFtdcInputOrder();
 		this.toFtdcInputOrderAction = new ToFtdcInputOrderAction();
 	}
@@ -187,21 +191,23 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	protected boolean innerStartup() {
+	protected boolean startup0() {
 		try {
-			ftdcGateway.initAndJoin();
+			gateway.initAndJoin();
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
+	/**
+	 * 订阅行情实现
+	 */
 	@Override
 	public boolean subscribeMarketData(Instrument... instruments) {
 		try {
 			if (isMdAvailable) {
-				ftdcGateway
-						.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
+				gateway.SubscribeMarketData(Stream.of(instruments).map(Instrument::code).collect(Collectors.toSet()));
 				return true;
 			} else {
 				return false;
@@ -212,6 +218,9 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		}
 	}
 
+	/**
+	 * 订单转换为FTDC新订单
+	 */
 	private final ToFtdcInputOrder toFtdcInputOrder;
 
 	@Override
@@ -224,7 +233,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 			 */
 			ftdcInputOrder.setOrderRef(orderRef);
 			OrderRefKeeper.put(orderRef, order.uniqueId());
-			ftdcGateway.ReqOrderInsert(ftdcInputOrder);
+			gateway.ReqOrderInsert(ftdcInputOrder);
 			return true;
 		} catch (Exception e) {
 			log.error("ftdcGateway.ReqOrderInsert exception -> {}", e.getMessage(), e);
@@ -232,6 +241,9 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 		}
 	}
 
+	/**
+	 * 订单转换为FTDC撤单
+	 */
 	private final ToFtdcInputOrderAction toFtdcInputOrderAction;
 
 	@Override
@@ -242,7 +254,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 
 			ftdcInputOrderAction.setOrderRef(orderRef);
 			ftdcInputOrderAction.setOrderActionRef(OrderRefGenerator.next(order.strategyId()));
-			ftdcGateway.ReqOrderAction(ftdcInputOrderAction);
+			gateway.ReqOrderAction(ftdcInputOrderAction);
 			return true;
 		} catch (OrderRefNotFoundException e) {
 			log.error(e.getMessage(), e);
@@ -263,7 +275,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						ftdcGateway.ReqQryOrder(instrument.symbol().exchange().code());
+						gateway.ReqQryOrder(instrument.symbol().exchange().code());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryOrder-SubThread");
@@ -285,7 +297,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryInvestorPosition, Waiting...");
 						sleep(1250);
-						ftdcGateway.ReqQryInvestorPosition(instrument.symbol().exchange().code(), instrument.code());
+						gateway.ReqQryInvestorPosition(instrument.symbol().exchange().code(), instrument.code());
 						log.info("FtdcAdaptor :: Has been sent ReqQryInvestorPosition");
 					}
 				}, "QueryPositions-SubThread");
@@ -307,7 +319,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 					synchronized (mutex) {
 						log.info("FtdcAdaptor :: Ready to sent ReqQryTradingAccount, Waiting...");
 						sleep(1250);
-						ftdcGateway.ReqQryTradingAccount();
+						gateway.ReqQryTradingAccount();
 						log.info("FtdcAdaptor :: Has been sent ReqQryTradingAccount");
 					}
 				}, "QueryBalance-SubThread");
