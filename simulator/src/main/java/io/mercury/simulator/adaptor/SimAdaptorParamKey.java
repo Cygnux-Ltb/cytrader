@@ -22,12 +22,12 @@ public enum SimAdaptorParamKey implements AdaptorParamKey {
 
 	;
 
-	private String kname;
+	private String keyName;
 
 	private ParamType type;
 
-	private SimAdaptorParamKey(String kname, ParamType type) {
-		this.kname = kname;
+	private SimAdaptorParamKey(String keyName, ParamType type) {
+		this.keyName = keyName;
 		this.type = type;
 	}
 
@@ -37,8 +37,8 @@ public enum SimAdaptorParamKey implements AdaptorParamKey {
 	}
 
 	@Override
-	public String kname() {
-		return kname;
+	public String keyName() {
+		return keyName;
 	}
 
 	@Override

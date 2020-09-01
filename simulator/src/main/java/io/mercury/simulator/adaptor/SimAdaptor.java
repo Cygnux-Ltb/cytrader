@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
-import io.mercury.common.param.map.ImmutableParamMap;
+import io.mercury.common.param.ImmutableParams;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.account.Account;
@@ -40,7 +40,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 
 	private StrategyScheduler<BasicMarketData> scheduler;
 
-	protected ImmutableParamMap<SimAdaptorParamKey> paramMap;
+	protected ImmutableParams<SimAdaptorParamKey> paramMap;
 
 	protected SocketConfigurator mdConfigurator;
 
@@ -59,7 +59,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 
 	private AvroBinaryDeserializer<ExOrder> orderDeserializer = new AvroBinaryDeserializer<>(ExOrder.class);
 
-	public SimAdaptor(int adaptorId, @Nonnull Account account, @Nonnull ImmutableParamMap<SimAdaptorParamKey> paramMap,
+	public SimAdaptor(int adaptorId, @Nonnull Account account, @Nonnull ImmutableParams<SimAdaptorParamKey> paramMap,
 			StrategyScheduler<BasicMarketData> scheduler) {
 		super(adaptorId, "SimulatorAdaptor[" + adaptorId + "]", account);
 		this.paramMap = paramMap;
