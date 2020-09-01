@@ -6,9 +6,9 @@ import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.strategy.StrategyParamKey;
-import io.mercury.redstone.engine.strategy.StrategySingleInstrumentImpl;
+import io.mercury.redstone.engine.strategy.StrategySingleInstrument;
 
-public final class SmaStrategyExample extends StrategySingleInstrumentImpl<BasicMarketData, StrategyParamKey>
+public final class SmaStrategyExample extends StrategySingleInstrument<BasicMarketData, StrategyParamKey>
 		implements SmaEvent {
 
 	public SmaStrategyExample(int strategyId, int subAccountId, Instrument instrument) {

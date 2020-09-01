@@ -46,11 +46,10 @@ public class ExampleWithNacos {
 				properties);
 
 		// 创建InboundAdaptor
-		int inboundAdaptorId = 1;
-		String inboundAdaptorName = "Ctp-InboundAdaptor";
+		int adaptorId = 1;
 
 		// TODO ADD ACCOUNT
-		try (Adaptor adaptor = new FtdcAdaptor(inboundAdaptorId, null, scheduler, adaptorParam)) {
+		try (Adaptor adaptor = new FtdcAdaptor(adaptorId, null, scheduler, adaptorParam)) {
 
 			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.newWith(Duration.ofSeconds(15)));
 			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
