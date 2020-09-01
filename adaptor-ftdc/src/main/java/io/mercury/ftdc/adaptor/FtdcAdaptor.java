@@ -15,7 +15,7 @@ import ctp.thostapi.CThostFtdcInputOrderActionField;
 import ctp.thostapi.CThostFtdcInputOrderField;
 import io.mercury.common.concurrent.queue.MpscArrayBlockingQueue;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.map.ImmutableParamMap;
+import io.mercury.common.param.ImmutableParams;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.ftdc.adaptor.converter.FromFtdcDepthMarketData;
@@ -76,7 +76,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private final StrategyScheduler<BasicMarketData> scheduler;
 
 	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull StrategyScheduler<BasicMarketData> scheduler,
-			@Nonnull ImmutableParamMap<FtdcAdaptorParamKey> paramMap) {
+			@Nonnull ImmutableParams<FtdcAdaptorParamKey> paramMap) {
 		super(adaptorId, "FtdcAdaptor-Broker[ " + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
 				account);
 		this.scheduler = scheduler;
@@ -93,7 +93,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	 * @param params
 	 * @return
 	 */
-	private FtdcConfig createFtdcConfig(ImmutableParamMap<FtdcAdaptorParamKey> paramMap) {
+	private FtdcConfig createFtdcConfig(ImmutableParams<FtdcAdaptorParamKey> paramMap) {
 		return new FtdcConfig().setTraderAddr(paramMap.getString(FtdcAdaptorParamKey.TraderAddr))
 				.setMdAddr(paramMap.getString(FtdcAdaptorParamKey.MdAddr))
 				.setAppId(paramMap.getString(FtdcAdaptorParamKey.AppId))

@@ -140,9 +140,8 @@ public class EReader extends Thread {
 		int msgSize = 0;
 
 		while (true)
-			try {
-				msgSize = m_iBufLen > 0 ? new EDecoder(m_clientSocket.serverVersion(), defaultWrapper)
-						.processMsg(new EMessage(m_iBuf, m_iBufLen)) : 0;
+			try (EDecoder edecoder = new EDecoder(m_clientSocket.serverVersion(), defaultWrapper)) {
+				msgSize = m_iBufLen > 0 ? edecoder.processMsg(new EMessage(m_iBuf, m_iBufLen)) : 0;
 				break;
 			} catch (Exception e) {
 				if (m_iBufLen >= m_iBuf.length * 3 / 4) {
