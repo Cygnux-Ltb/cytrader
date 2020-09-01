@@ -12,7 +12,7 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.param.JointKeySupporter;
+import io.mercury.common.param.JointKeyParams;
 import io.mercury.common.util.Assertor;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.Symbol;
@@ -71,7 +71,7 @@ public final class TimePeriodPool {
 	 * @return
 	 */
 	private long mergeSymbolTimeKey(Symbol symbol, TimePeriod period) {
-		return JointKeySupporter.mergeJointKey(symbol.id(), period.seconds());
+		return JointKeyParams.mergeJointKey(symbol.id(), period.seconds());
 	}
 
 	private void generateTimePeriod(Symbol[] symbols, TimePeriod period) {

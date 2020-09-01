@@ -9,7 +9,7 @@ import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.JointKeySupporter;
+import io.mercury.common.param.JointKeyParams;
 import io.mercury.financial.indicator.api.Indicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
@@ -77,7 +77,7 @@ public abstract class MultipleIndicatorPool<I extends Indicator<?, ?, M>, M exte
 	}
 
 	private long calculateIndex(int cycle, Instrument instrument) {
-		return JointKeySupporter.mergeJointKey(cycle, instrument.id());
+		return JointKeyParams.mergeJointKey(cycle, instrument.id());
 	}
 
 	private MutableLongObjectMap<I> getIndicatorMap(TimePeriod period) {
