@@ -6,6 +6,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.annotation.Nonnull;
+
 import io.mercury.common.param.map.ImmutableParamMap;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
@@ -57,9 +59,9 @@ public class SimAdaptor extends AdaptorBaseImpl {
 
 	private AvroBinaryDeserializer<ExOrder> orderDeserializer = new AvroBinaryDeserializer<>(ExOrder.class);
 
-	public SimAdaptor(int adaptorId, Account account, ImmutableParamMap<SimAdaptorParamKey> paramMap,
+	public SimAdaptor(int adaptorId, @Nonnull Account account, @Nonnull ImmutableParamMap<SimAdaptorParamKey> paramMap,
 			StrategyScheduler<BasicMarketData> scheduler) {
-		super(adaptorId, account);
+		super(adaptorId, "SimulatorAdaptor[" + adaptorId + "]", account);
 		this.paramMap = paramMap;
 		this.scheduler = scheduler;
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
@@ -86,7 +88,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 	}
 
 	@Override
-	public boolean innerStartup() {
+	public boolean startup0() {
 		mdReceiver.receive();
 		tdReceiver.receive();
 		return mdReceiver.isConnected() && tdReceiver.isConnected();

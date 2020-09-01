@@ -14,12 +14,16 @@
 	<artifactId>simulator</artifactId>
 	<name>simulator</name>
 
+	<properties>
+		<avro.version>1.10.0</avro.version>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.avro</groupId>
 				<artifactId>avro-maven-plugin</artifactId>
-				<version>1.9.2</version>
+				<version>${avro.version}</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -29,11 +33,15 @@
 						<configuration>
 							<sourceDirectory>${project.basedir}/src/main/resources/schema</sourceDirectory>
 							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
-							<!-- <includes> <include>**/*.avro</include> </includes> <imports> 
-								<import>${project.basedir}src/main/java/io/ffreedom/persistence/avro/schema/MsgTitle.avsc</import> 
-								</imports> -->
+							<!-- <includes> -->
+							<!-- <include>**/*.avro</include> -->
+							<!-- </includes> -->
+							<!-- <imports> -->
+							<!-- <import>${project.basedir}src/main/java/io/ffreedom/persistence/avro/schema/MsgTitle.avsc</import> -->
+							<!-- </imports> -->
 							<fieldVisibility>private</fieldVisibility>
 							<stringType>String</stringType>
+							<createOptionalGetters>true</createOptionalGetters>
 						</configuration>
 					</execution>
 				</executions>
@@ -52,7 +60,7 @@
 									<pluginExecutionFilter>
 										<groupId>org.apache.avro</groupId>
 										<artifactId>avro-maven-plugin</artifactId>
-										<versionRange>1.9.2</versionRange>
+										<versionRange>${avro.version}</versionRange>
 										<goals>
 											<goal>schema</goal>
 											<goal>idl-protocol</goal>
@@ -72,6 +80,12 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.helger</groupId>
+			<artifactId>ph-commons</artifactId>
+			<version>9.4.7</version>
+		</dependency>
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-avro</artifactId>
