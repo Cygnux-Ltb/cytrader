@@ -5,7 +5,7 @@ import java.util.Set;
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.mercury.common.collections.ImmutableLists;
-import io.mercury.common.param.map.ImmutableParamMap;
+import io.mercury.common.param.ImmutableParams;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
@@ -18,8 +18,8 @@ public abstract class StrategyMultiInstrument<M extends MarketData, PK extends S
 	protected ImmutableList<Instrument> instruments;
 
 	protected StrategyMultiInstrument(int strategyId, String strategyName, int subAccountId,
-			Set<Instrument> instruments, ImmutableParamMap<PK> paramMap) {
-		super(strategyId, strategyName, subAccountId, paramMap);
+			Set<Instrument> instruments, ImmutableParams<PK> params) {
+		super(strategyId, strategyName, subAccountId, params);
 		this.instruments = ImmutableLists.newImmutableList(instruments);
 	}
 

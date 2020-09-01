@@ -3,7 +3,7 @@ package io.mercury.redstone.engine.strategy;
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.mercury.common.collections.ImmutableLists;
-import io.mercury.common.param.map.ImmutableParamMap;
+import io.mercury.common.param.ImmutableParams;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.adaptor.Adaptor;
@@ -22,8 +22,8 @@ public abstract class StrategySingleInstrument<M extends MarketData, PK extends 
 	protected ImmutableList<Instrument> instruments;
 
 	protected StrategySingleInstrument(int strategyId, String strategyName, int subAccountId, Instrument instrument,
-			ImmutableParamMap<PK> paramMap) {
-		super(strategyId, strategyName, subAccountId, paramMap);
+			ImmutableParams<PK> params) {
+		super(strategyId, strategyName, subAccountId, params);
 		this.instrument = instrument;
 		this.instruments = ImmutableLists.newImmutableList(instrument);
 	}

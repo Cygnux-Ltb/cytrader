@@ -7,7 +7,7 @@ import java.util.Properties;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.log.LogConfigurator;
 import io.mercury.common.log.LogConfigurator.LogLevel;
-import io.mercury.common.param.map.ImmutableParamMap;
+import io.mercury.common.param.ImmutableParams;
 import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.instrument.futures.impl.ChinaFutures;
 import io.mercury.financial.instrument.futures.impl.ChinaFuturesSymbol;
@@ -42,7 +42,7 @@ public class ExampleWithNacos {
 		strategyExample.initialize(() -> true);
 
 		// Set Global AppId
-		ImmutableParamMap<FtdcAdaptorParamKey> adaptorParam = new ImmutableParamMap<>(FtdcAdaptorParamKey.values(),
+		ImmutableParams<FtdcAdaptorParamKey> adaptorParam = new ImmutableParams<>(FtdcAdaptorParamKey.values(),
 				properties);
 
 		// 创建InboundAdaptor

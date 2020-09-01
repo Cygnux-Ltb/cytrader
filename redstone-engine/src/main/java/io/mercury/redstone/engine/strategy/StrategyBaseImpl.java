@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.map.ImmutableParamMap;
+import io.mercury.common.param.ImmutableParams;
 import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
@@ -84,9 +84,9 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 	/**
 	 * 策略参数Map
 	 */
-	protected final ImmutableParamMap<PK> paramMap;
+	protected final ImmutableParams<PK> params;
 
-	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParamMap<PK> paramMap) {
+	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParams<PK> params) {
 		this.strategyId = strategyId;
 		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
 				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
@@ -95,7 +95,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 		this.subAccountId = subAccountId;
 		this.account = AccountKeeper.getAccountBySubAccountId(subAccountId);
 		this.accountId = account.accountId();
-		this.paramMap = paramMap;
+		this.params = params;
 	}
 
 	@Override
