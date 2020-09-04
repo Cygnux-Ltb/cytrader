@@ -4,7 +4,7 @@ import java.time.ZonedDateTime;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.mercury.financial.indicator.FixedPeriodIndicator;
+import io.mercury.financial.indicator.impl.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;

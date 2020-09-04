@@ -1,6 +1,6 @@
 package io.mercury.financial.indicator.impl.macd;
 
-import io.mercury.financial.indicator.FixedPeriodPoint;
+import io.mercury.financial.indicator.impl.FixedPeriodPoint;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriodSerial;
 

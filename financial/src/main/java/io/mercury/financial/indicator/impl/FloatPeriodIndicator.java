@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator;
+package io.mercury.financial.indicator.impl;
 
 import io.mercury.financial.indicator.api.IndicatorEvent;
 import io.mercury.financial.instrument.Instrument;

@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator;
+package io.mercury.financial.indicator.impl;
 
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.sequence.Serial;
@@ -6,14 +6,14 @@ import io.mercury.common.util.Assertor;
 import io.mercury.financial.indicator.api.Point;
 import io.mercury.financial.market.api.MarketData;
 
-public abstract class BasePoint<ST extends Serial, MT extends MarketData> implements Point<ST, MT> {
+public abstract class BasePoint<S extends Serial, M extends MarketData> implements Point<S, M> {
 
 	protected int index;
 
-	protected ST serial;
-	protected MT preMarketData;
+	protected S serial;
+	protected M preMarketData;
 
-	protected BasePoint(int index, ST serial) {
+	protected BasePoint(int index, S serial) {
 		this.index = Assertor.greaterThan(index, -1, "index");
 		this.serial = Assertor.nonNull(serial, "serial");
 	}
@@ -24,21 +24,21 @@ public abstract class BasePoint<ST extends Serial, MT extends MarketData> implem
 	}
 
 	@Override
-	public ST serial() {
+	public S serial() {
 		return serial;
 	}
 
 	@Override
-	public void onMarketData(MT marketData) {
+	public void onMarketData(M marketData) {
 		handleMarketData(marketData);
 		updatePreMarketData(marketData);
 	}
 
-	public void updatePreMarketData(MT marketData) {
+	public void updatePreMarketData(M marketData) {
 		this.preMarketData = marketData;
 	}
 
 	@AbstractFunction
-	protected abstract void handleMarketData(MT marketData);
+	protected abstract void handleMarketData(M marketData);
 
 }
