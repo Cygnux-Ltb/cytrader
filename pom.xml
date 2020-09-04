@@ -20,6 +20,7 @@
 		<module>adaptor-ib</module>
 		<!-- financial & indicator -->
 		<module>financial</module>
+		<module>indicator</module>
 		<!-- core api -->
 		<module>redstone-core</module>
 		<!-- execution engine -->
@@ -30,6 +31,7 @@
 		<module>redstone-runtime</module>
 		<!-- exchange simulator -->
 		<module>simulator</module>
+
 	</modules>
 
 	<properties>
@@ -107,6 +109,11 @@
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>financial</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>indicator</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

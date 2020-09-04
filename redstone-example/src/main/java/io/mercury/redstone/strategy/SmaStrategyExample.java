@@ -1,9 +1,9 @@
 package io.mercury.redstone.strategy;
 
-import io.mercury.financial.indicator.impl.ma.SmaEvent;
-import io.mercury.financial.indicator.impl.ma.SmaPoint;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
+import io.mercury.indicator.impl.ma.SmaEvent;
+import io.mercury.indicator.impl.ma.SmaPoint;
 import io.mercury.redstone.core.order.Order;
 import io.mercury.redstone.core.strategy.StrategyParamKey;
 import io.mercury.redstone.engine.strategy.StrategySingleInstrument;
