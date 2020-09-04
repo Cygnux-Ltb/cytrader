@@ -1,10 +1,10 @@
-package io.mercury.financial.indicator.pools.base;
+package io.mercury.indicator.pools.base;
 
 import org.eclipse.collections.api.list.MutableList;
 
 import io.mercury.common.collections.MutableLists;
-import io.mercury.financial.indicator.api.Indicator;
 import io.mercury.financial.market.api.MarketData;
+import io.mercury.indicator.api.Indicator;
 
 public abstract class IndicatorPool<I extends Indicator<?, ?, M>, M extends MarketData> {
 

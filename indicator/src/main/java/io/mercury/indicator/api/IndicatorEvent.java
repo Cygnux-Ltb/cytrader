@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.api;
+package io.mercury.indicator.api;
 
 public interface IndicatorEvent {
 

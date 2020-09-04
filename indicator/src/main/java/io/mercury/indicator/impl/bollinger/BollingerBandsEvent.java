@@ -1,6 +1,6 @@
-package io.mercury.financial.indicator.impl.bollinger;
+package io.mercury.indicator.impl.bollinger;
 
-import io.mercury.financial.indicator.api.IndicatorEvent;
+import io.mercury.indicator.api.IndicatorEvent;
 
 public interface BollingerBandsEvent extends IndicatorEvent {
 

@@ -1,6 +1,6 @@
-package io.mercury.financial.indicator.impl.ma;
+package io.mercury.indicator.impl.ma;
 
-import io.mercury.financial.indicator.api.IndicatorEvent;
+import io.mercury.indicator.api.IndicatorEvent;
 
 public interface EmaEvent extends IndicatorEvent {
 

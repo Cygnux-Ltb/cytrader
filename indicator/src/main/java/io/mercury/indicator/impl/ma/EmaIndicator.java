@@ -1,9 +1,9 @@
-package io.mercury.financial.indicator.impl.ma;
+package io.mercury.indicator.impl.ma;
 
-import io.mercury.financial.indicator.impl.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
+import io.mercury.indicator.impl.FixedPeriodIndicator;
 
 public final class EmaIndicator extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {
 

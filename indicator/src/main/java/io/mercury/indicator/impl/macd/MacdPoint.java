@@ -1,8 +1,8 @@
-package io.mercury.financial.indicator.impl.macd;
+package io.mercury.indicator.impl.macd;
 
-import io.mercury.financial.indicator.impl.FixedPeriodPoint;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriodSerial;
+import io.mercury.indicator.impl.FixedPeriodPoint;
 
 public final class MacdPoint extends FixedPeriodPoint<BasicMarketData> {
 

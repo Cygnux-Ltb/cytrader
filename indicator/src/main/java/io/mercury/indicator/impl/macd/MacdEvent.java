@@ -1,6 +1,6 @@
-package io.mercury.financial.indicator.impl.macd;
+package io.mercury.indicator.impl.macd;
 
-import io.mercury.financial.indicator.api.IndicatorEvent;
+import io.mercury.indicator.api.IndicatorEvent;
 
 public interface MacdEvent extends IndicatorEvent {
 

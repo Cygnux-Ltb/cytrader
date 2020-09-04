@@ -1,14 +1,14 @@
-package io.mercury.financial.indicator.impl.ma;
+package io.mercury.indicator.impl.ma;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.mercury.common.collections.list.FixedLengthRecorder;
-import io.mercury.financial.indicator.impl.FixedPeriodIndicator;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
+import io.mercury.indicator.impl.FixedPeriodIndicator;
 
 public final class SmaIndicator extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
 

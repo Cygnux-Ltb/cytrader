@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.util;
+package io.mercury.indicator.util;
 
 import org.eclipse.collections.api.block.predicate.primitive.LongLongPredicate;
 

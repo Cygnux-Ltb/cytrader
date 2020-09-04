@@ -1,12 +1,12 @@
-package io.mercury.financial.indicator.pools;
+package io.mercury.indicator.pools;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import io.mercury.financial.indicator.impl.bar.TimeBarIndicator;
-import io.mercury.financial.indicator.pools.base.SingleIndicatorPool;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriod;
+import io.mercury.indicator.impl.bar.TimeBarIndicator;
+import io.mercury.indicator.pools.base.SingleIndicatorPool;
 
 @NotThreadSafe
 public final class TimeBarIndicatorPool extends SingleIndicatorPool<TimeBarIndicator, BasicMarketData> {

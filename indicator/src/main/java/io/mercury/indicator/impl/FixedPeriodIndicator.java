@@ -1,9 +1,9 @@
-package io.mercury.financial.indicator.impl;
+package io.mercury.indicator.impl;
 
-import io.mercury.financial.indicator.api.IndicatorEvent;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.vector.TimePeriod;
+import io.mercury.indicator.api.IndicatorEvent;
 
 public abstract class FixedPeriodIndicator<P extends FixedPeriodPoint<M>, E extends IndicatorEvent, M extends MarketData>
 		extends BaseIndicator<P, E, M> {

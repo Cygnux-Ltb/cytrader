@@ -1,4 +1,4 @@
-package io.mercury.financial.indicator.pools;
+package io.mercury.indicator.pools;
 
 import javax.annotation.concurrent.ThreadSafe;
 
