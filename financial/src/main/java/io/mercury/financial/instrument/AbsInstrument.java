@@ -8,6 +8,7 @@ public abstract class AbsInstrument implements Instrument {
 	 * 唯一编码
 	 */
 	private final int id;
+
 	/**
 	 * String唯一编码
 	 */
@@ -17,7 +18,6 @@ public abstract class AbsInstrument implements Instrument {
 	 * 
 	 * @param id
 	 * @param code
-	 * @param symbol
 	 */
 	protected AbsInstrument(int id, String code) {
 		this.id = id;

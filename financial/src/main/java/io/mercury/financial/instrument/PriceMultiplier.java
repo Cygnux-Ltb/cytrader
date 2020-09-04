@@ -59,6 +59,7 @@ public enum PriceMultiplier {
 	 * 10000L
 	 */
 	TEN_THOUSAND {
+		
 		@Override
 		public long longMultiplier() {
 			return DecimalSupporter.LONG_MULTIPLIER_10000L;
@@ -84,6 +85,7 @@ public enum PriceMultiplier {
 	 * 1000000L
 	 */
 	MILLION {
+		
 		@Override
 		public long longMultiplier() {
 			return DecimalSupporter.LONG_MULTIPLIER_1000000L;
@@ -109,6 +111,7 @@ public enum PriceMultiplier {
 	 * 100000000L
 	 */
 	BILLION {
+		
 		@Override
 		public long longMultiplier() {
 			return DecimalSupporter.LONG_MULTIPLIER_100000000L;

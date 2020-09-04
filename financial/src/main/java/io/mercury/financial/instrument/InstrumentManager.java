@@ -1,5 +1,7 @@
 package io.mercury.financial.instrument;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
@@ -14,6 +16,7 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.serialization.Dumpable;
 import io.mercury.common.util.Assertor;
+import io.mercury.serialization.json.JsonUtil;
 
 /**
  * 
@@ -48,7 +51,7 @@ public final class InstrumentManager implements Dumpable<String> {
 	private InstrumentManager() {
 	}
 
-	private static boolean isInitialized = false;
+	private static volatile boolean isInitialized = false;
 
 	public static void initialize(@Nonnull Instrument... instruments) {
 		if (!isInitialized) {
@@ -58,7 +61,7 @@ public final class InstrumentManager implements Dumpable<String> {
 		} else {
 			IllegalStateException e = new IllegalStateException(
 					"InstrumentManager Has been initialized, cannot be initialize again");
-			log.error("", e);
+			log.error("InstrumentManager already initialized", e);
 			throw e;
 		}
 	}
@@ -71,62 +74,115 @@ public final class InstrumentManager implements Dumpable<String> {
 		setTradable(instrument.id());
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static boolean isInitialized() {
 		return isInitialized;
 	}
 
+	/**
+	 * 
+	 * @param instrument
+	 * @return
+	 */
 	public static Instrument setTradable(Instrument instrument) {
 		return setTradable(instrument.id());
 	}
 
-	public static Instrument setTradable(int instrumentId) {
-		Instrument instrument = getInstrument(instrumentId);
-		log.info("Instrument enable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
+	/**
+	 * 
+	 * @param instrumentId
+	 * @return
+	 */
+	public static Instrument setTradable(int id) {
+		Instrument instrument = getInstrument(id);
+		log.info("Instrument enable, id==[{}], instrument -> {}", id, instrument);
 		return instrument.enable();
 	}
 
+	/**
+	 * 
+	 * @param instrument
+	 * @return
+	 */
 	public static Instrument setNotTradable(Instrument instrument) {
 		return setNotTradable(instrument.id());
 	}
 
-	public static Instrument setNotTradable(int instrumentId) {
-		Instrument instrument = getInstrument(instrumentId);
-		log.info("Instrument disable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public static Instrument setNotTradable(int id) {
+		Instrument instrument = getInstrument(id);
+		log.info("Instrument disable, id==[{}], instrument -> {}", id, instrument);
 		return instrument.disable();
 	}
 
+	/**
+	 * 
+	 * @param instrument
+	 * @return
+	 */
 	public static boolean isTradable(Instrument instrument) {
 		return isTradable(instrument.id());
 	}
 
-	public static boolean isTradable(int instrumentId) {
-		return getInstrument(instrumentId).isEnabled();
+	/**
+	 * 
+	 * @param instrumentId
+	 * @return
+	 */
+	public static boolean isTradable(int id) {
+		return getInstrument(id).isEnabled();
 	}
 
-	public static Instrument getInstrument(int instrumentId) {
-		Instrument instrument = InstrumentMapById.get(instrumentId);
+	/**
+	 * 
+	 * @param instrumentId
+	 * @return
+	 */
+	public static Instrument getInstrument(int id) {
+		Instrument instrument = InstrumentMapById.get(id);
 		if (instrument == null)
-			throw new IllegalArgumentException("Instrument is not find, instrumentId == " + instrumentId);
+			throw new IllegalArgumentException("Instrument is not find, by instrument id == " + id);
 		return instrument;
 	}
 
-	public static Instrument getInstrument(String instrumentCode) {
-		Instrument instrument = InstrumentMapByCode.get(instrumentCode);
+	/**
+	 * 
+	 * @param instrumentCode
+	 * @return Instrument
+	 */
+	public static Instrument getInstrument(String code) {
+		Instrument instrument = InstrumentMapByCode.get(code);
 		if (instrument == null)
-			throw new IllegalArgumentException("Instrument is not find, instrumentCode == " + instrumentCode);
+			throw new IllegalArgumentException("Instrument is not find, by instrument code == " + code);
 		return instrument;
 	}
 
 	private static volatile ImmutableList<Instrument> allInstrument;
 
-	public static ImmutableList<Instrument> getAllInstrument() {
+	/**
+	 * 
+	 * @return ImmutableList
+	 */
+	public static ImmutableList<Instrument> allInstrument() {
 		if (allInstrument == null)
 			allInstrument = InstrumentMapById.toList().toImmutable();
 		return allInstrument;
 	}
 
 	public String dump() {
-		return "";
+		String jsonInstrumentMapById = JsonUtil.toPrettyJsonHasNulls(InstrumentMapById);
+		String jsonInstrumentMapByCode = JsonUtil.toPrettyJsonHasNulls(InstrumentMapByCode);
+		Map<String, String> map = new HashMap<>();
+		map.put("InstrumentMapById", jsonInstrumentMapById);
+		map.put("InstrumentMapByCode", jsonInstrumentMapByCode);
+		return JsonUtil.toPrettyJsonHasNulls(map);
 	}
 
 }

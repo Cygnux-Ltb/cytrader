@@ -1,9 +1,9 @@
 package io.mercury.financial.instrument;
 
 import io.mercury.common.fsm.Enable;
-import io.mercury.financial.FinancialObject;
+import io.mercury.financial.FinancialObj;
 
-public interface Instrument extends Enable<Instrument>, FinancialObject {
+public interface Instrument extends Enable<Instrument>, FinancialObj {
 
 	/**
 	 * STOCK : exchange|symbol<br>

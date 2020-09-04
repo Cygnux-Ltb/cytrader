@@ -25,8 +25,7 @@ public final class ChinaStock extends Stock {
 
 	@Override
 	public PriceMultiplier getPriceMultiplier() {
-		// TODO Auto-generated method stub
-		return null;
+		return super.getPriceMultiplier();
 	}
 
 	@Override
