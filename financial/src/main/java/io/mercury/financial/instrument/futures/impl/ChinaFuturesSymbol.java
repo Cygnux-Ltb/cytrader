@@ -405,7 +405,6 @@ public enum ChinaFuturesSymbol implements Symbol {
 			symbol.tradingPeriodSet().stream().map(tradingPeriod -> tradingPeriod
 					.segmentation(symbol.exchange().zoneId(), TimePeriod.newWith(Duration.ofSeconds(30))));
 		}
-
 		System.out.println(ChinaFuturesSymbol.AG.exchange.id());
 		System.out.println(ChinaFuturesSymbol.AG.id());
 	}

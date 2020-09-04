@@ -30,13 +30,12 @@ public final class ChinaStock extends Stock {
 
 	@Override
 	public ImmutableSortedSet<TradingPeriod> tradingPeriodSet() {
-		// TODO Auto-generated method stub
+		// TODO 添加固定的股票交易时间
 		return null;
 	}
 
 	@Override
 	public Exchange exchange() {
-		// TODO Auto-generated method stub
 		return Exchange.SHFE;
 	}
 

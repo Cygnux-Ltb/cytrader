@@ -14,20 +14,30 @@ public final class ToFtdcInputOrderAction implements Function<Order, CThostFtdcI
 	public CThostFtdcInputOrderActionField apply(Order order) {
 		Instrument instrument = order.instrument();
 		CThostFtdcInputOrderActionField inputOrderActionField = new CThostFtdcInputOrderActionField();
-
+		/**
+		 * 
+		 */
 		inputOrderActionField.setActionFlag(FtdcActionFlag.Delete);
-
+		/**
+		 * 
+		 */
 		inputOrderActionField.setExchangeID(instrument.symbol().exchange().code());
-
+		/**
+		 * 
+		 */
 		inputOrderActionField.setInstrumentID(instrument.code());
 
 		PriceMultiplier multiplier = instrument.symbol().getPriceMultiplier();
+		/**
+		 * 
+		 */
 		inputOrderActionField.setLimitPrice(multiplier.toDouble(order.price().offerPrice()));
-
+		/**
+		 * 
+		 */
 		inputOrderActionField.setVolumeChange(order.qty().leavesQty());
 
 		// TODO 补充完整
-
 		return inputOrderActionField;
 	}
 

@@ -15,7 +15,6 @@
 	<name>financial</name>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-json</artifactId>
@@ -30,14 +29,6 @@
 			<artifactId>commons-math3</artifactId>
 			<version>3.6.1</version>
 		</dependency>
-
-		<!-- High performance primitives and utility library. -->
-		<dependency>
-			<groupId>org.agrona</groupId>
-			<artifactId>agrona</artifactId>
-			<version>1.7.0</version>
-		</dependency>
-
 	</dependencies>
 
 </project>
