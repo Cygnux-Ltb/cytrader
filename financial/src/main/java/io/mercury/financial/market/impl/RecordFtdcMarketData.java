@@ -1,6 +1,7 @@
 package io.mercury.financial.market.impl;
 
 import io.mercury.financial.market.api.MarketData;
+import io.mercury.serialization.json.JsonUtil;
 
 public final class RecordFtdcMarketData implements MarketData {
 
@@ -34,6 +35,7 @@ public final class RecordFtdcMarketData implements MarketData {
 	private double UpperLimitPrice;
 	// 跌停板价
 	private double LowerLimitPrice;
+	
 	/* 五档买价卖价及买量卖量 v */
 	private long BidPrice1;
 	private int BidVolume1;
@@ -82,7 +84,6 @@ public final class RecordFtdcMarketData implements MarketData {
 
 	@Override
 	public long getLastPrice() {
-		// TODO Auto-generated method stub
 		return LastPrice;
 	}
 
@@ -239,7 +240,10 @@ public final class RecordFtdcMarketData implements MarketData {
 	public int getUpdateMillisec() {
 		return UpdateMillisec;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return JsonUtil.toJsonHasNulls(this);
+	}
 
 }

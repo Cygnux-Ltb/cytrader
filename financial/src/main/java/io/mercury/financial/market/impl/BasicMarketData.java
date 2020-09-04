@@ -79,7 +79,6 @@ public class BasicMarketData implements MarketData {
 
 	public BasicMarketData(Instrument instrument, LocalDateTime datetime) {
 		this.instrument = instrument;
-		// TODO 添加时区
 		this.epochMillis = EpochTime.millis(datetime);
 		this.datetime = datetime;
 	}
@@ -543,7 +542,7 @@ public class BasicMarketData implements MarketData {
 
 	@Override
 	public String toString() {
-		return JsonUtil.toJson(this);
+		return JsonUtil.toJsonHasNulls(this);
 	}
 
 	public static void main(String[] args) {

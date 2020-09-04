@@ -13,6 +13,7 @@ import io.mercury.common.serialization.Dumpable;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.market.api.MarketData;
+import io.mercury.serialization.json.JsonUtil;
 
 /**
  * 管理当前最新行情<br>
@@ -47,15 +48,15 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 	private final static MarkerDataKeeper StaticInstance = new MarkerDataKeeper();
 
 	private MarkerDataKeeper() {
-		MutableMap<String, LastMarkerData> mutableQuoteMap = MutableMaps.newUnifiedMap();
-		ImmutableList<Instrument> allInstrument = InstrumentManager.getAllInstrument();
+		MutableMap<String, LastMarkerData> tempQuoteMap = MutableMaps.newUnifiedMap();
+		ImmutableList<Instrument> allInstrument = InstrumentManager.allInstrument();
 		if (allInstrument.isEmpty())
 			throw new IllegalStateException("InstrumentKeeper is uninitialized");
 		allInstrument.each(instrument -> {
-			mutableQuoteMap.put(instrument.code(), new LastMarkerData());
+			tempQuoteMap.put(instrument.code(), new LastMarkerData());
 			log.info("Add instrument, instrumentId==[{}], instrument -> {}", instrument.id(), instrument);
 		});
-		QuoteMap = mutableQuoteMap.toImmutable();
+		QuoteMap = tempQuoteMap.toImmutable();
 	}
 
 	public static void onMarketDate(MarketData marketData) {
@@ -126,7 +127,7 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 
 	@Override
 	public String dump() {
-		return "";
+		return JsonUtil.toPrettyJsonHasNulls(QuoteMap);
 	}
 
 }

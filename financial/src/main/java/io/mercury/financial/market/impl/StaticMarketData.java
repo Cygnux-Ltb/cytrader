@@ -26,37 +26,31 @@ public final class StaticMarketData implements MarketData {
 
 	@Override
 	public int getVolume() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public long getTurnover() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public long getBidPrice1() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getBidVolume1() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public long getAskPrice1() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getAskVolume1() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.financial.market.api.QuoteLevelOverflowException;
+import io.mercury.serialization.json.JsonUtil;
 
 public final class DepthMarketData implements MarketData {
 
@@ -120,6 +121,11 @@ public final class DepthMarketData implements MarketData {
 	public int getAskVolume1() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return JsonUtil.toJsonHasNulls(this);
 	}
 
 	public static final class Quotes {
