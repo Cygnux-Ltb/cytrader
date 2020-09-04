@@ -158,7 +158,7 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						scheduler.onOrdReport(ordReport);
 						break;
 					case FtdcTrade:
-						// 成交回报处理
+						// TODO 成交回报处理
 						FtdcTrade ftdcTrade = ftdcRspMsg.getFtdcTrade();
 						log.info(
 								"Swap Queue Processor Handle FtdcTrade, InstrumentID==[{}], InvestorID==[{}], OrderRef==[{}]",
@@ -167,19 +167,19 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 						scheduler.onOrdReport(trdReport);
 						break;
 					case FtdcInputOrder:
-						// 报单错误处理
+						// TODO 报单错误处理
 						FtdcInputOrder ftdcInputOrder = ftdcRspMsg.getFtdcInputOrder();
 						log.info("Swap Queue Processor Handle FtdcInputOrder, FtdcInputOrder -> {}",
 								JsonUtil.toJson(ftdcInputOrder));
 						break;
 					case FtdcInputOrderAction:
-						// 撤单错误处理1
+						// TODO 撤单错误处理1
 						FtdcInputOrderAction ftdcInputOrderAction = ftdcRspMsg.getFtdcInputOrderAction();
 						log.info("Swap Queue Processor Handle FtdcInputOrderAction, FtdcInputOrderAction -> {}",
 								JsonUtil.toJson(ftdcInputOrderAction));
 						break;
 					case FtdcOrderAction:
-						// 撤单错误处理2
+						// TODO 撤单错误处理2
 						FtdcOrderAction ftdcOrderAction = ftdcRspMsg.getFtdcOrderAction();
 						log.info("Swap Queue Processor Handle FtdcOrderAction, FtdcOrderAction -> {}",
 								JsonUtil.toJson(ftdcOrderAction));
