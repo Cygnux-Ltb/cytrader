@@ -1,6 +1,6 @@
 package io.mercury.financial;
 
-public interface FinancialObject {
+public interface FinancialObj {
 
 	int id();
 
