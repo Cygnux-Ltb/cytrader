@@ -10,9 +10,9 @@ public enum OrdSide {
 
 	Buy(0x01, TrdDirection.Long),
 
-	MarginBuy(0x02, TrdDirection.Long),
+	Sell(0x02, TrdDirection.Short),
 
-	Sell(0x04, TrdDirection.Short),
+	MarginBuy(0x04, TrdDirection.Long),
 
 	ShortSell(0x08, TrdDirection.Short),
 

@@ -72,20 +72,20 @@ public final class AccountKeeper implements Dumpable<String> {
 					.each(AccountKeeper::putAccount);
 			isInitialized = true;
 		} else {
-			IllegalStateException exception = new IllegalStateException(
+			IllegalStateException ex = new IllegalStateException(
 					"AccountKeeper Has been initialized, cannot be initialize again");
-			log.error("AccountKeeper :: IllegalStateException", exception);
-			throw exception;
+			log.error("AccountKeeper :: IllegalStateException", ex);
+			throw ex;
 		}
 	}
 
-	public static void putAccount(Account account) {
+	private static void putAccount(Account account) {
 		AccountMap.put(account.accountId(), account);
 		AccountMapByInvestorId.put(account.investorId(), account);
 		log.info("Put account, accountId==[{}], investorId==[{}]", account.accountId(), account.investorId());
 	}
 
-	public static void putSubAccount(SubAccount subAccount) {
+	private static void putSubAccount(SubAccount subAccount) {
 		SubAccountMap.put(subAccount.subAccountId(), subAccount);
 		AccountMapBySubAccountId.put(subAccount.subAccountId(), subAccount.account());
 		log.info("Put subAccount, subAccountId==[{}], accountId==[{}]", subAccount.subAccountId(),

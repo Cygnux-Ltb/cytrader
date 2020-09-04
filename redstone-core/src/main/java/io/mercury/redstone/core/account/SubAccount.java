@@ -9,9 +9,9 @@ import io.mercury.common.util.Assertor;
 
 public final class SubAccount extends EnableComponent<SubAccount> implements Comparable<SubAccount> {
 
-	public static final int MaxSubAccountId = 899;
+	public static final int MaxSubAccountId = 900;
 
-	public static final int ExternalSubAccountId = 900;
+	public static final int ExternalSubAccountId = 910;
 
 	/**
 	 * 子账户ID
@@ -42,6 +42,7 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 	}
 
 	public SubAccount(int subAccountId, @Nonnull Account account, int balance, int credit) {
+		Assertor.lessThan(subAccountId, MaxSubAccountId, "");
 		this.subAccountId = subAccountId;
 		this.account = Assertor.nonNull(account, "account");
 		this.balance = balance;

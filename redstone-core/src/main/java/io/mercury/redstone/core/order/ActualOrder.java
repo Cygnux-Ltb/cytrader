@@ -28,20 +28,19 @@ public abstract class ActualOrder extends OrderBasicImpl {
 	 * 
 	 * @param uniqueId
 	 * @param strategyId
-	 * @param accountId
 	 * @param subAccountId
+	 * @param accountId
 	 * @param instrument
-	 * @param ordQty
-	 * @param ordPrice
-	 * @param ordType
+	 * @param qty
+	 * @param price
+	 * @param type
 	 * @param direction
 	 * @param action
 	 * @param ownerOrdId
 	 */
-	protected ActualOrder(long uniqueId, int strategyId, int accountId, int subAccountId, Instrument instrument,
-			OrdQty ordQty, OrdPrice ordPrice, OrdType ordType, TrdDirection direction, TrdAction action,
-			long ownerUniqueId) {
-		super(uniqueId, strategyId, accountId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
+	protected ActualOrder(long uniqueId, int strategyId, int subAccountId, int accountId, Instrument instrument,
+			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction, TrdAction action, long ownerUniqueId) {
+		super(uniqueId, strategyId, subAccountId, accountId, instrument, qty, price, type, direction);
 		this.action = action;
 		this.ownerUniqueId = ownerUniqueId != 0L ? ownerUniqueId : uniqueId();
 	}

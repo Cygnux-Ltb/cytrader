@@ -68,9 +68,7 @@ public final class OrdPrice {
 	}
 
 	public static void main(String[] args) {
-
 		System.out.println(OrdPrice.withOffer(2560));
-
 	}
 
 }

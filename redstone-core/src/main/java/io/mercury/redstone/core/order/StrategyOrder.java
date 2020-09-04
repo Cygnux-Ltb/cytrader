@@ -34,15 +34,16 @@ public final class StrategyOrder extends OrderBasicImpl {
 	 * 
 	 * @param strategyId
 	 * @param subAccountId
+	 * @param accountId
 	 * @param instrument
 	 * @param ordQty
 	 * @param ordPrice
 	 * @param ordType
 	 * @param direction
 	 */
-	public StrategyOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, OrdQty ordQty,
+	public StrategyOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, OrdQty ordQty,
 			OrdPrice ordPrice, OrdType ordType, TrdDirection direction) {
-		super(0L, strategyId, accountId, subAccountId, instrument, ordQty, ordPrice, ordType, direction);
+		super(0L, strategyId, subAccountId, accountId, instrument, ordQty, ordPrice, ordType, direction);
 	}
 
 	public MutableLongObjectMap<ActualParentOrder> ownOrders() {

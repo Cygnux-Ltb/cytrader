@@ -35,10 +35,9 @@ public final class OrdStopLoss implements Comparable<OrdStopLoss> {
 		return this;
 	}
 
-
 	@Override
 	public int compareTo(OrdStopLoss o) {
-		return 0;
+		return uniqueId < o.uniqueId ? -1 : uniqueId > o.uniqueId ? 1 : 0;
 	}
 
 }

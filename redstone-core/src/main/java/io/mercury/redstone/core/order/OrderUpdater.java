@@ -48,7 +48,7 @@ public final class OrderUpdater {
 			order.qty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade record
-			order.trdRecordList().add(report.getEpochMillis(), report.getTradePrice(),
+			order.recordList().add(report.getEpochMillis(), report.getTradePrice(),
 					filledQty - order.qty().lastFilledQty());
 			break;
 		case Filled:
@@ -57,11 +57,11 @@ public final class OrderUpdater {
 			order.qty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade Record
-			order.trdRecordList().add(report.getEpochMillis(), report.getTradePrice(),
+			order.recordList().add(report.getEpochMillis(), report.getTradePrice(),
 					filledQty - order.qty().lastFilledQty());
 			// 计算此订单成交均价
 			// Calculation AvgPrice
-			order.price().calculateAvgPrice(order.trdRecordList());
+			order.price().calculateAvgPrice(order.recordList());
 			break;
 		default:
 			break;

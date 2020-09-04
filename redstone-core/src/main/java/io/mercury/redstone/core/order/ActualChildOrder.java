@@ -1,5 +1,7 @@
 package io.mercury.redstone.core.order;
 
+import static io.mercury.redstone.core.order.UniqueIdSupporter.allocateId;
+
 import org.slf4j.Logger;
 
 import io.mercury.financial.instrument.Instrument;
@@ -34,13 +36,13 @@ public final class ActualChildOrder extends ActualOrder {
 	/**
 	 * 订单成交列表
 	 */
-	private final TrdRecordList trdRecordList;
+	private final TrdRecordList recordList;
 
 	/**
 	 * 
 	 * @param strategyId   策略Id
-	 * @param accountId    实际账户Id
 	 * @param subAccountId 子账户Id
+	 * @param accountId    实际账户Id
 	 * @param instrument   交易标的
 	 * @param ordQty       委托数量
 	 * @param ordPrice     委托价格
@@ -49,11 +51,11 @@ public final class ActualChildOrder extends ActualOrder {
 	 * @param action       交易动作
 	 * @param ownerOrdId   所属上级订单
 	 */
-	ActualChildOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
-			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(UniqueIdSupporter.allocateId(strategyId), strategyId, accountId, subAccountId, instrument,
-				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
-		this.trdRecordList = new TrdRecordList(uniqueId());
+	ActualChildOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
+			long offerPrice, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
+		super(allocateId(strategyId), strategyId, subAccountId, accountId, instrument, OrdQty.withOffer(offerQty),
+				OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
+		this.recordList = new TrdRecordList(uniqueId());
 	}
 
 	/**
@@ -73,7 +75,7 @@ public final class ActualChildOrder extends ActualOrder {
 			TrdDirection direction, TrdAction action) {
 		super(uniqueId, Strategy.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction, action, 0L);
-		this.trdRecordList = new TrdRecordList(uniqueId());
+		this.recordList = new TrdRecordList(uniqueId());
 	}
 
 	@Override
@@ -81,20 +83,36 @@ public final class ActualChildOrder extends ActualOrder {
 		return 0;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String[] brokerIdentifier() {
 		return brokerIdentifier;
 	}
 
-	public TrdRecordList trdRecordList() {
-		return trdRecordList;
+	/**
+	 * 
+	 * @return
+	 */
+	public TrdRecordList recordList() {
+		return recordList;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public TrdRecord firstTrdRecord() {
-		return trdRecordList.first().get();
+		return recordList.first().get();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public TrdRecord lastTrdRecord() {
-		return trdRecordList.last().get();
+		return recordList.last().get();
 	}
 
 	private static final String ChildOrderText = "{} :: {}, ChildOrder : uniqueId==[{}], ownerUniqueId==[{}], "
@@ -104,7 +122,7 @@ public final class ActualChildOrder extends ActualOrder {
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
 		log.info(ChildOrderText, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(), type(),
-				instrument(), price(), qty(), timestamp(), trdRecordList);
+				instrument(), price(), qty(), timestamp(), recordList);
 	}
 
 }

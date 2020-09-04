@@ -28,14 +28,14 @@ public abstract class OrderBasicImpl implements Order {
 	private final int strategyId;
 
 	/**
-	 * 实际账户Id
-	 */
-	private final int accountId;
-
-	/**
 	 * 子账户Id
 	 */
 	private final int subAccountId;
+
+	/**
+	 * 实际账户Id
+	 */
+	private final int accountId;
 
 	/**
 	 * instrument
@@ -79,12 +79,12 @@ public abstract class OrderBasicImpl implements Order {
 
 	private static final String defRemark = "none";
 
-	protected OrderBasicImpl(long uniqueId, int strategyId, int accountId, int subAccountId, Instrument instrument,
+	protected OrderBasicImpl(long uniqueId, int strategyId, int subAccountId, int accountId, Instrument instrument,
 			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction) {
 		this.uniqueId = uniqueId;
 		this.strategyId = strategyId;
-		this.accountId = accountId;
 		this.subAccountId = subAccountId;
+		this.accountId = accountId;
 		this.instrument = instrument;
 		this.qty = qty;
 		this.price = price;
@@ -106,13 +106,13 @@ public abstract class OrderBasicImpl implements Order {
 	}
 
 	@Override
-	public int accountId() {
-		return accountId;
+	public int subAccountId() {
+		return subAccountId;
 	}
 
 	@Override
-	public int subAccountId() {
-		return subAccountId;
+	public int accountId() {
+		return accountId;
 	}
 
 	@Override
@@ -170,8 +170,8 @@ public abstract class OrderBasicImpl implements Order {
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
-		log.info(OrderOutputText, objName, msg, uniqueId(), status(), direction(), type(), instrument(),
-				price(), qty(), timestamp());
+		log.info(OrderOutputText, objName, msg, uniqueId(), status(), direction(), type(), instrument(), price(), qty(),
+				timestamp());
 	}
 
 }

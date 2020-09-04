@@ -27,9 +27,9 @@ public interface Order extends Comparable<Order>, Serializable {
 
 	int strategyId();
 
-	int accountId();
-
 	int subAccountId();
+
+	int accountId();
 
 	Instrument instrument();
 

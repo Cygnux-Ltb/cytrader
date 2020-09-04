@@ -1,5 +1,7 @@
 package io.mercury.redstone.core.order;
 
+import static io.mercury.redstone.core.order.UniqueIdSupporter.allocateId;
+
 import java.util.function.Function;
 
 import org.eclipse.collections.api.list.MutableList;
@@ -35,20 +37,20 @@ public final class ActualParentOrder extends ActualOrder {
 	/**
 	 * 
 	 * @param strategyId   策略Id
-	 * @param accountId    实际账户Id
 	 * @param subAccountId 子账户Id
+	 * @param accountId    实际账户Id
 	 * @param instrument   交易标的
 	 * @param offerQty     委托数量
 	 * @param offerPrice   委托价格
-	 * @param ordType      订单类型
+	 * @param type         订单类型
 	 * @param direction    交易方向
 	 * @param action       交易动作
 	 * @param ownerOrdId   所属上级订单Id
 	 */
-	ActualParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
-			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action, long ownerOrdId) {
-		super(UniqueIdSupporter.allocateId(strategyId), strategyId, accountId, subAccountId, instrument,
-				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), ordType, direction, action, ownerOrdId);
+	ActualParentOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
+			long offerPrice, OrdType type, TrdDirection direction, TrdAction action, long ownerOrdId) {
+		super(allocateId(strategyId), strategyId, subAccountId, accountId, instrument, OrdQty.withOffer(offerQty),
+				OrdPrice.withOffer(offerPrice), type, direction, action, ownerOrdId);
 		this.childOrders = MutableLists.newFastList(8);
 	}
 
@@ -60,13 +62,13 @@ public final class ActualParentOrder extends ActualOrder {
 	 * @param instrument   交易标的
 	 * @param offerQty     委托数量
 	 * @param offerPrice   委托价格
-	 * @param ordType      订单类型
+	 * @param type         订单类型
 	 * @param direction    交易方向
 	 * @param action       交易动作
 	 */
-	ActualParentOrder(int strategyId, int accountId, int subAccountId, Instrument instrument, int offerQty,
-			long offerPrice, OrdType ordType, TrdDirection direction, TrdAction action) {
-		this(strategyId, accountId, subAccountId, instrument, offerQty, offerPrice, ordType, direction, action, 0L);
+	ActualParentOrder(int strategyId, int subAccountId, int accountId, Instrument instrument, int offerQty,
+			long offerPrice, OrdType type, TrdDirection direction, TrdAction action) {
+		this(strategyId, subAccountId, accountId, instrument, offerQty, offerPrice, type, direction, action, 0L);
 	}
 
 	/**
@@ -111,8 +113,8 @@ public final class ActualParentOrder extends ActualOrder {
 
 	@Override
 	public void writeLog(Logger log, String objName, String msg) {
-		log.info(ParentOrderText, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(),
-				type(), instrument(), price(), qty(), timestamp());
+		log.info(ParentOrderText, objName, msg, uniqueId(), ownerUniqueId(), status(), direction(), action(), type(),
+				instrument(), price(), qty(), timestamp());
 	}
 
 }
