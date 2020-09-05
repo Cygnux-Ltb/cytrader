@@ -1,6 +1,6 @@
 package io.mercury.redstone.core.strategy;
 
-public class StrategyException extends Exception {
+public class StrategyException extends RuntimeException {
 
 	/**
 	 * 
