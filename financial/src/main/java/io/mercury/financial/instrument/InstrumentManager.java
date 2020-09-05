@@ -14,8 +14,9 @@ import org.slf4j.Logger;
 
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.serialization.Dumpable;
 import io.mercury.common.util.Assertor;
+import io.mercury.financial.instrument.futures.impl.ChinaFutures;
+import io.mercury.financial.instrument.futures.impl.ChinaFuturesSymbol;
 import io.mercury.serialization.json.JsonUtil;
 
 /**
@@ -26,12 +27,7 @@ import io.mercury.serialization.json.JsonUtil;
  *
  */
 @NotThreadSafe
-public final class InstrumentManager implements Dumpable<String> {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6884791803809601376L;
+public final class InstrumentManager {
 
 	/**
 	 * Logger
@@ -176,13 +172,20 @@ public final class InstrumentManager implements Dumpable<String> {
 		return allInstrument;
 	}
 
-	public String dump() {
-		String jsonInstrumentMapById = JsonUtil.toPrettyJsonHasNulls(InstrumentMapById);
-		String jsonInstrumentMapByCode = JsonUtil.toPrettyJsonHasNulls(InstrumentMapByCode);
-		Map<String, String> map = new HashMap<>();
-		map.put("InstrumentMapById", jsonInstrumentMapById);
-		map.put("InstrumentMapByCode", jsonInstrumentMapByCode);
-		return JsonUtil.toPrettyJsonHasNulls(map);
+	public static String showStatus() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("isInitialized", isInitialized);
+		map.put("instruments", allInstrument());
+		return JsonUtil.toPrettyJson(map);
+	}
+
+	public static void main(String[] args) {
+		ChinaFutures au2012 = new ChinaFutures(ChinaFuturesSymbol.AU, 2012);
+		ChinaFutures rb2101 = new ChinaFutures(ChinaFuturesSymbol.RB, 2101);
+		InstrumentManager.initialize(au2012, rb2101);
+		System.out.println(InstrumentManager.showStatus());
+		InstrumentManager.setNotTradable(rb2101);
+		System.out.println(InstrumentManager.showStatus());
 	}
 
 }

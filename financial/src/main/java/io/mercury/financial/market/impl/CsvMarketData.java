@@ -360,13 +360,15 @@ public class CsvMarketData implements Comparable<CsvMarketData> {
 	@Override
 	public int compareTo(CsvMarketData o) {
 		if (equalsInstrumentId(o)) {
-			if (this.localTimestamp.isEqual(o.getLocalTimestamp()))
+			if (this.localTimestamp.isEqual(o.getLocalTimestamp())) {
 				return 0;
+			}
 		}
-		if (this.localTimestamp.isAfter(o.getLocalTimestamp()))
+		if (this.localTimestamp.isAfter(o.getLocalTimestamp())) {
 			return 1;
-		else
+		} else {
 			return -1;
+		}
 
 	}
 

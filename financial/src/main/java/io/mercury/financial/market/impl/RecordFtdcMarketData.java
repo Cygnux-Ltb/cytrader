@@ -67,11 +67,6 @@ public final class RecordFtdcMarketData implements MarketData {
 	private int UpdateMillisec;
 
 	@Override
-	public MarketDataType getMarketDataType() {
-		return MarketDataType.Record;
-	}
-
-	@Override
 	public String getInstrumentId() {
 		return InstrumentID;
 	}

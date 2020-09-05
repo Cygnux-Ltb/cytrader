@@ -5,11 +5,6 @@ import io.mercury.financial.market.api.MarketData;
 public final class StaticMarketData implements MarketData {
 
 	@Override
-	public MarketDataType getMarketDataType() {
-		return MarketDataType.Static;
-	}
-
-	@Override
 	public String getInstrumentId() {
 		return null;
 	}

@@ -113,11 +113,6 @@ public class BasicMarketData implements MarketData {
 		this.turnover = turnover;
 	}
 
-	@Override
-	public MarketDataType getMarketDataType() {
-		return MarketDataType.Basic;
-	}
-
 	public Instrument getInstrument() {
 		return instrument;
 	}

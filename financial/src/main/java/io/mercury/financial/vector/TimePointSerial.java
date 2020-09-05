@@ -13,11 +13,23 @@ public final class TimePointSerial implements Serial {
 	private long repeat;
 	private long serialId;
 
+	/**
+	 * 根据固定时间创建新序列
+	 * 
+	 * @param timePoint
+	 * @return
+	 */
 	public static TimePointSerial newWith(ZonedDateTime timePoint) {
 		Assertor.nonNull(timePoint, "timePoint");
 		return new TimePointSerial(timePoint, 0);
 	}
 
+	/**
+	 * 根据前一个序列创建新序列
+	 * 
+	 * @param previous
+	 * @return
+	 */
 	public static TimePointSerial newWith(TimePointSerial previous) {
 		Assertor.nonNull(previous, "previous");
 		return new TimePointSerial(previous.timePoint, previous.repeat + 1);

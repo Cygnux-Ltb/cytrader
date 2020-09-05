@@ -54,17 +54,15 @@ public final class ChinaFuturesSupporter {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(Integer.MAX_VALUE);
 
+		System.out.println(Integer.MAX_VALUE);
 		System.out.println(ChinaFuturesSymbol.AG.exchange().id());
 		System.out.println(ChinaFuturesSymbol.AG.id());
 		System.out.println(ChinaFuturesSymbol.AG.acquireInstrumentId(1906));
-
 		System.out.println(analyzeSymbolCode("rb1901"));
 		System.out.println(analyzeInstrumentTerm("rb1901"));
-		ChinaFuturesSymbol of = ChinaFuturesSymbol.of(analyzeSymbolCode("rb1901"));
-		
-		System.out.println(of);
+		ChinaFuturesSymbol rb1901 = ChinaFuturesSymbol.of(analyzeSymbolCode("rb1901"));
+		System.out.println(rb1901);
 	}
 
 }

@@ -89,11 +89,6 @@ public final class DepthMarketData implements MarketData {
 	}
 
 	@Override
-	public MarketDataType getMarketDataType() {
-		return MarketDataType.Depth;
-	}
-
-	@Override
 	public long getEpochMillis() {
 		// TODO Auto-generated method stub
 		return 0;
