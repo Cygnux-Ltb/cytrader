@@ -14,7 +14,6 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ImmutableParams;
 import io.mercury.common.util.Assertor;
-import io.mercury.common.util.StringUtil;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.market.MarkerDataKeeper;
@@ -88,9 +87,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 
 	protected StrategyBaseImpl(int strategyId, String strategyName, int subAccountId, ImmutableParams<PK> params) {
 		this.strategyId = strategyId;
-		this.strategyName = StringUtil.isNullOrEmpty(strategyName)
-				? "strategyId[" + strategyId + "]-subAccountId[" + subAccountId + "]"
-				: strategyName;
+		this.strategyName = strategyName;
 		this.subAccount = AccountKeeper.getSubAccount(subAccountId);
 		this.subAccountId = subAccountId;
 		this.account = AccountKeeper.getAccountBySubAccountId(subAccountId);
@@ -100,8 +97,10 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 
 	@Override
 	public void initialize(@Nonnull Supplier<Boolean> initializer) {
-		this.initSuccess = Assertor.nonNull(initializer, "initializer").get();
+		Assertor.nonNull(initializer, "initializer");
+		this.initSuccess = initializer.get();
 		log.info("Initialize result initSuccess==[{}]", initSuccess);
+		// TODO 设置StrategyKeeper
 		// StrategyKeeper.putStrategy(this);
 	}
 
