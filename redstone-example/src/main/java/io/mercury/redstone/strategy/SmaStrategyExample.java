@@ -1,5 +1,6 @@
 package io.mercury.redstone.strategy;
 
+import io.mercury.common.param.ImmutableParams;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.indicator.impl.ma.SmaEvent;
@@ -11,28 +12,29 @@ import io.mercury.redstone.engine.strategy.StrategySingleInstrument;
 public final class SmaStrategyExample extends StrategySingleInstrument<BasicMarketData, StrategyParamKey>
 		implements SmaEvent {
 
-	public SmaStrategyExample(int strategyId, int subAccountId, Instrument instrument) {
-		super(strategyId, "SmaStrategyExample", subAccountId, instrument, null);
+	public SmaStrategyExample(int strategyId, int subAccountId, Instrument instrument,
+			ImmutableParams<StrategyParamKey> params) {
+		super(strategyId, "SmaStrategyExample", subAccountId, instrument, params);
 	}
 
 	@Override
 	public String eventName() {
-		return null;
+		return "SmaStrategyExampleEvent";
 	}
 
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
-		
+
 	}
 
 	@Override
 	protected void handleOrder(Order order) {
-		
+
 	}
 
 	@Override
 	public void onCurrentPointAvgPriceChanged(SmaPoint point) {
-		
+
 	}
 
 	@Override

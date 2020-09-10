@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+
 import io.mercury.common.datetime.DateTimeUtil;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.log.LogConfigurator;
 import io.mercury.common.log.LogConfigurator.LogLevel;
 import io.mercury.common.param.ImmutableParams;
@@ -24,32 +27,37 @@ import io.mercury.redstone.strategy.SmaStrategyExample;
 
 public final class ExampleWithProperties {
 
-	public static void main(String[] args) {
+	private static final Logger log = CommonLoggerFactory.getLogger(ExampleWithProperties.class);
 
+	static {
 		long datetime = DateTimeUtil.datetimeOfSecond();
 		LogConfigurator.logFileName("redstone-example-" + datetime);
 		LogConfigurator.logLevel(LogLevel.INFO);
+	}
+
+	public static void main(String[] args) {
 
 		// TODO 读取配置文件
-		Properties properties = null;
+		Properties prop = null;
 		int strategyId = 1;
 		int subAccountId = 1;
 		ChinaFutures rb2010 = new ChinaFutures(ChinaFuturesSymbol.RB, 2010);
 		InstrumentManager.initialize(rb2010);
 
-		SmaStrategyExample strategyExample = new SmaStrategyExample(strategyId, subAccountId, rb2010);
+		log.info("read properties -> {}", prop);
+
+		SmaStrategyExample strategyExample = new SmaStrategyExample(strategyId, subAccountId, rb2010, null);
 		StrategyScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(strategyExample);
 		strategyExample.initialize(() -> true);
 
 		// Set Global AppId
-		ImmutableParams<FtdcAdaptorParamKey> adaptorParam = new ImmutableParams<>(FtdcAdaptorParamKey.values(),
-				properties);
+		ImmutableParams<FtdcAdaptorParamKey> adaptorParams = new ImmutableParams<>(FtdcAdaptorParamKey.values(), prop);
 
 		// 创建InboundAdaptor
 		int adaptorId = 1;
 
 		// TODO ADD ACCOUNT
-		try (Adaptor adaptor = new FtdcAdaptor(adaptorId, null, scheduler, adaptorParam)) {
+		try (Adaptor adaptor = new FtdcAdaptor(adaptorId, null, scheduler, adaptorParams)) {
 
 			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.newWith(Duration.ofSeconds(15)));
 			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
@@ -57,7 +65,7 @@ public final class ExampleWithProperties {
 			adaptor.startup();
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("IOException -> {}", e.getMessage(), e);
 		}
 
 	}

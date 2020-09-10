@@ -37,7 +37,7 @@ public class ExampleWithNacos {
 		ChinaFutures rb2010 = new ChinaFutures(ChinaFuturesSymbol.RB, 2010);
 		InstrumentManager.initialize(rb2010);
 
-		SmaStrategyExample strategyExample = new SmaStrategyExample(strategyId, subAccountId, rb2010);
+		SmaStrategyExample strategyExample = new SmaStrategyExample(strategyId, subAccountId, rb2010, null);
 		StrategyScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(strategyExample);
 		strategyExample.initialize(() -> true);
 
