@@ -17,9 +17,9 @@ public abstract class StrategyMultiInstrument<M extends MarketData, PK extends S
 	// 策略订阅的合约
 	protected ImmutableList<Instrument> instruments;
 
-	protected StrategyMultiInstrument(int strategyId, String strategyName, int subAccountId,
-			Set<Instrument> instruments, ImmutableParams<PK> params) {
-		super(strategyId, strategyName, subAccountId, params);
+	protected StrategyMultiInstrument(int strategyId, int subAccountId, Set<Instrument> instruments,
+			ImmutableParams<PK> params) {
+		super(strategyId, subAccountId, params);
 		this.instruments = ImmutableLists.newImmutableList(instruments);
 	}
 
