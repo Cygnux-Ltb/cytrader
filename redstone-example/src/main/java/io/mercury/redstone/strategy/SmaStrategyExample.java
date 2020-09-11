@@ -14,7 +14,12 @@ public final class SmaStrategyExample extends StrategySingleInstrument<BasicMark
 
 	public SmaStrategyExample(int strategyId, int subAccountId, Instrument instrument,
 			ImmutableParams<StrategyParamKey> params) {
-		super(strategyId, "SmaStrategyExample", subAccountId, instrument, params);
+		super(strategyId, subAccountId, instrument, params);
+	}
+
+	@Override
+	public String strategyName() {
+		return "SmaStrategyExample";
 	}
 
 	@Override
