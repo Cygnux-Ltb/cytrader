@@ -8,7 +8,7 @@ import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.indicator.impl.FixedPeriodPoint;
 
-public final class TimeBar extends FixedPeriodPoint<BasicMarketData> {
+public final class TimeBarPoint extends FixedPeriodPoint<BasicMarketData> {
 
 	// 存储开高低收价格和成交量以及成交金额的字段
 	private Bar bar = new Bar();
@@ -22,16 +22,16 @@ public final class TimeBar extends FixedPeriodPoint<BasicMarketData> {
 	private MutableDoubleList priceRecord = MutableLists.newDoubleArrayList(64);
 	private MutableLongList volumeRecord = MutableLists.newLongArrayList(64);
 
-	private TimeBar(int index, TimePeriodSerial serial) {
+	private TimeBarPoint(int index, TimePeriodSerial serial) {
 		super(index, serial);
 	}
 
-	public static TimeBar newWith(int index, TimePeriodSerial timePeriod) {
-		return new TimeBar(index, timePeriod);
+	public static TimeBarPoint newWith(int index, TimePeriodSerial timePeriod) {
+		return new TimeBarPoint(index, timePeriod);
 	}
 
-	public TimeBar generateNext() {
-		return new TimeBar(index + 1,
+	public TimeBarPoint generateNext() {
+		return new TimeBarPoint(index + 1,
 				TimePeriodSerial.newWith(serial.startTime().plusSeconds(serial.period().seconds()),
 						serial.endTime().plusSeconds(serial.period().seconds()), serial.period()));
 	}

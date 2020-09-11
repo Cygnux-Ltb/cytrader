@@ -11,7 +11,7 @@ import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.indicator.impl.FixedPeriodIndicator;
 
-public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBarEvent, BasicMarketData> {
+public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, TimeBarEvent, BasicMarketData> {
 
 	public TimeBarIndicator(Instrument instrument, TimePeriod period) {
 		super(instrument, period);
@@ -20,7 +20,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBa
 				period);
 		int i = -1;
 		for (TimePeriodSerial timePeriod : timePeriodSet)
-			pointSet.add(TimeBar.newWith(++i, timePeriod));
+			pointSet.add(TimeBarPoint.newWith(++i, timePeriod));
 		currentPoint = pointSet.getFirst();
 	}
 
@@ -29,9 +29,9 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBa
 	}
 
 	// @Override
-	protected TimeBar generateNextPoint(TimeBar currentPoint) {
+	protected TimeBarPoint generateNextPoint(TimeBarPoint currentPoint) {
 		// 根据当前周期的开始时间和结束时间以及时间周期创建新的点
-		TimeBar newPoint = currentPoint.generateNext();
+		TimeBarPoint newPoint = currentPoint.generateNext();
 		pointSet.add(newPoint);
 		return newPoint;
 	}
@@ -49,7 +49,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBar, TimeBa
 			for (TimeBarEvent timeBarsEvent : events) {
 				timeBarsEvent.onEndTimeBar(currentPoint);
 			}
-			TimeBar newBar = pointSet.nextOf(currentPoint).orElse(null);
+			TimeBarPoint newBar = pointSet.nextOf(currentPoint).orElse(null);
 			if (newBar == null) {
 				log.error("TimeBar [{}-{}] next is null.", currentPointSerial.startTime(),
 						currentPointSerial.endTime());

@@ -47,9 +47,9 @@ public final class Bar {
 		builder.append(str0);
 		builder.append(open);
 		builder.append(str1);
-		builder.append(highest);
+		builder.append(highest == Long.MIN_VALUE ? 0L : highest);
 		builder.append(str2);
-		builder.append(lowest);
+		builder.append(lowest == Long.MAX_VALUE ? 0L : lowest);
 		builder.append(str3);
 		builder.append(last);
 		builder.append(str4);

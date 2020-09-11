@@ -9,10 +9,10 @@ public interface TimeBarEvent extends IndicatorEvent {
 		return "TimeBarEvent";
 	}
 
-	void onCurrentTimeBarChanged(TimeBar bar);
+	void onCurrentTimeBarChanged(TimeBarPoint bar);
 
-	void onStartTimeBar(TimeBar bar);
+	void onStartTimeBar(TimeBarPoint bar);
 
-	void onEndTimeBar(TimeBar bar);
+	void onEndTimeBar(TimeBarPoint bar);
 
 }
