@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.bar;
+package io.mercury.indicator.impl.base;
 
 public final class Bar {
 

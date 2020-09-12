@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl;
+package io.mercury.indicator.impl.base;
 
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.sequence.Serial;

@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.bar;
+package io.mercury.indicator.impl;
 
 import java.time.ZonedDateTime;
 
@@ -9,7 +9,9 @@ import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
-import io.mercury.indicator.impl.FixedPeriodIndicator;
+import io.mercury.indicator.api.IndicatorEvent;
+import io.mercury.indicator.impl.TimeBarIndicator.TimeBarEvent;
+import io.mercury.indicator.impl.base.FixedPeriodIndicator;
 
 public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, TimeBarEvent, BasicMarketData> {
 
@@ -76,5 +78,21 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 		}
 
 	}
+	
+	public interface TimeBarEvent extends IndicatorEvent {
+
+		@Override
+		default String eventName() {
+			return "TimeBarEvent";
+		}
+
+		void onCurrentTimeBarChanged(TimeBarPoint bar);
+
+		void onStartTimeBar(TimeBarPoint bar);
+
+		void onEndTimeBar(TimeBarPoint bar);
+
+	}
+
 
 }

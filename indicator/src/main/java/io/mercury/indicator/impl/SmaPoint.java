@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.ma;
+package io.mercury.indicator.impl;
 
 import io.mercury.common.collections.list.FixedLengthRecorder;
 import io.mercury.financial.instrument.Instrument;

@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl;
+package io.mercury.indicator.impl.base;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;

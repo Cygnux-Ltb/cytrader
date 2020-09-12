@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.ma;
+package io.mercury.indicator.impl;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,7 +12,8 @@ import io.mercury.financial.time.TradingPeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.financial.vector.TradingPeriod;
-import io.mercury.indicator.impl.FixedPeriodIndicator;
+import io.mercury.indicator.impl.SmaIndicator.SmaEvent;
+import io.mercury.indicator.impl.base.FixedPeriodIndicator;
 
 public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
 
@@ -38,6 +39,7 @@ public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
 		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

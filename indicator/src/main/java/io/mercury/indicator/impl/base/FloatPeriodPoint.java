@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl;
+package io.mercury.indicator.impl.base;
 
 import java.time.ZonedDateTime;
 
