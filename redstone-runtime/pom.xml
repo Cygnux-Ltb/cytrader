@@ -36,12 +36,8 @@
 					<artifactId>slf4j-api</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>com.google.code.findbugs</groupId>
-					<artifactId>jsr305</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.alibaba</groupId>
-					<artifactId>fastjson</artifactId>
+					<groupId>commons-io</groupId>
+					<artifactId>commons-io</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.apache.commons</groupId>
@@ -52,12 +48,20 @@
 					<artifactId>commons-codec</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>commons-io</groupId>
-					<artifactId>commons-io</artifactId>
-				</exclusion>
-				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.code.findbugs</groupId>
+					<artifactId>jsr305</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.alibaba</groupId>
+					<artifactId>fastjson</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>com.fasterxml.jackson.core</groupId>
@@ -71,12 +75,8 @@
 					<groupId>com.fasterxml.jackson.core</groupId>
 					<artifactId>jackson-databind</artifactId>
 				</exclusion>
-				<exclusion>
-					<groupId>com.google.guava</groupId>
-					<artifactId>guava</artifactId>
-				</exclusion>
 			</exclusions>
 		</dependency>
 	</dependencies>
-	
+
 </project>
