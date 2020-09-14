@@ -63,6 +63,7 @@ public final class ChinaFuturesSupporter {
 		System.out.println(analyzeInstrumentTerm("rb1901"));
 		ChinaFuturesSymbol rb1901 = ChinaFuturesSymbol.of(analyzeSymbolCode("rb1901"));
 		System.out.println(rb1901);
+		
 	}
 
 }

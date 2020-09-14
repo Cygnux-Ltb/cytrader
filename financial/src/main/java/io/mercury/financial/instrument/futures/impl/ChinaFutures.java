@@ -16,9 +16,8 @@ public final class ChinaFutures extends Futures {
 		return priorityClose;
 	}
 
-	@Override
-	public String fmtText() {
-		return "";
+	public static void main(String[] args) {
+
 	}
 
 }

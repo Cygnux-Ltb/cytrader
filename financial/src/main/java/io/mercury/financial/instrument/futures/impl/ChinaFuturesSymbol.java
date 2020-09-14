@@ -340,7 +340,7 @@ public enum ChinaFuturesSymbol implements Symbol {
 	}
 
 	@Override
-	public ImmutableSortedSet<TradingPeriod> tradingPeriodSet() {
+	public ImmutableSortedSet<TradingPeriod> getTradingPeriodSet() {
 		return tradingPeriodSet;
 	}
 
@@ -364,10 +364,10 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @param symbolId
 	 * @return
 	 */
-	public static ChinaFuturesSymbol of(int symbolId) {
-		ChinaFuturesSymbol symbol = SymbolIdMap.get(symbolId);
+	public static ChinaFuturesSymbol of(int id) {
+		ChinaFuturesSymbol symbol = SymbolIdMap.get(id);
 		if (symbol == null)
-			throw new IllegalArgumentException("Symbol Id -> " + symbolId + " is no mapping object");
+			throw new IllegalArgumentException("Symbol Id -> " + id + " is no mapping object");
 		return symbol;
 	}
 
@@ -376,11 +376,13 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @param symbolCode
 	 * @return
 	 */
-	public static ChinaFuturesSymbol of(String symbolCode) {
-		String key = symbolCode.toUpperCase();
-		ChinaFuturesSymbol symbol = SymbolCodeMap.get(key);
-		if (symbol == null)
-			throw new IllegalArgumentException("Symbol Code -> " + symbolCode + " is no mapping object");
+	public static ChinaFuturesSymbol of(String code) {
+		ChinaFuturesSymbol symbol = SymbolCodeMap.get(code);
+		if (symbol == null) {
+			symbol = SymbolCodeMap.get(code.toUpperCase());
+			if (symbol == null)
+				throw new IllegalArgumentException("Symbol Code -> " + code + " is no mapping object");
+		}
 		return symbol;
 	}
 
@@ -397,12 +399,12 @@ public enum ChinaFuturesSymbol implements Symbol {
 
 	public static void main(String[] args) {
 		for (Symbol symbol : ChinaFuturesSymbol.values()) {
-			symbol.tradingPeriodSet()
+			symbol.getTradingPeriodSet()
 					.each(tradingPeriod -> tradingPeriod
 							.segmentation(symbol.exchange().zoneId(), TimePeriod.newWith(Duration.ofSeconds(30)))
 							.each(timePeriod -> System.out.println(symbol.code() + " | " + timePeriod)));
 
-			symbol.tradingPeriodSet().stream().map(tradingPeriod -> tradingPeriod
+			symbol.getTradingPeriodSet().stream().map(tradingPeriod -> tradingPeriod
 					.segmentation(symbol.exchange().zoneId(), TimePeriod.newWith(Duration.ofSeconds(30))));
 		}
 		System.out.println(ChinaFuturesSymbol.AG.exchange.id());
@@ -411,7 +413,8 @@ public enum ChinaFuturesSymbol implements Symbol {
 
 	@Override
 	public String fmtText() {
-		return "";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

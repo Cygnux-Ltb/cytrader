@@ -29,7 +29,7 @@ public final class ChinaStock extends Stock {
 	}
 
 	@Override
-	public ImmutableSortedSet<TradingPeriod> tradingPeriodSet() {
+	public ImmutableSortedSet<TradingPeriod> getTradingPeriodSet() {
 		// TODO 添加固定的股票交易时间
 		return null;
 	}

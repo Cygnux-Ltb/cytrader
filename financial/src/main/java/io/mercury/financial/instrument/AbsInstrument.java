@@ -70,8 +70,10 @@ public abstract class AbsInstrument implements Instrument {
 
 	@Override
 	public String fmtText() {
-		if (fmtText == null)
-			this.fmtText = "{\"type\" : " + StringUtil.toText(type()) + ", \"id\" : " + id + "" + "}";
+		if (fmtText == null) {
+			this.fmtText = "{\"type\" : " + StringUtil.toText(type()) + ", \"id\" : " + id + ", \"code\" : "
+					+ StringUtil.toText(code) + "}";
+		}
 		return fmtText;
 	}
 

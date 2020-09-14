@@ -7,7 +7,7 @@ import io.mercury.financial.vector.TradingPeriod;
 
 public interface Symbol extends FinancialObj {
 
-	ImmutableSortedSet<TradingPeriod> tradingPeriodSet();
+	ImmutableSortedSet<TradingPeriod> getTradingPeriodSet();
 
 	Exchange exchange();
 

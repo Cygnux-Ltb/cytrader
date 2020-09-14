@@ -340,7 +340,7 @@ public enum JapanFuturesSymbol implements Symbol {
 	}
 
 	@Override
-	public ImmutableSortedSet<TradingPeriod> tradingPeriodSet() {
+	public ImmutableSortedSet<TradingPeriod> getTradingPeriodSet() {
 		return tradingPeriodSet;
 	}
 
@@ -397,12 +397,12 @@ public enum JapanFuturesSymbol implements Symbol {
 
 	public static void main(String[] args) {
 		for (Symbol symbol : JapanFuturesSymbol.values()) {
-			symbol.tradingPeriodSet()
+			symbol.getTradingPeriodSet()
 					.each(tradingPeriod -> tradingPeriod
 							.segmentation(symbol.exchange().zoneId(), TimePeriod.newWith(Duration.ofSeconds(30)))
 							.each(timePeriod -> System.out.println(symbol.code() + " | " + timePeriod)));
 
-			symbol.tradingPeriodSet().stream().map(tradingPeriod -> tradingPeriod
+			symbol.getTradingPeriodSet().stream().map(tradingPeriod -> tradingPeriod
 					.segmentation(symbol.exchange().zoneId(), TimePeriod.newWith(Duration.ofSeconds(30))));
 		}
 		System.out.println(JapanFuturesSymbol.AG.exchange.id());
