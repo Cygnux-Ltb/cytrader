@@ -38,7 +38,7 @@ public final class TradingPeriodPool {
 
 	private void putTradingPeriod(Symbol symbol) {
 		if (!tradingPeriodMap.containsKey(symbol.id()))
-			tradingPeriodMap.put(symbol.id(), symbol.tradingPeriodSet());
+			tradingPeriodMap.put(symbol.id(), symbol.getTradingPeriodSet());
 	}
 
 	private void toImmutable() {
