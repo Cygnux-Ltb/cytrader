@@ -1,6 +1,5 @@
 package io.mercury.redstone.core.account;
 
-import static io.mercury.common.util.Assertor.nonEmpty;
 import static io.mercury.common.util.StringUtil.toText;
 
 import javax.annotation.Nonnull;
@@ -9,6 +8,7 @@ import org.eclipse.collections.api.set.MutableSet;
 
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.fsm.EnableComponent;
+import io.mercury.common.util.Assertor;
 import io.mercury.common.util.StringUtil;
 
 public final class Account extends EnableComponent<Account> implements Comparable<Account> {
@@ -17,11 +17,6 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	 * 账户ID
 	 */
 	private final int accountId;
-
-	/**
-	 * 账户名
-	 */
-	private final String accountName;
 
 	/**
 	 * 经纪商-名称
@@ -43,6 +38,11 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	 */
 	private int credit;
 
+	/**
+	 * 备注名
+	 */
+	private String remarkName;
+
 	// 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
 
@@ -51,16 +51,17 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	 */
 	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
-	public Account(int accountId, String accountName, @Nonnull String brokerName, @Nonnull String investorId) {
-		this(accountId, accountName, brokerName, investorId, 0, 0);
+	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId) {
+		this(accountId,  brokerName, investorId, 0, 0);
 	}
 
-	public Account(int accountId, String accountName, @Nonnull String brokerName, @Nonnull String investorId,
+	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId,
 			int balance, int credit) {
+		Assertor.nonEmpty(brokerName, "brokerName");
+		Assertor.nonEmpty(investorId, "investorId");
 		this.accountId = accountId;
-		this.accountName = nonEmpty(accountName, "accountName");
-		this.brokerName = nonEmpty(brokerName, "brokerName");
-		this.investorId = nonEmpty(investorId, "investorId");
+		this.brokerName = brokerName;
+		this.investorId = investorId;
 		this.balance = balance;
 		this.credit = credit;
 	}
@@ -69,9 +70,6 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		return accountId;
 	}
 
-	public String accountName() {
-		return accountName;
-	}
 
 	public String brokerName() {
 		return brokerName;
@@ -103,12 +101,27 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		return credit;
 	}
 
+	public String remarkName() {
+		return remarkName;
+	}
+
+	public Account setRemarkName(String remarkName) {
+		this.remarkName = remarkName;
+		return this;
+	}
+
 	public int subAccountCount() {
 		return subAccounts.size();
 	}
 
-	public void addSubAccount(SubAccount subAccount) {
+	/**
+	 * 仅提供给SubAccount调用
+	 * 
+	 * @param subAccount
+	 */
+	Account addSubAccount(SubAccount subAccount) {
 		subAccounts.add(subAccount);
+		return this;
 	}
 
 	@Override
@@ -145,7 +158,6 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		builder.append(str0);
 		builder.append(accountId);
 		builder.append(str1);
-		builder.append(toText(accountName));
 		builder.append(str2);
 		builder.append(toText(brokerName));
 		builder.append(str3);
@@ -169,7 +181,7 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 
 	public static void main(String[] args) {
 		System.out.println(StringUtil.toText(null));
-		System.out.println(new Account(1, "TEST[1]", "ZSQH", "200500"));
+		System.out.println(new Account(1,  "ZSQH", "200500"));
 	}
 
 }

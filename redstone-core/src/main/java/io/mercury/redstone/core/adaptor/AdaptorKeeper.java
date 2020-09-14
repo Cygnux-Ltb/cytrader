@@ -72,8 +72,8 @@ public final class AdaptorKeeper implements Dumpable<String> {
 		Account account = adaptor.account();
 		AccountAdaptorMap.put(account.accountId(), adaptor);
 		log.info(
-				"Put adaptor to AccountAdaptorMap, accountId==[{}], accountName==[{}], adaptorId==[{}], adaptorName==[{}]",
-				account.accountId(), account.accountName(), adaptor.adaptorId(), adaptor.adaptorName());
+				"Put adaptor to AccountAdaptorMap, accountId==[{}], remarkName==[{}], adaptorId==[{}], adaptorName==[{}]",
+				account.accountId(), account.remarkName(), adaptor.adaptorId(), adaptor.adaptorName());
 		account.subAccounts().each(subAccount -> {
 			SubAccountAdaptorMap.put(subAccount.subAccountId(), adaptor);
 			log.info(

@@ -42,12 +42,13 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 	}
 
 	public SubAccount(int subAccountId, @Nonnull Account account, int balance, int credit) {
-		Assertor.lessThan(subAccountId, MaxSubAccountId, "");
+		Assertor.lessThan(subAccountId, MaxSubAccountId, "subAccountId");
+		Assertor.nonNull(account, "account");
 		this.subAccountId = subAccountId;
-		this.account = Assertor.nonNull(account, "account");
+		this.account = account;
 		this.balance = balance;
 		this.credit = credit;
-		this.subAccountName = "SA-Account[" + account.accountName() + "]-SubAccount[" + subAccountId + "]";
+		this.subAccountName = "SA-Account[" + account.remarkName() + "]-SubAccount[" + subAccountId + "]";
 		account.addSubAccount(this);
 	}
 
@@ -122,7 +123,7 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 	}
 
 	public static void main(String[] args) {
-		SubAccount subAccount = new SubAccount(10, new Account(1, "Test-A", "HYQH", "200500", 100000, 0));
+		SubAccount subAccount = new SubAccount(10, new Account(1, "HYQH", "200500", 100000, 0));
 		System.out.println(subAccount);
 	}
 
