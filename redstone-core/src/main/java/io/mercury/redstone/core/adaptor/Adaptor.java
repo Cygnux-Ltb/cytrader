@@ -132,13 +132,4 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 */
 	boolean queryBalance(@Nullable Account account);
 
-	/**
-	 * 
-	 * @author yellow013
-	 *
-	 */
-	public static enum AdaptorStatus {
-		MdEnable, MdDisable, TraderEnable, TraderDisable
-	}
-
 }

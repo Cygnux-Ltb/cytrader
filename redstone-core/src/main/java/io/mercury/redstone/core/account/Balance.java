@@ -5,7 +5,6 @@ package io.mercury.redstone.core.account;
  * @author yellow013
  * 
  */
-
 @Deprecated
 public final class Balance {
 
@@ -14,6 +13,11 @@ public final class Balance {
 
 	public Balance(int margin) {
 		this.margin = margin;
+	}
+
+	public Balance(int margin, int credit) {
+		this.margin = margin;
+		this.credit = credit;
 	}
 
 	public int margin() {

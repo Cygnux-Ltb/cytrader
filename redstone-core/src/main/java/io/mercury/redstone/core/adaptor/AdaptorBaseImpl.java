@@ -1,10 +1,11 @@
 package io.mercury.redstone.core.adaptor;
 
+import static io.mercury.common.collections.MutableLists.newFastList;
+
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import io.mercury.common.collections.MutableLists;
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
 import io.mercury.financial.instrument.InstrumentManager;
@@ -23,7 +24,7 @@ public abstract class AdaptorBaseImpl extends EnableComponent<Adaptor> implement
 		this.adaptorId = adaptorId;
 		this.adaptorName = adaptorName;
 		this.account = accounts[0];
-		this.accounts = MutableLists.newFastList(accounts);
+		this.accounts = newFastList(accounts);
 		AdaptorKeeper.putAdaptor(this);
 	}
 

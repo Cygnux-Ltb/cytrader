@@ -19,12 +19,12 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	private final int accountId;
 
 	/**
-	 * 经纪商-名称
+	 * 经纪商名称
 	 */
 	private final String brokerName;
 
 	/**
-	 * 经纪商-投资者ID
+	 * 经纪商提供的投资者ID
 	 */
 	private final String investorId;
 
@@ -39,9 +39,9 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	private int credit;
 
 	/**
-	 * 备注名
+	 * 备注
 	 */
-	private String remarkName;
+	private String remark = "none";
 
 	// 备用, 数组下标, 用于快速访问本账户对应的仓位信息集合
 	// private int positionManagerIndex;
@@ -52,11 +52,11 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	private final MutableSet<SubAccount> subAccounts = MutableSets.newUnifiedSet();
 
 	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId) {
-		this(accountId,  brokerName, investorId, 0, 0);
+		this(accountId, brokerName, investorId, 0, 0);
 	}
 
-	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId,
-			int balance, int credit) {
+	public Account(int accountId, @Nonnull String brokerName, @Nonnull String investorId, int balance, int credit) {
+		// Assertor.lessThan(accountId, 100, "accountId");
 		Assertor.nonEmpty(brokerName, "brokerName");
 		Assertor.nonEmpty(investorId, "investorId");
 		this.accountId = accountId;
@@ -64,54 +64,6 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		this.investorId = investorId;
 		this.balance = balance;
 		this.credit = credit;
-	}
-
-	public int accountId() {
-		return accountId;
-	}
-
-
-	public String brokerName() {
-		return brokerName;
-	}
-
-	public String investorId() {
-		return investorId;
-	}
-
-	public MutableSet<SubAccount> subAccounts() {
-		return subAccounts;
-	}
-
-	public Account setBalance(int balance) {
-		this.balance = balance;
-		return this;
-	}
-
-	public int balance() {
-		return balance;
-	}
-
-	public Account setCredit(int credit) {
-		this.credit = credit;
-		return this;
-	}
-
-	public int credit() {
-		return credit;
-	}
-
-	public String remarkName() {
-		return remarkName;
-	}
-
-	public Account setRemarkName(String remarkName) {
-		this.remarkName = remarkName;
-		return this;
-	}
-
-	public int subAccountCount() {
-		return subAccounts.size();
 	}
 
 	/**
@@ -129,6 +81,89 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		return this;
 	}
 
+	/**
+	 * 账户ID
+	 * 
+	 * @return
+	 */
+	public int accountId() {
+		return accountId;
+	}
+
+	/**
+	 * 经纪商名称
+	 * 
+	 * @return
+	 */
+	public String brokerName() {
+		return brokerName;
+	}
+
+	/**
+	 * 经纪商投资者ID
+	 * 
+	 * @return
+	 */
+	public String investorId() {
+		return investorId;
+	}
+
+	/**
+	 * 账户余额
+	 * 
+	 * @return
+	 */
+	public int balance() {
+		return balance;
+	}
+
+	/**
+	 * 账户信用
+	 * 
+	 * @return
+	 */
+	public int credit() {
+		return credit;
+	}
+
+	/**
+	 * 备注
+	 * 
+	 * @return
+	 */
+	public String remark() {
+		return remark;
+	}
+
+	/**
+	 * 获取全部子账户
+	 * 
+	 * @return
+	 */
+	public MutableSet<SubAccount> subAccounts() {
+		return subAccounts;
+	}
+
+	/**
+	 * 备注
+	 * 
+	 * @param remark
+	 * @return
+	 */
+	public Account setRemark(String remark) {
+		this.remark = remark;
+		return this;
+	}
+
+	/**
+	 * 获取子账户数量
+	 * 
+	 * @return
+	 */
+	public int subAccountTotal() {
+		return subAccounts.size();
+	}
+
 	public final static class AccountException extends RuntimeException {
 
 		/**
@@ -143,12 +178,12 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 	}
 
 	private static final String str0 = "{\"accountId\" : ";
-	private static final String str1 = ", \"accountName\" : ";
-	private static final String str2 = ", \"brokerName\" : ";
-	private static final String str3 = ", \"investorId\" : ";
-	private static final String str4 = ", \"balance\" : ";
-	private static final String str5 = ", \"credit\" : ";
-	private static final String str6 = ", \"subAccountsCount\" : ";
+	private static final String str1 = ", \"brokerName\" : ";
+	private static final String str2 = ", \"investorId\" : ";
+	private static final String str3 = ", \"balance\" : ";
+	private static final String str4 = ", \"credit\" : ";
+	private static final String str5 = ", \"remark\" : ";
+	private static final String str6 = ", \"subAccountTotal\" : ";
 	private static final String str7 = ", \"isEnabled\" : ";
 	private static final String str8 = "}";
 
@@ -158,16 +193,17 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 		builder.append(str0);
 		builder.append(accountId);
 		builder.append(str1);
-		builder.append(str2);
 		builder.append(toText(brokerName));
-		builder.append(str3);
+		builder.append(str2);
 		builder.append(investorId);
-		builder.append(str4);
+		builder.append(str3);
 		builder.append(balance);
-		builder.append(str5);
+		builder.append(str4);
 		builder.append(credit);
+		builder.append(str5);
+		builder.append(toText(remark));
 		builder.append(str6);
-		builder.append(subAccounts.size());
+		builder.append(subAccountTotal());
 		builder.append(str7);
 		builder.append(isEnabled());
 		builder.append(str8);
@@ -181,7 +217,10 @@ public final class Account extends EnableComponent<Account> implements Comparabl
 
 	public static void main(String[] args) {
 		System.out.println(StringUtil.toText(null));
-		System.out.println(new Account(1,  "ZSQH", "200500"));
+		Account account = new Account(1, "ZSQH", "200500");
+		System.out.println(account.toString());
+		System.out.println(account.toString().length());
+		
 	}
 
 }

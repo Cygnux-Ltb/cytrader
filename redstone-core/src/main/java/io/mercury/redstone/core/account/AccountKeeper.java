@@ -57,10 +57,13 @@ public final class AccountKeeper implements Dumpable<String> {
 	 */
 	private static final MutableIntObjectMap<SubAccount> SubAccountMap = MutableMaps.newIntObjectHashMap();
 
+	/**
+	 * 
+	 */
 	private AccountKeeper() {
 	}
 
-	private static boolean isInitialized = false;
+	private static volatile boolean isInitialized = false;
 
 	public static void initialize(@Nonnull SubAccount... subAccounts) {
 		if (!isInitialized) {
@@ -72,10 +75,10 @@ public final class AccountKeeper implements Dumpable<String> {
 					.each(AccountKeeper::putAccount);
 			isInitialized = true;
 		} else {
-			IllegalStateException ex = new IllegalStateException(
+			IllegalStateException e = new IllegalStateException(
 					"AccountKeeper Has been initialized, cannot be initialize again");
-			log.error("AccountKeeper :: IllegalStateException", ex);
-			throw ex;
+			log.error("AccountKeeper :: IllegalStateException", e);
+			throw e;
 		}
 	}
 

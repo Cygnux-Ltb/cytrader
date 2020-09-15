@@ -1,7 +1,5 @@
 package io.mercury.redstone.core.adaptor;
 
-import io.mercury.redstone.core.adaptor.Adaptor.AdaptorStatus;
-
 public final class AdaptorEvent {
 
 	/**
@@ -25,6 +23,15 @@ public final class AdaptorEvent {
 
 	public AdaptorStatus status() {
 		return status;
+	}
+
+	/**
+	 * 
+	 * @author yellow013
+	 *
+	 */
+	public static enum AdaptorStatus {
+		MdEnable, MdDisable, TraderEnable, TraderDisable
 	}
 
 }

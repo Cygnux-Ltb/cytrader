@@ -32,6 +32,7 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 	 * 账户余额
 	 */
 	private int balance;
+
 	/**
 	 * 信用额度
 	 */
@@ -48,7 +49,8 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 		this.account = account;
 		this.balance = balance;
 		this.credit = credit;
-		this.subAccountName = "SA-Account[" + account.remarkName() + "]-SubAccount[" + subAccountId + "]";
+		this.subAccountName = "SubAccount[" + subAccountId + "]-Account[" + account.brokerName() + ":"
+				+ account.remark() + "]";
 		account.addSubAccount(this);
 	}
 
@@ -100,7 +102,7 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder(300);
+		StringBuilder builder = new StringBuilder(350);
 		builder.append(str0);
 		builder.append(subAccountId);
 		builder.append(str1);
@@ -125,6 +127,7 @@ public final class SubAccount extends EnableComponent<SubAccount> implements Com
 	public static void main(String[] args) {
 		SubAccount subAccount = new SubAccount(10, new Account(1, "HYQH", "200500", 100000, 0));
 		System.out.println(subAccount);
+		System.out.println(subAccount.toString().length());
 	}
 
 }
