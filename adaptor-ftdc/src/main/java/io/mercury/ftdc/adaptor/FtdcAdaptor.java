@@ -36,6 +36,7 @@ import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorBaseImpl;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
+import io.mercury.redstone.core.adaptor.AdaptorEvent.AdaptorStatus;
 import io.mercury.redstone.core.adaptor.Command;
 import io.mercury.redstone.core.order.ActualChildOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
@@ -113,8 +114,8 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	 * @param ftdcConfig
 	 * @return
 	 */
-	private FtdcGateway createFtdcGateway(FtdcConfig ftdcConfig) {
-		return new FtdcGateway("Ftdc-Gateway", ftdcConfig,
+	private FtdcGateway createFtdcGateway(FtdcConfig config) {
+		return new FtdcGateway("Ftdc-Gateway", config,
 				MpscArrayBlockingQueue.autoStartQueue("FtdcGateway-Buffer", 256, ftdcRspMsg -> {
 					switch (ftdcRspMsg.getRspType()) {
 					case FtdcMdConnect:
