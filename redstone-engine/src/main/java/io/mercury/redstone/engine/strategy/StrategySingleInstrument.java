@@ -1,8 +1,10 @@
 package io.mercury.redstone.engine.strategy;
 
 import org.eclipse.collections.api.list.ImmutableList;
+import org.slf4j.Logger;
 
 import io.mercury.common.collections.ImmutableLists;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ImmutableParams;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
@@ -13,7 +15,14 @@ import io.mercury.redstone.core.strategy.StrategyParamKey;
 public abstract class StrategySingleInstrument<M extends MarketData, PK extends StrategyParamKey>
 		extends StrategyBaseImpl<M, PK> {
 
-	// 策略订阅的合约
+	/**
+	 * Logger
+	 */
+	private static final Logger log = CommonLoggerFactory.getLogger(StrategySingleInstrument.class);
+
+	/**
+	 * 策略订阅的合约
+	 */
 	protected Instrument instrument;
 
 	/**

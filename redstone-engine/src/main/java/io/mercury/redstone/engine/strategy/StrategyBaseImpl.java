@@ -40,9 +40,9 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 		implements Strategy<M>, CircuitBreaker {
 
 	/**
-	 * 子类共用日志记录器
+	 * Logger
 	 */
-	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(StrategyBaseImpl.class);
 
 	/**
 	 * 策略ID

@@ -1,7 +1,10 @@
 package io.mercury.redstone.engine.scheduler;
 
+import org.slf4j.Logger;
+
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.disruptor.SpscQueue;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.market.MarkerDataKeeper;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
@@ -17,6 +20,11 @@ import io.mercury.redstone.core.order.structure.OrdReport;
  *
  */
 public final class QueueStrategyScheduler extends MultipleStrategyScheduler<BasicMarketData> {
+
+	/**
+	 * Logger
+	 */
+	private static final Logger log = CommonLoggerFactory.getLogger(QueueStrategyScheduler.class);
 
 	private SpscQueue<DespatchMsg> despatchQueue;
 
@@ -41,7 +49,8 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 				log.info("Handle OrdReport, brokerUniqueId==[{}], uniqueId==[{}]", ordReport.getBrokerUniqueId(),
 						ordReport.getUniqueId());
 				ActualChildOrder order = OrderKeeper.onOrdReport(ordReport);
-				log.info("Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], uniqueId==[{}]",
+				log.info(
+						"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], uniqueId==[{}]",
 						ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
 						ordReport.getUniqueId());
 				strategyMap.get(order.strategyId()).onOrder(order);

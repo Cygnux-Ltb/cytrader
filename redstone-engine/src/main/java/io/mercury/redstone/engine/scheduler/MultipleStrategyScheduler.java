@@ -17,7 +17,7 @@ public abstract class MultipleStrategyScheduler<M extends MarketData> implements
 	/**
 	 * Logger
 	 */
-	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(MultipleStrategyScheduler.class);
 
 	/**
 	 * 策略列表
