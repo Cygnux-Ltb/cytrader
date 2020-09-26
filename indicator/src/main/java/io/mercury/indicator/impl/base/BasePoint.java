@@ -6,7 +6,7 @@ import io.mercury.common.util.Assertor;
 import io.mercury.financial.market.api.MarketData;
 import io.mercury.indicator.api.Point;
 
-public abstract class BasePoint<S extends Serial, M extends MarketData> implements Point<S, M> {
+public abstract class BasePoint<S extends Serial, M extends MarketData> implements Point<S> {
 
 	protected int index;
 
@@ -14,8 +14,10 @@ public abstract class BasePoint<S extends Serial, M extends MarketData> implemen
 	protected M preMarketData;
 
 	protected BasePoint(int index, S serial) {
-		this.index = Assertor.greaterThan(index, -1, "index");
-		this.serial = Assertor.nonNull(serial, "serial");
+		Assertor.greaterThan(index, -1, "index");
+		Assertor.nonNull(serial, "serial");
+		this.index = index;
+		this.serial = serial;
 	}
 
 	@Override
@@ -28,9 +30,8 @@ public abstract class BasePoint<S extends Serial, M extends MarketData> implemen
 		return serial;
 	}
 
-	@Override
-	public void onMarketData(M marketData) {
-		handleMarketData(marketData);
+	public void handleMarketData(M marketData) {
+		handleMarketData0(marketData);
 		updatePreMarketData(marketData);
 	}
 
@@ -39,6 +40,6 @@ public abstract class BasePoint<S extends Serial, M extends MarketData> implemen
 	}
 
 	@AbstractFunction
-	protected abstract void handleMarketData(M marketData);
+	protected abstract void handleMarketData0(M marketData);
 
 }

@@ -13,7 +13,7 @@ import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 
 @NotThreadSafe
-public final class PointSet<P extends Point<?, ?>> {
+public final class PointSet<P extends Point<?>> {
 
 	private MutableList<P> pointList;
 	private MutableLongObjectMap<P> pointMap;
@@ -23,7 +23,7 @@ public final class PointSet<P extends Point<?, ?>> {
 		this.pointMap = MutableMaps.newLongObjectHashMap(capacity);
 	}
 
-	public static <P extends Point<?, ?>> PointSet<P> newEmpty(Capacity capacity) {
+	public static <P extends Point<?>> PointSet<P> newEmpty(Capacity capacity) {
 		return new PointSet<>(capacity);
 	}
 

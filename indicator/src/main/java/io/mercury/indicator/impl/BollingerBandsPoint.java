@@ -11,7 +11,7 @@ public final class BollingerBandsPoint extends FixedPeriodPoint<BasicMarketData>
 	}
 
 	@Override
-	protected void handleMarketData(BasicMarketData marketData) {
+	protected void handleMarketData0(BasicMarketData marketData) {
 
 	}
 

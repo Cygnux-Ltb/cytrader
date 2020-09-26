@@ -16,7 +16,7 @@ import io.mercury.indicator.api.PointSet;
 public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends IndicatorEvent, M extends MarketData>
 		implements Indicator<P, E, M> {
 
-	protected final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(BaseIndicator.class);
 
 	// 指标对应的标的
 	protected Instrument instrument;

@@ -1,5 +1,7 @@
 package io.mercury.indicator.impl.base;
 
+import io.mercury.serialization.json.JsonWrapper;
+
 public final class Bar {
 
 	// 存储开高低收价格
@@ -57,7 +59,12 @@ public final class Bar {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new Bar().onPrice(100000).onPrice(100L).onPrice(10000000L));
+		
+		Bar bar = new Bar().onPrice(100000).onPrice(100L).onPrice(10000000L);
+		
+		System.out.println(JsonWrapper.toJson(bar));
+		System.out.println(bar);
+		
 	}
 
 }

@@ -17,7 +17,7 @@ public final class EmaPoint extends MaPoint  {
 
 
 	@Override
-	protected void handleMarketData(BasicMarketData preMarketData) {
+	protected void handleMarketData0(BasicMarketData preMarketData) {
 		// TODO Auto-generated method stub
 
 	}

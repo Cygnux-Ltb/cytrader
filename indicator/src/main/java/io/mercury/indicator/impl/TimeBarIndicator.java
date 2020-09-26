@@ -3,7 +3,9 @@ package io.mercury.indicator.impl;
 import java.time.ZonedDateTime;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+import org.slf4j.Logger;
 
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;
@@ -15,6 +17,8 @@ import io.mercury.indicator.impl.base.FixedPeriodIndicator;
 
 public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, TimeBarEvent, BasicMarketData> {
 
+	private static final Logger log = CommonLoggerFactory.getLogger(TimeBarIndicator.class);
+	
 	public TimeBarIndicator(Instrument instrument, TimePeriod period) {
 		super(instrument, period);
 		// 从已经根据交易周期分配好的池中获取此指标的分割节点
@@ -43,7 +47,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 		TimePeriodSerial currentPointSerial = currentPoint.serial();
 		ZonedDateTime marketDatatime = marketData.zonedDatetime();
 		if (currentPointSerial.isPeriod(marketDatatime)) {
-			currentPoint.onMarketData(marketData);
+			currentPoint.handleMarketData(marketData);
 			for (TimeBarEvent timeBarsEvent : events) {
 				timeBarsEvent.onCurrentTimeBarChanged(currentPoint);
 			}
@@ -58,7 +62,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 				return;
 			}
 			while (!newBar.serial().isPeriod(marketDatatime)) {
-				newBar.onMarketData(preMarketData);
+				newBar.handleMarketData(preMarketData);
 				for (TimeBarEvent timeBarsEvent : events) {
 					timeBarsEvent.onStartTimeBar(newBar);
 				}
@@ -78,7 +82,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 		}
 
 	}
-	
+
 	public interface TimeBarEvent extends IndicatorEvent {
 
 		@Override
@@ -93,6 +97,5 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 		void onEndTimeBar(TimeBarPoint bar);
 
 	}
-
 
 }

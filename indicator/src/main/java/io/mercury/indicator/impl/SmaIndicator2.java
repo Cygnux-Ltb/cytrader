@@ -38,13 +38,11 @@ public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent
 
 	@Override
 	public void onMarketData(BasicMarketData marketData) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
-		// TODO Auto-generated method stub
 
 	}
 

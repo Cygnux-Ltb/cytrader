@@ -29,7 +29,7 @@ public final class SmaPoint extends MaPoint  {
 	}
 
 	@Override
-	protected void handleMarketData(BasicMarketData marketData) {
+	protected void handleMarketData0(BasicMarketData marketData) {
 		this.lastPrice = marketData.getLastPrice();
 		int count = historyPriceRecorder.count();
 		this.avgPrice = (historyPriceSum + lastPrice) / count;

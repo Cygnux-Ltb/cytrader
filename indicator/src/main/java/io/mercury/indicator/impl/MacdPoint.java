@@ -11,7 +11,7 @@ public final class MacdPoint extends FixedPeriodPoint<BasicMarketData> {
 	}
 
 	@Override
-	protected void handleMarketData(BasicMarketData marketData) {
+	protected void handleMarketData0(BasicMarketData marketData) {
 		// TODO Auto-generated method stub
 
 	}

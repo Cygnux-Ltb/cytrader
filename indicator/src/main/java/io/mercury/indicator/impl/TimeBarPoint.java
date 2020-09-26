@@ -1,6 +1,5 @@
 package io.mercury.indicator.impl;
 
-import org.eclipse.collections.api.list.primitive.MutableDoubleList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 
 import io.mercury.common.collections.MutableLists;
@@ -20,7 +19,7 @@ public final class TimeBarPoint extends FixedPeriodPoint<BasicMarketData> {
 	// 总成交金额
 	private long turnoverSum = 0L;
 
-	private MutableDoubleList priceRecord = MutableLists.newDoubleArrayList(64);
+	private MutableLongList priceRecord = MutableLists.newLongArrayList(64);
 	private MutableLongList volumeRecord = MutableLists.newLongArrayList(64);
 
 	private TimeBarPoint(int index, TimePeriodSerial serial) {
@@ -53,7 +52,7 @@ public final class TimeBarPoint extends FixedPeriodPoint<BasicMarketData> {
 		return bar.last();
 	}
 
-	public MutableDoubleList priceRecord() {
+	public MutableLongList priceRecord() {
 		return priceRecord;
 	}
 
@@ -70,7 +69,7 @@ public final class TimeBarPoint extends FixedPeriodPoint<BasicMarketData> {
 	}
 
 	@Override
-	protected void handleMarketData(BasicMarketData marketData) {
+	protected void handleMarketData0(BasicMarketData marketData) {
 		// 处理当前价格
 		bar.onPrice(marketData.getLastPrice());
 		// 记录当前价格
