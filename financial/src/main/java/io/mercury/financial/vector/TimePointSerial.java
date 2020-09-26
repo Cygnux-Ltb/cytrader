@@ -74,7 +74,9 @@ public final class TimePointSerial implements Serial {
 
 		System.out.println(EpochTime.millis());
 		System.out.println(EpochTime.seconds());
+		
 		System.out.println(Long.MAX_VALUE);
+		
 	}
 
 }
