@@ -33,6 +33,7 @@ import io.mercury.ftdc.gateway.bean.FtdcOrder;
 import io.mercury.ftdc.gateway.bean.FtdcOrderAction;
 import io.mercury.ftdc.gateway.bean.FtdcTrade;
 import io.mercury.ftdc.gateway.bean.FtdcTraderConnect;
+import io.mercury.redstone.core.EventScheduler;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.adaptor.AdaptorBaseImpl;
 import io.mercury.redstone.core.adaptor.AdaptorEvent;
@@ -40,10 +41,9 @@ import io.mercury.redstone.core.adaptor.AdaptorEvent.AdaptorStatus;
 import io.mercury.redstone.core.adaptor.Command;
 import io.mercury.redstone.core.order.ActualChildOrder;
 import io.mercury.redstone.core.order.structure.OrdReport;
-import io.mercury.redstone.core.strategy.StrategyScheduler;
 import io.mercury.serialization.json.JsonUtil;
 
-public class FtdcAdaptor extends AdaptorBaseImpl {
+public class FtdcAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(FtdcAdaptor.class);
 
@@ -74,13 +74,10 @@ public class FtdcAdaptor extends AdaptorBaseImpl {
 	private volatile boolean isMdAvailable;
 	private volatile boolean isTraderAvailable;
 
-	private final StrategyScheduler<BasicMarketData> scheduler;
-
-	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull StrategyScheduler<BasicMarketData> scheduler,
+	public FtdcAdaptor(int adaptorId, @Nonnull Account account, @Nonnull EventScheduler<BasicMarketData> scheduler,
 			@Nonnull ImmutableParams<FtdcAdaptorParamKey> paramMap) {
 		super(adaptorId, "FtdcAdaptor-Broker[ " + account.brokerName() + "]-InvestorId[" + account.investorId() + "]",
-				account);
-		this.scheduler = scheduler;
+				scheduler, account);
 		// 创建配置信息
 		FtdcConfig ftdcConfig = createFtdcConfig(paramMap);
 		// 创建Gateway
