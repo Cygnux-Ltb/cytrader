@@ -30,7 +30,7 @@ import io.mercury.transport.socket.SocketReceiver;
 import io.mercury.transport.socket.SocketSender;
 import io.mercury.transport.socket.configurator.SocketConfigurator;
 
-public class SimAdaptor extends AdaptorBaseImpl {
+public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	private Receiver mdReceiver;
 	private Receiver tdReceiver;
@@ -61,7 +61,7 @@ public class SimAdaptor extends AdaptorBaseImpl {
 
 	public SimAdaptor(int adaptorId, @Nonnull Account account, @Nonnull ImmutableParams<SimAdaptorParamKey> paramMap,
 			StrategyScheduler<BasicMarketData> scheduler) {
-		super(adaptorId, "SimulatorAdaptor[" + adaptorId + "]", account);
+		super(adaptorId, "SimulatorAdaptor[" + adaptorId + "]", scheduler, account);
 		this.paramMap = paramMap;
 		this.scheduler = scheduler;
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
