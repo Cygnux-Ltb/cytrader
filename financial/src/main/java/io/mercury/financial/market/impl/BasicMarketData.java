@@ -118,7 +118,7 @@ public class BasicMarketData implements MarketData {
 	}
 
 	@Override
-	public String getInstrumentId() {
+	public String getInstrumentCode() {
 		return instrument.code();
 	}
 

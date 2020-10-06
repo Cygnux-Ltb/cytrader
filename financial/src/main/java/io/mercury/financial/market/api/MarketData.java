@@ -2,7 +2,7 @@ package io.mercury.financial.market.api;
 
 public interface MarketData {
 
-	String getInstrumentId();
+	String getInstrumentCode();
 
 	long getEpochMillis();
 

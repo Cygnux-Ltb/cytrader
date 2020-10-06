@@ -60,10 +60,10 @@ public final class MarkerDataKeeper implements Dumpable<String> {
 	}
 
 	public static void onMarketDate(MarketData marketData) {
-		String instrumentId = marketData.getInstrumentId();
-		LastMarkerData lastMarkerData = getLast(instrumentId);
+		String instrumentCode = marketData.getInstrumentCode();
+		LastMarkerData lastMarkerData = getLast(instrumentCode);
 		if (lastMarkerData == null)
-			log.warn("Instrument unregistered, instrumentCode -> {}", instrumentId);
+			log.warn("Instrument unregistered, instrumentCode -> {}", instrumentCode);
 		else
 			lastMarkerData.setAskPrice1(marketData.getAskPrice1()).setAskVolume1(marketData.getAskVolume1())
 					.setBidPrice1(marketData.getBidPrice1()).setBidVolume1(marketData.getBidVolume1());

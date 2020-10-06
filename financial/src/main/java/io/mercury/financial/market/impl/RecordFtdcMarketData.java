@@ -35,7 +35,7 @@ public final class RecordFtdcMarketData implements MarketData {
 	private double UpperLimitPrice;
 	// 跌停板价
 	private double LowerLimitPrice;
-	
+
 	/* 五档买价卖价及买量卖量 v */
 	private long BidPrice1;
 	private int BidVolume1;
@@ -67,7 +67,7 @@ public final class RecordFtdcMarketData implements MarketData {
 	private int UpdateMillisec;
 
 	@Override
-	public String getInstrumentId() {
+	public String getInstrumentCode() {
 		return InstrumentID;
 	}
 
