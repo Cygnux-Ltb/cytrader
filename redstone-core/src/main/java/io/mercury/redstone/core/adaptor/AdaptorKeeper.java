@@ -42,33 +42,33 @@ public final class AdaptorKeeper implements Dumpable<String> {
 	/**
 	 * 存储Adaptor, 使用accountId索引
 	 */
-	private static final MutableIntObjectMap<Adaptor> AccountAdaptorMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<Adaptor<?>> AccountAdaptorMap = MutableMaps.newIntObjectHashMap();
 
 	/**
 	 * 存储Adaptor, 使用subAccountId索引
 	 */
-	private static final MutableIntObjectMap<Adaptor> SubAccountAdaptorMap = MutableMaps.newIntObjectHashMap();
+	private static final MutableIntObjectMap<Adaptor<?>> SubAccountAdaptorMap = MutableMaps.newIntObjectHashMap();
 
 	private AdaptorKeeper() {
 	}
 
-	public static Adaptor getAdaptorByAccount(Account account) {
+	public static Adaptor<?> getAdaptorByAccount(Account account) {
 		return AccountAdaptorMap.get(account.accountId());
 	}
 
-	public static Adaptor getAdaptorByAccountId(int accountId) {
+	public static Adaptor<?> getAdaptorByAccountId(int accountId) {
 		return AccountAdaptorMap.get(accountId);
 	}
 
-	public static Adaptor getAdaptorBySubAccount(SubAccount subAccount) {
+	public static Adaptor<?> getAdaptorBySubAccount(SubAccount subAccount) {
 		return SubAccountAdaptorMap.get(subAccount.subAccountId());
 	}
 
-	public static Adaptor getAdaptorBySubAccountId(int subAccountId) {
+	public static Adaptor<?> getAdaptorBySubAccountId(int subAccountId) {
 		return SubAccountAdaptorMap.get(subAccountId);
 	}
 
-	public static void putAdaptor(@Nonnull Adaptor adaptor) {
+	public static void putAdaptor(@Nonnull Adaptor<?> adaptor) {
 		Account account = adaptor.account();
 		AccountAdaptorMap.put(account.accountId(), adaptor);
 		log.info("Put adaptor to AccountAdaptorMap, accountId==[{}], remark==[{}], adaptorId==[{}], adaptorName==[{}]",

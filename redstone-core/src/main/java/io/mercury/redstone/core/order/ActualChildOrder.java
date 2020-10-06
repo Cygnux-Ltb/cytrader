@@ -13,7 +13,7 @@ import io.mercury.redstone.core.order.structure.OrdPrice;
 import io.mercury.redstone.core.order.structure.OrdQty;
 import io.mercury.redstone.core.order.structure.TrdRecord;
 import io.mercury.redstone.core.order.structure.TrdRecordList;
-import io.mercury.redstone.core.strategy.Strategy;
+import io.mercury.redstone.core.strategy.Strategy.StrategyIdConst;
 
 /**
  * 实际执行订单的最小执行单元, 可能根据合规, 账户情况等由ActParentOrder拆分出多个ActChildOrder
@@ -73,7 +73,7 @@ public final class ActualChildOrder extends ActualOrder {
 	 */
 	ActualChildOrder(long uniqueId, int accountId, Instrument instrument, int offerQty, long offerPrice,
 			TrdDirection direction, TrdAction action) {
-		super(uniqueId, Strategy.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
+		super(uniqueId, StrategyIdConst.ExternalStrategyId, accountId, SubAccount.ExternalSubAccountId, instrument,
 				OrdQty.withOffer(offerQty), OrdPrice.withOffer(offerPrice), OrdType.Limit, direction, action, 0L);
 		this.recordList = new TrdRecordList(uniqueId());
 	}

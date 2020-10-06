@@ -7,7 +7,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeConst;
 import io.mercury.common.util.BitOperator;
-import io.mercury.redstone.core.strategy.Strategy;
+import io.mercury.redstone.core.strategy.Strategy.StrategyIdConst;
 
 /**
  * 
@@ -39,13 +39,13 @@ public final class UniqueIdSupporter {
 	 * @return
 	 */
 	public static long allocateId(int strategyId) {
-		if (strategyId < 0 || strategyId > Strategy.MaxStrategyId)
+		if (strategyId < 0 || strategyId > StrategyIdConst.MaxStrategyId)
 			throw new RuntimeException("strategyId is illegal");
 		return generate(strategyId);
 	}
 
 	public static long allocateIdForExternal() {
-		return generate(Strategy.ExternalStrategyId);
+		return generate(StrategyIdConst.ExternalStrategyId);
 	}
 
 	private static volatile int increment;

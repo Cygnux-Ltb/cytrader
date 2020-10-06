@@ -8,7 +8,7 @@ import io.mercury.redstone.core.order.enums.OrdStatus;
 import io.mercury.redstone.core.order.enums.OrdType;
 import io.mercury.redstone.core.order.enums.TrdAction;
 import io.mercury.redstone.core.order.enums.TrdDirection;
-import io.mercury.serialization.json.JsonUtil;
+import io.mercury.serialization.json.JsonWrapper;
 
 public final class OrdReport implements Serial {
 
@@ -243,7 +243,7 @@ public final class OrdReport implements Serial {
 
 	@Override
 	public String toString() {
-		return JsonUtil.toJson(this);
+		return JsonWrapper.toJson(this);
 	}
 
 	@Override

@@ -8,10 +8,11 @@ import javax.annotation.Nullable;
 
 import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
+import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.order.ActualChildOrder;
 
-public interface Adaptor extends Closeable, Enable<Adaptor> {
+public interface Adaptor<M extends MarketData> extends Closeable, Enable<Adaptor<M>> {
 
 	int adaptorId();
 
@@ -26,7 +27,7 @@ public interface Adaptor extends Closeable, Enable<Adaptor> {
 	 * 
 	 * @return
 	 */
-	boolean startup();
+	boolean startup() throws IllegalStateException;
 
 	/**
 	 * 
