@@ -42,17 +42,17 @@ public abstract class StrategySingleInstrument<M extends MarketData, PK extends 
 		return instruments;
 	}
 
-	private Adaptor adaptor;
+	private Adaptor<M> adaptor;
 
 	@Override
-	public void addAdaptor(Adaptor adaptor) {
+	public void addAdaptor(Adaptor<M> adaptor) {
 		if (this.adaptor != null)
 			throw new IllegalStateException("adaptor is not null");
 		this.adaptor = adaptor;
 	}
 
 	@Override
-	protected Adaptor getAdaptor(Instrument instrument) {
+	protected Adaptor<M> getAdaptor(Instrument instrument) {
 		return adaptor;
 	}
 
