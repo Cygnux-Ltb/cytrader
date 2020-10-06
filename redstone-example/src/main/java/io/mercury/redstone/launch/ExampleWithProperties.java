@@ -20,8 +20,8 @@ import io.mercury.financial.time.TradingPeriodPool;
 import io.mercury.financial.vector.TimePeriod;
 import io.mercury.ftdc.adaptor.FtdcAdaptor;
 import io.mercury.ftdc.adaptor.FtdcAdaptorParamKey;
+import io.mercury.redstone.core.EventScheduler;
 import io.mercury.redstone.core.adaptor.Adaptor;
-import io.mercury.redstone.core.strategy.StrategyScheduler;
 import io.mercury.redstone.engine.scheduler.SingleStrategyScheduler;
 import io.mercury.redstone.strategy.SmaStrategyExample;
 
@@ -47,7 +47,7 @@ public final class ExampleWithProperties {
 		log.info("read properties -> {}", prop);
 
 		SmaStrategyExample strategyExample = new SmaStrategyExample(strategyId, subAccountId, rb2010, null);
-		StrategyScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(strategyExample);
+		EventScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(strategyExample);
 		strategyExample.initialize(() -> true);
 
 		// Set Global AppId
