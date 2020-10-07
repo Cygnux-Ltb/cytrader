@@ -35,12 +35,12 @@ public final class InstrumentManager {
 	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentManager.class);
 
 	/**
-	 * 存储instrument,以instrumentId索引
+	 * 存储instrument, 以instrumentId索引
 	 */
 	private static final MutableIntObjectMap<Instrument> InstrumentMapById = MutableMaps.newIntObjectHashMap();
 
 	/**
-	 * 存储instrument,以instrumentCode索引
+	 * 存储instrument, 以instrumentCode索引
 	 */
 	private static final MutableMap<String, Instrument> InstrumentMapByCode = MutableMaps.newUnifiedMap();
 
@@ -49,16 +49,16 @@ public final class InstrumentManager {
 
 	private static volatile boolean isInitialized = false;
 
-	public static void initialize(@Nonnull Instrument... instruments) {
+	public static synchronized void initialize(@Nonnull Instrument... instruments) {
 		if (!isInitialized) {
 			Assertor.requiredLength(instruments, 1, "instruments");
 			Stream.of(instruments).forEach(InstrumentManager::putInstrument);
 			isInitialized = true;
 		} else {
-			IllegalStateException e = new IllegalStateException(
-					"InstrumentManager Has been initialized, cannot be initialize again");
-			log.error("InstrumentManager already initialized", e);
-			throw e;
+			IllegalStateException stateException = new IllegalStateException(
+					"InstrumentManager Has been initialized, cannot be initialize again.");
+			log.error("InstrumentManager already initialized.", stateException);
+			throw stateException;
 		}
 	}
 
@@ -67,7 +67,7 @@ public final class InstrumentManager {
 				instrument.code(), instrument);
 		InstrumentMapById.put(instrument.id(), instrument);
 		InstrumentMapByCode.put(instrument.code(), instrument);
-		setTradable(instrument.id());
+		setTradable(instrument);
 	}
 
 	/**
@@ -92,9 +92,9 @@ public final class InstrumentManager {
 	 * @param instrumentId
 	 * @return
 	 */
-	public static Instrument setTradable(int id) {
-		Instrument instrument = getInstrument(id);
-		log.info("Instrument enable, id==[{}], instrument -> {}", id, instrument);
+	public static Instrument setTradable(int instrumentId) {
+		Instrument instrument = getInstrument(instrumentId);
+		log.info("Instrument enable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
 		return instrument.enable();
 	}
 
@@ -109,12 +109,12 @@ public final class InstrumentManager {
 
 	/**
 	 * 
-	 * @param id
+	 * @param instrumentId
 	 * @return
 	 */
-	public static Instrument setNotTradable(int id) {
-		Instrument instrument = getInstrument(id);
-		log.info("Instrument disable, id==[{}], instrument -> {}", id, instrument);
+	public static Instrument setNotTradable(int instrumentId) {
+		Instrument instrument = getInstrument(instrumentId);
+		log.info("Instrument disable, instrumentId==[{}], instrument -> {}", instrumentId, instrument);
 		return instrument.disable();
 	}
 
@@ -132,8 +132,8 @@ public final class InstrumentManager {
 	 * @param instrumentId
 	 * @return
 	 */
-	public static boolean isTradable(int id) {
-		return getInstrument(id).isEnabled();
+	public static boolean isTradable(int instrumentId) {
+		return getInstrument(instrumentId).isEnabled();
 	}
 
 	/**
@@ -141,22 +141,50 @@ public final class InstrumentManager {
 	 * @param instrumentId
 	 * @return
 	 */
-	public static Instrument getInstrument(int id) {
-		Instrument instrument = InstrumentMapById.get(id);
+	public static Instrument[] getInstrument(int... instrumentIds) {
+		Assertor.requiredLength(instrumentIds, 1, "instrumentIds");
+		Instrument[] instruments = new Instrument[instrumentIds.length];
+		for (int i = 0; i < instrumentIds.length; i++) {
+			instruments[i] = getInstrument(instrumentIds[i]);
+		}
+		return instruments;
+	}
+
+	/**
+	 * 
+	 * @param instrumentId
+	 * @return
+	 */
+	public static Instrument getInstrument(int instrumentId) {
+		Instrument instrument = InstrumentMapById.get(instrumentId);
 		if (instrument == null)
-			throw new IllegalArgumentException("Instrument is not find, by instrument id == " + id);
+			throw new IllegalArgumentException("Instrument is not find, by instrumentId : " + instrumentId);
 		return instrument;
 	}
 
 	/**
 	 * 
-	 * @param instrumentCode
-	 * @return Instrument
+	 * @param instrumentCodes
+	 * @return
 	 */
-	public static Instrument getInstrument(String code) {
-		Instrument instrument = InstrumentMapByCode.get(code);
+	public static Instrument[] getInstrument(String... instrumentCodes) {
+		Assertor.requiredLength(instrumentCodes, 1, "instrumentCodes");
+		Instrument[] instruments = new Instrument[instrumentCodes.length];
+		for (int i = 0; i < instrumentCodes.length; i++) {
+			instruments[i] = getInstrument(instrumentCodes[i]);
+		}
+		return instruments;
+	}
+
+	/**
+	 * 
+	 * @param instrumentCode
+	 * @return
+	 */
+	public static Instrument getInstrument(String instrumentCode) {
+		Instrument instrument = InstrumentMapByCode.get(instrumentCode);
 		if (instrument == null)
-			throw new IllegalArgumentException("Instrument is not find, by instrument code == " + code);
+			throw new IllegalArgumentException("Instrument is not find, by instrumentCode : " + instrumentCode);
 		return instrument;
 	}
 

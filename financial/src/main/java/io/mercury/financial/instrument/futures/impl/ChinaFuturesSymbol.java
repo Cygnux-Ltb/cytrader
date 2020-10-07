@@ -325,26 +325,42 @@ public enum ChinaFuturesSymbol implements Symbol {
 		return code;
 	}
 
+	/**
+	 * 交易所
+	 */
 	@Override
 	public Exchange exchange() {
 		return exchange;
 	}
 
+	/**
+	 * 优先平仓类型
+	 * 
+	 * @return
+	 */
 	public PriorityClose getPriorityClose() {
 		return priorityClose;
 	}
 
+	/**
+	 * 价格乘数
+	 */
 	@Override
 	public PriceMultiplier getPriceMultiplier() {
 		return priceMultiplier;
 	}
 
+	/**
+	 * 交易时间段
+	 */
 	@Override
 	public ImmutableSortedSet<TradingPeriod> getTradingPeriodSet() {
 		return tradingPeriodSet;
 	}
 
-	// 建立symbolId -> symbol的映射
+	/*
+	 * 建立symbolId -> symbol的映射
+	 */
 	private final static ImmutableIntObjectMap<ChinaFuturesSymbol> SymbolIdMap = ImmutableMaps.getIntObjectMapFactory()
 			.from(
 					// 将ChinaFuturesSymbol转换为Iterable
@@ -352,7 +368,9 @@ public enum ChinaFuturesSymbol implements Symbol {
 					// 取Symbol::id为Key
 					ChinaFuturesSymbol::id, symbol -> symbol);
 
-	// 建立symbolCode -> symbol的映射
+	/*
+	 * 建立symbolCode -> symbol的映射
+	 */
 	private final static ImmutableMap<String, ChinaFuturesSymbol> SymbolCodeMap = ImmutableMaps.newImmutableMap(
 			// 将ChinaFuturesSymbol转换为Map
 			Stream.of(ChinaFuturesSymbol.values()).collect(Collectors.toMap(
@@ -364,10 +382,10 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @param symbolId
 	 * @return
 	 */
-	public static ChinaFuturesSymbol of(int id) {
-		ChinaFuturesSymbol symbol = SymbolIdMap.get(id);
+	public static ChinaFuturesSymbol of(int symbolId) {
+		ChinaFuturesSymbol symbol = SymbolIdMap.get(symbolId);
 		if (symbol == null)
-			throw new IllegalArgumentException("Symbol Id -> " + id + " is no mapping object");
+			throw new IllegalArgumentException("symbolId -> " + symbolId + " is not mapping object");
 		return symbol;
 	}
 
@@ -376,12 +394,12 @@ public enum ChinaFuturesSymbol implements Symbol {
 	 * @param symbolCode
 	 * @return
 	 */
-	public static ChinaFuturesSymbol of(String code) {
-		ChinaFuturesSymbol symbol = SymbolCodeMap.get(code);
+	public static ChinaFuturesSymbol of(String symbolCode) {
+		ChinaFuturesSymbol symbol = SymbolCodeMap.get(symbolCode);
 		if (symbol == null) {
-			symbol = SymbolCodeMap.get(code.toUpperCase());
+			symbol = SymbolCodeMap.get(symbolCode.toUpperCase());
 			if (symbol == null)
-				throw new IllegalArgumentException("Symbol Code -> " + code + " is no mapping object");
+				throw new IllegalArgumentException("symbolCode -> " + symbolCode + " is not mapping object");
 		}
 		return symbol;
 	}
