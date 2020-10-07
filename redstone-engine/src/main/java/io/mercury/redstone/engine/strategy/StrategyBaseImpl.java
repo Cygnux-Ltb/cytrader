@@ -479,6 +479,6 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 	 * @return
 	 */
 	@AbstractFunction
-	protected abstract Adaptor<M> getAdaptor(Instrument instrument);
+	protected abstract Adaptor getAdaptor(Instrument instrument);
 
 }
