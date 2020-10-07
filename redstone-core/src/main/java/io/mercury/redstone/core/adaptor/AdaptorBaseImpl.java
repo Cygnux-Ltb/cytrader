@@ -1,10 +1,10 @@
 package io.mercury.redstone.core.adaptor;
 
-import static io.mercury.common.collections.MutableLists.newFastList;
-
-import java.util.List;
+import static io.mercury.common.collections.ImmutableLists.newImmutableList;
 
 import javax.annotation.Nonnull;
+
+import org.eclipse.collections.api.list.ImmutableList;
 
 import io.mercury.common.fsm.EnableComponent;
 import io.mercury.common.util.Assertor;
@@ -14,12 +14,11 @@ import io.mercury.redstone.core.EventScheduler;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.account.AccountKeeper;
 
-public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableComponent<Adaptor<M>> implements Adaptor<M> {
+public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableComponent<Adaptor> implements Adaptor {
 
 	private final int adaptorId;
 	private final String adaptorName;
-	private final Account account;
-	private final List<Account> accounts;
+	private final ImmutableList<Account> accounts;
 
 	protected final EventScheduler<M> scheduler;
 
@@ -29,8 +28,7 @@ public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableCompon
 		this.adaptorId = adaptorId;
 		this.adaptorName = adaptorName;
 		this.scheduler = scheduler;
-		this.account = accounts[0];
-		this.accounts = newFastList(accounts);
+		this.accounts = newImmutableList(accounts);
 		AdaptorKeeper.putAdaptor(this);
 	}
 
@@ -45,17 +43,12 @@ public abstract class AdaptorBaseImpl<M extends MarketData> extends EnableCompon
 	}
 
 	@Override
-	public Account account() {
-		return account;
-	}
-
-	@Override
-	public List<Account> accounts() {
+	public ImmutableList<Account> accounts() {
 		return accounts;
 	}
 
 	@Override
-	protected Adaptor<M> returnThis() {
+	protected Adaptor returnThis() {
 		return this;
 	}
 

@@ -1,26 +1,36 @@
 package io.mercury.redstone.core.adaptor;
 
 import java.io.Closeable;
-import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.eclipse.collections.api.list.ImmutableList;
+
 import io.mercury.common.fsm.Enable;
 import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.market.api.MarketData;
 import io.mercury.redstone.core.account.Account;
 import io.mercury.redstone.core.order.ActualChildOrder;
 
-public interface Adaptor<M extends MarketData> extends Closeable, Enable<Adaptor<M>> {
+public interface Adaptor extends Closeable, Enable<Adaptor> {
 
+	/**
+	 * 
+	 * @return
+	 */
 	int adaptorId();
 
+	/**
+	 * 
+	 * @return
+	 */
 	String adaptorName();
 
-	Account account();
-
-	List<Account> accounts();
+	/**
+	 * 
+	 * @return
+	 */
+	ImmutableList<Account> accounts();
 
 	/**
 	 * Adaptor 启动函数

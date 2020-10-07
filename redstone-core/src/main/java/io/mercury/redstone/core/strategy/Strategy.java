@@ -45,7 +45,7 @@ public interface Strategy<M extends MarketData> extends
 
 	void initialize(@Nonnull Supplier<Boolean> initializer);
 
-	void addAdaptor(@Nonnull Adaptor<M> adaptor);
+	void addAdaptor(@Nonnull Adaptor adaptor);
 
 	void onStrategyEvent(StrategyEvent event);
 
