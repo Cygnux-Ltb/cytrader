@@ -17,7 +17,8 @@ public class AvroDemo {
 
 		marketDataSubscribe.setInstrumentIdList(Arrays.asList("ni1709", "al1707", "rb1710"));
 
-		AvroBinarySerializer<MarketDataSubscribe> byteSerializer = new AvroBinarySerializer<>(MarketDataSubscribe.class);
+		AvroBinarySerializer<MarketDataSubscribe> byteSerializer = new AvroBinarySerializer<>(
+				MarketDataSubscribe.class);
 
 		AvroBinaryDeserializer<MarketDataSubscribe> byteDeserializer = new AvroBinaryDeserializer<>(
 				MarketDataSubscribe.class);

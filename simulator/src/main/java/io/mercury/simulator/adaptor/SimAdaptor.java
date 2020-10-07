@@ -178,12 +178,6 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	}
 
 	@Override
-	public List<Account> accounts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean sendCommand(Command command) {
 		// TODO Auto-generated method stub
 		return false;
