@@ -37,7 +37,11 @@ public final class ToFtdcInputOrderAction implements Function<Order, CThostFtdcI
 		 */
 		inputOrderActionField.setVolumeChange(order.qty().leavesQty());
 
-		// TODO 补充完整
+		// TODO 补充完整信息
+		
+		/**
+		 * 返回FTDC撤单对象
+		 */
 		return inputOrderActionField;
 	}
 

@@ -46,7 +46,7 @@ public final class FromFtdcTrade implements Function<FtdcTrade, OrdReport> {
 		/**
 		 * 报单状态
 		 */
-		report.setOrdStatus(OrdStatus.NotProvided);
+		report.setOrdStatus(OrdStatus.Unprovided);
 		/**
 		 * 买卖方向
 		 */

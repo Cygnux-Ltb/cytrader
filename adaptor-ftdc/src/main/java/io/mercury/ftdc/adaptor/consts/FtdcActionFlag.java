@@ -15,8 +15,14 @@ import ctp.thostapi.thosttraderapiConstants;
  */
 public interface FtdcActionFlag {
 
+	/**
+	 * 删除
+	 */
 	char Delete = thosttraderapiConstants.THOST_FTDC_AF_Delete;
 
+	/**
+	 * 修改
+	 */
 	char Modify = thosttraderapiConstants.THOST_FTDC_AF_Modify;
 
 }

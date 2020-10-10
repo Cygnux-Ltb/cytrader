@@ -11,6 +11,12 @@ import io.mercury.redstone.core.order.enums.TrdDirection;
 
 public final class FtdcConstMapper {
 
+	/**
+	 * 根据<b> [FTDC返回] </b>订单状态, 映射<b> [系统自定义] </b>订单状态
+	 * 
+	 * @param orderStatus
+	 * @return
+	 */
 	public static final OrdStatus fromOrderStatus(char orderStatus) {
 		if (FtdcOrderStatusType.NoTradeNotQueueing == orderStatus || FtdcOrderStatusType.NoTradeQueueing == orderStatus)
 			return OrdStatus.New;
@@ -26,11 +32,23 @@ public final class FtdcConstMapper {
 
 	}
 
+	/**
+	 * 根据<b> [FTDC返回] </b>开平仓类型, 映射<b> [系统自定义] </b>开平仓类型
+	 * 
+	 * @param combOffsetFlag
+	 * @return
+	 */
 	public static final TrdAction fromOffsetFlag(@Nonnull String combOffsetFlag) {
 		return fromOffsetFlag(combOffsetFlag.charAt(0));
 	}
 
-	public static final TrdAction fromOffsetFlag(@Nonnull char offsetFlag) {
+	/**
+	 * 根据<b> [FTDC返回] </b>开平仓类型, 映射<b> [系统自定义] </b>开平仓类型
+	 * 
+	 * @param offsetFlag
+	 * @return
+	 */
+	public static final TrdAction fromOffsetFlag(char offsetFlag) {
 		if (FtdcOffsetFlag.Open == offsetFlag)
 			return TrdAction.Open;
 		else if (FtdcOffsetFlag.Close == offsetFlag)
@@ -43,6 +61,11 @@ public final class FtdcConstMapper {
 			return TrdAction.Invalid;
 	}
 
+	/**
+	 * 根据<b> [FTDC返回] </b>买卖方向类型, 映射<b> [系统自定义] </b>买卖方向类型类型
+	 * @param direction
+	 * @return
+	 */
 	public static final TrdDirection fromDirection(char direction) {
 		if (FtdcDirection.Buy == direction)
 			return TrdDirection.Long;

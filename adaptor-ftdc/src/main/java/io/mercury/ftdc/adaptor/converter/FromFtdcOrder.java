@@ -4,6 +4,7 @@ import static io.mercury.common.util.StringUtil.delNonNumeric;
 
 import java.util.function.Function;
 
+import io.mercury.common.datetime.EpochTime;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.instrument.InstrumentManager;
 import io.mercury.financial.instrument.PriceMultiplier;
@@ -33,7 +34,7 @@ public final class FromFtdcOrder implements Function<FtdcOrder, OrdReport> {
 		/**
 		 * 时间戳
 		 */
-		report.setEpochMillis(System.currentTimeMillis());
+		report.setEpochMillis(EpochTime.millis());
 		/**
 		 * 报单编号
 		 */

@@ -52,7 +52,7 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 			inputOrderField.setCombOffsetFlag(FtdcOffsetFlag.CloseYesterdayStr);
 			break;
 		default:
-			throw new RuntimeException(childOrder.action() + " does not exist");
+			throw new IllegalStateException(childOrder.action() + " is invalid");
 		}
 		/**
 		 * 设置投机标识
@@ -69,7 +69,7 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 			inputOrderField.setDirection(FtdcDirection.Sell);
 			break;
 		case Invalid:
-			throw new RuntimeException(order.direction() + " is Invalid.");
+			throw new IllegalStateException(order.direction() + " is Invalid.");
 		}
 		/**
 		 * 设置价格
@@ -108,7 +108,9 @@ public final class ToFtdcInputOrder implements Function<Order, CThostFtdcInputOr
 		 * 设置自动挂起标识
 		 */
 		inputOrderField.setIsAutoSuspend(0);
-
+		/**
+		 * 返回FTDC新订单对象
+		 */
 		return inputOrderField;
 	}
 

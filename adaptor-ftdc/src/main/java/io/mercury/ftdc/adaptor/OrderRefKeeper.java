@@ -1,11 +1,13 @@
 package io.mercury.ftdc.adaptor;
 
+import static io.mercury.common.collections.MutableMaps.newLongObjectHashMap;
+import static io.mercury.common.collections.MutableMaps.newObjectLongHashMap;
+
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.slf4j.Logger;
 
 import io.mercury.common.collections.Capacity;
-import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
 import io.mercury.redstone.core.order.UniqueIdSupporter;
@@ -21,11 +23,9 @@ public class OrderRefKeeper {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrderRefKeeper.class);
 
-	private final MutableObjectLongMap<String> mapOfUniqueId = MutableMaps
-			.newObjectLongHashMap(Capacity.L10_SIZE_1024);
+	private final MutableObjectLongMap<String> mapOfUniqueId = newObjectLongHashMap(Capacity.L10_SIZE_1024);
 
-	private final MutableLongObjectMap<String> mapOfOrderRef = MutableMaps
-			.newLongObjectHashMap(Capacity.L10_SIZE_1024);
+	private final MutableLongObjectMap<String> mapOfOrderRef = newLongObjectHashMap(Capacity.L10_SIZE_1024);
 
 	private final static OrderRefKeeper StaticInstance = new OrderRefKeeper();
 
