@@ -1,27 +1,35 @@
 package io.mercury.financial.vector;
 
+import java.time.Duration;
 import java.time.ZonedDateTime;
 
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
 
+/**
+ * 时间周期序列
+ * 
+ * @author yellow013
+ */
 public final class TimePeriodSerial implements Serial {
 
 	private long epochSecond;
-	private TimePeriod period;
+	private Duration duration;
+	private int seconds;;
 	private ZonedDateTime startTime;
 	private ZonedDateTime endTime;
 
-	public static TimePeriodSerial newWith(ZonedDateTime startTime, ZonedDateTime endTime, TimePeriod period) {
+	public static TimePeriodSerial newSerial(ZonedDateTime startTime, ZonedDateTime endTime, Duration duration) {
 		Assertor.nonNull(startTime, "startTime");
 		Assertor.nonNull(endTime, "endTime");
-		return new TimePeriodSerial(startTime, endTime, period);
+		return new TimePeriodSerial(startTime, endTime, duration);
 	}
 
-	private TimePeriodSerial(ZonedDateTime startTime, ZonedDateTime endTime, TimePeriod period) {
+	private TimePeriodSerial(ZonedDateTime startTime, ZonedDateTime endTime, Duration duration) {
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.period = period;
+		this.duration = duration;
+		this.seconds = (int) duration.getSeconds();
 		this.epochSecond = startTime.toEpochSecond();
 	}
 
@@ -34,8 +42,12 @@ public final class TimePeriodSerial implements Serial {
 		return epochSecond;
 	}
 
-	public TimePeriod period() {
-		return period;
+	public Duration duration() {
+		return duration;
+	}
+
+	public int seconds() {
+		return seconds;
 	}
 
 	public ZonedDateTime startTime() {

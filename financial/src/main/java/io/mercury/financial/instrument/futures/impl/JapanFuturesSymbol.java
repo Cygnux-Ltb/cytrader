@@ -16,7 +16,6 @@ import io.mercury.financial.instrument.Exchange;
 import io.mercury.financial.instrument.Instrument.PriorityClose;
 import io.mercury.financial.instrument.PriceMultiplier;
 import io.mercury.financial.instrument.Symbol;
-import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TradingPeriod;
 
 public enum JapanFuturesSymbol implements Symbol {
@@ -27,120 +26,120 @@ public enum JapanFuturesSymbol implements Symbol {
 	 */
 	CU(1, "cu", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 铜期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 铝 al
 	 */
 	AL(2, "al", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 铝期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 锌 zn
 	 */
 	ZN(3, "zn", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 锌期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 镍
 	 */
 	NI(5, "ni", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 镍期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 锡
 	 */
 	SN(6, "sn", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 锡期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 黄金
 	 */
 	AU(7, "au", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.TEN_THOUSAND,
 			// 黄金期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 白银
 	 */
 	AG(8, "ag", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 白银期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 螺纹钢
 	 */
 	RB(9, "rb", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 螺纹钢期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 热卷扎板
 	 */
 	HC(10, "hc", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 热卷扎板期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 橡胶
 	 */
 	RU(12, "ru", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 橡胶期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 沥青
 	 */
 	BU(11, "bu", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 沥青期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 燃油
 	 */
 	FU(13, "fu", Exchange.SHFE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 燃油期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	// ************************上海能源交易所************************//
 	/**
@@ -148,10 +147,10 @@ public enum JapanFuturesSymbol implements Symbol {
 	 */
 	SC(1, "sc", Exchange.SHINE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 原油期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(1, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	// **************************大连商品交易所*************************//
 	/**
@@ -159,50 +158,50 @@ public enum JapanFuturesSymbol implements Symbol {
 	 */
 	A(3, "a", Exchange.DCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 大豆期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 豆粕 m
 	 */
 	M(3, "m", Exchange.DCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 豆粕期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 豆油 y
 	 */
 	Y(3, "y", Exchange.DCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 豆油期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 棕榈油 p
 	 */
 	P(3, "p", Exchange.DCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 棕榈油期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 铁矿石 i
 	 */
 	I(3, "i", Exchange.DCE, PriorityClose.NONE, PriceMultiplier.HUNDRED,
 			// 铁矿石期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 	// TODO 大商所品种 : 玉米, 鸡蛋, 塑料, PVC, PP,
 
 	// *****************************郑州商品交易所***********************************//
@@ -211,46 +210,46 @@ public enum JapanFuturesSymbol implements Symbol {
 	 */
 	CF(1, "CF", Exchange.ZCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 棉花交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(3, LocalTime.of(13, 30, 00), LocalTime.of(15, 00, 00))),
 
 	/**
 	 * 白糖 sr
 	 */
 	SR(2, "SR", Exchange.ZCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 白糖交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
 
 	/**
 	 * PTA
 	 */
 	TA(3, "TA", Exchange.ZCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// PTA交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
 
 	/**
 	 * 乙醇
 	 */
 	MA(4, "MA", Exchange.ZCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 乙醇交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
 
 	/**
 	 * 菜粕
 	 */
 	RM(5, "RM", Exchange.ZCE, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 菜粕交易时段
-			TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
-			TradingPeriod.newWith(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
+			new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(23, 00, 00)),
+			new TradingPeriod(1, LocalTime.of(9, 00, 00), LocalTime.of(10, 15, 00)),
+			new TradingPeriod(2, LocalTime.of(10, 30, 00), LocalTime.of(15, 15, 00))),
 
 	// ************************中国金融交易所************************//
 	/**
@@ -258,32 +257,32 @@ public enum JapanFuturesSymbol implements Symbol {
 	 */
 	IF(1, "IF", Exchange.CFFEX, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 股指期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			new TradingPeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 
 	/**
 	 * 上证50期货
 	 */
 	IH(2, "IH", Exchange.CFFEX, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 股指期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			new TradingPeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 
 	/**
 	 * 中证500期货
 	 */
 	IC(3, "IC", Exchange.CFFEX, PriorityClose.NONE, PriceMultiplier.NONE,
 			// 股指期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			new TradingPeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 
 	/**
 	 * 十年债券期货
 	 */
 	T(3, "T", Exchange.CFFEX, PriorityClose.NONE, PriceMultiplier.TEN_THOUSAND,
 			// 股指期货交易时段
-			TradingPeriod.newWith(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
-			TradingPeriod.newWith(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
+			new TradingPeriod(0, LocalTime.of(9, 15, 00), LocalTime.of(11, 30, 00)),
+			new TradingPeriod(1, LocalTime.of(13, 00, 00), LocalTime.of(15, 15, 00))),
 
 	;
 
@@ -399,11 +398,11 @@ public enum JapanFuturesSymbol implements Symbol {
 		for (Symbol symbol : JapanFuturesSymbol.values()) {
 			symbol.getTradingPeriodSet()
 					.each(tradingPeriod -> tradingPeriod
-							.segmentation(symbol.exchange().zoneId(), TimePeriod.newWith(Duration.ofSeconds(30)))
+							.segmentation(symbol.exchange().zoneId(), Duration.ofSeconds(30))
 							.each(timePeriod -> System.out.println(symbol.code() + " | " + timePeriod)));
 
-			symbol.getTradingPeriodSet().stream().map(tradingPeriod -> tradingPeriod
-					.segmentation(symbol.exchange().zoneId(), TimePeriod.newWith(Duration.ofSeconds(30))));
+			symbol.getTradingPeriodSet().stream().map(
+					tradingPeriod -> tradingPeriod.segmentation(symbol.exchange().zoneId(), Duration.ofSeconds(30)));
 		}
 		System.out.println(JapanFuturesSymbol.AG.exchange.id());
 		System.out.println(JapanFuturesSymbol.AG.id());

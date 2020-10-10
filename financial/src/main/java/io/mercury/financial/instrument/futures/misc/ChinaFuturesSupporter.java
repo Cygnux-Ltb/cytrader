@@ -13,9 +13,15 @@ public final class ChinaFuturesSupporter {
 	private ChinaFuturesSupporter() {
 	}
 
-	public static final LocalTime TRADING_DAY_DIVIDING_LINE = LocalTime.of(15, 15);
+	public static final LocalTime TRADING_DAY_DIVIDING_LINE = LocalTime.of(16, 00);
 
-	public static LocalDate analyzeTradingDay(LocalDateTime dateTime) {
+	/**
+	 * 分析具体时间的所属交易日
+	 * 
+	 * @param dateTime
+	 * @return
+	 */
+	public static final LocalDate analyzeTradingDay(LocalDateTime dateTime) {
 		DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
 		// 判断是否是夜盘
 		if (isNightTrading(dateTime.toLocalTime())) {
@@ -33,7 +39,13 @@ public final class ChinaFuturesSupporter {
 		}
 	}
 
-	private static boolean isNightTrading(LocalTime time) {
+	/**
+	 * 判断时间是否在交易日时间线之前
+	 * 
+	 * @param time
+	 * @return
+	 */
+	private static final boolean isNightTrading(LocalTime time) {
 		if (time.isAfter(TRADING_DAY_DIVIDING_LINE))
 			return true;
 		else
@@ -41,13 +53,25 @@ public final class ChinaFuturesSupporter {
 
 	}
 
-	public static String analyzeSymbolCode(String instrumentCode) {
+	/**
+	 * 分析instrumentCode中的symbol代码
+	 * 
+	 * @param instrumentCode
+	 * @return
+	 */
+	public static final String analyzeSymbolCode(String instrumentCode) {
 		if (StringUtil.isNullOrEmpty(instrumentCode))
 			return instrumentCode;
 		return instrumentCode.replaceAll("[\\d]", "").trim();
 	}
 
-	public static int analyzeInstrumentTerm(String instrumentCode) {
+	/**
+	 * 分析instrumentCode中的日期期限
+	 * 
+	 * @param instrumentCode
+	 * @return
+	 */
+	public static final int analyzeInstrumentTerm(String instrumentCode) {
 		if (StringUtil.isNullOrEmpty(instrumentCode))
 			return 0;
 		return Integer.parseInt(instrumentCode.replaceAll("[^\\d]", "").trim());
@@ -63,7 +87,7 @@ public final class ChinaFuturesSupporter {
 		System.out.println(analyzeInstrumentTerm("rb1901"));
 		ChinaFuturesSymbol rb1901 = ChinaFuturesSymbol.of(analyzeSymbolCode("rb1901"));
 		System.out.println(rb1901);
-		
+
 	}
 
 }

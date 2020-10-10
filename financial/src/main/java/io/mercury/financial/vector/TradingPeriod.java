@@ -9,6 +9,7 @@ import java.time.ZonedDateTime;
 
 import javax.annotation.Nonnull;
 
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 
 import io.mercury.common.collections.MutableLists;
@@ -33,13 +34,9 @@ public final class TradingPeriod implements Serial {
 	private boolean isCrossDay;
 	private Duration duration;
 
-	public static TradingPeriod newWith(int serialId, LocalTime startTime, LocalTime endTime) {
+	public TradingPeriod(int serialId, LocalTime startTime, LocalTime endTime) {
 		Assertor.nonNull(startTime, "startTime");
 		Assertor.nonNull(endTime, "endTime");
-		return new TradingPeriod(serialId, startTime, endTime);
-	}
-
-	private TradingPeriod(int serialId, LocalTime startTime, LocalTime endTime) {
 		this.serialId = serialId;
 		this.startTime = startTime;
 		this.startSecondOfDay = startTime.toSecondOfDay();
@@ -70,6 +67,10 @@ public final class TradingPeriod implements Serial {
 		return endSecondOfDay;
 	}
 
+	public Duration duration() {
+		return duration;
+	}
+
 	@Override
 	public long serialId() {
 		return serialId;
@@ -83,18 +84,27 @@ public final class TradingPeriod implements Serial {
 			return (startSecondOfDay <= secondOfDay || endSecondOfDay >= secondOfDay) ? true : false;
 	}
 
-	public MutableList<TimePeriodSerial> segmentation(@Nonnull ZoneId zoneId, @Nonnull TimePeriod period) {
+	/**
+	 * 分割交易时段
+	 * 
+	 * @param zoneId
+	 * @param period
+	 * @return
+	 */
+	public ImmutableList<TimePeriodSerial> segmentation(@Nonnull ZoneId zoneId, @Nonnull Duration duration) {
 		// 获取分割参数的秒数
-		int seconds = period.seconds();
+		int seconds = (int) duration.getSeconds();
 		// 判断分割段是否大于半天
 		if (seconds > TimeConst.SECONDS_PER_HALF_DAY) {
 			// 如果交易周期跨天,则此分割周期等于当天开始时间至次日结束时间
 			// 如果交易周期未跨天,则此分割周期等于当天开始时间至当天结束时间
-			return MutableLists.newFastList(isCrossDay
-					? TimePeriodSerial.newWith(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
-							ZonedDateTime.of(DateTimeUtil.nextDate(), endTime, zoneId), period)
-					: TimePeriodSerial.newWith(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
-							ZonedDateTime.of(DateTimeUtil.currentDate(), endTime, zoneId), period));
+			return MutableLists
+					.newFastList(isCrossDay
+							? TimePeriodSerial.newSerial(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
+									ZonedDateTime.of(DateTimeUtil.nextDate(), endTime, zoneId), duration)
+							: TimePeriodSerial.newSerial(ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId),
+									ZonedDateTime.of(DateTimeUtil.currentDate(), endTime, zoneId), duration))
+					.toImmutable();
 		} else {
 			// 获取此交易时间段的总时长
 			int totalSeconds = (int) duration.getSeconds();
@@ -102,7 +112,7 @@ public final class TradingPeriod implements Serial {
 			int count = totalSeconds / seconds;
 			if (totalSeconds % seconds > 0)
 				count++;
-			MutableList<TimePeriodSerial> list = MutableLists.newFastList(count);
+			MutableList<TimePeriodSerial> mutableList = MutableLists.newFastList(count);
 			// 计算开始时间点
 			ZonedDateTime startPoint = ZonedDateTime.of(DateTimeUtil.currentDate(), startTime, zoneId);
 			// 计算结束时间点,如果跨天则日期加一天
@@ -112,24 +122,24 @@ public final class TradingPeriod implements Serial {
 				ZonedDateTime nextStartPoint = startPoint.plusSeconds(seconds);
 				if (nextStartPoint.isBefore(lastEndPoint)) {
 					ZonedDateTime endPoint = nextStartPoint.minusNanos(1);
-					list.add(TimePeriodSerial.newWith(startPoint, endPoint, period));
+					mutableList.add(TimePeriodSerial.newSerial(startPoint, endPoint, duration));
 				} else {
-					list.add(TimePeriodSerial.newWith(startPoint, lastEndPoint, period));
+					mutableList.add(TimePeriodSerial.newSerial(startPoint, lastEndPoint, duration));
 					break;
 				}
 				startPoint = nextStartPoint;
 			}
-			return list;
+			return mutableList.toImmutable();
 		}
 	}
 
 	public static void main(String[] args) {
 
-		TradingPeriod tradingPeriod = TradingPeriod.newWith(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00));
+		TradingPeriod tradingPeriod = new TradingPeriod(0, LocalTime.of(21, 00, 00), LocalTime.of(2, 30, 00));
 
 		System.out.println(tradingPeriod.isPeriod(LocalTime.of(14, 00, 00)));
 
-		tradingPeriod.segmentation(TimeZone.CST, TimePeriod.newWith(Duration.ofMinutes(45)))
+		tradingPeriod.segmentation(TimeZone.CST, Duration.ofMinutes(45))
 				.each(timePeriod -> System.out.println(timePeriod.startTime() + " - " + timePeriod.endTime()));
 
 		LocalDateTime of = LocalDateTime.of(LocalDate.now(), LocalTime.of(23, 55, 30));

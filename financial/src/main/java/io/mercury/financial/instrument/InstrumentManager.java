@@ -208,8 +208,8 @@ public final class InstrumentManager {
 	}
 
 	public static void main(String[] args) {
-		ChinaFutures au2012 = new ChinaFutures(ChinaFuturesSymbol.AU, 2012);
-		ChinaFutures rb2101 = new ChinaFutures(ChinaFuturesSymbol.RB, 2101);
+		ChinaFutures au2012 = new ChinaFutures(ChinaFuturesSymbol.AU, 2012, "2012");
+		ChinaFutures rb2101 = new ChinaFutures(ChinaFuturesSymbol.RB, 2101, "2101");
 		InstrumentManager.initialize(au2012, rb2101);
 		System.out.println(InstrumentManager.showStatus());
 		InstrumentManager.setNotTradable(rb2101);
