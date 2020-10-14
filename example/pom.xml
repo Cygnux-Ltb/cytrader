@@ -6,33 +6,33 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.mercury</groupId>
-		<artifactId>redstone</artifactId>
+		<groupId>io.apollo</groupId>
+		<artifactId>apollo</artifactId>
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>redstone-example</artifactId>
-	<name>redstone-example</name>
+	<artifactId>example</artifactId>
+	<name>example</name>
 
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>io.mercury</groupId>
+			<groupId>io.gemini</groupId>
 			<artifactId>adaptor-ftdc</artifactId>
-			<version>${project.version}</version>
+			<version>${gemini.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.mercury</groupId>
+			<groupId>io.gemini</groupId>
 			<artifactId>indicator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>redstone-engine</artifactId>
+			<groupId>io.apollo</groupId>
+			<artifactId>engine</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>redstone-runtime</artifactId>
+			<groupId>io.apollo</groupId>
+			<artifactId>runtime</artifactId>
 		</dependency>
 	</dependencies>
 

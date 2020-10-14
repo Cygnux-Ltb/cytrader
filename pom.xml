@@ -5,30 +5,24 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.mercury</groupId>
-	<artifactId>redstone</artifactId>
+	<groupId>io.apollo</groupId>
+	<artifactId>apollo</artifactId>
 	<version>1.0</version>
 
 	<packaging>pom</packaging>
-	<name>redstone</name>
+	<name>apollo</name>
 
-	<url>https://github.com/yellow013/redstone.git</url>
+	<url>https://github.com/yellow013/apollo.git</url>
 
 	<modules>
-		<!-- adaptor modules -->
-		<module>adaptor-ftdc</module>
-		<module>adaptor-ib</module>
-		<!-- financial & indicator -->
-		<module>financial</module>
-		<module>indicator</module>
 		<!-- core api -->
-		<module>redstone-core</module>
+		<module>core</module>
 		<!-- execution engine -->
-		<module>redstone-engine</module>
+		<module>engine</module>
 		<!-- implement example -->
-		<module>redstone-example</module>
+		<module>example</module>
 		<!-- runtime -->
-		<module>redstone-runtime</module>
+		<module>runtime</module>
 		<!-- exchange simulator -->
 		<module>simulator</module>
 
@@ -37,8 +31,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<commons.version>1.0-SNAPSHOT</commons.version>
-		<transport.version>1.0-SNAPSHOT</transport.version>
+		<mercury.version>1.0-SNAPSHOT</mercury.version>
+		<gemini.version>1.0-SNAPSHOT</gemini.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -70,7 +64,7 @@
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-core</artifactId>
-			<version>${commons.version}</version>
+			<version>${mercury.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -81,54 +75,57 @@
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>commons-concurrent</artifactId>
-				<version>${commons.version}</version>
+				<version>${mercury.version}</version>
 			</dependency>
 			<!-- commons -->
 			<!-- see https://github.com/yellow013/transport.git -->
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-core</artifactId>
-				<version>${transport.version}</version>
+				<version>${mercury.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-zmq</artifactId>
-				<version>${transport.version}</version>
+				<version>${mercury.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-rabbitmq</artifactId>
-				<version>${transport.version}</version>
+				<version>${mercury.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-socket</artifactId>
-				<version>${transport.version}</version>
+				<version>${mercury.version}</version>
 			</dependency>
-			<!-- redstone -->
+			
+			<!-- gemini -->
 			<dependency>
-				<groupId>io.mercury</groupId>
+				<groupId>io.gemini</groupId>
 				<artifactId>financial</artifactId>
-				<version>${project.version}</version>
+				<version>${gemini.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.mercury</groupId>
+				<groupId>io.gemini</groupId>
 				<artifactId>indicator</artifactId>
+				<version>${gemini.version}</version>
+			</dependency>
+			
+			<!-- apollo -->
+			<dependency>
+				<groupId>io.apollo</groupId>
+				<artifactId>core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>redstone-core</artifactId>
+				<groupId>io.apollo</groupId>
+				<artifactId>engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>redstone-engine</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>redstone-runtime</artifactId>
+				<groupId>io.apollo</groupId>
+				<artifactId>runtime</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

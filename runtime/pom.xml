@@ -5,25 +5,24 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.mercury</groupId>
-		<artifactId>redstone</artifactId>
+		<groupId>io.apollo</groupId>
+		<artifactId>apollo</artifactId>
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>redstone-runtime</artifactId>
-	<name>redstone-runtime</name>
+	<artifactId>runtime</artifactId>
+	<name>runtime</name>
 
 	<dependencies>
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>commons-core</artifactId>
-			<version>${commons.version}</version>
+			<artifactId>commons-concurrent</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-http</artifactId>
-			<version>${transport.version}</version>
+			<version>${mercury.version}</version>
 		</dependency>
 
 		<dependency>
