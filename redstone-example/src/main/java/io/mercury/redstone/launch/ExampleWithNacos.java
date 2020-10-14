@@ -14,7 +14,6 @@ import io.mercury.financial.instrument.futures.impl.ChinaFuturesSymbol;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;
 import io.mercury.financial.time.TradingPeriodPool;
-import io.mercury.financial.vector.TimePeriod;
 import io.mercury.ftdc.adaptor.FtdcAdaptor;
 import io.mercury.ftdc.adaptor.FtdcAdaptorParamKey;
 import io.mercury.redstone.core.EventScheduler;
@@ -51,7 +50,7 @@ public class ExampleWithNacos {
 		// TODO ADD ACCOUNT
 		try (Adaptor adaptor = new FtdcAdaptor(adaptorId, null, scheduler, adaptorParam)) {
 
-			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), TimePeriod.newWith(Duration.ofSeconds(15)));
+			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), Duration.ofSeconds(15));
 			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
 
 			adaptor.startup();
