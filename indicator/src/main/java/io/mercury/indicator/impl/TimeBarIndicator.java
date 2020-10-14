@@ -1,5 +1,6 @@
 package io.mercury.indicator.impl;
 
+import java.time.Duration;
 import java.time.ZonedDateTime;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
@@ -9,7 +10,6 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;
-import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.indicator.api.IndicatorEvent;
 import io.mercury.indicator.impl.TimeBarIndicator.TimeBarEvent;
@@ -19,19 +19,19 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 
 	private static final Logger log = CommonLoggerFactory.getLogger(TimeBarIndicator.class);
 	
-	public TimeBarIndicator(Instrument instrument, TimePeriod period) {
-		super(instrument, period);
+	public TimeBarIndicator(Instrument instrument, Duration duration) {
+		super(instrument, duration);
 		// 从已经根据交易周期分配好的池中获取此指标的分割节点
 		ImmutableSortedSet<TimePeriodSerial> timePeriodSet = TimePeriodPool.Singleton.getTimePeriodSet(instrument,
-				period);
+				duration);
 		int i = -1;
 		for (TimePeriodSerial timePeriod : timePeriodSet)
 			pointSet.add(TimeBarPoint.newWith(++i, timePeriod));
 		currentPoint = pointSet.getFirst();
 	}
 
-	public static TimeBarIndicator with(Instrument instrument, TimePeriod period) {
-		return new TimeBarIndicator(instrument, period);
+	public static TimeBarIndicator with(Instrument instrument, Duration duration) {
+		return new TimeBarIndicator(instrument, duration);
 	}
 
 	// @Override

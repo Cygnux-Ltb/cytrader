@@ -1,14 +1,15 @@
 package io.mercury.indicator.impl.base;
 
+import java.time.Duration;
+
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.api.MarketData;
-import io.mercury.financial.vector.TimePeriod;
 import io.mercury.indicator.api.IndicatorEvent;
 
 public abstract class FixedPeriodIndicator<P extends FixedPeriodPoint<M>, E extends IndicatorEvent, M extends MarketData>
 		extends BaseIndicator<P, E, M> {
 
-	protected TimePeriod period;
+	protected Duration duration;
 	protected int cycle;
 
 	/**
@@ -16,8 +17,8 @@ public abstract class FixedPeriodIndicator<P extends FixedPeriodPoint<M>, E exte
 	 * @param instrument
 	 * @param period
 	 */
-	public FixedPeriodIndicator(Instrument instrument, TimePeriod period) {
-		this(instrument, period, 1);
+	public FixedPeriodIndicator(Instrument instrument, Duration duration) {
+		this(instrument, duration, 1);
 	}
 
 	/**
@@ -26,9 +27,9 @@ public abstract class FixedPeriodIndicator<P extends FixedPeriodPoint<M>, E exte
 	 * @param period
 	 * @param cycle
 	 */
-	public FixedPeriodIndicator(Instrument instrument, TimePeriod period, int cycle) {
+	public FixedPeriodIndicator(Instrument instrument, Duration duration, int cycle) {
 		super(instrument);
-		this.period = period;
+		this.duration = duration;
 		this.cycle = cycle;
 
 	}

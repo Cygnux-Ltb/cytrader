@@ -1,12 +1,13 @@
 package io.mercury.indicator.impl;
 
+import java.time.Duration;
+
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
 import io.mercury.common.collections.list.FixedLengthRecorder;
 import io.mercury.financial.instrument.Instrument;
 import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.financial.time.TimePeriodPool;
-import io.mercury.financial.vector.TimePeriod;
 import io.mercury.financial.vector.TimePeriodSerial;
 import io.mercury.indicator.api.IndicatorEvent;
 import io.mercury.indicator.impl.SmaIndicator.SmaEvent;
@@ -16,21 +17,21 @@ public final class SmaIndicator extends FixedPeriodIndicator<SmaPoint, SmaEvent,
 
 	private FixedLengthRecorder historyPriceRecorder;
 
-	public SmaIndicator(Instrument instrument, TimePeriod period, int cycle) {
-		super(instrument, period, cycle);
+	public SmaIndicator(Instrument instrument, Duration duration, int cycle) {
+		super(instrument, duration, cycle);
 
 		this.historyPriceRecorder = FixedLengthRecorder.newRecorder(cycle);
 		ImmutableSortedSet<TimePeriodSerial> timePeriodSet = TimePeriodPool.Singleton.getTimePeriodSet(instrument,
-				period);
+				duration);
 		int i = -1;
 		for (TimePeriodSerial timePeriod : timePeriodSet)
-			pointSet.add(SmaPoint.with(++i, instrument, period, timePeriod, cycle, historyPriceRecorder));
+			pointSet.add(SmaPoint.with(++i, instrument, duration, timePeriod, cycle, historyPriceRecorder));
 		currentPoint = pointSet.getFirst();
 
 	}
 
-	public static SmaIndicator with(Instrument instrument, TimePeriod period, int cycle) {
-		return new SmaIndicator(instrument, period, cycle);
+	public static SmaIndicator with(Instrument instrument, Duration duration, int cycle) {
+		return new SmaIndicator(instrument, duration, cycle);
 	}
 
 	@Override

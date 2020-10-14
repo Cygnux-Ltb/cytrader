@@ -31,9 +31,8 @@ public final class TimeBarPoint extends FixedPeriodPoint<BasicMarketData> {
 	}
 
 	public TimeBarPoint generateNext() {
-		return new TimeBarPoint(index + 1,
-				TimePeriodSerial.newWith(serial.startTime().plusSeconds(serial.period().seconds()),
-						serial.endTime().plusSeconds(serial.period().seconds()), serial.period()));
+		return new TimeBarPoint(index + 1, TimePeriodSerial.newSerial(serial.startTime().plusSeconds(serial.seconds()),
+				serial.endTime().plusSeconds(serial.seconds()), serial.duration()));
 	}
 
 	public double open() {
