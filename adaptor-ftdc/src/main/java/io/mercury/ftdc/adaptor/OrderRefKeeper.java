@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.ftdc.adaptor.exception.OrderRefNotFoundException;
-import io.mercury.redstone.core.order.UniqueIdSupporter;
+import io.mercury.redstone.core.order.OrderUniqueIds;
 
 /**
  * 
@@ -42,7 +42,7 @@ public class OrderRefKeeper {
 		long uniqueId = StaticInstance.mapOfUniqueId.get(orderRef);
 		if (uniqueId == 0L) {
 			// 处理其他来源的订单
-			uniqueId = UniqueIdSupporter.allocateIdForExternal();
+			uniqueId = OrderUniqueIds.allocateIdForExternal();
 			log.warn("Handle third order, allocate third uniqueId==[{}], orderRef==[{}]", uniqueId, orderRef);
 		}
 		return uniqueId;
