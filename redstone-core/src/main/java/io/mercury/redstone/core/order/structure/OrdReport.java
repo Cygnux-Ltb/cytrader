@@ -18,77 +18,62 @@ public final class OrdReport implements Serial {
 	 * mapping to order uniqueId
 	 */
 	private long uniqueId;
-
 	/**
 	 * report epoch milliseconds
 	 */
 	private long epochMillis;
-
 	/**
 	 * investorId
 	 */
 	private String investorId;
-
 	/**
 	 * ordType
 	 */
 	private OrdType ordType;
-
 	/**
 	 * order status of now report
 	 */
 	private OrdStatus ordStatus;
-
 	/**
 	 * CTP orderRef
 	 */
 	private String orderRef;
-
 	/**
 	 * broker return id
 	 */
 	private String brokerUniqueId;
-
 	/**
 	 * instrument
 	 */
 	private Instrument instrument;
-
 	/**
 	 * direction
 	 */
 	private TrdDirection direction;
-
 	/**
 	 * action
 	 */
 	private TrdAction action;
-
 	/**
 	 * offer quantity
 	 */
 	private int offerQty;
-
 	/**
 	 * filled quantity
 	 */
 	private int filledQty;
-
 	/**
 	 * offer price
 	 */
 	private long offerPrice;
-
 	/**
 	 * order trade price
 	 */
 	private long tradePrice;
-
 	/**
 	 * offer time
 	 */
 	private String offerTime;
-
 	/**
 	 * last update time
 	 */

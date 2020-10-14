@@ -45,7 +45,7 @@ public final class OrderKeeper implements Dumpable<String> {
 	/**
 	 * 存储所有的order
 	 */
-	private static final OrderBook AllOrders = new OrderBook(Capacity.L10_SIZE_1024);
+	private static final OrderBook AllOrders = new OrderBook(Capacity.L09_SIZE_512);
 
 	/**
 	 * 按照subAccountId分组存储
@@ -70,6 +70,11 @@ public final class OrderKeeper implements Dumpable<String> {
 	private OrderKeeper() {
 	}
 
+	/**
+	 * 新增订单
+	 * 
+	 * @param order
+	 */
 	static void putOrder(Order order) {
 		int subAccountId = order.subAccountId();
 		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
@@ -80,17 +85,19 @@ public final class OrderKeeper implements Dumpable<String> {
 		getInstrumentOrderBook(order.instrument()).putOrder(order);
 	}
 
-	static void onOrder(Order order) {
-		int subAccountId = order.subAccountId();
-		int accountId = AccountKeeper.getAccountBySubAccountId(subAccountId).accountId();
+	/**
+	 * 
+	 * @param order
+	 */
+	private static void updateOrder(Order order) {
 		switch (order.status()) {
 		case Filled:
 		case Canceled:
 		case NewRejected:
 		case CancelRejected:
 			AllOrders.finishOrder(order);
-			getSubAccountOrderBook(subAccountId).finishOrder(order);
-			getAccountOrderBook(accountId).finishOrder(order);
+			getSubAccountOrderBook(order.subAccountId()).finishOrder(order);
+			getAccountOrderBook(order.accountId()).finishOrder(order);
 			getStrategyOrderBook(order.strategyId()).finishOrder(order);
 			getInstrumentOrderBook(order.instrument()).finishOrder(order);
 			break;
@@ -121,9 +128,10 @@ public final class OrderKeeper implements Dumpable<String> {
 			order.writeLog(log, "OrderKeeper", "Search order OK");
 		}
 		ActualChildOrder childOrder = (ActualChildOrder) order;
-		// 更新订单状态
+		// 根据订单回报更新订单状态
 		OrderUpdater.updateWithReport(childOrder, report);
-		onOrder(childOrder);
+		// 更新Keeper内订单
+		updateOrder(childOrder);
 		return childOrder;
 	}
 

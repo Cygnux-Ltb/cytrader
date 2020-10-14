@@ -1,11 +1,13 @@
 package io.mercury.redstone.core.order;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.datetime.TimeConst;
+import io.mercury.common.datetime.TimeZone;
 import io.mercury.common.util.BitOperator;
 import io.mercury.redstone.core.strategy.Strategy.StrategyIdConst;
 
@@ -31,7 +33,7 @@ import io.mercury.redstone.core.strategy.Strategy.StrategyIdConst;
  * @creation 2019年4月13日
  */
 @NotThreadSafe
-public final class UniqueIdSupporter {
+public final class OrderUniqueIds {
 
 	/**
 	 * 
@@ -60,12 +62,21 @@ public final class UniqueIdSupporter {
 		return highPos * 10_000_000_000_000_000L + lastUseEpochSeconds * 1_000_000L + ++increment;
 	}
 
+	/**
+	 * 
+	 */
 	private static final long Baseline_2020_SECONDS = 1577836800L;
 	private static final long Baseline_2020_MILLIS = Baseline_2020_SECONDS * TimeConst.MILLIS_PER_SECONDS;
 
+	/**
+	 * 
+	 */
 	private static final long Baseline_2010_SECONDS = 1262304000L;
 	private static final long Baseline_2010_MILLIS = Baseline_2010_SECONDS * TimeConst.MILLIS_PER_SECONDS;
 
+	/**
+	 * 
+	 */
 	private static final long Baseline_2000_SECONDS = 946684800L;
 	private static final long Baseline_2000_MILLIS = Baseline_2000_SECONDS * TimeConst.MILLIS_PER_SECONDS;
 
@@ -103,6 +114,10 @@ public final class UniqueIdSupporter {
 		System.out.println(Instant.ofEpochSecond(Baseline_2000_SECONDS));
 		System.out.println(Instant.ofEpochSecond(Baseline_2010_SECONDS));
 		System.out.println(Instant.ofEpochSecond(Baseline_2020_SECONDS));
+
+		System.out.println(ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0, TimeZone.UTC).toEpochSecond());
+		System.out.println(ZonedDateTime.of(2010, 1, 1, 0, 0, 0, 0, TimeZone.UTC).toEpochSecond());
+		System.out.println(ZonedDateTime.of(2000, 1, 1, 0, 0, 0, 0, TimeZone.UTC).toEpochSecond());
 
 	}
 

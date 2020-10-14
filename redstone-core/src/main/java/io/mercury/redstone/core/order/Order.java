@@ -21,6 +21,8 @@ public interface Order extends Comparable<Order>, Serializable {
 	 * strategyId | epochSecond| increment<br>
 	 * 922 | 3372036854 | 775807<br>
 	 * 
+	 * TODO 使用雪花算法实现
+	 * 
 	 * @return long
 	 */
 	long uniqueId();

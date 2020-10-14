@@ -25,10 +25,10 @@ public final class OrderUpdater {
 	public static void updateWithReport(@Nonnull ActualChildOrder order, @Nonnull OrdReport report) {
 		OrdQty qty = order.qty();
 		int filledQty = report.getFilledQty();
-		log.info("OrdReport ordStatus==[{}], filledQty()==[{}], tradePrice==[{}], qty -> {}", report.getOrdStatus(),
-				report.getTradePrice(), filledQty, qty);
-		if (report.getOrdStatus() == OrdStatus.NotProvided) {
-			// 处理未返回订单状态的情况, 根据成交数量判断
+		log.info("OrdReport ordStatus==[{}], filledQty()==[{}], tradePrice==[{}], order.qty() -> {}",
+				report.getOrdStatus(), filledQty, report.getTradePrice(), qty);
+		// 处理未返回订单状态的情况, 根据成交数量判断
+		if (report.getOrdStatus() == OrdStatus.Unprovided) {
 			int offerQty = qty.offerQty();
 			order.setStatus(
 					// 成交数量等于委托数量, 状态为全部成交
@@ -37,8 +37,9 @@ public final class OrderUpdater {
 							: filledQty < offerQty && filledQty > 0 ? OrdStatus.PartiallyFilled
 									// 成交数量等于0, 状态为New
 									: OrdStatus.New);
-		} else {
-			// 已返回订单状态, 直接读取
+		}
+		// 已返回订单状态, 直接读取
+		else {
 			order.setStatus(report.getOrdStatus());
 		}
 		switch (order.status()) {
@@ -64,6 +65,8 @@ public final class OrderUpdater {
 			order.price().calculateAvgPrice(order.recordList());
 			break;
 		default:
+			// 记录其他情况, 打印详细信息
+			log.info("Order updateWithReport, order -> {}, report -> {}", order, report);
 			break;
 		}
 	}

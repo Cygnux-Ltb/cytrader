@@ -7,7 +7,7 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.redstone.core.order.exception.OrdStatusException;
 
 /**
- * 订单存储组件
+ * 用于存储订单的组件
  * 
  * @author yellow013
  *
@@ -48,7 +48,7 @@ public final class OrderBook {
 	 * 
 	 */
 	public OrderBook() {
-		this(Capacity.L09_SIZE_512);
+		this(Capacity.L08_SIZE_256);
 	}
 
 	/**

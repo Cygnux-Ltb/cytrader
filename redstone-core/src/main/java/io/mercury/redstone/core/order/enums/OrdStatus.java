@@ -24,7 +24,7 @@ public enum OrdStatus {
 
 	CancelRejected(1 << 7, true),
 
-	NotProvided(1 << 8, false),
+	Unprovided(1 << 8, false),
 
 	@Deprecated
 	PendingReplace(101, false),
@@ -81,7 +81,7 @@ public enum OrdStatus {
 		case 1 << 7:
 			return CancelRejected;
 		case 1 << 8:
-			return NotProvided;
+			return Unprovided;
 		case 101:
 			return PendingReplace;
 		case 102:
@@ -100,7 +100,7 @@ public enum OrdStatus {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(NotProvided);
+		System.out.println(Unprovided);
 	}
 
 }

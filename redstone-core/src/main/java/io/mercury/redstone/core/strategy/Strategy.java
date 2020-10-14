@@ -25,11 +25,11 @@ public interface Strategy<M extends MarketData> extends
 		MarketDataHandler<M>,
 		// 集成订单处理
 		OrderHandler,
-		// 集成Adaptor处理
+		// 集成AdaptorEvent处理
 		AdaptorEventHandler {
 
 	public static interface StrategyIdConst {
-		int MaxStrategyId = 899;
+		int MaxStrategyId = 900;
 		int ExternalStrategyId = 910;
 	}
 

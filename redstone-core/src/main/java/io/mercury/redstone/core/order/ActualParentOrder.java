@@ -1,6 +1,6 @@
 package io.mercury.redstone.core.order;
 
-import static io.mercury.redstone.core.order.UniqueIdSupporter.allocateId;
+import static io.mercury.redstone.core.order.OrderUniqueIds.allocateId;
 
 import java.util.function.Function;
 

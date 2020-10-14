@@ -58,14 +58,14 @@ public abstract class OrderBasicImpl implements Order {
 	private final OrdType type;
 
 	/**
-	 * 时间戳
-	 */
-	private final OrdTimestamp timestamp;
-
-	/**
 	 * 订单方向
 	 */
 	private final TrdDirection direction;
+
+	/**
+	 * 时间戳
+	 */
+	private final OrdTimestamp timestamp;
 
 	/**
 	 * 订单状态(可变)
@@ -77,7 +77,7 @@ public abstract class OrderBasicImpl implements Order {
 	 */
 	private String remark;
 
-	private static final String defRemark = "none";
+	private static final String DefRemark = "NONE";
 
 	protected OrderBasicImpl(long uniqueId, int strategyId, int subAccountId, int accountId, Instrument instrument,
 			OrdQty qty, OrdPrice price, OrdType type, TrdDirection direction) {
@@ -89,10 +89,10 @@ public abstract class OrderBasicImpl implements Order {
 		this.qty = qty;
 		this.price = price;
 		this.type = type;
-		this.timestamp = OrdTimestamp.generate();
 		this.direction = direction;
+		this.timestamp = OrdTimestamp.generate();
 		this.status = OrdStatus.PendingNew;
-		this.remark = defRemark;
+		this.remark = DefRemark;
 	}
 
 	@Override
