@@ -1,13 +1,13 @@
-package io.mercury.redstone.strategy;
+package io.apollo.example.strategy;
 
+import io.apollo.engine.strategy.StrategySingleInstrument;
+import io.gemini.definition.market.data.impl.BasicMarketData;
+import io.gemini.definition.market.instrument.Instrument;
+import io.gemini.definition.order.Order;
+import io.gemini.definition.strategy.StrategyParamKey;
 import io.mercury.common.param.ImmutableParams;
-import io.mercury.financial.instrument.Instrument;
-import io.mercury.financial.market.impl.BasicMarketData;
 import io.mercury.indicator.impl.SmaIndicator.SmaEvent;
 import io.mercury.indicator.impl.SmaPoint;
-import io.mercury.redstone.core.order.Order;
-import io.mercury.redstone.core.strategy.StrategyParamKey;
-import io.mercury.redstone.engine.strategy.StrategySingleInstrument;
 
 public final class SmaStrategyExample extends StrategySingleInstrument<BasicMarketData, StrategyParamKey>
 		implements SmaEvent {
