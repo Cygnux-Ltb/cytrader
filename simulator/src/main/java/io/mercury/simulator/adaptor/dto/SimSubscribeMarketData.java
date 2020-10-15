@@ -1,6 +1,6 @@
 package io.mercury.simulator.adaptor.dto;
 
-import io.mercury.financial.instrument.Instrument;
+import io.gemini.definition.market.instrument.Instrument;
 
 public final class SimSubscribeMarketData {
 

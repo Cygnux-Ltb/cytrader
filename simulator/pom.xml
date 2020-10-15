@@ -47,36 +47,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.avro</groupId>
-										<artifactId>avro-maven-plugin</artifactId>
-										<versionRange>${avro.version}</versionRange>
-										<goals>
-											<goal>schema</goal>
-											<goal>idl-protocol</goal>
-											<goal>protocol</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
 	<dependencies>
@@ -89,7 +59,7 @@
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-avro</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${mercury.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.mercury</groupId>
@@ -99,9 +69,10 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-socket</artifactId>
 		</dependency>
+		
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>redstone-core</artifactId>
+			<groupId>io.apollo</groupId>
+			<artifactId>apollo-core</artifactId>
 		</dependency>
 	</dependencies>
 

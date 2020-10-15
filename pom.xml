@@ -15,24 +15,18 @@
 	<url>https://github.com/yellow013/apollo.git</url>
 
 	<modules>
-		<!-- core api -->
-		<module>core</module>
-		<!-- execution engine -->
-		<module>engine</module>
-		<!-- implement example -->
+		<module>apollo-core</module>
+		<module>apollo-engine</module>
 		<module>example</module>
-		<!-- runtime -->
-		<module>runtime</module>
-		<!-- exchange simulator -->
+		<module>indicator</module>
 		<module>simulator</module>
-
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<mercury.version>1.0-SNAPSHOT</mercury.version>
-		<gemini.version>1.0-SNAPSHOT</gemini.version>
+		<gemini.version>1.0</gemini.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -99,33 +93,28 @@
 				<artifactId>transport-socket</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
-			
+
 			<!-- gemini -->
 			<dependency>
 				<groupId>io.gemini</groupId>
-				<artifactId>financial</artifactId>
+				<artifactId>definition</artifactId>
 				<version>${gemini.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>io.gemini</groupId>
-				<artifactId>indicator</artifactId>
-				<version>${gemini.version}</version>
-			</dependency>
-			
+
 			<!-- apollo -->
 			<dependency>
 				<groupId>io.apollo</groupId>
-				<artifactId>core</artifactId>
+				<artifactId>indicator</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.apollo</groupId>
-				<artifactId>engine</artifactId>
+				<artifactId>apollo-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.apollo</groupId>
-				<artifactId>runtime</artifactId>
+				<artifactId>apollo-engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
