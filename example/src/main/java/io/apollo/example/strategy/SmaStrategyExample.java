@@ -1,13 +1,13 @@
 package io.apollo.example.strategy;
 
 import io.apollo.engine.strategy.StrategySingleInstrument;
+import io.apollo.indicator.impl.SmaPoint;
+import io.apollo.indicator.impl.SmaIndicator.SmaEvent;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.order.Order;
 import io.gemini.definition.strategy.StrategyParamKey;
 import io.mercury.common.param.ImmutableParams;
-import io.mercury.indicator.impl.SmaIndicator.SmaEvent;
-import io.mercury.indicator.impl.SmaPoint;
 
 public final class SmaStrategyExample extends StrategySingleInstrument<BasicMarketData, StrategyParamKey>
 		implements SmaEvent {
