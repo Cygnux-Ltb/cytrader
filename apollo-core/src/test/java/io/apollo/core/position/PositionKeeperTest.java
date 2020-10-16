@@ -1,8 +1,7 @@
-package io.mercury.redstone.core.position;
+package io.apollo.core.position;
 
 import org.junit.Test;
 
-import io.apollo.core.position.PositionKeeper;
 import io.gemini.definition.market.instrument.futures.impl.ChinaFutures;
 import io.gemini.definition.market.instrument.futures.impl.ChinaFuturesSymbol;
 import io.gemini.definition.order.enums.TrdDirection;
