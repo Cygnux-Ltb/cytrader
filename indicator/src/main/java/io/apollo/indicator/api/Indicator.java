@@ -1,4 +1,4 @@
-package io.mercury.indicator.api;
+package io.apollo.indicator.api;
 
 import io.gemini.definition.market.data.api.MarketData;
 import io.gemini.definition.market.instrument.Instrument;

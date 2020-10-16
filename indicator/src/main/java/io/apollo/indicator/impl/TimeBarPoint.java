@@ -1,12 +1,12 @@
-package io.mercury.indicator.impl;
+package io.apollo.indicator.impl;
 
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 
+import io.apollo.indicator.impl.base.Bar;
+import io.apollo.indicator.impl.base.FixedPeriodPoint;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.vector.TimePeriodSerial;
 import io.mercury.common.collections.MutableLists;
-import io.mercury.indicator.impl.base.Bar;
-import io.mercury.indicator.impl.base.FixedPeriodPoint;
 
 public final class TimeBarPoint extends FixedPeriodPoint<BasicMarketData> {
 

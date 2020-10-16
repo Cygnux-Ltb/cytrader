@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl;
+package io.apollo.indicator.impl;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -6,14 +6,14 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import io.apollo.indicator.impl.SmaIndicator.SmaEvent;
+import io.apollo.indicator.impl.base.FixedPeriodIndicator;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.market.vector.TimePeriodSerial;
 import io.gemini.definition.market.vector.TradingPeriod;
 import io.gemini.definition.market.vector.TradingPeriodPool;
 import io.mercury.common.collections.list.FixedLengthRecorder;
-import io.mercury.indicator.impl.SmaIndicator.SmaEvent;
-import io.mercury.indicator.impl.base.FixedPeriodIndicator;
 
 public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
 

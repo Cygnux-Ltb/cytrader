@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl;
+package io.apollo.indicator.impl;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
@@ -6,14 +6,14 @@ import java.time.ZonedDateTime;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.slf4j.Logger;
 
+import io.apollo.indicator.api.IndicatorEvent;
+import io.apollo.indicator.impl.TimeBarIndicator.TimeBarEvent;
+import io.apollo.indicator.impl.base.FixedPeriodIndicator;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.market.vector.TimePeriodPool;
 import io.gemini.definition.market.vector.TimePeriodSerial;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.indicator.api.IndicatorEvent;
-import io.mercury.indicator.impl.TimeBarIndicator.TimeBarEvent;
-import io.mercury.indicator.impl.base.FixedPeriodIndicator;
 
 public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, TimeBarEvent, BasicMarketData> {
 

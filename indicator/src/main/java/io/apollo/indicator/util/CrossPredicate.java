@@ -1,4 +1,4 @@
-package io.mercury.indicator.util;
+package io.apollo.indicator.util;
 
 import org.eclipse.collections.api.block.predicate.primitive.LongLongPredicate;
 

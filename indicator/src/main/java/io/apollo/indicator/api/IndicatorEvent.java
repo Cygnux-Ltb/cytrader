@@ -1,4 +1,4 @@
-package io.mercury.indicator.api;
+package io.apollo.indicator.api;
 
 public interface IndicatorEvent {
 

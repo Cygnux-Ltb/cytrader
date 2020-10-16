@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl.ma;
+package io.apollo.indicator.impl.ma;
 
 import org.junit.Test;
 

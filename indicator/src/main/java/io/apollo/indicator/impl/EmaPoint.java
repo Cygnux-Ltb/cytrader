@@ -1,4 +1,4 @@
-package io.mercury.indicator.impl;
+package io.apollo.indicator.impl;
 
 import java.time.Duration;
 

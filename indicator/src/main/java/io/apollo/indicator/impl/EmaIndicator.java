@@ -1,12 +1,12 @@
-package io.mercury.indicator.impl;
+package io.apollo.indicator.impl;
 
 import java.time.Duration;
 
+import io.apollo.indicator.api.IndicatorEvent;
+import io.apollo.indicator.impl.EmaIndicator.EmaEvent;
+import io.apollo.indicator.impl.base.FixedPeriodIndicator;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
-import io.mercury.indicator.api.IndicatorEvent;
-import io.mercury.indicator.impl.EmaIndicator.EmaEvent;
-import io.mercury.indicator.impl.base.FixedPeriodIndicator;
 
 public final class EmaIndicator extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {
 

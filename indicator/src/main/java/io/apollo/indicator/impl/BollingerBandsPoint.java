@@ -1,8 +1,8 @@
-package io.mercury.indicator.impl;
+package io.apollo.indicator.impl;
 
+import io.apollo.indicator.impl.base.FixedPeriodPoint;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.vector.TimePeriodSerial;
-import io.mercury.indicator.impl.base.FixedPeriodPoint;
 
 public final class BollingerBandsPoint extends FixedPeriodPoint<BasicMarketData> {
 
