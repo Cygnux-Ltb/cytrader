@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.mercury.simulator.persistence.avro.entity;
+package io.apollo.simulator.persistence.avro.entity;
 
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -81,7 +81,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 		return DECODER.decode(b);
 	}
 
-	private io.mercury.simulator.persistence.avro.entity.PackTitle title;
+	private io.apollo.simulator.persistence.avro.entity.PackTitle title;
 	private java.nio.ByteBuffer content;
 
 	/**
@@ -98,7 +98,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 	 * @param title   The new value for title
 	 * @param content The new value for content
 	 */
-	public TransportPack(io.mercury.simulator.persistence.avro.entity.PackTitle title, java.nio.ByteBuffer content) {
+	public TransportPack(io.apollo.simulator.persistence.avro.entity.PackTitle title, java.nio.ByteBuffer content) {
 		this.title = title;
 		this.content = content;
 	}
@@ -127,7 +127,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 	public void put(int field$, java.lang.Object value$) {
 		switch (field$) {
 		case 0:
-			title = (io.mercury.simulator.persistence.avro.entity.PackTitle) value$;
+			title = (io.apollo.simulator.persistence.avro.entity.PackTitle) value$;
 			break;
 		case 1:
 			content = (java.nio.ByteBuffer) value$;
@@ -142,7 +142,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 	 * 
 	 * @return The value of the 'title' field.
 	 */
-	public io.mercury.simulator.persistence.avro.entity.PackTitle getTitle() {
+	public io.apollo.simulator.persistence.avro.entity.PackTitle getTitle() {
 		return title;
 	}
 
@@ -151,7 +151,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 	 * 
 	 * @param value the value to set.
 	 */
-	public void setTitle(io.mercury.simulator.persistence.avro.entity.PackTitle value) {
+	public void setTitle(io.apollo.simulator.persistence.avro.entity.PackTitle value) {
 		this.title = value;
 	}
 
@@ -178,8 +178,8 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 	 * 
 	 * @return A new TransportPack RecordBuilder
 	 */
-	public static io.mercury.simulator.persistence.avro.entity.TransportPack.Builder newBuilder() {
-		return new io.mercury.simulator.persistence.avro.entity.TransportPack.Builder();
+	public static io.apollo.simulator.persistence.avro.entity.TransportPack.Builder newBuilder() {
+		return new io.apollo.simulator.persistence.avro.entity.TransportPack.Builder();
 	}
 
 	/**
@@ -188,12 +188,12 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 	 * @param other The existing builder to copy.
 	 * @return A new TransportPack RecordBuilder
 	 */
-	public static io.mercury.simulator.persistence.avro.entity.TransportPack.Builder newBuilder(
-			io.mercury.simulator.persistence.avro.entity.TransportPack.Builder other) {
+	public static io.apollo.simulator.persistence.avro.entity.TransportPack.Builder newBuilder(
+			io.apollo.simulator.persistence.avro.entity.TransportPack.Builder other) {
 		if (other == null) {
-			return new io.mercury.simulator.persistence.avro.entity.TransportPack.Builder();
+			return new io.apollo.simulator.persistence.avro.entity.TransportPack.Builder();
 		} else {
-			return new io.mercury.simulator.persistence.avro.entity.TransportPack.Builder(other);
+			return new io.apollo.simulator.persistence.avro.entity.TransportPack.Builder(other);
 		}
 	}
 
@@ -204,12 +204,12 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 	 * @param other The existing instance to copy.
 	 * @return A new TransportPack RecordBuilder
 	 */
-	public static io.mercury.simulator.persistence.avro.entity.TransportPack.Builder newBuilder(
-			io.mercury.simulator.persistence.avro.entity.TransportPack other) {
+	public static io.apollo.simulator.persistence.avro.entity.TransportPack.Builder newBuilder(
+			io.apollo.simulator.persistence.avro.entity.TransportPack other) {
 		if (other == null) {
-			return new io.mercury.simulator.persistence.avro.entity.TransportPack.Builder();
+			return new io.apollo.simulator.persistence.avro.entity.TransportPack.Builder();
 		} else {
-			return new io.mercury.simulator.persistence.avro.entity.TransportPack.Builder(other);
+			return new io.apollo.simulator.persistence.avro.entity.TransportPack.Builder(other);
 		}
 	}
 
@@ -220,7 +220,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 	public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<TransportPack>
 			implements org.apache.avro.data.RecordBuilder<TransportPack> {
 
-		private io.mercury.simulator.persistence.avro.entity.PackTitle title;
+		private io.apollo.simulator.persistence.avro.entity.PackTitle title;
 		private java.nio.ByteBuffer content;
 
 		/** Creates a new Builder */
@@ -233,7 +233,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @param other The existing Builder to copy.
 		 */
-		private Builder(io.mercury.simulator.persistence.avro.entity.TransportPack.Builder other) {
+		private Builder(io.apollo.simulator.persistence.avro.entity.TransportPack.Builder other) {
 			super(other);
 			if (isValidValue(fields()[0], other.title)) {
 				this.title = data().deepCopy(fields()[0].schema(), other.title);
@@ -250,7 +250,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @param other The existing instance to copy.
 		 */
-		private Builder(io.mercury.simulator.persistence.avro.entity.TransportPack other) {
+		private Builder(io.apollo.simulator.persistence.avro.entity.TransportPack other) {
 			super(SCHEMA$);
 			if (isValidValue(fields()[0], other.title)) {
 				this.title = data().deepCopy(fields()[0].schema(), other.title);
@@ -267,7 +267,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return The value.
 		 */
-		public io.mercury.simulator.persistence.avro.entity.PackTitle getTitle() {
+		public io.apollo.simulator.persistence.avro.entity.PackTitle getTitle() {
 			return title;
 		}
 
@@ -277,8 +277,8 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'title'.
 		 * @return This builder.
 		 */
-		public io.mercury.simulator.persistence.avro.entity.TransportPack.Builder setTitle(
-				io.mercury.simulator.persistence.avro.entity.PackTitle value) {
+		public io.apollo.simulator.persistence.avro.entity.TransportPack.Builder setTitle(
+				io.apollo.simulator.persistence.avro.entity.PackTitle value) {
 			validate(fields()[0], value);
 			this.title = value;
 			fieldSetFlags()[0] = true;
@@ -299,7 +299,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.mercury.simulator.persistence.avro.entity.TransportPack.Builder clearTitle() {
+		public io.apollo.simulator.persistence.avro.entity.TransportPack.Builder clearTitle() {
 			title = null;
 			fieldSetFlags()[0] = false;
 			return this;
@@ -320,7 +320,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'content'.
 		 * @return This builder.
 		 */
-		public io.mercury.simulator.persistence.avro.entity.TransportPack.Builder setContent(
+		public io.apollo.simulator.persistence.avro.entity.TransportPack.Builder setContent(
 				java.nio.ByteBuffer value) {
 			validate(fields()[1], value);
 			this.content = value;
@@ -342,7 +342,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.mercury.simulator.persistence.avro.entity.TransportPack.Builder clearContent() {
+		public io.apollo.simulator.persistence.avro.entity.TransportPack.Builder clearContent() {
 			content = null;
 			fieldSetFlags()[1] = false;
 			return this;
@@ -353,7 +353,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 			try {
 				TransportPack record = new TransportPack();
 				record.title = fieldSetFlags()[0] ? this.title
-						: (io.mercury.simulator.persistence.avro.entity.PackTitle) defaultValue(fields()[0]);
+						: (io.apollo.simulator.persistence.avro.entity.PackTitle) defaultValue(fields()[0]);
 				record.content = fieldSetFlags()[1] ? this.content : (java.nio.ByteBuffer) defaultValue(fields()[1]);
 				return record;
 			} catch (org.apache.avro.AvroMissingFieldException e) {
@@ -399,7 +399,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 	public void customDecode(org.apache.avro.io.ResolvingDecoder in) throws java.io.IOException {
 		org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
 		if (fieldOrder == null) {
-			this.title = io.mercury.simulator.persistence.avro.entity.PackTitle.values()[in.readEnum()];
+			this.title = io.apollo.simulator.persistence.avro.entity.PackTitle.values()[in.readEnum()];
 
 			this.content = in.readBytes(this.content);
 
@@ -407,7 +407,7 @@ public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 			for (int i = 0; i < 2; i++) {
 				switch (fieldOrder[i].pos()) {
 				case 0:
-					this.title = io.mercury.simulator.persistence.avro.entity.PackTitle.values()[in.readEnum()];
+					this.title = io.apollo.simulator.persistence.avro.entity.PackTitle.values()[in.readEnum()];
 					break;
 
 				case 1:

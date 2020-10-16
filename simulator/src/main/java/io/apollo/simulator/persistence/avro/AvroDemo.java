@@ -1,13 +1,13 @@
-package io.mercury.simulator.persistence.avro;
+package io.apollo.simulator.persistence.avro;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
+import io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe;
 import io.mercury.serialization.avro.AvroBinaryDeserializer;
 import io.mercury.serialization.avro.AvroBinarySerializer;
 import io.mercury.serialization.avro.AvroTextDeserializer;
 import io.mercury.serialization.avro.AvroTextSerializer;
-import io.mercury.simulator.persistence.avro.entity.MarketDataSubscribe;
 
 public class AvroDemo {
 

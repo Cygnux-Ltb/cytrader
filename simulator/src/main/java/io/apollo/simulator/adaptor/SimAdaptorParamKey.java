@@ -1,4 +1,4 @@
-package io.mercury.simulator.adaptor;
+package io.apollo.simulator.adaptor;
 
 import io.gemini.definition.adaptor.AdaptorParamKey;
 import io.mercury.common.param.ParamType;

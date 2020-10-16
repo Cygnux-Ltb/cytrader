@@ -1,12 +1,12 @@
 {
-    "namespace": "io.mercury.simulator.persistence.avro.entity",
+    "namespace": "io.apollo.simulator.persistence.avro.entity",
     "type": "record",
     "name": "TransportPack",
     "fields": [
         {
             "name": "title",
             "type": {
-                "namespace": "io.mercury.simulator.persistence.avro.entity",
+                "namespace": "io.apollo.simulator.persistence.avro.entity",
                 "type": "enum",
                 "name": "PackTitle",
                 "symbols": [

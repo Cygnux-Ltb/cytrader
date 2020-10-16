@@ -1,5 +1,5 @@
 {
-    "namespace": "io.mercury.simulator.persistence.avro.entity",
+    "namespace": "io.apollo.simulator.persistence.avro.entity",
     "type": "record",
     "name": "MarketDataSubscribe",
     "fields": [
