@@ -5,3859 +5,4385 @@
  */
 package io.apollo.simulator.persistence.avro.entity;
 
-import org.apache.avro.generic.GenericArray;
-import org.apache.avro.specific.SpecificData;
-import org.apache.avro.util.Utf8;
-import org.apache.avro.message.BinaryMessageEncoder;
-import org.apache.avro.message.BinaryMessageDecoder;
-import org.apache.avro.message.SchemaStore;
 import java.util.Optional;
+
+import org.apache.avro.message.BinaryMessageDecoder;
+import org.apache.avro.message.BinaryMessageEncoder;
+import org.apache.avro.message.SchemaStore;
+import org.apache.avro.specific.SpecificData;
+
 @org.apache.avro.specific.AvroGenerated
-public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -7874409622385925980L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MarketDataLevel1\",\"namespace\":\"io.apollo.simulator.persistence.avro.entity\",\"fields\":[{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"double\"},{\"name\":\"preSettlementPrice\",\"type\":\"double\"},{\"name\":\"preClosePrice\",\"type\":\"double\"},{\"name\":\"preOpenInterest\",\"type\":\"double\"},{\"name\":\"openPrice\",\"type\":\"double\"},{\"name\":\"highestPrice\",\"type\":\"double\"},{\"name\":\"lowestPrice\",\"type\":\"double\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"double\"},{\"name\":\"openInterest\",\"type\":\"double\"},{\"name\":\"upperLimitPrice\",\"type\":\"double\"},{\"name\":\"lowerLimitPrice\",\"type\":\"double\"},{\"name\":\"bidPrice1\",\"type\":\"double\"},{\"name\":\"bidVolume1\",\"type\":\"int\"},{\"name\":\"askPrice1\",\"type\":\"double\"},{\"name\":\"askVolume1\",\"type\":\"int\"},{\"name\":\"bidPrice2\",\"type\":\"double\"},{\"name\":\"bidVolume2\",\"type\":\"int\"},{\"name\":\"askPrice2\",\"type\":\"double\"},{\"name\":\"askVolume2\",\"type\":\"int\"},{\"name\":\"bidPrice3\",\"type\":\"double\"},{\"name\":\"bidVolume3\",\"type\":\"int\"},{\"name\":\"askPrice3\",\"type\":\"double\"},{\"name\":\"askVolume3\",\"type\":\"int\"},{\"name\":\"bidPrice4\",\"type\":\"double\"},{\"name\":\"bidVolume4\",\"type\":\"int\"},{\"name\":\"askPrice4\",\"type\":\"double\"},{\"name\":\"askVolume4\",\"type\":\"int\"},{\"name\":\"bidPrice5\",\"type\":\"double\"},{\"name\":\"bidVolume5\",\"type\":\"int\"},{\"name\":\"askPrice5\",\"type\":\"double\"},{\"name\":\"askVolume5\",\"type\":\"int\"},{\"name\":\"averagePrice\",\"type\":\"double\"},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updateMillisec\",\"type\":\"int\"},{\"name\":\"localTimestamp\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
-  public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-
-  private static SpecificData MODEL$ = new SpecificData();
-
-  private static final BinaryMessageEncoder<MarketDataLevel1> ENCODER =
-      new BinaryMessageEncoder<MarketDataLevel1>(MODEL$, SCHEMA$);
-
-  private static final BinaryMessageDecoder<MarketDataLevel1> DECODER =
-      new BinaryMessageDecoder<MarketDataLevel1>(MODEL$, SCHEMA$);
-
-  /**
-   * Return the BinaryMessageEncoder instance used by this class.
-   * @return the message encoder used by this class
-   */
-  public static BinaryMessageEncoder<MarketDataLevel1> getEncoder() {
-    return ENCODER;
-  }
-
-  /**
-   * Return the BinaryMessageDecoder instance used by this class.
-   * @return the message decoder used by this class
-   */
-  public static BinaryMessageDecoder<MarketDataLevel1> getDecoder() {
-    return DECODER;
-  }
-
-  /**
-   * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
-   * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
-   * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
-   */
-  public static BinaryMessageDecoder<MarketDataLevel1> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<MarketDataLevel1>(MODEL$, SCHEMA$, resolver);
-  }
-
-  /**
-   * Serializes this MarketDataLevel1 to a ByteBuffer.
-   * @return a buffer holding the serialized data for this instance
-   * @throws java.io.IOException if this instance could not be serialized
-   */
-  public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
-    return ENCODER.encode(this);
-  }
-
-  /**
-   * Deserializes a MarketDataLevel1 from a ByteBuffer.
-   * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a MarketDataLevel1 instance decoded from the given buffer
-   * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
-   */
-  public static MarketDataLevel1 fromByteBuffer(
-      java.nio.ByteBuffer b) throws java.io.IOException {
-    return DECODER.decode(b);
-  }
-
-   private java.lang.String tradingDay;
-   private java.lang.String instrumentId;
-   private java.lang.String exchangeId;
-   private double lastPrice;
-   private double preSettlementPrice;
-   private double preClosePrice;
-   private double preOpenInterest;
-   private double openPrice;
-   private double highestPrice;
-   private double lowestPrice;
-   private int volume;
-   private double turnover;
-   private double openInterest;
-   private double upperLimitPrice;
-   private double lowerLimitPrice;
-   private double bidPrice1;
-   private int bidVolume1;
-   private double askPrice1;
-   private int askVolume1;
-   private double bidPrice2;
-   private int bidVolume2;
-   private double askPrice2;
-   private int askVolume2;
-   private double bidPrice3;
-   private int bidVolume3;
-   private double askPrice3;
-   private int askVolume3;
-   private double bidPrice4;
-   private int bidVolume4;
-   private double askPrice4;
-   private int askVolume4;
-   private double bidPrice5;
-   private int bidVolume5;
-   private double askPrice5;
-   private int askVolume5;
-   private double averagePrice;
-   private java.lang.String updateTime;
-   private int updateMillisec;
-   private java.lang.String localTimestamp;
-
-  /**
-   * Default constructor.  Note that this does not initialize fields
-   * to their default values from the schema.  If that is desired then
-   * one should use <code>newBuilder()</code>.
-   */
-  public MarketDataLevel1() {}
-
-  /**
-   * All-args constructor.
-   * @param tradingDay The new value for tradingDay
-   * @param instrumentId The new value for instrumentId
-   * @param exchangeId The new value for exchangeId
-   * @param lastPrice The new value for lastPrice
-   * @param preSettlementPrice The new value for preSettlementPrice
-   * @param preClosePrice The new value for preClosePrice
-   * @param preOpenInterest The new value for preOpenInterest
-   * @param openPrice The new value for openPrice
-   * @param highestPrice The new value for highestPrice
-   * @param lowestPrice The new value for lowestPrice
-   * @param volume The new value for volume
-   * @param turnover The new value for turnover
-   * @param openInterest The new value for openInterest
-   * @param upperLimitPrice The new value for upperLimitPrice
-   * @param lowerLimitPrice The new value for lowerLimitPrice
-   * @param bidPrice1 The new value for bidPrice1
-   * @param bidVolume1 The new value for bidVolume1
-   * @param askPrice1 The new value for askPrice1
-   * @param askVolume1 The new value for askVolume1
-   * @param bidPrice2 The new value for bidPrice2
-   * @param bidVolume2 The new value for bidVolume2
-   * @param askPrice2 The new value for askPrice2
-   * @param askVolume2 The new value for askVolume2
-   * @param bidPrice3 The new value for bidPrice3
-   * @param bidVolume3 The new value for bidVolume3
-   * @param askPrice3 The new value for askPrice3
-   * @param askVolume3 The new value for askVolume3
-   * @param bidPrice4 The new value for bidPrice4
-   * @param bidVolume4 The new value for bidVolume4
-   * @param askPrice4 The new value for askPrice4
-   * @param askVolume4 The new value for askVolume4
-   * @param bidPrice5 The new value for bidPrice5
-   * @param bidVolume5 The new value for bidVolume5
-   * @param askPrice5 The new value for askPrice5
-   * @param askVolume5 The new value for askVolume5
-   * @param averagePrice The new value for averagePrice
-   * @param updateTime The new value for updateTime
-   * @param updateMillisec The new value for updateMillisec
-   * @param localTimestamp The new value for localTimestamp
-   */
-  public MarketDataLevel1(java.lang.String tradingDay, java.lang.String instrumentId, java.lang.String exchangeId, java.lang.Double lastPrice, java.lang.Double preSettlementPrice, java.lang.Double preClosePrice, java.lang.Double preOpenInterest, java.lang.Double openPrice, java.lang.Double highestPrice, java.lang.Double lowestPrice, java.lang.Integer volume, java.lang.Double turnover, java.lang.Double openInterest, java.lang.Double upperLimitPrice, java.lang.Double lowerLimitPrice, java.lang.Double bidPrice1, java.lang.Integer bidVolume1, java.lang.Double askPrice1, java.lang.Integer askVolume1, java.lang.Double bidPrice2, java.lang.Integer bidVolume2, java.lang.Double askPrice2, java.lang.Integer askVolume2, java.lang.Double bidPrice3, java.lang.Integer bidVolume3, java.lang.Double askPrice3, java.lang.Integer askVolume3, java.lang.Double bidPrice4, java.lang.Integer bidVolume4, java.lang.Double askPrice4, java.lang.Integer askVolume4, java.lang.Double bidPrice5, java.lang.Integer bidVolume5, java.lang.Double askPrice5, java.lang.Integer askVolume5, java.lang.Double averagePrice, java.lang.String updateTime, java.lang.Integer updateMillisec, java.lang.String localTimestamp) {
-    this.tradingDay = tradingDay;
-    this.instrumentId = instrumentId;
-    this.exchangeId = exchangeId;
-    this.lastPrice = lastPrice;
-    this.preSettlementPrice = preSettlementPrice;
-    this.preClosePrice = preClosePrice;
-    this.preOpenInterest = preOpenInterest;
-    this.openPrice = openPrice;
-    this.highestPrice = highestPrice;
-    this.lowestPrice = lowestPrice;
-    this.volume = volume;
-    this.turnover = turnover;
-    this.openInterest = openInterest;
-    this.upperLimitPrice = upperLimitPrice;
-    this.lowerLimitPrice = lowerLimitPrice;
-    this.bidPrice1 = bidPrice1;
-    this.bidVolume1 = bidVolume1;
-    this.askPrice1 = askPrice1;
-    this.askVolume1 = askVolume1;
-    this.bidPrice2 = bidPrice2;
-    this.bidVolume2 = bidVolume2;
-    this.askPrice2 = askPrice2;
-    this.askVolume2 = askVolume2;
-    this.bidPrice3 = bidPrice3;
-    this.bidVolume3 = bidVolume3;
-    this.askPrice3 = askPrice3;
-    this.askVolume3 = askVolume3;
-    this.bidPrice4 = bidPrice4;
-    this.bidVolume4 = bidVolume4;
-    this.askPrice4 = askPrice4;
-    this.askVolume4 = askVolume4;
-    this.bidPrice5 = bidPrice5;
-    this.bidVolume5 = bidVolume5;
-    this.askPrice5 = askPrice5;
-    this.askVolume5 = askVolume5;
-    this.averagePrice = averagePrice;
-    this.updateTime = updateTime;
-    this.updateMillisec = updateMillisec;
-    this.localTimestamp = localTimestamp;
-  }
-
-  public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
-  public org.apache.avro.Schema getSchema() { return SCHEMA$; }
-  // Used by DatumWriter.  Applications should not call.
-  public java.lang.Object get(int field$) {
-    switch (field$) {
-    case 0: return tradingDay;
-    case 1: return instrumentId;
-    case 2: return exchangeId;
-    case 3: return lastPrice;
-    case 4: return preSettlementPrice;
-    case 5: return preClosePrice;
-    case 6: return preOpenInterest;
-    case 7: return openPrice;
-    case 8: return highestPrice;
-    case 9: return lowestPrice;
-    case 10: return volume;
-    case 11: return turnover;
-    case 12: return openInterest;
-    case 13: return upperLimitPrice;
-    case 14: return lowerLimitPrice;
-    case 15: return bidPrice1;
-    case 16: return bidVolume1;
-    case 17: return askPrice1;
-    case 18: return askVolume1;
-    case 19: return bidPrice2;
-    case 20: return bidVolume2;
-    case 21: return askPrice2;
-    case 22: return askVolume2;
-    case 23: return bidPrice3;
-    case 24: return bidVolume3;
-    case 25: return askPrice3;
-    case 26: return askVolume3;
-    case 27: return bidPrice4;
-    case 28: return bidVolume4;
-    case 29: return askPrice4;
-    case 30: return askVolume4;
-    case 31: return bidPrice5;
-    case 32: return bidVolume5;
-    case 33: return askPrice5;
-    case 34: return askVolume5;
-    case 35: return averagePrice;
-    case 36: return updateTime;
-    case 37: return updateMillisec;
-    case 38: return localTimestamp;
-    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
-    }
-  }
-
-  // Used by DatumReader.  Applications should not call.
-  @SuppressWarnings(value="unchecked")
-  public void put(int field$, java.lang.Object value$) {
-    switch (field$) {
-    case 0: tradingDay = value$ != null ? value$.toString() : null; break;
-    case 1: instrumentId = value$ != null ? value$.toString() : null; break;
-    case 2: exchangeId = value$ != null ? value$.toString() : null; break;
-    case 3: lastPrice = (java.lang.Double)value$; break;
-    case 4: preSettlementPrice = (java.lang.Double)value$; break;
-    case 5: preClosePrice = (java.lang.Double)value$; break;
-    case 6: preOpenInterest = (java.lang.Double)value$; break;
-    case 7: openPrice = (java.lang.Double)value$; break;
-    case 8: highestPrice = (java.lang.Double)value$; break;
-    case 9: lowestPrice = (java.lang.Double)value$; break;
-    case 10: volume = (java.lang.Integer)value$; break;
-    case 11: turnover = (java.lang.Double)value$; break;
-    case 12: openInterest = (java.lang.Double)value$; break;
-    case 13: upperLimitPrice = (java.lang.Double)value$; break;
-    case 14: lowerLimitPrice = (java.lang.Double)value$; break;
-    case 15: bidPrice1 = (java.lang.Double)value$; break;
-    case 16: bidVolume1 = (java.lang.Integer)value$; break;
-    case 17: askPrice1 = (java.lang.Double)value$; break;
-    case 18: askVolume1 = (java.lang.Integer)value$; break;
-    case 19: bidPrice2 = (java.lang.Double)value$; break;
-    case 20: bidVolume2 = (java.lang.Integer)value$; break;
-    case 21: askPrice2 = (java.lang.Double)value$; break;
-    case 22: askVolume2 = (java.lang.Integer)value$; break;
-    case 23: bidPrice3 = (java.lang.Double)value$; break;
-    case 24: bidVolume3 = (java.lang.Integer)value$; break;
-    case 25: askPrice3 = (java.lang.Double)value$; break;
-    case 26: askVolume3 = (java.lang.Integer)value$; break;
-    case 27: bidPrice4 = (java.lang.Double)value$; break;
-    case 28: bidVolume4 = (java.lang.Integer)value$; break;
-    case 29: askPrice4 = (java.lang.Double)value$; break;
-    case 30: askVolume4 = (java.lang.Integer)value$; break;
-    case 31: bidPrice5 = (java.lang.Double)value$; break;
-    case 32: bidVolume5 = (java.lang.Integer)value$; break;
-    case 33: askPrice5 = (java.lang.Double)value$; break;
-    case 34: askVolume5 = (java.lang.Integer)value$; break;
-    case 35: averagePrice = (java.lang.Double)value$; break;
-    case 36: updateTime = value$ != null ? value$.toString() : null; break;
-    case 37: updateMillisec = (java.lang.Integer)value$; break;
-    case 38: localTimestamp = value$ != null ? value$.toString() : null; break;
-    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
-    }
-  }
-
-  /**
-   * Gets the value of the 'tradingDay' field.
-   * @return The value of the 'tradingDay' field.
-   */
-  public java.lang.String getTradingDay() {
-    return tradingDay;
-  }
-
-  /**
-   * Gets the value of the 'tradingDay' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalTradingDay() {
-    return Optional.<java.lang.String>ofNullable(tradingDay);
-  }
-
-  /**
-   * Sets the value of the 'tradingDay' field.
-   * @param value the value to set.
-   */
-  public void setTradingDay(java.lang.String value) {
-    this.tradingDay = value;
-  }
-
-  /**
-   * Gets the value of the 'instrumentId' field.
-   * @return The value of the 'instrumentId' field.
-   */
-  public java.lang.String getInstrumentId() {
-    return instrumentId;
-  }
-
-  /**
-   * Gets the value of the 'instrumentId' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalInstrumentId() {
-    return Optional.<java.lang.String>ofNullable(instrumentId);
-  }
-
-  /**
-   * Sets the value of the 'instrumentId' field.
-   * @param value the value to set.
-   */
-  public void setInstrumentId(java.lang.String value) {
-    this.instrumentId = value;
-  }
-
-  /**
-   * Gets the value of the 'exchangeId' field.
-   * @return The value of the 'exchangeId' field.
-   */
-  public java.lang.String getExchangeId() {
-    return exchangeId;
-  }
-
-  /**
-   * Gets the value of the 'exchangeId' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalExchangeId() {
-    return Optional.<java.lang.String>ofNullable(exchangeId);
-  }
-
-  /**
-   * Sets the value of the 'exchangeId' field.
-   * @param value the value to set.
-   */
-  public void setExchangeId(java.lang.String value) {
-    this.exchangeId = value;
-  }
-
-  /**
-   * Gets the value of the 'lastPrice' field.
-   * @return The value of the 'lastPrice' field.
-   */
-  public double getLastPrice() {
-    return lastPrice;
-  }
-
-  /**
-   * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalLastPrice() {
-    return Optional.<java.lang.Double>ofNullable(lastPrice);
-  }
-
-  /**
-   * Sets the value of the 'lastPrice' field.
-   * @param value the value to set.
-   */
-  public void setLastPrice(double value) {
-    this.lastPrice = value;
-  }
-
-  /**
-   * Gets the value of the 'preSettlementPrice' field.
-   * @return The value of the 'preSettlementPrice' field.
-   */
-  public double getPreSettlementPrice() {
-    return preSettlementPrice;
-  }
-
-  /**
-   * Gets the value of the 'preSettlementPrice' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalPreSettlementPrice() {
-    return Optional.<java.lang.Double>ofNullable(preSettlementPrice);
-  }
-
-  /**
-   * Sets the value of the 'preSettlementPrice' field.
-   * @param value the value to set.
-   */
-  public void setPreSettlementPrice(double value) {
-    this.preSettlementPrice = value;
-  }
-
-  /**
-   * Gets the value of the 'preClosePrice' field.
-   * @return The value of the 'preClosePrice' field.
-   */
-  public double getPreClosePrice() {
-    return preClosePrice;
-  }
-
-  /**
-   * Gets the value of the 'preClosePrice' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalPreClosePrice() {
-    return Optional.<java.lang.Double>ofNullable(preClosePrice);
-  }
-
-  /**
-   * Sets the value of the 'preClosePrice' field.
-   * @param value the value to set.
-   */
-  public void setPreClosePrice(double value) {
-    this.preClosePrice = value;
-  }
-
-  /**
-   * Gets the value of the 'preOpenInterest' field.
-   * @return The value of the 'preOpenInterest' field.
-   */
-  public double getPreOpenInterest() {
-    return preOpenInterest;
-  }
-
-  /**
-   * Gets the value of the 'preOpenInterest' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalPreOpenInterest() {
-    return Optional.<java.lang.Double>ofNullable(preOpenInterest);
-  }
-
-  /**
-   * Sets the value of the 'preOpenInterest' field.
-   * @param value the value to set.
-   */
-  public void setPreOpenInterest(double value) {
-    this.preOpenInterest = value;
-  }
-
-  /**
-   * Gets the value of the 'openPrice' field.
-   * @return The value of the 'openPrice' field.
-   */
-  public double getOpenPrice() {
-    return openPrice;
-  }
-
-  /**
-   * Gets the value of the 'openPrice' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalOpenPrice() {
-    return Optional.<java.lang.Double>ofNullable(openPrice);
-  }
-
-  /**
-   * Sets the value of the 'openPrice' field.
-   * @param value the value to set.
-   */
-  public void setOpenPrice(double value) {
-    this.openPrice = value;
-  }
-
-  /**
-   * Gets the value of the 'highestPrice' field.
-   * @return The value of the 'highestPrice' field.
-   */
-  public double getHighestPrice() {
-    return highestPrice;
-  }
-
-  /**
-   * Gets the value of the 'highestPrice' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalHighestPrice() {
-    return Optional.<java.lang.Double>ofNullable(highestPrice);
-  }
-
-  /**
-   * Sets the value of the 'highestPrice' field.
-   * @param value the value to set.
-   */
-  public void setHighestPrice(double value) {
-    this.highestPrice = value;
-  }
-
-  /**
-   * Gets the value of the 'lowestPrice' field.
-   * @return The value of the 'lowestPrice' field.
-   */
-  public double getLowestPrice() {
-    return lowestPrice;
-  }
-
-  /**
-   * Gets the value of the 'lowestPrice' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalLowestPrice() {
-    return Optional.<java.lang.Double>ofNullable(lowestPrice);
-  }
-
-  /**
-   * Sets the value of the 'lowestPrice' field.
-   * @param value the value to set.
-   */
-  public void setLowestPrice(double value) {
-    this.lowestPrice = value;
-  }
-
-  /**
-   * Gets the value of the 'volume' field.
-   * @return The value of the 'volume' field.
-   */
-  public int getVolume() {
-    return volume;
-  }
-
-  /**
-   * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalVolume() {
-    return Optional.<java.lang.Integer>ofNullable(volume);
-  }
-
-  /**
-   * Sets the value of the 'volume' field.
-   * @param value the value to set.
-   */
-  public void setVolume(int value) {
-    this.volume = value;
-  }
-
-  /**
-   * Gets the value of the 'turnover' field.
-   * @return The value of the 'turnover' field.
-   */
-  public double getTurnover() {
-    return turnover;
-  }
-
-  /**
-   * Gets the value of the 'turnover' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalTurnover() {
-    return Optional.<java.lang.Double>ofNullable(turnover);
-  }
-
-  /**
-   * Sets the value of the 'turnover' field.
-   * @param value the value to set.
-   */
-  public void setTurnover(double value) {
-    this.turnover = value;
-  }
-
-  /**
-   * Gets the value of the 'openInterest' field.
-   * @return The value of the 'openInterest' field.
-   */
-  public double getOpenInterest() {
-    return openInterest;
-  }
-
-  /**
-   * Gets the value of the 'openInterest' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalOpenInterest() {
-    return Optional.<java.lang.Double>ofNullable(openInterest);
-  }
-
-  /**
-   * Sets the value of the 'openInterest' field.
-   * @param value the value to set.
-   */
-  public void setOpenInterest(double value) {
-    this.openInterest = value;
-  }
-
-  /**
-   * Gets the value of the 'upperLimitPrice' field.
-   * @return The value of the 'upperLimitPrice' field.
-   */
-  public double getUpperLimitPrice() {
-    return upperLimitPrice;
-  }
-
-  /**
-   * Gets the value of the 'upperLimitPrice' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalUpperLimitPrice() {
-    return Optional.<java.lang.Double>ofNullable(upperLimitPrice);
-  }
-
-  /**
-   * Sets the value of the 'upperLimitPrice' field.
-   * @param value the value to set.
-   */
-  public void setUpperLimitPrice(double value) {
-    this.upperLimitPrice = value;
-  }
-
-  /**
-   * Gets the value of the 'lowerLimitPrice' field.
-   * @return The value of the 'lowerLimitPrice' field.
-   */
-  public double getLowerLimitPrice() {
-    return lowerLimitPrice;
-  }
-
-  /**
-   * Gets the value of the 'lowerLimitPrice' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalLowerLimitPrice() {
-    return Optional.<java.lang.Double>ofNullable(lowerLimitPrice);
-  }
-
-  /**
-   * Sets the value of the 'lowerLimitPrice' field.
-   * @param value the value to set.
-   */
-  public void setLowerLimitPrice(double value) {
-    this.lowerLimitPrice = value;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice1' field.
-   * @return The value of the 'bidPrice1' field.
-   */
-  public double getBidPrice1() {
-    return bidPrice1;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice1' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalBidPrice1() {
-    return Optional.<java.lang.Double>ofNullable(bidPrice1);
-  }
-
-  /**
-   * Sets the value of the 'bidPrice1' field.
-   * @param value the value to set.
-   */
-  public void setBidPrice1(double value) {
-    this.bidPrice1 = value;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume1' field.
-   * @return The value of the 'bidVolume1' field.
-   */
-  public int getBidVolume1() {
-    return bidVolume1;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume1' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalBidVolume1() {
-    return Optional.<java.lang.Integer>ofNullable(bidVolume1);
-  }
-
-  /**
-   * Sets the value of the 'bidVolume1' field.
-   * @param value the value to set.
-   */
-  public void setBidVolume1(int value) {
-    this.bidVolume1 = value;
-  }
-
-  /**
-   * Gets the value of the 'askPrice1' field.
-   * @return The value of the 'askPrice1' field.
-   */
-  public double getAskPrice1() {
-    return askPrice1;
-  }
-
-  /**
-   * Gets the value of the 'askPrice1' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalAskPrice1() {
-    return Optional.<java.lang.Double>ofNullable(askPrice1);
-  }
-
-  /**
-   * Sets the value of the 'askPrice1' field.
-   * @param value the value to set.
-   */
-  public void setAskPrice1(double value) {
-    this.askPrice1 = value;
-  }
-
-  /**
-   * Gets the value of the 'askVolume1' field.
-   * @return The value of the 'askVolume1' field.
-   */
-  public int getAskVolume1() {
-    return askVolume1;
-  }
-
-  /**
-   * Gets the value of the 'askVolume1' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalAskVolume1() {
-    return Optional.<java.lang.Integer>ofNullable(askVolume1);
-  }
-
-  /**
-   * Sets the value of the 'askVolume1' field.
-   * @param value the value to set.
-   */
-  public void setAskVolume1(int value) {
-    this.askVolume1 = value;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice2' field.
-   * @return The value of the 'bidPrice2' field.
-   */
-  public double getBidPrice2() {
-    return bidPrice2;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice2' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalBidPrice2() {
-    return Optional.<java.lang.Double>ofNullable(bidPrice2);
-  }
-
-  /**
-   * Sets the value of the 'bidPrice2' field.
-   * @param value the value to set.
-   */
-  public void setBidPrice2(double value) {
-    this.bidPrice2 = value;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume2' field.
-   * @return The value of the 'bidVolume2' field.
-   */
-  public int getBidVolume2() {
-    return bidVolume2;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume2' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalBidVolume2() {
-    return Optional.<java.lang.Integer>ofNullable(bidVolume2);
-  }
-
-  /**
-   * Sets the value of the 'bidVolume2' field.
-   * @param value the value to set.
-   */
-  public void setBidVolume2(int value) {
-    this.bidVolume2 = value;
-  }
-
-  /**
-   * Gets the value of the 'askPrice2' field.
-   * @return The value of the 'askPrice2' field.
-   */
-  public double getAskPrice2() {
-    return askPrice2;
-  }
-
-  /**
-   * Gets the value of the 'askPrice2' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalAskPrice2() {
-    return Optional.<java.lang.Double>ofNullable(askPrice2);
-  }
-
-  /**
-   * Sets the value of the 'askPrice2' field.
-   * @param value the value to set.
-   */
-  public void setAskPrice2(double value) {
-    this.askPrice2 = value;
-  }
-
-  /**
-   * Gets the value of the 'askVolume2' field.
-   * @return The value of the 'askVolume2' field.
-   */
-  public int getAskVolume2() {
-    return askVolume2;
-  }
-
-  /**
-   * Gets the value of the 'askVolume2' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalAskVolume2() {
-    return Optional.<java.lang.Integer>ofNullable(askVolume2);
-  }
-
-  /**
-   * Sets the value of the 'askVolume2' field.
-   * @param value the value to set.
-   */
-  public void setAskVolume2(int value) {
-    this.askVolume2 = value;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice3' field.
-   * @return The value of the 'bidPrice3' field.
-   */
-  public double getBidPrice3() {
-    return bidPrice3;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice3' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalBidPrice3() {
-    return Optional.<java.lang.Double>ofNullable(bidPrice3);
-  }
-
-  /**
-   * Sets the value of the 'bidPrice3' field.
-   * @param value the value to set.
-   */
-  public void setBidPrice3(double value) {
-    this.bidPrice3 = value;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume3' field.
-   * @return The value of the 'bidVolume3' field.
-   */
-  public int getBidVolume3() {
-    return bidVolume3;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume3' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalBidVolume3() {
-    return Optional.<java.lang.Integer>ofNullable(bidVolume3);
-  }
-
-  /**
-   * Sets the value of the 'bidVolume3' field.
-   * @param value the value to set.
-   */
-  public void setBidVolume3(int value) {
-    this.bidVolume3 = value;
-  }
-
-  /**
-   * Gets the value of the 'askPrice3' field.
-   * @return The value of the 'askPrice3' field.
-   */
-  public double getAskPrice3() {
-    return askPrice3;
-  }
-
-  /**
-   * Gets the value of the 'askPrice3' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalAskPrice3() {
-    return Optional.<java.lang.Double>ofNullable(askPrice3);
-  }
-
-  /**
-   * Sets the value of the 'askPrice3' field.
-   * @param value the value to set.
-   */
-  public void setAskPrice3(double value) {
-    this.askPrice3 = value;
-  }
-
-  /**
-   * Gets the value of the 'askVolume3' field.
-   * @return The value of the 'askVolume3' field.
-   */
-  public int getAskVolume3() {
-    return askVolume3;
-  }
-
-  /**
-   * Gets the value of the 'askVolume3' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalAskVolume3() {
-    return Optional.<java.lang.Integer>ofNullable(askVolume3);
-  }
-
-  /**
-   * Sets the value of the 'askVolume3' field.
-   * @param value the value to set.
-   */
-  public void setAskVolume3(int value) {
-    this.askVolume3 = value;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice4' field.
-   * @return The value of the 'bidPrice4' field.
-   */
-  public double getBidPrice4() {
-    return bidPrice4;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice4' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalBidPrice4() {
-    return Optional.<java.lang.Double>ofNullable(bidPrice4);
-  }
-
-  /**
-   * Sets the value of the 'bidPrice4' field.
-   * @param value the value to set.
-   */
-  public void setBidPrice4(double value) {
-    this.bidPrice4 = value;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume4' field.
-   * @return The value of the 'bidVolume4' field.
-   */
-  public int getBidVolume4() {
-    return bidVolume4;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume4' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalBidVolume4() {
-    return Optional.<java.lang.Integer>ofNullable(bidVolume4);
-  }
-
-  /**
-   * Sets the value of the 'bidVolume4' field.
-   * @param value the value to set.
-   */
-  public void setBidVolume4(int value) {
-    this.bidVolume4 = value;
-  }
-
-  /**
-   * Gets the value of the 'askPrice4' field.
-   * @return The value of the 'askPrice4' field.
-   */
-  public double getAskPrice4() {
-    return askPrice4;
-  }
-
-  /**
-   * Gets the value of the 'askPrice4' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalAskPrice4() {
-    return Optional.<java.lang.Double>ofNullable(askPrice4);
-  }
-
-  /**
-   * Sets the value of the 'askPrice4' field.
-   * @param value the value to set.
-   */
-  public void setAskPrice4(double value) {
-    this.askPrice4 = value;
-  }
-
-  /**
-   * Gets the value of the 'askVolume4' field.
-   * @return The value of the 'askVolume4' field.
-   */
-  public int getAskVolume4() {
-    return askVolume4;
-  }
-
-  /**
-   * Gets the value of the 'askVolume4' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalAskVolume4() {
-    return Optional.<java.lang.Integer>ofNullable(askVolume4);
-  }
-
-  /**
-   * Sets the value of the 'askVolume4' field.
-   * @param value the value to set.
-   */
-  public void setAskVolume4(int value) {
-    this.askVolume4 = value;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice5' field.
-   * @return The value of the 'bidPrice5' field.
-   */
-  public double getBidPrice5() {
-    return bidPrice5;
-  }
-
-  /**
-   * Gets the value of the 'bidPrice5' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalBidPrice5() {
-    return Optional.<java.lang.Double>ofNullable(bidPrice5);
-  }
-
-  /**
-   * Sets the value of the 'bidPrice5' field.
-   * @param value the value to set.
-   */
-  public void setBidPrice5(double value) {
-    this.bidPrice5 = value;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume5' field.
-   * @return The value of the 'bidVolume5' field.
-   */
-  public int getBidVolume5() {
-    return bidVolume5;
-  }
-
-  /**
-   * Gets the value of the 'bidVolume5' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalBidVolume5() {
-    return Optional.<java.lang.Integer>ofNullable(bidVolume5);
-  }
-
-  /**
-   * Sets the value of the 'bidVolume5' field.
-   * @param value the value to set.
-   */
-  public void setBidVolume5(int value) {
-    this.bidVolume5 = value;
-  }
-
-  /**
-   * Gets the value of the 'askPrice5' field.
-   * @return The value of the 'askPrice5' field.
-   */
-  public double getAskPrice5() {
-    return askPrice5;
-  }
-
-  /**
-   * Gets the value of the 'askPrice5' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalAskPrice5() {
-    return Optional.<java.lang.Double>ofNullable(askPrice5);
-  }
-
-  /**
-   * Sets the value of the 'askPrice5' field.
-   * @param value the value to set.
-   */
-  public void setAskPrice5(double value) {
-    this.askPrice5 = value;
-  }
-
-  /**
-   * Gets the value of the 'askVolume5' field.
-   * @return The value of the 'askVolume5' field.
-   */
-  public int getAskVolume5() {
-    return askVolume5;
-  }
-
-  /**
-   * Gets the value of the 'askVolume5' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalAskVolume5() {
-    return Optional.<java.lang.Integer>ofNullable(askVolume5);
-  }
-
-  /**
-   * Sets the value of the 'askVolume5' field.
-   * @param value the value to set.
-   */
-  public void setAskVolume5(int value) {
-    this.askVolume5 = value;
-  }
-
-  /**
-   * Gets the value of the 'averagePrice' field.
-   * @return The value of the 'averagePrice' field.
-   */
-  public double getAveragePrice() {
-    return averagePrice;
-  }
-
-  /**
-   * Gets the value of the 'averagePrice' field as an Optional&lt;java.lang.Double&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-   */
-  public Optional<java.lang.Double> getOptionalAveragePrice() {
-    return Optional.<java.lang.Double>ofNullable(averagePrice);
-  }
-
-  /**
-   * Sets the value of the 'averagePrice' field.
-   * @param value the value to set.
-   */
-  public void setAveragePrice(double value) {
-    this.averagePrice = value;
-  }
-
-  /**
-   * Gets the value of the 'updateTime' field.
-   * @return The value of the 'updateTime' field.
-   */
-  public java.lang.String getUpdateTime() {
-    return updateTime;
-  }
-
-  /**
-   * Gets the value of the 'updateTime' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalUpdateTime() {
-    return Optional.<java.lang.String>ofNullable(updateTime);
-  }
-
-  /**
-   * Sets the value of the 'updateTime' field.
-   * @param value the value to set.
-   */
-  public void setUpdateTime(java.lang.String value) {
-    this.updateTime = value;
-  }
-
-  /**
-   * Gets the value of the 'updateMillisec' field.
-   * @return The value of the 'updateMillisec' field.
-   */
-  public int getUpdateMillisec() {
-    return updateMillisec;
-  }
-
-  /**
-   * Gets the value of the 'updateMillisec' field as an Optional&lt;java.lang.Integer&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-   */
-  public Optional<java.lang.Integer> getOptionalUpdateMillisec() {
-    return Optional.<java.lang.Integer>ofNullable(updateMillisec);
-  }
-
-  /**
-   * Sets the value of the 'updateMillisec' field.
-   * @param value the value to set.
-   */
-  public void setUpdateMillisec(int value) {
-    this.updateMillisec = value;
-  }
-
-  /**
-   * Gets the value of the 'localTimestamp' field.
-   * @return The value of the 'localTimestamp' field.
-   */
-  public java.lang.String getLocalTimestamp() {
-    return localTimestamp;
-  }
-
-  /**
-   * Gets the value of the 'localTimestamp' field as an Optional&lt;java.lang.String&gt;.
-   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-   */
-  public Optional<java.lang.String> getOptionalLocalTimestamp() {
-    return Optional.<java.lang.String>ofNullable(localTimestamp);
-  }
-
-  /**
-   * Sets the value of the 'localTimestamp' field.
-   * @param value the value to set.
-   */
-  public void setLocalTimestamp(java.lang.String value) {
-    this.localTimestamp = value;
-  }
-
-  /**
-   * Creates a new MarketDataLevel1 RecordBuilder.
-   * @return A new MarketDataLevel1 RecordBuilder
-   */
-  public static io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder() {
-    return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
-  }
-
-  /**
-   * Creates a new MarketDataLevel1 RecordBuilder by copying an existing Builder.
-   * @param other The existing builder to copy.
-   * @return A new MarketDataLevel1 RecordBuilder
-   */
-  public static io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder(io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder other) {
-    if (other == null) {
-      return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
-    } else {
-      return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder(other);
-    }
-  }
-
-  /**
-   * Creates a new MarketDataLevel1 RecordBuilder by copying an existing MarketDataLevel1 instance.
-   * @param other The existing instance to copy.
-   * @return A new MarketDataLevel1 RecordBuilder
-   */
-  public static io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder(io.apollo.simulator.persistence.avro.entity.MarketDataLevel1 other) {
-    if (other == null) {
-      return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
-    } else {
-      return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder(other);
-    }
-  }
-
-  /**
-   * RecordBuilder for MarketDataLevel1 instances.
-   */
-  @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<MarketDataLevel1>
-    implements org.apache.avro.data.RecordBuilder<MarketDataLevel1> {
-
-    private java.lang.String tradingDay;
-    private java.lang.String instrumentId;
-    private java.lang.String exchangeId;
-    private double lastPrice;
-    private double preSettlementPrice;
-    private double preClosePrice;
-    private double preOpenInterest;
-    private double openPrice;
-    private double highestPrice;
-    private double lowestPrice;
-    private int volume;
-    private double turnover;
-    private double openInterest;
-    private double upperLimitPrice;
-    private double lowerLimitPrice;
-    private double bidPrice1;
-    private int bidVolume1;
-    private double askPrice1;
-    private int askVolume1;
-    private double bidPrice2;
-    private int bidVolume2;
-    private double askPrice2;
-    private int askVolume2;
-    private double bidPrice3;
-    private int bidVolume3;
-    private double askPrice3;
-    private int askVolume3;
-    private double bidPrice4;
-    private int bidVolume4;
-    private double askPrice4;
-    private int askVolume4;
-    private double bidPrice5;
-    private int bidVolume5;
-    private double askPrice5;
-    private int askVolume5;
-    private double averagePrice;
-    private java.lang.String updateTime;
-    private int updateMillisec;
-    private java.lang.String localTimestamp;
-
-    /** Creates a new Builder */
-    private Builder() {
-      super(SCHEMA$);
-    }
-
-    /**
-     * Creates a Builder by copying an existing Builder.
-     * @param other The existing Builder to copy.
-     */
-    private Builder(io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder other) {
-      super(other);
-      if (isValidValue(fields()[0], other.tradingDay)) {
-        this.tradingDay = data().deepCopy(fields()[0].schema(), other.tradingDay);
-        fieldSetFlags()[0] = other.fieldSetFlags()[0];
-      }
-      if (isValidValue(fields()[1], other.instrumentId)) {
-        this.instrumentId = data().deepCopy(fields()[1].schema(), other.instrumentId);
-        fieldSetFlags()[1] = other.fieldSetFlags()[1];
-      }
-      if (isValidValue(fields()[2], other.exchangeId)) {
-        this.exchangeId = data().deepCopy(fields()[2].schema(), other.exchangeId);
-        fieldSetFlags()[2] = other.fieldSetFlags()[2];
-      }
-      if (isValidValue(fields()[3], other.lastPrice)) {
-        this.lastPrice = data().deepCopy(fields()[3].schema(), other.lastPrice);
-        fieldSetFlags()[3] = other.fieldSetFlags()[3];
-      }
-      if (isValidValue(fields()[4], other.preSettlementPrice)) {
-        this.preSettlementPrice = data().deepCopy(fields()[4].schema(), other.preSettlementPrice);
-        fieldSetFlags()[4] = other.fieldSetFlags()[4];
-      }
-      if (isValidValue(fields()[5], other.preClosePrice)) {
-        this.preClosePrice = data().deepCopy(fields()[5].schema(), other.preClosePrice);
-        fieldSetFlags()[5] = other.fieldSetFlags()[5];
-      }
-      if (isValidValue(fields()[6], other.preOpenInterest)) {
-        this.preOpenInterest = data().deepCopy(fields()[6].schema(), other.preOpenInterest);
-        fieldSetFlags()[6] = other.fieldSetFlags()[6];
-      }
-      if (isValidValue(fields()[7], other.openPrice)) {
-        this.openPrice = data().deepCopy(fields()[7].schema(), other.openPrice);
-        fieldSetFlags()[7] = other.fieldSetFlags()[7];
-      }
-      if (isValidValue(fields()[8], other.highestPrice)) {
-        this.highestPrice = data().deepCopy(fields()[8].schema(), other.highestPrice);
-        fieldSetFlags()[8] = other.fieldSetFlags()[8];
-      }
-      if (isValidValue(fields()[9], other.lowestPrice)) {
-        this.lowestPrice = data().deepCopy(fields()[9].schema(), other.lowestPrice);
-        fieldSetFlags()[9] = other.fieldSetFlags()[9];
-      }
-      if (isValidValue(fields()[10], other.volume)) {
-        this.volume = data().deepCopy(fields()[10].schema(), other.volume);
-        fieldSetFlags()[10] = other.fieldSetFlags()[10];
-      }
-      if (isValidValue(fields()[11], other.turnover)) {
-        this.turnover = data().deepCopy(fields()[11].schema(), other.turnover);
-        fieldSetFlags()[11] = other.fieldSetFlags()[11];
-      }
-      if (isValidValue(fields()[12], other.openInterest)) {
-        this.openInterest = data().deepCopy(fields()[12].schema(), other.openInterest);
-        fieldSetFlags()[12] = other.fieldSetFlags()[12];
-      }
-      if (isValidValue(fields()[13], other.upperLimitPrice)) {
-        this.upperLimitPrice = data().deepCopy(fields()[13].schema(), other.upperLimitPrice);
-        fieldSetFlags()[13] = other.fieldSetFlags()[13];
-      }
-      if (isValidValue(fields()[14], other.lowerLimitPrice)) {
-        this.lowerLimitPrice = data().deepCopy(fields()[14].schema(), other.lowerLimitPrice);
-        fieldSetFlags()[14] = other.fieldSetFlags()[14];
-      }
-      if (isValidValue(fields()[15], other.bidPrice1)) {
-        this.bidPrice1 = data().deepCopy(fields()[15].schema(), other.bidPrice1);
-        fieldSetFlags()[15] = other.fieldSetFlags()[15];
-      }
-      if (isValidValue(fields()[16], other.bidVolume1)) {
-        this.bidVolume1 = data().deepCopy(fields()[16].schema(), other.bidVolume1);
-        fieldSetFlags()[16] = other.fieldSetFlags()[16];
-      }
-      if (isValidValue(fields()[17], other.askPrice1)) {
-        this.askPrice1 = data().deepCopy(fields()[17].schema(), other.askPrice1);
-        fieldSetFlags()[17] = other.fieldSetFlags()[17];
-      }
-      if (isValidValue(fields()[18], other.askVolume1)) {
-        this.askVolume1 = data().deepCopy(fields()[18].schema(), other.askVolume1);
-        fieldSetFlags()[18] = other.fieldSetFlags()[18];
-      }
-      if (isValidValue(fields()[19], other.bidPrice2)) {
-        this.bidPrice2 = data().deepCopy(fields()[19].schema(), other.bidPrice2);
-        fieldSetFlags()[19] = other.fieldSetFlags()[19];
-      }
-      if (isValidValue(fields()[20], other.bidVolume2)) {
-        this.bidVolume2 = data().deepCopy(fields()[20].schema(), other.bidVolume2);
-        fieldSetFlags()[20] = other.fieldSetFlags()[20];
-      }
-      if (isValidValue(fields()[21], other.askPrice2)) {
-        this.askPrice2 = data().deepCopy(fields()[21].schema(), other.askPrice2);
-        fieldSetFlags()[21] = other.fieldSetFlags()[21];
-      }
-      if (isValidValue(fields()[22], other.askVolume2)) {
-        this.askVolume2 = data().deepCopy(fields()[22].schema(), other.askVolume2);
-        fieldSetFlags()[22] = other.fieldSetFlags()[22];
-      }
-      if (isValidValue(fields()[23], other.bidPrice3)) {
-        this.bidPrice3 = data().deepCopy(fields()[23].schema(), other.bidPrice3);
-        fieldSetFlags()[23] = other.fieldSetFlags()[23];
-      }
-      if (isValidValue(fields()[24], other.bidVolume3)) {
-        this.bidVolume3 = data().deepCopy(fields()[24].schema(), other.bidVolume3);
-        fieldSetFlags()[24] = other.fieldSetFlags()[24];
-      }
-      if (isValidValue(fields()[25], other.askPrice3)) {
-        this.askPrice3 = data().deepCopy(fields()[25].schema(), other.askPrice3);
-        fieldSetFlags()[25] = other.fieldSetFlags()[25];
-      }
-      if (isValidValue(fields()[26], other.askVolume3)) {
-        this.askVolume3 = data().deepCopy(fields()[26].schema(), other.askVolume3);
-        fieldSetFlags()[26] = other.fieldSetFlags()[26];
-      }
-      if (isValidValue(fields()[27], other.bidPrice4)) {
-        this.bidPrice4 = data().deepCopy(fields()[27].schema(), other.bidPrice4);
-        fieldSetFlags()[27] = other.fieldSetFlags()[27];
-      }
-      if (isValidValue(fields()[28], other.bidVolume4)) {
-        this.bidVolume4 = data().deepCopy(fields()[28].schema(), other.bidVolume4);
-        fieldSetFlags()[28] = other.fieldSetFlags()[28];
-      }
-      if (isValidValue(fields()[29], other.askPrice4)) {
-        this.askPrice4 = data().deepCopy(fields()[29].schema(), other.askPrice4);
-        fieldSetFlags()[29] = other.fieldSetFlags()[29];
-      }
-      if (isValidValue(fields()[30], other.askVolume4)) {
-        this.askVolume4 = data().deepCopy(fields()[30].schema(), other.askVolume4);
-        fieldSetFlags()[30] = other.fieldSetFlags()[30];
-      }
-      if (isValidValue(fields()[31], other.bidPrice5)) {
-        this.bidPrice5 = data().deepCopy(fields()[31].schema(), other.bidPrice5);
-        fieldSetFlags()[31] = other.fieldSetFlags()[31];
-      }
-      if (isValidValue(fields()[32], other.bidVolume5)) {
-        this.bidVolume5 = data().deepCopy(fields()[32].schema(), other.bidVolume5);
-        fieldSetFlags()[32] = other.fieldSetFlags()[32];
-      }
-      if (isValidValue(fields()[33], other.askPrice5)) {
-        this.askPrice5 = data().deepCopy(fields()[33].schema(), other.askPrice5);
-        fieldSetFlags()[33] = other.fieldSetFlags()[33];
-      }
-      if (isValidValue(fields()[34], other.askVolume5)) {
-        this.askVolume5 = data().deepCopy(fields()[34].schema(), other.askVolume5);
-        fieldSetFlags()[34] = other.fieldSetFlags()[34];
-      }
-      if (isValidValue(fields()[35], other.averagePrice)) {
-        this.averagePrice = data().deepCopy(fields()[35].schema(), other.averagePrice);
-        fieldSetFlags()[35] = other.fieldSetFlags()[35];
-      }
-      if (isValidValue(fields()[36], other.updateTime)) {
-        this.updateTime = data().deepCopy(fields()[36].schema(), other.updateTime);
-        fieldSetFlags()[36] = other.fieldSetFlags()[36];
-      }
-      if (isValidValue(fields()[37], other.updateMillisec)) {
-        this.updateMillisec = data().deepCopy(fields()[37].schema(), other.updateMillisec);
-        fieldSetFlags()[37] = other.fieldSetFlags()[37];
-      }
-      if (isValidValue(fields()[38], other.localTimestamp)) {
-        this.localTimestamp = data().deepCopy(fields()[38].schema(), other.localTimestamp);
-        fieldSetFlags()[38] = other.fieldSetFlags()[38];
-      }
-    }
-
-    /**
-     * Creates a Builder by copying an existing MarketDataLevel1 instance
-     * @param other The existing instance to copy.
-     */
-    private Builder(io.apollo.simulator.persistence.avro.entity.MarketDataLevel1 other) {
-      super(SCHEMA$);
-      if (isValidValue(fields()[0], other.tradingDay)) {
-        this.tradingDay = data().deepCopy(fields()[0].schema(), other.tradingDay);
-        fieldSetFlags()[0] = true;
-      }
-      if (isValidValue(fields()[1], other.instrumentId)) {
-        this.instrumentId = data().deepCopy(fields()[1].schema(), other.instrumentId);
-        fieldSetFlags()[1] = true;
-      }
-      if (isValidValue(fields()[2], other.exchangeId)) {
-        this.exchangeId = data().deepCopy(fields()[2].schema(), other.exchangeId);
-        fieldSetFlags()[2] = true;
-      }
-      if (isValidValue(fields()[3], other.lastPrice)) {
-        this.lastPrice = data().deepCopy(fields()[3].schema(), other.lastPrice);
-        fieldSetFlags()[3] = true;
-      }
-      if (isValidValue(fields()[4], other.preSettlementPrice)) {
-        this.preSettlementPrice = data().deepCopy(fields()[4].schema(), other.preSettlementPrice);
-        fieldSetFlags()[4] = true;
-      }
-      if (isValidValue(fields()[5], other.preClosePrice)) {
-        this.preClosePrice = data().deepCopy(fields()[5].schema(), other.preClosePrice);
-        fieldSetFlags()[5] = true;
-      }
-      if (isValidValue(fields()[6], other.preOpenInterest)) {
-        this.preOpenInterest = data().deepCopy(fields()[6].schema(), other.preOpenInterest);
-        fieldSetFlags()[6] = true;
-      }
-      if (isValidValue(fields()[7], other.openPrice)) {
-        this.openPrice = data().deepCopy(fields()[7].schema(), other.openPrice);
-        fieldSetFlags()[7] = true;
-      }
-      if (isValidValue(fields()[8], other.highestPrice)) {
-        this.highestPrice = data().deepCopy(fields()[8].schema(), other.highestPrice);
-        fieldSetFlags()[8] = true;
-      }
-      if (isValidValue(fields()[9], other.lowestPrice)) {
-        this.lowestPrice = data().deepCopy(fields()[9].schema(), other.lowestPrice);
-        fieldSetFlags()[9] = true;
-      }
-      if (isValidValue(fields()[10], other.volume)) {
-        this.volume = data().deepCopy(fields()[10].schema(), other.volume);
-        fieldSetFlags()[10] = true;
-      }
-      if (isValidValue(fields()[11], other.turnover)) {
-        this.turnover = data().deepCopy(fields()[11].schema(), other.turnover);
-        fieldSetFlags()[11] = true;
-      }
-      if (isValidValue(fields()[12], other.openInterest)) {
-        this.openInterest = data().deepCopy(fields()[12].schema(), other.openInterest);
-        fieldSetFlags()[12] = true;
-      }
-      if (isValidValue(fields()[13], other.upperLimitPrice)) {
-        this.upperLimitPrice = data().deepCopy(fields()[13].schema(), other.upperLimitPrice);
-        fieldSetFlags()[13] = true;
-      }
-      if (isValidValue(fields()[14], other.lowerLimitPrice)) {
-        this.lowerLimitPrice = data().deepCopy(fields()[14].schema(), other.lowerLimitPrice);
-        fieldSetFlags()[14] = true;
-      }
-      if (isValidValue(fields()[15], other.bidPrice1)) {
-        this.bidPrice1 = data().deepCopy(fields()[15].schema(), other.bidPrice1);
-        fieldSetFlags()[15] = true;
-      }
-      if (isValidValue(fields()[16], other.bidVolume1)) {
-        this.bidVolume1 = data().deepCopy(fields()[16].schema(), other.bidVolume1);
-        fieldSetFlags()[16] = true;
-      }
-      if (isValidValue(fields()[17], other.askPrice1)) {
-        this.askPrice1 = data().deepCopy(fields()[17].schema(), other.askPrice1);
-        fieldSetFlags()[17] = true;
-      }
-      if (isValidValue(fields()[18], other.askVolume1)) {
-        this.askVolume1 = data().deepCopy(fields()[18].schema(), other.askVolume1);
-        fieldSetFlags()[18] = true;
-      }
-      if (isValidValue(fields()[19], other.bidPrice2)) {
-        this.bidPrice2 = data().deepCopy(fields()[19].schema(), other.bidPrice2);
-        fieldSetFlags()[19] = true;
-      }
-      if (isValidValue(fields()[20], other.bidVolume2)) {
-        this.bidVolume2 = data().deepCopy(fields()[20].schema(), other.bidVolume2);
-        fieldSetFlags()[20] = true;
-      }
-      if (isValidValue(fields()[21], other.askPrice2)) {
-        this.askPrice2 = data().deepCopy(fields()[21].schema(), other.askPrice2);
-        fieldSetFlags()[21] = true;
-      }
-      if (isValidValue(fields()[22], other.askVolume2)) {
-        this.askVolume2 = data().deepCopy(fields()[22].schema(), other.askVolume2);
-        fieldSetFlags()[22] = true;
-      }
-      if (isValidValue(fields()[23], other.bidPrice3)) {
-        this.bidPrice3 = data().deepCopy(fields()[23].schema(), other.bidPrice3);
-        fieldSetFlags()[23] = true;
-      }
-      if (isValidValue(fields()[24], other.bidVolume3)) {
-        this.bidVolume3 = data().deepCopy(fields()[24].schema(), other.bidVolume3);
-        fieldSetFlags()[24] = true;
-      }
-      if (isValidValue(fields()[25], other.askPrice3)) {
-        this.askPrice3 = data().deepCopy(fields()[25].schema(), other.askPrice3);
-        fieldSetFlags()[25] = true;
-      }
-      if (isValidValue(fields()[26], other.askVolume3)) {
-        this.askVolume3 = data().deepCopy(fields()[26].schema(), other.askVolume3);
-        fieldSetFlags()[26] = true;
-      }
-      if (isValidValue(fields()[27], other.bidPrice4)) {
-        this.bidPrice4 = data().deepCopy(fields()[27].schema(), other.bidPrice4);
-        fieldSetFlags()[27] = true;
-      }
-      if (isValidValue(fields()[28], other.bidVolume4)) {
-        this.bidVolume4 = data().deepCopy(fields()[28].schema(), other.bidVolume4);
-        fieldSetFlags()[28] = true;
-      }
-      if (isValidValue(fields()[29], other.askPrice4)) {
-        this.askPrice4 = data().deepCopy(fields()[29].schema(), other.askPrice4);
-        fieldSetFlags()[29] = true;
-      }
-      if (isValidValue(fields()[30], other.askVolume4)) {
-        this.askVolume4 = data().deepCopy(fields()[30].schema(), other.askVolume4);
-        fieldSetFlags()[30] = true;
-      }
-      if (isValidValue(fields()[31], other.bidPrice5)) {
-        this.bidPrice5 = data().deepCopy(fields()[31].schema(), other.bidPrice5);
-        fieldSetFlags()[31] = true;
-      }
-      if (isValidValue(fields()[32], other.bidVolume5)) {
-        this.bidVolume5 = data().deepCopy(fields()[32].schema(), other.bidVolume5);
-        fieldSetFlags()[32] = true;
-      }
-      if (isValidValue(fields()[33], other.askPrice5)) {
-        this.askPrice5 = data().deepCopy(fields()[33].schema(), other.askPrice5);
-        fieldSetFlags()[33] = true;
-      }
-      if (isValidValue(fields()[34], other.askVolume5)) {
-        this.askVolume5 = data().deepCopy(fields()[34].schema(), other.askVolume5);
-        fieldSetFlags()[34] = true;
-      }
-      if (isValidValue(fields()[35], other.averagePrice)) {
-        this.averagePrice = data().deepCopy(fields()[35].schema(), other.averagePrice);
-        fieldSetFlags()[35] = true;
-      }
-      if (isValidValue(fields()[36], other.updateTime)) {
-        this.updateTime = data().deepCopy(fields()[36].schema(), other.updateTime);
-        fieldSetFlags()[36] = true;
-      }
-      if (isValidValue(fields()[37], other.updateMillisec)) {
-        this.updateMillisec = data().deepCopy(fields()[37].schema(), other.updateMillisec);
-        fieldSetFlags()[37] = true;
-      }
-      if (isValidValue(fields()[38], other.localTimestamp)) {
-        this.localTimestamp = data().deepCopy(fields()[38].schema(), other.localTimestamp);
-        fieldSetFlags()[38] = true;
-      }
-    }
-
-    /**
-      * Gets the value of the 'tradingDay' field.
-      * @return The value.
-      */
-    public java.lang.String getTradingDay() {
-      return tradingDay;
-    }
-
-    /**
-      * Gets the value of the 'tradingDay' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalTradingDay() {
-      return Optional.<java.lang.String>ofNullable(tradingDay);
-    }
-
-    /**
-      * Sets the value of the 'tradingDay' field.
-      * @param value The value of 'tradingDay'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setTradingDay(java.lang.String value) {
-      validate(fields()[0], value);
-      this.tradingDay = value;
-      fieldSetFlags()[0] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'tradingDay' field has been set.
-      * @return True if the 'tradingDay' field has been set, false otherwise.
-      */
-    public boolean hasTradingDay() {
-      return fieldSetFlags()[0];
-    }
-
-
-    /**
-      * Clears the value of the 'tradingDay' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearTradingDay() {
-      tradingDay = null;
-      fieldSetFlags()[0] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'instrumentId' field.
-      * @return The value.
-      */
-    public java.lang.String getInstrumentId() {
-      return instrumentId;
-    }
-
-    /**
-      * Gets the value of the 'instrumentId' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalInstrumentId() {
-      return Optional.<java.lang.String>ofNullable(instrumentId);
-    }
-
-    /**
-      * Sets the value of the 'instrumentId' field.
-      * @param value The value of 'instrumentId'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setInstrumentId(java.lang.String value) {
-      validate(fields()[1], value);
-      this.instrumentId = value;
-      fieldSetFlags()[1] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'instrumentId' field has been set.
-      * @return True if the 'instrumentId' field has been set, false otherwise.
-      */
-    public boolean hasInstrumentId() {
-      return fieldSetFlags()[1];
-    }
-
-
-    /**
-      * Clears the value of the 'instrumentId' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearInstrumentId() {
-      instrumentId = null;
-      fieldSetFlags()[1] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'exchangeId' field.
-      * @return The value.
-      */
-    public java.lang.String getExchangeId() {
-      return exchangeId;
-    }
-
-    /**
-      * Gets the value of the 'exchangeId' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalExchangeId() {
-      return Optional.<java.lang.String>ofNullable(exchangeId);
-    }
-
-    /**
-      * Sets the value of the 'exchangeId' field.
-      * @param value The value of 'exchangeId'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setExchangeId(java.lang.String value) {
-      validate(fields()[2], value);
-      this.exchangeId = value;
-      fieldSetFlags()[2] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'exchangeId' field has been set.
-      * @return True if the 'exchangeId' field has been set, false otherwise.
-      */
-    public boolean hasExchangeId() {
-      return fieldSetFlags()[2];
-    }
-
-
-    /**
-      * Clears the value of the 'exchangeId' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearExchangeId() {
-      exchangeId = null;
-      fieldSetFlags()[2] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'lastPrice' field.
-      * @return The value.
-      */
-    public double getLastPrice() {
-      return lastPrice;
-    }
-
-    /**
-      * Gets the value of the 'lastPrice' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalLastPrice() {
-      return Optional.<java.lang.Double>ofNullable(lastPrice);
-    }
-
-    /**
-      * Sets the value of the 'lastPrice' field.
-      * @param value The value of 'lastPrice'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLastPrice(double value) {
-      validate(fields()[3], value);
-      this.lastPrice = value;
-      fieldSetFlags()[3] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'lastPrice' field has been set.
-      * @return True if the 'lastPrice' field has been set, false otherwise.
-      */
-    public boolean hasLastPrice() {
-      return fieldSetFlags()[3];
-    }
-
-
-    /**
-      * Clears the value of the 'lastPrice' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLastPrice() {
-      fieldSetFlags()[3] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'preSettlementPrice' field.
-      * @return The value.
-      */
-    public double getPreSettlementPrice() {
-      return preSettlementPrice;
-    }
-
-    /**
-      * Gets the value of the 'preSettlementPrice' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalPreSettlementPrice() {
-      return Optional.<java.lang.Double>ofNullable(preSettlementPrice);
-    }
-
-    /**
-      * Sets the value of the 'preSettlementPrice' field.
-      * @param value The value of 'preSettlementPrice'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreSettlementPrice(double value) {
-      validate(fields()[4], value);
-      this.preSettlementPrice = value;
-      fieldSetFlags()[4] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'preSettlementPrice' field has been set.
-      * @return True if the 'preSettlementPrice' field has been set, false otherwise.
-      */
-    public boolean hasPreSettlementPrice() {
-      return fieldSetFlags()[4];
-    }
-
-
-    /**
-      * Clears the value of the 'preSettlementPrice' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreSettlementPrice() {
-      fieldSetFlags()[4] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'preClosePrice' field.
-      * @return The value.
-      */
-    public double getPreClosePrice() {
-      return preClosePrice;
-    }
-
-    /**
-      * Gets the value of the 'preClosePrice' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalPreClosePrice() {
-      return Optional.<java.lang.Double>ofNullable(preClosePrice);
-    }
-
-    /**
-      * Sets the value of the 'preClosePrice' field.
-      * @param value The value of 'preClosePrice'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreClosePrice(double value) {
-      validate(fields()[5], value);
-      this.preClosePrice = value;
-      fieldSetFlags()[5] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'preClosePrice' field has been set.
-      * @return True if the 'preClosePrice' field has been set, false otherwise.
-      */
-    public boolean hasPreClosePrice() {
-      return fieldSetFlags()[5];
-    }
-
-
-    /**
-      * Clears the value of the 'preClosePrice' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreClosePrice() {
-      fieldSetFlags()[5] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'preOpenInterest' field.
-      * @return The value.
-      */
-    public double getPreOpenInterest() {
-      return preOpenInterest;
-    }
-
-    /**
-      * Gets the value of the 'preOpenInterest' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalPreOpenInterest() {
-      return Optional.<java.lang.Double>ofNullable(preOpenInterest);
-    }
-
-    /**
-      * Sets the value of the 'preOpenInterest' field.
-      * @param value The value of 'preOpenInterest'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreOpenInterest(double value) {
-      validate(fields()[6], value);
-      this.preOpenInterest = value;
-      fieldSetFlags()[6] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'preOpenInterest' field has been set.
-      * @return True if the 'preOpenInterest' field has been set, false otherwise.
-      */
-    public boolean hasPreOpenInterest() {
-      return fieldSetFlags()[6];
-    }
-
-
-    /**
-      * Clears the value of the 'preOpenInterest' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreOpenInterest() {
-      fieldSetFlags()[6] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'openPrice' field.
-      * @return The value.
-      */
-    public double getOpenPrice() {
-      return openPrice;
-    }
-
-    /**
-      * Gets the value of the 'openPrice' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalOpenPrice() {
-      return Optional.<java.lang.Double>ofNullable(openPrice);
-    }
-
-    /**
-      * Sets the value of the 'openPrice' field.
-      * @param value The value of 'openPrice'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setOpenPrice(double value) {
-      validate(fields()[7], value);
-      this.openPrice = value;
-      fieldSetFlags()[7] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'openPrice' field has been set.
-      * @return True if the 'openPrice' field has been set, false otherwise.
-      */
-    public boolean hasOpenPrice() {
-      return fieldSetFlags()[7];
-    }
-
-
-    /**
-      * Clears the value of the 'openPrice' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearOpenPrice() {
-      fieldSetFlags()[7] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'highestPrice' field.
-      * @return The value.
-      */
-    public double getHighestPrice() {
-      return highestPrice;
-    }
-
-    /**
-      * Gets the value of the 'highestPrice' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalHighestPrice() {
-      return Optional.<java.lang.Double>ofNullable(highestPrice);
-    }
-
-    /**
-      * Sets the value of the 'highestPrice' field.
-      * @param value The value of 'highestPrice'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setHighestPrice(double value) {
-      validate(fields()[8], value);
-      this.highestPrice = value;
-      fieldSetFlags()[8] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'highestPrice' field has been set.
-      * @return True if the 'highestPrice' field has been set, false otherwise.
-      */
-    public boolean hasHighestPrice() {
-      return fieldSetFlags()[8];
-    }
-
-
-    /**
-      * Clears the value of the 'highestPrice' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearHighestPrice() {
-      fieldSetFlags()[8] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'lowestPrice' field.
-      * @return The value.
-      */
-    public double getLowestPrice() {
-      return lowestPrice;
-    }
-
-    /**
-      * Gets the value of the 'lowestPrice' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalLowestPrice() {
-      return Optional.<java.lang.Double>ofNullable(lowestPrice);
-    }
-
-    /**
-      * Sets the value of the 'lowestPrice' field.
-      * @param value The value of 'lowestPrice'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLowestPrice(double value) {
-      validate(fields()[9], value);
-      this.lowestPrice = value;
-      fieldSetFlags()[9] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'lowestPrice' field has been set.
-      * @return True if the 'lowestPrice' field has been set, false otherwise.
-      */
-    public boolean hasLowestPrice() {
-      return fieldSetFlags()[9];
-    }
-
-
-    /**
-      * Clears the value of the 'lowestPrice' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLowestPrice() {
-      fieldSetFlags()[9] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'volume' field.
-      * @return The value.
-      */
-    public int getVolume() {
-      return volume;
-    }
-
-    /**
-      * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalVolume() {
-      return Optional.<java.lang.Integer>ofNullable(volume);
-    }
-
-    /**
-      * Sets the value of the 'volume' field.
-      * @param value The value of 'volume'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setVolume(int value) {
-      validate(fields()[10], value);
-      this.volume = value;
-      fieldSetFlags()[10] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'volume' field has been set.
-      * @return True if the 'volume' field has been set, false otherwise.
-      */
-    public boolean hasVolume() {
-      return fieldSetFlags()[10];
-    }
-
-
-    /**
-      * Clears the value of the 'volume' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearVolume() {
-      fieldSetFlags()[10] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'turnover' field.
-      * @return The value.
-      */
-    public double getTurnover() {
-      return turnover;
-    }
-
-    /**
-      * Gets the value of the 'turnover' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalTurnover() {
-      return Optional.<java.lang.Double>ofNullable(turnover);
-    }
-
-    /**
-      * Sets the value of the 'turnover' field.
-      * @param value The value of 'turnover'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setTurnover(double value) {
-      validate(fields()[11], value);
-      this.turnover = value;
-      fieldSetFlags()[11] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'turnover' field has been set.
-      * @return True if the 'turnover' field has been set, false otherwise.
-      */
-    public boolean hasTurnover() {
-      return fieldSetFlags()[11];
-    }
-
-
-    /**
-      * Clears the value of the 'turnover' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearTurnover() {
-      fieldSetFlags()[11] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'openInterest' field.
-      * @return The value.
-      */
-    public double getOpenInterest() {
-      return openInterest;
-    }
-
-    /**
-      * Gets the value of the 'openInterest' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalOpenInterest() {
-      return Optional.<java.lang.Double>ofNullable(openInterest);
-    }
-
-    /**
-      * Sets the value of the 'openInterest' field.
-      * @param value The value of 'openInterest'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setOpenInterest(double value) {
-      validate(fields()[12], value);
-      this.openInterest = value;
-      fieldSetFlags()[12] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'openInterest' field has been set.
-      * @return True if the 'openInterest' field has been set, false otherwise.
-      */
-    public boolean hasOpenInterest() {
-      return fieldSetFlags()[12];
-    }
-
-
-    /**
-      * Clears the value of the 'openInterest' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearOpenInterest() {
-      fieldSetFlags()[12] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'upperLimitPrice' field.
-      * @return The value.
-      */
-    public double getUpperLimitPrice() {
-      return upperLimitPrice;
-    }
-
-    /**
-      * Gets the value of the 'upperLimitPrice' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalUpperLimitPrice() {
-      return Optional.<java.lang.Double>ofNullable(upperLimitPrice);
-    }
-
-    /**
-      * Sets the value of the 'upperLimitPrice' field.
-      * @param value The value of 'upperLimitPrice'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpperLimitPrice(double value) {
-      validate(fields()[13], value);
-      this.upperLimitPrice = value;
-      fieldSetFlags()[13] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'upperLimitPrice' field has been set.
-      * @return True if the 'upperLimitPrice' field has been set, false otherwise.
-      */
-    public boolean hasUpperLimitPrice() {
-      return fieldSetFlags()[13];
-    }
-
-
-    /**
-      * Clears the value of the 'upperLimitPrice' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpperLimitPrice() {
-      fieldSetFlags()[13] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'lowerLimitPrice' field.
-      * @return The value.
-      */
-    public double getLowerLimitPrice() {
-      return lowerLimitPrice;
-    }
-
-    /**
-      * Gets the value of the 'lowerLimitPrice' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalLowerLimitPrice() {
-      return Optional.<java.lang.Double>ofNullable(lowerLimitPrice);
-    }
-
-    /**
-      * Sets the value of the 'lowerLimitPrice' field.
-      * @param value The value of 'lowerLimitPrice'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLowerLimitPrice(double value) {
-      validate(fields()[14], value);
-      this.lowerLimitPrice = value;
-      fieldSetFlags()[14] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'lowerLimitPrice' field has been set.
-      * @return True if the 'lowerLimitPrice' field has been set, false otherwise.
-      */
-    public boolean hasLowerLimitPrice() {
-      return fieldSetFlags()[14];
-    }
-
-
-    /**
-      * Clears the value of the 'lowerLimitPrice' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLowerLimitPrice() {
-      fieldSetFlags()[14] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice1' field.
-      * @return The value.
-      */
-    public double getBidPrice1() {
-      return bidPrice1;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice1' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalBidPrice1() {
-      return Optional.<java.lang.Double>ofNullable(bidPrice1);
-    }
-
-    /**
-      * Sets the value of the 'bidPrice1' field.
-      * @param value The value of 'bidPrice1'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice1(double value) {
-      validate(fields()[15], value);
-      this.bidPrice1 = value;
-      fieldSetFlags()[15] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidPrice1' field has been set.
-      * @return True if the 'bidPrice1' field has been set, false otherwise.
-      */
-    public boolean hasBidPrice1() {
-      return fieldSetFlags()[15];
-    }
-
-
-    /**
-      * Clears the value of the 'bidPrice1' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice1() {
-      fieldSetFlags()[15] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume1' field.
-      * @return The value.
-      */
-    public int getBidVolume1() {
-      return bidVolume1;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume1' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalBidVolume1() {
-      return Optional.<java.lang.Integer>ofNullable(bidVolume1);
-    }
-
-    /**
-      * Sets the value of the 'bidVolume1' field.
-      * @param value The value of 'bidVolume1'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume1(int value) {
-      validate(fields()[16], value);
-      this.bidVolume1 = value;
-      fieldSetFlags()[16] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidVolume1' field has been set.
-      * @return True if the 'bidVolume1' field has been set, false otherwise.
-      */
-    public boolean hasBidVolume1() {
-      return fieldSetFlags()[16];
-    }
-
-
-    /**
-      * Clears the value of the 'bidVolume1' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume1() {
-      fieldSetFlags()[16] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askPrice1' field.
-      * @return The value.
-      */
-    public double getAskPrice1() {
-      return askPrice1;
-    }
-
-    /**
-      * Gets the value of the 'askPrice1' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalAskPrice1() {
-      return Optional.<java.lang.Double>ofNullable(askPrice1);
-    }
-
-    /**
-      * Sets the value of the 'askPrice1' field.
-      * @param value The value of 'askPrice1'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice1(double value) {
-      validate(fields()[17], value);
-      this.askPrice1 = value;
-      fieldSetFlags()[17] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askPrice1' field has been set.
-      * @return True if the 'askPrice1' field has been set, false otherwise.
-      */
-    public boolean hasAskPrice1() {
-      return fieldSetFlags()[17];
-    }
-
-
-    /**
-      * Clears the value of the 'askPrice1' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice1() {
-      fieldSetFlags()[17] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askVolume1' field.
-      * @return The value.
-      */
-    public int getAskVolume1() {
-      return askVolume1;
-    }
-
-    /**
-      * Gets the value of the 'askVolume1' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalAskVolume1() {
-      return Optional.<java.lang.Integer>ofNullable(askVolume1);
-    }
-
-    /**
-      * Sets the value of the 'askVolume1' field.
-      * @param value The value of 'askVolume1'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume1(int value) {
-      validate(fields()[18], value);
-      this.askVolume1 = value;
-      fieldSetFlags()[18] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askVolume1' field has been set.
-      * @return True if the 'askVolume1' field has been set, false otherwise.
-      */
-    public boolean hasAskVolume1() {
-      return fieldSetFlags()[18];
-    }
-
-
-    /**
-      * Clears the value of the 'askVolume1' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume1() {
-      fieldSetFlags()[18] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice2' field.
-      * @return The value.
-      */
-    public double getBidPrice2() {
-      return bidPrice2;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice2' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalBidPrice2() {
-      return Optional.<java.lang.Double>ofNullable(bidPrice2);
-    }
-
-    /**
-      * Sets the value of the 'bidPrice2' field.
-      * @param value The value of 'bidPrice2'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice2(double value) {
-      validate(fields()[19], value);
-      this.bidPrice2 = value;
-      fieldSetFlags()[19] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidPrice2' field has been set.
-      * @return True if the 'bidPrice2' field has been set, false otherwise.
-      */
-    public boolean hasBidPrice2() {
-      return fieldSetFlags()[19];
-    }
-
-
-    /**
-      * Clears the value of the 'bidPrice2' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice2() {
-      fieldSetFlags()[19] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume2' field.
-      * @return The value.
-      */
-    public int getBidVolume2() {
-      return bidVolume2;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume2' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalBidVolume2() {
-      return Optional.<java.lang.Integer>ofNullable(bidVolume2);
-    }
-
-    /**
-      * Sets the value of the 'bidVolume2' field.
-      * @param value The value of 'bidVolume2'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume2(int value) {
-      validate(fields()[20], value);
-      this.bidVolume2 = value;
-      fieldSetFlags()[20] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidVolume2' field has been set.
-      * @return True if the 'bidVolume2' field has been set, false otherwise.
-      */
-    public boolean hasBidVolume2() {
-      return fieldSetFlags()[20];
-    }
-
-
-    /**
-      * Clears the value of the 'bidVolume2' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume2() {
-      fieldSetFlags()[20] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askPrice2' field.
-      * @return The value.
-      */
-    public double getAskPrice2() {
-      return askPrice2;
-    }
-
-    /**
-      * Gets the value of the 'askPrice2' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalAskPrice2() {
-      return Optional.<java.lang.Double>ofNullable(askPrice2);
-    }
-
-    /**
-      * Sets the value of the 'askPrice2' field.
-      * @param value The value of 'askPrice2'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice2(double value) {
-      validate(fields()[21], value);
-      this.askPrice2 = value;
-      fieldSetFlags()[21] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askPrice2' field has been set.
-      * @return True if the 'askPrice2' field has been set, false otherwise.
-      */
-    public boolean hasAskPrice2() {
-      return fieldSetFlags()[21];
-    }
-
-
-    /**
-      * Clears the value of the 'askPrice2' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice2() {
-      fieldSetFlags()[21] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askVolume2' field.
-      * @return The value.
-      */
-    public int getAskVolume2() {
-      return askVolume2;
-    }
-
-    /**
-      * Gets the value of the 'askVolume2' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalAskVolume2() {
-      return Optional.<java.lang.Integer>ofNullable(askVolume2);
-    }
-
-    /**
-      * Sets the value of the 'askVolume2' field.
-      * @param value The value of 'askVolume2'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume2(int value) {
-      validate(fields()[22], value);
-      this.askVolume2 = value;
-      fieldSetFlags()[22] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askVolume2' field has been set.
-      * @return True if the 'askVolume2' field has been set, false otherwise.
-      */
-    public boolean hasAskVolume2() {
-      return fieldSetFlags()[22];
-    }
-
-
-    /**
-      * Clears the value of the 'askVolume2' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume2() {
-      fieldSetFlags()[22] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice3' field.
-      * @return The value.
-      */
-    public double getBidPrice3() {
-      return bidPrice3;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice3' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalBidPrice3() {
-      return Optional.<java.lang.Double>ofNullable(bidPrice3);
-    }
-
-    /**
-      * Sets the value of the 'bidPrice3' field.
-      * @param value The value of 'bidPrice3'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice3(double value) {
-      validate(fields()[23], value);
-      this.bidPrice3 = value;
-      fieldSetFlags()[23] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidPrice3' field has been set.
-      * @return True if the 'bidPrice3' field has been set, false otherwise.
-      */
-    public boolean hasBidPrice3() {
-      return fieldSetFlags()[23];
-    }
-
-
-    /**
-      * Clears the value of the 'bidPrice3' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice3() {
-      fieldSetFlags()[23] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume3' field.
-      * @return The value.
-      */
-    public int getBidVolume3() {
-      return bidVolume3;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume3' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalBidVolume3() {
-      return Optional.<java.lang.Integer>ofNullable(bidVolume3);
-    }
-
-    /**
-      * Sets the value of the 'bidVolume3' field.
-      * @param value The value of 'bidVolume3'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume3(int value) {
-      validate(fields()[24], value);
-      this.bidVolume3 = value;
-      fieldSetFlags()[24] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidVolume3' field has been set.
-      * @return True if the 'bidVolume3' field has been set, false otherwise.
-      */
-    public boolean hasBidVolume3() {
-      return fieldSetFlags()[24];
-    }
-
-
-    /**
-      * Clears the value of the 'bidVolume3' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume3() {
-      fieldSetFlags()[24] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askPrice3' field.
-      * @return The value.
-      */
-    public double getAskPrice3() {
-      return askPrice3;
-    }
-
-    /**
-      * Gets the value of the 'askPrice3' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalAskPrice3() {
-      return Optional.<java.lang.Double>ofNullable(askPrice3);
-    }
-
-    /**
-      * Sets the value of the 'askPrice3' field.
-      * @param value The value of 'askPrice3'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice3(double value) {
-      validate(fields()[25], value);
-      this.askPrice3 = value;
-      fieldSetFlags()[25] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askPrice3' field has been set.
-      * @return True if the 'askPrice3' field has been set, false otherwise.
-      */
-    public boolean hasAskPrice3() {
-      return fieldSetFlags()[25];
-    }
-
-
-    /**
-      * Clears the value of the 'askPrice3' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice3() {
-      fieldSetFlags()[25] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askVolume3' field.
-      * @return The value.
-      */
-    public int getAskVolume3() {
-      return askVolume3;
-    }
-
-    /**
-      * Gets the value of the 'askVolume3' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalAskVolume3() {
-      return Optional.<java.lang.Integer>ofNullable(askVolume3);
-    }
-
-    /**
-      * Sets the value of the 'askVolume3' field.
-      * @param value The value of 'askVolume3'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume3(int value) {
-      validate(fields()[26], value);
-      this.askVolume3 = value;
-      fieldSetFlags()[26] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askVolume3' field has been set.
-      * @return True if the 'askVolume3' field has been set, false otherwise.
-      */
-    public boolean hasAskVolume3() {
-      return fieldSetFlags()[26];
-    }
-
-
-    /**
-      * Clears the value of the 'askVolume3' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume3() {
-      fieldSetFlags()[26] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice4' field.
-      * @return The value.
-      */
-    public double getBidPrice4() {
-      return bidPrice4;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice4' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalBidPrice4() {
-      return Optional.<java.lang.Double>ofNullable(bidPrice4);
-    }
-
-    /**
-      * Sets the value of the 'bidPrice4' field.
-      * @param value The value of 'bidPrice4'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice4(double value) {
-      validate(fields()[27], value);
-      this.bidPrice4 = value;
-      fieldSetFlags()[27] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidPrice4' field has been set.
-      * @return True if the 'bidPrice4' field has been set, false otherwise.
-      */
-    public boolean hasBidPrice4() {
-      return fieldSetFlags()[27];
-    }
-
-
-    /**
-      * Clears the value of the 'bidPrice4' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice4() {
-      fieldSetFlags()[27] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume4' field.
-      * @return The value.
-      */
-    public int getBidVolume4() {
-      return bidVolume4;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume4' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalBidVolume4() {
-      return Optional.<java.lang.Integer>ofNullable(bidVolume4);
-    }
-
-    /**
-      * Sets the value of the 'bidVolume4' field.
-      * @param value The value of 'bidVolume4'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume4(int value) {
-      validate(fields()[28], value);
-      this.bidVolume4 = value;
-      fieldSetFlags()[28] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidVolume4' field has been set.
-      * @return True if the 'bidVolume4' field has been set, false otherwise.
-      */
-    public boolean hasBidVolume4() {
-      return fieldSetFlags()[28];
-    }
-
-
-    /**
-      * Clears the value of the 'bidVolume4' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume4() {
-      fieldSetFlags()[28] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askPrice4' field.
-      * @return The value.
-      */
-    public double getAskPrice4() {
-      return askPrice4;
-    }
-
-    /**
-      * Gets the value of the 'askPrice4' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalAskPrice4() {
-      return Optional.<java.lang.Double>ofNullable(askPrice4);
-    }
-
-    /**
-      * Sets the value of the 'askPrice4' field.
-      * @param value The value of 'askPrice4'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice4(double value) {
-      validate(fields()[29], value);
-      this.askPrice4 = value;
-      fieldSetFlags()[29] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askPrice4' field has been set.
-      * @return True if the 'askPrice4' field has been set, false otherwise.
-      */
-    public boolean hasAskPrice4() {
-      return fieldSetFlags()[29];
-    }
-
-
-    /**
-      * Clears the value of the 'askPrice4' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice4() {
-      fieldSetFlags()[29] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askVolume4' field.
-      * @return The value.
-      */
-    public int getAskVolume4() {
-      return askVolume4;
-    }
-
-    /**
-      * Gets the value of the 'askVolume4' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalAskVolume4() {
-      return Optional.<java.lang.Integer>ofNullable(askVolume4);
-    }
-
-    /**
-      * Sets the value of the 'askVolume4' field.
-      * @param value The value of 'askVolume4'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume4(int value) {
-      validate(fields()[30], value);
-      this.askVolume4 = value;
-      fieldSetFlags()[30] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askVolume4' field has been set.
-      * @return True if the 'askVolume4' field has been set, false otherwise.
-      */
-    public boolean hasAskVolume4() {
-      return fieldSetFlags()[30];
-    }
-
-
-    /**
-      * Clears the value of the 'askVolume4' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume4() {
-      fieldSetFlags()[30] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice5' field.
-      * @return The value.
-      */
-    public double getBidPrice5() {
-      return bidPrice5;
-    }
-
-    /**
-      * Gets the value of the 'bidPrice5' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalBidPrice5() {
-      return Optional.<java.lang.Double>ofNullable(bidPrice5);
-    }
-
-    /**
-      * Sets the value of the 'bidPrice5' field.
-      * @param value The value of 'bidPrice5'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice5(double value) {
-      validate(fields()[31], value);
-      this.bidPrice5 = value;
-      fieldSetFlags()[31] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidPrice5' field has been set.
-      * @return True if the 'bidPrice5' field has been set, false otherwise.
-      */
-    public boolean hasBidPrice5() {
-      return fieldSetFlags()[31];
-    }
-
-
-    /**
-      * Clears the value of the 'bidPrice5' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice5() {
-      fieldSetFlags()[31] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume5' field.
-      * @return The value.
-      */
-    public int getBidVolume5() {
-      return bidVolume5;
-    }
-
-    /**
-      * Gets the value of the 'bidVolume5' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalBidVolume5() {
-      return Optional.<java.lang.Integer>ofNullable(bidVolume5);
-    }
-
-    /**
-      * Sets the value of the 'bidVolume5' field.
-      * @param value The value of 'bidVolume5'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume5(int value) {
-      validate(fields()[32], value);
-      this.bidVolume5 = value;
-      fieldSetFlags()[32] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bidVolume5' field has been set.
-      * @return True if the 'bidVolume5' field has been set, false otherwise.
-      */
-    public boolean hasBidVolume5() {
-      return fieldSetFlags()[32];
-    }
-
-
-    /**
-      * Clears the value of the 'bidVolume5' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume5() {
-      fieldSetFlags()[32] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askPrice5' field.
-      * @return The value.
-      */
-    public double getAskPrice5() {
-      return askPrice5;
-    }
-
-    /**
-      * Gets the value of the 'askPrice5' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalAskPrice5() {
-      return Optional.<java.lang.Double>ofNullable(askPrice5);
-    }
-
-    /**
-      * Sets the value of the 'askPrice5' field.
-      * @param value The value of 'askPrice5'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice5(double value) {
-      validate(fields()[33], value);
-      this.askPrice5 = value;
-      fieldSetFlags()[33] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askPrice5' field has been set.
-      * @return True if the 'askPrice5' field has been set, false otherwise.
-      */
-    public boolean hasAskPrice5() {
-      return fieldSetFlags()[33];
-    }
-
-
-    /**
-      * Clears the value of the 'askPrice5' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice5() {
-      fieldSetFlags()[33] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'askVolume5' field.
-      * @return The value.
-      */
-    public int getAskVolume5() {
-      return askVolume5;
-    }
-
-    /**
-      * Gets the value of the 'askVolume5' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalAskVolume5() {
-      return Optional.<java.lang.Integer>ofNullable(askVolume5);
-    }
-
-    /**
-      * Sets the value of the 'askVolume5' field.
-      * @param value The value of 'askVolume5'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume5(int value) {
-      validate(fields()[34], value);
-      this.askVolume5 = value;
-      fieldSetFlags()[34] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'askVolume5' field has been set.
-      * @return True if the 'askVolume5' field has been set, false otherwise.
-      */
-    public boolean hasAskVolume5() {
-      return fieldSetFlags()[34];
-    }
-
-
-    /**
-      * Clears the value of the 'askVolume5' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume5() {
-      fieldSetFlags()[34] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'averagePrice' field.
-      * @return The value.
-      */
-    public double getAveragePrice() {
-      return averagePrice;
-    }
-
-    /**
-      * Gets the value of the 'averagePrice' field as an Optional&lt;java.lang.Double&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-      */
-    public Optional<java.lang.Double> getOptionalAveragePrice() {
-      return Optional.<java.lang.Double>ofNullable(averagePrice);
-    }
-
-    /**
-      * Sets the value of the 'averagePrice' field.
-      * @param value The value of 'averagePrice'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAveragePrice(double value) {
-      validate(fields()[35], value);
-      this.averagePrice = value;
-      fieldSetFlags()[35] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'averagePrice' field has been set.
-      * @return True if the 'averagePrice' field has been set, false otherwise.
-      */
-    public boolean hasAveragePrice() {
-      return fieldSetFlags()[35];
-    }
-
-
-    /**
-      * Clears the value of the 'averagePrice' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAveragePrice() {
-      fieldSetFlags()[35] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'updateTime' field.
-      * @return The value.
-      */
-    public java.lang.String getUpdateTime() {
-      return updateTime;
-    }
-
-    /**
-      * Gets the value of the 'updateTime' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalUpdateTime() {
-      return Optional.<java.lang.String>ofNullable(updateTime);
-    }
-
-    /**
-      * Sets the value of the 'updateTime' field.
-      * @param value The value of 'updateTime'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpdateTime(java.lang.String value) {
-      validate(fields()[36], value);
-      this.updateTime = value;
-      fieldSetFlags()[36] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'updateTime' field has been set.
-      * @return True if the 'updateTime' field has been set, false otherwise.
-      */
-    public boolean hasUpdateTime() {
-      return fieldSetFlags()[36];
-    }
-
-
-    /**
-      * Clears the value of the 'updateTime' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpdateTime() {
-      updateTime = null;
-      fieldSetFlags()[36] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'updateMillisec' field.
-      * @return The value.
-      */
-    public int getUpdateMillisec() {
-      return updateMillisec;
-    }
-
-    /**
-      * Gets the value of the 'updateMillisec' field as an Optional&lt;java.lang.Integer&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-      */
-    public Optional<java.lang.Integer> getOptionalUpdateMillisec() {
-      return Optional.<java.lang.Integer>ofNullable(updateMillisec);
-    }
-
-    /**
-      * Sets the value of the 'updateMillisec' field.
-      * @param value The value of 'updateMillisec'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpdateMillisec(int value) {
-      validate(fields()[37], value);
-      this.updateMillisec = value;
-      fieldSetFlags()[37] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'updateMillisec' field has been set.
-      * @return True if the 'updateMillisec' field has been set, false otherwise.
-      */
-    public boolean hasUpdateMillisec() {
-      return fieldSetFlags()[37];
-    }
-
-
-    /**
-      * Clears the value of the 'updateMillisec' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpdateMillisec() {
-      fieldSetFlags()[37] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'localTimestamp' field.
-      * @return The value.
-      */
-    public java.lang.String getLocalTimestamp() {
-      return localTimestamp;
-    }
-
-    /**
-      * Gets the value of the 'localTimestamp' field as an Optional&lt;java.lang.String&gt;.
-      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-      */
-    public Optional<java.lang.String> getOptionalLocalTimestamp() {
-      return Optional.<java.lang.String>ofNullable(localTimestamp);
-    }
-
-    /**
-      * Sets the value of the 'localTimestamp' field.
-      * @param value The value of 'localTimestamp'.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLocalTimestamp(java.lang.String value) {
-      validate(fields()[38], value);
-      this.localTimestamp = value;
-      fieldSetFlags()[38] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'localTimestamp' field has been set.
-      * @return True if the 'localTimestamp' field has been set, false otherwise.
-      */
-    public boolean hasLocalTimestamp() {
-      return fieldSetFlags()[38];
-    }
-
-
-    /**
-      * Clears the value of the 'localTimestamp' field.
-      * @return This builder.
-      */
-    public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLocalTimestamp() {
-      localTimestamp = null;
-      fieldSetFlags()[38] = false;
-      return this;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public MarketDataLevel1 build() {
-      try {
-        MarketDataLevel1 record = new MarketDataLevel1();
-        record.tradingDay = fieldSetFlags()[0] ? this.tradingDay : (java.lang.String) defaultValue(fields()[0]);
-        record.instrumentId = fieldSetFlags()[1] ? this.instrumentId : (java.lang.String) defaultValue(fields()[1]);
-        record.exchangeId = fieldSetFlags()[2] ? this.exchangeId : (java.lang.String) defaultValue(fields()[2]);
-        record.lastPrice = fieldSetFlags()[3] ? this.lastPrice : (java.lang.Double) defaultValue(fields()[3]);
-        record.preSettlementPrice = fieldSetFlags()[4] ? this.preSettlementPrice : (java.lang.Double) defaultValue(fields()[4]);
-        record.preClosePrice = fieldSetFlags()[5] ? this.preClosePrice : (java.lang.Double) defaultValue(fields()[5]);
-        record.preOpenInterest = fieldSetFlags()[6] ? this.preOpenInterest : (java.lang.Double) defaultValue(fields()[6]);
-        record.openPrice = fieldSetFlags()[7] ? this.openPrice : (java.lang.Double) defaultValue(fields()[7]);
-        record.highestPrice = fieldSetFlags()[8] ? this.highestPrice : (java.lang.Double) defaultValue(fields()[8]);
-        record.lowestPrice = fieldSetFlags()[9] ? this.lowestPrice : (java.lang.Double) defaultValue(fields()[9]);
-        record.volume = fieldSetFlags()[10] ? this.volume : (java.lang.Integer) defaultValue(fields()[10]);
-        record.turnover = fieldSetFlags()[11] ? this.turnover : (java.lang.Double) defaultValue(fields()[11]);
-        record.openInterest = fieldSetFlags()[12] ? this.openInterest : (java.lang.Double) defaultValue(fields()[12]);
-        record.upperLimitPrice = fieldSetFlags()[13] ? this.upperLimitPrice : (java.lang.Double) defaultValue(fields()[13]);
-        record.lowerLimitPrice = fieldSetFlags()[14] ? this.lowerLimitPrice : (java.lang.Double) defaultValue(fields()[14]);
-        record.bidPrice1 = fieldSetFlags()[15] ? this.bidPrice1 : (java.lang.Double) defaultValue(fields()[15]);
-        record.bidVolume1 = fieldSetFlags()[16] ? this.bidVolume1 : (java.lang.Integer) defaultValue(fields()[16]);
-        record.askPrice1 = fieldSetFlags()[17] ? this.askPrice1 : (java.lang.Double) defaultValue(fields()[17]);
-        record.askVolume1 = fieldSetFlags()[18] ? this.askVolume1 : (java.lang.Integer) defaultValue(fields()[18]);
-        record.bidPrice2 = fieldSetFlags()[19] ? this.bidPrice2 : (java.lang.Double) defaultValue(fields()[19]);
-        record.bidVolume2 = fieldSetFlags()[20] ? this.bidVolume2 : (java.lang.Integer) defaultValue(fields()[20]);
-        record.askPrice2 = fieldSetFlags()[21] ? this.askPrice2 : (java.lang.Double) defaultValue(fields()[21]);
-        record.askVolume2 = fieldSetFlags()[22] ? this.askVolume2 : (java.lang.Integer) defaultValue(fields()[22]);
-        record.bidPrice3 = fieldSetFlags()[23] ? this.bidPrice3 : (java.lang.Double) defaultValue(fields()[23]);
-        record.bidVolume3 = fieldSetFlags()[24] ? this.bidVolume3 : (java.lang.Integer) defaultValue(fields()[24]);
-        record.askPrice3 = fieldSetFlags()[25] ? this.askPrice3 : (java.lang.Double) defaultValue(fields()[25]);
-        record.askVolume3 = fieldSetFlags()[26] ? this.askVolume3 : (java.lang.Integer) defaultValue(fields()[26]);
-        record.bidPrice4 = fieldSetFlags()[27] ? this.bidPrice4 : (java.lang.Double) defaultValue(fields()[27]);
-        record.bidVolume4 = fieldSetFlags()[28] ? this.bidVolume4 : (java.lang.Integer) defaultValue(fields()[28]);
-        record.askPrice4 = fieldSetFlags()[29] ? this.askPrice4 : (java.lang.Double) defaultValue(fields()[29]);
-        record.askVolume4 = fieldSetFlags()[30] ? this.askVolume4 : (java.lang.Integer) defaultValue(fields()[30]);
-        record.bidPrice5 = fieldSetFlags()[31] ? this.bidPrice5 : (java.lang.Double) defaultValue(fields()[31]);
-        record.bidVolume5 = fieldSetFlags()[32] ? this.bidVolume5 : (java.lang.Integer) defaultValue(fields()[32]);
-        record.askPrice5 = fieldSetFlags()[33] ? this.askPrice5 : (java.lang.Double) defaultValue(fields()[33]);
-        record.askVolume5 = fieldSetFlags()[34] ? this.askVolume5 : (java.lang.Integer) defaultValue(fields()[34]);
-        record.averagePrice = fieldSetFlags()[35] ? this.averagePrice : (java.lang.Double) defaultValue(fields()[35]);
-        record.updateTime = fieldSetFlags()[36] ? this.updateTime : (java.lang.String) defaultValue(fields()[36]);
-        record.updateMillisec = fieldSetFlags()[37] ? this.updateMillisec : (java.lang.Integer) defaultValue(fields()[37]);
-        record.localTimestamp = fieldSetFlags()[38] ? this.localTimestamp : (java.lang.String) defaultValue(fields()[38]);
-        return record;
-      } catch (org.apache.avro.AvroMissingFieldException e) {
-        throw e;
-      } catch (java.lang.Exception e) {
-        throw new org.apache.avro.AvroRuntimeException(e);
-      }
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<MarketDataLevel1>
-    WRITER$ = (org.apache.avro.io.DatumWriter<MarketDataLevel1>)MODEL$.createDatumWriter(SCHEMA$);
-
-  @Override public void writeExternal(java.io.ObjectOutput out)
-    throws java.io.IOException {
-    WRITER$.write(this, SpecificData.getEncoder(out));
-  }
-
-  @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<MarketDataLevel1>
-    READER$ = (org.apache.avro.io.DatumReader<MarketDataLevel1>)MODEL$.createDatumReader(SCHEMA$);
-
-  @Override public void readExternal(java.io.ObjectInput in)
-    throws java.io.IOException {
-    READER$.read(this, SpecificData.getDecoder(in));
-  }
-
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeString(this.tradingDay);
-
-    out.writeString(this.instrumentId);
-
-    out.writeString(this.exchangeId);
-
-    out.writeDouble(this.lastPrice);
-
-    out.writeDouble(this.preSettlementPrice);
-
-    out.writeDouble(this.preClosePrice);
-
-    out.writeDouble(this.preOpenInterest);
-
-    out.writeDouble(this.openPrice);
-
-    out.writeDouble(this.highestPrice);
-
-    out.writeDouble(this.lowestPrice);
-
-    out.writeInt(this.volume);
-
-    out.writeDouble(this.turnover);
-
-    out.writeDouble(this.openInterest);
-
-    out.writeDouble(this.upperLimitPrice);
-
-    out.writeDouble(this.lowerLimitPrice);
-
-    out.writeDouble(this.bidPrice1);
-
-    out.writeInt(this.bidVolume1);
-
-    out.writeDouble(this.askPrice1);
-
-    out.writeInt(this.askVolume1);
-
-    out.writeDouble(this.bidPrice2);
-
-    out.writeInt(this.bidVolume2);
-
-    out.writeDouble(this.askPrice2);
-
-    out.writeInt(this.askVolume2);
-
-    out.writeDouble(this.bidPrice3);
-
-    out.writeInt(this.bidVolume3);
-
-    out.writeDouble(this.askPrice3);
-
-    out.writeInt(this.askVolume3);
-
-    out.writeDouble(this.bidPrice4);
-
-    out.writeInt(this.bidVolume4);
-
-    out.writeDouble(this.askPrice4);
-
-    out.writeInt(this.askVolume4);
-
-    out.writeDouble(this.bidPrice5);
-
-    out.writeInt(this.bidVolume5);
-
-    out.writeDouble(this.askPrice5);
-
-    out.writeInt(this.askVolume5);
-
-    out.writeDouble(this.averagePrice);
-
-    out.writeString(this.updateTime);
-
-    out.writeInt(this.updateMillisec);
-
-    out.writeString(this.localTimestamp);
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.tradingDay = in.readString();
-
-      this.instrumentId = in.readString();
-
-      this.exchangeId = in.readString();
-
-      this.lastPrice = in.readDouble();
-
-      this.preSettlementPrice = in.readDouble();
-
-      this.preClosePrice = in.readDouble();
-
-      this.preOpenInterest = in.readDouble();
-
-      this.openPrice = in.readDouble();
-
-      this.highestPrice = in.readDouble();
-
-      this.lowestPrice = in.readDouble();
-
-      this.volume = in.readInt();
-
-      this.turnover = in.readDouble();
-
-      this.openInterest = in.readDouble();
-
-      this.upperLimitPrice = in.readDouble();
-
-      this.lowerLimitPrice = in.readDouble();
-
-      this.bidPrice1 = in.readDouble();
-
-      this.bidVolume1 = in.readInt();
-
-      this.askPrice1 = in.readDouble();
-
-      this.askVolume1 = in.readInt();
-
-      this.bidPrice2 = in.readDouble();
-
-      this.bidVolume2 = in.readInt();
-
-      this.askPrice2 = in.readDouble();
-
-      this.askVolume2 = in.readInt();
-
-      this.bidPrice3 = in.readDouble();
-
-      this.bidVolume3 = in.readInt();
-
-      this.askPrice3 = in.readDouble();
-
-      this.askVolume3 = in.readInt();
-
-      this.bidPrice4 = in.readDouble();
-
-      this.bidVolume4 = in.readInt();
-
-      this.askPrice4 = in.readDouble();
-
-      this.askVolume4 = in.readInt();
-
-      this.bidPrice5 = in.readDouble();
-
-      this.bidVolume5 = in.readInt();
-
-      this.askPrice5 = in.readDouble();
-
-      this.askVolume5 = in.readInt();
-
-      this.averagePrice = in.readDouble();
-
-      this.updateTime = in.readString();
-
-      this.updateMillisec = in.readInt();
-
-      this.localTimestamp = in.readString();
-
-    } else {
-      for (int i = 0; i < 39; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.tradingDay = in.readString();
-          break;
-
-        case 1:
-          this.instrumentId = in.readString();
-          break;
-
-        case 2:
-          this.exchangeId = in.readString();
-          break;
-
-        case 3:
-          this.lastPrice = in.readDouble();
-          break;
-
-        case 4:
-          this.preSettlementPrice = in.readDouble();
-          break;
-
-        case 5:
-          this.preClosePrice = in.readDouble();
-          break;
-
-        case 6:
-          this.preOpenInterest = in.readDouble();
-          break;
-
-        case 7:
-          this.openPrice = in.readDouble();
-          break;
-
-        case 8:
-          this.highestPrice = in.readDouble();
-          break;
-
-        case 9:
-          this.lowestPrice = in.readDouble();
-          break;
-
-        case 10:
-          this.volume = in.readInt();
-          break;
-
-        case 11:
-          this.turnover = in.readDouble();
-          break;
-
-        case 12:
-          this.openInterest = in.readDouble();
-          break;
-
-        case 13:
-          this.upperLimitPrice = in.readDouble();
-          break;
-
-        case 14:
-          this.lowerLimitPrice = in.readDouble();
-          break;
-
-        case 15:
-          this.bidPrice1 = in.readDouble();
-          break;
-
-        case 16:
-          this.bidVolume1 = in.readInt();
-          break;
-
-        case 17:
-          this.askPrice1 = in.readDouble();
-          break;
-
-        case 18:
-          this.askVolume1 = in.readInt();
-          break;
-
-        case 19:
-          this.bidPrice2 = in.readDouble();
-          break;
-
-        case 20:
-          this.bidVolume2 = in.readInt();
-          break;
-
-        case 21:
-          this.askPrice2 = in.readDouble();
-          break;
-
-        case 22:
-          this.askVolume2 = in.readInt();
-          break;
-
-        case 23:
-          this.bidPrice3 = in.readDouble();
-          break;
-
-        case 24:
-          this.bidVolume3 = in.readInt();
-          break;
-
-        case 25:
-          this.askPrice3 = in.readDouble();
-          break;
-
-        case 26:
-          this.askVolume3 = in.readInt();
-          break;
-
-        case 27:
-          this.bidPrice4 = in.readDouble();
-          break;
-
-        case 28:
-          this.bidVolume4 = in.readInt();
-          break;
-
-        case 29:
-          this.askPrice4 = in.readDouble();
-          break;
-
-        case 30:
-          this.askVolume4 = in.readInt();
-          break;
-
-        case 31:
-          this.bidPrice5 = in.readDouble();
-          break;
-
-        case 32:
-          this.bidVolume5 = in.readInt();
-          break;
-
-        case 33:
-          this.askPrice5 = in.readDouble();
-          break;
-
-        case 34:
-          this.askVolume5 = in.readInt();
-          break;
-
-        case 35:
-          this.averagePrice = in.readDouble();
-          break;
-
-        case 36:
-          this.updateTime = in.readString();
-          break;
-
-        case 37:
-          this.updateMillisec = in.readInt();
-          break;
-
-        case 38:
-          this.localTimestamp = in.readString();
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
+public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBase
+		implements org.apache.avro.specific.SpecificRecord {
+	private static final long serialVersionUID = -7874409622385925980L;
+	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
+			"{\"type\":\"record\",\"name\":\"MarketDataLevel1\",\"namespace\":\"io.apollo.simulator.persistence.avro.entity\",\"fields\":[{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastPrice\",\"type\":\"double\"},{\"name\":\"preSettlementPrice\",\"type\":\"double\"},{\"name\":\"preClosePrice\",\"type\":\"double\"},{\"name\":\"preOpenInterest\",\"type\":\"double\"},{\"name\":\"openPrice\",\"type\":\"double\"},{\"name\":\"highestPrice\",\"type\":\"double\"},{\"name\":\"lowestPrice\",\"type\":\"double\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"turnover\",\"type\":\"double\"},{\"name\":\"openInterest\",\"type\":\"double\"},{\"name\":\"upperLimitPrice\",\"type\":\"double\"},{\"name\":\"lowerLimitPrice\",\"type\":\"double\"},{\"name\":\"bidPrice1\",\"type\":\"double\"},{\"name\":\"bidVolume1\",\"type\":\"int\"},{\"name\":\"askPrice1\",\"type\":\"double\"},{\"name\":\"askVolume1\",\"type\":\"int\"},{\"name\":\"bidPrice2\",\"type\":\"double\"},{\"name\":\"bidVolume2\",\"type\":\"int\"},{\"name\":\"askPrice2\",\"type\":\"double\"},{\"name\":\"askVolume2\",\"type\":\"int\"},{\"name\":\"bidPrice3\",\"type\":\"double\"},{\"name\":\"bidVolume3\",\"type\":\"int\"},{\"name\":\"askPrice3\",\"type\":\"double\"},{\"name\":\"askVolume3\",\"type\":\"int\"},{\"name\":\"bidPrice4\",\"type\":\"double\"},{\"name\":\"bidVolume4\",\"type\":\"int\"},{\"name\":\"askPrice4\",\"type\":\"double\"},{\"name\":\"askVolume4\",\"type\":\"int\"},{\"name\":\"bidPrice5\",\"type\":\"double\"},{\"name\":\"bidVolume5\",\"type\":\"int\"},{\"name\":\"askPrice5\",\"type\":\"double\"},{\"name\":\"askVolume5\",\"type\":\"int\"},{\"name\":\"averagePrice\",\"type\":\"double\"},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updateMillisec\",\"type\":\"int\"},{\"name\":\"localTimestamp\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+
+	public static org.apache.avro.Schema getClassSchema() {
+		return SCHEMA$;
+	}
+
+	private static SpecificData MODEL$ = new SpecificData();
+
+	private static final BinaryMessageEncoder<MarketDataLevel1> ENCODER = new BinaryMessageEncoder<MarketDataLevel1>(
+			MODEL$, SCHEMA$);
+
+	private static final BinaryMessageDecoder<MarketDataLevel1> DECODER = new BinaryMessageDecoder<MarketDataLevel1>(
+			MODEL$, SCHEMA$);
+
+	/**
+	 * Return the BinaryMessageEncoder instance used by this class.
+	 * 
+	 * @return the message encoder used by this class
+	 */
+	public static BinaryMessageEncoder<MarketDataLevel1> getEncoder() {
+		return ENCODER;
+	}
+
+	/**
+	 * Return the BinaryMessageDecoder instance used by this class.
+	 * 
+	 * @return the message decoder used by this class
+	 */
+	public static BinaryMessageDecoder<MarketDataLevel1> getDecoder() {
+		return DECODER;
+	}
+
+	/**
+	 * Create a new BinaryMessageDecoder instance for this class that uses the
+	 * specified {@link SchemaStore}.
+	 * 
+	 * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
+	 * @return a BinaryMessageDecoder instance for this class backed by the given
+	 *         SchemaStore
+	 */
+	public static BinaryMessageDecoder<MarketDataLevel1> createDecoder(SchemaStore resolver) {
+		return new BinaryMessageDecoder<MarketDataLevel1>(MODEL$, SCHEMA$, resolver);
+	}
+
+	/**
+	 * Serializes this MarketDataLevel1 to a ByteBuffer.
+	 * 
+	 * @return a buffer holding the serialized data for this instance
+	 * @throws java.io.IOException if this instance could not be serialized
+	 */
+	public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
+		return ENCODER.encode(this);
+	}
+
+	/**
+	 * Deserializes a MarketDataLevel1 from a ByteBuffer.
+	 * 
+	 * @param b a byte buffer holding serialized data for an instance of this class
+	 * @return a MarketDataLevel1 instance decoded from the given buffer
+	 * @throws java.io.IOException if the given bytes could not be deserialized into
+	 *                             an instance of this class
+	 */
+	public static MarketDataLevel1 fromByteBuffer(java.nio.ByteBuffer b) throws java.io.IOException {
+		return DECODER.decode(b);
+	}
+
+	private java.lang.String tradingDay;
+	private java.lang.String instrumentId;
+	private java.lang.String exchangeId;
+	private double lastPrice;
+	private double preSettlementPrice;
+	private double preClosePrice;
+	private double preOpenInterest;
+	private double openPrice;
+	private double highestPrice;
+	private double lowestPrice;
+	private int volume;
+	private double turnover;
+	private double openInterest;
+	private double upperLimitPrice;
+	private double lowerLimitPrice;
+	private double bidPrice1;
+	private int bidVolume1;
+	private double askPrice1;
+	private int askVolume1;
+	private double bidPrice2;
+	private int bidVolume2;
+	private double askPrice2;
+	private int askVolume2;
+	private double bidPrice3;
+	private int bidVolume3;
+	private double askPrice3;
+	private int askVolume3;
+	private double bidPrice4;
+	private int bidVolume4;
+	private double askPrice4;
+	private int askVolume4;
+	private double bidPrice5;
+	private int bidVolume5;
+	private double askPrice5;
+	private int askVolume5;
+	private double averagePrice;
+	private java.lang.String updateTime;
+	private int updateMillisec;
+	private java.lang.String localTimestamp;
+
+	/**
+	 * Default constructor. Note that this does not initialize fields to their
+	 * default values from the schema. If that is desired then one should use
+	 * <code>newBuilder()</code>.
+	 */
+	public MarketDataLevel1() {
+	}
+
+	/**
+	 * All-args constructor.
+	 * 
+	 * @param tradingDay         The new value for tradingDay
+	 * @param instrumentId       The new value for instrumentId
+	 * @param exchangeId         The new value for exchangeId
+	 * @param lastPrice          The new value for lastPrice
+	 * @param preSettlementPrice The new value for preSettlementPrice
+	 * @param preClosePrice      The new value for preClosePrice
+	 * @param preOpenInterest    The new value for preOpenInterest
+	 * @param openPrice          The new value for openPrice
+	 * @param highestPrice       The new value for highestPrice
+	 * @param lowestPrice        The new value for lowestPrice
+	 * @param volume             The new value for volume
+	 * @param turnover           The new value for turnover
+	 * @param openInterest       The new value for openInterest
+	 * @param upperLimitPrice    The new value for upperLimitPrice
+	 * @param lowerLimitPrice    The new value for lowerLimitPrice
+	 * @param bidPrice1          The new value for bidPrice1
+	 * @param bidVolume1         The new value for bidVolume1
+	 * @param askPrice1          The new value for askPrice1
+	 * @param askVolume1         The new value for askVolume1
+	 * @param bidPrice2          The new value for bidPrice2
+	 * @param bidVolume2         The new value for bidVolume2
+	 * @param askPrice2          The new value for askPrice2
+	 * @param askVolume2         The new value for askVolume2
+	 * @param bidPrice3          The new value for bidPrice3
+	 * @param bidVolume3         The new value for bidVolume3
+	 * @param askPrice3          The new value for askPrice3
+	 * @param askVolume3         The new value for askVolume3
+	 * @param bidPrice4          The new value for bidPrice4
+	 * @param bidVolume4         The new value for bidVolume4
+	 * @param askPrice4          The new value for askPrice4
+	 * @param askVolume4         The new value for askVolume4
+	 * @param bidPrice5          The new value for bidPrice5
+	 * @param bidVolume5         The new value for bidVolume5
+	 * @param askPrice5          The new value for askPrice5
+	 * @param askVolume5         The new value for askVolume5
+	 * @param averagePrice       The new value for averagePrice
+	 * @param updateTime         The new value for updateTime
+	 * @param updateMillisec     The new value for updateMillisec
+	 * @param localTimestamp     The new value for localTimestamp
+	 */
+	public MarketDataLevel1(java.lang.String tradingDay, java.lang.String instrumentId, java.lang.String exchangeId,
+			java.lang.Double lastPrice, java.lang.Double preSettlementPrice, java.lang.Double preClosePrice,
+			java.lang.Double preOpenInterest, java.lang.Double openPrice, java.lang.Double highestPrice,
+			java.lang.Double lowestPrice, java.lang.Integer volume, java.lang.Double turnover,
+			java.lang.Double openInterest, java.lang.Double upperLimitPrice, java.lang.Double lowerLimitPrice,
+			java.lang.Double bidPrice1, java.lang.Integer bidVolume1, java.lang.Double askPrice1,
+			java.lang.Integer askVolume1, java.lang.Double bidPrice2, java.lang.Integer bidVolume2,
+			java.lang.Double askPrice2, java.lang.Integer askVolume2, java.lang.Double bidPrice3,
+			java.lang.Integer bidVolume3, java.lang.Double askPrice3, java.lang.Integer askVolume3,
+			java.lang.Double bidPrice4, java.lang.Integer bidVolume4, java.lang.Double askPrice4,
+			java.lang.Integer askVolume4, java.lang.Double bidPrice5, java.lang.Integer bidVolume5,
+			java.lang.Double askPrice5, java.lang.Integer askVolume5, java.lang.Double averagePrice,
+			java.lang.String updateTime, java.lang.Integer updateMillisec, java.lang.String localTimestamp) {
+		this.tradingDay = tradingDay;
+		this.instrumentId = instrumentId;
+		this.exchangeId = exchangeId;
+		this.lastPrice = lastPrice;
+		this.preSettlementPrice = preSettlementPrice;
+		this.preClosePrice = preClosePrice;
+		this.preOpenInterest = preOpenInterest;
+		this.openPrice = openPrice;
+		this.highestPrice = highestPrice;
+		this.lowestPrice = lowestPrice;
+		this.volume = volume;
+		this.turnover = turnover;
+		this.openInterest = openInterest;
+		this.upperLimitPrice = upperLimitPrice;
+		this.lowerLimitPrice = lowerLimitPrice;
+		this.bidPrice1 = bidPrice1;
+		this.bidVolume1 = bidVolume1;
+		this.askPrice1 = askPrice1;
+		this.askVolume1 = askVolume1;
+		this.bidPrice2 = bidPrice2;
+		this.bidVolume2 = bidVolume2;
+		this.askPrice2 = askPrice2;
+		this.askVolume2 = askVolume2;
+		this.bidPrice3 = bidPrice3;
+		this.bidVolume3 = bidVolume3;
+		this.askPrice3 = askPrice3;
+		this.askVolume3 = askVolume3;
+		this.bidPrice4 = bidPrice4;
+		this.bidVolume4 = bidVolume4;
+		this.askPrice4 = askPrice4;
+		this.askVolume4 = askVolume4;
+		this.bidPrice5 = bidPrice5;
+		this.bidVolume5 = bidVolume5;
+		this.askPrice5 = askPrice5;
+		this.askVolume5 = askVolume5;
+		this.averagePrice = averagePrice;
+		this.updateTime = updateTime;
+		this.updateMillisec = updateMillisec;
+		this.localTimestamp = localTimestamp;
+	}
+
+	public org.apache.avro.specific.SpecificData getSpecificData() {
+		return MODEL$;
+	}
+
+	public org.apache.avro.Schema getSchema() {
+		return SCHEMA$;
+	}
+
+	// Used by DatumWriter. Applications should not call.
+	public java.lang.Object get(int field$) {
+		switch (field$) {
+		case 0:
+			return tradingDay;
+		case 1:
+			return instrumentId;
+		case 2:
+			return exchangeId;
+		case 3:
+			return lastPrice;
+		case 4:
+			return preSettlementPrice;
+		case 5:
+			return preClosePrice;
+		case 6:
+			return preOpenInterest;
+		case 7:
+			return openPrice;
+		case 8:
+			return highestPrice;
+		case 9:
+			return lowestPrice;
+		case 10:
+			return volume;
+		case 11:
+			return turnover;
+		case 12:
+			return openInterest;
+		case 13:
+			return upperLimitPrice;
+		case 14:
+			return lowerLimitPrice;
+		case 15:
+			return bidPrice1;
+		case 16:
+			return bidVolume1;
+		case 17:
+			return askPrice1;
+		case 18:
+			return askVolume1;
+		case 19:
+			return bidPrice2;
+		case 20:
+			return bidVolume2;
+		case 21:
+			return askPrice2;
+		case 22:
+			return askVolume2;
+		case 23:
+			return bidPrice3;
+		case 24:
+			return bidVolume3;
+		case 25:
+			return askPrice3;
+		case 26:
+			return askVolume3;
+		case 27:
+			return bidPrice4;
+		case 28:
+			return bidVolume4;
+		case 29:
+			return askPrice4;
+		case 30:
+			return askVolume4;
+		case 31:
+			return bidPrice5;
+		case 32:
+			return bidVolume5;
+		case 33:
+			return askPrice5;
+		case 34:
+			return askVolume5;
+		case 35:
+			return averagePrice;
+		case 36:
+			return updateTime;
+		case 37:
+			return updateMillisec;
+		case 38:
+			return localTimestamp;
+		default:
+			throw new IndexOutOfBoundsException("Invalid index: " + field$);
+		}
+	}
+
+	// Used by DatumReader. Applications should not call.
+	public void put(int field$, java.lang.Object value$) {
+		switch (field$) {
+		case 0:
+			tradingDay = value$ != null ? value$.toString() : null;
+			break;
+		case 1:
+			instrumentId = value$ != null ? value$.toString() : null;
+			break;
+		case 2:
+			exchangeId = value$ != null ? value$.toString() : null;
+			break;
+		case 3:
+			lastPrice = (java.lang.Double) value$;
+			break;
+		case 4:
+			preSettlementPrice = (java.lang.Double) value$;
+			break;
+		case 5:
+			preClosePrice = (java.lang.Double) value$;
+			break;
+		case 6:
+			preOpenInterest = (java.lang.Double) value$;
+			break;
+		case 7:
+			openPrice = (java.lang.Double) value$;
+			break;
+		case 8:
+			highestPrice = (java.lang.Double) value$;
+			break;
+		case 9:
+			lowestPrice = (java.lang.Double) value$;
+			break;
+		case 10:
+			volume = (java.lang.Integer) value$;
+			break;
+		case 11:
+			turnover = (java.lang.Double) value$;
+			break;
+		case 12:
+			openInterest = (java.lang.Double) value$;
+			break;
+		case 13:
+			upperLimitPrice = (java.lang.Double) value$;
+			break;
+		case 14:
+			lowerLimitPrice = (java.lang.Double) value$;
+			break;
+		case 15:
+			bidPrice1 = (java.lang.Double) value$;
+			break;
+		case 16:
+			bidVolume1 = (java.lang.Integer) value$;
+			break;
+		case 17:
+			askPrice1 = (java.lang.Double) value$;
+			break;
+		case 18:
+			askVolume1 = (java.lang.Integer) value$;
+			break;
+		case 19:
+			bidPrice2 = (java.lang.Double) value$;
+			break;
+		case 20:
+			bidVolume2 = (java.lang.Integer) value$;
+			break;
+		case 21:
+			askPrice2 = (java.lang.Double) value$;
+			break;
+		case 22:
+			askVolume2 = (java.lang.Integer) value$;
+			break;
+		case 23:
+			bidPrice3 = (java.lang.Double) value$;
+			break;
+		case 24:
+			bidVolume3 = (java.lang.Integer) value$;
+			break;
+		case 25:
+			askPrice3 = (java.lang.Double) value$;
+			break;
+		case 26:
+			askVolume3 = (java.lang.Integer) value$;
+			break;
+		case 27:
+			bidPrice4 = (java.lang.Double) value$;
+			break;
+		case 28:
+			bidVolume4 = (java.lang.Integer) value$;
+			break;
+		case 29:
+			askPrice4 = (java.lang.Double) value$;
+			break;
+		case 30:
+			askVolume4 = (java.lang.Integer) value$;
+			break;
+		case 31:
+			bidPrice5 = (java.lang.Double) value$;
+			break;
+		case 32:
+			bidVolume5 = (java.lang.Integer) value$;
+			break;
+		case 33:
+			askPrice5 = (java.lang.Double) value$;
+			break;
+		case 34:
+			askVolume5 = (java.lang.Integer) value$;
+			break;
+		case 35:
+			averagePrice = (java.lang.Double) value$;
+			break;
+		case 36:
+			updateTime = value$ != null ? value$.toString() : null;
+			break;
+		case 37:
+			updateMillisec = (java.lang.Integer) value$;
+			break;
+		case 38:
+			localTimestamp = value$ != null ? value$.toString() : null;
+			break;
+		default:
+			throw new IndexOutOfBoundsException("Invalid index: " + field$);
+		}
+	}
+
+	/**
+	 * Gets the value of the 'tradingDay' field.
+	 * 
+	 * @return The value of the 'tradingDay' field.
+	 */
+	public java.lang.String getTradingDay() {
+		return tradingDay;
+	}
+
+	/**
+	 * Gets the value of the 'tradingDay' field as an
+	 * Optional&lt;java.lang.String&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+	 */
+	public Optional<java.lang.String> getOptionalTradingDay() {
+		return Optional.<java.lang.String>ofNullable(tradingDay);
+	}
+
+	/**
+	 * Sets the value of the 'tradingDay' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setTradingDay(java.lang.String value) {
+		this.tradingDay = value;
+	}
+
+	/**
+	 * Gets the value of the 'instrumentId' field.
+	 * 
+	 * @return The value of the 'instrumentId' field.
+	 */
+	public java.lang.String getInstrumentId() {
+		return instrumentId;
+	}
+
+	/**
+	 * Gets the value of the 'instrumentId' field as an
+	 * Optional&lt;java.lang.String&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+	 */
+	public Optional<java.lang.String> getOptionalInstrumentId() {
+		return Optional.<java.lang.String>ofNullable(instrumentId);
+	}
+
+	/**
+	 * Sets the value of the 'instrumentId' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setInstrumentId(java.lang.String value) {
+		this.instrumentId = value;
+	}
+
+	/**
+	 * Gets the value of the 'exchangeId' field.
+	 * 
+	 * @return The value of the 'exchangeId' field.
+	 */
+	public java.lang.String getExchangeId() {
+		return exchangeId;
+	}
+
+	/**
+	 * Gets the value of the 'exchangeId' field as an
+	 * Optional&lt;java.lang.String&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+	 */
+	public Optional<java.lang.String> getOptionalExchangeId() {
+		return Optional.<java.lang.String>ofNullable(exchangeId);
+	}
+
+	/**
+	 * Sets the value of the 'exchangeId' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setExchangeId(java.lang.String value) {
+		this.exchangeId = value;
+	}
+
+	/**
+	 * Gets the value of the 'lastPrice' field.
+	 * 
+	 * @return The value of the 'lastPrice' field.
+	 */
+	public double getLastPrice() {
+		return lastPrice;
+	}
+
+	/**
+	 * Gets the value of the 'lastPrice' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalLastPrice() {
+		return Optional.<java.lang.Double>ofNullable(lastPrice);
+	}
+
+	/**
+	 * Sets the value of the 'lastPrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setLastPrice(double value) {
+		this.lastPrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'preSettlementPrice' field.
+	 * 
+	 * @return The value of the 'preSettlementPrice' field.
+	 */
+	public double getPreSettlementPrice() {
+		return preSettlementPrice;
+	}
+
+	/**
+	 * Gets the value of the 'preSettlementPrice' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalPreSettlementPrice() {
+		return Optional.<java.lang.Double>ofNullable(preSettlementPrice);
+	}
+
+	/**
+	 * Sets the value of the 'preSettlementPrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setPreSettlementPrice(double value) {
+		this.preSettlementPrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'preClosePrice' field.
+	 * 
+	 * @return The value of the 'preClosePrice' field.
+	 */
+	public double getPreClosePrice() {
+		return preClosePrice;
+	}
+
+	/**
+	 * Gets the value of the 'preClosePrice' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalPreClosePrice() {
+		return Optional.<java.lang.Double>ofNullable(preClosePrice);
+	}
+
+	/**
+	 * Sets the value of the 'preClosePrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setPreClosePrice(double value) {
+		this.preClosePrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'preOpenInterest' field.
+	 * 
+	 * @return The value of the 'preOpenInterest' field.
+	 */
+	public double getPreOpenInterest() {
+		return preOpenInterest;
+	}
+
+	/**
+	 * Gets the value of the 'preOpenInterest' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalPreOpenInterest() {
+		return Optional.<java.lang.Double>ofNullable(preOpenInterest);
+	}
+
+	/**
+	 * Sets the value of the 'preOpenInterest' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setPreOpenInterest(double value) {
+		this.preOpenInterest = value;
+	}
+
+	/**
+	 * Gets the value of the 'openPrice' field.
+	 * 
+	 * @return The value of the 'openPrice' field.
+	 */
+	public double getOpenPrice() {
+		return openPrice;
+	}
+
+	/**
+	 * Gets the value of the 'openPrice' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalOpenPrice() {
+		return Optional.<java.lang.Double>ofNullable(openPrice);
+	}
+
+	/**
+	 * Sets the value of the 'openPrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setOpenPrice(double value) {
+		this.openPrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'highestPrice' field.
+	 * 
+	 * @return The value of the 'highestPrice' field.
+	 */
+	public double getHighestPrice() {
+		return highestPrice;
+	}
+
+	/**
+	 * Gets the value of the 'highestPrice' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalHighestPrice() {
+		return Optional.<java.lang.Double>ofNullable(highestPrice);
+	}
+
+	/**
+	 * Sets the value of the 'highestPrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setHighestPrice(double value) {
+		this.highestPrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'lowestPrice' field.
+	 * 
+	 * @return The value of the 'lowestPrice' field.
+	 */
+	public double getLowestPrice() {
+		return lowestPrice;
+	}
+
+	/**
+	 * Gets the value of the 'lowestPrice' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalLowestPrice() {
+		return Optional.<java.lang.Double>ofNullable(lowestPrice);
+	}
+
+	/**
+	 * Sets the value of the 'lowestPrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setLowestPrice(double value) {
+		this.lowestPrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'volume' field.
+	 * 
+	 * @return The value of the 'volume' field.
+	 */
+	public int getVolume() {
+		return volume;
+	}
+
+	/**
+	 * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalVolume() {
+		return Optional.<java.lang.Integer>ofNullable(volume);
+	}
+
+	/**
+	 * Sets the value of the 'volume' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setVolume(int value) {
+		this.volume = value;
+	}
+
+	/**
+	 * Gets the value of the 'turnover' field.
+	 * 
+	 * @return The value of the 'turnover' field.
+	 */
+	public double getTurnover() {
+		return turnover;
+	}
+
+	/**
+	 * Gets the value of the 'turnover' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalTurnover() {
+		return Optional.<java.lang.Double>ofNullable(turnover);
+	}
+
+	/**
+	 * Sets the value of the 'turnover' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setTurnover(double value) {
+		this.turnover = value;
+	}
+
+	/**
+	 * Gets the value of the 'openInterest' field.
+	 * 
+	 * @return The value of the 'openInterest' field.
+	 */
+	public double getOpenInterest() {
+		return openInterest;
+	}
+
+	/**
+	 * Gets the value of the 'openInterest' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalOpenInterest() {
+		return Optional.<java.lang.Double>ofNullable(openInterest);
+	}
+
+	/**
+	 * Sets the value of the 'openInterest' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setOpenInterest(double value) {
+		this.openInterest = value;
+	}
+
+	/**
+	 * Gets the value of the 'upperLimitPrice' field.
+	 * 
+	 * @return The value of the 'upperLimitPrice' field.
+	 */
+	public double getUpperLimitPrice() {
+		return upperLimitPrice;
+	}
+
+	/**
+	 * Gets the value of the 'upperLimitPrice' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalUpperLimitPrice() {
+		return Optional.<java.lang.Double>ofNullable(upperLimitPrice);
+	}
+
+	/**
+	 * Sets the value of the 'upperLimitPrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setUpperLimitPrice(double value) {
+		this.upperLimitPrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'lowerLimitPrice' field.
+	 * 
+	 * @return The value of the 'lowerLimitPrice' field.
+	 */
+	public double getLowerLimitPrice() {
+		return lowerLimitPrice;
+	}
+
+	/**
+	 * Gets the value of the 'lowerLimitPrice' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalLowerLimitPrice() {
+		return Optional.<java.lang.Double>ofNullable(lowerLimitPrice);
+	}
+
+	/**
+	 * Sets the value of the 'lowerLimitPrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setLowerLimitPrice(double value) {
+		this.lowerLimitPrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice1' field.
+	 * 
+	 * @return The value of the 'bidPrice1' field.
+	 */
+	public double getBidPrice1() {
+		return bidPrice1;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice1' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalBidPrice1() {
+		return Optional.<java.lang.Double>ofNullable(bidPrice1);
+	}
+
+	/**
+	 * Sets the value of the 'bidPrice1' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidPrice1(double value) {
+		this.bidPrice1 = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume1' field.
+	 * 
+	 * @return The value of the 'bidVolume1' field.
+	 */
+	public int getBidVolume1() {
+		return bidVolume1;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume1' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalBidVolume1() {
+		return Optional.<java.lang.Integer>ofNullable(bidVolume1);
+	}
+
+	/**
+	 * Sets the value of the 'bidVolume1' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidVolume1(int value) {
+		this.bidVolume1 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice1' field.
+	 * 
+	 * @return The value of the 'askPrice1' field.
+	 */
+	public double getAskPrice1() {
+		return askPrice1;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice1' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalAskPrice1() {
+		return Optional.<java.lang.Double>ofNullable(askPrice1);
+	}
+
+	/**
+	 * Sets the value of the 'askPrice1' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskPrice1(double value) {
+		this.askPrice1 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume1' field.
+	 * 
+	 * @return The value of the 'askVolume1' field.
+	 */
+	public int getAskVolume1() {
+		return askVolume1;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume1' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalAskVolume1() {
+		return Optional.<java.lang.Integer>ofNullable(askVolume1);
+	}
+
+	/**
+	 * Sets the value of the 'askVolume1' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskVolume1(int value) {
+		this.askVolume1 = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice2' field.
+	 * 
+	 * @return The value of the 'bidPrice2' field.
+	 */
+	public double getBidPrice2() {
+		return bidPrice2;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice2' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalBidPrice2() {
+		return Optional.<java.lang.Double>ofNullable(bidPrice2);
+	}
+
+	/**
+	 * Sets the value of the 'bidPrice2' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidPrice2(double value) {
+		this.bidPrice2 = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume2' field.
+	 * 
+	 * @return The value of the 'bidVolume2' field.
+	 */
+	public int getBidVolume2() {
+		return bidVolume2;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume2' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalBidVolume2() {
+		return Optional.<java.lang.Integer>ofNullable(bidVolume2);
+	}
+
+	/**
+	 * Sets the value of the 'bidVolume2' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidVolume2(int value) {
+		this.bidVolume2 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice2' field.
+	 * 
+	 * @return The value of the 'askPrice2' field.
+	 */
+	public double getAskPrice2() {
+		return askPrice2;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice2' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalAskPrice2() {
+		return Optional.<java.lang.Double>ofNullable(askPrice2);
+	}
+
+	/**
+	 * Sets the value of the 'askPrice2' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskPrice2(double value) {
+		this.askPrice2 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume2' field.
+	 * 
+	 * @return The value of the 'askVolume2' field.
+	 */
+	public int getAskVolume2() {
+		return askVolume2;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume2' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalAskVolume2() {
+		return Optional.<java.lang.Integer>ofNullable(askVolume2);
+	}
+
+	/**
+	 * Sets the value of the 'askVolume2' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskVolume2(int value) {
+		this.askVolume2 = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice3' field.
+	 * 
+	 * @return The value of the 'bidPrice3' field.
+	 */
+	public double getBidPrice3() {
+		return bidPrice3;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice3' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalBidPrice3() {
+		return Optional.<java.lang.Double>ofNullable(bidPrice3);
+	}
+
+	/**
+	 * Sets the value of the 'bidPrice3' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidPrice3(double value) {
+		this.bidPrice3 = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume3' field.
+	 * 
+	 * @return The value of the 'bidVolume3' field.
+	 */
+	public int getBidVolume3() {
+		return bidVolume3;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume3' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalBidVolume3() {
+		return Optional.<java.lang.Integer>ofNullable(bidVolume3);
+	}
+
+	/**
+	 * Sets the value of the 'bidVolume3' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidVolume3(int value) {
+		this.bidVolume3 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice3' field.
+	 * 
+	 * @return The value of the 'askPrice3' field.
+	 */
+	public double getAskPrice3() {
+		return askPrice3;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice3' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalAskPrice3() {
+		return Optional.<java.lang.Double>ofNullable(askPrice3);
+	}
+
+	/**
+	 * Sets the value of the 'askPrice3' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskPrice3(double value) {
+		this.askPrice3 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume3' field.
+	 * 
+	 * @return The value of the 'askVolume3' field.
+	 */
+	public int getAskVolume3() {
+		return askVolume3;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume3' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalAskVolume3() {
+		return Optional.<java.lang.Integer>ofNullable(askVolume3);
+	}
+
+	/**
+	 * Sets the value of the 'askVolume3' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskVolume3(int value) {
+		this.askVolume3 = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice4' field.
+	 * 
+	 * @return The value of the 'bidPrice4' field.
+	 */
+	public double getBidPrice4() {
+		return bidPrice4;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice4' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalBidPrice4() {
+		return Optional.<java.lang.Double>ofNullable(bidPrice4);
+	}
+
+	/**
+	 * Sets the value of the 'bidPrice4' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidPrice4(double value) {
+		this.bidPrice4 = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume4' field.
+	 * 
+	 * @return The value of the 'bidVolume4' field.
+	 */
+	public int getBidVolume4() {
+		return bidVolume4;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume4' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalBidVolume4() {
+		return Optional.<java.lang.Integer>ofNullable(bidVolume4);
+	}
+
+	/**
+	 * Sets the value of the 'bidVolume4' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidVolume4(int value) {
+		this.bidVolume4 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice4' field.
+	 * 
+	 * @return The value of the 'askPrice4' field.
+	 */
+	public double getAskPrice4() {
+		return askPrice4;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice4' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalAskPrice4() {
+		return Optional.<java.lang.Double>ofNullable(askPrice4);
+	}
+
+	/**
+	 * Sets the value of the 'askPrice4' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskPrice4(double value) {
+		this.askPrice4 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume4' field.
+	 * 
+	 * @return The value of the 'askVolume4' field.
+	 */
+	public int getAskVolume4() {
+		return askVolume4;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume4' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalAskVolume4() {
+		return Optional.<java.lang.Integer>ofNullable(askVolume4);
+	}
+
+	/**
+	 * Sets the value of the 'askVolume4' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskVolume4(int value) {
+		this.askVolume4 = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice5' field.
+	 * 
+	 * @return The value of the 'bidPrice5' field.
+	 */
+	public double getBidPrice5() {
+		return bidPrice5;
+	}
+
+	/**
+	 * Gets the value of the 'bidPrice5' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalBidPrice5() {
+		return Optional.<java.lang.Double>ofNullable(bidPrice5);
+	}
+
+	/**
+	 * Sets the value of the 'bidPrice5' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidPrice5(double value) {
+		this.bidPrice5 = value;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume5' field.
+	 * 
+	 * @return The value of the 'bidVolume5' field.
+	 */
+	public int getBidVolume5() {
+		return bidVolume5;
+	}
+
+	/**
+	 * Gets the value of the 'bidVolume5' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalBidVolume5() {
+		return Optional.<java.lang.Integer>ofNullable(bidVolume5);
+	}
+
+	/**
+	 * Sets the value of the 'bidVolume5' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setBidVolume5(int value) {
+		this.bidVolume5 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice5' field.
+	 * 
+	 * @return The value of the 'askPrice5' field.
+	 */
+	public double getAskPrice5() {
+		return askPrice5;
+	}
+
+	/**
+	 * Gets the value of the 'askPrice5' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalAskPrice5() {
+		return Optional.<java.lang.Double>ofNullable(askPrice5);
+	}
+
+	/**
+	 * Sets the value of the 'askPrice5' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskPrice5(double value) {
+		this.askPrice5 = value;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume5' field.
+	 * 
+	 * @return The value of the 'askVolume5' field.
+	 */
+	public int getAskVolume5() {
+		return askVolume5;
+	}
+
+	/**
+	 * Gets the value of the 'askVolume5' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalAskVolume5() {
+		return Optional.<java.lang.Integer>ofNullable(askVolume5);
+	}
+
+	/**
+	 * Sets the value of the 'askVolume5' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAskVolume5(int value) {
+		this.askVolume5 = value;
+	}
+
+	/**
+	 * Gets the value of the 'averagePrice' field.
+	 * 
+	 * @return The value of the 'averagePrice' field.
+	 */
+	public double getAveragePrice() {
+		return averagePrice;
+	}
+
+	/**
+	 * Gets the value of the 'averagePrice' field as an
+	 * Optional&lt;java.lang.Double&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+	 */
+	public Optional<java.lang.Double> getOptionalAveragePrice() {
+		return Optional.<java.lang.Double>ofNullable(averagePrice);
+	}
+
+	/**
+	 * Sets the value of the 'averagePrice' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setAveragePrice(double value) {
+		this.averagePrice = value;
+	}
+
+	/**
+	 * Gets the value of the 'updateTime' field.
+	 * 
+	 * @return The value of the 'updateTime' field.
+	 */
+	public java.lang.String getUpdateTime() {
+		return updateTime;
+	}
+
+	/**
+	 * Gets the value of the 'updateTime' field as an
+	 * Optional&lt;java.lang.String&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+	 */
+	public Optional<java.lang.String> getOptionalUpdateTime() {
+		return Optional.<java.lang.String>ofNullable(updateTime);
+	}
+
+	/**
+	 * Sets the value of the 'updateTime' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setUpdateTime(java.lang.String value) {
+		this.updateTime = value;
+	}
+
+	/**
+	 * Gets the value of the 'updateMillisec' field.
+	 * 
+	 * @return The value of the 'updateMillisec' field.
+	 */
+	public int getUpdateMillisec() {
+		return updateMillisec;
+	}
+
+	/**
+	 * Gets the value of the 'updateMillisec' field as an
+	 * Optional&lt;java.lang.Integer&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+	 */
+	public Optional<java.lang.Integer> getOptionalUpdateMillisec() {
+		return Optional.<java.lang.Integer>ofNullable(updateMillisec);
+	}
+
+	/**
+	 * Sets the value of the 'updateMillisec' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setUpdateMillisec(int value) {
+		this.updateMillisec = value;
+	}
+
+	/**
+	 * Gets the value of the 'localTimestamp' field.
+	 * 
+	 * @return The value of the 'localTimestamp' field.
+	 */
+	public java.lang.String getLocalTimestamp() {
+		return localTimestamp;
+	}
+
+	/**
+	 * Gets the value of the 'localTimestamp' field as an
+	 * Optional&lt;java.lang.String&gt;.
+	 * 
+	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+	 */
+	public Optional<java.lang.String> getOptionalLocalTimestamp() {
+		return Optional.<java.lang.String>ofNullable(localTimestamp);
+	}
+
+	/**
+	 * Sets the value of the 'localTimestamp' field.
+	 * 
+	 * @param value the value to set.
+	 */
+	public void setLocalTimestamp(java.lang.String value) {
+		this.localTimestamp = value;
+	}
+
+	/**
+	 * Creates a new MarketDataLevel1 RecordBuilder.
+	 * 
+	 * @return A new MarketDataLevel1 RecordBuilder
+	 */
+	public static io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder() {
+		return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
+	}
+
+	/**
+	 * Creates a new MarketDataLevel1 RecordBuilder by copying an existing Builder.
+	 * 
+	 * @param other The existing builder to copy.
+	 * @return A new MarketDataLevel1 RecordBuilder
+	 */
+	public static io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder(
+			io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder other) {
+		if (other == null) {
+			return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
+		} else {
+			return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder(other);
+		}
+	}
+
+	/**
+	 * Creates a new MarketDataLevel1 RecordBuilder by copying an existing
+	 * MarketDataLevel1 instance.
+	 * 
+	 * @param other The existing instance to copy.
+	 * @return A new MarketDataLevel1 RecordBuilder
+	 */
+	public static io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder(
+			io.apollo.simulator.persistence.avro.entity.MarketDataLevel1 other) {
+		if (other == null) {
+			return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
+		} else {
+			return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder(other);
+		}
+	}
+
+	/**
+	 * RecordBuilder for MarketDataLevel1 instances.
+	 */
+	@org.apache.avro.specific.AvroGenerated
+	public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<MarketDataLevel1>
+			implements org.apache.avro.data.RecordBuilder<MarketDataLevel1> {
+
+		private java.lang.String tradingDay;
+		private java.lang.String instrumentId;
+		private java.lang.String exchangeId;
+		private double lastPrice;
+		private double preSettlementPrice;
+		private double preClosePrice;
+		private double preOpenInterest;
+		private double openPrice;
+		private double highestPrice;
+		private double lowestPrice;
+		private int volume;
+		private double turnover;
+		private double openInterest;
+		private double upperLimitPrice;
+		private double lowerLimitPrice;
+		private double bidPrice1;
+		private int bidVolume1;
+		private double askPrice1;
+		private int askVolume1;
+		private double bidPrice2;
+		private int bidVolume2;
+		private double askPrice2;
+		private int askVolume2;
+		private double bidPrice3;
+		private int bidVolume3;
+		private double askPrice3;
+		private int askVolume3;
+		private double bidPrice4;
+		private int bidVolume4;
+		private double askPrice4;
+		private int askVolume4;
+		private double bidPrice5;
+		private int bidVolume5;
+		private double askPrice5;
+		private int askVolume5;
+		private double averagePrice;
+		private java.lang.String updateTime;
+		private int updateMillisec;
+		private java.lang.String localTimestamp;
+
+		/** Creates a new Builder */
+		private Builder() {
+			super(SCHEMA$);
+		}
+
+		/**
+		 * Creates a Builder by copying an existing Builder.
+		 * 
+		 * @param other The existing Builder to copy.
+		 */
+		private Builder(io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder other) {
+			super(other);
+			if (isValidValue(fields()[0], other.tradingDay)) {
+				this.tradingDay = data().deepCopy(fields()[0].schema(), other.tradingDay);
+				fieldSetFlags()[0] = other.fieldSetFlags()[0];
+			}
+			if (isValidValue(fields()[1], other.instrumentId)) {
+				this.instrumentId = data().deepCopy(fields()[1].schema(), other.instrumentId);
+				fieldSetFlags()[1] = other.fieldSetFlags()[1];
+			}
+			if (isValidValue(fields()[2], other.exchangeId)) {
+				this.exchangeId = data().deepCopy(fields()[2].schema(), other.exchangeId);
+				fieldSetFlags()[2] = other.fieldSetFlags()[2];
+			}
+			if (isValidValue(fields()[3], other.lastPrice)) {
+				this.lastPrice = data().deepCopy(fields()[3].schema(), other.lastPrice);
+				fieldSetFlags()[3] = other.fieldSetFlags()[3];
+			}
+			if (isValidValue(fields()[4], other.preSettlementPrice)) {
+				this.preSettlementPrice = data().deepCopy(fields()[4].schema(), other.preSettlementPrice);
+				fieldSetFlags()[4] = other.fieldSetFlags()[4];
+			}
+			if (isValidValue(fields()[5], other.preClosePrice)) {
+				this.preClosePrice = data().deepCopy(fields()[5].schema(), other.preClosePrice);
+				fieldSetFlags()[5] = other.fieldSetFlags()[5];
+			}
+			if (isValidValue(fields()[6], other.preOpenInterest)) {
+				this.preOpenInterest = data().deepCopy(fields()[6].schema(), other.preOpenInterest);
+				fieldSetFlags()[6] = other.fieldSetFlags()[6];
+			}
+			if (isValidValue(fields()[7], other.openPrice)) {
+				this.openPrice = data().deepCopy(fields()[7].schema(), other.openPrice);
+				fieldSetFlags()[7] = other.fieldSetFlags()[7];
+			}
+			if (isValidValue(fields()[8], other.highestPrice)) {
+				this.highestPrice = data().deepCopy(fields()[8].schema(), other.highestPrice);
+				fieldSetFlags()[8] = other.fieldSetFlags()[8];
+			}
+			if (isValidValue(fields()[9], other.lowestPrice)) {
+				this.lowestPrice = data().deepCopy(fields()[9].schema(), other.lowestPrice);
+				fieldSetFlags()[9] = other.fieldSetFlags()[9];
+			}
+			if (isValidValue(fields()[10], other.volume)) {
+				this.volume = data().deepCopy(fields()[10].schema(), other.volume);
+				fieldSetFlags()[10] = other.fieldSetFlags()[10];
+			}
+			if (isValidValue(fields()[11], other.turnover)) {
+				this.turnover = data().deepCopy(fields()[11].schema(), other.turnover);
+				fieldSetFlags()[11] = other.fieldSetFlags()[11];
+			}
+			if (isValidValue(fields()[12], other.openInterest)) {
+				this.openInterest = data().deepCopy(fields()[12].schema(), other.openInterest);
+				fieldSetFlags()[12] = other.fieldSetFlags()[12];
+			}
+			if (isValidValue(fields()[13], other.upperLimitPrice)) {
+				this.upperLimitPrice = data().deepCopy(fields()[13].schema(), other.upperLimitPrice);
+				fieldSetFlags()[13] = other.fieldSetFlags()[13];
+			}
+			if (isValidValue(fields()[14], other.lowerLimitPrice)) {
+				this.lowerLimitPrice = data().deepCopy(fields()[14].schema(), other.lowerLimitPrice);
+				fieldSetFlags()[14] = other.fieldSetFlags()[14];
+			}
+			if (isValidValue(fields()[15], other.bidPrice1)) {
+				this.bidPrice1 = data().deepCopy(fields()[15].schema(), other.bidPrice1);
+				fieldSetFlags()[15] = other.fieldSetFlags()[15];
+			}
+			if (isValidValue(fields()[16], other.bidVolume1)) {
+				this.bidVolume1 = data().deepCopy(fields()[16].schema(), other.bidVolume1);
+				fieldSetFlags()[16] = other.fieldSetFlags()[16];
+			}
+			if (isValidValue(fields()[17], other.askPrice1)) {
+				this.askPrice1 = data().deepCopy(fields()[17].schema(), other.askPrice1);
+				fieldSetFlags()[17] = other.fieldSetFlags()[17];
+			}
+			if (isValidValue(fields()[18], other.askVolume1)) {
+				this.askVolume1 = data().deepCopy(fields()[18].schema(), other.askVolume1);
+				fieldSetFlags()[18] = other.fieldSetFlags()[18];
+			}
+			if (isValidValue(fields()[19], other.bidPrice2)) {
+				this.bidPrice2 = data().deepCopy(fields()[19].schema(), other.bidPrice2);
+				fieldSetFlags()[19] = other.fieldSetFlags()[19];
+			}
+			if (isValidValue(fields()[20], other.bidVolume2)) {
+				this.bidVolume2 = data().deepCopy(fields()[20].schema(), other.bidVolume2);
+				fieldSetFlags()[20] = other.fieldSetFlags()[20];
+			}
+			if (isValidValue(fields()[21], other.askPrice2)) {
+				this.askPrice2 = data().deepCopy(fields()[21].schema(), other.askPrice2);
+				fieldSetFlags()[21] = other.fieldSetFlags()[21];
+			}
+			if (isValidValue(fields()[22], other.askVolume2)) {
+				this.askVolume2 = data().deepCopy(fields()[22].schema(), other.askVolume2);
+				fieldSetFlags()[22] = other.fieldSetFlags()[22];
+			}
+			if (isValidValue(fields()[23], other.bidPrice3)) {
+				this.bidPrice3 = data().deepCopy(fields()[23].schema(), other.bidPrice3);
+				fieldSetFlags()[23] = other.fieldSetFlags()[23];
+			}
+			if (isValidValue(fields()[24], other.bidVolume3)) {
+				this.bidVolume3 = data().deepCopy(fields()[24].schema(), other.bidVolume3);
+				fieldSetFlags()[24] = other.fieldSetFlags()[24];
+			}
+			if (isValidValue(fields()[25], other.askPrice3)) {
+				this.askPrice3 = data().deepCopy(fields()[25].schema(), other.askPrice3);
+				fieldSetFlags()[25] = other.fieldSetFlags()[25];
+			}
+			if (isValidValue(fields()[26], other.askVolume3)) {
+				this.askVolume3 = data().deepCopy(fields()[26].schema(), other.askVolume3);
+				fieldSetFlags()[26] = other.fieldSetFlags()[26];
+			}
+			if (isValidValue(fields()[27], other.bidPrice4)) {
+				this.bidPrice4 = data().deepCopy(fields()[27].schema(), other.bidPrice4);
+				fieldSetFlags()[27] = other.fieldSetFlags()[27];
+			}
+			if (isValidValue(fields()[28], other.bidVolume4)) {
+				this.bidVolume4 = data().deepCopy(fields()[28].schema(), other.bidVolume4);
+				fieldSetFlags()[28] = other.fieldSetFlags()[28];
+			}
+			if (isValidValue(fields()[29], other.askPrice4)) {
+				this.askPrice4 = data().deepCopy(fields()[29].schema(), other.askPrice4);
+				fieldSetFlags()[29] = other.fieldSetFlags()[29];
+			}
+			if (isValidValue(fields()[30], other.askVolume4)) {
+				this.askVolume4 = data().deepCopy(fields()[30].schema(), other.askVolume4);
+				fieldSetFlags()[30] = other.fieldSetFlags()[30];
+			}
+			if (isValidValue(fields()[31], other.bidPrice5)) {
+				this.bidPrice5 = data().deepCopy(fields()[31].schema(), other.bidPrice5);
+				fieldSetFlags()[31] = other.fieldSetFlags()[31];
+			}
+			if (isValidValue(fields()[32], other.bidVolume5)) {
+				this.bidVolume5 = data().deepCopy(fields()[32].schema(), other.bidVolume5);
+				fieldSetFlags()[32] = other.fieldSetFlags()[32];
+			}
+			if (isValidValue(fields()[33], other.askPrice5)) {
+				this.askPrice5 = data().deepCopy(fields()[33].schema(), other.askPrice5);
+				fieldSetFlags()[33] = other.fieldSetFlags()[33];
+			}
+			if (isValidValue(fields()[34], other.askVolume5)) {
+				this.askVolume5 = data().deepCopy(fields()[34].schema(), other.askVolume5);
+				fieldSetFlags()[34] = other.fieldSetFlags()[34];
+			}
+			if (isValidValue(fields()[35], other.averagePrice)) {
+				this.averagePrice = data().deepCopy(fields()[35].schema(), other.averagePrice);
+				fieldSetFlags()[35] = other.fieldSetFlags()[35];
+			}
+			if (isValidValue(fields()[36], other.updateTime)) {
+				this.updateTime = data().deepCopy(fields()[36].schema(), other.updateTime);
+				fieldSetFlags()[36] = other.fieldSetFlags()[36];
+			}
+			if (isValidValue(fields()[37], other.updateMillisec)) {
+				this.updateMillisec = data().deepCopy(fields()[37].schema(), other.updateMillisec);
+				fieldSetFlags()[37] = other.fieldSetFlags()[37];
+			}
+			if (isValidValue(fields()[38], other.localTimestamp)) {
+				this.localTimestamp = data().deepCopy(fields()[38].schema(), other.localTimestamp);
+				fieldSetFlags()[38] = other.fieldSetFlags()[38];
+			}
+		}
+
+		/**
+		 * Creates a Builder by copying an existing MarketDataLevel1 instance
+		 * 
+		 * @param other The existing instance to copy.
+		 */
+		private Builder(io.apollo.simulator.persistence.avro.entity.MarketDataLevel1 other) {
+			super(SCHEMA$);
+			if (isValidValue(fields()[0], other.tradingDay)) {
+				this.tradingDay = data().deepCopy(fields()[0].schema(), other.tradingDay);
+				fieldSetFlags()[0] = true;
+			}
+			if (isValidValue(fields()[1], other.instrumentId)) {
+				this.instrumentId = data().deepCopy(fields()[1].schema(), other.instrumentId);
+				fieldSetFlags()[1] = true;
+			}
+			if (isValidValue(fields()[2], other.exchangeId)) {
+				this.exchangeId = data().deepCopy(fields()[2].schema(), other.exchangeId);
+				fieldSetFlags()[2] = true;
+			}
+			if (isValidValue(fields()[3], other.lastPrice)) {
+				this.lastPrice = data().deepCopy(fields()[3].schema(), other.lastPrice);
+				fieldSetFlags()[3] = true;
+			}
+			if (isValidValue(fields()[4], other.preSettlementPrice)) {
+				this.preSettlementPrice = data().deepCopy(fields()[4].schema(), other.preSettlementPrice);
+				fieldSetFlags()[4] = true;
+			}
+			if (isValidValue(fields()[5], other.preClosePrice)) {
+				this.preClosePrice = data().deepCopy(fields()[5].schema(), other.preClosePrice);
+				fieldSetFlags()[5] = true;
+			}
+			if (isValidValue(fields()[6], other.preOpenInterest)) {
+				this.preOpenInterest = data().deepCopy(fields()[6].schema(), other.preOpenInterest);
+				fieldSetFlags()[6] = true;
+			}
+			if (isValidValue(fields()[7], other.openPrice)) {
+				this.openPrice = data().deepCopy(fields()[7].schema(), other.openPrice);
+				fieldSetFlags()[7] = true;
+			}
+			if (isValidValue(fields()[8], other.highestPrice)) {
+				this.highestPrice = data().deepCopy(fields()[8].schema(), other.highestPrice);
+				fieldSetFlags()[8] = true;
+			}
+			if (isValidValue(fields()[9], other.lowestPrice)) {
+				this.lowestPrice = data().deepCopy(fields()[9].schema(), other.lowestPrice);
+				fieldSetFlags()[9] = true;
+			}
+			if (isValidValue(fields()[10], other.volume)) {
+				this.volume = data().deepCopy(fields()[10].schema(), other.volume);
+				fieldSetFlags()[10] = true;
+			}
+			if (isValidValue(fields()[11], other.turnover)) {
+				this.turnover = data().deepCopy(fields()[11].schema(), other.turnover);
+				fieldSetFlags()[11] = true;
+			}
+			if (isValidValue(fields()[12], other.openInterest)) {
+				this.openInterest = data().deepCopy(fields()[12].schema(), other.openInterest);
+				fieldSetFlags()[12] = true;
+			}
+			if (isValidValue(fields()[13], other.upperLimitPrice)) {
+				this.upperLimitPrice = data().deepCopy(fields()[13].schema(), other.upperLimitPrice);
+				fieldSetFlags()[13] = true;
+			}
+			if (isValidValue(fields()[14], other.lowerLimitPrice)) {
+				this.lowerLimitPrice = data().deepCopy(fields()[14].schema(), other.lowerLimitPrice);
+				fieldSetFlags()[14] = true;
+			}
+			if (isValidValue(fields()[15], other.bidPrice1)) {
+				this.bidPrice1 = data().deepCopy(fields()[15].schema(), other.bidPrice1);
+				fieldSetFlags()[15] = true;
+			}
+			if (isValidValue(fields()[16], other.bidVolume1)) {
+				this.bidVolume1 = data().deepCopy(fields()[16].schema(), other.bidVolume1);
+				fieldSetFlags()[16] = true;
+			}
+			if (isValidValue(fields()[17], other.askPrice1)) {
+				this.askPrice1 = data().deepCopy(fields()[17].schema(), other.askPrice1);
+				fieldSetFlags()[17] = true;
+			}
+			if (isValidValue(fields()[18], other.askVolume1)) {
+				this.askVolume1 = data().deepCopy(fields()[18].schema(), other.askVolume1);
+				fieldSetFlags()[18] = true;
+			}
+			if (isValidValue(fields()[19], other.bidPrice2)) {
+				this.bidPrice2 = data().deepCopy(fields()[19].schema(), other.bidPrice2);
+				fieldSetFlags()[19] = true;
+			}
+			if (isValidValue(fields()[20], other.bidVolume2)) {
+				this.bidVolume2 = data().deepCopy(fields()[20].schema(), other.bidVolume2);
+				fieldSetFlags()[20] = true;
+			}
+			if (isValidValue(fields()[21], other.askPrice2)) {
+				this.askPrice2 = data().deepCopy(fields()[21].schema(), other.askPrice2);
+				fieldSetFlags()[21] = true;
+			}
+			if (isValidValue(fields()[22], other.askVolume2)) {
+				this.askVolume2 = data().deepCopy(fields()[22].schema(), other.askVolume2);
+				fieldSetFlags()[22] = true;
+			}
+			if (isValidValue(fields()[23], other.bidPrice3)) {
+				this.bidPrice3 = data().deepCopy(fields()[23].schema(), other.bidPrice3);
+				fieldSetFlags()[23] = true;
+			}
+			if (isValidValue(fields()[24], other.bidVolume3)) {
+				this.bidVolume3 = data().deepCopy(fields()[24].schema(), other.bidVolume3);
+				fieldSetFlags()[24] = true;
+			}
+			if (isValidValue(fields()[25], other.askPrice3)) {
+				this.askPrice3 = data().deepCopy(fields()[25].schema(), other.askPrice3);
+				fieldSetFlags()[25] = true;
+			}
+			if (isValidValue(fields()[26], other.askVolume3)) {
+				this.askVolume3 = data().deepCopy(fields()[26].schema(), other.askVolume3);
+				fieldSetFlags()[26] = true;
+			}
+			if (isValidValue(fields()[27], other.bidPrice4)) {
+				this.bidPrice4 = data().deepCopy(fields()[27].schema(), other.bidPrice4);
+				fieldSetFlags()[27] = true;
+			}
+			if (isValidValue(fields()[28], other.bidVolume4)) {
+				this.bidVolume4 = data().deepCopy(fields()[28].schema(), other.bidVolume4);
+				fieldSetFlags()[28] = true;
+			}
+			if (isValidValue(fields()[29], other.askPrice4)) {
+				this.askPrice4 = data().deepCopy(fields()[29].schema(), other.askPrice4);
+				fieldSetFlags()[29] = true;
+			}
+			if (isValidValue(fields()[30], other.askVolume4)) {
+				this.askVolume4 = data().deepCopy(fields()[30].schema(), other.askVolume4);
+				fieldSetFlags()[30] = true;
+			}
+			if (isValidValue(fields()[31], other.bidPrice5)) {
+				this.bidPrice5 = data().deepCopy(fields()[31].schema(), other.bidPrice5);
+				fieldSetFlags()[31] = true;
+			}
+			if (isValidValue(fields()[32], other.bidVolume5)) {
+				this.bidVolume5 = data().deepCopy(fields()[32].schema(), other.bidVolume5);
+				fieldSetFlags()[32] = true;
+			}
+			if (isValidValue(fields()[33], other.askPrice5)) {
+				this.askPrice5 = data().deepCopy(fields()[33].schema(), other.askPrice5);
+				fieldSetFlags()[33] = true;
+			}
+			if (isValidValue(fields()[34], other.askVolume5)) {
+				this.askVolume5 = data().deepCopy(fields()[34].schema(), other.askVolume5);
+				fieldSetFlags()[34] = true;
+			}
+			if (isValidValue(fields()[35], other.averagePrice)) {
+				this.averagePrice = data().deepCopy(fields()[35].schema(), other.averagePrice);
+				fieldSetFlags()[35] = true;
+			}
+			if (isValidValue(fields()[36], other.updateTime)) {
+				this.updateTime = data().deepCopy(fields()[36].schema(), other.updateTime);
+				fieldSetFlags()[36] = true;
+			}
+			if (isValidValue(fields()[37], other.updateMillisec)) {
+				this.updateMillisec = data().deepCopy(fields()[37].schema(), other.updateMillisec);
+				fieldSetFlags()[37] = true;
+			}
+			if (isValidValue(fields()[38], other.localTimestamp)) {
+				this.localTimestamp = data().deepCopy(fields()[38].schema(), other.localTimestamp);
+				fieldSetFlags()[38] = true;
+			}
+		}
+
+		/**
+		 * Gets the value of the 'tradingDay' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.lang.String getTradingDay() {
+			return tradingDay;
+		}
+
+		/**
+		 * Gets the value of the 'tradingDay' field as an
+		 * Optional&lt;java.lang.String&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+		 */
+		public Optional<java.lang.String> getOptionalTradingDay() {
+			return Optional.<java.lang.String>ofNullable(tradingDay);
+		}
+
+		/**
+		 * Sets the value of the 'tradingDay' field.
+		 * 
+		 * @param value The value of 'tradingDay'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setTradingDay(
+				java.lang.String value) {
+			validate(fields()[0], value);
+			this.tradingDay = value;
+			fieldSetFlags()[0] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'tradingDay' field has been set.
+		 * 
+		 * @return True if the 'tradingDay' field has been set, false otherwise.
+		 */
+		public boolean hasTradingDay() {
+			return fieldSetFlags()[0];
+		}
+
+		/**
+		 * Clears the value of the 'tradingDay' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearTradingDay() {
+			tradingDay = null;
+			fieldSetFlags()[0] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'instrumentId' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.lang.String getInstrumentId() {
+			return instrumentId;
+		}
+
+		/**
+		 * Gets the value of the 'instrumentId' field as an
+		 * Optional&lt;java.lang.String&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+		 */
+		public Optional<java.lang.String> getOptionalInstrumentId() {
+			return Optional.<java.lang.String>ofNullable(instrumentId);
+		}
+
+		/**
+		 * Sets the value of the 'instrumentId' field.
+		 * 
+		 * @param value The value of 'instrumentId'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setInstrumentId(
+				java.lang.String value) {
+			validate(fields()[1], value);
+			this.instrumentId = value;
+			fieldSetFlags()[1] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'instrumentId' field has been set.
+		 * 
+		 * @return True if the 'instrumentId' field has been set, false otherwise.
+		 */
+		public boolean hasInstrumentId() {
+			return fieldSetFlags()[1];
+		}
+
+		/**
+		 * Clears the value of the 'instrumentId' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearInstrumentId() {
+			instrumentId = null;
+			fieldSetFlags()[1] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'exchangeId' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.lang.String getExchangeId() {
+			return exchangeId;
+		}
+
+		/**
+		 * Gets the value of the 'exchangeId' field as an
+		 * Optional&lt;java.lang.String&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+		 */
+		public Optional<java.lang.String> getOptionalExchangeId() {
+			return Optional.<java.lang.String>ofNullable(exchangeId);
+		}
+
+		/**
+		 * Sets the value of the 'exchangeId' field.
+		 * 
+		 * @param value The value of 'exchangeId'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setExchangeId(
+				java.lang.String value) {
+			validate(fields()[2], value);
+			this.exchangeId = value;
+			fieldSetFlags()[2] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'exchangeId' field has been set.
+		 * 
+		 * @return True if the 'exchangeId' field has been set, false otherwise.
+		 */
+		public boolean hasExchangeId() {
+			return fieldSetFlags()[2];
+		}
+
+		/**
+		 * Clears the value of the 'exchangeId' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearExchangeId() {
+			exchangeId = null;
+			fieldSetFlags()[2] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'lastPrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getLastPrice() {
+			return lastPrice;
+		}
+
+		/**
+		 * Gets the value of the 'lastPrice' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalLastPrice() {
+			return Optional.<java.lang.Double>ofNullable(lastPrice);
+		}
+
+		/**
+		 * Sets the value of the 'lastPrice' field.
+		 * 
+		 * @param value The value of 'lastPrice'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLastPrice(double value) {
+			validate(fields()[3], value);
+			this.lastPrice = value;
+			fieldSetFlags()[3] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'lastPrice' field has been set.
+		 * 
+		 * @return True if the 'lastPrice' field has been set, false otherwise.
+		 */
+		public boolean hasLastPrice() {
+			return fieldSetFlags()[3];
+		}
+
+		/**
+		 * Clears the value of the 'lastPrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLastPrice() {
+			fieldSetFlags()[3] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'preSettlementPrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getPreSettlementPrice() {
+			return preSettlementPrice;
+		}
+
+		/**
+		 * Gets the value of the 'preSettlementPrice' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalPreSettlementPrice() {
+			return Optional.<java.lang.Double>ofNullable(preSettlementPrice);
+		}
+
+		/**
+		 * Sets the value of the 'preSettlementPrice' field.
+		 * 
+		 * @param value The value of 'preSettlementPrice'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreSettlementPrice(
+				double value) {
+			validate(fields()[4], value);
+			this.preSettlementPrice = value;
+			fieldSetFlags()[4] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'preSettlementPrice' field has been set.
+		 * 
+		 * @return True if the 'preSettlementPrice' field has been set, false otherwise.
+		 */
+		public boolean hasPreSettlementPrice() {
+			return fieldSetFlags()[4];
+		}
+
+		/**
+		 * Clears the value of the 'preSettlementPrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreSettlementPrice() {
+			fieldSetFlags()[4] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'preClosePrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getPreClosePrice() {
+			return preClosePrice;
+		}
+
+		/**
+		 * Gets the value of the 'preClosePrice' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalPreClosePrice() {
+			return Optional.<java.lang.Double>ofNullable(preClosePrice);
+		}
+
+		/**
+		 * Sets the value of the 'preClosePrice' field.
+		 * 
+		 * @param value The value of 'preClosePrice'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreClosePrice(double value) {
+			validate(fields()[5], value);
+			this.preClosePrice = value;
+			fieldSetFlags()[5] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'preClosePrice' field has been set.
+		 * 
+		 * @return True if the 'preClosePrice' field has been set, false otherwise.
+		 */
+		public boolean hasPreClosePrice() {
+			return fieldSetFlags()[5];
+		}
+
+		/**
+		 * Clears the value of the 'preClosePrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreClosePrice() {
+			fieldSetFlags()[5] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'preOpenInterest' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getPreOpenInterest() {
+			return preOpenInterest;
+		}
+
+		/**
+		 * Gets the value of the 'preOpenInterest' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalPreOpenInterest() {
+			return Optional.<java.lang.Double>ofNullable(preOpenInterest);
+		}
+
+		/**
+		 * Sets the value of the 'preOpenInterest' field.
+		 * 
+		 * @param value The value of 'preOpenInterest'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreOpenInterest(double value) {
+			validate(fields()[6], value);
+			this.preOpenInterest = value;
+			fieldSetFlags()[6] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'preOpenInterest' field has been set.
+		 * 
+		 * @return True if the 'preOpenInterest' field has been set, false otherwise.
+		 */
+		public boolean hasPreOpenInterest() {
+			return fieldSetFlags()[6];
+		}
+
+		/**
+		 * Clears the value of the 'preOpenInterest' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreOpenInterest() {
+			fieldSetFlags()[6] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'openPrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getOpenPrice() {
+			return openPrice;
+		}
+
+		/**
+		 * Gets the value of the 'openPrice' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalOpenPrice() {
+			return Optional.<java.lang.Double>ofNullable(openPrice);
+		}
+
+		/**
+		 * Sets the value of the 'openPrice' field.
+		 * 
+		 * @param value The value of 'openPrice'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setOpenPrice(double value) {
+			validate(fields()[7], value);
+			this.openPrice = value;
+			fieldSetFlags()[7] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'openPrice' field has been set.
+		 * 
+		 * @return True if the 'openPrice' field has been set, false otherwise.
+		 */
+		public boolean hasOpenPrice() {
+			return fieldSetFlags()[7];
+		}
+
+		/**
+		 * Clears the value of the 'openPrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearOpenPrice() {
+			fieldSetFlags()[7] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'highestPrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getHighestPrice() {
+			return highestPrice;
+		}
+
+		/**
+		 * Gets the value of the 'highestPrice' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalHighestPrice() {
+			return Optional.<java.lang.Double>ofNullable(highestPrice);
+		}
+
+		/**
+		 * Sets the value of the 'highestPrice' field.
+		 * 
+		 * @param value The value of 'highestPrice'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setHighestPrice(double value) {
+			validate(fields()[8], value);
+			this.highestPrice = value;
+			fieldSetFlags()[8] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'highestPrice' field has been set.
+		 * 
+		 * @return True if the 'highestPrice' field has been set, false otherwise.
+		 */
+		public boolean hasHighestPrice() {
+			return fieldSetFlags()[8];
+		}
+
+		/**
+		 * Clears the value of the 'highestPrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearHighestPrice() {
+			fieldSetFlags()[8] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'lowestPrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getLowestPrice() {
+			return lowestPrice;
+		}
+
+		/**
+		 * Gets the value of the 'lowestPrice' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalLowestPrice() {
+			return Optional.<java.lang.Double>ofNullable(lowestPrice);
+		}
+
+		/**
+		 * Sets the value of the 'lowestPrice' field.
+		 * 
+		 * @param value The value of 'lowestPrice'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLowestPrice(double value) {
+			validate(fields()[9], value);
+			this.lowestPrice = value;
+			fieldSetFlags()[9] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'lowestPrice' field has been set.
+		 * 
+		 * @return True if the 'lowestPrice' field has been set, false otherwise.
+		 */
+		public boolean hasLowestPrice() {
+			return fieldSetFlags()[9];
+		}
+
+		/**
+		 * Clears the value of the 'lowestPrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLowestPrice() {
+			fieldSetFlags()[9] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'volume' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getVolume() {
+			return volume;
+		}
+
+		/**
+		 * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalVolume() {
+			return Optional.<java.lang.Integer>ofNullable(volume);
+		}
+
+		/**
+		 * Sets the value of the 'volume' field.
+		 * 
+		 * @param value The value of 'volume'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setVolume(int value) {
+			validate(fields()[10], value);
+			this.volume = value;
+			fieldSetFlags()[10] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'volume' field has been set.
+		 * 
+		 * @return True if the 'volume' field has been set, false otherwise.
+		 */
+		public boolean hasVolume() {
+			return fieldSetFlags()[10];
+		}
+
+		/**
+		 * Clears the value of the 'volume' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearVolume() {
+			fieldSetFlags()[10] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'turnover' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getTurnover() {
+			return turnover;
+		}
+
+		/**
+		 * Gets the value of the 'turnover' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalTurnover() {
+			return Optional.<java.lang.Double>ofNullable(turnover);
+		}
+
+		/**
+		 * Sets the value of the 'turnover' field.
+		 * 
+		 * @param value The value of 'turnover'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setTurnover(double value) {
+			validate(fields()[11], value);
+			this.turnover = value;
+			fieldSetFlags()[11] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'turnover' field has been set.
+		 * 
+		 * @return True if the 'turnover' field has been set, false otherwise.
+		 */
+		public boolean hasTurnover() {
+			return fieldSetFlags()[11];
+		}
+
+		/**
+		 * Clears the value of the 'turnover' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearTurnover() {
+			fieldSetFlags()[11] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'openInterest' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getOpenInterest() {
+			return openInterest;
+		}
+
+		/**
+		 * Gets the value of the 'openInterest' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalOpenInterest() {
+			return Optional.<java.lang.Double>ofNullable(openInterest);
+		}
+
+		/**
+		 * Sets the value of the 'openInterest' field.
+		 * 
+		 * @param value The value of 'openInterest'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setOpenInterest(double value) {
+			validate(fields()[12], value);
+			this.openInterest = value;
+			fieldSetFlags()[12] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'openInterest' field has been set.
+		 * 
+		 * @return True if the 'openInterest' field has been set, false otherwise.
+		 */
+		public boolean hasOpenInterest() {
+			return fieldSetFlags()[12];
+		}
+
+		/**
+		 * Clears the value of the 'openInterest' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearOpenInterest() {
+			fieldSetFlags()[12] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'upperLimitPrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getUpperLimitPrice() {
+			return upperLimitPrice;
+		}
+
+		/**
+		 * Gets the value of the 'upperLimitPrice' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalUpperLimitPrice() {
+			return Optional.<java.lang.Double>ofNullable(upperLimitPrice);
+		}
+
+		/**
+		 * Sets the value of the 'upperLimitPrice' field.
+		 * 
+		 * @param value The value of 'upperLimitPrice'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpperLimitPrice(double value) {
+			validate(fields()[13], value);
+			this.upperLimitPrice = value;
+			fieldSetFlags()[13] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'upperLimitPrice' field has been set.
+		 * 
+		 * @return True if the 'upperLimitPrice' field has been set, false otherwise.
+		 */
+		public boolean hasUpperLimitPrice() {
+			return fieldSetFlags()[13];
+		}
+
+		/**
+		 * Clears the value of the 'upperLimitPrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpperLimitPrice() {
+			fieldSetFlags()[13] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'lowerLimitPrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getLowerLimitPrice() {
+			return lowerLimitPrice;
+		}
+
+		/**
+		 * Gets the value of the 'lowerLimitPrice' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalLowerLimitPrice() {
+			return Optional.<java.lang.Double>ofNullable(lowerLimitPrice);
+		}
+
+		/**
+		 * Sets the value of the 'lowerLimitPrice' field.
+		 * 
+		 * @param value The value of 'lowerLimitPrice'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLowerLimitPrice(double value) {
+			validate(fields()[14], value);
+			this.lowerLimitPrice = value;
+			fieldSetFlags()[14] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'lowerLimitPrice' field has been set.
+		 * 
+		 * @return True if the 'lowerLimitPrice' field has been set, false otherwise.
+		 */
+		public boolean hasLowerLimitPrice() {
+			return fieldSetFlags()[14];
+		}
+
+		/**
+		 * Clears the value of the 'lowerLimitPrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLowerLimitPrice() {
+			fieldSetFlags()[14] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice1' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getBidPrice1() {
+			return bidPrice1;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice1' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalBidPrice1() {
+			return Optional.<java.lang.Double>ofNullable(bidPrice1);
+		}
+
+		/**
+		 * Sets the value of the 'bidPrice1' field.
+		 * 
+		 * @param value The value of 'bidPrice1'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice1(double value) {
+			validate(fields()[15], value);
+			this.bidPrice1 = value;
+			fieldSetFlags()[15] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidPrice1' field has been set.
+		 * 
+		 * @return True if the 'bidPrice1' field has been set, false otherwise.
+		 */
+		public boolean hasBidPrice1() {
+			return fieldSetFlags()[15];
+		}
+
+		/**
+		 * Clears the value of the 'bidPrice1' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice1() {
+			fieldSetFlags()[15] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume1' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getBidVolume1() {
+			return bidVolume1;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume1' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalBidVolume1() {
+			return Optional.<java.lang.Integer>ofNullable(bidVolume1);
+		}
+
+		/**
+		 * Sets the value of the 'bidVolume1' field.
+		 * 
+		 * @param value The value of 'bidVolume1'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume1(int value) {
+			validate(fields()[16], value);
+			this.bidVolume1 = value;
+			fieldSetFlags()[16] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidVolume1' field has been set.
+		 * 
+		 * @return True if the 'bidVolume1' field has been set, false otherwise.
+		 */
+		public boolean hasBidVolume1() {
+			return fieldSetFlags()[16];
+		}
+
+		/**
+		 * Clears the value of the 'bidVolume1' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume1() {
+			fieldSetFlags()[16] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice1' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getAskPrice1() {
+			return askPrice1;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice1' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalAskPrice1() {
+			return Optional.<java.lang.Double>ofNullable(askPrice1);
+		}
+
+		/**
+		 * Sets the value of the 'askPrice1' field.
+		 * 
+		 * @param value The value of 'askPrice1'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice1(double value) {
+			validate(fields()[17], value);
+			this.askPrice1 = value;
+			fieldSetFlags()[17] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askPrice1' field has been set.
+		 * 
+		 * @return True if the 'askPrice1' field has been set, false otherwise.
+		 */
+		public boolean hasAskPrice1() {
+			return fieldSetFlags()[17];
+		}
+
+		/**
+		 * Clears the value of the 'askPrice1' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice1() {
+			fieldSetFlags()[17] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume1' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getAskVolume1() {
+			return askVolume1;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume1' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalAskVolume1() {
+			return Optional.<java.lang.Integer>ofNullable(askVolume1);
+		}
+
+		/**
+		 * Sets the value of the 'askVolume1' field.
+		 * 
+		 * @param value The value of 'askVolume1'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume1(int value) {
+			validate(fields()[18], value);
+			this.askVolume1 = value;
+			fieldSetFlags()[18] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askVolume1' field has been set.
+		 * 
+		 * @return True if the 'askVolume1' field has been set, false otherwise.
+		 */
+		public boolean hasAskVolume1() {
+			return fieldSetFlags()[18];
+		}
+
+		/**
+		 * Clears the value of the 'askVolume1' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume1() {
+			fieldSetFlags()[18] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice2' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getBidPrice2() {
+			return bidPrice2;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice2' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalBidPrice2() {
+			return Optional.<java.lang.Double>ofNullable(bidPrice2);
+		}
+
+		/**
+		 * Sets the value of the 'bidPrice2' field.
+		 * 
+		 * @param value The value of 'bidPrice2'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice2(double value) {
+			validate(fields()[19], value);
+			this.bidPrice2 = value;
+			fieldSetFlags()[19] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidPrice2' field has been set.
+		 * 
+		 * @return True if the 'bidPrice2' field has been set, false otherwise.
+		 */
+		public boolean hasBidPrice2() {
+			return fieldSetFlags()[19];
+		}
+
+		/**
+		 * Clears the value of the 'bidPrice2' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice2() {
+			fieldSetFlags()[19] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume2' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getBidVolume2() {
+			return bidVolume2;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume2' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalBidVolume2() {
+			return Optional.<java.lang.Integer>ofNullable(bidVolume2);
+		}
+
+		/**
+		 * Sets the value of the 'bidVolume2' field.
+		 * 
+		 * @param value The value of 'bidVolume2'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume2(int value) {
+			validate(fields()[20], value);
+			this.bidVolume2 = value;
+			fieldSetFlags()[20] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidVolume2' field has been set.
+		 * 
+		 * @return True if the 'bidVolume2' field has been set, false otherwise.
+		 */
+		public boolean hasBidVolume2() {
+			return fieldSetFlags()[20];
+		}
+
+		/**
+		 * Clears the value of the 'bidVolume2' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume2() {
+			fieldSetFlags()[20] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice2' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getAskPrice2() {
+			return askPrice2;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice2' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalAskPrice2() {
+			return Optional.<java.lang.Double>ofNullable(askPrice2);
+		}
+
+		/**
+		 * Sets the value of the 'askPrice2' field.
+		 * 
+		 * @param value The value of 'askPrice2'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice2(double value) {
+			validate(fields()[21], value);
+			this.askPrice2 = value;
+			fieldSetFlags()[21] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askPrice2' field has been set.
+		 * 
+		 * @return True if the 'askPrice2' field has been set, false otherwise.
+		 */
+		public boolean hasAskPrice2() {
+			return fieldSetFlags()[21];
+		}
+
+		/**
+		 * Clears the value of the 'askPrice2' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice2() {
+			fieldSetFlags()[21] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume2' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getAskVolume2() {
+			return askVolume2;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume2' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalAskVolume2() {
+			return Optional.<java.lang.Integer>ofNullable(askVolume2);
+		}
+
+		/**
+		 * Sets the value of the 'askVolume2' field.
+		 * 
+		 * @param value The value of 'askVolume2'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume2(int value) {
+			validate(fields()[22], value);
+			this.askVolume2 = value;
+			fieldSetFlags()[22] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askVolume2' field has been set.
+		 * 
+		 * @return True if the 'askVolume2' field has been set, false otherwise.
+		 */
+		public boolean hasAskVolume2() {
+			return fieldSetFlags()[22];
+		}
+
+		/**
+		 * Clears the value of the 'askVolume2' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume2() {
+			fieldSetFlags()[22] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice3' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getBidPrice3() {
+			return bidPrice3;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice3' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalBidPrice3() {
+			return Optional.<java.lang.Double>ofNullable(bidPrice3);
+		}
+
+		/**
+		 * Sets the value of the 'bidPrice3' field.
+		 * 
+		 * @param value The value of 'bidPrice3'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice3(double value) {
+			validate(fields()[23], value);
+			this.bidPrice3 = value;
+			fieldSetFlags()[23] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidPrice3' field has been set.
+		 * 
+		 * @return True if the 'bidPrice3' field has been set, false otherwise.
+		 */
+		public boolean hasBidPrice3() {
+			return fieldSetFlags()[23];
+		}
+
+		/**
+		 * Clears the value of the 'bidPrice3' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice3() {
+			fieldSetFlags()[23] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume3' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getBidVolume3() {
+			return bidVolume3;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume3' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalBidVolume3() {
+			return Optional.<java.lang.Integer>ofNullable(bidVolume3);
+		}
+
+		/**
+		 * Sets the value of the 'bidVolume3' field.
+		 * 
+		 * @param value The value of 'bidVolume3'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume3(int value) {
+			validate(fields()[24], value);
+			this.bidVolume3 = value;
+			fieldSetFlags()[24] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidVolume3' field has been set.
+		 * 
+		 * @return True if the 'bidVolume3' field has been set, false otherwise.
+		 */
+		public boolean hasBidVolume3() {
+			return fieldSetFlags()[24];
+		}
+
+		/**
+		 * Clears the value of the 'bidVolume3' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume3() {
+			fieldSetFlags()[24] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice3' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getAskPrice3() {
+			return askPrice3;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice3' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalAskPrice3() {
+			return Optional.<java.lang.Double>ofNullable(askPrice3);
+		}
+
+		/**
+		 * Sets the value of the 'askPrice3' field.
+		 * 
+		 * @param value The value of 'askPrice3'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice3(double value) {
+			validate(fields()[25], value);
+			this.askPrice3 = value;
+			fieldSetFlags()[25] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askPrice3' field has been set.
+		 * 
+		 * @return True if the 'askPrice3' field has been set, false otherwise.
+		 */
+		public boolean hasAskPrice3() {
+			return fieldSetFlags()[25];
+		}
+
+		/**
+		 * Clears the value of the 'askPrice3' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice3() {
+			fieldSetFlags()[25] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume3' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getAskVolume3() {
+			return askVolume3;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume3' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalAskVolume3() {
+			return Optional.<java.lang.Integer>ofNullable(askVolume3);
+		}
+
+		/**
+		 * Sets the value of the 'askVolume3' field.
+		 * 
+		 * @param value The value of 'askVolume3'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume3(int value) {
+			validate(fields()[26], value);
+			this.askVolume3 = value;
+			fieldSetFlags()[26] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askVolume3' field has been set.
+		 * 
+		 * @return True if the 'askVolume3' field has been set, false otherwise.
+		 */
+		public boolean hasAskVolume3() {
+			return fieldSetFlags()[26];
+		}
+
+		/**
+		 * Clears the value of the 'askVolume3' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume3() {
+			fieldSetFlags()[26] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice4' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getBidPrice4() {
+			return bidPrice4;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice4' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalBidPrice4() {
+			return Optional.<java.lang.Double>ofNullable(bidPrice4);
+		}
+
+		/**
+		 * Sets the value of the 'bidPrice4' field.
+		 * 
+		 * @param value The value of 'bidPrice4'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice4(double value) {
+			validate(fields()[27], value);
+			this.bidPrice4 = value;
+			fieldSetFlags()[27] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidPrice4' field has been set.
+		 * 
+		 * @return True if the 'bidPrice4' field has been set, false otherwise.
+		 */
+		public boolean hasBidPrice4() {
+			return fieldSetFlags()[27];
+		}
+
+		/**
+		 * Clears the value of the 'bidPrice4' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice4() {
+			fieldSetFlags()[27] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume4' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getBidVolume4() {
+			return bidVolume4;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume4' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalBidVolume4() {
+			return Optional.<java.lang.Integer>ofNullable(bidVolume4);
+		}
+
+		/**
+		 * Sets the value of the 'bidVolume4' field.
+		 * 
+		 * @param value The value of 'bidVolume4'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume4(int value) {
+			validate(fields()[28], value);
+			this.bidVolume4 = value;
+			fieldSetFlags()[28] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidVolume4' field has been set.
+		 * 
+		 * @return True if the 'bidVolume4' field has been set, false otherwise.
+		 */
+		public boolean hasBidVolume4() {
+			return fieldSetFlags()[28];
+		}
+
+		/**
+		 * Clears the value of the 'bidVolume4' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume4() {
+			fieldSetFlags()[28] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice4' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getAskPrice4() {
+			return askPrice4;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice4' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalAskPrice4() {
+			return Optional.<java.lang.Double>ofNullable(askPrice4);
+		}
+
+		/**
+		 * Sets the value of the 'askPrice4' field.
+		 * 
+		 * @param value The value of 'askPrice4'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice4(double value) {
+			validate(fields()[29], value);
+			this.askPrice4 = value;
+			fieldSetFlags()[29] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askPrice4' field has been set.
+		 * 
+		 * @return True if the 'askPrice4' field has been set, false otherwise.
+		 */
+		public boolean hasAskPrice4() {
+			return fieldSetFlags()[29];
+		}
+
+		/**
+		 * Clears the value of the 'askPrice4' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice4() {
+			fieldSetFlags()[29] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume4' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getAskVolume4() {
+			return askVolume4;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume4' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalAskVolume4() {
+			return Optional.<java.lang.Integer>ofNullable(askVolume4);
+		}
+
+		/**
+		 * Sets the value of the 'askVolume4' field.
+		 * 
+		 * @param value The value of 'askVolume4'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume4(int value) {
+			validate(fields()[30], value);
+			this.askVolume4 = value;
+			fieldSetFlags()[30] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askVolume4' field has been set.
+		 * 
+		 * @return True if the 'askVolume4' field has been set, false otherwise.
+		 */
+		public boolean hasAskVolume4() {
+			return fieldSetFlags()[30];
+		}
+
+		/**
+		 * Clears the value of the 'askVolume4' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume4() {
+			fieldSetFlags()[30] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice5' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getBidPrice5() {
+			return bidPrice5;
+		}
+
+		/**
+		 * Gets the value of the 'bidPrice5' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalBidPrice5() {
+			return Optional.<java.lang.Double>ofNullable(bidPrice5);
+		}
+
+		/**
+		 * Sets the value of the 'bidPrice5' field.
+		 * 
+		 * @param value The value of 'bidPrice5'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice5(double value) {
+			validate(fields()[31], value);
+			this.bidPrice5 = value;
+			fieldSetFlags()[31] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidPrice5' field has been set.
+		 * 
+		 * @return True if the 'bidPrice5' field has been set, false otherwise.
+		 */
+		public boolean hasBidPrice5() {
+			return fieldSetFlags()[31];
+		}
+
+		/**
+		 * Clears the value of the 'bidPrice5' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice5() {
+			fieldSetFlags()[31] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume5' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getBidVolume5() {
+			return bidVolume5;
+		}
+
+		/**
+		 * Gets the value of the 'bidVolume5' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalBidVolume5() {
+			return Optional.<java.lang.Integer>ofNullable(bidVolume5);
+		}
+
+		/**
+		 * Sets the value of the 'bidVolume5' field.
+		 * 
+		 * @param value The value of 'bidVolume5'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume5(int value) {
+			validate(fields()[32], value);
+			this.bidVolume5 = value;
+			fieldSetFlags()[32] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'bidVolume5' field has been set.
+		 * 
+		 * @return True if the 'bidVolume5' field has been set, false otherwise.
+		 */
+		public boolean hasBidVolume5() {
+			return fieldSetFlags()[32];
+		}
+
+		/**
+		 * Clears the value of the 'bidVolume5' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume5() {
+			fieldSetFlags()[32] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice5' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getAskPrice5() {
+			return askPrice5;
+		}
+
+		/**
+		 * Gets the value of the 'askPrice5' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalAskPrice5() {
+			return Optional.<java.lang.Double>ofNullable(askPrice5);
+		}
+
+		/**
+		 * Sets the value of the 'askPrice5' field.
+		 * 
+		 * @param value The value of 'askPrice5'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice5(double value) {
+			validate(fields()[33], value);
+			this.askPrice5 = value;
+			fieldSetFlags()[33] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askPrice5' field has been set.
+		 * 
+		 * @return True if the 'askPrice5' field has been set, false otherwise.
+		 */
+		public boolean hasAskPrice5() {
+			return fieldSetFlags()[33];
+		}
+
+		/**
+		 * Clears the value of the 'askPrice5' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice5() {
+			fieldSetFlags()[33] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume5' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getAskVolume5() {
+			return askVolume5;
+		}
+
+		/**
+		 * Gets the value of the 'askVolume5' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalAskVolume5() {
+			return Optional.<java.lang.Integer>ofNullable(askVolume5);
+		}
+
+		/**
+		 * Sets the value of the 'askVolume5' field.
+		 * 
+		 * @param value The value of 'askVolume5'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume5(int value) {
+			validate(fields()[34], value);
+			this.askVolume5 = value;
+			fieldSetFlags()[34] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'askVolume5' field has been set.
+		 * 
+		 * @return True if the 'askVolume5' field has been set, false otherwise.
+		 */
+		public boolean hasAskVolume5() {
+			return fieldSetFlags()[34];
+		}
+
+		/**
+		 * Clears the value of the 'askVolume5' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume5() {
+			fieldSetFlags()[34] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'averagePrice' field.
+		 * 
+		 * @return The value.
+		 */
+		public double getAveragePrice() {
+			return averagePrice;
+		}
+
+		/**
+		 * Gets the value of the 'averagePrice' field as an
+		 * Optional&lt;java.lang.Double&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+		 */
+		public Optional<java.lang.Double> getOptionalAveragePrice() {
+			return Optional.<java.lang.Double>ofNullable(averagePrice);
+		}
+
+		/**
+		 * Sets the value of the 'averagePrice' field.
+		 * 
+		 * @param value The value of 'averagePrice'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAveragePrice(double value) {
+			validate(fields()[35], value);
+			this.averagePrice = value;
+			fieldSetFlags()[35] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'averagePrice' field has been set.
+		 * 
+		 * @return True if the 'averagePrice' field has been set, false otherwise.
+		 */
+		public boolean hasAveragePrice() {
+			return fieldSetFlags()[35];
+		}
+
+		/**
+		 * Clears the value of the 'averagePrice' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAveragePrice() {
+			fieldSetFlags()[35] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'updateTime' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.lang.String getUpdateTime() {
+			return updateTime;
+		}
+
+		/**
+		 * Gets the value of the 'updateTime' field as an
+		 * Optional&lt;java.lang.String&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+		 */
+		public Optional<java.lang.String> getOptionalUpdateTime() {
+			return Optional.<java.lang.String>ofNullable(updateTime);
+		}
+
+		/**
+		 * Sets the value of the 'updateTime' field.
+		 * 
+		 * @param value The value of 'updateTime'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpdateTime(
+				java.lang.String value) {
+			validate(fields()[36], value);
+			this.updateTime = value;
+			fieldSetFlags()[36] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'updateTime' field has been set.
+		 * 
+		 * @return True if the 'updateTime' field has been set, false otherwise.
+		 */
+		public boolean hasUpdateTime() {
+			return fieldSetFlags()[36];
+		}
+
+		/**
+		 * Clears the value of the 'updateTime' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpdateTime() {
+			updateTime = null;
+			fieldSetFlags()[36] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'updateMillisec' field.
+		 * 
+		 * @return The value.
+		 */
+		public int getUpdateMillisec() {
+			return updateMillisec;
+		}
+
+		/**
+		 * Gets the value of the 'updateMillisec' field as an
+		 * Optional&lt;java.lang.Integer&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+		 */
+		public Optional<java.lang.Integer> getOptionalUpdateMillisec() {
+			return Optional.<java.lang.Integer>ofNullable(updateMillisec);
+		}
+
+		/**
+		 * Sets the value of the 'updateMillisec' field.
+		 * 
+		 * @param value The value of 'updateMillisec'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpdateMillisec(int value) {
+			validate(fields()[37], value);
+			this.updateMillisec = value;
+			fieldSetFlags()[37] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'updateMillisec' field has been set.
+		 * 
+		 * @return True if the 'updateMillisec' field has been set, false otherwise.
+		 */
+		public boolean hasUpdateMillisec() {
+			return fieldSetFlags()[37];
+		}
+
+		/**
+		 * Clears the value of the 'updateMillisec' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpdateMillisec() {
+			fieldSetFlags()[37] = false;
+			return this;
+		}
+
+		/**
+		 * Gets the value of the 'localTimestamp' field.
+		 * 
+		 * @return The value.
+		 */
+		public java.lang.String getLocalTimestamp() {
+			return localTimestamp;
+		}
+
+		/**
+		 * Gets the value of the 'localTimestamp' field as an
+		 * Optional&lt;java.lang.String&gt;.
+		 * 
+		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+		 */
+		public Optional<java.lang.String> getOptionalLocalTimestamp() {
+			return Optional.<java.lang.String>ofNullable(localTimestamp);
+		}
+
+		/**
+		 * Sets the value of the 'localTimestamp' field.
+		 * 
+		 * @param value The value of 'localTimestamp'.
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLocalTimestamp(
+				java.lang.String value) {
+			validate(fields()[38], value);
+			this.localTimestamp = value;
+			fieldSetFlags()[38] = true;
+			return this;
+		}
+
+		/**
+		 * Checks whether the 'localTimestamp' field has been set.
+		 * 
+		 * @return True if the 'localTimestamp' field has been set, false otherwise.
+		 */
+		public boolean hasLocalTimestamp() {
+			return fieldSetFlags()[38];
+		}
+
+		/**
+		 * Clears the value of the 'localTimestamp' field.
+		 * 
+		 * @return This builder.
+		 */
+		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLocalTimestamp() {
+			localTimestamp = null;
+			fieldSetFlags()[38] = false;
+			return this;
+		}
+
+		@Override
+		public MarketDataLevel1 build() {
+			try {
+				MarketDataLevel1 record = new MarketDataLevel1();
+				record.tradingDay = fieldSetFlags()[0] ? this.tradingDay : (java.lang.String) defaultValue(fields()[0]);
+				record.instrumentId = fieldSetFlags()[1] ? this.instrumentId
+						: (java.lang.String) defaultValue(fields()[1]);
+				record.exchangeId = fieldSetFlags()[2] ? this.exchangeId : (java.lang.String) defaultValue(fields()[2]);
+				record.lastPrice = fieldSetFlags()[3] ? this.lastPrice : (java.lang.Double) defaultValue(fields()[3]);
+				record.preSettlementPrice = fieldSetFlags()[4] ? this.preSettlementPrice
+						: (java.lang.Double) defaultValue(fields()[4]);
+				record.preClosePrice = fieldSetFlags()[5] ? this.preClosePrice
+						: (java.lang.Double) defaultValue(fields()[5]);
+				record.preOpenInterest = fieldSetFlags()[6] ? this.preOpenInterest
+						: (java.lang.Double) defaultValue(fields()[6]);
+				record.openPrice = fieldSetFlags()[7] ? this.openPrice : (java.lang.Double) defaultValue(fields()[7]);
+				record.highestPrice = fieldSetFlags()[8] ? this.highestPrice
+						: (java.lang.Double) defaultValue(fields()[8]);
+				record.lowestPrice = fieldSetFlags()[9] ? this.lowestPrice
+						: (java.lang.Double) defaultValue(fields()[9]);
+				record.volume = fieldSetFlags()[10] ? this.volume : (java.lang.Integer) defaultValue(fields()[10]);
+				record.turnover = fieldSetFlags()[11] ? this.turnover : (java.lang.Double) defaultValue(fields()[11]);
+				record.openInterest = fieldSetFlags()[12] ? this.openInterest
+						: (java.lang.Double) defaultValue(fields()[12]);
+				record.upperLimitPrice = fieldSetFlags()[13] ? this.upperLimitPrice
+						: (java.lang.Double) defaultValue(fields()[13]);
+				record.lowerLimitPrice = fieldSetFlags()[14] ? this.lowerLimitPrice
+						: (java.lang.Double) defaultValue(fields()[14]);
+				record.bidPrice1 = fieldSetFlags()[15] ? this.bidPrice1 : (java.lang.Double) defaultValue(fields()[15]);
+				record.bidVolume1 = fieldSetFlags()[16] ? this.bidVolume1
+						: (java.lang.Integer) defaultValue(fields()[16]);
+				record.askPrice1 = fieldSetFlags()[17] ? this.askPrice1 : (java.lang.Double) defaultValue(fields()[17]);
+				record.askVolume1 = fieldSetFlags()[18] ? this.askVolume1
+						: (java.lang.Integer) defaultValue(fields()[18]);
+				record.bidPrice2 = fieldSetFlags()[19] ? this.bidPrice2 : (java.lang.Double) defaultValue(fields()[19]);
+				record.bidVolume2 = fieldSetFlags()[20] ? this.bidVolume2
+						: (java.lang.Integer) defaultValue(fields()[20]);
+				record.askPrice2 = fieldSetFlags()[21] ? this.askPrice2 : (java.lang.Double) defaultValue(fields()[21]);
+				record.askVolume2 = fieldSetFlags()[22] ? this.askVolume2
+						: (java.lang.Integer) defaultValue(fields()[22]);
+				record.bidPrice3 = fieldSetFlags()[23] ? this.bidPrice3 : (java.lang.Double) defaultValue(fields()[23]);
+				record.bidVolume3 = fieldSetFlags()[24] ? this.bidVolume3
+						: (java.lang.Integer) defaultValue(fields()[24]);
+				record.askPrice3 = fieldSetFlags()[25] ? this.askPrice3 : (java.lang.Double) defaultValue(fields()[25]);
+				record.askVolume3 = fieldSetFlags()[26] ? this.askVolume3
+						: (java.lang.Integer) defaultValue(fields()[26]);
+				record.bidPrice4 = fieldSetFlags()[27] ? this.bidPrice4 : (java.lang.Double) defaultValue(fields()[27]);
+				record.bidVolume4 = fieldSetFlags()[28] ? this.bidVolume4
+						: (java.lang.Integer) defaultValue(fields()[28]);
+				record.askPrice4 = fieldSetFlags()[29] ? this.askPrice4 : (java.lang.Double) defaultValue(fields()[29]);
+				record.askVolume4 = fieldSetFlags()[30] ? this.askVolume4
+						: (java.lang.Integer) defaultValue(fields()[30]);
+				record.bidPrice5 = fieldSetFlags()[31] ? this.bidPrice5 : (java.lang.Double) defaultValue(fields()[31]);
+				record.bidVolume5 = fieldSetFlags()[32] ? this.bidVolume5
+						: (java.lang.Integer) defaultValue(fields()[32]);
+				record.askPrice5 = fieldSetFlags()[33] ? this.askPrice5 : (java.lang.Double) defaultValue(fields()[33]);
+				record.askVolume5 = fieldSetFlags()[34] ? this.askVolume5
+						: (java.lang.Integer) defaultValue(fields()[34]);
+				record.averagePrice = fieldSetFlags()[35] ? this.averagePrice
+						: (java.lang.Double) defaultValue(fields()[35]);
+				record.updateTime = fieldSetFlags()[36] ? this.updateTime
+						: (java.lang.String) defaultValue(fields()[36]);
+				record.updateMillisec = fieldSetFlags()[37] ? this.updateMillisec
+						: (java.lang.Integer) defaultValue(fields()[37]);
+				record.localTimestamp = fieldSetFlags()[38] ? this.localTimestamp
+						: (java.lang.String) defaultValue(fields()[38]);
+				return record;
+			} catch (org.apache.avro.AvroMissingFieldException e) {
+				throw e;
+			} catch (java.lang.Exception e) {
+				throw new org.apache.avro.AvroRuntimeException(e);
+			}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static final org.apache.avro.io.DatumWriter<MarketDataLevel1> WRITER$ = (org.apache.avro.io.DatumWriter<MarketDataLevel1>) MODEL$
+			.createDatumWriter(SCHEMA$);
+
+	@Override
+	public void writeExternal(java.io.ObjectOutput out) throws java.io.IOException {
+		WRITER$.write(this, SpecificData.getEncoder(out));
+	}
+
+	@SuppressWarnings("unchecked")
+	private static final org.apache.avro.io.DatumReader<MarketDataLevel1> READER$ = (org.apache.avro.io.DatumReader<MarketDataLevel1>) MODEL$
+			.createDatumReader(SCHEMA$);
+
+	@Override
+	public void readExternal(java.io.ObjectInput in) throws java.io.IOException {
+		READER$.read(this, SpecificData.getDecoder(in));
+	}
+
+	@Override
+	protected boolean hasCustomCoders() {
+		return true;
+	}
+
+	@Override
+	public void customEncode(org.apache.avro.io.Encoder out) throws java.io.IOException {
+		out.writeString(this.tradingDay);
+
+		out.writeString(this.instrumentId);
+
+		out.writeString(this.exchangeId);
+
+		out.writeDouble(this.lastPrice);
+
+		out.writeDouble(this.preSettlementPrice);
+
+		out.writeDouble(this.preClosePrice);
+
+		out.writeDouble(this.preOpenInterest);
+
+		out.writeDouble(this.openPrice);
+
+		out.writeDouble(this.highestPrice);
+
+		out.writeDouble(this.lowestPrice);
+
+		out.writeInt(this.volume);
+
+		out.writeDouble(this.turnover);
+
+		out.writeDouble(this.openInterest);
+
+		out.writeDouble(this.upperLimitPrice);
+
+		out.writeDouble(this.lowerLimitPrice);
+
+		out.writeDouble(this.bidPrice1);
+
+		out.writeInt(this.bidVolume1);
+
+		out.writeDouble(this.askPrice1);
+
+		out.writeInt(this.askVolume1);
+
+		out.writeDouble(this.bidPrice2);
+
+		out.writeInt(this.bidVolume2);
+
+		out.writeDouble(this.askPrice2);
+
+		out.writeInt(this.askVolume2);
+
+		out.writeDouble(this.bidPrice3);
+
+		out.writeInt(this.bidVolume3);
+
+		out.writeDouble(this.askPrice3);
+
+		out.writeInt(this.askVolume3);
+
+		out.writeDouble(this.bidPrice4);
+
+		out.writeInt(this.bidVolume4);
+
+		out.writeDouble(this.askPrice4);
+
+		out.writeInt(this.askVolume4);
+
+		out.writeDouble(this.bidPrice5);
+
+		out.writeInt(this.bidVolume5);
+
+		out.writeDouble(this.askPrice5);
+
+		out.writeInt(this.askVolume5);
+
+		out.writeDouble(this.averagePrice);
+
+		out.writeString(this.updateTime);
+
+		out.writeInt(this.updateMillisec);
+
+		out.writeString(this.localTimestamp);
+
+	}
+
+	@Override
+	public void customDecode(org.apache.avro.io.ResolvingDecoder in) throws java.io.IOException {
+		org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
+		if (fieldOrder == null) {
+			this.tradingDay = in.readString();
+
+			this.instrumentId = in.readString();
+
+			this.exchangeId = in.readString();
+
+			this.lastPrice = in.readDouble();
+
+			this.preSettlementPrice = in.readDouble();
+
+			this.preClosePrice = in.readDouble();
+
+			this.preOpenInterest = in.readDouble();
+
+			this.openPrice = in.readDouble();
+
+			this.highestPrice = in.readDouble();
+
+			this.lowestPrice = in.readDouble();
+
+			this.volume = in.readInt();
+
+			this.turnover = in.readDouble();
+
+			this.openInterest = in.readDouble();
+
+			this.upperLimitPrice = in.readDouble();
+
+			this.lowerLimitPrice = in.readDouble();
+
+			this.bidPrice1 = in.readDouble();
+
+			this.bidVolume1 = in.readInt();
+
+			this.askPrice1 = in.readDouble();
+
+			this.askVolume1 = in.readInt();
+
+			this.bidPrice2 = in.readDouble();
+
+			this.bidVolume2 = in.readInt();
+
+			this.askPrice2 = in.readDouble();
+
+			this.askVolume2 = in.readInt();
+
+			this.bidPrice3 = in.readDouble();
+
+			this.bidVolume3 = in.readInt();
+
+			this.askPrice3 = in.readDouble();
+
+			this.askVolume3 = in.readInt();
+
+			this.bidPrice4 = in.readDouble();
+
+			this.bidVolume4 = in.readInt();
+
+			this.askPrice4 = in.readDouble();
+
+			this.askVolume4 = in.readInt();
+
+			this.bidPrice5 = in.readDouble();
+
+			this.bidVolume5 = in.readInt();
+
+			this.askPrice5 = in.readDouble();
+
+			this.askVolume5 = in.readInt();
+
+			this.averagePrice = in.readDouble();
+
+			this.updateTime = in.readString();
+
+			this.updateMillisec = in.readInt();
+
+			this.localTimestamp = in.readString();
+
+		} else {
+			for (int i = 0; i < 39; i++) {
+				switch (fieldOrder[i].pos()) {
+				case 0:
+					this.tradingDay = in.readString();
+					break;
+
+				case 1:
+					this.instrumentId = in.readString();
+					break;
+
+				case 2:
+					this.exchangeId = in.readString();
+					break;
+
+				case 3:
+					this.lastPrice = in.readDouble();
+					break;
+
+				case 4:
+					this.preSettlementPrice = in.readDouble();
+					break;
+
+				case 5:
+					this.preClosePrice = in.readDouble();
+					break;
+
+				case 6:
+					this.preOpenInterest = in.readDouble();
+					break;
+
+				case 7:
+					this.openPrice = in.readDouble();
+					break;
+
+				case 8:
+					this.highestPrice = in.readDouble();
+					break;
+
+				case 9:
+					this.lowestPrice = in.readDouble();
+					break;
+
+				case 10:
+					this.volume = in.readInt();
+					break;
+
+				case 11:
+					this.turnover = in.readDouble();
+					break;
+
+				case 12:
+					this.openInterest = in.readDouble();
+					break;
+
+				case 13:
+					this.upperLimitPrice = in.readDouble();
+					break;
+
+				case 14:
+					this.lowerLimitPrice = in.readDouble();
+					break;
+
+				case 15:
+					this.bidPrice1 = in.readDouble();
+					break;
+
+				case 16:
+					this.bidVolume1 = in.readInt();
+					break;
+
+				case 17:
+					this.askPrice1 = in.readDouble();
+					break;
+
+				case 18:
+					this.askVolume1 = in.readInt();
+					break;
+
+				case 19:
+					this.bidPrice2 = in.readDouble();
+					break;
+
+				case 20:
+					this.bidVolume2 = in.readInt();
+					break;
+
+				case 21:
+					this.askPrice2 = in.readDouble();
+					break;
+
+				case 22:
+					this.askVolume2 = in.readInt();
+					break;
+
+				case 23:
+					this.bidPrice3 = in.readDouble();
+					break;
+
+				case 24:
+					this.bidVolume3 = in.readInt();
+					break;
+
+				case 25:
+					this.askPrice3 = in.readDouble();
+					break;
+
+				case 26:
+					this.askVolume3 = in.readInt();
+					break;
+
+				case 27:
+					this.bidPrice4 = in.readDouble();
+					break;
+
+				case 28:
+					this.bidVolume4 = in.readInt();
+					break;
+
+				case 29:
+					this.askPrice4 = in.readDouble();
+					break;
+
+				case 30:
+					this.askVolume4 = in.readInt();
+					break;
+
+				case 31:
+					this.bidPrice5 = in.readDouble();
+					break;
+
+				case 32:
+					this.bidVolume5 = in.readInt();
+					break;
+
+				case 33:
+					this.askPrice5 = in.readDouble();
+					break;
+
+				case 34:
+					this.askVolume5 = in.readInt();
+					break;
+
+				case 35:
+					this.averagePrice = in.readDouble();
+					break;
+
+				case 36:
+					this.updateTime = in.readString();
+					break;
+
+				case 37:
+					this.updateMillisec = in.readInt();
+					break;
+
+				case 38:
+					this.localTimestamp = in.readString();
+					break;
+
+				default:
+					throw new java.io.IOException("Corrupt ResolvingDecoder.");
+				}
+			}
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
