@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
-import io.apollo.simulator.persistence.avro.entity.ExOrder;
 import io.apollo.simulator.persistence.avro.entity.MarketDataLevel1;
 import io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe;
+import io.apollo.simulator.persistence.avro.entity.SimOrder;
 import io.gemini.definition.account.Account;
 import io.gemini.definition.adaptor.AdaptorBaseImpl;
 import io.gemini.definition.adaptor.Command;
@@ -50,14 +50,14 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 		return null;
 	};
 
-	private Function<ExOrder, OrdReport> orderFunction = order -> {
+	private Function<SimOrder, OrdReport> orderFunction = order -> {
 		return null;
 	};
 
 	private AvroBinaryDeserializer<MarketDataLevel1> marketDataDeserializer = new AvroBinaryDeserializer<>(
 			MarketDataLevel1.class);
 
-	private AvroBinaryDeserializer<ExOrder> orderDeserializer = new AvroBinaryDeserializer<>(ExOrder.class);
+	private AvroBinaryDeserializer<SimOrder> orderDeserializer = new AvroBinaryDeserializer<>(SimOrder.class);
 
 	public SimAdaptor(int adaptorId, @Nonnull Account account, @Nonnull ImmutableParams<SimAdaptorParamKey> paramMap,
 			StrategyScheduler<BasicMarketData> scheduler) {
@@ -77,8 +77,8 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 			}
 		});
 		this.tdReceiver = new SocketReceiver(tdConfigurator, (bytes) -> {
-			List<ExOrder> orders = orderDeserializer.deserializationMultiple(bytes);
-			for (ExOrder order : orders) {
+			List<SimOrder> orders = orderDeserializer.deserializationMultiple(bytes);
+			for (SimOrder order : orders) {
 				this.scheduler.onOrdReport(orderFunction.apply(order));
 			}
 		});
@@ -120,7 +120,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	@Override
 	public boolean newOredr(Account account, ActualChildOrder order) {
-		ExOrder simOrder = ExOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
+		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
 				.setInstrumentId(order.instrument().code()).setLimitPrice(order.price().offerPrice())
 				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.direction().code()).build();
@@ -137,7 +137,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	@Override
 	public boolean cancelOrder(Account account, ActualChildOrder order) {
 		Order cancelOrder = OrderKeeper.getOrder(order.uniqueId());
-		ExOrder simOrder = ExOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
+		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
 				.setInstrumentId(cancelOrder.instrument().code()).setLimitPrice(order.price().offerPrice())
 				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.direction().code()).build();
@@ -153,19 +153,16 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	@Override
 	public boolean queryOrder(Account account, Instrument instrument) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean queryPositions(Account account, Instrument instrument) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean queryBalance(Account account) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -179,7 +176,6 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	@Override
 	public boolean sendCommand(Command command) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

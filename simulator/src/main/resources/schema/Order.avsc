@@ -1,7 +1,7 @@
 {
     "namespace": "io.apollo.simulator.persistence.avro.entity",
     "type": "record",
-    "name": "ExOrder",
+    "name": "SimOrder",
     "fields": [
         {
             "name": "strategyId",
