@@ -1,11 +1,11 @@
 package io.apollo.engine.position;
 
-import io.apollo.core.position.impl.AbsT1Position;
+import io.apollo.core.position.impl.BasePositionT1;
 import io.gemini.definition.order.Order;
 import io.gemini.definition.order.enums.OrdStatus;
 import io.gemini.definition.order.structure.OrdQty;
 
-public class ChinaStockPosition extends AbsT1Position {
+public class ChinaStockPosition extends BasePositionT1 {
 
 	public ChinaStockPosition(int accountId, int instrumentId, int tradeableQty) {
 		super(accountId, instrumentId, tradeableQty);

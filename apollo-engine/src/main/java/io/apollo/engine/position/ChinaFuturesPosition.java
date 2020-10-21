@@ -2,7 +2,7 @@ package io.apollo.engine.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
-import io.apollo.core.position.impl.AbsT0Position;
+import io.apollo.core.position.impl.BasePositionT0;
 import io.gemini.definition.order.Order;
 import io.gemini.definition.order.enums.OrdStatus;
 import io.gemini.definition.order.enums.TrdDirection;
@@ -10,7 +10,7 @@ import io.gemini.definition.order.structure.OrdQty;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 
-public final class ChinaFuturesPosition extends AbsT0Position {
+public final class ChinaFuturesPosition extends BasePositionT0 {
 
 	private int beforeTodayQty;
 

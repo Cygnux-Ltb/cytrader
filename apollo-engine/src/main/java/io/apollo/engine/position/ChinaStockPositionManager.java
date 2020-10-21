@@ -1,8 +1,8 @@
 package io.apollo.engine.position;
 
-import io.apollo.core.position.impl.AbsPositionManager;
+import io.apollo.core.position.impl.BasePositionManager;
 
-public class ChinaStockPositionManager extends AbsPositionManager<ChinaStockPosition> {
+public class ChinaStockPositionManager extends BasePositionManager<ChinaStockPosition> {
 
 	public static final ChinaStockPositionManager Singleton = new ChinaStockPositionManager();
 
