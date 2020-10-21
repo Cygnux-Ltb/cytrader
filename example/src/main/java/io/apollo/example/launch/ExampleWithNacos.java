@@ -27,7 +27,7 @@ public class ExampleWithNacos {
 
 		long datetime = DateTimeUtil.datetimeOfSecond();
 		LogConfigurator.filename("redstone-example-" + datetime);
-		LogConfigurator.level(LogLevel.INFO);
+		LogConfigurator.logLevel(LogLevel.INFO);
 
 		// TODO 读取配置文件
 		Properties properties = null;

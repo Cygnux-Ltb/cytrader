@@ -31,7 +31,7 @@ public final class ExampleWithProperties {
 	static {
 		long datetime = DateTimeUtil.datetimeOfSecond();
 		LogConfigurator.filename("redstone-example-" + datetime);
-		LogConfigurator.level(LogLevel.INFO);
+		LogConfigurator.logLevel(LogLevel.INFO);
 	}
 
 	public static void main(String[] args) {

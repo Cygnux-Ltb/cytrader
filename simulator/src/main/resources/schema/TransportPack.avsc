@@ -12,7 +12,7 @@
                 "symbols": [
                     "MarketDataSubscribe",
                     "MarketDataLevel1",
-                    "Order",
+                    "SimOrder",
                     "Next"
                 ]
             }
