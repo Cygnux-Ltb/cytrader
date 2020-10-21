@@ -1,8 +1,8 @@
 package io.apollo.core.position.impl;
 
-public abstract class AbsT0Position extends AbsPosition {
+public abstract class BasePositionT0 extends BasePosition {
 
-	public AbsT0Position(int accountId, int instrumentId) {
+	public BasePositionT0(int accountId, int instrumentId) {
 		super(accountId, instrumentId);
 	}
 

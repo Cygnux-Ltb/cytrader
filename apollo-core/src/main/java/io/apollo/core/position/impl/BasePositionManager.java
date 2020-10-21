@@ -2,18 +2,19 @@ package io.apollo.core.position.impl;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
-import io.apollo.core.position.api.Position;
-import io.apollo.core.position.api.PositionManager;
-import io.apollo.core.position.api.PositionProducer;
+import io.apollo.core.position.Position;
+import io.apollo.core.position.PositionManager;
+import io.apollo.core.position.PositionProducer;
+import io.apollo.core.position.PositionSet;
 import io.mercury.common.collections.MutableMaps;
 
-public abstract class AbsPositionManager<T extends Position> implements PositionManager<T> {
+public abstract class BasePositionManager<T extends Position> implements PositionManager<T> {
 
 	private MutableIntObjectMap<PositionSet<T>> positionSetMap = MutableMaps.newIntObjectHashMap();
 
 	private PositionProducer<T> producer;
 
-	protected AbsPositionManager(PositionProducer<T> producer) {
+	protected BasePositionManager(PositionProducer<T> producer) {
 		this.producer = producer;
 	}
 

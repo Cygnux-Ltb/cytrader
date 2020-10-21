@@ -1,14 +1,14 @@
 package io.apollo.core.position.impl;
 
-import io.apollo.core.position.api.Position;
+import io.apollo.core.position.Position;
 
-public abstract class AbsPosition implements Position {
+public abstract class BasePosition implements Position {
 
 	protected int accountId;
 	protected int instrumentId;
 	protected int currentQty;
 
-	public AbsPosition(int accountId, int instrumentId) {
+	public BasePosition(int accountId, int instrumentId) {
 		this.instrumentId = instrumentId;
 	}
 

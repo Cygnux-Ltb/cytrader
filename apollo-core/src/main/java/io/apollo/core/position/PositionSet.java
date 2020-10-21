@@ -1,9 +1,7 @@
-package io.apollo.core.position.impl;
+package io.apollo.core.position;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
-import io.apollo.core.position.api.Position;
-import io.apollo.core.position.api.PositionProducer;
 import io.mercury.common.collections.MutableMaps;
 
 /**

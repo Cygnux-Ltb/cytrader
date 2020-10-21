@@ -11,9 +11,9 @@ public interface TradeSignal extends Signal {
 
 	int strategyId();
 
-	TrdAction trdAction();
+	TrdAction action();
 
-	TrdDirection trdDirection();
+	TrdDirection direction();
 
 	public static TradeSignal openLongSignal(Instrument instrument, int strategyId) {
 		return new OpenLongSignal(instrument, strategyId);
@@ -38,12 +38,12 @@ public interface TradeSignal extends Signal {
 		}
 
 		@Override
-		public TrdAction trdAction() {
+		public TrdAction action() {
 			return TrdAction.Open;
 		}
 
 		@Override
-		public TrdDirection trdDirection() {
+		public TrdDirection direction() {
 			return TrdDirection.Long;
 		}
 	}
@@ -55,12 +55,12 @@ public interface TradeSignal extends Signal {
 		}
 
 		@Override
-		public TrdAction trdAction() {
+		public TrdAction action() {
 			return TrdAction.Open;
 		}
 
 		@Override
-		public TrdDirection trdDirection() {
+		public TrdDirection direction() {
 			return TrdDirection.Short;
 		}
 	}
@@ -72,12 +72,12 @@ public interface TradeSignal extends Signal {
 		}
 
 		@Override
-		public TrdAction trdAction() {
+		public TrdAction action() {
 			return TrdAction.Close;
 		}
 
 		@Override
-		public TrdDirection trdDirection() {
+		public TrdDirection direction() {
 			return TrdDirection.Long;
 		}
 	}
@@ -89,12 +89,12 @@ public interface TradeSignal extends Signal {
 		}
 
 		@Override
-		public TrdAction trdAction() {
+		public TrdAction action() {
 			return TrdAction.Close;
 		}
 
 		@Override
-		public TrdDirection trdDirection() {
+		public TrdDirection direction() {
 			return TrdDirection.Short;
 		}
 	}
@@ -105,7 +105,6 @@ public interface TradeSignal extends Signal {
 		private int strategyId;
 
 		private BaseTradeSignal(Instrument instrument, int strategyId) {
-			super();
 			this.instrument = instrument;
 			this.strategyId = strategyId;
 		}

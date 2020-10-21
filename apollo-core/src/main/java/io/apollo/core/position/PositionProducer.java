@@ -1,4 +1,4 @@
-package io.apollo.core.position.api;
+package io.apollo.core.position;
 
 @FunctionalInterface
 public interface PositionProducer<T extends Position> {

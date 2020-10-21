@@ -1,4 +1,4 @@
-package io.apollo.core.position.api;
+package io.apollo.core.position;
 
 import io.gemini.definition.order.Order;
 
