@@ -2,7 +2,7 @@ package io.apollo.indicator.impl;
 
 import java.time.Duration;
 
-import io.apollo.indicator.api.IndicatorEvent;
+import io.apollo.indicator.IndicatorEvent;
 import io.apollo.indicator.impl.EmaIndicator.EmaEvent;
 import io.apollo.indicator.impl.base.FixedPeriodIndicator;
 import io.gemini.definition.market.data.impl.BasicMarketData;

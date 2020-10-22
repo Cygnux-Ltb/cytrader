@@ -1,6 +1,6 @@
 package io.apollo.indicator.impl.base;
 
-import io.apollo.indicator.api.Point;
+import io.apollo.indicator.Point;
 import io.gemini.definition.market.data.api.MarketData;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.sequence.Serial;

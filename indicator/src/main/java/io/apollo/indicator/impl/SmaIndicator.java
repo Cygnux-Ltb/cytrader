@@ -4,7 +4,7 @@ import java.time.Duration;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 
-import io.apollo.indicator.api.IndicatorEvent;
+import io.apollo.indicator.IndicatorEvent;
 import io.apollo.indicator.impl.SmaIndicator.SmaEvent;
 import io.apollo.indicator.impl.base.FixedPeriodIndicator;
 import io.gemini.definition.market.data.impl.BasicMarketData;

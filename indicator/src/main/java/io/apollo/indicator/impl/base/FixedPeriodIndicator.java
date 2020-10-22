@@ -2,7 +2,7 @@ package io.apollo.indicator.impl.base;
 
 import java.time.Duration;
 
-import io.apollo.indicator.api.IndicatorEvent;
+import io.apollo.indicator.IndicatorEvent;
 import io.gemini.definition.market.data.api.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 
