@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import io.gemini.definition.adaptor.AdaptorEvent;
 import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.market.data.MarkerDataKeeper;
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.order.ActualChildOrder;
 import io.gemini.definition.order.OrderKeeper;
 import io.gemini.definition.order.structure.OrdReport;

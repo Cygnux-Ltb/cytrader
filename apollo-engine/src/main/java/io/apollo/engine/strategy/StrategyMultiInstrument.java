@@ -5,7 +5,7 @@ import java.util.Set;
 import org.eclipse.collections.api.list.ImmutableList;
 
 import io.gemini.definition.adaptor.AdaptorEvent;
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.strategy.StrategyParamKey;
 import io.mercury.common.collections.ImmutableLists;

@@ -4,7 +4,7 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.slf4j.Logger;
 
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.strategy.Strategy;
 import io.gemini.definition.strategy.StrategyScheduler;
