@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import io.apollo.indicator.Indicator;
 import io.apollo.indicator.IndicatorEvent;
 import io.apollo.indicator.PointSet;
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.Capacity;

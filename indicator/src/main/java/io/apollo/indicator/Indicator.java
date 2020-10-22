@@ -1,6 +1,6 @@
 package io.apollo.indicator;
 
-import io.gemini.definition.market.data.api.MarketData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 
 /**
