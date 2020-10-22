@@ -1,4 +1,4 @@
-package io.apollo.indicator.api;
+package io.apollo.indicator;
 
 import java.util.Optional;
 
@@ -23,10 +23,21 @@ public final class PointSet<P extends Point<?>> {
 		this.pointMap = MutableMaps.newLongObjectHashMap(capacity);
 	}
 
+	/**
+	 * 
+	 * @param <P>
+	 * @param capacity
+	 * @return
+	 */
 	public static <P extends Point<?>> PointSet<P> newEmpty(Capacity capacity) {
 		return new PointSet<>(capacity);
 	}
 
+	/**
+	 * 
+	 * @param point
+	 * @return
+	 */
 	public boolean add(P point) {
 		long serialId = point.serial().serialId();
 		if (pointMap.containsKey(serialId))
@@ -35,18 +46,35 @@ public final class PointSet<P extends Point<?>> {
 		return pointList.add(point);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int size() {
 		return pointList.size();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public P getLast() {
 		return pointList.getLast();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public P getFirst() {
 		return pointList.getFirst();
 	}
 
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 */
 	public Optional<P> get(int index) {
 		return index < pointList.size() ? Optional.ofNullable(pointList.get(index)) : Optional.empty();
 	}
@@ -62,15 +90,30 @@ public final class PointSet<P extends Point<?>> {
 		return get(++index);
 	}
 
+	/**
+	 * 
+	 * @param serialId
+	 * @return
+	 */
 	@CheckForNull
 	public P getPoint(long serialId) {
 		return pointMap.get(serialId);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public MutableList<P> getPointList() {
 		return pointList;
 	}
 
+	/**
+	 * 
+	 * @param fromIndex
+	 * @param toIndex
+	 * @return
+	 */
 	public MutableList<P> getSubPointList(int fromIndex, int toIndex) {
 		return pointList.subList(fromIndex, toIndex);
 	}

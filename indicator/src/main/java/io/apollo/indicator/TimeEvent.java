@@ -1,4 +1,4 @@
-package io.apollo.indicator.api;
+package io.apollo.indicator;
 
 import java.time.temporal.TemporalAdjuster;
 
