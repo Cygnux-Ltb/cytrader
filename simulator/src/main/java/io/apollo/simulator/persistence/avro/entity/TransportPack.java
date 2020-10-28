@@ -15,9 +15,9 @@ import org.apache.avro.specific.SpecificData;
 @org.apache.avro.specific.AvroGenerated
 public class TransportPack extends org.apache.avro.specific.SpecificRecordBase
 		implements org.apache.avro.specific.SpecificRecord {
-	private static final long serialVersionUID = 793710001682238237L;
+	private static final long serialVersionUID = -967877140834527067L;
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
-			"{\"type\":\"record\",\"name\":\"TransportPack\",\"namespace\":\"io.apollo.simulator.persistence.avro.entity\",\"fields\":[{\"name\":\"title\",\"type\":{\"type\":\"enum\",\"name\":\"PackTitle\",\"symbols\":[\"MarketDataSubscribe\",\"MarketDataLevel1\",\"Order\",\"Next\"]}},{\"name\":\"content\",\"type\":\"bytes\"}]}");
+			"{\"type\":\"record\",\"name\":\"TransportPack\",\"namespace\":\"io.apollo.simulator.persistence.avro.entity\",\"fields\":[{\"name\":\"title\",\"type\":{\"type\":\"enum\",\"name\":\"PackTitle\",\"symbols\":[\"MarketDataSubscribe\",\"MarketDataLevel1\",\"SimOrder\",\"Next\"]}},{\"name\":\"content\",\"type\":\"bytes\"}]}");
 
 	public static org.apache.avro.Schema getClassSchema() {
 		return SCHEMA$;
