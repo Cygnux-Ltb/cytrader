@@ -12,7 +12,7 @@ import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.market.vector.TimePeriodSerial;
 import io.gemini.definition.market.vector.TradingPeriod;
-import io.gemini.definition.market.vector.TradingPeriodPool;
+import io.gemini.definition.pool.TradingPeriodPool;
 import io.mercury.common.collections.list.FixedLengthRecorder;
 
 public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {

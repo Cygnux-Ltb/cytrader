@@ -7,14 +7,14 @@ import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.market.vector.TimePeriodSerial;
 import io.mercury.common.collections.list.FixedLengthRecorder;
 
-public final class SmaPoint extends MaPoint  {
+public final class SmaPoint extends MaPoint {
 
 	private long historyPriceSum;
 
 	private int cycle;
 
-	public SmaPoint(int index, Instrument instrument, Duration duration, TimePeriodSerial timePeriod,
-			int cycle, FixedLengthRecorder historyPriceRecorder) {
+	public SmaPoint(int index, Instrument instrument, Duration duration, TimePeriodSerial timePeriod, int cycle,
+			FixedLengthRecorder historyPriceRecorder) {
 		super(index, instrument, duration, timePeriod, historyPriceRecorder);
 		this.historyPriceSum = historyPriceRecorder.sum();
 		this.cycle = cycle;
