@@ -12,8 +12,8 @@ import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.InstrumentManager;
 import io.gemini.definition.market.instrument.futures.impl.ChinaFutures;
 import io.gemini.definition.market.instrument.futures.impl.ChinaFuturesSymbol;
-import io.gemini.definition.market.vector.TimePeriodPool;
-import io.gemini.definition.market.vector.TradingPeriodPool;
+import io.gemini.definition.pool.TimePeriodPool;
+import io.gemini.definition.pool.TradingPeriodPool;
 import io.gemini.ftdc.adaptor.FtdcAdaptor;
 import io.gemini.ftdc.adaptor.FtdcAdaptorParamKey;
 import io.mercury.common.datetime.DateTimeUtil;
@@ -26,7 +26,7 @@ public class ExampleWithNacos {
 	public static void main(String[] args) {
 
 		long datetime = DateTimeUtil.datetimeOfSecond();
-		LogConfigurator.filename("redstone-example-" + datetime);
+		LogConfigurator.filename("apollo-example-" + datetime);
 		LogConfigurator.logLevel(LogLevel.INFO);
 
 		// TODO 读取配置文件

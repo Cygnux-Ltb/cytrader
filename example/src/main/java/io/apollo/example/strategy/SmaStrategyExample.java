@@ -9,6 +9,11 @@ import io.gemini.definition.order.Order;
 import io.gemini.definition.strategy.StrategyParamKey;
 import io.mercury.common.param.ImmutableParams;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 public final class SmaStrategyExample extends StrategySingleInstrument<BasicMarketData, StrategyParamKey>
 		implements SmaEvent {
 
