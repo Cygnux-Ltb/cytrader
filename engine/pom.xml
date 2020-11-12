@@ -11,8 +11,8 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>apollo-engine</artifactId>
-	<name>apollo-engine</name>
+	<artifactId>engine</artifactId>
+	<name>engine</name>
 
 	<dependencies>
 

@@ -102,13 +102,12 @@
 			<!-- apollo -->
 			<dependency>
 				<groupId>io.apollo</groupId>
-				<artifactId>indicator</artifactId>
+				<artifactId>engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-		
 			<dependency>
 				<groupId>io.apollo</groupId>
-				<artifactId>apollo-engine</artifactId>
+				<artifactId>indicator</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

@@ -28,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.apollo</groupId>
-			<artifactId>apollo-engine</artifactId>
+			<artifactId>engine</artifactId>
 		</dependency>
 
 		<dependency>
