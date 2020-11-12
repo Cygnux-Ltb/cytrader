@@ -69,11 +69,12 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-socket</artifactId>
 		</dependency>
-		
+
 		<dependency>
-			<groupId>io.apollo</groupId>
-			<artifactId>apollo-core</artifactId>
+			<groupId>io.gemini</groupId>
+			<artifactId>definition</artifactId>
 		</dependency>
+
 	</dependencies>
 
 

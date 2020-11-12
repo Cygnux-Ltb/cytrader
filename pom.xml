@@ -15,8 +15,7 @@
 	<url>https://github.com/yellow013/apollo.git</url>
 
 	<modules>
-		<module>apollo-core</module>
-		<module>apollo-engine</module>
+		<module>engine</module>
 		<module>example</module>
 		<module>indicator</module>
 		<module>simulator</module>
@@ -106,11 +105,7 @@
 				<artifactId>indicator</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>io.apollo</groupId>
-				<artifactId>apollo-core</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+		
 			<dependency>
 				<groupId>io.apollo</groupId>
 				<artifactId>apollo-engine</artifactId>

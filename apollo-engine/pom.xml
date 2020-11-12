@@ -26,10 +26,7 @@
 			<groupId>io.gemini</groupId>
 			<artifactId>definition</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>io.apollo</groupId>
-			<artifactId>apollo-core</artifactId>
-		</dependency>
+	
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-json</artifactId>
