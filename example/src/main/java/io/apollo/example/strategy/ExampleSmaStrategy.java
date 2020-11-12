@@ -14,10 +14,10 @@ import io.mercury.common.param.ImmutableParams;
  * @author yellow013
  *
  */
-public final class SmaStrategyExample extends StrategySingleInstrument<BasicMarketData, StrategyParamKey>
+public final class ExampleSmaStrategy extends StrategySingleInstrument<BasicMarketData, StrategyParamKey>
 		implements SmaEvent {
 
-	public SmaStrategyExample(int strategyId, int subAccountId, Instrument instrument,
+	public ExampleSmaStrategy(int strategyId, int subAccountId, Instrument instrument,
 			ImmutableParams<StrategyParamKey> params) {
 		super(strategyId, subAccountId, instrument, params);
 	}

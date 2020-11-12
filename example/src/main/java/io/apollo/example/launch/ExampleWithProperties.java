@@ -7,7 +7,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 
 import io.apollo.engine.scheduler.SingleStrategyScheduler;
-import io.apollo.example.strategy.SmaStrategyExample;
+import io.apollo.example.strategy.ExampleSmaStrategy;
 import io.gemini.definition.adaptor.Adaptor;
 import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.market.data.impl.BasicMarketData;
@@ -43,12 +43,12 @@ public final class ExampleWithProperties {
 
 		log.info("read properties -> {}", prop);
 
-		SmaStrategyExample strategyExample = new SmaStrategyExample(strategyId, subAccountId, rb2010, null);
-		InboundScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(strategyExample);
-		strategyExample.initialize(() -> true);
+		ExampleSmaStrategy exampleStrategy = new ExampleSmaStrategy(strategyId, subAccountId, rb2010, null);
+		InboundScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(exampleStrategy);
+		exampleStrategy.initialize(() -> true);
 
 		// Set Global AppId
-		ImmutableParams<FtdcAdaptorParamKey> adaptorParams = new ImmutableParams<>(FtdcAdaptorParamKey.values(), prop);
+		ImmutableParams<FtdcAdaptorParamKey> adaptorParams = new ImmutableParams<>(prop, FtdcAdaptorParamKey.values());
 
 		// 创建InboundAdaptor
 		int adaptorId = 1;

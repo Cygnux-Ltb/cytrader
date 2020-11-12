@@ -2,6 +2,8 @@ package io.apollo.core.position;
 
 import static java.lang.Math.abs;
 
+import java.io.Serializable;
+
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
@@ -13,7 +15,6 @@ import io.gemini.definition.order.enums.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.JointKeyParams;
-import io.mercury.common.serialization.Dumpable;
 
 /**
  * 统一管理仓位信息<br>
@@ -24,7 +25,7 @@ import io.mercury.common.serialization.Dumpable;
  */
 
 @NotThreadSafe
-public final class PositionKeeper implements Dumpable<String> {
+public final class PositionKeeper implements Serializable {
 
 	/**
 	 * 
@@ -213,8 +214,7 @@ public final class PositionKeeper implements Dumpable<String> {
 	}
 
 	@Override
-	public String dump() {
-		
+	public String toString() {
 		return "";
 	}
 

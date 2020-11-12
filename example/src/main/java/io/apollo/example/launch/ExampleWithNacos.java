@@ -5,7 +5,7 @@ import java.time.Duration;
 import java.util.Properties;
 
 import io.apollo.engine.scheduler.SingleStrategyScheduler;
-import io.apollo.example.strategy.SmaStrategyExample;
+import io.apollo.example.strategy.ExampleSmaStrategy;
 import io.gemini.definition.adaptor.Adaptor;
 import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.market.data.impl.BasicMarketData;
@@ -30,19 +30,18 @@ public class ExampleWithNacos {
 		LogConfigurator.logLevel(LogLevel.INFO);
 
 		// TODO 读取配置文件
-		Properties properties = null;
+		Properties prop = null;
 		int strategyId = 1;
 		int subAccountId = 1;
 		ChinaFutures rb2010 = new ChinaFutures(ChinaFuturesSymbol.RB, 2010);
 		InstrumentManager.initialize(rb2010);
 
-		SmaStrategyExample strategyExample = new SmaStrategyExample(strategyId, subAccountId, rb2010, null);
-		InboundScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(strategyExample);
-		strategyExample.initialize(() -> true);
+		ExampleSmaStrategy exampleStrategy = new ExampleSmaStrategy(strategyId, subAccountId, rb2010, null);
+		InboundScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(exampleStrategy);
+		exampleStrategy.initialize(() -> true);
 
 		// Set Global AppId
-		ImmutableParams<FtdcAdaptorParamKey> adaptorParam = new ImmutableParams<>(FtdcAdaptorParamKey.values(),
-				properties);
+		ImmutableParams<FtdcAdaptorParamKey> adaptorParam = new ImmutableParams<>(prop, FtdcAdaptorParamKey.values());
 
 		// 创建InboundAdaptor
 		int adaptorId = 1;

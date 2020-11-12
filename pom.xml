@@ -54,7 +54,7 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- commons -->
-		<!-- see https://github.com/yellow013/commons.git -->
+		<!-- see https://github.com/yellow013/mercury.git -->
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-core</artifactId>
@@ -64,15 +64,13 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- commons -->
-			<!-- see https://github.com/yellow013/commons.git -->
+			<!-- mercury library -->
+			<!-- see https://github.com/yellow013/mercury.git -->
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>commons-concurrent</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
-			<!-- commons -->
-			<!-- see https://github.com/yellow013/transport.git -->
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-core</artifactId>
@@ -95,6 +93,7 @@
 			</dependency>
 
 			<!-- gemini -->
+			<!-- see https://github.com/yellow013/gemini.git -->
 			<dependency>
 				<groupId>io.gemini</groupId>
 				<artifactId>definition</artifactId>
