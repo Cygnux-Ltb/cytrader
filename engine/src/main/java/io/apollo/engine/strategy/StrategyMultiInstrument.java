@@ -7,11 +7,11 @@ import org.eclipse.collections.api.list.ImmutableList;
 import io.gemini.definition.adaptor.AdaptorEvent;
 import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.strategy.StrategyParamKey;
 import io.mercury.common.collections.ImmutableLists;
 import io.mercury.common.param.ImmutableParams;
+import io.mercury.common.param.ParamKey;
 
-public abstract class StrategyMultiInstrument<M extends MarketData, PK extends StrategyParamKey>
+public abstract class StrategyMultiInstrument<M extends MarketData, PK extends ParamKey>
 		extends StrategyBaseImpl<M, PK> {
 
 	// 策略订阅的合约

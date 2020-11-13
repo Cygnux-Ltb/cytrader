@@ -9,15 +9,14 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
-import io.apollo.core.position.PositionKeeper;
 import io.apollo.core.risk.CircuitBreaker;
 import io.gemini.definition.account.Account;
 import io.gemini.definition.account.AccountKeeper;
 import io.gemini.definition.account.SubAccount;
 import io.gemini.definition.adaptor.Adaptor;
 import io.gemini.definition.market.data.MarkerDataKeeper;
-import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.data.MarkerDataKeeper.LastMarkerData;
+import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.market.instrument.InstrumentManager;
 import io.gemini.definition.order.ActualChildOrder;
@@ -27,22 +26,21 @@ import io.gemini.definition.order.OrderKeeper;
 import io.gemini.definition.order.enums.OrdType;
 import io.gemini.definition.order.enums.TrdAction;
 import io.gemini.definition.order.enums.TrdDirection;
-import io.gemini.definition.strategy.Strategy;
-import io.gemini.definition.strategy.StrategyEvent;
-import io.gemini.definition.strategy.StrategyParamKey;
+import io.gemini.definition.position.PositionKeeper;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.ImmutableParams;
+import io.mercury.common.param.ParamKey;
+import io.mercury.common.param.Params;
 import io.mercury.common.util.Assertor;
 
-public abstract class StrategyBaseImpl<M extends MarketData, PK extends StrategyParamKey>
+public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey>
 		implements Strategy<M>, CircuitBreaker {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(StrategyBaseImpl.class);
+	private final Logger log = CommonLoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 策略ID
@@ -77,11 +75,11 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 	protected final MutableLongObjectMap<Order> orders = MutableMaps.newLongObjectHashMap();
 
 	/**
-	 * 策略参数Map
+	 * 策略参数
 	 */
-	protected final ImmutableParams<PK> params;
+	protected final Params<PK> params;
 
-	protected StrategyBaseImpl(int strategyId, int subAccountId, ImmutableParams<PK> params) {
+	protected StrategyBaseImpl(int strategyId, int subAccountId, Params<PK> params) {
 		this.strategyId = strategyId;
 		this.subAccount = AccountKeeper.getSubAccount(subAccountId);
 		this.subAccountId = subAccountId;
@@ -118,6 +116,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 	public void onMarketData(M marketData) {
 		if (orders.notEmpty()) {
 			log.info("{} :: strategyOrders not empty, doing....", strategyName());
+			// TODO
 		}
 		handleMarketData(marketData);
 	}
@@ -136,6 +135,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends Strategy
 
 	@Override
 	public void onStrategyEvent(StrategyEvent event) {
+		// TODO
 		log.info("{} :: Handle StrategyControlEvent -> {}", strategyName(), event);
 	}
 

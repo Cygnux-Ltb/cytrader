@@ -7,12 +7,12 @@ import io.gemini.definition.adaptor.Adaptor;
 import io.gemini.definition.adaptor.AdaptorEvent;
 import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.strategy.StrategyParamKey;
 import io.mercury.common.collections.ImmutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.ImmutableParams;
+import io.mercury.common.param.ParamKey;
+import io.mercury.common.param.Params;
 
-public abstract class StrategySingleInstrument<M extends MarketData, PK extends StrategyParamKey>
+public abstract class StrategySingleInstrument<M extends MarketData, PK extends ParamKey>
 		extends StrategyBaseImpl<M, PK> {
 
 	/**
@@ -31,7 +31,7 @@ public abstract class StrategySingleInstrument<M extends MarketData, PK extends 
 	protected ImmutableList<Instrument> instruments;
 
 	protected StrategySingleInstrument(int strategyId, int subAccountId, Instrument instrument,
-			ImmutableParams<PK> params) {
+			Params<PK> params) {
 		super(strategyId, subAccountId, params);
 		this.instrument = instrument;
 		this.instruments = ImmutableLists.newImmutableList(instrument);
