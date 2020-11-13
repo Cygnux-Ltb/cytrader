@@ -14,6 +14,7 @@ import io.apollo.simulator.persistence.avro.entity.SimOrder;
 import io.gemini.definition.account.Account;
 import io.gemini.definition.adaptor.AdaptorBaseImpl;
 import io.gemini.definition.adaptor.Command;
+import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.order.ActualChildOrder;
@@ -21,7 +22,6 @@ import io.gemini.definition.order.Order;
 import io.gemini.definition.order.OrderKeeper;
 import io.gemini.definition.order.enums.OrdStatus;
 import io.gemini.definition.order.structure.OrdReport;
-import io.gemini.definition.strategy.StrategyScheduler;
 import io.mercury.common.param.ImmutableParams;
 import io.mercury.serialization.avro.AvroBinaryDeserializer;
 import io.mercury.transport.core.api.Receiver;
@@ -38,7 +38,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	private Sender<byte[]> mdSender;
 	private Sender<byte[]> tdSender;
 
-	private StrategyScheduler<BasicMarketData> scheduler;
+	private InboundScheduler<BasicMarketData> scheduler;
 
 	protected ImmutableParams<SimAdaptorParamKey> paramMap;
 
@@ -60,7 +60,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	private AvroBinaryDeserializer<SimOrder> orderDeserializer = new AvroBinaryDeserializer<>(SimOrder.class);
 
 	public SimAdaptor(int adaptorId, @Nonnull Account account, @Nonnull ImmutableParams<SimAdaptorParamKey> paramMap,
-			StrategyScheduler<BasicMarketData> scheduler) {
+			InboundScheduler<BasicMarketData> scheduler) {
 		super(adaptorId, "SimulatorAdaptor[" + adaptorId + "]", scheduler, account);
 		this.paramMap = paramMap;
 		this.scheduler = scheduler;
