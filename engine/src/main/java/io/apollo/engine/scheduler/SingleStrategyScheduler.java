@@ -7,8 +7,8 @@ import io.gemini.definition.adaptor.AdaptorEvent;
 import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.market.data.MarkerDataKeeper;
 import io.gemini.definition.market.data.MarketData;
-import io.gemini.definition.order.ActualChildOrder;
 import io.gemini.definition.order.OrderKeeper;
+import io.gemini.definition.order.actual.ChildOrder;
 import io.gemini.definition.order.structure.OrdReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
@@ -36,7 +36,7 @@ public final class SingleStrategyScheduler<M extends MarketData> implements Inbo
 
 	@Override
 	public void onOrdReport(OrdReport report) {
-		ActualChildOrder order = OrderKeeper.onOrdReport(report);
+		ChildOrder order = OrderKeeper.onOrdReport(report);
 		// 调用策略实现的订单回调函数
 		strategy.onOrder(order);
 	}

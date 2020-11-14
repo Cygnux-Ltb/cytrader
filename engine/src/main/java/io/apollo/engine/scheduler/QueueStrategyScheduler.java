@@ -5,8 +5,8 @@ import org.slf4j.Logger;
 import io.gemini.definition.adaptor.AdaptorEvent;
 import io.gemini.definition.market.data.MarkerDataKeeper;
 import io.gemini.definition.market.data.impl.BasicMarketData;
-import io.gemini.definition.order.ActualChildOrder;
 import io.gemini.definition.order.OrderKeeper;
+import io.gemini.definition.order.actual.ChildOrder;
 import io.gemini.definition.order.structure.OrdReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.disruptor.SpscQueue;
@@ -48,7 +48,7 @@ public final class QueueStrategyScheduler extends MultipleStrategyScheduler<Basi
 				OrdReport ordReport = despatchMsg.getOrdReport();
 				log.info("Handle OrdReport, brokerUniqueId==[{}], uniqueId==[{}]", ordReport.getBrokerUniqueId(),
 						ordReport.getUniqueId());
-				ActualChildOrder order = OrderKeeper.onOrdReport(ordReport);
+				ChildOrder order = OrderKeeper.onOrdReport(ordReport);
 				log.info(
 						"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], uniqueId==[{}]",
 						ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),

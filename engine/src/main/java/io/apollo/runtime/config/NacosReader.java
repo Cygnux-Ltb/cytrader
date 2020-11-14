@@ -23,7 +23,7 @@ import io.mercury.common.util.StringUtil;
  */
 public class NacosReader {
 
-	private ConfigService configService;
+	private final ConfigService configService;
 
 	private static final Logger log = CommonLoggerFactory.getLogger(NacosReader.class);
 
@@ -47,23 +47,23 @@ public class NacosReader {
 	}
 
 	public static final NacosReader connection(String serverAddr) throws NacosReadException {
-		Properties properties = new Properties();
-		properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-		return new NacosReader(properties);
+		Properties prop = new Properties();
+		prop.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
+		return new NacosReader(prop);
 	}
 
 	public static final NacosReader connection(String serverAddr, String namespace) throws NacosReadException {
-		Properties properties = new Properties();
-		properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-		properties.put(PropertyKeyConst.NAMESPACE, namespace);
-		return new NacosReader(properties);
+		Properties prop = new Properties();
+		prop.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
+		prop.put(PropertyKeyConst.NAMESPACE, namespace);
+		return new NacosReader(prop);
 	}
 
-	private NacosReader(Properties nacosProperties) throws NacosReadException {
+	private NacosReader(Properties prop) throws NacosReadException {
 		try {
-			log.info("Connection ConfigService -> serverAddr==[{}]", nacosProperties.get(PropertyKeyConst.SERVER_ADDR));
-			log.info("Connection ConfigService -> namespace==[{}]", nacosProperties.get(PropertyKeyConst.NAMESPACE));
-			this.configService = ConfigFactory.createConfigService(nacosProperties);
+			log.info("Connection ConfigService -> serverAddr==[{}]", prop.get(PropertyKeyConst.SERVER_ADDR));
+			log.info("Connection ConfigService -> namespace==[{}]", prop.get(PropertyKeyConst.NAMESPACE));
+			this.configService = ConfigFactory.createConfigService(prop);
 		} catch (NacosException e) {
 			log.error("createConfigService error -> {}", e.getMessage(), e);
 			throw new NacosReadException("ConfigFactory.createConfigService call error", e);
@@ -73,7 +73,7 @@ public class NacosReader {
 	public String getSaved(String group, String dataId) throws NacosReadException {
 		try {
 			log.info("Reading nacos ->  group==[{}], dataId==[{}]", group, dataId);
-			String saved = configService.getConfig(dataId, group, 8000);
+			String saved = configService.getConfig(dataId, group, 10000);
 			if (StringUtil.isNullOrEmpty(saved)) {
 				log.info("Read nacos config is null or empty");
 				throw new NacosReadException("Read nacos config is null or empty");
@@ -88,16 +88,16 @@ public class NacosReader {
 	public Properties getProperties(String group, String dataId) throws NacosReadException {
 		try {
 			log.info("Reading nacos ->  group==[{}], dataId==[{}]", group, dataId);
-			String saved = configService.getConfig(dataId, group, 8000);
+			String saved = configService.getConfig(dataId, group, 10000);
 			if (StringUtil.isNullOrEmpty(saved)) {
 				log.info("Read nacos config is null or empty");
 				throw new NacosReadException("Read nacos config is null or empty");
 			}
 			try (ByteArrayInputStream inputStream = new ByteArrayInputStream(saved.getBytes())) {
-				Properties properties = new Properties();
-				properties.load(inputStream);
-				properties.forEach((key, value) -> log.info("print nacos config : key -> {}, value -> {}", key, value));
-				return properties;
+				Properties prop = new Properties();
+				prop.load(inputStream);
+				prop.forEach((key, value) -> log.info("Print nacos config : key -> {}, value -> {}", key, value));
+				return prop;
 			}
 		} catch (NacosException e) {
 			log.error("Read nacos error -> {}", e.getMessage());

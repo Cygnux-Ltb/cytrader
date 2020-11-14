@@ -26,7 +26,7 @@
 			<groupId>io.gemini</groupId>
 			<artifactId>definition</artifactId>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-json</artifactId>
@@ -41,9 +41,9 @@
 		<dependency>
 			<groupId>com.alibaba.nacos</groupId>
 			<artifactId>nacos-client</artifactId>
-			<version>1.3.2</version>
-			<exclusions>
-				<exclusion>
+			<version>1.4.0</version>
+			 <exclusions>
+				 <exclusion>
 					<groupId>org.slf4j</groupId>
 					<artifactId>slf4j-api</artifactId>
 				</exclusion>
@@ -51,30 +51,30 @@
 					<groupId>commons-io</groupId>
 					<artifactId>commons-io</artifactId>
 				</exclusion>
-				<exclusion>
+				 <exclusion>
 					<groupId>org.apache.commons</groupId>
 					<artifactId>commons-lang3</artifactId>
 				</exclusion>
-				<exclusion>
+				<!--<exclusion>
 					<groupId>commons-codec</groupId>
 					<artifactId>commons-codec</artifactId>
-				</exclusion>
+				</exclusion>-->
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				</exclusion>
+				</exclusion> 
 				<exclusion>
 					<groupId>com.google.guava</groupId>
 					<artifactId>guava</artifactId>
 				</exclusion>
-				<exclusion>
+				<!-- <exclusion>
 					<groupId>com.google.code.findbugs</groupId>
 					<artifactId>jsr305</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>com.alibaba</groupId>
 					<artifactId>fastjson</artifactId>
-				</exclusion>
+				</exclusion>-->
 				<exclusion>
 					<groupId>com.fasterxml.jackson.core</groupId>
 					<artifactId>jackson-core</artifactId>
@@ -86,8 +86,8 @@
 				<exclusion>
 					<groupId>com.fasterxml.jackson.core</groupId>
 					<artifactId>jackson-databind</artifactId>
-				</exclusion>
-			</exclusions>
+				</exclusion> 
+			</exclusions> 
 		</dependency>
 
 	</dependencies>

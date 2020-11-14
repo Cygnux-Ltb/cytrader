@@ -19,10 +19,10 @@ import io.gemini.definition.market.data.MarkerDataKeeper.LastMarkerData;
 import io.gemini.definition.market.data.MarketData;
 import io.gemini.definition.market.instrument.Instrument;
 import io.gemini.definition.market.instrument.InstrumentManager;
-import io.gemini.definition.order.ActualChildOrder;
-import io.gemini.definition.order.ActualParentOrder;
 import io.gemini.definition.order.Order;
 import io.gemini.definition.order.OrderKeeper;
+import io.gemini.definition.order.actual.ChildOrder;
+import io.gemini.definition.order.actual.ParentOrder;
 import io.gemini.definition.order.enums.OrdType;
 import io.gemini.definition.order.enums.TrdAction;
 import io.gemini.definition.order.enums.TrdDirection;
@@ -350,12 +350,12 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 	 */
 	protected void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType,
 			TrdDirection direction) {
-		ActualParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
+		ParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
 				abs(offerQty), offerPrice, ordType, direction, TrdAction.Open);
 		parentOrder.writeLog(log, strategyName(), "Open position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
-		ActualChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
+		ChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
 		childOrder.writeLog(log, strategyName(), "Open position generate [ChildOrder]");
 		saveOrder(childOrder);
 
@@ -449,13 +449,13 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 	 * @param ordType    订单类型
 	 */
 	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
-		ActualParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
+		ParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
 				abs(offerQty), offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short,
 				TrdAction.Close);
 		parentOrder.writeLog(log, strategyName(), "Close position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
-		ActualChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
+		ChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
 		childOrder.writeLog(log, strategyName(), "Close position generate [ChildOrder]");
 		saveOrder(childOrder);
 
