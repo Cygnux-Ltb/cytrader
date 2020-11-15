@@ -48,13 +48,13 @@ public final class ExampleWithProperties {
 		exampleStrategy.initialize(() -> true);
 
 		// Set Global AppId
-		ImmutableParams<FtdcAdaptorParamKey> adaptorParams = new ImmutableParams<>(prop, FtdcAdaptorParamKey.values());
+		ImmutableParams<FtdcAdaptorParamKey> ftdcParam = new ImmutableParams<>(prop, FtdcAdaptorParamKey.values());
 
 		// 创建InboundAdaptor
 		int adaptorId = 1;
 
 		// TODO ADD ACCOUNT
-		try (Adaptor adaptor = new FtdcAdaptor(adaptorId, null, scheduler, adaptorParams)) {
+		try (Adaptor adaptor = new FtdcAdaptor(adaptorId, null, ftdcParam, scheduler)) {
 
 			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), Duration.ofSeconds(15));
 			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());

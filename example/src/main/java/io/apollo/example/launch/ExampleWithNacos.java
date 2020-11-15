@@ -41,13 +41,13 @@ public class ExampleWithNacos {
 		exampleStrategy.initialize(() -> true);
 
 		// Set Global AppId
-		ImmutableParams<FtdcAdaptorParamKey> adaptorParam = new ImmutableParams<>(prop, FtdcAdaptorParamKey.values());
+		ImmutableParams<FtdcAdaptorParamKey> ftdcParam = new ImmutableParams<>(prop, FtdcAdaptorParamKey.values());
 
 		// 创建InboundAdaptor
 		int adaptorId = 1;
 
 		// TODO ADD ACCOUNT
-		try (Adaptor adaptor = new FtdcAdaptor(adaptorId, null, scheduler, adaptorParam)) {
+		try (Adaptor adaptor = new FtdcAdaptor(adaptorId, null, ftdcParam, scheduler)) {
 
 			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), Duration.ofSeconds(15));
 			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());

@@ -17,9 +17,9 @@ import io.gemini.definition.adaptor.Command;
 import io.gemini.definition.event.InboundScheduler;
 import io.gemini.definition.market.data.impl.BasicMarketData;
 import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.ActualChildOrder;
 import io.gemini.definition.order.Order;
 import io.gemini.definition.order.OrderKeeper;
+import io.gemini.definition.order.actual.ChildOrder;
 import io.gemini.definition.order.enums.OrdStatus;
 import io.gemini.definition.order.structure.OrdReport;
 import io.mercury.common.param.ImmutableParams;
@@ -119,7 +119,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	}
 
 	@Override
-	public boolean newOredr(Account account, ActualChildOrder order) {
+	public boolean newOredr(Account account, ChildOrder order) {
 		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
 				.setInstrumentId(order.instrument().code()).setLimitPrice(order.price().offerPrice())
 				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
@@ -135,7 +135,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	}
 
 	@Override
-	public boolean cancelOrder(Account account, ActualChildOrder order) {
+	public boolean cancelOrder(Account account, ChildOrder order) {
 		Order cancelOrder = OrderKeeper.getOrder(order.uniqueId());
 		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
 				.setInstrumentId(cancelOrder.instrument().code()).setLimitPrice(order.price().offerPrice())
