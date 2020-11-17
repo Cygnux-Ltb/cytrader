@@ -5,8 +5,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.apollo</groupId>
-	<artifactId>apollo</artifactId>
+	<groupId>io.cygnus</groupId>
+	<artifactId>cygnus</artifactId>
 	<version>1.0</version>
 
 	<packaging>pom</packaging>
@@ -96,19 +96,19 @@
 			<!-- gemini -->
 			<!-- see https://github.com/yellow013/gemini.git -->
 			<dependency>
-				<groupId>io.gemini</groupId>
+				<groupId>io.horizon</groupId>
 				<artifactId>definition</artifactId>
 				<version>${gemini.version}</version>
 			</dependency>
 
 			<!-- apollo -->
 			<dependency>
-				<groupId>io.apollo</groupId>
+				<groupId>io.cygnus</groupId>
 				<artifactId>engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.apollo</groupId>
+				<groupId>io.cygnus</groupId>
 				<artifactId>indicator</artifactId>
 				<version>${project.version}</version>
 			</dependency>

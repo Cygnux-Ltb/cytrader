@@ -12,6 +12,11 @@ import io.mercury.common.collections.MutableMaps;
 
 public final class ChinaFuturesPosition extends PositionT0 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4650337450176161266L;
+
 	private int beforeTodayQty;
 
 	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(Capacity.L06_SIZE_64);

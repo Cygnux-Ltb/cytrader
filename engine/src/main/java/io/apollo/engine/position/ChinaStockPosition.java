@@ -7,6 +7,11 @@ import io.gemini.definition.position.PositionT1;
 
 public class ChinaStockPosition extends PositionT1 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4167492706203838544L;
+
 	public ChinaStockPosition(int accountId, int instrumentId, int tradeableQty) {
 		super(accountId, instrumentId, tradeableQty);
 	}

@@ -6,8 +6,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.apollo</groupId>
-		<artifactId>apollo</artifactId>
+		<groupId>io.cygnus</groupId>
+		<artifactId>cygnus</artifactId>
 		<version>1.0</version>
 	</parent>
 
@@ -18,16 +18,16 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.gemini</groupId>
+			<groupId>io.horizon</groupId>
 			<artifactId>adaptor-ftdc</artifactId>
 			<version>${gemini.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.apollo</groupId>
+			<groupId>io.cygnus</groupId>
 			<artifactId>indicator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.apollo</groupId>
+			<groupId>io.cygnus</groupId>
 			<artifactId>engine</artifactId>
 		</dependency>
 
