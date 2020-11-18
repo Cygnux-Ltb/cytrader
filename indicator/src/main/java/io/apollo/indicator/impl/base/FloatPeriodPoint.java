@@ -2,8 +2,8 @@ package io.apollo.indicator.impl.base;
 
 import java.time.ZonedDateTime;
 
-import io.gemini.definition.market.data.MarketData;
-import io.gemini.definition.market.vector.TimePointSerial;
+import io.horizon.definition.market.data.MarketData;
+import io.horizon.definition.market.vector.TimePointSerial;
 
 public abstract class FloatPeriodPoint<M extends MarketData> extends BasePoint<TimePointSerial, M> {
 

@@ -9,10 +9,10 @@ import org.slf4j.Logger;
 import io.apollo.indicator.IndicatorEvent;
 import io.apollo.indicator.impl.TimeBarIndicator.TimeBarEvent;
 import io.apollo.indicator.impl.base.FixedPeriodIndicator;
-import io.gemini.definition.market.data.impl.BasicMarketData;
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.market.vector.TimePeriodSerial;
-import io.gemini.definition.pool.TimePeriodPool;
+import io.horizon.definition.market.data.impl.BasicMarketData;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.market.vector.TimePeriodSerial;
+import io.horizon.definition.pool.TimePeriodPool;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, TimeBarEvent, BasicMarketData> {

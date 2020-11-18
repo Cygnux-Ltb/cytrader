@@ -1,6 +1,6 @@
 package io.apollo.simulator.adaptor;
 
-import io.gemini.definition.adaptor.AdaptorParamKey;
+import io.horizon.definition.adaptor.AdaptorParamKey;
 import io.mercury.common.param.ParamType;
 
 public enum SimAdaptorParamKey implements AdaptorParamKey {

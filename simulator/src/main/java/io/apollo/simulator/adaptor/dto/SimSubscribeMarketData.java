@@ -1,6 +1,6 @@
 package io.apollo.simulator.adaptor.dto;
 
-import io.gemini.definition.market.instrument.Instrument;
+import io.horizon.definition.market.instrument.Instrument;
 
 public final class SimSubscribeMarketData {
 

@@ -3,9 +3,9 @@ package io.apollo.indicator.impl;
 import java.time.Duration;
 
 import io.apollo.indicator.impl.base.FixedPeriodPoint;
-import io.gemini.definition.market.data.impl.BasicMarketData;
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.market.vector.TimePeriodSerial;
+import io.horizon.definition.market.data.impl.BasicMarketData;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.market.vector.TimePeriodSerial;
 import io.mercury.common.collections.list.FixedLengthRecorder;
 
 public abstract class MaPoint extends FixedPeriodPoint<BasicMarketData> {

@@ -3,8 +3,8 @@ package io.apollo.indicator.impl.base;
 import java.time.Duration;
 
 import io.apollo.indicator.IndicatorEvent;
-import io.gemini.definition.market.data.MarketData;
-import io.gemini.definition.market.instrument.Instrument;
+import io.horizon.definition.market.data.MarketData;
+import io.horizon.definition.market.instrument.Instrument;
 
 public abstract class FixedPeriodIndicator<P extends FixedPeriodPoint<M>, E extends IndicatorEvent, M extends MarketData>
 		extends BaseIndicator<P, E, M> {

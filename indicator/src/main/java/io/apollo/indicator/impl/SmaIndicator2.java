@@ -8,11 +8,11 @@ import java.time.ZonedDateTime;
 
 import io.apollo.indicator.impl.SmaIndicator.SmaEvent;
 import io.apollo.indicator.impl.base.FixedPeriodIndicator;
-import io.gemini.definition.market.data.impl.BasicMarketData;
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.market.vector.TimePeriodSerial;
-import io.gemini.definition.market.vector.TradingPeriod;
-import io.gemini.definition.pool.TradingPeriodPool;
+import io.horizon.definition.market.data.impl.BasicMarketData;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.market.vector.TimePeriodSerial;
+import io.horizon.definition.market.vector.TradingPeriod;
+import io.horizon.definition.pool.TradingPeriodPool;
 import io.mercury.common.collections.list.FixedLengthRecorder;
 
 public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {

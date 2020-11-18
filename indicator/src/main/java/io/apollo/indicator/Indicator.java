@@ -1,7 +1,7 @@
 package io.apollo.indicator;
 
-import io.gemini.definition.market.data.MarketData;
-import io.gemini.definition.market.instrument.Instrument;
+import io.horizon.definition.market.data.MarketData;
+import io.horizon.definition.market.instrument.Instrument;
 
 /**
  * 

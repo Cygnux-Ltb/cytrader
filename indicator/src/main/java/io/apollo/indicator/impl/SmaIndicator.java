@@ -7,10 +7,10 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import io.apollo.indicator.IndicatorEvent;
 import io.apollo.indicator.impl.SmaIndicator.SmaEvent;
 import io.apollo.indicator.impl.base.FixedPeriodIndicator;
-import io.gemini.definition.market.data.impl.BasicMarketData;
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.market.vector.TimePeriodSerial;
-import io.gemini.definition.pool.TimePeriodPool;
+import io.horizon.definition.market.data.impl.BasicMarketData;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.market.vector.TimePeriodSerial;
+import io.horizon.definition.pool.TimePeriodPool;
 import io.mercury.common.collections.list.FixedLengthRecorder;
 
 public final class SmaIndicator extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
