@@ -3,9 +3,9 @@ package io.apollo.example.strategy;
 import io.apollo.engine.strategy.StrategySingleInstrument;
 import io.apollo.indicator.impl.SmaIndicator.SmaEvent;
 import io.apollo.indicator.impl.SmaPoint;
-import io.gemini.definition.market.data.impl.BasicMarketData;
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.Order;
+import io.horizon.definition.market.data.impl.BasicMarketData;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.Order;
 import io.mercury.common.param.ImmutableParams;
 import io.mercury.common.param.ParamKey;
 
