@@ -1,8 +1,8 @@
-package io.apollo.engine.scheduler;
+package io.cygnus.engine.scheduler;
 
 import org.slf4j.Logger;
 
-import io.apollo.engine.strategy.Strategy;
+import io.cygnus.engine.strategy.Strategy;
 import io.horizon.definition.adaptor.AdaptorEvent;
 import io.horizon.definition.event.InboundScheduler;
 import io.horizon.definition.market.data.MarkerDataKeeper;

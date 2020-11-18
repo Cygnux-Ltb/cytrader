@@ -1,4 +1,4 @@
-package io.apollo.runtime.config;
+package io.cygnus.runtime.config;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

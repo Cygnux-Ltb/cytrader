@@ -1,4 +1,4 @@
-package io.apollo.engine.strategy;
+package io.cygnus.engine.strategy;
 
 import io.horizon.definition.event.InboundScheduler;
 import io.horizon.definition.market.data.MarketData;

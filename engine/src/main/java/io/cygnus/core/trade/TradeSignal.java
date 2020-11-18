@@ -1,4 +1,4 @@
-package io.apollo.core.trade;
+package io.cygnus.core.trade;
 
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.order.enums.TrdAction;

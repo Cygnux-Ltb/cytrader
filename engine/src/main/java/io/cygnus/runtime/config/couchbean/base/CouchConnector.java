@@ -1,4 +1,4 @@
-package io.apollo.runtime.config.couchbean.base;
+package io.cygnus.runtime.config.couchbean.base;
 
 import java.io.File;
 import java.io.FileInputStream;

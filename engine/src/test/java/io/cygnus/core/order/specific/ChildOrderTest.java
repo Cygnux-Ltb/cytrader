@@ -1,4 +1,4 @@
-package io.apollo.core.order.specific;
+package io.cygnus.core.order.specific;
 
 import org.junit.Test;
 

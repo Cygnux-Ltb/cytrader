@@ -1,4 +1,4 @@
-package io.apollo.core.position;
+package io.cygnus.core.position;
 
 import org.junit.Test;
 

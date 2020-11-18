@@ -1,4 +1,4 @@
-package io.apollo.runtime.jmx;
+package io.cygnus.runtime.jmx;
 
 public class Config implements ConfigMBean {
 

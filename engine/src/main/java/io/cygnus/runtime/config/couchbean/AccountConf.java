@@ -1,4 +1,4 @@
-package io.apollo.runtime.config.couchbean;
+package io.cygnus.runtime.config.couchbean;
 
 public class AccountConf {
 

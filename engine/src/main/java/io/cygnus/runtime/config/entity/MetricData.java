@@ -1,4 +1,4 @@
-package io.apollo.runtime.config.entity;
+package io.cygnus.runtime.config.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

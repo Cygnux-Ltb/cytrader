@@ -1,9 +1,9 @@
-package io.apollo.runtime.config.couchbean;
+package io.cygnus.runtime.config.couchbean;
 
 import java.util.List;
 
-import io.apollo.runtime.config.couchbean.base.CouchConnector;
-import io.apollo.runtime.config.couchbean.base.CouchDocumentEnum;
+import io.cygnus.runtime.config.couchbean.base.CouchConnector;
+import io.cygnus.runtime.config.couchbean.base.CouchDocumentEnum;
 import io.mercury.serialization.json.JsonUtil;
 
 public class AppConf {

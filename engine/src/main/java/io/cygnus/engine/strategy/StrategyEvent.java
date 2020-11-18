@@ -1,4 +1,4 @@
-package io.apollo.engine.strategy;
+package io.cygnus.engine.strategy;
 
 public interface StrategyEvent {
 

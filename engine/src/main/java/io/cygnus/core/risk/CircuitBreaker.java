@@ -1,4 +1,4 @@
-package io.apollo.core.risk;
+package io.cygnus.core.risk;
 
 public interface CircuitBreaker {
 

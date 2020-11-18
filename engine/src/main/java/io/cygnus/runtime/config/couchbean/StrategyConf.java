@@ -1,4 +1,4 @@
-package io.apollo.runtime.config.couchbean;
+package io.cygnus.runtime.config.couchbean;
 
 import io.mercury.serialization.json.JsonUtil;
 

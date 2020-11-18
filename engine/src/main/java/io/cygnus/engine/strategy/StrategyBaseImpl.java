@@ -1,4 +1,4 @@
-package io.apollo.engine.strategy;
+package io.cygnus.engine.strategy;
 
 import static java.lang.Math.abs;
 
@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
-import io.apollo.core.risk.CircuitBreaker;
+import io.cygnus.core.risk.CircuitBreaker;
 import io.horizon.definition.account.Account;
 import io.horizon.definition.account.AccountKeeper;
 import io.horizon.definition.account.SubAccount;

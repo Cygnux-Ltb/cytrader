@@ -1,8 +1,8 @@
-package io.apollo.engine.actor;
+package io.cygnus.engine.actor;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.apollo.core.trade.TradeSignal;
+import io.cygnus.core.trade.TradeSignal;
 import io.mercury.common.collections.MutableLists;
 
 public final class TradeSignalActor {

@@ -1,4 +1,4 @@
-package io.apollo.runtime.config;
+package io.cygnus.runtime.config;
 
 public final class NacosReadException extends RuntimeException {
 

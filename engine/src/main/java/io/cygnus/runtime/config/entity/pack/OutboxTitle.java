@@ -1,4 +1,4 @@
-package io.apollo.runtime.config.entity.pack;
+package io.cygnus.runtime.config.entity.pack;
 
 import java.util.HashMap;
 import java.util.Map;

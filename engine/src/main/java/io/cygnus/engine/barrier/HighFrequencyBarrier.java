@@ -1,8 +1,8 @@
-package io.apollo.engine.barrier;
+package io.cygnus.engine.barrier;
 
 import org.slf4j.Logger;
 
-import io.apollo.core.risk.OrderBarrier;
+import io.cygnus.core.risk.OrderBarrier;
 import io.horizon.definition.order.actual.ChildOrder;
 import io.mercury.common.log.CommonLoggerFactory;
 

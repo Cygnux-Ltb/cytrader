@@ -1,4 +1,4 @@
-package io.apollo.runtime.config.entity.pack;
+package io.cygnus.runtime.config.entity.pack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.annotation.JSONType;
 
-import io.apollo.runtime.config.entity.StrategySwitch;
+import io.cygnus.runtime.config.entity.StrategySwitch;
 
 @JSONType(orders = { "Title", "Content" })
 public class OutboxMessage<T> {
