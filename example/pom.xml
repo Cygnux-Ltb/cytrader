@@ -20,10 +20,10 @@
 		<dependency>
 			<groupId>io.horizon</groupId>
 			<artifactId>adaptor-ftdc</artifactId>
-			<version>${gemini.version}</version>
+			<version>${horizon.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.cygnus</groupId>
+			<groupId>io.horizon</groupId>
 			<artifactId>indicator</artifactId>
 		</dependency>
 		<dependency>

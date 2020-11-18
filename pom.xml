@@ -19,7 +19,6 @@
 		<module>dashboard</module>
 		<module>engine</module>
 		<module>example</module>
-		<module>indicator</module>
 		<module>simulator</module>
 	</modules>
 
@@ -27,7 +26,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<mercury.version>1.0-SNAPSHOT</mercury.version>
-		<gemini.version>1.0</gemini.version>
+		<horizon.version>1.0</horizon.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -93,25 +92,26 @@
 				<version>${mercury.version}</version>
 			</dependency>
 
-			<!-- gemini -->
-			<!-- see https://github.com/yellow013/gemini.git -->
+			<!-- horizon -->
+			<!-- see https://github.com/yellow013/horizon.git -->
 			<dependency>
 				<groupId>io.horizon</groupId>
 				<artifactId>definition</artifactId>
-				<version>${gemini.version}</version>
+				<version>${horizon.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.horizon</groupId>
+				<artifactId>indicator</artifactId>
+				<version>${horizon.version}</version>
 			</dependency>
 
-			<!-- apollo -->
+			<!-- cygnus -->
 			<dependency>
 				<groupId>io.cygnus</groupId>
 				<artifactId>engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>io.cygnus</groupId>
-				<artifactId>indicator</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 
