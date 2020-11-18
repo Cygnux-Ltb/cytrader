@@ -1,6 +1,6 @@
-package io.apollo.indicator.impl.base;
+package io.cygnus.indicator.impl.base;
 
-import io.apollo.indicator.Point;
+import io.cygnus.indicator.Point;
 import io.horizon.definition.market.data.MarketData;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.sequence.Serial;

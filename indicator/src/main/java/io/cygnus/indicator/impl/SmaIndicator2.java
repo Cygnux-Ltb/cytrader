@@ -1,4 +1,4 @@
-package io.apollo.indicator.impl;
+package io.cygnus.indicator.impl;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -6,8 +6,8 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-import io.apollo.indicator.impl.SmaIndicator.SmaEvent;
-import io.apollo.indicator.impl.base.FixedPeriodIndicator;
+import io.cygnus.indicator.impl.SmaIndicator.SmaEvent;
+import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.market.vector.TimePeriodSerial;

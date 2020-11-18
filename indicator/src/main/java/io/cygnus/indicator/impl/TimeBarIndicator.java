@@ -1,4 +1,4 @@
-package io.apollo.indicator.impl;
+package io.cygnus.indicator.impl;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
@@ -6,9 +6,9 @@ import java.time.ZonedDateTime;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.slf4j.Logger;
 
-import io.apollo.indicator.IndicatorEvent;
-import io.apollo.indicator.impl.TimeBarIndicator.TimeBarEvent;
-import io.apollo.indicator.impl.base.FixedPeriodIndicator;
+import io.cygnus.indicator.IndicatorEvent;
+import io.cygnus.indicator.impl.TimeBarIndicator.TimeBarEvent;
+import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.market.vector.TimePeriodSerial;

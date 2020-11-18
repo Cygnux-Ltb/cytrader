@@ -1,9 +1,9 @@
-package io.apollo.indicator.impl;
+package io.cygnus.indicator.impl;
 
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 
-import io.apollo.indicator.impl.base.Bar;
-import io.apollo.indicator.impl.base.FixedPeriodPoint;
+import io.cygnus.indicator.impl.base.Bar;
+import io.cygnus.indicator.impl.base.FixedPeriodPoint;
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.vector.TimePeriodSerial;
 import io.mercury.common.collections.MutableLists;

@@ -1,11 +1,11 @@
-package io.apollo.indicator.impl.base;
+package io.cygnus.indicator.impl.base;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.slf4j.Logger;
 
-import io.apollo.indicator.Indicator;
-import io.apollo.indicator.IndicatorEvent;
-import io.apollo.indicator.PointSet;
+import io.cygnus.indicator.Indicator;
+import io.cygnus.indicator.IndicatorEvent;
+import io.cygnus.indicator.PointSet;
 import io.horizon.definition.market.data.MarketData;
 import io.horizon.definition.market.instrument.Instrument;
 import io.mercury.common.annotation.lang.AbstractFunction;

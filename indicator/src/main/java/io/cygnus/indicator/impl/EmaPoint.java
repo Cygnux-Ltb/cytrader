@@ -1,4 +1,4 @@
-package io.apollo.indicator.impl;
+package io.cygnus.indicator.impl;
 
 import java.time.Duration;
 

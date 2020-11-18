@@ -1,4 +1,4 @@
-package io.apollo.indicator.impl.base;
+package io.cygnus.indicator.impl.base;
 
 import io.mercury.serialization.json.JsonWrapper;
 

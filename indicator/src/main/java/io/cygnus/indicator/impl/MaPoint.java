@@ -1,8 +1,8 @@
-package io.apollo.indicator.impl;
+package io.cygnus.indicator.impl;
 
 import java.time.Duration;
 
-import io.apollo.indicator.impl.base.FixedPeriodPoint;
+import io.cygnus.indicator.impl.base.FixedPeriodPoint;
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.market.vector.TimePeriodSerial;

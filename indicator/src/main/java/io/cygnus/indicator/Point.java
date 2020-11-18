@@ -1,4 +1,4 @@
-package io.apollo.indicator;
+package io.cygnus.indicator;
 
 import io.mercury.common.sequence.Serial;
 

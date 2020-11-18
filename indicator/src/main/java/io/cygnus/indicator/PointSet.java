@@ -1,4 +1,4 @@
-package io.apollo.indicator;
+package io.cygnus.indicator;
 
 import java.util.Optional;
 

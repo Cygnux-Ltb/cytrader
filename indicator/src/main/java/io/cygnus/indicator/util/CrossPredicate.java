@@ -1,4 +1,4 @@
-package io.apollo.indicator.util;
+package io.cygnus.indicator.util;
 
 import org.eclipse.collections.api.block.predicate.primitive.LongLongPredicate;
 

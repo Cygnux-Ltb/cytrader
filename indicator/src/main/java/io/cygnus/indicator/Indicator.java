@@ -1,4 +1,4 @@
-package io.apollo.indicator;
+package io.cygnus.indicator;
 
 import io.horizon.definition.market.data.MarketData;
 import io.horizon.definition.market.instrument.Instrument;
