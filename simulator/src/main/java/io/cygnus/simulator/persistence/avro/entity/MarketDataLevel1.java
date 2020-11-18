@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.apollo.simulator.persistence.avro.entity;
+package io.cygnus.simulator.persistence.avro.entity;
 
 import java.util.Optional;
 
@@ -1543,8 +1543,8 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 	 * 
 	 * @return A new MarketDataLevel1 RecordBuilder
 	 */
-	public static io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder() {
-		return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
+	public static io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder() {
+		return new io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
 	}
 
 	/**
@@ -1553,12 +1553,12 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 	 * @param other The existing builder to copy.
 	 * @return A new MarketDataLevel1 RecordBuilder
 	 */
-	public static io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder(
-			io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder other) {
+	public static io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder(
+			io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder other) {
 		if (other == null) {
-			return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
+			return new io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
 		} else {
-			return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder(other);
+			return new io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder(other);
 		}
 	}
 
@@ -1569,12 +1569,12 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 	 * @param other The existing instance to copy.
 	 * @return A new MarketDataLevel1 RecordBuilder
 	 */
-	public static io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder(
-			io.apollo.simulator.persistence.avro.entity.MarketDataLevel1 other) {
+	public static io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder newBuilder(
+			io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1 other) {
 		if (other == null) {
-			return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
+			return new io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder();
 		} else {
-			return new io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder(other);
+			return new io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder(other);
 		}
 	}
 
@@ -1635,7 +1635,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @param other The existing Builder to copy.
 		 */
-		private Builder(io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder other) {
+		private Builder(io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder other) {
 			super(other);
 			if (isValidValue(fields()[0], other.tradingDay)) {
 				this.tradingDay = data().deepCopy(fields()[0].schema(), other.tradingDay);
@@ -1800,7 +1800,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @param other The existing instance to copy.
 		 */
-		private Builder(io.apollo.simulator.persistence.avro.entity.MarketDataLevel1 other) {
+		private Builder(io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1 other) {
 			super(SCHEMA$);
 			if (isValidValue(fields()[0], other.tradingDay)) {
 				this.tradingDay = data().deepCopy(fields()[0].schema(), other.tradingDay);
@@ -1985,7 +1985,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'tradingDay'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setTradingDay(
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setTradingDay(
 				java.lang.String value) {
 			validate(fields()[0], value);
 			this.tradingDay = value;
@@ -2007,7 +2007,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearTradingDay() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearTradingDay() {
 			tradingDay = null;
 			fieldSetFlags()[0] = false;
 			return this;
@@ -2038,7 +2038,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'instrumentId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setInstrumentId(
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setInstrumentId(
 				java.lang.String value) {
 			validate(fields()[1], value);
 			this.instrumentId = value;
@@ -2060,7 +2060,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearInstrumentId() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearInstrumentId() {
 			instrumentId = null;
 			fieldSetFlags()[1] = false;
 			return this;
@@ -2091,7 +2091,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'exchangeId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setExchangeId(
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setExchangeId(
 				java.lang.String value) {
 			validate(fields()[2], value);
 			this.exchangeId = value;
@@ -2113,7 +2113,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearExchangeId() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearExchangeId() {
 			exchangeId = null;
 			fieldSetFlags()[2] = false;
 			return this;
@@ -2144,7 +2144,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'lastPrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLastPrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLastPrice(double value) {
 			validate(fields()[3], value);
 			this.lastPrice = value;
 			fieldSetFlags()[3] = true;
@@ -2165,7 +2165,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLastPrice() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLastPrice() {
 			fieldSetFlags()[3] = false;
 			return this;
 		}
@@ -2195,7 +2195,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'preSettlementPrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreSettlementPrice(
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreSettlementPrice(
 				double value) {
 			validate(fields()[4], value);
 			this.preSettlementPrice = value;
@@ -2217,7 +2217,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreSettlementPrice() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreSettlementPrice() {
 			fieldSetFlags()[4] = false;
 			return this;
 		}
@@ -2247,7 +2247,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'preClosePrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreClosePrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreClosePrice(double value) {
 			validate(fields()[5], value);
 			this.preClosePrice = value;
 			fieldSetFlags()[5] = true;
@@ -2268,7 +2268,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreClosePrice() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreClosePrice() {
 			fieldSetFlags()[5] = false;
 			return this;
 		}
@@ -2298,7 +2298,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'preOpenInterest'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreOpenInterest(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setPreOpenInterest(double value) {
 			validate(fields()[6], value);
 			this.preOpenInterest = value;
 			fieldSetFlags()[6] = true;
@@ -2319,7 +2319,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreOpenInterest() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearPreOpenInterest() {
 			fieldSetFlags()[6] = false;
 			return this;
 		}
@@ -2349,7 +2349,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'openPrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setOpenPrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setOpenPrice(double value) {
 			validate(fields()[7], value);
 			this.openPrice = value;
 			fieldSetFlags()[7] = true;
@@ -2370,7 +2370,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearOpenPrice() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearOpenPrice() {
 			fieldSetFlags()[7] = false;
 			return this;
 		}
@@ -2400,7 +2400,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'highestPrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setHighestPrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setHighestPrice(double value) {
 			validate(fields()[8], value);
 			this.highestPrice = value;
 			fieldSetFlags()[8] = true;
@@ -2421,7 +2421,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearHighestPrice() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearHighestPrice() {
 			fieldSetFlags()[8] = false;
 			return this;
 		}
@@ -2451,7 +2451,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'lowestPrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLowestPrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLowestPrice(double value) {
 			validate(fields()[9], value);
 			this.lowestPrice = value;
 			fieldSetFlags()[9] = true;
@@ -2472,7 +2472,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLowestPrice() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLowestPrice() {
 			fieldSetFlags()[9] = false;
 			return this;
 		}
@@ -2501,7 +2501,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'volume'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setVolume(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setVolume(int value) {
 			validate(fields()[10], value);
 			this.volume = value;
 			fieldSetFlags()[10] = true;
@@ -2522,7 +2522,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearVolume() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearVolume() {
 			fieldSetFlags()[10] = false;
 			return this;
 		}
@@ -2552,7 +2552,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'turnover'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setTurnover(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setTurnover(double value) {
 			validate(fields()[11], value);
 			this.turnover = value;
 			fieldSetFlags()[11] = true;
@@ -2573,7 +2573,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearTurnover() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearTurnover() {
 			fieldSetFlags()[11] = false;
 			return this;
 		}
@@ -2603,7 +2603,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'openInterest'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setOpenInterest(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setOpenInterest(double value) {
 			validate(fields()[12], value);
 			this.openInterest = value;
 			fieldSetFlags()[12] = true;
@@ -2624,7 +2624,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearOpenInterest() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearOpenInterest() {
 			fieldSetFlags()[12] = false;
 			return this;
 		}
@@ -2654,7 +2654,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'upperLimitPrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpperLimitPrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpperLimitPrice(double value) {
 			validate(fields()[13], value);
 			this.upperLimitPrice = value;
 			fieldSetFlags()[13] = true;
@@ -2675,7 +2675,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpperLimitPrice() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpperLimitPrice() {
 			fieldSetFlags()[13] = false;
 			return this;
 		}
@@ -2705,7 +2705,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'lowerLimitPrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLowerLimitPrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLowerLimitPrice(double value) {
 			validate(fields()[14], value);
 			this.lowerLimitPrice = value;
 			fieldSetFlags()[14] = true;
@@ -2726,7 +2726,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLowerLimitPrice() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLowerLimitPrice() {
 			fieldSetFlags()[14] = false;
 			return this;
 		}
@@ -2756,7 +2756,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidPrice1'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice1(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice1(double value) {
 			validate(fields()[15], value);
 			this.bidPrice1 = value;
 			fieldSetFlags()[15] = true;
@@ -2777,7 +2777,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice1() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice1() {
 			fieldSetFlags()[15] = false;
 			return this;
 		}
@@ -2807,7 +2807,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidVolume1'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume1(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume1(int value) {
 			validate(fields()[16], value);
 			this.bidVolume1 = value;
 			fieldSetFlags()[16] = true;
@@ -2828,7 +2828,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume1() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume1() {
 			fieldSetFlags()[16] = false;
 			return this;
 		}
@@ -2858,7 +2858,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askPrice1'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice1(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice1(double value) {
 			validate(fields()[17], value);
 			this.askPrice1 = value;
 			fieldSetFlags()[17] = true;
@@ -2879,7 +2879,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice1() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice1() {
 			fieldSetFlags()[17] = false;
 			return this;
 		}
@@ -2909,7 +2909,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askVolume1'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume1(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume1(int value) {
 			validate(fields()[18], value);
 			this.askVolume1 = value;
 			fieldSetFlags()[18] = true;
@@ -2930,7 +2930,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume1() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume1() {
 			fieldSetFlags()[18] = false;
 			return this;
 		}
@@ -2960,7 +2960,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidPrice2'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice2(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice2(double value) {
 			validate(fields()[19], value);
 			this.bidPrice2 = value;
 			fieldSetFlags()[19] = true;
@@ -2981,7 +2981,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice2() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice2() {
 			fieldSetFlags()[19] = false;
 			return this;
 		}
@@ -3011,7 +3011,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidVolume2'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume2(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume2(int value) {
 			validate(fields()[20], value);
 			this.bidVolume2 = value;
 			fieldSetFlags()[20] = true;
@@ -3032,7 +3032,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume2() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume2() {
 			fieldSetFlags()[20] = false;
 			return this;
 		}
@@ -3062,7 +3062,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askPrice2'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice2(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice2(double value) {
 			validate(fields()[21], value);
 			this.askPrice2 = value;
 			fieldSetFlags()[21] = true;
@@ -3083,7 +3083,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice2() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice2() {
 			fieldSetFlags()[21] = false;
 			return this;
 		}
@@ -3113,7 +3113,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askVolume2'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume2(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume2(int value) {
 			validate(fields()[22], value);
 			this.askVolume2 = value;
 			fieldSetFlags()[22] = true;
@@ -3134,7 +3134,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume2() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume2() {
 			fieldSetFlags()[22] = false;
 			return this;
 		}
@@ -3164,7 +3164,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidPrice3'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice3(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice3(double value) {
 			validate(fields()[23], value);
 			this.bidPrice3 = value;
 			fieldSetFlags()[23] = true;
@@ -3185,7 +3185,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice3() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice3() {
 			fieldSetFlags()[23] = false;
 			return this;
 		}
@@ -3215,7 +3215,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidVolume3'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume3(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume3(int value) {
 			validate(fields()[24], value);
 			this.bidVolume3 = value;
 			fieldSetFlags()[24] = true;
@@ -3236,7 +3236,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume3() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume3() {
 			fieldSetFlags()[24] = false;
 			return this;
 		}
@@ -3266,7 +3266,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askPrice3'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice3(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice3(double value) {
 			validate(fields()[25], value);
 			this.askPrice3 = value;
 			fieldSetFlags()[25] = true;
@@ -3287,7 +3287,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice3() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice3() {
 			fieldSetFlags()[25] = false;
 			return this;
 		}
@@ -3317,7 +3317,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askVolume3'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume3(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume3(int value) {
 			validate(fields()[26], value);
 			this.askVolume3 = value;
 			fieldSetFlags()[26] = true;
@@ -3338,7 +3338,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume3() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume3() {
 			fieldSetFlags()[26] = false;
 			return this;
 		}
@@ -3368,7 +3368,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidPrice4'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice4(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice4(double value) {
 			validate(fields()[27], value);
 			this.bidPrice4 = value;
 			fieldSetFlags()[27] = true;
@@ -3389,7 +3389,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice4() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice4() {
 			fieldSetFlags()[27] = false;
 			return this;
 		}
@@ -3419,7 +3419,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidVolume4'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume4(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume4(int value) {
 			validate(fields()[28], value);
 			this.bidVolume4 = value;
 			fieldSetFlags()[28] = true;
@@ -3440,7 +3440,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume4() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume4() {
 			fieldSetFlags()[28] = false;
 			return this;
 		}
@@ -3470,7 +3470,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askPrice4'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice4(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice4(double value) {
 			validate(fields()[29], value);
 			this.askPrice4 = value;
 			fieldSetFlags()[29] = true;
@@ -3491,7 +3491,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice4() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice4() {
 			fieldSetFlags()[29] = false;
 			return this;
 		}
@@ -3521,7 +3521,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askVolume4'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume4(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume4(int value) {
 			validate(fields()[30], value);
 			this.askVolume4 = value;
 			fieldSetFlags()[30] = true;
@@ -3542,7 +3542,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume4() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume4() {
 			fieldSetFlags()[30] = false;
 			return this;
 		}
@@ -3572,7 +3572,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidPrice5'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice5(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidPrice5(double value) {
 			validate(fields()[31], value);
 			this.bidPrice5 = value;
 			fieldSetFlags()[31] = true;
@@ -3593,7 +3593,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice5() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidPrice5() {
 			fieldSetFlags()[31] = false;
 			return this;
 		}
@@ -3623,7 +3623,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'bidVolume5'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume5(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setBidVolume5(int value) {
 			validate(fields()[32], value);
 			this.bidVolume5 = value;
 			fieldSetFlags()[32] = true;
@@ -3644,7 +3644,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume5() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearBidVolume5() {
 			fieldSetFlags()[32] = false;
 			return this;
 		}
@@ -3674,7 +3674,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askPrice5'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice5(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskPrice5(double value) {
 			validate(fields()[33], value);
 			this.askPrice5 = value;
 			fieldSetFlags()[33] = true;
@@ -3695,7 +3695,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice5() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskPrice5() {
 			fieldSetFlags()[33] = false;
 			return this;
 		}
@@ -3725,7 +3725,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'askVolume5'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume5(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAskVolume5(int value) {
 			validate(fields()[34], value);
 			this.askVolume5 = value;
 			fieldSetFlags()[34] = true;
@@ -3746,7 +3746,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume5() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAskVolume5() {
 			fieldSetFlags()[34] = false;
 			return this;
 		}
@@ -3776,7 +3776,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'averagePrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAveragePrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setAveragePrice(double value) {
 			validate(fields()[35], value);
 			this.averagePrice = value;
 			fieldSetFlags()[35] = true;
@@ -3797,7 +3797,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAveragePrice() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearAveragePrice() {
 			fieldSetFlags()[35] = false;
 			return this;
 		}
@@ -3827,7 +3827,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'updateTime'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpdateTime(
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpdateTime(
 				java.lang.String value) {
 			validate(fields()[36], value);
 			this.updateTime = value;
@@ -3849,7 +3849,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpdateTime() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpdateTime() {
 			updateTime = null;
 			fieldSetFlags()[36] = false;
 			return this;
@@ -3880,7 +3880,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'updateMillisec'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpdateMillisec(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setUpdateMillisec(int value) {
 			validate(fields()[37], value);
 			this.updateMillisec = value;
 			fieldSetFlags()[37] = true;
@@ -3901,7 +3901,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpdateMillisec() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearUpdateMillisec() {
 			fieldSetFlags()[37] = false;
 			return this;
 		}
@@ -3931,7 +3931,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * @param value The value of 'localTimestamp'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLocalTimestamp(
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder setLocalTimestamp(
 				java.lang.String value) {
 			validate(fields()[38], value);
 			this.localTimestamp = value;
@@ -3953,7 +3953,7 @@ public class MarketDataLevel1 extends org.apache.avro.specific.SpecificRecordBas
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLocalTimestamp() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataLevel1.Builder clearLocalTimestamp() {
 			localTimestamp = null;
 			fieldSetFlags()[38] = false;
 			return this;

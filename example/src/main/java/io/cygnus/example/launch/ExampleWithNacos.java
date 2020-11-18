@@ -1,11 +1,11 @@
-package io.apollo.example.launch;
+package io.cygnus.example.launch;
 
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
-import io.apollo.engine.scheduler.SingleStrategyScheduler;
-import io.apollo.example.strategy.ExampleSmaStrategy;
+import io.cygnus.engine.scheduler.SingleStrategyScheduler;
+import io.cygnus.example.strategy.ExampleSmaStrategy;
 import io.horizon.definition.adaptor.Adaptor;
 import io.horizon.definition.event.InboundScheduler;
 import io.horizon.definition.market.data.impl.BasicMarketData;

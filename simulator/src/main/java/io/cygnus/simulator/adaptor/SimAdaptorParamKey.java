@@ -1,4 +1,4 @@
-package io.apollo.simulator.adaptor;
+package io.cygnus.simulator.adaptor;
 
 import io.horizon.definition.adaptor.AdaptorParamKey;
 import io.mercury.common.param.ParamType;

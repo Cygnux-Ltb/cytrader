@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.apollo.simulator.persistence.avro.entity;
+package io.cygnus.simulator.persistence.avro.entity;
 
 import java.util.Optional;
 
@@ -1390,8 +1390,8 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 	 * 
 	 * @return A new SimOrder RecordBuilder
 	 */
-	public static io.apollo.simulator.persistence.avro.entity.SimOrder.Builder newBuilder() {
-		return new io.apollo.simulator.persistence.avro.entity.SimOrder.Builder();
+	public static io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder newBuilder() {
+		return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder();
 	}
 
 	/**
@@ -1400,12 +1400,12 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 	 * @param other The existing builder to copy.
 	 * @return A new SimOrder RecordBuilder
 	 */
-	public static io.apollo.simulator.persistence.avro.entity.SimOrder.Builder newBuilder(
-			io.apollo.simulator.persistence.avro.entity.SimOrder.Builder other) {
+	public static io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder newBuilder(
+			io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder other) {
 		if (other == null) {
-			return new io.apollo.simulator.persistence.avro.entity.SimOrder.Builder();
+			return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder();
 		} else {
-			return new io.apollo.simulator.persistence.avro.entity.SimOrder.Builder(other);
+			return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder(other);
 		}
 	}
 
@@ -1416,12 +1416,12 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 	 * @param other The existing instance to copy.
 	 * @return A new SimOrder RecordBuilder
 	 */
-	public static io.apollo.simulator.persistence.avro.entity.SimOrder.Builder newBuilder(
-			io.apollo.simulator.persistence.avro.entity.SimOrder other) {
+	public static io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder newBuilder(
+			io.cygnus.simulator.persistence.avro.entity.SimOrder other) {
 		if (other == null) {
-			return new io.apollo.simulator.persistence.avro.entity.SimOrder.Builder();
+			return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder();
 		} else {
-			return new io.apollo.simulator.persistence.avro.entity.SimOrder.Builder(other);
+			return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder(other);
 		}
 	}
 
@@ -1478,7 +1478,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @param other The existing Builder to copy.
 		 */
-		private Builder(io.apollo.simulator.persistence.avro.entity.SimOrder.Builder other) {
+		private Builder(io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder other) {
 			super(other);
 			if (isValidValue(fields()[0], other.strategyId)) {
 				this.strategyId = data().deepCopy(fields()[0].schema(), other.strategyId);
@@ -1627,7 +1627,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @param other The existing instance to copy.
 		 */
-		private Builder(io.apollo.simulator.persistence.avro.entity.SimOrder other) {
+		private Builder(io.cygnus.simulator.persistence.avro.entity.SimOrder other) {
 			super(SCHEMA$);
 			if (isValidValue(fields()[0], other.strategyId)) {
 				this.strategyId = data().deepCopy(fields()[0].schema(), other.strategyId);
@@ -1796,7 +1796,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'strategyId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setStrategyId(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setStrategyId(int value) {
 			validate(fields()[0], value);
 			this.strategyId = value;
 			fieldSetFlags()[0] = true;
@@ -1817,7 +1817,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearStrategyId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearStrategyId() {
 			fieldSetFlags()[0] = false;
 			return this;
 		}
@@ -1847,7 +1847,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'brokerId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setBrokerId(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setBrokerId(java.lang.String value) {
 			validate(fields()[1], value);
 			this.brokerId = value;
 			fieldSetFlags()[1] = true;
@@ -1868,7 +1868,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearBrokerId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearBrokerId() {
 			brokerId = null;
 			fieldSetFlags()[1] = false;
 			return this;
@@ -1899,7 +1899,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'investorId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setInvestorId(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setInvestorId(java.lang.String value) {
 			validate(fields()[2], value);
 			this.investorId = value;
 			fieldSetFlags()[2] = true;
@@ -1920,7 +1920,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearInvestorId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearInvestorId() {
 			investorId = null;
 			fieldSetFlags()[2] = false;
 			return this;
@@ -1951,7 +1951,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'instrumentId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setInstrumentId(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setInstrumentId(java.lang.String value) {
 			validate(fields()[3], value);
 			this.instrumentId = value;
 			fieldSetFlags()[3] = true;
@@ -1972,7 +1972,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearInstrumentId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearInstrumentId() {
 			instrumentId = null;
 			fieldSetFlags()[3] = false;
 			return this;
@@ -2003,7 +2003,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'orderMsgType'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setOrderMsgType(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderMsgType(int value) {
 			validate(fields()[4], value);
 			this.orderMsgType = value;
 			fieldSetFlags()[4] = true;
@@ -2024,7 +2024,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearOrderMsgType() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderMsgType() {
 			fieldSetFlags()[4] = false;
 			return this;
 		}
@@ -2054,7 +2054,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'orderRef'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setOrderRef(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderRef(int value) {
 			validate(fields()[5], value);
 			this.orderRef = value;
 			fieldSetFlags()[5] = true;
@@ -2075,7 +2075,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearOrderRef() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderRef() {
 			fieldSetFlags()[5] = false;
 			return this;
 		}
@@ -2104,7 +2104,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'userId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setUserId(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setUserId(java.lang.String value) {
 			validate(fields()[6], value);
 			this.userId = value;
 			fieldSetFlags()[6] = true;
@@ -2125,7 +2125,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearUserId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearUserId() {
 			userId = null;
 			fieldSetFlags()[6] = false;
 			return this;
@@ -2156,7 +2156,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'direction'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setDirection(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setDirection(int value) {
 			validate(fields()[7], value);
 			this.direction = value;
 			fieldSetFlags()[7] = true;
@@ -2177,7 +2177,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearDirection() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearDirection() {
 			fieldSetFlags()[7] = false;
 			return this;
 		}
@@ -2206,7 +2206,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'offset'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setOffset(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOffset(int value) {
 			validate(fields()[8], value);
 			this.offset = value;
 			fieldSetFlags()[8] = true;
@@ -2227,7 +2227,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearOffset() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOffset() {
 			fieldSetFlags()[8] = false;
 			return this;
 		}
@@ -2257,7 +2257,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'limitPrice'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setLimitPrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setLimitPrice(double value) {
 			validate(fields()[9], value);
 			this.limitPrice = value;
 			fieldSetFlags()[9] = true;
@@ -2278,7 +2278,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearLimitPrice() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearLimitPrice() {
 			fieldSetFlags()[9] = false;
 			return this;
 		}
@@ -2307,7 +2307,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'volume'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setVolume(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolume(int value) {
 			validate(fields()[10], value);
 			this.volume = value;
 			fieldSetFlags()[10] = true;
@@ -2328,7 +2328,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearVolume() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolume() {
 			fieldSetFlags()[10] = false;
 			return this;
 		}
@@ -2358,7 +2358,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'volumeFilled'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setVolumeFilled(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolumeFilled(int value) {
 			validate(fields()[11], value);
 			this.volumeFilled = value;
 			fieldSetFlags()[11] = true;
@@ -2379,7 +2379,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeFilled() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeFilled() {
 			fieldSetFlags()[11] = false;
 			return this;
 		}
@@ -2409,7 +2409,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'volumeRemained'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setVolumeRemained(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolumeRemained(int value) {
 			validate(fields()[12], value);
 			this.volumeRemained = value;
 			fieldSetFlags()[12] = true;
@@ -2430,7 +2430,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeRemained() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeRemained() {
 			fieldSetFlags()[12] = false;
 			return this;
 		}
@@ -2460,7 +2460,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'volumeTotalOriginal'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setVolumeTotalOriginal(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolumeTotalOriginal(int value) {
 			validate(fields()[13], value);
 			this.volumeTotalOriginal = value;
 			fieldSetFlags()[13] = true;
@@ -2482,7 +2482,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeTotalOriginal() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeTotalOriginal() {
 			fieldSetFlags()[13] = false;
 			return this;
 		}
@@ -2512,7 +2512,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'tradingDay'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setTradingDay(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setTradingDay(java.lang.String value) {
 			validate(fields()[14], value);
 			this.tradingDay = value;
 			fieldSetFlags()[14] = true;
@@ -2533,7 +2533,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearTradingDay() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearTradingDay() {
 			tradingDay = null;
 			fieldSetFlags()[14] = false;
 			return this;
@@ -2564,7 +2564,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'orderSysId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setOrderSysId(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderSysId(java.lang.String value) {
 			validate(fields()[15], value);
 			this.orderSysId = value;
 			fieldSetFlags()[15] = true;
@@ -2585,7 +2585,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearOrderSysId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderSysId() {
 			orderSysId = null;
 			fieldSetFlags()[15] = false;
 			return this;
@@ -2616,7 +2616,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'orderStatus'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setOrderStatus(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderStatus(int value) {
 			validate(fields()[16], value);
 			this.orderStatus = value;
 			fieldSetFlags()[16] = true;
@@ -2637,7 +2637,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearOrderStatus() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderStatus() {
 			fieldSetFlags()[16] = false;
 			return this;
 		}
@@ -2667,7 +2667,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'orderType'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setOrderType(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderType(int value) {
 			validate(fields()[17], value);
 			this.orderType = value;
 			fieldSetFlags()[17] = true;
@@ -2688,7 +2688,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearOrderType() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderType() {
 			fieldSetFlags()[17] = false;
 			return this;
 		}
@@ -2717,7 +2717,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'price'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setPrice(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setPrice(double value) {
 			validate(fields()[18], value);
 			this.price = value;
 			fieldSetFlags()[18] = true;
@@ -2738,7 +2738,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearPrice() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearPrice() {
 			fieldSetFlags()[18] = false;
 			return this;
 		}
@@ -2767,7 +2767,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'tradeId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setTradeId(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setTradeId(java.lang.String value) {
 			validate(fields()[19], value);
 			this.tradeId = value;
 			fieldSetFlags()[19] = true;
@@ -2788,7 +2788,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearTradeId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearTradeId() {
 			tradeId = null;
 			fieldSetFlags()[19] = false;
 			return this;
@@ -2819,7 +2819,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'ordRejReason'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setOrdRejReason(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrdRejReason(int value) {
 			validate(fields()[20], value);
 			this.ordRejReason = value;
 			fieldSetFlags()[20] = true;
@@ -2840,7 +2840,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearOrdRejReason() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrdRejReason() {
 			fieldSetFlags()[20] = false;
 			return this;
 		}
@@ -2870,7 +2870,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'insertTime'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setInsertTime(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setInsertTime(java.lang.String value) {
 			validate(fields()[21], value);
 			this.insertTime = value;
 			fieldSetFlags()[21] = true;
@@ -2891,7 +2891,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearInsertTime() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearInsertTime() {
 			insertTime = null;
 			fieldSetFlags()[21] = false;
 			return this;
@@ -2922,7 +2922,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'updateTime'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setUpdateTime(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setUpdateTime(java.lang.String value) {
 			validate(fields()[22], value);
 			this.updateTime = value;
 			fieldSetFlags()[22] = true;
@@ -2943,7 +2943,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearUpdateTime() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearUpdateTime() {
 			updateTime = null;
 			fieldSetFlags()[22] = false;
 			return this;
@@ -2974,7 +2974,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'cancelTime'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setCancelTime(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCancelTime(java.lang.String value) {
 			validate(fields()[23], value);
 			this.cancelTime = value;
 			fieldSetFlags()[23] = true;
@@ -2995,7 +2995,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearCancelTime() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCancelTime() {
 			cancelTime = null;
 			fieldSetFlags()[23] = false;
 			return this;
@@ -3026,7 +3026,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'frontId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setFrontId(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setFrontId(int value) {
 			validate(fields()[24], value);
 			this.frontId = value;
 			fieldSetFlags()[24] = true;
@@ -3047,7 +3047,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearFrontId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearFrontId() {
 			fieldSetFlags()[24] = false;
 			return this;
 		}
@@ -3077,7 +3077,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'sessionId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setSessionId(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setSessionId(int value) {
 			validate(fields()[25], value);
 			this.sessionId = value;
 			fieldSetFlags()[25] = true;
@@ -3098,7 +3098,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearSessionId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearSessionId() {
 			fieldSetFlags()[25] = false;
 			return this;
 		}
@@ -3128,7 +3128,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'statusMsg'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setStatusMsg(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setStatusMsg(java.lang.String value) {
 			validate(fields()[26], value);
 			this.statusMsg = value;
 			fieldSetFlags()[26] = true;
@@ -3149,7 +3149,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearStatusMsg() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearStatusMsg() {
 			statusMsg = null;
 			fieldSetFlags()[26] = false;
 			return this;
@@ -3180,7 +3180,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'exchangeCode'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setExchangeCode(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setExchangeCode(java.lang.String value) {
 			validate(fields()[27], value);
 			this.exchangeCode = value;
 			fieldSetFlags()[27] = true;
@@ -3201,7 +3201,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearExchangeCode() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearExchangeCode() {
 			exchangeCode = null;
 			fieldSetFlags()[27] = false;
 			return this;
@@ -3231,7 +3231,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'fee'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setFee(double value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setFee(double value) {
 			validate(fields()[28], value);
 			this.fee = value;
 			fieldSetFlags()[28] = true;
@@ -3252,7 +3252,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearFee() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearFee() {
 			fieldSetFlags()[28] = false;
 			return this;
 		}
@@ -3282,7 +3282,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'counterType'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setCounterType(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCounterType(int value) {
 			validate(fields()[29], value);
 			this.counterType = value;
 			fieldSetFlags()[29] = true;
@@ -3303,7 +3303,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearCounterType() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCounterType() {
 			fieldSetFlags()[29] = false;
 			return this;
 		}
@@ -3333,7 +3333,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'counterSysId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setCounterSysId(long value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCounterSysId(long value) {
 			validate(fields()[30], value);
 			this.counterSysId = value;
 			fieldSetFlags()[30] = true;
@@ -3354,7 +3354,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearCounterSysId() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCounterSysId() {
 			fieldSetFlags()[30] = false;
 			return this;
 		}
@@ -3384,7 +3384,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'cancelAttempts'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setCancelAttempts(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCancelAttempts(int value) {
 			validate(fields()[31], value);
 			this.cancelAttempts = value;
 			fieldSetFlags()[31] = true;
@@ -3405,7 +3405,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearCancelAttempts() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCancelAttempts() {
 			fieldSetFlags()[31] = false;
 			return this;
 		}
@@ -3434,7 +3434,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'timeStamp'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setTimeStamp(long value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setTimeStamp(long value) {
 			validate(fields()[32], value);
 			this.timeStamp = value;
 			fieldSetFlags()[32] = true;
@@ -3455,7 +3455,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearTimeStamp() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearTimeStamp() {
 			fieldSetFlags()[32] = false;
 			return this;
 		}
@@ -3485,7 +3485,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'epochTimeReturn'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setEpochTimeReturn(long value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setEpochTimeReturn(long value) {
 			validate(fields()[33], value);
 			this.epochTimeReturn = value;
 			fieldSetFlags()[33] = true;
@@ -3506,7 +3506,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearEpochTimeReturn() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearEpochTimeReturn() {
 			fieldSetFlags()[33] = false;
 			return this;
 		}
@@ -3536,7 +3536,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * @param value The value of 'funcName'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder setFuncName(java.lang.String value) {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setFuncName(java.lang.String value) {
 			validate(fields()[34], value);
 			this.funcName = value;
 			fieldSetFlags()[34] = true;
@@ -3557,7 +3557,7 @@ public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.SimOrder.Builder clearFuncName() {
+		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearFuncName() {
 			funcName = null;
 			fieldSetFlags()[34] = false;
 			return this;

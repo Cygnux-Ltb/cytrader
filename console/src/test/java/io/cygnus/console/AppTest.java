@@ -1,4 +1,4 @@
-package io.apollo.console;
+package io.cygnus.console;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

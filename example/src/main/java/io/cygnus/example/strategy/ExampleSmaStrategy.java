@@ -1,8 +1,8 @@
-package io.apollo.example.strategy;
+package io.cygnus.example.strategy;
 
-import io.apollo.engine.strategy.StrategySingleInstrument;
-import io.apollo.indicator.impl.SmaIndicator.SmaEvent;
-import io.apollo.indicator.impl.SmaPoint;
+import io.cygnus.engine.strategy.StrategySingleInstrument;
+import io.cygnus.indicator.impl.SmaPoint;
+import io.cygnus.indicator.impl.SmaIndicator.SmaEvent;
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.order.Order;

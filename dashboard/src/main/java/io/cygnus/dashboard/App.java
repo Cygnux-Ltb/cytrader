@@ -1,4 +1,4 @@
-package io.apollo.dashboard;
+package io.cygnus.dashboard;
 
 /**
  * Hello world!

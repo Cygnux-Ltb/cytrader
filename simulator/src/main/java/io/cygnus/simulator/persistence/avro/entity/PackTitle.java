@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.apollo.simulator.persistence.avro.entity;
+package io.cygnus.simulator.persistence.avro.entity;
 
 @org.apache.avro.specific.AvroGenerated
 public enum PackTitle implements org.apache.avro.generic.GenericEnumSymbol<PackTitle> {

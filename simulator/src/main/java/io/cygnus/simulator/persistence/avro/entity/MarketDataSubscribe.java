@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package io.apollo.simulator.persistence.avro.entity;
+package io.cygnus.simulator.persistence.avro.entity;
 
 import java.util.Optional;
 
@@ -275,8 +275,8 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 	 * 
 	 * @return A new MarketDataSubscribe RecordBuilder
 	 */
-	public static io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder() {
-		return new io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder();
+	public static io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder() {
+		return new io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder();
 	}
 
 	/**
@@ -286,12 +286,12 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 	 * @param other The existing builder to copy.
 	 * @return A new MarketDataSubscribe RecordBuilder
 	 */
-	public static io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder(
-			io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder other) {
+	public static io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder(
+			io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder other) {
 		if (other == null) {
-			return new io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder();
+			return new io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder();
 		} else {
-			return new io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder(other);
+			return new io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder(other);
 		}
 	}
 
@@ -302,12 +302,12 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 	 * @param other The existing instance to copy.
 	 * @return A new MarketDataSubscribe RecordBuilder
 	 */
-	public static io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder(
-			io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe other) {
+	public static io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder newBuilder(
+			io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe other) {
 		if (other == null) {
-			return new io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder();
+			return new io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder();
 		} else {
-			return new io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder(other);
+			return new io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder(other);
 		}
 	}
 
@@ -333,7 +333,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * 
 		 * @param other The existing Builder to copy.
 		 */
-		private Builder(io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder other) {
+		private Builder(io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder other) {
 			super(other);
 			if (isValidValue(fields()[0], other.uniqueId)) {
 				this.uniqueId = data().deepCopy(fields()[0].schema(), other.uniqueId);
@@ -358,7 +358,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * 
 		 * @param other The existing instance to copy.
 		 */
-		private Builder(io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe other) {
+		private Builder(io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe other) {
 			super(SCHEMA$);
 			if (isValidValue(fields()[0], other.uniqueId)) {
 				this.uniqueId = data().deepCopy(fields()[0].schema(), other.uniqueId);
@@ -403,7 +403,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * @param value The value of 'uniqueId'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder setUniqueId(int value) {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder setUniqueId(int value) {
 			validate(fields()[0], value);
 			this.uniqueId = value;
 			fieldSetFlags()[0] = true;
@@ -424,7 +424,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder clearUniqueId() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder clearUniqueId() {
 			fieldSetFlags()[0] = false;
 			return this;
 		}
@@ -454,7 +454,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * @param value The value of 'startTradingDay'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder setStartTradingDay(
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder setStartTradingDay(
 				java.lang.String value) {
 			validate(fields()[1], value);
 			this.startTradingDay = value;
@@ -476,7 +476,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder clearStartTradingDay() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder clearStartTradingDay() {
 			startTradingDay = null;
 			fieldSetFlags()[1] = false;
 			return this;
@@ -507,7 +507,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * @param value The value of 'endTradingDay'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder setEndTradingDay(
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder setEndTradingDay(
 				java.lang.String value) {
 			validate(fields()[2], value);
 			this.endTradingDay = value;
@@ -529,7 +529,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder clearEndTradingDay() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder clearEndTradingDay() {
 			endTradingDay = null;
 			fieldSetFlags()[2] = false;
 			return this;
@@ -561,7 +561,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * @param value The value of 'instrumentIdList'.
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder setInstrumentIdList(
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder setInstrumentIdList(
 				java.util.List<java.lang.String> value) {
 			validate(fields()[3], value);
 			this.instrumentIdList = value;
@@ -583,7 +583,7 @@ public class MarketDataSubscribe extends org.apache.avro.specific.SpecificRecord
 		 * 
 		 * @return This builder.
 		 */
-		public io.apollo.simulator.persistence.avro.entity.MarketDataSubscribe.Builder clearInstrumentIdList() {
+		public io.cygnus.simulator.persistence.avro.entity.MarketDataSubscribe.Builder clearInstrumentIdList() {
 			instrumentIdList = null;
 			fieldSetFlags()[3] = false;
 			return this;

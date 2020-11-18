@@ -1,4 +1,4 @@
-package io.apollo.simulator.adaptor.dto;
+package io.cygnus.simulator.adaptor.dto;
 
 import io.horizon.definition.market.instrument.Instrument;
 
