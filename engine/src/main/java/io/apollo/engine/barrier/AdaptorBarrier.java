@@ -1,7 +1,7 @@
 package io.apollo.engine.barrier;
 
 import io.apollo.core.risk.OrderBarrier;
-import io.gemini.definition.order.actual.ChildOrder;
+import io.horizon.definition.order.actual.ChildOrder;
 
 public class AdaptorBarrier implements OrderBarrier<ChildOrder> {
 

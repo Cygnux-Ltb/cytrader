@@ -2,7 +2,7 @@ package io.apollo.engine.actor;
 
 import com.lmax.disruptor.EventHandler;
 
-import io.gemini.definition.order.Order;
+import io.horizon.definition.order.Order;
 
 public final class OrderRecoreder implements EventHandler<Order> {
 

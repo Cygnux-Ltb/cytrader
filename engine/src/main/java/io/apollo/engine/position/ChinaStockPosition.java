@@ -1,9 +1,9 @@
 package io.apollo.engine.position;
 
-import io.gemini.definition.order.Order;
-import io.gemini.definition.order.enums.OrdStatus;
-import io.gemini.definition.order.structure.OrdQty;
-import io.gemini.definition.position.PositionT1;
+import io.horizon.definition.order.Order;
+import io.horizon.definition.order.enums.OrdStatus;
+import io.horizon.definition.order.structure.OrdQty;
+import io.horizon.definition.position.PositionT1;
 
 public class ChinaStockPosition extends PositionT1 {
 

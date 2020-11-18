@@ -2,10 +2,10 @@ package io.apollo.core.position;
 
 import org.junit.Test;
 
-import io.gemini.definition.market.instrument.futures.impl.ChinaFutures;
-import io.gemini.definition.market.instrument.futures.impl.ChinaFuturesSymbol;
-import io.gemini.definition.order.enums.TrdDirection;
-import io.gemini.definition.position.PositionKeeper;
+import io.horizon.definition.market.instrument.futures.impl.ChinaFutures;
+import io.horizon.definition.market.instrument.futures.impl.ChinaFuturesSymbol;
+import io.horizon.definition.order.enums.TrdDirection;
+import io.horizon.definition.position.PositionKeeper;
 
 public class PositionKeeperTest {
 

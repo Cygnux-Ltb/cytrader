@@ -3,7 +3,7 @@ package io.apollo.engine.barrier;
 import org.slf4j.Logger;
 
 import io.apollo.core.risk.OrderBarrier;
-import io.gemini.definition.order.actual.ChildOrder;
+import io.horizon.definition.order.actual.ChildOrder;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {

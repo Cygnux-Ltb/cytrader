@@ -2,7 +2,7 @@ package io.apollo.core.order;
 
 import org.junit.Test;
 
-import io.gemini.definition.order.OrderKeeper;
+import io.horizon.definition.order.OrderKeeper;
 
 public class OrderKeeperTest {
 	

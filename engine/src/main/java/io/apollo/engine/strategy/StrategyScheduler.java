@@ -1,7 +1,7 @@
 package io.apollo.engine.strategy;
 
-import io.gemini.definition.event.InboundScheduler;
-import io.gemini.definition.market.data.MarketData;
+import io.horizon.definition.event.InboundScheduler;
+import io.horizon.definition.market.data.MarketData;
 
 /**
  * 

@@ -6,14 +6,14 @@ import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.list.ImmutableList;
 
-import io.gemini.definition.account.Account;
-import io.gemini.definition.account.SubAccount;
-import io.gemini.definition.adaptor.Adaptor;
-import io.gemini.definition.event.handler.AdaptorEventHandler;
-import io.gemini.definition.event.handler.MarketDataHandler;
-import io.gemini.definition.event.handler.OrderHandler;
-import io.gemini.definition.market.data.MarketData;
-import io.gemini.definition.market.instrument.Instrument;
+import io.horizon.definition.account.Account;
+import io.horizon.definition.account.SubAccount;
+import io.horizon.definition.adaptor.Adaptor;
+import io.horizon.definition.event.handler.AdaptorEventHandler;
+import io.horizon.definition.event.handler.MarketDataHandler;
+import io.horizon.definition.event.handler.OrderHandler;
+import io.horizon.definition.market.data.MarketData;
+import io.horizon.definition.market.instrument.Instrument;
 import io.mercury.common.fsm.Enable;
 
 public interface Strategy<M extends MarketData> extends

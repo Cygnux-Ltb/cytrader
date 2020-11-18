@@ -1,8 +1,8 @@
 package io.apollo.core.trade;
 
-import io.gemini.definition.market.instrument.Instrument;
-import io.gemini.definition.order.enums.TrdAction;
-import io.gemini.definition.order.enums.TrdDirection;
+import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.enums.TrdAction;
+import io.horizon.definition.order.enums.TrdDirection;
 import io.mercury.common.fsm.Signal;
 
 public interface TradeSignal extends Signal {

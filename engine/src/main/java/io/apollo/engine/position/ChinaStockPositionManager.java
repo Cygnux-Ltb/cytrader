@@ -1,6 +1,6 @@
 package io.apollo.engine.position;
 
-import io.gemini.definition.position.PositionManagerBaseImpl;
+import io.horizon.definition.position.PositionManagerBaseImpl;
 
 public final class ChinaStockPositionManager extends PositionManagerBaseImpl<ChinaStockPosition> {
 
