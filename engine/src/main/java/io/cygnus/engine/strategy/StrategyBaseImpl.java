@@ -9,7 +9,6 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
-import io.cygnus.core.risk.CircuitBreaker;
 import io.horizon.definition.account.Account;
 import io.horizon.definition.account.AccountKeeper;
 import io.horizon.definition.account.SubAccount;
@@ -27,6 +26,7 @@ import io.horizon.definition.order.enums.OrdType;
 import io.horizon.definition.order.enums.TrdAction;
 import io.horizon.definition.order.enums.TrdDirection;
 import io.horizon.definition.position.PositionKeeper;
+import io.horizon.definition.risk.CircuitBreaker;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;

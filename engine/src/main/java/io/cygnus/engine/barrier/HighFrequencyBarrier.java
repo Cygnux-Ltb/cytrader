@@ -2,8 +2,8 @@ package io.cygnus.engine.barrier;
 
 import org.slf4j.Logger;
 
-import io.cygnus.core.risk.OrderBarrier;
 import io.horizon.definition.order.actual.ChildOrder;
+import io.horizon.definition.risk.OrderBarrier;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {
