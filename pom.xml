@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 	<name>apollo</name>
 
-	<url>https://github.com/yellow013/apollo.git</url>
+	<url>https://github.com/yellow013/cygnus.git</url>
 
 	<modules>
 		<module>console</module>
