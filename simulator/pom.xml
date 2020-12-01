@@ -50,31 +50,37 @@
 	</build>
 
 	<dependencies>
+
+		<!-- Java 1.8+ Library with tons of utility classes required in all projects -->
 		<dependency>
 			<groupId>com.helger</groupId>
 			<artifactId>ph-commons</artifactId>
-			<version>9.4.7</version>
+			<version>9.5.3</version>
 		</dependency>
 
+		<!-- mercury -->
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-avro</artifactId>
 			<version>${mercury.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>transport-core</artifactId>
+			<artifactId>transport-netty</artifactId>
+			<version>${mercury.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>transport-socket</artifactId>
+			<version>${mercury.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.horizon</groupId>
 			<artifactId>definition</artifactId>
 		</dependency>
-
 	</dependencies>
 
 

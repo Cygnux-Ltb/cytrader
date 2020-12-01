@@ -48,6 +48,7 @@ public class AvroDome0 {
 
 			byte[] newBytes = new byte[(int) (serialization1.array().length * 1.5)];
 			System.out.println(serialization1.array().length);
+			
 			System.out.println(serialization2.array().length);
 			System.out.println(newBytes.length);
 

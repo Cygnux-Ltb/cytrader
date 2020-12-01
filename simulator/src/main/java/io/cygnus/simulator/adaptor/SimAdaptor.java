@@ -22,7 +22,7 @@ import io.horizon.definition.order.OrderKeeper;
 import io.horizon.definition.order.actual.ChildOrder;
 import io.horizon.definition.order.enums.OrdStatus;
 import io.horizon.definition.order.structure.OrdReport;
-import io.mercury.common.param.ImmutableParams;
+import io.mercury.common.param.Params;
 import io.mercury.serialization.avro.AvroBinaryDeserializer;
 import io.mercury.transport.core.api.Receiver;
 import io.mercury.transport.core.api.Sender;
@@ -40,7 +40,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	private InboundScheduler<BasicMarketData> scheduler;
 
-	protected ImmutableParams<SimAdaptorParamKey> paramMap;
+	protected Params<SimAdaptorParamKey> params;
 
 	protected SocketConfigurator mdConfigurator;
 
@@ -59,16 +59,16 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	private AvroBinaryDeserializer<SimOrder> orderDeserializer = new AvroBinaryDeserializer<>(SimOrder.class);
 
-	public SimAdaptor(int adaptorId, @Nonnull Account account, @Nonnull ImmutableParams<SimAdaptorParamKey> paramMap,
+	public SimAdaptor(int adaptorId, @Nonnull Account account, @Nonnull Params<SimAdaptorParamKey> params,
 			InboundScheduler<BasicMarketData> scheduler) {
 		super(adaptorId, "SimulatorAdaptor[" + adaptorId + "]", scheduler, account);
-		this.paramMap = paramMap;
+		this.params = params;
 		this.scheduler = scheduler;
 		SocketConfigurator mdConfigurator = SocketConfigurator.builder()
-				.host(paramMap.getString(SimAdaptorParamKey.MdHost)).port(paramMap.getInt(SimAdaptorParamKey.MdPort))
+				.host(params.getString(SimAdaptorParamKey.MdHost)).port(params.getInt(SimAdaptorParamKey.MdPort))
 				.build();
 		SocketConfigurator tdConfigurator = SocketConfigurator.builder()
-				.host(paramMap.getString(SimAdaptorParamKey.TdHost)).port(paramMap.getInt(SimAdaptorParamKey.TdPort))
+				.host(params.getString(SimAdaptorParamKey.TdHost)).port(params.getInt(SimAdaptorParamKey.TdPort))
 				.build();
 		this.mdReceiver = new SocketReceiver(mdConfigurator, (bytes) -> {
 			List<MarketDataLevel1> marketDatas = marketDataDeserializer.deserializationMultiple(bytes);
@@ -103,8 +103,8 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean subscribeMarketData(Instrument... instruments) {
 
 		MarketDataSubscribe simSubscribe = MarketDataSubscribe.newBuilder().setUniqueId(Integer.valueOf(1))
-				.setStartTradingDay(paramMap.getString(SimAdaptorParamKey.TradingDayStart))
-				.setEndTradingDay(paramMap.getString(SimAdaptorParamKey.TradingDayEnd))
+				.setStartTradingDay(params.getString(SimAdaptorParamKey.TradingDayStart))
+				.setEndTradingDay(params.getString(SimAdaptorParamKey.TradingDayEnd))
 				.setInstrumentIdList(
 						Stream.of(instruments).map(instrument -> instrument.code()).collect(Collectors.toList()))
 				.build();
