@@ -71,26 +71,6 @@
 				<artifactId>commons-concurrent</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>transport-core</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>transport-zmq</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>transport-rabbitmq</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
-				<artifactId>transport-socket</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
 
 			<!-- horizon -->
 			<!-- see https://github.com/yellow013/horizon.git -->
@@ -106,12 +86,12 @@
 			</dependency>
 
 			<!-- cygnus -->
+			<!-- see https://github.com/yellow013/cygnus.git -->
 			<dependency>
 				<groupId>io.cygnus</groupId>
 				<artifactId>engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
 		</dependencies>
 	</dependencyManagement>
 
