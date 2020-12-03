@@ -12,12 +12,12 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public abstract class MultipleStrategyScheduler<M extends MarketData> implements StrategyScheduler<M> {
+public abstract class MultiStrategyScheduler<M extends MarketData> implements StrategyScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(MultipleStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(MultiStrategyScheduler.class);
 
 	/**
 	 * 策略列表
@@ -35,7 +35,7 @@ public abstract class MultipleStrategyScheduler<M extends MarketData> implements
 		log.info("Add strategy -> strategyId==[{}], strategyName==[{}], subAccount==[{}]", strategy.strategyId(),
 				strategy.strategyName(), strategy.getSubAccount());
 		strategyMap.put(strategy.strategyId(), strategy);
-		strategy.instruments().each(instrument -> this.subscribeInstrument(instrument, strategy));
+		strategy.instruments().each(instrument -> subscribeInstrument(instrument, strategy));
 		strategy.enable();
 	}
 

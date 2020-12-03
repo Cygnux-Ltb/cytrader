@@ -9,7 +9,8 @@ import io.horizon.definition.order.OrderKeeper;
 import io.horizon.definition.order.actual.ChildOrder;
 import io.horizon.definition.order.structure.OrdReport;
 import io.mercury.common.collections.Capacity;
-import io.mercury.common.concurrent.disruptor.SpscQueue;
+import io.mercury.common.concurrent.queue.WaitingStrategy;
+import io.mercury.common.concurrent.queue.jct.JctScQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 
 /**
@@ -19,49 +20,50 @@ import io.mercury.common.log.CommonLoggerFactory;
  *         策略执行引擎与整体框架分离
  *
  */
-public final class QueueStrategyScheduler extends MultipleStrategyScheduler<BasicMarketData> {
+public final class QueueStrategyScheduler extends MultiStrategyScheduler<BasicMarketData> {
 
 	/**
 	 * Logger
 	 */
 	private static final Logger log = CommonLoggerFactory.getLogger(QueueStrategyScheduler.class);
 
-	private SpscQueue<DespatchMsg> despatchQueue;
+	private JctScQueue<DespatchMsg> despatchQueue;
 
 	private static final int MarketData = 0;
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
 	public QueueStrategyScheduler(Capacity capacity) {
-		this.despatchQueue = new SpscQueue<>("QueueStrategyScheduler-Despatch", capacity, true, despatchMsg -> {
-			switch (despatchMsg.mark()) {
-			case MarketData:
-				BasicMarketData marketData = despatchMsg.getMarketData();
-				MarkerDataKeeper.onMarketDate(marketData);
-				subscribedMap.get(marketData.getInstrument().id()).each(strategy -> {
-					if (strategy.isEnabled()) {
-						strategy.onMarketData(marketData);
+		this.despatchQueue = JctScQueue.spsc("QueueStrategyScheduler-Despatch").capacity(capacity.size())
+				.waitingStrategy(WaitingStrategy.SpinWaiting).buildWithProcessor(despatchMsg -> {
+					switch (despatchMsg.mark()) {
+					case MarketData:
+						BasicMarketData marketData = despatchMsg.getMarketData();
+						MarkerDataKeeper.onMarketDate(marketData);
+						subscribedMap.get(marketData.getInstrument().id()).each(strategy -> {
+							if (strategy.isEnabled()) {
+								strategy.onMarketData(marketData);
+							}
+						});
+						break;
+					case OrderReport:
+						OrdReport ordReport = despatchMsg.getOrdReport();
+						log.info("Handle OrdReport, brokerUniqueId==[{}], uniqueId==[{}]",
+								ordReport.getBrokerUniqueId(), ordReport.getUniqueId());
+						ChildOrder order = OrderKeeper.onOrdReport(ordReport);
+						log.info(
+								"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], uniqueId==[{}]",
+								ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
+								ordReport.getUniqueId());
+						strategyMap.get(order.strategyId()).onOrder(order);
+						break;
+					case AdaptorEvent:
+						despatchMsg.getAdaptorEvent();
+						break;
+					default:
+						throw new IllegalStateException("scheduler mark illegal");
 					}
 				});
-				break;
-			case OrderReport:
-				OrdReport ordReport = despatchMsg.getOrdReport();
-				log.info("Handle OrdReport, brokerUniqueId==[{}], uniqueId==[{}]", ordReport.getBrokerUniqueId(),
-						ordReport.getUniqueId());
-				ChildOrder order = OrderKeeper.onOrdReport(ordReport);
-				log.info(
-						"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], uniqueId==[{}]",
-						ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
-						ordReport.getUniqueId());
-				strategyMap.get(order.strategyId()).onOrder(order);
-				break;
-			case AdaptorEvent:
-				despatchMsg.getAdaptorEvent();
-				break;
-			default:
-				throw new IllegalStateException("scheduler mark illegal");
-			}
-		});
 	}
 
 	// TODO add pools
