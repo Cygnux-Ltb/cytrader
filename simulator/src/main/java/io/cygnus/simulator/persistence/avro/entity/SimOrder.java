@@ -11,3944 +11,3486 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.SchemaStore;
 import org.apache.avro.specific.SpecificData;
-
 @org.apache.avro.specific.AvroGenerated
-public class SimOrder extends org.apache.avro.specific.SpecificRecordBase
-		implements org.apache.avro.specific.SpecificRecord {
-	private static final long serialVersionUID = 3822102436888237904L;
-	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
-			"{\"type\":\"record\",\"name\":\"SimOrder\",\"namespace\":\"io.apollo.simulator.persistence.avro.entity\",\"fields\":[{\"name\":\"strategyId\",\"type\":\"int\"},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderMsgType\",\"type\":\"int\"},{\"name\":\"orderRef\",\"type\":\"int\"},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"direction\",\"type\":\"int\"},{\"name\":\"offset\",\"type\":\"int\"},{\"name\":\"limitPrice\",\"type\":\"double\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"volumeFilled\",\"type\":\"int\"},{\"name\":\"volumeRemained\",\"type\":\"int\"},{\"name\":\"volumeTotalOriginal\",\"type\":\"int\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderSysId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderStatus\",\"type\":\"int\"},{\"name\":\"orderType\",\"type\":\"int\"},{\"name\":\"price\",\"type\":\"double\"},{\"name\":\"tradeId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ordRejReason\",\"type\":\"int\"},{\"name\":\"insertTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"cancelTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"frontId\",\"type\":\"int\"},{\"name\":\"sessionId\",\"type\":\"int\"},{\"name\":\"statusMsg\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"fee\",\"type\":\"double\"},{\"name\":\"counterType\",\"type\":\"int\"},{\"name\":\"counterSysId\",\"type\":\"long\"},{\"name\":\"cancelAttempts\",\"type\":\"int\"},{\"name\":\"timeStamp\",\"type\":\"long\"},{\"name\":\"epochTimeReturn\",\"type\":\"long\"},{\"name\":\"funcName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
-
-	public static org.apache.avro.Schema getClassSchema() {
-		return SCHEMA$;
-	}
-
-	private static SpecificData MODEL$ = new SpecificData();
-
-	private static final BinaryMessageEncoder<SimOrder> ENCODER = new BinaryMessageEncoder<SimOrder>(MODEL$, SCHEMA$);
-
-	private static final BinaryMessageDecoder<SimOrder> DECODER = new BinaryMessageDecoder<SimOrder>(MODEL$, SCHEMA$);
-
-	/**
-	 * Return the BinaryMessageEncoder instance used by this class.
-	 * 
-	 * @return the message encoder used by this class
-	 */
-	public static BinaryMessageEncoder<SimOrder> getEncoder() {
-		return ENCODER;
-	}
-
-	/**
-	 * Return the BinaryMessageDecoder instance used by this class.
-	 * 
-	 * @return the message decoder used by this class
-	 */
-	public static BinaryMessageDecoder<SimOrder> getDecoder() {
-		return DECODER;
-	}
-
-	/**
-	 * Create a new BinaryMessageDecoder instance for this class that uses the
-	 * specified {@link SchemaStore}.
-	 * 
-	 * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
-	 * @return a BinaryMessageDecoder instance for this class backed by the given
-	 *         SchemaStore
-	 */
-	public static BinaryMessageDecoder<SimOrder> createDecoder(SchemaStore resolver) {
-		return new BinaryMessageDecoder<SimOrder>(MODEL$, SCHEMA$, resolver);
-	}
-
-	/**
-	 * Serializes this SimOrder to a ByteBuffer.
-	 * 
-	 * @return a buffer holding the serialized data for this instance
-	 * @throws java.io.IOException if this instance could not be serialized
-	 */
-	public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
-		return ENCODER.encode(this);
-	}
-
-	/**
-	 * Deserializes a SimOrder from a ByteBuffer.
-	 * 
-	 * @param b a byte buffer holding serialized data for an instance of this class
-	 * @return a SimOrder instance decoded from the given buffer
-	 * @throws java.io.IOException if the given bytes could not be deserialized into
-	 *                             an instance of this class
-	 */
-	public static SimOrder fromByteBuffer(java.nio.ByteBuffer b) throws java.io.IOException {
-		return DECODER.decode(b);
-	}
-
-	private int strategyId;
-	private java.lang.String brokerId;
-	private java.lang.String investorId;
-	private java.lang.String instrumentId;
-	private int orderMsgType;
-	private int orderRef;
-	private java.lang.String userId;
-	private int direction;
-	private int offset;
-	private double limitPrice;
-	private int volume;
-	private int volumeFilled;
-	private int volumeRemained;
-	private int volumeTotalOriginal;
-	private java.lang.String tradingDay;
-	private java.lang.String orderSysId;
-	private int orderStatus;
-	private int orderType;
-	private double price;
-	private java.lang.String tradeId;
-	private int ordRejReason;
-	private java.lang.String insertTime;
-	private java.lang.String updateTime;
-	private java.lang.String cancelTime;
-	private int frontId;
-	private int sessionId;
-	private java.lang.String statusMsg;
-	private java.lang.String exchangeCode;
-	private double fee;
-	private int counterType;
-	private long counterSysId;
-	private int cancelAttempts;
-	private long timeStamp;
-	private long epochTimeReturn;
-	private java.lang.String funcName;
-
-	/**
-	 * Default constructor. Note that this does not initialize fields to their
-	 * default values from the schema. If that is desired then one should use
-	 * <code>newBuilder()</code>.
-	 */
-	public SimOrder() {
-	}
-
-	/**
-	 * All-args constructor.
-	 * 
-	 * @param strategyId          The new value for strategyId
-	 * @param brokerId            The new value for brokerId
-	 * @param investorId          The new value for investorId
-	 * @param instrumentId        The new value for instrumentId
-	 * @param orderMsgType        The new value for orderMsgType
-	 * @param orderRef            The new value for orderRef
-	 * @param userId              The new value for userId
-	 * @param direction           The new value for direction
-	 * @param offset              The new value for offset
-	 * @param limitPrice          The new value for limitPrice
-	 * @param volume              The new value for volume
-	 * @param volumeFilled        The new value for volumeFilled
-	 * @param volumeRemained      The new value for volumeRemained
-	 * @param volumeTotalOriginal The new value for volumeTotalOriginal
-	 * @param tradingDay          The new value for tradingDay
-	 * @param orderSysId          The new value for orderSysId
-	 * @param orderStatus         The new value for orderStatus
-	 * @param orderType           The new value for orderType
-	 * @param price               The new value for price
-	 * @param tradeId             The new value for tradeId
-	 * @param ordRejReason        The new value for ordRejReason
-	 * @param insertTime          The new value for insertTime
-	 * @param updateTime          The new value for updateTime
-	 * @param cancelTime          The new value for cancelTime
-	 * @param frontId             The new value for frontId
-	 * @param sessionId           The new value for sessionId
-	 * @param statusMsg           The new value for statusMsg
-	 * @param exchangeCode        The new value for exchangeCode
-	 * @param fee                 The new value for fee
-	 * @param counterType         The new value for counterType
-	 * @param counterSysId        The new value for counterSysId
-	 * @param cancelAttempts      The new value for cancelAttempts
-	 * @param timeStamp           The new value for timeStamp
-	 * @param epochTimeReturn     The new value for epochTimeReturn
-	 * @param funcName            The new value for funcName
-	 */
-	public SimOrder(java.lang.Integer strategyId, java.lang.String brokerId, java.lang.String investorId,
-			java.lang.String instrumentId, java.lang.Integer orderMsgType, java.lang.Integer orderRef,
-			java.lang.String userId, java.lang.Integer direction, java.lang.Integer offset, java.lang.Double limitPrice,
-			java.lang.Integer volume, java.lang.Integer volumeFilled, java.lang.Integer volumeRemained,
-			java.lang.Integer volumeTotalOriginal, java.lang.String tradingDay, java.lang.String orderSysId,
-			java.lang.Integer orderStatus, java.lang.Integer orderType, java.lang.Double price,
-			java.lang.String tradeId, java.lang.Integer ordRejReason, java.lang.String insertTime,
-			java.lang.String updateTime, java.lang.String cancelTime, java.lang.Integer frontId,
-			java.lang.Integer sessionId, java.lang.String statusMsg, java.lang.String exchangeCode,
-			java.lang.Double fee, java.lang.Integer counterType, java.lang.Long counterSysId,
-			java.lang.Integer cancelAttempts, java.lang.Long timeStamp, java.lang.Long epochTimeReturn,
-			java.lang.String funcName) {
-		this.strategyId = strategyId;
-		this.brokerId = brokerId;
-		this.investorId = investorId;
-		this.instrumentId = instrumentId;
-		this.orderMsgType = orderMsgType;
-		this.orderRef = orderRef;
-		this.userId = userId;
-		this.direction = direction;
-		this.offset = offset;
-		this.limitPrice = limitPrice;
-		this.volume = volume;
-		this.volumeFilled = volumeFilled;
-		this.volumeRemained = volumeRemained;
-		this.volumeTotalOriginal = volumeTotalOriginal;
-		this.tradingDay = tradingDay;
-		this.orderSysId = orderSysId;
-		this.orderStatus = orderStatus;
-		this.orderType = orderType;
-		this.price = price;
-		this.tradeId = tradeId;
-		this.ordRejReason = ordRejReason;
-		this.insertTime = insertTime;
-		this.updateTime = updateTime;
-		this.cancelTime = cancelTime;
-		this.frontId = frontId;
-		this.sessionId = sessionId;
-		this.statusMsg = statusMsg;
-		this.exchangeCode = exchangeCode;
-		this.fee = fee;
-		this.counterType = counterType;
-		this.counterSysId = counterSysId;
-		this.cancelAttempts = cancelAttempts;
-		this.timeStamp = timeStamp;
-		this.epochTimeReturn = epochTimeReturn;
-		this.funcName = funcName;
-	}
-
-	public org.apache.avro.specific.SpecificData getSpecificData() {
-		return MODEL$;
-	}
-
-	public org.apache.avro.Schema getSchema() {
-		return SCHEMA$;
-	}
-
-	// Used by DatumWriter. Applications should not call.
-	public java.lang.Object get(int field$) {
-		switch (field$) {
-		case 0:
-			return strategyId;
-		case 1:
-			return brokerId;
-		case 2:
-			return investorId;
-		case 3:
-			return instrumentId;
-		case 4:
-			return orderMsgType;
-		case 5:
-			return orderRef;
-		case 6:
-			return userId;
-		case 7:
-			return direction;
-		case 8:
-			return offset;
-		case 9:
-			return limitPrice;
-		case 10:
-			return volume;
-		case 11:
-			return volumeFilled;
-		case 12:
-			return volumeRemained;
-		case 13:
-			return volumeTotalOriginal;
-		case 14:
-			return tradingDay;
-		case 15:
-			return orderSysId;
-		case 16:
-			return orderStatus;
-		case 17:
-			return orderType;
-		case 18:
-			return price;
-		case 19:
-			return tradeId;
-		case 20:
-			return ordRejReason;
-		case 21:
-			return insertTime;
-		case 22:
-			return updateTime;
-		case 23:
-			return cancelTime;
-		case 24:
-			return frontId;
-		case 25:
-			return sessionId;
-		case 26:
-			return statusMsg;
-		case 27:
-			return exchangeCode;
-		case 28:
-			return fee;
-		case 29:
-			return counterType;
-		case 30:
-			return counterSysId;
-		case 31:
-			return cancelAttempts;
-		case 32:
-			return timeStamp;
-		case 33:
-			return epochTimeReturn;
-		case 34:
-			return funcName;
-		default:
-			throw new IndexOutOfBoundsException("Invalid index: " + field$);
-		}
-	}
-
-	// Used by DatumReader. Applications should not call.
-	public void put(int field$, java.lang.Object value$) {
-		switch (field$) {
-		case 0:
-			strategyId = (java.lang.Integer) value$;
-			break;
-		case 1:
-			brokerId = value$ != null ? value$.toString() : null;
-			break;
-		case 2:
-			investorId = value$ != null ? value$.toString() : null;
-			break;
-		case 3:
-			instrumentId = value$ != null ? value$.toString() : null;
-			break;
-		case 4:
-			orderMsgType = (java.lang.Integer) value$;
-			break;
-		case 5:
-			orderRef = (java.lang.Integer) value$;
-			break;
-		case 6:
-			userId = value$ != null ? value$.toString() : null;
-			break;
-		case 7:
-			direction = (java.lang.Integer) value$;
-			break;
-		case 8:
-			offset = (java.lang.Integer) value$;
-			break;
-		case 9:
-			limitPrice = (java.lang.Double) value$;
-			break;
-		case 10:
-			volume = (java.lang.Integer) value$;
-			break;
-		case 11:
-			volumeFilled = (java.lang.Integer) value$;
-			break;
-		case 12:
-			volumeRemained = (java.lang.Integer) value$;
-			break;
-		case 13:
-			volumeTotalOriginal = (java.lang.Integer) value$;
-			break;
-		case 14:
-			tradingDay = value$ != null ? value$.toString() : null;
-			break;
-		case 15:
-			orderSysId = value$ != null ? value$.toString() : null;
-			break;
-		case 16:
-			orderStatus = (java.lang.Integer) value$;
-			break;
-		case 17:
-			orderType = (java.lang.Integer) value$;
-			break;
-		case 18:
-			price = (java.lang.Double) value$;
-			break;
-		case 19:
-			tradeId = value$ != null ? value$.toString() : null;
-			break;
-		case 20:
-			ordRejReason = (java.lang.Integer) value$;
-			break;
-		case 21:
-			insertTime = value$ != null ? value$.toString() : null;
-			break;
-		case 22:
-			updateTime = value$ != null ? value$.toString() : null;
-			break;
-		case 23:
-			cancelTime = value$ != null ? value$.toString() : null;
-			break;
-		case 24:
-			frontId = (java.lang.Integer) value$;
-			break;
-		case 25:
-			sessionId = (java.lang.Integer) value$;
-			break;
-		case 26:
-			statusMsg = value$ != null ? value$.toString() : null;
-			break;
-		case 27:
-			exchangeCode = value$ != null ? value$.toString() : null;
-			break;
-		case 28:
-			fee = (java.lang.Double) value$;
-			break;
-		case 29:
-			counterType = (java.lang.Integer) value$;
-			break;
-		case 30:
-			counterSysId = (java.lang.Long) value$;
-			break;
-		case 31:
-			cancelAttempts = (java.lang.Integer) value$;
-			break;
-		case 32:
-			timeStamp = (java.lang.Long) value$;
-			break;
-		case 33:
-			epochTimeReturn = (java.lang.Long) value$;
-			break;
-		case 34:
-			funcName = value$ != null ? value$.toString() : null;
-			break;
-		default:
-			throw new IndexOutOfBoundsException("Invalid index: " + field$);
-		}
-	}
-
-	/**
-	 * Gets the value of the 'strategyId' field.
-	 * 
-	 * @return The value of the 'strategyId' field.
-	 */
-	public int getStrategyId() {
-		return strategyId;
-	}
-
-	/**
-	 * Gets the value of the 'strategyId' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalStrategyId() {
-		return Optional.<java.lang.Integer>ofNullable(strategyId);
-	}
-
-	/**
-	 * Sets the value of the 'strategyId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setStrategyId(int value) {
-		this.strategyId = value;
-	}
-
-	/**
-	 * Gets the value of the 'brokerId' field.
-	 * 
-	 * @return The value of the 'brokerId' field.
-	 */
-	public java.lang.String getBrokerId() {
-		return brokerId;
-	}
-
-	/**
-	 * Gets the value of the 'brokerId' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalBrokerId() {
-		return Optional.<java.lang.String>ofNullable(brokerId);
-	}
-
-	/**
-	 * Sets the value of the 'brokerId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setBrokerId(java.lang.String value) {
-		this.brokerId = value;
-	}
-
-	/**
-	 * Gets the value of the 'investorId' field.
-	 * 
-	 * @return The value of the 'investorId' field.
-	 */
-	public java.lang.String getInvestorId() {
-		return investorId;
-	}
-
-	/**
-	 * Gets the value of the 'investorId' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalInvestorId() {
-		return Optional.<java.lang.String>ofNullable(investorId);
-	}
-
-	/**
-	 * Sets the value of the 'investorId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setInvestorId(java.lang.String value) {
-		this.investorId = value;
-	}
-
-	/**
-	 * Gets the value of the 'instrumentId' field.
-	 * 
-	 * @return The value of the 'instrumentId' field.
-	 */
-	public java.lang.String getInstrumentId() {
-		return instrumentId;
-	}
-
-	/**
-	 * Gets the value of the 'instrumentId' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalInstrumentId() {
-		return Optional.<java.lang.String>ofNullable(instrumentId);
-	}
-
-	/**
-	 * Sets the value of the 'instrumentId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setInstrumentId(java.lang.String value) {
-		this.instrumentId = value;
-	}
-
-	/**
-	 * Gets the value of the 'orderMsgType' field.
-	 * 
-	 * @return The value of the 'orderMsgType' field.
-	 */
-	public int getOrderMsgType() {
-		return orderMsgType;
-	}
-
-	/**
-	 * Gets the value of the 'orderMsgType' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalOrderMsgType() {
-		return Optional.<java.lang.Integer>ofNullable(orderMsgType);
-	}
-
-	/**
-	 * Sets the value of the 'orderMsgType' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setOrderMsgType(int value) {
-		this.orderMsgType = value;
-	}
-
-	/**
-	 * Gets the value of the 'orderRef' field.
-	 * 
-	 * @return The value of the 'orderRef' field.
-	 */
-	public int getOrderRef() {
-		return orderRef;
-	}
-
-	/**
-	 * Gets the value of the 'orderRef' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalOrderRef() {
-		return Optional.<java.lang.Integer>ofNullable(orderRef);
-	}
-
-	/**
-	 * Sets the value of the 'orderRef' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setOrderRef(int value) {
-		this.orderRef = value;
-	}
-
-	/**
-	 * Gets the value of the 'userId' field.
-	 * 
-	 * @return The value of the 'userId' field.
-	 */
-	public java.lang.String getUserId() {
-		return userId;
-	}
-
-	/**
-	 * Gets the value of the 'userId' field as an Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalUserId() {
-		return Optional.<java.lang.String>ofNullable(userId);
-	}
-
-	/**
-	 * Sets the value of the 'userId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setUserId(java.lang.String value) {
-		this.userId = value;
-	}
-
-	/**
-	 * Gets the value of the 'direction' field.
-	 * 
-	 * @return The value of the 'direction' field.
-	 */
-	public int getDirection() {
-		return direction;
-	}
-
-	/**
-	 * Gets the value of the 'direction' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalDirection() {
-		return Optional.<java.lang.Integer>ofNullable(direction);
-	}
-
-	/**
-	 * Sets the value of the 'direction' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setDirection(int value) {
-		this.direction = value;
-	}
-
-	/**
-	 * Gets the value of the 'offset' field.
-	 * 
-	 * @return The value of the 'offset' field.
-	 */
-	public int getOffset() {
-		return offset;
-	}
-
-	/**
-	 * Gets the value of the 'offset' field as an Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalOffset() {
-		return Optional.<java.lang.Integer>ofNullable(offset);
-	}
-
-	/**
-	 * Sets the value of the 'offset' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setOffset(int value) {
-		this.offset = value;
-	}
-
-	/**
-	 * Gets the value of the 'limitPrice' field.
-	 * 
-	 * @return The value of the 'limitPrice' field.
-	 */
-	public double getLimitPrice() {
-		return limitPrice;
-	}
-
-	/**
-	 * Gets the value of the 'limitPrice' field as an
-	 * Optional&lt;java.lang.Double&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-	 */
-	public Optional<java.lang.Double> getOptionalLimitPrice() {
-		return Optional.<java.lang.Double>ofNullable(limitPrice);
-	}
-
-	/**
-	 * Sets the value of the 'limitPrice' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setLimitPrice(double value) {
-		this.limitPrice = value;
-	}
-
-	/**
-	 * Gets the value of the 'volume' field.
-	 * 
-	 * @return The value of the 'volume' field.
-	 */
-	public int getVolume() {
-		return volume;
-	}
-
-	/**
-	 * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalVolume() {
-		return Optional.<java.lang.Integer>ofNullable(volume);
-	}
-
-	/**
-	 * Sets the value of the 'volume' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setVolume(int value) {
-		this.volume = value;
-	}
-
-	/**
-	 * Gets the value of the 'volumeFilled' field.
-	 * 
-	 * @return The value of the 'volumeFilled' field.
-	 */
-	public int getVolumeFilled() {
-		return volumeFilled;
-	}
-
-	/**
-	 * Gets the value of the 'volumeFilled' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalVolumeFilled() {
-		return Optional.<java.lang.Integer>ofNullable(volumeFilled);
-	}
-
-	/**
-	 * Sets the value of the 'volumeFilled' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setVolumeFilled(int value) {
-		this.volumeFilled = value;
-	}
-
-	/**
-	 * Gets the value of the 'volumeRemained' field.
-	 * 
-	 * @return The value of the 'volumeRemained' field.
-	 */
-	public int getVolumeRemained() {
-		return volumeRemained;
-	}
-
-	/**
-	 * Gets the value of the 'volumeRemained' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalVolumeRemained() {
-		return Optional.<java.lang.Integer>ofNullable(volumeRemained);
-	}
-
-	/**
-	 * Sets the value of the 'volumeRemained' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setVolumeRemained(int value) {
-		this.volumeRemained = value;
-	}
-
-	/**
-	 * Gets the value of the 'volumeTotalOriginal' field.
-	 * 
-	 * @return The value of the 'volumeTotalOriginal' field.
-	 */
-	public int getVolumeTotalOriginal() {
-		return volumeTotalOriginal;
-	}
-
-	/**
-	 * Gets the value of the 'volumeTotalOriginal' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalVolumeTotalOriginal() {
-		return Optional.<java.lang.Integer>ofNullable(volumeTotalOriginal);
-	}
-
-	/**
-	 * Sets the value of the 'volumeTotalOriginal' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setVolumeTotalOriginal(int value) {
-		this.volumeTotalOriginal = value;
-	}
-
-	/**
-	 * Gets the value of the 'tradingDay' field.
-	 * 
-	 * @return The value of the 'tradingDay' field.
-	 */
-	public java.lang.String getTradingDay() {
-		return tradingDay;
-	}
-
-	/**
-	 * Gets the value of the 'tradingDay' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalTradingDay() {
-		return Optional.<java.lang.String>ofNullable(tradingDay);
-	}
-
-	/**
-	 * Sets the value of the 'tradingDay' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setTradingDay(java.lang.String value) {
-		this.tradingDay = value;
-	}
-
-	/**
-	 * Gets the value of the 'orderSysId' field.
-	 * 
-	 * @return The value of the 'orderSysId' field.
-	 */
-	public java.lang.String getOrderSysId() {
-		return orderSysId;
-	}
-
-	/**
-	 * Gets the value of the 'orderSysId' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalOrderSysId() {
-		return Optional.<java.lang.String>ofNullable(orderSysId);
-	}
-
-	/**
-	 * Sets the value of the 'orderSysId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setOrderSysId(java.lang.String value) {
-		this.orderSysId = value;
-	}
-
-	/**
-	 * Gets the value of the 'orderStatus' field.
-	 * 
-	 * @return The value of the 'orderStatus' field.
-	 */
-	public int getOrderStatus() {
-		return orderStatus;
-	}
-
-	/**
-	 * Gets the value of the 'orderStatus' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalOrderStatus() {
-		return Optional.<java.lang.Integer>ofNullable(orderStatus);
-	}
-
-	/**
-	 * Sets the value of the 'orderStatus' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setOrderStatus(int value) {
-		this.orderStatus = value;
-	}
-
-	/**
-	 * Gets the value of the 'orderType' field.
-	 * 
-	 * @return The value of the 'orderType' field.
-	 */
-	public int getOrderType() {
-		return orderType;
-	}
-
-	/**
-	 * Gets the value of the 'orderType' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalOrderType() {
-		return Optional.<java.lang.Integer>ofNullable(orderType);
-	}
-
-	/**
-	 * Sets the value of the 'orderType' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setOrderType(int value) {
-		this.orderType = value;
-	}
-
-	/**
-	 * Gets the value of the 'price' field.
-	 * 
-	 * @return The value of the 'price' field.
-	 */
-	public double getPrice() {
-		return price;
-	}
-
-	/**
-	 * Gets the value of the 'price' field as an Optional&lt;java.lang.Double&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-	 */
-	public Optional<java.lang.Double> getOptionalPrice() {
-		return Optional.<java.lang.Double>ofNullable(price);
-	}
-
-	/**
-	 * Sets the value of the 'price' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setPrice(double value) {
-		this.price = value;
-	}
-
-	/**
-	 * Gets the value of the 'tradeId' field.
-	 * 
-	 * @return The value of the 'tradeId' field.
-	 */
-	public java.lang.String getTradeId() {
-		return tradeId;
-	}
-
-	/**
-	 * Gets the value of the 'tradeId' field as an Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalTradeId() {
-		return Optional.<java.lang.String>ofNullable(tradeId);
-	}
-
-	/**
-	 * Sets the value of the 'tradeId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setTradeId(java.lang.String value) {
-		this.tradeId = value;
-	}
-
-	/**
-	 * Gets the value of the 'ordRejReason' field.
-	 * 
-	 * @return The value of the 'ordRejReason' field.
-	 */
-	public int getOrdRejReason() {
-		return ordRejReason;
-	}
-
-	/**
-	 * Gets the value of the 'ordRejReason' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalOrdRejReason() {
-		return Optional.<java.lang.Integer>ofNullable(ordRejReason);
-	}
-
-	/**
-	 * Sets the value of the 'ordRejReason' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setOrdRejReason(int value) {
-		this.ordRejReason = value;
-	}
-
-	/**
-	 * Gets the value of the 'insertTime' field.
-	 * 
-	 * @return The value of the 'insertTime' field.
-	 */
-	public java.lang.String getInsertTime() {
-		return insertTime;
-	}
-
-	/**
-	 * Gets the value of the 'insertTime' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalInsertTime() {
-		return Optional.<java.lang.String>ofNullable(insertTime);
-	}
-
-	/**
-	 * Sets the value of the 'insertTime' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setInsertTime(java.lang.String value) {
-		this.insertTime = value;
-	}
-
-	/**
-	 * Gets the value of the 'updateTime' field.
-	 * 
-	 * @return The value of the 'updateTime' field.
-	 */
-	public java.lang.String getUpdateTime() {
-		return updateTime;
-	}
-
-	/**
-	 * Gets the value of the 'updateTime' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalUpdateTime() {
-		return Optional.<java.lang.String>ofNullable(updateTime);
-	}
-
-	/**
-	 * Sets the value of the 'updateTime' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setUpdateTime(java.lang.String value) {
-		this.updateTime = value;
-	}
-
-	/**
-	 * Gets the value of the 'cancelTime' field.
-	 * 
-	 * @return The value of the 'cancelTime' field.
-	 */
-	public java.lang.String getCancelTime() {
-		return cancelTime;
-	}
-
-	/**
-	 * Gets the value of the 'cancelTime' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalCancelTime() {
-		return Optional.<java.lang.String>ofNullable(cancelTime);
-	}
-
-	/**
-	 * Sets the value of the 'cancelTime' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setCancelTime(java.lang.String value) {
-		this.cancelTime = value;
-	}
-
-	/**
-	 * Gets the value of the 'frontId' field.
-	 * 
-	 * @return The value of the 'frontId' field.
-	 */
-	public int getFrontId() {
-		return frontId;
-	}
-
-	/**
-	 * Gets the value of the 'frontId' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalFrontId() {
-		return Optional.<java.lang.Integer>ofNullable(frontId);
-	}
-
-	/**
-	 * Sets the value of the 'frontId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setFrontId(int value) {
-		this.frontId = value;
-	}
-
-	/**
-	 * Gets the value of the 'sessionId' field.
-	 * 
-	 * @return The value of the 'sessionId' field.
-	 */
-	public int getSessionId() {
-		return sessionId;
-	}
-
-	/**
-	 * Gets the value of the 'sessionId' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalSessionId() {
-		return Optional.<java.lang.Integer>ofNullable(sessionId);
-	}
-
-	/**
-	 * Sets the value of the 'sessionId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setSessionId(int value) {
-		this.sessionId = value;
-	}
-
-	/**
-	 * Gets the value of the 'statusMsg' field.
-	 * 
-	 * @return The value of the 'statusMsg' field.
-	 */
-	public java.lang.String getStatusMsg() {
-		return statusMsg;
-	}
-
-	/**
-	 * Gets the value of the 'statusMsg' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalStatusMsg() {
-		return Optional.<java.lang.String>ofNullable(statusMsg);
-	}
-
-	/**
-	 * Sets the value of the 'statusMsg' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setStatusMsg(java.lang.String value) {
-		this.statusMsg = value;
-	}
-
-	/**
-	 * Gets the value of the 'exchangeCode' field.
-	 * 
-	 * @return The value of the 'exchangeCode' field.
-	 */
-	public java.lang.String getExchangeCode() {
-		return exchangeCode;
-	}
-
-	/**
-	 * Gets the value of the 'exchangeCode' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalExchangeCode() {
-		return Optional.<java.lang.String>ofNullable(exchangeCode);
-	}
-
-	/**
-	 * Sets the value of the 'exchangeCode' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setExchangeCode(java.lang.String value) {
-		this.exchangeCode = value;
-	}
-
-	/**
-	 * Gets the value of the 'fee' field.
-	 * 
-	 * @return The value of the 'fee' field.
-	 */
-	public double getFee() {
-		return fee;
-	}
-
-	/**
-	 * Gets the value of the 'fee' field as an Optional&lt;java.lang.Double&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-	 */
-	public Optional<java.lang.Double> getOptionalFee() {
-		return Optional.<java.lang.Double>ofNullable(fee);
-	}
-
-	/**
-	 * Sets the value of the 'fee' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setFee(double value) {
-		this.fee = value;
-	}
-
-	/**
-	 * Gets the value of the 'counterType' field.
-	 * 
-	 * @return The value of the 'counterType' field.
-	 */
-	public int getCounterType() {
-		return counterType;
-	}
-
-	/**
-	 * Gets the value of the 'counterType' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalCounterType() {
-		return Optional.<java.lang.Integer>ofNullable(counterType);
-	}
-
-	/**
-	 * Sets the value of the 'counterType' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setCounterType(int value) {
-		this.counterType = value;
-	}
-
-	/**
-	 * Gets the value of the 'counterSysId' field.
-	 * 
-	 * @return The value of the 'counterSysId' field.
-	 */
-	public long getCounterSysId() {
-		return counterSysId;
-	}
-
-	/**
-	 * Gets the value of the 'counterSysId' field as an
-	 * Optional&lt;java.lang.Long&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-	 */
-	public Optional<java.lang.Long> getOptionalCounterSysId() {
-		return Optional.<java.lang.Long>ofNullable(counterSysId);
-	}
-
-	/**
-	 * Sets the value of the 'counterSysId' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setCounterSysId(long value) {
-		this.counterSysId = value;
-	}
-
-	/**
-	 * Gets the value of the 'cancelAttempts' field.
-	 * 
-	 * @return The value of the 'cancelAttempts' field.
-	 */
-	public int getCancelAttempts() {
-		return cancelAttempts;
-	}
-
-	/**
-	 * Gets the value of the 'cancelAttempts' field as an
-	 * Optional&lt;java.lang.Integer&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-	 */
-	public Optional<java.lang.Integer> getOptionalCancelAttempts() {
-		return Optional.<java.lang.Integer>ofNullable(cancelAttempts);
-	}
-
-	/**
-	 * Sets the value of the 'cancelAttempts' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setCancelAttempts(int value) {
-		this.cancelAttempts = value;
-	}
-
-	/**
-	 * Gets the value of the 'timeStamp' field.
-	 * 
-	 * @return The value of the 'timeStamp' field.
-	 */
-	public long getTimeStamp() {
-		return timeStamp;
-	}
-
-	/**
-	 * Gets the value of the 'timeStamp' field as an Optional&lt;java.lang.Long&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-	 */
-	public Optional<java.lang.Long> getOptionalTimeStamp() {
-		return Optional.<java.lang.Long>ofNullable(timeStamp);
-	}
-
-	/**
-	 * Sets the value of the 'timeStamp' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setTimeStamp(long value) {
-		this.timeStamp = value;
-	}
-
-	/**
-	 * Gets the value of the 'epochTimeReturn' field.
-	 * 
-	 * @return The value of the 'epochTimeReturn' field.
-	 */
-	public long getEpochTimeReturn() {
-		return epochTimeReturn;
-	}
-
-	/**
-	 * Gets the value of the 'epochTimeReturn' field as an
-	 * Optional&lt;java.lang.Long&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-	 */
-	public Optional<java.lang.Long> getOptionalEpochTimeReturn() {
-		return Optional.<java.lang.Long>ofNullable(epochTimeReturn);
-	}
-
-	/**
-	 * Sets the value of the 'epochTimeReturn' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setEpochTimeReturn(long value) {
-		this.epochTimeReturn = value;
-	}
-
-	/**
-	 * Gets the value of the 'funcName' field.
-	 * 
-	 * @return The value of the 'funcName' field.
-	 */
-	public java.lang.String getFuncName() {
-		return funcName;
-	}
-
-	/**
-	 * Gets the value of the 'funcName' field as an
-	 * Optional&lt;java.lang.String&gt;.
-	 * 
-	 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-	 */
-	public Optional<java.lang.String> getOptionalFuncName() {
-		return Optional.<java.lang.String>ofNullable(funcName);
-	}
-
-	/**
-	 * Sets the value of the 'funcName' field.
-	 * 
-	 * @param value the value to set.
-	 */
-	public void setFuncName(java.lang.String value) {
-		this.funcName = value;
-	}
-
-	/**
-	 * Creates a new SimOrder RecordBuilder.
-	 * 
-	 * @return A new SimOrder RecordBuilder
-	 */
-	public static io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder newBuilder() {
-		return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder();
-	}
-
-	/**
-	 * Creates a new SimOrder RecordBuilder by copying an existing Builder.
-	 * 
-	 * @param other The existing builder to copy.
-	 * @return A new SimOrder RecordBuilder
-	 */
-	public static io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder newBuilder(
-			io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder other) {
-		if (other == null) {
-			return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder();
-		} else {
-			return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder(other);
-		}
-	}
-
-	/**
-	 * Creates a new SimOrder RecordBuilder by copying an existing SimOrder
-	 * instance.
-	 * 
-	 * @param other The existing instance to copy.
-	 * @return A new SimOrder RecordBuilder
-	 */
-	public static io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder newBuilder(
-			io.cygnus.simulator.persistence.avro.entity.SimOrder other) {
-		if (other == null) {
-			return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder();
-		} else {
-			return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder(other);
-		}
-	}
-
-	/**
-	 * RecordBuilder for SimOrder instances.
-	 */
-	@org.apache.avro.specific.AvroGenerated
-	public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<SimOrder>
-			implements org.apache.avro.data.RecordBuilder<SimOrder> {
-
-		private int strategyId;
-		private java.lang.String brokerId;
-		private java.lang.String investorId;
-		private java.lang.String instrumentId;
-		private int orderMsgType;
-		private int orderRef;
-		private java.lang.String userId;
-		private int direction;
-		private int offset;
-		private double limitPrice;
-		private int volume;
-		private int volumeFilled;
-		private int volumeRemained;
-		private int volumeTotalOriginal;
-		private java.lang.String tradingDay;
-		private java.lang.String orderSysId;
-		private int orderStatus;
-		private int orderType;
-		private double price;
-		private java.lang.String tradeId;
-		private int ordRejReason;
-		private java.lang.String insertTime;
-		private java.lang.String updateTime;
-		private java.lang.String cancelTime;
-		private int frontId;
-		private int sessionId;
-		private java.lang.String statusMsg;
-		private java.lang.String exchangeCode;
-		private double fee;
-		private int counterType;
-		private long counterSysId;
-		private int cancelAttempts;
-		private long timeStamp;
-		private long epochTimeReturn;
-		private java.lang.String funcName;
-
-		/** Creates a new Builder */
-		private Builder() {
-			super(SCHEMA$);
-		}
-
-		/**
-		 * Creates a Builder by copying an existing Builder.
-		 * 
-		 * @param other The existing Builder to copy.
-		 */
-		private Builder(io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder other) {
-			super(other);
-			if (isValidValue(fields()[0], other.strategyId)) {
-				this.strategyId = data().deepCopy(fields()[0].schema(), other.strategyId);
-				fieldSetFlags()[0] = other.fieldSetFlags()[0];
-			}
-			if (isValidValue(fields()[1], other.brokerId)) {
-				this.brokerId = data().deepCopy(fields()[1].schema(), other.brokerId);
-				fieldSetFlags()[1] = other.fieldSetFlags()[1];
-			}
-			if (isValidValue(fields()[2], other.investorId)) {
-				this.investorId = data().deepCopy(fields()[2].schema(), other.investorId);
-				fieldSetFlags()[2] = other.fieldSetFlags()[2];
-			}
-			if (isValidValue(fields()[3], other.instrumentId)) {
-				this.instrumentId = data().deepCopy(fields()[3].schema(), other.instrumentId);
-				fieldSetFlags()[3] = other.fieldSetFlags()[3];
-			}
-			if (isValidValue(fields()[4], other.orderMsgType)) {
-				this.orderMsgType = data().deepCopy(fields()[4].schema(), other.orderMsgType);
-				fieldSetFlags()[4] = other.fieldSetFlags()[4];
-			}
-			if (isValidValue(fields()[5], other.orderRef)) {
-				this.orderRef = data().deepCopy(fields()[5].schema(), other.orderRef);
-				fieldSetFlags()[5] = other.fieldSetFlags()[5];
-			}
-			if (isValidValue(fields()[6], other.userId)) {
-				this.userId = data().deepCopy(fields()[6].schema(), other.userId);
-				fieldSetFlags()[6] = other.fieldSetFlags()[6];
-			}
-			if (isValidValue(fields()[7], other.direction)) {
-				this.direction = data().deepCopy(fields()[7].schema(), other.direction);
-				fieldSetFlags()[7] = other.fieldSetFlags()[7];
-			}
-			if (isValidValue(fields()[8], other.offset)) {
-				this.offset = data().deepCopy(fields()[8].schema(), other.offset);
-				fieldSetFlags()[8] = other.fieldSetFlags()[8];
-			}
-			if (isValidValue(fields()[9], other.limitPrice)) {
-				this.limitPrice = data().deepCopy(fields()[9].schema(), other.limitPrice);
-				fieldSetFlags()[9] = other.fieldSetFlags()[9];
-			}
-			if (isValidValue(fields()[10], other.volume)) {
-				this.volume = data().deepCopy(fields()[10].schema(), other.volume);
-				fieldSetFlags()[10] = other.fieldSetFlags()[10];
-			}
-			if (isValidValue(fields()[11], other.volumeFilled)) {
-				this.volumeFilled = data().deepCopy(fields()[11].schema(), other.volumeFilled);
-				fieldSetFlags()[11] = other.fieldSetFlags()[11];
-			}
-			if (isValidValue(fields()[12], other.volumeRemained)) {
-				this.volumeRemained = data().deepCopy(fields()[12].schema(), other.volumeRemained);
-				fieldSetFlags()[12] = other.fieldSetFlags()[12];
-			}
-			if (isValidValue(fields()[13], other.volumeTotalOriginal)) {
-				this.volumeTotalOriginal = data().deepCopy(fields()[13].schema(), other.volumeTotalOriginal);
-				fieldSetFlags()[13] = other.fieldSetFlags()[13];
-			}
-			if (isValidValue(fields()[14], other.tradingDay)) {
-				this.tradingDay = data().deepCopy(fields()[14].schema(), other.tradingDay);
-				fieldSetFlags()[14] = other.fieldSetFlags()[14];
-			}
-			if (isValidValue(fields()[15], other.orderSysId)) {
-				this.orderSysId = data().deepCopy(fields()[15].schema(), other.orderSysId);
-				fieldSetFlags()[15] = other.fieldSetFlags()[15];
-			}
-			if (isValidValue(fields()[16], other.orderStatus)) {
-				this.orderStatus = data().deepCopy(fields()[16].schema(), other.orderStatus);
-				fieldSetFlags()[16] = other.fieldSetFlags()[16];
-			}
-			if (isValidValue(fields()[17], other.orderType)) {
-				this.orderType = data().deepCopy(fields()[17].schema(), other.orderType);
-				fieldSetFlags()[17] = other.fieldSetFlags()[17];
-			}
-			if (isValidValue(fields()[18], other.price)) {
-				this.price = data().deepCopy(fields()[18].schema(), other.price);
-				fieldSetFlags()[18] = other.fieldSetFlags()[18];
-			}
-			if (isValidValue(fields()[19], other.tradeId)) {
-				this.tradeId = data().deepCopy(fields()[19].schema(), other.tradeId);
-				fieldSetFlags()[19] = other.fieldSetFlags()[19];
-			}
-			if (isValidValue(fields()[20], other.ordRejReason)) {
-				this.ordRejReason = data().deepCopy(fields()[20].schema(), other.ordRejReason);
-				fieldSetFlags()[20] = other.fieldSetFlags()[20];
-			}
-			if (isValidValue(fields()[21], other.insertTime)) {
-				this.insertTime = data().deepCopy(fields()[21].schema(), other.insertTime);
-				fieldSetFlags()[21] = other.fieldSetFlags()[21];
-			}
-			if (isValidValue(fields()[22], other.updateTime)) {
-				this.updateTime = data().deepCopy(fields()[22].schema(), other.updateTime);
-				fieldSetFlags()[22] = other.fieldSetFlags()[22];
-			}
-			if (isValidValue(fields()[23], other.cancelTime)) {
-				this.cancelTime = data().deepCopy(fields()[23].schema(), other.cancelTime);
-				fieldSetFlags()[23] = other.fieldSetFlags()[23];
-			}
-			if (isValidValue(fields()[24], other.frontId)) {
-				this.frontId = data().deepCopy(fields()[24].schema(), other.frontId);
-				fieldSetFlags()[24] = other.fieldSetFlags()[24];
-			}
-			if (isValidValue(fields()[25], other.sessionId)) {
-				this.sessionId = data().deepCopy(fields()[25].schema(), other.sessionId);
-				fieldSetFlags()[25] = other.fieldSetFlags()[25];
-			}
-			if (isValidValue(fields()[26], other.statusMsg)) {
-				this.statusMsg = data().deepCopy(fields()[26].schema(), other.statusMsg);
-				fieldSetFlags()[26] = other.fieldSetFlags()[26];
-			}
-			if (isValidValue(fields()[27], other.exchangeCode)) {
-				this.exchangeCode = data().deepCopy(fields()[27].schema(), other.exchangeCode);
-				fieldSetFlags()[27] = other.fieldSetFlags()[27];
-			}
-			if (isValidValue(fields()[28], other.fee)) {
-				this.fee = data().deepCopy(fields()[28].schema(), other.fee);
-				fieldSetFlags()[28] = other.fieldSetFlags()[28];
-			}
-			if (isValidValue(fields()[29], other.counterType)) {
-				this.counterType = data().deepCopy(fields()[29].schema(), other.counterType);
-				fieldSetFlags()[29] = other.fieldSetFlags()[29];
-			}
-			if (isValidValue(fields()[30], other.counterSysId)) {
-				this.counterSysId = data().deepCopy(fields()[30].schema(), other.counterSysId);
-				fieldSetFlags()[30] = other.fieldSetFlags()[30];
-			}
-			if (isValidValue(fields()[31], other.cancelAttempts)) {
-				this.cancelAttempts = data().deepCopy(fields()[31].schema(), other.cancelAttempts);
-				fieldSetFlags()[31] = other.fieldSetFlags()[31];
-			}
-			if (isValidValue(fields()[32], other.timeStamp)) {
-				this.timeStamp = data().deepCopy(fields()[32].schema(), other.timeStamp);
-				fieldSetFlags()[32] = other.fieldSetFlags()[32];
-			}
-			if (isValidValue(fields()[33], other.epochTimeReturn)) {
-				this.epochTimeReturn = data().deepCopy(fields()[33].schema(), other.epochTimeReturn);
-				fieldSetFlags()[33] = other.fieldSetFlags()[33];
-			}
-			if (isValidValue(fields()[34], other.funcName)) {
-				this.funcName = data().deepCopy(fields()[34].schema(), other.funcName);
-				fieldSetFlags()[34] = other.fieldSetFlags()[34];
-			}
-		}
-
-		/**
-		 * Creates a Builder by copying an existing SimOrder instance
-		 * 
-		 * @param other The existing instance to copy.
-		 */
-		private Builder(io.cygnus.simulator.persistence.avro.entity.SimOrder other) {
-			super(SCHEMA$);
-			if (isValidValue(fields()[0], other.strategyId)) {
-				this.strategyId = data().deepCopy(fields()[0].schema(), other.strategyId);
-				fieldSetFlags()[0] = true;
-			}
-			if (isValidValue(fields()[1], other.brokerId)) {
-				this.brokerId = data().deepCopy(fields()[1].schema(), other.brokerId);
-				fieldSetFlags()[1] = true;
-			}
-			if (isValidValue(fields()[2], other.investorId)) {
-				this.investorId = data().deepCopy(fields()[2].schema(), other.investorId);
-				fieldSetFlags()[2] = true;
-			}
-			if (isValidValue(fields()[3], other.instrumentId)) {
-				this.instrumentId = data().deepCopy(fields()[3].schema(), other.instrumentId);
-				fieldSetFlags()[3] = true;
-			}
-			if (isValidValue(fields()[4], other.orderMsgType)) {
-				this.orderMsgType = data().deepCopy(fields()[4].schema(), other.orderMsgType);
-				fieldSetFlags()[4] = true;
-			}
-			if (isValidValue(fields()[5], other.orderRef)) {
-				this.orderRef = data().deepCopy(fields()[5].schema(), other.orderRef);
-				fieldSetFlags()[5] = true;
-			}
-			if (isValidValue(fields()[6], other.userId)) {
-				this.userId = data().deepCopy(fields()[6].schema(), other.userId);
-				fieldSetFlags()[6] = true;
-			}
-			if (isValidValue(fields()[7], other.direction)) {
-				this.direction = data().deepCopy(fields()[7].schema(), other.direction);
-				fieldSetFlags()[7] = true;
-			}
-			if (isValidValue(fields()[8], other.offset)) {
-				this.offset = data().deepCopy(fields()[8].schema(), other.offset);
-				fieldSetFlags()[8] = true;
-			}
-			if (isValidValue(fields()[9], other.limitPrice)) {
-				this.limitPrice = data().deepCopy(fields()[9].schema(), other.limitPrice);
-				fieldSetFlags()[9] = true;
-			}
-			if (isValidValue(fields()[10], other.volume)) {
-				this.volume = data().deepCopy(fields()[10].schema(), other.volume);
-				fieldSetFlags()[10] = true;
-			}
-			if (isValidValue(fields()[11], other.volumeFilled)) {
-				this.volumeFilled = data().deepCopy(fields()[11].schema(), other.volumeFilled);
-				fieldSetFlags()[11] = true;
-			}
-			if (isValidValue(fields()[12], other.volumeRemained)) {
-				this.volumeRemained = data().deepCopy(fields()[12].schema(), other.volumeRemained);
-				fieldSetFlags()[12] = true;
-			}
-			if (isValidValue(fields()[13], other.volumeTotalOriginal)) {
-				this.volumeTotalOriginal = data().deepCopy(fields()[13].schema(), other.volumeTotalOriginal);
-				fieldSetFlags()[13] = true;
-			}
-			if (isValidValue(fields()[14], other.tradingDay)) {
-				this.tradingDay = data().deepCopy(fields()[14].schema(), other.tradingDay);
-				fieldSetFlags()[14] = true;
-			}
-			if (isValidValue(fields()[15], other.orderSysId)) {
-				this.orderSysId = data().deepCopy(fields()[15].schema(), other.orderSysId);
-				fieldSetFlags()[15] = true;
-			}
-			if (isValidValue(fields()[16], other.orderStatus)) {
-				this.orderStatus = data().deepCopy(fields()[16].schema(), other.orderStatus);
-				fieldSetFlags()[16] = true;
-			}
-			if (isValidValue(fields()[17], other.orderType)) {
-				this.orderType = data().deepCopy(fields()[17].schema(), other.orderType);
-				fieldSetFlags()[17] = true;
-			}
-			if (isValidValue(fields()[18], other.price)) {
-				this.price = data().deepCopy(fields()[18].schema(), other.price);
-				fieldSetFlags()[18] = true;
-			}
-			if (isValidValue(fields()[19], other.tradeId)) {
-				this.tradeId = data().deepCopy(fields()[19].schema(), other.tradeId);
-				fieldSetFlags()[19] = true;
-			}
-			if (isValidValue(fields()[20], other.ordRejReason)) {
-				this.ordRejReason = data().deepCopy(fields()[20].schema(), other.ordRejReason);
-				fieldSetFlags()[20] = true;
-			}
-			if (isValidValue(fields()[21], other.insertTime)) {
-				this.insertTime = data().deepCopy(fields()[21].schema(), other.insertTime);
-				fieldSetFlags()[21] = true;
-			}
-			if (isValidValue(fields()[22], other.updateTime)) {
-				this.updateTime = data().deepCopy(fields()[22].schema(), other.updateTime);
-				fieldSetFlags()[22] = true;
-			}
-			if (isValidValue(fields()[23], other.cancelTime)) {
-				this.cancelTime = data().deepCopy(fields()[23].schema(), other.cancelTime);
-				fieldSetFlags()[23] = true;
-			}
-			if (isValidValue(fields()[24], other.frontId)) {
-				this.frontId = data().deepCopy(fields()[24].schema(), other.frontId);
-				fieldSetFlags()[24] = true;
-			}
-			if (isValidValue(fields()[25], other.sessionId)) {
-				this.sessionId = data().deepCopy(fields()[25].schema(), other.sessionId);
-				fieldSetFlags()[25] = true;
-			}
-			if (isValidValue(fields()[26], other.statusMsg)) {
-				this.statusMsg = data().deepCopy(fields()[26].schema(), other.statusMsg);
-				fieldSetFlags()[26] = true;
-			}
-			if (isValidValue(fields()[27], other.exchangeCode)) {
-				this.exchangeCode = data().deepCopy(fields()[27].schema(), other.exchangeCode);
-				fieldSetFlags()[27] = true;
-			}
-			if (isValidValue(fields()[28], other.fee)) {
-				this.fee = data().deepCopy(fields()[28].schema(), other.fee);
-				fieldSetFlags()[28] = true;
-			}
-			if (isValidValue(fields()[29], other.counterType)) {
-				this.counterType = data().deepCopy(fields()[29].schema(), other.counterType);
-				fieldSetFlags()[29] = true;
-			}
-			if (isValidValue(fields()[30], other.counterSysId)) {
-				this.counterSysId = data().deepCopy(fields()[30].schema(), other.counterSysId);
-				fieldSetFlags()[30] = true;
-			}
-			if (isValidValue(fields()[31], other.cancelAttempts)) {
-				this.cancelAttempts = data().deepCopy(fields()[31].schema(), other.cancelAttempts);
-				fieldSetFlags()[31] = true;
-			}
-			if (isValidValue(fields()[32], other.timeStamp)) {
-				this.timeStamp = data().deepCopy(fields()[32].schema(), other.timeStamp);
-				fieldSetFlags()[32] = true;
-			}
-			if (isValidValue(fields()[33], other.epochTimeReturn)) {
-				this.epochTimeReturn = data().deepCopy(fields()[33].schema(), other.epochTimeReturn);
-				fieldSetFlags()[33] = true;
-			}
-			if (isValidValue(fields()[34], other.funcName)) {
-				this.funcName = data().deepCopy(fields()[34].schema(), other.funcName);
-				fieldSetFlags()[34] = true;
-			}
-		}
-
-		/**
-		 * Gets the value of the 'strategyId' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getStrategyId() {
-			return strategyId;
-		}
-
-		/**
-		 * Gets the value of the 'strategyId' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalStrategyId() {
-			return Optional.<java.lang.Integer>ofNullable(strategyId);
-		}
-
-		/**
-		 * Sets the value of the 'strategyId' field.
-		 * 
-		 * @param value The value of 'strategyId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setStrategyId(int value) {
-			validate(fields()[0], value);
-			this.strategyId = value;
-			fieldSetFlags()[0] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'strategyId' field has been set.
-		 * 
-		 * @return True if the 'strategyId' field has been set, false otherwise.
-		 */
-		public boolean hasStrategyId() {
-			return fieldSetFlags()[0];
-		}
-
-		/**
-		 * Clears the value of the 'strategyId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearStrategyId() {
-			fieldSetFlags()[0] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'brokerId' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getBrokerId() {
-			return brokerId;
-		}
-
-		/**
-		 * Gets the value of the 'brokerId' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalBrokerId() {
-			return Optional.<java.lang.String>ofNullable(brokerId);
-		}
-
-		/**
-		 * Sets the value of the 'brokerId' field.
-		 * 
-		 * @param value The value of 'brokerId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setBrokerId(java.lang.String value) {
-			validate(fields()[1], value);
-			this.brokerId = value;
-			fieldSetFlags()[1] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'brokerId' field has been set.
-		 * 
-		 * @return True if the 'brokerId' field has been set, false otherwise.
-		 */
-		public boolean hasBrokerId() {
-			return fieldSetFlags()[1];
-		}
-
-		/**
-		 * Clears the value of the 'brokerId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearBrokerId() {
-			brokerId = null;
-			fieldSetFlags()[1] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'investorId' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getInvestorId() {
-			return investorId;
-		}
-
-		/**
-		 * Gets the value of the 'investorId' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalInvestorId() {
-			return Optional.<java.lang.String>ofNullable(investorId);
-		}
-
-		/**
-		 * Sets the value of the 'investorId' field.
-		 * 
-		 * @param value The value of 'investorId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setInvestorId(java.lang.String value) {
-			validate(fields()[2], value);
-			this.investorId = value;
-			fieldSetFlags()[2] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'investorId' field has been set.
-		 * 
-		 * @return True if the 'investorId' field has been set, false otherwise.
-		 */
-		public boolean hasInvestorId() {
-			return fieldSetFlags()[2];
-		}
-
-		/**
-		 * Clears the value of the 'investorId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearInvestorId() {
-			investorId = null;
-			fieldSetFlags()[2] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'instrumentId' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getInstrumentId() {
-			return instrumentId;
-		}
-
-		/**
-		 * Gets the value of the 'instrumentId' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalInstrumentId() {
-			return Optional.<java.lang.String>ofNullable(instrumentId);
-		}
-
-		/**
-		 * Sets the value of the 'instrumentId' field.
-		 * 
-		 * @param value The value of 'instrumentId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setInstrumentId(java.lang.String value) {
-			validate(fields()[3], value);
-			this.instrumentId = value;
-			fieldSetFlags()[3] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'instrumentId' field has been set.
-		 * 
-		 * @return True if the 'instrumentId' field has been set, false otherwise.
-		 */
-		public boolean hasInstrumentId() {
-			return fieldSetFlags()[3];
-		}
-
-		/**
-		 * Clears the value of the 'instrumentId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearInstrumentId() {
-			instrumentId = null;
-			fieldSetFlags()[3] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'orderMsgType' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getOrderMsgType() {
-			return orderMsgType;
-		}
-
-		/**
-		 * Gets the value of the 'orderMsgType' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalOrderMsgType() {
-			return Optional.<java.lang.Integer>ofNullable(orderMsgType);
-		}
-
-		/**
-		 * Sets the value of the 'orderMsgType' field.
-		 * 
-		 * @param value The value of 'orderMsgType'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderMsgType(int value) {
-			validate(fields()[4], value);
-			this.orderMsgType = value;
-			fieldSetFlags()[4] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'orderMsgType' field has been set.
-		 * 
-		 * @return True if the 'orderMsgType' field has been set, false otherwise.
-		 */
-		public boolean hasOrderMsgType() {
-			return fieldSetFlags()[4];
-		}
-
-		/**
-		 * Clears the value of the 'orderMsgType' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderMsgType() {
-			fieldSetFlags()[4] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'orderRef' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getOrderRef() {
-			return orderRef;
-		}
-
-		/**
-		 * Gets the value of the 'orderRef' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalOrderRef() {
-			return Optional.<java.lang.Integer>ofNullable(orderRef);
-		}
-
-		/**
-		 * Sets the value of the 'orderRef' field.
-		 * 
-		 * @param value The value of 'orderRef'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderRef(int value) {
-			validate(fields()[5], value);
-			this.orderRef = value;
-			fieldSetFlags()[5] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'orderRef' field has been set.
-		 * 
-		 * @return True if the 'orderRef' field has been set, false otherwise.
-		 */
-		public boolean hasOrderRef() {
-			return fieldSetFlags()[5];
-		}
-
-		/**
-		 * Clears the value of the 'orderRef' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderRef() {
-			fieldSetFlags()[5] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'userId' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getUserId() {
-			return userId;
-		}
-
-		/**
-		 * Gets the value of the 'userId' field as an Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalUserId() {
-			return Optional.<java.lang.String>ofNullable(userId);
-		}
-
-		/**
-		 * Sets the value of the 'userId' field.
-		 * 
-		 * @param value The value of 'userId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setUserId(java.lang.String value) {
-			validate(fields()[6], value);
-			this.userId = value;
-			fieldSetFlags()[6] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'userId' field has been set.
-		 * 
-		 * @return True if the 'userId' field has been set, false otherwise.
-		 */
-		public boolean hasUserId() {
-			return fieldSetFlags()[6];
-		}
-
-		/**
-		 * Clears the value of the 'userId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearUserId() {
-			userId = null;
-			fieldSetFlags()[6] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'direction' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getDirection() {
-			return direction;
-		}
-
-		/**
-		 * Gets the value of the 'direction' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalDirection() {
-			return Optional.<java.lang.Integer>ofNullable(direction);
-		}
-
-		/**
-		 * Sets the value of the 'direction' field.
-		 * 
-		 * @param value The value of 'direction'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setDirection(int value) {
-			validate(fields()[7], value);
-			this.direction = value;
-			fieldSetFlags()[7] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'direction' field has been set.
-		 * 
-		 * @return True if the 'direction' field has been set, false otherwise.
-		 */
-		public boolean hasDirection() {
-			return fieldSetFlags()[7];
-		}
-
-		/**
-		 * Clears the value of the 'direction' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearDirection() {
-			fieldSetFlags()[7] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'offset' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getOffset() {
-			return offset;
-		}
-
-		/**
-		 * Gets the value of the 'offset' field as an Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalOffset() {
-			return Optional.<java.lang.Integer>ofNullable(offset);
-		}
-
-		/**
-		 * Sets the value of the 'offset' field.
-		 * 
-		 * @param value The value of 'offset'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOffset(int value) {
-			validate(fields()[8], value);
-			this.offset = value;
-			fieldSetFlags()[8] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'offset' field has been set.
-		 * 
-		 * @return True if the 'offset' field has been set, false otherwise.
-		 */
-		public boolean hasOffset() {
-			return fieldSetFlags()[8];
-		}
-
-		/**
-		 * Clears the value of the 'offset' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOffset() {
-			fieldSetFlags()[8] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'limitPrice' field.
-		 * 
-		 * @return The value.
-		 */
-		public double getLimitPrice() {
-			return limitPrice;
-		}
-
-		/**
-		 * Gets the value of the 'limitPrice' field as an
-		 * Optional&lt;java.lang.Double&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-		 */
-		public Optional<java.lang.Double> getOptionalLimitPrice() {
-			return Optional.<java.lang.Double>ofNullable(limitPrice);
-		}
-
-		/**
-		 * Sets the value of the 'limitPrice' field.
-		 * 
-		 * @param value The value of 'limitPrice'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setLimitPrice(double value) {
-			validate(fields()[9], value);
-			this.limitPrice = value;
-			fieldSetFlags()[9] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'limitPrice' field has been set.
-		 * 
-		 * @return True if the 'limitPrice' field has been set, false otherwise.
-		 */
-		public boolean hasLimitPrice() {
-			return fieldSetFlags()[9];
-		}
-
-		/**
-		 * Clears the value of the 'limitPrice' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearLimitPrice() {
-			fieldSetFlags()[9] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'volume' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getVolume() {
-			return volume;
-		}
-
-		/**
-		 * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalVolume() {
-			return Optional.<java.lang.Integer>ofNullable(volume);
-		}
-
-		/**
-		 * Sets the value of the 'volume' field.
-		 * 
-		 * @param value The value of 'volume'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolume(int value) {
-			validate(fields()[10], value);
-			this.volume = value;
-			fieldSetFlags()[10] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'volume' field has been set.
-		 * 
-		 * @return True if the 'volume' field has been set, false otherwise.
-		 */
-		public boolean hasVolume() {
-			return fieldSetFlags()[10];
-		}
-
-		/**
-		 * Clears the value of the 'volume' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolume() {
-			fieldSetFlags()[10] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'volumeFilled' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getVolumeFilled() {
-			return volumeFilled;
-		}
-
-		/**
-		 * Gets the value of the 'volumeFilled' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalVolumeFilled() {
-			return Optional.<java.lang.Integer>ofNullable(volumeFilled);
-		}
-
-		/**
-		 * Sets the value of the 'volumeFilled' field.
-		 * 
-		 * @param value The value of 'volumeFilled'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolumeFilled(int value) {
-			validate(fields()[11], value);
-			this.volumeFilled = value;
-			fieldSetFlags()[11] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'volumeFilled' field has been set.
-		 * 
-		 * @return True if the 'volumeFilled' field has been set, false otherwise.
-		 */
-		public boolean hasVolumeFilled() {
-			return fieldSetFlags()[11];
-		}
-
-		/**
-		 * Clears the value of the 'volumeFilled' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeFilled() {
-			fieldSetFlags()[11] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'volumeRemained' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getVolumeRemained() {
-			return volumeRemained;
-		}
-
-		/**
-		 * Gets the value of the 'volumeRemained' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalVolumeRemained() {
-			return Optional.<java.lang.Integer>ofNullable(volumeRemained);
-		}
-
-		/**
-		 * Sets the value of the 'volumeRemained' field.
-		 * 
-		 * @param value The value of 'volumeRemained'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolumeRemained(int value) {
-			validate(fields()[12], value);
-			this.volumeRemained = value;
-			fieldSetFlags()[12] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'volumeRemained' field has been set.
-		 * 
-		 * @return True if the 'volumeRemained' field has been set, false otherwise.
-		 */
-		public boolean hasVolumeRemained() {
-			return fieldSetFlags()[12];
-		}
-
-		/**
-		 * Clears the value of the 'volumeRemained' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeRemained() {
-			fieldSetFlags()[12] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'volumeTotalOriginal' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getVolumeTotalOriginal() {
-			return volumeTotalOriginal;
-		}
-
-		/**
-		 * Gets the value of the 'volumeTotalOriginal' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalVolumeTotalOriginal() {
-			return Optional.<java.lang.Integer>ofNullable(volumeTotalOriginal);
-		}
-
-		/**
-		 * Sets the value of the 'volumeTotalOriginal' field.
-		 * 
-		 * @param value The value of 'volumeTotalOriginal'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolumeTotalOriginal(int value) {
-			validate(fields()[13], value);
-			this.volumeTotalOriginal = value;
-			fieldSetFlags()[13] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'volumeTotalOriginal' field has been set.
-		 * 
-		 * @return True if the 'volumeTotalOriginal' field has been set, false
-		 *         otherwise.
-		 */
-		public boolean hasVolumeTotalOriginal() {
-			return fieldSetFlags()[13];
-		}
-
-		/**
-		 * Clears the value of the 'volumeTotalOriginal' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeTotalOriginal() {
-			fieldSetFlags()[13] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'tradingDay' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getTradingDay() {
-			return tradingDay;
-		}
-
-		/**
-		 * Gets the value of the 'tradingDay' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalTradingDay() {
-			return Optional.<java.lang.String>ofNullable(tradingDay);
-		}
-
-		/**
-		 * Sets the value of the 'tradingDay' field.
-		 * 
-		 * @param value The value of 'tradingDay'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setTradingDay(java.lang.String value) {
-			validate(fields()[14], value);
-			this.tradingDay = value;
-			fieldSetFlags()[14] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'tradingDay' field has been set.
-		 * 
-		 * @return True if the 'tradingDay' field has been set, false otherwise.
-		 */
-		public boolean hasTradingDay() {
-			return fieldSetFlags()[14];
-		}
-
-		/**
-		 * Clears the value of the 'tradingDay' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearTradingDay() {
-			tradingDay = null;
-			fieldSetFlags()[14] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'orderSysId' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getOrderSysId() {
-			return orderSysId;
-		}
-
-		/**
-		 * Gets the value of the 'orderSysId' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalOrderSysId() {
-			return Optional.<java.lang.String>ofNullable(orderSysId);
-		}
-
-		/**
-		 * Sets the value of the 'orderSysId' field.
-		 * 
-		 * @param value The value of 'orderSysId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderSysId(java.lang.String value) {
-			validate(fields()[15], value);
-			this.orderSysId = value;
-			fieldSetFlags()[15] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'orderSysId' field has been set.
-		 * 
-		 * @return True if the 'orderSysId' field has been set, false otherwise.
-		 */
-		public boolean hasOrderSysId() {
-			return fieldSetFlags()[15];
-		}
-
-		/**
-		 * Clears the value of the 'orderSysId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderSysId() {
-			orderSysId = null;
-			fieldSetFlags()[15] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'orderStatus' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getOrderStatus() {
-			return orderStatus;
-		}
-
-		/**
-		 * Gets the value of the 'orderStatus' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalOrderStatus() {
-			return Optional.<java.lang.Integer>ofNullable(orderStatus);
-		}
-
-		/**
-		 * Sets the value of the 'orderStatus' field.
-		 * 
-		 * @param value The value of 'orderStatus'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderStatus(int value) {
-			validate(fields()[16], value);
-			this.orderStatus = value;
-			fieldSetFlags()[16] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'orderStatus' field has been set.
-		 * 
-		 * @return True if the 'orderStatus' field has been set, false otherwise.
-		 */
-		public boolean hasOrderStatus() {
-			return fieldSetFlags()[16];
-		}
-
-		/**
-		 * Clears the value of the 'orderStatus' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderStatus() {
-			fieldSetFlags()[16] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'orderType' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getOrderType() {
-			return orderType;
-		}
-
-		/**
-		 * Gets the value of the 'orderType' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalOrderType() {
-			return Optional.<java.lang.Integer>ofNullable(orderType);
-		}
-
-		/**
-		 * Sets the value of the 'orderType' field.
-		 * 
-		 * @param value The value of 'orderType'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderType(int value) {
-			validate(fields()[17], value);
-			this.orderType = value;
-			fieldSetFlags()[17] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'orderType' field has been set.
-		 * 
-		 * @return True if the 'orderType' field has been set, false otherwise.
-		 */
-		public boolean hasOrderType() {
-			return fieldSetFlags()[17];
-		}
-
-		/**
-		 * Clears the value of the 'orderType' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderType() {
-			fieldSetFlags()[17] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'price' field.
-		 * 
-		 * @return The value.
-		 */
-		public double getPrice() {
-			return price;
-		}
-
-		/**
-		 * Gets the value of the 'price' field as an Optional&lt;java.lang.Double&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-		 */
-		public Optional<java.lang.Double> getOptionalPrice() {
-			return Optional.<java.lang.Double>ofNullable(price);
-		}
-
-		/**
-		 * Sets the value of the 'price' field.
-		 * 
-		 * @param value The value of 'price'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setPrice(double value) {
-			validate(fields()[18], value);
-			this.price = value;
-			fieldSetFlags()[18] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'price' field has been set.
-		 * 
-		 * @return True if the 'price' field has been set, false otherwise.
-		 */
-		public boolean hasPrice() {
-			return fieldSetFlags()[18];
-		}
-
-		/**
-		 * Clears the value of the 'price' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearPrice() {
-			fieldSetFlags()[18] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'tradeId' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getTradeId() {
-			return tradeId;
-		}
-
-		/**
-		 * Gets the value of the 'tradeId' field as an Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalTradeId() {
-			return Optional.<java.lang.String>ofNullable(tradeId);
-		}
-
-		/**
-		 * Sets the value of the 'tradeId' field.
-		 * 
-		 * @param value The value of 'tradeId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setTradeId(java.lang.String value) {
-			validate(fields()[19], value);
-			this.tradeId = value;
-			fieldSetFlags()[19] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'tradeId' field has been set.
-		 * 
-		 * @return True if the 'tradeId' field has been set, false otherwise.
-		 */
-		public boolean hasTradeId() {
-			return fieldSetFlags()[19];
-		}
-
-		/**
-		 * Clears the value of the 'tradeId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearTradeId() {
-			tradeId = null;
-			fieldSetFlags()[19] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'ordRejReason' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getOrdRejReason() {
-			return ordRejReason;
-		}
-
-		/**
-		 * Gets the value of the 'ordRejReason' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalOrdRejReason() {
-			return Optional.<java.lang.Integer>ofNullable(ordRejReason);
-		}
-
-		/**
-		 * Sets the value of the 'ordRejReason' field.
-		 * 
-		 * @param value The value of 'ordRejReason'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrdRejReason(int value) {
-			validate(fields()[20], value);
-			this.ordRejReason = value;
-			fieldSetFlags()[20] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'ordRejReason' field has been set.
-		 * 
-		 * @return True if the 'ordRejReason' field has been set, false otherwise.
-		 */
-		public boolean hasOrdRejReason() {
-			return fieldSetFlags()[20];
-		}
-
-		/**
-		 * Clears the value of the 'ordRejReason' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrdRejReason() {
-			fieldSetFlags()[20] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'insertTime' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getInsertTime() {
-			return insertTime;
-		}
-
-		/**
-		 * Gets the value of the 'insertTime' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalInsertTime() {
-			return Optional.<java.lang.String>ofNullable(insertTime);
-		}
-
-		/**
-		 * Sets the value of the 'insertTime' field.
-		 * 
-		 * @param value The value of 'insertTime'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setInsertTime(java.lang.String value) {
-			validate(fields()[21], value);
-			this.insertTime = value;
-			fieldSetFlags()[21] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'insertTime' field has been set.
-		 * 
-		 * @return True if the 'insertTime' field has been set, false otherwise.
-		 */
-		public boolean hasInsertTime() {
-			return fieldSetFlags()[21];
-		}
-
-		/**
-		 * Clears the value of the 'insertTime' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearInsertTime() {
-			insertTime = null;
-			fieldSetFlags()[21] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'updateTime' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getUpdateTime() {
-			return updateTime;
-		}
-
-		/**
-		 * Gets the value of the 'updateTime' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalUpdateTime() {
-			return Optional.<java.lang.String>ofNullable(updateTime);
-		}
-
-		/**
-		 * Sets the value of the 'updateTime' field.
-		 * 
-		 * @param value The value of 'updateTime'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setUpdateTime(java.lang.String value) {
-			validate(fields()[22], value);
-			this.updateTime = value;
-			fieldSetFlags()[22] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'updateTime' field has been set.
-		 * 
-		 * @return True if the 'updateTime' field has been set, false otherwise.
-		 */
-		public boolean hasUpdateTime() {
-			return fieldSetFlags()[22];
-		}
-
-		/**
-		 * Clears the value of the 'updateTime' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearUpdateTime() {
-			updateTime = null;
-			fieldSetFlags()[22] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'cancelTime' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getCancelTime() {
-			return cancelTime;
-		}
-
-		/**
-		 * Gets the value of the 'cancelTime' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalCancelTime() {
-			return Optional.<java.lang.String>ofNullable(cancelTime);
-		}
-
-		/**
-		 * Sets the value of the 'cancelTime' field.
-		 * 
-		 * @param value The value of 'cancelTime'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCancelTime(java.lang.String value) {
-			validate(fields()[23], value);
-			this.cancelTime = value;
-			fieldSetFlags()[23] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'cancelTime' field has been set.
-		 * 
-		 * @return True if the 'cancelTime' field has been set, false otherwise.
-		 */
-		public boolean hasCancelTime() {
-			return fieldSetFlags()[23];
-		}
-
-		/**
-		 * Clears the value of the 'cancelTime' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCancelTime() {
-			cancelTime = null;
-			fieldSetFlags()[23] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'frontId' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getFrontId() {
-			return frontId;
-		}
-
-		/**
-		 * Gets the value of the 'frontId' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalFrontId() {
-			return Optional.<java.lang.Integer>ofNullable(frontId);
-		}
-
-		/**
-		 * Sets the value of the 'frontId' field.
-		 * 
-		 * @param value The value of 'frontId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setFrontId(int value) {
-			validate(fields()[24], value);
-			this.frontId = value;
-			fieldSetFlags()[24] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'frontId' field has been set.
-		 * 
-		 * @return True if the 'frontId' field has been set, false otherwise.
-		 */
-		public boolean hasFrontId() {
-			return fieldSetFlags()[24];
-		}
-
-		/**
-		 * Clears the value of the 'frontId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearFrontId() {
-			fieldSetFlags()[24] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'sessionId' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getSessionId() {
-			return sessionId;
-		}
-
-		/**
-		 * Gets the value of the 'sessionId' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalSessionId() {
-			return Optional.<java.lang.Integer>ofNullable(sessionId);
-		}
-
-		/**
-		 * Sets the value of the 'sessionId' field.
-		 * 
-		 * @param value The value of 'sessionId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setSessionId(int value) {
-			validate(fields()[25], value);
-			this.sessionId = value;
-			fieldSetFlags()[25] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'sessionId' field has been set.
-		 * 
-		 * @return True if the 'sessionId' field has been set, false otherwise.
-		 */
-		public boolean hasSessionId() {
-			return fieldSetFlags()[25];
-		}
-
-		/**
-		 * Clears the value of the 'sessionId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearSessionId() {
-			fieldSetFlags()[25] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'statusMsg' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getStatusMsg() {
-			return statusMsg;
-		}
-
-		/**
-		 * Gets the value of the 'statusMsg' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalStatusMsg() {
-			return Optional.<java.lang.String>ofNullable(statusMsg);
-		}
-
-		/**
-		 * Sets the value of the 'statusMsg' field.
-		 * 
-		 * @param value The value of 'statusMsg'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setStatusMsg(java.lang.String value) {
-			validate(fields()[26], value);
-			this.statusMsg = value;
-			fieldSetFlags()[26] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'statusMsg' field has been set.
-		 * 
-		 * @return True if the 'statusMsg' field has been set, false otherwise.
-		 */
-		public boolean hasStatusMsg() {
-			return fieldSetFlags()[26];
-		}
-
-		/**
-		 * Clears the value of the 'statusMsg' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearStatusMsg() {
-			statusMsg = null;
-			fieldSetFlags()[26] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'exchangeCode' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getExchangeCode() {
-			return exchangeCode;
-		}
-
-		/**
-		 * Gets the value of the 'exchangeCode' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalExchangeCode() {
-			return Optional.<java.lang.String>ofNullable(exchangeCode);
-		}
-
-		/**
-		 * Sets the value of the 'exchangeCode' field.
-		 * 
-		 * @param value The value of 'exchangeCode'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setExchangeCode(java.lang.String value) {
-			validate(fields()[27], value);
-			this.exchangeCode = value;
-			fieldSetFlags()[27] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'exchangeCode' field has been set.
-		 * 
-		 * @return True if the 'exchangeCode' field has been set, false otherwise.
-		 */
-		public boolean hasExchangeCode() {
-			return fieldSetFlags()[27];
-		}
-
-		/**
-		 * Clears the value of the 'exchangeCode' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearExchangeCode() {
-			exchangeCode = null;
-			fieldSetFlags()[27] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'fee' field.
-		 * 
-		 * @return The value.
-		 */
-		public double getFee() {
-			return fee;
-		}
-
-		/**
-		 * Gets the value of the 'fee' field as an Optional&lt;java.lang.Double&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
-		 */
-		public Optional<java.lang.Double> getOptionalFee() {
-			return Optional.<java.lang.Double>ofNullable(fee);
-		}
-
-		/**
-		 * Sets the value of the 'fee' field.
-		 * 
-		 * @param value The value of 'fee'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setFee(double value) {
-			validate(fields()[28], value);
-			this.fee = value;
-			fieldSetFlags()[28] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'fee' field has been set.
-		 * 
-		 * @return True if the 'fee' field has been set, false otherwise.
-		 */
-		public boolean hasFee() {
-			return fieldSetFlags()[28];
-		}
-
-		/**
-		 * Clears the value of the 'fee' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearFee() {
-			fieldSetFlags()[28] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'counterType' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getCounterType() {
-			return counterType;
-		}
-
-		/**
-		 * Gets the value of the 'counterType' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalCounterType() {
-			return Optional.<java.lang.Integer>ofNullable(counterType);
-		}
-
-		/**
-		 * Sets the value of the 'counterType' field.
-		 * 
-		 * @param value The value of 'counterType'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCounterType(int value) {
-			validate(fields()[29], value);
-			this.counterType = value;
-			fieldSetFlags()[29] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'counterType' field has been set.
-		 * 
-		 * @return True if the 'counterType' field has been set, false otherwise.
-		 */
-		public boolean hasCounterType() {
-			return fieldSetFlags()[29];
-		}
-
-		/**
-		 * Clears the value of the 'counterType' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCounterType() {
-			fieldSetFlags()[29] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'counterSysId' field.
-		 * 
-		 * @return The value.
-		 */
-		public long getCounterSysId() {
-			return counterSysId;
-		}
-
-		/**
-		 * Gets the value of the 'counterSysId' field as an
-		 * Optional&lt;java.lang.Long&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-		 */
-		public Optional<java.lang.Long> getOptionalCounterSysId() {
-			return Optional.<java.lang.Long>ofNullable(counterSysId);
-		}
-
-		/**
-		 * Sets the value of the 'counterSysId' field.
-		 * 
-		 * @param value The value of 'counterSysId'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCounterSysId(long value) {
-			validate(fields()[30], value);
-			this.counterSysId = value;
-			fieldSetFlags()[30] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'counterSysId' field has been set.
-		 * 
-		 * @return True if the 'counterSysId' field has been set, false otherwise.
-		 */
-		public boolean hasCounterSysId() {
-			return fieldSetFlags()[30];
-		}
-
-		/**
-		 * Clears the value of the 'counterSysId' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCounterSysId() {
-			fieldSetFlags()[30] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'cancelAttempts' field.
-		 * 
-		 * @return The value.
-		 */
-		public int getCancelAttempts() {
-			return cancelAttempts;
-		}
-
-		/**
-		 * Gets the value of the 'cancelAttempts' field as an
-		 * Optional&lt;java.lang.Integer&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
-		 */
-		public Optional<java.lang.Integer> getOptionalCancelAttempts() {
-			return Optional.<java.lang.Integer>ofNullable(cancelAttempts);
-		}
-
-		/**
-		 * Sets the value of the 'cancelAttempts' field.
-		 * 
-		 * @param value The value of 'cancelAttempts'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCancelAttempts(int value) {
-			validate(fields()[31], value);
-			this.cancelAttempts = value;
-			fieldSetFlags()[31] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'cancelAttempts' field has been set.
-		 * 
-		 * @return True if the 'cancelAttempts' field has been set, false otherwise.
-		 */
-		public boolean hasCancelAttempts() {
-			return fieldSetFlags()[31];
-		}
-
-		/**
-		 * Clears the value of the 'cancelAttempts' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCancelAttempts() {
-			fieldSetFlags()[31] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'timeStamp' field.
-		 * 
-		 * @return The value.
-		 */
-		public long getTimeStamp() {
-			return timeStamp;
-		}
-
-		/**
-		 * Gets the value of the 'timeStamp' field as an Optional&lt;java.lang.Long&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-		 */
-		public Optional<java.lang.Long> getOptionalTimeStamp() {
-			return Optional.<java.lang.Long>ofNullable(timeStamp);
-		}
-
-		/**
-		 * Sets the value of the 'timeStamp' field.
-		 * 
-		 * @param value The value of 'timeStamp'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setTimeStamp(long value) {
-			validate(fields()[32], value);
-			this.timeStamp = value;
-			fieldSetFlags()[32] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'timeStamp' field has been set.
-		 * 
-		 * @return True if the 'timeStamp' field has been set, false otherwise.
-		 */
-		public boolean hasTimeStamp() {
-			return fieldSetFlags()[32];
-		}
-
-		/**
-		 * Clears the value of the 'timeStamp' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearTimeStamp() {
-			fieldSetFlags()[32] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'epochTimeReturn' field.
-		 * 
-		 * @return The value.
-		 */
-		public long getEpochTimeReturn() {
-			return epochTimeReturn;
-		}
-
-		/**
-		 * Gets the value of the 'epochTimeReturn' field as an
-		 * Optional&lt;java.lang.Long&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
-		 */
-		public Optional<java.lang.Long> getOptionalEpochTimeReturn() {
-			return Optional.<java.lang.Long>ofNullable(epochTimeReturn);
-		}
-
-		/**
-		 * Sets the value of the 'epochTimeReturn' field.
-		 * 
-		 * @param value The value of 'epochTimeReturn'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setEpochTimeReturn(long value) {
-			validate(fields()[33], value);
-			this.epochTimeReturn = value;
-			fieldSetFlags()[33] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'epochTimeReturn' field has been set.
-		 * 
-		 * @return True if the 'epochTimeReturn' field has been set, false otherwise.
-		 */
-		public boolean hasEpochTimeReturn() {
-			return fieldSetFlags()[33];
-		}
-
-		/**
-		 * Clears the value of the 'epochTimeReturn' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearEpochTimeReturn() {
-			fieldSetFlags()[33] = false;
-			return this;
-		}
-
-		/**
-		 * Gets the value of the 'funcName' field.
-		 * 
-		 * @return The value.
-		 */
-		public java.lang.String getFuncName() {
-			return funcName;
-		}
-
-		/**
-		 * Gets the value of the 'funcName' field as an
-		 * Optional&lt;java.lang.String&gt;.
-		 * 
-		 * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
-		 */
-		public Optional<java.lang.String> getOptionalFuncName() {
-			return Optional.<java.lang.String>ofNullable(funcName);
-		}
-
-		/**
-		 * Sets the value of the 'funcName' field.
-		 * 
-		 * @param value The value of 'funcName'.
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setFuncName(java.lang.String value) {
-			validate(fields()[34], value);
-			this.funcName = value;
-			fieldSetFlags()[34] = true;
-			return this;
-		}
-
-		/**
-		 * Checks whether the 'funcName' field has been set.
-		 * 
-		 * @return True if the 'funcName' field has been set, false otherwise.
-		 */
-		public boolean hasFuncName() {
-			return fieldSetFlags()[34];
-		}
-
-		/**
-		 * Clears the value of the 'funcName' field.
-		 * 
-		 * @return This builder.
-		 */
-		public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearFuncName() {
-			funcName = null;
-			fieldSetFlags()[34] = false;
-			return this;
-		}
-
-		@Override
-		public SimOrder build() {
-			try {
-				SimOrder record = new SimOrder();
-				record.strategyId = fieldSetFlags()[0] ? this.strategyId
-						: (java.lang.Integer) defaultValue(fields()[0]);
-				record.brokerId = fieldSetFlags()[1] ? this.brokerId : (java.lang.String) defaultValue(fields()[1]);
-				record.investorId = fieldSetFlags()[2] ? this.investorId : (java.lang.String) defaultValue(fields()[2]);
-				record.instrumentId = fieldSetFlags()[3] ? this.instrumentId
-						: (java.lang.String) defaultValue(fields()[3]);
-				record.orderMsgType = fieldSetFlags()[4] ? this.orderMsgType
-						: (java.lang.Integer) defaultValue(fields()[4]);
-				record.orderRef = fieldSetFlags()[5] ? this.orderRef : (java.lang.Integer) defaultValue(fields()[5]);
-				record.userId = fieldSetFlags()[6] ? this.userId : (java.lang.String) defaultValue(fields()[6]);
-				record.direction = fieldSetFlags()[7] ? this.direction : (java.lang.Integer) defaultValue(fields()[7]);
-				record.offset = fieldSetFlags()[8] ? this.offset : (java.lang.Integer) defaultValue(fields()[8]);
-				record.limitPrice = fieldSetFlags()[9] ? this.limitPrice : (java.lang.Double) defaultValue(fields()[9]);
-				record.volume = fieldSetFlags()[10] ? this.volume : (java.lang.Integer) defaultValue(fields()[10]);
-				record.volumeFilled = fieldSetFlags()[11] ? this.volumeFilled
-						: (java.lang.Integer) defaultValue(fields()[11]);
-				record.volumeRemained = fieldSetFlags()[12] ? this.volumeRemained
-						: (java.lang.Integer) defaultValue(fields()[12]);
-				record.volumeTotalOriginal = fieldSetFlags()[13] ? this.volumeTotalOriginal
-						: (java.lang.Integer) defaultValue(fields()[13]);
-				record.tradingDay = fieldSetFlags()[14] ? this.tradingDay
-						: (java.lang.String) defaultValue(fields()[14]);
-				record.orderSysId = fieldSetFlags()[15] ? this.orderSysId
-						: (java.lang.String) defaultValue(fields()[15]);
-				record.orderStatus = fieldSetFlags()[16] ? this.orderStatus
-						: (java.lang.Integer) defaultValue(fields()[16]);
-				record.orderType = fieldSetFlags()[17] ? this.orderType
-						: (java.lang.Integer) defaultValue(fields()[17]);
-				record.price = fieldSetFlags()[18] ? this.price : (java.lang.Double) defaultValue(fields()[18]);
-				record.tradeId = fieldSetFlags()[19] ? this.tradeId : (java.lang.String) defaultValue(fields()[19]);
-				record.ordRejReason = fieldSetFlags()[20] ? this.ordRejReason
-						: (java.lang.Integer) defaultValue(fields()[20]);
-				record.insertTime = fieldSetFlags()[21] ? this.insertTime
-						: (java.lang.String) defaultValue(fields()[21]);
-				record.updateTime = fieldSetFlags()[22] ? this.updateTime
-						: (java.lang.String) defaultValue(fields()[22]);
-				record.cancelTime = fieldSetFlags()[23] ? this.cancelTime
-						: (java.lang.String) defaultValue(fields()[23]);
-				record.frontId = fieldSetFlags()[24] ? this.frontId : (java.lang.Integer) defaultValue(fields()[24]);
-				record.sessionId = fieldSetFlags()[25] ? this.sessionId
-						: (java.lang.Integer) defaultValue(fields()[25]);
-				record.statusMsg = fieldSetFlags()[26] ? this.statusMsg : (java.lang.String) defaultValue(fields()[26]);
-				record.exchangeCode = fieldSetFlags()[27] ? this.exchangeCode
-						: (java.lang.String) defaultValue(fields()[27]);
-				record.fee = fieldSetFlags()[28] ? this.fee : (java.lang.Double) defaultValue(fields()[28]);
-				record.counterType = fieldSetFlags()[29] ? this.counterType
-						: (java.lang.Integer) defaultValue(fields()[29]);
-				record.counterSysId = fieldSetFlags()[30] ? this.counterSysId
-						: (java.lang.Long) defaultValue(fields()[30]);
-				record.cancelAttempts = fieldSetFlags()[31] ? this.cancelAttempts
-						: (java.lang.Integer) defaultValue(fields()[31]);
-				record.timeStamp = fieldSetFlags()[32] ? this.timeStamp : (java.lang.Long) defaultValue(fields()[32]);
-				record.epochTimeReturn = fieldSetFlags()[33] ? this.epochTimeReturn
-						: (java.lang.Long) defaultValue(fields()[33]);
-				record.funcName = fieldSetFlags()[34] ? this.funcName : (java.lang.String) defaultValue(fields()[34]);
-				return record;
-			} catch (org.apache.avro.AvroMissingFieldException e) {
-				throw e;
-			} catch (java.lang.Exception e) {
-				throw new org.apache.avro.AvroRuntimeException(e);
-			}
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	private static final org.apache.avro.io.DatumWriter<SimOrder> WRITER$ = (org.apache.avro.io.DatumWriter<SimOrder>) MODEL$
-			.createDatumWriter(SCHEMA$);
-
-	@Override
-	public void writeExternal(java.io.ObjectOutput out) throws java.io.IOException {
-		WRITER$.write(this, SpecificData.getEncoder(out));
-	}
-
-	@SuppressWarnings("unchecked")
-	private static final org.apache.avro.io.DatumReader<SimOrder> READER$ = (org.apache.avro.io.DatumReader<SimOrder>) MODEL$
-			.createDatumReader(SCHEMA$);
-
-	@Override
-	public void readExternal(java.io.ObjectInput in) throws java.io.IOException {
-		READER$.read(this, SpecificData.getDecoder(in));
-	}
-
-	@Override
-	protected boolean hasCustomCoders() {
-		return true;
-	}
-
-	@Override
-	public void customEncode(org.apache.avro.io.Encoder out) throws java.io.IOException {
-		out.writeInt(this.strategyId);
-
-		out.writeString(this.brokerId);
-
-		out.writeString(this.investorId);
-
-		out.writeString(this.instrumentId);
-
-		out.writeInt(this.orderMsgType);
-
-		out.writeInt(this.orderRef);
-
-		out.writeString(this.userId);
-
-		out.writeInt(this.direction);
-
-		out.writeInt(this.offset);
-
-		out.writeDouble(this.limitPrice);
-
-		out.writeInt(this.volume);
-
-		out.writeInt(this.volumeFilled);
-
-		out.writeInt(this.volumeRemained);
-
-		out.writeInt(this.volumeTotalOriginal);
-
-		out.writeString(this.tradingDay);
-
-		out.writeString(this.orderSysId);
-
-		out.writeInt(this.orderStatus);
-
-		out.writeInt(this.orderType);
-
-		out.writeDouble(this.price);
-
-		out.writeString(this.tradeId);
-
-		out.writeInt(this.ordRejReason);
-
-		out.writeString(this.insertTime);
-
-		out.writeString(this.updateTime);
-
-		out.writeString(this.cancelTime);
-
-		out.writeInt(this.frontId);
-
-		out.writeInt(this.sessionId);
-
-		out.writeString(this.statusMsg);
-
-		out.writeString(this.exchangeCode);
-
-		out.writeDouble(this.fee);
-
-		out.writeInt(this.counterType);
-
-		out.writeLong(this.counterSysId);
-
-		out.writeInt(this.cancelAttempts);
-
-		out.writeLong(this.timeStamp);
-
-		out.writeLong(this.epochTimeReturn);
-
-		out.writeString(this.funcName);
-
-	}
-
-	@Override
-	public void customDecode(org.apache.avro.io.ResolvingDecoder in) throws java.io.IOException {
-		org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-		if (fieldOrder == null) {
-			this.strategyId = in.readInt();
-
-			this.brokerId = in.readString();
-
-			this.investorId = in.readString();
-
-			this.instrumentId = in.readString();
-
-			this.orderMsgType = in.readInt();
-
-			this.orderRef = in.readInt();
-
-			this.userId = in.readString();
-
-			this.direction = in.readInt();
-
-			this.offset = in.readInt();
-
-			this.limitPrice = in.readDouble();
-
-			this.volume = in.readInt();
-
-			this.volumeFilled = in.readInt();
-
-			this.volumeRemained = in.readInt();
-
-			this.volumeTotalOriginal = in.readInt();
-
-			this.tradingDay = in.readString();
-
-			this.orderSysId = in.readString();
-
-			this.orderStatus = in.readInt();
-
-			this.orderType = in.readInt();
-
-			this.price = in.readDouble();
-
-			this.tradeId = in.readString();
-
-			this.ordRejReason = in.readInt();
-
-			this.insertTime = in.readString();
-
-			this.updateTime = in.readString();
-
-			this.cancelTime = in.readString();
-
-			this.frontId = in.readInt();
-
-			this.sessionId = in.readInt();
-
-			this.statusMsg = in.readString();
-
-			this.exchangeCode = in.readString();
-
-			this.fee = in.readDouble();
-
-			this.counterType = in.readInt();
-
-			this.counterSysId = in.readLong();
-
-			this.cancelAttempts = in.readInt();
-
-			this.timeStamp = in.readLong();
-
-			this.epochTimeReturn = in.readLong();
-
-			this.funcName = in.readString();
-
-		} else {
-			for (int i = 0; i < 35; i++) {
-				switch (fieldOrder[i].pos()) {
-				case 0:
-					this.strategyId = in.readInt();
-					break;
-
-				case 1:
-					this.brokerId = in.readString();
-					break;
-
-				case 2:
-					this.investorId = in.readString();
-					break;
-
-				case 3:
-					this.instrumentId = in.readString();
-					break;
-
-				case 4:
-					this.orderMsgType = in.readInt();
-					break;
-
-				case 5:
-					this.orderRef = in.readInt();
-					break;
-
-				case 6:
-					this.userId = in.readString();
-					break;
-
-				case 7:
-					this.direction = in.readInt();
-					break;
-
-				case 8:
-					this.offset = in.readInt();
-					break;
-
-				case 9:
-					this.limitPrice = in.readDouble();
-					break;
-
-				case 10:
-					this.volume = in.readInt();
-					break;
-
-				case 11:
-					this.volumeFilled = in.readInt();
-					break;
-
-				case 12:
-					this.volumeRemained = in.readInt();
-					break;
-
-				case 13:
-					this.volumeTotalOriginal = in.readInt();
-					break;
-
-				case 14:
-					this.tradingDay = in.readString();
-					break;
-
-				case 15:
-					this.orderSysId = in.readString();
-					break;
-
-				case 16:
-					this.orderStatus = in.readInt();
-					break;
-
-				case 17:
-					this.orderType = in.readInt();
-					break;
-
-				case 18:
-					this.price = in.readDouble();
-					break;
-
-				case 19:
-					this.tradeId = in.readString();
-					break;
-
-				case 20:
-					this.ordRejReason = in.readInt();
-					break;
-
-				case 21:
-					this.insertTime = in.readString();
-					break;
-
-				case 22:
-					this.updateTime = in.readString();
-					break;
-
-				case 23:
-					this.cancelTime = in.readString();
-					break;
-
-				case 24:
-					this.frontId = in.readInt();
-					break;
-
-				case 25:
-					this.sessionId = in.readInt();
-					break;
-
-				case 26:
-					this.statusMsg = in.readString();
-					break;
-
-				case 27:
-					this.exchangeCode = in.readString();
-					break;
-
-				case 28:
-					this.fee = in.readDouble();
-					break;
-
-				case 29:
-					this.counterType = in.readInt();
-					break;
-
-				case 30:
-					this.counterSysId = in.readLong();
-					break;
-
-				case 31:
-					this.cancelAttempts = in.readInt();
-					break;
-
-				case 32:
-					this.timeStamp = in.readLong();
-					break;
-
-				case 33:
-					this.epochTimeReturn = in.readLong();
-					break;
-
-				case 34:
-					this.funcName = in.readString();
-					break;
-
-				default:
-					throw new java.io.IOException("Corrupt ResolvingDecoder.");
-				}
-			}
-		}
-	}
+public class SimOrder extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 1173756580834504309L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"SimOrder\",\"namespace\":\"io.cygnus.simulator.persistence.avro.entity\",\"fields\":[{\"name\":\"strategyId\",\"type\":\"int\"},{\"name\":\"brokerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"investorId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"instrumentId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderMsgType\",\"type\":\"int\"},{\"name\":\"orderRef\",\"type\":\"int\"},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"direction\",\"type\":\"int\"},{\"name\":\"offset\",\"type\":\"int\"},{\"name\":\"limitPrice\",\"type\":\"double\"},{\"name\":\"volume\",\"type\":\"int\"},{\"name\":\"volumeFilled\",\"type\":\"int\"},{\"name\":\"volumeRemained\",\"type\":\"int\"},{\"name\":\"volumeTotalOriginal\",\"type\":\"int\"},{\"name\":\"tradingDay\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderSysId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderStatus\",\"type\":\"int\"},{\"name\":\"orderType\",\"type\":\"int\"},{\"name\":\"price\",\"type\":\"double\"},{\"name\":\"tradeId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ordRejReason\",\"type\":\"int\"},{\"name\":\"insertTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updateTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"cancelTime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"frontId\",\"type\":\"int\"},{\"name\":\"sessionId\",\"type\":\"int\"},{\"name\":\"statusMsg\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"exchangeCode\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"fee\",\"type\":\"double\"},{\"name\":\"counterType\",\"type\":\"int\"},{\"name\":\"counterSysId\",\"type\":\"long\"},{\"name\":\"cancelAttempts\",\"type\":\"int\"},{\"name\":\"timeStamp\",\"type\":\"long\"},{\"name\":\"epochTimeReturn\",\"type\":\"long\"},{\"name\":\"funcName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
+
+  private static SpecificData MODEL$ = new SpecificData();
+
+  private static final BinaryMessageEncoder<SimOrder> ENCODER =
+      new BinaryMessageEncoder<SimOrder>(MODEL$, SCHEMA$);
+
+  private static final BinaryMessageDecoder<SimOrder> DECODER =
+      new BinaryMessageDecoder<SimOrder>(MODEL$, SCHEMA$);
+
+  /**
+   * Return the BinaryMessageEncoder instance used by this class.
+   * @return the message encoder used by this class
+   */
+  public static BinaryMessageEncoder<SimOrder> getEncoder() {
+    return ENCODER;
+  }
+
+  /**
+   * Return the BinaryMessageDecoder instance used by this class.
+   * @return the message decoder used by this class
+   */
+  public static BinaryMessageDecoder<SimOrder> getDecoder() {
+    return DECODER;
+  }
+
+  /**
+   * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
+   * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
+   * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
+   */
+  public static BinaryMessageDecoder<SimOrder> createDecoder(SchemaStore resolver) {
+    return new BinaryMessageDecoder<SimOrder>(MODEL$, SCHEMA$, resolver);
+  }
+
+  /**
+   * Serializes this SimOrder to a ByteBuffer.
+   * @return a buffer holding the serialized data for this instance
+   * @throws java.io.IOException if this instance could not be serialized
+   */
+  public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
+    return ENCODER.encode(this);
+  }
+
+  /**
+   * Deserializes a SimOrder from a ByteBuffer.
+   * @param b a byte buffer holding serialized data for an instance of this class
+   * @return a SimOrder instance decoded from the given buffer
+   * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
+   */
+  public static SimOrder fromByteBuffer(
+      java.nio.ByteBuffer b) throws java.io.IOException {
+    return DECODER.decode(b);
+  }
+
+   private int strategyId;
+   private java.lang.String brokerId;
+   private java.lang.String investorId;
+   private java.lang.String instrumentId;
+   private int orderMsgType;
+   private int orderRef;
+   private java.lang.String userId;
+   private int direction;
+   private int offset;
+   private double limitPrice;
+   private int volume;
+   private int volumeFilled;
+   private int volumeRemained;
+   private int volumeTotalOriginal;
+   private java.lang.String tradingDay;
+   private java.lang.String orderSysId;
+   private int orderStatus;
+   private int orderType;
+   private double price;
+   private java.lang.String tradeId;
+   private int ordRejReason;
+   private java.lang.String insertTime;
+   private java.lang.String updateTime;
+   private java.lang.String cancelTime;
+   private int frontId;
+   private int sessionId;
+   private java.lang.String statusMsg;
+   private java.lang.String exchangeCode;
+   private double fee;
+   private int counterType;
+   private long counterSysId;
+   private int cancelAttempts;
+   private long timeStamp;
+   private long epochTimeReturn;
+   private java.lang.String funcName;
+
+  /**
+   * Default constructor.  Note that this does not initialize fields
+   * to their default values from the schema.  If that is desired then
+   * one should use <code>newBuilder()</code>.
+   */
+  public SimOrder() {}
+
+  /**
+   * All-args constructor.
+   * @param strategyId The new value for strategyId
+   * @param brokerId The new value for brokerId
+   * @param investorId The new value for investorId
+   * @param instrumentId The new value for instrumentId
+   * @param orderMsgType The new value for orderMsgType
+   * @param orderRef The new value for orderRef
+   * @param userId The new value for userId
+   * @param direction The new value for direction
+   * @param offset The new value for offset
+   * @param limitPrice The new value for limitPrice
+   * @param volume The new value for volume
+   * @param volumeFilled The new value for volumeFilled
+   * @param volumeRemained The new value for volumeRemained
+   * @param volumeTotalOriginal The new value for volumeTotalOriginal
+   * @param tradingDay The new value for tradingDay
+   * @param orderSysId The new value for orderSysId
+   * @param orderStatus The new value for orderStatus
+   * @param orderType The new value for orderType
+   * @param price The new value for price
+   * @param tradeId The new value for tradeId
+   * @param ordRejReason The new value for ordRejReason
+   * @param insertTime The new value for insertTime
+   * @param updateTime The new value for updateTime
+   * @param cancelTime The new value for cancelTime
+   * @param frontId The new value for frontId
+   * @param sessionId The new value for sessionId
+   * @param statusMsg The new value for statusMsg
+   * @param exchangeCode The new value for exchangeCode
+   * @param fee The new value for fee
+   * @param counterType The new value for counterType
+   * @param counterSysId The new value for counterSysId
+   * @param cancelAttempts The new value for cancelAttempts
+   * @param timeStamp The new value for timeStamp
+   * @param epochTimeReturn The new value for epochTimeReturn
+   * @param funcName The new value for funcName
+   */
+  public SimOrder(java.lang.Integer strategyId, java.lang.String brokerId, java.lang.String investorId, java.lang.String instrumentId, java.lang.Integer orderMsgType, java.lang.Integer orderRef, java.lang.String userId, java.lang.Integer direction, java.lang.Integer offset, java.lang.Double limitPrice, java.lang.Integer volume, java.lang.Integer volumeFilled, java.lang.Integer volumeRemained, java.lang.Integer volumeTotalOriginal, java.lang.String tradingDay, java.lang.String orderSysId, java.lang.Integer orderStatus, java.lang.Integer orderType, java.lang.Double price, java.lang.String tradeId, java.lang.Integer ordRejReason, java.lang.String insertTime, java.lang.String updateTime, java.lang.String cancelTime, java.lang.Integer frontId, java.lang.Integer sessionId, java.lang.String statusMsg, java.lang.String exchangeCode, java.lang.Double fee, java.lang.Integer counterType, java.lang.Long counterSysId, java.lang.Integer cancelAttempts, java.lang.Long timeStamp, java.lang.Long epochTimeReturn, java.lang.String funcName) {
+    this.strategyId = strategyId;
+    this.brokerId = brokerId;
+    this.investorId = investorId;
+    this.instrumentId = instrumentId;
+    this.orderMsgType = orderMsgType;
+    this.orderRef = orderRef;
+    this.userId = userId;
+    this.direction = direction;
+    this.offset = offset;
+    this.limitPrice = limitPrice;
+    this.volume = volume;
+    this.volumeFilled = volumeFilled;
+    this.volumeRemained = volumeRemained;
+    this.volumeTotalOriginal = volumeTotalOriginal;
+    this.tradingDay = tradingDay;
+    this.orderSysId = orderSysId;
+    this.orderStatus = orderStatus;
+    this.orderType = orderType;
+    this.price = price;
+    this.tradeId = tradeId;
+    this.ordRejReason = ordRejReason;
+    this.insertTime = insertTime;
+    this.updateTime = updateTime;
+    this.cancelTime = cancelTime;
+    this.frontId = frontId;
+    this.sessionId = sessionId;
+    this.statusMsg = statusMsg;
+    this.exchangeCode = exchangeCode;
+    this.fee = fee;
+    this.counterType = counterType;
+    this.counterSysId = counterSysId;
+    this.cancelAttempts = cancelAttempts;
+    this.timeStamp = timeStamp;
+    this.epochTimeReturn = epochTimeReturn;
+    this.funcName = funcName;
+  }
+
+  public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
+  public org.apache.avro.Schema getSchema() { return SCHEMA$; }
+  // Used by DatumWriter.  Applications should not call.
+  public java.lang.Object get(int field$) {
+    switch (field$) {
+    case 0: return strategyId;
+    case 1: return brokerId;
+    case 2: return investorId;
+    case 3: return instrumentId;
+    case 4: return orderMsgType;
+    case 5: return orderRef;
+    case 6: return userId;
+    case 7: return direction;
+    case 8: return offset;
+    case 9: return limitPrice;
+    case 10: return volume;
+    case 11: return volumeFilled;
+    case 12: return volumeRemained;
+    case 13: return volumeTotalOriginal;
+    case 14: return tradingDay;
+    case 15: return orderSysId;
+    case 16: return orderStatus;
+    case 17: return orderType;
+    case 18: return price;
+    case 19: return tradeId;
+    case 20: return ordRejReason;
+    case 21: return insertTime;
+    case 22: return updateTime;
+    case 23: return cancelTime;
+    case 24: return frontId;
+    case 25: return sessionId;
+    case 26: return statusMsg;
+    case 27: return exchangeCode;
+    case 28: return fee;
+    case 29: return counterType;
+    case 30: return counterSysId;
+    case 31: return cancelAttempts;
+    case 32: return timeStamp;
+    case 33: return epochTimeReturn;
+    case 34: return funcName;
+    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
+    }
+  }
+
+  // Used by DatumReader.  Applications should not call.
+  public void put(int field$, java.lang.Object value$) {
+    switch (field$) {
+    case 0: strategyId = (java.lang.Integer)value$; break;
+    case 1: brokerId = value$ != null ? value$.toString() : null; break;
+    case 2: investorId = value$ != null ? value$.toString() : null; break;
+    case 3: instrumentId = value$ != null ? value$.toString() : null; break;
+    case 4: orderMsgType = (java.lang.Integer)value$; break;
+    case 5: orderRef = (java.lang.Integer)value$; break;
+    case 6: userId = value$ != null ? value$.toString() : null; break;
+    case 7: direction = (java.lang.Integer)value$; break;
+    case 8: offset = (java.lang.Integer)value$; break;
+    case 9: limitPrice = (java.lang.Double)value$; break;
+    case 10: volume = (java.lang.Integer)value$; break;
+    case 11: volumeFilled = (java.lang.Integer)value$; break;
+    case 12: volumeRemained = (java.lang.Integer)value$; break;
+    case 13: volumeTotalOriginal = (java.lang.Integer)value$; break;
+    case 14: tradingDay = value$ != null ? value$.toString() : null; break;
+    case 15: orderSysId = value$ != null ? value$.toString() : null; break;
+    case 16: orderStatus = (java.lang.Integer)value$; break;
+    case 17: orderType = (java.lang.Integer)value$; break;
+    case 18: price = (java.lang.Double)value$; break;
+    case 19: tradeId = value$ != null ? value$.toString() : null; break;
+    case 20: ordRejReason = (java.lang.Integer)value$; break;
+    case 21: insertTime = value$ != null ? value$.toString() : null; break;
+    case 22: updateTime = value$ != null ? value$.toString() : null; break;
+    case 23: cancelTime = value$ != null ? value$.toString() : null; break;
+    case 24: frontId = (java.lang.Integer)value$; break;
+    case 25: sessionId = (java.lang.Integer)value$; break;
+    case 26: statusMsg = value$ != null ? value$.toString() : null; break;
+    case 27: exchangeCode = value$ != null ? value$.toString() : null; break;
+    case 28: fee = (java.lang.Double)value$; break;
+    case 29: counterType = (java.lang.Integer)value$; break;
+    case 30: counterSysId = (java.lang.Long)value$; break;
+    case 31: cancelAttempts = (java.lang.Integer)value$; break;
+    case 32: timeStamp = (java.lang.Long)value$; break;
+    case 33: epochTimeReturn = (java.lang.Long)value$; break;
+    case 34: funcName = value$ != null ? value$.toString() : null; break;
+    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
+    }
+  }
+
+  /**
+   * Gets the value of the 'strategyId' field.
+   * @return The value of the 'strategyId' field.
+   */
+  public int getStrategyId() {
+    return strategyId;
+  }
+
+  /**
+   * Gets the value of the 'strategyId' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalStrategyId() {
+    return Optional.<java.lang.Integer>ofNullable(strategyId);
+  }
+
+  /**
+   * Sets the value of the 'strategyId' field.
+   * @param value the value to set.
+   */
+  public void setStrategyId(int value) {
+    this.strategyId = value;
+  }
+
+  /**
+   * Gets the value of the 'brokerId' field.
+   * @return The value of the 'brokerId' field.
+   */
+  public java.lang.String getBrokerId() {
+    return brokerId;
+  }
+
+  /**
+   * Gets the value of the 'brokerId' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalBrokerId() {
+    return Optional.<java.lang.String>ofNullable(brokerId);
+  }
+
+  /**
+   * Sets the value of the 'brokerId' field.
+   * @param value the value to set.
+   */
+  public void setBrokerId(java.lang.String value) {
+    this.brokerId = value;
+  }
+
+  /**
+   * Gets the value of the 'investorId' field.
+   * @return The value of the 'investorId' field.
+   */
+  public java.lang.String getInvestorId() {
+    return investorId;
+  }
+
+  /**
+   * Gets the value of the 'investorId' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalInvestorId() {
+    return Optional.<java.lang.String>ofNullable(investorId);
+  }
+
+  /**
+   * Sets the value of the 'investorId' field.
+   * @param value the value to set.
+   */
+  public void setInvestorId(java.lang.String value) {
+    this.investorId = value;
+  }
+
+  /**
+   * Gets the value of the 'instrumentId' field.
+   * @return The value of the 'instrumentId' field.
+   */
+  public java.lang.String getInstrumentId() {
+    return instrumentId;
+  }
+
+  /**
+   * Gets the value of the 'instrumentId' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalInstrumentId() {
+    return Optional.<java.lang.String>ofNullable(instrumentId);
+  }
+
+  /**
+   * Sets the value of the 'instrumentId' field.
+   * @param value the value to set.
+   */
+  public void setInstrumentId(java.lang.String value) {
+    this.instrumentId = value;
+  }
+
+  /**
+   * Gets the value of the 'orderMsgType' field.
+   * @return The value of the 'orderMsgType' field.
+   */
+  public int getOrderMsgType() {
+    return orderMsgType;
+  }
+
+  /**
+   * Gets the value of the 'orderMsgType' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalOrderMsgType() {
+    return Optional.<java.lang.Integer>ofNullable(orderMsgType);
+  }
+
+  /**
+   * Sets the value of the 'orderMsgType' field.
+   * @param value the value to set.
+   */
+  public void setOrderMsgType(int value) {
+    this.orderMsgType = value;
+  }
+
+  /**
+   * Gets the value of the 'orderRef' field.
+   * @return The value of the 'orderRef' field.
+   */
+  public int getOrderRef() {
+    return orderRef;
+  }
+
+  /**
+   * Gets the value of the 'orderRef' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalOrderRef() {
+    return Optional.<java.lang.Integer>ofNullable(orderRef);
+  }
+
+  /**
+   * Sets the value of the 'orderRef' field.
+   * @param value the value to set.
+   */
+  public void setOrderRef(int value) {
+    this.orderRef = value;
+  }
+
+  /**
+   * Gets the value of the 'userId' field.
+   * @return The value of the 'userId' field.
+   */
+  public java.lang.String getUserId() {
+    return userId;
+  }
+
+  /**
+   * Gets the value of the 'userId' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalUserId() {
+    return Optional.<java.lang.String>ofNullable(userId);
+  }
+
+  /**
+   * Sets the value of the 'userId' field.
+   * @param value the value to set.
+   */
+  public void setUserId(java.lang.String value) {
+    this.userId = value;
+  }
+
+  /**
+   * Gets the value of the 'direction' field.
+   * @return The value of the 'direction' field.
+   */
+  public int getDirection() {
+    return direction;
+  }
+
+  /**
+   * Gets the value of the 'direction' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalDirection() {
+    return Optional.<java.lang.Integer>ofNullable(direction);
+  }
+
+  /**
+   * Sets the value of the 'direction' field.
+   * @param value the value to set.
+   */
+  public void setDirection(int value) {
+    this.direction = value;
+  }
+
+  /**
+   * Gets the value of the 'offset' field.
+   * @return The value of the 'offset' field.
+   */
+  public int getOffset() {
+    return offset;
+  }
+
+  /**
+   * Gets the value of the 'offset' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalOffset() {
+    return Optional.<java.lang.Integer>ofNullable(offset);
+  }
+
+  /**
+   * Sets the value of the 'offset' field.
+   * @param value the value to set.
+   */
+  public void setOffset(int value) {
+    this.offset = value;
+  }
+
+  /**
+   * Gets the value of the 'limitPrice' field.
+   * @return The value of the 'limitPrice' field.
+   */
+  public double getLimitPrice() {
+    return limitPrice;
+  }
+
+  /**
+   * Gets the value of the 'limitPrice' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+   */
+  public Optional<java.lang.Double> getOptionalLimitPrice() {
+    return Optional.<java.lang.Double>ofNullable(limitPrice);
+  }
+
+  /**
+   * Sets the value of the 'limitPrice' field.
+   * @param value the value to set.
+   */
+  public void setLimitPrice(double value) {
+    this.limitPrice = value;
+  }
+
+  /**
+   * Gets the value of the 'volume' field.
+   * @return The value of the 'volume' field.
+   */
+  public int getVolume() {
+    return volume;
+  }
+
+  /**
+   * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalVolume() {
+    return Optional.<java.lang.Integer>ofNullable(volume);
+  }
+
+  /**
+   * Sets the value of the 'volume' field.
+   * @param value the value to set.
+   */
+  public void setVolume(int value) {
+    this.volume = value;
+  }
+
+  /**
+   * Gets the value of the 'volumeFilled' field.
+   * @return The value of the 'volumeFilled' field.
+   */
+  public int getVolumeFilled() {
+    return volumeFilled;
+  }
+
+  /**
+   * Gets the value of the 'volumeFilled' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalVolumeFilled() {
+    return Optional.<java.lang.Integer>ofNullable(volumeFilled);
+  }
+
+  /**
+   * Sets the value of the 'volumeFilled' field.
+   * @param value the value to set.
+   */
+  public void setVolumeFilled(int value) {
+    this.volumeFilled = value;
+  }
+
+  /**
+   * Gets the value of the 'volumeRemained' field.
+   * @return The value of the 'volumeRemained' field.
+   */
+  public int getVolumeRemained() {
+    return volumeRemained;
+  }
+
+  /**
+   * Gets the value of the 'volumeRemained' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalVolumeRemained() {
+    return Optional.<java.lang.Integer>ofNullable(volumeRemained);
+  }
+
+  /**
+   * Sets the value of the 'volumeRemained' field.
+   * @param value the value to set.
+   */
+  public void setVolumeRemained(int value) {
+    this.volumeRemained = value;
+  }
+
+  /**
+   * Gets the value of the 'volumeTotalOriginal' field.
+   * @return The value of the 'volumeTotalOriginal' field.
+   */
+  public int getVolumeTotalOriginal() {
+    return volumeTotalOriginal;
+  }
+
+  /**
+   * Gets the value of the 'volumeTotalOriginal' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalVolumeTotalOriginal() {
+    return Optional.<java.lang.Integer>ofNullable(volumeTotalOriginal);
+  }
+
+  /**
+   * Sets the value of the 'volumeTotalOriginal' field.
+   * @param value the value to set.
+   */
+  public void setVolumeTotalOriginal(int value) {
+    this.volumeTotalOriginal = value;
+  }
+
+  /**
+   * Gets the value of the 'tradingDay' field.
+   * @return The value of the 'tradingDay' field.
+   */
+  public java.lang.String getTradingDay() {
+    return tradingDay;
+  }
+
+  /**
+   * Gets the value of the 'tradingDay' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalTradingDay() {
+    return Optional.<java.lang.String>ofNullable(tradingDay);
+  }
+
+  /**
+   * Sets the value of the 'tradingDay' field.
+   * @param value the value to set.
+   */
+  public void setTradingDay(java.lang.String value) {
+    this.tradingDay = value;
+  }
+
+  /**
+   * Gets the value of the 'orderSysId' field.
+   * @return The value of the 'orderSysId' field.
+   */
+  public java.lang.String getOrderSysId() {
+    return orderSysId;
+  }
+
+  /**
+   * Gets the value of the 'orderSysId' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalOrderSysId() {
+    return Optional.<java.lang.String>ofNullable(orderSysId);
+  }
+
+  /**
+   * Sets the value of the 'orderSysId' field.
+   * @param value the value to set.
+   */
+  public void setOrderSysId(java.lang.String value) {
+    this.orderSysId = value;
+  }
+
+  /**
+   * Gets the value of the 'orderStatus' field.
+   * @return The value of the 'orderStatus' field.
+   */
+  public int getOrderStatus() {
+    return orderStatus;
+  }
+
+  /**
+   * Gets the value of the 'orderStatus' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalOrderStatus() {
+    return Optional.<java.lang.Integer>ofNullable(orderStatus);
+  }
+
+  /**
+   * Sets the value of the 'orderStatus' field.
+   * @param value the value to set.
+   */
+  public void setOrderStatus(int value) {
+    this.orderStatus = value;
+  }
+
+  /**
+   * Gets the value of the 'orderType' field.
+   * @return The value of the 'orderType' field.
+   */
+  public int getOrderType() {
+    return orderType;
+  }
+
+  /**
+   * Gets the value of the 'orderType' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalOrderType() {
+    return Optional.<java.lang.Integer>ofNullable(orderType);
+  }
+
+  /**
+   * Sets the value of the 'orderType' field.
+   * @param value the value to set.
+   */
+  public void setOrderType(int value) {
+    this.orderType = value;
+  }
+
+  /**
+   * Gets the value of the 'price' field.
+   * @return The value of the 'price' field.
+   */
+  public double getPrice() {
+    return price;
+  }
+
+  /**
+   * Gets the value of the 'price' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+   */
+  public Optional<java.lang.Double> getOptionalPrice() {
+    return Optional.<java.lang.Double>ofNullable(price);
+  }
+
+  /**
+   * Sets the value of the 'price' field.
+   * @param value the value to set.
+   */
+  public void setPrice(double value) {
+    this.price = value;
+  }
+
+  /**
+   * Gets the value of the 'tradeId' field.
+   * @return The value of the 'tradeId' field.
+   */
+  public java.lang.String getTradeId() {
+    return tradeId;
+  }
+
+  /**
+   * Gets the value of the 'tradeId' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalTradeId() {
+    return Optional.<java.lang.String>ofNullable(tradeId);
+  }
+
+  /**
+   * Sets the value of the 'tradeId' field.
+   * @param value the value to set.
+   */
+  public void setTradeId(java.lang.String value) {
+    this.tradeId = value;
+  }
+
+  /**
+   * Gets the value of the 'ordRejReason' field.
+   * @return The value of the 'ordRejReason' field.
+   */
+  public int getOrdRejReason() {
+    return ordRejReason;
+  }
+
+  /**
+   * Gets the value of the 'ordRejReason' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalOrdRejReason() {
+    return Optional.<java.lang.Integer>ofNullable(ordRejReason);
+  }
+
+  /**
+   * Sets the value of the 'ordRejReason' field.
+   * @param value the value to set.
+   */
+  public void setOrdRejReason(int value) {
+    this.ordRejReason = value;
+  }
+
+  /**
+   * Gets the value of the 'insertTime' field.
+   * @return The value of the 'insertTime' field.
+   */
+  public java.lang.String getInsertTime() {
+    return insertTime;
+  }
+
+  /**
+   * Gets the value of the 'insertTime' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalInsertTime() {
+    return Optional.<java.lang.String>ofNullable(insertTime);
+  }
+
+  /**
+   * Sets the value of the 'insertTime' field.
+   * @param value the value to set.
+   */
+  public void setInsertTime(java.lang.String value) {
+    this.insertTime = value;
+  }
+
+  /**
+   * Gets the value of the 'updateTime' field.
+   * @return The value of the 'updateTime' field.
+   */
+  public java.lang.String getUpdateTime() {
+    return updateTime;
+  }
+
+  /**
+   * Gets the value of the 'updateTime' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalUpdateTime() {
+    return Optional.<java.lang.String>ofNullable(updateTime);
+  }
+
+  /**
+   * Sets the value of the 'updateTime' field.
+   * @param value the value to set.
+   */
+  public void setUpdateTime(java.lang.String value) {
+    this.updateTime = value;
+  }
+
+  /**
+   * Gets the value of the 'cancelTime' field.
+   * @return The value of the 'cancelTime' field.
+   */
+  public java.lang.String getCancelTime() {
+    return cancelTime;
+  }
+
+  /**
+   * Gets the value of the 'cancelTime' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalCancelTime() {
+    return Optional.<java.lang.String>ofNullable(cancelTime);
+  }
+
+  /**
+   * Sets the value of the 'cancelTime' field.
+   * @param value the value to set.
+   */
+  public void setCancelTime(java.lang.String value) {
+    this.cancelTime = value;
+  }
+
+  /**
+   * Gets the value of the 'frontId' field.
+   * @return The value of the 'frontId' field.
+   */
+  public int getFrontId() {
+    return frontId;
+  }
+
+  /**
+   * Gets the value of the 'frontId' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalFrontId() {
+    return Optional.<java.lang.Integer>ofNullable(frontId);
+  }
+
+  /**
+   * Sets the value of the 'frontId' field.
+   * @param value the value to set.
+   */
+  public void setFrontId(int value) {
+    this.frontId = value;
+  }
+
+  /**
+   * Gets the value of the 'sessionId' field.
+   * @return The value of the 'sessionId' field.
+   */
+  public int getSessionId() {
+    return sessionId;
+  }
+
+  /**
+   * Gets the value of the 'sessionId' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalSessionId() {
+    return Optional.<java.lang.Integer>ofNullable(sessionId);
+  }
+
+  /**
+   * Sets the value of the 'sessionId' field.
+   * @param value the value to set.
+   */
+  public void setSessionId(int value) {
+    this.sessionId = value;
+  }
+
+  /**
+   * Gets the value of the 'statusMsg' field.
+   * @return The value of the 'statusMsg' field.
+   */
+  public java.lang.String getStatusMsg() {
+    return statusMsg;
+  }
+
+  /**
+   * Gets the value of the 'statusMsg' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalStatusMsg() {
+    return Optional.<java.lang.String>ofNullable(statusMsg);
+  }
+
+  /**
+   * Sets the value of the 'statusMsg' field.
+   * @param value the value to set.
+   */
+  public void setStatusMsg(java.lang.String value) {
+    this.statusMsg = value;
+  }
+
+  /**
+   * Gets the value of the 'exchangeCode' field.
+   * @return The value of the 'exchangeCode' field.
+   */
+  public java.lang.String getExchangeCode() {
+    return exchangeCode;
+  }
+
+  /**
+   * Gets the value of the 'exchangeCode' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalExchangeCode() {
+    return Optional.<java.lang.String>ofNullable(exchangeCode);
+  }
+
+  /**
+   * Sets the value of the 'exchangeCode' field.
+   * @param value the value to set.
+   */
+  public void setExchangeCode(java.lang.String value) {
+    this.exchangeCode = value;
+  }
+
+  /**
+   * Gets the value of the 'fee' field.
+   * @return The value of the 'fee' field.
+   */
+  public double getFee() {
+    return fee;
+  }
+
+  /**
+   * Gets the value of the 'fee' field as an Optional&lt;java.lang.Double&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+   */
+  public Optional<java.lang.Double> getOptionalFee() {
+    return Optional.<java.lang.Double>ofNullable(fee);
+  }
+
+  /**
+   * Sets the value of the 'fee' field.
+   * @param value the value to set.
+   */
+  public void setFee(double value) {
+    this.fee = value;
+  }
+
+  /**
+   * Gets the value of the 'counterType' field.
+   * @return The value of the 'counterType' field.
+   */
+  public int getCounterType() {
+    return counterType;
+  }
+
+  /**
+   * Gets the value of the 'counterType' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalCounterType() {
+    return Optional.<java.lang.Integer>ofNullable(counterType);
+  }
+
+  /**
+   * Sets the value of the 'counterType' field.
+   * @param value the value to set.
+   */
+  public void setCounterType(int value) {
+    this.counterType = value;
+  }
+
+  /**
+   * Gets the value of the 'counterSysId' field.
+   * @return The value of the 'counterSysId' field.
+   */
+  public long getCounterSysId() {
+    return counterSysId;
+  }
+
+  /**
+   * Gets the value of the 'counterSysId' field as an Optional&lt;java.lang.Long&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   */
+  public Optional<java.lang.Long> getOptionalCounterSysId() {
+    return Optional.<java.lang.Long>ofNullable(counterSysId);
+  }
+
+  /**
+   * Sets the value of the 'counterSysId' field.
+   * @param value the value to set.
+   */
+  public void setCounterSysId(long value) {
+    this.counterSysId = value;
+  }
+
+  /**
+   * Gets the value of the 'cancelAttempts' field.
+   * @return The value of the 'cancelAttempts' field.
+   */
+  public int getCancelAttempts() {
+    return cancelAttempts;
+  }
+
+  /**
+   * Gets the value of the 'cancelAttempts' field as an Optional&lt;java.lang.Integer&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+   */
+  public Optional<java.lang.Integer> getOptionalCancelAttempts() {
+    return Optional.<java.lang.Integer>ofNullable(cancelAttempts);
+  }
+
+  /**
+   * Sets the value of the 'cancelAttempts' field.
+   * @param value the value to set.
+   */
+  public void setCancelAttempts(int value) {
+    this.cancelAttempts = value;
+  }
+
+  /**
+   * Gets the value of the 'timeStamp' field.
+   * @return The value of the 'timeStamp' field.
+   */
+  public long getTimeStamp() {
+    return timeStamp;
+  }
+
+  /**
+   * Gets the value of the 'timeStamp' field as an Optional&lt;java.lang.Long&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   */
+  public Optional<java.lang.Long> getOptionalTimeStamp() {
+    return Optional.<java.lang.Long>ofNullable(timeStamp);
+  }
+
+  /**
+   * Sets the value of the 'timeStamp' field.
+   * @param value the value to set.
+   */
+  public void setTimeStamp(long value) {
+    this.timeStamp = value;
+  }
+
+  /**
+   * Gets the value of the 'epochTimeReturn' field.
+   * @return The value of the 'epochTimeReturn' field.
+   */
+  public long getEpochTimeReturn() {
+    return epochTimeReturn;
+  }
+
+  /**
+   * Gets the value of the 'epochTimeReturn' field as an Optional&lt;java.lang.Long&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+   */
+  public Optional<java.lang.Long> getOptionalEpochTimeReturn() {
+    return Optional.<java.lang.Long>ofNullable(epochTimeReturn);
+  }
+
+  /**
+   * Sets the value of the 'epochTimeReturn' field.
+   * @param value the value to set.
+   */
+  public void setEpochTimeReturn(long value) {
+    this.epochTimeReturn = value;
+  }
+
+  /**
+   * Gets the value of the 'funcName' field.
+   * @return The value of the 'funcName' field.
+   */
+  public java.lang.String getFuncName() {
+    return funcName;
+  }
+
+  /**
+   * Gets the value of the 'funcName' field as an Optional&lt;java.lang.String&gt;.
+   * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+   */
+  public Optional<java.lang.String> getOptionalFuncName() {
+    return Optional.<java.lang.String>ofNullable(funcName);
+  }
+
+  /**
+   * Sets the value of the 'funcName' field.
+   * @param value the value to set.
+   */
+  public void setFuncName(java.lang.String value) {
+    this.funcName = value;
+  }
+
+  /**
+   * Creates a new SimOrder RecordBuilder.
+   * @return A new SimOrder RecordBuilder
+   */
+  public static io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder newBuilder() {
+    return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder();
+  }
+
+  /**
+   * Creates a new SimOrder RecordBuilder by copying an existing Builder.
+   * @param other The existing builder to copy.
+   * @return A new SimOrder RecordBuilder
+   */
+  public static io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder newBuilder(io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder other) {
+    if (other == null) {
+      return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder();
+    } else {
+      return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder(other);
+    }
+  }
+
+  /**
+   * Creates a new SimOrder RecordBuilder by copying an existing SimOrder instance.
+   * @param other The existing instance to copy.
+   * @return A new SimOrder RecordBuilder
+   */
+  public static io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder newBuilder(io.cygnus.simulator.persistence.avro.entity.SimOrder other) {
+    if (other == null) {
+      return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder();
+    } else {
+      return new io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder(other);
+    }
+  }
+
+  /**
+   * RecordBuilder for SimOrder instances.
+   */
+  @org.apache.avro.specific.AvroGenerated
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<SimOrder>
+    implements org.apache.avro.data.RecordBuilder<SimOrder> {
+
+    private int strategyId;
+    private java.lang.String brokerId;
+    private java.lang.String investorId;
+    private java.lang.String instrumentId;
+    private int orderMsgType;
+    private int orderRef;
+    private java.lang.String userId;
+    private int direction;
+    private int offset;
+    private double limitPrice;
+    private int volume;
+    private int volumeFilled;
+    private int volumeRemained;
+    private int volumeTotalOriginal;
+    private java.lang.String tradingDay;
+    private java.lang.String orderSysId;
+    private int orderStatus;
+    private int orderType;
+    private double price;
+    private java.lang.String tradeId;
+    private int ordRejReason;
+    private java.lang.String insertTime;
+    private java.lang.String updateTime;
+    private java.lang.String cancelTime;
+    private int frontId;
+    private int sessionId;
+    private java.lang.String statusMsg;
+    private java.lang.String exchangeCode;
+    private double fee;
+    private int counterType;
+    private long counterSysId;
+    private int cancelAttempts;
+    private long timeStamp;
+    private long epochTimeReturn;
+    private java.lang.String funcName;
+
+    /** Creates a new Builder */
+    private Builder() {
+      super(SCHEMA$);
+    }
+
+    /**
+     * Creates a Builder by copying an existing Builder.
+     * @param other The existing Builder to copy.
+     */
+    private Builder(io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder other) {
+      super(other);
+      if (isValidValue(fields()[0], other.strategyId)) {
+        this.strategyId = data().deepCopy(fields()[0].schema(), other.strategyId);
+        fieldSetFlags()[0] = other.fieldSetFlags()[0];
+      }
+      if (isValidValue(fields()[1], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[1].schema(), other.brokerId);
+        fieldSetFlags()[1] = other.fieldSetFlags()[1];
+      }
+      if (isValidValue(fields()[2], other.investorId)) {
+        this.investorId = data().deepCopy(fields()[2].schema(), other.investorId);
+        fieldSetFlags()[2] = other.fieldSetFlags()[2];
+      }
+      if (isValidValue(fields()[3], other.instrumentId)) {
+        this.instrumentId = data().deepCopy(fields()[3].schema(), other.instrumentId);
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
+      if (isValidValue(fields()[4], other.orderMsgType)) {
+        this.orderMsgType = data().deepCopy(fields()[4].schema(), other.orderMsgType);
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
+      }
+      if (isValidValue(fields()[5], other.orderRef)) {
+        this.orderRef = data().deepCopy(fields()[5].schema(), other.orderRef);
+        fieldSetFlags()[5] = other.fieldSetFlags()[5];
+      }
+      if (isValidValue(fields()[6], other.userId)) {
+        this.userId = data().deepCopy(fields()[6].schema(), other.userId);
+        fieldSetFlags()[6] = other.fieldSetFlags()[6];
+      }
+      if (isValidValue(fields()[7], other.direction)) {
+        this.direction = data().deepCopy(fields()[7].schema(), other.direction);
+        fieldSetFlags()[7] = other.fieldSetFlags()[7];
+      }
+      if (isValidValue(fields()[8], other.offset)) {
+        this.offset = data().deepCopy(fields()[8].schema(), other.offset);
+        fieldSetFlags()[8] = other.fieldSetFlags()[8];
+      }
+      if (isValidValue(fields()[9], other.limitPrice)) {
+        this.limitPrice = data().deepCopy(fields()[9].schema(), other.limitPrice);
+        fieldSetFlags()[9] = other.fieldSetFlags()[9];
+      }
+      if (isValidValue(fields()[10], other.volume)) {
+        this.volume = data().deepCopy(fields()[10].schema(), other.volume);
+        fieldSetFlags()[10] = other.fieldSetFlags()[10];
+      }
+      if (isValidValue(fields()[11], other.volumeFilled)) {
+        this.volumeFilled = data().deepCopy(fields()[11].schema(), other.volumeFilled);
+        fieldSetFlags()[11] = other.fieldSetFlags()[11];
+      }
+      if (isValidValue(fields()[12], other.volumeRemained)) {
+        this.volumeRemained = data().deepCopy(fields()[12].schema(), other.volumeRemained);
+        fieldSetFlags()[12] = other.fieldSetFlags()[12];
+      }
+      if (isValidValue(fields()[13], other.volumeTotalOriginal)) {
+        this.volumeTotalOriginal = data().deepCopy(fields()[13].schema(), other.volumeTotalOriginal);
+        fieldSetFlags()[13] = other.fieldSetFlags()[13];
+      }
+      if (isValidValue(fields()[14], other.tradingDay)) {
+        this.tradingDay = data().deepCopy(fields()[14].schema(), other.tradingDay);
+        fieldSetFlags()[14] = other.fieldSetFlags()[14];
+      }
+      if (isValidValue(fields()[15], other.orderSysId)) {
+        this.orderSysId = data().deepCopy(fields()[15].schema(), other.orderSysId);
+        fieldSetFlags()[15] = other.fieldSetFlags()[15];
+      }
+      if (isValidValue(fields()[16], other.orderStatus)) {
+        this.orderStatus = data().deepCopy(fields()[16].schema(), other.orderStatus);
+        fieldSetFlags()[16] = other.fieldSetFlags()[16];
+      }
+      if (isValidValue(fields()[17], other.orderType)) {
+        this.orderType = data().deepCopy(fields()[17].schema(), other.orderType);
+        fieldSetFlags()[17] = other.fieldSetFlags()[17];
+      }
+      if (isValidValue(fields()[18], other.price)) {
+        this.price = data().deepCopy(fields()[18].schema(), other.price);
+        fieldSetFlags()[18] = other.fieldSetFlags()[18];
+      }
+      if (isValidValue(fields()[19], other.tradeId)) {
+        this.tradeId = data().deepCopy(fields()[19].schema(), other.tradeId);
+        fieldSetFlags()[19] = other.fieldSetFlags()[19];
+      }
+      if (isValidValue(fields()[20], other.ordRejReason)) {
+        this.ordRejReason = data().deepCopy(fields()[20].schema(), other.ordRejReason);
+        fieldSetFlags()[20] = other.fieldSetFlags()[20];
+      }
+      if (isValidValue(fields()[21], other.insertTime)) {
+        this.insertTime = data().deepCopy(fields()[21].schema(), other.insertTime);
+        fieldSetFlags()[21] = other.fieldSetFlags()[21];
+      }
+      if (isValidValue(fields()[22], other.updateTime)) {
+        this.updateTime = data().deepCopy(fields()[22].schema(), other.updateTime);
+        fieldSetFlags()[22] = other.fieldSetFlags()[22];
+      }
+      if (isValidValue(fields()[23], other.cancelTime)) {
+        this.cancelTime = data().deepCopy(fields()[23].schema(), other.cancelTime);
+        fieldSetFlags()[23] = other.fieldSetFlags()[23];
+      }
+      if (isValidValue(fields()[24], other.frontId)) {
+        this.frontId = data().deepCopy(fields()[24].schema(), other.frontId);
+        fieldSetFlags()[24] = other.fieldSetFlags()[24];
+      }
+      if (isValidValue(fields()[25], other.sessionId)) {
+        this.sessionId = data().deepCopy(fields()[25].schema(), other.sessionId);
+        fieldSetFlags()[25] = other.fieldSetFlags()[25];
+      }
+      if (isValidValue(fields()[26], other.statusMsg)) {
+        this.statusMsg = data().deepCopy(fields()[26].schema(), other.statusMsg);
+        fieldSetFlags()[26] = other.fieldSetFlags()[26];
+      }
+      if (isValidValue(fields()[27], other.exchangeCode)) {
+        this.exchangeCode = data().deepCopy(fields()[27].schema(), other.exchangeCode);
+        fieldSetFlags()[27] = other.fieldSetFlags()[27];
+      }
+      if (isValidValue(fields()[28], other.fee)) {
+        this.fee = data().deepCopy(fields()[28].schema(), other.fee);
+        fieldSetFlags()[28] = other.fieldSetFlags()[28];
+      }
+      if (isValidValue(fields()[29], other.counterType)) {
+        this.counterType = data().deepCopy(fields()[29].schema(), other.counterType);
+        fieldSetFlags()[29] = other.fieldSetFlags()[29];
+      }
+      if (isValidValue(fields()[30], other.counterSysId)) {
+        this.counterSysId = data().deepCopy(fields()[30].schema(), other.counterSysId);
+        fieldSetFlags()[30] = other.fieldSetFlags()[30];
+      }
+      if (isValidValue(fields()[31], other.cancelAttempts)) {
+        this.cancelAttempts = data().deepCopy(fields()[31].schema(), other.cancelAttempts);
+        fieldSetFlags()[31] = other.fieldSetFlags()[31];
+      }
+      if (isValidValue(fields()[32], other.timeStamp)) {
+        this.timeStamp = data().deepCopy(fields()[32].schema(), other.timeStamp);
+        fieldSetFlags()[32] = other.fieldSetFlags()[32];
+      }
+      if (isValidValue(fields()[33], other.epochTimeReturn)) {
+        this.epochTimeReturn = data().deepCopy(fields()[33].schema(), other.epochTimeReturn);
+        fieldSetFlags()[33] = other.fieldSetFlags()[33];
+      }
+      if (isValidValue(fields()[34], other.funcName)) {
+        this.funcName = data().deepCopy(fields()[34].schema(), other.funcName);
+        fieldSetFlags()[34] = other.fieldSetFlags()[34];
+      }
+    }
+
+    /**
+     * Creates a Builder by copying an existing SimOrder instance
+     * @param other The existing instance to copy.
+     */
+    private Builder(io.cygnus.simulator.persistence.avro.entity.SimOrder other) {
+      super(SCHEMA$);
+      if (isValidValue(fields()[0], other.strategyId)) {
+        this.strategyId = data().deepCopy(fields()[0].schema(), other.strategyId);
+        fieldSetFlags()[0] = true;
+      }
+      if (isValidValue(fields()[1], other.brokerId)) {
+        this.brokerId = data().deepCopy(fields()[1].schema(), other.brokerId);
+        fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.investorId)) {
+        this.investorId = data().deepCopy(fields()[2].schema(), other.investorId);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.instrumentId)) {
+        this.instrumentId = data().deepCopy(fields()[3].schema(), other.instrumentId);
+        fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.orderMsgType)) {
+        this.orderMsgType = data().deepCopy(fields()[4].schema(), other.orderMsgType);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.orderRef)) {
+        this.orderRef = data().deepCopy(fields()[5].schema(), other.orderRef);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.userId)) {
+        this.userId = data().deepCopy(fields()[6].schema(), other.userId);
+        fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.direction)) {
+        this.direction = data().deepCopy(fields()[7].schema(), other.direction);
+        fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.offset)) {
+        this.offset = data().deepCopy(fields()[8].schema(), other.offset);
+        fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.limitPrice)) {
+        this.limitPrice = data().deepCopy(fields()[9].schema(), other.limitPrice);
+        fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.volume)) {
+        this.volume = data().deepCopy(fields()[10].schema(), other.volume);
+        fieldSetFlags()[10] = true;
+      }
+      if (isValidValue(fields()[11], other.volumeFilled)) {
+        this.volumeFilled = data().deepCopy(fields()[11].schema(), other.volumeFilled);
+        fieldSetFlags()[11] = true;
+      }
+      if (isValidValue(fields()[12], other.volumeRemained)) {
+        this.volumeRemained = data().deepCopy(fields()[12].schema(), other.volumeRemained);
+        fieldSetFlags()[12] = true;
+      }
+      if (isValidValue(fields()[13], other.volumeTotalOriginal)) {
+        this.volumeTotalOriginal = data().deepCopy(fields()[13].schema(), other.volumeTotalOriginal);
+        fieldSetFlags()[13] = true;
+      }
+      if (isValidValue(fields()[14], other.tradingDay)) {
+        this.tradingDay = data().deepCopy(fields()[14].schema(), other.tradingDay);
+        fieldSetFlags()[14] = true;
+      }
+      if (isValidValue(fields()[15], other.orderSysId)) {
+        this.orderSysId = data().deepCopy(fields()[15].schema(), other.orderSysId);
+        fieldSetFlags()[15] = true;
+      }
+      if (isValidValue(fields()[16], other.orderStatus)) {
+        this.orderStatus = data().deepCopy(fields()[16].schema(), other.orderStatus);
+        fieldSetFlags()[16] = true;
+      }
+      if (isValidValue(fields()[17], other.orderType)) {
+        this.orderType = data().deepCopy(fields()[17].schema(), other.orderType);
+        fieldSetFlags()[17] = true;
+      }
+      if (isValidValue(fields()[18], other.price)) {
+        this.price = data().deepCopy(fields()[18].schema(), other.price);
+        fieldSetFlags()[18] = true;
+      }
+      if (isValidValue(fields()[19], other.tradeId)) {
+        this.tradeId = data().deepCopy(fields()[19].schema(), other.tradeId);
+        fieldSetFlags()[19] = true;
+      }
+      if (isValidValue(fields()[20], other.ordRejReason)) {
+        this.ordRejReason = data().deepCopy(fields()[20].schema(), other.ordRejReason);
+        fieldSetFlags()[20] = true;
+      }
+      if (isValidValue(fields()[21], other.insertTime)) {
+        this.insertTime = data().deepCopy(fields()[21].schema(), other.insertTime);
+        fieldSetFlags()[21] = true;
+      }
+      if (isValidValue(fields()[22], other.updateTime)) {
+        this.updateTime = data().deepCopy(fields()[22].schema(), other.updateTime);
+        fieldSetFlags()[22] = true;
+      }
+      if (isValidValue(fields()[23], other.cancelTime)) {
+        this.cancelTime = data().deepCopy(fields()[23].schema(), other.cancelTime);
+        fieldSetFlags()[23] = true;
+      }
+      if (isValidValue(fields()[24], other.frontId)) {
+        this.frontId = data().deepCopy(fields()[24].schema(), other.frontId);
+        fieldSetFlags()[24] = true;
+      }
+      if (isValidValue(fields()[25], other.sessionId)) {
+        this.sessionId = data().deepCopy(fields()[25].schema(), other.sessionId);
+        fieldSetFlags()[25] = true;
+      }
+      if (isValidValue(fields()[26], other.statusMsg)) {
+        this.statusMsg = data().deepCopy(fields()[26].schema(), other.statusMsg);
+        fieldSetFlags()[26] = true;
+      }
+      if (isValidValue(fields()[27], other.exchangeCode)) {
+        this.exchangeCode = data().deepCopy(fields()[27].schema(), other.exchangeCode);
+        fieldSetFlags()[27] = true;
+      }
+      if (isValidValue(fields()[28], other.fee)) {
+        this.fee = data().deepCopy(fields()[28].schema(), other.fee);
+        fieldSetFlags()[28] = true;
+      }
+      if (isValidValue(fields()[29], other.counterType)) {
+        this.counterType = data().deepCopy(fields()[29].schema(), other.counterType);
+        fieldSetFlags()[29] = true;
+      }
+      if (isValidValue(fields()[30], other.counterSysId)) {
+        this.counterSysId = data().deepCopy(fields()[30].schema(), other.counterSysId);
+        fieldSetFlags()[30] = true;
+      }
+      if (isValidValue(fields()[31], other.cancelAttempts)) {
+        this.cancelAttempts = data().deepCopy(fields()[31].schema(), other.cancelAttempts);
+        fieldSetFlags()[31] = true;
+      }
+      if (isValidValue(fields()[32], other.timeStamp)) {
+        this.timeStamp = data().deepCopy(fields()[32].schema(), other.timeStamp);
+        fieldSetFlags()[32] = true;
+      }
+      if (isValidValue(fields()[33], other.epochTimeReturn)) {
+        this.epochTimeReturn = data().deepCopy(fields()[33].schema(), other.epochTimeReturn);
+        fieldSetFlags()[33] = true;
+      }
+      if (isValidValue(fields()[34], other.funcName)) {
+        this.funcName = data().deepCopy(fields()[34].schema(), other.funcName);
+        fieldSetFlags()[34] = true;
+      }
+    }
+
+    /**
+      * Gets the value of the 'strategyId' field.
+      * @return The value.
+      */
+    public int getStrategyId() {
+      return strategyId;
+    }
+
+    /**
+      * Gets the value of the 'strategyId' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalStrategyId() {
+      return Optional.<java.lang.Integer>ofNullable(strategyId);
+    }
+
+    /**
+      * Sets the value of the 'strategyId' field.
+      * @param value The value of 'strategyId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setStrategyId(int value) {
+      validate(fields()[0], value);
+      this.strategyId = value;
+      fieldSetFlags()[0] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'strategyId' field has been set.
+      * @return True if the 'strategyId' field has been set, false otherwise.
+      */
+    public boolean hasStrategyId() {
+      return fieldSetFlags()[0];
+    }
+
+
+    /**
+      * Clears the value of the 'strategyId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearStrategyId() {
+      fieldSetFlags()[0] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'brokerId' field.
+      * @return The value.
+      */
+    public java.lang.String getBrokerId() {
+      return brokerId;
+    }
+
+    /**
+      * Gets the value of the 'brokerId' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalBrokerId() {
+      return Optional.<java.lang.String>ofNullable(brokerId);
+    }
+
+    /**
+      * Sets the value of the 'brokerId' field.
+      * @param value The value of 'brokerId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setBrokerId(java.lang.String value) {
+      validate(fields()[1], value);
+      this.brokerId = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'brokerId' field has been set.
+      * @return True if the 'brokerId' field has been set, false otherwise.
+      */
+    public boolean hasBrokerId() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'brokerId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearBrokerId() {
+      brokerId = null;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'investorId' field.
+      * @return The value.
+      */
+    public java.lang.String getInvestorId() {
+      return investorId;
+    }
+
+    /**
+      * Gets the value of the 'investorId' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalInvestorId() {
+      return Optional.<java.lang.String>ofNullable(investorId);
+    }
+
+    /**
+      * Sets the value of the 'investorId' field.
+      * @param value The value of 'investorId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setInvestorId(java.lang.String value) {
+      validate(fields()[2], value);
+      this.investorId = value;
+      fieldSetFlags()[2] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'investorId' field has been set.
+      * @return True if the 'investorId' field has been set, false otherwise.
+      */
+    public boolean hasInvestorId() {
+      return fieldSetFlags()[2];
+    }
+
+
+    /**
+      * Clears the value of the 'investorId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearInvestorId() {
+      investorId = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'instrumentId' field.
+      * @return The value.
+      */
+    public java.lang.String getInstrumentId() {
+      return instrumentId;
+    }
+
+    /**
+      * Gets the value of the 'instrumentId' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalInstrumentId() {
+      return Optional.<java.lang.String>ofNullable(instrumentId);
+    }
+
+    /**
+      * Sets the value of the 'instrumentId' field.
+      * @param value The value of 'instrumentId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setInstrumentId(java.lang.String value) {
+      validate(fields()[3], value);
+      this.instrumentId = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'instrumentId' field has been set.
+      * @return True if the 'instrumentId' field has been set, false otherwise.
+      */
+    public boolean hasInstrumentId() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'instrumentId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearInstrumentId() {
+      instrumentId = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'orderMsgType' field.
+      * @return The value.
+      */
+    public int getOrderMsgType() {
+      return orderMsgType;
+    }
+
+    /**
+      * Gets the value of the 'orderMsgType' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalOrderMsgType() {
+      return Optional.<java.lang.Integer>ofNullable(orderMsgType);
+    }
+
+    /**
+      * Sets the value of the 'orderMsgType' field.
+      * @param value The value of 'orderMsgType'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderMsgType(int value) {
+      validate(fields()[4], value);
+      this.orderMsgType = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'orderMsgType' field has been set.
+      * @return True if the 'orderMsgType' field has been set, false otherwise.
+      */
+    public boolean hasOrderMsgType() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'orderMsgType' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderMsgType() {
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'orderRef' field.
+      * @return The value.
+      */
+    public int getOrderRef() {
+      return orderRef;
+    }
+
+    /**
+      * Gets the value of the 'orderRef' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalOrderRef() {
+      return Optional.<java.lang.Integer>ofNullable(orderRef);
+    }
+
+    /**
+      * Sets the value of the 'orderRef' field.
+      * @param value The value of 'orderRef'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderRef(int value) {
+      validate(fields()[5], value);
+      this.orderRef = value;
+      fieldSetFlags()[5] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'orderRef' field has been set.
+      * @return True if the 'orderRef' field has been set, false otherwise.
+      */
+    public boolean hasOrderRef() {
+      return fieldSetFlags()[5];
+    }
+
+
+    /**
+      * Clears the value of the 'orderRef' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderRef() {
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'userId' field.
+      * @return The value.
+      */
+    public java.lang.String getUserId() {
+      return userId;
+    }
+
+    /**
+      * Gets the value of the 'userId' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalUserId() {
+      return Optional.<java.lang.String>ofNullable(userId);
+    }
+
+    /**
+      * Sets the value of the 'userId' field.
+      * @param value The value of 'userId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setUserId(java.lang.String value) {
+      validate(fields()[6], value);
+      this.userId = value;
+      fieldSetFlags()[6] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'userId' field has been set.
+      * @return True if the 'userId' field has been set, false otherwise.
+      */
+    public boolean hasUserId() {
+      return fieldSetFlags()[6];
+    }
+
+
+    /**
+      * Clears the value of the 'userId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearUserId() {
+      userId = null;
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'direction' field.
+      * @return The value.
+      */
+    public int getDirection() {
+      return direction;
+    }
+
+    /**
+      * Gets the value of the 'direction' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalDirection() {
+      return Optional.<java.lang.Integer>ofNullable(direction);
+    }
+
+    /**
+      * Sets the value of the 'direction' field.
+      * @param value The value of 'direction'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setDirection(int value) {
+      validate(fields()[7], value);
+      this.direction = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'direction' field has been set.
+      * @return True if the 'direction' field has been set, false otherwise.
+      */
+    public boolean hasDirection() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'direction' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearDirection() {
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'offset' field.
+      * @return The value.
+      */
+    public int getOffset() {
+      return offset;
+    }
+
+    /**
+      * Gets the value of the 'offset' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalOffset() {
+      return Optional.<java.lang.Integer>ofNullable(offset);
+    }
+
+    /**
+      * Sets the value of the 'offset' field.
+      * @param value The value of 'offset'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOffset(int value) {
+      validate(fields()[8], value);
+      this.offset = value;
+      fieldSetFlags()[8] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'offset' field has been set.
+      * @return True if the 'offset' field has been set, false otherwise.
+      */
+    public boolean hasOffset() {
+      return fieldSetFlags()[8];
+    }
+
+
+    /**
+      * Clears the value of the 'offset' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOffset() {
+      fieldSetFlags()[8] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'limitPrice' field.
+      * @return The value.
+      */
+    public double getLimitPrice() {
+      return limitPrice;
+    }
+
+    /**
+      * Gets the value of the 'limitPrice' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+      */
+    public Optional<java.lang.Double> getOptionalLimitPrice() {
+      return Optional.<java.lang.Double>ofNullable(limitPrice);
+    }
+
+    /**
+      * Sets the value of the 'limitPrice' field.
+      * @param value The value of 'limitPrice'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setLimitPrice(double value) {
+      validate(fields()[9], value);
+      this.limitPrice = value;
+      fieldSetFlags()[9] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'limitPrice' field has been set.
+      * @return True if the 'limitPrice' field has been set, false otherwise.
+      */
+    public boolean hasLimitPrice() {
+      return fieldSetFlags()[9];
+    }
+
+
+    /**
+      * Clears the value of the 'limitPrice' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearLimitPrice() {
+      fieldSetFlags()[9] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'volume' field.
+      * @return The value.
+      */
+    public int getVolume() {
+      return volume;
+    }
+
+    /**
+      * Gets the value of the 'volume' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalVolume() {
+      return Optional.<java.lang.Integer>ofNullable(volume);
+    }
+
+    /**
+      * Sets the value of the 'volume' field.
+      * @param value The value of 'volume'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolume(int value) {
+      validate(fields()[10], value);
+      this.volume = value;
+      fieldSetFlags()[10] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'volume' field has been set.
+      * @return True if the 'volume' field has been set, false otherwise.
+      */
+    public boolean hasVolume() {
+      return fieldSetFlags()[10];
+    }
+
+
+    /**
+      * Clears the value of the 'volume' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolume() {
+      fieldSetFlags()[10] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'volumeFilled' field.
+      * @return The value.
+      */
+    public int getVolumeFilled() {
+      return volumeFilled;
+    }
+
+    /**
+      * Gets the value of the 'volumeFilled' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalVolumeFilled() {
+      return Optional.<java.lang.Integer>ofNullable(volumeFilled);
+    }
+
+    /**
+      * Sets the value of the 'volumeFilled' field.
+      * @param value The value of 'volumeFilled'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolumeFilled(int value) {
+      validate(fields()[11], value);
+      this.volumeFilled = value;
+      fieldSetFlags()[11] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'volumeFilled' field has been set.
+      * @return True if the 'volumeFilled' field has been set, false otherwise.
+      */
+    public boolean hasVolumeFilled() {
+      return fieldSetFlags()[11];
+    }
+
+
+    /**
+      * Clears the value of the 'volumeFilled' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeFilled() {
+      fieldSetFlags()[11] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'volumeRemained' field.
+      * @return The value.
+      */
+    public int getVolumeRemained() {
+      return volumeRemained;
+    }
+
+    /**
+      * Gets the value of the 'volumeRemained' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalVolumeRemained() {
+      return Optional.<java.lang.Integer>ofNullable(volumeRemained);
+    }
+
+    /**
+      * Sets the value of the 'volumeRemained' field.
+      * @param value The value of 'volumeRemained'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolumeRemained(int value) {
+      validate(fields()[12], value);
+      this.volumeRemained = value;
+      fieldSetFlags()[12] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'volumeRemained' field has been set.
+      * @return True if the 'volumeRemained' field has been set, false otherwise.
+      */
+    public boolean hasVolumeRemained() {
+      return fieldSetFlags()[12];
+    }
+
+
+    /**
+      * Clears the value of the 'volumeRemained' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeRemained() {
+      fieldSetFlags()[12] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'volumeTotalOriginal' field.
+      * @return The value.
+      */
+    public int getVolumeTotalOriginal() {
+      return volumeTotalOriginal;
+    }
+
+    /**
+      * Gets the value of the 'volumeTotalOriginal' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalVolumeTotalOriginal() {
+      return Optional.<java.lang.Integer>ofNullable(volumeTotalOriginal);
+    }
+
+    /**
+      * Sets the value of the 'volumeTotalOriginal' field.
+      * @param value The value of 'volumeTotalOriginal'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setVolumeTotalOriginal(int value) {
+      validate(fields()[13], value);
+      this.volumeTotalOriginal = value;
+      fieldSetFlags()[13] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'volumeTotalOriginal' field has been set.
+      * @return True if the 'volumeTotalOriginal' field has been set, false otherwise.
+      */
+    public boolean hasVolumeTotalOriginal() {
+      return fieldSetFlags()[13];
+    }
+
+
+    /**
+      * Clears the value of the 'volumeTotalOriginal' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearVolumeTotalOriginal() {
+      fieldSetFlags()[13] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'tradingDay' field.
+      * @return The value.
+      */
+    public java.lang.String getTradingDay() {
+      return tradingDay;
+    }
+
+    /**
+      * Gets the value of the 'tradingDay' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalTradingDay() {
+      return Optional.<java.lang.String>ofNullable(tradingDay);
+    }
+
+    /**
+      * Sets the value of the 'tradingDay' field.
+      * @param value The value of 'tradingDay'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setTradingDay(java.lang.String value) {
+      validate(fields()[14], value);
+      this.tradingDay = value;
+      fieldSetFlags()[14] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'tradingDay' field has been set.
+      * @return True if the 'tradingDay' field has been set, false otherwise.
+      */
+    public boolean hasTradingDay() {
+      return fieldSetFlags()[14];
+    }
+
+
+    /**
+      * Clears the value of the 'tradingDay' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearTradingDay() {
+      tradingDay = null;
+      fieldSetFlags()[14] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'orderSysId' field.
+      * @return The value.
+      */
+    public java.lang.String getOrderSysId() {
+      return orderSysId;
+    }
+
+    /**
+      * Gets the value of the 'orderSysId' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalOrderSysId() {
+      return Optional.<java.lang.String>ofNullable(orderSysId);
+    }
+
+    /**
+      * Sets the value of the 'orderSysId' field.
+      * @param value The value of 'orderSysId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderSysId(java.lang.String value) {
+      validate(fields()[15], value);
+      this.orderSysId = value;
+      fieldSetFlags()[15] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'orderSysId' field has been set.
+      * @return True if the 'orderSysId' field has been set, false otherwise.
+      */
+    public boolean hasOrderSysId() {
+      return fieldSetFlags()[15];
+    }
+
+
+    /**
+      * Clears the value of the 'orderSysId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderSysId() {
+      orderSysId = null;
+      fieldSetFlags()[15] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'orderStatus' field.
+      * @return The value.
+      */
+    public int getOrderStatus() {
+      return orderStatus;
+    }
+
+    /**
+      * Gets the value of the 'orderStatus' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalOrderStatus() {
+      return Optional.<java.lang.Integer>ofNullable(orderStatus);
+    }
+
+    /**
+      * Sets the value of the 'orderStatus' field.
+      * @param value The value of 'orderStatus'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderStatus(int value) {
+      validate(fields()[16], value);
+      this.orderStatus = value;
+      fieldSetFlags()[16] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'orderStatus' field has been set.
+      * @return True if the 'orderStatus' field has been set, false otherwise.
+      */
+    public boolean hasOrderStatus() {
+      return fieldSetFlags()[16];
+    }
+
+
+    /**
+      * Clears the value of the 'orderStatus' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderStatus() {
+      fieldSetFlags()[16] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'orderType' field.
+      * @return The value.
+      */
+    public int getOrderType() {
+      return orderType;
+    }
+
+    /**
+      * Gets the value of the 'orderType' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalOrderType() {
+      return Optional.<java.lang.Integer>ofNullable(orderType);
+    }
+
+    /**
+      * Sets the value of the 'orderType' field.
+      * @param value The value of 'orderType'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrderType(int value) {
+      validate(fields()[17], value);
+      this.orderType = value;
+      fieldSetFlags()[17] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'orderType' field has been set.
+      * @return True if the 'orderType' field has been set, false otherwise.
+      */
+    public boolean hasOrderType() {
+      return fieldSetFlags()[17];
+    }
+
+
+    /**
+      * Clears the value of the 'orderType' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrderType() {
+      fieldSetFlags()[17] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'price' field.
+      * @return The value.
+      */
+    public double getPrice() {
+      return price;
+    }
+
+    /**
+      * Gets the value of the 'price' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+      */
+    public Optional<java.lang.Double> getOptionalPrice() {
+      return Optional.<java.lang.Double>ofNullable(price);
+    }
+
+    /**
+      * Sets the value of the 'price' field.
+      * @param value The value of 'price'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setPrice(double value) {
+      validate(fields()[18], value);
+      this.price = value;
+      fieldSetFlags()[18] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'price' field has been set.
+      * @return True if the 'price' field has been set, false otherwise.
+      */
+    public boolean hasPrice() {
+      return fieldSetFlags()[18];
+    }
+
+
+    /**
+      * Clears the value of the 'price' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearPrice() {
+      fieldSetFlags()[18] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'tradeId' field.
+      * @return The value.
+      */
+    public java.lang.String getTradeId() {
+      return tradeId;
+    }
+
+    /**
+      * Gets the value of the 'tradeId' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalTradeId() {
+      return Optional.<java.lang.String>ofNullable(tradeId);
+    }
+
+    /**
+      * Sets the value of the 'tradeId' field.
+      * @param value The value of 'tradeId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setTradeId(java.lang.String value) {
+      validate(fields()[19], value);
+      this.tradeId = value;
+      fieldSetFlags()[19] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'tradeId' field has been set.
+      * @return True if the 'tradeId' field has been set, false otherwise.
+      */
+    public boolean hasTradeId() {
+      return fieldSetFlags()[19];
+    }
+
+
+    /**
+      * Clears the value of the 'tradeId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearTradeId() {
+      tradeId = null;
+      fieldSetFlags()[19] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'ordRejReason' field.
+      * @return The value.
+      */
+    public int getOrdRejReason() {
+      return ordRejReason;
+    }
+
+    /**
+      * Gets the value of the 'ordRejReason' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalOrdRejReason() {
+      return Optional.<java.lang.Integer>ofNullable(ordRejReason);
+    }
+
+    /**
+      * Sets the value of the 'ordRejReason' field.
+      * @param value The value of 'ordRejReason'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setOrdRejReason(int value) {
+      validate(fields()[20], value);
+      this.ordRejReason = value;
+      fieldSetFlags()[20] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'ordRejReason' field has been set.
+      * @return True if the 'ordRejReason' field has been set, false otherwise.
+      */
+    public boolean hasOrdRejReason() {
+      return fieldSetFlags()[20];
+    }
+
+
+    /**
+      * Clears the value of the 'ordRejReason' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearOrdRejReason() {
+      fieldSetFlags()[20] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'insertTime' field.
+      * @return The value.
+      */
+    public java.lang.String getInsertTime() {
+      return insertTime;
+    }
+
+    /**
+      * Gets the value of the 'insertTime' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalInsertTime() {
+      return Optional.<java.lang.String>ofNullable(insertTime);
+    }
+
+    /**
+      * Sets the value of the 'insertTime' field.
+      * @param value The value of 'insertTime'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setInsertTime(java.lang.String value) {
+      validate(fields()[21], value);
+      this.insertTime = value;
+      fieldSetFlags()[21] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'insertTime' field has been set.
+      * @return True if the 'insertTime' field has been set, false otherwise.
+      */
+    public boolean hasInsertTime() {
+      return fieldSetFlags()[21];
+    }
+
+
+    /**
+      * Clears the value of the 'insertTime' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearInsertTime() {
+      insertTime = null;
+      fieldSetFlags()[21] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'updateTime' field.
+      * @return The value.
+      */
+    public java.lang.String getUpdateTime() {
+      return updateTime;
+    }
+
+    /**
+      * Gets the value of the 'updateTime' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalUpdateTime() {
+      return Optional.<java.lang.String>ofNullable(updateTime);
+    }
+
+    /**
+      * Sets the value of the 'updateTime' field.
+      * @param value The value of 'updateTime'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setUpdateTime(java.lang.String value) {
+      validate(fields()[22], value);
+      this.updateTime = value;
+      fieldSetFlags()[22] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'updateTime' field has been set.
+      * @return True if the 'updateTime' field has been set, false otherwise.
+      */
+    public boolean hasUpdateTime() {
+      return fieldSetFlags()[22];
+    }
+
+
+    /**
+      * Clears the value of the 'updateTime' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearUpdateTime() {
+      updateTime = null;
+      fieldSetFlags()[22] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'cancelTime' field.
+      * @return The value.
+      */
+    public java.lang.String getCancelTime() {
+      return cancelTime;
+    }
+
+    /**
+      * Gets the value of the 'cancelTime' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalCancelTime() {
+      return Optional.<java.lang.String>ofNullable(cancelTime);
+    }
+
+    /**
+      * Sets the value of the 'cancelTime' field.
+      * @param value The value of 'cancelTime'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCancelTime(java.lang.String value) {
+      validate(fields()[23], value);
+      this.cancelTime = value;
+      fieldSetFlags()[23] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'cancelTime' field has been set.
+      * @return True if the 'cancelTime' field has been set, false otherwise.
+      */
+    public boolean hasCancelTime() {
+      return fieldSetFlags()[23];
+    }
+
+
+    /**
+      * Clears the value of the 'cancelTime' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCancelTime() {
+      cancelTime = null;
+      fieldSetFlags()[23] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'frontId' field.
+      * @return The value.
+      */
+    public int getFrontId() {
+      return frontId;
+    }
+
+    /**
+      * Gets the value of the 'frontId' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalFrontId() {
+      return Optional.<java.lang.Integer>ofNullable(frontId);
+    }
+
+    /**
+      * Sets the value of the 'frontId' field.
+      * @param value The value of 'frontId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setFrontId(int value) {
+      validate(fields()[24], value);
+      this.frontId = value;
+      fieldSetFlags()[24] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'frontId' field has been set.
+      * @return True if the 'frontId' field has been set, false otherwise.
+      */
+    public boolean hasFrontId() {
+      return fieldSetFlags()[24];
+    }
+
+
+    /**
+      * Clears the value of the 'frontId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearFrontId() {
+      fieldSetFlags()[24] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'sessionId' field.
+      * @return The value.
+      */
+    public int getSessionId() {
+      return sessionId;
+    }
+
+    /**
+      * Gets the value of the 'sessionId' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalSessionId() {
+      return Optional.<java.lang.Integer>ofNullable(sessionId);
+    }
+
+    /**
+      * Sets the value of the 'sessionId' field.
+      * @param value The value of 'sessionId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setSessionId(int value) {
+      validate(fields()[25], value);
+      this.sessionId = value;
+      fieldSetFlags()[25] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'sessionId' field has been set.
+      * @return True if the 'sessionId' field has been set, false otherwise.
+      */
+    public boolean hasSessionId() {
+      return fieldSetFlags()[25];
+    }
+
+
+    /**
+      * Clears the value of the 'sessionId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearSessionId() {
+      fieldSetFlags()[25] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'statusMsg' field.
+      * @return The value.
+      */
+    public java.lang.String getStatusMsg() {
+      return statusMsg;
+    }
+
+    /**
+      * Gets the value of the 'statusMsg' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalStatusMsg() {
+      return Optional.<java.lang.String>ofNullable(statusMsg);
+    }
+
+    /**
+      * Sets the value of the 'statusMsg' field.
+      * @param value The value of 'statusMsg'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setStatusMsg(java.lang.String value) {
+      validate(fields()[26], value);
+      this.statusMsg = value;
+      fieldSetFlags()[26] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'statusMsg' field has been set.
+      * @return True if the 'statusMsg' field has been set, false otherwise.
+      */
+    public boolean hasStatusMsg() {
+      return fieldSetFlags()[26];
+    }
+
+
+    /**
+      * Clears the value of the 'statusMsg' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearStatusMsg() {
+      statusMsg = null;
+      fieldSetFlags()[26] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'exchangeCode' field.
+      * @return The value.
+      */
+    public java.lang.String getExchangeCode() {
+      return exchangeCode;
+    }
+
+    /**
+      * Gets the value of the 'exchangeCode' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalExchangeCode() {
+      return Optional.<java.lang.String>ofNullable(exchangeCode);
+    }
+
+    /**
+      * Sets the value of the 'exchangeCode' field.
+      * @param value The value of 'exchangeCode'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setExchangeCode(java.lang.String value) {
+      validate(fields()[27], value);
+      this.exchangeCode = value;
+      fieldSetFlags()[27] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'exchangeCode' field has been set.
+      * @return True if the 'exchangeCode' field has been set, false otherwise.
+      */
+    public boolean hasExchangeCode() {
+      return fieldSetFlags()[27];
+    }
+
+
+    /**
+      * Clears the value of the 'exchangeCode' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearExchangeCode() {
+      exchangeCode = null;
+      fieldSetFlags()[27] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'fee' field.
+      * @return The value.
+      */
+    public double getFee() {
+      return fee;
+    }
+
+    /**
+      * Gets the value of the 'fee' field as an Optional&lt;java.lang.Double&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Double&gt;.
+      */
+    public Optional<java.lang.Double> getOptionalFee() {
+      return Optional.<java.lang.Double>ofNullable(fee);
+    }
+
+    /**
+      * Sets the value of the 'fee' field.
+      * @param value The value of 'fee'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setFee(double value) {
+      validate(fields()[28], value);
+      this.fee = value;
+      fieldSetFlags()[28] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'fee' field has been set.
+      * @return True if the 'fee' field has been set, false otherwise.
+      */
+    public boolean hasFee() {
+      return fieldSetFlags()[28];
+    }
+
+
+    /**
+      * Clears the value of the 'fee' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearFee() {
+      fieldSetFlags()[28] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'counterType' field.
+      * @return The value.
+      */
+    public int getCounterType() {
+      return counterType;
+    }
+
+    /**
+      * Gets the value of the 'counterType' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalCounterType() {
+      return Optional.<java.lang.Integer>ofNullable(counterType);
+    }
+
+    /**
+      * Sets the value of the 'counterType' field.
+      * @param value The value of 'counterType'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCounterType(int value) {
+      validate(fields()[29], value);
+      this.counterType = value;
+      fieldSetFlags()[29] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'counterType' field has been set.
+      * @return True if the 'counterType' field has been set, false otherwise.
+      */
+    public boolean hasCounterType() {
+      return fieldSetFlags()[29];
+    }
+
+
+    /**
+      * Clears the value of the 'counterType' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCounterType() {
+      fieldSetFlags()[29] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'counterSysId' field.
+      * @return The value.
+      */
+    public long getCounterSysId() {
+      return counterSysId;
+    }
+
+    /**
+      * Gets the value of the 'counterSysId' field as an Optional&lt;java.lang.Long&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      */
+    public Optional<java.lang.Long> getOptionalCounterSysId() {
+      return Optional.<java.lang.Long>ofNullable(counterSysId);
+    }
+
+    /**
+      * Sets the value of the 'counterSysId' field.
+      * @param value The value of 'counterSysId'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCounterSysId(long value) {
+      validate(fields()[30], value);
+      this.counterSysId = value;
+      fieldSetFlags()[30] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'counterSysId' field has been set.
+      * @return True if the 'counterSysId' field has been set, false otherwise.
+      */
+    public boolean hasCounterSysId() {
+      return fieldSetFlags()[30];
+    }
+
+
+    /**
+      * Clears the value of the 'counterSysId' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCounterSysId() {
+      fieldSetFlags()[30] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'cancelAttempts' field.
+      * @return The value.
+      */
+    public int getCancelAttempts() {
+      return cancelAttempts;
+    }
+
+    /**
+      * Gets the value of the 'cancelAttempts' field as an Optional&lt;java.lang.Integer&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Integer&gt;.
+      */
+    public Optional<java.lang.Integer> getOptionalCancelAttempts() {
+      return Optional.<java.lang.Integer>ofNullable(cancelAttempts);
+    }
+
+    /**
+      * Sets the value of the 'cancelAttempts' field.
+      * @param value The value of 'cancelAttempts'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setCancelAttempts(int value) {
+      validate(fields()[31], value);
+      this.cancelAttempts = value;
+      fieldSetFlags()[31] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'cancelAttempts' field has been set.
+      * @return True if the 'cancelAttempts' field has been set, false otherwise.
+      */
+    public boolean hasCancelAttempts() {
+      return fieldSetFlags()[31];
+    }
+
+
+    /**
+      * Clears the value of the 'cancelAttempts' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearCancelAttempts() {
+      fieldSetFlags()[31] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'timeStamp' field.
+      * @return The value.
+      */
+    public long getTimeStamp() {
+      return timeStamp;
+    }
+
+    /**
+      * Gets the value of the 'timeStamp' field as an Optional&lt;java.lang.Long&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      */
+    public Optional<java.lang.Long> getOptionalTimeStamp() {
+      return Optional.<java.lang.Long>ofNullable(timeStamp);
+    }
+
+    /**
+      * Sets the value of the 'timeStamp' field.
+      * @param value The value of 'timeStamp'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setTimeStamp(long value) {
+      validate(fields()[32], value);
+      this.timeStamp = value;
+      fieldSetFlags()[32] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'timeStamp' field has been set.
+      * @return True if the 'timeStamp' field has been set, false otherwise.
+      */
+    public boolean hasTimeStamp() {
+      return fieldSetFlags()[32];
+    }
+
+
+    /**
+      * Clears the value of the 'timeStamp' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearTimeStamp() {
+      fieldSetFlags()[32] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'epochTimeReturn' field.
+      * @return The value.
+      */
+    public long getEpochTimeReturn() {
+      return epochTimeReturn;
+    }
+
+    /**
+      * Gets the value of the 'epochTimeReturn' field as an Optional&lt;java.lang.Long&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.Long&gt;.
+      */
+    public Optional<java.lang.Long> getOptionalEpochTimeReturn() {
+      return Optional.<java.lang.Long>ofNullable(epochTimeReturn);
+    }
+
+    /**
+      * Sets the value of the 'epochTimeReturn' field.
+      * @param value The value of 'epochTimeReturn'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setEpochTimeReturn(long value) {
+      validate(fields()[33], value);
+      this.epochTimeReturn = value;
+      fieldSetFlags()[33] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'epochTimeReturn' field has been set.
+      * @return True if the 'epochTimeReturn' field has been set, false otherwise.
+      */
+    public boolean hasEpochTimeReturn() {
+      return fieldSetFlags()[33];
+    }
+
+
+    /**
+      * Clears the value of the 'epochTimeReturn' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearEpochTimeReturn() {
+      fieldSetFlags()[33] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'funcName' field.
+      * @return The value.
+      */
+    public java.lang.String getFuncName() {
+      return funcName;
+    }
+
+    /**
+      * Gets the value of the 'funcName' field as an Optional&lt;java.lang.String&gt;.
+      * @return The value wrapped in an Optional&lt;java.lang.String&gt;.
+      */
+    public Optional<java.lang.String> getOptionalFuncName() {
+      return Optional.<java.lang.String>ofNullable(funcName);
+    }
+
+    /**
+      * Sets the value of the 'funcName' field.
+      * @param value The value of 'funcName'.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder setFuncName(java.lang.String value) {
+      validate(fields()[34], value);
+      this.funcName = value;
+      fieldSetFlags()[34] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'funcName' field has been set.
+      * @return True if the 'funcName' field has been set, false otherwise.
+      */
+    public boolean hasFuncName() {
+      return fieldSetFlags()[34];
+    }
+
+
+    /**
+      * Clears the value of the 'funcName' field.
+      * @return This builder.
+      */
+    public io.cygnus.simulator.persistence.avro.entity.SimOrder.Builder clearFuncName() {
+      funcName = null;
+      fieldSetFlags()[34] = false;
+      return this;
+    }
+
+    @Override
+    public SimOrder build() {
+      try {
+        SimOrder record = new SimOrder();
+        record.strategyId = fieldSetFlags()[0] ? this.strategyId : (java.lang.Integer) defaultValue(fields()[0]);
+        record.brokerId = fieldSetFlags()[1] ? this.brokerId : (java.lang.String) defaultValue(fields()[1]);
+        record.investorId = fieldSetFlags()[2] ? this.investorId : (java.lang.String) defaultValue(fields()[2]);
+        record.instrumentId = fieldSetFlags()[3] ? this.instrumentId : (java.lang.String) defaultValue(fields()[3]);
+        record.orderMsgType = fieldSetFlags()[4] ? this.orderMsgType : (java.lang.Integer) defaultValue(fields()[4]);
+        record.orderRef = fieldSetFlags()[5] ? this.orderRef : (java.lang.Integer) defaultValue(fields()[5]);
+        record.userId = fieldSetFlags()[6] ? this.userId : (java.lang.String) defaultValue(fields()[6]);
+        record.direction = fieldSetFlags()[7] ? this.direction : (java.lang.Integer) defaultValue(fields()[7]);
+        record.offset = fieldSetFlags()[8] ? this.offset : (java.lang.Integer) defaultValue(fields()[8]);
+        record.limitPrice = fieldSetFlags()[9] ? this.limitPrice : (java.lang.Double) defaultValue(fields()[9]);
+        record.volume = fieldSetFlags()[10] ? this.volume : (java.lang.Integer) defaultValue(fields()[10]);
+        record.volumeFilled = fieldSetFlags()[11] ? this.volumeFilled : (java.lang.Integer) defaultValue(fields()[11]);
+        record.volumeRemained = fieldSetFlags()[12] ? this.volumeRemained : (java.lang.Integer) defaultValue(fields()[12]);
+        record.volumeTotalOriginal = fieldSetFlags()[13] ? this.volumeTotalOriginal : (java.lang.Integer) defaultValue(fields()[13]);
+        record.tradingDay = fieldSetFlags()[14] ? this.tradingDay : (java.lang.String) defaultValue(fields()[14]);
+        record.orderSysId = fieldSetFlags()[15] ? this.orderSysId : (java.lang.String) defaultValue(fields()[15]);
+        record.orderStatus = fieldSetFlags()[16] ? this.orderStatus : (java.lang.Integer) defaultValue(fields()[16]);
+        record.orderType = fieldSetFlags()[17] ? this.orderType : (java.lang.Integer) defaultValue(fields()[17]);
+        record.price = fieldSetFlags()[18] ? this.price : (java.lang.Double) defaultValue(fields()[18]);
+        record.tradeId = fieldSetFlags()[19] ? this.tradeId : (java.lang.String) defaultValue(fields()[19]);
+        record.ordRejReason = fieldSetFlags()[20] ? this.ordRejReason : (java.lang.Integer) defaultValue(fields()[20]);
+        record.insertTime = fieldSetFlags()[21] ? this.insertTime : (java.lang.String) defaultValue(fields()[21]);
+        record.updateTime = fieldSetFlags()[22] ? this.updateTime : (java.lang.String) defaultValue(fields()[22]);
+        record.cancelTime = fieldSetFlags()[23] ? this.cancelTime : (java.lang.String) defaultValue(fields()[23]);
+        record.frontId = fieldSetFlags()[24] ? this.frontId : (java.lang.Integer) defaultValue(fields()[24]);
+        record.sessionId = fieldSetFlags()[25] ? this.sessionId : (java.lang.Integer) defaultValue(fields()[25]);
+        record.statusMsg = fieldSetFlags()[26] ? this.statusMsg : (java.lang.String) defaultValue(fields()[26]);
+        record.exchangeCode = fieldSetFlags()[27] ? this.exchangeCode : (java.lang.String) defaultValue(fields()[27]);
+        record.fee = fieldSetFlags()[28] ? this.fee : (java.lang.Double) defaultValue(fields()[28]);
+        record.counterType = fieldSetFlags()[29] ? this.counterType : (java.lang.Integer) defaultValue(fields()[29]);
+        record.counterSysId = fieldSetFlags()[30] ? this.counterSysId : (java.lang.Long) defaultValue(fields()[30]);
+        record.cancelAttempts = fieldSetFlags()[31] ? this.cancelAttempts : (java.lang.Integer) defaultValue(fields()[31]);
+        record.timeStamp = fieldSetFlags()[32] ? this.timeStamp : (java.lang.Long) defaultValue(fields()[32]);
+        record.epochTimeReturn = fieldSetFlags()[33] ? this.epochTimeReturn : (java.lang.Long) defaultValue(fields()[33]);
+        record.funcName = fieldSetFlags()[34] ? this.funcName : (java.lang.String) defaultValue(fields()[34]);
+        return record;
+      } catch (org.apache.avro.AvroMissingFieldException e) {
+        throw e;
+      } catch (java.lang.Exception e) {
+        throw new org.apache.avro.AvroRuntimeException(e);
+      }
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private static final org.apache.avro.io.DatumWriter<SimOrder>
+    WRITER$ = (org.apache.avro.io.DatumWriter<SimOrder>)MODEL$.createDatumWriter(SCHEMA$);
+
+  @Override public void writeExternal(java.io.ObjectOutput out)
+    throws java.io.IOException {
+    WRITER$.write(this, SpecificData.getEncoder(out));
+  }
+
+  @SuppressWarnings("unchecked")
+  private static final org.apache.avro.io.DatumReader<SimOrder>
+    READER$ = (org.apache.avro.io.DatumReader<SimOrder>)MODEL$.createDatumReader(SCHEMA$);
+
+  @Override public void readExternal(java.io.ObjectInput in)
+    throws java.io.IOException {
+    READER$.read(this, SpecificData.getDecoder(in));
+  }
+
+  @Override protected boolean hasCustomCoders() { return true; }
+
+  @Override public void customEncode(org.apache.avro.io.Encoder out)
+    throws java.io.IOException
+  {
+    out.writeInt(this.strategyId);
+
+    out.writeString(this.brokerId);
+
+    out.writeString(this.investorId);
+
+    out.writeString(this.instrumentId);
+
+    out.writeInt(this.orderMsgType);
+
+    out.writeInt(this.orderRef);
+
+    out.writeString(this.userId);
+
+    out.writeInt(this.direction);
+
+    out.writeInt(this.offset);
+
+    out.writeDouble(this.limitPrice);
+
+    out.writeInt(this.volume);
+
+    out.writeInt(this.volumeFilled);
+
+    out.writeInt(this.volumeRemained);
+
+    out.writeInt(this.volumeTotalOriginal);
+
+    out.writeString(this.tradingDay);
+
+    out.writeString(this.orderSysId);
+
+    out.writeInt(this.orderStatus);
+
+    out.writeInt(this.orderType);
+
+    out.writeDouble(this.price);
+
+    out.writeString(this.tradeId);
+
+    out.writeInt(this.ordRejReason);
+
+    out.writeString(this.insertTime);
+
+    out.writeString(this.updateTime);
+
+    out.writeString(this.cancelTime);
+
+    out.writeInt(this.frontId);
+
+    out.writeInt(this.sessionId);
+
+    out.writeString(this.statusMsg);
+
+    out.writeString(this.exchangeCode);
+
+    out.writeDouble(this.fee);
+
+    out.writeInt(this.counterType);
+
+    out.writeLong(this.counterSysId);
+
+    out.writeInt(this.cancelAttempts);
+
+    out.writeLong(this.timeStamp);
+
+    out.writeLong(this.epochTimeReturn);
+
+    out.writeString(this.funcName);
+
+  }
+
+  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
+    throws java.io.IOException
+  {
+    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
+    if (fieldOrder == null) {
+      this.strategyId = in.readInt();
+
+      this.brokerId = in.readString();
+
+      this.investorId = in.readString();
+
+      this.instrumentId = in.readString();
+
+      this.orderMsgType = in.readInt();
+
+      this.orderRef = in.readInt();
+
+      this.userId = in.readString();
+
+      this.direction = in.readInt();
+
+      this.offset = in.readInt();
+
+      this.limitPrice = in.readDouble();
+
+      this.volume = in.readInt();
+
+      this.volumeFilled = in.readInt();
+
+      this.volumeRemained = in.readInt();
+
+      this.volumeTotalOriginal = in.readInt();
+
+      this.tradingDay = in.readString();
+
+      this.orderSysId = in.readString();
+
+      this.orderStatus = in.readInt();
+
+      this.orderType = in.readInt();
+
+      this.price = in.readDouble();
+
+      this.tradeId = in.readString();
+
+      this.ordRejReason = in.readInt();
+
+      this.insertTime = in.readString();
+
+      this.updateTime = in.readString();
+
+      this.cancelTime = in.readString();
+
+      this.frontId = in.readInt();
+
+      this.sessionId = in.readInt();
+
+      this.statusMsg = in.readString();
+
+      this.exchangeCode = in.readString();
+
+      this.fee = in.readDouble();
+
+      this.counterType = in.readInt();
+
+      this.counterSysId = in.readLong();
+
+      this.cancelAttempts = in.readInt();
+
+      this.timeStamp = in.readLong();
+
+      this.epochTimeReturn = in.readLong();
+
+      this.funcName = in.readString();
+
+    } else {
+      for (int i = 0; i < 35; i++) {
+        switch (fieldOrder[i].pos()) {
+        case 0:
+          this.strategyId = in.readInt();
+          break;
+
+        case 1:
+          this.brokerId = in.readString();
+          break;
+
+        case 2:
+          this.investorId = in.readString();
+          break;
+
+        case 3:
+          this.instrumentId = in.readString();
+          break;
+
+        case 4:
+          this.orderMsgType = in.readInt();
+          break;
+
+        case 5:
+          this.orderRef = in.readInt();
+          break;
+
+        case 6:
+          this.userId = in.readString();
+          break;
+
+        case 7:
+          this.direction = in.readInt();
+          break;
+
+        case 8:
+          this.offset = in.readInt();
+          break;
+
+        case 9:
+          this.limitPrice = in.readDouble();
+          break;
+
+        case 10:
+          this.volume = in.readInt();
+          break;
+
+        case 11:
+          this.volumeFilled = in.readInt();
+          break;
+
+        case 12:
+          this.volumeRemained = in.readInt();
+          break;
+
+        case 13:
+          this.volumeTotalOriginal = in.readInt();
+          break;
+
+        case 14:
+          this.tradingDay = in.readString();
+          break;
+
+        case 15:
+          this.orderSysId = in.readString();
+          break;
+
+        case 16:
+          this.orderStatus = in.readInt();
+          break;
+
+        case 17:
+          this.orderType = in.readInt();
+          break;
+
+        case 18:
+          this.price = in.readDouble();
+          break;
+
+        case 19:
+          this.tradeId = in.readString();
+          break;
+
+        case 20:
+          this.ordRejReason = in.readInt();
+          break;
+
+        case 21:
+          this.insertTime = in.readString();
+          break;
+
+        case 22:
+          this.updateTime = in.readString();
+          break;
+
+        case 23:
+          this.cancelTime = in.readString();
+          break;
+
+        case 24:
+          this.frontId = in.readInt();
+          break;
+
+        case 25:
+          this.sessionId = in.readInt();
+          break;
+
+        case 26:
+          this.statusMsg = in.readString();
+          break;
+
+        case 27:
+          this.exchangeCode = in.readString();
+          break;
+
+        case 28:
+          this.fee = in.readDouble();
+          break;
+
+        case 29:
+          this.counterType = in.readInt();
+          break;
+
+        case 30:
+          this.counterSysId = in.readLong();
+          break;
+
+        case 31:
+          this.cancelAttempts = in.readInt();
+          break;
+
+        case 32:
+          this.timeStamp = in.readLong();
+          break;
+
+        case 33:
+          this.epochTimeReturn = in.readLong();
+          break;
+
+        case 34:
+          this.funcName = in.readString();
+          break;
+
+        default:
+          throw new java.io.IOException("Corrupt ResolvingDecoder.");
+        }
+      }
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
