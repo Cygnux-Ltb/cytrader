@@ -5,9 +5,9 @@ import org.slf4j.Logger;
 import io.horizon.definition.adaptor.AdaptorEvent;
 import io.horizon.definition.market.data.MarkerDataKeeper;
 import io.horizon.definition.market.data.impl.BasicMarketData;
+import io.horizon.definition.order.OrdReport;
 import io.horizon.definition.order.OrderKeeper;
 import io.horizon.definition.order.actual.ChildOrder;
-import io.horizon.definition.order.structure.OrdReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.WaitingStrategy;
 import io.mercury.common.concurrent.queue.jct.JctScQueue;
@@ -48,13 +48,13 @@ public final class QueueStrategyScheduler extends MultiStrategyScheduler<BasicMa
 						break;
 					case OrderReport:
 						OrdReport ordReport = despatchMsg.getOrdReport();
-						log.info("Handle OrdReport, brokerUniqueId==[{}], uniqueId==[{}]",
-								ordReport.getBrokerUniqueId(), ordReport.getUniqueId());
+						log.info("Handle OrdReport, brokerUniqueId==[{}], ordId==[{}]", ordReport.getBrokerUniqueId(),
+								ordReport.getOrdId());
 						ChildOrder order = OrderKeeper.onOrdReport(ordReport);
 						log.info(
-								"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], uniqueId==[{}]",
+								"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], ordId==[{}]",
 								ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
-								ordReport.getUniqueId());
+								ordReport.getOrdId());
 						strategyMap.get(order.strategyId()).onOrder(order);
 						break;
 					case AdaptorEvent:
