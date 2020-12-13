@@ -83,12 +83,8 @@
 		<!-- <dependency> <groupId>exchange.core2</groupId> <artifactId>collections</artifactId> 
 			<version>0.5.1</version> </dependency> -->
 
-		<dependency>
-			<groupId>exchange.core2</groupId>
-			<artifactId>orderbook</artifactId>
-			<version>0.7.0</version>
-		</dependency>
-
+		<!-- <dependency> <groupId>exchange.core2</groupId> <artifactId>orderbook</artifactId> 
+			<version>0.7.0</version> </dependency> -->
 
 		<!-- LMAX Disruptor -->
 		<dependency>
