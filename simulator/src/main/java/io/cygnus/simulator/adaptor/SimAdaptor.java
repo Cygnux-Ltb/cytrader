@@ -17,11 +17,11 @@ import io.horizon.definition.adaptor.Command;
 import io.horizon.definition.event.InboundScheduler;
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.definition.order.OrdReport;
 import io.horizon.definition.order.Order;
 import io.horizon.definition.order.OrderKeeper;
 import io.horizon.definition.order.actual.ChildOrder;
 import io.horizon.definition.order.enums.OrdStatus;
-import io.horizon.definition.order.structure.OrdReport;
 import io.mercury.common.param.Params;
 import io.mercury.serialization.avro.AvroBinaryDeserializer;
 import io.mercury.transport.core.api.Receiver;
@@ -120,7 +120,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	@Override
 	public boolean newOredr(Account account, ChildOrder order) {
-		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
+		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.ordId()).intValue())
 				.setInstrumentId(order.instrument().code()).setLimitPrice(order.price().offerPrice())
 				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.direction().code()).build();
@@ -136,8 +136,8 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	@Override
 	public boolean cancelOrder(Account account, ChildOrder order) {
-		Order cancelOrder = OrderKeeper.getOrder(order.uniqueId());
-		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.uniqueId()).intValue())
+		Order cancelOrder = OrderKeeper.getOrder(order.ordId());
+		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.ordId()).intValue())
 				.setInstrumentId(cancelOrder.instrument().code()).setLimitPrice(order.price().offerPrice())
 				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.direction().code()).build();
