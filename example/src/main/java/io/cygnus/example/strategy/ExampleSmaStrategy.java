@@ -1,6 +1,6 @@
 package io.cygnus.example.strategy;
 
-import io.cygnus.engine.strategy.StrategySingleInstrument;
+import io.cygnus.engine.strategy.impl.StrategySingleInstrument;
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.market.instrument.Instrument;
 import io.horizon.definition.order.Order;
