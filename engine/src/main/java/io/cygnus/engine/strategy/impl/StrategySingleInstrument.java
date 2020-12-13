@@ -1,4 +1,4 @@
-package io.cygnus.engine.strategy;
+package io.cygnus.engine.strategy.impl;
 
 import org.eclipse.collections.api.list.ImmutableList;
 import org.slf4j.Logger;
@@ -30,8 +30,7 @@ public abstract class StrategySingleInstrument<M extends MarketData, PK extends 
 	 */
 	protected ImmutableList<Instrument> instruments;
 
-	protected StrategySingleInstrument(int strategyId, int subAccountId, Instrument instrument,
-			Params<PK> params) {
+	protected StrategySingleInstrument(int strategyId, int subAccountId, Instrument instrument, Params<PK> params) {
 		super(strategyId, subAccountId, params);
 		this.instrument = instrument;
 		this.instruments = ImmutableLists.newImmutableList(instrument);
@@ -77,6 +76,7 @@ public abstract class StrategySingleInstrument<M extends MarketData, PK extends 
 			log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", strategyName(), event.adaptorId());
 			break;
 		default:
+			log.warn("{} unhandled event received {}", strategyName(), event);
 			break;
 		}
 	}

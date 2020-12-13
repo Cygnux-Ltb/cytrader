@@ -1,4 +1,4 @@
-package io.cygnus.engine.strategy;
+package io.cygnus.engine.strategy.impl;
 
 import static java.lang.Math.abs;
 
@@ -9,6 +9,8 @@ import javax.annotation.Nonnull;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
+import io.cygnus.engine.strategy.Strategy;
+import io.cygnus.engine.strategy.StrategyEvent;
 import io.horizon.definition.account.Account;
 import io.horizon.definition.account.AccountKeeper;
 import io.horizon.definition.account.SubAccount;
@@ -469,7 +471,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 	 * @param order
 	 */
 	private void saveOrder(Order order) {
-		orders.put(order.uniqueId(), order);
+		orders.put(order.ordId(), order);
 	}
 
 	/**
