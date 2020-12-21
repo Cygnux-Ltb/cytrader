@@ -65,9 +65,9 @@ public final class StrategyKeeper implements Serializable {
 			StrategyMap.put(strategy.strategyId(), strategy);
 			log.info("Put strategy, strategyId==[{}]", strategy.strategyId());
 			strategy.instruments().each(instrument -> {
-				SubscribedInstrumentMap.getIfAbsentPut(instrument.id(), MutableLists::newFastList).add(strategy);
+				SubscribedInstrumentMap.getIfAbsentPut(instrument.instrumentId(), MutableLists::newFastList).add(strategy);
 				log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
-						instrument.id());
+						instrument.instrumentId());
 			});
 			strategy.enable();
 			log.info("Strategy is enable, strategyId==[{}]", strategy.strategyId());
@@ -79,7 +79,7 @@ public final class StrategyKeeper implements Serializable {
 	}
 
 	public static MutableList<Strategy<?>> getSubscribedStrategys(Instrument instrument) {
-		return getSubscribedStrategys(instrument.id());
+		return getSubscribedStrategys(instrument.instrumentId());
 	}
 
 	public static MutableList<Strategy<?>> getSubscribedStrategys(int instrumentId) {

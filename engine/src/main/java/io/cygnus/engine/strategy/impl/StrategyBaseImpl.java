@@ -304,10 +304,10 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 		switch (direction) {
 		case Long:
 			// 获取当前卖一价
-			return markerData.askPrice1();
+			return markerData.getAskPrice1();
 		case Short:
 			// 获取当前买一价
-			return markerData.bidPrice1();
+			return markerData.getBidPrice1();
 		default:
 			throw new IllegalArgumentException("TrdDirection is [Invalid]");
 		}
@@ -383,10 +383,10 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 		if (position == 0) {
 			log.warn(
 					"{} :: Terminate execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
-					strategyName(), subAccountId, instrument.code(), position);
+					strategyName(), subAccountId, instrument.instrumentCode(), position);
 		} else {
 			log.info("{} :: Execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
-					strategyName(), subAccountId, instrument.code(), position);
+					strategyName(), subAccountId, instrument.instrumentCode(), position);
 			long offerPrice = 0L;
 			if (position > 0)
 				offerPrice = getLevel1Price(instrument, TrdDirection.Long);
@@ -406,10 +406,10 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 		if (position == 0) {
 			log.warn(
 					"{} :: Terminate execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
-					strategyName(), subAccountId, instrument.code(), position);
+					strategyName(), subAccountId, instrument.instrumentCode(), position);
 		} else {
 			log.info("{} :: Execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
-					strategyName(), subAccountId, instrument.code(), position);
+					strategyName(), subAccountId, instrument.instrumentCode(), position);
 			closePosition(instrument, position, offerPrice, OrdType.Limit);
 		}
 	}
@@ -425,10 +425,10 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 		if (position == 0) {
 			log.warn(
 					"{} :: Terminate execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
-					strategyName(), subAccountId, instrument.code(), position);
+					strategyName(), subAccountId, instrument.instrumentCode(), position);
 		} else {
 			log.info("{} :: Execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
-					strategyName(), subAccountId, instrument.code(), position);
+					strategyName(), subAccountId, instrument.instrumentCode(), position);
 			closePosition(instrument, position, offerPrice, ordType);
 		}
 	}
