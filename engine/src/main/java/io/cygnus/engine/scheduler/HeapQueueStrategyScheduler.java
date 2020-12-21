@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import io.horizon.definition.adaptor.AdaptorEvent;
 import io.horizon.definition.market.data.MarkerDataKeeper;
+import io.horizon.definition.market.data.MarketData;
 import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.order.OrdReport;
 import io.horizon.definition.order.OrderKeeper;
@@ -20,12 +21,12 @@ import io.mercury.common.log.CommonLoggerFactory;
  *         策略执行引擎与整体框架分离
  *
  */
-public final class QueueStrategyScheduler extends MultiStrategyScheduler<BasicMarketData> {
+public final class HeapQueueStrategyScheduler<M extends MarketData> extends MultiStrategyScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(QueueStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(HeapQueueStrategyScheduler.class);
 
 	private JctScQueue<DespatchMsg> despatchQueue;
 
@@ -33,14 +34,14 @@ public final class QueueStrategyScheduler extends MultiStrategyScheduler<BasicMa
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	public QueueStrategyScheduler(Capacity capacity) {
+	public HeapQueueStrategyScheduler(Capacity capacity) {
 		this.despatchQueue = JctScQueue.spsc("QueueStrategyScheduler-Despatch").capacity(capacity.size())
 				.waitingStrategy(WaitingStrategy.SpinWaiting).buildWithProcessor(despatchMsg -> {
 					switch (despatchMsg.mark()) {
 					case MarketData:
-						BasicMarketData marketData = despatchMsg.getMarketData();
+						M marketData = despatchMsg.getMarketData();
 						MarkerDataKeeper.onMarketDate(marketData);
-						subscribedMap.get(marketData.getInstrument().id()).each(strategy -> {
+						subscribedMap.get(marketData.getInstrumentId()).each(strategy -> {
 							if (strategy.isEnabled()) {
 								strategy.onMarketData(marketData);
 							}
@@ -53,7 +54,7 @@ public final class QueueStrategyScheduler extends MultiStrategyScheduler<BasicMa
 						ChildOrder order = OrderKeeper.onOrdReport(ordReport);
 						log.info(
 								"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], ordId==[{}]",
-								ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().code(),
+								ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().instrumentCode(),
 								ordReport.getOrdId());
 						strategyMap.get(order.strategyId()).onOrder(order);
 						break;
@@ -68,7 +69,7 @@ public final class QueueStrategyScheduler extends MultiStrategyScheduler<BasicMa
 
 	// TODO add pools
 	@Override
-	public void onMarketData(BasicMarketData marketData) {
+	public void onMarketData(M marketData) {
 		despatchQueue.enqueue(new DespatchMsg(marketData));
 	}
 
@@ -87,11 +88,11 @@ public final class QueueStrategyScheduler extends MultiStrategyScheduler<BasicMa
 	private class DespatchMsg {
 
 		private int mark;
-		private BasicMarketData marketData;
+		private M marketData;
 		private OrdReport ordReport;
 		private AdaptorEvent adaptorEvent;
 
-		DespatchMsg(BasicMarketData marketData) {
+		DespatchMsg(M marketData) {
 			this.mark = MarketData;
 			this.marketData = marketData;
 		}
@@ -110,7 +111,7 @@ public final class QueueStrategyScheduler extends MultiStrategyScheduler<BasicMa
 			return mark;
 		}
 
-		private BasicMarketData getMarketData() {
+		private M getMarketData() {
 			return marketData;
 		}
 

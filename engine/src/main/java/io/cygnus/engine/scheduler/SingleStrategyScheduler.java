@@ -20,7 +20,7 @@ public final class SingleStrategyScheduler<M extends MarketData> implements Inbo
 	private static final Logger log = CommonLoggerFactory.getLogger(SingleStrategyScheduler.class);
 
 	/**
-	 * only strategy
+	 * only one strategy
 	 */
 	private final Strategy<M> strategy;
 

@@ -40,9 +40,9 @@ public abstract class MultiStrategyScheduler<M extends MarketData> implements St
 	}
 
 	private void subscribeInstrument(Instrument instrument, Strategy<M> strategy) {
-		subscribedMap.getIfAbsentPut(instrument.id(), MutableSets::newUnifiedSet).add(strategy);
+		subscribedMap.getIfAbsentPut(instrument.instrumentId(), MutableSets::newUnifiedSet).add(strategy);
 		log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
-				instrument.id());
+				instrument.instrumentId());
 	}
 
 }
