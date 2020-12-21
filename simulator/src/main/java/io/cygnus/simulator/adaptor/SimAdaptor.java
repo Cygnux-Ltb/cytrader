@@ -106,7 +106,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 				.setStartTradingDay(params.getString(SimAdaptorParamKey.TradingDayStart))
 				.setEndTradingDay(params.getString(SimAdaptorParamKey.TradingDayEnd))
 				.setInstrumentIdList(
-						Stream.of(instruments).map(instrument -> instrument.code()).collect(Collectors.toList()))
+						Stream.of(instruments).map(instrument -> instrument.instrumentCode()).collect(Collectors.toList()))
 				.build();
 		byte[] byteMsg;
 		try {
@@ -121,7 +121,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	@Override
 	public boolean newOredr(Account account, ChildOrder order) {
 		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.ordId()).intValue())
-				.setInstrumentId(order.instrument().code()).setLimitPrice(order.price().offerPrice())
+				.setInstrumentId(order.instrument().instrumentCode()).setLimitPrice(order.price().offerPrice())
 				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.direction().code()).build();
 		byte[] byteMsg;
@@ -138,7 +138,7 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	public boolean cancelOrder(Account account, ChildOrder order) {
 		Order cancelOrder = OrderKeeper.getOrder(order.ordId());
 		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.ordId()).intValue())
-				.setInstrumentId(cancelOrder.instrument().code()).setLimitPrice(order.price().offerPrice())
+				.setInstrumentId(cancelOrder.instrument().instrumentCode()).setLimitPrice(order.price().offerPrice())
 				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
 				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.direction().code()).build();
 		byte[] byteMsg;
