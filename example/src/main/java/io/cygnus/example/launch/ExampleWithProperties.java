@@ -6,7 +6,7 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 
-import io.cygnus.engine.scheduler.SingleStrategyScheduler;
+import io.cygnus.engine.scheduler.SimpleSingleStrategyScheduler;
 import io.cygnus.example.strategy.ExampleSmaStrategy;
 import io.horizon.definition.adaptor.Adaptor;
 import io.horizon.definition.event.InboundScheduler;
@@ -44,7 +44,7 @@ public final class ExampleWithProperties {
 		log.info("read properties -> {}", prop);
 
 		ExampleSmaStrategy exampleStrategy = new ExampleSmaStrategy(strategyId, subAccountId, rb2010, null);
-		InboundScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(exampleStrategy);
+		InboundScheduler<BasicMarketData> scheduler = new SimpleSingleStrategyScheduler<>(exampleStrategy);
 		exampleStrategy.initialize(() -> true);
 
 		// Set Global AppId

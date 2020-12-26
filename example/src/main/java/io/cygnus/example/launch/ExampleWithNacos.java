@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
-import io.cygnus.engine.scheduler.SingleStrategyScheduler;
+import io.cygnus.engine.scheduler.SimpleSingleStrategyScheduler;
 import io.cygnus.example.strategy.ExampleSmaStrategy;
 import io.horizon.definition.adaptor.Adaptor;
 import io.horizon.definition.event.InboundScheduler;
@@ -37,7 +37,7 @@ public class ExampleWithNacos {
 		InstrumentManager.initialize(rb2010);
 
 		ExampleSmaStrategy exampleStrategy = new ExampleSmaStrategy(strategyId, subAccountId, rb2010, null);
-		InboundScheduler<BasicMarketData> scheduler = new SingleStrategyScheduler<>(exampleStrategy);
+		InboundScheduler<BasicMarketData> scheduler = new SimpleSingleStrategyScheduler<>(exampleStrategy);
 		exampleStrategy.initialize(() -> true);
 
 		// Set Global AppId
