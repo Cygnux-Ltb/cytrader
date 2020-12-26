@@ -12,19 +12,19 @@ import io.horizon.definition.order.OrderKeeper;
 import io.horizon.definition.order.actual.ChildOrder;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public final class SingleStrategyScheduler<M extends MarketData> implements InboundScheduler<M> {
+public final class SimpleSingleStrategyScheduler<M extends MarketData> implements InboundScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(SingleStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(SimpleSingleStrategyScheduler.class);
 
 	/**
 	 * only one strategy
 	 */
 	private final Strategy<M> strategy;
 
-	public SingleStrategyScheduler(Strategy<M> strategy) {
+	public SimpleSingleStrategyScheduler(Strategy<M> strategy) {
 		this.strategy = strategy;
 	}
 

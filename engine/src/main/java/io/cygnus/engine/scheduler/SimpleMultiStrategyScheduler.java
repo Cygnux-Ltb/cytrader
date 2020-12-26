@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import io.horizon.definition.adaptor.AdaptorEvent;
 import io.horizon.definition.market.data.MarkerDataKeeper;
 import io.horizon.definition.market.data.MarketData;
-import io.horizon.definition.market.data.impl.BasicMarketData;
 import io.horizon.definition.order.OrdReport;
 import io.horizon.definition.order.OrderKeeper;
 import io.horizon.definition.order.actual.ChildOrder;
@@ -21,12 +20,12 @@ import io.mercury.common.log.CommonLoggerFactory;
  *         策略执行引擎与整体框架分离
  *
  */
-public final class HeapQueueStrategyScheduler<M extends MarketData> extends MultiStrategyScheduler<M> {
+public final class SimpleMultiStrategyScheduler<M extends MarketData> extends MultiStrategyScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(HeapQueueStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(SimpleMultiStrategyScheduler.class);
 
 	private JctScQueue<DespatchMsg> despatchQueue;
 
@@ -34,7 +33,7 @@ public final class HeapQueueStrategyScheduler<M extends MarketData> extends Mult
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	public HeapQueueStrategyScheduler(Capacity capacity) {
+	public SimpleMultiStrategyScheduler(Capacity capacity) {
 		this.despatchQueue = JctScQueue.spsc("QueueStrategyScheduler-Despatch").capacity(capacity.size())
 				.waitingStrategy(WaitingStrategy.SpinWaiting).buildWithProcessor(despatchMsg -> {
 					switch (despatchMsg.mark()) {
