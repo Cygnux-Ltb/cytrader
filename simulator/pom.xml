@@ -79,7 +79,7 @@
 
 		<dependency>
 			<groupId>io.horizon</groupId>
-			<artifactId>definition</artifactId>
+			<artifactId>structure</artifactId>
 		</dependency>
 	</dependencies>
 

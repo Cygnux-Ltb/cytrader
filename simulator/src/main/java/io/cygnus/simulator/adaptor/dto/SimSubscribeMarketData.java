@@ -1,6 +1,6 @@
 package io.cygnus.simulator.adaptor.dto;
 
-import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.structure.market.instrument.Instrument;
 
 public final class SimSubscribeMarketData {
 
