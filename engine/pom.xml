@@ -24,7 +24,7 @@
 			<version>0.1</version> </dependency> -->
 		<dependency>
 			<groupId>io.horizon</groupId>
-			<artifactId>definition</artifactId>
+			<artifactId>structure</artifactId>
 		</dependency>
 
 		<dependency>

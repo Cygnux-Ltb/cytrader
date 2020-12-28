@@ -2,7 +2,7 @@ package io.cygnus.core.order;
 
 import org.junit.Test;
 
-import io.horizon.definition.order.OrderKeeper;
+import io.horizon.structure.order.OrderKeeper;
 
 public class OrderKeeperTest {
 	
