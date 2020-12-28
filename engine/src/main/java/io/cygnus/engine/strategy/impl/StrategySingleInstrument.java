@@ -3,10 +3,10 @@ package io.cygnus.engine.strategy.impl;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.slf4j.Logger;
 
-import io.horizon.definition.adaptor.Adaptor;
-import io.horizon.definition.adaptor.AdaptorEvent;
-import io.horizon.definition.market.data.MarketData;
-import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.structure.adaptor.Adaptor;
+import io.horizon.structure.adaptor.AdaptorEvent;
+import io.horizon.structure.market.data.MarketData;
+import io.horizon.structure.market.instrument.Instrument;
 import io.mercury.common.collections.ImmutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.ParamKey;

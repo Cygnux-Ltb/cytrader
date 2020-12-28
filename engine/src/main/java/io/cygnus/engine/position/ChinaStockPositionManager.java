@@ -1,6 +1,6 @@
 package io.cygnus.engine.position;
 
-import io.horizon.definition.position.PositionManagerBaseImpl;
+import io.horizon.structure.position.PositionManagerBaseImpl;
 
 public final class ChinaStockPositionManager extends PositionManagerBaseImpl<ChinaStockPosition> {
 

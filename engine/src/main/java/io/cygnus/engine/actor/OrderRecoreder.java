@@ -2,7 +2,7 @@ package io.cygnus.engine.actor;
 
 import com.lmax.disruptor.EventHandler;
 
-import io.horizon.definition.order.Order;
+import io.horizon.structure.order.Order;
 
 public final class OrderRecoreder implements EventHandler<Order> {
 

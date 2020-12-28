@@ -1,7 +1,7 @@
 package io.cygnus.engine.barrier;
 
-import io.horizon.definition.order.actual.ChildOrder;
-import io.horizon.definition.risk.OrderBarrier;
+import io.horizon.structure.order.actual.ChildOrder;
+import io.horizon.structure.risk.OrderBarrier;
 
 public class AdaptorBarrier implements OrderBarrier<ChildOrder> {
 

@@ -2,11 +2,11 @@ package io.cygnus.engine.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
-import io.horizon.definition.order.OrdQty;
-import io.horizon.definition.order.Order;
-import io.horizon.definition.order.enums.OrdStatus;
-import io.horizon.definition.order.enums.TrdDirection;
-import io.horizon.definition.position.PositionT0;
+import io.horizon.structure.order.OrdQty;
+import io.horizon.structure.order.Order;
+import io.horizon.structure.order.enums.OrdStatus;
+import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.position.PositionT0;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 

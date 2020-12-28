@@ -1,9 +1,9 @@
 package io.cygnus.engine.position;
 
-import io.horizon.definition.order.OrdQty;
-import io.horizon.definition.order.Order;
-import io.horizon.definition.order.enums.OrdStatus;
-import io.horizon.definition.position.PositionT1;
+import io.horizon.structure.order.OrdQty;
+import io.horizon.structure.order.Order;
+import io.horizon.structure.order.enums.OrdStatus;
+import io.horizon.structure.position.PositionT1;
 
 public class ChinaStockPosition extends PositionT1 {
 

@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 
 import io.cygnus.engine.strategy.Strategy;
 import io.cygnus.engine.strategy.StrategyScheduler;
-import io.horizon.definition.market.data.MarketData;
-import io.horizon.definition.market.instrument.Instrument;
+import io.horizon.structure.market.data.MarketData;
+import io.horizon.structure.market.instrument.Instrument;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.log.CommonLoggerFactory;

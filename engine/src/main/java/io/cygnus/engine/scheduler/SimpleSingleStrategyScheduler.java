@@ -3,13 +3,13 @@ package io.cygnus.engine.scheduler;
 import org.slf4j.Logger;
 
 import io.cygnus.engine.strategy.Strategy;
-import io.horizon.definition.adaptor.AdaptorEvent;
-import io.horizon.definition.event.InboundScheduler;
-import io.horizon.definition.market.data.MarkerDataKeeper;
-import io.horizon.definition.market.data.MarketData;
-import io.horizon.definition.order.OrdReport;
-import io.horizon.definition.order.OrderKeeper;
-import io.horizon.definition.order.actual.ChildOrder;
+import io.horizon.structure.adaptor.AdaptorEvent;
+import io.horizon.structure.event.InboundScheduler;
+import io.horizon.structure.market.data.MarkerDataKeeper;
+import io.horizon.structure.market.data.MarketData;
+import io.horizon.structure.order.OrdReport;
+import io.horizon.structure.order.OrderKeeper;
+import io.horizon.structure.order.actual.ChildOrder;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class SimpleSingleStrategyScheduler<M extends MarketData> implements InboundScheduler<M> {
