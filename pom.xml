@@ -77,7 +77,7 @@
 			<!-- see https://github.com/yellow013/horizon.git -->
 			<dependency>
 				<groupId>io.horizon</groupId>
-				<artifactId>definition</artifactId>
+				<artifactId>structure</artifactId>
 				<version>${horizon.version}</version>
 			</dependency>
 			<dependency>
