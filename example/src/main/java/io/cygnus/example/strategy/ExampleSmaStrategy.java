@@ -1,11 +1,11 @@
 package io.cygnus.example.strategy;
 
 import io.cygnus.engine.strategy.impl.StrategySingleInstrument;
-import io.horizon.definition.market.data.impl.BasicMarketData;
-import io.horizon.definition.market.instrument.Instrument;
-import io.horizon.definition.order.Order;
 import io.horizon.indicator.impl.SmaPoint;
 import io.horizon.indicator.impl.SmaIndicator.SmaEvent;
+import io.horizon.structure.market.data.impl.BasicMarketData;
+import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.structure.order.Order;
 import io.mercury.common.param.ImmutableParams;
 import io.mercury.common.param.ParamKey;
 
