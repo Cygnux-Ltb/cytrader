@@ -57,23 +57,23 @@ public abstract class StrategySingleInstrument<M extends MarketData, PK extends 
 
 	@Override
 	public void onAdaptorEvent(AdaptorEvent event) {
-		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", strategyName(), event.adaptorId(),
-				event.status());
-		switch (event.status()) {
+		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", strategyName(), event.getAdaptorId(),
+				event.getStatus());
+		switch (event.getStatus()) {
 		case MdEnable:
-			log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", strategyName(), event.adaptorId());
+			log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", strategyName(), event.getAdaptorId());
 			adaptor.subscribeMarketData(instrument);
 			log.info("{} :: Call subscribeMarketData, instrument -> {}", strategyName(), instrument);
 			break;
 		case TraderEnable:
-			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", strategyName(), event.adaptorId());
+			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", strategyName(), event.getAdaptorId());
 			adaptor.queryOrder(instrument);
-			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", strategyName(), event.adaptorId());
+			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", strategyName(), event.getAdaptorId());
 			adaptor.queryPositions(instrument);
 			log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", strategyName(),
-					event.adaptorId());
+					event.getAdaptorId());
 			adaptor.queryBalance();
-			log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", strategyName(), event.adaptorId());
+			log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", strategyName(), event.getAdaptorId());
 			break;
 		default:
 			log.warn("{} unhandled event received {}", strategyName(), event);

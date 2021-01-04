@@ -16,12 +16,12 @@ import io.horizon.structure.account.AccountKeeper;
 import io.horizon.structure.account.SubAccount;
 import io.horizon.structure.adaptor.Adaptor;
 import io.horizon.structure.market.data.MarkerDataKeeper;
-import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.data.MarkerDataKeeper.LastMarkerData;
+import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.market.instrument.InstrumentManager;
+import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.horizon.structure.order.Order;
-import io.horizon.structure.order.OrderKeeper;
+import io.horizon.structure.order.OrderBookKeeper;
 import io.horizon.structure.order.actual.ChildOrder;
 import io.horizon.structure.order.actual.ParentOrder;
 import io.horizon.structure.order.enums.OrdType;
@@ -86,7 +86,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 		this.subAccount = AccountKeeper.getSubAccount(subAccountId);
 		this.subAccountId = subAccountId;
 		this.account = AccountKeeper.getAccountBySubAccountId(subAccountId);
-		this.accountId = account.accountId();
+		this.accountId = account.getAccountId();
 		this.params = params;
 	}
 
@@ -184,12 +184,12 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 
 	@Override
 	public void enableInstrument(int instrumentId) {
-		InstrumentManager.setTradable(instrumentId);
+		InstrumentKeeper.setTradable(instrumentId);
 	}
 
 	@Override
 	public void disableInstrument(int instrumentId) {
-		InstrumentManager.setNotTradable(instrumentId);
+		InstrumentKeeper.setNotTradable(instrumentId);
 	}
 
 	@Override
@@ -352,12 +352,12 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 	 */
 	protected void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType,
 			TrdDirection direction) {
-		ParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
+		ParentOrder parentOrder = OrderBookKeeper.createNewOrder(strategyId, accountId, subAccountId, instrument,
 				abs(offerQty), offerPrice, ordType, direction, TrdAction.Open);
 		parentOrder.writeLog(log, strategyName(), "Open position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
-		ChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
+		ChildOrder childOrder = OrderBookKeeper.toChildOrder(parentOrder);
 		childOrder.writeLog(log, strategyName(), "Open position generate [ChildOrder]");
 		saveOrder(childOrder);
 
@@ -451,13 +451,13 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 	 * @param ordType    订单类型
 	 */
 	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
-		ParentOrder parentOrder = OrderKeeper.createParentOrder(strategyId, accountId, subAccountId, instrument,
+		ParentOrder parentOrder = OrderBookKeeper.createNewOrder(strategyId, accountId, subAccountId, instrument,
 				abs(offerQty), offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short,
 				TrdAction.Close);
 		parentOrder.writeLog(log, strategyName(), "Close position generate [ParentOrder]");
 		saveOrder(parentOrder);
 
-		ChildOrder childOrder = OrderKeeper.toChildOrder(parentOrder);
+		ChildOrder childOrder = OrderBookKeeper.toChildOrder(parentOrder);
 		childOrder.writeLog(log, strategyName(), "Close position generate [ChildOrder]");
 		saveOrder(childOrder);
 
@@ -471,7 +471,7 @@ public abstract class StrategyBaseImpl<M extends MarketData, PK extends ParamKey
 	 * @param order
 	 */
 	private void saveOrder(Order order) {
-		orders.put(order.ordId(), order);
+		orders.put(order.getOrdId(), order);
 	}
 
 	/**
