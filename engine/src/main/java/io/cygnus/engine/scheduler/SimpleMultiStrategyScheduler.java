@@ -6,7 +6,7 @@ import io.horizon.structure.adaptor.AdaptorEvent;
 import io.horizon.structure.market.data.MarkerDataKeeper;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.order.OrdReport;
-import io.horizon.structure.order.OrderKeeper;
+import io.horizon.structure.order.OrderBookKeeper;
 import io.horizon.structure.order.actual.ChildOrder;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.WaitingStrategy;
@@ -50,15 +50,16 @@ public final class SimpleMultiStrategyScheduler<M extends MarketData> extends Mu
 						OrdReport ordReport = despatchMsg.getOrdReport();
 						log.info("Handle OrdReport, brokerUniqueId==[{}], ordId==[{}]", ordReport.getBrokerUniqueId(),
 								ordReport.getOrdId());
-						ChildOrder order = OrderKeeper.onOrdReport(ordReport);
+						ChildOrder order = OrderBookKeeper.onOrdReport(ordReport);
 						log.info(
 								"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], ordId==[{}]",
-								ordReport.getBrokerUniqueId(), order.strategyId(), order.instrument().instrumentCode(),
+								ordReport.getBrokerUniqueId(), order.getStrategyId(), order.getInstrument().instrumentCode(),
 								ordReport.getOrdId());
-						strategyMap.get(order.strategyId()).onOrder(order);
+						strategyMap.get(order.getStrategyId()).onOrder(order);
 						break;
 					case AdaptorEvent:
-						despatchMsg.getAdaptorEvent();
+						AdaptorEvent adaptorEvent = despatchMsg.getAdaptorEvent();
+						adaptorEvent.getAdaptorId();
 						break;
 					default:
 						throw new IllegalStateException("scheduler mark illegal");

@@ -8,7 +8,7 @@ import io.horizon.structure.event.InboundScheduler;
 import io.horizon.structure.market.data.MarkerDataKeeper;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.order.OrdReport;
-import io.horizon.structure.order.OrderKeeper;
+import io.horizon.structure.order.OrderBookKeeper;
 import io.horizon.structure.order.actual.ChildOrder;
 import io.mercury.common.log.CommonLoggerFactory;
 
@@ -36,7 +36,7 @@ public final class SimpleSingleStrategyScheduler<M extends MarketData> implement
 
 	@Override
 	public void onOrdReport(OrdReport report) {
-		ChildOrder order = OrderKeeper.onOrdReport(report);
+		ChildOrder order = OrderBookKeeper.onOrdReport(report);
 		// 调用策略实现的订单回调函数
 		strategy.onOrder(order);
 	}
