@@ -11,7 +11,7 @@ import io.horizon.ftdc.adaptor.FtdcAdaptorParamKey;
 import io.horizon.structure.adaptor.Adaptor;
 import io.horizon.structure.event.InboundScheduler;
 import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.InstrumentManager;
+import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.horizon.structure.market.instrument.impl.ChinaFutures;
 import io.horizon.structure.market.instrument.impl.ChinaFuturesSymbol;
 import io.horizon.structure.pool.TimePeriodPool;
@@ -34,7 +34,7 @@ public class ExampleWithNacos {
 		int strategyId = 1;
 		int subAccountId = 1;
 		ChinaFutures rb2010 = new ChinaFutures(ChinaFuturesSymbol.RB, 2010);
-		InstrumentManager.initialize(rb2010);
+		InstrumentKeeper.initialize(rb2010);
 
 		ExampleSmaStrategy exampleStrategy = new ExampleSmaStrategy(strategyId, subAccountId, rb2010, null);
 		InboundScheduler<BasicMarketData> scheduler = new SimpleSingleStrategyScheduler<>(exampleStrategy);
