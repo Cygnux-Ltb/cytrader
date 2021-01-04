@@ -19,7 +19,7 @@ import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.OrdReport;
 import io.horizon.structure.order.Order;
-import io.horizon.structure.order.OrderKeeper;
+import io.horizon.structure.order.OrderBookKeeper;
 import io.horizon.structure.order.actual.ChildOrder;
 import io.horizon.structure.order.enums.OrdStatus;
 import io.mercury.common.param.Params;
@@ -95,8 +95,8 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 	}
 
 	@Override
-	public String adaptorName() {
-		return "SimInboundAdaptor$" + this.hashCode();
+	public String getAdaptorName() {
+		return "SimAdaptor$" + this.hashCode();
 	}
 
 	@Override
@@ -104,9 +104,8 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 		MarketDataSubscribe simSubscribe = MarketDataSubscribe.newBuilder().setUniqueId(Integer.valueOf(1))
 				.setStartTradingDay(params.getString(SimAdaptorParamKey.TradingDayStart))
-				.setEndTradingDay(params.getString(SimAdaptorParamKey.TradingDayEnd))
-				.setInstrumentIdList(
-						Stream.of(instruments).map(instrument -> instrument.instrumentCode()).collect(Collectors.toList()))
+				.setEndTradingDay(params.getString(SimAdaptorParamKey.TradingDayEnd)).setInstrumentIdList(Stream
+						.of(instruments).map(instrument -> instrument.instrumentCode()).collect(Collectors.toList()))
 				.build();
 		byte[] byteMsg;
 		try {
@@ -120,10 +119,10 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	@Override
 	public boolean newOredr(Account account, ChildOrder order) {
-		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.ordId()).intValue())
-				.setInstrumentId(order.instrument().instrumentCode()).setLimitPrice(order.price().offerPrice())
-				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
-				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.direction().code()).build();
+		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.getOrdId()).intValue())
+				.setInstrumentId(order.getInstrument().instrumentCode()).setLimitPrice(order.getPrice().offerPrice())
+				.setVolumeTotalOriginal(Double.valueOf(order.getQty().offerQty()).intValue())
+				.setOrderStatus(OrdStatus.PendingNew.code()).setDirection(order.getDirection().code()).build();
 		byte[] byteMsg;
 		try {
 			byteMsg = simOrder.toByteBuffer().array();
@@ -136,11 +135,11 @@ public class SimAdaptor extends AdaptorBaseImpl<BasicMarketData> {
 
 	@Override
 	public boolean cancelOrder(Account account, ChildOrder order) {
-		Order cancelOrder = OrderKeeper.getOrder(order.ordId());
-		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.ordId()).intValue())
-				.setInstrumentId(cancelOrder.instrument().instrumentCode()).setLimitPrice(order.price().offerPrice())
-				.setVolumeTotalOriginal(Double.valueOf(order.qty().offerQty()).intValue())
-				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.direction().code()).build();
+		Order cancelOrder = OrderBookKeeper.getOrder(order.getOrdId());
+		SimOrder simOrder = SimOrder.newBuilder().setOrderRef(Long.valueOf(order.getOrdId()).intValue())
+				.setInstrumentId(cancelOrder.getInstrument().instrumentCode()).setLimitPrice(order.getPrice().offerPrice())
+				.setVolumeTotalOriginal(Double.valueOf(order.getQty().offerQty()).intValue())
+				.setOrderStatus(OrdStatus.PendingCancel.code()).setDirection(cancelOrder.getDirection().code()).build();
 		byte[] byteMsg;
 		try {
 			byteMsg = simOrder.toByteBuffer().array();

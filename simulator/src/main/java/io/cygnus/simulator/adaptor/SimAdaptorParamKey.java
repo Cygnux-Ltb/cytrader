@@ -47,7 +47,7 @@ public enum SimAdaptorParamKey implements AdaptorParamKey {
 	}
 
 	@Override
-	public String adaptorName() {
+	public String getAdaptorName() {
 		return "SimAdaptor";
 	}
 
