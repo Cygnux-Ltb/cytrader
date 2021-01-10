@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,9 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common.api.reports;
-
+package io.cygnus.exchange.core.common.api.reports;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -23,17 +22,18 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public final class ApiReportQuery {
 
-    public long timestamp;
+	public long timestamp;
 
-    // transfer unique id
-    // can be constant unless going to push data concurrently
-    public final int transferId;
+	// transfer unique id
+	// can be constant unless going to push data concurrently
+	public final int transferId;
 
-    // serializable object
-    public final ReportQuery<?> query;
+	// serializable object
+	public final ReportQuery<?> query;
 
-    @Override
-    public String toString() {
-        return "[REPORT_QUERY tid=" + transferId + " query=" + query + "]";
-    }
+	@Override
+	public String toString() {
+		return "[REPORT_QUERY tid=" + transferId + " query=" + query + "]";
+	}
+
 }

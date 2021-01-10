@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,20 +11,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common.api.reports;
+package io.cygnus.exchange.core.common.api.reports;
 
 
-import exchange.core2.core.utils.SerializationUtils;
+import java.util.stream.Stream;
+
+import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
+
+import io.cygnus.exchange.core.utils.SerializationUtils;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import net.openhft.chronicle.bytes.BytesIn;
 import net.openhft.chronicle.bytes.BytesOut;
-import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
-
-import java.util.stream.Stream;
 
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -34,17 +36,17 @@ import java.util.stream.Stream;
 public final class TotalCurrencyBalanceReportResult implements ReportResult {
 
     // currency -> balance
-    final private IntLongHashMap accountBalances;
-    final private IntLongHashMap fees;
-    final private IntLongHashMap adjustments;
-    final private IntLongHashMap suspends;
-    final private IntLongHashMap ordersBalances;
+    final private MutableIntLongMap accountBalances;
+    final private MutableIntLongMap fees;
+    final private MutableIntLongMap adjustments;
+    final private MutableIntLongMap suspends;
+    final private MutableIntLongMap ordersBalances;
 
     // symbol -> volume
     // We have to keep shorts and longs separately because for multi-core processing different risk engine instances will give non-matching results.
     // They should match when aggregated though.
-    final private IntLongHashMap openInterestLong;
-    final private IntLongHashMap openInterestShort;
+    final private MutableIntLongMap openInterestLong;
+    final private MutableIntLongMap openInterestShort;
 
     public static TotalCurrencyBalanceReportResult createEmpty() {
         return new TotalCurrencyBalanceReportResult(
@@ -77,11 +79,11 @@ public final class TotalCurrencyBalanceReportResult implements ReportResult {
         SerializationUtils.marshallNullable(openInterestShort, bytes, SerializationUtils::marshallIntLongHashMap);
     }
 
-    public IntLongHashMap getGlobalBalancesSum() {
+    public MutableIntLongMap getGlobalBalancesSum() {
         return SerializationUtils.mergeSum(accountBalances, ordersBalances, fees, adjustments, suspends);
     }
 
-    public IntLongHashMap getClientsBalancesSum() {
+    public MutableIntLongMap getClientsBalancesSum() {
         return SerializationUtils.mergeSum(accountBalances, ordersBalances, suspends);
     }
 

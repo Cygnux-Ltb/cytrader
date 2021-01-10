@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,20 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common.api.reports;
-
-import exchange.core2.core.common.Order;
-import exchange.core2.core.common.PositionDirection;
-import exchange.core2.core.common.UserStatus;
-import exchange.core2.core.utils.SerializationUtils;
-import lombok.*;
-import lombok.extern.slf4j.Slf4j;
-import net.openhft.chronicle.bytes.BytesIn;
-import net.openhft.chronicle.bytes.BytesOut;
-import net.openhft.chronicle.bytes.WriteBytesMarshallable;
-import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+package io.cygnus.exchange.core.common.api.reports;
 
 import java.util.Collection;
 import java.util.List;
@@ -33,12 +21,31 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+import org.slf4j.Logger;
+
+import io.cygnus.exchange.core.common.Order;
+import io.cygnus.exchange.core.common.PositionDirection;
+import io.cygnus.exchange.core.common.UserStatus;
+import io.cygnus.exchange.core.utils.SerializationUtils;
+import io.mercury.common.log.CommonLoggerFactory;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import net.openhft.chronicle.bytes.BytesIn;
+import net.openhft.chronicle.bytes.BytesOut;
+import net.openhft.chronicle.bytes.WriteBytesMarshallable;
+
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 @Getter
-@Slf4j
 public final class SingleUserReportResult implements ReportResult {
 
+	private static final Logger log = CommonLoggerFactory.getLogger(SingleUserReportResult.class);
+	
 	public static final SingleUserReportResult IDENTITY = new SingleUserReportResult(0L, null, null, null, null,
 			QueryExecutionStatus.OK);
 
@@ -48,7 +55,7 @@ public final class SingleUserReportResult implements ReportResult {
 	// private final UserProfile userProfile;
 
 	private final UserStatus userStatus;
-	private final IntLongHashMap accounts;
+	private final MutableIntLongMap accounts;
 	private final IntObjectHashMap<Position> positions;
 
 	// matching engine: orders placed by user
@@ -63,7 +70,7 @@ public final class SingleUserReportResult implements ReportResult {
 	}
 
 	public static SingleUserReportResult createFromRiskEngineFound(long uid, UserStatus userStatus,
-			IntLongHashMap accounts, IntObjectHashMap<Position> positions) {
+			MutableIntLongMap accounts, IntObjectHashMap<Position> positions) {
 		return new SingleUserReportResult(uid, userStatus, accounts, positions, null, QueryExecutionStatus.OK);
 	}
 
@@ -122,7 +129,12 @@ public final class SingleUserReportResult implements ReportResult {
 	}
 
 	public enum QueryExecutionStatus {
-		OK(0), USER_NOT_FOUND(1);
+
+		OK(0),
+
+		USER_NOT_FOUND(1),
+
+		;
 
 		private final int code;
 
@@ -171,14 +183,11 @@ public final class SingleUserReportResult implements ReportResult {
 		public final long pendingBuySize;
 
 		private Position(BytesIn<?> bytes) {
-
 			this.quoteCurrency = bytes.readInt();
-
 			this.direction = PositionDirection.of(bytes.readByte());
 			this.openVolume = bytes.readLong();
 			this.openPriceSum = bytes.readLong();
 			this.profit = bytes.readLong();
-
 			this.pendingSellSize = bytes.readLong();
 			this.pendingBuySize = bytes.readLong();
 		}

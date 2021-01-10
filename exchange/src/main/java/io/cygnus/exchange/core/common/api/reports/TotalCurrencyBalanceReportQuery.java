@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,26 +11,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common.api.reports;
+package io.cygnus.exchange.core.common.api.reports;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.PositionDirection;
-import exchange.core2.core.common.SymbolType;
-import exchange.core2.core.processors.MatchingEngineRouter;
-import exchange.core2.core.processors.RiskEngine;
-import exchange.core2.core.processors.SymbolSpecificationProvider;
-import exchange.core2.core.utils.CoreArithmeticUtils;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.PositionDirection;
+import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.processors.MatchingEngineRouter;
+import io.cygnus.exchange.core.processors.RiskEngine;
+import io.cygnus.exchange.core.processors.SymbolSpecificationProvider;
+import io.cygnus.exchange.core.utils.BizArithmeticUtils;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.openhft.chronicle.bytes.BytesIn;
 import net.openhft.chronicle.bytes.BytesOut;
-import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
-
-import java.util.Optional;
-import java.util.stream.Stream;
 
 @NoArgsConstructor
 @EqualsAndHashCode
@@ -64,11 +65,11 @@ public final class TotalCurrencyBalanceReportQuery implements ReportQuery<TotalC
 
                     currencyBalance.addToValue(
                             spec.getBaseCurrency(),
-                            ob.askOrdersStream(false).mapToLong(ord -> CoreArithmeticUtils.calculateAmountAsk(ord.getSize() - ord.getFilled(), spec)).sum());
+                            ob.askOrdersStream(false).mapToLong(ord -> BizArithmeticUtils.calculateAmountAsk(ord.getSize() - ord.getFilled(), spec)).sum());
 
                     currencyBalance.addToValue(
                             spec.getQuoteCurrency(),
-                            ob.bidOrdersStream(false).mapToLong(ord -> CoreArithmeticUtils.calculateAmountBidTakerFee(ord.getSize() - ord.getFilled(), ord.getReserveBidPrice(), spec)).sum());
+                            ob.bidOrdersStream(false).mapToLong(ord -> BizArithmeticUtils.calculateAmountBidTakerFee(ord.getSize() - ord.getFilled(), ord.getReserveBidPrice(), spec)).sum());
                 });
 
         return Optional.of(TotalCurrencyBalanceReportResult.ofOrderBalances(currencyBalance));

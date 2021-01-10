@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,16 +11,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common.api.binary;
+package io.cygnus.exchange.core.common.api.binary;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.utils.SerializationUtils;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.utils.SerializationUtils;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import net.openhft.chronicle.bytes.BytesIn;
 import net.openhft.chronicle.bytes.BytesOut;
+
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
 import java.util.Collection;
@@ -31,7 +33,7 @@ import java.util.Collection;
 @Getter
 public final class BatchAddSymbolsCommand implements BinaryDataCommand {
 
-	private final IntObjectHashMap<CoreSymbolSpecification> symbols;
+	private final MutableIntObjectMap<CoreSymbolSpecification> symbols;
 
 	public BatchAddSymbolsCommand(final CoreSymbolSpecification symbol) {
 		symbols = IntObjectHashMap.newWithKeysValues(symbol.symbolId, symbol);

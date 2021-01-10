@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common.api.binary;
+package io.cygnus.exchange.core.common.api.binary;
 
 import lombok.Getter;
 
@@ -21,7 +21,10 @@ import lombok.Getter;
 public enum BinaryCommandType {
 
     ADD_ACCOUNTS(1002),
-    ADD_SYMBOLS(1003);
+    
+    ADD_SYMBOLS(1003),
+    
+    ;
 
     private final int code;
 
