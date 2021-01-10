@@ -1,31 +1,31 @@
-package exchange.core2.tests.examples;
+package io.cygnus.exchange.tests.examples;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 import org.junit.Test;
 
-import exchange.core2.core.ExchangeApi;
-import exchange.core2.core.ExchangeCore;
-import exchange.core2.core.IEventsHandler;
-import exchange.core2.core.SimpleEventsProcessor;
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.OrderAction;
-import exchange.core2.core.common.OrderType;
-import exchange.core2.core.common.SymbolType;
-import exchange.core2.core.common.api.ApiAddUser;
-import exchange.core2.core.common.api.ApiAdjustUserBalance;
-import exchange.core2.core.common.api.ApiCancelOrder;
-import exchange.core2.core.common.api.ApiMoveOrder;
-import exchange.core2.core.common.api.ApiPlaceOrder;
-import exchange.core2.core.common.api.binary.BatchAddSymbolsCommand;
-import exchange.core2.core.common.api.reports.SingleUserReportQuery;
-import exchange.core2.core.common.api.reports.SingleUserReportResult;
-import exchange.core2.core.common.api.reports.TotalCurrencyBalanceReportQuery;
-import exchange.core2.core.common.api.reports.TotalCurrencyBalanceReportResult;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.config.ExchangeConfiguration;
+import io.cygnus.exchange.core.ExchangeApi;
+import io.cygnus.exchange.core.ExchangeCore;
+import io.cygnus.exchange.core.IEventsHandler;
+import io.cygnus.exchange.core.SimpleEventsProcessor;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.OrderAction;
+import io.cygnus.exchange.core.common.OrderType;
+import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.common.api.ApiAddUser;
+import io.cygnus.exchange.core.common.api.ApiAdjustUserBalance;
+import io.cygnus.exchange.core.common.api.ApiCancelOrder;
+import io.cygnus.exchange.core.common.api.ApiMoveOrder;
+import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
+import io.cygnus.exchange.core.common.api.binary.BatchAddSymbolsCommand;
+import io.cygnus.exchange.core.common.api.reports.SingleUserReportQuery;
+import io.cygnus.exchange.core.common.api.reports.SingleUserReportResult;
+import io.cygnus.exchange.core.common.api.reports.TotalCurrencyBalanceReportQuery;
+import io.cygnus.exchange.core.common.api.reports.TotalCurrencyBalanceReportResult;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
 
 public class ITCoreExample {
 
