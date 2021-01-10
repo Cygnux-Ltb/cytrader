@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common.cmd;
+package io.cygnus.exchange.core.common.cmd;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +23,7 @@ import java.util.HashMap;
 @Getter
 @AllArgsConstructor
 public enum OrderCommandType {
+	
     PLACE_ORDER((byte) 1, true),
     CANCEL_ORDER((byte) 2, true),
     MOVE_ORDER((byte) 3, true),

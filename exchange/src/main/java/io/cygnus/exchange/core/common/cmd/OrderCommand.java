@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,15 +11,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common.cmd;
-
-import exchange.core2.core.common.*;
-import lombok.*;
+package io.cygnus.exchange.core.common.cmd;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+import io.cygnus.exchange.core.common.IOrder;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.OrderAction;
+import io.cygnus.exchange.core.common.OrderType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Builder
 @NoArgsConstructor
