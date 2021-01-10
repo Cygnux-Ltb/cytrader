@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,42 +11,46 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.processors;
+package io.cygnus.exchange.core.processors;
 
 import java.util.HashMap;
 import java.util.Optional;
 
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+import org.slf4j.Logger;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.SymbolType;
-import exchange.core2.core.common.api.binary.BatchAddAccountsCommand;
-import exchange.core2.core.common.api.binary.BatchAddSymbolsCommand;
-import exchange.core2.core.common.api.reports.ReportQuery;
-import exchange.core2.core.common.api.reports.ReportResult;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.cmd.OrderCommandType;
-import exchange.core2.core.common.config.ExchangeConfiguration;
-import exchange.core2.core.common.config.LoggingConfiguration;
-import exchange.core2.core.common.config.OrdersProcessingConfiguration;
-import exchange.core2.core.orderbook.IOrderBook;
-import exchange.core2.core.orderbook.OrderBookEventsHelper;
-import exchange.core2.core.processors.journaling.ISerializationProcessor;
-import exchange.core2.core.utils.SerializationUtils;
-import exchange.core2.core.utils.UnsafeUtils;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.common.api.binary.BatchAddAccountsCommand;
+import io.cygnus.exchange.core.common.api.binary.BatchAddSymbolsCommand;
+import io.cygnus.exchange.core.common.api.reports.ReportQuery;
+import io.cygnus.exchange.core.common.api.reports.ReportResult;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
+import io.cygnus.exchange.core.common.config.LoggingConfiguration;
+import io.cygnus.exchange.core.common.config.OrdersProcessingConfiguration;
+import io.cygnus.exchange.core.orderbook.IOrderBook;
+import io.cygnus.exchange.core.orderbook.OrderBookEventsHelper;
+import io.cygnus.exchange.core.processors.journaling.ISerializationProcessor;
+import io.cygnus.exchange.core.utils.SerializationUtils;
+import io.cygnus.exchange.core.utils.UnsafeOperator;
 import io.mercury.common.collections.art.ObjectsPool;
+import io.mercury.common.log.CommonLoggerFactory;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import net.openhft.chronicle.bytes.BytesOut;
 import net.openhft.chronicle.bytes.WriteBytesMarshallable;
 
-@Slf4j
 @Getter
 public final class MatchingEngineRouter implements WriteBytesMarshallable {
+	
+	private static final Logger log = CommonLoggerFactory.getLogger(MatchingEngineRouter.class);
 
     // state
     private final BinaryCommandsProcessor binaryCommandsProcessor;
@@ -189,7 +192,7 @@ public final class MatchingEngineRouter implements WriteBytesMarshallable {
                     shardId,
                     this);
             // Send ACCEPTED because this is a first command in series. Risk engine is second - so it will return SUCCESS
-            UnsafeUtils.setResultVolatile(cmd, isSuccess, CommandResultCode.ACCEPTED, CommandResultCode.STATE_PERSIST_MATCHING_ENGINE_FAILED);
+            UnsafeOperator.setResultVolatile(cmd, isSuccess, CommandResultCode.ACCEPTED, CommandResultCode.STATE_PERSIST_MATCHING_ENGINE_FAILED);
         }
 
     }
@@ -197,7 +200,7 @@ public final class MatchingEngineRouter implements WriteBytesMarshallable {
     private void handleBinaryMessage(Object message) {
 
         if (message instanceof BatchAddSymbolsCommand) {
-            final IntObjectHashMap<CoreSymbolSpecification> symbols = ((BatchAddSymbolsCommand) message).getSymbols();
+            final MutableIntObjectMap<CoreSymbolSpecification> symbols = ((BatchAddSymbolsCommand) message).getSymbols();
             symbols.forEach(this::addSymbol);
         } else if (message instanceof BatchAddAccountsCommand) {
             // do nothing

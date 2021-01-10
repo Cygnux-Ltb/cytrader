@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.processors;
+package io.cygnus.exchange.core.processors;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -26,12 +26,13 @@ import com.lmax.disruptor.Sequence;
 import com.lmax.disruptor.SequenceBarrier;
 import com.lmax.disruptor.Sequencer;
 
-import exchange.core2.core.common.CoreWaitStrategy;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.CoreWaitStrategy;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.cmd.OrderCommandType;
 import lombok.Setter;
 
 public final class TwoStepMasterProcessor implements EventProcessor {
+
 	private static final int IDLE = 0;
 	private static final int HALTED = IDLE + 1;
 	private static final int RUNNING = HALTED + 1;

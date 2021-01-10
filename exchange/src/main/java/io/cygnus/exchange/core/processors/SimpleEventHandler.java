@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,11 +11,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
+package io.cygnus.exchange.core.processors;
 
-package exchange.core2.core.processors;
-
-import exchange.core2.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
 
 public interface SimpleEventHandler {
 

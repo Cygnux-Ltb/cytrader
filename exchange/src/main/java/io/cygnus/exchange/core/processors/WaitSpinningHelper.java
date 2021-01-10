@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.processors;
+package io.cygnus.exchange.core.processors;
 
 import java.lang.reflect.Field;
 import java.util.concurrent.locks.Condition;
@@ -26,8 +26,8 @@ import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.SequenceBarrier;
 import com.lmax.disruptor.Sequencer;
 
-import exchange.core2.core.common.CoreWaitStrategy;
-import exchange.core2.core.utils.ReflectionUtils;
+import io.cygnus.exchange.core.common.CoreWaitStrategy;
+import io.mercury.common.util.JdkReflection;
 
 public final class WaitSpinningHelper {
 
@@ -54,10 +54,10 @@ public final class WaitSpinningHelper {
 
 		this.block = waitStrategy.isBlock();
 		if (block) {
-			this.blockingDisruptorWaitStrategy = ReflectionUtils.extractField(AbstractSequencer.class,
+			this.blockingDisruptorWaitStrategy = JdkReflection.extractField(AbstractSequencer.class,
 					(AbstractSequencer) sequencer, "waitStrategy");
-			this.lock = ReflectionUtils.extractField(BlockingWaitStrategy.class, blockingDisruptorWaitStrategy, "lock");
-			this.processorNotifyCondition = ReflectionUtils.extractField(BlockingWaitStrategy.class,
+			this.lock = JdkReflection.extractField(BlockingWaitStrategy.class, blockingDisruptorWaitStrategy, "lock");
+			this.processorNotifyCondition = JdkReflection.extractField(BlockingWaitStrategy.class,
 					blockingDisruptorWaitStrategy, "processorNotifyCondition");
 		} else {
 			this.blockingDisruptorWaitStrategy = null;
@@ -105,9 +105,9 @@ public final class WaitSpinningHelper {
 
 	private static <T> Sequencer extractSequencer(RingBuffer<T> ringBuffer) {
 		try {
-			final Field f = ReflectionUtils.getField(RingBuffer.class, "sequencer");
-			f.setAccessible(true);
-			return (Sequencer) f.get(ringBuffer);
+			final Field field = JdkReflection.getField(RingBuffer.class, "sequencer");
+			field.setAccessible(true);
+			return (Sequencer) field.get(ringBuffer);
 		} catch (NoSuchFieldException | IllegalAccessException e) {
 			throw new IllegalStateException("Can not access Disruptor internals: ", e);
 		}

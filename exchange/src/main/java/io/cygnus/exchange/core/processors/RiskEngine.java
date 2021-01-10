@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,42 +11,45 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.processors;
+package io.cygnus.exchange.core.processors;
 
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
-import exchange.core2.core.common.BalanceAdjustmentType;
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.MatcherEventType;
-import exchange.core2.core.common.MatcherTradeEvent;
-import exchange.core2.core.common.OrderAction;
-import exchange.core2.core.common.OrderType;
-import exchange.core2.core.common.StateHash;
-import exchange.core2.core.common.SymbolPositionRecord;
-import exchange.core2.core.common.SymbolType;
-import exchange.core2.core.common.UserProfile;
-import exchange.core2.core.common.api.binary.BatchAddAccountsCommand;
-import exchange.core2.core.common.api.binary.BatchAddSymbolsCommand;
-import exchange.core2.core.common.api.binary.BinaryDataCommand;
-import exchange.core2.core.common.api.reports.ReportQuery;
-import exchange.core2.core.common.api.reports.ReportResult;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.cmd.OrderCommandType;
-import exchange.core2.core.common.config.ExchangeConfiguration;
-import exchange.core2.core.common.config.LoggingConfiguration;
-import exchange.core2.core.common.config.OrdersProcessingConfiguration;
-import exchange.core2.core.processors.journaling.ISerializationProcessor;
-import exchange.core2.core.utils.CoreArithmeticUtils;
-import exchange.core2.core.utils.SerializationUtils;
-import exchange.core2.core.utils.UnsafeUtils;
+import io.cygnus.exchange.core.common.BalanceAdjustmentType;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.MatcherEventType;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.OrderAction;
+import io.cygnus.exchange.core.common.OrderType;
+import io.cygnus.exchange.core.common.StateHash;
+import io.cygnus.exchange.core.common.SymbolPositionRecord;
+import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.common.UserProfile;
+import io.cygnus.exchange.core.common.api.binary.BatchAddAccountsCommand;
+import io.cygnus.exchange.core.common.api.binary.BatchAddSymbolsCommand;
+import io.cygnus.exchange.core.common.api.binary.BinaryDataCommand;
+import io.cygnus.exchange.core.common.api.reports.ReportQuery;
+import io.cygnus.exchange.core.common.api.reports.ReportResult;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
+import io.cygnus.exchange.core.common.config.LoggingConfiguration;
+import io.cygnus.exchange.core.common.config.OrdersProcessingConfiguration;
+import io.cygnus.exchange.core.processors.journaling.ISerializationProcessor;
+import io.cygnus.exchange.core.utils.BizArithmeticUtils;
+import io.cygnus.exchange.core.utils.SerializationUtils;
+import io.cygnus.exchange.core.utils.UnsafeOperator;
 import io.mercury.common.collections.art.ObjectsPool;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -70,9 +72,9 @@ public final class RiskEngine implements WriteBytesMarshallable {
 	private final UserProfileService userProfileService;
 	private final BinaryCommandsProcessor binaryCommandsProcessor;
 	private final IntObjectHashMap<LastPriceCacheRecord> lastPriceCache;
-	private final IntLongHashMap fees;
-	private final IntLongHashMap adjustments;
-	private final IntLongHashMap suspends;
+	private final MutableIntLongMap fees;
+	private final MutableIntLongMap adjustments;
+	private final MutableIntLongMap suspends;
 	private final ObjectsPool objectsPool;
 
 	// sharding by symbolId
@@ -122,9 +124,9 @@ public final class RiskEngine implements WriteBytesMarshallable {
 								exchangeConfiguration.getReportsQueriesCfg(), bytesIn, shardId);
 						final IntObjectHashMap<LastPriceCacheRecord> lastPriceCache = SerializationUtils
 								.readIntHashMap(bytesIn, LastPriceCacheRecord::new);
-						final IntLongHashMap fees = SerializationUtils.readIntLongHashMap(bytesIn);
-						final IntLongHashMap adjustments = SerializationUtils.readIntLongHashMap(bytesIn);
-						final IntLongHashMap suspends = SerializationUtils.readIntLongHashMap(bytesIn);
+						final MutableIntLongMap fees = SerializationUtils.readIntLongHashMap(bytesIn);
+						final MutableIntLongMap adjustments = SerializationUtils.readIntLongHashMap(bytesIn);
+						final MutableIntLongMap suspends = SerializationUtils.readIntLongHashMap(bytesIn);
 
 						return new State(symbolSpecificationProvider, userProfileService, binaryCommandsProcessor,
 								lastPriceCache, fees, adjustments, suspends);
@@ -272,7 +274,7 @@ public final class RiskEngine implements WriteBytesMarshallable {
 		case PERSIST_STATE_RISK:
 			final boolean isSuccess = serializationProcessor.storeData(cmd.orderId, seq, cmd.timestamp,
 					ISerializationProcessor.SerializedModuleType.RISK_ENGINE, shardId, this);
-			UnsafeUtils.setResultVolatile(cmd, isSuccess, CommandResultCode.SUCCESS,
+			UnsafeOperator.setResultVolatile(cmd, isSuccess, CommandResultCode.SUCCESS,
 					CommandResultCode.STATE_PERSIST_RISK_ENGINE_FAILED);
 			return false;
 		default:
@@ -303,7 +305,8 @@ public final class RiskEngine implements WriteBytesMarshallable {
 
 		if (message instanceof BatchAddSymbolsCommand) {
 
-			final IntObjectHashMap<CoreSymbolSpecification> symbols = ((BatchAddSymbolsCommand) message).getSymbols();
+			final MutableIntObjectMap<CoreSymbolSpecification> symbols = ((BatchAddSymbolsCommand) message)
+					.getSymbols();
 			symbols.forEach(spec -> {
 				if (spec.type == SymbolType.CURRENCY_EXCHANGE_PAIR || cfgMarginTradingEnabled) {
 					symbolSpecificationProvider.addSymbol(spec);
@@ -433,7 +436,7 @@ public final class RiskEngine implements WriteBytesMarshallable {
 					return CommandResultCode.RISK_INVALID_RESERVE_BID_PRICE;
 				}
 
-				orderHoldAmount = CoreArithmeticUtils.calculateAmountBidTakerFeeForBudget(size, cmd.price, spec);
+				orderHoldAmount = BizArithmeticUtils.calculateAmountBidTakerFeeForBudget(size, cmd.price, spec);
 				if (logDebug)
 					log.debug("hold amount budget buy {} = {} * {} + {} * {}", cmd.price, size, spec.quoteScaleK, size,
 							spec.takerFee);
@@ -445,7 +448,7 @@ public final class RiskEngine implements WriteBytesMarshallable {
 					// cmd.price);
 					return CommandResultCode.RISK_INVALID_RESERVE_BID_PRICE;
 				}
-				orderHoldAmount = CoreArithmeticUtils.calculateAmountBidTakerFee(size, cmd.reserveBidPrice, spec);
+				orderHoldAmount = BizArithmeticUtils.calculateAmountBidTakerFee(size, cmd.reserveBidPrice, spec);
 				if (logDebug)
 					log.debug("hold amount buy {} = {} * ( {} * {} + {} )", orderHoldAmount, size, cmd.reserveBidPrice,
 							spec.quoteScaleK, spec.takerFee);
@@ -460,7 +463,7 @@ public final class RiskEngine implements WriteBytesMarshallable {
 				return CommandResultCode.RISK_ASK_PRICE_LOWER_THAN_FEE;
 			}
 
-			orderHoldAmount = CoreArithmeticUtils.calculateAmountAsk(size, spec);
+			orderHoldAmount = BizArithmeticUtils.calculateAmountAsk(size, spec);
 			if (logDebug)
 				log.debug("hold sell {} = {} * {} ", orderHoldAmount, size, spec.baseScaleK);
 		}
@@ -645,16 +648,16 @@ public final class RiskEngine implements WriteBytesMarshallable {
 		// for cancel/rejection only one party is involved
 		if (takerSell) {
 
-			taker.accounts.addToValue(spec.baseCurrency, CoreArithmeticUtils.calculateAmountAsk(ev.size, spec));
+			taker.accounts.addToValue(spec.baseCurrency, BizArithmeticUtils.calculateAmountAsk(ev.size, spec));
 
 		} else {
 
 			if (cmd.command == OrderCommandType.PLACE_ORDER && cmd.orderType == OrderType.FOK_BUDGET) {
 				taker.accounts.addToValue(spec.quoteCurrency,
-						CoreArithmeticUtils.calculateAmountBidTakerFeeForBudget(ev.size, ev.price, spec));
+						BizArithmeticUtils.calculateAmountBidTakerFeeForBudget(ev.size, ev.price, spec));
 			} else {
 				taker.accounts.addToValue(spec.quoteCurrency,
-						CoreArithmeticUtils.calculateAmountBidTakerFee(ev.size, ev.bidderHoldPrice, spec));
+						BizArithmeticUtils.calculateAmountBidTakerFee(ev.size, ev.bidderHoldPrice, spec));
 			}
 			// TODO for OrderType.IOC_BUDGET - for REJECT should release leftover deposit
 			// after all trades calculated
@@ -691,11 +694,11 @@ public final class RiskEngine implements WriteBytesMarshallable {
 				// buying, use bidderHoldPrice to calculate released amount based on price
 				// difference
 				final long priceDiff = ev.bidderHoldPrice - ev.price;
-				final long amountDiffToReleaseInQuoteCurrency = CoreArithmeticUtils
+				final long amountDiffToReleaseInQuoteCurrency = BizArithmeticUtils
 						.calculateAmountBidReleaseCorrMaker(size, priceDiff, spec);
 				maker.accounts.addToValue(quoteCurrency, amountDiffToReleaseInQuoteCurrency);
 
-				final long gainedAmountInBaseCurrency = CoreArithmeticUtils.calculateAmountAsk(size, spec);
+				final long gainedAmountInBaseCurrency = BizArithmeticUtils.calculateAmountAsk(size, spec);
 				maker.accounts.addToValue(spec.baseCurrency, gainedAmountInBaseCurrency);
 
 				makerSizeForThisHandler += size;
@@ -744,7 +747,7 @@ public final class RiskEngine implements WriteBytesMarshallable {
 			if (uidForThisHandler(ev.matchedOrderUid)) {
 				final long size = ev.size;
 				final UserProfile maker = userProfileService.getUserProfileOrAddSuspended(ev.matchedOrderUid);
-				final long gainedAmountInQuoteCurrency = CoreArithmeticUtils.calculateAmountBid(size, ev.price, spec);
+				final long gainedAmountInQuoteCurrency = BizArithmeticUtils.calculateAmountBid(size, ev.price, spec);
 				maker.accounts.addToValue(quoteCurrency, gainedAmountInQuoteCurrency - spec.makerFee * size);
 				makerSizeForThisHandler += size;
 			}
@@ -808,8 +811,9 @@ public final class RiskEngine implements WriteBytesMarshallable {
 		private final UserProfileService userProfileService;
 		private final BinaryCommandsProcessor binaryCommandsProcessor;
 		private final IntObjectHashMap<LastPriceCacheRecord> lastPriceCache;
-		private final IntLongHashMap fees;
-		private final IntLongHashMap adjustments;
-		private final IntLongHashMap suspends;
+		private final MutableIntLongMap fees;
+		private final MutableIntLongMap adjustments;
+		private final MutableIntLongMap suspends;
 	}
+
 }
