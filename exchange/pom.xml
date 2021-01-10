@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>io.cygnus</groupId>
@@ -13,45 +12,9 @@
 	<artifactId>exchange</artifactId>
 	<name>exchange</name>
 	<description>High performance market exchange core.</description>
-	<url>https://core2.exchange</url>
-
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<scm>
-		<url>https://github.com/mzheravin/exchange-core.git</url>
-		<connection>scm:git:git://github.com/mzheravin/exchange-core.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:mzheravin/exchange-core.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
-
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/mzheravin/exchange-core/issues</url>
-	</issueManagement>
-
-	<developers>
-		<developer>
-			<name>Maksim Zheravin</name>
-			<email>mzheravin@core2.exchange</email>
-			<organization>Core2</organization>
-			<organizationUrl>https://github.com/mzheravin</organizationUrl>
-		</developer>
-	</developers>
 
 	<properties>
 		<skip.it>false</skip.it>
-		<java.version>1.8</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<cucumber.version>5.4.2</cucumber.version>
 		<delombok.output>target/delombok</delombok.output>
 	</properties>
 
@@ -67,11 +30,10 @@
 		<!-- <dependency> <groupId>exchange.core2</groupId> <artifactId>orderbook</artifactId> 
 			<version>0.7.0</version> </dependency> -->
 
-		<!-- LMAX Disruptor -->
 		<dependency>
-			<groupId>com.lmax</groupId>
-			<artifactId>disruptor</artifactId>
-			<version>3.4.2</version>
+			<groupId>exchange.core2</groupId>
+			<artifactId>orderbook</artifactId>
+			<version>0.7.0</version>
 		</dependency>
 
 		<dependency>
@@ -79,13 +41,6 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.16</version>
 			<scope>provided</scope>
-		</dependency>
-
-		<!-- logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.30</version>
 		</dependency>
 
 		<!-- OpenHFT -->
@@ -182,29 +137,25 @@
 			<version>2.2</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-library</artifactId>
-			<version>2.1</version>
-			<scope>test</scope>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.hamcrest</groupId> <artifactId>hamcrest-library</artifactId> 
+			<version>2.1</version> <scope>test</scope> </dependency> -->
 
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>${cucumber.version}</version>
+			<version>6.9.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit</artifactId>
-			<version>${cucumber.version}</version>
+			<version>6.9.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-picocontainer</artifactId>
-			<version>${cucumber.version}</version>
+			<version>6.9.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
