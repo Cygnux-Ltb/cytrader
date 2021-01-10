@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.orderbook;
+package io.cygnus.exchange.core.orderbook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,11 +25,11 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import exchange.core2.core.common.IOrder;
-import exchange.core2.core.common.MatcherTradeEvent;
-import exchange.core2.core.common.Order;
-import exchange.core2.core.common.OrderAction;
-import exchange.core2.core.utils.SerializationUtils;
+import io.cygnus.exchange.core.common.IOrder;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.Order;
+import io.cygnus.exchange.core.common.OrderAction;
+import io.cygnus.exchange.core.utils.SerializationUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

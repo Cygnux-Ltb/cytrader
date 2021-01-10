@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,10 +11,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.orderbook;
+package io.cygnus.exchange.core.orderbook;
 
-import static exchange.core2.core.ExchangeCore.EVENTS_POOLING;
+import static io.cygnus.exchange.core.ExchangeCore.EVENTS_POOLING;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,17 +26,19 @@ import java.util.TreeMap;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import exchange.core2.core.common.IOrder;
-import exchange.core2.core.common.MatcherEventType;
-import exchange.core2.core.common.MatcherTradeEvent;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.utils.SerializationUtils;
+import io.cygnus.exchange.core.common.IOrder;
+import io.cygnus.exchange.core.common.MatcherEventType;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.utils.SerializationUtils;
 import lombok.RequiredArgsConstructor;
 import net.openhft.chronicle.bytes.NativeBytes;
 import net.openhft.chronicle.wire.Wire;
 
 @RequiredArgsConstructor
 public final class OrderBookEventsHelper {
+	
+	//private static final Logger log = CommonLoggerFactory.getLogger(OrderBookEventsHelper.class);
 
     public static final OrderBookEventsHelper NON_POOLED_EVENTS_HELPER = new OrderBookEventsHelper(MatcherTradeEvent::new);
 
@@ -51,8 +53,8 @@ public final class OrderBookEventsHelper {
                                             final long bidderHoldPrice) {
         //final long takerOrderTimestamp
 
-//        log.debug("** sendTradeEvent: active id:{} matched id:{}", activeOrder.orderId, matchingOrder.orderId);
-//        log.debug("** sendTradeEvent: price:{} v:{}", price, v);
+        //log.debug("** sendTradeEvent: active id:{} matched id:{}", activeOrder.orderId, matchingOrder.getOrderId());
+        //log.debug("** sendTradeEvent: price:{} v:{}", price, v);
 
         final MatcherTradeEvent event = newMatcherEvent();
 

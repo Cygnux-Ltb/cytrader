@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.orderbook;
+package io.cygnus.exchange.core.orderbook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +27,18 @@ import org.agrona.collections.MutableInteger;
 import org.agrona.collections.MutableLong;
 import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.IOrder;
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.MatcherTradeEvent;
-import exchange.core2.core.common.Order;
-import exchange.core2.core.common.OrderAction;
-import exchange.core2.core.common.OrderType;
-import exchange.core2.core.common.SymbolType;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.cmd.OrderCommandType;
-import exchange.core2.core.common.config.LoggingConfiguration;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.IOrder;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.Order;
+import io.cygnus.exchange.core.common.OrderAction;
+import io.cygnus.exchange.core.common.OrderType;
+import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.config.LoggingConfiguration;
 import io.mercury.common.collections.art.LongAdaptiveRadixTreeMap;
 import io.mercury.common.collections.art.ObjectsPool;
 import lombok.AllArgsConstructor;
@@ -219,6 +219,7 @@ public final class OrderBookDirectImpl implements IOrderBook {
 				budget += availableSize * price;
 				if (logDebug)
 					log.debug("add    {} * {} -> {}", price, availableSize, budget);
+
 			} else {
 				if (logDebug)
 					log.debug("return {} * {} -> {}", price, size, budget + size * price);
@@ -809,41 +810,43 @@ public final class OrderBookDirectImpl implements IOrderBook {
 	public static final class DirectOrder implements WriteBytesMarshallable, IOrder {
 
 		@Getter
-		public long orderId;
+		private long orderId;
 
 		@Getter
-		public long price;
+		private long price;
 
 		@Getter
-		public long size;
+		private long size;
 
 		@Getter
-		public long filled;
+		private long filled;
 
 		// new orders - reserved price for fast moves of GTC bid orders in exchange mode
 		@Getter
-		public long reserveBidPrice;
+		private long reserveBidPrice;
 
 		// required for PLACE_ORDER only;
 		@Getter
-		public OrderAction action;
+		private OrderAction action;
 
 		@Getter
-		public long uid;
+		private long uid;
 
 		@Getter
-		public long timestamp;
+		private long timestamp;
 
 		// fast orders structure
-
-		Bucket parent;
+		@Getter
+		private Bucket parent;
 
 		// next order (towards the matching direction, price grows for asks)
-		DirectOrder next;
+		@Getter
+		private DirectOrder next;
 
 		// previous order (to the tail of the queue, lower priority and worst price,
 		// towards the matching direction)
-		DirectOrder prev;
+		@Getter
+		private DirectOrder prev;
 
 		// public int userCookie;
 

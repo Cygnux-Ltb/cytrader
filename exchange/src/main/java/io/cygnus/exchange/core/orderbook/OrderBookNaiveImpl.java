@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.orderbook;
+package io.cygnus.exchange.core.orderbook;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,17 +27,17 @@ import java.util.stream.Stream;
 
 import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.IOrder;
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.MatcherTradeEvent;
-import exchange.core2.core.common.Order;
-import exchange.core2.core.common.OrderAction;
-import exchange.core2.core.common.SymbolType;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.config.LoggingConfiguration;
-import exchange.core2.core.utils.SerializationUtils;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.IOrder;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.Order;
+import io.cygnus.exchange.core.common.OrderAction;
+import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.config.LoggingConfiguration;
+import io.cygnus.exchange.core.utils.SerializationUtils;
 import io.mercury.common.collections.art.ObjectsPool;
 import lombok.extern.slf4j.Slf4j;
 import net.openhft.chronicle.bytes.BytesIn;
