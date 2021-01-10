@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.integration;
+package io.cygnus.exchange.tests.integration;
 
-import static exchange.core2.core.common.OrderAction.ASK;
-import static exchange.core2.core.common.OrderAction.BID;
-import static exchange.core2.core.common.OrderType.FOK_BUDGET;
-import static exchange.core2.core.common.OrderType.GTC;
-import static exchange.core2.core.common.OrderType.IOC;
-import static exchange.core2.tests.integration.ITExchangeCoreIntegrationRejection.RejectionCause.NO_REJECTION;
-import static exchange.core2.tests.integration.ITExchangeCoreIntegrationRejection.RejectionCause.REJECTION_BY_BUDGET;
-import static exchange.core2.tests.integration.ITExchangeCoreIntegrationRejection.RejectionCause.REJECTION_BY_SIZE;
-import static exchange.core2.tests.util.TestConstants.SYMBOLSPECFEE_USD_JPY;
-import static exchange.core2.tests.util.TestConstants.SYMBOLSPECFEE_XBT_LTC;
-import static exchange.core2.tests.util.TestConstants.UID_1;
-import static exchange.core2.tests.util.TestConstants.UID_2;
-import static exchange.core2.tests.util.TestConstants.UID_3;
-import static exchange.core2.tests.util.TestConstants.UID_4;
+import static io.cygnus.exchange.core.common.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.OrderAction.BID;
+import static io.cygnus.exchange.core.common.OrderType.FOK_BUDGET;
+import static io.cygnus.exchange.core.common.OrderType.GTC;
+import static io.cygnus.exchange.core.common.OrderType.IOC;
+import static io.cygnus.exchange.tests.integration.ITExchangeCoreIntegrationRejection.RejectionCause.NO_REJECTION;
+import static io.cygnus.exchange.tests.integration.ITExchangeCoreIntegrationRejection.RejectionCause.REJECTION_BY_BUDGET;
+import static io.cygnus.exchange.tests.integration.ITExchangeCoreIntegrationRejection.RejectionCause.REJECTION_BY_SIZE;
+import static io.cygnus.exchange.tests.util.TestConstants.SYMBOLSPECFEE_USD_JPY;
+import static io.cygnus.exchange.tests.util.TestConstants.SYMBOLSPECFEE_XBT_LTC;
+import static io.cygnus.exchange.tests.util.TestConstants.UID_1;
+import static io.cygnus.exchange.tests.util.TestConstants.UID_2;
+import static io.cygnus.exchange.tests.util.TestConstants.UID_3;
+import static io.cygnus.exchange.tests.util.TestConstants.UID_4;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -47,15 +47,15 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import exchange.core2.core.IEventsHandler;
-import exchange.core2.core.SimpleEventsProcessor;
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.OrderAction;
-import exchange.core2.core.common.OrderType;
-import exchange.core2.core.common.api.ApiPlaceOrder;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.tests.util.ExchangeTestContainer;
+import io.cygnus.exchange.core.IEventsHandler;
+import io.cygnus.exchange.core.SimpleEventsProcessor;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.OrderAction;
+import io.cygnus.exchange.core.common.OrderType;
+import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.tests.util.ExchangeTestContainer;
 import junit.framework.TestCase;
 
 @RunWith(MockitoJUnitRunner.class)

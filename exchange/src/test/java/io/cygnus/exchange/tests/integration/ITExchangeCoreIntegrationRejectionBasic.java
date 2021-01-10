@@ -1,6 +1,6 @@
-package exchange.core2.tests.integration;
+package io.cygnus.exchange.tests.integration;
 
-import exchange.core2.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
 
 public class ITExchangeCoreIntegrationRejectionBasic extends ITExchangeCoreIntegrationRejection {
 

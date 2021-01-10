@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.integration;
+package io.cygnus.exchange.tests.integration;
 
-import static exchange.core2.core.common.OrderType.GTC;
-import static exchange.core2.tests.util.TestConstants.CURRENECY_LTC;
-import static exchange.core2.tests.util.TestConstants.CURRENECY_XBT;
-import static exchange.core2.tests.util.TestConstants.SYMBOLSPECFEE_XBT_LTC;
-import static exchange.core2.tests.util.TestConstants.SYMBOL_EXCHANGE_FEE;
-import static exchange.core2.tests.util.TestConstants.UID_1;
-import static exchange.core2.tests.util.TestConstants.UID_2;
+import static io.cygnus.exchange.core.common.OrderType.GTC;
+import static io.cygnus.exchange.tests.util.TestConstants.CURRENECY_LTC;
+import static io.cygnus.exchange.tests.util.TestConstants.CURRENECY_XBT;
+import static io.cygnus.exchange.tests.util.TestConstants.SYMBOLSPECFEE_XBT_LTC;
+import static io.cygnus.exchange.tests.util.TestConstants.SYMBOL_EXCHANGE_FEE;
+import static io.cygnus.exchange.tests.util.TestConstants.UID_1;
+import static io.cygnus.exchange.tests.util.TestConstants.UID_2;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
@@ -29,14 +29,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import exchange.core2.core.common.OrderAction;
-import exchange.core2.core.common.OrderType;
-import exchange.core2.core.common.api.ApiCancelOrder;
-import exchange.core2.core.common.api.ApiPlaceOrder;
-import exchange.core2.core.common.api.reports.TotalCurrencyBalanceReportResult;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.tests.util.ExchangeTestContainer;
+import io.cygnus.exchange.core.common.OrderAction;
+import io.cygnus.exchange.core.common.OrderType;
+import io.cygnus.exchange.core.common.api.ApiCancelOrder;
+import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
+import io.cygnus.exchange.core.common.api.reports.TotalCurrencyBalanceReportResult;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.tests.util.ExchangeTestContainer;
 
 /**
  * TODO IOC reject tests

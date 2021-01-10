@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.integration;
+package io.cygnus.exchange.tests.integration;
 
-import exchange.core2.core.common.*;
-import exchange.core2.core.common.api.ApiAdjustUserBalance;
-import exchange.core2.core.common.api.ApiCancelOrder;
-import exchange.core2.core.common.api.ApiMoveOrder;
-import exchange.core2.core.common.api.ApiPlaceOrder;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommandType;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.tests.util.ExchangeTestContainer;
-import exchange.core2.tests.util.L2MarketDataHelper;
+import io.cygnus.exchange.core.common.*;
+import io.cygnus.exchange.core.common.api.ApiAdjustUserBalance;
+import io.cygnus.exchange.core.common.api.ApiCancelOrder;
+import io.cygnus.exchange.core.common.api.ApiMoveOrder;
+import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.tests.util.ExchangeTestContainer;
+import io.cygnus.exchange.tests.util.L2MarketDataHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.List;
 
-import static exchange.core2.core.common.OrderAction.ASK;
-import static exchange.core2.core.common.OrderType.GTC;
-import static exchange.core2.tests.util.ExchangeTestContainer.CHECK_SUCCESS;
-import static exchange.core2.tests.util.TestConstants.*;
+import static io.cygnus.exchange.core.common.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.OrderType.GTC;
+import static io.cygnus.exchange.tests.util.ExchangeTestContainer.CHECK_SUCCESS;
+import static io.cygnus.exchange.tests.util.TestConstants.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;

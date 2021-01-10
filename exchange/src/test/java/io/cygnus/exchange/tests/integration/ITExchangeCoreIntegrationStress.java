@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.integration;
+package io.cygnus.exchange.tests.integration;
 
-import exchange.core2.core.ExchangeApi;
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.api.ApiCommand;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.tests.util.ExchangeTestContainer;
-import exchange.core2.tests.util.TestOrdersGenerator;
-import lombok.extern.slf4j.Slf4j;
-import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
-import org.junit.Test;
+import static io.cygnus.exchange.tests.util.TestConstants.SYMBOLSPEC_ETH_XBT;
+import static io.cygnus.exchange.tests.util.TestConstants.SYMBOLSPEC_EUR_USD;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.number.OrderingComparison.greaterThan;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 import java.util.Set;
@@ -33,12 +29,17 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static exchange.core2.tests.util.TestConstants.SYMBOLSPEC_ETH_XBT;
-import static exchange.core2.tests.util.TestConstants.SYMBOLSPEC_EUR_USD;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.number.OrderingComparison.greaterThan;
-import static org.junit.Assert.assertEquals;
+import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
+import org.junit.Test;
+
+import io.cygnus.exchange.core.ExchangeApi;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.api.ApiCommand;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.tests.util.ExchangeTestContainer;
+import io.cygnus.exchange.tests.util.TestOrdersGenerator;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public abstract class ITExchangeCoreIntegrationStress {
@@ -88,7 +89,7 @@ public abstract class ITExchangeCoreIntegrationStress {
             container.usersInit(numUsers, allowedCurrencies);
 
             // validate total balance as a sum of loaded funds
-            final Consumer<IntLongHashMap> balancesValidator = balances -> allowedCurrencies.forEach(
+            final Consumer<MutableIntLongMap> balancesValidator = balances -> allowedCurrencies.forEach(
                     cur -> assertThat(balances.get(cur), is(10_0000_0000L * numUsers)));
 
 
