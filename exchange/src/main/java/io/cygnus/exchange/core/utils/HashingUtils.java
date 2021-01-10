@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.utils;
+package io.cygnus.exchange.core.utils;
 
 import java.util.Arrays;
 import java.util.BitSet;
@@ -22,29 +22,51 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 import org.agrona.collections.MutableLong;
-import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
+import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
-import exchange.core2.core.common.StateHash;
+import io.cygnus.exchange.core.common.StateHash;
 
 public final class HashingUtils {
 
+	/**
+	 * 
+	 * @param bitSet
+	 * @return
+	 */
 	public static int stateHash(final BitSet bitSet) {
 		return Arrays.hashCode(bitSet.toLongArray());
 	}
 
-	public static <T extends StateHash> int stateHash(final LongObjectHashMap<T> hashMap) {
+	/**
+	 * 
+	 * @param <T>
+	 * @param hashMap
+	 * @return
+	 */
+	public static <T extends StateHash> int stateHash(final MutableLongObjectMap<T> hashMap) {
 		final MutableLong mutableLong = new MutableLong();
 		hashMap.forEachKeyValue((k, v) -> mutableLong.addAndGet(Objects.hash(k, v.stateHash())));
 		return Long.hashCode(mutableLong.value);
 	}
 
-	public static <T extends StateHash> int stateHash(final IntObjectHashMap<T> hashMap) {
+	/**
+	 * 
+	 * @param <T>
+	 * @param hashMap
+	 * @return
+	 */
+	public static <T extends StateHash> int stateHash(final MutableIntObjectMap<T> hashMap) {
 		final MutableLong mutableLong = new MutableLong();
 		hashMap.forEachKeyValue((k, v) -> mutableLong.addAndGet(Objects.hash(k, v.stateHash())));
 		return Long.hashCode(mutableLong.value);
 	}
 
+	/**
+	 * 
+	 * @param stream
+	 * @return
+	 */
 	public static int stateHashStream(final Stream<? extends StateHash> stream) {
 		int h = 0;
 		final Iterator<? extends StateHash> iterator = stream.iterator();

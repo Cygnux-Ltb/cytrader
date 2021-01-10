@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,18 +11,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.utils;
+package io.cygnus.exchange.core.utils;
 
 import static net.openhft.chronicle.core.UnsafeMemory.UNSAFE;
 
-import exchange.core2.core.common.MatcherTradeEvent;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
 
 @SuppressWarnings("restriction")
-//@Slf4j
-public final class UnsafeUtils {
+public final class UnsafeOperator {
 
 	private static final long OFFSET_RESULT_CODE;
 	private static final long OFFSET_EVENT;
@@ -69,6 +68,7 @@ public final class UnsafeUtils {
 
 			// do a CAS operation
 		} while (!UNSAFE.compareAndSwapObject(cmd, OFFSET_EVENT, tail.nextEvent, eventHead));
+
 	}
 
 }

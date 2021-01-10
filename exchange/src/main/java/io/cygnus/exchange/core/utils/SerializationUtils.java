@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.utils;
+package io.cygnus.exchange.core.utils;
 
 import java.nio.ByteBuffer;
 import java.nio.LongBuffer;
@@ -27,7 +27,10 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
+import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
+import org.eclipse.collections.api.set.primitive.MutableLongSet;
 import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap;
@@ -218,7 +221,7 @@ public final class SerializationUtils {
 		});
 	}
 
-	public static IntLongHashMap readIntLongHashMap(final BytesIn<?> bytes) {
+	public static MutableIntLongMap readIntLongHashMap(final BytesIn<?> bytes) {
 		int length = bytes.readInt();
 		final IntLongHashMap hashMap = new IntLongHashMap(length);
 		// TODO shuffle (? performance can be reduced if populating linearly)
@@ -230,14 +233,14 @@ public final class SerializationUtils {
 		return hashMap;
 	}
 
-	public static void marshallLongHashSet(final LongHashSet set, final BytesOut<?> bytes) {
+	public static void marshallLongHashSet(final MutableLongSet set, final BytesOut<?> bytes) {
 		bytes.writeInt(set.size());
 		set.forEach(bytes::writeLong);
 	}
 
-	public static LongHashSet readLongHashSet(final BytesIn<?> bytes) {
+	public static MutableLongSet readLongHashSet(final BytesIn<?> bytes) {
 		int length = bytes.readInt();
-		final LongHashSet set = new LongHashSet(length);
+		final MutableLongSet set = new LongHashSet(length);
 		// TODO shuffle (? performance can be reduced if populating linearly)
 		for (int i = 0; i < length; i++) {
 			set.add(bytes.readLong());
@@ -245,7 +248,7 @@ public final class SerializationUtils {
 		return set;
 	}
 
-	public static <T extends WriteBytesMarshallable> void marshallLongHashMap(final LongObjectHashMap<T> hashMap,
+	public static <T extends WriteBytesMarshallable> void marshallLongHashMap(final MutableLongObjectMap<T> hashMap,
 			final BytesOut<?> bytes) {
 
 		bytes.writeInt(hashMap.size());
@@ -257,7 +260,7 @@ public final class SerializationUtils {
 
 	}
 
-	public static <T> void marshallLongHashMap(final LongObjectHashMap<T> hashMap,
+	public static <T> void marshallLongHashMap(final MutableLongObjectMap<T> hashMap,
 			final BiConsumer<T, BytesOut<?>> valuesMarshaller, final BytesOut<?> bytes) {
 
 		bytes.writeInt(hashMap.size());
@@ -279,7 +282,7 @@ public final class SerializationUtils {
 		return hashMap;
 	}
 
-	public static <T extends WriteBytesMarshallable> void marshallIntHashMap(final IntObjectHashMap<T> hashMap,
+	public static <T extends WriteBytesMarshallable> void marshallIntHashMap(final MutableIntObjectMap<T> hashMap,
 			final BytesOut<?> bytes) {
 		bytes.writeInt(hashMap.size());
 		hashMap.forEachKeyValue((k, v) -> {
@@ -393,9 +396,9 @@ public final class SerializationUtils {
 		return res;
 	}
 
-	public static IntLongHashMap mergeSum(final IntLongHashMap... maps) {
-		IntLongHashMap res = null;
-		for (IntLongHashMap map : maps) {
+	public static MutableIntLongMap mergeSum(final MutableIntLongMap... maps) {
+		MutableIntLongMap res = null;
+		for (MutableIntLongMap map : maps) {
 			if (map != null) {
 				if (res == null) {
 					res = new IntLongHashMap(map);
