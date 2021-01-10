@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.perf;
+package io.cygnus.exchange.tests.perf;
 
 import org.junit.Test;
 
-import exchange.core2.core.common.config.InitialStateConfiguration;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.core.common.config.SerializationConfiguration;
-import exchange.core2.tests.util.ExchangeTestContainer;
-import exchange.core2.tests.util.TestConstants;
-import exchange.core2.tests.util.TestDataParameters;
-import exchange.core2.tests.util.TestOrdersGeneratorConfig;
-import exchange.core2.tests.util.ThroughputTestsModule;
+import io.cygnus.exchange.core.common.config.InitialStateConfiguration;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.config.SerializationConfiguration;
+import io.cygnus.exchange.tests.util.ExchangeTestContainer;
+import io.cygnus.exchange.tests.util.TestConstants;
+import io.cygnus.exchange.tests.util.TestDataParameters;
+import io.cygnus.exchange.tests.util.TestOrdersGeneratorConfig;
+import io.cygnus.exchange.tests.util.ThroughputTestsModule;
 
 public final class PerfThroughput {
 

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.perf.modules;
+package io.cygnus.exchange.tests.perf.modules;
 
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.orderbook.IOrderBook;
-import exchange.core2.tests.util.TestOrdersGenerator;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.orderbook.IOrderBook;
+import io.cygnus.exchange.tests.util.TestOrdersGenerator;
 import lombok.extern.slf4j.Slf4j;
 import net.openhft.affinity.AffinityLock;
 import org.junit.After;
@@ -31,9 +31,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static exchange.core2.core.common.OrderAction.ASK;
-import static exchange.core2.core.common.OrderAction.BID;
-import static exchange.core2.core.common.OrderType.IOC;
+import static io.cygnus.exchange.core.common.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.OrderAction.BID;
+import static io.cygnus.exchange.core.common.OrderType.IOC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 

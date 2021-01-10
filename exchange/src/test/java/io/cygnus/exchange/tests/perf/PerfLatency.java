@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.perf;
+package io.cygnus.exchange.tests.perf;
 
-import static exchange.core2.tests.util.LatencyTestsModule.latencyTestImpl;
+import static io.cygnus.exchange.tests.util.LatencyTestsModule.latencyTestImpl;
 
 import org.junit.Test;
 
-import exchange.core2.core.common.config.InitialStateConfiguration;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.core.common.config.SerializationConfiguration;
-import exchange.core2.tests.util.TestDataParameters;
+import io.cygnus.exchange.core.common.config.InitialStateConfiguration;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.config.SerializationConfiguration;
+import io.cygnus.exchange.tests.util.TestDataParameters;
 
 public final class PerfLatency {
 
