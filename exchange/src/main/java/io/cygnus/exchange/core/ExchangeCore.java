@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core;
+package io.cygnus.exchange.core;
 
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.EventTranslator;
@@ -21,16 +21,17 @@ import com.lmax.disruptor.TimeoutException;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.EventHandlerGroup;
 import com.lmax.disruptor.dsl.ProducerType;
-import exchange.core2.core.common.CoreWaitStrategy;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.cmd.OrderCommandType;
-import exchange.core2.core.common.config.ExchangeConfiguration;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.core.common.config.SerializationConfiguration;
-import exchange.core2.core.orderbook.IOrderBook;
-import exchange.core2.core.processors.*;
-import exchange.core2.core.processors.journaling.ISerializationProcessor;
+
+import io.cygnus.exchange.core.common.CoreWaitStrategy;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.config.SerializationConfiguration;
+import io.cygnus.exchange.core.orderbook.IOrderBook;
+import io.cygnus.exchange.core.processors.*;
+import io.cygnus.exchange.core.processors.journaling.ISerializationProcessor;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -88,7 +89,7 @@ public final class ExchangeCore {
                 ringBufferSize,
                 perfCfg.getThreadFactory(),
                 ProducerType.MULTI, // multiple gateway threads are writing
-                perfCfg.getWaitStrategy().getDisruptorWaitStrategyFactory().get());
+                perfCfg.getWaitStrategy().getWaitStrategySupplier().get());
 
         this.api = new ExchangeApi(disruptor.getRingBuffer(), perfCfg.getBinaryCommandsLz4CompressorFactory().get());
 

@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,26 +11,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core;
+package io.cygnus.exchange.core;
 
 import com.lmax.disruptor.EventTranslatorOneArg;
 import com.lmax.disruptor.RingBuffer;
-import exchange.core2.core.common.BalanceAdjustmentType;
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.OrderAction;
-import exchange.core2.core.common.OrderType;
-import exchange.core2.core.common.api.*;
-import exchange.core2.core.common.api.binary.BinaryDataCommand;
-import exchange.core2.core.common.api.reports.ApiReportQuery;
-import exchange.core2.core.common.api.reports.ReportQuery;
-import exchange.core2.core.common.api.reports.ReportResult;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.cmd.OrderCommandType;
-import exchange.core2.core.orderbook.OrderBookEventsHelper;
-import exchange.core2.core.processors.BinaryCommandsProcessor;
-import exchange.core2.core.utils.SerializationUtils;
+
+import io.cygnus.exchange.core.common.BalanceAdjustmentType;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.OrderAction;
+import io.cygnus.exchange.core.common.OrderType;
+import io.cygnus.exchange.core.common.api.*;
+import io.cygnus.exchange.core.common.api.binary.BinaryDataCommand;
+import io.cygnus.exchange.core.common.api.reports.ApiReportQuery;
+import io.cygnus.exchange.core.common.api.reports.ReportQuery;
+import io.cygnus.exchange.core.common.api.reports.ReportResult;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.orderbook.OrderBookEventsHelper;
+import io.cygnus.exchange.core.processors.BinaryCommandsProcessor;
+import io.cygnus.exchange.core.utils.SerializationUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.jpountz.lz4.LZ4Compressor;
