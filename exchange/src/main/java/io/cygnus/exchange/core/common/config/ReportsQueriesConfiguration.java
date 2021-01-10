@@ -1,11 +1,25 @@
-package exchange.core2.core.common.config;
+/**
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ */
+package io.cygnus.exchange.core.common.config;
 
-
-import exchange.core2.core.common.api.binary.BatchAddAccountsCommand;
-import exchange.core2.core.common.api.binary.BatchAddSymbolsCommand;
-import exchange.core2.core.common.api.binary.BinaryCommandType;
-import exchange.core2.core.common.api.binary.BinaryDataCommand;
-import exchange.core2.core.common.api.reports.*;
+import io.cygnus.exchange.core.common.api.binary.BatchAddAccountsCommand;
+import io.cygnus.exchange.core.common.api.binary.BatchAddSymbolsCommand;
+import io.cygnus.exchange.core.common.api.binary.BinaryCommandType;
+import io.cygnus.exchange.core.common.api.binary.BinaryDataCommand;
+import io.cygnus.exchange.core.common.api.reports.*;
 import lombok.Getter;
 import net.openhft.chronicle.bytes.BytesIn;
 
@@ -21,93 +35,92 @@ import java.util.stream.Collectors;
 @Getter
 public final class ReportsQueriesConfiguration {
 
-    public static final ReportsQueriesConfiguration DEFAULT = createStandardConfig();
+	public static final ReportsQueriesConfiguration DEFAULT = createStandardConfig();
 
-    private final Map<Integer, Constructor<? extends ReportQuery<?>>> reportConstructors;
-    private final Map<Integer, Constructor<? extends BinaryDataCommand>> binaryCommandConstructors;
+	private final Map<Integer, Constructor<? extends ReportQuery<?>>> reportConstructors;
 
-    /**
-     * Creates default reports config
-     *
-     * @return reports configuration
-     */
-    public static ReportsQueriesConfiguration createStandardConfig() {
-        return createStandardConfig(Collections.emptyMap());
-    }
+	private final Map<Integer, Constructor<? extends BinaryDataCommand>> binaryCommandConstructors;
 
-    /**
-     * Creates reports config with additional custom reports
-     *
-     * @param customReports - custom reports collection
-     * @return reports configuration
-     */
-    public static ReportsQueriesConfiguration createStandardConfig(final Map<Integer, Class<? extends ReportQuery<?>>> customReports) {
+	/**
+	 * Creates default reports config
+	 *
+	 * @return reports configuration
+	 */
+	public static ReportsQueriesConfiguration createStandardConfig() {
+		return createStandardConfig(Collections.emptyMap());
+	}
 
-        final Map<Integer, Constructor<? extends ReportQuery<?>>> reportConstructors = new HashMap<>();
-        final Map<Integer, Constructor<? extends BinaryDataCommand>> binaryCommandConstructors = new HashMap<>();
+	/**
+	 * Creates reports config with additional custom reports
+	 *
+	 * @param customReports - custom reports collection
+	 * @return reports configuration
+	 */
+	public static ReportsQueriesConfiguration createStandardConfig(
+			final Map<Integer, Class<? extends ReportQuery<?>>> customReports) {
 
-        // binary commands (not extendable)
-        addBinaryCommandClass(binaryCommandConstructors, BinaryCommandType.ADD_ACCOUNTS, BatchAddAccountsCommand.class);
-        addBinaryCommandClass(binaryCommandConstructors, BinaryCommandType.ADD_SYMBOLS, BatchAddSymbolsCommand.class);
+		final Map<Integer, Constructor<? extends ReportQuery<?>>> reportConstructors = new HashMap<>();
+		final Map<Integer, Constructor<? extends BinaryDataCommand>> binaryCommandConstructors = new HashMap<>();
 
-        // predefined queries (extendable)
-        addQueryClass(reportConstructors, ReportType.STATE_HASH.getCode(), StateHashReportQuery.class);
-        addQueryClass(reportConstructors, ReportType.SINGLE_USER_REPORT.getCode(), SingleUserReportQuery.class);
-        addQueryClass(reportConstructors, ReportType.TOTAL_CURRENCY_BALANCE.getCode(), TotalCurrencyBalanceReportQuery.class);
+		// binary commands (not extendable)
+		addBinaryCommandClass(binaryCommandConstructors, BinaryCommandType.ADD_ACCOUNTS, BatchAddAccountsCommand.class);
+		addBinaryCommandClass(binaryCommandConstructors, BinaryCommandType.ADD_SYMBOLS, BatchAddSymbolsCommand.class);
 
-        customReports.forEach((code, customReport) -> addQueryClass(reportConstructors, code, customReport));
+		// predefined queries (extendable)
+		addQueryClass(reportConstructors, ReportType.STATE_HASH.getCode(), StateHashReportQuery.class);
+		addQueryClass(reportConstructors, ReportType.SINGLE_USER_REPORT.getCode(), SingleUserReportQuery.class);
+		addQueryClass(reportConstructors, ReportType.TOTAL_CURRENCY_BALANCE.getCode(),
+				TotalCurrencyBalanceReportQuery.class);
 
-        return new ReportsQueriesConfiguration(
-                Collections.unmodifiableMap(reportConstructors),
-                Collections.unmodifiableMap(binaryCommandConstructors));
-    }
+		customReports.forEach((code, customReport) -> addQueryClass(reportConstructors, code, customReport));
 
+		return new ReportsQueriesConfiguration(Collections.unmodifiableMap(reportConstructors),
+				Collections.unmodifiableMap(binaryCommandConstructors));
+	}
 
-    private static void addQueryClass(final Map<Integer, Constructor<? extends ReportQuery<?>>> reportConstructors,
-                                      final int reportTypeCode,
-                                      final Class<? extends ReportQuery<?>> reportQueryClass) {
+	private static void addQueryClass(final Map<Integer, Constructor<? extends ReportQuery<?>>> reportConstructors,
+			final int reportTypeCode, final Class<? extends ReportQuery<?>> reportQueryClass) {
 
-        final Constructor<? extends ReportQuery<?>> existing = reportConstructors.get(reportTypeCode);
+		final Constructor<? extends ReportQuery<?>> existing = reportConstructors.get(reportTypeCode);
 
-        if (existing != null) {
-            throw new IllegalArgumentException("Configuration error: report type code " + reportTypeCode + " is already occupied by " + existing.getDeclaringClass().getName());
-        }
+		if (existing != null) {
+			throw new IllegalArgumentException("Configuration error: report type code " + reportTypeCode
+					+ " is already occupied by " + existing.getDeclaringClass().getName());
+		}
 
-        try {
-            reportConstructors.put(reportTypeCode, reportQueryClass.getConstructor(BytesIn.class));
-        } catch (final NoSuchMethodException ex) {
-            throw new IllegalArgumentException("Configuration error: report class " + reportQueryClass.getName() + "deserialization constructor accepting BytesIn");
-        }
+		try {
+			reportConstructors.put(reportTypeCode, reportQueryClass.getConstructor(BytesIn.class));
+		} catch (final NoSuchMethodException ex) {
+			throw new IllegalArgumentException("Configuration error: report class " + reportQueryClass.getName()
+					+ "deserialization constructor accepting BytesIn");
+		}
 
-    }
+	}
 
-    private static void addBinaryCommandClass(Map<Integer, Constructor<? extends BinaryDataCommand>> binaryCommandConstructors,
-                                              BinaryCommandType type,
-                                              Class<? extends BinaryDataCommand> binaryCommandClass) {
-        try {
-            binaryCommandConstructors.put(type.getCode(), binaryCommandClass.getConstructor(BytesIn.class));
-        } catch (final NoSuchMethodException ex) {
-            throw new IllegalArgumentException(ex);
-        }
-    }
+	private static void addBinaryCommandClass(
+			Map<Integer, Constructor<? extends BinaryDataCommand>> binaryCommandConstructors, BinaryCommandType type,
+			Class<? extends BinaryDataCommand> binaryCommandClass) {
+		try {
+			binaryCommandConstructors.put(type.getCode(), binaryCommandClass.getConstructor(BytesIn.class));
+		} catch (final NoSuchMethodException ex) {
+			throw new IllegalArgumentException(ex);
+		}
+	}
 
-    private ReportsQueriesConfiguration(final Map<Integer, Constructor<? extends ReportQuery<?>>> reportConstructors,
-                                        final Map<Integer, Constructor<? extends BinaryDataCommand>> binaryCommandConstructors) {
-        this.reportConstructors = reportConstructors;
-        this.binaryCommandConstructors = binaryCommandConstructors;
-    }
+	private ReportsQueriesConfiguration(final Map<Integer, Constructor<? extends ReportQuery<?>>> reportConstructors,
+			final Map<Integer, Constructor<? extends BinaryDataCommand>> binaryCommandConstructors) {
+		this.reportConstructors = reportConstructors;
+		this.binaryCommandConstructors = binaryCommandConstructors;
+	}
 
-    @Override
-    public String toString() {
-        return "ReportsQueriesConfiguration{" +
-                "reportConstructors=[" + reportToString(reportConstructors) +
-                "], binaryCommandConstructors=[" + reportToString(binaryCommandConstructors) +
-                "]}";
-    }
+	@Override
+	public String toString() {
+		return "ReportsQueriesConfiguration{" + "reportConstructors=[" + reportToString(reportConstructors)
+				+ "], binaryCommandConstructors=[" + reportToString(binaryCommandConstructors) + "]}";
+	}
 
-    private static String reportToString(final Map<Integer, ? extends Constructor<?>> mapping) {
-        return mapping.entrySet().stream()
-                .map(entry -> String.format("%d:%s", entry.getKey(), entry.getValue().getDeclaringClass().getSimpleName()))
-                .collect(Collectors.joining(", "));
-    }
+	private static String reportToString(final Map<Integer, ? extends Constructor<?>> mapping) {
+		return mapping.entrySet().stream().map(entry -> String.format("%d -> %s", entry.getKey(),
+				entry.getValue().getDeclaringClass().getSimpleName())).collect(Collectors.joining(", "));
+	}
 }

@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common;
+package io.cygnus.exchange.core.common;
 
 import lombok.Getter;
 
@@ -21,20 +21,23 @@ import java.util.Arrays;
 
 @Getter
 public enum SymbolType {
-    CURRENCY_EXCHANGE_PAIR(0),
-    FUTURES_CONTRACT(1),
-    OPTION(2);
 
-    private byte code;
+	CURRENCY_EXCHANGE_PAIR(0),
 
-    SymbolType(int code) {
-        this.code = (byte) code;
-    }
+	FUTURES_CONTRACT(1),
 
-    public static SymbolType of(int code) {
-        return Arrays.stream(values())
-                .filter(c -> c.code == (byte) code)
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("unknown SymbolType code: " + code));
-    }
+	OPTION(2),
+
+	;
+
+	private byte code;
+
+	SymbolType(int code) {
+		this.code = (byte) code;
+	}
+
+	public static SymbolType of(int code) {
+		return Arrays.stream(values()).filter(c -> c.code == (byte) code).findFirst()
+				.orElseThrow(() -> new IllegalStateException("unknown SymbolType code: " + code));
+	}
 }

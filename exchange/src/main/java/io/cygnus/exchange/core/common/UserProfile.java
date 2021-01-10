@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,19 +11,22 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common;
+package io.cygnus.exchange.core.common;
 
-import exchange.core2.core.utils.HashingUtils;
-import exchange.core2.core.utils.SerializationUtils;
+import java.util.Objects;
+
+import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+
+import io.cygnus.exchange.core.utils.HashingUtils;
+import io.cygnus.exchange.core.utils.SerializationUtils;
 import lombok.extern.slf4j.Slf4j;
 import net.openhft.chronicle.bytes.BytesIn;
 import net.openhft.chronicle.bytes.BytesOut;
 import net.openhft.chronicle.bytes.WriteBytesMarshallable;
-import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
-
-import java.util.Objects;
 
 @Slf4j
 public final class UserProfile implements WriteBytesMarshallable, StateHash {
@@ -40,7 +42,7 @@ public final class UserProfile implements WriteBytesMarshallable, StateHash {
 
 	// currency accounts
 	// currency -> balance
-	public final IntLongHashMap accounts;
+	public final MutableIntLongMap accounts;
 
 	public UserStatus userStatus;
 

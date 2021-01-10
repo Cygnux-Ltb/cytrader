@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common;
+package io.cygnus.exchange.core.common;
 
 import java.util.Objects;
 
@@ -104,9 +104,15 @@ public final class CoreSymbolSpecification implements WriteBytesMarshallable, St
 		if (o == null || getClass() != o.getClass())
 			return false;
 		CoreSymbolSpecification that = (CoreSymbolSpecification) o;
-		return symbolId == that.symbolId && baseCurrency == that.baseCurrency && quoteCurrency == that.quoteCurrency
-				&& baseScaleK == that.baseScaleK && quoteScaleK == that.quoteScaleK && takerFee == that.takerFee
-				&& makerFee == that.makerFee && marginBuy == that.marginBuy && marginSell == that.marginSell
+		return symbolId == that.symbolId 
+				&& baseCurrency == that.baseCurrency 
+				&& quoteCurrency == that.quoteCurrency
+				&& baseScaleK == that.baseScaleK 
+				&& quoteScaleK == that.quoteScaleK 
+				&& takerFee == that.takerFee
+				&& makerFee == that.makerFee 
+				&& marginBuy == that.marginBuy 
+				&& marginSell == that.marginSell
 				&& type == that.type;
 	}
 }

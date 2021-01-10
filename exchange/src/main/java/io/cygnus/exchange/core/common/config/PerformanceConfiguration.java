@@ -1,11 +1,25 @@
-package exchange.core2.core.common.config;
+/**
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ */
+package io.cygnus.exchange.core.common.config;
 
-
-import exchange.core2.core.common.CoreWaitStrategy;
-import exchange.core2.core.orderbook.IOrderBook;
-import exchange.core2.core.orderbook.OrderBookDirectImpl;
-import exchange.core2.core.orderbook.OrderBookNaiveImpl;
-import exchange.core2.core.utils.AffinityThreadFactory;
+import io.cygnus.exchange.core.common.CoreWaitStrategy;
+import io.cygnus.exchange.core.orderbook.IOrderBook;
+import io.cygnus.exchange.core.orderbook.OrderBookDirectImpl;
+import io.cygnus.exchange.core.orderbook.OrderBookNaiveImpl;
+import io.cygnus.exchange.core.utils.AffinityThreadFactory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,119 +33,108 @@ import java.util.function.Supplier;
  * Exchange performance configuration
  */
 @AllArgsConstructor
-@Getter
 @Builder
 public final class PerformanceConfiguration {
 
-    public static final PerformanceConfiguration DEFAULT = PerformanceConfiguration.baseBuilder().build();
+	public static final PerformanceConfiguration DEFAULT = PerformanceConfiguration.baseBuilder().build();
 
-    /*
-     * Disruptor ring buffer size (number of commands). Must be power of 2.
-     */
-    private final int ringBufferSize;
+	/*
+	 * Disruptor ring buffer size (number of commands). Must be power of 2.
+	 */
+	@Getter
+	private final int ringBufferSize;
 
-    /*
-     * Number of matching engines. Each instance requires extra CPU core.
-     */
-    private final int matchingEnginesNum;
+	/*
+	 * Number of matching engines. Each instance requires extra CPU core.
+	 */
+	@Getter
+	private final int matchingEnginesNum;
 
-    /*
-     * Number of risk engines. Each instance requires extra CPU core.
-     */
-    private final int riskEnginesNum;
+	/*
+	 * Number of risk engines. Each instance requires extra CPU core.
+	 */
+	@Getter
+	private final int riskEnginesNum;
 
-    /*
-     * max number of messages not processed by R2 stage. Must be less than quarter of ringBufferSize.
-     * Lower values, like 100, provide better mean latency.
-     * Higher values, like 2000 provide better throughput and tail latency.
-     */
-    private final int msgsInGroupLimit;
+	/*
+	 * max number of messages not processed by R2 stage. Must be less than quarter
+	 * of ringBufferSize. Lower values, like 100, provide better mean latency.
+	 * Higher values, like 2000 provide better throughput and tail latency.
+	 */
+	@Getter
+	private final int msgsInGroupLimit;
 
+	/*
+	 * max interval when messages not processed by R2 stage. Interfere with
+	 * msgsInGroupLimit parameter. Lower values, like 1000 (1us), provide better
+	 * mean latency. Higher values, like 2000 provide better throughput and tail
+	 * latency.
+	 */
+	@Getter
+	private final int maxGroupDurationNs;
 
-    /*
-     * max interval when messages not processed by R2 stage.
-     * Interfere with msgsInGroupLimit parameter.
-     * Lower values, like 1000 (1us), provide better mean latency.
-     * Higher values, like 2000 provide better throughput and tail latency.
-     */
-    private final int maxGroupDurationNs;
+	/*
+	 * Disruptor threads factory
+	 */
+	@Getter
+	private final ThreadFactory threadFactory;
 
-    /*
-     * Disruptor threads factory
-     */
-    private final ThreadFactory threadFactory;
+	/*
+	 * Disruptor wait strategy
+	 */
+	@Getter
+	private final CoreWaitStrategy waitStrategy;
 
-    /*
-     * Disruptor wait strategy
-     */
-    private final CoreWaitStrategy waitStrategy;
+	/*
+	 * Order books factory
+	 */@Getter
+	private final IOrderBook.OrderBookFactory orderBookFactory;
 
-    /*
-     * Order books factory
-     */
-    private final IOrderBook.OrderBookFactory orderBookFactory;
+	/*
+	 * LZ4 compressor factory for binary commands and reports
+	 */
+	@Getter
+	private final Supplier<LZ4Compressor> binaryCommandsLz4CompressorFactory;
 
-    /*
-     * LZ4 compressor factory for binary commands and reports
-     */
-    private final Supplier<LZ4Compressor> binaryCommandsLz4CompressorFactory;
+	@Override
+	public String toString() {
+		return "PerformanceConfiguration{" + "ringBufferSize=" + ringBufferSize + ", matchingEnginesNum="
+				+ matchingEnginesNum + ", riskEnginesNum=" + riskEnginesNum + ", msgsInGroupLimit=" + msgsInGroupLimit
+				+ ", maxGroupDurationNs=" + maxGroupDurationNs + ", threadFactory="
+				+ (threadFactory == null ? null : threadFactory.getClass().getSimpleName()) + ", waitStrategy="
+				+ waitStrategy + ", orderBookFactory="
+				+ (orderBookFactory == null ? null : orderBookFactory.getClass().getSimpleName())
+				+ ", binaryCommandsLz4CompressorFactory=" + (binaryCommandsLz4CompressorFactory == null ? null
+						: binaryCommandsLz4CompressorFactory.getClass().getSimpleName())
+				+ '}';
+	}
 
-    @Override
-    public String toString() {
-        return "PerformanceConfiguration{" +
-                "ringBufferSize=" + ringBufferSize +
-                ", matchingEnginesNum=" + matchingEnginesNum +
-                ", riskEnginesNum=" + riskEnginesNum +
-                ", msgsInGroupLimit=" + msgsInGroupLimit +
-                ", maxGroupDurationNs=" + maxGroupDurationNs +
-                ", threadFactory=" + (threadFactory == null ? null : threadFactory.getClass().getSimpleName()) +
-                ", waitStrategy=" + waitStrategy +
-                ", orderBookFactory=" + (orderBookFactory == null ? null : orderBookFactory.getClass().getSimpleName()) +
-                ", binaryCommandsLz4CompressorFactory=" + (binaryCommandsLz4CompressorFactory == null ? null : binaryCommandsLz4CompressorFactory.getClass().getSimpleName()) +
-                '}';
-    }
+	// TODO add expected number of users and symbols
 
-    // TODO add expected number of users and symbols
+	public static PerformanceConfiguration.PerformanceConfigurationBuilder baseBuilder() {
+		return builder().ringBufferSize(16 * 1024).matchingEnginesNum(1).riskEnginesNum(1).msgsInGroupLimit(256)
+				.maxGroupDurationNs(10_000).threadFactory(Thread::new).waitStrategy(CoreWaitStrategy.BLOCKING)
+				.binaryCommandsLz4CompressorFactory(() -> LZ4Factory.fastestInstance().highCompressor())
+				.orderBookFactory(OrderBookNaiveImpl::new);
+	}
 
-    public static PerformanceConfiguration.PerformanceConfigurationBuilder baseBuilder() {
+	public static PerformanceConfiguration.PerformanceConfigurationBuilder latencyPerformanceBuilder() {
+		return builder().ringBufferSize(2 * 1024).matchingEnginesNum(1).riskEnginesNum(1).msgsInGroupLimit(256)
+				.maxGroupDurationNs(10_000)
+				.threadFactory(new AffinityThreadFactory(
+						AffinityThreadFactory.ThreadAffinityMode.THREAD_AFFINITY_ENABLE_PER_LOGICAL_CORE))
+				.waitStrategy(CoreWaitStrategy.BUSY_SPIN)
+				.binaryCommandsLz4CompressorFactory(() -> LZ4Factory.fastestInstance().highCompressor())
+				.orderBookFactory(OrderBookDirectImpl::new);
+	}
 
-        return builder()
-                .ringBufferSize(16 * 1024)
-                .matchingEnginesNum(1)
-                .riskEnginesNum(1)
-                .msgsInGroupLimit(256)
-                .maxGroupDurationNs(10_000)
-                .threadFactory(Thread::new)
-                .waitStrategy(CoreWaitStrategy.BLOCKING)
-                .binaryCommandsLz4CompressorFactory(() -> LZ4Factory.fastestInstance().highCompressor())
-                .orderBookFactory(OrderBookNaiveImpl::new);
-    }
-
-    public static PerformanceConfiguration.PerformanceConfigurationBuilder latencyPerformanceBuilder() {
-
-        return builder()
-                .ringBufferSize(2 * 1024)
-                .matchingEnginesNum(1)
-                .riskEnginesNum(1)
-                .msgsInGroupLimit(256)
-                .maxGroupDurationNs(10_000)
-                .threadFactory(new AffinityThreadFactory(AffinityThreadFactory.ThreadAffinityMode.THREAD_AFFINITY_ENABLE_PER_LOGICAL_CORE))
-                .waitStrategy(CoreWaitStrategy.BUSY_SPIN)
-                .binaryCommandsLz4CompressorFactory(() -> LZ4Factory.fastestInstance().highCompressor())
-                .orderBookFactory(OrderBookDirectImpl::new);
-    }
-
-    public static PerformanceConfiguration.PerformanceConfigurationBuilder throughputPerformanceBuilder() {
-
-        return builder()
-                .ringBufferSize(64 * 1024)
-                .matchingEnginesNum(4)
-                .riskEnginesNum(2)
-                .msgsInGroupLimit(4_096)
-                .maxGroupDurationNs(4_000_000)
-                .threadFactory(new AffinityThreadFactory(AffinityThreadFactory.ThreadAffinityMode.THREAD_AFFINITY_ENABLE_PER_LOGICAL_CORE))
-                .waitStrategy(CoreWaitStrategy.BUSY_SPIN)
-                .binaryCommandsLz4CompressorFactory(() -> LZ4Factory.fastestInstance().highCompressor())
-                .orderBookFactory(OrderBookDirectImpl::new);
-    }
+	public static PerformanceConfiguration.PerformanceConfigurationBuilder throughputPerformanceBuilder() {
+		return builder().ringBufferSize(64 * 1024).matchingEnginesNum(4).riskEnginesNum(2).msgsInGroupLimit(4_096)
+				.maxGroupDurationNs(4_000_000)
+				.threadFactory(new AffinityThreadFactory(
+						AffinityThreadFactory.ThreadAffinityMode.THREAD_AFFINITY_ENABLE_PER_LOGICAL_CORE))
+				.waitStrategy(CoreWaitStrategy.BUSY_SPIN)
+				.binaryCommandsLz4CompressorFactory(() -> LZ4Factory.fastestInstance().highCompressor())
+				.orderBookFactory(OrderBookDirectImpl::new);
+	}
 }

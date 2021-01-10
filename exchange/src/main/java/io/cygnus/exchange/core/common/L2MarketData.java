@@ -1,6 +1,5 @@
-/*
- * Copyright 2019 Maksim Zheravin
- *
+/**
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +11,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-package exchange.core2.core.common;
+package io.cygnus.exchange.core.common;
 
 import lombok.ToString;
 
@@ -118,6 +118,7 @@ public final class L2MarketData {
 		if (!(obj instanceof L2MarketData)) {
 			return false;
 		}
+
 		L2MarketData o = (L2MarketData) obj;
 
 		if (askSize != o.askSize || bidSize != o.bidSize) {
@@ -129,6 +130,7 @@ public final class L2MarketData {
 				return false;
 			}
 		}
+
 		for (int i = 0; i < bidSize; i++) {
 			if (bidPrices[i] != o.bidPrices[i] || bidVolumes[i] != o.bidVolumes[i] || bidOrders[i] != o.bidOrders[i]) {
 				return false;
