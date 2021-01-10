@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.core.orderbook;
+package io.cygnus.exchange.core.orderbook;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.config.LoggingConfiguration;
-import exchange.core2.tests.util.TestConstants;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.config.LoggingConfiguration;
+import io.cygnus.exchange.tests.util.TestConstants;
 import io.mercury.common.collections.art.ObjectsPool;
 
 public final class OrderBookDirectImplExchangeTest extends OrderBookDirectImplTest {

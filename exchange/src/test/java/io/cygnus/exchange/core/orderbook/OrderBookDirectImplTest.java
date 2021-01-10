@@ -13,27 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.core.orderbook;
+package io.cygnus.exchange.core.orderbook;
 
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.config.LoggingConfiguration;
-import exchange.core2.tests.util.TestOrdersGenerator;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import static io.cygnus.exchange.core.common.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.OrderAction.BID;
+import static io.cygnus.exchange.core.common.OrderType.GTC;
+import static io.cygnus.exchange.core.common.cmd.CommandResultCode.SUCCESS;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static exchange.core2.core.common.OrderAction.ASK;
-import static exchange.core2.core.common.OrderAction.BID;
-import static exchange.core2.core.common.OrderType.GTC;
-import static exchange.core2.core.common.cmd.CommandResultCode.SUCCESS;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.config.LoggingConfiguration;
+import io.cygnus.exchange.tests.util.TestOrdersGenerator;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public abstract class OrderBookDirectImplTest extends OrderBookBaseTest {

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.core.orderbook;
+package io.cygnus.exchange.core.orderbook;
 
-import static exchange.core2.core.common.OrderAction.ASK;
-import static exchange.core2.core.common.OrderAction.BID;
-import static exchange.core2.core.common.OrderType.FOK_BUDGET;
-import static exchange.core2.core.common.OrderType.GTC;
-import static exchange.core2.core.common.OrderType.IOC;
-import static exchange.core2.core.common.cmd.CommandResultCode.MATCHING_REDUCE_FAILED_WRONG_SIZE;
-import static exchange.core2.core.common.cmd.CommandResultCode.MATCHING_UNKNOWN_ORDER_ID;
-import static exchange.core2.core.common.cmd.CommandResultCode.SUCCESS;
+import static io.cygnus.exchange.core.common.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.OrderAction.BID;
+import static io.cygnus.exchange.core.common.OrderType.FOK_BUDGET;
+import static io.cygnus.exchange.core.common.OrderType.GTC;
+import static io.cygnus.exchange.core.common.OrderType.IOC;
+import static io.cygnus.exchange.core.common.cmd.CommandResultCode.MATCHING_REDUCE_FAILED_WRONG_SIZE;
+import static io.cygnus.exchange.core.common.cmd.CommandResultCode.MATCHING_UNKNOWN_ORDER_ID;
+import static io.cygnus.exchange.core.common.cmd.CommandResultCode.SUCCESS;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
@@ -38,14 +38,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.MatcherEventType;
-import exchange.core2.core.common.MatcherTradeEvent;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.tests.util.L2MarketDataHelper;
-import exchange.core2.tests.util.TestOrdersGenerator;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.MatcherEventType;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.tests.util.L2MarketDataHelper;
+import io.cygnus.exchange.tests.util.TestOrdersGenerator;
 
 
 /**

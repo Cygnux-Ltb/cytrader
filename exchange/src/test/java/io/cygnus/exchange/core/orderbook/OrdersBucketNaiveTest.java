@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.core.orderbook;
+package io.cygnus.exchange.core.orderbook;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,9 +29,9 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
-import exchange.core2.core.common.MatcherTradeEvent;
-import exchange.core2.core.common.Order;
-import exchange.core2.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.Order;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
 
 public final class OrdersBucketNaiveTest {
 
