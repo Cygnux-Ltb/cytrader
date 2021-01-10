@@ -1,14 +1,15 @@
-package exchange.core2.tests.nasdaq;
+package io.cygnus.exchange.tests.nasdaq;
 
 import com.paritytrading.juncture.nasdaq.itch50.ITCH50Parser;
 import com.paritytrading.nassau.util.BinaryFILE;
-import exchange.core2.core.ExchangeApi;
-import exchange.core2.core.common.config.InitialStateConfiguration;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.core.common.config.SerializationConfiguration;
-import exchange.core2.tests.util.ExchangeTestContainer;
-import exchange.core2.tests.util.ExecutionTime;
-import exchange.core2.tests.util.TestConstants;
+
+import io.cygnus.exchange.core.ExchangeApi;
+import io.cygnus.exchange.core.common.config.InitialStateConfiguration;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.config.SerializationConfiguration;
+import io.cygnus.exchange.tests.util.ExchangeTestContainer;
+import io.cygnus.exchange.tests.util.ExecutionTime;
+import io.cygnus.exchange.tests.util.TestConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.agrona.BitUtil;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package exchange.core2.tests.nasdaq;
+package io.cygnus.exchange.tests.nasdaq;
 
 import com.paritytrading.foundation.ASCII;
 import com.paritytrading.juncture.nasdaq.itch50.ITCH50;
