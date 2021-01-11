@@ -1,20 +1,20 @@
-package exchange.core2.tests.steps;
+package io.cygnus.exchange.tests.steps;
 
-import exchange.core2.core.common.*;
-import exchange.core2.core.common.api.*;
-import exchange.core2.core.common.api.reports.SingleUserReportResult;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommandType;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.tests.util.ExchangeTestContainer;
-import exchange.core2.tests.util.L2MarketDataHelper;
-import exchange.core2.tests.util.TestConstants;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cygnus.exchange.core.common.*;
+import io.cygnus.exchange.core.common.api.*;
+import io.cygnus.exchange.core.common.api.reports.SingleUserReportResult;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.tests.util.ExchangeTestContainer;
+import io.cygnus.exchange.tests.util.L2MarketDataHelper;
+import io.cygnus.exchange.tests.util.TestConstants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import static exchange.core2.tests.util.ExchangeTestContainer.CHECK_SUCCESS;
+import static io.cygnus.exchange.tests.util.ExchangeTestContainer.CHECK_SUCCESS;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;

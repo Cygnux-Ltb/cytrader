@@ -1,21 +1,21 @@
-package exchange.core2.tests.steps;
+package io.cygnus.exchange.tests.steps;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.tests.util.L2MarketDataHelper;
 import io.cucumber.core.api.TypeRegistry;
 import io.cucumber.core.api.TypeRegistryConfigurer;
 import io.cucumber.cucumberexpressions.ParameterType;
 import io.cucumber.cucumberexpressions.Transformer;
 import io.cucumber.datatable.DataTableType;
 import io.cucumber.datatable.TableTransformer;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.tests.util.L2MarketDataHelper;
+
+import static io.cygnus.exchange.tests.util.TestConstants.SYMBOLSPEC_ETH_XBT;
+import static io.cygnus.exchange.tests.util.TestConstants.SYMBOLSPEC_EUR_USD;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import static exchange.core2.tests.util.TestConstants.SYMBOLSPEC_ETH_XBT;
-import static exchange.core2.tests.util.TestConstants.SYMBOLSPEC_EUR_USD;
 
 // TODO use annotation based configuration
 @SuppressWarnings("deprecation")
