@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
-import exchange.core2.core.common.config.InitialStateConfiguration;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.core.common.config.SerializationConfiguration;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.stream.IntStream;
+
+import io.cygnus.exchange.core.common.config.InitialStateConfiguration;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.config.SerializationConfiguration;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;

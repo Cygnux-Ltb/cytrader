@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
-import exchange.core2.core.ExchangeApi;
-import exchange.core2.core.common.MatcherTradeEvent;
-import exchange.core2.core.common.OrderType;
-import exchange.core2.core.common.api.ApiCommand;
-import exchange.core2.core.common.api.ApiMoveOrder;
-import exchange.core2.core.common.api.ApiPlaceOrder;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.config.InitialStateConfiguration;
-import exchange.core2.core.common.config.PerformanceConfiguration;
-import exchange.core2.core.common.config.SerializationConfiguration;
+import io.cygnus.exchange.core.ExchangeApi;
+import io.cygnus.exchange.core.common.MatcherTradeEvent;
+import io.cygnus.exchange.core.common.OrderType;
+import io.cygnus.exchange.core.common.api.ApiCommand;
+import io.cygnus.exchange.core.common.api.ApiMoveOrder;
+import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.config.InitialStateConfiguration;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.config.SerializationConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.HdrHistogram.Histogram;

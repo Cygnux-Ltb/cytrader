@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
 import org.HdrHistogram.Histogram;
 

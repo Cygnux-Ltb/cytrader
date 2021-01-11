@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
 import com.google.common.collect.Iterables;
-import exchange.core2.core.common.*;
-import exchange.core2.core.common.api.*;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.cmd.OrderCommandType;
-import exchange.core2.core.common.config.LoggingConfiguration;
-import exchange.core2.core.orderbook.IOrderBook;
-import exchange.core2.core.orderbook.OrderBookNaiveImpl;
+
+import io.cygnus.exchange.core.common.*;
+import io.cygnus.exchange.core.common.api.*;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.config.LoggingConfiguration;
+import io.cygnus.exchange.core.orderbook.IOrderBook;
+import io.cygnus.exchange.core.orderbook.OrderBookNaiveImpl;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,8 @@ import org.apache.commons.math3.distribution.RealDistribution;
 import org.apache.commons.math3.random.JDKRandomGenerator;
 import org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap;
 import org.jetbrains.annotations.NotNull;
+
+import static io.cygnus.exchange.tests.util.TestConstants.SYMBOLSPEC_EUR_USD;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -42,8 +45,6 @@ import java.util.function.LongConsumer;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
-
-import static exchange.core2.tests.util.TestConstants.SYMBOLSPEC_EUR_USD;
 
 @Slf4j
 public final class TestOrdersGenerator {

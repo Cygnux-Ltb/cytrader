@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
 import com.google.common.base.Strings;
-import exchange.core2.core.common.L2MarketData;
+
+import io.cygnus.exchange.core.common.L2MarketData;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;

@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.SymbolType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.distribution.ParetoDistribution;
 import org.apache.commons.math3.distribution.RealDistribution;
 import org.apache.commons.math3.random.JDKRandomGenerator;
+
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.SymbolType;
 
 import java.util.*;
 

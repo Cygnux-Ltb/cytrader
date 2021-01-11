@@ -1,4 +1,4 @@
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
 import lombok.Builder;
 import lombok.Data;

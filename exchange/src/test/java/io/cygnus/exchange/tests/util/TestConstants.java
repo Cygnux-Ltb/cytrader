@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
 import com.google.common.collect.Sets;
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.SymbolType;
+
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.SymbolType;
 
 import java.util.Set;
 

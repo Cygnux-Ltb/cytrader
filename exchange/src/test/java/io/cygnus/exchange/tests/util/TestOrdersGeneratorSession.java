@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -25,7 +25,7 @@ import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap;
 
-import exchange.core2.core.orderbook.IOrderBook;
+import io.cygnus.exchange.core.orderbook.IOrderBook;
 
 public final class TestOrdersGeneratorSession {
 

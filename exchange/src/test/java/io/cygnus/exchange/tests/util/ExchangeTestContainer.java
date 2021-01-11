@@ -13,32 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
-import com.google.common.collect.Lists;
-import exchange.core2.core.ExchangeApi;
-import exchange.core2.core.ExchangeCore;
-import exchange.core2.core.common.CoreSymbolSpecification;
-import exchange.core2.core.common.L2MarketData;
-import exchange.core2.core.common.SymbolType;
-import exchange.core2.core.common.api.*;
-import exchange.core2.core.common.api.binary.BatchAddSymbolsCommand;
-import exchange.core2.core.common.api.binary.BinaryDataCommand;
-import exchange.core2.core.common.api.reports.*;
-import exchange.core2.core.common.cmd.CommandResultCode;
-import exchange.core2.core.common.cmd.OrderCommand;
-import exchange.core2.core.common.config.*;
-import exchange.core2.core.utils.AffinityThreadFactory;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
-import org.hamcrest.core.Is;
+import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
@@ -47,9 +41,44 @@ import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
+import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
+import org.hamcrest.core.Is;
+
+import com.google.common.collect.Lists;
+
+import io.cygnus.exchange.core.ExchangeApi;
+import io.cygnus.exchange.core.ExchangeCore;
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
+import io.cygnus.exchange.core.common.L2MarketData;
+import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.common.api.ApiAddUser;
+import io.cygnus.exchange.core.common.api.ApiAdjustUserBalance;
+import io.cygnus.exchange.core.common.api.ApiCommand;
+import io.cygnus.exchange.core.common.api.ApiNop;
+import io.cygnus.exchange.core.common.api.ApiReset;
+import io.cygnus.exchange.core.common.api.binary.BatchAddSymbolsCommand;
+import io.cygnus.exchange.core.common.api.binary.BinaryDataCommand;
+import io.cygnus.exchange.core.common.api.reports.SingleUserReportQuery;
+import io.cygnus.exchange.core.common.api.reports.SingleUserReportResult;
+import io.cygnus.exchange.core.common.api.reports.StateHashReportQuery;
+import io.cygnus.exchange.core.common.api.reports.TotalCurrencyBalanceReportQuery;
+import io.cygnus.exchange.core.common.api.reports.TotalCurrencyBalanceReportResult;
+import io.cygnus.exchange.core.common.cmd.CommandResultCode;
+import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
+import io.cygnus.exchange.core.common.config.InitialStateConfiguration;
+import io.cygnus.exchange.core.common.config.LoggingConfiguration;
+import io.cygnus.exchange.core.common.config.OrdersProcessingConfiguration;
+import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.config.ReportsQueriesConfiguration;
+import io.cygnus.exchange.core.common.config.SerializationConfiguration;
+import io.cygnus.exchange.core.utils.AffinityThreadFactory;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public final class ExchangeTestContainer implements AutoCloseable {
@@ -309,9 +338,9 @@ public final class ExchangeTestContainer implements AutoCloseable {
 
     public TotalCurrencyBalanceReportResult totalBalanceReport() {
         final TotalCurrencyBalanceReportResult res = api.processReport(new TotalCurrencyBalanceReportQuery(), getRandomTransferId()).join();
-        final IntLongHashMap openInterestLong = res.getOpenInterestLong();
-        final IntLongHashMap openInterestShort = res.getOpenInterestShort();
-        final IntLongHashMap openInterestDiff = new IntLongHashMap(openInterestLong);
+        final MutableIntLongMap openInterestLong = res.getOpenInterestLong();
+        final MutableIntLongMap openInterestShort = res.getOpenInterestShort();
+        final MutableIntLongMap openInterestDiff = new IntLongHashMap(openInterestLong);
         openInterestShort.forEachKeyValue((k, v) -> openInterestDiff.addToValue(k, -v));
         if (openInterestDiff.anySatisfy(vol -> vol != 0)) {
             throw new IllegalStateException("Open Interest balance check failed");

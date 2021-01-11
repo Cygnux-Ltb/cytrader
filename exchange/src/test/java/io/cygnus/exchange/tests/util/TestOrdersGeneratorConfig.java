@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package exchange.core2.tests.util;
+package io.cygnus.exchange.tests.util;
 
-import exchange.core2.core.common.CoreSymbolSpecification;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +22,8 @@ import lombok.Getter;
 import java.util.BitSet;
 import java.util.List;
 import java.util.function.Function;
+
+import io.cygnus.exchange.core.common.CoreSymbolSpecification;
 
 @AllArgsConstructor
 @Builder
