@@ -1,31 +1,24 @@
-/**
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
 package io.cygnus.exchange.core.common.api.reports;
 
-import lombok.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Objects;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.stream.Stream;
+
+import org.jetbrains.annotations.NotNull;
+
+import io.cygnus.exchange.core.utils.SerializationUtils;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import net.openhft.chronicle.bytes.BytesIn;
 import net.openhft.chronicle.bytes.BytesOut;
 import net.openhft.chronicle.bytes.WriteBytesMarshallable;
-import org.jetbrains.annotations.NotNull;
-
-import io.cygnus.exchange.core.utils.SerializationUtils;
-
-import java.util.*;
-import java.util.stream.Stream;
 
 @Getter
 @Slf4j
@@ -37,7 +30,7 @@ public final class StateHashReportResult implements ReportResult {
 	public static final StateHashReportResult EMPTY = new StateHashReportResult(new TreeMap<>());
 
 	private static final Comparator<SubmoduleKey> SUBMODULE_KEY_COMPARATOR = Comparator
-			.<SubmoduleKey>comparingInt(k -> k.submodule.code).thenComparing(k -> k.moduleId);
+			.<SubmoduleKey>comparingInt(key -> key.submodule.code).thenComparing(key -> key.moduleId);
 
 	private final SortedMap<SubmoduleKey, Integer> hashCodes;
 
@@ -77,16 +70,23 @@ public final class StateHashReportResult implements ReportResult {
 
 	@AllArgsConstructor
 	public enum SubmoduleType {
-		RISK_SYMBOL_SPEC_PROVIDER(0, ModuleType.RISK_ENGINE), RISK_USER_PROFILE_SERVICE(1, ModuleType.RISK_ENGINE),
-		RISK_BINARY_CMD_PROCESSOR(2, ModuleType.MATCHING_ENGINE), RISK_LAST_PRICE_CACHE(3, ModuleType.RISK_ENGINE),
-		RISK_FEES(4, ModuleType.RISK_ENGINE), RISK_ADJUSTMENTS(5, ModuleType.RISK_ENGINE),
-		RISK_SUSPENDS(6, ModuleType.RISK_ENGINE), RISK_SHARD_MASK(7, ModuleType.RISK_ENGINE),
+		RISK_SYMBOL_SPEC_PROVIDER(0, ModuleType.RISK_ENGINE), //
+		RISK_USER_PROFILE_SERVICE(1, ModuleType.RISK_ENGINE), //
+		RISK_BINARY_CMD_PROCESSOR(2, ModuleType.MATCHING_ENGINE), //
+		RISK_LAST_PRICE_CACHE(3, ModuleType.RISK_ENGINE), //
+		RISK_FEES(4, ModuleType.RISK_ENGINE), //
+		RISK_ADJUSTMENTS(5, ModuleType.RISK_ENGINE), //
+		RISK_SUSPENDS(6, ModuleType.RISK_ENGINE), //
+		RISK_SHARD_MASK(7, ModuleType.RISK_ENGINE), //
 
-		MATCHING_BINARY_CMD_PROCESSOR(64, ModuleType.MATCHING_ENGINE),
-		MATCHING_ORDER_BOOKS(65, ModuleType.MATCHING_ENGINE), MATCHING_SHARD_MASK(66, ModuleType.MATCHING_ENGINE);
+		MATCHING_BINARY_CMD_PROCESSOR(64, ModuleType.MATCHING_ENGINE), //
+		MATCHING_ORDER_BOOKS(65, ModuleType.MATCHING_ENGINE), //
+		MATCHING_SHARD_MASK(66, ModuleType.MATCHING_ENGINE);//
 
-		public final int code;
-		public final ModuleType moduleType;
+		@Getter
+		private final int code;
+		@Getter
+		private final ModuleType moduleType;
 
 		public static SubmoduleType fromCode(int code) {
 			return Arrays.stream(values()).filter(c -> c.code == code).findFirst()

@@ -1,18 +1,3 @@
-/**
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
 package io.cygnus.exchange.core.common.api.reports;
 
 import java.util.Optional;
@@ -22,8 +7,8 @@ import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
 import io.cygnus.exchange.core.common.CoreSymbolSpecification;
-import io.cygnus.exchange.core.common.PositionDirection;
-import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.common.enums.PositionDirection;
+import io.cygnus.exchange.core.common.enums.SymbolType;
 import io.cygnus.exchange.core.processors.MatchingEngineRouter;
 import io.cygnus.exchange.core.processors.RiskEngine;
 import io.cygnus.exchange.core.processors.SymbolSpecificationProvider;
@@ -59,17 +44,17 @@ public final class TotalCurrencyBalanceReportQuery implements ReportQuery<TotalC
         final IntLongHashMap currencyBalance = new IntLongHashMap();
 
         matchingEngine.getOrderBooks().stream()
-                .filter(ob -> ob.getSymbolSpec().type == SymbolType.CURRENCY_EXCHANGE_PAIR)
-                .forEach(ob -> {
-                    final CoreSymbolSpecification spec = ob.getSymbolSpec();
+                .filter(orderBook -> orderBook.getSymbolSpec().type == SymbolType.CURRENCY_EXCHANGE_PAIR)
+                .forEach(orderBook -> {
+                    final CoreSymbolSpecification spec = orderBook.getSymbolSpec();
 
                     currencyBalance.addToValue(
-                            spec.getBaseCurrency(),
-                            ob.askOrdersStream(false).mapToLong(ord -> BizArithmeticUtils.calculateAmountAsk(ord.getSize() - ord.getFilled(), spec)).sum());
+                            spec.baseCurrency,
+                            orderBook.askOrdersStream(false).mapToLong(ord -> BizArithmeticUtils.calculateAmountAsk(ord.getSize() - ord.getFilled(), spec)).sum());
 
                     currencyBalance.addToValue(
-                            spec.getQuoteCurrency(),
-                            ob.bidOrdersStream(false).mapToLong(ord -> BizArithmeticUtils.calculateAmountBidTakerFee(ord.getSize() - ord.getFilled(), ord.getReserveBidPrice(), spec)).sum());
+                            spec.quoteCurrency,
+                            orderBook.bidOrdersStream(false).mapToLong(ord -> BizArithmeticUtils.calculateAmountBidTakerFee(ord.getSize() - ord.getFilled(), ord.getReserveBidPrice(), spec)).sum());
                 });
 
         return Optional.of(TotalCurrencyBalanceReportResult.ofOrderBalances(currencyBalance));

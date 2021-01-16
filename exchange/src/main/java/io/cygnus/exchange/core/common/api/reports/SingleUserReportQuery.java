@@ -1,18 +1,3 @@
-/**
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
 package io.cygnus.exchange.core.common.api.reports;
 
 import java.util.List;
@@ -28,7 +13,6 @@ import io.cygnus.exchange.core.processors.MatchingEngineRouter;
 import io.cygnus.exchange.core.processors.RiskEngine;
 import io.mercury.common.log.CommonLoggerFactory;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 import net.openhft.chronicle.bytes.BytesIn;
 import net.openhft.chronicle.bytes.BytesOut;
@@ -39,8 +23,7 @@ public final class SingleUserReportQuery implements ReportQuery<SingleUserReport
 
 	private static final Logger log = CommonLoggerFactory.getLogger(SingleUserReportQuery.class);
 
-	@Getter
-	private final long uid;
+	public final long uid;
 
 	public SingleUserReportQuery(long uid) {
 		this.uid = uid;
@@ -67,12 +50,12 @@ public final class SingleUserReportQuery implements ReportQuery<SingleUserReport
 
 		final IntObjectHashMap<List<Order>> orders = new IntObjectHashMap<>();
 
-		matchingEngine.getOrderBooks().forEach(ob -> {
-			final List<Order> userOrders = ob.findUserOrders(this.uid);
+		matchingEngine.getOrderBooks().forEach(orderBook -> {
+			final List<Order> userOrders = orderBook.findUserOrders(this.uid);
 			// dont put empty results, so that the report result merge procedure would be
 			// simple
 			if (!userOrders.isEmpty()) {
-				orders.put(ob.getSymbolSpec().symbolId, userOrders);
+				orders.put(orderBook.getSymbolSpec().symbolId, userOrders);
 			}
 		});
 
