@@ -31,7 +31,6 @@ public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {
 		
 		System.out.println(Integer.MAX_VALUE);
 		
-		
 	}
 
 }
