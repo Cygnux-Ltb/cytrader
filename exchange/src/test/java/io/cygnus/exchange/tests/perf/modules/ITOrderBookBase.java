@@ -31,9 +31,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.cygnus.exchange.core.common.OrderAction.ASK;
-import static io.cygnus.exchange.core.common.OrderAction.BID;
-import static io.cygnus.exchange.core.common.OrderType.IOC;
+import static io.cygnus.exchange.core.common.enums.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.enums.OrderAction.BID;
+import static io.cygnus.exchange.core.common.enums.OrderType.IOC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
