@@ -30,7 +30,7 @@ public final class ChinaFuturesPosition extends PositionBaseImpl<ChinaFuturesPos
 	private int beforeTodayQty;
 
 	// 昨仓锁定记录
-	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(Capacity.L05_SIZE_32);
+	private MutableLongLongMap beforeTodayQtyLockRecord = MutableMaps.newLongLongHashMap(Capacity.L05_SIZE);
 
 	ChinaFuturesPosition(int accountId, ChinaFutures futures) {
 		this(accountId, futures, 0);
