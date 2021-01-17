@@ -15,14 +15,35 @@
  */
 package io.cygnus.exchange.core;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentMap;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.LongConsumer;
+import java.util.stream.Stream;
+
+import org.agrona.collections.LongLongConsumer;
+import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+
 import com.lmax.disruptor.EventTranslatorOneArg;
 import com.lmax.disruptor.RingBuffer;
 
-import io.cygnus.exchange.core.common.BalanceAdjustmentType;
 import io.cygnus.exchange.core.common.L2MarketData;
-import io.cygnus.exchange.core.common.OrderAction;
-import io.cygnus.exchange.core.common.OrderType;
-import io.cygnus.exchange.core.common.api.*;
+import io.cygnus.exchange.core.common.api.ApiAddUser;
+import io.cygnus.exchange.core.common.api.ApiAdjustUserBalance;
+import io.cygnus.exchange.core.common.api.ApiBinaryDataCommand;
+import io.cygnus.exchange.core.common.api.ApiCancelOrder;
+import io.cygnus.exchange.core.common.api.ApiCommand;
+import io.cygnus.exchange.core.common.api.ApiMoveOrder;
+import io.cygnus.exchange.core.common.api.ApiNop;
+import io.cygnus.exchange.core.common.api.ApiOrderBookRequest;
+import io.cygnus.exchange.core.common.api.ApiPersistState;
+import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
+import io.cygnus.exchange.core.common.api.ApiReduceOrder;
+import io.cygnus.exchange.core.common.api.ApiReset;
+import io.cygnus.exchange.core.common.api.ApiResumeUser;
+import io.cygnus.exchange.core.common.api.ApiSuspendUser;
 import io.cygnus.exchange.core.common.api.binary.BinaryDataCommand;
 import io.cygnus.exchange.core.common.api.reports.ApiReportQuery;
 import io.cygnus.exchange.core.common.api.reports.ReportQuery;
@@ -30,6 +51,9 @@ import io.cygnus.exchange.core.common.api.reports.ReportResult;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.cmd.OrderCommand;
 import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.enums.BalanceAdjustmentType;
+import io.cygnus.exchange.core.common.enums.OrderAction;
+import io.cygnus.exchange.core.common.enums.OrderType;
 import io.cygnus.exchange.core.orderbook.OrderBookEventsHelper;
 import io.cygnus.exchange.core.processors.BinaryCommandsProcessor;
 import io.cygnus.exchange.core.utils.SerializationUtils;
@@ -38,16 +62,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.jpountz.lz4.LZ4Compressor;
 import net.openhft.chronicle.bytes.WriteBytesMarshallable;
 import net.openhft.chronicle.wire.Wire;
-import org.agrona.collections.LongLongConsumer;
-import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
-
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.LongConsumer;
-import java.util.stream.Stream;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -57,7 +71,7 @@ public final class ExchangeApi {
 	private final LZ4Compressor lz4Compressor;
 
 	// promises cache (TODO can be changed to queue)
-	private final Map<Long, Consumer<OrderCommand>> promises = new ConcurrentHashMap<>();
+	private final ConcurrentMap<Long, Consumer<OrderCommand>> promises = new ConcurrentHashMap<>();
 
 	public static final int LONGS_PER_MESSAGE = 5;
 
@@ -73,7 +87,7 @@ public final class ExchangeApi {
 	}
 
 	public void submitCommand(ApiCommand cmd) {
-		// log.debug("{}", cmd);
+		log.debug("cmd -> {}", cmd);
 
 		if (cmd instanceof ApiMoveOrder) {
 			ringBuffer.publishEvent(MOVE_ORDER_TRANSLATOR, (ApiMoveOrder) cmd);
@@ -109,7 +123,7 @@ public final class ExchangeApi {
 	}
 
 	public CompletableFuture<CommandResultCode> submitCommandAsync(ApiCommand cmd) {
-		// log.debug("{}", cmd);
+		log.debug("cmd -> {}", cmd);
 
 		if (cmd instanceof ApiMoveOrder) {
 			return submitCommandAsync(MOVE_ORDER_TRANSLATOR, (ApiMoveOrder) cmd);
@@ -227,9 +241,11 @@ public final class ExchangeApi {
 		final CompletableFuture<CommandResultCode> future = new CompletableFuture<>();
 
 		publishBinaryData(OrderCommandType.BINARY_DATA_COMMAND, data, data.getBinaryCommandTypeCode(),
-				(int) System.nanoTime(), // can be any value because sequence is used for result identification, not
-											// transferId
-				0L, seq -> promises.put(seq, orderCommand -> future.complete(orderCommand.resultCode)));
+				// can be any value because sequence is used for result identification,
+				// not transferId
+				(int) System.nanoTime(), 0L,
+				
+				seq -> promises.put(seq, orderCommand -> future.complete(orderCommand.resultCode)));
 
 		return future;
 	}

@@ -1,18 +1,3 @@
-/**
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
 package io.cygnus.exchange.core;
 
 import com.lmax.disruptor.EventHandler;
@@ -22,13 +7,13 @@ import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.EventHandlerGroup;
 import com.lmax.disruptor.dsl.ProducerType;
 
-import io.cygnus.exchange.core.common.CoreWaitStrategy;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.cmd.OrderCommand;
 import io.cygnus.exchange.core.common.cmd.OrderCommandType;
 import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
 import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
 import io.cygnus.exchange.core.common.config.SerializationConfiguration;
+import io.cygnus.exchange.core.common.enums.CoreWaitStrategy;
 import io.cygnus.exchange.core.orderbook.IOrderBook;
 import io.cygnus.exchange.core.processors.*;
 import io.cygnus.exchange.core.processors.journaling.ISerializationProcessor;
