@@ -19,16 +19,16 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import io.cygnus.exchange.core.common.MatcherEventType;
 import io.cygnus.exchange.core.common.MatcherTradeEvent;
-import io.cygnus.exchange.core.common.OrderAction;
-import io.cygnus.exchange.core.common.OrderType;
 import io.cygnus.exchange.core.common.api.ApiCancelOrder;
 import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
 import io.cygnus.exchange.core.common.api.ApiReduceOrder;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.cmd.OrderCommand;
 import io.cygnus.exchange.core.common.cmd.OrderCommandType;
+import io.cygnus.exchange.core.common.enums.MatcherEventType;
+import io.cygnus.exchange.core.common.enums.OrderAction;
+import io.cygnus.exchange.core.common.enums.OrderType;
 
 @RunWith(MockitoJUnitRunner.class)
 public final class SimpleEventsProcessorTest {
