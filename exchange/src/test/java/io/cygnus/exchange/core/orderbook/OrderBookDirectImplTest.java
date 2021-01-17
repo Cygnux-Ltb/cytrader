@@ -15,10 +15,10 @@
  */
 package io.cygnus.exchange.core.orderbook;
 
-import static io.cygnus.exchange.core.common.OrderAction.ASK;
-import static io.cygnus.exchange.core.common.OrderAction.BID;
-import static io.cygnus.exchange.core.common.OrderType.GTC;
 import static io.cygnus.exchange.core.common.cmd.CommandResultCode.SUCCESS;
+import static io.cygnus.exchange.core.common.enums.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.enums.OrderAction.BID;
+import static io.cygnus.exchange.core.common.enums.OrderType.GTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;

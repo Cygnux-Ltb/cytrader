@@ -15,14 +15,14 @@
  */
 package io.cygnus.exchange.core.orderbook;
 
-import static io.cygnus.exchange.core.common.OrderAction.ASK;
-import static io.cygnus.exchange.core.common.OrderAction.BID;
-import static io.cygnus.exchange.core.common.OrderType.FOK_BUDGET;
-import static io.cygnus.exchange.core.common.OrderType.GTC;
-import static io.cygnus.exchange.core.common.OrderType.IOC;
 import static io.cygnus.exchange.core.common.cmd.CommandResultCode.MATCHING_REDUCE_FAILED_WRONG_SIZE;
 import static io.cygnus.exchange.core.common.cmd.CommandResultCode.MATCHING_UNKNOWN_ORDER_ID;
 import static io.cygnus.exchange.core.common.cmd.CommandResultCode.SUCCESS;
+import static io.cygnus.exchange.core.common.enums.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.enums.OrderAction.BID;
+import static io.cygnus.exchange.core.common.enums.OrderType.FOK_BUDGET;
+import static io.cygnus.exchange.core.common.enums.OrderType.GTC;
+import static io.cygnus.exchange.core.common.enums.OrderType.IOC;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
@@ -40,10 +40,10 @@ import org.junit.Test;
 
 import io.cygnus.exchange.core.common.CoreSymbolSpecification;
 import io.cygnus.exchange.core.common.L2MarketData;
-import io.cygnus.exchange.core.common.MatcherEventType;
 import io.cygnus.exchange.core.common.MatcherTradeEvent;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.enums.MatcherEventType;
 import io.cygnus.exchange.tests.util.L2MarketDataHelper;
 import io.cygnus.exchange.tests.util.TestOrdersGenerator;
 
