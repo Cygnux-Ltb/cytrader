@@ -1,18 +1,3 @@
-/**
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
 package io.cygnus.exchange.core.processors.journaling;
 
 import java.io.BufferedInputStream;
@@ -41,14 +26,14 @@ import org.agrona.collections.MutableLong;
 import org.slf4j.Logger;
 
 import io.cygnus.exchange.core.ExchangeApi;
-import io.cygnus.exchange.core.common.BalanceAdjustmentType;
-import io.cygnus.exchange.core.common.OrderAction;
-import io.cygnus.exchange.core.common.OrderType;
 import io.cygnus.exchange.core.common.cmd.OrderCommand;
 import io.cygnus.exchange.core.common.cmd.OrderCommandType;
 import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
 import io.cygnus.exchange.core.common.config.InitialStateConfiguration;
 import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.enums.BalanceAdjustmentType;
+import io.cygnus.exchange.core.common.enums.OrderAction;
+import io.cygnus.exchange.core.common.enums.OrderType;
 import io.mercury.common.log.CommonLoggerFactory;
 import net.jpountz.lz4.LZ4Compressor;
 import net.jpountz.lz4.LZ4Factory;
@@ -126,8 +111,9 @@ public final class DiskSerializationProcessor implements ISerializationProcessor
 
 		this.journalFileMaxSize = diskConfig.getJournalFileMaxSize() - journalBufferSize;
 
-		this.journalBufferFlushTrigger = journalBufferSize - MAX_COMMAND_SIZE_BYTES; // less than max command size in
-																						// bytes
+		// less than max command size in bytes
+		this.journalBufferFlushTrigger = journalBufferSize - MAX_COMMAND_SIZE_BYTES;
+
 		this.journalBatchCompressThreshold = diskConfig.getJournalBatchCompressThreshold();
 
 		this.journalWriteBuffer = ByteBuffer.allocateDirect(journalBufferSize);
@@ -173,7 +159,7 @@ public final class DiskSerializationProcessor implements ISerializationProcessor
 			try (final OutputStream os = Files.newOutputStream(resolveMainLogPath(), StandardOpenOption.CREATE,
 					StandardOpenOption.APPEND)) {
 				os.write((System.currentTimeMillis() + " seq=" + seq + " timestampNs=" + timestampNs + " snapshotId="
-						+ snapshotId + " type=" + type.code + " instance=" + instanceId + "\n").getBytes());
+						+ snapshotId + " type=" + type.getCode() + " instance=" + instanceId + "\n").getBytes());
 			} catch (final IOException ex) {
 				log.error("Can not write main log file: ", ex);
 				return false;
@@ -759,13 +745,12 @@ public final class DiskSerializationProcessor implements ISerializationProcessor
 	 * @param timestampNs
 	 */
 	private void registerNextSnapshot(long snapshotId, long seq, long timestampNs) {
-
 		lastSnapshotDescriptor = lastSnapshotDescriptor.createNext(snapshotId, seq, timestampNs);
 	}
 
 	private Path resolveSnapshotPath(long snapshotId, SerializedModuleType type, int instanceId) {
-
-		return folder.resolve(String.format("%s_snapshot_%d_%s%d.ecs", exchangeId, snapshotId, type.code, instanceId));
+		return folder
+				.resolve(String.format("%s_snapshot_%d_%s%d.ecs", exchangeId, snapshotId, type.getCode(), instanceId));
 	}
 
 	private Path resolveMainLogPath() {
@@ -775,4 +760,5 @@ public final class DiskSerializationProcessor implements ISerializationProcessor
 	private Path resolveJournalPath(int partitionId, long snapshotId) {
 		return folder.resolve(String.format("%s_journal_%d_%04X.ecj", exchangeId, snapshotId, partitionId));
 	}
+
 }
