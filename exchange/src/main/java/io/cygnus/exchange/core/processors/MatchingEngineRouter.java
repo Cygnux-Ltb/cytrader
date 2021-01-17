@@ -1,18 +1,3 @@
-/**
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
 package io.cygnus.exchange.core.processors;
 
 import java.util.HashMap;
@@ -23,7 +8,6 @@ import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 import org.slf4j.Logger;
 
 import io.cygnus.exchange.core.common.CoreSymbolSpecification;
-import io.cygnus.exchange.core.common.SymbolType;
 import io.cygnus.exchange.core.common.api.binary.BatchAddAccountsCommand;
 import io.cygnus.exchange.core.common.api.binary.BatchAddSymbolsCommand;
 import io.cygnus.exchange.core.common.api.reports.ReportQuery;
@@ -34,6 +18,7 @@ import io.cygnus.exchange.core.common.cmd.OrderCommandType;
 import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
 import io.cygnus.exchange.core.common.config.LoggingConfiguration;
 import io.cygnus.exchange.core.common.config.OrdersProcessingConfiguration;
+import io.cygnus.exchange.core.common.enums.SymbolType;
 import io.cygnus.exchange.core.orderbook.IOrderBook;
 import io.cygnus.exchange.core.orderbook.OrderBookEventsHelper;
 import io.cygnus.exchange.core.processors.journaling.ISerializationProcessor;

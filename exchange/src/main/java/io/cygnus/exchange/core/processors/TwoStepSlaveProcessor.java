@@ -1,18 +1,3 @@
-/**
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
 package io.cygnus.exchange.core.processors;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,8 +10,8 @@ import com.lmax.disruptor.Sequence;
 import com.lmax.disruptor.SequenceBarrier;
 import com.lmax.disruptor.Sequencer;
 
-import io.cygnus.exchange.core.common.CoreWaitStrategy;
 import io.cygnus.exchange.core.common.cmd.OrderCommand;
+import io.cygnus.exchange.core.common.enums.CoreWaitStrategy;
 
 public final class TwoStepSlaveProcessor implements EventProcessor {
 	
@@ -50,6 +35,7 @@ public final class TwoStepSlaveProcessor implements EventProcessor {
                                  final SimpleEventHandler eventHandler,
                                  final ExceptionHandler<? super OrderCommand> exceptionHandler,
                                  final String name) {
+    	
         this.dataProvider = ringBuffer;
         this.sequenceBarrier = sequenceBarrier;
         this.waitSpinningHelper = new WaitSpinningHelper(ringBuffer, sequenceBarrier, 0, CoreWaitStrategy.SECOND_STEP_NO_WAIT);

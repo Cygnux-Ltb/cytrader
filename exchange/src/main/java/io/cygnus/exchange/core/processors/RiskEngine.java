@@ -1,18 +1,3 @@
-/**
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
 package io.cygnus.exchange.core.processors;
 
 import java.util.HashMap;
@@ -24,16 +9,11 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
-import io.cygnus.exchange.core.common.BalanceAdjustmentType;
 import io.cygnus.exchange.core.common.CoreSymbolSpecification;
 import io.cygnus.exchange.core.common.L2MarketData;
-import io.cygnus.exchange.core.common.MatcherEventType;
 import io.cygnus.exchange.core.common.MatcherTradeEvent;
-import io.cygnus.exchange.core.common.OrderAction;
-import io.cygnus.exchange.core.common.OrderType;
 import io.cygnus.exchange.core.common.StateHash;
 import io.cygnus.exchange.core.common.SymbolPositionRecord;
-import io.cygnus.exchange.core.common.SymbolType;
 import io.cygnus.exchange.core.common.UserProfile;
 import io.cygnus.exchange.core.common.api.binary.BatchAddAccountsCommand;
 import io.cygnus.exchange.core.common.api.binary.BatchAddSymbolsCommand;
@@ -46,6 +26,11 @@ import io.cygnus.exchange.core.common.cmd.OrderCommandType;
 import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
 import io.cygnus.exchange.core.common.config.LoggingConfiguration;
 import io.cygnus.exchange.core.common.config.OrdersProcessingConfiguration;
+import io.cygnus.exchange.core.common.enums.BalanceAdjustmentType;
+import io.cygnus.exchange.core.common.enums.MatcherEventType;
+import io.cygnus.exchange.core.common.enums.OrderAction;
+import io.cygnus.exchange.core.common.enums.OrderType;
+import io.cygnus.exchange.core.common.enums.SymbolType;
 import io.cygnus.exchange.core.processors.journaling.ISerializationProcessor;
 import io.cygnus.exchange.core.utils.BizArithmeticUtils;
 import io.cygnus.exchange.core.utils.SerializationUtils;

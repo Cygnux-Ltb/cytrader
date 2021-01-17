@@ -1,18 +1,3 @@
-/**
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
 package io.cygnus.exchange.core.processors;
 
 import java.lang.reflect.Constructor;
@@ -34,7 +19,6 @@ import io.cygnus.exchange.core.common.api.reports.ReportQueriesHandler;
 import io.cygnus.exchange.core.common.api.reports.ReportQuery;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.cmd.OrderCommand;
-import io.cygnus.exchange.core.common.cmd.OrderCommandType;
 import io.cygnus.exchange.core.common.config.ReportsQueriesConfiguration;
 import io.cygnus.exchange.core.orderbook.OrderBookEventsHelper;
 import io.cygnus.exchange.core.utils.HashingUtils;
@@ -121,8 +105,8 @@ public final class BinaryCommandsProcessor implements WriteBytesMarshallable, St
 			final BytesIn<?> bytesIn = SerializationUtils.longsLz4ToWire(record.dataArray, record.wordsTransfered)
 					.bytes();
 
-			if (cmd.command == OrderCommandType.BINARY_DATA_QUERY) {
-
+			switch (cmd.command) {
+			case BINARY_DATA_QUERY:
 				deserializeQuery(bytesIn).flatMap(reportQueriesHandler::handleReport).ifPresent(res -> {
 					final NativeBytes<Void> bytes = Bytes.allocateElasticDirect(128);
 					res.writeMarshallable(bytes);
@@ -130,17 +114,33 @@ public final class BinaryCommandsProcessor implements WriteBytesMarshallable, St
 							section, bytes);
 					UnsafeOperator.appendEventsVolatile(cmd, binaryEventsChain);
 				});
-
-			} else if (cmd.command == OrderCommandType.BINARY_DATA_COMMAND) {
-
-//                log.debug("Unpack {} words", record.wordsTransfered);
+				break;
+			case BINARY_DATA_COMMAND:
+				log.debug("Unpack {} words", record.wordsTransfered);
 				final BinaryDataCommand binaryDataCommand = deserializeBinaryCommand(bytesIn);
-//                log.debug("Succeed");
+				log.debug("Succeed");
 				completeMessagesHandler.accept(binaryDataCommand);
-
-			} else {
-				throw new IllegalStateException();
+				break;
+			default:
+				throw new IllegalStateException("cmd type is ->" + cmd.getClass());
 			}
+
+//			if (cmd.command == OrderCommandType.BINARY_DATA_QUERY) {
+//				deserializeQuery(bytesIn).flatMap(reportQueriesHandler::handleReport).ifPresent(res -> {
+//					final NativeBytes<Void> bytes = Bytes.allocateElasticDirect(128);
+//					res.writeMarshallable(bytes);
+//					final MatcherTradeEvent binaryEventsChain = eventsHelper.createBinaryEventsChain(cmd.timestamp,
+//							section, bytes);
+//					UnsafeOperator.appendEventsVolatile(cmd, binaryEventsChain);
+//				});
+//			} else if (cmd.command == OrderCommandType.BINARY_DATA_COMMAND) {
+//				log.debug("Unpack {} words", record.wordsTransfered);
+//				final BinaryDataCommand binaryDataCommand = deserializeBinaryCommand(bytesIn);
+//				log.debug("Succeed");
+//				completeMessagesHandler.accept(binaryDataCommand);
+//			} else {
+//				throw new IllegalStateException("cmd type is ->" + cmd.getClass());
+//			}
 
 			return CommandResultCode.SUCCESS;
 		} else {
