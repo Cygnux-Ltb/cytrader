@@ -15,7 +15,7 @@
  */
 package io.cygnus.exchange.tests.integration;
 
-import static io.cygnus.exchange.core.common.OrderType.GTC;
+import static io.cygnus.exchange.core.common.enums.OrderType.GTC;
 import static io.cygnus.exchange.tests.util.TestConstants.CURRENECY_LTC;
 import static io.cygnus.exchange.tests.util.TestConstants.CURRENECY_XBT;
 import static io.cygnus.exchange.tests.util.TestConstants.SYMBOLSPECFEE_XBT_LTC;
@@ -29,13 +29,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import io.cygnus.exchange.core.common.OrderAction;
-import io.cygnus.exchange.core.common.OrderType;
 import io.cygnus.exchange.core.common.api.ApiCancelOrder;
 import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
 import io.cygnus.exchange.core.common.api.reports.TotalCurrencyBalanceReportResult;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.enums.OrderAction;
+import io.cygnus.exchange.core.common.enums.OrderType;
 import io.cygnus.exchange.tests.util.ExchangeTestContainer;
 
 /**

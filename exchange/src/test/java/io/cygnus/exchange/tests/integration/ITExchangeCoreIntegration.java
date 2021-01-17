@@ -23,6 +23,10 @@ import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.cmd.OrderCommandType;
 import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.enums.MatcherEventType;
+import io.cygnus.exchange.core.common.enums.OrderAction;
+import io.cygnus.exchange.core.common.enums.OrderType;
+import io.cygnus.exchange.core.common.enums.SymbolType;
 import io.cygnus.exchange.tests.util.ExchangeTestContainer;
 import io.cygnus.exchange.tests.util.L2MarketDataHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +34,8 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static io.cygnus.exchange.core.common.OrderAction.ASK;
-import static io.cygnus.exchange.core.common.OrderType.GTC;
+import static io.cygnus.exchange.core.common.enums.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.enums.OrderType.GTC;
 import static io.cygnus.exchange.tests.util.ExchangeTestContainer.CHECK_SUCCESS;
 import static io.cygnus.exchange.tests.util.TestConstants.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -394,7 +398,7 @@ public abstract class ITExchangeCoreIntegration {
 					});
 
 			// expected balance when 203 placed with reserve price 18_500
-			final long ethUid2 = 94_000_000L - 18_500 * 500 * SYMBOLSPEC_ETH_XBT.getQuoteScaleK();
+			final long ethUid2 = 94_000_000L - 18_500 * 500 * SYMBOLSPEC_ETH_XBT.quoteScaleK;
 
 			container.validateUserState(UID_2, profile -> {
 				assertThat(profile.getAccounts().get(CURRENECY_XBT), is(ethUid2));
@@ -551,7 +555,7 @@ public abstract class ITExchangeCoreIntegration {
 			// accordingly
 			container.validateUserState(UID_2, profile -> {
 				assertThat(profile.getAccounts().get(CURRENECY_XBT),
-						is(94_000_000L - 18_500 * 500 * SYMBOLSPEC_ETH_XBT.getQuoteScaleK()));
+						is(94_000_000L - 18_500 * 500 * SYMBOLSPEC_ETH_XBT.quoteScaleK));
 				assertThat(profile.fetchIndexedOrders().get(203L).reserveBidPrice, is(18_500L));
 			});
 

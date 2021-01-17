@@ -15,11 +15,11 @@
  */
 package io.cygnus.exchange.tests.integration;
 
-import static io.cygnus.exchange.core.common.OrderAction.ASK;
-import static io.cygnus.exchange.core.common.OrderAction.BID;
-import static io.cygnus.exchange.core.common.OrderType.FOK_BUDGET;
-import static io.cygnus.exchange.core.common.OrderType.GTC;
-import static io.cygnus.exchange.core.common.OrderType.IOC;
+import static io.cygnus.exchange.core.common.enums.OrderAction.ASK;
+import static io.cygnus.exchange.core.common.enums.OrderAction.BID;
+import static io.cygnus.exchange.core.common.enums.OrderType.FOK_BUDGET;
+import static io.cygnus.exchange.core.common.enums.OrderType.GTC;
+import static io.cygnus.exchange.core.common.enums.OrderType.IOC;
 import static io.cygnus.exchange.tests.integration.ITExchangeCoreIntegrationRejection.RejectionCause.NO_REJECTION;
 import static io.cygnus.exchange.tests.integration.ITExchangeCoreIntegrationRejection.RejectionCause.REJECTION_BY_BUDGET;
 import static io.cygnus.exchange.tests.integration.ITExchangeCoreIntegrationRejection.RejectionCause.REJECTION_BY_SIZE;
@@ -50,11 +50,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import io.cygnus.exchange.core.IEventsHandler;
 import io.cygnus.exchange.core.SimpleEventsProcessor;
 import io.cygnus.exchange.core.common.CoreSymbolSpecification;
-import io.cygnus.exchange.core.common.OrderAction;
-import io.cygnus.exchange.core.common.OrderType;
 import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
+import io.cygnus.exchange.core.common.enums.OrderAction;
+import io.cygnus.exchange.core.common.enums.OrderType;
 import io.cygnus.exchange.tests.util.ExchangeTestContainer;
 import junit.framework.TestCase;
 

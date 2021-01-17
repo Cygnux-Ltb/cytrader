@@ -44,77 +44,69 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class ITExchangeCoreIntegrationStress {
 
-    // configuration provided by child class
-    public abstract PerformanceConfiguration getPerformanceConfiguration();
+	// configuration provided by child class
+	public abstract PerformanceConfiguration getPerformanceConfiguration();
 
-    @Test(timeout = 60_000)
-    public void manyOperationsMargin() throws Exception {
+	@Test(timeout = 60_000)
+	public void manyOperationsMargin() throws Exception {
+		manyOperations(SYMBOLSPEC_EUR_USD);
+	}
 
-        manyOperations(SYMBOLSPEC_EUR_USD);
-    }
+	@Test(timeout = 60_000)
+	public void manyOperationsExchange() throws Exception {
+		manyOperations(SYMBOLSPEC_ETH_XBT);
+	}
 
-    @Test(timeout = 60_000)
-    public void manyOperationsExchange() throws Exception {
+	public void manyOperations(final CoreSymbolSpecification symbolSpec) throws Exception {
+		try (final ExchangeTestContainer container = ExchangeTestContainer.create(getPerformanceConfiguration())) {
+			container.initBasicSymbols();
+			// container.initBasicUsers();
+			final ExchangeApi api = container.getApi();
 
-        manyOperations(SYMBOLSPEC_ETH_XBT);
-    }
+			int numOrders = 1_000_000;
+			int targetOrderBookOrders = 1000;
+			int numUsers = 1000;
 
-    public void manyOperations(final CoreSymbolSpecification symbolSpec) throws Exception {
-        try (final ExchangeTestContainer container = ExchangeTestContainer.create(getPerformanceConfiguration())) {
-            container.initBasicSymbols();
-            //container.initBasicUsers();
-            final ExchangeApi api = container.getApi();
+			log.debug("Generating commands...");
+			final TestOrdersGenerator.GenResult genResult = TestOrdersGenerator.generateCommands(numOrders,
+					targetOrderBookOrders, numUsers, TestOrdersGenerator.UID_PLAIN_MAPPER, symbolSpec.symbolId, false,
+					false, TestOrdersGenerator.createAsyncProgressLogger(numOrders), 288379917);
 
-            int numOrders = 1_000_000;
-            int targetOrderBookOrders = 1000;
-            int numUsers = 1000;
+			final List<ApiCommand> apiCommands = TestOrdersGenerator.convertToApiCommand(genResult);
 
-            log.debug("Generating commands...");
-            final TestOrdersGenerator.GenResult genResult = TestOrdersGenerator.generateCommands(
-                    numOrders,
-                    targetOrderBookOrders,
-                    numUsers,
-                    TestOrdersGenerator.UID_PLAIN_MAPPER,
-                    symbolSpec.getSymbolId(),
-                    false,
-                    false,
-                    TestOrdersGenerator.createAsyncProgressLogger(numOrders),
-                    288379917);
+			final Set<Integer> allowedCurrencies = Stream.of(symbolSpec.quoteCurrency, symbolSpec.baseCurrency)
+					.collect(Collectors.toSet());
 
-            final List<ApiCommand> apiCommands = TestOrdersGenerator.convertToApiCommand(genResult);
+			log.debug("Users init ...");
+			container.usersInit(numUsers, allowedCurrencies);
 
-            final Set<Integer> allowedCurrencies = Stream.of(symbolSpec.quoteCurrency, symbolSpec.baseCurrency).collect(Collectors.toSet());
+			// validate total balance as a sum of loaded funds
+			final Consumer<MutableIntLongMap> balancesValidator = balances -> allowedCurrencies
+					.forEach(cur -> assertThat(balances.get(cur), is(10_0000_0000L * numUsers)));
 
-            log.debug("Users init ...");
-            container.usersInit(numUsers, allowedCurrencies);
+			log.debug("Verifying balances...");
+			balancesValidator.accept(container.totalBalanceReport().getClientsBalancesSum());
 
-            // validate total balance as a sum of loaded funds
-            final Consumer<MutableIntLongMap> balancesValidator = balances -> allowedCurrencies.forEach(
-                    cur -> assertThat(balances.get(cur), is(10_0000_0000L * numUsers)));
+			log.debug("Running benchmark...");
+			final CountDownLatch ordersLatch = new CountDownLatch(apiCommands.size());
+			container.setConsumer((cmd, seq) -> ordersLatch.countDown());
+			for (ApiCommand cmd : apiCommands) {
+				cmd.timestamp = System.currentTimeMillis();
+				api.submitCommand(cmd);
+			}
+			ordersLatch.await();
 
+			// compare orderBook final state just to make sure all commands executed same
+			// way
+			// TODO compare events, wait until finish
+			final L2MarketData l2MarketData = container.requestCurrentOrderBook(symbolSpec.symbolId);
+			assertEquals(genResult.getFinalOrderBookSnapshot(), l2MarketData);
+			assertThat(l2MarketData.askSize, greaterThan(10));
+			assertThat(l2MarketData.bidSize, greaterThan(10));
 
-            log.debug("Verifying balances...");
-            balancesValidator.accept(container.totalBalanceReport().getClientsBalancesSum());
-
-            log.debug("Running benchmark...");
-            final CountDownLatch ordersLatch = new CountDownLatch(apiCommands.size());
-            container.setConsumer((cmd, seq) -> ordersLatch.countDown());
-            for (ApiCommand cmd : apiCommands) {
-                cmd.timestamp = System.currentTimeMillis();
-                api.submitCommand(cmd);
-            }
-            ordersLatch.await();
-
-            // compare orderBook final state just to make sure all commands executed same way
-            // TODO compare events, wait until finish
-            final L2MarketData l2MarketData = container.requestCurrentOrderBook(symbolSpec.getSymbolId());
-            assertEquals(genResult.getFinalOrderBookSnapshot(), l2MarketData);
-            assertThat(l2MarketData.askSize, greaterThan(10));
-            assertThat(l2MarketData.bidSize, greaterThan(10));
-
-            // verify that total balance was not changed
-            balancesValidator.accept(container.totalBalanceReport().getClientsBalancesSum());
-        }
-    }
+			// verify that total balance was not changed
+			balancesValidator.accept(container.totalBalanceReport().getClientsBalancesSum());
+		}
+	}
 
 }
