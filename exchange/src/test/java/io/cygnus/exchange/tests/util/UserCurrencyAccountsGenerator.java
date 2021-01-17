@@ -21,7 +21,7 @@ import org.apache.commons.math3.distribution.RealDistribution;
 import org.apache.commons.math3.random.JDKRandomGenerator;
 
 import io.cygnus.exchange.core.common.CoreSymbolSpecification;
-import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.common.enums.SymbolType;
 
 import java.util.*;
 

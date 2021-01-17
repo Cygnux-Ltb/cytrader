@@ -18,7 +18,7 @@ package io.cygnus.exchange.tests.util;
 import com.google.common.collect.Sets;
 
 import io.cygnus.exchange.core.common.CoreSymbolSpecification;
-import io.cygnus.exchange.core.common.SymbolType;
+import io.cygnus.exchange.core.common.enums.SymbolType;
 
 import java.util.Set;
 

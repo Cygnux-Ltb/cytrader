@@ -17,7 +17,6 @@ package io.cygnus.exchange.tests.util;
 
 import io.cygnus.exchange.core.ExchangeApi;
 import io.cygnus.exchange.core.common.MatcherTradeEvent;
-import io.cygnus.exchange.core.common.OrderType;
 import io.cygnus.exchange.core.common.api.ApiCommand;
 import io.cygnus.exchange.core.common.api.ApiMoveOrder;
 import io.cygnus.exchange.core.common.api.ApiPlaceOrder;
@@ -25,6 +24,7 @@ import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.config.InitialStateConfiguration;
 import io.cygnus.exchange.core.common.config.PerformanceConfiguration;
 import io.cygnus.exchange.core.common.config.SerializationConfiguration;
+import io.cygnus.exchange.core.common.enums.OrderType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.HdrHistogram.Histogram;
