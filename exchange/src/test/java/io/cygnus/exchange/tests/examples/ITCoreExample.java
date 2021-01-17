@@ -11,9 +11,6 @@ import io.cygnus.exchange.core.IEventsHandler;
 import io.cygnus.exchange.core.SimpleEventsProcessor;
 import io.cygnus.exchange.core.common.CoreSymbolSpecification;
 import io.cygnus.exchange.core.common.L2MarketData;
-import io.cygnus.exchange.core.common.OrderAction;
-import io.cygnus.exchange.core.common.OrderType;
-import io.cygnus.exchange.core.common.SymbolType;
 import io.cygnus.exchange.core.common.api.ApiAddUser;
 import io.cygnus.exchange.core.common.api.ApiAdjustUserBalance;
 import io.cygnus.exchange.core.common.api.ApiCancelOrder;
@@ -26,6 +23,9 @@ import io.cygnus.exchange.core.common.api.reports.TotalCurrencyBalanceReportQuer
 import io.cygnus.exchange.core.common.api.reports.TotalCurrencyBalanceReportResult;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.config.ExchangeConfiguration;
+import io.cygnus.exchange.core.common.enums.OrderAction;
+import io.cygnus.exchange.core.common.enums.OrderType;
+import io.cygnus.exchange.core.common.enums.SymbolType;
 
 public class ITCoreExample {
 
