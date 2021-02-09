@@ -4,10 +4,10 @@ import io.horizon.structure.market.instrument.impl.ChinaStock;
 import io.horizon.structure.order.OrdQty;
 import io.horizon.structure.order.Order;
 import io.horizon.structure.order.enums.OrdStatus;
-import io.horizon.structure.position.Position.PositionBaseImpl;
+import io.horizon.structure.position.AbstractPosition;
 import io.mercury.serialization.json.JsonWrapper;
 
-public class ChinaStockPosition extends PositionBaseImpl<ChinaStockPosition> {
+public class ChinaStockPosition extends AbstractPosition {
 
 	/**
 	 * 
@@ -27,14 +27,8 @@ public class ChinaStockPosition extends PositionBaseImpl<ChinaStockPosition> {
 	}
 
 	@Override
-	public ChinaStockPosition setTradeableQty(int tradeableQty) {
+	public void setTradeableQty(int tradeableQty) {
 		this.tradeableQty = tradeableQty;
-		return this;
-	}
-
-	@Override
-	protected ChinaStockPosition returnSelf() {
-		return this;
 	}
 
 	@Override
@@ -44,14 +38,14 @@ public class ChinaStockPosition extends PositionBaseImpl<ChinaStockPosition> {
 
 	@Override
 	public void updateWithOrder(Order order) {
-		OrdStatus status = order.getStatus();
-		OrdQty qty = order.getQty();
+		final OrdStatus status = order.getStatus();
+		final OrdQty qty = order.getQty();
 		switch (order.getDirection()) {
 		case Long:
 			switch (status) {
 			case PartiallyFilled:
 			case Filled:
-				setCurrentQty(getCurrentQty() + qty.filledQty() - qty.lastFilledQty());
+				setCurrentQty(getCurrentQty() + qty.getFilledQty() - qty.getLastFilledQty());
 				break;
 			default:
 				break;
@@ -60,15 +54,15 @@ public class ChinaStockPosition extends PositionBaseImpl<ChinaStockPosition> {
 		case Short:
 			switch (status) {
 			case PendingNew:
-				setTradeableQty(getTradeableQty() - qty.offerQty());
+				setTradeableQty(getTradeableQty() - qty.getOfferQty());
 				break;
 			case Canceled:
 			case NewRejected:
-				setTradeableQty(getTradeableQty() + qty.offerQty() - qty.lastFilledQty());
+				setTradeableQty(getTradeableQty() + qty.getOfferQty() - qty.getLastFilledQty());
 				break;
 			case PartiallyFilled:
 			case Filled:
-				setCurrentQty(getCurrentQty() - qty.filledQty() + qty.lastFilledQty());
+				setCurrentQty(getCurrentQty() - qty.getFilledQty() + qty.getLastFilledQty());
 				break;
 			default:
 				break;

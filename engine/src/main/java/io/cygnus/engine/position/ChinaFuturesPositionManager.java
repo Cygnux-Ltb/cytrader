@@ -1,9 +1,9 @@
 package io.cygnus.engine.position;
 
 import io.horizon.structure.market.instrument.impl.ChinaFutures;
-import io.horizon.structure.position.PositionManager.PositionManagerBaseImpl;
+import io.horizon.structure.position.AbstractPositionManager;
 
-public final class ChinaFuturesPositionManager extends PositionManagerBaseImpl<ChinaFuturesPosition> {
+public final class ChinaFuturesPositionManager extends AbstractPositionManager<ChinaFuturesPosition> {
 
 	public static final ChinaFuturesPositionManager Singleton = new ChinaFuturesPositionManager();
 

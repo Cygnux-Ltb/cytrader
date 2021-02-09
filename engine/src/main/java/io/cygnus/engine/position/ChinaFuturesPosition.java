@@ -7,7 +7,7 @@ import io.horizon.structure.order.OrdQty;
 import io.horizon.structure.order.Order;
 import io.horizon.structure.order.enums.OrdStatus;
 import io.horizon.structure.order.enums.TrdDirection;
-import io.horizon.structure.position.Position.PositionBaseImpl;
+import io.horizon.structure.position.AbstractPosition;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.serialization.json.JsonWrapper;
@@ -19,7 +19,7 @@ import io.mercury.serialization.json.JsonWrapper;
  * @author yellow013
  *
  */
-public final class ChinaFuturesPosition extends PositionBaseImpl<ChinaFuturesPosition> {
+public final class ChinaFuturesPosition extends AbstractPosition {
 
 	/**
 	 * 
@@ -47,14 +47,8 @@ public final class ChinaFuturesPosition extends PositionBaseImpl<ChinaFuturesPos
 	}
 
 	@Override
-	public ChinaFuturesPosition setTradeableQty(int qty) {
+	public void setTradeableQty(int qty) {
 		setCurrentQty(qty);
-		return this;
-	}
-
-	@Override
-	protected ChinaFuturesPosition returnSelf() {
-		return this;
 	}
 
 	@Override
@@ -66,7 +60,7 @@ public final class ChinaFuturesPosition extends PositionBaseImpl<ChinaFuturesPos
 		return beforeTodayQty;
 	}
 
-	public int lockBeforeTodayQty(long ordId, TrdDirection direction, int lockQty) {
+	public int lockBeforeTodayQty(long ordSysId, TrdDirection direction, int lockQty) {
 		if (beforeTodayQty == 0) {
 			return 0;
 		} else if (beforeTodayQty > 0) {
@@ -75,13 +69,13 @@ public final class ChinaFuturesPosition extends PositionBaseImpl<ChinaFuturesPos
 				// 需要锁定的Qty小于或等于昨仓, 实际锁定量等于请求量
 				if (lockQty <= beforeTodayQty) {
 					// 记录此订单锁定量
-					beforeTodayQtyLockRecord.put(ordId, lockQty);
+					beforeTodayQtyLockRecord.put(ordSysId, lockQty);
 					beforeTodayQty -= lockQty;
 					return lockQty;
 				}
 				// 需要锁定的Qty大于昨仓,实际锁定量等于全部剩余量
 				else {
-					beforeTodayQtyLockRecord.put(ordId, beforeTodayQty);
+					beforeTodayQtyLockRecord.put(ordSysId, beforeTodayQty);
 					beforeTodayQty = 0;
 					return beforeTodayQty;
 				}
@@ -95,11 +89,11 @@ public final class ChinaFuturesPosition extends PositionBaseImpl<ChinaFuturesPos
 				int absBeforeTodayQty = Math.abs(beforeTodayQty);
 				if (lockQty <= absBeforeTodayQty) {
 					// 记录此订单锁定量
-					beforeTodayQtyLockRecord.put(ordId, lockQty);
+					beforeTodayQtyLockRecord.put(ordSysId, lockQty);
 					beforeTodayQty += lockQty;
 					return lockQty;
 				} else {
-					beforeTodayQtyLockRecord.put(ordId, absBeforeTodayQty);
+					beforeTodayQtyLockRecord.put(ordSysId, absBeforeTodayQty);
 					beforeTodayQty = 0;
 					return absBeforeTodayQty;
 				}
@@ -110,7 +104,7 @@ public final class ChinaFuturesPosition extends PositionBaseImpl<ChinaFuturesPos
 	}
 
 	// TODO 解锁可用仓位
-	public int unlockBeforeTodayQty(long ordId, TrdDirection direction, int unlockQty) {
+	public int unlockBeforeTodayQty(long ordSysId, TrdDirection direction, int unlockQty) {
 		return 0;
 	}
 
@@ -123,10 +117,10 @@ public final class ChinaFuturesPosition extends PositionBaseImpl<ChinaFuturesPos
 		case Filled:
 			switch (order.getDirection()) {
 			case Long:
-				setCurrentQty(getCurrentQty() + qty.filledQty() - qty.lastFilledQty());
+				setCurrentQty(getCurrentQty() + qty.getFilledQty() - qty.getLastFilledQty());
 				break;
 			case Short:
-				setCurrentQty(getCurrentQty() - qty.filledQty() + qty.lastFilledQty());
+				setCurrentQty(getCurrentQty() - qty.getFilledQty() + qty.getLastFilledQty());
 				break;
 			default:
 				break;

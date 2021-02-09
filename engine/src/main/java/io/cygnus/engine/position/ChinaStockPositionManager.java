@@ -1,9 +1,9 @@
 package io.cygnus.engine.position;
 
 import io.horizon.structure.market.instrument.impl.ChinaStock;
-import io.horizon.structure.position.PositionManager.PositionManagerBaseImpl;
+import io.horizon.structure.position.AbstractPositionManager;
 
-public final class ChinaStockPositionManager extends PositionManagerBaseImpl<ChinaStockPosition> {
+public final class ChinaStockPositionManager extends AbstractPositionManager<ChinaStockPosition> {
 
 	public static final ChinaStockPositionManager Singleton = new ChinaStockPositionManager();
 
