@@ -7,23 +7,27 @@ import io.mercury.common.collections.MutableLists;
 
 public final class TradeSignalActor {
 
-	private MutableList<TrdSignal> tradeSignalList = MutableLists.newFastList(256);
+	private MutableList<TrdSignal> trdSignalList = MutableLists.newFastList(256);
 
 	public static final TradeSignalActor Singleton = new TradeSignalActor();
 
 	public boolean addTradeSignal(TrdSignal signal) {
-		return tradeSignalList.add(signal);
+		return trdSignalList.add(signal);
 	}
 
+	/**
+	 * 
+	 * @param signal
+	 */
 	public void handleTradeSignal(TrdSignal signal) {
-		switch (signal.action()) {
+		switch (signal.getAction()) {
 		case Open:
-			switch (signal.direction()) {
+			switch (signal.getDirection()) {
 			case Long:
-				
+
 				break;
 			case Short:
-				
+
 				break;
 
 			default:
@@ -31,7 +35,7 @@ public final class TradeSignalActor {
 			}
 			break;
 		case Close:
-			switch (signal.direction()) {
+			switch (signal.getDirection()) {
 			case Long:
 
 				break;
