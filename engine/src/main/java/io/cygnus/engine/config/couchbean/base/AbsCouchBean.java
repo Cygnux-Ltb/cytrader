@@ -1,26 +1,26 @@
-package io.cygnus.runtime.config.couchbean.base;
+package io.cygnus.engine.config.couchbean.base;
 
 public class AbsCouchBean {
 
-	private String _id;
-	private String _rev;
+	private String id;
+	private String rev;
 	private String value;
 
-	public String _id() {
-		return _id;
+	public String id() {
+		return id;
 	}
 
-	public AbsCouchBean _id(String _id) {
-		this._id = _id;
+	public AbsCouchBean id(String id) {
+		this.id = id;
 		return this;
 	}
 
-	public String _rev() {
-		return _rev;
+	public String rev() {
+		return rev;
 	}
 
-	public AbsCouchBean _rev(String _rev) {
-		this._rev = _rev;
+	public AbsCouchBean rev(String rev) {
+		this.rev = rev;
 		return this;
 	}
 

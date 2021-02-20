@@ -1,31 +1,27 @@
 package io.cygnus.engine.strategy.impl;
 
-import java.util.Set;
+import static io.mercury.common.collections.ImmutableMaps.immutableIntObjectMapFactory;
+import static java.util.stream.Collectors.toSet;
 
-import org.eclipse.collections.api.list.ImmutableList;
+import java.util.stream.Stream;
 
-import io.horizon.structure.adaptor.AdaptorEvent;
+import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
+
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.Instrument;
-import io.mercury.common.collections.ImmutableLists;
-import io.mercury.common.param.ImmutableParams;
-import io.mercury.common.param.ParamKey;
+import io.mercury.common.param.Params;
+import io.mercury.common.param.Params.ParamKey;
 
 public abstract class StrategyMultiInstrument<M extends MarketData, PK extends ParamKey>
-		extends StrategyBaseImpl<M, PK> {
+		extends AbstractStrategy<M, PK> {
 
-	// 策略订阅的合约
-	protected ImmutableList<Instrument> instruments;
+	// 策略订阅的合约列表
+	protected ImmutableIntObjectMap<Instrument> instruments;
 
-	protected StrategyMultiInstrument(int strategyId, int subAccountId, Set<Instrument> instruments,
-			ImmutableParams<PK> params) {
+	protected StrategyMultiInstrument(int strategyId, int subAccountId, Params<PK> params, Instrument... instruments) {
 		super(strategyId, subAccountId, params);
-		this.instruments = ImmutableLists.newImmutableList(instruments);
-	}
-
-	@Override
-	public void onAdaptorEvent(AdaptorEvent event) {
-		// TODO Auto-generated method stub
+		this.instruments = immutableIntObjectMapFactory().from(Stream.of(instruments).collect(toSet()),
+				Instrument::getInstrumentId, instrument -> instrument);
 	}
 
 }

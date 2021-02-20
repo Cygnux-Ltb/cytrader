@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 
-import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 
 import io.horizon.structure.account.Account;
 import io.horizon.structure.account.SubAccount;
@@ -14,11 +14,11 @@ import io.horizon.structure.event.handler.MarketDataHandler;
 import io.horizon.structure.event.handler.OrderHandler;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.Instrument;
-import io.mercury.common.fsm.Enable;
+import io.mercury.common.fsm.Enableable;
 
 public interface Strategy<M extends MarketData> extends
 		// 用于控制可用状态
-		Enable<Strategy<M>>,
+		Enableable,
 		// 用于确定优先级
 		Comparable<Strategy<M>>,
 		// 集成行情处理
@@ -28,9 +28,9 @@ public interface Strategy<M extends MarketData> extends
 		// 集成AdaptorEvent处理
 		AdaptorEventHandler {
 
-	int strategyId();
+	int getStrategyId();
 
-	String strategyName();
+	String getStrategyName();
 
 	@Nonnull
 	SubAccount getSubAccount();
@@ -39,7 +39,7 @@ public interface Strategy<M extends MarketData> extends
 	Account getAccount();
 
 	@Nonnull
-	ImmutableList<Instrument> instruments();
+	ImmutableIntObjectMap<Instrument> getInstruments();
 
 	void initialize(@Nonnull Supplier<Boolean> initializer);
 
@@ -51,7 +51,7 @@ public interface Strategy<M extends MarketData> extends
 
 	@Override
 	default int compareTo(Strategy<M> o) {
-		return this.strategyId() < o.strategyId() ? -1 : this.strategyId() > o.strategyId() ? 1 : 0;
+		return this.getStrategyId() < o.getStrategyId() ? -1 : this.getStrategyId() > o.getStrategyId() ? 1 : 0;
 	}
 
 }

@@ -1,4 +1,4 @@
-package io.cygnus.runtime.config.couchbean.base;
+package io.cygnus.engine.config.couchbean.base;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sys.SysProperties;
-import io.mercury.serialization.json.JsonUtil;
+import io.mercury.serialization.json.JsonParser;
 import io.mercury.transport.http.HttpRequester;
 
 public final class CouchConnector {
@@ -33,7 +33,7 @@ public final class CouchConnector {
 			properties.load(inputStream);
 			this.couchdbUrl = properties.getProperty("couchdb_url");
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("", e);
 		}
 	}
 
@@ -45,19 +45,26 @@ public final class CouchConnector {
 	 * @param params
 	 * @return
 	 */
-	public String getCouchBeanValue(CouchDocument document) {
-		AbsCouchBean absCouchBean = JsonUtil.toObject(sendGetRequest(document._database(), document._id()),
+	public String getCouchBeanValue(String database, CouchDocument document) {
+		AbsCouchBean absCouchBean = JsonParser.toObject(sendGetRequest(database, document.documentId()),
 				AbsCouchBean.class);
 		return absCouchBean.getValue();
 	}
 
-	private String sendGetRequest(String _database, String _id) {
-		log.info("sendGetRequest() -> _database==[{}], _id==[{}]", _database, _id);
-		return HttpRequester.sentGet(couchdbUrl + _database + _id);
-	}
-
-	public static void main(String[] args) {
-
+	/**
+	 * 
+	 * @param database
+	 * @param documentId
+	 * @return
+	 */
+	private String sendGetRequest(String database, String documentId) {
+		log.info("sendGetRequest() -> database==[{}], documentId==[{}]", database, documentId);
+		try {
+			return HttpRequester.sentGet(couchdbUrl + "/" + database + "/" + documentId);
+		} catch (Exception e) {
+			log.error("sendGetRequest() -> database==[{}], documentId==[{}]", database, documentId, e);
+			return "";
+		}
 	}
 
 }

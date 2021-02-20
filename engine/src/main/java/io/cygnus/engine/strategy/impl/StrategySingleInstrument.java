@@ -1,43 +1,39 @@
 package io.cygnus.engine.strategy.impl;
 
-import org.eclipse.collections.api.list.ImmutableList;
+import static io.mercury.common.collections.ImmutableMaps.immutableIntObjectMapFactory;
+import static io.mercury.common.log.CommonLoggerFactory.getLogger;
+
+import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.slf4j.Logger;
 
 import io.horizon.structure.adaptor.Adaptor;
 import io.horizon.structure.adaptor.AdaptorEvent;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.Instrument;
-import io.mercury.common.collections.ImmutableLists;
-import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
+import io.mercury.common.param.Params.ParamKey;
+import io.mercury.common.util.Assertor;
 
 public abstract class StrategySingleInstrument<M extends MarketData, PK extends ParamKey>
-		extends StrategyBaseImpl<M, PK> {
+		extends AbstractStrategy<M, PK> {
 
-	/**
-	 * Logger
-	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(StrategySingleInstrument.class);
+	// Logger
+	private static final Logger log = getLogger(StrategySingleInstrument.class);
 
-	/**
-	 * 策略订阅的合约
-	 */
+	// 策略订阅的合约
 	protected Instrument instrument;
 
-	/**
-	 * 策略订阅的合约列表
-	 */
-	protected ImmutableList<Instrument> instruments;
+	// 策略订阅的合约列表
+	protected ImmutableIntObjectMap<Instrument> instruments;
 
 	protected StrategySingleInstrument(int strategyId, int subAccountId, Instrument instrument, Params<PK> params) {
 		super(strategyId, subAccountId, params);
 		this.instrument = instrument;
-		this.instruments = ImmutableLists.newImmutableList(instrument);
+		this.instruments = immutableIntObjectMapFactory().of(instrument.getInstrumentId(), instrument);
 	}
 
 	@Override
-	public ImmutableList<Instrument> instruments() {
+	public ImmutableIntObjectMap<Instrument> getInstruments() {
 		return instruments;
 	}
 
@@ -45,8 +41,7 @@ public abstract class StrategySingleInstrument<M extends MarketData, PK extends 
 
 	@Override
 	public void addAdaptor(Adaptor adaptor) {
-		if (this.adaptor != null)
-			throw new IllegalStateException("adaptor is not null");
+		Assertor.nonNull(adaptor, "adaptor");
 		this.adaptor = adaptor;
 	}
 
@@ -57,26 +52,28 @@ public abstract class StrategySingleInstrument<M extends MarketData, PK extends 
 
 	@Override
 	public void onAdaptorEvent(AdaptorEvent event) {
-		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", strategyName(), event.getAdaptorId(),
-				event.getStatus());
+		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", getStrategyName(),
+				event.getAdaptorId(), event.getStatus());
 		switch (event.getStatus()) {
 		case MdEnable:
-			log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", strategyName(), event.getAdaptorId());
+			log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
 			adaptor.subscribeMarketData(instrument);
-			log.info("{} :: Call subscribeMarketData, instrument -> {}", strategyName(), instrument);
+			log.info("{} :: Call subscribeMarketData, instrument -> {}", getStrategyName(), instrument);
 			break;
 		case TraderEnable:
-			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", strategyName(), event.getAdaptorId());
+			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
 			adaptor.queryOrder(instrument);
-			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", strategyName(), event.getAdaptorId());
+			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", getStrategyName(),
+					event.getAdaptorId());
 			adaptor.queryPositions(instrument);
-			log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", strategyName(),
+			log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", getStrategyName(),
 					event.getAdaptorId());
 			adaptor.queryBalance();
-			log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", strategyName(), event.getAdaptorId());
+			log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", getStrategyName(),
+					event.getAdaptorId());
 			break;
 		default:
-			log.warn("{} unhandled event received {}", strategyName(), event);
+			log.warn("{} unhandled event received {}", getStrategyName(), event);
 			break;
 		}
 	}

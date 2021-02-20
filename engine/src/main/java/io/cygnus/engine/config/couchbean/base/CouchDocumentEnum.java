@@ -1,31 +1,24 @@
-package io.cygnus.runtime.config.couchbean.base;
+package io.cygnus.engine.config.couchbean.base;
 
 public enum CouchDocumentEnum implements CouchDocument {
 
-	AppConf("/redstone", "/app_conf"),
+	AppConf("/app_conf"),
 
-	AccountConf("/redstone", "/account_config"),
+	AccountConf("/account_conf"),
 
-	StrategyConf("/redstone", "/strategy_conf"),
+	StrategyConf("/strategy_conf"),
 
 	;
 
-	private String _database;
-	private String _id;
+	private final String documentId;
 
-	private CouchDocumentEnum(String _database, String _id) {
-		this._database = _database;
-		this._id = _id;
+	private CouchDocumentEnum(String documentId) {
+		this.documentId = documentId;
 	}
 
 	@Override
-	public String _id() {
-		return _id;
-	}
-
-	@Override
-	public String _database() {
-		return _database;
+	public String documentId() {
+		return documentId;
 	}
 
 }

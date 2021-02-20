@@ -59,18 +59,18 @@ public final class StrategyKeeper implements Serializable {
 	 * @param strategy
 	 */
 	public static void putStrategy(Strategy<?> strategy) {
-		if (StrategyMap.containsKey(strategy.strategyId())) {
+		if (StrategyMap.containsKey(strategy.getStrategyId())) {
 			log.error("Strategy id is existed, Have stored or have duplicate strategy id");
 		} else {
-			StrategyMap.put(strategy.strategyId(), strategy);
-			log.info("Put strategy, strategyId==[{}]", strategy.strategyId());
-			strategy.instruments().each(instrument -> {
-				SubscribedInstrumentMap.getIfAbsentPut(instrument.instrumentId(), MutableLists::newFastList).add(strategy);
-				log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
-						instrument.instrumentId());
+			StrategyMap.put(strategy.getStrategyId(), strategy);
+			log.info("Put strategy, strategyId==[{}]", strategy.getStrategyId());
+			strategy.getInstruments().each(instrument -> {
+				SubscribedInstrumentMap.getIfAbsentPut(instrument.getInstrumentId(), MutableLists::newFastList).add(strategy);
+				log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.getStrategyId(),
+						instrument.getInstrumentId());
 			});
 			strategy.enable();
-			log.info("Strategy is enable, strategyId==[{}]", strategy.strategyId());
+			log.info("Strategy is enable, strategyId==[{}]", strategy.getStrategyId());
 		}
 	}
 
@@ -79,7 +79,7 @@ public final class StrategyKeeper implements Serializable {
 	}
 
 	public static MutableList<Strategy<?>> getSubscribedStrategys(Instrument instrument) {
-		return getSubscribedStrategys(instrument.instrumentId());
+		return getSubscribedStrategys(instrument.getInstrumentId());
 	}
 
 	public static MutableList<Strategy<?>> getSubscribedStrategys(int instrumentId) {
