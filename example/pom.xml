@@ -23,8 +23,9 @@
 			<version>${horizon.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.horizon</groupId>
+			<groupId>io.cygnus</groupId>
 			<artifactId>indicator</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.cygnus</groupId>

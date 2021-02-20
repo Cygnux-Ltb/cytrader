@@ -1,6 +1,5 @@
 package io.cygnus.example.launch;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -17,7 +16,7 @@ import io.horizon.structure.market.instrument.InstrumentKeeper;
 import io.horizon.structure.market.instrument.impl.ChinaFutures;
 import io.horizon.structure.market.instrument.impl.ChinaFuturesSymbol;
 import io.horizon.structure.pool.TimePeriodPool;
-import io.horizon.structure.pool.TradingPeriodPool;
+import io.horizon.structure.pool.TradablePeriodPool;
 import io.mercury.common.datetime.DateTimeUtil;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.log.LogConfigurator;
@@ -29,8 +28,8 @@ public final class ExampleWithProperties {
 	public static void main(String[] args) {
 
 		long datetime = DateTimeUtil.datetimeOfSecond();
-		LogConfigurator.filename("apollo-example-" + datetime);
-		LogConfigurator.logLevel(LogLevel.INFO);
+		LogConfigurator.setFilename("cygnus-example-" + datetime);
+		LogConfigurator.setLogLevel(LogLevel.INFO);
 
 		final Logger log = CommonLoggerFactory.getLogger(ExampleWithProperties.class);
 
@@ -43,7 +42,7 @@ public final class ExampleWithProperties {
 
 		log.info("read properties -> {}", prop);
 
-		ExampleSmaStrategy exampleStrategy = new ExampleSmaStrategy(strategyId, subAccountId, rb2010, null);
+		ExampleSmaStrategy exampleStrategy = new ExampleSmaStrategy(strategyId, subAccountId, null, rb2010);
 		InboundScheduler<BasicMarketData> scheduler = new SimpleSingleStrategyScheduler<>(exampleStrategy);
 		exampleStrategy.initialize(() -> true);
 
@@ -57,12 +56,12 @@ public final class ExampleWithProperties {
 		try (Adaptor adaptor = new FtdcAdaptor(adaptorId, null, ftdcParam, scheduler)) {
 
 			TimePeriodPool.Singleton.register(ChinaFuturesSymbol.values(), Duration.ofSeconds(15));
-			TradingPeriodPool.Singleton.register(ChinaFuturesSymbol.values());
+			TradablePeriodPool.Singleton.register(ChinaFuturesSymbol.values());
 
 			adaptor.startup();
 
-		} catch (IOException e) {
-			log.error("IOException -> {}", e.getMessage(), e);
+		} catch (Exception e) {
+			log.error("adaptor throws Exception -> {}", e.getMessage(), e);
 		}
 
 	}
