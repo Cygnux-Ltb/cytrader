@@ -30,4 +30,5 @@ public final class BatchAddAccountsCommand implements BinaryDataCommand {
 	public int getBinaryCommandTypeCode() {
 		return BinaryCommandType.ADD_ACCOUNTS.getCode();
 	}
+	
 }

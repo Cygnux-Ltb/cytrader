@@ -500,7 +500,7 @@ public final class DiskSerializationProcessor implements ISerializationProcessor
 				final long timestampNs = jr.readLong();
 				final int serviceFlags = jr.readInt();
 				final long eventsGroup = jr.readLong();
-				final OrderCommandType cmdType = OrderCommandType.fromCode(cmd);
+				final OrderCommandType cmdType = OrderCommandType.of(cmd);
 
 				if (seq != lastSeq.value + 1) {
 					log.warn("Sequence gap {}->{} ({})", lastSeq, seq, seq - lastSeq.value);

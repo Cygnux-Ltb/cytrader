@@ -2,7 +2,6 @@ package io.cygnus.exchange.core.common.enums;
 
 import lombok.Getter;
 
-@Getter
 public enum UserStatus {
 
 	ACTIVE(0), // normal user
@@ -11,6 +10,7 @@ public enum UserStatus {
 
 	;
 
+	@Getter
 	private byte code;
 
 	private UserStatus(int code) {
@@ -24,7 +24,7 @@ public enum UserStatus {
 		case 1:
 			return SUSPENDED;
 		default:
-			throw new IllegalArgumentException("unknown UserStatus:" + code);
+			throw new IllegalArgumentException("unknown UserStatus code : " + code);
 		}
 	}
 

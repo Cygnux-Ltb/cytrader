@@ -26,6 +26,7 @@ public final class OrderCommand implements IOrder {
 	@Getter
 	public long orderId;
 
+	@Getter
 	public int symbol;
 
 	@Getter
@@ -44,6 +45,7 @@ public final class OrderCommand implements IOrder {
 	@Getter
 	public OrderAction action;
 
+	@Getter
 	public OrderType orderType;
 
 	@Getter
@@ -55,7 +57,6 @@ public final class OrderCommand implements IOrder {
 	public int userCookie;
 
 	// filled by grouping processor:
-
 	public long eventsGroup;
 	public int serviceFlags;
 

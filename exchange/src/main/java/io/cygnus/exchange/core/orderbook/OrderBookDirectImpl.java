@@ -789,6 +789,20 @@ public final class OrderBookDirectImpl implements IOrderBook {
 		bidOrdersStream(true).forEach(order -> order.writeMarshallable(bytes));
 	}
 
+	/**
+	 * 
+	 * @author yellow013
+	 *
+	 */
+	@ToString
+	private static class Bucket {
+
+		private long volume;
+		private int numOrders;
+		private DirectOrder tail;
+
+	}
+
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
@@ -846,7 +860,6 @@ public final class OrderBookDirectImpl implements IOrderBook {
 			this.uid = bytes.readLong(); // uid
 			this.timestamp = bytes.readLong(); // timestamp
 			// this.userCookie = bytes.readInt(); // userCookie
-
 			// TODO
 		}
 
@@ -903,12 +916,7 @@ public final class OrderBookDirectImpl implements IOrderBook {
 					// userCookie,
 					uid);
 		}
+		
 	}
 
-	@ToString
-	private static class Bucket {
-		long volume;
-		int numOrders;
-		DirectOrder tail;
-	}
 }

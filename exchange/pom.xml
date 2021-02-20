@@ -30,16 +30,12 @@
 		<!-- <dependency> <groupId>exchange.core2</groupId> <artifactId>orderbook</artifactId> 
 			<version>0.7.0</version> </dependency> -->
 
-		<dependency>
-			<groupId>exchange.core2</groupId>
-			<artifactId>orderbook</artifactId>
-			<version>0.7.0</version>
-		</dependency>
+		<!-- <dependency> <groupId>exchange.core2</groupId> <artifactId>orderbook</artifactId> 
+			<version>0.7.0</version> </dependency> -->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.16</version>
 			<scope>provided</scope>
 		</dependency>
 

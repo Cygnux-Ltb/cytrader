@@ -24,7 +24,7 @@ public enum BalanceAdjustmentType {
 		case 1:
 			return SUSPEND;
 		default:
-			throw new IllegalArgumentException("unknown BalanceAdjustmentType:" + code);
+			throw new IllegalArgumentException("unknown BalanceAdjustmentType code : " + code);
 		}
 	}
 

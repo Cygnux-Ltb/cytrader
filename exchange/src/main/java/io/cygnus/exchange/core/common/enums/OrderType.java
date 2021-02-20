@@ -2,7 +2,6 @@ package io.cygnus.exchange.core.common.enums;
 
 import lombok.Getter;
 
-@Getter
 public enum OrderType {
 
 	// Good till Cancel - equivalent to regular limit order
@@ -18,6 +17,7 @@ public enum OrderType {
 
 	;
 
+	@Getter
 	private final byte code;
 
 	private OrderType(final int code) {
@@ -37,7 +37,7 @@ public enum OrderType {
 		case 4:
 			return FOK_BUDGET;
 		default:
-			throw new IllegalArgumentException("unknown OrderType:" + code);
+			throw new IllegalArgumentException("unknown OrderType code : " + code);
 		}
 	}
 

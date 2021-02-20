@@ -2,7 +2,6 @@ package io.cygnus.exchange.core.common.enums;
 
 import lombok.Getter;
 
-@Getter
 public enum OrderAction {
 
 	ASK(0),
@@ -11,7 +10,8 @@ public enum OrderAction {
 
 	;
 
-	private byte code;
+	@Getter
+	private final byte code;
 
 	private OrderAction(int code) {
 		this.code = (byte) code;
@@ -24,7 +24,7 @@ public enum OrderAction {
 		case 1:
 			return BID;
 		default:
-			throw new IllegalArgumentException("unknown OrderAction:" + code);
+			throw new IllegalArgumentException("unknown OrderAction code : " + code);
 		}
 	}
 

@@ -42,4 +42,5 @@ public final class BatchAddSymbolsCommand implements BinaryDataCommand {
 	public int getBinaryCommandTypeCode() {
 		return BinaryCommandType.ADD_SYMBOLS.getCode();
 	}
+	
 }

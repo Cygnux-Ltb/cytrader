@@ -15,7 +15,7 @@ public enum PositionDirection {
 	;
 
 	@Getter
-	private int multiplier;
+	private final int multiplier;
 
 	public static PositionDirection of(OrderAction action) {
 		return action == OrderAction.BID ? LONG : SHORT;
@@ -30,7 +30,7 @@ public enum PositionDirection {
 		case 0:
 			return EMPTY;
 		default:
-			throw new IllegalArgumentException("unknown PositionDirection:" + code);
+			throw new IllegalArgumentException("unknown PositionDirection code : " + code);
 		}
 	}
 

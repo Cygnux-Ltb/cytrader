@@ -19,8 +19,8 @@ public final class HashingUtils {
 	 * @param bitSet
 	 * @return
 	 */
-	public static int stateHash(final BitSet bitSet) {
-		return Arrays.hashCode(bitSet.toLongArray());
+	public static int stateHash(final BitSet set) {
+		return Arrays.hashCode(set.toLongArray());
 	}
 
 	/**
@@ -29,9 +29,9 @@ public final class HashingUtils {
 	 * @param hashMap
 	 * @return
 	 */
-	public static <T extends StateHash> int stateHash(final MutableLongObjectMap<T> hashMap) {
+	public static <T extends StateHash> int stateHash(final MutableLongObjectMap<T> map) {
 		final MutableLong mutableLong = new MutableLong();
-		hashMap.forEachKeyValue((k, v) -> mutableLong.addAndGet(Objects.hash(k, v.stateHash())));
+		map.forEachKeyValue((k, v) -> mutableLong.addAndGet(Objects.hash(k, v.stateHash())));
 		return Long.hashCode(mutableLong.value);
 	}
 
@@ -41,9 +41,9 @@ public final class HashingUtils {
 	 * @param hashMap
 	 * @return
 	 */
-	public static <T extends StateHash> int stateHash(final MutableIntObjectMap<T> hashMap) {
+	public static <T extends StateHash> int stateHash(final MutableIntObjectMap<T> set) {
 		final MutableLong mutableLong = new MutableLong();
-		hashMap.forEachKeyValue((k, v) -> mutableLong.addAndGet(Objects.hash(k, v.stateHash())));
+		set.forEachKeyValue((k, v) -> mutableLong.addAndGet(Objects.hash(k, v.stateHash())));
 		return Long.hashCode(mutableLong.value);
 	}
 

@@ -1,9 +1,11 @@
 package io.cygnus.exchange.core.common.cmd;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 
+@RequiredArgsConstructor
 public enum CommandResultCode {
 
 	NEW(0), //
@@ -61,15 +63,11 @@ public enum CommandResultCode {
 	// codes below -10000 are reserved for gateways
 
 	@Getter
-	private int code;
-
-	CommandResultCode(int code) {
-		this.code = code;
-	}
+	private final int code;
 
 	public static CommandResultCode mergeToFirstFailed(CommandResultCode... results) {
-		return Arrays.stream(results).filter(r -> r != SUCCESS && r != ACCEPTED).findFirst()
-				.orElse(Arrays.stream(results).anyMatch(r -> r == SUCCESS) ? SUCCESS : ACCEPTED);
+		return Arrays.stream(results).filter(result -> result != SUCCESS && result != ACCEPTED).findFirst()
+				.orElse(Arrays.stream(results).anyMatch(result -> result == SUCCESS) ? SUCCESS : ACCEPTED);
 	}
 
 }

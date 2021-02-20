@@ -41,9 +41,9 @@ public final class SerializationUtils {
 		final ByteBuffer byteBuffer = ByteBuffer.allocate((int) bytes.readRemaining());
 		bytes.read(byteBuffer);
 		final byte[] array = byteBuffer.array();
-		log.debug("array:{}", array);
+		log.debug("array: {}", array);
 		final long[] longs = toLongsArray(array, padding);
-		log.debug("longs:{}", longs);
+		log.debug("longs: {}", longs);
 		return longs;
 	}
 

@@ -38,11 +38,12 @@ public enum OrderCommandType {
 	;
 
 	@Getter
-	private byte code;
+	private final byte code;
+	
 	@Getter
-	private boolean mutate;
+	private final boolean mutate;
 
-	public static OrderCommandType fromCode(byte code) {
+	public static OrderCommandType of(byte code) {
 		// TODO try if-else
 		final OrderCommandType result = CodesMap.get(code);
 		if (result == null) {
@@ -55,8 +56,8 @@ public enum OrderCommandType {
 
 	static {
 		MutableByteObjectMap<OrderCommandType> tempMap = new ByteObjectHashMap<>();
-		for (OrderCommandType x : values()) {
-			tempMap.put(x.code, x);
+		for (OrderCommandType type : values()) {
+			tempMap.put(type.code, type);
 		}
 		CodesMap = tempMap.toImmutable();
 	}
