@@ -22,12 +22,12 @@ import io.mercury.common.log.CommonLoggerFactory;
  *         策略执行引擎与整体框架分离
  *
  */
-public final class SimpleMultiStrategyScheduler<M extends MarketData> extends MultiStrategyScheduler<M> {
+public final class SyncMultiStrategyScheduler<M extends MarketData> extends MultiStrategyScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(SimpleMultiStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(SyncMultiStrategyScheduler.class);
 
 	private JctScQueue<DespatchMsg> despatchQueue;
 
@@ -35,7 +35,7 @@ public final class SimpleMultiStrategyScheduler<M extends MarketData> extends Mu
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
-	public SimpleMultiStrategyScheduler(Capacity capacity) {
+	public SyncMultiStrategyScheduler(Capacity capacity) {
 		this.despatchQueue = JctScQueue.spsc("QueueStrategyScheduler-Despatch").capacity(capacity.value())
 				.waitingStrategy(WaitingStrategy.SpinWaiting).buildWithProcessor(despatchMsg -> {
 					switch (despatchMsg.mark()) {

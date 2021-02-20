@@ -32,17 +32,17 @@ public abstract class MultiStrategyScheduler<M extends MarketData> implements St
 
 	@Override
 	public void addStrategy(Strategy<M> strategy) {
-		log.info("Add strategy -> strategyId==[{}], strategyName==[{}], subAccount==[{}]", strategy.strategyId(),
-				strategy.strategyName(), strategy.getSubAccount());
-		strategyMap.put(strategy.strategyId(), strategy);
-		strategy.instruments().each(instrument -> subscribeInstrument(instrument, strategy));
+		log.info("Add strategy -> strategyId==[{}], strategyName==[{}], subAccount==[{}]", strategy.getStrategyId(),
+				strategy.getStrategyName(), strategy.getSubAccount());
+		strategyMap.put(strategy.getStrategyId(), strategy);
+		strategy.getInstruments().each(instrument -> subscribeInstrument(instrument, strategy));
 		strategy.enable();
 	}
 
 	private void subscribeInstrument(Instrument instrument, Strategy<M> strategy) {
-		subscribedMap.getIfAbsentPut(instrument.instrumentId(), MutableSets::newUnifiedSet).add(strategy);
-		log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.strategyId(),
-				instrument.instrumentId());
+		subscribedMap.getIfAbsentPut(instrument.getInstrumentId(), MutableSets::newUnifiedSet).add(strategy);
+		log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.getStrategyId(),
+				instrument.getInstrumentId());
 	}
 
 }
