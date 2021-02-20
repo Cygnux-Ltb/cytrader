@@ -37,7 +37,7 @@
 							<!-- <include>**/*.avro</include> -->
 							<!-- </includes> -->
 							<!-- <imports> -->
-							<!-- <import>${project.basedir}src/main/java/io/ffreedom/persistence/avro/schema/MsgTitle.avsc</import> -->
+							<!-- <import>${project.basedir}src/main/java/io/cygnus/simulator/persistence/avro/schema/MsgTitle.avsc</import> -->
 							<!-- </imports> -->
 							<fieldVisibility>private</fieldVisibility>
 							<stringType>String</stringType>
@@ -50,12 +50,29 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Java 1.8+ Library with tons of utility classes required in all projects -->
 		<dependency>
 			<groupId>com.helger</groupId>
 			<artifactId>ph-commons</artifactId>
 			<version>9.5.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cygnus</groupId>
+			<artifactId>service-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cygnus</groupId>
+			<artifactId>restful-client</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<!-- mercury -->
@@ -73,7 +90,19 @@
 
 		<dependency>
 			<groupId>io.mercury</groupId>
+			<artifactId>transport-http</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
 			<artifactId>transport-socket</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-rabbitmq</artifactId>
 			<version>${mercury.version}</version>
 		</dependency>
 
@@ -82,6 +111,5 @@
 			<artifactId>structure</artifactId>
 		</dependency>
 	</dependencies>
-
 
 </project>
