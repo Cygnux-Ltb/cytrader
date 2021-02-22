@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+          "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.url">jdbc:mysql://rm-bp119s8cooy48csk7o.mysql.rds.aliyuncs.com:3306/thad</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">Jinpengdb123$</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		
+	    <mapping class="org.beam.persistence.db.entity.ThadInfo"/>
+		<mapping class="org.beam.persistence.db.entity.ThadInitConfig"/>
+		<mapping class="org.beam.persistence.db.entity.ThadMqConfig"/>
+		<mapping class="org.beam.persistence.db.entity.ThadStrategy"/>
+		<mapping class="org.beam.persistence.db.entity.DataCleanInfo"/>
+		<mapping class="org.beam.persistence.db.entity.Exchange"/>
+		<mapping class="org.beam.persistence.db.entity.InstrumentSettlementPrice"/>
+		<mapping class="org.beam.persistence.db.entity.Order"/>
+		<mapping class="org.beam.persistence.db.entity.Signal"/>
+		<mapping class="org.beam.persistence.db.entity.SignalParam"/>
+		<mapping class="org.beam.persistence.db.entity.SignalSymbol"/>
+		<mapping class="org.beam.persistence.db.entity.Strategy"/>
+		<mapping class="org.beam.persistence.db.entity.StrategyDefaultParam"/>
+		<mapping class="org.beam.persistence.db.entity.StrategyInstrumentPNLDaily"/>
+		<mapping class="org.beam.persistence.db.entity.StrategyInstrumentPNLSettlementDaily"/>
+		<mapping class="org.beam.persistence.db.entity.StrategyParam"/>
+		<mapping class="org.beam.persistence.db.entity.StrategyParamFields"/>
+		<mapping class="org.beam.persistence.db.entity.StrategySignal"/>
+		<mapping class="org.beam.persistence.db.entity.StrategySymbol"/>
+		<mapping class="org.beam.persistence.db.entity.SymbolInfo"/>
+		<mapping class="org.beam.persistence.db.entity.SymbolTradingFee"/>
+		<mapping class="org.beam.persistence.db.entity.SymbolTradingPeriod"/>
+		<mapping class="org.beam.persistence.db.entity.TimeBinner"/>
+		<mapping class="org.beam.persistence.db.entity.TradeableInstrument"/> 
+	</session-factory>
+</hibernate-configuration>
