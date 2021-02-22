@@ -52,7 +52,6 @@ public class SimpleSingleStrategyScheduler<M extends MarketData> implements Inbo
 	@Override
 	public void close() throws IOException {
 		log.info("Strategy [{}] closed", strategy.getStrategyName());
-
 	}
 
 }
