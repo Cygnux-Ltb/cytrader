@@ -14,9 +14,10 @@ import io.cygnus.exchange.core.common.StateHash;
 
 public final class HashingUtils {
 
+
 	/**
 	 * 
-	 * @param bitSet
+	 * @param set
 	 * @return
 	 */
 	public static int stateHash(final BitSet set) {
