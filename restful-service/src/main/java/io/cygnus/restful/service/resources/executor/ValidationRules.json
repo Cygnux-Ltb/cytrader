@@ -1,0 +1,34 @@
+[
+    {
+        "paramName": "targetQtyString",
+        "dataType": "String",
+        "regex": "^([a-zA-Z]{1,2},\\d+;)*([a-zA-Z]{1,2},\\d+;?)$",
+        "valueType": "Int",
+        "minValue": "0",
+        "maxValue": "100"
+    },
+    {
+        "paramName": "referenceHighString",
+        "dataType": "String",
+        "regex": "^([a-zA-Z]{1,2},\\d+(\\.\\d+)?;)*([a-zA-Z]{1,2},\\d+(\\.\\d+)?;?)$",
+        "valueType": "Double",
+        "minValue": "1",
+        "maxValue": "200000"
+    },
+    {
+        "paramName": "referenceLowString",
+        "dataType": "String",
+        "regex": "^([a-zA-Z]{1,2},\\d+(\\.\\d+)?;)*([a-zA-Z]{1,2},\\d+(\\.\\d+)?;?)$",
+        "valueType": "Double",
+        "minValue": "1",
+        "maxValue": "200000"
+    },
+    {
+        "paramName": "rangeString",
+        "dataType": "String",
+        "regex": "^([a-zA-Z]{1,2},\\d+(\\.\\d+)?;)*([a-zA-Z]{1,2},\\d+(\\.\\d+)?;?)$",
+        "valueType": "Double",
+        "minValue": "0",
+        "maxValue": "20000"
+    }
+]
