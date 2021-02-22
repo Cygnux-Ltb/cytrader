@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.cygnus</groupId>
+		<artifactId>cygnus</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>restful-client</artifactId>
+	<name>restful-client</name>
+	<dependencies>
+		<dependency>
+			<groupId>io.cygnus</groupId>
+			<artifactId>service-impl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5</artifactId>
+			<version>5.0.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>transport-http</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+	</dependencies>
+</project>
