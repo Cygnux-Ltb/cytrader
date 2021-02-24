@@ -1,16 +1,18 @@
-package io.cygnus.engine.strategy.impl;
+package io.cygnus.engine.strategy;
 
 import static java.lang.Math.abs;
 
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
-import io.cygnus.engine.strategy.Strategy;
-import io.cygnus.engine.strategy.StrategyEvent;
+import io.cygnus.engine.strategy.api.Strategy;
+import io.cygnus.engine.strategy.api.StrategyEvent;
+import io.cygnus.engine.strategy.api.StrategySign;
 import io.horizon.structure.account.Account;
 import io.horizon.structure.account.AccountKeeper;
 import io.horizon.structure.account.SubAccount;
@@ -35,82 +37,64 @@ import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
 import io.mercury.common.util.Assertor;
+import lombok.Getter;
 
 public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey> extends EnableableComponent
 		implements Strategy<M>, CircuitBreaker {
 
-	/**
-	 * Logger
-	 */
-	private final Logger log = CommonLoggerFactory.getLogger(this.getClass());
+	// Logger
+	private final static Logger log = CommonLoggerFactory.getLogger(AbstractStrategy.class);
 
-	/**
-	 * 策略ID
-	 */
-	private final int strategyId;
+	// 策略ID
+	@Getter
+	protected final int strategyId;
 
-	/**
-	 * 子账号
-	 */
+	// 策略名称
+	@Getter
+	protected final String strategyName;
+
+	// 子账号
+	@Getter
 	protected final SubAccount subAccount;
 	protected final int subAccountId;
 
-	/**
-	 * 实际账号
-	 */
+	// 实际账号
+	@Getter
 	protected final Account account;
 	protected final int accountId;
 
-	/**
-	 * 是否初始化成功
-	 */
+	// 是否初始化成功
 	private boolean initSuccess = false;
 
-	/**
-	 * 记录当前策略所有的订单
-	 */
+	// 记录当前策略所有的订单
 	protected final MutableLongObjectMap<Order> orders = MutableMaps.newLongObjectHashMap();
 
-	/**
-	 * 策略参数
-	 */
+	// 策略参数
 	protected final Params<PK> params;
 
-	protected AbstractStrategy(int strategyId, int subAccountId, Params<PK> params) {
-		this.strategyId = strategyId;
-		SubAccount subAccount = AccountKeeper.getSubAccount(subAccountId);
-		if (subAccount == null)
-			throw new IllegalArgumentException();
-		Account account = AccountKeeper.getAccountBySubAccountId(subAccountId);
+	protected AbstractStrategy(@Nonnull StrategySign sign, @Nonnull SubAccount subAccount,
+			@Nullable Params<PK> params) {
+		this.strategyId = sign.getStrategyId();
+		this.strategyName = sign.getStrategyName();
+		Assertor.nonNull(subAccount, "subAccount");
 		this.subAccount = subAccount;
 		this.subAccountId = subAccount.getSubAccountId();
+		final Account account = AccountKeeper.getAccountBySubAccountId(subAccount.getSubAccountId());
+		if (account == null)
+			throw new IllegalArgumentException(subAccount.getSubAccountName() + " is not found Account");
 		this.account = account;
 		this.accountId = account.getAccountId();
 		this.params = params;
 	}
 
 	@Override
-	public void initialize(@Nonnull Supplier<Boolean> initializer) {
+	public Strategy<M> initialize(@Nonnull Supplier<Boolean> initializer) {
 		Assertor.nonNull(initializer, "initializer");
 		this.initSuccess = initializer.get();
 		log.info("Initialize result initSuccess==[{}]", initSuccess);
 		// TODO 设置StrategyKeeper
 		// StrategyKeeper.putStrategy(this);
-	}
-
-	@Override
-	public int getStrategyId() {
-		return strategyId;
-	}
-
-	@Override
-	public SubAccount getSubAccount() {
-		return subAccount;
-	}
-
-	@Override
-	public Account getAccount() {
-		return account;
+		return this;
 	}
 
 	@Override

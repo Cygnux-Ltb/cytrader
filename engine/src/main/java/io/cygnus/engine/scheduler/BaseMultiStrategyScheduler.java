@@ -4,20 +4,20 @@ import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.slf4j.Logger;
 
-import io.cygnus.engine.strategy.Strategy;
-import io.cygnus.engine.strategy.StrategyScheduler;
+import io.cygnus.engine.strategy.api.MultiStrategyScheduler;
+import io.cygnus.engine.strategy.api.Strategy;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.Instrument;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public abstract class MultiStrategyScheduler<M extends MarketData> implements StrategyScheduler<M> {
+public abstract class BaseMultiStrategyScheduler<M extends MarketData> implements MultiStrategyScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(MultiStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(BaseMultiStrategyScheduler.class);
 
 	/**
 	 * 策略列表

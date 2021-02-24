@@ -1,4 +1,4 @@
-package io.cygnus.engine.strategy;
+package io.cygnus.engine.strategy.api;
 
 public class StrategyException extends RuntimeException {
 

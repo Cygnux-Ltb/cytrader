@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 
-import io.cygnus.engine.strategy.Strategy;
+import io.cygnus.engine.strategy.api.Strategy;
 import io.horizon.structure.adaptor.AdaptorEvent;
 import io.horizon.structure.event.InboundScheduler;
 import io.horizon.structure.market.data.MarkerDataKeeper;
@@ -14,19 +14,19 @@ import io.horizon.structure.order.OrderBookKeeper;
 import io.horizon.structure.order.actual.ChildOrder;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public class SimpleSingleStrategyScheduler<M extends MarketData> implements InboundScheduler<M> {
+public class SyncSingleStrategyScheduler<M extends MarketData> implements InboundScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(SimpleSingleStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(SyncSingleStrategyScheduler.class);
 
 	/**
 	 * only one strategy
 	 */
 	private final Strategy<M> strategy;
 
-	public SimpleSingleStrategyScheduler(Strategy<M> strategy) {
+	public SyncSingleStrategyScheduler(Strategy<M> strategy) {
 		this.strategy = strategy;
 	}
 

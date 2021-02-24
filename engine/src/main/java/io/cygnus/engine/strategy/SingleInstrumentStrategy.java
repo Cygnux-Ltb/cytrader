@@ -1,11 +1,16 @@
-package io.cygnus.engine.strategy.impl;
+package io.cygnus.engine.strategy;
 
 import static io.mercury.common.collections.ImmutableMaps.immutableIntObjectMapFactory;
 import static io.mercury.common.log.CommonLoggerFactory.getLogger;
 
+import javax.annotation.Nullable;
+
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.slf4j.Logger;
 
+import io.cygnus.engine.strategy.api.Strategy;
+import io.cygnus.engine.strategy.api.StrategySign;
+import io.horizon.structure.account.SubAccount;
 import io.horizon.structure.adaptor.Adaptor;
 import io.horizon.structure.adaptor.AdaptorEvent;
 import io.horizon.structure.market.data.MarketData;
@@ -13,36 +18,52 @@ import io.horizon.structure.market.instrument.Instrument;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
 import io.mercury.common.util.Assertor;
+import lombok.Getter;
 
-public abstract class StrategySingleInstrument<M extends MarketData, PK extends ParamKey>
+public abstract class SingleInstrumentStrategy<M extends MarketData, PK extends ParamKey>
 		extends AbstractStrategy<M, PK> {
 
 	// Logger
-	private static final Logger log = getLogger(StrategySingleInstrument.class);
+	private static final Logger log = getLogger(SingleInstrumentStrategy.class);
 
 	// 策略订阅的合约
 	protected Instrument instrument;
 
 	// 策略订阅的合约列表
+	@Getter
 	protected ImmutableIntObjectMap<Instrument> instruments;
 
-	protected StrategySingleInstrument(int strategyId, int subAccountId, Instrument instrument, Params<PK> params) {
-		super(strategyId, subAccountId, params);
+	private Adaptor adaptor;
+
+	/**
+	 * 
+	 * @param strategyId
+	 * @param subAccount
+	 * @param instrument
+	 */
+	protected SingleInstrumentStrategy(StrategySign sign, SubAccount subAccount, Instrument instrument) {
+		this(sign, subAccount, null, instrument);
+	}
+
+	/**
+	 * 
+	 * @param strategyId
+	 * @param subAccount
+	 * @param params
+	 * @param instrument
+	 */
+	protected SingleInstrumentStrategy(StrategySign sign, SubAccount subAccount, @Nullable Params<PK> params,
+			Instrument instrument) {
+		super(sign, subAccount, params);
 		this.instrument = instrument;
 		this.instruments = immutableIntObjectMapFactory().of(instrument.getInstrumentId(), instrument);
 	}
 
 	@Override
-	public ImmutableIntObjectMap<Instrument> getInstruments() {
-		return instruments;
-	}
-
-	private Adaptor adaptor;
-
-	@Override
-	public void addAdaptor(Adaptor adaptor) {
+	public Strategy<M> addAdaptor(Adaptor adaptor) {
 		Assertor.nonNull(adaptor, "adaptor");
 		this.adaptor = adaptor;
+		return this;
 	}
 
 	@Override

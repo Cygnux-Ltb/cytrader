@@ -22,7 +22,7 @@ import io.mercury.common.log.CommonLoggerFactory;
  *         策略执行引擎与整体框架分离
  *
  */
-public final class SimpleMultiStrategyScheduler<M extends MarketData> extends MultiStrategyScheduler<M> {
+public final class SimpleMultiStrategyScheduler<M extends MarketData> extends BaseMultiStrategyScheduler<M> {
 
 	/**
 	 * Logger

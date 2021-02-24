@@ -1,5 +1,6 @@
-package io.cygnus.engine.strategy;
+package io.cygnus.engine.strategy.api;
 
+import java.io.Closeable;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
@@ -26,7 +27,9 @@ public interface Strategy<M extends MarketData> extends
 		// 集成订单处理
 		OrderHandler,
 		// 集成AdaptorEvent处理
-		AdaptorEventHandler {
+		AdaptorEventHandler,
+		// 用于清理资源
+		Closeable {
 
 	int getStrategyId();
 
@@ -41,9 +44,9 @@ public interface Strategy<M extends MarketData> extends
 	@Nonnull
 	ImmutableIntObjectMap<Instrument> getInstruments();
 
-	void initialize(@Nonnull Supplier<Boolean> initializer);
+	Strategy<M> initialize(@Nonnull Supplier<Boolean> initializer);
 
-	void addAdaptor(@Nonnull Adaptor adaptor);
+	Strategy<M> addAdaptor(@Nonnull Adaptor adaptor);
 
 	void onStrategyEvent(@Nonnull StrategyEvent event);
 
