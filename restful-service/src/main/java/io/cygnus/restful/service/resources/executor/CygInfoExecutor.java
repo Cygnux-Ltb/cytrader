@@ -15,7 +15,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public class CygInfoExecutor extends BaseExecutor {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(CygInfoExecutor.class);
 
 	// All cygInfo Cache
 	private static final CacheList<CygInfo> AllCygInfoCache = new CacheList<>(() -> {
@@ -30,7 +30,7 @@ public class CygInfoExecutor extends BaseExecutor {
 	/**
 	 * cygInfo Cache by cygId
 	 */
-	private static final GuavaCacheMap<Integer, List<CygInfo>> CygInfoCacheMap = GuavaCacheMap.builder()
+	private static final GuavaCacheMap<Integer, List<CygInfo>> CygInfoCacheMap = GuavaCacheMap.newBuilder()
 			.buildWith(cygId -> {
 				CygInfoDao dao = new CygInfoDao();
 				return dao.getCygInfoById(cygId);
@@ -43,7 +43,7 @@ public class CygInfoExecutor extends BaseExecutor {
 	/**
 	 * cygStrategy Cache by cygId
 	 */
-	private static final GuavaCacheMap<Integer, List<CygStrategy>> CygStrategyCacheMap = GuavaCacheMap.builder()
+	private static final GuavaCacheMap<Integer, List<CygStrategy>> CygStrategyCacheMap = GuavaCacheMap.newBuilder()
 			.buildWith(cygId -> {
 				CygInfoDao dao = new CygInfoDao();
 				return dao.getCygStrategyById(cygId);

@@ -19,8 +19,8 @@ import io.mercury.serialization.json.JsonParser;
 
 public class UpdateParamExecutor {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
-	
+	private static final Logger log = CommonLoggerFactory.getLogger(UpdateParamExecutor.class);
+
 	private static Map<String, ValidationRule> validationRuleMap;
 
 	static {

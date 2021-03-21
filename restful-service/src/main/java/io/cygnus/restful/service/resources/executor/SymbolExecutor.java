@@ -18,7 +18,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public class SymbolExecutor extends BaseExecutor {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(SymbolExecutor.class);
 
 	/**
 	 * All SymbolInfo Cache
@@ -35,7 +35,7 @@ public class SymbolExecutor extends BaseExecutor {
 	/**
 	 * SymbolInfo Cache by symbolName
 	 */
-	private static final GuavaCacheMap<String, List<SymbolInfo>> SymbolInfoCacheMap = GuavaCacheMap.builder()
+	private static final GuavaCacheMap<String, List<SymbolInfo>> SymbolInfoCacheMap = GuavaCacheMap.newBuilder()
 			.buildWith((symbol) -> {
 				SymbolDao symbolDao = new SymbolDao();
 				return symbolDao.getSymbolInfoByName(symbol);
@@ -49,7 +49,7 @@ public class SymbolExecutor extends BaseExecutor {
 	 * SymbolTradingFee Cache by symbolName
 	 */
 	private static final GuavaCacheMap<String, List<SymbolTradingFee>> SymbolTradingFeeCacheMap = GuavaCacheMap
-			.builder().buildWith((symbol) -> {
+			.newBuilder().buildWith((symbol) -> {
 				SymbolDao symbolDao = new SymbolDao();
 				return symbolDao.getSymbolTradingFeeByName(symbol);
 			});
@@ -67,7 +67,7 @@ public class SymbolExecutor extends BaseExecutor {
 	 * SymbolTradingPeriod Cache by symbolName
 	 */
 	private static final GuavaCacheMap<String, List<SymbolTradingPeriod>> SymbolTradingPeriodCacheMap = GuavaCacheMap
-			.builder().buildWith((symbol) -> {
+			.newBuilder().buildWith((symbol) -> {
 				SymbolDao symbolDao = new SymbolDao();
 				return symbolDao.getSymbolTradingPeriodByName(symbol);
 			});

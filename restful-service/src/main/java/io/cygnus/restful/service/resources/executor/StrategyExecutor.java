@@ -16,7 +16,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public class StrategyExecutor {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(StrategyExecutor.class);
 
 	/**
 	 * All strategy Cache
@@ -33,7 +33,7 @@ public class StrategyExecutor {
 	/**
 	 * Strategy CacheMap
 	 */
-	private static final GuavaCacheMap<Integer, List<Strategy>> StrategyCacheMap = GuavaCacheMap.builder()
+	private static final GuavaCacheMap<Integer, List<Strategy>> StrategyCacheMap = GuavaCacheMap.newBuilder()
 			.buildWith((strategyId) -> {
 				StrategyDao strategyDao = new StrategyDao();
 				return strategyDao.getStrategyById(strategyId);
@@ -54,7 +54,7 @@ public class StrategyExecutor {
 	/**
 	 * StrategyParam CacheMap
 	 */
-	private static final GuavaCacheMap<Integer, List<StrategyParam>> StrategyParamCacheMap = GuavaCacheMap.builder()
+	private static final GuavaCacheMap<Integer, List<StrategyParam>> StrategyParamCacheMap = GuavaCacheMap.newBuilder()
 			.buildWith((strategyId) -> {
 				StrategyDao strategyDao = new StrategyDao();
 				List<StrategyParam> strategyParams = strategyDao.getParamsByStrategyId(strategyId);
@@ -97,7 +97,7 @@ public class StrategyExecutor {
 	/**
 	 * StrategySymbol CacheMap
 	 */
-	private static GuavaCacheMap<Integer, List<StrategySymbol>> strategySymbolCacheMap = GuavaCacheMap.builder()
+	private static GuavaCacheMap<Integer, List<StrategySymbol>> strategySymbolCacheMap = GuavaCacheMap.newBuilder()
 			.buildWith((strategyId) -> {
 				StrategyDao strategyDao = new StrategyDao();
 				return strategyDao.getSymbolsByStrategyId(strategyId);

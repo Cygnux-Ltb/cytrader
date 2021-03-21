@@ -29,11 +29,11 @@ import io.mercury.transport.core.api.Publisher;
 @Component
 public class CygnusInitService {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(CygnusInitService.class);
 
 	@PostConstruct
 	public void init() throws ServletException {
-		logger.info("Cygnus Servlet init...");
+		log.info("Cygnus Servlet init...");
 		initEndTimeBinnerSender(new Date(), 1000 * 60);
 	}
 
@@ -48,9 +48,9 @@ public class CygnusInitService {
 	}
 
 	private void initEndTimeBinnerSender(Date startTime, long period) {
-		logger.info("EndTimeBinnerSender init...");
+		log.info("EndTimeBinnerSender init...");
 		Timer endTimeBinnerSender = new Timer("EndTimeBinnerSender");
-		logger.info("Start Time : " + startTime);
+		log.info("Start Time : " + startTime);
 		endTimeBinnerSender.schedule(new TimerTask() {
 			DateFormat format = new SimpleDateFormat(TimePattern.HHMM.getPattern());
 
@@ -85,7 +85,7 @@ public class CygnusInitService {
 
 			String msg = JSON.toJSONString(new OutboxMessage<>(OutboxTitle.EndTimeBinner, null));
 
-			logger.info("EndTimeBinner : " + msg);
+			log.info("EndTimeBinner : " + msg);
 
 			publisher.publish(msg.getBytes(Charsets.UTF8));
 		}

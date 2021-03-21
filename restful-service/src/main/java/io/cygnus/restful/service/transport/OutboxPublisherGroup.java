@@ -23,15 +23,15 @@ public class OutboxPublisherGroup extends AbstractGroup<Integer, Publisher<byte[
 	}
 
 	@Override
-	protected synchronized Publisher<byte[]> createMember(Integer thadId) {
+	protected synchronized Publisher<byte[]> createMember(Integer cygId) {
 
 		CygInfoDao dao = new CygInfoDao();
 
-		List<CygMqConfig> thadMqConfigs = dao.getCygMqConfigById(thadId);
+		List<CygMqConfig> thadMqConfigs = dao.getCygMqConfigById(cygId);
 
 		if (thadMqConfigs.isEmpty() || thadMqConfigs.size() > 1) {
 			throw new IllegalArgumentException(
-					"Query MqConfig for ThadId(" + thadId + ") is null or more than one record.");
+					"Query MqConfig for CygId(" + cygId + ") is null or more than one record.");
 		}
 
 		CygMqConfig thadMqConfig = thadMqConfigs.get(0);
@@ -40,7 +40,7 @@ public class OutboxPublisherGroup extends AbstractGroup<Integer, Publisher<byte[
 				thadMqConfig.getServerMqPort(), thadMqConfig.getServerMqUsername(), thadMqConfig.getServerMqPassword(),
 				ExchangeRelationship.fanout(thadMqConfig.getServerInbox())).build();
 
-		return new RabbitMqPublisher("Thad-" + thadId + "-RestfulToOutbox", configurator);
+		return new RabbitMqPublisher("Cyg-" + cygId + "-RestfulToOutbox", configurator);
 	}
 
 }
