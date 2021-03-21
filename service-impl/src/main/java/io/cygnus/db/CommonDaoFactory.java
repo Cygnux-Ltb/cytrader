@@ -40,6 +40,7 @@ public class CommonDaoFactory {
 
 	public static void main(String[] args) {
 		Session session = CommonDaoFactory.getSession();
+		@SuppressWarnings("deprecation")
 		Criteria criteria = session.createCriteria(CygInfo.class);
 		System.out.println(criteria.list());
 	}

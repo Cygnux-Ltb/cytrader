@@ -18,7 +18,7 @@ public class SymbolDao {
 
 	public List<SymbolInfo> getAllSymbolInfo() {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<SymbolInfo> list = session.createCriteria(SymbolInfo.class).list();
 		CommonDaoFactory.close(session);
 		return list;
@@ -26,7 +26,7 @@ public class SymbolDao {
 
 	public List<SymbolInfo> getSymbolInfoByName(String symbol) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<SymbolInfo> list = session.createCriteria(SymbolInfo.class)
 				.add(Restrictions.eq(SymbolInfo.COLUMN_NAME_Symbol, symbol)).list();
 		CommonDaoFactory.close(session);
@@ -35,7 +35,7 @@ public class SymbolDao {
 
 	public List<SymbolTradingFee> getSymbolTradingFeeByName(String symbol) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<SymbolTradingFee> list = session.createCriteria(SymbolTradingFee.class)
 				.add(Restrictions.eq(SymbolTradingFee.COLUMN_NAME_Symbol, symbol)).list();
 		CommonDaoFactory.close(session);
@@ -46,6 +46,7 @@ public class SymbolDao {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
+			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(SymbolTradingFee.class);
 			@SuppressWarnings("unchecked")
 			List<SymbolTradingFee> queryResult = criteria
@@ -71,7 +72,7 @@ public class SymbolDao {
 
 	public List<SymbolTradingPeriod> getSymbolTradingPeriodByName(String symbol) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<SymbolTradingPeriod> list = session.createCriteria(SymbolTradingPeriod.class)
 				.add(Restrictions.eq(SymbolTradingPeriod.COLUMN_NAME_Symbol, symbol)).list();
 		CommonDaoFactory.close(session);
@@ -82,7 +83,7 @@ public class SymbolDao {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			@SuppressWarnings("unchecked")
+			@SuppressWarnings({ "unchecked", "deprecation" })
 			List<SymbolTradingPeriod> queryResult = session.createCriteria(SymbolTradingPeriod.class)
 					.add(Restrictions.eq(SymbolTradingPeriod.COLUMN_NAME_Symbol, symbol)).list();
 			if (queryResult.size() == 0) {
@@ -106,7 +107,7 @@ public class SymbolDao {
 
 	public List<TradeableInstrument> getTradeableInstrument(String symbol, Date tradingDay) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<TradeableInstrument> list = session.createCriteria(TradeableInstrument.class)
 				.add(Restrictions.eq(TradeableInstrument.COLUMN_NAME_Symbol, symbol))
 				.add(Restrictions.eq(TradeableInstrument.COLUMN_NAME_TradingDay, tradingDay)).list();

@@ -18,7 +18,7 @@ public class BinnerDao {
 
 	public List<TimeBinner> getTimeBinners(Integer cygId, Date dateTradingDay, String instrumentId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<TimeBinner> list = session.createCriteria(TimeBinner.class)
 				.add(Restrictions.eq(TimeBinner.COLUMN_NAME_CygId, cygId))
 				.add(Restrictions.eq(TimeBinner.COLUMN_NAME_TradingDay, dateTradingDay))
@@ -31,7 +31,7 @@ public class BinnerDao {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			@SuppressWarnings("unchecked")
+			@SuppressWarnings({ "unchecked", "deprecation" })
 			List<TimeBinner> queryForFieldValues = session.createCriteria(TimeBinner.class)
 					.add(Restrictions.eq(TimeBinner.COLUMN_NAME_CygId, timeBinner.getCygId()))
 					.add(Restrictions.eq(TimeBinner.COLUMN_NAME_TradingDay, timeBinner.getTradingDay()))

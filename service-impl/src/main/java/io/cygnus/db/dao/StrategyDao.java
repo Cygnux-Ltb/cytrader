@@ -18,7 +18,7 @@ public class StrategyDao {
 
 	public List<Strategy> getAllStrategy() {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<Strategy> list = session.createCriteria(Strategy.class).list();
 		CommonDaoFactory.close(session);
 		return list;
@@ -26,7 +26,7 @@ public class StrategyDao {
 
 	public List<Strategy> getStrategyById(Integer strategyId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<Strategy> list = session.createCriteria(Strategy.class)
 				.add(Restrictions.eq(Strategy.COLUMN_NAME_StrategyID, strategyId)).list();
 		CommonDaoFactory.close(session);
@@ -35,7 +35,7 @@ public class StrategyDao {
 
 	public List<StrategyParam> getParamsByStrategyId(Integer strategyId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<StrategyParam> list = session.createCriteria(StrategyParam.class)
 				.add(Restrictions.eq(StrategyParam.COLUMN_NAME_StrategyID, strategyId)).list();
 		CommonDaoFactory.close(session);
@@ -44,7 +44,7 @@ public class StrategyDao {
 
 	public List<StrategyDefaultParam> getAllDefaultParam() {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<StrategyDefaultParam> list = session.createCriteria(StrategyDefaultParam.class).list();
 		CommonDaoFactory.close(session);
 		return list;
@@ -52,17 +52,16 @@ public class StrategyDao {
 
 	public List<StrategySymbol> getSymbolsByStrategyId(Integer strategyId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<StrategySymbol> list = session.createCriteria(StrategySymbol.class)
 				.add(Restrictions.eq(StrategySymbol.COLUMN_NAME_StrategyID, strategyId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
 
-	
 	public List<StrategySignal> getSignalByStrategyId(Integer strategyId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<StrategySignal> list = session.createCriteria(StrategySignal.class)
 				.add(Restrictions.eq(StrategySignal.COLUMN_NAME_StrategyID, strategyId)).list();
 		CommonDaoFactory.close(session);
@@ -73,6 +72,7 @@ public class StrategyDao {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
+			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(StrategyParam.class);
 			List<StrategyParam> queryResult = queryStrategyParam(criteria, strategyParam.getStrategyId(),
 					strategyParam.getName(), strategyParam.getValueType());
@@ -100,8 +100,8 @@ public class StrategyDao {
 	public void putStrategySignal(StrategySignal strategySignal) {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
-
 		try {
+			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(StrategySignal.class);
 			List<StrategySignal> queryResult = queryStrategySignal(criteria, strategySignal.getStrategyId(),
 					strategySignal.getSignalID());
@@ -126,6 +126,7 @@ public class StrategyDao {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
+			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(StrategyParam.class);
 			List<StrategyParam> queryResult = queryStrategyParam(criteria, strategyParam.getStrategyId(),
 					strategyParam.getName(), strategyParam.getValueType());

@@ -15,7 +15,7 @@ public class DataCleanInfoDao {
 
 	public List<DataCleanInfo> getData(String location, Date tradingDay) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<DataCleanInfo> list = session.createCriteria(DataCleanInfo.class)
 				.add(Restrictions.eq(DataCleanInfo.COLUMN_NAME_Location, location))
 				.add(Restrictions.eq(DataCleanInfo.COLUMN_NAME_TradingDay, tradingDay)).list();
@@ -27,7 +27,7 @@ public class DataCleanInfoDao {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			@SuppressWarnings("unchecked")
+			@SuppressWarnings({ "unchecked", "deprecation" })
 			List<DataCleanInfo> list = session.createCriteria(DataCleanInfo.class)
 					.add(Restrictions.eq(DataCleanInfo.COLUMN_NAME_Location, info.getLocation()))
 					.add(Restrictions.eq(DataCleanInfo.COLUMN_NAME_TradingDay, info.getTradingDay())).list();

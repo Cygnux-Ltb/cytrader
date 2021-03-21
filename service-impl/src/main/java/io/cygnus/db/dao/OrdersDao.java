@@ -14,7 +14,7 @@ public class OrdersDao {
 
 	public List<Order> getOrders(Integer strategyId, Date dateTradingDay, String investorId, String instrumentId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<Order> list = session.createCriteria(Order.class)
 				.add(Restrictions.eq(Order.COLUMN_NAME_TradingDay, dateTradingDay))
 				.add(Restrictions.eq(Order.COLUMN_NAME_StrategyID, strategyId))
@@ -26,7 +26,7 @@ public class OrdersDao {
 
 	public List<Order> getOrdersByInit(Date dateTradingDay, Integer strategyId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<Order> list = session.createCriteria(Order.class)
 				.add(Restrictions.eq(Order.COLUMN_NAME_TradingDay, dateTradingDay))
 				.add(Restrictions.eq(Order.COLUMN_NAME_StrategyID, strategyId)).list();

@@ -14,7 +14,7 @@ public class SignalDao {
 
 	public List<Signal> getAllSignal() {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<Signal> list = session.createCriteria(Signal.class).list();
 		CommonDaoFactory.close(session);
 		return list;
@@ -22,7 +22,7 @@ public class SignalDao {
 
 	public List<Signal> getSignalById(Integer signalId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<Signal> list = session.createCriteria(Signal.class)
 				.add(Restrictions.eq(Signal.COLUMN_NAME_SignalID, signalId)).list();
 		CommonDaoFactory.close(session);
@@ -31,7 +31,7 @@ public class SignalDao {
 
 	public List<SignalParam> getParamsBySignalId(Integer signalId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<SignalParam> list = session.createCriteria(SignalParam.class)
 				.add(Restrictions.eq(Signal.COLUMN_NAME_SignalID, signalId)).list();
 		CommonDaoFactory.close(session);
@@ -40,7 +40,7 @@ public class SignalDao {
 
 	public List<SignalSymbol> getSymbolBySignalId(Integer signalId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<SignalSymbol> list = session.createCriteria(SignalSymbol.class)
 				.add(Restrictions.eq(SignalSymbol.COLUMN_NAME_SignalID, signalId)).list();
 		CommonDaoFactory.close(session);

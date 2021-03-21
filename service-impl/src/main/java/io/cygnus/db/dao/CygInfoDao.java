@@ -17,7 +17,7 @@ public class CygInfoDao {
 
 	public List<CygInfo> getAllCygInfo() {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygInfo> list = session.createCriteria(CygInfo.class).list();
 		CommonDaoFactory.close(session);
 		return list;
@@ -34,7 +34,7 @@ public class CygInfoDao {
 
 	public List<CygInfo> getCygInfoById(Integer cygId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygInfo> list = session.createCriteria(CygInfo.class)
 				.add(Restrictions.eq(CygInfo.COLUMN_NAME_CygID, cygId)).list();
 		CommonDaoFactory.close(session);
@@ -43,7 +43,7 @@ public class CygInfoDao {
 
 	public List<CygStrategy> getCygStrategyById(Integer cygId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygStrategy> list = session.createCriteria(CygStrategy.class)
 				.add(Restrictions.eq(CygStrategy.COLUMN_NAME_CygID, cygId)).list();
 		CommonDaoFactory.close(session);
@@ -52,7 +52,7 @@ public class CygInfoDao {
 
 	public List<CygMqConfig> getCygMqConfigById(Integer cygId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygMqConfig> list = session.createCriteria(CygMqConfig.class)
 				.add(Restrictions.eq(CygMqConfig.COLUMN_NAME_CygID, cygId)).list();
 		CommonDaoFactory.close(session);
@@ -61,7 +61,7 @@ public class CygInfoDao {
 
 	public List<CygInitConfig> getCygInitConfigById(Integer cygId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygInitConfig> list = session.createCriteria(CygInitConfig.class)
 				.add(Restrictions.eq(CygMqConfig.COLUMN_NAME_CygID, cygId)).list();
 		CommonDaoFactory.close(session);
@@ -71,6 +71,7 @@ public class CygInfoDao {
 	public static void main(String[] args) {
 		try {
 			Session session = CommonDaoFactory.getSession();
+			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(CygInfo.class);
 			@SuppressWarnings("unchecked")
 			List<CygInfo> cygInfos = criteria.list();

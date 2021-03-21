@@ -15,7 +15,7 @@ public class PnlDao {
 
 	public List<StrategyInstrumentPNLDaily> queryPnlDailys(Date dateTradingDay, Integer strategyId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<StrategyInstrumentPNLDaily> list = session.createCriteria(StrategyInstrumentPNLDaily.class)
 				.add(Restrictions.eq(StrategyInstrumentPNLDaily.COLUMN_NAME_TradingDay, dateTradingDay))
 				.add(Restrictions.eq(StrategyInstrumentPNLDaily.COLUMN_NAME_StrategyID, strategyId))
@@ -27,7 +27,7 @@ public class PnlDao {
 	public List<StrategyInstrumentPNLSettlementDaily> queryPnlSettlementDailys(Date dateTradingDay,
 			Integer strategyId) {
 		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<StrategyInstrumentPNLSettlementDaily> list = session
 				.createCriteria(StrategyInstrumentPNLSettlementDaily.class)
 				.add(Restrictions.eq(StrategyInstrumentPNLSettlementDaily.COLUMN_NAME_TradingDay, dateTradingDay))
@@ -40,7 +40,7 @@ public class PnlDao {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			@SuppressWarnings("unchecked")
+			@SuppressWarnings({ "unchecked", "deprecation" })
 			List<StrategyInstrumentPNLDaily> queryResult = session.createCriteria(StrategyInstrumentPNLDaily.class)
 					.add(Restrictions.eq(StrategyInstrumentPNLDaily.COLUMN_NAME_StrategyID, pnlDaily.getStrategyId()))
 					.add(Restrictions.eq(StrategyInstrumentPNLDaily.COLUMN_NAME_InstrumentID,
