@@ -13,16 +13,16 @@ import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.pool.TradablePeriodPool;
 import io.horizon.structure.serial.TimePeriodSerial;
 import io.horizon.structure.serial.TradablePeriodSerial;
-import io.mercury.common.collections.list.LongFixedLengthList;
+import io.mercury.common.collections.list.LongSlidingWindow;
 
 public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
 
-	private LongFixedLengthList historyPriceRecorder;
+	private LongSlidingWindow historyPriceWindow;
 
 	// TODO
 	public SmaIndicator2(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration, cycle);
-		this.historyPriceRecorder = LongFixedLengthList.newList(cycle);
+		this.historyPriceWindow = LongSlidingWindow.newWindow(cycle);
 		TradablePeriodSerial tradingPeriod = TradablePeriodPool.Singleton.getAfterTradingPeriod(instrument, LocalTime.now());
 		LocalDate nowDate = LocalDate.now();
 		ZoneOffset zoneOffset = instrument.getZoneOffset();
@@ -30,7 +30,7 @@ public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent
 				ZonedDateTime.of(nowDate, tradingPeriod.getStartTime(), zoneOffset), ZonedDateTime.of(nowDate,
 						tradingPeriod.getStartTime().plusSeconds(duration.getSeconds()).minusNanos(1), zoneOffset),
 				duration);
-		currentPoint = SmaPoint.with(0, instrument, duration, timePeriod, cycle, historyPriceRecorder);
+		currentPoint = SmaPoint.with(0, instrument, duration, timePeriod, cycle, historyPriceWindow);
 	}
 
 	public static SmaIndicator2 with(Instrument instrument, Duration duration, int cycle) {

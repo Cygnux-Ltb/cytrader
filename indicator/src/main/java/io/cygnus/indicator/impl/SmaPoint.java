@@ -5,7 +5,7 @@ import java.time.Duration;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.serial.TimePeriodSerial;
-import io.mercury.common.collections.list.LongFixedLengthList;
+import io.mercury.common.collections.list.LongSlidingWindow;
 
 public final class SmaPoint extends MaPoint {
 
@@ -14,15 +14,15 @@ public final class SmaPoint extends MaPoint {
 	private int cycle;
 
 	public SmaPoint(int index, Instrument instrument, Duration duration, TimePeriodSerial timePeriod, int cycle,
-			LongFixedLengthList historyPriceRecorder) {
-		super(index, instrument, duration, timePeriod, historyPriceRecorder);
-		this.historyPriceSum = historyPriceRecorder.sum();
+			LongSlidingWindow historyPriceWindow) {
+		super(index, instrument, duration, timePeriod, historyPriceWindow);
+		this.historyPriceSum = historyPriceWindow.sum();
 		this.cycle = cycle;
 	}
 
 	public static SmaPoint with(int indxe, Instrument instrument, Duration duration, TimePeriodSerial timePeriod,
-			int cycle, LongFixedLengthList historyPriceRecorder) {
-		return new SmaPoint(indxe, instrument, duration, timePeriod, cycle, historyPriceRecorder);
+			int cycle, LongSlidingWindow historyPriceWindow) {
+		return new SmaPoint(indxe, instrument, duration, timePeriod, cycle, historyPriceWindow);
 	}
 
 	public int cycle() {
@@ -32,7 +32,7 @@ public final class SmaPoint extends MaPoint {
 	@Override
 	protected void handleMarketData0(BasicMarketData marketData) {
 		this.lastPrice = marketData.getLastPrice();
-		int count = historyPriceRecorder.count();
+		int count = historyPriceWindow.count();
 		this.avgPrice = (historyPriceSum + lastPrice) / count;
 	}
 

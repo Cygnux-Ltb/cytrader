@@ -21,15 +21,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Tiny Java utility to incrementally calculate Mean and Standard Deviation 
-			with a numerically stable algorithm. Contains a simple utility class to incrementally 
-			calculate moving average and moving standard deviation of a data series. -->
-		<dependency>
-			<groupId>org.tools4j</groupId>
-			<artifactId>tools4j-meanvar</artifactId>
-			<version>1.1</version>
-		</dependency>
-
 		<dependency>
 			<groupId>io.horizon</groupId>
 			<artifactId>structure</artifactId>
