@@ -1,9 +1,9 @@
 package io.cygnus.engine.position;
 
 import io.horizon.structure.market.instrument.impl.ChinaStock;
+import io.horizon.structure.order.OrdEnum.OrdStatus;
 import io.horizon.structure.order.OrdQty;
 import io.horizon.structure.order.Order;
-import io.horizon.structure.order.enums.OrdStatus;
 import io.horizon.structure.position.AbstractPosition;
 import io.mercury.serialization.json.JsonWrapper;
 

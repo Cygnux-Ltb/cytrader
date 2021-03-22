@@ -2,13 +2,13 @@ package io.cygnus.core.order;
 
 import org.junit.Test;
 
-import io.horizon.structure.order.OrderBookKeeper;
+import io.horizon.structure.order.OrderManager;
 
-public class OrderBookManagerTest {
+public class OrderManagerTest {
 	
 	@Test
 	public void test() {
-		OrderBookKeeper.isContainsOrder(0);
+		OrderManager.isContainsOrder(0);
 	}
 
 	@Test

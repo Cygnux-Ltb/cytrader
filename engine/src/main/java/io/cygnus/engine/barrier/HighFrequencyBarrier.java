@@ -2,7 +2,7 @@ package io.cygnus.engine.barrier;
 
 import org.slf4j.Logger;
 
-import io.horizon.structure.order.actual.ChildOrder;
+import io.horizon.structure.order.ChildOrder;
 import io.horizon.structure.risk.OrderBarrier;
 import io.mercury.common.log.CommonLoggerFactory;
 

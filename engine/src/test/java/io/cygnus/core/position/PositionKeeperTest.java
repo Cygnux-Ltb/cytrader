@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import io.horizon.structure.market.instrument.impl.ChinaFutures;
 import io.horizon.structure.market.instrument.impl.ChinaFuturesSymbol;
-import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 import io.horizon.structure.position.PositionKeeper;
 
 public class PositionKeeperTest {

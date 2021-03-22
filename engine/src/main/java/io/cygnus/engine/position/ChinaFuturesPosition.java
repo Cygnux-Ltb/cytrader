@@ -3,10 +3,10 @@ package io.cygnus.engine.position;
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
 import io.horizon.structure.market.instrument.impl.ChinaFutures;
+import io.horizon.structure.order.OrdEnum.OrdStatus;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
 import io.horizon.structure.order.OrdQty;
 import io.horizon.structure.order.Order;
-import io.horizon.structure.order.enums.OrdStatus;
-import io.horizon.structure.order.enums.TrdDirection;
 import io.horizon.structure.position.AbstractPosition;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableMaps;

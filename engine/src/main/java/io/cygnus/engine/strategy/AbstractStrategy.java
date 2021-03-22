@@ -22,12 +22,13 @@ import io.horizon.structure.market.data.MarkerDataKeeper.LastMarkerData;
 import io.horizon.structure.market.data.MarketData;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.market.instrument.InstrumentKeeper;
+import io.horizon.structure.order.ChildOrder;
+import io.horizon.structure.order.OrdEnum.OrdType;
+import io.horizon.structure.order.OrdEnum.TrdAction;
+import io.horizon.structure.order.OrdEnum.TrdDirection;
+import io.horizon.structure.order.OrdSysIdAllocator;
 import io.horizon.structure.order.Order;
-import io.horizon.structure.order.OrderBookKeeper;
-import io.horizon.structure.order.actual.ChildOrder;
-import io.horizon.structure.order.enums.OrdType;
-import io.horizon.structure.order.enums.TrdAction;
-import io.horizon.structure.order.enums.TrdDirection;
+import io.horizon.structure.order.OrderManager;
 import io.horizon.structure.position.PositionKeeper;
 import io.horizon.structure.risk.CircuitBreaker;
 import io.mercury.common.annotation.lang.AbstractFunction;
@@ -36,6 +37,7 @@ import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
+import io.mercury.common.sequence.SnowflakeAlgorithm;
 import io.mercury.common.util.Assertor;
 import lombok.Getter;
 
@@ -72,11 +74,13 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	// 策略参数
 	protected final Params<PK> params;
 
+	private final OrdSysIdAllocator allocator;
+
 	protected AbstractStrategy(@Nonnull StrategySign sign, @Nonnull SubAccount subAccount,
 			@Nullable Params<PK> params) {
+		Assertor.nonNull(subAccount, "subAccount");
 		this.strategyId = sign.getStrategyId();
 		this.strategyName = sign.getStrategyName();
-		Assertor.nonNull(subAccount, "subAccount");
 		this.subAccount = subAccount;
 		this.subAccountId = subAccount.getSubAccountId();
 		final Account account = AccountKeeper.getAccountBySubAccountId(subAccount.getSubAccountId());
@@ -85,6 +89,8 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 		this.account = account;
 		this.accountId = account.getAccountId();
 		this.params = params;
+		final SnowflakeAlgorithm snowflake = new SnowflakeAlgorithm(strategyId);
+		this.allocator = () -> snowflake.next();
 	}
 
 	@Override
@@ -286,7 +292,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	 * @return
 	 */
 	protected long getLevel1Price(Instrument instrument, TrdDirection direction) {
-		LastMarkerData markerData = MarkerDataKeeper.getLast(instrument);
+		LastMarkerData markerData = MarkerDataKeeper.getLastMarkerData(instrument);
 		switch (direction) {
 		case Long:
 			// 获取当前卖一价
@@ -338,7 +344,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	 */
 	protected void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType,
 			TrdDirection direction) {
-		final ChildOrder childOrder = OrderBookKeeper.createAndSaveChildOrder(strategyId, subAccount, account,
+		final ChildOrder childOrder = OrderManager.createAndSaveChildOrder(allocator, strategyId, subAccount, account,
 				instrument, abs(offerQty), offerPrice, ordType, direction, TrdAction.Open);
 		childOrder.writeLog(log, getStrategyName() + " :: Open position generate [ChildOrder]");
 		saveOrder(childOrder);
@@ -433,7 +439,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	 * @param ordType    订单类型
 	 */
 	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
-		final ChildOrder childOrder = OrderBookKeeper.createAndSaveChildOrder(strategyId, subAccount, account,
+		final ChildOrder childOrder = OrderManager.createAndSaveChildOrder(allocator, strategyId, subAccount, account,
 				instrument, abs(offerQty), offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short,
 				TrdAction.Close);
 
