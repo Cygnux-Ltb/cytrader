@@ -1,8 +1,12 @@
 package io.cygnus.example.strategy;
 
-import io.cygnus.engine.strategy.impl.StrategySingleInstrument;
+import java.io.IOException;
+
+import io.cygnus.engine.strategy.SingleInstrumentStrategy;
+import io.cygnus.engine.strategy.api.StrategySign;
 import io.cygnus.indicator.impl.SmaIndicator.SmaEvent;
 import io.cygnus.indicator.impl.SmaPoint;
+import io.horizon.structure.account.SubAccount;
 import io.horizon.structure.market.data.impl.BasicMarketData;
 import io.horizon.structure.market.instrument.Instrument;
 import io.horizon.structure.order.Order;
@@ -14,10 +18,21 @@ import io.mercury.common.param.Params.ParamKey;
  * @author yellow013
  *
  */
-public final class ExampleSmaStrategy extends StrategySingleInstrument<BasicMarketData, ParamKey> implements SmaEvent {
+public final class ExampleSmaStrategy extends SingleInstrumentStrategy<BasicMarketData, ParamKey> implements SmaEvent {
 
-	public ExampleSmaStrategy(int strategyId, int subAccountId, Params<ParamKey> params, Instrument instrument) {
-		super(strategyId, subAccountId, instrument, params);
+	public ExampleSmaStrategy(SubAccount subAccount, Params<ParamKey> params, Instrument instrument) {
+		super(new StrategySign() {
+
+			@Override
+			public String getStrategyName() {
+				return "ExampleSmaStrategy";
+			}
+
+			@Override
+			public int getStrategyId() {
+				return 100;
+			}
+		}, subAccount, params, instrument);
 	}
 
 	@Override
@@ -54,6 +69,12 @@ public final class ExampleSmaStrategy extends StrategySingleInstrument<BasicMark
 	public String getEventName() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void close() throws IOException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -30,6 +30,7 @@
 		<dependency>
 			<groupId>io.cygnus</groupId>
 			<artifactId>engine</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 
