@@ -10,9 +10,9 @@ import io.cygnus.service.entity.Strategy;
 import io.cygnus.service.entity.StrategyDefaultParam;
 import io.cygnus.service.entity.StrategyParam;
 import io.cygnus.service.entity.StrategySymbol;
-import io.mercury.common.concurrent.list.CacheList;
 import io.mercury.common.concurrent.map.GuavaCacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.commons.cache.CacheList;
 
 public class StrategyExecutor {
 

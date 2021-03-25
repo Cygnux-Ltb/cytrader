@@ -9,9 +9,9 @@ import io.cygnus.restful.service.base.BaseExecutor;
 import io.cygnus.service.entity.CygInfo;
 import io.cygnus.service.entity.CygMqConfig;
 import io.cygnus.service.entity.CygStrategy;
-import io.mercury.common.concurrent.list.CacheList;
 import io.mercury.common.concurrent.map.GuavaCacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.commons.cache.CacheList;
 
 public class CygInfoExecutor extends BaseExecutor {
 

@@ -67,5 +67,12 @@
 			<artifactId>transport-http</artifactId>
 			<version>${mercury.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-cache</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
 	</dependencies>
+
 </project>
