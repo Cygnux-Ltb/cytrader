@@ -15,6 +15,11 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 // StrategyInstrumentPNLSettlementDaily
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "StrategyInstrumentPNLSettlementDaily")
 @Getter

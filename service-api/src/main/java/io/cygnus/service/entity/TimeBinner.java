@@ -15,6 +15,11 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 // TimeBinner
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "TimeBinner")
 @Getter

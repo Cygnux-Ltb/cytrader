@@ -13,6 +13,11 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 // SymbolInfo
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "SymbolInfo")
 @Getter

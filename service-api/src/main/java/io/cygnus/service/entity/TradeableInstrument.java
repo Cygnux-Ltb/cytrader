@@ -15,6 +15,11 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 // TradeableInstrument
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "TradeableInstrument")
 @Getter

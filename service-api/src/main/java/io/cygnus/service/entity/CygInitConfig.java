@@ -11,6 +11,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "CygInitConfig")
 @Getter
@@ -19,27 +24,27 @@ import lombok.experimental.Accessors;
 public final class CygInitConfig {
 
 	@Id
-	@Column(name = "UID")
+	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
 
 	// CygID int
-	@Column(name = "CygID")
+	@Column(name = "cyg_id")
 	private Integer cygId;
 	public static final String COLUMN_NAME_CygID = "CygID";
 
 	// FieldName varchar 63
-	@Column(name = "FieldName")
+	@Column(name = "field_name")
 	private String fieldName;
 	public static final String COLUMN_NAME_FieldName = "FieldName";
 
 	// FieldValue varchar 63
-	@Column(name = "FieldValue")
+	@Column(name = "field_value")
 	private String fieldValue;
 	public static final String COLUMN_NAME_FieldValue = "FieldValue";
 
 	// FieldType varchar 15
-	@Column(name = "FieldType")
+	@Column(name = "field_type")
 	private String fieldType;
 	public static final String COLUMN_NAME_FieldType = "FieldType";
 

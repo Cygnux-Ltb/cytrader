@@ -12,7 +12,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-//StrategySymbol
+/**
+ * StrategySymbol
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "StrategySignal")
 @Getter

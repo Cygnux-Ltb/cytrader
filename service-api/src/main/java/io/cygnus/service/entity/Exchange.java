@@ -11,25 +11,30 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 // Exchange
 @Entity
 @Table(name = "Exchange")
 @Getter
 @Setter
 @Accessors(chain = true)
-public final class Exchange  {
+public final class Exchange {
 
 	@Id
-	@Column(name = "UID")
+	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
 
 	// ExchangeCode varchar 9
-	@Column(name = "ExchangeCode")
+	@Column(name = "exchange_code")
 	private String exchangeCode;
 
 	// ExchangeName varchar 63
-	@Column(name = "ExchangeName")
+	@Column(name = "exchange_name")
 	private String exchangeName;
 
 }

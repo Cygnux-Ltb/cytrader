@@ -12,6 +12,11 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 // InstrumentTradingPeriod
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "SymbolTradingPeriod")
 @Getter

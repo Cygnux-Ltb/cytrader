@@ -11,6 +11,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "CygStrategy")
 @Getter
@@ -19,15 +24,15 @@ import lombok.experimental.Accessors;
 public final class CygStrategy {
 
 	@Id
-	@Column(name = "UID")
+	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
 
-	@Column(name = "CygID")
+	@Column(name = "cyg_id")
 	private Integer cygId;
 	public static final String COLUMN_NAME_CygID = "CygID";
 
-	@Column(name = "StrategyID")
+	@Column(name = "strategy_id")
 	private Integer strategyId;
 	public static final String COLUMN_NAME_StrategyID = "StrategyID";
 

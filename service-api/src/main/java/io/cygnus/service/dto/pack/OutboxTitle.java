@@ -4,7 +4,9 @@ import static io.mercury.common.collections.MutableMaps.newUnifiedMap;
 
 import java.util.Map;
 
-public enum OutboxTitle {
+import io.mercury.common.codec.Envelope;
+
+public enum OutboxTitle implements Envelope {
 
 	Heartbeat,
 
@@ -63,6 +65,12 @@ public enum OutboxTitle {
 		if ((value = Map.get(name)) != null)
 			return value;
 		throw new IllegalArgumentException("Checkout with [" + name + "] is null");
+	}
+
+	@Override
+	public int getCode() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

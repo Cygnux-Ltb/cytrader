@@ -12,6 +12,11 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 // StrategyParamFields
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "StrategyParamFields")
 @Getter

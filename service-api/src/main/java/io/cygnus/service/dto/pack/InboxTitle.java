@@ -4,7 +4,9 @@ import static io.mercury.common.collections.MutableMaps.newUnifiedMap;
 
 import java.util.Map;
 
-public enum InboxTitle {
+import io.mercury.common.codec.Envelope;
+
+public enum InboxTitle implements Envelope {
 
 	LastPrice,
 
@@ -44,6 +46,12 @@ public enum InboxTitle {
 		if ((value = Map.get(name)) != null)
 			return value;
 		throw new IllegalArgumentException("Checkout with [" + name + "] is null");
+	}
+
+	@Override
+	public int getCode() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

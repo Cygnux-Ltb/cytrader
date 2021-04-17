@@ -14,6 +14,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "DataCleanInfo")
 @Getter
@@ -22,28 +27,28 @@ import lombok.experimental.Accessors;
 public final class DataCleanInfo {
 
 	@Id
-	@Column(name = "UID")
+	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
 
-	@Column(name = "Location")
+	@Column(name = "location")
 	private String location;
 	public static final String COLUMN_NAME_Location = "Location";
 
 	// TradingDay date
-	@Column(name = "TradingDay", columnDefinition = ColumnDefinition.DATE)
+	@Column(name = "trading_day", columnDefinition = ColumnDefinition.DATE)
 	private Date tradingDay;
 	public static final String COLUMN_NAME_TradingDay = "TradingDay";
 
-	@Column(name = "StartTime")
+	@Column(name = "start_time")
 	private String startTime;
 	public static final String COLUMN_NAME_StartTime = "StartTime";
 
-	@Column(name = "EndTime")
+	@Column(name = "end_time")
 	private String endTime;
 	public static final String COLUMN_NAME_EndTime = "EndTime";
 
-	@Column(name = "UpdateTime")
+	@Column(name = "update_time")
 	private String updateTime;
 	public static final String COLUMN_NAME_UpdateTime = "UpdateTime";
 

@@ -11,6 +11,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "CygMqConfig")
 @Getter
@@ -19,72 +24,72 @@ import lombok.experimental.Accessors;
 public class CygMqConfig {
 
 	@Id
-	@Column(name = "UID")
+	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
 
 	// CygID int
-	@Column(name = "CygID")
+	@Column(name = "cyg_id")
 	private Integer cygId;
 	public static final String COLUMN_NAME_CygID = "CygID";
 
 	// MqHost varchar 31
-	@Column(name = "CygMqHost")
+	@Column(name = "cyg_mq_host")
 	private String CygMqHost;
 	public static final String COLUMN_NAME_CygMqHost = "CygMqHost";
 
 	// MqPort int
-	@Column(name = "CygMqPort")
+	@Column(name = "cyg_mq_port")
 	private Integer CygMqPort;
 	public static final String COLUMN_NAME_CygMqPort = "CygMqPort";
 
 	// MqHost varchar 31
-	@Column(name = "CygMqUsername")
+	@Column(name = "cyg_mq_username")
 	private String CygMqUsername;
 	public static final String COLUMN_NAME_CygMqUsername = "CygMqUsername";
 
 	// MqHost varchar 31
-	@Column(name = "CygMqPassword")
+	@Column(name = "cyg_mq_password")
 	private String CygMqPassword;
 	public static final String COLUMN_NAME_CygMqPassword = "CygMqPassword";
 
 	// MqNameCygToServer varchar 31
-	@Column(name = "QueueNameCygToServer")
+	@Column(name = "queue_name_cyg_to_server")
 	private String queueNameCygToServer;
 	public static final String COLUMN_NAME_QueueNameCygToServer = "QueueNameCygToServer";
 
 	// MqNameServerToCyg varchar 31
-	@Column(name = "QueueNameServerToCyg")
+	@Column(name = "queue_name_server_to_cyg")
 	private String queueNameServerToCyg;
 	public static final String COLUMN_NAME_QueueNameServerToCyg = "QueueNameServerToCyg";
 
 	// MqHost varchar 31
-	@Column(name = "ServerMqHost")
+	@Column(name = "server_mq_host")
 	private String serverMqHost;
 	public static final String COLUMN_NAME_ServerMqHost = "ServerMqHost";
 
 	// MqPort int
-	@Column(name = "ServerMqPort")
+	@Column(name = "server_mq_port")
 	private Integer serverMqPort;
 	public static final String COLUMN_NAME_ServerMqPort = "ServerMqPort";
 
 	// MqHost varchar 31
-	@Column(name = "ServerMqUsername")
+	@Column(name = "server_mq_username")
 	private String serverMqUsername;
 	public static final String COLUMN_NAME_ServerMqUsername = "ServerMqUsername";
 
 	// MqHost varchar 31
-	@Column(name = "ServerMqPassword")
+	@Column(name = "server_mq_password")
 	private String serverMqPassword;
 	public static final String COLUMN_NAME_ServerMqPassword = "ServerMqPassword";
 
 	// MqNameCygToServer varchar 31
-	@Column(name = "ServerInbox")
+	@Column(name = "server_inbox")
 	private String serverInbox;
 	public static final String COLUMN_NAME_ServerInbox = "ServerInbox";
 
 	// MqNameServerToCyg varchar 31
-	@Column(name = "ServerOutbox")
+	@Column(name = "server_outbox")
 	private String serverOutbox;
 	public static final String COLUMN_NAME_ServerOutbox = "ServerOutbox";
 

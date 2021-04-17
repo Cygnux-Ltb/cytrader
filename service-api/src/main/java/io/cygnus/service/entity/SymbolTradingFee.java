@@ -13,6 +13,11 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 // SymbolTradingFee
+/**
+ * 
+ * @author yellow013
+ *
+ */
 @Entity
 @Table(name = "SymbolTradingFee")
 @Getter
