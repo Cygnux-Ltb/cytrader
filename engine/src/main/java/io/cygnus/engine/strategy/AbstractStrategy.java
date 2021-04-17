@@ -13,24 +13,24 @@ import org.slf4j.Logger;
 import io.cygnus.engine.strategy.api.Strategy;
 import io.cygnus.engine.strategy.api.StrategyEvent;
 import io.cygnus.engine.strategy.api.StrategySign;
-import io.horizon.structure.account.Account;
-import io.horizon.structure.account.AccountKeeper;
-import io.horizon.structure.account.SubAccount;
-import io.horizon.structure.adaptor.Adaptor;
-import io.horizon.structure.market.data.MarkerDataKeeper;
-import io.horizon.structure.market.data.MarkerDataKeeper.LastMarkerData;
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.market.instrument.InstrumentKeeper;
-import io.horizon.structure.order.ChildOrder;
-import io.horizon.structure.order.OrdEnum.OrdType;
-import io.horizon.structure.order.OrdEnum.TrdAction;
-import io.horizon.structure.order.OrdEnum.TrdDirection;
-import io.horizon.structure.order.OrdSysIdAllocator;
-import io.horizon.structure.order.Order;
-import io.horizon.structure.order.OrderManager;
-import io.horizon.structure.position.PositionKeeper;
-import io.horizon.structure.risk.CircuitBreaker;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.data.MarketDataKeeper;
+import io.horizon.market.data.MarketDataKeeper.MarketDataSnapshot;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.InstrumentKeeper;
+import io.horizon.transaction.account.Account;
+import io.horizon.transaction.account.AccountKeeper;
+import io.horizon.transaction.account.SubAccount;
+import io.horizon.transaction.adaptor.Adaptor;
+import io.horizon.transaction.order.ChildOrder;
+import io.horizon.transaction.order.OrdEnum.OrdType;
+import io.horizon.transaction.order.OrdEnum.TrdAction;
+import io.horizon.transaction.order.OrdEnum.TrdDirection;
+import io.horizon.transaction.order.OrdSysIdAllocator;
+import io.horizon.transaction.order.Order;
+import io.horizon.transaction.order.OrderManager;
+import io.horizon.transaction.position.PositionKeeper;
+import io.horizon.transaction.risk.CircuitBreaker;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.fsm.EnableableComponent;
@@ -292,16 +292,16 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	 * @return
 	 */
 	protected long getLevel1Price(Instrument instrument, TrdDirection direction) {
-		LastMarkerData markerData = MarkerDataKeeper.getLastMarkerData(instrument);
+		MarketDataSnapshot snapshot = MarketDataKeeper.getSnapshot(instrument);
 		switch (direction) {
 		case Long:
 			// 获取当前卖一价
-			return markerData.getAskPrice1();
+			return snapshot.getAskPrice1();
 		case Short:
 			// 获取当前买一价
-			return markerData.getBidPrice1();
+			return snapshot.getBidPrice1();
 		default:
-			throw new IllegalArgumentException("TrdDirection is [Invalid]");
+			throw new IllegalArgumentException("Direction is [Invalid]");
 		}
 	}
 

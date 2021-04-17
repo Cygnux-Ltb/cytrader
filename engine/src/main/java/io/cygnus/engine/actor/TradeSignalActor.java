@@ -2,7 +2,7 @@ package io.cygnus.engine.actor;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.horizon.structure.order.TrdSignal;
+import io.horizon.transaction.order.TrdSignal;
 import io.mercury.common.collections.MutableLists;
 
 public final class TradeSignalActor {

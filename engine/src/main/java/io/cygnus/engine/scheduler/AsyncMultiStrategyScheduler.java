@@ -4,12 +4,12 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 
-import io.horizon.structure.adaptor.AdaptorEvent;
-import io.horizon.structure.market.data.MarkerDataKeeper;
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.order.ChildOrder;
-import io.horizon.structure.order.OrderManager;
-import io.horizon.structure.order.OrderReport;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.data.MarketDataKeeper;
+import io.horizon.transaction.adaptor.AdaptorEvent;
+import io.horizon.transaction.order.ChildOrder;
+import io.horizon.transaction.order.OrderManager;
+import io.horizon.transaction.order.OrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.WaitingStrategy;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
@@ -23,26 +23,27 @@ import lombok.Getter;
  *         策略执行引擎与整体框架分离
  *
  */
-public final class AsyncMultiStrategyScheduler<M extends MarketData> extends BaseMultiStrategyScheduler<M> {
+public final class AsyncMultiStrategyScheduler<M extends MarketData> extends AbstractMultiStrategyScheduler<M> {
 
 	/**
 	 * Logger
 	 */
 	private static final Logger log = CommonLoggerFactory.getLogger(AsyncMultiStrategyScheduler.class);
 
-	private final JctSingleConsumerQueue<InternalMsg> despatchQueue;
+	private final JctSingleConsumerQueue<QueueMsg> queue;
 
 	private static final int MarketData = 0;
 	private static final int OrderReport = 1;
 	private static final int AdaptorEvent = 2;
 
 	public AsyncMultiStrategyScheduler(Capacity capacity) {
-		this.despatchQueue = JctSingleConsumerQueue.newSingleProducerQueue("AsyncMultiStrategyScheduler-Queue")
-				.capacity(capacity.value()).waitingStrategy(WaitingStrategy.SpinWaiting).buildWithProcessor(msg -> {
+		this.queue = JctSingleConsumerQueue.singleProducer("AsyncMultiStrategyScheduler-Queue")
+				.setCapacity(capacity.value()).setWaitingStrategy(WaitingStrategy.SpinWaiting)
+				.buildWithProcessor(msg -> {
 					switch (msg.getMark()) {
 					case MarketData:
 						M marketData = msg.getMarketData();
-						MarkerDataKeeper.onMarketDate(marketData);
+						MarketDataKeeper.onMarketDate(marketData);
 						subscribedMap.get(marketData.getInstrumentId()).each(strategy -> {
 							if (strategy.isEnabled()) {
 								strategy.onMarketData(marketData);
@@ -74,22 +75,22 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Bas
 	// TODO add pools
 	@Override
 	public void onMarketData(M marketData) {
-		despatchQueue.enqueue(new InternalMsg(marketData));
+		queue.enqueue(new QueueMsg(marketData));
 	}
 
 	// TODO add pools
 	@Override
 	public void onOrderReport(OrderReport report) {
-		despatchQueue.enqueue(new InternalMsg(report));
+		queue.enqueue(new QueueMsg(report));
 	}
 
 	// TODO add pools
 	@Override
 	public void onAdaptorEvent(AdaptorEvent event) {
-		despatchQueue.enqueue(new InternalMsg(event));
+		queue.enqueue(new QueueMsg(event));
 	}
 
-	private class InternalMsg {
+	private class QueueMsg {
 
 		@Getter
 		private final int mark;
@@ -100,17 +101,17 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Bas
 		@Getter
 		private AdaptorEvent adaptorEvent;
 
-		private InternalMsg(M marketData) {
+		private QueueMsg(M marketData) {
 			this.mark = MarketData;
 			this.marketData = marketData;
 		}
 
-		private InternalMsg(OrderReport ordReport) {
+		private QueueMsg(OrderReport ordReport) {
 			this.mark = OrderReport;
 			this.ordReport = ordReport;
 		}
 
-		private InternalMsg(AdaptorEvent adaptorEvent) {
+		private QueueMsg(AdaptorEvent adaptorEvent) {
 			this.mark = AdaptorEvent;
 			this.adaptorEvent = adaptorEvent;
 		}
@@ -118,7 +119,7 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Bas
 	}
 
 	@Override
-	public void close() throws IOException {
+	protected void close0() throws IOException {
 		// TODO Auto-generated method stub
 
 	}

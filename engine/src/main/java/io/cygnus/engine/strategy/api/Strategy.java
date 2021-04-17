@@ -7,14 +7,14 @@ import javax.annotation.Nonnull;
 
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 
-import io.horizon.structure.account.Account;
-import io.horizon.structure.account.SubAccount;
-import io.horizon.structure.adaptor.Adaptor;
-import io.horizon.structure.event.handler.AdaptorEventHandler;
-import io.horizon.structure.event.handler.MarketDataHandler;
-import io.horizon.structure.event.handler.OrderHandler;
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.handler.MarketDataHandler;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.transaction.account.Account;
+import io.horizon.transaction.account.SubAccount;
+import io.horizon.transaction.adaptor.Adaptor;
+import io.horizon.transaction.event.handler.AdaptorEventHandler;
+import io.horizon.transaction.event.handler.OrderHandler;
 import io.mercury.common.fsm.Enableable;
 
 public interface Strategy<M extends MarketData> extends

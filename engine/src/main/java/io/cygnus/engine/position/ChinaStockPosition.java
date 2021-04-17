@@ -1,10 +1,10 @@
 package io.cygnus.engine.position;
 
-import io.horizon.structure.market.instrument.impl.ChinaStock;
-import io.horizon.structure.order.OrdEnum.OrdStatus;
-import io.horizon.structure.order.OrdQty;
-import io.horizon.structure.order.Order;
-import io.horizon.structure.position.AbstractPosition;
+import io.horizon.market.instrument.impl.ChinaStock;
+import io.horizon.transaction.order.OrdEnum.OrdStatus;
+import io.horizon.transaction.order.OrdQty;
+import io.horizon.transaction.order.Order;
+import io.horizon.transaction.position.AbstractPosition;
 import io.mercury.serialization.json.JsonWrapper;
 
 public class ChinaStockPosition extends AbstractPosition {

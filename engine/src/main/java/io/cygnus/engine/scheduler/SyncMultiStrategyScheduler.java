@@ -4,12 +4,12 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 
-import io.horizon.structure.adaptor.AdaptorEvent;
-import io.horizon.structure.market.data.MarkerDataKeeper;
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.order.ChildOrder;
-import io.horizon.structure.order.OrderManager;
-import io.horizon.structure.order.OrderReport;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.data.MarketDataKeeper;
+import io.horizon.transaction.adaptor.AdaptorEvent;
+import io.horizon.transaction.order.ChildOrder;
+import io.horizon.transaction.order.OrderManager;
+import io.horizon.transaction.order.OrderReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
 /**
@@ -19,20 +19,20 @@ import io.mercury.common.log.CommonLoggerFactory;
  *         策略执行引擎与整体框架分离
  *
  */
-public final class SimpleMultiStrategyScheduler<M extends MarketData> extends BaseMultiStrategyScheduler<M> {
+public final class SyncMultiStrategyScheduler<M extends MarketData> extends AbstractMultiStrategyScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(SimpleMultiStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(SyncMultiStrategyScheduler.class);
 
-	public SimpleMultiStrategyScheduler() {
+	public SyncMultiStrategyScheduler() {
 
 	}
 
 	@Override
 	public void onMarketData(M marketData) {
-		MarkerDataKeeper.onMarketDate(marketData);
+		MarketDataKeeper.onMarketDate(marketData);
 		subscribedMap.get(marketData.getInstrumentId()).each(strategy -> {
 			if (strategy.isEnabled()) {
 				strategy.onMarketData(marketData);
@@ -57,10 +57,11 @@ public final class SimpleMultiStrategyScheduler<M extends MarketData> extends Ba
 		log.info("Recv AdaptorEvent -> {}", event);
 	}
 
-	@Override
-	public void close() throws IOException {
-		// TODO Auto-generated method stub
 
+	@Override
+	protected void close0() throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

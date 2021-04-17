@@ -5,34 +5,42 @@ import java.io.IOException;
 import org.slf4j.Logger;
 
 import io.cygnus.engine.strategy.api.Strategy;
-import io.horizon.structure.adaptor.AdaptorEvent;
-import io.horizon.structure.event.InboundScheduler;
-import io.horizon.structure.market.data.MarkerDataKeeper;
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.order.ChildOrder;
-import io.horizon.structure.order.OrderManager;
-import io.horizon.structure.order.OrderReport;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.data.MarketDataKeeper;
+import io.horizon.transaction.adaptor.AdaptorEvent;
+import io.horizon.transaction.event.InboundScheduler;
+import io.horizon.transaction.order.ChildOrder;
+import io.horizon.transaction.order.OrderManager;
+import io.horizon.transaction.order.OrderReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public class SyncSingleStrategyScheduler<M extends MarketData> implements InboundScheduler<M> {
+/**
+ * 
+ * 单策略调度器, 直接调用策略回调函数, 没有异步操作, 最简单并且速度最快的调度器
+ * 
+ * @author yellow013
+ *
+ * @param <M>
+ */
+public class SingleStrategyScheduler<M extends MarketData> implements InboundScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(SyncSingleStrategyScheduler.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(SingleStrategyScheduler.class);
 
 	/**
 	 * only one strategy
 	 */
 	private final Strategy<M> strategy;
 
-	public SyncSingleStrategyScheduler(Strategy<M> strategy) {
+	public SingleStrategyScheduler(Strategy<M> strategy) {
 		this.strategy = strategy;
 	}
 
 	@Override
 	public void onMarketData(M marketData) {
-		MarkerDataKeeper.onMarketDate(marketData);
+		MarketDataKeeper.onMarketDate(marketData);
 		strategy.onMarketData(marketData);
 	}
 
@@ -51,6 +59,7 @@ public class SyncSingleStrategyScheduler<M extends MarketData> implements Inboun
 
 	@Override
 	public void close() throws IOException {
+		strategy.close();
 		log.info("Strategy [{}] closed", strategy.getStrategyName());
 	}
 

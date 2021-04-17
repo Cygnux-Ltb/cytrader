@@ -1,7 +1,7 @@
 package io.cygnus.engine.strategy.api;
 
-import io.horizon.structure.event.InboundScheduler;
-import io.horizon.structure.market.data.MarketData;
+import io.horizon.market.data.MarketData;
+import io.horizon.transaction.event.InboundScheduler;
 
 /**
  * 
