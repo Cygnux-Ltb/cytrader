@@ -40,9 +40,13 @@ public class CygInfoRestfulApi extends CygRestfulApi {
 		return jsonResponse(thadInfos);
 	}
 
-	private static ConcurrentHashMap<Integer, InitFinish> thadInfoInitFinishCacheMap = new ConcurrentHashMap<>();
+	private static ConcurrentHashMap<Integer, InitFinish> cygInfoInitFinishCacheMap = new ConcurrentHashMap<>();
 
-	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@PutMapping("/initialized")
 	public ResponseEntity<Object> putInitFinish(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
@@ -50,22 +54,37 @@ public class CygInfoRestfulApi extends CygRestfulApi {
 			return httpBadRequest();
 		}
 		InitFinish initFinish = jsonToObj(json, InitFinish.class);
-		thadInfoInitFinishCacheMap.put(initFinish.getCygId(), initFinish);
+		cygInfoInitFinishCacheMap.put(initFinish.getCygId(), initFinish);
 		return httpOk();
 	}
 
+	/**
+	 * 
+	 * @param cygId
+	 * @return
+	 */
 	@GetMapping("/{cygId}")
 	public ResponseEntity<Object> getcygInfoById(@PathParam("cygId") Integer cygId) {
 		List<CygInfo> thadInfoById = executor.getCygInfoById(cygId);
 		return jsonResponse(thadInfoById);
 	}
 
+	/**
+	 * 
+	 * @param cygId
+	 * @return
+	 */
 	@GetMapping("/{cygId}/strategy")
 	public ResponseEntity<Object> getcygStrategyById(@PathParam("cygId") Integer cygId) {
 		List<CygStrategy> thadStrategys = executor.getCygStrategyById(cygId);
 		return jsonResponse(thadStrategys);
 	}
 
+	/**
+	 * 
+	 * @param cygId
+	 * @return
+	 */
 	@GetMapping("/{cygId}/mq")
 	public ResponseEntity<Object> getcygMqConfigById(@PathParam("cygId") Integer cygId) {
 		List<CygMqConfig> thadMqConfigs = executor.getCygMqConfigById(cygId);

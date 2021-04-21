@@ -38,6 +38,11 @@ public class UpdateParamExecutor {
 
 	}
 
+	/**
+	 * 
+	 * @param strategyParam
+	 * @return
+	 */
 	public int updateParamSafe(StrategyParam strategyParam) {
 		if (validationStrategyParam(strategyParam)) {
 			StrategyDao strategyDao = new StrategyDao();

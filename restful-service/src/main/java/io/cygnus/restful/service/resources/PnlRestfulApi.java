@@ -67,7 +67,6 @@ public class PnlRestfulApi extends CygRestfulApi {
 	 * @param tradingDay
 	 * @return
 	 */
-	
 	@GetMapping("/settlement")
 	public ResponseEntity<Object> getPnlSettlementDailys(@RequestParam("tradingDay") String tradingDay,
 			@RequestParam("strategyId") Integer strategyId) {

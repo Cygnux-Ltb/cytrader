@@ -24,7 +24,7 @@ import io.cygnus.service.dto.pack.OutboxMessage;
 import io.cygnus.service.dto.pack.OutboxTitle;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.transport.core.api.Publisher;
+import io.mercury.transport.api.Publisher;
 
 @RestController("/status")
 public class StatusRestfulApi extends CygRestfulApi {
@@ -33,12 +33,21 @@ public class StatusRestfulApi extends CygRestfulApi {
 
 	private static final ConcurrentHashMap<String, StrategySwitch> strategySwitchMap = new ConcurrentHashMap<>();
 
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/show")
 	public ResponseEntity<Object> statusShow() {
 		Collection<StrategySwitch> strategySwitchs = strategySwitchMap.values();
 		return jsonResponse(strategySwitchs);
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@PutMapping("/command")
 	public ResponseEntity<Object> statusCommand(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
@@ -68,13 +77,19 @@ public class StatusRestfulApi extends CygRestfulApi {
 		return httpOk();
 	}
 
+	/**
+	 * 
+	 * @param cygId
+	 * @param request
+	 * @return
+	 */
 	@PutMapping("/update")
-	public ResponseEntity<Object> statusUpdate(@RequestParam("thadId") Integer thadId,
+	public ResponseEntity<Object> statusUpdate(@RequestParam("thadId") Integer cygId,
 			@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		log.info("method statusUpdate recv : {}", json);
 		StrategySwitch strategySwitch = jsonToObj(json, StrategySwitch.class);
-		strategySwitch.setCygId(thadId);
+		strategySwitch.setCygId(cygId);
 		strategySwitchMap.put(strategySwitch.getKey(), strategySwitch);
 		return httpOk();
 	}

@@ -22,7 +22,7 @@ import io.cygnus.service.entity.StrategyParam;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringUtil;
-import io.mercury.transport.core.api.Publisher;
+import io.mercury.transport.api.Publisher;
 
 @RestController("/update_param")
 public class UpdateParamRestfulApi extends CygRestfulApi {
@@ -31,6 +31,12 @@ public class UpdateParamRestfulApi extends CygRestfulApi {
 
 	private UpdateParamExecutor executor = new UpdateParamExecutor();
 
+	/**
+	 * 
+	 * @param cygId
+	 * @param request
+	 * @return
+	 */
 	@PutMapping(consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	public ResponseEntity<Object> updateParam(@RequestParam("cygId") Integer cygId,
 			@RequestBody HttpServletRequest request) {
@@ -52,6 +58,11 @@ public class UpdateParamRestfulApi extends CygRestfulApi {
 		return httpOk();
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@PutMapping(path = "/safe", consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	public ResponseEntity<Object> updateParamSafe(@RequestBody HttpServletRequest request) {
 		// 获取输入参数

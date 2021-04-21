@@ -10,19 +10,20 @@ import io.cygnus.service.entity.Strategy;
 import io.cygnus.service.entity.StrategyDefaultParam;
 import io.cygnus.service.entity.StrategyParam;
 import io.cygnus.service.entity.StrategySymbol;
-import io.mercury.common.concurrent.map.GuavaCacheMap;
+import io.mercury.common.concurrent.cache.CacheList;
+import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.commons.cache.CacheList;
 
 public class StrategyExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(StrategyExecutor.class);
 
+	private static final StrategyDao strategyDao = new StrategyDao();
+
 	/**
 	 * All strategy Cache
 	 */
 	private static final CacheList<Strategy> AllStrategyCache = new CacheList<>(() -> {
-		StrategyDao strategyDao = new StrategyDao();
 		return strategyDao.getAllStrategy();
 	});
 
@@ -33,9 +34,8 @@ public class StrategyExecutor {
 	/**
 	 * Strategy CacheMap
 	 */
-	private static final GuavaCacheMap<Integer, List<Strategy>> StrategyCacheMap = GuavaCacheMap.newBuilder()
+	private static final CacheMap<Integer, List<Strategy>> StrategyCacheMap = CacheMap.newBuilder()
 			.buildWith((strategyId) -> {
-				StrategyDao strategyDao = new StrategyDao();
 				return strategyDao.getStrategyById(strategyId);
 			});
 
@@ -47,16 +47,14 @@ public class StrategyExecutor {
 	 * StrategyDefaultParam Cache
 	 */
 	private static final CacheList<StrategyDefaultParam> AllStrategyDefaultParamCache = new CacheList<>(() -> {
-		StrategyDao strategyDao = new StrategyDao();
 		return strategyDao.getAllDefaultParam();
 	});
 
 	/**
 	 * StrategyParam CacheMap
 	 */
-	private static final GuavaCacheMap<Integer, List<StrategyParam>> StrategyParamCacheMap = GuavaCacheMap.newBuilder()
+	private static final CacheMap<Integer, List<StrategyParam>> StrategyParamCacheMap = CacheMap.newBuilder()
 			.buildWith((strategyId) -> {
-				StrategyDao strategyDao = new StrategyDao();
 				List<StrategyParam> strategyParams = strategyDao.getParamsByStrategyId(strategyId);
 				List<StrategyParam> mergeList = new ArrayList<>(strategyParams);
 				// 遍历全部默认参数
@@ -84,7 +82,6 @@ public class StrategyExecutor {
 	}
 
 	public boolean putStrategyParam(StrategyParam strategyParam) {
-		StrategyDao strategyDao = new StrategyDao();
 		boolean isSuccess = strategyDao.putStrategyParam(strategyParam);
 		if (isSuccess) {
 			StrategyParamCacheMap.setUnavailable(strategyParam.getStrategyId());
@@ -97,9 +94,8 @@ public class StrategyExecutor {
 	/**
 	 * StrategySymbol CacheMap
 	 */
-	private static GuavaCacheMap<Integer, List<StrategySymbol>> strategySymbolCacheMap = GuavaCacheMap.newBuilder()
+	private static CacheMap<Integer, List<StrategySymbol>> strategySymbolCacheMap = CacheMap.newBuilder()
 			.buildWith((strategyId) -> {
-				StrategyDao strategyDao = new StrategyDao();
 				return strategyDao.getSymbolsByStrategyId(strategyId);
 			});
 

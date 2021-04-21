@@ -30,7 +30,6 @@ public class InstrumentRestfulApi extends CygRestfulApi {
 	 * @param tradingDay
 	 * @return
 	 */
-	
 	@GetMapping("/settlement_price")
 	public ResponseEntity<Object> getSettlementPrice(@RequestParam("instrumentId") String instrumentId,
 			@RequestParam("tradingDay") String tradingDay) {

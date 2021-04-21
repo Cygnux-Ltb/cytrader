@@ -12,19 +12,20 @@ import io.cygnus.service.entity.SymbolInfo;
 import io.cygnus.service.entity.SymbolTradingFee;
 import io.cygnus.service.entity.SymbolTradingPeriod;
 import io.cygnus.service.entity.TradeableInstrument;
-import io.mercury.common.concurrent.map.GuavaCacheMap;
+import io.mercury.common.concurrent.cache.CacheList;
+import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.commons.cache.CacheList;
 
 public class SymbolExecutor extends BaseExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(SymbolExecutor.class);
 
+	private static final SymbolDao symbolDao = new SymbolDao();
+
 	/**
 	 * All SymbolInfo Cache
 	 */
 	private static final CacheList<SymbolInfo> AllSymbolInfoCache = new CacheList<>(() -> {
-		SymbolDao symbolDao = new SymbolDao();
 		return symbolDao.getAllSymbolInfo();
 	});
 
@@ -35,9 +36,8 @@ public class SymbolExecutor extends BaseExecutor {
 	/**
 	 * SymbolInfo Cache by symbolName
 	 */
-	private static final GuavaCacheMap<String, List<SymbolInfo>> SymbolInfoCacheMap = GuavaCacheMap.newBuilder()
+	private static final CacheMap<String, List<SymbolInfo>> SymbolInfoCacheMap = CacheMap.newBuilder()
 			.buildWith((symbol) -> {
-				SymbolDao symbolDao = new SymbolDao();
 				return symbolDao.getSymbolInfoByName(symbol);
 			});
 
@@ -48,9 +48,8 @@ public class SymbolExecutor extends BaseExecutor {
 	/**
 	 * SymbolTradingFee Cache by symbolName
 	 */
-	private static final GuavaCacheMap<String, List<SymbolTradingFee>> SymbolTradingFeeCacheMap = GuavaCacheMap
-			.newBuilder().buildWith((symbol) -> {
-				SymbolDao symbolDao = new SymbolDao();
+	private static final CacheMap<String, List<SymbolTradingFee>> SymbolTradingFeeCacheMap = CacheMap.newBuilder()
+			.buildWith((symbol) -> {
 				return symbolDao.getSymbolTradingFeeByName(symbol);
 			});
 
@@ -59,16 +58,14 @@ public class SymbolExecutor extends BaseExecutor {
 	}
 
 	public boolean putSymbolTradingFeeByName(String symbol, SymbolTradingFee symbolTradingFee) {
-		SymbolDao symbolDao = new SymbolDao();
 		return symbolDao.putSymbolTradingFeeByName(symbol, symbolTradingFee);
 	}
 
 	/**
 	 * SymbolTradingPeriod Cache by symbolName
 	 */
-	private static final GuavaCacheMap<String, List<SymbolTradingPeriod>> SymbolTradingPeriodCacheMap = GuavaCacheMap
-			.newBuilder().buildWith((symbol) -> {
-				SymbolDao symbolDao = new SymbolDao();
+	private static final CacheMap<String, List<SymbolTradingPeriod>> SymbolTradingPeriodCacheMap = CacheMap.newBuilder()
+			.buildWith((symbol) -> {
 				return symbolDao.getSymbolTradingPeriodByName(symbol);
 			});
 
@@ -77,7 +74,6 @@ public class SymbolExecutor extends BaseExecutor {
 	}
 
 	public boolean putSymbolTradingPeriodByName(String symbol, SymbolTradingPeriod symbolTradingPeriod) {
-		SymbolDao symbolDao = new SymbolDao();
 		return symbolDao.putSymbolTradingPeriodByName(symbol, symbolTradingPeriod);
 	}
 
@@ -88,7 +84,6 @@ public class SymbolExecutor extends BaseExecutor {
 	 * @return
 	 */
 	public List<TradeableInstrument> getTradeables(String symbol, Date tradingDay) {
-		SymbolDao symbolDao = new SymbolDao();
 		List<TradeableInstrument> instrumentByTradingDay = symbolDao.getTradeableInstrument(symbol, tradingDay);
 		List<TradeableInstrument> instrumentByTradingDayAndSymbol = new ArrayList<>();
 		for (TradeableInstrument instrument : instrumentByTradingDay) {

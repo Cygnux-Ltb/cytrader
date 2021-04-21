@@ -26,14 +26,14 @@ public class BinnerRestfulApi extends CygRestfulApi {
 	/**
 	 * Get Binners
 	 * 
-	 * @param thadId
+	 * @param cygId
 	 * @param instrumentId
 	 * @param tradingDay
 	 * @return
 	 */
 	@GetMapping("/{cygId}")
-	public List<TimeBinner> getBinners(@PathVariable("cygId") Integer thadId, @RequestParam("instrumentId") String instrumentId,
-			@RequestParam("tradingDay") String tradingDay) {
+	public List<TimeBinner> getBinners(@PathVariable("cygId") Integer cygId,
+			@RequestParam("instrumentId") String instrumentId, @RequestParam("tradingDay") String tradingDay) {
 		Date dateTradingDay = null;
 		if (tradingDay != null) {
 			dateTradingDay = changeTradingDay(tradingDay);
@@ -42,7 +42,7 @@ public class BinnerRestfulApi extends CygRestfulApi {
 			}
 		}
 		BinnerDao dao = new BinnerDao();
-		List<TimeBinner> timeBinners = dao.getTimeBinners(thadId, dateTradingDay, instrumentId);
+		List<TimeBinner> timeBinners = dao.getTimeBinners(cygId, dateTradingDay, instrumentId);
 		return timeBinners;
 	}
 

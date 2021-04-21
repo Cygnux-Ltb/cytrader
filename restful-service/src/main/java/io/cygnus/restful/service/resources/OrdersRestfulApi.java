@@ -30,8 +30,9 @@ public class OrdersRestfulApi extends CygRestfulApi {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<Object> getOrders(@RequestParam("strategyId") Integer strategyId, @RequestParam("tradingDay") String tradingDay,
-			@RequestParam("investorId") String investorId, @RequestParam("instrumentId") String instrumentId) {
+	public ResponseEntity<Object> getOrders(@RequestParam("strategyId") Integer strategyId,
+			@RequestParam("tradingDay") String tradingDay, @RequestParam("investorId") String investorId,
+			@RequestParam("instrumentId") String instrumentId) {
 		if (checkParamIsNull(strategyId, tradingDay, investorId, instrumentId)) {
 			return httpBadRequest();
 		}
@@ -47,6 +48,12 @@ public class OrdersRestfulApi extends CygRestfulApi {
 		return jsonResponse(orders);
 	}
 
+	/**
+	 * 
+	 * @param tradingDay
+	 * @param strategyId
+	 * @return
+	 */
 	@GetMapping("/init")
 	public ResponseEntity<Object> getOrdersByInit(@RequestParam("tradingDay") String tradingDay,
 			@RequestParam("strategyId") Integer strategyId) {
@@ -66,6 +73,11 @@ public class OrdersRestfulApi extends CygRestfulApi {
 		return jsonResponse(orders);
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@PutMapping
 	public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);

@@ -9,18 +9,19 @@ import io.cygnus.restful.service.base.BaseExecutor;
 import io.cygnus.service.entity.CygInfo;
 import io.cygnus.service.entity.CygMqConfig;
 import io.cygnus.service.entity.CygStrategy;
-import io.mercury.common.concurrent.map.GuavaCacheMap;
+import io.mercury.common.concurrent.cache.CacheList;
+import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.commons.cache.CacheList;
 
 public class CygInfoExecutor extends BaseExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(CygInfoExecutor.class);
 
+	private final static CygInfoDao dao = new CygInfoDao();
+
 	// All cygInfo Cache
 	private static final CacheList<CygInfo> AllCygInfoCache = new CacheList<>(() -> {
-		CygInfoDao cygInfoDao = new CygInfoDao();
-		return cygInfoDao.getAllCygInfo();
+		return dao.getAllCygInfo();
 	});
 
 	public List<CygInfo> getAllcygInfo() {
@@ -30,11 +31,9 @@ public class CygInfoExecutor extends BaseExecutor {
 	/**
 	 * cygInfo Cache by cygId
 	 */
-	private static final GuavaCacheMap<Integer, List<CygInfo>> CygInfoCacheMap = GuavaCacheMap.newBuilder()
-			.buildWith(cygId -> {
-				CygInfoDao dao = new CygInfoDao();
-				return dao.getCygInfoById(cygId);
-			});
+	private static final CacheMap<Integer, List<CygInfo>> CygInfoCacheMap = CacheMap.newBuilder().buildWith(cygId -> {
+		return dao.getCygInfoById(cygId);
+	});
 
 	public List<CygInfo> getCygInfoById(Integer cygId) {
 		return CygInfoCacheMap.getOptional(cygId).get();
@@ -43,9 +42,8 @@ public class CygInfoExecutor extends BaseExecutor {
 	/**
 	 * cygStrategy Cache by cygId
 	 */
-	private static final GuavaCacheMap<Integer, List<CygStrategy>> CygStrategyCacheMap = GuavaCacheMap.newBuilder()
+	private static final CacheMap<Integer, List<CygStrategy>> CygStrategyCacheMap = CacheMap.newBuilder()
 			.buildWith(cygId -> {
-				CygInfoDao dao = new CygInfoDao();
 				return dao.getCygStrategyById(cygId);
 			});
 
@@ -54,7 +52,6 @@ public class CygInfoExecutor extends BaseExecutor {
 	}
 
 	public List<CygMqConfig> getCygMqConfigById(Integer cygId) {
-		CygInfoDao dao = new CygInfoDao();
 		return dao.getCygMqConfigById(cygId);
 	}
 

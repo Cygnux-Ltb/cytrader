@@ -70,8 +70,7 @@
 		
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>commons-cache</artifactId>
-			<version>${mercury.version}</version>
+			<artifactId>commons-concurrent</artifactId>
 		</dependency>
 	</dependencies>
 
