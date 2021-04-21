@@ -6,10 +6,10 @@ import io.cygnus.engine.strategy.SingleInstrumentStrategy;
 import io.cygnus.engine.strategy.api.StrategySign;
 import io.cygnus.indicator.impl.SmaIndicator.SmaEvent;
 import io.cygnus.indicator.impl.SmaPoint;
-import io.horizon.structure.account.SubAccount;
-import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.order.Order;
+import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.transaction.account.SubAccount;
+import io.horizon.transaction.order.Order;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
 
@@ -24,14 +24,15 @@ public final class ExampleSmaStrategy extends SingleInstrumentStrategy<BasicMark
 		super(new StrategySign() {
 
 			@Override
+			public int getStrategyId() {
+				return 100;
+			}
+
+			@Override
 			public String getStrategyName() {
 				return "ExampleSmaStrategy";
 			}
 
-			@Override
-			public int getStrategyId() {
-				return 100;
-			}
 		}, subAccount, params, instrument);
 	}
 
