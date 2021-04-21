@@ -6,9 +6,9 @@ import io.cygnus.indicator.IndicatorEvent;
 import io.cygnus.indicator.impl.EmaIndicator.EmaEvent;
 import io.cygnus.indicator.impl.EmaIndicator.EmaPoint;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
-import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.serial.TimePeriodSerial;
+import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.serial.TimePeriodSerial;
 import io.mercury.common.collections.list.LongSlidingWindow;
 
 public final class EmaIndicator extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {

@@ -2,9 +2,9 @@ package io.cygnus.indicator.impl;
 
 import java.time.Duration;
 
-import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.serial.TimePeriodSerial;
+import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.serial.TimePeriodSerial;
 import io.mercury.common.collections.list.LongSlidingWindow;
 
 public final class SmaPoint extends MaPoint {

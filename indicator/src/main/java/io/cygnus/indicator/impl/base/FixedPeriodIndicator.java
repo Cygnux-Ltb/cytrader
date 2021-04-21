@@ -3,8 +3,8 @@ package io.cygnus.indicator.impl.base;
 import java.time.Duration;
 
 import io.cygnus.indicator.IndicatorEvent;
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.market.instrument.Instrument;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.instrument.Instrument;
 import lombok.Getter;
 
 public abstract class FixedPeriodIndicator<P extends FixedPeriodPoint<M>, E extends IndicatorEvent, M extends MarketData>

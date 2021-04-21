@@ -8,11 +8,11 @@ import java.time.ZonedDateTime;
 
 import io.cygnus.indicator.impl.SmaIndicator.SmaEvent;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
-import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.pool.TradablePeriodPool;
-import io.horizon.structure.serial.TimePeriodSerial;
-import io.horizon.structure.serial.TradablePeriodSerial;
+import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.pool.TradablePeriodPool;
+import io.horizon.market.serial.TimePeriodSerial;
+import io.horizon.market.serial.TradablePeriodSerial;
 import io.mercury.common.collections.list.LongSlidingWindow;
 
 public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
@@ -22,11 +22,12 @@ public final class SmaIndicator2 extends FixedPeriodIndicator<SmaPoint, SmaEvent
 	// TODO
 	public SmaIndicator2(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration, cycle);
-		this.historyPriceWindow = LongSlidingWindow.newWindow(cycle);
-		TradablePeriodSerial tradingPeriod = TradablePeriodPool.Singleton.getAfterTradingPeriod(instrument, LocalTime.now());
+		this.historyPriceWindow = new LongSlidingWindow(cycle);
+		TradablePeriodSerial tradingPeriod = TradablePeriodPool.Singleton.getAfterTradingPeriod(instrument,
+				LocalTime.now());
 		LocalDate nowDate = LocalDate.now();
 		ZoneOffset zoneOffset = instrument.getZoneOffset();
-		TimePeriodSerial timePeriod = TimePeriodSerial.newSerial(
+		TimePeriodSerial timePeriod = new TimePeriodSerial(
 				ZonedDateTime.of(nowDate, tradingPeriod.getStartTime(), zoneOffset), ZonedDateTime.of(nowDate,
 						tradingPeriod.getStartTime().plusSeconds(duration.getSeconds()).minusNanos(1), zoneOffset),
 				duration);

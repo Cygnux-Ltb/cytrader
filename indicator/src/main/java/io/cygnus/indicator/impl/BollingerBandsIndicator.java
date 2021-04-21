@@ -7,9 +7,9 @@ import io.cygnus.indicator.impl.BollingerBandsIndicator.BollingerBandsEvent;
 import io.cygnus.indicator.impl.BollingerBandsIndicator.BollingerBandsPoint;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.cygnus.indicator.impl.base.FixedPeriodPoint;
-import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.serial.TimePeriodSerial;
+import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.serial.TimePeriodSerial;
 
 public final class BollingerBandsIndicator
 		extends FixedPeriodIndicator<BollingerBandsPoint, BollingerBandsEvent, BasicMarketData> {

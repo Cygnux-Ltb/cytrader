@@ -13,10 +13,10 @@ import io.cygnus.indicator.impl.TimeBarIndicator.TimeBarPoint;
 import io.cygnus.indicator.impl.base.Bar;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.cygnus.indicator.impl.base.FixedPeriodPoint;
-import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.pool.TimePeriodPool;
-import io.horizon.structure.serial.TimePeriodSerial;
+import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.pool.TimePeriodPool;
+import io.horizon.market.serial.TimePeriodSerial;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
 
@@ -134,7 +134,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 
 		private TimeBarPoint generateNext() {
 			return new TimeBarPoint(index + 1,
-					TimePeriodSerial.newSerial(serial.getStartTime().plusSeconds(serial.getDuration().getSeconds()),
+					new TimePeriodSerial(serial.getStartTime().plusSeconds(serial.getDuration().getSeconds()),
 							serial.getEndTime().plusSeconds(serial.getDuration().getSeconds()), serial.getDuration()));
 		}
 

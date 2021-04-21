@@ -7,10 +7,10 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import io.cygnus.indicator.IndicatorEvent;
 import io.cygnus.indicator.impl.SmaIndicator.SmaEvent;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
-import io.horizon.structure.market.data.impl.BasicMarketData;
-import io.horizon.structure.market.instrument.Instrument;
-import io.horizon.structure.pool.TimePeriodPool;
-import io.horizon.structure.serial.TimePeriodSerial;
+import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.pool.TimePeriodPool;
+import io.horizon.market.serial.TimePeriodSerial;
 import io.mercury.common.collections.list.LongSlidingWindow;
 
 public final class SmaIndicator extends FixedPeriodIndicator<SmaPoint, SmaEvent, BasicMarketData> {
@@ -19,7 +19,7 @@ public final class SmaIndicator extends FixedPeriodIndicator<SmaPoint, SmaEvent,
 
 	public SmaIndicator(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration, cycle);
-		this.historyPriceWindow = LongSlidingWindow.newWindow(cycle);
+		this.historyPriceWindow = new LongSlidingWindow(cycle);
 		ImmutableSortedSet<TimePeriodSerial> timePeriodSet = TimePeriodPool.Singleton.getTimePeriodSet(instrument,
 				duration);
 		int i = -1;

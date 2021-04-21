@@ -1,7 +1,7 @@
 package io.cygnus.indicator.impl.base;
 
 import io.cygnus.indicator.Point;
-import io.horizon.structure.market.data.MarketData;
+import io.horizon.market.data.MarketData;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;

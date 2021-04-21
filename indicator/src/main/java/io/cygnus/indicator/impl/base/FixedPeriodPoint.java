@@ -2,8 +2,8 @@ package io.cygnus.indicator.impl.base;
 
 import java.time.ZonedDateTime;
 
-import io.horizon.structure.market.data.MarketData;
-import io.horizon.structure.serial.TimePeriodSerial;
+import io.horizon.market.data.MarketData;
+import io.horizon.market.serial.TimePeriodSerial;
 
 public abstract class FixedPeriodPoint<M extends MarketData> extends BasePoint<TimePeriodSerial, M> {
 
