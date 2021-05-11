@@ -14,8 +14,6 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSON;
-
 import io.cygnus.db.CommonDaoFactory;
 import io.cygnus.db.dao.CygInfoDao;
 import io.cygnus.restful.service.transport.OutboxPublisherGroup;
@@ -24,6 +22,7 @@ import io.cygnus.service.dto.pack.OutboxTitle;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.datetime.pattern.spec.TimePattern;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.api.Publisher;
 
 @Component
@@ -83,7 +82,7 @@ public class CygnusInitService {
 		for (Integer cygId : cygIdList) {
 			Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cygId);
 
-			String msg = JSON.toJSONString(new OutboxMessage<>(OutboxTitle.EndTimeBinner, null));
+			String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.EndTimeBinner, null));
 
 			log.info("EndTimeBinner : " + msg);
 
