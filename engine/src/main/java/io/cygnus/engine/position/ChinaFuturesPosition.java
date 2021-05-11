@@ -2,9 +2,9 @@ package io.cygnus.engine.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
-import io.horizon.market.instrument.impl.ChinaFutures;
 import io.horizon.transaction.order.OrdEnum.OrdStatus;
 import io.horizon.transaction.order.OrdEnum.TrdDirection;
+import io.horizon.market.instrument.spec.ChinaFutures;
 import io.horizon.transaction.order.OrdQty;
 import io.horizon.transaction.order.Order;
 import io.horizon.transaction.position.AbstractPosition;

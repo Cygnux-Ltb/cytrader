@@ -11,7 +11,6 @@ import io.horizon.transaction.order.ChildOrder;
 import io.horizon.transaction.order.OrderManager;
 import io.horizon.transaction.order.OrderReport;
 import io.mercury.common.collections.Capacity;
-import io.mercury.common.concurrent.queue.WaitingStrategy;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.CommonLoggerFactory;
 import lombok.Getter;
@@ -38,8 +37,7 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 
 	public AsyncMultiStrategyScheduler(Capacity capacity) {
 		this.queue = JctSingleConsumerQueue.singleProducer("AsyncMultiStrategyScheduler-Queue")
-				.setCapacity(capacity.value()).setWaitingStrategy(WaitingStrategy.SpinWaiting)
-				.buildWithProcessor(msg -> {
+				.setCapacity(capacity.value()).useSpinStrategy().buildWithProcessor(msg -> {
 					switch (msg.getMark()) {
 					case MarketData:
 						M marketData = msg.getMarketData();

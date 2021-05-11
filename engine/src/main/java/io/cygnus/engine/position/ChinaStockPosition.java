@@ -1,7 +1,7 @@
 package io.cygnus.engine.position;
 
-import io.horizon.market.instrument.impl.ChinaStock;
 import io.horizon.transaction.order.OrdEnum.OrdStatus;
+import io.horizon.market.instrument.spec.ChinaStock;
 import io.horizon.transaction.order.OrdQty;
 import io.horizon.transaction.order.Order;
 import io.horizon.transaction.position.AbstractPosition;
