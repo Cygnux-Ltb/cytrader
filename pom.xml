@@ -100,7 +100,7 @@
 			</dependency>
 			<dependency>
 				<groupId>io.horizon</groupId>
-				<artifactId>transaction-api</artifactId>
+				<artifactId>trader-api</artifactId>
 				<version>${horizon.version}</version>
 			</dependency>
 		</dependencies>

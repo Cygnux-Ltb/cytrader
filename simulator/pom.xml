@@ -108,7 +108,7 @@
 
 		<dependency>
 			<groupId>io.horizon</groupId>
-			<artifactId>transaction-api</artifactId>
+			<artifactId>trader-api</artifactId>
 		</dependency>
 	</dependencies>
 
