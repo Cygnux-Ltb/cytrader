@@ -2,7 +2,7 @@ package io.cygnus.indicator;
 
 import io.mercury.common.sequence.Serial;
 
-public interface Point<S extends Serial<S>> extends Comparable<Point<S>> {
+public interface Point<S extends Serial> extends Comparable<Point<S>> {
 
 	int getIndex();
 

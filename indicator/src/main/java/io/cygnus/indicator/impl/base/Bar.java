@@ -3,29 +3,36 @@ package io.cygnus.indicator.impl.base;
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.Getter;
 
+/**
+ * 
+ * @author yellow013
+ */
 public final class Bar {
 
-	// 存储开高低收价格
+	// 开盘价
 	@Getter
 	private long open = 0L;
 
+	// 最高价
 	@Getter
 	private long highest = Long.MIN_VALUE;
 
+	// 最低价
 	@Getter
 	private long lowest = Long.MAX_VALUE;
 
+	// 最终价
 	@Getter
 	private long last = 0L;
 
 	public Bar onPrice(long price) {
-		last = price;
 		if (open == 0L)
 			open = price;
-		if (price < lowest)
-			lowest = price;
 		if (price > highest)
 			highest = price;
+		if (price < lowest)
+			lowest = price;
+		last = price;
 		return this;
 	}
 
@@ -38,22 +45,14 @@ public final class Bar {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder(76);
-		builder.append(OpenField);
-		builder.append(open);
-		builder.append(HighestField);
-		builder.append(highest == Long.MIN_VALUE ? 0L : highest);
-		builder.append(LowestField);
-		builder.append(lowest == Long.MAX_VALUE ? 0L : lowest);
-		builder.append(LastField);
-		builder.append(last);
-		builder.append(End);
-		return builder.toString();
+		return builder.append(OpenField).append(open).append(HighestField)
+				.append(highest == Long.MIN_VALUE ? 0L : highest).append(LowestField)
+				.append(lowest == Long.MAX_VALUE ? 0L : lowest).append(LastField).append(last).append(End).toString();
 	}
 
 	public static void main(String[] args) {
 
 		Bar bar = new Bar().onPrice(100000).onPrice(100L).onPrice(10000000L);
-
 		System.out.println(JsonWrapper.toJson(bar));
 		System.out.println(bar);
 

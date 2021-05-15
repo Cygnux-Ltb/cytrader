@@ -6,7 +6,7 @@ import io.cygnus.indicator.IndicatorEvent;
 import io.cygnus.indicator.impl.MacdIndicator.MacdEvent;
 import io.cygnus.indicator.impl.MacdIndicator.MacdPoint;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
-import io.cygnus.indicator.impl.base.FixedPeriodPoint;
+import io.cygnus.indicator.impl.base.FixedPeriodIndicator.FixedPeriodPoint;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.serial.TimePeriodSerial;

@@ -5,13 +5,17 @@ import org.slf4j.Logger;
 
 import io.cygnus.indicator.Indicator;
 import io.cygnus.indicator.IndicatorEvent;
+import io.cygnus.indicator.Point;
 import io.cygnus.indicator.PointSet;
+import io.cygnus.indicator.impl.base.BaseIndicator.BasePoint;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.annotation.lang.AbstractFunction;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.sequence.Serial;
+import io.mercury.common.util.Assertor;
 import lombok.Getter;
 
 public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends IndicatorEvent, M extends MarketData>
@@ -78,6 +82,45 @@ public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends Indicat
 		if (index >= pointSet.size())
 			index = pointSet.size() - 1;
 		return pointSet.get(index).orElse(currentPoint);
+	}
+
+	/**
+	 * 
+	 * @author yellow013
+	 *
+	 * @param <S>
+	 * @param <M>
+	 */
+	public static abstract class BasePoint<S extends Serial, M extends MarketData> implements Point<S> {
+
+		@Getter
+		protected final int index;
+
+		@Getter
+		protected final S serial;
+
+		@Getter
+		protected M preMarketData;
+
+		protected BasePoint(int index, S serial) {
+			Assertor.greaterThan(index, -1, "index");
+			Assertor.nonNull(serial, "serial");
+			this.index = index;
+			this.serial = serial;
+		}
+
+		public void handleMarketData(M marketData) {
+			handleMarketData0(marketData);
+			updatePreMarketData(marketData);
+		}
+
+		public void updatePreMarketData(M marketData) {
+			this.preMarketData = marketData;
+		}
+
+		@AbstractFunction
+		protected abstract void handleMarketData0(M marketData);
+
 	}
 
 }

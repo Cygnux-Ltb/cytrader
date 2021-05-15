@@ -2,7 +2,7 @@ package io.cygnus.indicator.impl;
 
 import java.time.Duration;
 
-import io.cygnus.indicator.impl.base.FixedPeriodPoint;
+import io.cygnus.indicator.impl.base.FixedPeriodIndicator.FixedPeriodPoint;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.serial.TimePeriodSerial;

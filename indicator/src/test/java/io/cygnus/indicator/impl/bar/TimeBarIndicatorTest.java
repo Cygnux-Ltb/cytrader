@@ -6,7 +6,6 @@ public class TimeBarIndicatorTest {
 
 	@Test
 	public void test() {
-		
 	}
 
 }

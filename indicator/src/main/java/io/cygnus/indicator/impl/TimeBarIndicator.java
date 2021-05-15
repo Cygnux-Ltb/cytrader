@@ -12,7 +12,7 @@ import io.cygnus.indicator.impl.TimeBarIndicator.TimeBarEvent;
 import io.cygnus.indicator.impl.TimeBarIndicator.TimeBarPoint;
 import io.cygnus.indicator.impl.base.Bar;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
-import io.cygnus.indicator.impl.base.FixedPeriodPoint;
+import io.cygnus.indicator.impl.base.FixedPeriodIndicator.FixedPeriodPoint;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.pool.TimePeriodPool;
