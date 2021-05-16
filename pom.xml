@@ -20,6 +20,11 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	<developers>
+		<developer>
+			<name>yellow013</name>
+		</developer>
+	</developers>
 
 	<modules>
 		<module>dashboard</module>
