@@ -15,6 +15,10 @@ import io.cygnus.service.entity.CygStrategy;
 
 public class CygInfoDao {
 
+	/**
+	 * 
+	 * @return
+	 */
 	public List<CygInfo> getAllCygInfo() {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
