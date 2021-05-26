@@ -47,10 +47,20 @@ public class CygInfoExecutor extends BaseExecutor {
 				return dao.getCygStrategyById(cygId);
 			});
 
+	/**
+	 * 
+	 * @param cygId
+	 * @return
+	 */
 	public List<CygStrategy> getCygStrategyById(Integer cygId) {
 		return CygStrategyCacheMap.getOptional(cygId).get();
 	}
 
+	/**
+	 * 
+	 * @param cygId
+	 * @return
+	 */
 	public List<CygMqConfig> getCygMqConfigById(Integer cygId) {
 		return dao.getCygMqConfigById(cygId);
 	}

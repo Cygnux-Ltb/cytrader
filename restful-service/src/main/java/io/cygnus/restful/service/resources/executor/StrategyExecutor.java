@@ -27,6 +27,10 @@ public class StrategyExecutor {
 		return strategyDao.getAllStrategy();
 	});
 
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Strategy> getAllStrategy() {
 		return AllStrategyCache.get();
 	}
@@ -39,6 +43,11 @@ public class StrategyExecutor {
 				return strategyDao.getStrategyById(strategyId);
 			});
 
+	/**
+	 * 
+	 * @param strategyId
+	 * @return
+	 */
 	public List<Strategy> getStrategyById(Integer strategyId) {
 		return StrategyCacheMap.getOptional(strategyId).get();
 	}
