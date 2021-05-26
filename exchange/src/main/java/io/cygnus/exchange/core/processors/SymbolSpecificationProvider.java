@@ -2,6 +2,7 @@ package io.cygnus.exchange.core.processors;
 
 import java.util.Objects;
 
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
 import io.cygnus.exchange.core.common.CoreSymbolSpecification;
@@ -15,7 +16,7 @@ import net.openhft.chronicle.bytes.WriteBytesMarshallable;
 public final class SymbolSpecificationProvider implements WriteBytesMarshallable, StateHash {
 
 	// symbol-> specs
-	private final IntObjectHashMap<CoreSymbolSpecification> symbolSpecMap;
+	private final MutableIntObjectMap<CoreSymbolSpecification> symbolSpecMap;
 
 	public SymbolSpecificationProvider() {
 		this.symbolSpecMap = new IntObjectHashMap<>();

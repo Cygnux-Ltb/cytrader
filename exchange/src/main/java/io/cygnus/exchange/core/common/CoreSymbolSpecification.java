@@ -80,6 +80,11 @@ public final class CoreSymbolSpecification implements WriteBytesMarshallable, St
 		return Objects.hash(symbolId, type.getCode(), baseCurrency, quoteCurrency, baseScaleK, quoteScaleK, takerFee,
 				makerFee, marginBuy, marginSell);
 	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 	@Override
 	public boolean equals(Object o) {
