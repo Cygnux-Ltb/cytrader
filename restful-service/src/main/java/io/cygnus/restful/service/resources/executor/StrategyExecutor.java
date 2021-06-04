@@ -86,10 +86,20 @@ public class StrategyExecutor {
 				return mergeList;
 			});
 
+	/**
+	 * 
+	 * @param strategyId
+	 * @return
+	 */
 	public List<StrategyParam> getParamsByStrategyId(Integer strategyId) {
 		return StrategyParamCacheMap.getOptional(strategyId).get();
 	}
 
+	/**
+	 * 
+	 * @param strategyParam
+	 * @return
+	 */
 	public boolean putStrategyParam(StrategyParam strategyParam) {
 		boolean isSuccess = strategyDao.putStrategyParam(strategyParam);
 		if (isSuccess) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.cygnus.db.dao.CygInfoDao;
 import io.cygnus.service.entity.CygMqConfig;
-import io.mercury.common.group.AbstractGroup;
+import io.mercury.common.collections.group.AbstractGroup;
 import io.mercury.transport.api.Publisher;
 import io.mercury.transport.rabbitmq.RabbitMqPublisher;
 import io.mercury.transport.rabbitmq.configurator.RmqPublisherConfigurator;
@@ -27,18 +27,18 @@ public class OutboxPublisherGroup extends AbstractGroup<Integer, Publisher<byte[
 
 		CygInfoDao dao = new CygInfoDao();
 
-		List<CygMqConfig> thadMqConfigs = dao.getCygMqConfigById(cygId);
+		List<CygMqConfig> cygMqConfigs = dao.getCygMqConfigById(cygId);
 
-		if (thadMqConfigs.isEmpty() || thadMqConfigs.size() > 1) {
+		if (cygMqConfigs.isEmpty() || cygMqConfigs.size() > 1) {
 			throw new IllegalArgumentException(
 					"Query MqConfig for CygId(" + cygId + ") is null or more than one record.");
 		}
 
-		CygMqConfig thadMqConfig = thadMqConfigs.get(0);
+		CygMqConfig cygMqConfig = cygMqConfigs.get(0);
 
-		RmqPublisherConfigurator configurator = RmqPublisherConfigurator.configuration(thadMqConfig.getServerMqHost(),
-				thadMqConfig.getServerMqPort(), thadMqConfig.getServerMqUsername(), thadMqConfig.getServerMqPassword(),
-				ExchangeDefinition.fanout(thadMqConfig.getServerInbox())).build();
+		RmqPublisherConfigurator configurator = RmqPublisherConfigurator.configuration(cygMqConfig.getServerMqHost(),
+				cygMqConfig.getServerMqPort(), cygMqConfig.getServerMqUsername(), cygMqConfig.getServerMqPassword(),
+				ExchangeDefinition.fanout(cygMqConfig.getServerInbox())).build();
 
 		return new RabbitMqPublisher("Cyg-" + cygId + "-RestfulToOutbox", configurator);
 	}
