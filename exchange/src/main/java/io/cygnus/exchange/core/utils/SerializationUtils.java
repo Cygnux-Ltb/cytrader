@@ -276,7 +276,7 @@ public final class SerializationUtils {
 		});
 	}
 
-	public static <T> void marshallIntHashMap(final IntObjectHashMap<T> hashMap, final BytesOut<?> bytes,
+	public static <T> void marshallIntHashMap(final MutableIntObjectMap<T> hashMap, final BytesOut<?> bytes,
 			final Consumer<T> elementMarshaller) {
 		bytes.writeInt(hashMap.size());
 		hashMap.forEachKeyValue((k, v) -> {

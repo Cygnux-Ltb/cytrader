@@ -41,7 +41,7 @@ public final class MatchingEngineRouter implements WriteBytesMarshallable {
     private final BinaryCommandsProcessor binaryCommandsProcessor;
 
     // symbol->OB
-    private final IntObjectHashMap<IOrderBook> orderBooks;
+    private final MutableIntObjectMap<IOrderBook> orderBooks;
 
     private final IOrderBook.OrderBookFactory orderBookFactory;
 
@@ -110,7 +110,7 @@ public final class MatchingEngineRouter implements WriteBytesMarshallable {
                                 bytesIn,
                                 shardId + 1024);
 
-                        final IntObjectHashMap<IOrderBook> ob = SerializationUtils.readIntHashMap(
+                        final MutableIntObjectMap<IOrderBook> ob = SerializationUtils.readIntHashMap(
                                 bytesIn,
                                 bytes -> IOrderBook.create(bytes, objectsPool, eventsHelper, loggingCfg));
 
@@ -247,6 +247,6 @@ public final class MatchingEngineRouter implements WriteBytesMarshallable {
     @RequiredArgsConstructor
     private static class DeserializedData {
         private final BinaryCommandsProcessor binaryCommandsProcessor;
-        private final IntObjectHashMap<IOrderBook> orderBooks;
+        private final MutableIntObjectMap<IOrderBook> orderBooks;
     }
 }

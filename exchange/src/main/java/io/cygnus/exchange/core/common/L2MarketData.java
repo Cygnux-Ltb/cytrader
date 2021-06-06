@@ -97,12 +97,18 @@ public final class L2MarketData {
 		return new L2MarketData(getAskPricesCopy(), getAskVolumesCopy(), getAskOrdersCopy(), getBidPricesCopy(),
 				getBidVolumesCopy(), getBidOrdersCopy());
 	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof L2MarketData)) {
+		if (obj == null)
 			return false;
-		}
+		if (!(obj instanceof L2MarketData))
+			return false;
 
 		L2MarketData o = (L2MarketData) obj;
 

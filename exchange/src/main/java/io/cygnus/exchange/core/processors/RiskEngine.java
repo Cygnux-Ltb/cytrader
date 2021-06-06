@@ -56,7 +56,7 @@ public final class RiskEngine implements WriteBytesMarshallable {
 	private final SymbolSpecificationProvider symbolSpecificationProvider;
 	private final UserProfileService userProfileService;
 	private final BinaryCommandsProcessor binaryCommandsProcessor;
-	private final IntObjectHashMap<LastPriceCacheRecord> lastPriceCache;
+	private final MutableIntObjectMap<LastPriceCacheRecord> lastPriceCache;
 	private final MutableIntLongMap fees;
 	private final MutableIntLongMap adjustments;
 	private final MutableIntLongMap suspends;
@@ -107,7 +107,7 @@ public final class RiskEngine implements WriteBytesMarshallable {
 						final BinaryCommandsProcessor binaryCommandsProcessor = new BinaryCommandsProcessor(
 								this::handleBinaryMessage, this::handleReportQuery, sharedPool,
 								exchangeConfiguration.getReportsQueriesCfg(), bytesIn, shardId);
-						final IntObjectHashMap<LastPriceCacheRecord> lastPriceCache = SerializationUtils
+						final MutableIntObjectMap<LastPriceCacheRecord> lastPriceCache = SerializationUtils
 								.readIntHashMap(bytesIn, LastPriceCacheRecord::new);
 						final MutableIntLongMap fees = SerializationUtils.readIntLongHashMap(bytesIn);
 						final MutableIntLongMap adjustments = SerializationUtils.readIntLongHashMap(bytesIn);
@@ -795,7 +795,7 @@ public final class RiskEngine implements WriteBytesMarshallable {
 		private final SymbolSpecificationProvider symbolSpecificationProvider;
 		private final UserProfileService userProfileService;
 		private final BinaryCommandsProcessor binaryCommandsProcessor;
-		private final IntObjectHashMap<LastPriceCacheRecord> lastPriceCache;
+		private final MutableIntObjectMap<LastPriceCacheRecord> lastPriceCache;
 		private final MutableIntLongMap fees;
 		private final MutableIntLongMap adjustments;
 		private final MutableIntLongMap suspends;

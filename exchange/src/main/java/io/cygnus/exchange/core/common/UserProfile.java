@@ -3,6 +3,7 @@ package io.cygnus.exchange.core.common;
 import java.util.Objects;
 
 import org.eclipse.collections.api.map.primitive.MutableIntLongMap;
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntLongHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
@@ -21,7 +22,7 @@ public final class UserProfile implements WriteBytesMarshallable, StateHash {
 
 	// symbol -> margin position records
 	// TODO initialize lazily (only needed if margin trading allowed)
-	public final IntObjectHashMap<SymbolPositionRecord> positions;
+	public final MutableIntObjectMap<SymbolPositionRecord> positions;
 
 	// protects from double adjustment
 	public long adjustmentsCounter;
