@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.springframework.stereotype.Component;
 
 import io.cygnus.db.dao.StrategyDao;
 import io.cygnus.service.entity.Strategy;
@@ -14,6 +15,7 @@ import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
 
+@Component
 public class StrategyExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(StrategyExecutor.class);

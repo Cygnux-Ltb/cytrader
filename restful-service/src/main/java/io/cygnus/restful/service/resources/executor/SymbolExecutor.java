@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.springframework.stereotype.Component;
 
 import io.cygnus.db.dao.SymbolDao;
 import io.cygnus.restful.service.base.BaseExecutor;
@@ -16,6 +17,7 @@ import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
 
+@Component
 public class SymbolExecutor extends BaseExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(SymbolExecutor.class);

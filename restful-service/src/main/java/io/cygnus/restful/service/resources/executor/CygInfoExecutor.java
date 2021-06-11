@@ -3,6 +3,7 @@ package io.cygnus.restful.service.resources.executor;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.springframework.stereotype.Component;
 
 import io.cygnus.db.dao.CygInfoDao;
 import io.cygnus.restful.service.base.BaseExecutor;
@@ -13,6 +14,7 @@ import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
 
+@Component
 public class CygInfoExecutor extends BaseExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(CygInfoExecutor.class);

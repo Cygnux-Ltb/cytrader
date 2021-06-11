@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
+import org.springframework.stereotype.Component;
 
 import io.cygnus.db.dao.StrategyDao;
 import io.cygnus.restful.service.resources.executor.bean.ValidationRule;
@@ -17,6 +18,7 @@ import io.mercury.common.character.Charsets;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonParser;
 
+@Component
 public class UpdateParamExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(UpdateParamExecutor.class);
