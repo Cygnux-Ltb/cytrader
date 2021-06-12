@@ -7,7 +7,7 @@ import io.cygnus.service.entity.CygMqConfig;
 import io.mercury.common.collections.group.AbstractGroup;
 import io.mercury.transport.api.Publisher;
 import io.mercury.transport.rabbitmq.RabbitMqPublisher;
-import io.mercury.transport.rabbitmq.configurator.RmqPublisherConfigurator;
+import io.mercury.transport.rabbitmq.configurator.RabbitPublisherCfg;
 import io.mercury.transport.rabbitmq.declare.ExchangeDefinition;
 
 public class OutboxPublisherGroup extends AbstractGroup<Integer, Publisher<byte[]>> {
@@ -36,7 +36,7 @@ public class OutboxPublisherGroup extends AbstractGroup<Integer, Publisher<byte[
 
 		CygMqConfig cygMqConfig = cygMqConfigs.get(0);
 
-		RmqPublisherConfigurator configurator = RmqPublisherConfigurator.configuration(cygMqConfig.getServerMqHost(),
+		RabbitPublisherCfg configurator = RabbitPublisherCfg.configuration(cygMqConfig.getServerMqHost(),
 				cygMqConfig.getServerMqPort(), cygMqConfig.getServerMqUsername(), cygMqConfig.getServerMqPassword(),
 				ExchangeDefinition.fanout(cygMqConfig.getServerInbox())).build();
 
