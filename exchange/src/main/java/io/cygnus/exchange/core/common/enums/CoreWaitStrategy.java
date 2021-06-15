@@ -24,7 +24,7 @@ public enum CoreWaitStrategy {
 	;
 
 	@Getter
-	private final Supplier<WaitStrategy> waitStrategySupplier;
+	private final Supplier<WaitStrategy> strategySupplier;
 
 	@Getter
 	private final boolean yield;
