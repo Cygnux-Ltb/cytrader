@@ -28,7 +28,7 @@ public class StrategyDao {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<Strategy> list = session.createCriteria(Strategy.class)
-				.add(Restrictions.eq(Strategy.COLUMN_NAME_StrategyID, strategyId)).list();
+				.add(Restrictions.eq(Strategy.COLUMN_StrategyID, strategyId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}

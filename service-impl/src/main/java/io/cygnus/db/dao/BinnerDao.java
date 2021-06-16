@@ -14,7 +14,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public class BinnerDao {
 
-	private Logger logger = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger logger = CommonLoggerFactory.getLogger(BinnerDao.class);
 
 	public List<TimeBinner> getTimeBinners(Integer cygId, Date dateTradingDay, String instrumentId) {
 		Session session = CommonDaoFactory.getSession();

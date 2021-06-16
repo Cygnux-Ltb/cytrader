@@ -16,10 +16,10 @@ public class OrdersDao {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<Order> list = session.createCriteria(Order.class)
-				.add(Restrictions.eq(Order.COLUMN_NAME_TradingDay, dateTradingDay))
-				.add(Restrictions.eq(Order.COLUMN_NAME_StrategyID, strategyId))
-				.add(Restrictions.eq(Order.COLUMN_NAME_InvestorID, investorId))
-				.add(Restrictions.eq(Order.COLUMN_NAME_InstrumentID, instrumentId)).list();
+				.add(Restrictions.eq(Order.COLUMN_TradingDay, dateTradingDay))
+				.add(Restrictions.eq(Order.COLUMN_StrategyID, strategyId))
+				.add(Restrictions.eq(Order.COLUMN_InvestorID, investorId))
+				.add(Restrictions.eq(Order.COLUMN_InstrumentID, instrumentId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
@@ -28,8 +28,8 @@ public class OrdersDao {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<Order> list = session.createCriteria(Order.class)
-				.add(Restrictions.eq(Order.COLUMN_NAME_TradingDay, dateTradingDay))
-				.add(Restrictions.eq(Order.COLUMN_NAME_StrategyID, strategyId)).list();
+				.add(Restrictions.eq(Order.COLUMN_TradingDay, dateTradingDay))
+				.add(Restrictions.eq(Order.COLUMN_StrategyID, strategyId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}

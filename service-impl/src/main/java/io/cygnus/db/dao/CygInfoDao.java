@@ -13,6 +13,7 @@ import io.cygnus.service.entity.CygInitConfig;
 import io.cygnus.service.entity.CygMqConfig;
 import io.cygnus.service.entity.CygStrategy;
 
+
 public class CygInfoDao {
 
 	/**
