@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import io.cygnus.db.dao.SymbolDao;
-import io.cygnus.restful.service.base.BaseExecutor;
 import io.cygnus.service.entity.SymbolInfo;
 import io.cygnus.service.entity.SymbolTradingFee;
 import io.cygnus.service.entity.SymbolTradingPeriod;
@@ -18,7 +17,7 @@ import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
 
 @Component
-public class SymbolExecutor extends BaseExecutor {
+public class SymbolExecutor  {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(SymbolExecutor.class);
 

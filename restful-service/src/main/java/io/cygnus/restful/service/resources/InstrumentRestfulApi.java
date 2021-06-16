@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,9 @@ import io.mercury.common.annotation.cache.GetCache;
 
 @RestController("/instrument")
 public class InstrumentRestfulApi extends CygRestfulApi {
+	
+	@Resource
+	private InstrumentDao instrumentDao;
 
 	/**
 	 * Get SettlementPrice
@@ -43,8 +47,10 @@ public class InstrumentRestfulApi extends CygRestfulApi {
 				return httpBadRequest();
 			}
 		}
-		InstrumentDao instrumentDao = new InstrumentDao();
-		List<InstrumentSettlementPrice> settlementPrices = instrumentDao.getSettlementPrice(dateTradingDay,
+		
+		List<InstrumentSettlementPrice> settlementPrices = instrumentDao.
+				
+				getSettlementPrice(dateTradingDay,
 				instrumentId);
 		return jsonResponse(settlementPrices);
 	}

@@ -82,7 +82,7 @@ public class CygnusInitService {
 		for (Integer cygId : cygIdList) {
 			Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cygId);
 
-			String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.EndTimeBinner, null));
+			String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.EndTimeBinner.name(), null));
 
 			log.info("EndTimeBinner : " + msg);
 

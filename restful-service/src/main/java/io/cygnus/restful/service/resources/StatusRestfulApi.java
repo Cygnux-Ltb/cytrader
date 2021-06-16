@@ -53,7 +53,7 @@ public class StatusRestfulApi extends CygRestfulApi {
 		String json = getBody(request);
 		log.info("method statusCommand recv : {}", json);
 		List<StrategySwitch> strategySwitchs = jsonToList(json, StrategySwitch.class);
-		// 将传入的StrategySwitchs按照ThadID分组
+		// 将传入的StrategySwitchs按照CygID分组
 		Map<Integer, List<StrategySwitch>> strategySwitchListMap = new HashMap<>();
 		for (StrategySwitch strategySwitch : strategySwitchs) {
 			Integer thadId = strategySwitch.getCygId();
@@ -70,7 +70,7 @@ public class StatusRestfulApi extends CygRestfulApi {
 		for (Integer cygId : strategySwitchListMap.keySet()) {
 			Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cygId);
 			String msg = outboxMessageToJson(
-					new OutboxMessage<>(OutboxTitle.StrategySwitch, strategySwitchListMap.get(cygId)));
+					new OutboxMessage<>(OutboxTitle.StrategySwitch.name(), strategySwitchListMap.get(cygId)));
 			log.info("StrategySwitchs : {}", msg);
 			publisher.publish(msg.getBytes(Charsets.UTF8));
 		}
@@ -84,7 +84,7 @@ public class StatusRestfulApi extends CygRestfulApi {
 	 * @return
 	 */
 	@PutMapping("/update")
-	public ResponseEntity<Object> statusUpdate(@RequestParam("thadId") Integer cygId,
+	public ResponseEntity<Object> statusUpdate(@RequestParam("cygId") int cygId,
 			@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		log.info("method statusUpdate recv : {}", json);

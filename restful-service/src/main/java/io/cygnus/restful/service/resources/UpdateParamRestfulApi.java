@@ -51,7 +51,7 @@ public class UpdateParamRestfulApi extends CygRestfulApi {
 		// 获取Publisher
 		Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cygId);
 		// 转换为需要发送的发件箱消息
-		String msg = outboxMessageToJson(new OutboxMessage<>(OutboxTitle.UpdateStrategyParams, strategyParams));
+		String msg = outboxMessageToJson(new OutboxMessage<>(OutboxTitle.UpdateStrategyParams.name(), strategyParams));
 		// 发送消息
 		publisher.publish(msg.getBytes(Charsets.UTF8));
 		// 返回Put成功标识
