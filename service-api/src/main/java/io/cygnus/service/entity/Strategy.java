@@ -32,11 +32,11 @@ public final class Strategy {
 	// StrategyID int
 	@Column(name = "StrategyID")
 	private Integer strategyId;
-	public static final String COLUMN_NAME_StrategyID = "StrategyID";
+	public static final String COLUMN_StrategyID = "StrategyID";
 
 	// StrategyName varchar 15
 	@Column(name = "StrategyName")
 	private String strategyName;
-	public static final String COLUMN_NAME_StrategyName = "StrategyName";
+	public static final String COLUMN_StrategyName = "StrategyName";
 
 }

@@ -1,22 +1,20 @@
 package io.cygnus.service.dto.pack;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
+@Builder
 @Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class InboxMessage {
 
-	@Getter
-	@Setter
 	private String title;
 
-	@Getter
-	@Setter
 	private String content;
 
 }
