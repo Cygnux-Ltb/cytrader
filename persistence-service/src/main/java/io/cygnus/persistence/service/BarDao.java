@@ -1,4 +1,4 @@
-package io.cygnus.db.dao;
+package io.cygnus.persistence.service;
 
 import java.util.Date;
 import java.util.List;
@@ -8,35 +8,34 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 
-import io.cygnus.db.CommonDaoFactory;
-import io.cygnus.service.entity.TimeBinner;
+import io.cygnus.persistence.db.CommonDaoFactory;
+import io.cygnus.persistence.entity.Bar;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public class BinnerDao {
+public class BarDao {
 
-	private static final Logger logger = CommonLoggerFactory.getLogger(BinnerDao.class);
+	private static final Logger logger = CommonLoggerFactory.getLogger(BarDao.class);
 
-	public List<TimeBinner> getTimeBinners(Integer cygId, Date dateTradingDay, String instrumentId) {
+	public List<Bar> getTimeBinners(Integer cygId, Date dateTradingDay, String instrumentCode) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<TimeBinner> list = session.createCriteria(TimeBinner.class)
-				.add(Restrictions.eq(TimeBinner.COLUMN_NAME_CygId, cygId))
-				.add(Restrictions.eq(TimeBinner.COLUMN_NAME_TradingDay, dateTradingDay))
-				.add(Restrictions.eq(TimeBinner.COLUMN_NAME_InstrumentId, instrumentId)).list();
+		List<Bar> list = session.createCriteria(Bar.class).add(Restrictions.eq(Bar.COLUMN_CygId, cygId))
+				.add(Restrictions.eq(Bar.COLUMN_TradingDay, dateTradingDay))
+				.add(Restrictions.eq(Bar.COLUMN_InstrumentCode, instrumentCode)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
 
-	public boolean addTimeBinners(TimeBinner timeBinner) {
+	public boolean addTimeBinners(Bar timeBinner) {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
 			@SuppressWarnings({ "unchecked", "deprecation" })
-			List<TimeBinner> queryForFieldValues = session.createCriteria(TimeBinner.class)
-					.add(Restrictions.eq(TimeBinner.COLUMN_NAME_CygId, timeBinner.getCygId()))
-					.add(Restrictions.eq(TimeBinner.COLUMN_NAME_TradingDay, timeBinner.getTradingDay()))
-					.add(Restrictions.eq(TimeBinner.COLUMN_NAME_Time, timeBinner.getTime()))
-					.add(Restrictions.eq(TimeBinner.COLUMN_NAME_InstrumentId, timeBinner.getInstrumentId())).list();
+			List<Bar> queryForFieldValues = session.createCriteria(Bar.class)
+					.add(Restrictions.eq(Bar.COLUMN_CygId, timeBinner.getCygId()))
+					.add(Restrictions.eq(Bar.COLUMN_TradingDay, timeBinner.getTradingDay()))
+					.add(Restrictions.eq(Bar.COLUMN_TimePoint, timeBinner.getTimePoint()))
+					.add(Restrictions.eq(Bar.COLUMN_InstrumentCode, timeBinner.getInstrumentCode())).list();
 			if (queryForFieldValues.size() > 0) {
 				// logger.error("Repeat consumption -> " + JSON.toJSONString(timeBinner));
 				logger.error("Repeat consumption -> " + timeBinner.toString());

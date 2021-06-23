@@ -1,35 +1,32 @@
 package io.cygnus.service.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import io.mercury.serialization.json.JsonWrapper;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 public class LogInfo {
 
-	@Getter
-	@Setter
-	private String logTime;
-
-	@Getter
-	@Setter
-	private String logType;
-
-	@Getter
-	@Setter
 	private long epochTime;
 
-	@Getter
-	@Setter
+	private String logTime;
+
+	private String logLevel;
+
+	private String logTitle;
+
 	private String logText;
 
 	@Override
 	public String toString() {
-		if (logText.contains("MeasureLatency")) {
-			return logTime + "," + logType + "," + epochTime + "," + logText;
-		} else {
-			return logTime + "," + logType + "," + epochTime + ",\"" + logText + "\"";
-		}
+		return JsonWrapper.toJson(this);
 	}
 
 }

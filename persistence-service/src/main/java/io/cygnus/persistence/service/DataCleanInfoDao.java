@@ -1,24 +1,22 @@
-package io.cygnus.db.dao;
+package io.cygnus.persistence.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import io.cygnus.db.CommonDaoFactory;
-import io.cygnus.service.entity.DataCleanInfo;
+import io.cygnus.persistence.db.CommonDaoFactory;
+import io.cygnus.persistence.entity.DataCleanInfo;
 
 public class DataCleanInfoDao {
 
-	public List<DataCleanInfo> getData(String location, Date tradingDay) {
+	public List<DataCleanInfo> getData(String location, Long tradingDay) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<DataCleanInfo> list = session.createCriteria(DataCleanInfo.class)
-				.add(Restrictions.eq(DataCleanInfo.COLUMN_NAME_Location, location))
-				.add(Restrictions.eq(DataCleanInfo.COLUMN_NAME_TradingDay, tradingDay)).list();
+				.add(Restrictions.eq(DataCleanInfo.COLUMN_Location, location))
+				.add(Restrictions.eq(DataCleanInfo.COLUMN_TradingDay, tradingDay)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
@@ -29,8 +27,8 @@ public class DataCleanInfoDao {
 		try {
 			@SuppressWarnings({ "unchecked", "deprecation" })
 			List<DataCleanInfo> list = session.createCriteria(DataCleanInfo.class)
-					.add(Restrictions.eq(DataCleanInfo.COLUMN_NAME_Location, info.getLocation()))
-					.add(Restrictions.eq(DataCleanInfo.COLUMN_NAME_TradingDay, info.getTradingDay())).list();
+					.add(Restrictions.eq(DataCleanInfo.COLUMN_Location, info.getLocation()))
+					.add(Restrictions.eq(DataCleanInfo.COLUMN_TradingDay, info.getTradingDay())).list();
 			if (list.size() == 0) {
 				session.save(info);
 			} else {
@@ -50,14 +48,11 @@ public class DataCleanInfoDao {
 	public static void main(String[] args) {
 		try {
 			DataCleanInfoDao dao = new DataCleanInfoDao();
-
 			DataCleanInfo info = new DataCleanInfo();
 			info.setLocation("test");
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			info.setTradingDay(formatter.parse("2017-03-11"));
+			info.setTradingDay(20170311);
 			info.setStartTime("555555");
 			dao.addOrUpdateData(info);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

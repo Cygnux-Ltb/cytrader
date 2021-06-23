@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.cygnus</groupId>
+		<artifactId>cygnus</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<artifactId>persistence-service</artifactId>
+	<name>persistence-service</name>
+
+	<properties>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-jpa</artifactId> 
+			<version>${spring.boot.version}</version> <exclusions> <exclusion> <groupId>org.slf4j</groupId> 
+			<artifactId>slf4j-api</artifactId> </exclusion> <exclusion> <groupId>ch.qos.logback</groupId> 
+			<artifactId>logback-core</artifactId> </exclusion> <exclusion> <groupId>ch.qos.logback</groupId> 
+			<artifactId>logback-classic</artifactId> </exclusion> </exclusions> </dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<version>${spring.boot.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.5.3.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.j256.ormlite</groupId>
+			<artifactId>ormlite-jdbc</artifactId>
+			<version>5.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>serialization-json</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>persistence-h2</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>com.j256.ormlite</groupId> <artifactId>ormlite-core</artifactId> 
+			<version>5.5</version> </dependency> -->
+
+		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
+			<version>8.0.23</version> </dependency> -->
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.7</version>
+		</dependency>
+
+	</dependencies>
+</project>

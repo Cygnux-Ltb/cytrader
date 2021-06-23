@@ -1,5 +1,4 @@
-package io.cygnus.db;
-//package org.beam.persistence.db;
+package io.cygnus.persistence.db;
 //
 //import java.sql.SQLException;
 //

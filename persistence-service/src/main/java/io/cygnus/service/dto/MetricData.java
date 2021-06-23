@@ -1,45 +1,28 @@
 package io.cygnus.service.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
+@Data
 @Accessors(chain = true)
 public class MetricData {
 
-	@Getter
-	@Setter
 	private int keyId;
 
-	@Getter
-	@Setter
 	private int strategyId;
 
-	@Getter
-	@Setter
 	private String exchangeCode;
 
-	@Getter
-	@Setter
 	private String lastPoint;
 
-	@Getter
-	@Setter
 	private String currPoint;
 
-	@Getter
-	@Setter
 	private long epochTime;
 
-	@Getter
-	@Setter
 	private int epochTimeDiff;
 
-	@Getter
-	@Setter
 	private char interfaceType;
 
-	
 	@Override
 	public String toString() {
 		return new StringBuffer()

@@ -1,6 +1,4 @@
-package io.cygnus.service.entity;
-
-import java.util.Date;
+package io.cygnus.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,77 +7,75 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.service.entity.base.ColumnDefinition;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
-// TimeBinner
 /**
  * 
  * @author yellow013
+ * 
+ *         Bar
  *
  */
+@Data
 @Entity
-@Table(name = "TimeBinner")
-@Getter
-@Setter
+@Table(name = "Bar")
 @Accessors(chain = true)
-public final class TimeBinner {
+public final class Bar {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "UID")
+	@Column(name = "uid")
 	private Long uid;
 
 	// ThadID int
-	@Column(name = "CygId")
+	@Column(name = "cyg_id")
 	private Integer cygId;
-	public static final String COLUMN_NAME_CygId = "CygId";
+	public static final String COLUMN_CygId = "cyg_id";
 
 	// InstrumentID varchar 31
-	@Column(name = "InstrumentId")
-	private String instrumentId;
-	public static final String COLUMN_NAME_InstrumentId = "InstrumentId";
+	@Column(name = "instrument_code")
+	private String instrumentCode;
+	public static final String COLUMN_InstrumentCode = "instrument_code";
 
 	// TradingDay date
-	@Column(name = "TradingDay", columnDefinition = ColumnDefinition.DATE)
-	private Date tradingDay;
-	public static final String COLUMN_NAME_TradingDay = "TradingDay";
+	@Column(name = "trading_day")
+	private long tradingDay;
+	public static final String COLUMN_TradingDay = "trading_day";
 
 	// Time datetime
-	@Column(name = "Time")
-	private Integer time;
-	public static final String COLUMN_NAME_Time = "Time";
+	@Column(name = "time_point")
+	private Integer timePoint;
+	public static final String COLUMN_TimePoint = "time_point";
 
 	// Open double 19_4
-	@Column(name = "Open", columnDefinition = ColumnDefinition.DECIMAL_19_4)
-	private double open;
-	public static final String COLUMN_NAME_Open = "Open";
+	@Column(name = "open")
+	private long open;
+	public static final String COLUMN_Open = "open";
 
 	// High double 19_4
-	@Column(name = "High", columnDefinition = ColumnDefinition.DECIMAL_19_4)
-	private double high;
-	public static final String COLUMN_NAME_High = "High";
+	@Column(name = "high")
+	private long high;
+	public static final String COLUMN_High = "high";
 
 	// Low double 19_4
-	@Column(name = "Low", columnDefinition = ColumnDefinition.DECIMAL_19_4)
-	private double low;
-	public static final String COLUMN_NAME_Low = "Low";
+	@Column(name = "low")
+	private long low;
+	public static final String COLUMN_Low = "low";
 
 	// Close double 19_4
-	@Column(name = "Close", columnDefinition = ColumnDefinition.DECIMAL_19_4)
-	private double close;
-	public static final String COLUMN_NAME_Close = "Close";
+	@Column(name = "close")
+	private long close;
+	public static final String COLUMN_Close = "close";
 
 	// VWAP double 19_4
-	@Column(name = "VWAP", columnDefinition = ColumnDefinition.DECIMAL_19_4)
-	private double vwap;
-	public static final String COLUMN_NAME_VWAP = "VWAP";
+	@Column(name = "vwap")
+	private long vwap;
+	public static final String COLUMN_VWAP = "vwap";
 
 	// VWAP double 19_4
-	@Column(name = "LastVolume")
-	private Integer lastVolume;
-	public static final String COLUMN_NAME_LastVolume = "LastVolume";
+	@Column(name = "last_volume")
+	private long lastVolume;
+	public static final String COLUMN_LastVolume = "last_volume";
 
 }

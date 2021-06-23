@@ -1,4 +1,4 @@
-package io.cygnus.service.entity;
+package io.cygnus.persistence.entity;
 
 import java.util.Date;
 
@@ -9,72 +9,71 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.service.entity.base.ColumnDefinition;
-import lombok.Getter;
-import lombok.Setter;
+import io.cygnus.persistence.entity.base.ColumnDefinition;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
-// StrategyInstrumentPNLSettlementDaily
 /**
  * 
  * @author yellow013
+ * 
+ * CygPnlSettlementDaily
  *
  */
+@Data
 @Entity
-@Table(name = "StrategyInstrumentPNLSettlementDaily")
-@Getter
-@Setter
+@Table(name = "cyg_pnl_settlement_daily")
 @Accessors(chain = true)
-public final class StrategyInstrumentPNLSettlementDaily  {
+public final class CygPnlSettlementDaily {
 
 	@Id
-	@Column(name = "UID")
+	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
 
 	// StrategyID int
-	@Column(name = "StrategyID")
+	@Column(name = "strategy_id")
 	private Integer strategyId;
-	public static String COLUMN_NAME_StrategyID = "StrategyID";
+	public static final String COLUMN_StrategyID = "strategy_id";
 
 	// InstrumentID varchar 31
-	@Column(name = "InstrumentID")
-	private String instrumentId;
-	public static String COLUMN_NAME_InstrumentID = "InstrumentID";
+	@Column(name = "instrument_code")
+	private String instrumentCode;
+	public static final String COLUMN_InstrumentCode = "instrument_code";
 
 	// TradingDay date
-	@Column(name = "TradingDay", columnDefinition = ColumnDefinition.DATE)
+	@Column(name = "trading_day", columnDefinition = ColumnDefinition.DATE)
 	private Date tradingDay;
-	public static String COLUMN_NAME_TradingDay = "TradingDay";
+	public static final String COLUMN_TradingDay = "trading_day";
 
 	// Position int
-	@Column(name = "Position")
+	@Column(name = "position")
 	private Integer position;
-	public static String COLUMN_NAME_Position = "Position";
+	public static final String COLUMN_Position = "position";
 
 	// PNLGross double 19_4
-	@Column(name = "PNLGross", columnDefinition = ColumnDefinition.DECIMAL_19_4)
-	private double pnlGross;
-	public static String COLUMN_NAME_PNLGross = "PNLGross";
+	@Column(name = "pnl_total", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	private double pnlTotal;
+	public static final String COLUMN_PnlTotal = "pnl_total";
 
 	// PNLNet double 19_4
-	@Column(name = "PNLNet", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	@Column(name = "pnl_net", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double pnlNet;
-	public static String COLUMN_NAME_PNLNet = "PNLNet";
+	public static final String COLUMN_PnlNet = "pnl_net";
 
 	// TranscationCost double 19_4
-	@Column(name = "TranscationCost", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	@Column(name = "transcation_cost", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double transcationCost;
-	public static String COLUMN_NAME_TranscationCost = "TranscationCost";
+	public static final String COLUMN_TranscationCost = "transcation_cost";
 
 	// Exposure double 19_4
-	@Column(name = "Exposure", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	@Column(name = "exposure", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double exposure;
-	public static String COLUMN_NAME_Exposure = "Exposure";
+	public static final String COLUMN_Exposure = "exposure";
 
 	// Approved char
-	@Column(name = "Approved")
+	@Column(name = "approved")
 	private char approved;
-	public static String COLUMN_NAME_Approved = "Approved";
+	public static final String COLUMN_Approved = "approved";
 
 }

@@ -1,4 +1,4 @@
-package io.cygnus.service.entity;
+package io.cygnus.persistence.entity;
 
 import java.util.Date;
 
@@ -9,23 +9,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.service.entity.base.ColumnDefinition;
-import lombok.Getter;
-import lombok.Setter;
+import io.cygnus.persistence.entity.base.ColumnDefinition;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * OrderFills
  * 
  * @author yellow013
+ * 
+ *         CygOrder
  *
  */
+@Data
 @Entity
-@Table(name = "Order")
-@Getter
-@Setter
+@Table(name = "cyg_order")
 @Accessors(chain = true)
-public final class Order {
+public final class CygOrder {
 
 	@Id
 	@Column(name = "uid")
@@ -48,9 +47,9 @@ public final class Order {
 	public static final String COLUMN_InvestorID = "investor_id";
 
 	// InstrumentID varchar 31
-	@Column(name = "instrument_id")
-	private String instrumentId;
-	public static final String COLUMN_InstrumentID = "InstrumentID";
+	@Column(name = "instrument_code")
+	private String instrumentCode;
+	public static final String COLUMN_InstrumentCode = "instrument_code";
 
 	// OrderRef int
 	@Column(name = "order_ref")

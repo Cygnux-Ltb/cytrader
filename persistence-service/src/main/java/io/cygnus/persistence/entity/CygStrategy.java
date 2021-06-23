@@ -1,14 +1,10 @@
-package io.cygnus.service.entity;
+package io.cygnus.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
@@ -16,24 +12,18 @@ import lombok.experimental.Accessors;
  * @author yellow013
  *
  */
+@Data
 @Entity
-@Table(name = "CygStrategy")
-@Getter
-@Setter
+@Table(name = "cyg_strategy")
 @Accessors(chain = true)
 public final class CygStrategy {
 
-	@Id
-	@Column(name = "uid")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long uid;
-
-	@Column(name = "cyg_id")
-	private Integer cygId;
-	public static final String COLUMN_NAME_CygID = "CygID";
-
 	@Column(name = "strategy_id")
-	private Integer strategyId;
-	public static final String COLUMN_NAME_StrategyID = "StrategyID";
+	private int strategyId;
+	public static final String COLUMN_StrategyID = "strategy_id";
+	
+	@Column(name = "strategy_name")
+	private int strategyName;
+	public static final String COLUMN_StrategyName = "strategy_name";
 
 }

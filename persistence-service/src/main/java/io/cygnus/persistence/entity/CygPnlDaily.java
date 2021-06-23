@@ -1,4 +1,4 @@
-package io.cygnus.service.entity;
+package io.cygnus.persistence.entity;
 
 import java.util.Date;
 
@@ -9,112 +9,111 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.service.entity.base.ColumnDefinition;
-import lombok.Getter;
-import lombok.Setter;
+import io.cygnus.persistence.entity.base.ColumnDefinition;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
-// StrategyInstrumentPNLDaily
 /**
  * 
  * @author yellow013
+ * 
+ *         CygPnlDaily
  *
  */
+@Data
 @Entity
-@Table(name = "StrategyInstrumentPNLDaily")
-@Getter
-@Setter
+@Table(name = "cyg_pnl_daily")
 @Accessors(chain = true)
-public final class StrategyInstrumentPNLDaily {
+public final class CygPnlDaily {
 
 	@Id
-	@Column(name = "UID")
+	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
 
 	// StrategyID int
-	@Column(name = "StrategyID")
+	@Column(name = "strategy_id")
 	private Integer strategyId;
-	public static final String COLUMN_NAME_StrategyID = "StrategyID";
+	public static final String COLUMN_StrategyID = "strategy_id";
 
 	// InstrumentID varchar 31
-	@Column(name = "InstrumentID")
-	private String instrumentId;
-	public static final String COLUMN_NAME_InstrumentID = "InstrumentID";
+	@Column(name = "instrument_code")
+	private String instrumentCode;
+	public static final String COLUMN_InstrumentCode = "instrument_code";
 
 	// TradingDay date
-	@Column(name = "TradingDay", columnDefinition = ColumnDefinition.DATE)
+	@Column(name = "trading_day", columnDefinition = ColumnDefinition.DATE)
 	private Date tradingDay;
-	public static final String COLUMN_NAME_TradingDay = "TradingDay";
+	public static final String COLUMN_TradingDay = "trading_day";
 
 	// EventType char
-	@Column(name = "EventType")
+	@Column(name = "event_type")
 	private String eventType;
-	public static final String COLUMN_NAME_EventType = "EventType";
+	public static final String COLUMN_EventType = "event_type";
 
 	// EventID varchar 21
-	@Column(name = "EventID")
+	@Column(name = "event_id")
 	private String eventId;
-	public static final String COLUMN_NAME_EventID = "EventID";
+	public static final String COLUMN_NAME_EventID = "event_id";
 
 	// AvgBuyPrice double 19_4
-	@Column(name = "AvgBuyPrice", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	@Column(name = "avg_buy_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double avgBuyPrice;
-	public static final String COLUMN_NAME_AvgBuyPrice = "AvgBuyPrice";
+	public static final String COLUMN_AvgBuyPrice = "avg_buy_price";
 
 	// AvgSellPrice double 19_4
-	@Column(name = "AvgSellPrice", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	@Column(name = "avg_sell_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double avgSellPrice;
-	public static final String COLUMN_NAME_AvgSellPrice = "AvgSellPrice";
+	public static final String COLUMN_AvgSellPrice = "avg_sell_price";
 
 	// BuyQuantity int
-	@Column(name = "BuyQuantity")
+	@Column(name = "buy_quantity")
 	private Integer buyQuantity;
-	public static final String COLUMN_NAME_BuyQuantity = "BuyQuantity";
+	public static final String COLUMN_BuyQuantity = "buy_quantity";
 
 	// SellQuantity int
-	@Column(name = "SellQuantity")
+	@Column(name = "sell_quantity")
 	private Integer sellQuantity;
-	public static final String COLUMN_NAME_SellQuantity = "SellQuantity";
+	public static final String COLUMN_SellQuantity = "sell_quantity";
 
 	// TodayLong int
-	@Column(name = "TodayLong")
+	@Column(name = "today_long")
 	private Integer todayLong;
-	public static final String COLUMN_NAME_TodayLong = "TodayLong";
+	public static final String COLUMN_TodayLong = "today_long";
 
 	// YesterdayLong int
-	@Column(name = "YesterdayLong")
+	@Column(name = "yesterday_long")
 	private Integer yesterdayLong;
-	public static final String COLUMN_NAME_YesterdayLong = "YesterdayLong";
+	public static final String COLUMN_YesterdayLong = "yesterday_long";
 
 	// TodayShort int
-	@Column(name = "TodayShort")
+	@Column(name = "today_short")
 	private Integer todayShort;
-	public static final String COLUMN_NAME_TodayShort = "TodayShort";
+	public static final String COLUMN_TodayShort = "today_short";
 
 	// YesterdayShort int
-	@Column(name = "YesterdayShort")
+	@Column(name = "yesterday_short")
 	private Integer yesterdayShort;
-	public static final String COLUMN_NAME_YesterdayShort = "YesterdayShort";
+	public static final String COLUMN_YesterdayShort = "yesterday_short";
 
 	// NetPosition int
-	@Column(name = "NetPosition")
+	@Column(name = "net_position")
 	private Integer netPosition;
-	public static final String COLUMN_NAME_NetPosition = "NetPosition";
+	public static final String COLUMN_NetPosition = "net_position";
 
 	// AggregatedFee double 19_4
-	@Column(name = "AggregatedFee", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	@Column(name = "aggregated_fee", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double aggregatedFee;
-	public static final String COLUMN_NAME_AggregatedFee = "AggregatedFee";
+	public static final String COLUMN_AggregatedFee = "aggregated_fee";
 
 	// Approved char
-	@Column(name = "Approved")
+	@Column(name = "approved")
 	private char approved;
-	public static final String COLUMN_NAME_Approved = "Approved";
+	public static final String COLUMN_Approved = "approved";
 
 	// Turnover int
-	@Column(name = "Turnover")
+	@Column(name = "turnover")
 	private Integer turnover;
-	public static final String COLUMN_NAME_Turnover = "Turnover";
+	public static final String COLUMN_Turnover = "turnover";
 
 }

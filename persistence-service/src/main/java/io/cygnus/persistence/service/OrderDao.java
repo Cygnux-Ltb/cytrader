@@ -1,40 +1,51 @@
-package io.cygnus.db.dao;
+package io.cygnus.persistence.service;
 
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Component;
 
-import io.cygnus.db.CommonDaoFactory;
-import io.cygnus.service.entity.Order;
+import io.cygnus.persistence.db.CommonDaoFactory;
+import io.cygnus.persistence.entity.CygOrder;
+import io.cygnus.persistence.repository.CygOrderRepository;
 
-public class OrdersDao {
+@Component
+public class OrderDao {
 
-	public List<Order> getOrders(Integer strategyId, Date dateTradingDay, String investorId, String instrumentId) {
+	@Resource
+	private CygOrderRepository repository;
+
+	public List<CygOrder> getOrders(Integer strategyId, Date dateTradingDay, String investorId, String instrumentCode) {
+		
+		
+		
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<Order> list = session.createCriteria(Order.class)
-				.add(Restrictions.eq(Order.COLUMN_TradingDay, dateTradingDay))
-				.add(Restrictions.eq(Order.COLUMN_StrategyID, strategyId))
-				.add(Restrictions.eq(Order.COLUMN_InvestorID, investorId))
-				.add(Restrictions.eq(Order.COLUMN_InstrumentID, instrumentId)).list();
+		List<CygOrder> list = session.createCriteria(CygOrder.class)
+				.add(Restrictions.eq(CygOrder.COLUMN_TradingDay, dateTradingDay))
+				.add(Restrictions.eq(CygOrder.COLUMN_StrategyID, strategyId))
+				.add(Restrictions.eq(CygOrder.COLUMN_InvestorID, investorId))
+				.add(Restrictions.eq(CygOrder.COLUMN_InstrumentCode, instrumentCode)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
 
-	public List<Order> getOrdersByInit(Date dateTradingDay, Integer strategyId) {
+	public List<CygOrder> getOrdersByInit(Date dateTradingDay, Integer strategyId) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<Order> list = session.createCriteria(Order.class)
-				.add(Restrictions.eq(Order.COLUMN_TradingDay, dateTradingDay))
-				.add(Restrictions.eq(Order.COLUMN_StrategyID, strategyId)).list();
+		List<CygOrder> list = session.createCriteria(CygOrder.class)
+				.add(Restrictions.eq(CygOrder.COLUMN_TradingDay, dateTradingDay))
+				.add(Restrictions.eq(CygOrder.COLUMN_StrategyID, strategyId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
 
-	public boolean addOrder(Order order) {
+	public boolean addOrder(CygOrder order) {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {

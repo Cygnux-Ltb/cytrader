@@ -1,6 +1,4 @@
-package io.cygnus.service.entity;
-
-import java.util.Date;
+package io.cygnus.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.service.entity.base.ColumnDefinition;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 // TradeableInstrument
@@ -20,36 +16,27 @@ import lombok.experimental.Accessors;
  * @author yellow013
  *
  */
+@Data
 @Entity
-@Table(name = "TradeableInstrument")
-@Getter
-@Setter
+@Table(name = "cyg_instrument_status")
 @Accessors(chain = true)
-public final class  TradeableInstrument  {
+public final class CygInstrumentStatus {
 
 	@Id
-	@Column(name = "UID")
+	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
 
-	// Symbol varchar 10
-	@Column(name = "Symbol")
-	private String symbol;
-	public static final String COLUMN_NAME_Symbol = "Symbol";
+	@Column(name = "instrument_code")
+	private String instrumentCode;
+	public static final String COLUMN_InstrumentID = "instrument_code";
 
-	// InsrumentID varchar 31
-	@Column(name = "InstrumentID")
-	private String instrumentId;
-	public static final String COLUMN_NAME_InstrumentID = "InstrumentID";
+	@Column(name = "trading_day")
+	private long tradingDay;
+	public static final String COLUMN_TradingDay = "trading_day";
 
-	// TradingDay date
-	@Column(name = "TradingDay", columnDefinition = ColumnDefinition.DATE)
-	private Date tradingDay;
-	public static final String COLUMN_NAME_TradingDay = "TradingDay";
-
-	// TradeableType char
-	@Column(name = "TradeableType")
-	private String tradeableType;
-	public static final String COLUMN_NAME_TradeableType = "TradeableType";
+	@Column(name = "tradeable")
+	private boolean tradeable;
+	public static final String COLUMN_Tradeable = "tradeable";
 
 }

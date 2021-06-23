@@ -4,6 +4,8 @@ import static io.mercury.common.collections.MutableMaps.newUnifiedMap;
 
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import io.mercury.common.codec.Envelope;
 
 public enum InboxTitle implements Envelope {
@@ -33,6 +35,8 @@ public enum InboxTitle implements Envelope {
 	MetricData,
 
 	;
+	
+	
 
 	private static final Map<String, InboxTitle> Map = newUnifiedMap();
 
@@ -41,11 +45,11 @@ public enum InboxTitle implements Envelope {
 			Map.put(value.name(), value);
 	}
 
-	public static InboxTitle checkout(String name) {
+	public static InboxTitle checkout(@Nonnull String name) {
 		InboxTitle value;
 		if ((value = Map.get(name)) != null)
 			return value;
-		throw new IllegalArgumentException("Checkout with [" + name + "] is null");
+		throw new IllegalArgumentException("checkout with [" + name + "] is null");
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package io.cygnus.service.entity.base;
+package io.cygnus.persistence.entity.base;
 
 public interface IEntity {
 

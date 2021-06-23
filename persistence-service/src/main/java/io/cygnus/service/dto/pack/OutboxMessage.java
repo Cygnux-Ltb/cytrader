@@ -7,11 +7,13 @@ import java.util.Map;
 
 import io.cygnus.service.dto.StrategySwitch;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Data
+@Builder
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,33 +22,6 @@ public class OutboxMessage<T> {
 	private String title;
 
 	private T content;
-
-//	/**
-//	 * @param title
-//	 * @param content
-//	 */
-//	public OutboxMessage(OutboxTitle title, T content) {
-//		this.title = title.name();
-//		this.content = content;
-//	}
-//
-//	public String getTitle() {
-//		return title;
-//	}
-//
-//	public OutboxMessage<T> setTitle(String title) {
-//		this.title = title;
-//		return this;
-//	}
-//
-//	public T getContent() {
-//		return content;
-//	}
-//
-//	public OutboxMessage<T> setContent(T content) {
-//		this.content = content;
-//		return this;
-//	}
 
 	public static void main(String[] args) {
 

@@ -1,4 +1,4 @@
-package io.cygnus.db.dao;
+package io.cygnus.persistence.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import io.cygnus.db.CommonDaoFactory;
-import io.cygnus.service.entity.CygInfo;
-import io.cygnus.service.entity.CygInitConfig;
-import io.cygnus.service.entity.CygMqConfig;
-import io.cygnus.service.entity.CygStrategy;
-
+import io.cygnus.persistence.db.CommonDaoFactory;
+import io.cygnus.persistence.entity.CygInfo;
+import io.cygnus.persistence.entity.CygInitConfig;
+import io.cygnus.persistence.entity.CygMqConfig;
 
 public class CygInfoDao {
 
@@ -40,17 +38,8 @@ public class CygInfoDao {
 	public List<CygInfo> getCygInfoById(Integer cygId) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygInfo> list = session.createCriteria(CygInfo.class)
-				.add(Restrictions.eq(CygInfo.COLUMN_NAME_CygID, cygId)).list();
-		CommonDaoFactory.close(session);
-		return list;
-	}
-
-	public List<CygStrategy> getCygStrategyById(Integer cygId) {
-		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygStrategy> list = session.createCriteria(CygStrategy.class)
-				.add(Restrictions.eq(CygStrategy.COLUMN_NAME_CygID, cygId)).list();
+		List<CygInfo> list = session.createCriteria(CygInfo.class).add(Restrictions.eq(CygInfo.COLUMN_CygID, cygId))
+				.list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
@@ -59,7 +48,7 @@ public class CygInfoDao {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygMqConfig> list = session.createCriteria(CygMqConfig.class)
-				.add(Restrictions.eq(CygMqConfig.COLUMN_NAME_CygID, cygId)).list();
+				.add(Restrictions.eq(CygMqConfig.COLUMN_CygID, cygId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
@@ -68,7 +57,7 @@ public class CygInfoDao {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygInitConfig> list = session.createCriteria(CygInitConfig.class)
-				.add(Restrictions.eq(CygMqConfig.COLUMN_NAME_CygID, cygId)).list();
+				.add(Restrictions.eq(CygMqConfig.COLUMN_CygID, cygId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}

@@ -1,4 +1,4 @@
-package io.cygnus.db;
+package io.cygnus.persistence.db;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -7,19 +7,15 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import io.cygnus.service.entity.CygInfo;
+import io.cygnus.persistence.entity.CygInfo;
 
 public class CommonDaoFactory {
 
 	private static SessionFactory sessionFactory;
 
 	static {
-		try {
-			final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+		CommonDaoFactory.sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 	}
 
 	public static void closeSessionFactory() {

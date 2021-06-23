@@ -1,4 +1,4 @@
-package io.cygnus.db;
+package io.cygnus.persistence.db;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +17,6 @@ public class Session implements Cloneable {
 			@SuppressWarnings("unused")
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

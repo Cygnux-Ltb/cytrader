@@ -4,18 +4,18 @@
           "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="connection.url">jdbc:mysql://rm-bp119s8cooy48csk7o.mysql.rds.aliyuncs.com:3306/thad</property>
+		<property name="connection.url">jdbc:mysql://rm-bp119s8cooy48csk7o.mysql.rds.aliyuncs.com:3306/cyg</property>
 		<property name="connection.username">root</property>
-		<property name="connection.password">Jinpengdb123$</property>
+		<property name="connection.password"></property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		
-	    <mapping class="org.beam.persistence.db.entity.ThadInfo"/>
-		<mapping class="org.beam.persistence.db.entity.ThadInitConfig"/>
-		<mapping class="org.beam.persistence.db.entity.ThadMqConfig"/>
-		<mapping class="org.beam.persistence.db.entity.ThadStrategy"/>
+	    <mapping class="org.beam.persistence.db.entity.CygInfo"/>
+		<mapping class="org.beam.persistence.db.entity.CygInitConfig"/>
+		<mapping class="org.beam.persistence.db.entity.CygMqConfig"/>
+		<mapping class="org.beam.persistence.db.entity.CygStrategy"/>
 		<mapping class="org.beam.persistence.db.entity.DataCleanInfo"/>
 		<mapping class="org.beam.persistence.db.entity.Exchange"/>
 		<mapping class="org.beam.persistence.db.entity.InstrumentSettlementPrice"/>

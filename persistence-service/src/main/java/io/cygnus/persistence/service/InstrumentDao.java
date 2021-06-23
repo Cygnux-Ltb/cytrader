@@ -1,10 +1,10 @@
-package io.cygnus.db.dao;
+package io.cygnus.persistence.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-import io.cygnus.service.entity.InstrumentSettlementPrice;
+import io.cygnus.persistence.entity.CygInstrumentSettlementPrice;
 
-public interface InstrumentDao extends JpaRepository<InstrumentSettlementPrice, Long> {
+public interface InstrumentDao extends CrudRepository<CygInstrumentSettlementPrice, Long> {
 
 //	public List<InstrumentSettlementPrice> getSettlementPrice(Date dateTradingDay, String instrumentId) {
 //		Session session = CommonDaoFactory.getSession();

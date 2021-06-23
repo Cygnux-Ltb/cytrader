@@ -3,27 +3,25 @@ package io.cygnus.service.dto;
 import java.util.Set;
 import java.util.TreeSet;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 public class StrategySwitch implements Comparable<StrategySwitch> {
 
-	@Getter
-	@Setter
 	private Integer cygId;
 
-	@Getter
-	@Setter
 	private Integer strategyId;
 
-	@Getter
-	@Setter
 	private String instrumentId;
 
-	@Getter
-	@Setter
 	private int tradeable;
 
 	public String getKey() {

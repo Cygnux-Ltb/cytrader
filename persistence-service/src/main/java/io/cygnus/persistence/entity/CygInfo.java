@@ -1,4 +1,4 @@
-package io.cygnus.service.entity;
+package io.cygnus.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,46 +31,46 @@ public final class CygInfo {
 	// CygID int
 	@Column(name = "cyg_id")
 	private Integer cygId;
-	public static final String COLUMN_NAME_CygID = "CygID";
+	public static final String COLUMN_CygID = "cyg_id";
 
 	// ProductName varchar 127
 	@Column(name = "product_name")
 	private String productName;
-	public static final String COLUMN_NAME_ProductName = "ProductName";
+	public static final String COLUMN_ProductName = "product_name";
 
 	// TraderName varchar 63
 	@Column(name = "trader_name")
 	private String traderName;
-	public static final String COLUMN_NAME_TraderName = "TraderName";
+	public static final String COLUMN_TraderName = "trader_name";
 
 	// InvestorID varchar 13
 	@Column(name = "investor_id")
 	private String investorId;
-	public static final String COLUMN_NAME_InvestorID = "InvestorID";
+	public static final String COLUMN_InvestorID = "investor_id";
 
 	// BrokerID varchar 11
 	@Column(name = "broker_id")
 	private String brokerId;
-	public static final String COLUMN_NAME_BrokerID = "BrokerID";
+	public static final String COLUMN_BrokerID = "broker_id";
 
 	// BinnerInterval int
 	@Column(name = "binner_interval")
 	private Integer binnerInterval;
-	public static final String COLUMN_NAME_BinnerInterval = "BinnerInterval";
-
-	// InterfaceMode varchar 10
-	@Column(name = "interface_mode")
-	private String interfaceMode;
-	public static final String COLUMN_NAME_InterfaceMode = "InterfaceMode";
+	public static final String COLUMN_BinnerInterval = "binner_interval";
 
 	// ExchangeCode varchar 9
 	@Column(name = "exchange_code")
 	private String exchangeCode;
-	public static final String COLUMN_NAME_ExchangeCode = "ExchangeCode";
+	public static final String COLUMN_ExchangeCode = "exchange_code";
+	
+	// InterfaceMode varchar 10
+	@Column(name = "interface_mode")
+	private String interfaceMode;
+	public static final String COLUMN_InterfaceMode = "interface_mode";
 
 	// InterfaceType char
 	@Column(name = "interface_type")
 	private char interfaceType;
-	public static final String COLUMN_NAME_InterfaceType = "InterfaceType";
+	public static final String COLUMN_InterfaceType = "interface_type";
 
 }
