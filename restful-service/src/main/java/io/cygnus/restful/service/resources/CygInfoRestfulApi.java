@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.cygnus.persistence.entity.CygInfo;
+import io.cygnus.persistence.entity.CygMqConfig;
+import io.cygnus.persistence.entity.CygStrategy;
 import io.cygnus.restful.service.base.CygRestfulApi;
 import io.cygnus.restful.service.resources.executor.CygInfoExecutor;
 import io.cygnus.service.dto.InitFinish;
-import io.cygnus.service.entity.CygInfo;
-import io.cygnus.service.entity.CygMqConfig;
-import io.cygnus.service.entity.CygStrategy;
 import io.mercury.common.annotation.cache.GetCache;
 
 @RestController("/cyg_info")

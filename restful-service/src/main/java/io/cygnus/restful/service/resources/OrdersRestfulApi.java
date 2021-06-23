@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.db.dao.OrdersDao;
+import io.cygnus.persistence.entity.Order;
+import io.cygnus.persistence.service.OrderDao;
 import io.cygnus.restful.service.base.CygRestfulApi;
-import io.cygnus.service.entity.Order;
 
-@RestController("/orders")
+@RestController("/order")
 public class OrdersRestfulApi extends CygRestfulApi {
 
 	/**
@@ -30,7 +30,7 @@ public class OrdersRestfulApi extends CygRestfulApi {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<Object> getOrders(@RequestParam("strategyId") Integer strategyId,
+	public ResponseEntity<Object> getOrder(@RequestParam("strategyId") Integer strategyId,
 			@RequestParam("tradingDay") String tradingDay, @RequestParam("investorId") String investorId,
 			@RequestParam("instrumentId") String instrumentId) {
 		if (checkParamIsNull(strategyId, tradingDay, investorId, instrumentId)) {
@@ -43,7 +43,7 @@ public class OrdersRestfulApi extends CygRestfulApi {
 				return httpBadRequest();
 			}
 		}
-		OrdersDao ordersDao = new OrdersDao();
+		OrderDao ordersDao = new OrderDao();
 		List<Order> orders = ordersDao.getOrders(strategyId, dateTradingDay, investorId, instrumentId);
 		return jsonResponse(orders);
 	}
@@ -68,7 +68,7 @@ public class OrdersRestfulApi extends CygRestfulApi {
 				return httpBadRequest();
 			}
 		}
-		OrdersDao ordersDao = new OrdersDao();
+		OrderDao ordersDao = new OrderDao();
 		List<Order> orders = ordersDao.getOrdersByInit(dateTradingDay, strategyId);
 		return jsonResponse(orders);
 	}
@@ -82,7 +82,7 @@ public class OrdersRestfulApi extends CygRestfulApi {
 	public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		Order order = jsonToObj(json, Order.class);
-		OrdersDao ordersDao = new OrdersDao();
+		OrderDao ordersDao = new OrderDao();
 		if (ordersDao.addOrder(order)) {
 			return httpOk();
 		}

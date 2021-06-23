@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.db.dao.BinnerDao;
+import io.cygnus.persistence.entity.TimeBinner;
+import io.cygnus.persistence.service.BinnerDao;
 import io.cygnus.restful.service.base.CygRestfulApi;
-import io.cygnus.service.entity.TimeBinner;
 
 @RestController("/binner")
 public class BinnerRestfulApi extends CygRestfulApi {

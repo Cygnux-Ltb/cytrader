@@ -2,8 +2,8 @@ package io.cygnus.restful.service.transport;
 
 import java.util.List;
 
-import io.cygnus.db.dao.CygInfoDao;
-import io.cygnus.service.entity.CygMqConfig;
+import io.cygnus.persistence.entity.CygMqConfig;
+import io.cygnus.persistence.service.CygInfoDao;
 import io.mercury.common.collections.group.AbstractGroup;
 import io.mercury.transport.api.Publisher;
 import io.mercury.transport.rabbitmq.RabbitMqPublisher;

@@ -14,8 +14,8 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import io.cygnus.db.CommonDaoFactory;
-import io.cygnus.db.dao.CygInfoDao;
+import io.cygnus.persistence.db.CommonDaoFactory;
+import io.cygnus.persistence.service.CygInfoDao;
 import io.cygnus.restful.service.transport.OutboxPublisherGroup;
 import io.cygnus.service.dto.pack.OutboxMessage;
 import io.cygnus.service.dto.pack.OutboxTitle;

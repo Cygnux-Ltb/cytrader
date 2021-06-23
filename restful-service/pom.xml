@@ -54,14 +54,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>persistence-h2</artifactId>
-			<version>${mercury.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>io.cygnus</groupId>
-			<artifactId>service-impl</artifactId>
+			<artifactId>persistence-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

@@ -11,9 +11,9 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import io.cygnus.db.dao.StrategyDao;
+import io.cygnus.persistence.entity.StrategyParam;
+import io.cygnus.persistence.service.StrategyDao;
 import io.cygnus.restful.service.resources.executor.bean.ValidationRule;
-import io.cygnus.service.entity.StrategyParam;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonParser;

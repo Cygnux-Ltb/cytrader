@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.db.dao.PnlDao;
+import io.cygnus.persistence.entity.StrategyInstrumentPNLDaily;
+import io.cygnus.persistence.entity.StrategyInstrumentPNLSettlementDaily;
+import io.cygnus.persistence.service.PnlDao;
 import io.cygnus.restful.service.base.CygRestfulApi;
-import io.cygnus.service.entity.StrategyInstrumentPNLDaily;
-import io.cygnus.service.entity.StrategyInstrumentPNLSettlementDaily;
 
 @RestController("/pnl")
 public class PnlRestfulApi extends CygRestfulApi {
