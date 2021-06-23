@@ -2,12 +2,12 @@ package io.cygnus.restful.client;
 
 import java.util.List;
 
+import io.cygnus.persistence.entity.CygInfo;
+import io.cygnus.persistence.entity.CygInitConfig;
+import io.cygnus.persistence.entity.CygMqConfig;
+import io.cygnus.persistence.entity.CygStrategy;
 import io.cygnus.restful.client.base.BaseApiClient;
 import io.cygnus.restful.client.base.PathParam;
-import io.cygnus.service.entity.CygInfo;
-import io.cygnus.service.entity.CygInitConfig;
-import io.cygnus.service.entity.CygMqConfig;
-import io.cygnus.service.entity.CygStrategy;
 
 
 public class CygApiClient extends BaseApiClient {

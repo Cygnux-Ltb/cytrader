@@ -2,12 +2,12 @@ package io.cygnus.restful.client;
 
 import java.util.List;
 
+import io.cygnus.persistence.entity.SymbolInfo;
+import io.cygnus.persistence.entity.SymbolTradingFee;
+import io.cygnus.persistence.entity.SymbolTradingPeriod;
+import io.cygnus.persistence.entity.TradeableInstrument;
 import io.cygnus.restful.client.base.BaseApiClient;
 import io.cygnus.restful.client.base.PathParam;
-import io.cygnus.service.entity.SymbolInfo;
-import io.cygnus.service.entity.SymbolTradingFee;
-import io.cygnus.service.entity.SymbolTradingPeriod;
-import io.cygnus.service.entity.TradeableInstrument;
 
 public class SymbolApiClient extends BaseApiClient {
 

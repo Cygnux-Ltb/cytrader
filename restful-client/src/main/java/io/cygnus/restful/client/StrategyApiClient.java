@@ -2,12 +2,12 @@ package io.cygnus.restful.client;
 
 import java.util.List;
 
+import io.cygnus.persistence.entity.CygStrategy;
+import io.cygnus.persistence.entity.StrategyParam;
+import io.cygnus.persistence.entity.StrategySignal;
+import io.cygnus.persistence.entity.StrategySymbol;
 import io.cygnus.restful.client.base.BaseApiClient;
 import io.cygnus.restful.client.base.PathParam;
-import io.cygnus.service.entity.Strategy;
-import io.cygnus.service.entity.StrategyParam;
-import io.cygnus.service.entity.StrategySignal;
-import io.cygnus.service.entity.StrategySymbol;
 
 public class StrategyApiClient extends BaseApiClient {
 
@@ -15,8 +15,8 @@ public class StrategyApiClient extends BaseApiClient {
 
 	private String strategyByIdUri = baseUri + "/{strategyId}";
 
-	public List<Strategy> getStrategyById(Integer strategyId) {
-		return super.getResultSet(Strategy.class, strategyByIdUri, 
+	public List<CygStrategy> getStrategyById(Integer strategyId) {
+		return super.getResultSet(CygStrategy.class, strategyByIdUri, 
 				new PathParam("strategyId", strategyId.toString()));
 	}
 

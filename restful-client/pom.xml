@@ -14,7 +14,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.cygnus</groupId>
-			<artifactId>service-impl</artifactId>
+			<artifactId>persistence-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
