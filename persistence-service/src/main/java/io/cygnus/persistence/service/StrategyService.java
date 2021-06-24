@@ -1,4 +1,4 @@
-package io.cygnus.service.api;
+package io.cygnus.persistence.service;
 
 public interface StrategyService {
 

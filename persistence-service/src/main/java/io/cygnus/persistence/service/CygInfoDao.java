@@ -9,8 +9,6 @@ import org.hibernate.criterion.Restrictions;
 
 import io.cygnus.persistence.db.CommonDaoFactory;
 import io.cygnus.persistence.entity.CygInfo;
-import io.cygnus.persistence.entity.CygInitConfig;
-import io.cygnus.persistence.entity.CygMqConfig;
 
 public class CygInfoDao {
 
@@ -26,6 +24,10 @@ public class CygInfoDao {
 		return list;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Integer> getAllCygId() {
 		List<CygInfo> allCygInfos = getAllCygInfo();
 		List<Integer> cygIds = new ArrayList<>();
@@ -35,29 +37,16 @@ public class CygInfoDao {
 		return cygIds;
 	}
 
+	/**
+	 * 
+	 * @param cygId
+	 * @return
+	 */
 	public List<CygInfo> getCygInfoById(Integer cygId) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygInfo> list = session.createCriteria(CygInfo.class).add(Restrictions.eq(CygInfo.COLUMN_CygID, cygId))
 				.list();
-		CommonDaoFactory.close(session);
-		return list;
-	}
-
-	public List<CygMqConfig> getCygMqConfigById(Integer cygId) {
-		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygMqConfig> list = session.createCriteria(CygMqConfig.class)
-				.add(Restrictions.eq(CygMqConfig.COLUMN_CygID, cygId)).list();
-		CommonDaoFactory.close(session);
-		return list;
-	}
-
-	public List<CygInitConfig> getCygInitConfigById(Integer cygId) {
-		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygInitConfig> list = session.createCriteria(CygInitConfig.class)
-				.add(Restrictions.eq(CygMqConfig.COLUMN_CygID, cygId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
