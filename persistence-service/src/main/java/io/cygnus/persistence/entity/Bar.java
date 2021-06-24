@@ -7,7 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -17,9 +18,11 @@ import lombok.experimental.Accessors;
  *         Bar
  *
  */
-@Data
+
 @Entity
-@Table(name = "Bar")
+@Table(name = "bar")
+@Getter
+@Setter
 @Accessors(chain = true)
 public final class Bar {
 

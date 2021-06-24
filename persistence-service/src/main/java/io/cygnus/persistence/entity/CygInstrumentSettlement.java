@@ -7,21 +7,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
  * 
  * @author yellow013
  * 
- *         CygInstrumentSettlementPrice
+ *         CygInstrumentSettlement
  *
  */
-@Data
 @Entity
-@Table(name = "cyg_instrument_settlement_price")
+@Table(name = "cyg_instrument_settlement")
+@Getter
+@Setter
 @Accessors(chain = true)
-public final class CygInstrumentSettlementPrice {
+public final class CygInstrumentSettlement {
 
 	@Id
 	@Column(name = "uid")
@@ -37,6 +39,11 @@ public final class CygInstrumentSettlementPrice {
 	@Column(name = "instrument_code")
 	private String instrumentCode;
 	public static final String COLUMN_InstrumentCode = "instrument_code";
+
+	// SettlementPrice double 19_4
+	@Column(name = "last_price")
+	private long lastPrice;
+	public static final String COLUMN_LastPrice = "last_price";
 
 	// SettlementPrice double 19_4
 	@Column(name = "settlement_price")

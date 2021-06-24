@@ -7,7 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 // StrategyParam
@@ -16,9 +17,10 @@ import lombok.experimental.Accessors;
  * @author yellow013
  *
  */
-@Data
 @Entity
 @Table(name = "cyg_strategy_param")
+@Getter
+@Setter
 @Accessors(chain = true)
 public final class CygStrategyParam {
 

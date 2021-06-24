@@ -10,7 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import io.cygnus.persistence.entity.base.ColumnDefinition;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -20,9 +21,10 @@ import lombok.experimental.Accessors;
  * CygPnlSettlementDaily
  *
  */
-@Data
 @Entity
 @Table(name = "cyg_pnl_settlement_daily")
+@Getter
+@Setter
 @Accessors(chain = true)
 public final class CygPnlSettlementDaily {
 

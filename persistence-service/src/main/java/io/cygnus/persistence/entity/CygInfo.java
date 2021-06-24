@@ -14,13 +14,16 @@ import lombok.experimental.Accessors;
 /**
  * 
  * @author yellow013
+ * 
+ *         CygInfo
  *
  */
-@Entity
-@Table(name = "CygInfo")
+
 @Getter
 @Setter
 @Accessors(chain = true)
+@Entity(name = "cyg_info")
+@Table(name = "cyg_info")
 public final class CygInfo {
 
 	@Id
@@ -62,7 +65,7 @@ public final class CygInfo {
 	@Column(name = "exchange_code")
 	private String exchangeCode;
 	public static final String COLUMN_ExchangeCode = "exchange_code";
-	
+
 	// InterfaceMode varchar 10
 	@Column(name = "interface_mode")
 	private String interfaceMode;
@@ -70,7 +73,7 @@ public final class CygInfo {
 
 	// InterfaceType char
 	@Column(name = "interface_type")
-	private char interfaceType;
+	private int interfaceType;
 	public static final String COLUMN_InterfaceType = "interface_type";
 
 }

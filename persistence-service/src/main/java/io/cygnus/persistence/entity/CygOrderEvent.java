@@ -22,11 +22,11 @@ import lombok.experimental.Accessors;
  *
  */
 @Entity
-@Table(name = "cyg_order")
+@Table(name = "cyg_order_event")
 @Getter
 @Setter
 @Accessors(chain = true)
-public final class CygOrder {
+public final class CygOrderEvent {
 
 	@Id
 	@Column(name = "uid")

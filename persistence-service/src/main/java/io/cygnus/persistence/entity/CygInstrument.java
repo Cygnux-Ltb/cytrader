@@ -7,20 +7,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
-// TradeableInstrument
 /**
  * 
  * @author yellow013
+ * 
+ *         CygInstrument
  *
  */
-@Data
+
 @Entity
-@Table(name = "cyg_instrument_status")
+@Table(name = "cyg_instrument")
+@Getter
+@Setter
 @Accessors(chain = true)
-public final class CygInstrumentStatus {
+public final class CygInstrument {
 
 	@Id
 	@Column(name = "uid")
@@ -34,6 +38,11 @@ public final class CygInstrumentStatus {
 	@Column(name = "trading_day")
 	private long tradingDay;
 	public static final String COLUMN_TradingDay = "trading_day";
+
+	// Fee double 19_4
+	@Column(name = "fee")
+	private long fee;
+	public static final String COLUMN_Fee = "Fee";
 
 	@Column(name = "tradeable")
 	private boolean tradeable;

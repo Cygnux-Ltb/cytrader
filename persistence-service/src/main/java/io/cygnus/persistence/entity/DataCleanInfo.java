@@ -8,7 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import io.cygnus.persistence.entity.base.ColumnDefinition;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -17,9 +18,10 @@ import lombok.experimental.Accessors;
  *
  */
 
-@Data
 @Entity
 @Table(name = "data_clean_info")
+@Getter
+@Setter
 @Accessors(chain = true)
 public final class DataCleanInfo {
 
