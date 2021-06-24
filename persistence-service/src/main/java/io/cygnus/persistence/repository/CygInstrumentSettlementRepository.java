@@ -1,9 +1,9 @@
 package io.cygnus.persistence.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import io.cygnus.persistence.entity.CygInstrumentSettlementPrice;
+import io.cygnus.persistence.entity.CygInstrumentSettlement;
 
-public interface CygInstrumentSettlementPriceRepository extends CrudRepository<CygInstrumentSettlementPrice, Long> {
+public interface CygInstrumentSettlementRepository extends JpaRepository<CygInstrumentSettlement, Long> {
 
 }
