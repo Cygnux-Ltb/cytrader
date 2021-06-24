@@ -65,12 +65,6 @@
 
 		<dependency>
 			<groupId>io.cygnus</groupId>
-			<artifactId>service-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.cygnus</groupId>
 			<artifactId>restful-client</artifactId>
 			<version>${project.version}</version>
 		</dependency>
