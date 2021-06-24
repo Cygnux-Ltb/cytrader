@@ -32,11 +32,11 @@
 		<module>example</module>
 		<module>exchange</module>
 		<module>indicator</module>
+		<module>persistence-service</module>
 		<module>restful-client</module>
 		<module>restful-service</module>
-		<module>service-api</module>
-		<module>service-impl</module>
 		<module>simulator</module>
+		<module>rawdata-service</module>
 	</modules>
 
 	<properties>
