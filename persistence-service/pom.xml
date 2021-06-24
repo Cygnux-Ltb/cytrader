@@ -23,15 +23,38 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-jpa</artifactId> 
-			<version>${spring.boot.version}</version> <exclusions> <exclusion> <groupId>org.slf4j</groupId> 
-			<artifactId>slf4j-api</artifactId> </exclusion> <exclusion> <groupId>ch.qos.logback</groupId> 
-			<artifactId>logback-core</artifactId> </exclusion> <exclusion> <groupId>ch.qos.logback</groupId> 
-			<artifactId>logback-classic</artifactId> </exclusion> </exclusions> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<version>${spring.boot.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.data</groupId>
+					<artifactId>spring-data-jpa</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>2.5.2</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
@@ -40,17 +63,10 @@
 			</exclusions>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.5.3.Final</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.j256.ormlite</groupId>
-			<artifactId>ormlite-jdbc</artifactId>
-			<version>5.5</version>
 		</dependency>
 
 		<dependency>
@@ -72,10 +88,9 @@
 			<version>8.0.23</version> </dependency> -->
 
 		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.5.7</version>
+			<groupId>io.mercury</groupId>
+			<artifactId>commons-core</artifactId>
+			<version>${mercury.version}</version>
 		</dependency>
-
 	</dependencies>
 </project>
