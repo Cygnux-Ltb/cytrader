@@ -32,7 +32,7 @@
 		<module>example</module>
 		<module>exchange</module>
 		<module>indicator</module>
-		<module>persistence-service</module>
+		<module>repository</module>
 		<module>restful-client</module>
 		<module>restful-service</module>
 		<module>simulator</module>
@@ -72,6 +72,7 @@
 			<version>4.13.1</version>
 			<scope>test</scope>
 		</dependency>
+		
 		<!-- commons -->
 		<!-- see https://github.com/yellow013/mercury.git -->
 		<dependency>
