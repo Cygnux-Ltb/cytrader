@@ -1,4 +1,4 @@
-package io.cygnus.persistence.entity;
+package io.cygnus.repository.entity;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.persistence.entity.base.ColumnDefinition;
+import io.cygnus.repository.constant.ColumnDefinition;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -18,14 +18,14 @@ import lombok.experimental.Accessors;
  * 
  * @author yellow013
  * 
- * CygPnlSettlementDaily
+ *         CygPnlSettlementDaily
  *
  */
-@Entity
-@Table(name = "cyg_pnl_settlement_daily")
 @Getter
 @Setter
 @Accessors(chain = true)
+@Table(name = "cyg_pnl_settlement_daily")
+@Entity(name = "cyg_pnl_settlement_daily")
 public final class CygPnlSettlementDaily {
 
 	@Id

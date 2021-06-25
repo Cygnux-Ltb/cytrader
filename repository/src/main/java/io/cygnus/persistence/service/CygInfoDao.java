@@ -8,7 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import io.cygnus.persistence.db.CommonDaoFactory;
-import io.cygnus.persistence.entity.CygInfo;
+import io.cygnus.repository.entity.CygInfo;
+import io.cygnus.repository.entity.CygInfo.CygInfoColumn;
 
 public class CygInfoDao {
 
@@ -45,7 +46,7 @@ public class CygInfoDao {
 	public List<CygInfo> getCygInfoById(Integer cygId) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygInfo> list = session.createCriteria(CygInfo.class).add(Restrictions.eq(CygInfo.COLUMN_CygID, cygId))
+		List<CygInfo> list = session.createCriteria(CygInfo.class).add(Restrictions.eq(CygInfoColumn.CYG_ID, cygId))
 				.list();
 		CommonDaoFactory.close(session);
 		return list;

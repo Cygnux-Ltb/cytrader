@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import io.cygnus.persistence.db.CommonDaoFactory;
-import io.cygnus.persistence.entity.DataCleanInfo;
+import io.cygnus.repository.entity.DataCleanInfo;
 
 public class DataCleanInfoDao {
 

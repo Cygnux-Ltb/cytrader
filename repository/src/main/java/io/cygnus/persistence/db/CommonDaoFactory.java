@@ -7,7 +7,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import io.cygnus.persistence.entity.CygInfo;
+import io.cygnus.repository.entity.CygInfo;
 
 public class CommonDaoFactory {
 

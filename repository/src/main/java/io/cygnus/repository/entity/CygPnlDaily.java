@@ -1,6 +1,4 @@
-package io.cygnus.persistence.entity;
-
-import java.util.Date;
+package io.cygnus.repository.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.persistence.entity.base.ColumnDefinition;
+import io.cygnus.repository.constant.ColumnDefinition;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -21,21 +19,21 @@ import lombok.experimental.Accessors;
  *         CygPnlDaily
  *
  */
-@Entity
-@Table(name = "cyg_pnl_daily")
 @Getter
 @Setter
 @Accessors(chain = true)
+@Table(name = "cyg_pnl_daily")
+@Entity(name = "cyg_pnl_daily")
 public final class CygPnlDaily {
 
 	@Id
 	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long uid;
+	private long uid;
 
 	// StrategyID int
 	@Column(name = "strategy_id")
-	private Integer strategyId;
+	private int strategyId;
 	public static final String COLUMN_StrategyID = "strategy_id";
 
 	// InstrumentID varchar 31
@@ -44,8 +42,8 @@ public final class CygPnlDaily {
 	public static final String COLUMN_InstrumentCode = "instrument_code";
 
 	// TradingDay date
-	@Column(name = "trading_day", columnDefinition = ColumnDefinition.DATE)
-	private Date tradingDay;
+	@Column(name = "trading_day")
+	private int tradingDay;
 	public static final String COLUMN_TradingDay = "trading_day";
 
 	// EventType char

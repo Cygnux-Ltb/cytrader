@@ -3,16 +3,16 @@ package io.cygnus.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.CygInstrument;
+import io.cygnus.repository.entity.CygStrategyParam;
 
 /**
  * 
  * @author yellow013
  * 
- *         CygInstrumentRepository
+ *         CygStrategyParamRepository
  *
  */
 @Repository
-public interface CygInstrumentRepository extends JpaRepository<CygInstrument, Long> {
+public interface CygStrategyParamRepository extends JpaRepository<CygStrategyParam, Long> {
 
 }

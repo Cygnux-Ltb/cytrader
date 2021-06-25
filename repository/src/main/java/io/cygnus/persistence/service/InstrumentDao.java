@@ -2,7 +2,7 @@ package io.cygnus.persistence.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import io.cygnus.persistence.entity.CygInstrumentSettlement;
+import io.cygnus.repository.entity.CygInstrumentSettlement;
 
 public interface InstrumentDao extends JpaRepository<CygInstrumentSettlement, Long> {
 

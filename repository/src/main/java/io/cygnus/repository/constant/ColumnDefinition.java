@@ -1,4 +1,4 @@
-package io.cygnus.persistence.entity.base;
+package io.cygnus.repository.constant;
 
 public interface ColumnDefinition {
 

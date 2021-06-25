@@ -9,7 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 
 import io.cygnus.persistence.db.CommonDaoFactory;
-import io.cygnus.persistence.entity.Bar;
+import io.cygnus.repository.entity.Bar;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public class BarDao {

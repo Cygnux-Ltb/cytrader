@@ -8,12 +8,12 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import io.cygnus.persistence.db.CommonDaoFactory;
-import io.cygnus.persistence.entity.CygPnlDaily;
-import io.cygnus.persistence.entity.CygPnlSettlementDaily;
+import io.cygnus.repository.entity.CygPnlDaily;
+import io.cygnus.repository.entity.CygPnlSettlementDaily;
 
 public class PnlDao {
 
-	public List<CygPnlDaily> queryPnlDailys(Date dateTradingDay, Integer strategyId) {
+	public List<CygPnlDaily> queryPnlDailys(Integer strategyId, Date dateTradingDay ) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygPnlDaily> list = session.createCriteria(CygPnlDaily.class)
@@ -24,7 +24,7 @@ public class PnlDao {
 		return list;
 	}
 
-	public List<CygPnlSettlementDaily> queryPnlSettlementDailys(Date dateTradingDay, Integer strategyId) {
+	public List<CygPnlSettlementDaily> queryPnlSettlementDailys(Integer strategyId, Date dateTradingDay) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygPnlSettlementDaily> list = session.createCriteria(CygPnlSettlementDaily.class)

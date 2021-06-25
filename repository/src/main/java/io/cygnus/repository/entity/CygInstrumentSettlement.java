@@ -1,4 +1,4 @@
-package io.cygnus.persistence.entity;
+package io.cygnus.repository.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,21 +18,21 @@ import lombok.experimental.Accessors;
  *         CygInstrumentSettlement
  *
  */
-@Entity
-@Table(name = "cyg_instrument_settlement")
 @Getter
 @Setter
 @Accessors(chain = true)
+@Table(name = "cyg_instrument_settlement")
+@Entity(name = "cyg_instrument_settlement")
 public final class CygInstrumentSettlement {
 
 	@Id
 	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long uid;
+	private long uid;
 
 	// TradingDay date
 	@Column(name = "trading_day")
-	private long tradingDay;
+	private int tradingDay;
 	public static final String COLUMN_TradingDay = "trading_day";
 
 	// InstrumentID varchar 31

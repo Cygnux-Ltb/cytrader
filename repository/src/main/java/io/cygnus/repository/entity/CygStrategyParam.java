@@ -1,4 +1,4 @@
-package io.cygnus.persistence.entity;
+package io.cygnus.repository.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +17,11 @@ import lombok.experimental.Accessors;
  * @author yellow013
  *
  */
-@Entity
-@Table(name = "cyg_strategy_param")
 @Getter
 @Setter
 @Accessors(chain = true)
+@Table(name = "cyg_strategy_param")
+@Entity(name = "cyg_strategy_param")
 public final class CygStrategyParam {
 
 	@Id

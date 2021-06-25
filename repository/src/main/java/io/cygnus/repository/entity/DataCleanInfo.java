@@ -1,4 +1,4 @@
-package io.cygnus.persistence.entity;
+package io.cygnus.repository.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.persistence.entity.base.ColumnDefinition;
+import io.cygnus.repository.constant.ColumnDefinition;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

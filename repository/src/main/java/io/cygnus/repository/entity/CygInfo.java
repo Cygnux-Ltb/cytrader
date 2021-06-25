@@ -1,12 +1,11 @@
-package io.cygnus.persistence.entity;
+package io.cygnus.repository.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.cygnus.repository.constant.TableName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -22,58 +21,61 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Entity(name = "cyg_info")
-@Table(name = "cyg_info")
+@Table(name = TableName.CYG_INFO)
+@Entity(name = TableName.CYG_INFO)
 public final class CygInfo {
 
 	@Id
-	@Column(name = "uid")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long uid;
-
-	// CygID int
-	@Column(name = "cyg_id")
+	@Column(name = CygInfoColumn.CYG_ID)
 	private Integer cygId;
-	public static final String COLUMN_CygID = "cyg_id";
 
 	// ProductName varchar 127
-	@Column(name = "product_name")
+	@Column(name = CygInfoColumn.PRODUCT_NAME)
 	private String productName;
-	public static final String COLUMN_ProductName = "product_name";
 
 	// TraderName varchar 63
-	@Column(name = "trader_name")
+	@Column(name = CygInfoColumn.TRADER_NAME)
 	private String traderName;
-	public static final String COLUMN_TraderName = "trader_name";
 
 	// InvestorID varchar 13
-	@Column(name = "investor_id")
+	@Column(name = CygInfoColumn.INVESTOR_ID)
 	private String investorId;
-	public static final String COLUMN_InvestorID = "investor_id";
 
 	// BrokerID varchar 11
-	@Column(name = "broker_id")
+	@Column(name = CygInfoColumn.BROKER_ID)
 	private String brokerId;
-	public static final String COLUMN_BrokerID = "broker_id";
 
 	// BinnerInterval int
-	@Column(name = "binner_interval")
+	@Column(name = CygInfoColumn.BINNER_INTERVAL)
 	private Integer binnerInterval;
-	public static final String COLUMN_BinnerInterval = "binner_interval";
 
 	// ExchangeCode varchar 9
-	@Column(name = "exchange_code")
+	@Column(name = CygInfoColumn.EXCHANGE_CODE)
 	private String exchangeCode;
-	public static final String COLUMN_ExchangeCode = "exchange_code";
 
 	// InterfaceMode varchar 10
-	@Column(name = "interface_mode")
+	@Column(name = CygInfoColumn.INTERFACE_MODE)
 	private String interfaceMode;
-	public static final String COLUMN_InterfaceMode = "interface_mode";
 
 	// InterfaceType char
-	@Column(name = "interface_type")
+	@Column(name = CygInfoColumn.INTERFACE_TYPE)
 	private int interfaceType;
-	public static final String COLUMN_InterfaceType = "interface_type";
+
+	/**
+	 * 
+	 * @author yellow013
+	 *
+	 */
+	public static interface CygInfoColumn {
+		String CYG_ID = "cyg_id";
+		String PRODUCT_NAME = "product_name";
+		String TRADER_NAME = "trader_name";
+		String INVESTOR_ID = "investor_id";
+		String BROKER_ID = "broker_id";
+		String BINNER_INTERVAL = "binner_interval";
+		String EXCHANGE_CODE = "exchange_code";
+		String INTERFACE_MODE = "interface_mode";
+		String INTERFACE_TYPE = "interface_type";
+	}
 
 }

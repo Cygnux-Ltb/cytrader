@@ -1,4 +1,4 @@
-package io.cygnus.persistence.entity;
+package io.cygnus.repository.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,11 +19,11 @@ import lombok.experimental.Accessors;
  *
  */
 
-@Entity
-@Table(name = "cyg_instrument")
 @Getter
 @Setter
 @Accessors(chain = true)
+@Table(name = "cyg_instrument")
+@Entity(name = "cyg_instrument")
 public final class CygInstrument {
 
 	@Id
@@ -36,7 +36,7 @@ public final class CygInstrument {
 	public static final String COLUMN_InstrumentID = "instrument_code";
 
 	@Column(name = "trading_day")
-	private long tradingDay;
+	private int tradingDay;
 	public static final String COLUMN_TradingDay = "trading_day";
 
 	// Fee double 19_4

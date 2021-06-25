@@ -8,8 +8,8 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import io.cygnus.persistence.db.CommonDaoFactory;
-import io.cygnus.persistence.entity.CygStrategy;
-import io.cygnus.persistence.entity.CygStrategyParam;
+import io.cygnus.repository.entity.CygStrategy;
+import io.cygnus.repository.entity.CygStrategyParam;
 
 public class StrategyDao {
 

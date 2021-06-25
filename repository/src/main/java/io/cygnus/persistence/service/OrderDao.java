@@ -11,8 +11,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
 import io.cygnus.persistence.db.CommonDaoFactory;
-import io.cygnus.persistence.entity.CygOrder;
-import io.cygnus.persistence.repository.CygOrderRepository;
+import io.cygnus.repository.CygOrderRepository;
+import io.cygnus.repository.entity.CygOrder;
 
 @Component
 public class OrderDao {
