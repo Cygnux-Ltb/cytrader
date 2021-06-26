@@ -8,9 +8,10 @@ import io.cygnus.repository.entity.CygInstrumentSettlement;
 /**
  * 
  * @author yellow013
+ * 
+ *         CygInstrumentSettlementRepository
  *
  */
-
 @Repository
 public interface CygInstrumentSettlementRepository extends JpaRepository<CygInstrumentSettlement, Long> {
 

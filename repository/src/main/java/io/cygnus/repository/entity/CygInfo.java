@@ -26,56 +26,41 @@ import lombok.experimental.Accessors;
 public final class CygInfo {
 
 	@Id
-	@Column(name = CygInfoColumn.CYG_ID)
+	@Column(name = CygInfoQueryColumn.CYG_ID)
 	private Integer cygId;
 
-	// ProductName varchar 127
-	@Column(name = CygInfoColumn.PRODUCT_NAME)
-	private String productName;
-
-	// TraderName varchar 63
-	@Column(name = CygInfoColumn.TRADER_NAME)
-	private String traderName;
-
-	// InvestorID varchar 13
-	@Column(name = CygInfoColumn.INVESTOR_ID)
+	@Column(name = CygInfoQueryColumn.INVESTOR_ID)
 	private String investorId;
 
-	// BrokerID varchar 11
-	@Column(name = CygInfoColumn.BROKER_ID)
+	@Column(name = CygInfoQueryColumn.BROKER_ID)
 	private String brokerId;
 
-	// BinnerInterval int
-	@Column(name = CygInfoColumn.BINNER_INTERVAL)
-	private Integer binnerInterval;
+	@Column(name = "product_name", length = 127)
+	private String productName;
 
-	// ExchangeCode varchar 9
-	@Column(name = CygInfoColumn.EXCHANGE_CODE)
-	private String exchangeCode;
+	@Column(name = "trader_name", length = 127)
+	private String traderName;
 
-	// InterfaceMode varchar 10
-	@Column(name = CygInfoColumn.INTERFACE_MODE)
+	@Column(name = "binner_interval")
+	private int binnerInterval;
+
+	@Column(name = "interface_mode", length = 16)
 	private String interfaceMode;
 
-	// InterfaceType char
-	@Column(name = CygInfoColumn.INTERFACE_TYPE)
-	private int interfaceType;
+	@Column(name = "interface_type", length = 16)
+	private String interfaceType;
 
 	/**
 	 * 
 	 * @author yellow013
 	 *
 	 */
-	public static interface CygInfoColumn {
+	public static interface CygInfoQueryColumn {
+
 		String CYG_ID = "cyg_id";
-		String PRODUCT_NAME = "product_name";
-		String TRADER_NAME = "trader_name";
 		String INVESTOR_ID = "investor_id";
 		String BROKER_ID = "broker_id";
-		String BINNER_INTERVAL = "binner_interval";
-		String EXCHANGE_CODE = "exchange_code";
-		String INTERFACE_MODE = "interface_mode";
-		String INTERFACE_TYPE = "interface_type";
+
 	}
 
 }
