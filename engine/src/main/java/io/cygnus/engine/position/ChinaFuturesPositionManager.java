@@ -1,7 +1,7 @@
 package io.cygnus.engine.position;
 
 import io.horizon.market.instrument.spec.ChinaFutures;
-import io.horizon.transaction.position.AbstractPositionManager;
+import io.horizon.trader.position.AbstractPositionManager;
 
 public final class ChinaFuturesPositionManager extends AbstractPositionManager<ChinaFuturesPosition> {
 
