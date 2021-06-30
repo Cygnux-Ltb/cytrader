@@ -16,23 +16,23 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class StrategySwitch implements Comparable<StrategySwitch> {
 
-	private Integer cygId;
+	private int cygId;
 
-	private Integer strategyId;
+	private int strategyId;
 
-	private String instrumentId;
+	private String instrumentCode;
 
-	private int tradeable;
+	private boolean tradeable;
 
 	public String getKey() {
-		return cygId.toString() + "-" + strategyId.toString() + "-" + instrumentId;
+		return cygId + "-" + strategyId + "-" + instrumentCode;
 	}
 
 	@Override
 	public int compareTo(StrategySwitch o) {
-		if (o.cygId.equals(this.cygId)) {
-			if (o.strategyId.equals(this.strategyId)) {
-				if (o.instrumentId.equals(this.instrumentId)) {
+		if (o.cygId == this.cygId) {
+			if (o.strategyId == this.strategyId) {
+				if (o.instrumentCode.equals(this.instrumentCode)) {
 					return 0;
 				}
 			}
@@ -42,10 +42,10 @@ public class StrategySwitch implements Comparable<StrategySwitch> {
 
 	public static void main(String[] args) {
 
-		StrategySwitch strategySwitch1 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentId("au1706");
-		StrategySwitch strategySwitch2 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentId("au1706");
-		StrategySwitch strategySwitch3 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentId("au1706");
-		StrategySwitch strategySwitch4 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentId("au1706");
+		StrategySwitch strategySwitch1 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentCode("au1706");
+		StrategySwitch strategySwitch2 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentCode("au1706");
+		StrategySwitch strategySwitch3 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentCode("au1706");
+		StrategySwitch strategySwitch4 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentCode("au1706");
 
 		Set<StrategySwitch> set = new TreeSet<>();
 
@@ -56,7 +56,7 @@ public class StrategySwitch implements Comparable<StrategySwitch> {
 
 		for (StrategySwitch strategySwitch : set) {
 			System.out.println(strategySwitch.getCygId() + "-" + strategySwitch.getStrategyId() + "-"
-					+ strategySwitch.getInstrumentId());
+					+ strategySwitch.getInstrumentCode());
 		}
 
 	}

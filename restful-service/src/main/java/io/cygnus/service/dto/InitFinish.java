@@ -11,10 +11,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class LastPrice {
+public class InitFinish {
 
-	private String instrumentId;
-
-	private long lastPrice;
+	private int cygId;
 
 }

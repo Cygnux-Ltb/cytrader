@@ -13,6 +13,10 @@ import io.cygnus.repository.entity.CygStrategyParam;
 
 public class StrategyDao {
 
+	/**
+	 * 
+	 * @return
+	 */
 	public List<CygStrategy> getAllStrategy() {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
@@ -21,7 +25,12 @@ public class StrategyDao {
 		return list;
 	}
 
-	public List<CygStrategy> getStrategyById(Integer strategyId) {
+	/**
+	 * 
+	 * @param strategyId
+	 * @return
+	 */
+	public List<CygStrategy> getStrategyById(int strategyId) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygStrategy> list = session.createCriteria(CygStrategy.class)
@@ -30,6 +39,11 @@ public class StrategyDao {
 		return list;
 	}
 
+	/**
+	 * 
+	 * @param strategyId
+	 * @return
+	 */
 	public List<CygStrategyParam> getParamsByStrategyId(Integer strategyId) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
@@ -39,6 +53,9 @@ public class StrategyDao {
 		return list;
 	}
 
+	/**
+	 * 
+	 */
 	public boolean putStrategyParam(CygStrategyParam strategyParam) {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
@@ -68,6 +85,11 @@ public class StrategyDao {
 
 	}
 
+	/**
+	 * 
+	 * @param strategyParam
+	 * @return
+	 */
 	public int putStrategyParamOnlyUpdate(CygStrategyParam strategyParam) {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();

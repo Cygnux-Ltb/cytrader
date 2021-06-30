@@ -25,18 +25,18 @@ public class OutboxMessage<T> {
 
 	public static void main(String[] args) {
 
-		StrategySwitch strategySwitch1 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentId("ni")
-				.setTradeable(1);
-		StrategySwitch strategySwitch2 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentId("rb")
-				.setTradeable(1);
-		StrategySwitch strategySwitch3 = new StrategySwitch().setCygId(1).setStrategyId(2).setInstrumentId("TA")
-				.setTradeable(1);
-		StrategySwitch strategySwitch4 = new StrategySwitch().setCygId(1).setStrategyId(2).setInstrumentId("MA")
-				.setTradeable(1);
-		StrategySwitch strategySwitch5 = new StrategySwitch().setCygId(1).setStrategyId(2).setInstrumentId("cu")
-				.setTradeable(1);
-		StrategySwitch strategySwitch6 = new StrategySwitch().setCygId(1).setStrategyId(3).setInstrumentId("p")
-				.setTradeable(1);
+		StrategySwitch strategySwitch1 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentCode("ni")
+				.setTradeable(true);
+		StrategySwitch strategySwitch2 = new StrategySwitch().setCygId(1).setStrategyId(1).setInstrumentCode("rb")
+				.setTradeable(true);
+		StrategySwitch strategySwitch3 = new StrategySwitch().setCygId(1).setStrategyId(2).setInstrumentCode("TA")
+				.setTradeable(true);
+		StrategySwitch strategySwitch4 = new StrategySwitch().setCygId(1).setStrategyId(2).setInstrumentCode("MA")
+				.setTradeable(true);
+		StrategySwitch strategySwitch5 = new StrategySwitch().setCygId(1).setStrategyId(2).setInstrumentCode("cu")
+				.setTradeable(true);
+		StrategySwitch strategySwitch6 = new StrategySwitch().setCygId(1).setStrategyId(3).setInstrumentCode("p")
+				.setTradeable(true);
 
 		List<StrategySwitch> list = new ArrayList<>();
 

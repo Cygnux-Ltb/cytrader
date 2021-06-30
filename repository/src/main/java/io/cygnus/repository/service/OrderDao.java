@@ -21,9 +21,6 @@ public class OrderDao {
 	private CygOrderRepository repository;
 
 	public List<CygOrder> getOrders(Integer strategyId, Date dateTradingDay, String investorId, String instrumentCode) {
-		
-		
-		
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		List<CygOrder> list = session.createCriteria(CygOrder.class)
