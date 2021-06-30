@@ -2,8 +2,10 @@ package io.cygnus.repository.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.cygnus.repository.constant.CommonQueryColumn;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -20,12 +22,11 @@ import lombok.experimental.Accessors;
 @Entity(name = "cyg_strategy")
 public final class CygStrategy {
 
-	@Column(name = "strategy_id")
+	@Id
+	@Column(name = CommonQueryColumn.STRATEGY_ID)
 	private int strategyId;
-	public static final String COLUMN_StrategyID = "strategy_id";
-	
+
 	@Column(name = "strategy_name")
 	private int strategyName;
-	public static final String COLUMN_StrategyName = "strategy_name";
 
 }

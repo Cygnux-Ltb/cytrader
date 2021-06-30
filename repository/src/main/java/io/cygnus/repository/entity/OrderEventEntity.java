@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import io.cygnus.repository.constant.ColumnDefinition;
-import io.cygnus.repository.constant.CommonQueryColumn;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -25,188 +24,138 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "cyg_order")
-@Entity(name = "cyg_order")
-public final class CygOrder {
+@Table(name = "cyg_order_event")
+@Entity(name = "cyg_order_event")
+public final class CygOrderEvent {
 
 	@Id
-	@Column(name = "uid")
+	@Column(name = ColumnDefinition.UID)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long uid;
 
-	/**
-	 * strategyId
-	 */
-	@Column(name = CommonQueryColumn.STRATEGY_ID)
+	// StrategyID int
+	@Column(name = "strategy_id")
 	private int strategyId;
+	public static final String COLUMN_StrategyID = "strategy_id";
 
-	/**
-	 * tradingDay
-	 */
-	@Column(name = CommonQueryColumn.TRADING_DAY)
+	// TradingDay date
+	@Column(name = "trading_day")
 	private int tradingDay;
+	public static final String COLUMN_TradingDay = "trading_day";
 
-	/**
-	 * instrumentCode
-	 */
-	@Column(name = CommonQueryColumn.INSTRUMENT_CODE)
-	private String instrumentCode;
-
-	/**
-	 * investorId
-	 */
+	// InvestorID varchar 13
 	@Column(name = "investor_id")
 	private String investorId;
 	public static final String COLUMN_InvestorID = "investor_id";
 
-	/**
-	 * orderRef
-	 */
+	// InstrumentID varchar 31
+	@Column(name = "instrument_code")
+	private String instrumentCode;
+	public static final String COLUMN_InstrumentCode = "instrument_code";
+
+	// OrderRef int
 	@Column(name = "order_ref")
-	private String orderRef;
+	private Integer orderRef;
 	public static final String COLUMN_OrderRef = "order_ref";
 
-	/**
-	 * orderMsgType
-	 */
+	// OrderMsgType int
 	@Column(name = "order_msg_type")
 	private Integer orderMsgType;
 	public static final String COLUMN_OrderMsgType = "order_msg_type";
 
-	/**
-	 * userId
-	 */
+	// UserID varchar 31
 	@Column(name = "user_id")
 	private String userId;
 	public static final String COLUMN_UserID = "user_id";
 
-	/**
-	 * direction
-	 */
+	// Direction char
 	@Column(name = "direction")
 	private char direction;
 	public static final String COLUMN_Direction = "direction";
 
-	/**
-	 * offset
-	 */
+	// Offset char
 	@Column(name = "offset")
 	private char offset;
 	public static final String COLUMN_Offset = "offset";
 
-	/**
-	 * limitPrice
-	 */
-	@Column(name = "offer_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
-	private double offerPrice;
+	// LimitPrice double 19_4
+	@Column(name = "limit_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	private double limitPrice;
+	public static final String COLUMN_LimitPrice = "limit_price";
 
-	/**
-	 * volumeTotalOriginal
-	 */
-	@Column(name = "offer_qty")
-	private Integer offerQty;
+	// VolumeTotalOriginal int
+	@Column(name = "volume_total_original")
+	private Integer volumeTotalOriginal;
+	public static final String COLUMN_VolumeTotalOriginal = "volume_total_original";
 
-	/**
-	 * orderSysId
-	 */
+	// OrderSysID varchar 21
 	@Column(name = "order_sys_id")
 	private String orderSysId;
 	public static final String COLUMN_OrderSysID = "order_sys_id";
 
-	/**
-	 * orderStatus
-	 */
+	// OrderStatus char
 	@Column(name = "order_status")
 	private char orderStatus;
 	public static final String COLUMN_OrderStatus = "order_status";
 
-	/**
-	 * broker_id
-	 */
 	@Column(name = "broker_id")
 	private String brokerId;
 	public static final String COLUMN_BrokerID = "broker_id";
 
-	/**
-	 * order_type
-	 */
 	@Column(name = "order_type")
 	private Integer orderType;
 	public static final String COLUMN_OrderType = "order_type";
 
-	/**
-	 * counterSysID
-	 */
 	@Column(name = "counter_sys_id")
-	private long counterSysID;
+	private Long counterSysID;
 	public static final String COLUMN_CounterSysID = "counter_sys_id";
 
-	/**
-	 * volume
-	 */
+	// Volume int
 	@Column(name = "volume")
-	private int volume;
+	private Integer volume;
 	public static final String COLUMN_Volume = "volume";
 
-	/**
-	 * volumeFilled
-	 */
+	// VolumeFilled int
 	@Column(name = "volume_filled")
-	private int volumeFilled;
+	private Integer volumeFilled;
 	public static final String COLUMN_VolumeFilled = "volume_filled";
 
-	/**
-	 * volumeRemained
-	 */
+	// VolumeRemained int
 	@Column(name = "volume_remained")
-	private int volumeRemained;
+	private Integer volumeRemained;
 	public static final String COLUMN_VolumeRemained = "volume_remained";
 
-	/**
-	 * price
-	 */
+	// Price double 19_4
 	@Column(name = "price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double price;
 	public static final String COLUMN_Price = "price";
 
-	/**
-	 * tradeId
-	 */
+	// TradeID varchar 21
 	@Column(name = "trade_id")
 	private String tradeId;
 	public static final String COLUMN_TradeID = "trade_id";
 
-	/**
-	 * ordRejReason
-	 */
+	// OrdRejReason int
 	@Column(name = "ord_rej_reason")
-	private int ordRejReason;
+	private Integer ordRejReason;
 	public static final String COLUMN_OrdRejReason = "ord_rej_reason";
 
-	/**
-	 * insertTime
-	 */
+	// InsertTime datetime
 	@Column(name = "insert_time", columnDefinition = ColumnDefinition.TIME)
 	private Date insertTime;
 	public static final String COLUMN_InsertTime = "insert_time";
 
-	/**
-	 * updateTime
-	 */
+	// UpdateTime datetime
 	@Column(name = "update_time", columnDefinition = ColumnDefinition.TIME)
 	private Date updateTime;
 	public static final String COLUMN_UpdateTime = "update_time";
 
-	/**
-	 * cancelTime
-	 */
+	// CancelTime datetime
 	@Column(name = "cancel_time", columnDefinition = ColumnDefinition.TIME)
 	private Date cancelTime;
 	public static final String COLUMN_CancelTime = "cancel_time";
 
-	/**
-	 * frontId
-	 */
+	// FrontID int
 	@Column(name = "front_id")
 	private Integer frontId;
 	public static final String COLUMN_FrontID = "front_id";

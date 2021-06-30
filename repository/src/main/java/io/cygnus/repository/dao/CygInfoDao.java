@@ -14,6 +14,8 @@ import io.cygnus.repository.entity.CygInfo;
  */
 
 @Repository
-public interface CygInfoRepository extends JpaRepository<CygInfo, Long> {
+public interface CygInfoDao extends JpaRepository<CygInfo, Long> {
+
+
 
 }

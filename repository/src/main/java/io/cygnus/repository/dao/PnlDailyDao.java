@@ -1,4 +1,4 @@
-package io.cygnus.repository;
+package io.cygnus.repository.dao;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import io.cygnus.repository.entity.CygPnlDaily;
  *
  */
 @Repository
-public interface CygPnlDailyRepository extends JpaRepository<CygPnlDaily, Long> {
+public interface CygPnlDailyDao extends JpaRepository<CygPnlDaily, Long> {
 
-	@Query("SELECT * FROM " + TableName.CYG_INFO + "")
+	@Query("SELECT * FROM #{#" + TableName.CYG_INFO + "} where ")
 	List<CygPnlDaily> queryPnlDailys(int strategyId, long tradingDay);
 
 }

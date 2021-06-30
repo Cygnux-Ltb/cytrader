@@ -1,4 +1,4 @@
-package io.cygnus.persistence.service;
+package io.cygnus.repository.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

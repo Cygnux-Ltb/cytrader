@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.cygnus.repository.constant.ColumnDefinition;
 import io.cygnus.repository.constant.CommonQueryColumn;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,20 +28,32 @@ import lombok.experimental.Accessors;
 public final class CygInstrumentSettlement {
 
 	@Id
-	@Column(name = "uid")
+	@Column(name = ColumnDefinition.UID)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long uid;
 
+	/**
+	 * instrumentCode
+	 */
 	@Column(name = CommonQueryColumn.INSTRUMENT_CODE)
 	private String instrumentCode;
 
+	/**
+	 * tradingDay
+	 */
 	@Column(name = CommonQueryColumn.TRADING_DAY)
 	private int tradingDay;
 
-	@Column(name = "last_price")
-	private long lastPrice;
+	/**
+	 * lastPrice
+	 */
+	@Column(name = "last_price" , columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	private double lastPrice;
 
-	@Column(name = "settlement_price")
-	private long settlementPrice;
+	/**
+	 * settlementPrice
+	 */
+	@Column(name = "settlement_price" , columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	private double settlementPrice;
 
 }

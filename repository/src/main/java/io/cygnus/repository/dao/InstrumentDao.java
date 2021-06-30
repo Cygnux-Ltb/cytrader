@@ -1,4 +1,4 @@
-package io.cygnus.repository;
+package io.cygnus.repository.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,6 +13,6 @@ import io.cygnus.repository.entity.CygInstrument;
  *
  */
 @Repository
-public interface CygInstrumentRepository extends JpaRepository<CygInstrument, Long> {
+public interface CygInstrumentDao extends JpaRepository<CygInstrument, Long> {
 
 }

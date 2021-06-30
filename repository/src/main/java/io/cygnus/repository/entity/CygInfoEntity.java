@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.cygnus.repository.constant.CommonQueryColumn;
 import io.cygnus.repository.constant.TableName;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,17 +23,17 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Table(name = TableName.CYG_INFO)
-@Entity(name = TableName.CYG_INFO)
+@Entity(name = "CygInfo")
 public final class CygInfo {
 
 	@Id
 	@Column(name = CygInfoQueryColumn.CYG_ID)
 	private Integer cygId;
 
-	@Column(name = CygInfoQueryColumn.INVESTOR_ID)
+	@Column(name = CommonQueryColumn.INVESTOR_ID)
 	private String investorId;
 
-	@Column(name = CygInfoQueryColumn.BROKER_ID)
+	@Column(name = CommonQueryColumn.BROKER_ID)
 	private String brokerId;
 
 	@Column(name = "product_name", length = 127)
@@ -41,13 +42,7 @@ public final class CygInfo {
 	@Column(name = "trader_name", length = 127)
 	private String traderName;
 
-	@Column(name = "binner_interval")
-	private int binnerInterval;
-
-	@Column(name = "interface_mode", length = 16)
-	private String interfaceMode;
-
-	@Column(name = "interface_type", length = 16)
+	@Column(name = "adaptor_type", length = 16)
 	private String interfaceType;
 
 	/**
@@ -58,9 +53,7 @@ public final class CygInfo {
 	public static interface CygInfoQueryColumn {
 
 		String CYG_ID = "cyg_id";
-		String INVESTOR_ID = "investor_id";
-		String BROKER_ID = "broker_id";
-
+		
 	}
 
 }

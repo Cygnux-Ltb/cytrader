@@ -1,4 +1,4 @@
-package io.cygnus.persistence.service;
+package io.cygnus.repository.service;
 
 import java.util.Date;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 
-import io.cygnus.persistence.db.CommonDaoFactory;
+import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.entity.Bar;
 import io.mercury.common.log.CommonLoggerFactory;
 
