@@ -12,9 +12,9 @@ import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.entity.Bar;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public class BarDao {
+public class BarService {
 
-	private static final Logger logger = CommonLoggerFactory.getLogger(BarDao.class);
+	private static final Logger logger = CommonLoggerFactory.getLogger(BarService.class);
 
 	public List<Bar> getTimeBinners(Integer cygId, Date dateTradingDay, String instrumentCode) {
 		Session session = CommonDaoFactory.getSession();
