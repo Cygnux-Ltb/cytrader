@@ -1,4 +1,4 @@
-package io.cygnus.repository.entity;
+package io.cygnus.rawdata.service;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

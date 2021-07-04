@@ -17,51 +17,50 @@ import io.mercury.common.log.CommonLoggerFactory;
 
 public abstract class AbstractMultiStrategyScheduler<M extends MarketData> implements MultiStrategyScheduler<M> {
 
-	/**
-	 * Logger
-	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(AbstractMultiStrategyScheduler.class);
+    /**
+     * Logger
+     */
+    private static final Logger log = CommonLoggerFactory.getLogger(AbstractMultiStrategyScheduler.class);
 
-	/**
-	 * 策略列表
-	 */
-	protected final MutableIntObjectMap<Strategy<M>> strategyMap = MutableMaps.newIntObjectHashMap();
+    /**
+     * 策略列表
+     */
+    protected final MutableIntObjectMap<Strategy<M>> strategyMap = MutableMaps.newIntObjectHashMap();
 
-	/**
-	 * 订阅合约的策略列表 <br>
-	 * instrumentId -> Set::[Strategy]
-	 */
-	protected final MutableIntObjectMap<MutableSet<Strategy<M>>> subscribedMap = MutableMaps.newIntObjectHashMap();
+    /**
+     * 订阅合约的策略列表 <br>
+     * instrumentId -> Set::[Strategy]
+     */
+    protected final MutableIntObjectMap<MutableSet<Strategy<M>>> subscribedMap = MutableMaps.newIntObjectHashMap();
 
-	@Override
-	public void addStrategy(Strategy<M> strategy) {
-		log.info("Add strategy -> strategyId==[{}], strategyName==[{}], subAccount==[{}]", strategy.getStrategyId(),
-				strategy.getStrategyName(), strategy.getSubAccount());
-		strategyMap.put(strategy.getStrategyId(), strategy);
-		strategy.getInstruments().each(instrument -> subscribeInstrument(instrument, strategy));
-		strategy.enable();
-	}
+    @Override
+    public void addStrategy(Strategy<M> strategy) {
+        log.info("Add strategy -> strategyId==[{}], strategyName==[{}], subAccount==[{}]", strategy.getStrategyId(),
+                strategy.getStrategyName(), strategy.getSubAccount());
+        strategyMap.put(strategy.getStrategyId(), strategy);
+        strategy.getInstruments().each(instrument -> subscribeInstrument(instrument, strategy));
+        strategy.enable();
+    }
 
-	private void subscribeInstrument(Instrument instrument, Strategy<M> strategy) {
-		subscribedMap.getIfAbsentPut(instrument.getInstrumentId(), MutableSets::newUnifiedSet).add(strategy);
-		log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.getStrategyId(),
-				instrument.getInstrumentId());
-	}
+    private void subscribeInstrument(Instrument instrument, Strategy<M> strategy) {
+        subscribedMap.getIfAbsentPut(instrument.getInstrumentId(), MutableSets::newUnifiedSet).add(strategy);
+        log.info("Add subscribe instrument, strategyId==[{}], instrumentId==[{}]", strategy.getStrategyId(),
+                instrument.getInstrumentId());
+    }
 
-	@AbstractFunction
-	protected abstract void close0() throws IOException;
+    @AbstractFunction
+    protected abstract void close0() throws IOException;
 
-	@Override
-	public void close() throws IOException {
-		strategyMap.each(strategy -> {
-			try {
-				strategy.close();
-			}catch (IOException e) {
-				
-			}
-			
-		});
-
-	}
+    @Override
+    public void close() throws IOException {
+        strategyMap.each(strategy -> {
+            try {
+                strategy.close();
+            } catch (IOException e) {
+                log.error("strategy close exception!", e);
+            }
+        });
+        close0();
+    }
 
 }
