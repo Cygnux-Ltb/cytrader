@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import io.cygnus.persistence.entity.CygInfo;
 import io.cygnus.persistence.entity.CygMqConfig;
 import io.cygnus.persistence.entity.CygStrategy;
-import io.cygnus.persistence.service.CygInfoDao;
+import io.cygnus.repository.service.CygInfoService;
 import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -18,7 +18,7 @@ public class CygInfoExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(CygInfoExecutor.class);
 
-	private final static CygInfoDao dao = new CygInfoDao();
+	private final static CygInfoService dao = new CygInfoService();
 
 	// All cygInfo Cache
 	private static final CacheList<CygInfo> AllCygInfoCache = new CacheList<>(() -> {

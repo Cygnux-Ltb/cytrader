@@ -2,7 +2,7 @@ package io.cygnus.restful.client;
 
 import java.util.List;
 
-import io.cygnus.persistence.entity.Bar;
+import io.cygnus.repository.entity.Bar;
 import io.cygnus.restful.client.base.BaseApiClient;
 import io.cygnus.restful.client.base.PathParam;
 

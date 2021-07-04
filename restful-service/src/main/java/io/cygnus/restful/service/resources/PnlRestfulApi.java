@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.persistence.entity.StrategyInstrumentPNLDaily;
 import io.cygnus.persistence.entity.StrategyInstrumentPNLSettlementDaily;
-import io.cygnus.persistence.service.PnlDao;
+import io.cygnus.repository.service.PnlService;
 import io.cygnus.restful.service.base.CygRestfulApi;
 
 @RestController("/pnl")
@@ -37,8 +37,8 @@ public class PnlRestfulApi extends CygRestfulApi {
 		if (dateTradingDay == null) {
 			return httpBadRequest();
 		}
-		PnlDao dao = new PnlDao();
-		List<StrategyInstrumentPNLDaily> pnlDailys = dao.queryPnlDailys(dateTradingDay, strategyId);
+		PnlService dao = new PnlService();
+		List<StrategyInstrumentPNLDaily> pnlDailys = dao.queryPnlDailys(tradingDay, strategyId);
 		return jsonResponse(pnlDailys);
 	}
 
@@ -55,7 +55,7 @@ public class PnlRestfulApi extends CygRestfulApi {
 			return httpBadRequest();
 		}
 		StrategyInstrumentPNLDaily pnlDaily = jsonToObj(json, StrategyInstrumentPNLDaily.class);
-		PnlDao dao = new PnlDao();
+		PnlService dao = new PnlService();
 		dao.addOrUpdatePnlDailys(pnlDaily);
 		return httpOk();
 	}
@@ -77,7 +77,7 @@ public class PnlRestfulApi extends CygRestfulApi {
 		if (dateTradingDay == null) {
 			return httpBadRequest();
 		}
-		PnlDao dao = new PnlDao();
+		PnlService dao = new PnlService();
 		List<StrategyInstrumentPNLSettlementDaily> pnlSettlementDailys = dao.queryPnlSettlementDailys(dateTradingDay,
 				strategyId);
 		return jsonResponse(pnlSettlementDailys);

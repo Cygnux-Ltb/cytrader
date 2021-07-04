@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.persistence.entity.InstrumentSettlementPrice;
-import io.cygnus.persistence.service.InstrumentDao;
+import io.cygnus.repository.service.InstrumentService;
 import io.cygnus.restful.service.base.CygRestfulApi;
 import io.cygnus.service.dto.LastPrice;
 import io.mercury.common.annotation.cache.GetCache;
@@ -25,7 +25,7 @@ import io.mercury.common.annotation.cache.GetCache;
 public class InstrumentRestfulApi extends CygRestfulApi {
 	
 	@Resource
-	private InstrumentDao instrumentDao;
+	private InstrumentService instrumentDao;
 
 	/**
 	 * Get SettlementPrice

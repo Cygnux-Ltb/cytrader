@@ -14,8 +14,8 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import io.cygnus.persistence.db.CommonDaoFactory;
-import io.cygnus.persistence.service.CygInfoDao;
+import io.cygnus.repository.db.CommonDaoFactory;
+import io.cygnus.repository.service.CygInfoService;
 import io.cygnus.restful.service.transport.OutboxPublisherGroup;
 import io.cygnus.service.dto.pack.OutboxMessage;
 import io.cygnus.service.dto.pack.OutboxTitle;
@@ -76,7 +76,7 @@ public class CygnusInitService {
 
 	private void sendEndTimeBinner() {
 
-		CygInfoDao dao = new CygInfoDao();
+		CygInfoService dao = new CygInfoService();
 		List<Integer> cygIdList = dao.getAllCygId();
 
 		for (Integer cygId : cygIdList) {

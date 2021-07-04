@@ -8,9 +8,9 @@ import io.cygnus.restful.client.base.PathParam;
 
 public class PnlApiClient extends BaseApiClient {
 
-	private String baseUri = "/pnl";
+	private String pnlUri = "/pnl";
 
-	private String getPnlDailysUri = baseUri + "?tradingDay={tradingDay}&strategyId={strategyId}";
+	private String getPnlDailysUri = pnlUri + "?tradingDay={tradingDay}&strategyId={strategyId}";
 
 	public List<CygPnlDaily> getPnlDailys(String tradingDay, Integer strategyId) {
 		return getResultSet(CygPnlDaily.class, getPnlDailysUri,

@@ -3,6 +3,7 @@ package io.cygnus.restful.service.resources.executor;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.cygnus.repository.service.StrategyService;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -10,23 +11,26 @@ import io.cygnus.persistence.entity.Strategy;
 import io.cygnus.persistence.entity.StrategyDefaultParam;
 import io.cygnus.persistence.entity.StrategyParam;
 import io.cygnus.persistence.entity.StrategySymbol;
-import io.cygnus.persistence.service.StrategyDao;
+import io.cygnus.repository.service.StrategyDao;
 import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
+
+import javax.annotation.Resource;
 
 @Component
 public class StrategyExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(StrategyExecutor.class);
 
-	private static final StrategyDao strategyDao = new StrategyDao();
+	@Resource
+	private StrategyService strategy;
 
 	/**
 	 * All strategy Cache
 	 */
-	private static final CacheList<Strategy> AllStrategyCache = new CacheList<>(() -> {
-		return strategyDao.getAllStrategy();
+	private  final CacheList<Strategy> AllStrategyCache = new CacheList<>(() -> {
+		return strategy.getAllStrategy();
 	});
 
 	/**

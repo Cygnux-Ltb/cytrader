@@ -8,9 +8,9 @@ import io.cygnus.restful.client.base.PathParam;
 
 public class OrderApiClient extends BaseApiClient {
 
-	private String baseUri = "/orders";
+	private String orderUri = "/order";
 
-	private String ordersByInitUri = baseUri + "/init?tradingDay={tradingDay}&strategyId={strategyId}";
+	private String ordersByInitUri = orderUri + "/init?tradingDay={tradingDay}&strategyId={strategyId}";
 
 	public List<CygOrder> getOrdersByInit(String tradingDay, Integer strategyId) {
 		return getResultSet(CygOrder.class, ordersByInitUri, new PathParam("tradingDay", tradingDay),
@@ -18,7 +18,7 @@ public class OrderApiClient extends BaseApiClient {
 	}
 
 	public boolean putOrders(CygOrder order) {
-		return putBody(order, baseUri);
+		return putBody(order, orderUri);
 	}
 
 }

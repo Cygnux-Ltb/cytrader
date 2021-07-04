@@ -3,6 +3,7 @@ package io.cygnus.restful.service.resources;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
@@ -13,27 +14,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.persistence.entity.Order;
-import io.cygnus.persistence.service.OrderDao;
+import io.cygnus.repository.service.OrderService;
 import io.cygnus.restful.service.base.CygRestfulApi;
 
 @RestController("/order")
 public class OrdersRestfulApi extends CygRestfulApi {
 
+	@Resource
+	private OrderService orderService;
 	/**
 	 * 查询Order
 	 * 
 	 * @param strategyId
 	 * @param tradingDay
 	 * @param investorId
-	 * @param instrumentId
+	 * @param instrumentCode
 	 * 
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<Object> getOrder(@RequestParam("strategyId") Integer strategyId,
+	public ResponseEntity<Object> getOrder(@RequestParam("strategyId") int strategyId,
 			@RequestParam("tradingDay") String tradingDay, @RequestParam("investorId") String investorId,
-			@RequestParam("instrumentId") String instrumentId) {
-		if (checkParamIsNull(strategyId, tradingDay, investorId, instrumentId)) {
+			@RequestParam("instrumentCode") String instrumentCode) {
+		if (checkParamIsNull(strategyId, tradingDay, investorId, instrumentCode)) {
 			return httpBadRequest();
 		}
 		Date dateTradingDay = null;
@@ -43,8 +46,8 @@ public class OrdersRestfulApi extends CygRestfulApi {
 				return httpBadRequest();
 			}
 		}
-		OrderDao ordersDao = new OrderDao();
-		List<Order> orders = ordersDao.getOrders(strategyId, dateTradingDay, investorId, instrumentId);
+		OrderService ordersDao = new OrderService();
+		List<Order> orders = ordersDao.getOrders(strategyId, tradingDay, investorId, instrumentCode);
 		return jsonResponse(orders);
 	}
 
@@ -68,7 +71,7 @@ public class OrdersRestfulApi extends CygRestfulApi {
 				return httpBadRequest();
 			}
 		}
-		OrderDao ordersDao = new OrderDao();
+		OrderService ordersDao = new OrderService();
 		List<Order> orders = ordersDao.getOrdersByInit(dateTradingDay, strategyId);
 		return jsonResponse(orders);
 	}
@@ -82,7 +85,7 @@ public class OrdersRestfulApi extends CygRestfulApi {
 	public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		Order order = jsonToObj(json, Order.class);
-		OrderDao ordersDao = new OrderDao();
+		OrderService ordersDao = new OrderService();
 		if (ordersDao.addOrder(order)) {
 			return httpOk();
 		}

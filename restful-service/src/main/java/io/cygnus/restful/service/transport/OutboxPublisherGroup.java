@@ -3,7 +3,7 @@ package io.cygnus.restful.service.transport;
 import java.util.List;
 
 import io.cygnus.persistence.entity.CygMqConfig;
-import io.cygnus.persistence.service.CygInfoDao;
+import io.cygnus.repository.service.CygInfoService;
 import io.mercury.common.collections.group.AbstractGroup;
 import io.mercury.transport.api.Publisher;
 import io.mercury.transport.rabbitmq.RabbitMqPublisher;
@@ -25,7 +25,7 @@ public class OutboxPublisherGroup extends AbstractGroup<Integer, Publisher<byte[
 	@Override
 	protected synchronized Publisher<byte[]> createMember(Integer cygId) {
 
-		CygInfoDao dao = new CygInfoDao();
+		CygInfoService dao = new CygInfoService();
 
 		List<CygMqConfig> cygMqConfigs = dao.getCygMqConfigById(cygId);
 

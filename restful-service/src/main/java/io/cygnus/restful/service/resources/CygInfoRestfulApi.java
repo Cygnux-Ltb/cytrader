@@ -35,9 +35,9 @@ public class CygInfoRestfulApi extends CygRestfulApi {
 	 */
 	@GetMapping
 	@GetCache
-	public ResponseEntity<Object> getAllcygInfo() {
-		List<CygInfo> thadInfos = executor.getAllcygInfo();
-		return jsonResponse(thadInfos);
+	public ResponseEntity<Object> getAllCygInfo() {
+		List<CygInfo> cygInfoList = executor.getAllcygInfo();
+		return jsonResponse(cygInfoList);
 	}
 
 	private static ConcurrentHashMap<Integer, InitFinish> cygInfoInitFinishCacheMap = new ConcurrentHashMap<>();
