@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import io.cygnus.repository.constant.ColumnDefinition;
-import io.cygnus.repository.constant.CommonQueryColumn;
+import io.cygnus.repository.constant.CommonColumn;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -26,23 +26,23 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Table(name = "cyg_instrument")
 @Entity(name = "cyg_instrument")
-public final class CygInstrument {
+public final class InstrumentEntity {
 
 	@Id
-	@Column(name = ColumnDefinition.UID)
+	@Column(name = CommonColumn.UID)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long uid;
 
 	/**
 	 * instrumentCode
 	 */
-	@Column(name = CommonQueryColumn.INSTRUMENT_CODE)
+	@Column(name = CommonColumn.INSTRUMENT_CODE)
 	private String instrumentCode;
 
 	/**
 	 * tradingDay
 	 */
-	@Column(name = CommonQueryColumn.TRADING_DAY)
+	@Column(name = CommonColumn.TRADING_DAY)
 	private int tradingDay;
 
 	/**

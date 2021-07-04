@@ -3,17 +3,17 @@ package io.cygnus.repository.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.CygStrategy;
+import io.cygnus.repository.entity.StrategyEntity;
 
 /**
  * @author yellow013
  * <p>
- * CygStrategyRepository
+ * StrategyDao
  */
 
 @Repository
-public interface CygStrategyDao extends JpaRepository<CygStrategy, Long> {
+public interface StrategyDao extends JpaRepository<StrategyEntity, Long> {
 
-    CygStrategy queryStrategyByStrategyId(int strategyId);
+    StrategyEntity queryByStrategyId(int strategyId);
 
 }

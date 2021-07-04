@@ -8,19 +8,19 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import io.cygnus.repository.db.CommonDaoFactory;
-import io.cygnus.repository.entity.CygInfo;
-import io.cygnus.repository.entity.CygInfo.CygInfoQueryColumn;
+import io.cygnus.repository.entity.CygInfoEntity;
+import io.cygnus.repository.entity.CygInfoEntity.CygInfoQueryColumn;
 
-public class CygInfoDao {
+public class CygInfoService {
 
 	/**
 	 * 
 	 * @return
 	 */
-	public List<CygInfo> getAllCygInfo() {
+	public List<CygInfoEntity> getAllCygInfo() {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygInfo> list = session.createCriteria(CygInfo.class).list();
+		List<CygInfoEntity> list = session.createCriteria(CygInfoEntity.class).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
@@ -30,9 +30,9 @@ public class CygInfoDao {
 	 * @return
 	 */
 	public List<Integer> getAllCygId() {
-		List<CygInfo> allCygInfos = getAllCygInfo();
+		List<CygInfoEntity> allCygInfos = getAllCygInfo();
 		List<Integer> cygIds = new ArrayList<>();
-		for (CygInfo CygInfo : allCygInfos) {
+		for (CygInfoEntity CygInfo : allCygInfos) {
 			cygIds.add(CygInfo.getCygId());
 		}
 		return cygIds;
@@ -43,10 +43,10 @@ public class CygInfoDao {
 	 * @param cygId
 	 * @return
 	 */
-	public List<CygInfo> getCygInfoById(Integer cygId) {
+	public List<CygInfoEntity> getCygInfoById(Integer cygId) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygInfo> list = session.createCriteria(CygInfo.class).add(Restrictions.eq(CygInfoQueryColumn.CYG_ID, cygId))
+		List<CygInfoEntity> list = session.createCriteria(CygInfoEntity.class).add(Restrictions.eq(CygInfoQueryColumn.CYG_ID, cygId))
 				.list();
 		CommonDaoFactory.close(session);
 		return list;
@@ -56,13 +56,13 @@ public class CygInfoDao {
 		try {
 			Session session = CommonDaoFactory.getSession();
 			@SuppressWarnings("deprecation")
-			Criteria criteria = session.createCriteria(CygInfo.class);
+			Criteria criteria = session.createCriteria(CygInfoEntity.class);
 			@SuppressWarnings("unchecked")
-			List<CygInfo> cygInfos = criteria.list();
+			List<CygInfoEntity> cygInfos = criteria.list();
 			// String json = JSON.toJSONString(cygInfos);
 			// System.out.println(json);
 
-			for (CygInfo cygInfo : cygInfos) {
+			for (CygInfoEntity cygInfo : cygInfos) {
 				System.out.println(cygInfo.getCygId());
 			}
 		} catch (Exception e) {

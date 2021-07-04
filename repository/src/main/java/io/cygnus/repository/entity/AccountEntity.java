@@ -1,7 +1,7 @@
 package io.cygnus.repository.entity;
 
 import io.cygnus.repository.constant.ColumnDefinition;
-import io.cygnus.repository.constant.CommonQueryColumn;
+import io.cygnus.repository.constant.CommonColumn;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,20 +14,20 @@ import javax.persistence.*;
 public final class AccountEntity {
 
 	@Id
-	@Column(name = ColumnDefinition.UID)
+	@Column(name = CommonColumn.UID)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int uid;
 
-	@Column(name = AccountQueryColumn.SUB_ACCOUNT_ID)
+	@Column(name = AccountColumn.SUB_ACCOUNT_ID)
 	private int subAccountId;
 
-	@Column(name = AccountQueryColumn.ACCOUNT_ID)
+	@Column(name = AccountColumn.ACCOUNT_ID)
 	private int accountId;
 
-	@Column(name = CommonQueryColumn.BROKER_ID)
+	@Column(name = CommonColumn.BROKER_ID)
 	private String brokerId;
 
-	@Column(name = CommonQueryColumn.INVESTOR_ID)
+	@Column(name = CommonColumn.INVESTOR_ID)
 	private String investorId;
 
 	@Column(name = "adaptor_type")
@@ -38,9 +38,11 @@ public final class AccountEntity {
 	 * @author yellow013
 	 *
 	 */
-	public interface AccountQueryColumn {
+	public interface AccountColumn {
+
 		String SUB_ACCOUNT_ID = "sub_account_id";
 		String ACCOUNT_ID = "account_id";
+
 	}
 
 }

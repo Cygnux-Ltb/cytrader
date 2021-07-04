@@ -2,14 +2,14 @@ package io.cygnus.repository.constant;
 
 public interface ColumnDefinition {
 
-	String DECIMAL_19_4 = "DECIMAL(19,4)";
-	
-	String DECIMAL_19_8 = "DECIMAL(19,8)";
+    String DECIMAL_19_4 = "DECIMAL(19,4)";
 
-	String DATETIME = "DATETIME";
+    String DECIMAL_19_8 = "DECIMAL(19,8)";
 
-	String DATE = "DATE";
+    String DATETIME = "DATETIME";
 
-	String TIME = "TIME";
+    String DATE = "DATE";
+
+    String TIME = "TIME";
 
 }

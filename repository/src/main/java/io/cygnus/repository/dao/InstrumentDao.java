@@ -3,16 +3,16 @@ package io.cygnus.repository.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.CygInstrument;
+import io.cygnus.repository.entity.InstrumentEntity;
 
 /**
- * 
  * @author yellow013
- * 
- *         CygInstrumentRepository
- *
+ * <p>
+ * InstrumentDao
  */
 @Repository
-public interface CygInstrumentDao extends JpaRepository<CygInstrument, Long> {
+public interface InstrumentDao extends JpaRepository<InstrumentEntity, Long> {
+
+
 
 }

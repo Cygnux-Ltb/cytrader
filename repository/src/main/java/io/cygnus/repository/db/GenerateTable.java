@@ -1,4 +1,4 @@
-package io.cygnus.persistence.db;
+package io.cygnus.repository.db;
 //
 //import java.sql.SQLException;
 //

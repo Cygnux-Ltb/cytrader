@@ -1,4 +1,4 @@
-package io.cygnus.persistence.service;
+package io.cygnus.repository.service;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import io.cygnus.persistence.db.CommonDaoFactory;
+import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.entity.DataCleanInfo;
 
 public class DataCleanInfoDao {
@@ -21,6 +21,10 @@ public class DataCleanInfoDao {
 		return list;
 	}
 
+	/**
+	 *
+	 * @param info
+	 */
 	public void addOrUpdateData(DataCleanInfo info) {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();

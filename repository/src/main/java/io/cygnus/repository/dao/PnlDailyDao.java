@@ -7,19 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import io.cygnus.repository.constant.TableName;
-import io.cygnus.repository.entity.CygPnlDaily;
+import io.cygnus.repository.entity.PnlDailyEntity;
 
 /**
- * 
  * @author yellow013
- * 
- *         CygPnlDailyRepository
- *
+ * <p>
+ * PnlDailyDao
  */
 @Repository
-public interface CygPnlDailyDao extends JpaRepository<CygPnlDaily, Long> {
+public interface PnlDailyDao extends JpaRepository<PnlDailyEntity, Long> {
 
-	@Query("SELECT * FROM #{#" + TableName.CYG_INFO + "} where ")
-	List<CygPnlDaily> queryPnlDailys(int strategyId, long tradingDay);
+    @Query("SELECT * FROM #{#" + TableName.CYG_INFO + "} where ")
+    List<PnlDailyEntity> query(int strategyId, long tradingDay);
 
 }

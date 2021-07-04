@@ -1,18 +1,23 @@
 package io.cygnus.repository.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.CygOrder;
+import io.cygnus.repository.entity.OrderEntity;
+
+import java.util.List;
 
 /**
- * 
  * @author yellow013
- * 
- *         CygOrderRepository
- *
+ * <p>
+ * OrderDao
  */
 @Repository
-public interface CygOrderDao extends JpaRepository<CygOrder, Long> {
+public interface OrderDao extends JpaRepository<OrderEntity, Long> {
+
+    @Query("")
+    List<OrderEntity> query();
+
 
 }

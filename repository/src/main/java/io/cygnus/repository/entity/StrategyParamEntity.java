@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import io.cygnus.repository.constant.ColumnDefinition;
-import io.cygnus.repository.constant.CommonQueryColumn;
+import io.cygnus.repository.constant.CommonColumn;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -23,14 +23,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Table(name = "cyg_strategy_param")
 @Entity(name = "cyg_strategy_param")
-public final class CygStrategyParam {
+public final class StrategyParamEntity {
 
     @Id
-    @Column(name = ColumnDefinition.UID)
+    @Column(name = CommonColumn.UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
-    @Column(name = CommonQueryColumn.STRATEGY_ID)
+    @Column(name = CommonColumn.STRATEGY_ID)
     private int strategyId;
 
     @Column(name = "param_name")

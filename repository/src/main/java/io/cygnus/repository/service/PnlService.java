@@ -3,50 +3,55 @@ package io.cygnus.repository.service;
 import java.util.Date;
 import java.util.List;
 
+import io.cygnus.repository.dao.PnlDailyDao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import io.cygnus.repository.db.CommonDaoFactory;
-import io.cygnus.repository.entity.CygPnlDaily;
-import io.cygnus.repository.entity.CygPnlSettlementDaily;
+import io.cygnus.repository.entity.PnlDailyEntity;
+import io.cygnus.repository.entity.PnlSettlementDailyEntity;
+import org.springframework.stereotype.Component;
 
-public class PnlDataService {
+@Component
+public final class PnlService {
 
-	public List<CygPnlDaily> queryPnlDailys(Integer strategyId, Date dateTradingDay ) {
+	private PnlDailyDao pnlDailyDao;
+
+	public List<PnlDailyEntity> queryPnlDailys(Integer strategyId, Date dateTradingDay ) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygPnlDaily> list = session.createCriteria(CygPnlDaily.class)
-				.add(Restrictions.eq(CygPnlDaily.COLUMN_TradingDay, dateTradingDay))
-				.add(Restrictions.eq(CygPnlDaily.COLUMN_StrategyID, strategyId))
-				.add(Restrictions.eq(CygPnlDaily.COLUMN_Approved, 'Y')).list();
+		List<PnlDailyEntity> list = session.createCriteria(PnlDailyEntity.class)
+				.add(Restrictions.eq(PnlDailyEntity.COLUMN_TradingDay, dateTradingDay))
+				.add(Restrictions.eq(PnlDailyEntity.COLUMN_StrategyID, strategyId))
+				.add(Restrictions.eq(PnlDailyEntity.COLUMN_Approved, 'Y')).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
 
-	public List<CygPnlSettlementDaily> queryPnlSettlementDailys(Integer strategyId, Date dateTradingDay) {
+	public List<PnlSettlementDailyEntity> queryPnlSettlementDailys(Integer strategyId, Date dateTradingDay) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygPnlSettlementDaily> list = session.createCriteria(CygPnlSettlementDaily.class)
-				.add(Restrictions.eq(CygPnlSettlementDaily.COLUMN_TradingDay, dateTradingDay))
-				.add(Restrictions.eq(CygPnlSettlementDaily.COLUMN_StrategyID, strategyId)).list();
+		List<PnlSettlementDailyEntity> list = session.createCriteria(PnlSettlementDailyEntity.class)
+				.add(Restrictions.eq(PnlSettlementDailyEntity.COLUMN_TradingDay, dateTradingDay))
+				.add(Restrictions.eq(PnlSettlementDailyEntity.COLUMN_StrategyID, strategyId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
 
-	public void addOrUpdatePnlDailys(CygPnlDaily pnlDaily) {
+	public void addOrUpdatePnlDailys(PnlDailyEntity pnlDaily) {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
 			@SuppressWarnings({ "unchecked", "deprecation" })
-			List<CygPnlDaily> queryResult = session.createCriteria(CygPnlDaily.class)
-					.add(Restrictions.eq(CygPnlDaily.COLUMN_StrategyID, pnlDaily.getStrategyId()))
-					.add(Restrictions.eq(CygPnlDaily.COLUMN_InstrumentCode, pnlDaily.getInstrumentCode()))
-					.add(Restrictions.eq(CygPnlDaily.COLUMN_TradingDay, pnlDaily.getTradingDay())).list();
+			List<PnlDailyEntity> queryResult = session.createCriteria(PnlDailyEntity.class)
+					.add(Restrictions.eq(PnlDailyEntity.COLUMN_StrategyID, pnlDaily.getStrategyId()))
+					.add(Restrictions.eq(PnlDailyEntity.COLUMN_InstrumentCode, pnlDaily.getInstrumentCode()))
+					.add(Restrictions.eq(PnlDailyEntity.COLUMN_TradingDay, pnlDaily.getTradingDay())).list();
 			if (queryResult.size() == 0) {
 				session.save(pnlDaily);
 			} else {
-				CygPnlDaily queryResultObj = queryResult.get(0);
+				PnlDailyEntity queryResultObj = queryResult.get(0);
 				pnlDaily.setUid(queryResultObj.getUid());
 				session.update(pnlDaily);
 			}

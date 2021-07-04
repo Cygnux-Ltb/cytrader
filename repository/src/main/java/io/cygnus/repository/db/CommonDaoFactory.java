@@ -1,4 +1,4 @@
-package io.cygnus.persistence.db;
+package io.cygnus.repository.db;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -7,7 +7,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import io.cygnus.repository.entity.CygInfo;
+import io.cygnus.repository.entity.CygInfoEntity;
 
 public class CommonDaoFactory {
 
@@ -37,7 +37,7 @@ public class CommonDaoFactory {
 	public static void main(String[] args) {
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings("deprecation")
-		Criteria criteria = session.createCriteria(CygInfo.class);
+		Criteria criteria = session.createCriteria(CygInfoEntity.class);
 		System.out.println(criteria.list());
 	}
 

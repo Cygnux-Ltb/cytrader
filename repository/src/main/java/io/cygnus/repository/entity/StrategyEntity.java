@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.repository.constant.CommonQueryColumn;
+import io.cygnus.repository.constant.CommonColumn;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -20,10 +20,10 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Table(name = "cyg_strategy")
 @Entity(name = "cyg_strategy")
-public final class CygStrategy {
+public final class StrategyEntity {
 
 	@Id
-	@Column(name = CommonQueryColumn.STRATEGY_ID)
+	@Column(name = CommonColumn.STRATEGY_ID)
 	private int strategyId;
 
 	@Column(name = "strategy_name")

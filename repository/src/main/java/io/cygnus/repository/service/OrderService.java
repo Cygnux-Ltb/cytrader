@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import io.cygnus.repository.dao.OrderDao;
+import io.cygnus.repository.dao.OrderEventDao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -12,37 +14,34 @@ import org.springframework.stereotype.Component;
 
 import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.CygOrderRepository;
-import io.cygnus.repository.entity.CygOrder;
+import io.cygnus.repository.entity.OrderEntity;
 
 @Component
-public class OrderDao {
+public class OrderService {
 
 	@Resource
-	private CygOrderRepository repository;
+	private OrderDao orderDao;
 
-	public List<CygOrder> getOrders(Integer strategyId, Date dateTradingDay, String investorId, String instrumentCode) {
+	@Resource
+	private OrderEventDao orderEventDao;
+
+	public List<OrderEntity> getOrders(int strategyId, int tradingDay, String investorId, String instrumentCode) {
+		return null;
+	}
+
+	public List<OrderEntity> getOrdersByInit(int tradingDay, int strategyId) {
+
+
 		Session session = CommonDaoFactory.getSession();
 		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygOrder> list = session.createCriteria(CygOrder.class)
-				.add(Restrictions.eq(CygOrder.COLUMN_TradingDay, dateTradingDay))
-				.add(Restrictions.eq(CygOrder.COLUMN_StrategyID, strategyId))
-				.add(Restrictions.eq(CygOrder.COLUMN_InvestorID, investorId))
-				.add(Restrictions.eq(CygOrder.COLUMN_InstrumentCode, instrumentCode)).list();
+		List<OrderEntity> list = session.createCriteria(OrderEntity.class)
+				.add(Restrictions.eq(OrderEntity.COLUMN_TradingDay, dateTradingDay))
+				.add(Restrictions.eq(OrderEntity.COLUMN_StrategyID, strategyId)).list();
 		CommonDaoFactory.close(session);
 		return list;
 	}
 
-	public List<CygOrder> getOrdersByInit(Date dateTradingDay, Integer strategyId) {
-		Session session = CommonDaoFactory.getSession();
-		@SuppressWarnings({ "unchecked", "deprecation" })
-		List<CygOrder> list = session.createCriteria(CygOrder.class)
-				.add(Restrictions.eq(CygOrder.COLUMN_TradingDay, dateTradingDay))
-				.add(Restrictions.eq(CygOrder.COLUMN_StrategyID, strategyId)).list();
-		CommonDaoFactory.close(session);
-		return list;
-	}
-
-	public boolean addOrder(CygOrder order) {
+	public boolean addOrder(OrderEntity order) {
 		Session session = CommonDaoFactory.getSession();
 		Transaction transaction = session.beginTransaction();
 		try {
