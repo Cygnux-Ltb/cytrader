@@ -1,16 +1,16 @@
 package io.cygnus.repository.service;
 
-import io.cygnus.repository.dao.InstrumentDao;
-import io.cygnus.repository.dao.InstrumentSettlementDao;
-import io.cygnus.repository.entity.InstrumentEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import io.cygnus.repository.entity.InstrumentSettlementEntity;
-import org.springframework.stereotype.Component;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Resource;
-import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import io.cygnus.repository.dao.InstrumentDao;
+import io.cygnus.repository.dao.InstrumentSettlementDao;
+import io.cygnus.repository.entity.InstrumentEntity;
+import io.cygnus.repository.entity.InstrumentSettlementEntity;
 
 @Component
 public final class InstrumentService {

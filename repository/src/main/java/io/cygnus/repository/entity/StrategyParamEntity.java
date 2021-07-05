@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.cygnus.repository.constant.ColumnDefinition;
 import io.cygnus.repository.constant.CommonColumn;
 import lombok.Getter;
 import lombok.Setter;
