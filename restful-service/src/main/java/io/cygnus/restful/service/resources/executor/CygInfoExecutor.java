@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import io.cygnus.persistence.entity.CygInfo;
 import io.cygnus.persistence.entity.CygMqConfig;
 import io.cygnus.persistence.entity.CygStrategy;
+import io.cygnus.repository.entity.StrategyEntity;
 import io.cygnus.repository.service.CygInfoService;
 import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
@@ -43,7 +44,7 @@ public class CygInfoExecutor {
 	/**
 	 * cygStrategy Cache by cygId
 	 */
-	private static final CacheMap<Integer, List<CygStrategy>> CygStrategyCacheMap = CacheMap.newBuilder()
+	private static final CacheMap<Integer, List<StrategyEntity>> CygStrategyCacheMap = CacheMap.newBuilder()
 			.buildWith(cygId -> {
 				return dao.getCygStrategyById(cygId);
 			});

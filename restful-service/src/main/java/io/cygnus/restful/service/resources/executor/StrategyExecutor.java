@@ -11,6 +11,7 @@ import io.cygnus.persistence.entity.Strategy;
 import io.cygnus.persistence.entity.StrategyDefaultParam;
 import io.cygnus.persistence.entity.StrategyParam;
 import io.cygnus.persistence.entity.StrategySymbol;
+import io.cygnus.repository.entity.StrategyEntity;
 import io.cygnus.repository.service.StrategyDao;
 import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
@@ -24,37 +25,36 @@ public class StrategyExecutor {
 	private static final Logger log = CommonLoggerFactory.getLogger(StrategyExecutor.class);
 
 	@Resource
-	private StrategyService strategy;
+	private StrategyService strategyService;
 
 	/**
 	 * All strategy Cache
 	 */
-	private  final CacheList<Strategy> AllStrategyCache = new CacheList<>(() -> {
-		return strategy.getAllStrategy();
+	private final CacheList<StrategyEntity> strategyCacheList = new CacheList<>(() -> {
+		return strategyService.getAllStrategy();
 	});
 
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Strategy> getAllStrategy() {
-		return AllStrategyCache.get();
+	public List<StrategyEntity> getAllStrategy() {
+		return strategyCacheList.get();
 	}
 
 	/**
 	 * Strategy CacheMap
 	 */
-	private static final CacheMap<Integer, List<Strategy>> StrategyCacheMap = CacheMap.newBuilder()
-			.buildWith((strategyId) -> {
-				return strategyDao.getStrategyById(strategyId);
-			});
+	private final CacheMap<Integer, StrategyEntity> StrategyCacheMap = CacheMap.newBuilder().buildWith((strategyId) -> {
+		return strategyService.getStrategyById(strategyId);
+	});
 
 	/**
 	 * 
 	 * @param strategyId
 	 * @return
 	 */
-	public List<Strategy> getStrategyById(Integer strategyId) {
+	public StrategyEntity getStrategyById(Integer strategyId) {
 		return StrategyCacheMap.getOptional(strategyId).get();
 	}
 
