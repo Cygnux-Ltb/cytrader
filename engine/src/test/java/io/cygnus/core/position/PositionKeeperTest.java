@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import io.horizon.market.instrument.spec.ChinaFutures;
 import io.horizon.market.instrument.spec.ChinaFuturesSymbol;
-import io.horizon.trader.order.attr.OrdEnum.TrdDirection;
+import io.horizon.trader.order.attr.TrdDirection;
 import io.horizon.trader.position.PositionKeeper;
 
 public class PositionKeeperTest {
