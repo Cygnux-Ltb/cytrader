@@ -9,22 +9,23 @@ import javax.persistence.Table;
 
 import io.cygnus.repository.constant.ColumnDefinition;
 import io.cygnus.repository.constant.CommonColumn;
+import io.cygnus.repository.constant.EntityName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
+ * InstrumentSettlement Entity
  * 
  * @author yellow013
  * 
- *         CygInstrumentSettlement
  *
  */
 @Getter
 @Setter
 @Accessors(chain = true)
 @Table(name = "cyg_instrument_settlement")
-@Entity(name = "cyg_instrument_settlement")
+@Entity(name = EntityName.InstrumentSettlement)
 public final class InstrumentSettlementEntity {
 
 	@Id
@@ -47,13 +48,13 @@ public final class InstrumentSettlementEntity {
 	/**
 	 * lastPrice
 	 */
-	@Column(name = "last_price" , columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	@Column(name = "last_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double lastPrice;
 
 	/**
 	 * settlementPrice
 	 */
-	@Column(name = "settlement_price" , columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	@Column(name = "settlement_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double settlementPrice;
 
 }

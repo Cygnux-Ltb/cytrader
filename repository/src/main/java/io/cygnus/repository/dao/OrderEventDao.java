@@ -9,14 +9,15 @@ import io.cygnus.repository.entity.OrderEventEntity;
 import java.util.List;
 
 /**
+ * OrderEvent DAO
+ * 
  * @author yellow013
- * <p>
- * OrderEventDao
+ * 
  */
 @Repository
 public interface OrderEventDao extends JpaRepository<OrderEventEntity, Long> {
 
-    @Query("")
-    List<OrderEventEntity> query();
+	@Query("")
+	List<OrderEventEntity> query();
 
 }

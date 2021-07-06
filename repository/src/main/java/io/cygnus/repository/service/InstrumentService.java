@@ -5,14 +5,14 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.dao.InstrumentDao;
 import io.cygnus.repository.dao.InstrumentSettlementDao;
 import io.cygnus.repository.entity.InstrumentEntity;
 import io.cygnus.repository.entity.InstrumentSettlementEntity;
 
-@Component
+@Service
 public final class InstrumentService {
 
     @Resource

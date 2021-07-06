@@ -6,29 +6,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import io.cygnus.repository.constant.CommonColumn;
-import io.cygnus.repository.constant.TableName;
+import io.cygnus.repository.constant.EntityName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
  * 
+ * CygInfo Entity
+ * 
  * @author yellow013
  * 
- *         CygInfo
- *
  */
-
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = TableName.CYG_INFO)
-@Entity(name = "CygInfo")
+@Table(name = "cyg_info")
+@Entity(name = EntityName.CygInfo)
 public final class CygInfoEntity {
 
 	@Id
-	@Column(name = CygInfoQueryColumn.CYG_ID)
-	private Integer cygId;
+	@Column(name = "cyg_id")
+	private int cygId;
 
 	@Column(name = CommonColumn.INVESTOR_ID)
 	private String investorId;
@@ -44,16 +43,5 @@ public final class CygInfoEntity {
 
 	@Column(name = "adaptor_type", length = 16)
 	private String interfaceType;
-
-	/**
-	 * 
-	 * @author yellow013
-	 *
-	 */
-	public static interface CygInfoQueryColumn {
-
-		String CYG_ID = "cyg_id";
-		
-	}
 
 }

@@ -8,13 +8,14 @@ import org.springframework.stereotype.Repository;
 import io.cygnus.repository.entity.StrategyParamEntity;
 
 /**
+ * StrategyParam DAO
+ * 
  * @author yellow013
- * <p>
- * StrategyParamDao
+ * 
  */
 @Repository
 public interface StrategyParamDao extends JpaRepository<StrategyParamEntity, Long> {
 
-    List<StrategyParamEntity> queryByStrategyId(int strategyId);
+	List<StrategyParamEntity> queryByStrategyId(int strategyId);
 
 }

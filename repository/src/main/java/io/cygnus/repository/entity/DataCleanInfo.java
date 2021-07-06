@@ -13,16 +13,16 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
+ * DataCleanInfo
  * 
  * @author yellow013
  *
  */
-
-@Entity
-@Table(name = "data_clean_info")
 @Getter
 @Setter
 @Accessors(chain = true)
+@Table(name = "data_clean_info")
+@Entity()
 public final class DataCleanInfo {
 
 	@Id

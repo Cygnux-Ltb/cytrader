@@ -8,9 +8,10 @@ import io.cygnus.repository.entity.AccountEntity;
 import java.util.List;
 
 /**
+ * Account DAO
+ * 
  * @author yellow013
- * <p>
- * AccountDao
+ * 
  */
 
 @Repository

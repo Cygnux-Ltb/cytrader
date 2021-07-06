@@ -8,13 +8,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import io.cygnus.repository.constant.CommonColumn;
+import io.cygnus.repository.constant.EntityName;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
+/**
+ * 
+ * Account Entity
+ * 
+ * @author yellow013
+ *
+ */
 @Getter
 @Setter
-@Table
-@Entity
+@Accessors(chain = true)
+@Table(name = "cyg_account")
+@Entity(name = EntityName.Account)
 public final class AccountEntity {
 
 	@Id
@@ -22,10 +32,10 @@ public final class AccountEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int uid;
 
-	@Column(name = AccountColumn.SUB_ACCOUNT_ID)
+	@Column(name = "sub_account_id")
 	private int subAccountId;
 
-	@Column(name = AccountColumn.ACCOUNT_ID)
+	@Column(name = "account_id")
 	private int accountId;
 
 	@Column(name = CommonColumn.BROKER_ID)
@@ -36,17 +46,5 @@ public final class AccountEntity {
 
 	@Column(name = "adaptor_type")
 	private String adaptorType;
-
-	/**
-	 * 
-	 * @author yellow013
-	 *
-	 */
-	public interface AccountColumn {
-
-		String SUB_ACCOUNT_ID = "sub_account_id";
-		String ACCOUNT_ID = "account_id";
-
-	}
 
 }

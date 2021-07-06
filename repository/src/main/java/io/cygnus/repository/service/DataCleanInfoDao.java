@@ -5,10 +5,12 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.entity.DataCleanInfo;
 
+@Service
 public class DataCleanInfoDao {
 
 	public List<DataCleanInfo> getData(String location, Long tradingDay) {

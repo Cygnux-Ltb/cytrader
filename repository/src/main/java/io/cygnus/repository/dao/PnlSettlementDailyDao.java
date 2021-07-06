@@ -8,13 +8,14 @@ import io.cygnus.repository.entity.PnlSettlementDailyEntity;
 import java.util.List;
 
 /**
+ * PnlSettlementDaily DAO
+ * 
  * @author yellow013
- * <p>
- * PnlSettlementDailyDao
+ * 
  */
 @Repository
 public interface PnlSettlementDailyDao extends JpaRepository<PnlSettlementDailyEntity, Long> {
 
-    List<PnlSettlementDailyEntity> queryByStrategyId(int strategyId);
+	List<PnlSettlementDailyEntity> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
 
 }

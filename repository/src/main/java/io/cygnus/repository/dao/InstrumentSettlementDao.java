@@ -6,9 +6,11 @@ import org.springframework.stereotype.Repository;
 import io.cygnus.repository.entity.InstrumentSettlementEntity;
 
 /**
+ * 
+ * InstrumentSettlement DAO
+ * 
  * @author yellow013
- * <p>
- * InstrumentSettlementDao
+ * 
  */
 @Repository
 public interface InstrumentSettlementDao extends JpaRepository<InstrumentSettlementEntity, Long> {

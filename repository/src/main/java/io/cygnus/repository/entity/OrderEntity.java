@@ -11,22 +11,22 @@ import javax.persistence.Table;
 
 import io.cygnus.repository.constant.ColumnDefinition;
 import io.cygnus.repository.constant.CommonColumn;
+import io.cygnus.repository.constant.EntityName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
+ * Order Entity
  * 
  * @author yellow013
- * 
- *         CygOrder
  *
  */
 @Getter
 @Setter
 @Accessors(chain = true)
 @Table(name = "cyg_order")
-@Entity(name = "CygOrder")
+@Entity(name = EntityName.Order)
 public final class OrderEntity {
 
 	@Id

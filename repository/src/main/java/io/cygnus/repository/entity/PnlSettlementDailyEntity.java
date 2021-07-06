@@ -9,22 +9,23 @@ import javax.persistence.Table;
 
 import io.cygnus.repository.constant.ColumnDefinition;
 import io.cygnus.repository.constant.CommonColumn;
+import io.cygnus.repository.constant.EntityName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
  * 
+ * PnlSettlementDaily Entity
+ * 
  * @author yellow013
  * 
- *         CygPnlSettlementDaily
- *
  */
 @Getter
 @Setter
 @Accessors(chain = true)
 @Table(name = "cyg_pnl_settlement_daily")
-@Entity(name = "cyg_pnl_settlement_daily")
+@Entity(name = EntityName.PnlSettlementDaily)
 public final class PnlSettlementDailyEntity {
 
 	@Id

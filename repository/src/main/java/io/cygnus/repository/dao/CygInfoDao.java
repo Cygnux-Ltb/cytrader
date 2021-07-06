@@ -6,13 +6,13 @@ import org.springframework.stereotype.Repository;
 import io.cygnus.repository.entity.CygInfoEntity;
 
 /**
+ * 
+ * CygInfo DAO
+ * 
  * @author yellow013
- * <p>
- * CygInfoDao
+ * 
  */
-
 @Repository
-public interface CygInfoDao extends JpaRepository<CygInfoEntity, Long> {
-
+public interface CygInfoDao extends JpaRepository<CygInfoEntity, Integer> {
 
 }
