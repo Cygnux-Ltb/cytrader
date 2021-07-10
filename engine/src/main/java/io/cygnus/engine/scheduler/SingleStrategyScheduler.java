@@ -10,7 +10,7 @@ import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.adaptor.AdaptorEvent;
 import io.horizon.trader.event.InboundScheduler;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.OrderManager;
+import io.horizon.trader.order.OrderKeeper;
 import io.horizon.trader.order.OrderReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
@@ -30,7 +30,7 @@ public class SingleStrategyScheduler<M extends MarketData> implements InboundSch
 	private static final Logger log = CommonLoggerFactory.getLogger(SingleStrategyScheduler.class);
 
 	/**
-	 * only one strategy
+	 * Only one strategy
 	 */
 	private final Strategy<M> strategy;
 
@@ -46,7 +46,7 @@ public class SingleStrategyScheduler<M extends MarketData> implements InboundSch
 
 	@Override
 	public void onOrderReport(OrderReport report) {
-		ChildOrder order = OrderManager.handleOrderReport(report);
+		ChildOrder order = OrderKeeper.handleOrderReport(report);
 		// 调用策略实现的订单回调函数
 		strategy.onOrder(order);
 	}

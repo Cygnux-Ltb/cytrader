@@ -8,7 +8,7 @@ import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.adaptor.AdaptorEvent;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.OrderManager;
+import io.horizon.trader.order.OrderKeeper;
 import io.horizon.trader.order.OrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
@@ -52,7 +52,7 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 						OrderReport report = msg.getOrdReport();
 						log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerUniqueId(),
 								report.getOrdSysId());
-						ChildOrder order = OrderManager.handleOrderReport(report);
+						ChildOrder order = OrderKeeper.handleOrderReport(report);
 						log.info(
 								"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
 								report.getBrokerUniqueId(), order.getStrategyId(),

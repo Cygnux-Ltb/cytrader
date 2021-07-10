@@ -25,7 +25,7 @@ import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.order.OrdSysIdAllocator;
 import io.horizon.trader.order.Order;
-import io.horizon.trader.order.OrderManager;
+import io.horizon.trader.order.OrderKeeper;
 import io.horizon.trader.order.attr.OrdType;
 import io.horizon.trader.order.attr.TrdAction;
 import io.horizon.trader.order.attr.TrdDirection;
@@ -344,7 +344,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	 */
 	protected void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType,
 			TrdDirection direction) {
-		final ChildOrder childOrder = OrderManager.createAndSaveChildOrder(allocator, strategyId, subAccount, account,
+		final ChildOrder childOrder = OrderKeeper.createAndSaveChildOrder(allocator, strategyId, subAccount, account,
 				instrument, abs(offerQty), offerPrice, ordType, direction, TrdAction.Open);
 		childOrder.writeLog(log, getStrategyName() + " :: Open position generate [ChildOrder]");
 		saveOrder(childOrder);
@@ -439,7 +439,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	 * @param ordType    订单类型
 	 */
 	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
-		final ChildOrder childOrder = OrderManager.createAndSaveChildOrder(allocator, strategyId, subAccount, account,
+		final ChildOrder childOrder = OrderKeeper.createAndSaveChildOrder(allocator, strategyId, subAccount, account,
 				instrument, abs(offerQty), offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short,
 				TrdAction.Close);
 
