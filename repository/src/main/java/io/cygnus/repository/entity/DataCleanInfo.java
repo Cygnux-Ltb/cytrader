@@ -18,6 +18,8 @@ import lombok.experimental.Accessors;
  * @author yellow013
  *
  */
+@Deprecated
+
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -28,7 +30,7 @@ public final class DataCleanInfo {
 	@Id
 	@Column(name = "uid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long uid;
+	private long uid;
 
 	@Column(name = "location")
 	private String location;

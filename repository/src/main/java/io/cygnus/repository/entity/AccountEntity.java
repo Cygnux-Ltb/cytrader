@@ -30,7 +30,7 @@ public final class AccountEntity {
 	@Id
 	@Column(name = CommonColumn.UID)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int uid;
+	private long uid;
 
 	@Column(name = "sub_account_id")
 	private int subAccountId;

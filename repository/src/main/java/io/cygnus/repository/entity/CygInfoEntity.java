@@ -35,10 +35,10 @@ public final class CygInfoEntity {
 	@Column(name = CommonColumn.BROKER_ID)
 	private String brokerId;
 
-	@Column(name = "product_name", length = 127)
+	@Column(name = "product_name", length = 128)
 	private String productName;
 
-	@Column(name = "trader_name", length = 127)
+	@Column(name = "trader_name", length = 128)
 	private String traderName;
 
 	@Column(name = "adaptor_type", length = 16)

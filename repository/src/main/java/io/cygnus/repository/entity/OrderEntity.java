@@ -35,28 +35,28 @@ public final class OrderEntity {
 	private long uid;
 
 	/**
-	 * strategyId
+	 * strategyId [*]
 	 */
 	@Column(name = CommonColumn.STRATEGY_ID)
 	private int strategyId;
 
 	/**
-	 * tradingDay
+	 * tradingDay [*]
 	 */
 	@Column(name = CommonColumn.TRADING_DAY)
 	private int tradingDay;
 
 	/**
-	 * instrumentCode
+	 * instrumentCode [*]
 	 */
 	@Column(name = CommonColumn.INSTRUMENT_CODE)
 	private String instrumentCode;
 
 	/**
-	 * orderSysId
+	 * orderSysId [*]
 	 */
-	@Column(name = "order_sys_id")
-	private String orderSysId;
+	@Column(name = "ord_sys_id")
+	private long orderSysId;
 
 	/**
 	 * 
@@ -81,7 +81,7 @@ public final class OrderEntity {
 	 * orderMsgType
 	 */
 	@Column(name = "order_msg_type")
-	private Integer orderMsgType;
+	private int orderMsgType;
 	public static final String COLUMN_OrderMsgType = "order_msg_type";
 
 	/**
@@ -139,7 +139,7 @@ public final class OrderEntity {
 	 * order_type
 	 */
 	@Column(name = "order_type")
-	private Integer orderType;
+	private int orderType;
 	public static final String COLUMN_OrderType = "order_type";
 
 	/**

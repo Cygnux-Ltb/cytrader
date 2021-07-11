@@ -17,12 +17,12 @@ import java.util.List;
 @Repository
 public interface AccountDao extends JpaRepository<AccountEntity, Long> {
 
-    List<AccountEntity> queryBySubAccountId(int subAccountId);
+	List<AccountEntity> queryByBrokerId(String brokerId);
 
-    List<AccountEntity> queryByAccountId(int accountId);
+	List<AccountEntity> queryByInvestorId(String investorId);
 
-    List<AccountEntity> queryByInvestorId(String investorId);
+	List<AccountEntity> queryByAccountId(int accountId);
 
-    List<AccountEntity> queryByBrokerId(String brokerId);
+	List<AccountEntity> queryBySubAccountId(int subAccountId);
 
 }

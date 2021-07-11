@@ -5,12 +5,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.dao.StrategyDao;
 import io.cygnus.repository.dao.StrategyParamDao;
 import io.cygnus.repository.entity.StrategyEntity;
 import io.cygnus.repository.entity.StrategyParamEntity;
+import io.mercury.common.log.CommonLoggerFactory;
 
 @Service
 public final class StrategyService {
@@ -20,6 +22,8 @@ public final class StrategyService {
 
 	@Resource
 	private StrategyParamDao strategyParamDao;
+
+	private final Logger log = CommonLoggerFactory.getLogger(StrategyService.class);
 
 	/**
 	 * 
@@ -60,6 +64,7 @@ public final class StrategyService {
 			strategyParamDao.save(strategyParam);
 			return true;
 		} catch (Exception e) {
+			log.error("Save StrategyParamEntity error -> {}", e.getMessage(), e);
 			return false;
 		}
 	}

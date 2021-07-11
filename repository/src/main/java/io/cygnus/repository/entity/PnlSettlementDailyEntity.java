@@ -31,7 +31,7 @@ public final class PnlSettlementDailyEntity {
 	@Id
 	@Column(name = CommonColumn.UID)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long uid;
+	private long uid;
 
 	/**
 	 * strategyId

@@ -70,7 +70,7 @@ public final class OrderEventEntity {
 	 *
 	 */
 	@Column(name = "order_msg_type")
-	private Integer orderMsgType;
+	private int orderMsgType;
 	public static final String COLUMN_OrderMsgType = "order_msg_type";
 
 	// UserID varchar 31

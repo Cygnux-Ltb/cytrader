@@ -22,7 +22,7 @@ public final class InstrumentService {
     private InstrumentSettlementDao instrumentSettlementDao;
 
     public InstrumentEntity getInstrument(@Nonnull String instrumentCode) {
-
+    	instrumentDao.query(instrumentCode, 0);
         return null;
     }
 

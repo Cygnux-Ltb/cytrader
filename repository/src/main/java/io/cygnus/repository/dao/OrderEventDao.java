@@ -18,6 +18,8 @@ import java.util.List;
 public interface OrderEventDao extends JpaRepository<OrderEventEntity, Long> {
 
 	@Query("")
-	List<OrderEventEntity> query();
+	List<OrderEventEntity> queryByTradingDay(int tradingDay);
+
+	List<OrderEventEntity> queryByOrdSysId(long ordSysId);
 
 }
