@@ -13,8 +13,8 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
-import io.horizon.trader.event.handler.AdaptorEventHandler;
-import io.horizon.trader.event.handler.OrderHandler;
+import io.horizon.trader.handler.AdaptorEventHandler;
+import io.horizon.trader.handler.OrderHandler;
 import io.mercury.common.fsm.Enableable;
 
 public interface Strategy<M extends MarketData> extends

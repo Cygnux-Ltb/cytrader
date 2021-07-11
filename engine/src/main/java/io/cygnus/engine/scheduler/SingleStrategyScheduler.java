@@ -8,7 +8,7 @@ import io.cygnus.engine.strategy.api.Strategy;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.adaptor.AdaptorEvent;
-import io.horizon.trader.event.InboundScheduler;
+import io.horizon.trader.handler.InboundScheduler;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.order.OrderKeeper;
 import io.horizon.trader.order.OrderReport;

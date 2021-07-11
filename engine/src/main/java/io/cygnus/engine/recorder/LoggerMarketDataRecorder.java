@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.trader.event.MarketDataRecorder.AbstractMarketDataRecorder;
+import io.horizon.trader.handler.MarketDataRecorder.AbstractMarketDataRecorder;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class LoggerMarketDataRecorder extends AbstractMarketDataRecorder<BasicMarketData> {
