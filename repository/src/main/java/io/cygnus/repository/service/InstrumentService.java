@@ -15,20 +15,28 @@ import io.cygnus.repository.entity.InstrumentSettlementEntity;
 @Service
 public final class InstrumentService {
 
-    @Resource
-    private InstrumentDao instrumentDao;
+	@Resource
+	private InstrumentDao instrumentDao;
 
-    @Resource
-    private InstrumentSettlementDao instrumentSettlementDao;
+	@Resource
+	private InstrumentSettlementDao instrumentSettlementDao;
+	
+	
+	
 
-    public InstrumentEntity getInstrument(@Nonnull String instrumentCode) {
-    	instrumentDao.query(instrumentCode, 0);
-        return null;
-    }
+	public List<InstrumentEntity> getInstrument(@Nonnull String instrumentCode) {
+		return getInstrument(instrumentCode, 0);
+	}
 
-    public List<InstrumentSettlementEntity> getInstrumentSettlement(int tradingDay, @Nonnull String instrumentCode) {
+	public List<InstrumentEntity> getInstrument(@Nonnull String instrumentCode, int tradingDay) {
+		List<InstrumentEntity> list = instrumentDao.query(instrumentCode, tradingDay);
 
-        return null;
-    }
+		return list;
+	}
+
+	public List<InstrumentSettlementEntity> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
+		List<InstrumentSettlementEntity> list = instrumentSettlementDao.query(instrumentCode, tradingDay);
+		return list;
+	}
 
 }

@@ -23,14 +23,6 @@ public class OrderService {
 
 	/**
 	 * 
-	 * @return
-	 */
-	public boolean putOrder() {
-		return false;
-	}
-
-	/**
-	 * 
 	 * @param strategyId
 	 * @param tradingDay
 	 * @param investorId
@@ -57,15 +49,14 @@ public class OrderService {
 
 		return null;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param ordSysId
 	 * @return
 	 */
-	public List<OrderEventEntity> getOrderEvent(long ordSysId){
-		
+	public List<OrderEventEntity> getOrderEvent(long ordSysId) {
+
 		return null;
 	}
 
@@ -81,12 +72,8 @@ public class OrderService {
 	 */
 	private boolean checkParams(int strategyId, int startTradingDay, int endTradingDay, long ordSysId,
 			String investorId, String instrumentCode) {
-		if (strategyId <= 0 
-				&& startTradingDay <= 0 
-				&& endTradingDay < startTradingDay 
-				&& ordSysId < 0L
-				&& StringUtil.isNullOrEmpty(investorId) 
-				&& StringUtil.isNullOrEmpty(instrumentCode))
+		if (strategyId <= 0 && startTradingDay <= 0 && endTradingDay < startTradingDay && ordSysId < 0L
+				&& StringUtil.isNullOrEmpty(investorId) && StringUtil.isNullOrEmpty(instrumentCode))
 			return true;
 		return false;
 	}
@@ -97,8 +84,18 @@ public class OrderService {
 	 * @return
 	 */
 	public boolean putOrder(OrderEntity order) {
-
+		orderDao.save(order);
 		return true;
+	}
+
+	/**
+	 * 
+	 * @param orderEvent
+	 * @return
+	 */
+	public boolean putOrderEvent(OrderEventEntity orderEvent) {
+		orderEventDao.save(orderEvent);
+		return false;
 	}
 
 }
