@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.persistence.entity.InstrumentSettlementPrice;
+import io.cygnus.repository.entity.InstrumentSettlementEntity;
 import io.cygnus.repository.service.InstrumentService;
 import io.cygnus.restful.service.base.CygRestfulApi;
 import io.cygnus.service.dto.LastPrice;
@@ -23,7 +23,7 @@ import io.mercury.common.annotation.cache.GetCache;
 
 @RestController("/instrument")
 public class InstrumentRestfulApi extends CygRestfulApi {
-	
+
 	@Resource
 	private InstrumentService instrumentDao;
 
@@ -35,7 +35,7 @@ public class InstrumentRestfulApi extends CygRestfulApi {
 	 * @return
 	 */
 	@GetMapping("/settlement_price")
-	public ResponseEntity<Object> getSettlementPrice(@RequestParam("instrumentId") String instrumentId,
+	public ResponseEntity<List<InstrumentSettlementEntity>> getSettlementPrice(@RequestParam("instrumentId") String instrumentId,
 			@RequestParam("tradingDay") String tradingDay) {
 		if (checkParamIsNull(instrumentId, tradingDay)) {
 			return httpBadRequest();
@@ -47,11 +47,9 @@ public class InstrumentRestfulApi extends CygRestfulApi {
 				return httpBadRequest();
 			}
 		}
-		
-		List<InstrumentSettlementPrice> settlementPrices = instrumentDao.
-				
-				getSettlementPrice(dateTradingDay,
-				instrumentId);
+
+		List<InstrumentSettlementEntity> settlementPrices = instrumentDao.
+				getInstrumentSettlement(instrumentId, dateTradingDay);
 		return jsonResponse(settlementPrices);
 	}
 

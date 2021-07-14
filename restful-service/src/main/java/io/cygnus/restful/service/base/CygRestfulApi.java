@@ -8,16 +8,20 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import io.cygnus.service.dto.pack.OutboxMessage;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.datetime.pattern.spec.DatePattern;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonParser;
 import io.mercury.serialization.json.JsonWrapper;
 
 public abstract class CygRestfulApi {
+
+	private static final Logger log = CommonLoggerFactory.getLogger(CygRestfulApi.class);
 
 	/**
 	 * 转换String到Date
@@ -101,7 +105,7 @@ public abstract class CygRestfulApi {
 			// System.out.println(json);
 			return IOUtils.toString(request.getInputStream(), Charsets.UTF8);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("Get body has exception, {}", e.getMessage(), e);
 			return null;
 		}
 	}
