@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.dao.OrderDao;
 import io.cygnus.repository.dao.OrderEventDao;
 import io.cygnus.repository.entity.OrderEntity;
 import io.cygnus.repository.entity.OrderEventEntity;
+import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringUtil;
 
 @Service
@@ -20,6 +22,8 @@ public class OrderService {
 
 	@Resource
 	private OrderEventDao orderEventDao;
+
+	private static final Logger log = CommonLoggerFactory.getLogger(OrderService.class);
 
 	/**
 	 * 
@@ -55,7 +59,7 @@ public class OrderService {
 	 * @param ordSysId
 	 * @return
 	 */
-	public List<OrderEventEntity> getOrderEvent(long ordSysId) {
+	public List<OrderEventEntity> getOrderEvents(long ordSysId) {
 
 		return null;
 	}
@@ -73,8 +77,13 @@ public class OrderService {
 	private boolean checkParams(int strategyId, int startTradingDay, int endTradingDay, long ordSysId,
 			String investorId, String instrumentCode) {
 		if (strategyId <= 0 && startTradingDay <= 0 && endTradingDay < startTradingDay && ordSysId < 0L
-				&& StringUtil.isNullOrEmpty(investorId) && StringUtil.isNullOrEmpty(instrumentCode))
+				&& StringUtil.isNullOrEmpty(investorId) && StringUtil.isNullOrEmpty(instrumentCode)) {
+			log.error(
+					"illegal params, strategyId -> {}, startTradingDay -> {}, endTradingDay -> {}, "
+							+ "ordSysId -> {}, investorId -> {}, instrumentCode -> {}",
+					strategyId, startTradingDay, endTradingDay, ordSysId, investorId, instrumentCode);
 			return true;
+		}
 		return false;
 	}
 

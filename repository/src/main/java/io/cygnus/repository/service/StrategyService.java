@@ -23,7 +23,7 @@ public final class StrategyService {
 	@Resource
 	private StrategyParamDao strategyParamDao;
 
-	private final Logger log = CommonLoggerFactory.getLogger(StrategyService.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(StrategyService.class);
 
 	/**
 	 * 
@@ -49,8 +49,10 @@ public final class StrategyService {
 	 */
 	public List<StrategyParamEntity> getParamsByStrategyId(int strategyId) {
 		List<StrategyParamEntity> list = strategyParamDao.queryByStrategyId(strategyId);
-		if (list == null)
+		if (list == null) {
+			
 			return new ArrayList<>();
+		}
 		return list;
 	}
 

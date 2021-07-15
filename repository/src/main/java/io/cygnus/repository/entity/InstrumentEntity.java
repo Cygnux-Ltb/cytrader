@@ -40,12 +40,6 @@ public final class InstrumentEntity {
 	private String instrumentCode;
 
 	/**
-	 * tradingDay
-	 */
-	@Column(name = CommonColumn.TRADING_DAY)
-	private int tradingDay;
-
-	/**
 	 * fee
 	 */
 	@Column(name = "fee", columnDefinition = ColumnDefinition.DECIMAL_19_4)
