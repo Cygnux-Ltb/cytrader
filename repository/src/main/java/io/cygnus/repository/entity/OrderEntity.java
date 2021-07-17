@@ -53,6 +53,12 @@ public final class OrderEntity {
 	private String instrumentCode;
 
 	/**
+	 * investorId
+	 */
+	@Column(name = CommonColumn.INVESTOR_ID)
+	private String investorId;
+
+	/**
 	 * orderSysId [*]
 	 */
 	@Column(name = "ord_sys_id")
@@ -61,14 +67,8 @@ public final class OrderEntity {
 	/**
 	 * 
 	 */
+	@Column(name = "ord_type")
 	private String ordType;
-
-	/**
-	 * investorId
-	 */
-	@Column(name = "investor_id")
-	private String investorId;
-	public static final String COLUMN_InvestorID = "investor_id";
 
 	/**
 	 * orderRef
@@ -101,9 +101,8 @@ public final class OrderEntity {
 	/**
 	 * offset
 	 */
-	@Column(name = "offset")
-	private char offset;
-	public static final String COLUMN_Offset = "offset";
+	@Column(name = "side")
+	private char side;
 
 	/**
 	 * limitPrice
@@ -116,10 +115,6 @@ public final class OrderEntity {
 	 */
 	@Column(name = "offer_qty")
 	private int offerQty;
-
-	/**
-	 * orderSysId
-	 */
 
 	/**
 	 * orderStatus
@@ -135,12 +130,6 @@ public final class OrderEntity {
 	private String brokerId;
 	public static final String COLUMN_BrokerID = "broker_id";
 
-	/**
-	 * order_type
-	 */
-	@Column(name = "order_type")
-	private int orderType;
-	public static final String COLUMN_OrderType = "order_type";
 
 	/**
 	 * counterSysID
@@ -156,19 +145,6 @@ public final class OrderEntity {
 	private int volume;
 	public static final String COLUMN_Volume = "volume";
 
-	/**
-	 * volumeFilled
-	 */
-	@Column(name = "volume_filled")
-	private int volumeFilled;
-	public static final String COLUMN_VolumeFilled = "volume_filled";
-
-	/**
-	 * volumeRemained
-	 */
-	@Column(name = "volume_remained")
-	private int volumeRemained;
-	public static final String COLUMN_VolumeRemained = "volume_remained";
 
 	/**
 	 * price

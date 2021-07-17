@@ -65,9 +65,8 @@ public final class OrderEventEntity {
 	private Integer orderRef;
 	public static final String COLUMN_OrderRef = "order_ref";
 
-	// OrderMsgType int
 	/**
-	 *
+	 * orderMsgType
 	 */
 	@Column(name = "order_msg_type")
 	private int orderMsgType;

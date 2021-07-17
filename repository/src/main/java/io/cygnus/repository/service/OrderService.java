@@ -48,9 +48,9 @@ public class OrderService {
 	 */
 	public List<OrderEntity> getOrders(int strategyId, int startTradingDay, int endTradingDay, String investorId,
 			String instrumentCode) {
-		if (checkParams(strategyId, startTradingDay, endTradingDay, 0L, investorId, instrumentCode))
+		if (checkParams(strategyId, startTradingDay, endTradingDay, 0L, investorId, instrumentCode)) {
 			throw new IllegalArgumentException("missing or invalid query params");
-
+		}
 		return null;
 	}
 

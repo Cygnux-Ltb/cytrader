@@ -1,6 +1,5 @@
 package io.cygnus.repository.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import io.cygnus.repository.dao.AccountDao;
 import io.cygnus.repository.entity.AccountEntity;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.serialization.json.JsonWrapper;
 
 @Service
 public class AccountService {
@@ -20,10 +20,9 @@ public class AccountService {
 	
 	private static final Logger log = CommonLoggerFactory.getLogger(AccountService.class);
 
-	public List<AccountEntity> get(int accountId) {
+	public List<AccountEntity> getAccount(int accountId) {
 		List<AccountEntity> list = dao.queryByAccountId(accountId);
-		if (list == null)
-			return new ArrayList<>();
+		log.info("query Account where accountId == {}, result -> {}", JsonWrapper.toJson(list));
 		return list;
 	}
 
