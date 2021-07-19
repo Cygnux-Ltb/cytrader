@@ -6,7 +6,7 @@ import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.risk.OrderBarrier;
 import io.mercury.common.log.CommonLoggerFactory;
 
-public final class HighFrequencyBarrier implements OrderBarrier<ChildOrder> {
+public final class HighFrequencyBarrier implements OrderBarrier {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(HighFrequencyBarrier.class);
 

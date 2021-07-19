@@ -3,7 +3,7 @@ package io.cygnus.engine.barrier;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.risk.OrderBarrier;
 
-public class AccountBarrier implements OrderBarrier<ChildOrder> {
+public class AccountBarrier implements OrderBarrier {
 
 	@Override
 	public boolean filter(ChildOrder order) {
