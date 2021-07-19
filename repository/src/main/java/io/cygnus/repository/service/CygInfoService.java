@@ -24,7 +24,7 @@ public class CygInfoService {
 	 * 
 	 * @return
 	 */
-	public List<CygInfoEntity> getCygInfos() {
+	public List<CygInfoEntity> getAll() {
 		List<CygInfoEntity> list = dao.findAll();
 		if (list == null) {
 			log.error("");
@@ -38,7 +38,7 @@ public class CygInfoService {
 	 * @param cygId
 	 * @return
 	 */
-	public CygInfoEntity getCygInfo(int cygId) {
+	public CygInfoEntity get(int cygId) {
 		CygInfoEntity cygInfo = dao.getById(cygId);
 		return cygInfo;
 	}

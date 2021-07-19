@@ -5,6 +5,8 @@ public interface EntityName {
 	String CygInfo = "CygInfo";
 
 	String Account = "Account";
+	
+	String Bar = "Bar";
 
 	String Instrument = "Instrument";
 
