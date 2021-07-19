@@ -7,12 +7,7 @@ import io.cygnus.repository.service.StrategyService;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import io.cygnus.persistence.entity.Strategy;
-import io.cygnus.persistence.entity.StrategyDefaultParam;
-import io.cygnus.persistence.entity.StrategyParam;
-import io.cygnus.persistence.entity.StrategySymbol;
 import io.cygnus.repository.entity.StrategyEntity;
-import io.cygnus.repository.service.StrategyDao;
 import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -31,7 +26,7 @@ public class StrategyExecutor {
 	 * All strategy Cache
 	 */
 	private final CacheList<StrategyEntity> strategyCacheList = new CacheList<>(() -> {
-		return strategyService.getAllStrategy();
+		return null;
 	});
 
 	/**

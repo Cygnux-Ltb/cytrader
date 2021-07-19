@@ -20,7 +20,7 @@ import io.cygnus.persistence.entity.TimeBinner;
 import io.cygnus.persistence.service.BinnerDao;
 import io.cygnus.restful.service.base.CygRestfulApi;
 
-@RestController("/binner")
+@RestController("/bar")
 public class BinnerRestfulApi extends CygRestfulApi {
 
 	/**

@@ -2,13 +2,12 @@ package io.cygnus.restful.service.resources.executor;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import io.cygnus.persistence.entity.CygInfo;
-import io.cygnus.persistence.entity.CygMqConfig;
-import io.cygnus.persistence.entity.CygStrategy;
-import io.cygnus.repository.entity.StrategyEntity;
+import io.cygnus.repository.entity.CygInfoEntity;
 import io.cygnus.repository.service.CygInfoService;
 import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
@@ -19,52 +18,32 @@ public class CygInfoExecutor {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(CygInfoExecutor.class);
 
-	private final static CygInfoService dao = new CygInfoService();
+	@Resource
+	private CygInfoService dao;
 
 	// All cygInfo Cache
-	private static final CacheList<CygInfo> AllCygInfoCache = new CacheList<>(() -> {
-		return dao.getAllCygInfo();
+	private final CacheList<CygInfoEntity> AllCygInfoCache = new CacheList<>(() -> {
+		return dao.getAll();
 	});
 
-	public List<CygInfo> getAllcygInfo() {
+	public List<CygInfoEntity> getCygInfos() {
 		return AllCygInfoCache.get();
 	}
 
 	/**
 	 * cygInfo Cache by cygId
 	 */
-	private static final CacheMap<Integer, List<CygInfo>> CygInfoCacheMap = CacheMap.newBuilder().buildWith(cygId -> {
-		return dao.getCygInfoById(cygId);
+	private final CacheMap<Integer, CygInfoEntity> CygInfoCacheMap = CacheMap.newBuilder().buildWith(cygId -> {
+		return dao.get(cygId);
 	});
 
-	public List<CygInfo> getCygInfoById(Integer cygId) {
+	/**
+	 * 
+	 * @param cygId
+	 * @return
+	 */
+	public CygInfoEntity getCygInfoById(int cygId) {
 		return CygInfoCacheMap.getOptional(cygId).get();
-	}
-
-	/**
-	 * cygStrategy Cache by cygId
-	 */
-	private static final CacheMap<Integer, List<StrategyEntity>> CygStrategyCacheMap = CacheMap.newBuilder()
-			.buildWith(cygId -> {
-				return dao.getCygStrategyById(cygId);
-			});
-
-	/**
-	 * 
-	 * @param cygId
-	 * @return
-	 */
-	public List<CygStrategy> getCygStrategyById(Integer cygId) {
-		return CygStrategyCacheMap.getOptional(cygId).get();
-	}
-
-	/**
-	 * 
-	 * @param cygId
-	 * @return
-	 */
-	public List<CygMqConfig> getCygMqConfigById(Integer cygId) {
-		return dao.getCygMqConfigById(cygId);
 	}
 
 }
