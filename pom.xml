@@ -36,7 +36,6 @@
 		<module>restful-client</module>
 		<module>restful-service</module>
 		<module>simulator</module>
-		<module>rawdata-service</module>
 	</modules>
 
 	<properties>
