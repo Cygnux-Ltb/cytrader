@@ -1,9 +1,13 @@
 package io.cygnus.repository.service;
 
+import static io.mercury.common.functional.Functions.fun;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +55,20 @@ public class OrderService {
 		if (checkParams(strategyId, startTradingDay, endTradingDay, 0L, investorId, instrumentCode)) {
 			throw new IllegalArgumentException("missing or invalid query params");
 		}
-		return null;
+		return fun(() -> orderDao.query(strategyId, startTradingDay, endTradingDay, investorId, instrumentCode),
+				list -> {
+					if (CollectionUtils.isEmpty(list))
+						log.warn(
+								"query [OrderEntity] return 0 row, strategyId=={}, startTradingDay=={}, endTradingDay=={}, investorId=={}, instrumentCode=={}",
+								strategyId, startTradingDay, endTradingDay, investorId, instrumentCode);
+					else
+						log.info(
+								"query [OrderEntity] where strategyId=={}, startTradingDay=={}, endTradingDay=={}, investorId=={}, instrumentCode=={}, result row -> {}",
+								strategyId, startTradingDay, endTradingDay, investorId, instrumentCode, list.size());
+					return list;
+				}, e -> {
+					// TODO
+				}, ArrayList::new);
 	}
 
 	/**

@@ -1,56 +1,64 @@
 package io.cygnus.repository.service;
 
-import java.util.Date;
+import static io.mercury.common.functional.Functions.booleanFun;
+import static io.mercury.common.functional.Functions.fun;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
+import javax.annotation.Nonnull;
+import javax.annotation.Resource;
 
-import io.cygnus.repository.db.CommonDaoFactory;
+import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.Logger;
+import org.springframework.stereotype.Service;
+
+import io.cygnus.repository.dao.BarDao;
 import io.cygnus.repository.entity.BarEntity;
 import io.mercury.common.log.CommonLoggerFactory;
 
+@Service
 public class BarService {
 
-    private static final Logger logger = CommonLoggerFactory.getLogger(BarService.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(BarService.class);
 
-    public List<BarEntity> getTimeBinners(Integer cygId, Date dateTradingDay, String instrumentCode) {
-        Session session = CommonDaoFactory.getSession();
-        @SuppressWarnings({"unchecked", "deprecation"})
-        List<BarEntity> list = session.createCriteria(BarEntity.class).add(Restrictions.eq(BarEntity.COLUMN_CygId, cygId))
-                .add(Restrictions.eq(BarEntity.COLUMN_TradingDay, dateTradingDay))
-                .add(Restrictions.eq(BarEntity.COLUMN_InstrumentCode, instrumentCode)).list();
-        CommonDaoFactory.close(session);
-        return list;
-    }
+	@Resource
+	private BarDao dao;
 
-    public boolean addTimeBinners(BarEntity timeBinner) {
-        Session session = CommonDaoFactory.getSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            @SuppressWarnings({"unchecked", "deprecation"})
-            List<BarEntity> queryForFieldValues = session.createCriteria(BarEntity.class)
-                    .add(Restrictions.eq(BarEntity.COLUMN_CygId, timeBinner.getCygId()))
-                    .add(Restrictions.eq(BarEntity.COLUMN_TradingDay, timeBinner.getTradingDay()))
-                    .add(Restrictions.eq(BarEntity.COLUMN_TimePoint, timeBinner.getTimePoint()))
-                    .add(Restrictions.eq(BarEntity.COLUMN_InstrumentCode, timeBinner.getInstrumentCode())).list();
-            if (queryForFieldValues.size() > 0) {
-                // logger.error("Repeat consumption -> " + JSON.toJSONString(timeBinner));
-                logger.error("Repeat consumption -> {}", timeBinner.toString());
-                return true;
-            }
-            session.save(timeBinner);
-            transaction.commit();
-        } catch (Exception e) {
-            if (null != transaction) {
-                transaction.rollback();
-            }
-        } finally {
-            CommonDaoFactory.close(session);
-        }
-        return true;
-    }
+	/**
+	 * 
+	 * @param instrumentCode
+	 * @param tradingDay
+	 * @return
+	 */
+	public List<BarEntity> getBars(final String instrumentCode, final int tradingDay) {
+		return fun(() -> dao.query(instrumentCode, tradingDay), list -> {
+			if (CollectionUtils.isEmpty(list))
+				log.warn("query [BarEntity] return 0 row, instrumentCode=={}, tradingDay=={}", instrumentCode,
+						tradingDay);
+			else
+				log.info("query [BarEntity] where instrumentCode=={}, tradingDay=={}, result row -> {}", instrumentCode,
+						tradingDay, list.size());
+			return list;
+		}, e -> {
+			log.error("query [BarEntity] exception, instrumentCode=={}, tradingDay=={}, e.getMessage() -> {}",
+					instrumentCode, tradingDay, e.getMessage(), e);
+		}, ArrayList::new);
+	}
+
+	/**
+	 * 
+	 * @param bar
+	 * @return
+	 */
+	public boolean putBar(@Nonnull final BarEntity bar) {
+		return booleanFun(() -> dao.save(bar), o -> {
+			log.info("put [BarEntity] success, bar -> {}", bar);
+			return true;
+		}, e -> {
+			log.error("put [BarEntity] failure, bar -> {}, e.getMessage() -> {}", bar, e.getMessage(), e);
+			return false;
+		});
+	}
 
 }
