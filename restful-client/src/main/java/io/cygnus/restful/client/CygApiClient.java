@@ -27,10 +27,6 @@ public class CygApiClient extends BaseApiClient {
 		return super.getResultSet(StrategyEntity.class, cygStrategyByIdUri, new PathParam("cygId", cygId.toString()));
 	}
 
-	private String cygMqConfigByIdUri = baseUri + "/{cygId}/mq";
-
-	private String cygInitConfigByIdUri = baseUri + "/{cygId}/init_config";
-
 	public static void main(String[] args) {
 		CygApiClient client = new CygApiClient();
 		client.getAllCygInfo();

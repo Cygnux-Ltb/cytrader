@@ -2,7 +2,7 @@ package io.cygnus.restful.client;
 
 import java.util.List;
 
-import io.cygnus.persistence.entity.CygPnlDaily;
+import io.cygnus.repository.entity.PnlDailyEntity;
 import io.cygnus.restful.client.base.BaseApiClient;
 import io.cygnus.restful.client.base.PathParam;
 
@@ -12,13 +12,13 @@ public class PnlApiClient extends BaseApiClient {
 
 	private String getPnlDailysUri = pnlUri + "?tradingDay={tradingDay}&strategyId={strategyId}";
 
-	public List<CygPnlDaily> getPnlDailys(String tradingDay, Integer strategyId) {
-		return getResultSet(CygPnlDaily.class, getPnlDailysUri,
+	public List<PnlDailyEntity> getPnlDailys(String tradingDay, Integer strategyId) {
+		return getResultSet(PnlDailyEntity.class, getPnlDailysUri,
 				new PathParam("tradingDay", tradingDay), new PathParam("strategyId", strategyId.toString()));
 	}
 
-	public boolean putPnlDailys(CygPnlDaily pnlDaily) {
-		return putBody(pnlDaily, baseUri);
+	public boolean putPnlDailys(PnlDailyEntity pnlDaily) {
+		return putBody(pnlDaily, pnlUri);
 	}
 
 }
