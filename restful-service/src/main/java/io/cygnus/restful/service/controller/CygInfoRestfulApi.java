@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.resources;
+package io.cygnus.restful.service.controller;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;

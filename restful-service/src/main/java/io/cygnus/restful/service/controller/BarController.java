@@ -1,49 +1,51 @@
-package io.cygnus.restful.service.resources;
+package io.cygnus.restful.service.controller;
 
 import static io.mercury.transport.http.MimeType.APPLICATION_JSON_UTF8;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.persistence.entity.TimeBinner;
-import io.cygnus.persistence.service.BinnerDao;
+import io.cygnus.repository.dao.BarDao;
+import io.cygnus.repository.entity.BarEntity;
+import io.cygnus.repository.service.BarService;
 import io.cygnus.restful.service.base.CygRestfulApi;
 
 @RestController("/bar")
-public class BinnerRestfulApi extends CygRestfulApi {
+public class BarController extends CygRestfulApi {
+
+	@Resource
+	private BarService service;
 
 	/**
-	 * Get Binners
+	 * Get Bars
 	 * 
-	 * @param cygId
 	 * @param instrumentId
 	 * @param tradingDay
 	 * @return
 	 */
-	@GetMapping("/{cygId}")
-	public List<TimeBinner> getBinners(@PathVariable("cygId") Integer cygId,
-			@RequestParam("instrumentId") String instrumentId, @RequestParam("tradingDay") String tradingDay) {
-		Date dateTradingDay = null;
-		if (tradingDay != null) {
-			dateTradingDay = changeTradingDay(tradingDay);
-			if (dateTradingDay == null) {
-				return null;
-			}
-		}
-		BinnerDao dao = new BinnerDao();
-		List<TimeBinner> timeBinners = dao.getTimeBinners(cygId, dateTradingDay, instrumentId);
-		return timeBinners;
+	@GetMapping
+	public List<BarEntity> getBars(@RequestParam("instrumentCode") String instrumentCode,
+			@RequestParam("tradingDay") int tradingDay) {
+		
+		
+		
+		List<BarEntity> bars = service.getTimeBinners(null, instrumentCode)
+				
+				query(instrumentCode, tradingDay);
+		if (bars == null)
+			return new ArrayList<>();
+		return bars;
 	}
 
 	/**
@@ -55,12 +57,13 @@ public class BinnerRestfulApi extends CygRestfulApi {
 	@PutMapping(consumes = APPLICATION_JSON_UTF8)
 	public ResponseEntity<Integer> putBinners(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
-		TimeBinner timeBinner = jsonToObj(json, TimeBinner.class);
-		BinnerDao binnerDao = new BinnerDao();
-		if (binnerDao.addTimeBinners(timeBinner)) {
+		BarEntity bar = jsonToObj(json, BarEntity.class);
+		try {
+			dao.save(bar);
 			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+		} catch (Exception e) {
+			return internalServerError();
 		}
-		return httpInternalServerError();
 	}
 
 }

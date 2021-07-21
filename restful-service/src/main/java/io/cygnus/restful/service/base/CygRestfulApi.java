@@ -58,7 +58,7 @@ public abstract class CygRestfulApi {
 	 * 
 	 * @return
 	 */
-	protected <T> ResponseEntity<T> httpBadRequest() {
+	protected <T> ResponseEntity<T> badRequest() {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 
@@ -67,16 +67,16 @@ public abstract class CygRestfulApi {
 	 * 
 	 * @return
 	 */
-	protected <T> ResponseEntity<T> httpInternalServerError() {
+	protected <T> ResponseEntity<T> internalServerError() {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 
 	/**
-	 * Http Status Code: 200 Ok
+	 * Http Status Code: 200 ok
 	 * 
 	 * @return
 	 */
-	protected <T> ResponseEntity<T> httpOk() {
+	protected <T> ResponseEntity<T> ok() {
 		return ResponseEntity.ok().build();
 	}
 
@@ -88,7 +88,7 @@ public abstract class CygRestfulApi {
 	 */
 	protected <T> ResponseEntity<T> jsonResponse(T object) {
 		if (object == null) {
-			return httpInternalServerError();
+			return internalServerError();
 		}
 		return ResponseEntity.ok(object);
 	}

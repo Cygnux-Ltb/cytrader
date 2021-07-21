@@ -23,6 +23,7 @@ public class CygInfoExecutor {
 
 	// All cygInfo Cache
 	private final CacheList<CygInfoEntity> AllCygInfoCache = new CacheList<>(() -> {
+		log.info("update cache");
 		return dao.getAll();
 	});
 

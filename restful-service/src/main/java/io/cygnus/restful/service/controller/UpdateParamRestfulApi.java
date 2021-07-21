@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.resources;
+package io.cygnus.restful.service.controller;
 
 import static io.mercury.transport.http.MimeType.APPLICATION_JSON_UTF8;
 
