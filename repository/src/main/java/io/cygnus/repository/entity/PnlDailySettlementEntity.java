@@ -24,9 +24,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "cyg_pnl_settlement_daily")
-@Entity(name = EntityName.PnlSettlementDaily)
-public final class PnlSettlementDailyEntity {
+@Table(name = "cyg_pnl_daily_settlement")
+@Entity(name = EntityName.PnlDailySettlement)
+public final class PnlDailySettlementEntity {
 
 	@Id
 	@Column(name = CommonColumn.UID)

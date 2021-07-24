@@ -1,8 +1,8 @@
 package io.cygnus.repository.service;
 
-import static io.mercury.common.functional.Functions.fun;
+import static io.mercury.common.functional.Functions.booleanFun;
+import static io.mercury.common.functional.Functions.listFun;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,10 +22,10 @@ import io.mercury.common.util.StringUtil;
 public class OrderService {
 
 	@Resource
-	private OrderDao orderDao;
+	private OrderDao dao;
 
 	@Resource
-	private OrderEventDao orderEventDao;
+	private OrderEventDao eventDao;
 
 	private static final Logger log = CommonLoggerFactory.getLogger(OrderService.class);
 
@@ -55,7 +55,7 @@ public class OrderService {
 		if (checkParams(strategyId, startTradingDay, endTradingDay, 0L, investorId, instrumentCode)) {
 			throw new IllegalArgumentException("missing or invalid query params");
 		}
-		return fun(() -> orderDao.query(strategyId, startTradingDay, endTradingDay, investorId, instrumentCode),
+		return listFun(() -> dao.query(strategyId, startTradingDay, endTradingDay, investorId, instrumentCode),
 				list -> {
 					if (CollectionUtils.isEmpty(list))
 						log.warn(
@@ -67,8 +67,10 @@ public class OrderService {
 								strategyId, startTradingDay, endTradingDay, investorId, instrumentCode, list.size());
 					return list;
 				}, e -> {
-					// TODO
-				}, ArrayList::new);
+					log.error(
+							"query [OrderEntity] exception, strategyId=={}, startTradingDay=={}, endTradingDay=={}, investorId=={}, instrumentCode=={}, e.getMessage() -> {}",
+							strategyId, startTradingDay, endTradingDay, investorId, instrumentCode, e.getMessage(), e);
+				});
 	}
 
 	/**
@@ -110,8 +112,7 @@ public class OrderService {
 	 * @return
 	 */
 	public boolean putOrder(OrderEntity order) {
-		orderDao.save(order);
-		return true;
+		return booleanFun(() -> dao.save(order), o -> true, e -> false);
 	}
 
 	/**
@@ -120,8 +121,7 @@ public class OrderService {
 	 * @return
 	 */
 	public boolean putOrderEvent(OrderEventEntity orderEvent) {
-		orderEventDao.save(orderEvent);
-		return false;
+		return booleanFun(() -> eventDao.save(orderEvent), o -> true, e -> false);
 	}
 
 }

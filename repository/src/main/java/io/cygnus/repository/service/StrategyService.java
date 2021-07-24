@@ -18,10 +18,10 @@ import io.mercury.common.log.CommonLoggerFactory;
 public final class StrategyService {
 
 	@Resource
-	private StrategyDao strategyDao;
+	private StrategyDao dao;
 
 	@Resource
-	private StrategyParamDao strategyParamDao;
+	private StrategyParamDao paramDao;
 
 	private static final Logger log = CommonLoggerFactory.getLogger(StrategyService.class);
 
@@ -30,7 +30,7 @@ public final class StrategyService {
 	 * @return
 	 */
 	public List<StrategyEntity> getStrategys() {
-		return strategyDao.findAll();
+		return dao.findAll();
 	}
 
 	/**
@@ -39,7 +39,7 @@ public final class StrategyService {
 	 * @return
 	 */
 	public StrategyEntity getStrategyById(int strategyId) {
-		return strategyDao.findById(strategyId).get();
+		return dao.findById(strategyId).get();
 	}
 
 	/**
@@ -48,9 +48,8 @@ public final class StrategyService {
 	 * @return
 	 */
 	public List<StrategyParamEntity> getParamsByStrategyId(int strategyId) {
-		List<StrategyParamEntity> list = strategyParamDao.queryByStrategyId(strategyId);
+		List<StrategyParamEntity> list = paramDao.queryByStrategyId(strategyId);
 		if (list == null) {
-			
 			return new ArrayList<>();
 		}
 		return list;
@@ -63,7 +62,7 @@ public final class StrategyService {
 	 */
 	public boolean putStrategyParam(StrategyParamEntity strategyParam) {
 		try {
-			strategyParamDao.save(strategyParam);
+			paramDao.save(strategyParam);
 			return true;
 		} catch (Exception e) {
 			log.error("Save StrategyParamEntity error -> {}", e.getMessage(), e);

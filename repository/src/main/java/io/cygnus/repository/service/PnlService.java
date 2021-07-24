@@ -1,27 +1,30 @@
 package io.cygnus.repository.service;
 
-import java.util.ArrayList;
+import static io.mercury.common.functional.Functions.booleanFun;
+import static io.mercury.common.functional.Functions.listFun;
+
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.dao.PnlDailyDao;
-import io.cygnus.repository.dao.PnlSettlementDailyDao;
+import io.cygnus.repository.dao.PnlDailySettlementDao;
 import io.cygnus.repository.entity.PnlDailyEntity;
-import io.cygnus.repository.entity.PnlSettlementDailyEntity;
+import io.cygnus.repository.entity.PnlDailySettlementEntity;
 import io.mercury.common.log.CommonLoggerFactory;
 
 @Service
 public final class PnlService {
 
 	@Resource
-	private PnlDailyDao pnlDailyDao;
+	private PnlDailyDao dao;
 
 	@Resource
-	private PnlSettlementDailyDao pnlSettlementDailyDao;
+	private PnlDailySettlementDao settlementDao;
 
 	private static final Logger log = CommonLoggerFactory.getLogger(PnlService.class);
 
@@ -32,10 +35,18 @@ public final class PnlService {
 	 * @return
 	 */
 	public List<PnlDailyEntity> getPnlDailys(int strategyId, int tradingDay) {
-		List<PnlDailyEntity> list = pnlDailyDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay);
-		if (list == null)
-			return new ArrayList<>();
-		return list;
+		return listFun(() -> dao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
+			if (CollectionUtils.isEmpty(list))
+				log.warn("query [PnlDailyEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId, tradingDay);
+			else
+				log.info("query [PnlDailyEntity] where strategyId=={}, tradingDay=={}, result row -> {}", strategyId,
+						tradingDay, list.size());
+			return list;
+		}, e -> {
+			log.error("query [PnlDailyEntity] exception, strategyId=={}, tradingDay=={}, e.getMessage() -> {}",
+					strategyId, tradingDay, e.getMessage(), e);
+		});
+
 	}
 
 	/**
@@ -44,12 +55,20 @@ public final class PnlService {
 	 * @param tradingDay
 	 * @return
 	 */
-	public List<PnlSettlementDailyEntity> getPnlSettlementDailys(int strategyId, int tradingDay) {
-		List<PnlSettlementDailyEntity> list = pnlSettlementDailyDao.queryByStrategyIdAndTradingDay(strategyId,
-				tradingDay);
-		if (list == null)
-			return new ArrayList<>();
-		return list;
+	public List<PnlDailySettlementEntity> getPnlDailySettlements(int strategyId, int tradingDay) {
+		return listFun(() -> settlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
+			if (CollectionUtils.isEmpty(list))
+				log.warn("query [PnlDailySettlementEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId,
+						tradingDay);
+			else
+				log.info("query [PnlDailySettlementEntity] where strategyId=={}, tradingDay=={}, result row -> {}",
+						strategyId, tradingDay, list.size());
+			return list;
+		}, e -> {
+			log.error(
+					"query [PnlDailySettlementEntity] exception, strategyId=={}, tradingDay=={}, e.getMessage() -> {}",
+					strategyId, tradingDay, e.getMessage(), e);
+		});
 	}
 
 	/**
@@ -58,31 +77,28 @@ public final class PnlService {
 	 * @return
 	 */
 	public boolean putPnlDaily(PnlDailyEntity pnlDaily) {
-		try {
-			pnlDailyDao.save(pnlDaily);
-			log.info("save PnlDaily entity success -> {}", pnlDaily);
+		return booleanFun(() -> dao.save(pnlDaily), o -> {
+			log.info("save [PnlDailyEntity] success -> {}", pnlDaily);
 			return true;
-		} catch (Exception e) {
-			log.error("save PnlDaily entity failure -> {}, message -> {}", pnlDaily, e.getMessage(), e);
+		}, e -> {
+			log.error("save [PnlDailyEntity] failure -> {}, message -> {}", pnlDaily, e.getMessage(), e);
 			return false;
-		}
+		});
 	}
 
 	/**
 	 * 
-	 * @param pnlSettlementDailyEntity
+	 * @param entity
 	 * @return
 	 */
-	public boolean putPnlSettlementDaily(PnlSettlementDailyEntity pnlSettlementDailyEntity) {
-		try {
-			pnlSettlementDailyDao.save(pnlSettlementDailyEntity);
-			log.info("save PnlSettlementDaily entity success -> {}", pnlSettlementDailyEntity);
+	public boolean putPnlDailySettlement(PnlDailySettlementEntity entity) {
+		return booleanFun(() -> settlementDao.save(entity), o -> {
+			log.info("save [PnlDailySettlementEntity] success -> {}", entity);
 			return true;
-		} catch (Exception e) {
-			log.error("save PnlSettlementDaily entity failure -> {}, message -> {}", pnlSettlementDailyEntity,
-					e.getMessage(), e);
+		}, e -> {
+			log.error("save [PnlDailySettlementEntity] failure -> {}, message -> {}", entity, e.getMessage(), e);
 			return false;
-		}
+		});
 	}
 
 }

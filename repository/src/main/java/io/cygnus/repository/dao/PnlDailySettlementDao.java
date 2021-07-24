@@ -1,11 +1,11 @@
 package io.cygnus.repository.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.PnlSettlementDailyEntity;
-
-import java.util.List;
+import io.cygnus.repository.entity.PnlDailySettlementEntity;
 
 /**
  * PnlSettlementDaily DAO
@@ -14,8 +14,8 @@ import java.util.List;
  * 
  */
 @Repository
-public interface PnlSettlementDailyDao extends JpaRepository<PnlSettlementDailyEntity, Long> {
+public interface PnlDailySettlementDao extends JpaRepository<PnlDailySettlementEntity, Long> {
 
-	List<PnlSettlementDailyEntity> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
+	List<PnlDailySettlementEntity> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
 
 }

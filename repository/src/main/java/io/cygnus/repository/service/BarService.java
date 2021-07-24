@@ -1,9 +1,8 @@
 package io.cygnus.repository.service;
 
 import static io.mercury.common.functional.Functions.booleanFun;
-import static io.mercury.common.functional.Functions.fun;
+import static io.mercury.common.functional.Functions.listFun;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -32,7 +31,7 @@ public class BarService {
 	 * @return
 	 */
 	public List<BarEntity> getBars(final String instrumentCode, final int tradingDay) {
-		return fun(() -> dao.query(instrumentCode, tradingDay), list -> {
+		return listFun(() -> dao.query(instrumentCode, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [BarEntity] return 0 row, instrumentCode=={}, tradingDay=={}", instrumentCode,
 						tradingDay);
@@ -43,7 +42,7 @@ public class BarService {
 		}, e -> {
 			log.error("query [BarEntity] exception, instrumentCode=={}, tradingDay=={}, e.getMessage() -> {}",
 					instrumentCode, tradingDay, e.getMessage(), e);
-		}, ArrayList::new);
+		});
 	}
 
 	/**
@@ -53,10 +52,10 @@ public class BarService {
 	 */
 	public boolean putBar(@Nonnull final BarEntity bar) {
 		return booleanFun(() -> dao.save(bar), o -> {
-			log.info("put [BarEntity] success, bar -> {}", bar);
+			log.info("save [BarEntity] success, bar -> {}", bar);
 			return true;
 		}, e -> {
-			log.error("put [BarEntity] failure, bar -> {}, e.getMessage() -> {}", bar, e.getMessage(), e);
+			log.error("save [BarEntity] failure, bar -> {}, e.getMessage() -> {}", bar, e.getMessage(), e);
 			return false;
 		});
 	}

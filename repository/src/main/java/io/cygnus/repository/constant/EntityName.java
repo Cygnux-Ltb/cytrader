@@ -18,7 +18,7 @@ public interface EntityName {
 
 	String PnlDaily = "PnlDaily";
 
-	String PnlSettlementDaily = "PnlSettlementDaily";
+	String PnlDailySettlement = "PnlDailySettlement";
 
 	String Strategy = "Strategy";
 

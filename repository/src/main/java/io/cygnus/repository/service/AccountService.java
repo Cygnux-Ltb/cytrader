@@ -1,5 +1,7 @@
 package io.cygnus.repository.service;
 
+import static io.mercury.common.functional.Functions.listFun;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,10 +19,13 @@ public class AccountService {
 
 	@Resource
 	private AccountDao dao;
-	
+
 	private static final Logger log = CommonLoggerFactory.getLogger(AccountService.class);
 
 	public List<AccountEntity> getAccount(int accountId) {
+		listFun(() -> dao.queryByAccountId(accountId), list -> list, e -> {
+
+		});
 		List<AccountEntity> list = dao.queryByAccountId(accountId);
 		log.info("query Account where accountId == {}, result -> {}", JsonWrapper.toJson(list));
 		return list;
