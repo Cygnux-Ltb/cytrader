@@ -2,7 +2,6 @@ package io.cygnus.restful.service.controller;
 
 import static io.mercury.transport.http.MimeType.APPLICATION_JSON_UTF8;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.repository.dao.BarDao;
 import io.cygnus.repository.entity.BarEntity;
 import io.cygnus.repository.service.BarService;
 import io.cygnus.restful.service.base.CygRestfulApi;
@@ -37,33 +35,20 @@ public class BarController extends CygRestfulApi {
 	@GetMapping
 	public List<BarEntity> getBars(@RequestParam("instrumentCode") String instrumentCode,
 			@RequestParam("tradingDay") int tradingDay) {
-		
-		
-		
-		List<BarEntity> bars = service.getTimeBinners(null, instrumentCode)
-				
-				query(instrumentCode, tradingDay);
-		if (bars == null)
-			return new ArrayList<>();
-		return bars;
+		return service.getBars(instrumentCode, tradingDay);
 	}
 
 	/**
-	 * Put Binner
+	 * Put Bar
 	 * 
 	 * @param request
 	 * @return
 	 */
 	@PutMapping(consumes = APPLICATION_JSON_UTF8)
-	public ResponseEntity<Integer> putBinners(@RequestBody HttpServletRequest request) {
+	public ResponseEntity<Integer> putBar(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		BarEntity bar = jsonToObj(json, BarEntity.class);
-		try {
-			dao.save(bar);
-			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
-		} catch (Exception e) {
-			return internalServerError();
-		}
+		return service.putBar(bar) ? ResponseEntity.status(HttpStatus.ACCEPTED).build() : internalServerError();
 	}
 
 }

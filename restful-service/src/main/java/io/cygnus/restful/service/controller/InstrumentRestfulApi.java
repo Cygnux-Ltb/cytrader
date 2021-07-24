@@ -25,7 +25,7 @@ import io.mercury.common.annotation.cache.GetCache;
 public class InstrumentRestfulApi extends CygRestfulApi {
 
 	@Resource
-	private InstrumentService instrumentDao;
+	private InstrumentService service;
 
 	/**
 	 * Get SettlementPrice
@@ -35,9 +35,9 @@ public class InstrumentRestfulApi extends CygRestfulApi {
 	 * @return
 	 */
 	@GetMapping("/settlement_price")
-	public ResponseEntity<List<InstrumentSettlementEntity>> getSettlementPrice(@RequestParam("instrumentId") String instrumentId,
-			@RequestParam("tradingDay") String tradingDay) {
-		if (checkParamIsNull(instrumentId, tradingDay)) {
+	public ResponseEntity<List<InstrumentSettlementEntity>> getSettlementPrice(
+			@RequestParam("instrumentCode") String instrumentCode, @RequestParam("tradingDay") int tradingDay) {
+		if (checkParamIsNull(instrumentCode, tradingDay)) {
 			return httpBadRequest();
 		}
 		Date dateTradingDay = null;
@@ -48,8 +48,8 @@ public class InstrumentRestfulApi extends CygRestfulApi {
 			}
 		}
 
-		List<InstrumentSettlementEntity> settlementPrices = instrumentDao.
-				getInstrumentSettlement(instrumentId, dateTradingDay);
+		List<InstrumentSettlementEntity> settlementPrices = instrumentDao.getInstrumentSettlement(instrumentId,
+				dateTradingDay);
 		return jsonResponse(settlementPrices);
 	}
 
