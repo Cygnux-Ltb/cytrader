@@ -43,8 +43,7 @@ public final class PnlService {
 						tradingDay, list.size());
 			return list;
 		}, e -> {
-			log.error("query [PnlDailyEntity] exception, strategyId=={}, tradingDay=={}, e.getMessage() -> {}",
-					strategyId, tradingDay, e.getMessage(), e);
+			log.error("query [PnlDailyEntity] exception, strategyId=={}, tradingDay=={}", strategyId, tradingDay, e);
 		});
 
 	}
@@ -65,9 +64,8 @@ public final class PnlService {
 						strategyId, tradingDay, list.size());
 			return list;
 		}, e -> {
-			log.error(
-					"query [PnlDailySettlementEntity] exception, strategyId=={}, tradingDay=={}, e.getMessage() -> {}",
-					strategyId, tradingDay, e.getMessage(), e);
+			log.error("query [PnlDailySettlementEntity] exception, strategyId=={}, tradingDay=={}", strategyId,
+					tradingDay, e);
 		});
 	}
 
@@ -81,7 +79,7 @@ public final class PnlService {
 			log.info("save [PnlDailyEntity] success -> {}", pnlDaily);
 			return true;
 		}, e -> {
-			log.error("save [PnlDailyEntity] failure -> {}, message -> {}", pnlDaily, e.getMessage(), e);
+			log.error("save [PnlDailyEntity] failure -> {}", pnlDaily, e);
 			return false;
 		});
 	}
@@ -96,7 +94,7 @@ public final class PnlService {
 			log.info("save [PnlDailySettlementEntity] success -> {}", entity);
 			return true;
 		}, e -> {
-			log.error("save [PnlDailySettlementEntity] failure -> {}, message -> {}", entity, e.getMessage(), e);
+			log.error("save [PnlDailySettlementEntity] failure -> {}", entity, e);
 			return false;
 		});
 	}

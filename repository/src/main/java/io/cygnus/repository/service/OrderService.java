@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +16,20 @@ import io.cygnus.repository.dao.OrderDao;
 import io.cygnus.repository.dao.OrderEventDao;
 import io.cygnus.repository.entity.OrderEntity;
 import io.cygnus.repository.entity.OrderEventEntity;
+import io.cygnus.repository.service.base.BaseService;
+import io.mercury.common.lang.Throws;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.util.StringUtil;
 
 @Service
-public class OrderService {
+public class OrderService extends BaseService {
+
+	private static final Logger log = CommonLoggerFactory.getLogger(OrderService.class);
 
 	@Resource
 	private OrderDao dao;
 
 	@Resource
 	private OrderEventDao eventDao;
-
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderService.class);
 
 	/**
 	 * 
@@ -37,9 +39,11 @@ public class OrderService {
 	 * @param instrumentCode
 	 * @return
 	 */
-	public List<OrderEntity> getOrders(int strategyId, int tradingDay, String investorId, String instrumentCode) {
-		return getOrders(strategyId, tradingDay, tradingDay, investorId, instrumentCode);
+	public List<OrderEntity> getOrders(int strategyId, String investorId, String instrumentCode, int tradingDay) {
+		return getOrders(strategyId, investorId, instrumentCode, tradingDay, tradingDay);
 	}
+
+	private final String QueryOrderParamErrorMsg = "query [OrderEntity] param error";
 
 	/**
 	 * 
@@ -50,12 +54,17 @@ public class OrderService {
 	 * @param instrumentCode
 	 * @return
 	 */
-	public List<OrderEntity> getOrders(int strategyId, int startTradingDay, int endTradingDay, String investorId,
-			String instrumentCode) {
-		if (checkParams(strategyId, startTradingDay, endTradingDay, 0L, investorId, instrumentCode)) {
-			throw new IllegalArgumentException("missing or invalid query params");
-		}
-		return listFun(() -> dao.query(strategyId, startTradingDay, endTradingDay, investorId, instrumentCode),
+	public List<OrderEntity> getOrders(int strategyId, String investorId, String instrumentCode, int startTradingDay,
+			int endTradingDay) {
+		if (checkStrategyId(strategyId, log, QueryOrderParamErrorMsg))
+			Throws.illegalArgument("strategyId");
+		if (checkTradingDay(startTradingDay, endTradingDay, log, QueryOrderParamErrorMsg))
+			Throws.illegalArgument("startTradingDay & endTradingDay");
+		if (checkInvestorId(investorId, log, QueryOrderParamErrorMsg))
+			Throws.illegalArgument("investorId");
+		if (checkInstrumentCode(instrumentCode, log, QueryOrderParamErrorMsg))
+			Throws.illegalArgument("instrumentCode");
+		return listFun(() -> dao.query(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay),
 				list -> {
 					if (CollectionUtils.isEmpty(list))
 						log.warn(
@@ -68,10 +77,12 @@ public class OrderService {
 					return list;
 				}, e -> {
 					log.error(
-							"query [OrderEntity] exception, strategyId=={}, startTradingDay=={}, endTradingDay=={}, investorId=={}, instrumentCode=={}, e.getMessage() -> {}",
-							strategyId, startTradingDay, endTradingDay, investorId, instrumentCode, e.getMessage(), e);
+							"query [OrderEntity] exception, strategyId=={}, startTradingDay=={}, endTradingDay=={}, investorId=={}, instrumentCode=={}",
+							strategyId, startTradingDay, endTradingDay, investorId, instrumentCode, e);
 				});
 	}
+
+	private final String QueryOrderEventParamErrorMsg = "query [OrderEventEntity] param error";
 
 	/**
 	 * 
@@ -79,49 +90,66 @@ public class OrderService {
 	 * @return
 	 */
 	public List<OrderEventEntity> getOrderEvents(long ordSysId) {
-
-		return null;
+		if (checkOrdSysId(ordSysId, log, QueryOrderEventParamErrorMsg))
+			return new FastList<>();
+		return listFun(() -> eventDao.queryByOrdSysId(ordSysId), list -> {
+			if (CollectionUtils.isEmpty(list))
+				log.warn("query [OrderEventEntity] return 0 row, ordSysId=={}", ordSysId);
+			else
+				log.info("query [OrderEventEntity] where ordSysId=={}, result row -> {}", ordSysId, list.size());
+			return list;
+		}, e -> {
+			log.error("query [OrderEventEntity] exception, ordSysId=={}", ordSysId, e);
+		});
 	}
 
 	/**
 	 * 
-	 * @param strategyId
-	 * @param startTradingDay
-	 * @param endTradingDay
-	 * @param ordSysId
-	 * @param investorId
-	 * @param instrumentCode
+	 * @param tradingDay
 	 * @return
 	 */
-	private boolean checkParams(int strategyId, int startTradingDay, int endTradingDay, long ordSysId,
-			String investorId, String instrumentCode) {
-		if (strategyId <= 0 && startTradingDay <= 0 && endTradingDay < startTradingDay && ordSysId < 0L
-				&& StringUtil.isNullOrEmpty(investorId) && StringUtil.isNullOrEmpty(instrumentCode)) {
-			log.error(
-					"illegal params, strategyId -> {}, startTradingDay -> {}, endTradingDay -> {}, "
-							+ "ordSysId -> {}, investorId -> {}, instrumentCode -> {}",
-					strategyId, startTradingDay, endTradingDay, ordSysId, investorId, instrumentCode);
+	public List<OrderEventEntity> getOrderEvents(int tradingDay) {
+		if (checkTradingDay(tradingDay, log, QueryOrderEventParamErrorMsg))
+			return new FastList<>();
+		return listFun(() -> eventDao.queryByTradingDay(tradingDay), list -> {
+			if (CollectionUtils.isEmpty(list))
+				log.warn("query [OrderEventEntity] return 0 row, tradingDay=={}", tradingDay);
+			else
+				log.info("query [OrderEventEntity] where tradingDay=={}, result row -> {}", tradingDay, list.size());
+			return list;
+		}, e -> {
+			log.error("query [OrderEventEntity] exception, tradingDay=={}", tradingDay, e);
+		});
+	}
+
+	/**
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	public boolean putOrder(OrderEntity entity) {
+		return booleanFun(() -> dao.save(entity), o -> {
+			log.info("save [OrderEntity] success -> {}", entity);
 			return true;
-		}
-		return false;
+		}, e -> {
+			log.error("save [OrderEntity] failure -> {}", entity, e);
+			return false;
+		});
 	}
 
 	/**
 	 * 
-	 * @param order
+	 * @param entity
 	 * @return
 	 */
-	public boolean putOrder(OrderEntity order) {
-		return booleanFun(() -> dao.save(order), o -> true, e -> false);
-	}
-
-	/**
-	 * 
-	 * @param orderEvent
-	 * @return
-	 */
-	public boolean putOrderEvent(OrderEventEntity orderEvent) {
-		return booleanFun(() -> eventDao.save(orderEvent), o -> true, e -> false);
+	public boolean putOrderEvent(OrderEventEntity entity) {
+		return booleanFun(() -> eventDao.save(entity), o -> {
+			log.info("save [OrderEventEntity] success -> {}", entity);
+			return true;
+		}, e -> {
+			log.error("save [OrderEventEntity] failure -> {}", entity, e);
+			return false;
+		});
 	}
 
 }

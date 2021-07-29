@@ -30,7 +30,7 @@ public class BarService {
 	 * @param tradingDay
 	 * @return
 	 */
-	public List<BarEntity> getBars(final String instrumentCode, final int tradingDay) {
+	public List<BarEntity> getBars(@Nonnull String instrumentCode, int tradingDay) {
 		return listFun(() -> dao.query(instrumentCode, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [BarEntity] return 0 row, instrumentCode=={}, tradingDay=={}", instrumentCode,
@@ -40,22 +40,21 @@ public class BarService {
 						tradingDay, list.size());
 			return list;
 		}, e -> {
-			log.error("query [BarEntity] exception, instrumentCode=={}, tradingDay=={}, e.getMessage() -> {}",
-					instrumentCode, tradingDay, e.getMessage(), e);
+			log.error("query [BarEntity] exception, instrumentCode=={}, tradingDay=={}", instrumentCode, tradingDay, e);
 		});
 	}
 
 	/**
 	 * 
-	 * @param bar
+	 * @param entity
 	 * @return
 	 */
-	public boolean putBar(@Nonnull final BarEntity bar) {
-		return booleanFun(() -> dao.save(bar), o -> {
-			log.info("save [BarEntity] success, bar -> {}", bar);
+	public boolean putBar(@Nonnull BarEntity entity) {
+		return booleanFun(() -> dao.save(entity), o -> {
+			log.info("save [BarEntity] success -> {}", entity);
 			return true;
 		}, e -> {
-			log.error("save [BarEntity] failure, bar -> {}, e.getMessage() -> {}", bar, e.getMessage(), e);
+			log.error("save [BarEntity] failure -> {}", entity, e);
 			return false;
 		});
 	}

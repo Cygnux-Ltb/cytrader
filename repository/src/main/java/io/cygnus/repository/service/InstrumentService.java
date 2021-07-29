@@ -22,13 +22,13 @@ import io.mercury.serialization.json.JsonWrapper;
 @Service
 public final class InstrumentService {
 
+	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentService.class);
+
 	@Resource
 	private InstrumentDao dao;
 
 	@Resource
 	private InstrumentSettlementDao settlementDao;
-
-	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentService.class);
 
 	/**
 	 * 
@@ -44,8 +44,7 @@ public final class InstrumentService {
 						JsonWrapper.toPrettyJsonHasNulls(list));
 			return list;
 		}, e -> {
-			log.error("query [InstrumentEntity] exception, instrumentCode=={}, e.getMessage() -> {}", instrumentCode,
-					e.getMessage(), e);
+			log.error("query [InstrumentEntity] exception, instrumentCode=={}", instrumentCode, e);
 		});
 	}
 
@@ -65,40 +64,37 @@ public final class InstrumentService {
 						instrumentCode, tradingDay, JsonWrapper.toPrettyJsonHasNulls(list));
 			return list;
 		}, e -> {
-			log.error(
-					"query [InstrumentSettlementEntity] exception, instrumentCode=={}, tradingDay=={}, e.getMessage() -> {}",
-					instrumentCode, tradingDay, e.getMessage(), e);
+			log.error("query [InstrumentSettlementEntity] exception, instrumentCode=={}, tradingDay=={}",
+					instrumentCode, tradingDay, e);
 		});
 	}
 
 	/**
 	 * 
-	 * @param instrument
+	 * @param entity
 	 * @return
 	 */
-	public boolean putInstrument(@Nonnull InstrumentEntity instrument) {
-		return booleanFun(() -> dao.save(instrument), o -> {
-			log.info("save [InstrumentEntity] success, instrument -> {}", instrument);
+	public boolean putInstrument(@Nonnull InstrumentEntity entity) {
+		return booleanFun(() -> dao.save(entity), o -> {
+			log.info("save [InstrumentEntity] success, entity -> {}", entity);
 			return true;
 		}, e -> {
-			log.error("save [InstrumentEntity] failure, instrument -> {}, e.getMessage() -> {}", instrument,
-					e.getMessage(), e);
+			log.error("save [InstrumentEntity] failure, entity -> {}", entity, e);
 			return false;
 		});
 	}
 
 	/**
 	 * 
-	 * @param instrumentSettlement
+	 * @param entity
 	 * @return
 	 */
-	public boolean putInstrumentSettlement(@Nonnull InstrumentSettlementEntity instrumentSettlement) {
-		return booleanFun(() -> settlementDao.save(instrumentSettlement), o -> {
-			log.info("save [InstrumentSettlementEntity] success, instrumentSettlement -> {}", instrumentSettlement);
+	public boolean putInstrumentSettlement(@Nonnull InstrumentSettlementEntity entity) {
+		return booleanFun(() -> settlementDao.save(entity), o -> {
+			log.info("save [InstrumentSettlementEntity] success -> {}", entity);
 			return true;
 		}, e -> {
-			log.error("save [InstrumentSettlementEntity] failure, instrumentSettlement -> {}, e.getMessage() -> {}",
-					instrumentSettlement, e.getMessage(), e);
+			log.error("save [InstrumentSettlementEntity] failure -> {}", entity, e);
 			return false;
 		});
 	}

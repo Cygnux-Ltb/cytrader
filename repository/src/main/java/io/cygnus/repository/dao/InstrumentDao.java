@@ -21,7 +21,8 @@ import io.cygnus.repository.entity.InstrumentEntity;
 public interface InstrumentDao extends JpaRepository<InstrumentEntity, Long> {
 
 	@Query("SELECT * FROM #{#entityName} e " 
-			+ " WHERE e.instrumentCode LIKE :instrumentCode ")
+			+ " WHERE "
+			+ "e.instrumentCode LIKE :instrumentCode ")
 	List<InstrumentEntity> query(@Nullable String instrumentCode);
 
 }

@@ -21,8 +21,10 @@ import io.cygnus.repository.entity.InstrumentSettlementEntity;
 public interface InstrumentSettlementDao extends JpaRepository<InstrumentSettlementEntity, Long> {
 
 	@Query("SELECT * FROM #{#entityName} e " 
-			+ " WHERE e.instrumentCode LIKE %:instrumentCode% " 
-			+ " AND e.tradingDay = :tradingDay ")
+			+ " WHERE "
+			+ " e.instrumentCode LIKE %:instrumentCode% " 
+			+ " AND "
+			+ " e.tradingDay = :tradingDay ")
 	List<InstrumentSettlementEntity> query(@Nullable String instrumentCode, int tradingDay);
 	
 }
