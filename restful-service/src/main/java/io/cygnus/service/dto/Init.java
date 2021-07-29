@@ -13,8 +13,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Init {
 
-	private Integer cygId;
+	private int cygId;
 
-	private String tradingDay;
+	private int tradingDay;
 
 }

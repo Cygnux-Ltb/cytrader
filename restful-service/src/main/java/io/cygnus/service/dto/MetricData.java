@@ -1,9 +1,11 @@
 package io.cygnus.service.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 public class MetricData {
 
@@ -25,19 +27,10 @@ public class MetricData {
 
 	@Override
 	public String toString() {
-		return new StringBuffer()
-		.append(keyId)
-		.append(",").append(interfaceType)
-		.append(",").append(exchangeCode)
-		.append(",").append(strategyId)
-		.append(",").append(lastPoint)
-		.append("<->")
-		.append(currPoint)
-		.append(",").append(lastPoint)
-		.append(",").append(currPoint)
-		.append(",").append(epochTime)
-		.append(",").append(epochTimeDiff)
-		.toString();
+		return new StringBuffer().append(keyId).append(",").append(interfaceType).append(",").append(exchangeCode)
+				.append(",").append(strategyId).append(",").append(lastPoint).append("<->").append(currPoint)
+				.append(",").append(lastPoint).append(",").append(currPoint).append(",").append(epochTime).append(",")
+				.append(epochTimeDiff).toString();
 	}
 
 }

@@ -2,43 +2,49 @@ package io.cygnus.service.dto.pack;
 
 import static io.mercury.common.collections.MutableMaps.newUnifiedMap;
 
-import java.util.Map;
-
 import javax.annotation.Nonnull;
 
-import io.mercury.common.codec.Envelope;
+import org.eclipse.collections.api.map.MutableMap;
 
+import io.mercury.common.codec.Envelope;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
 public enum InboxTitle implements Envelope {
 
-	LastPrice,
+	Unknown(-1),
+	
+	Heartbeat(0),
 
-	Heartbeat,
+	LastPrice(1),
 
-	Order,
+	Bar(2),
 
-	TimeBinner,
+	Order(3),
 
-	StrategyInstrumentPNLDaily,
+	StrategyInstrumentPNLDaily(),
 
-	Init,
+	Init(),
 
-	InitFinish,
+	InitFinish(),
 
-	LogInfo,
+	LogInfo(),
 
-	StrategySwitch,
+	StrategySwitch(),
 
-	UpdateStrategyParams,
+	UpdateStrategyParams(),
 
-	UpdateStrategySignals,
+	UpdateStrategySignals(),
 
-	MetricData,
+	MetricData(7),
 
 	;
 	
+	@Getter
+	private final int code;
 	
-
-	private static final Map<String, InboxTitle> Map = newUnifiedMap();
+	private static final MutableMap<String, InboxTitle> Map = newUnifiedMap();
 
 	static {
 		for (InboxTitle value : InboxTitle.values())
@@ -52,10 +58,6 @@ public enum InboxTitle implements Envelope {
 		throw new IllegalArgumentException("checkout with [" + name + "] is null");
 	}
 
-	@Override
-	public int getCode() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 }
