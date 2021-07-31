@@ -22,13 +22,13 @@ import io.mercury.common.log.CommonLoggerFactory;
 @Service
 public final class StrategyService extends BaseService {
 
+	private final Logger log = CommonLoggerFactory.getLogger(StrategyService.class);
+
 	@Resource
 	private StrategyDao dao;
 
 	@Resource
 	private StrategyParamDao paramDao;
-
-	private static final Logger log = CommonLoggerFactory.getLogger(StrategyService.class);
 
 	/**
 	 * 
@@ -45,10 +45,21 @@ public final class StrategyService extends BaseService {
 	 * @param strategyId
 	 * @return
 	 */
-	public StrategyEntity getStrategyById(int strategyId) {
+	public StrategyEntity getStrategy(int strategyId) {
 		if (checkStrategyId(strategyId, log, "query [StrategyEntity] param error"))
 			Throws.illegalArgument("strategyId");
-		return dao.findById(strategyId).get();
+		return dao.queryByStrategyId(strategyId);
+	}
+
+	/**
+	 * 
+	 * @param strategyName
+	 * @return
+	 */
+	public List<StrategyEntity> getStrategy(String strategyName) {
+		if (checkStrategyName(strategyName, log, "query [StrategyEntity] param error"))
+			Throws.illegalArgument("strategyName");
+		return dao.queryByStrategyName(strategyName);
 	}
 
 	/**
@@ -56,7 +67,7 @@ public final class StrategyService extends BaseService {
 	 * @param strategyId
 	 * @return
 	 */
-	public List<StrategyParamEntity> getParams(int strategyId) {
+	public List<StrategyParamEntity> getStrategyParams(int strategyId) {
 		if (checkStrategyId(strategyId, log, "query [StrategyParamEntity] param error"))
 			Throws.illegalArgument("strategyId");
 		return listFun(() -> paramDao.queryByStrategyId(strategyId), list -> {
@@ -70,6 +81,31 @@ public final class StrategyService extends BaseService {
 		});
 	}
 
+	/**
+	 * 
+	 * @param strategyName
+	 * @return
+	 */
+	public List<StrategyParamEntity> getStrategyParams(String strategyName) {
+		if (checkStrategyName(strategyName, log, "query [StrategyParamEntity] param error"))
+			Throws.illegalArgument("strategyId");
+		return listFun(() -> paramDao.queryByStrategyName(strategyName), list -> {
+			if (CollectionUtils.isEmpty(list)) {
+				log.warn("query [StrategyParamEntity] return 0 row, strategyName=={}", strategyName);
+			} else
+				log.info("query [StrategyParamEntity] where strategyName=={}, result row -> {}", strategyName,
+						list.size());
+			return list;
+		}, e -> {
+			log.error("query [StrategyParamEntity] exception, strategyName=={}", strategyName, e);
+		});
+	}
+
+	/**
+	 * 
+	 * @param entity
+	 * @return
+	 */
 	public boolean putStrategy(StrategyEntity entity) {
 		return booleanFun(() -> dao.save(entity), o -> {
 			log.info("save [StrategyEntity] success -> {}", entity);
@@ -82,7 +118,7 @@ public final class StrategyService extends BaseService {
 
 	/**
 	 * 
-	 * @param strategyParam
+	 * @param entity
 	 * @return
 	 */
 	public boolean putStrategyParam(StrategyParamEntity entity) {

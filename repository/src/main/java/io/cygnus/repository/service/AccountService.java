@@ -17,10 +17,10 @@ import io.mercury.serialization.json.JsonWrapper;
 @Service
 public class AccountService {
 
+	private final Logger log = CommonLoggerFactory.getLogger(AccountService.class);
+
 	@Resource
 	private AccountDao dao;
-
-	private static final Logger log = CommonLoggerFactory.getLogger(AccountService.class);
 
 	public List<AccountEntity> getAccount(int accountId) {
 		listFun(() -> dao.queryByAccountId(accountId), list -> list, e -> {

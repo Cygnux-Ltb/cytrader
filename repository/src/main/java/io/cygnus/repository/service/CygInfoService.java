@@ -15,10 +15,10 @@ import io.mercury.common.log.CommonLoggerFactory;
 @Service
 public class CygInfoService {
 
+	private final Logger log = CommonLoggerFactory.getLogger(CygInfoService.class);
+
 	@Resource
 	private CygInfoDao dao;
-
-	private static final Logger log = CommonLoggerFactory.getLogger(CygInfoService.class);
 
 	/**
 	 * 

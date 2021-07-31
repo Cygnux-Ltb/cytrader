@@ -14,6 +14,14 @@ public abstract class BaseService {
 		return false;
 	}
 
+	protected final boolean checkStrategyName(String strategyName, Logger log, String msg) {
+		if (StringUtil.isNullOrEmpty(strategyName)) {
+			log.error("{}, strategyName=={}", msg, strategyName);
+			return true;
+		}
+		return false;
+	}
+
 	protected final boolean checkInvestorId(String investorId, Logger log, String msg) {
 		if (StringUtil.isNullOrEmpty(investorId)) {
 			log.error("{}, investorId=={}", msg, investorId);

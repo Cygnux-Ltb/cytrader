@@ -20,13 +20,13 @@ import io.mercury.common.log.CommonLoggerFactory;
 @Service
 public final class PnlService {
 
+	private final Logger log = CommonLoggerFactory.getLogger(PnlService.class);
+
 	@Resource
 	private PnlDailyDao dao;
 
 	@Resource
 	private PnlDailySettlementDao settlementDao;
-
-	private static final Logger log = CommonLoggerFactory.getLogger(PnlService.class);
 
 	/**
 	 * 

@@ -22,7 +22,7 @@ import io.mercury.serialization.json.JsonWrapper;
 @Service
 public final class InstrumentService {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(InstrumentService.class);
+	private final Logger log = CommonLoggerFactory.getLogger(InstrumentService.class);
 
 	@Resource
 	private InstrumentDao dao;

@@ -32,6 +32,9 @@ public final class StrategyParamEntity {
 
 	@Column(name = CommonColumn.STRATEGY_ID)
 	private int strategyId;
+	
+	@Column(name = CommonColumn.STRATEGY_NAME)
+	private String strategyName;
 
 	@Column(name = "param_name")
 	private String paramName;

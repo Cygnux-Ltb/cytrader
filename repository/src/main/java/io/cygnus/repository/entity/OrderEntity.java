@@ -53,7 +53,7 @@ public final class OrderEntity {
 	private String instrumentCode;
 
 	/**
-	 * investorId
+	 * investorId [*]
 	 */
 	@Column(name = CommonColumn.INVESTOR_ID)
 	private String investorId;
@@ -65,7 +65,7 @@ public final class OrderEntity {
 	private long orderSysId;
 
 	/**
-	 * 
+	 * ordType
 	 */
 	@Column(name = "ord_type")
 	private String ordType;
@@ -130,7 +130,6 @@ public final class OrderEntity {
 	private String brokerId;
 	public static final String COLUMN_BrokerID = "broker_id";
 
-
 	/**
 	 * counterSysID
 	 */
@@ -144,7 +143,6 @@ public final class OrderEntity {
 	@Column(name = "volume")
 	private int volume;
 	public static final String COLUMN_Volume = "volume";
-
 
 	/**
 	 * price

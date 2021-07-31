@@ -98,8 +98,8 @@ public final class BarEntity {
 	/*
 	 * VWAP double 19_4
 	 */
-	@Column(name = "last_volume")
-	private long lastVolume;
-	public static final String COLUMN_LastVolume = "last_volume";
+	@Column(name = "volume")
+	private long volume;
+	public static final String COLUMN_Volume = "volume";
 
 }

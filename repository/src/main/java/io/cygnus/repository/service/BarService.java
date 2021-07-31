@@ -19,7 +19,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 @Service
 public class BarService {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(BarService.class);
+	private final Logger log = CommonLoggerFactory.getLogger(BarService.class);
 
 	@Resource
 	private BarDao dao;

@@ -28,7 +28,7 @@ public final class StrategyEntity {
 	@Column(name = CommonColumn.STRATEGY_ID)
 	private int strategyId;
 
-	@Column(name = "strategy_name")
+	@Column(name = CommonColumn.STRATEGY_NAME)
 	private int strategyName;
 
 }

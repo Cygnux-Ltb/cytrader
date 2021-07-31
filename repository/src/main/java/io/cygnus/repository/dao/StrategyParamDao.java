@@ -18,4 +18,6 @@ public interface StrategyParamDao extends JpaRepository<StrategyParamEntity, Lon
 
 	List<StrategyParamEntity> queryByStrategyId(int strategyId);
 
+	List<StrategyParamEntity> queryByStrategyName(String strategyName);
+
 }

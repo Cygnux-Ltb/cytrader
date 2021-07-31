@@ -23,7 +23,7 @@ import io.mercury.common.log.CommonLoggerFactory;
 @Service
 public class OrderService extends BaseService {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderService.class);
+	private final Logger log = CommonLoggerFactory.getLogger(OrderService.class);
 
 	@Resource
 	private OrderDao dao;

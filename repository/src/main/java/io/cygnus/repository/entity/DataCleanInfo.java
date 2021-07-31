@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Table(name = "data_clean_info")
-@Entity()
+@Entity
 public final class DataCleanInfo {
 
 	@Id
