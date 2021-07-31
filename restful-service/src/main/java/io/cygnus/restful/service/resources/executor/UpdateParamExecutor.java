@@ -4,6 +4,7 @@ import io.cygnus.persistence.entity.StrategyParam;
 import io.cygnus.repository.dao.StrategyDao;
 import io.cygnus.repository.entity.StrategyParamEntity;
 import io.cygnus.repository.service.StrategyDao;
+import io.cygnus.repository.service.StrategyService;
 import io.cygnus.restful.service.resources.executor.bean.ValidationRule;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -23,12 +24,12 @@ import java.util.regex.Pattern;
 @Component
 public class UpdateParamExecutor {
 
-    private static final Logger log = CommonLoggerFactory.getLogger(UpdateParamExecutor.class);
+    private final Logger log = CommonLoggerFactory.getLogger(UpdateParamExecutor.class);
 
     private static Map<String, ValidationRule> validationRuleMap;
 
     @Resource
-    private StrategyDao strategyDao;
+    private StrategyService strategyDao;
 
     static {
         InputStream inputStream = UpdateParamExecutor.class.getResourceAsStream("ValidationRules.json");

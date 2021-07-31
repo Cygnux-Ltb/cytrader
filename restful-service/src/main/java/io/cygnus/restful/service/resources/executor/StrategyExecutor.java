@@ -3,16 +3,17 @@ package io.cygnus.restful.service.resources.executor;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.cygnus.repository.service.StrategyService;
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import io.cygnus.repository.entity.StrategyEntity;
+import io.cygnus.repository.entity.StrategyParamEntity;
+import io.cygnus.repository.service.StrategyService;
 import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
-
-import javax.annotation.Resource;
 
 @Component
 public class StrategyExecutor {
@@ -56,21 +57,21 @@ public class StrategyExecutor {
 	/**
 	 * StrategyDefaultParam Cache
 	 */
-	private static final CacheList<StrategyDefaultParam> AllStrategyDefaultParamCache = new CacheList<>(() -> {
-		return strategyDao.getAllDefaultParam();
+	private  final CacheList<StrategyParamEntity> AllStrategyDefaultParamCache = new CacheList<>(() -> {
+		return null;
 	});
 
 	/**
 	 * StrategyParam CacheMap
 	 */
-	private static final CacheMap<Integer, List<StrategyParam>> StrategyParamCacheMap = CacheMap.newBuilder()
+	private final CacheMap<Integer, List<StrategyParamEntity>> StrategyParamCacheMap = CacheMap.newBuilder()
 			.buildWith((strategyId) -> {
-				List<StrategyParam> strategyParams = strategyDao.getParamsByStrategyId(strategyId);
-				List<StrategyParam> mergeList = new ArrayList<>(strategyParams);
+				List<StrategyParamEntity> strategyParams = strategyService.getParams(strategyId);
+				List<StrategyParamEntity> mergeList = new ArrayList<>(strategyParams);
 				// 遍历全部默认参数
-				for (StrategyDefaultParam defaultParam : AllStrategyDefaultParamCache.get()) {
+				for (StrategyParamEntity defaultParam : AllStrategyDefaultParamCache.get()) {
 					boolean existed = false;
-					for (StrategyParam strategyParam : strategyParams) {
+					for (StrategyParamEntity strategyParam : strategyParams) {
 						// 判断策略参数与默认参数是否相同
 						if (strategyParam.isSame(defaultParam)) {
 							// 如果相同, 则使用策略参数
@@ -81,7 +82,7 @@ public class StrategyExecutor {
 					// 如果默认参数在策略参数中不存在, 则将此默认参数添加到策略参数中
 					if (!existed) {
 						mergeList.add(
-								new StrategyParam().setValues4DefaultParam(defaultParam).setStrategyId(strategyId));
+								new StrategyParamEntity().setValues4DefaultParam(defaultParam).setStrategyId(strategyId));
 					}
 				}
 				return mergeList;

@@ -7,21 +7,16 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import io.cygnus.persistence.entity.SymbolInfo;
-import io.cygnus.persistence.entity.SymbolTradingFee;
-import io.cygnus.persistence.entity.SymbolTradingPeriod;
-import io.cygnus.persistence.entity.TradeableInstrument;
-import io.cygnus.persistence.service.SymbolDao;
 import io.mercury.common.concurrent.cache.CacheList;
 import io.mercury.common.concurrent.cache.CacheMap;
 import io.mercury.common.log.CommonLoggerFactory;
 
 @Component
-public class SymbolExecutor  {
+public class SymbolExecutor {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(SymbolExecutor.class);
+	private final Logger log = CommonLoggerFactory.getLogger(SymbolExecutor.class);
 
-	private static final SymbolDao symbolDao = new SymbolDao();
+	private final SymbolDao symbolDao = new SymbolDao();
 
 	/**
 	 * All SymbolInfo Cache

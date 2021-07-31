@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.persistence.entity.CygInfo;
-import io.cygnus.persistence.entity.CygMqConfig;
-import io.cygnus.persistence.entity.CygStrategy;
+import io.cygnus.repository.entity.CygInfoEntity;
 import io.cygnus.restful.service.base.CygRestfulApi;
 import io.cygnus.restful.service.resources.executor.CygInfoExecutor;
 import io.cygnus.service.dto.InitFinish;
@@ -36,7 +34,7 @@ public class CygInfoRestfulApi extends CygRestfulApi {
 	@GetMapping
 	@GetCache
 	public ResponseEntity<Object> getAllCygInfo() {
-		List<CygInfo> cygInfoList = executor.getAllcygInfo();
+		List<CygInfoEntity> cygInfoList = executor.getAllcygInfo();
 		return jsonResponse(cygInfoList);
 	}
 
