@@ -103,6 +103,15 @@ public final class StrategyService extends BaseService {
 
 	/**
 	 * 
+	 * @param strategyName
+	 * @return
+	 */
+	public List<StrategyParamEntity> getDefaultStrategyParams() {
+		return getStrategyParams(0);
+	}
+
+	/**
+	 * 
 	 * @param entity
 	 * @return
 	 */
