@@ -1,8 +1,8 @@
 package io.cygnus.restful.service.controller;
 
-import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.persistence.entity.StrategyInstrumentPNLDaily;
-import io.cygnus.persistence.entity.StrategyInstrumentPNLSettlementDaily;
+import io.cygnus.repository.entity.PnlDailyEntity;
+import io.cygnus.repository.entity.PnlDailySettlementEntity;
 import io.cygnus.repository.service.PnlService;
-import io.cygnus.restful.service.base.CygRestfulApi;
+import io.cygnus.restful.service.base.BaseController;
 
 @RestController("/pnl")
-public class PnlRestfulApi extends CygRestfulApi {
+public class PnlRestfulApi extends BaseController {
+
+	@Resource
+	private PnlService service;
 
 	/**
 	 * 查询PNL
@@ -28,18 +31,11 @@ public class PnlRestfulApi extends CygRestfulApi {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<Object> getPnlDailys(@RequestParam("tradingDay") String tradingDay,
-			@RequestParam("strategyId") Integer strategyId) {
-		if (checkParamIsNull(tradingDay)) {
-			return httpBadRequest();
-		}
-		Date dateTradingDay = changeTradingDay(tradingDay);
-		if (dateTradingDay == null) {
-			return httpBadRequest();
-		}
-		PnlService dao = new PnlService();
-		List<StrategyInstrumentPNLDaily> pnlDailys = dao.queryPnlDailys(tradingDay, strategyId);
-		return jsonResponse(pnlDailys);
+	public ResponseEntity<Object> getPnlDailys(@RequestParam("strategyId") int strategyId,
+			@RequestParam("tradingDay") int tradingDay) {
+		if (checkParamIsNull(tradingDay))
+			return badRequest();
+		return responseOf(service.getPnlDailys(strategyId, tradingDay));
 	}
 
 	/**
@@ -51,13 +47,8 @@ public class PnlRestfulApi extends CygRestfulApi {
 	@PutMapping
 	public ResponseEntity<Object> putPnlDailys(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
-		if (checkParamIsNull(json)) {
-			return httpBadRequest();
-		}
-		StrategyInstrumentPNLDaily pnlDaily = jsonToObj(json, StrategyInstrumentPNLDaily.class);
-		PnlService dao = new PnlService();
-		dao.addOrUpdatePnlDailys(pnlDaily);
-		return httpOk();
+		return checkParamIsNull(json) ? badRequest()
+				: service.putPnlDaily(toObject(json, PnlDailyEntity.class)) ? ok() : internalServerError();
 	}
 
 	/**
@@ -68,19 +59,11 @@ public class PnlRestfulApi extends CygRestfulApi {
 	 * @return
 	 */
 	@GetMapping("/settlement")
-	public ResponseEntity<Object> getPnlSettlementDailys(@RequestParam("tradingDay") String tradingDay,
-			@RequestParam("strategyId") Integer strategyId) {
-		if (checkParamIsNull(tradingDay)) {
-			return httpBadRequest();
-		}
-		Date dateTradingDay = changeTradingDay(tradingDay);
-		if (dateTradingDay == null) {
-			return httpBadRequest();
-		}
-		PnlService dao = new PnlService();
-		List<StrategyInstrumentPNLSettlementDaily> pnlSettlementDailys = dao.queryPnlSettlementDailys(dateTradingDay,
-				strategyId);
-		return jsonResponse(pnlSettlementDailys);
+	public ResponseEntity<List<PnlDailySettlementEntity>> getPnlSettlementDailys(
+			@RequestParam("strategyId") int strategyId, @RequestParam("tradingDay") int tradingDay) {
+		if (checkParamIsNull(tradingDay))
+			return badRequest();
+		return responseOf(service.getPnlDailySettlements(strategyId, tradingDay));
 	}
 
 }

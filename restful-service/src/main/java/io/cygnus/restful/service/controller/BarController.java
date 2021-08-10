@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.repository.entity.BarEntity;
 import io.cygnus.repository.service.BarService;
-import io.cygnus.restful.service.base.CygRestfulApi;
+import io.cygnus.restful.service.base.BaseController;
 
 @RestController("/bar")
-public class BarController extends CygRestfulApi {
+public class BarController extends BaseController {
 
 	@Resource
 	private BarService service;
@@ -47,7 +47,7 @@ public class BarController extends CygRestfulApi {
 	@PutMapping(consumes = APPLICATION_JSON_UTF8)
 	public ResponseEntity<Integer> putBar(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
-		BarEntity bar = jsonToObj(json, BarEntity.class);
+		BarEntity bar = toObject(json, BarEntity.class);
 		return service.putBar(bar) ? ResponseEntity.status(HttpStatus.ACCEPTED).build() : internalServerError();
 	}
 

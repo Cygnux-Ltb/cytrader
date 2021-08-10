@@ -1,7 +1,6 @@
 package io.cygnus.restful.service.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,12 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.repository.entity.InstrumentSettlementEntity;
 import io.cygnus.repository.service.InstrumentService;
-import io.cygnus.restful.service.base.CygRestfulApi;
+import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.service.dto.LastPrice;
 import io.mercury.common.annotation.cache.GetCache;
+import io.mercury.common.util.StringUtil;
 
 @RestController("/instrument")
-public class InstrumentRestfulApi extends CygRestfulApi {
+public class InstrumentController extends BaseController {
 
 	@Resource
 	private InstrumentService service;
@@ -38,23 +38,15 @@ public class InstrumentRestfulApi extends CygRestfulApi {
 	public ResponseEntity<List<InstrumentSettlementEntity>> getSettlementPrice(
 			@RequestParam("instrumentCode") String instrumentCode, @RequestParam("tradingDay") int tradingDay) {
 		if (checkParamIsNull(instrumentCode, tradingDay)) {
-			return httpBadRequest();
+			return badRequest();
 		}
-		Date dateTradingDay = null;
-		if (tradingDay != null) {
-			dateTradingDay = changeTradingDay(tradingDay);
-			if (dateTradingDay == null) {
-				return httpBadRequest();
-			}
-		}
-
-		List<InstrumentSettlementEntity> settlementPrices = instrumentDao.getInstrumentSettlement(instrumentId,
-				dateTradingDay);
-		return jsonResponse(settlementPrices);
+		List<InstrumentSettlementEntity> instrumentSettlements = service.getInstrumentSettlement(instrumentCode,
+				tradingDay);
+		return responseOf(instrumentSettlements);
 	}
 
 	// LastPrices Cache
-	private static ConcurrentHashMap<String, LastPrice> lastPriceMap = new ConcurrentHashMap<>();
+	private static final ConcurrentHashMap<String, LastPrice> lastPriceMap = new ConcurrentHashMap<>();
 
 	/**
 	 * Get LastPrices
@@ -64,22 +56,19 @@ public class InstrumentRestfulApi extends CygRestfulApi {
 	 */
 	@GetMapping("/last_price")
 	@GetCache
-	public ResponseEntity<Object> getLastPrice(@RequestParam("instrumentIds") String instrumentIdArrayStr) {
-		if (instrumentIdArrayStr == null || instrumentIdArrayStr.equals("")) {
-			return httpBadRequest();
+	public ResponseEntity<Object> getLastPrice(@RequestParam("instrumentCodes") String instrumentCodes) {
+		if (StringUtil.nonEmpty(instrumentCodes)) {
+			return badRequest();
 		}
 		List<LastPrice> lastPrices = new ArrayList<>();
-		String[] instrumentIds = instrumentIdArrayStr.split(",");
-		for (String instrumentId : instrumentIds) {
-			LastPrice lastPrice;
-			if (lastPriceMap.containsKey(instrumentId)) {
-				lastPrice = lastPriceMap.get(instrumentId);
-			} else {
-				lastPrice = new LastPrice().setInstrumentId(instrumentId);
-			}
+		String[] instrumentCodeArray = instrumentCodes.split(",");
+		for (String instrumentCode : instrumentCodeArray) {
+			final LastPrice lastPrice = lastPriceMap.putIfAbsent(instrumentCode,
+					new LastPrice().setInstrumentCode(instrumentCode));
+			// TODO 修改最新价格进入队列
 			lastPrices.add(lastPrice);
 		}
-		return jsonResponse(lastPrices);
+		return responseOf(lastPrices);
 	}
 
 	/**
@@ -92,11 +81,11 @@ public class InstrumentRestfulApi extends CygRestfulApi {
 	public ResponseEntity<Object> putLastPrice(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		if (json == null) {
-			return httpBadRequest();
+			return badRequest();
 		}
-		LastPrice lastPrice = jsonToObj(json, LastPrice.class);
-		lastPriceMap.put(lastPrice.getInstrumentId(), lastPrice);
-		return httpOk();
+		final LastPrice lastPrice = toObject(json, LastPrice.class);
+		lastPriceMap.put(lastPrice.getInstrumentCode(), lastPrice);
+		return ok();
 	}
 
 }

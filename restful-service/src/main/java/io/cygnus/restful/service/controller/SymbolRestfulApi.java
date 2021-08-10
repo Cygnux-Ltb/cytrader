@@ -36,7 +36,7 @@ public class SymbolRestfulApi extends CygRestfulApi {
 	@GetMapping
 	public ResponseEntity<Object> getAllSymbolInfo() {
 		List<SymbolInfo> allSymbolInfo = executor.getAllSymbolInfo();
-		return jsonResponse(allSymbolInfo);
+		return responseOf(allSymbolInfo);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class SymbolRestfulApi extends CygRestfulApi {
 	@GetMapping("/{symbol}")
 	public ResponseEntity<Object> getSymbolInfoByName(@RequestParam("symbol") String symbol) {
 		List<SymbolInfo> symbolInfoByName = executor.getSymbolInfoByName(symbol);
-		return jsonResponse(symbolInfoByName);
+		return responseOf(symbolInfoByName);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class SymbolRestfulApi extends CygRestfulApi {
 	@GetMapping("/{symbol}/trading_fee")
 	public ResponseEntity<Object> getSymbolTradingFeeByName(@RequestParam("symbol") String symbol) {
 		List<SymbolTradingFee> symbolTradingFeeByName = executor.getSymbolTradingFeeByName(symbol);
-		return jsonResponse(symbolTradingFeeByName);
+		return responseOf(symbolTradingFeeByName);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class SymbolRestfulApi extends CygRestfulApi {
 		if (StringUtil.isNullOrEmpty(json)) {
 			return httpBadRequest();
 		}
-		SymbolTradingFee symbolTradingFee = jsonToObj(json, SymbolTradingFee.class);
+		SymbolTradingFee symbolTradingFee = toObject(json, SymbolTradingFee.class);
 		if (executor.putSymbolTradingFeeByName(symbol, symbolTradingFee)) {
 			return httpOk();
 		} else {
@@ -94,7 +94,7 @@ public class SymbolRestfulApi extends CygRestfulApi {
 	@GetMapping("/{symbol}/trading_period")
 	public ResponseEntity<Object> getSymbolTradingPeriodByName(@RequestParam("symbol") String symbol) {
 		List<SymbolTradingPeriod> symbolTradingPeriodByName = executor.getSymbolTradingPeriodByName(symbol);
-		return jsonResponse(symbolTradingPeriodByName);
+		return responseOf(symbolTradingPeriodByName);
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class SymbolRestfulApi extends CygRestfulApi {
 		if (json == null || json.equals("")) {
 			return httpBadRequest();
 		}
-		SymbolTradingPeriod symbolTradingPeriod = jsonToObj(json, SymbolTradingPeriod.class);
+		SymbolTradingPeriod symbolTradingPeriod = toObject(json, SymbolTradingPeriod.class);
 		if (executor.putSymbolTradingPeriodByName(symbol, symbolTradingPeriod)) {
 			return httpOk();
 		} else {
@@ -135,7 +135,7 @@ public class SymbolRestfulApi extends CygRestfulApi {
 			return httpBadRequest();
 		}
 		List<TradeableInstrument> tradeables = executor.getTradeables(symbol, dateTradingDay);
-		return jsonResponse(tradeables);
+		return responseOf(tradeables);
 	}
 
 }

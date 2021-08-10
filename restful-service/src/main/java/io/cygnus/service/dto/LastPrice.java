@@ -15,6 +15,6 @@ public class LastPrice {
 
 	private String instrumentCode;
 
-	private long lastPrice;
+	private double lastPrice;
 
 }

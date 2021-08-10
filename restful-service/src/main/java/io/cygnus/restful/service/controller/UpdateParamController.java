@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.persistence.entity.StrategyParam;
+import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.restful.service.base.CygRestfulApi;
 import io.cygnus.restful.service.resources.executor.UpdateParamExecutor;
 import io.cygnus.restful.service.transport.OutboxPublisherGroup;
@@ -25,7 +26,7 @@ import io.mercury.common.util.StringUtil;
 import io.mercury.transport.api.Publisher;
 
 @RestController("/update_param")
-public class UpdateParamRestfulApi extends CygRestfulApi {
+public class UpdateParamController extends BaseController {
 
 	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
@@ -47,7 +48,7 @@ public class UpdateParamRestfulApi extends CygRestfulApi {
 			return httpBadRequest();
 		}
 		// 将参数转换为List
-		List<StrategyParam> strategyParams = jsonToList(json, StrategyParam.class);
+		List<StrategyParam> strategyParams = toList(json, StrategyParam.class);
 		// 获取Publisher
 		Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cygId);
 		// 转换为需要发送的发件箱消息
@@ -55,7 +56,7 @@ public class UpdateParamRestfulApi extends CygRestfulApi {
 		// 发送消息
 		publisher.publish(msg.getBytes(Charsets.UTF8));
 		// 返回Put成功标识
-		return httpOk();
+		return ok();
 	}
 
 	/**
@@ -72,7 +73,7 @@ public class UpdateParamRestfulApi extends CygRestfulApi {
 			return httpBadRequest();
 		}
 		// 将参数转换为StrategyParam
-		StrategyParam strategyParam = jsonToObj(json, StrategyParam.class);
+		StrategyParam strategyParam = toObject(json, StrategyParam.class);
 		if (checkParamIsNull(strategyParam)) {
 			return httpBadRequest();
 		}

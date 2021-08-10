@@ -2,6 +2,7 @@ package io.cygnus.restful.service.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -13,17 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.repository.entity.*;
+import io.cygnus.repository.service.StrategyService;
+import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.restful.service.base.CygRestfulApi;
 import io.cygnus.restful.service.resources.executor.StrategyExecutor;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringUtil;
 
 @RestController("/strategy")
-public class StrategyRestfulApi extends CygRestfulApi {
+public class StrategyController extends BaseController {
 
 	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	private StrategyExecutor executor = new StrategyExecutor();
+	@Resource
+	private StrategyService service;
 
 	/**
 	 * 返回全部Strategy
@@ -31,22 +35,19 @@ public class StrategyRestfulApi extends CygRestfulApi {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<Object> getAllStrategy() {
-		List<Strategy> strategys = executor.getAllStrategy();
-		return jsonResponse(strategys);
+	public ResponseEntity<List<StrategyEntity>> getAllStrategy() {
+		return responseOf(service.getStrategys());
 	}
 
 	/**
-	 * 使用StrategyId作为URI访问Strategy
+	 * 使用StrategyId作为get params访问Strategy
 	 * 
 	 * @param strategyId
 	 * @return
 	 */
-
-	@GetMapping("/{strategyId}")
-	public ResponseEntity<Object> getStrategyById(@RequestParam("strategyId") Integer strategyId) {
+	public ResponseEntity<Object> getStrategyById(@RequestParam("strategyId") int strategyId) {
 		List<Strategy> strategys = executor.getStrategyById(strategyId);
-		return jsonResponse(strategys);
+		return responseOf(strategys);
 	}
 
 	/**
@@ -58,7 +59,7 @@ public class StrategyRestfulApi extends CygRestfulApi {
 	@GetMapping("/{strategyId}/param")
 	public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") Integer strategyId) {
 		List<StrategyParam> strategyParams = executor.getParamsByStrategyId(strategyId);
-		return jsonResponse(strategyParams);
+		return responseOf(strategyParams);
 	}
 
 	/**
@@ -75,9 +76,9 @@ public class StrategyRestfulApi extends CygRestfulApi {
 		if (StringUtil.isNullOrEmpty(json)) {
 			return httpBadRequest();
 		}
-		StrategyParam strategyParam = jsonToObj(json, StrategyParam.class);
+		StrategyParam strategyParam = toObject(json, StrategyParam.class);
 		if (executor.putStrategyParam(strategyParam)) {
-			return httpOk();
+			return ok();
 		} else {
 			return httpInternalServerError();
 		}
@@ -92,7 +93,7 @@ public class StrategyRestfulApi extends CygRestfulApi {
 	@GetMapping("/{strategyId}/symbol")
 	public ResponseEntity<Object> getSymbolByStrategyId(@RequestParam("strategyId") Integer strategyId) {
 		List<StrategySymbol> strategySymbols = executor.getSymbolsByStrategyId(strategyId);
-		return jsonResponse(strategySymbols);
+		return responseOf(strategySymbols);
 	}
 
 }

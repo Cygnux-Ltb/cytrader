@@ -1,6 +1,5 @@
 package io.cygnus.restful.service.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,15 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.persistence.entity.Order;
+import io.cygnus.repository.entity.OrderEntity;
+import io.cygnus.repository.entity.OrderEventEntity;
 import io.cygnus.repository.service.OrderService;
-import io.cygnus.restful.service.base.CygRestfulApi;
+import io.cygnus.restful.service.base.BaseController;
 
 @RestController("/order")
-public class OrdersRestfulApi extends CygRestfulApi {
+public class OrderController extends BaseController {
 
 	@Resource
-	private OrderService orderService;
+	private OrderService service;
+
 	/**
 	 * 查询Order
 	 * 
@@ -34,21 +35,13 @@ public class OrdersRestfulApi extends CygRestfulApi {
 	 */
 	@GetMapping
 	public ResponseEntity<Object> getOrder(@RequestParam("strategyId") int strategyId,
-			@RequestParam("tradingDay") String tradingDay, @RequestParam("investorId") String investorId,
-			@RequestParam("instrumentCode") String instrumentCode) {
+			@RequestParam("investorId") String investorId, @RequestParam("instrumentCode") String instrumentCode,
+			@RequestParam("tradingDay") int tradingDay) {
 		if (checkParamIsNull(strategyId, tradingDay, investorId, instrumentCode)) {
-			return httpBadRequest();
+			return badRequest();
 		}
-		Date dateTradingDay = null;
-		if (tradingDay != null) {
-			dateTradingDay = changeTradingDay(tradingDay);
-			if (dateTradingDay == null) {
-				return httpBadRequest();
-			}
-		}
-		OrderService ordersDao = new OrderService();
-		List<Order> orders = ordersDao.getOrders(strategyId, tradingDay, investorId, instrumentCode);
-		return jsonResponse(orders);
+		List<OrderEntity> orders = service.getOrders(strategyId, investorId, instrumentCode, tradingDay);
+		return responseOf(orders);
 	}
 
 	/**
@@ -57,23 +50,16 @@ public class OrdersRestfulApi extends CygRestfulApi {
 	 * @param strategyId
 	 * @return
 	 */
-	@GetMapping("/init")
-	public ResponseEntity<Object> getOrdersByInit(@RequestParam("tradingDay") String tradingDay,
-			@RequestParam("strategyId") Integer strategyId) {
-		// TODO 过滤最后的订单
+	@GetMapping("/status")
+	public ResponseEntity<Object> getOrdersByInit(@RequestParam("tradingDay") int tradingDay,
+			@RequestParam("strategyId") int strategyId) {
+
 		if (checkParamIsNull(strategyId, tradingDay)) {
-			return httpBadRequest();
+			return badRequest();
 		}
-		Date dateTradingDay = null;
-		if (tradingDay != null) {
-			dateTradingDay = changeTradingDay(tradingDay);
-			if (dateTradingDay == null) {
-				return httpBadRequest();
-			}
-		}
-		OrderService ordersDao = new OrderService();
-		List<Order> orders = ordersDao.getOrdersByInit(dateTradingDay, strategyId);
-		return jsonResponse(orders);
+		List<OrderEventEntity> orderEvents = service.getOrderEvents(tradingDay);
+		// TODO 过滤最后的订单
+		return responseOf(orderEvents);
 	}
 
 	/**
@@ -84,12 +70,7 @@ public class OrdersRestfulApi extends CygRestfulApi {
 	@PutMapping
 	public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
-		Order order = jsonToObj(json, Order.class);
-		OrderService ordersDao = new OrderService();
-		if (ordersDao.addOrder(order)) {
-			return httpOk();
-		}
-		return httpInternalServerError();
+		return service.putOrder(toObject(json, OrderEntity.class)) ? ok() : internalServerError();
 	}
 
 }

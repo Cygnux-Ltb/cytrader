@@ -12,16 +12,14 @@ import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import io.cygnus.service.dto.pack.OutboxMessage;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.datetime.pattern.spec.DatePattern;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonParser;
-import io.mercury.serialization.json.JsonWrapper;
 
-public abstract class CygRestfulApi {
+public abstract class BaseController {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(CygRestfulApi.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(BaseController.class);
 
 	/**
 	 * 转换String到Date
@@ -83,14 +81,12 @@ public abstract class CygRestfulApi {
 	/**
 	 * 生成JSON Response
 	 * 
-	 * @param entity
+	 * @param <T>
+	 * @param t
 	 * @return
 	 */
-	protected <T> ResponseEntity<T> jsonResponse(T object) {
-		if (object == null) {
-			return internalServerError();
-		}
-		return ResponseEntity.ok(object);
+	protected <T> ResponseEntity<T> responseOf(T t) {
+		return t == null ? internalServerError() : ResponseEntity.ok(t);
 	}
 
 	/**
@@ -105,7 +101,7 @@ public abstract class CygRestfulApi {
 			// System.out.println(json);
 			return IOUtils.toString(request.getInputStream(), Charsets.UTF8);
 		} catch (IOException e) {
-			log.error("Get body has exception, {}", e.getMessage(), e);
+			log.error("Get body has exception", e);
 			return null;
 		}
 	}
@@ -117,7 +113,7 @@ public abstract class CygRestfulApi {
 	 * @param clazz
 	 * @return
 	 */
-	protected <T> T jsonToObj(String json, Class<T> clazz) {
+	protected <T> T toObject(String json, Class<T> clazz) {
 		return JsonParser.toObject(json, clazz);
 	}
 
@@ -128,17 +124,8 @@ public abstract class CygRestfulApi {
 	 * @param clazz
 	 * @return
 	 */
-	protected <T> List<T> jsonToList(String json, Class<T> clazz) {
+	protected <T> List<T> toList(String json, Class<T> clazz) {
 		return JsonParser.toList(json, clazz);
-	}
-
-	/**
-	 * 
-	 * @param outboxMessage
-	 * @return
-	 */
-	protected String outboxMessageToJson(OutboxMessage<?> outboxMessage) {
-		return JsonWrapper.toJson(outboxMessage);
 	}
 
 }

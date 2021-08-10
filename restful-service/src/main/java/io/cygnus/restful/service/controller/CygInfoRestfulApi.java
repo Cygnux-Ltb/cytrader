@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.repository.entity.CygInfoEntity;
-import io.cygnus.restful.service.base.CygRestfulApi;
+import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.restful.service.resources.executor.CygInfoExecutor;
 import io.cygnus.service.dto.InitFinish;
 import io.mercury.common.annotation.cache.GetCache;
 
 @RestController("/cyg_info")
-public class CygInfoRestfulApi extends CygRestfulApi {
+public class CygInfoRestfulApi extends BaseController {
 
 	/**
 	 * 执行具体操作的executor
@@ -35,7 +35,7 @@ public class CygInfoRestfulApi extends CygRestfulApi {
 	@GetCache
 	public ResponseEntity<Object> getAllCygInfo() {
 		List<CygInfoEntity> cygInfoList = executor.getAllcygInfo();
-		return jsonResponse(cygInfoList);
+		return responseOf(cygInfoList);
 	}
 
 	private static ConcurrentHashMap<Integer, InitFinish> cygInfoInitFinishCacheMap = new ConcurrentHashMap<>();
@@ -49,11 +49,12 @@ public class CygInfoRestfulApi extends CygRestfulApi {
 	public ResponseEntity<Object> putInitFinish(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		if (checkParamIsNull(json)) {
-			return httpBadRequest();
+			return badRequest();
 		}
-		InitFinish initFinish = jsonToObj(json, InitFinish.class);
+		InitFinish initFinish = toObject(json, InitFinish.class);
 		cygInfoInitFinishCacheMap.put(initFinish.getCygId(), initFinish);
-		return httpOk();
+		return ok();
+
 	}
 
 	/**
@@ -64,7 +65,7 @@ public class CygInfoRestfulApi extends CygRestfulApi {
 	@GetMapping("/{cygId}")
 	public ResponseEntity<Object> getcygInfoById(@PathParam("cygId") Integer cygId) {
 		List<CygInfo> thadInfoById = executor.getCygInfoById(cygId);
-		return jsonResponse(thadInfoById);
+		return responseOf(thadInfoById);
 	}
 
 	/**
@@ -75,7 +76,7 @@ public class CygInfoRestfulApi extends CygRestfulApi {
 	@GetMapping("/{cygId}/strategy")
 	public ResponseEntity<Object> getcygStrategyById(@PathParam("cygId") Integer cygId) {
 		List<CygStrategy> thadStrategys = executor.getCygStrategyById(cygId);
-		return jsonResponse(thadStrategys);
+		return responseOf(thadStrategys);
 	}
 
 	/**
@@ -86,7 +87,7 @@ public class CygInfoRestfulApi extends CygRestfulApi {
 	@GetMapping("/{cygId}/mq")
 	public ResponseEntity<Object> getcygMqConfigById(@PathParam("cygId") Integer cygId) {
 		List<CygMqConfig> thadMqConfigs = executor.getCygMqConfigById(cygId);
-		return jsonResponse(thadMqConfigs);
+		return responseOf(thadMqConfigs);
 	}
 
 }
