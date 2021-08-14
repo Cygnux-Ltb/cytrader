@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.persistence.entity.StrategyParam;
+import io.cygnus.repository.entity.StrategyParamEntity;
 import io.cygnus.restful.service.base.BaseController;
-import io.cygnus.restful.service.base.CygRestfulApi;
 import io.cygnus.restful.service.resources.executor.UpdateParamExecutor;
 import io.cygnus.restful.service.transport.OutboxPublisherGroup;
 import io.cygnus.service.dto.pack.OutboxMessage;
@@ -45,10 +44,10 @@ public class UpdateParamController extends BaseController {
 		String json = getBody(request);
 		log.info("method updateParam recv : {}", json);
 		if (StringUtil.isNullOrEmpty(json)) {
-			return httpBadRequest();
+			return badRequest();
 		}
 		// 将参数转换为List
-		List<StrategyParam> strategyParams = toList(json, StrategyParam.class);
+		List<StrategyParamEntity> strategyParams = toList(json, StrategyParamEntity.class);
 		// 获取Publisher
 		Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cygId);
 		// 转换为需要发送的发件箱消息

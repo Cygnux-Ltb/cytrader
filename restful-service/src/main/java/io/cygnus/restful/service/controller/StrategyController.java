@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.repository.entity.*;
+import io.cygnus.repository.entity.StrategyEntity;
+import io.cygnus.repository.entity.StrategyParamEntity;
 import io.cygnus.repository.service.StrategyService;
 import io.cygnus.restful.service.base.BaseController;
-import io.cygnus.restful.service.base.CygRestfulApi;
-import io.cygnus.restful.service.resources.executor.StrategyExecutor;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringUtil;
 
@@ -35,7 +35,7 @@ public class StrategyController extends BaseController {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<List<StrategyEntity>> getAllStrategy() {
+	public ResponseEntity<List<StrategyEntity>> getStrategys() {
 		return responseOf(service.getStrategys());
 	}
 
@@ -45,9 +45,9 @@ public class StrategyController extends BaseController {
 	 * @param strategyId
 	 * @return
 	 */
-	public ResponseEntity<Object> getStrategyById(@RequestParam("strategyId") int strategyId) {
-		List<Strategy> strategys = executor.getStrategyById(strategyId);
-		return responseOf(strategys);
+	public ResponseEntity<StrategyEntity> getStrategyById(@RequestParam("strategyId") int strategyId) {
+		StrategyEntity strategy = service.getStrategy(strategyId);
+		return responseOf(strategy);
 	}
 
 	/**
@@ -56,8 +56,8 @@ public class StrategyController extends BaseController {
 	 * @param strategyId
 	 * @return
 	 */
-	@GetMapping("/{strategyId}/param")
-	public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") Integer strategyId) {
+	@GetMapping("/param")
+	public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
 		List<StrategyParam> strategyParams = executor.getParamsByStrategyId(strategyId);
 		return responseOf(strategyParams);
 	}
@@ -68,32 +68,15 @@ public class StrategyController extends BaseController {
 	 * @param strategyId
 	 * @return
 	 */
-
 	@PutMapping("/{strategyId}/param")
 	public ResponseEntity<Object> putParamsByStrategyId(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		log.info("method putParamsByStrategyId recv : {}", json);
 		if (StringUtil.isNullOrEmpty(json)) {
-			return httpBadRequest();
+			return badRequest();
 		}
-		StrategyParam strategyParam = toObject(json, StrategyParam.class);
-		if (executor.putStrategyParam(strategyParam)) {
-			return ok();
-		} else {
-			return httpInternalServerError();
-		}
-	}
-
-	/**
-	 * 使用StrategyId作为URI访问Param
-	 * 
-	 * @param strategyId
-	 * @return
-	 */
-	@GetMapping("/{strategyId}/symbol")
-	public ResponseEntity<Object> getSymbolByStrategyId(@RequestParam("strategyId") Integer strategyId) {
-		List<StrategySymbol> strategySymbols = executor.getSymbolsByStrategyId(strategyId);
-		return responseOf(strategySymbols);
+		StrategyParamEntity entity = toObject(json, StrategyParamEntity.class);
+		return (service.putStrategyParam(entity)) ? ok() : internalServerError();
 	}
 
 }

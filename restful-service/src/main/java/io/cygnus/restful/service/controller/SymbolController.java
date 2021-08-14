@@ -16,12 +16,13 @@ import io.cygnus.persistence.entity.SymbolInfo;
 import io.cygnus.persistence.entity.SymbolTradingFee;
 import io.cygnus.persistence.entity.SymbolTradingPeriod;
 import io.cygnus.persistence.entity.TradeableInstrument;
+import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.restful.service.base.CygRestfulApi;
 import io.cygnus.restful.service.resources.executor.SymbolExecutor;
 import io.mercury.common.util.StringUtil;
 
 @RestController("/symbol")
-public class SymbolRestfulApi extends CygRestfulApi {
+public class SymbolController extends BaseController {
 
 	/**
 	 * 执行具体操作的executor
@@ -126,13 +127,12 @@ public class SymbolRestfulApi extends CygRestfulApi {
 	 * @param tradingDay
 	 * @return
 	 */
-
 	@GetMapping("/{symbol}/tradeable/{tradingDay}")
 	public ResponseEntity<Object> getTradeables(@RequestParam("symbol") String symbol,
 			@RequestParam("tradingDay") String tradingDay) {
 		Date dateTradingDay = changeTradingDay(tradingDay);
 		if (dateTradingDay == null) {
-			return httpBadRequest();
+			return badRequest();
 		}
 		List<TradeableInstrument> tradeables = executor.getTradeables(symbol, dateTradingDay);
 		return responseOf(tradeables);

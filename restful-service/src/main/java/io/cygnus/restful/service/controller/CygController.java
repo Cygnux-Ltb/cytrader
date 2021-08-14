@@ -3,6 +3,7 @@ package io.cygnus.restful.service.controller;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
@@ -13,18 +14,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.repository.entity.CygInfoEntity;
+import io.cygnus.repository.service.CygInfoService;
 import io.cygnus.restful.service.base.BaseController;
-import io.cygnus.restful.service.resources.executor.CygInfoExecutor;
 import io.cygnus.service.dto.InitFinish;
 import io.mercury.common.annotation.cache.GetCache;
 
 @RestController("/cyg_info")
-public class CygInfoRestfulApi extends BaseController {
+public class CygController extends BaseController {
 
 	/**
 	 * 执行具体操作的executor
 	 */
-	private CygInfoExecutor executor = new CygInfoExecutor();
+	@Resource
+	private CygInfoService service;
 
 	/**
 	 * Get All cygInfo
@@ -34,7 +36,7 @@ public class CygInfoRestfulApi extends BaseController {
 	@GetMapping
 	@GetCache
 	public ResponseEntity<Object> getAllCygInfo() {
-		List<CygInfoEntity> cygInfoList = executor.getAllcygInfo();
+		List<CygInfoEntity> cygInfoList = service.getAll();
 		return responseOf(cygInfoList);
 	}
 
@@ -63,31 +65,9 @@ public class CygInfoRestfulApi extends BaseController {
 	 * @return
 	 */
 	@GetMapping("/{cygId}")
-	public ResponseEntity<Object> getcygInfoById(@PathParam("cygId") Integer cygId) {
-		List<CygInfo> thadInfoById = executor.getCygInfoById(cygId);
-		return responseOf(thadInfoById);
-	}
-
-	/**
-	 * 
-	 * @param cygId
-	 * @return
-	 */
-	@GetMapping("/{cygId}/strategy")
-	public ResponseEntity<Object> getcygStrategyById(@PathParam("cygId") Integer cygId) {
-		List<CygStrategy> thadStrategys = executor.getCygStrategyById(cygId);
-		return responseOf(thadStrategys);
-	}
-
-	/**
-	 * 
-	 * @param cygId
-	 * @return
-	 */
-	@GetMapping("/{cygId}/mq")
-	public ResponseEntity<Object> getcygMqConfigById(@PathParam("cygId") Integer cygId) {
-		List<CygMqConfig> thadMqConfigs = executor.getCygMqConfigById(cygId);
-		return responseOf(thadMqConfigs);
+	public ResponseEntity<CygInfoEntity> getcygInfoById(@PathParam("cygId") int cygId) {
+		CygInfoEntity entity = service.get(cygId);
+		return responseOf(entity);
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 
 import org.eclipse.collections.api.list.ImmutableList;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import io.cygnus.repository.db.CommonDaoFactory;
+import io.cygnus.repository.entity.CygInfoEntity;
 import io.cygnus.repository.service.CygInfoService;
 import io.cygnus.restful.service.transport.OutboxPublisherGroup;
 import io.cygnus.service.dto.pack.OutboxMessage;
@@ -29,6 +31,9 @@ import io.mercury.transport.api.Publisher;
 public class CygnusInitService {
 
 	private static final Logger log = CommonLoggerFactory.getLogger(CygnusInitService.class);
+
+	@Resource
+	private CygInfoService service;
 
 	@PostConstruct
 	public void init() throws ServletException {
@@ -51,7 +56,8 @@ public class CygnusInitService {
 		Timer endTimeBinnerSender = new Timer("EndTimeBinnerSender");
 		log.info("Start Time : " + startTime);
 		endTimeBinnerSender.schedule(new TimerTask() {
-			DateFormat format = new SimpleDateFormat(TimePattern.HHMM.getPattern());
+
+			private final DateFormat format = new SimpleDateFormat(TimePattern.HHMM.getPattern());
 
 			@Override
 			public void run() {
@@ -76,11 +82,10 @@ public class CygnusInitService {
 
 	private void sendEndTimeBinner() {
 
-		CygInfoService dao = new CygInfoService();
-		List<Integer> cygIdList = dao.getAllCygId();
+		List<CygInfoEntity> all = service.getAll();
 
-		for (Integer cygId : cygIdList) {
-			Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cygId);
+		for (CygInfoEntity cyg : all) {
+			Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cyg.getCygId());
 
 			String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.EndTimeBinner.name(), null));
 
