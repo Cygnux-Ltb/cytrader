@@ -21,7 +21,7 @@ public class StrategyExecutor {
 	private static final Logger log = CommonLoggerFactory.getLogger(StrategyExecutor.class);
 
 	@Resource
-	private StrategyService strategyService;
+	private StrategyService service;
 
 	/**
 	 * All strategy Cache
@@ -42,7 +42,7 @@ public class StrategyExecutor {
 	 * Strategy CacheMap
 	 */
 	private final CacheMap<Integer, StrategyEntity> StrategyCacheMap = CacheMap.newBuilder().buildWith((strategyId) -> {
-		return strategyService.getStrategyById(strategyId);
+		return service.getStrategy(strategyId);
 	});
 
 	/**
@@ -57,7 +57,7 @@ public class StrategyExecutor {
 	/**
 	 * StrategyDefaultParam Cache
 	 */
-	private  final CacheList<StrategyParamEntity> AllStrategyDefaultParamCache = new CacheList<>(() -> {
+	private final CacheList<StrategyParamEntity> AllStrategyDefaultParamCache = new CacheList<>(() -> {
 		return null;
 	});
 
@@ -66,7 +66,7 @@ public class StrategyExecutor {
 	 */
 	private final CacheMap<Integer, List<StrategyParamEntity>> StrategyParamCacheMap = CacheMap.newBuilder()
 			.buildWith((strategyId) -> {
-				List<StrategyParamEntity> strategyParams = strategyService.getParams(strategyId);
+				List<StrategyParamEntity> strategyParams = service.getStrategyParams(strategyId);
 				List<StrategyParamEntity> mergeList = new ArrayList<>(strategyParams);
 				// 遍历全部默认参数
 				for (StrategyParamEntity defaultParam : AllStrategyDefaultParamCache.get()) {
@@ -81,8 +81,8 @@ public class StrategyExecutor {
 					}
 					// 如果默认参数在策略参数中不存在, 则将此默认参数添加到策略参数中
 					if (!existed) {
-						mergeList.add(
-								new StrategyParamEntity().setValues4DefaultParam(defaultParam).setStrategyId(strategyId));
+						mergeList.add(new StrategyParamEntity().setValues4DefaultParam(defaultParam)
+								.setStrategyId(strategyId));
 					}
 				}
 				return mergeList;
@@ -93,7 +93,7 @@ public class StrategyExecutor {
 	 * @param strategyId
 	 * @return
 	 */
-	public List<StrategyParam> getParamsByStrategyId(Integer strategyId) {
+	public List<StrategyParamEntity> getParamsByStrategyId(Integer strategyId) {
 		return StrategyParamCacheMap.getOptional(strategyId).get();
 	}
 
@@ -102,8 +102,8 @@ public class StrategyExecutor {
 	 * @param strategyParam
 	 * @return
 	 */
-	public boolean putStrategyParam(StrategyParam strategyParam) {
-		boolean isSuccess = strategyDao.putStrategyParam(strategyParam);
+	public boolean putStrategyParam(StrategyParamEntity strategyParam) {
+		boolean isSuccess = service.putStrategyParam(strategyParam);
 		if (isSuccess) {
 			StrategyParamCacheMap.setUnavailable(strategyParam.getStrategyId());
 			return true;

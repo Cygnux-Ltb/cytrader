@@ -1,9 +1,7 @@
 package io.cygnus.restful.service.resources.executor;
 
-import io.cygnus.persistence.entity.StrategyParam;
 import io.cygnus.repository.dao.StrategyDao;
 import io.cygnus.repository.entity.StrategyParamEntity;
-import io.cygnus.repository.service.StrategyDao;
 import io.cygnus.repository.service.StrategyService;
 import io.cygnus.restful.service.resources.executor.bean.ValidationRule;
 import io.mercury.common.character.Charsets;

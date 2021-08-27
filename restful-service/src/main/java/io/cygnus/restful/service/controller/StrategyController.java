@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
 
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +57,7 @@ public class StrategyController extends BaseController {
 	 */
 	@GetMapping("/param")
 	public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
-		List<StrategyParam> strategyParams = executor.getParamsByStrategyId(strategyId);
+		List<StrategyParamEntity> strategyParams = service.getStrategyParams(strategyId);
 		return responseOf(strategyParams);
 	}
 

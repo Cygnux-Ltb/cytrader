@@ -69,23 +69,23 @@ public class UpdateParamController extends BaseController {
 		String json = getBody(request);
 		log.info("method updateParamSafe recv : {}", json);
 		if (StringUtil.isNullOrEmpty(json)) {
-			return httpBadRequest();
+			return badRequest();
 		}
 		// 将参数转换为StrategyParam
 		StrategyParam strategyParam = toObject(json, StrategyParam.class);
 		if (checkParamIsNull(strategyParam)) {
-			return httpBadRequest();
+			return badRequest();
 		}
 		switch (executor.updateParamSafe(strategyParam)) {
 		// 更新成功返回Ok状态码
 		case 1:
-			return httpOk();
+			return ok();
 		// 返回错误参数状态码
 		case -1:
-			return httpBadRequest();
+			return badRequest();
 		// 否则返回服务器内部错误状态码
 		default:
-			return httpInternalServerError();
+			return internalServerError();
 		}
 	}
 

@@ -76,11 +76,11 @@ public class SymbolController extends BaseController {
 			@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		if (StringUtil.isNullOrEmpty(json)) {
-			return httpBadRequest();
+			return badRequest();
 		}
 		SymbolTradingFee symbolTradingFee = toObject(json, SymbolTradingFee.class);
 		if (executor.putSymbolTradingFeeByName(symbol, symbolTradingFee)) {
-			return httpOk();
+			return ok();
 		} else {
 			return httpInternalServerError();
 		}
@@ -110,13 +110,13 @@ public class SymbolController extends BaseController {
 			@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		if (json == null || json.equals("")) {
-			return httpBadRequest();
+			return badRequest();
 		}
 		SymbolTradingPeriod symbolTradingPeriod = toObject(json, SymbolTradingPeriod.class);
 		if (executor.putSymbolTradingPeriodByName(symbol, symbolTradingPeriod)) {
-			return httpOk();
+			return ok();
 		} else {
-			return httpInternalServerError();
+			return internalServerError();
 		}
 	}
 
