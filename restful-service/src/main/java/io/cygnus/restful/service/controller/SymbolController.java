@@ -82,7 +82,7 @@ public class SymbolController extends BaseController {
 		if (executor.putSymbolTradingFeeByName(symbol, symbolTradingFee)) {
 			return ok();
 		} else {
-			return httpInternalServerError();
+			return internalServerError();
 		}
 	}
 
