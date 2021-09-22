@@ -17,7 +17,6 @@ import io.cygnus.persistence.entity.SymbolTradingFee;
 import io.cygnus.persistence.entity.SymbolTradingPeriod;
 import io.cygnus.persistence.entity.TradeableInstrument;
 import io.cygnus.restful.service.base.BaseController;
-import io.cygnus.restful.service.base.CygRestfulApi;
 import io.cygnus.restful.service.resources.executor.SymbolExecutor;
 import io.mercury.common.util.StringUtil;
 
