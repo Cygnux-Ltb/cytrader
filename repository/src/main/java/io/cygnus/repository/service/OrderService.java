@@ -1,7 +1,6 @@
 package io.cygnus.repository.service;
 
-import static io.mercury.common.functional.Functions.booleanFun;
-import static io.mercury.common.functional.Functions.listFun;
+import static io.mercury.common.functional.Functions.exec;
 
 import java.util.List;
 
@@ -64,7 +63,7 @@ public class OrderService extends BaseService {
 			Throws.illegalArgument("investorId");
 		if (checkInstrumentCode(instrumentCode, log, QueryOrderParamErrorMsg))
 			Throws.illegalArgument("instrumentCode");
-		return listFun(() -> dao.query(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay),
+		return exec(() -> dao.query(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay),
 				list -> {
 					if (CollectionUtils.isEmpty(list))
 						log.warn(
@@ -92,7 +91,7 @@ public class OrderService extends BaseService {
 	public List<OrderEventEntity> getOrderEvents(long ordSysId) {
 		if (checkOrdSysId(ordSysId, log, QueryOrderEventParamErrorMsg))
 			return new FastList<>();
-		return listFun(() -> eventDao.queryByOrdSysId(ordSysId), list -> {
+		return exec(() -> eventDao.queryByOrdSysId(ordSysId), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [OrderEventEntity] return 0 row, ordSysId=={}", ordSysId);
 			else
@@ -111,7 +110,7 @@ public class OrderService extends BaseService {
 	public List<OrderEventEntity> getOrderEvents(int tradingDay) {
 		if (checkTradingDay(tradingDay, log, QueryOrderEventParamErrorMsg))
 			return new FastList<>();
-		return listFun(() -> eventDao.queryByTradingDay(tradingDay), list -> {
+		return exec(() -> eventDao.queryByTradingDay(tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [OrderEventEntity] return 0 row, tradingDay=={}", tradingDay);
 			else
@@ -128,7 +127,7 @@ public class OrderService extends BaseService {
 	 * @return
 	 */
 	public boolean putOrder(OrderEntity entity) {
-		return booleanFun(() -> dao.save(entity), o -> {
+		return exec(() -> dao.save(entity), o -> {
 			log.info("save [OrderEntity] success -> {}", entity);
 			return true;
 		}, e -> {
@@ -143,7 +142,7 @@ public class OrderService extends BaseService {
 	 * @return
 	 */
 	public boolean putOrderEvent(OrderEventEntity entity) {
-		return booleanFun(() -> eventDao.save(entity), o -> {
+		return exec(() -> eventDao.save(entity), o -> {
 			log.info("save [OrderEventEntity] success -> {}", entity);
 			return true;
 		}, e -> {

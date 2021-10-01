@@ -1,7 +1,6 @@
 package io.cygnus.repository.service;
 
-import static io.mercury.common.functional.Functions.booleanFun;
-import static io.mercury.common.functional.Functions.listFun;
+import static io.mercury.common.functional.Functions.exec;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public final class PnlService {
 	 * @return
 	 */
 	public List<PnlDailyEntity> getPnlDailys(int strategyId, int tradingDay) {
-		return listFun(() -> dao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
+		return exec(() -> dao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [PnlDailyEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId, tradingDay);
 			else
@@ -55,7 +54,7 @@ public final class PnlService {
 	 * @return
 	 */
 	public List<PnlDailySettlementEntity> getPnlDailySettlements(int strategyId, int tradingDay) {
-		return listFun(() -> settlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
+		return exec(() -> settlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [PnlDailySettlementEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId,
 						tradingDay);
@@ -75,7 +74,7 @@ public final class PnlService {
 	 * @return
 	 */
 	public boolean putPnlDaily(PnlDailyEntity pnlDaily) {
-		return booleanFun(() -> dao.save(pnlDaily), o -> {
+		return exec(() -> dao.save(pnlDaily), o -> {
 			log.info("save [PnlDailyEntity] success -> {}", pnlDaily);
 			return true;
 		}, e -> {
@@ -90,7 +89,7 @@ public final class PnlService {
 	 * @return
 	 */
 	public boolean putPnlDailySettlement(PnlDailySettlementEntity entity) {
-		return booleanFun(() -> settlementDao.save(entity), o -> {
+		return exec(() -> settlementDao.save(entity), o -> {
 			log.info("save [PnlDailySettlementEntity] success -> {}", entity);
 			return true;
 		}, e -> {

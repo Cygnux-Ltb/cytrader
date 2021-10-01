@@ -1,6 +1,6 @@
 package io.cygnus.repository.service;
 
-import static io.mercury.common.functional.Functions.listFun;
+import static io.mercury.common.functional.Functions.exec;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class AccountService {
 	private AccountDao dao;
 
 	public List<AccountEntity> getAccount(int accountId) {
-		listFun(() -> dao.queryByAccountId(accountId), list -> list, e -> {
+		exec(() -> dao.queryByAccountId(accountId), list -> list, e -> {
 
 		});
 		List<AccountEntity> list = dao.queryByAccountId(accountId);

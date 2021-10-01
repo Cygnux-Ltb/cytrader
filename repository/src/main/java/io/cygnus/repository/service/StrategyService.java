@@ -1,7 +1,6 @@
 package io.cygnus.repository.service;
 
-import static io.mercury.common.functional.Functions.booleanFun;
-import static io.mercury.common.functional.Functions.listFun;
+import static io.mercury.common.functional.Functions.exec;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public final class StrategyService extends BaseService {
 	 * @return
 	 */
 	public List<StrategyEntity> getStrategys() {
-		return listFun(() -> dao.findAll(), list -> list, e -> {
+		return exec(() -> dao.findAll(), list -> list, e -> {
 			log.error("query [StrategyEntity] exception", e);
 		});
 	}
@@ -70,7 +69,7 @@ public final class StrategyService extends BaseService {
 	public List<StrategyParamEntity> getStrategyParams(int strategyId) {
 		if (checkStrategyId(strategyId, log, "query [StrategyParamEntity] param error"))
 			Throws.illegalArgument("strategyId");
-		return listFun(() -> paramDao.queryByStrategyId(strategyId), list -> {
+		return exec(() -> paramDao.queryByStrategyId(strategyId), list -> {
 			if (CollectionUtils.isEmpty(list)) {
 				log.warn("query [StrategyParamEntity] return 0 row, strategyId=={}", strategyId);
 			} else
@@ -89,7 +88,7 @@ public final class StrategyService extends BaseService {
 	public List<StrategyParamEntity> getStrategyParams(String strategyName) {
 		if (checkStrategyName(strategyName, log, "query [StrategyParamEntity] param error"))
 			Throws.illegalArgument("strategyId");
-		return listFun(() -> paramDao.queryByStrategyName(strategyName), list -> {
+		return exec(() -> paramDao.queryByStrategyName(strategyName), list -> {
 			if (CollectionUtils.isEmpty(list)) {
 				log.warn("query [StrategyParamEntity] return 0 row, strategyName=={}", strategyName);
 			} else
@@ -116,7 +115,7 @@ public final class StrategyService extends BaseService {
 	 * @return
 	 */
 	public boolean putStrategy(StrategyEntity entity) {
-		return booleanFun(() -> dao.save(entity), o -> {
+		return exec(() -> dao.save(entity), o -> {
 			log.info("save [StrategyEntity] success -> {}", entity);
 			return true;
 		}, e -> {
@@ -131,7 +130,7 @@ public final class StrategyService extends BaseService {
 	 * @return
 	 */
 	public boolean putStrategyParam(StrategyParamEntity entity) {
-		return booleanFun(() -> paramDao.save(entity), o -> {
+		return exec(() -> paramDao.save(entity), o -> {
 			log.info("save [StrategyParamEntity] success -> {}", entity);
 			return true;
 		}, e -> {

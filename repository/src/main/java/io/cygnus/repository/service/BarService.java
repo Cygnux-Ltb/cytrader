@@ -1,7 +1,6 @@
 package io.cygnus.repository.service;
 
-import static io.mercury.common.functional.Functions.booleanFun;
-import static io.mercury.common.functional.Functions.listFun;
+import static io.mercury.common.functional.Functions.exec;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class BarService {
 	 * @return
 	 */
 	public List<BarEntity> getBars(@Nonnull String instrumentCode, int tradingDay) {
-		return listFun(() -> dao.query(instrumentCode, tradingDay), list -> {
+		return exec(() -> dao.query(instrumentCode, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [BarEntity] return 0 row, instrumentCode=={}, tradingDay=={}", instrumentCode,
 						tradingDay);
@@ -50,7 +49,7 @@ public class BarService {
 	 * @return
 	 */
 	public boolean putBar(@Nonnull BarEntity entity) {
-		return booleanFun(() -> dao.save(entity), o -> {
+		return exec(() -> dao.save(entity), o -> {
 			log.info("save [BarEntity] success -> {}", entity);
 			return true;
 		}, e -> {

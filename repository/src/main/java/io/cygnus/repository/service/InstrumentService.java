@@ -1,7 +1,6 @@
 package io.cygnus.repository.service;
 
-import static io.mercury.common.functional.Functions.booleanFun;
-import static io.mercury.common.functional.Functions.listFun;
+import static io.mercury.common.functional.Functions.exec;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ public final class InstrumentService {
 	 * @return
 	 */
 	public List<InstrumentEntity> getInstrument(@Nonnull String instrumentCode) {
-		return listFun(() -> dao.query(instrumentCode), list -> {
+		return exec(() -> dao.query(instrumentCode), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [InstrumentEntity] return 0 row, instrumentCode=={}", instrumentCode);
 			else
@@ -55,7 +54,7 @@ public final class InstrumentService {
 	 * @return
 	 */
 	public List<InstrumentSettlementEntity> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
-		return listFun(() -> settlementDao.query(instrumentCode, tradingDay), list -> {
+		return exec(() -> settlementDao.query(instrumentCode, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [InstrumentSettlementEntity] return 0 row, instrumentCode=={}, tradingDay=={}",
 						instrumentCode, tradingDay);
@@ -75,7 +74,7 @@ public final class InstrumentService {
 	 * @return
 	 */
 	public boolean putInstrument(@Nonnull InstrumentEntity entity) {
-		return booleanFun(() -> dao.save(entity), o -> {
+		return exec(() -> dao.save(entity), o -> {
 			log.info("save [InstrumentEntity] success, entity -> {}", entity);
 			return true;
 		}, e -> {
@@ -90,7 +89,7 @@ public final class InstrumentService {
 	 * @return
 	 */
 	public boolean putInstrumentSettlement(@Nonnull InstrumentSettlementEntity entity) {
-		return booleanFun(() -> settlementDao.save(entity), o -> {
+		return exec(() -> settlementDao.save(entity), o -> {
 			log.info("save [InstrumentSettlementEntity] success -> {}", entity);
 			return true;
 		}, e -> {
