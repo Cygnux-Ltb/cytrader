@@ -8,8 +8,8 @@ import io.cygnus.indicator.impl.EmaIndicator.EmaPoint;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.serial.TimePeriodSerial;
 import io.mercury.common.collections.list.LongSlidingWindow;
+import io.mercury.common.sequence.TimeWindow;
 
 public final class EmaIndicator extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {
 
@@ -49,7 +49,7 @@ public final class EmaIndicator extends FixedPeriodIndicator<EmaPoint, EmaEvent,
 	 */
 	public final class EmaPoint extends MaPoint {
 
-		protected EmaPoint(int index, Instrument instrument, Duration duration, TimePeriodSerial timePeriod,
+		protected EmaPoint(int index, Instrument instrument, Duration duration, TimeWindow timePeriod,
 				LongSlidingWindow historyPriceWindow) {
 			super(index, instrument, duration, timePeriod, historyPriceWindow);
 			// TODO Auto-generated constructor stub

@@ -1,7 +1,6 @@
 package io.cygnus.indicator.impl.base;
 
 import io.mercury.serialization.json.JsonWrapper;
-import lombok.Getter;
 
 /**
  * 
@@ -10,19 +9,19 @@ import lombok.Getter;
 public final class Bar {
 
 	// 开盘价
-	@Getter
+
 	private long open = 0L;
 
 	// 最高价
-	@Getter
+
 	private long highest = Long.MIN_VALUE;
 
 	// 最低价
-	@Getter
+
 	private long lowest = Long.MAX_VALUE;
 
 	// 最终价
-	@Getter
+
 	private long last = 0L;
 
 	public Bar onPrice(long price) {
@@ -34,6 +33,22 @@ public final class Bar {
 			lowest = price;
 		last = price;
 		return this;
+	}
+
+	public long getOpen() {
+		return open;
+	}
+
+	public long getHighest() {
+		return highest;
+	}
+
+	public long getLowest() {
+		return lowest;
+	}
+
+	public long getLast() {
+		return last;
 	}
 
 	private static final String OpenField = "{\"open\" : ";

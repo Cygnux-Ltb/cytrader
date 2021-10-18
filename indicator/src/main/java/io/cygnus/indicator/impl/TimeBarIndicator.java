@@ -1,7 +1,7 @@
 package io.cygnus.indicator.impl;
 
 import java.time.Duration;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
@@ -12,13 +12,12 @@ import io.cygnus.indicator.impl.TimeBarIndicator.TimeBarEvent;
 import io.cygnus.indicator.impl.TimeBarIndicator.TimeBarPoint;
 import io.cygnus.indicator.impl.base.Bar;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
-import io.cygnus.indicator.impl.base.FixedPeriodIndicator.FixedPeriodPoint;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.pool.TimePeriodPool;
-import io.horizon.market.serial.TimePeriodSerial;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.sequence.TimeWindow;
 
 /**
  * K-Line 指标
@@ -33,10 +32,9 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 	public TimeBarIndicator(Instrument instrument, Duration duration) {
 		super(instrument, duration);
 		// 从已经根据交易周期分配好的池中获取此指标的分割节点
-		ImmutableSortedSet<TimePeriodSerial> timePeriodSet = TimePeriodPool.Singleton.getTimePeriodSet(instrument,
-				duration);
+		ImmutableSortedSet<TimeWindow> timePeriodSet = TimePeriodPool.Singleton.getTimePeriodSet(instrument, duration);
 		int i = -1;
-		for (TimePeriodSerial timePeriod : timePeriodSet)
+		for (TimeWindow timePeriod : timePeriodSet)
 			pointSet.add(new TimeBarPoint(++i, timePeriod));
 		currentPoint = pointSet.getFirst();
 	}
@@ -55,8 +53,8 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 
 	@Override
 	protected void handleMarketData(BasicMarketData marketData) {
-		TimePeriodSerial currentPointSerial = currentPoint.getSerial();
-		ZonedDateTime marketDatatime = marketData.getZonedDatetime();
+		TimeWindow currentPointSerial = currentPoint.getSerial();
+		LocalDateTime marketDatatime = marketData.getTimestamp().getZonedDateTime().toLocalDateTime();
 		if (currentPointSerial.isPeriod(marketDatatime)) {
 			currentPoint.handleMarketData(marketData);
 			for (TimeBarEvent timeBarsEvent : events) {
@@ -68,8 +66,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 			}
 			TimeBarPoint newBar = pointSet.nextOf(currentPoint).orElse(null);
 			if (newBar == null) {
-				log.error("TimeBar [{}-{}] next is null.", currentPointSerial.getStartTime(),
-						currentPointSerial.getEndTime());
+				log.error("TimeBar [{}-{}] next is null.", currentPointSerial.getStart(), currentPointSerial.getEnd());
 				return;
 			}
 			while (!newBar.getSerial().isPeriod(marketDatatime)) {
@@ -82,8 +79,8 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 				}
 				newBar = pointSet.nextOf(currentPoint).orElseGet(null);
 				if (newBar == null) {
-					log.error("TimeBar [{}-{}] next is null.", currentPointSerial.getStartTime(),
-							currentPointSerial.getEndTime());
+					log.error("TimeBar [{}-{}] next is null.", currentPointSerial.getStart(),
+							currentPointSerial.getEnd());
 					break;
 				}
 			}
@@ -114,7 +111,7 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 	 * @author yellow013
 	 *
 	 */
-	public static final class TimeBarPoint extends FixedPeriodPoint<BasicMarketData> {
+	public static final class TimeBarPoint extends FixedPeriodIndicator.FixedPeriodPoint<BasicMarketData> {
 
 		// 存储开高低收价格和成交量以及成交金额的字段
 		private Bar bar = new Bar();
@@ -128,14 +125,12 @@ public final class TimeBarIndicator extends FixedPeriodIndicator<TimeBarPoint, T
 		private MutableLongList priceRecord = MutableLists.newLongArrayList(64);
 		private MutableLongList volumeRecord = MutableLists.newLongArrayList(64);
 
-		private TimeBarPoint(int index, TimePeriodSerial serial) {
+		private TimeBarPoint(int index, TimeWindow serial) {
 			super(index, serial);
 		}
 
 		private TimeBarPoint generateNext() {
-			return new TimeBarPoint(index + 1,
-					new TimePeriodSerial(serial.getStartTime().plusSeconds(serial.getDuration().getSeconds()),
-							serial.getEndTime().plusSeconds(serial.getDuration().getSeconds()), serial.getDuration()));
+			return new TimeBarPoint(index + 1, TimeWindow.genNext(serial));
 		}
 
 		public double getOpen() {

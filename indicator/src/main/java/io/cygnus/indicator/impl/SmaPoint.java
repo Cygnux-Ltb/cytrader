@@ -4,8 +4,8 @@ import java.time.Duration;
 
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.serial.TimePeriodSerial;
 import io.mercury.common.collections.list.LongSlidingWindow;
+import io.mercury.common.sequence.TimeWindow;
 
 public final class SmaPoint extends MaPoint {
 
@@ -13,14 +13,14 @@ public final class SmaPoint extends MaPoint {
 
 	private int cycle;
 
-	public SmaPoint(int index, Instrument instrument, Duration duration, TimePeriodSerial timePeriod, int cycle,
+	public SmaPoint(int index, Instrument instrument, Duration duration, TimeWindow timePeriod, int cycle,
 			LongSlidingWindow historyPriceWindow) {
 		super(index, instrument, duration, timePeriod, historyPriceWindow);
 		this.historyPriceSum = historyPriceWindow.sum();
 		this.cycle = cycle;
 	}
 
-	public static SmaPoint with(int indxe, Instrument instrument, Duration duration, TimePeriodSerial timePeriod,
+	public static SmaPoint with(int indxe, Instrument instrument, Duration duration, TimeWindow timePeriod,
 			int cycle, LongSlidingWindow historyPriceWindow) {
 		return new SmaPoint(indxe, instrument, duration, timePeriod, cycle, historyPriceWindow);
 	}

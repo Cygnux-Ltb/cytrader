@@ -1,22 +1,19 @@
 package io.cygnus.indicator.impl.base;
 
 import java.time.Duration;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 import io.cygnus.indicator.IndicatorEvent;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator.FixedPeriodPoint;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.serial.TimePeriodSerial;
-import lombok.Getter;
+import io.mercury.common.sequence.TimeWindow;
 
 public abstract class FixedPeriodIndicator<P extends FixedPeriodPoint<M>, E extends IndicatorEvent, M extends MarketData>
 		extends BaseIndicator<P, E, M> {
 
-	@Getter
 	protected final Duration duration;
 
-	@Getter
 	protected final int cycle;
 
 	/**
@@ -40,24 +37,32 @@ public abstract class FixedPeriodIndicator<P extends FixedPeriodPoint<M>, E exte
 		this.cycle = cycle;
 	}
 
+	public Duration getDuration() {
+		return duration;
+	}
+
+	public int getCycle() {
+		return cycle;
+	}
+
 	/**
 	 * 
 	 * @author yellow013
 	 *
 	 * @param <M>
 	 */
-	public static abstract class FixedPeriodPoint<M extends MarketData> extends BasePoint<TimePeriodSerial, M> {
+	public static abstract class FixedPeriodPoint<M extends MarketData> extends BasePoint<TimeWindow, M> {
 
-		protected FixedPeriodPoint(int index, TimePeriodSerial serial) {
+		protected FixedPeriodPoint(int index, TimeWindow serial) {
 			super(index, serial);
 		}
 
-		public ZonedDateTime getStartTime() {
-			return serial.getStartTime();
+		public LocalDateTime getStartTime() {
+			return serial.getStart();
 		}
 
-		public ZonedDateTime getEndTime() {
-			return serial.getEndTime();
+		public LocalDateTime getEndTime() {
+			return serial.getEnd();
 		}
 
 	}

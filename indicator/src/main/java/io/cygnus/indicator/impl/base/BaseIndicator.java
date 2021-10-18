@@ -16,7 +16,6 @@ import io.mercury.common.collections.MutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.sequence.Serial;
 import io.mercury.common.util.Assertor;
-import lombok.Getter;
 
 public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends IndicatorEvent, M extends MarketData>
 		implements Indicator<P, E, M> {
@@ -24,19 +23,15 @@ public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends Indicat
 	private static final Logger log = CommonLoggerFactory.getLogger(BaseIndicator.class);
 
 	// 指标对应的标的
-	@Getter
 	protected final Instrument instrument;
 
 	// 存储所有Point的集合
-	@Getter
 	protected final PointSet<P> pointSet;
 
 	// 当前Point
-	@Getter
 	protected P currentPoint;
 
 	// 前一笔行情
-	@Getter
 	protected M preMarketData;
 
 	// 存储事件的集合
@@ -49,6 +44,22 @@ public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends Indicat
 	protected BaseIndicator(Instrument instrument, Capacity capacity) {
 		this.instrument = instrument;
 		this.pointSet = PointSet.newEmpty(capacity);
+	}
+
+	public Instrument getInstrument() {
+		return instrument;
+	}
+
+	public PointSet<P> getPointSet() {
+		return pointSet;
+	}
+
+	public P getCurrentPoint() {
+		return currentPoint;
+	}
+
+	public M getPreMarketData() {
+		return preMarketData;
 	}
 
 	@Override
@@ -91,15 +102,12 @@ public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends Indicat
 	 * @param <S>
 	 * @param <M>
 	 */
-	public static abstract class BasePoint<S extends Serial, M extends MarketData> implements Point<S> {
+	public static abstract class BasePoint<S extends Serial<S>, M extends MarketData> implements Point<S> {
 
-		@Getter
 		protected final int index;
 
-		@Getter
 		protected final S serial;
 
-		@Getter
 		protected M preMarketData;
 
 		protected BasePoint(int index, S serial) {
@@ -107,6 +115,18 @@ public abstract class BaseIndicator<P extends BasePoint<?, M>, E extends Indicat
 			Assertor.nonNull(serial, "serial");
 			this.index = index;
 			this.serial = serial;
+		}
+
+		public int getIndex() {
+			return index;
+		}
+
+		public S getSerial() {
+			return serial;
+		}
+
+		public M getPreMarketData() {
+			return preMarketData;
 		}
 
 		public void handleMarketData(M marketData) {

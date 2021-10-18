@@ -9,7 +9,7 @@ import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator.FixedPeriodPoint;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.serial.TimePeriodSerial;
+import io.mercury.common.sequence.TimeWindow;
 
 public final class MacdIndicator extends FixedPeriodIndicator<MacdPoint, MacdEvent, BasicMarketData> {
 
@@ -33,7 +33,7 @@ public final class MacdIndicator extends FixedPeriodIndicator<MacdPoint, MacdEve
 
 	public final class MacdPoint extends FixedPeriodPoint<BasicMarketData> {
 
-		private MacdPoint(int index, TimePeriodSerial timePeriod) {
+		private MacdPoint(int index, TimeWindow timePeriod) {
 			super(index, timePeriod);
 		}
 

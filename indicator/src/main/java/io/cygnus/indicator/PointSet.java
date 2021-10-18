@@ -15,12 +15,12 @@ import io.mercury.common.collections.MutableMaps;
 @NotThreadSafe
 public final class PointSet<P extends Point<?>> {
 
-	private MutableList<P> pointList;
-	private MutableLongObjectMap<P> pointMap;
+	private MutableList<P> list;
+	private MutableLongObjectMap<P> map;
 
 	private PointSet(Capacity capacity) {
-		this.pointList = MutableLists.newFastList(capacity.value());
-		this.pointMap = MutableMaps.newLongObjectHashMap(capacity);
+		this.list = MutableLists.newFastList(capacity.value());
+		this.map = MutableMaps.newLongObjectHashMap(capacity);
 	}
 
 	/**
@@ -40,10 +40,10 @@ public final class PointSet<P extends Point<?>> {
 	 */
 	public boolean add(P point) {
 		long serialId = point.getSerial().getSerialId();
-		if (pointMap.containsKey(serialId))
+		if (map.containsKey(serialId))
 			return false;
-		pointMap.put(serialId, point);
-		return pointList.add(point);
+		map.put(serialId, point);
+		return list.add(point);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public final class PointSet<P extends Point<?>> {
 	 * @return
 	 */
 	public int size() {
-		return pointList.size();
+		return list.size();
 	}
 
 	/**
@@ -59,7 +59,7 @@ public final class PointSet<P extends Point<?>> {
 	 * @return
 	 */
 	public P getLast() {
-		return pointList.getLast();
+		return list.getLast();
 	}
 
 	/**
@@ -67,7 +67,7 @@ public final class PointSet<P extends Point<?>> {
 	 * @return
 	 */
 	public P getFirst() {
-		return pointList.getFirst();
+		return list.getFirst();
 	}
 
 	/**
@@ -76,7 +76,7 @@ public final class PointSet<P extends Point<?>> {
 	 * @return
 	 */
 	public Optional<P> get(int index) {
-		return index < pointList.size() ? Optional.ofNullable(pointList.get(index)) : Optional.empty();
+		return index < list.size() ? Optional.ofNullable(list.get(index)) : Optional.empty();
 	}
 
 	/**
@@ -97,7 +97,7 @@ public final class PointSet<P extends Point<?>> {
 	 */
 	@CheckForNull
 	public P getPoint(long serialId) {
-		return pointMap.get(serialId);
+		return map.get(serialId);
 	}
 
 	/**
@@ -105,7 +105,7 @@ public final class PointSet<P extends Point<?>> {
 	 * @return
 	 */
 	public MutableList<P> getPointList() {
-		return pointList;
+		return list;
 	}
 
 	/**
@@ -115,7 +115,7 @@ public final class PointSet<P extends Point<?>> {
 	 * @return
 	 */
 	public MutableList<P> getSubPointList(int fromIndex, int toIndex) {
-		return pointList.subList(fromIndex, toIndex);
+		return list.subList(fromIndex, toIndex);
 	}
 
 }

@@ -9,7 +9,7 @@ import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator.FixedPeriodPoint;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.serial.TimePeriodSerial;
+import io.mercury.common.sequence.TimeWindow;
 
 public final class BollingerBandsIndicator
 		extends FixedPeriodIndicator<BollingerBandsPoint, BollingerBandsEvent, BasicMarketData> {
@@ -39,7 +39,7 @@ public final class BollingerBandsIndicator
 
 	public final class BollingerBandsPoint extends FixedPeriodPoint<BasicMarketData> {
 
-		private BollingerBandsPoint(int index, TimePeriodSerial timePeriod) {
+		private BollingerBandsPoint(int index, TimeWindow timePeriod) {
 			super(index, timePeriod);
 		}
 
