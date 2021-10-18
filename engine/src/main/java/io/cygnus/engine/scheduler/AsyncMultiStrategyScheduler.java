@@ -13,7 +13,6 @@ import io.horizon.trader.order.OrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.CommonLoggerFactory;
-import lombok.Getter;
 
 /**
  * 
@@ -90,13 +89,12 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 
 	private class QueueMsg {
 
-		@Getter
 		private final int mark;
-		@Getter
+
 		private M marketData;
-		@Getter
+
 		private OrderReport ordReport;
-		@Getter
+
 		private AdaptorEvent adaptorEvent;
 
 		private QueueMsg(M marketData) {
@@ -112,6 +110,22 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 		private QueueMsg(AdaptorEvent adaptorEvent) {
 			this.mark = AdaptorEvent;
 			this.adaptorEvent = adaptorEvent;
+		}
+
+		public int getMark() {
+			return mark;
+		}
+
+		public M getMarketData() {
+			return marketData;
+		}
+
+		public OrderReport getOrdReport() {
+			return ordReport;
+		}
+
+		public AdaptorEvent getAdaptorEvent() {
+			return adaptorEvent;
 		}
 
 	}

@@ -2,7 +2,7 @@ package io.cygnus.engine.position;
 
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 
-import io.horizon.market.instrument.spec.ChinaFutures;
+import io.horizon.market.instrument.impl.futures.ChinaFutures;
 import io.horizon.trader.order.Order;
 import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.attr.OrdStatus;

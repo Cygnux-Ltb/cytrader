@@ -26,7 +26,6 @@ import io.horizon.trader.order.attr.TrdAction;
 import io.horizon.trader.order.attr.TrdDirection;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
-import lombok.Getter;
 
 /**
  * 统一管理订单<br>
@@ -50,31 +49,26 @@ public final class OrderKeeper implements Serializable {
 	/*
 	 * 存储所有的order
 	 */
-	@Getter
 	private static final OrderBook OrderBook = new OrderBook(Capacity.L09_SIZE);
 
 	/*
 	 * 按照subAccountId分组存储
 	 */
-	@Getter
 	private static final MutableIntObjectMap<OrderBook> SubAccountOrderBooks = newIntObjectHashMap();
 
 	/*
 	 * 按照accountId分组存储
 	 */
-	@Getter
 	private static final MutableIntObjectMap<OrderBook> AccountOrderBooks = newIntObjectHashMap();
 
 	/*
 	 * 按照strategyId分组存储
 	 */
-	@Getter
 	private static final MutableIntObjectMap<OrderBook> StrategyOrderBooks = newIntObjectHashMap();
 
 	/*
 	 * 按照instrumentId分组存储
 	 */
-	@Getter
 	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = newIntObjectHashMap();
 
 	private OrderKeeper() {

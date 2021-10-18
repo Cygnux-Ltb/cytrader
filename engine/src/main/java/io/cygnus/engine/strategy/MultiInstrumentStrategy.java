@@ -19,13 +19,12 @@ import io.horizon.trader.adaptor.Adaptor;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
 import io.mercury.common.util.Assertor;
-import lombok.Getter;
 
 public abstract class MultiInstrumentStrategy<M extends MarketData, PK extends ParamKey>
 		extends AbstractStrategy<M, PK> {
 
 	// 策略订阅的合约列表
-	@Getter
+
 	protected ImmutableIntObjectMap<Instrument> instruments;
 
 	protected Adaptor adaptor;
@@ -39,6 +38,11 @@ public abstract class MultiInstrumentStrategy<M extends MarketData, PK extends P
 		super(sign, subAccount, params);
 		this.instruments = immutableIntObjectMapFactory().from(Stream.of(instruments).collect(toSet()),
 				Instrument::getInstrumentId, instrument -> instrument);
+	}
+
+	@Override
+	public ImmutableIntObjectMap<Instrument> getInstruments() {
+		return instruments;
 	}
 
 	@Override

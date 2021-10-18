@@ -1,10 +1,7 @@
 package io.cygnus.engine.scheduler.base;
 
 import io.mercury.common.codec.Envelope;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public enum SchedulerDataType implements Envelope {
 
 	MarketData(0),
@@ -15,7 +12,20 @@ public enum SchedulerDataType implements Envelope {
 
 	;
 
-	@Getter
 	private final int code;
+
+	private SchedulerDataType(int code) {
+		this.code = code;
+	}
+
+	@Override
+	public int getCode() {
+		return code;
+	}
+
+	@Override
+	public int getVersion() {
+		return 1;
+	}
 
 }

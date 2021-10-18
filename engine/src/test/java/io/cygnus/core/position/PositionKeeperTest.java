@@ -3,8 +3,8 @@ package io.cygnus.core.position;
 import org.junit.Test;
 
 import io.cygnus.engine.position.PositionKeeper;
-import io.horizon.market.instrument.spec.ChinaFutures;
-import io.horizon.market.instrument.spec.ChinaFuturesSymbol;
+import io.horizon.market.instrument.impl.futures.ChinaFutures;
+import io.horizon.market.instrument.impl.futures.ChinaFuturesSymbol;
 import io.horizon.trader.order.attr.TrdDirection;
 
 public class PositionKeeperTest {

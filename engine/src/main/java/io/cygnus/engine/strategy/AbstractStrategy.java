@@ -39,7 +39,6 @@ import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
 import io.mercury.common.sequence.SnowflakeAlgorithm;
 import io.mercury.common.util.Assertor;
-import lombok.Getter;
 
 public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey> extends EnableableComponent
 		implements Strategy<M>, CircuitBreaker {
@@ -48,20 +47,16 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	private final static Logger log = CommonLoggerFactory.getLogger(AbstractStrategy.class);
 
 	// 策略ID
-	@Getter
 	protected final int strategyId;
 
 	// 策略名称
-	@Getter
 	protected final String strategyName;
 
 	// 子账号
-	@Getter
 	protected final SubAccount subAccount;
 	protected final int subAccountId;
 
 	// 实际账号
-	@Getter
 	protected final Account account;
 	protected final int accountId;
 
@@ -91,6 +86,30 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 		this.params = params;
 		final SnowflakeAlgorithm snowflake = new SnowflakeAlgorithm(strategyId);
 		this.allocator = () -> snowflake.next();
+	}
+
+	public int getStrategyId() {
+		return strategyId;
+	}
+
+	public String getStrategyName() {
+		return strategyName;
+	}
+
+	public SubAccount getSubAccount() {
+		return subAccount;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public MutableLongObjectMap<Order> getOrders() {
+		return orders;
+	}
+
+	public Params<PK> getParams() {
+		return params;
 	}
 
 	@Override

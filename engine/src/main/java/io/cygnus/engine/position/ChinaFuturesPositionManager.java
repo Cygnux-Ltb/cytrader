@@ -1,6 +1,6 @@
 package io.cygnus.engine.position;
 
-import io.horizon.market.instrument.spec.ChinaFutures;
+import io.horizon.market.instrument.impl.futures.ChinaFutures;
 import io.horizon.trader.position.AbstractPositionManager;
 
 /**

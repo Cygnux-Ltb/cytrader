@@ -9,7 +9,6 @@ import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import io.horizon.trader.order.Order;
 import io.horizon.trader.order.attr.OrdStatus.OrdStatusException;
 import io.mercury.common.collections.Capacity;
-import lombok.Getter;
 
 /**
  * 用于存储订单的组件
@@ -22,37 +21,37 @@ public final class OrderBook {
 	/*
 	 * 存储本OrderBook里的所有订单, 以ordSysId索引
 	 */
-	@Getter
+
 	private final MutableLongObjectMap<Order> orderMap;
 
 	/*
 	 * 存储本OrderBook里的所有long订单, 以ordSysId索引
 	 */
-	@Getter
+
 	private final MutableLongObjectMap<Order> longOrderMap;
 
 	/*
 	 * 存储本OrderBook里的所有short订单, 以ordSysId索引
 	 */
-	@Getter
+
 	private final MutableLongObjectMap<Order> shortOrderMap;
 
 	/*
 	 * 存储本OrderBook里的所有活动状态的订单, 以ordSysId索引
 	 */
-	@Getter
+
 	private final MutableLongObjectMap<Order> activeOrderMap;
 
 	/*
 	 * 存储本OrderBook里的所有活动状态的long订单, 以ordSysId索引
 	 */
-	@Getter
+
 	private final MutableLongObjectMap<Order> activeLongOrderMap;
 
 	/*
 	 * 存储本OrderBook里的所有活动状态的short订单, 以ordSysId索引
 	 */
-	@Getter
+
 	private final MutableLongObjectMap<Order> activeShortOrderMap;
 
 	/**
@@ -73,6 +72,30 @@ public final class OrderBook {
 		this.activeOrderMap = newLongObjectHashMap(capacity.quarter());
 		this.activeLongOrderMap = newLongObjectHashMap(capacity.quarter());
 		this.activeShortOrderMap = newLongObjectHashMap(capacity.quarter());
+	}
+
+	public MutableLongObjectMap<Order> getOrderMap() {
+		return orderMap;
+	}
+
+	public MutableLongObjectMap<Order> getLongOrderMap() {
+		return longOrderMap;
+	}
+
+	public MutableLongObjectMap<Order> getShortOrderMap() {
+		return shortOrderMap;
+	}
+
+	public MutableLongObjectMap<Order> getActiveOrderMap() {
+		return activeOrderMap;
+	}
+
+	public MutableLongObjectMap<Order> getActiveLongOrderMap() {
+		return activeLongOrderMap;
+	}
+
+	public MutableLongObjectMap<Order> getActiveShortOrderMap() {
+		return activeShortOrderMap;
 	}
 
 	/**
