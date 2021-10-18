@@ -41,4 +41,9 @@ public enum InboxTitle implements Envelope {
 		throw new IllegalArgumentException("checkout with code -> " + code + " is null");
 	}
 
+	@Override
+	public int getVersion() {
+		return 1;
+	}
+
 }

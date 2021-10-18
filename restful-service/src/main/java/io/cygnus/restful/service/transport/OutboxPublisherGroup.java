@@ -2,7 +2,7 @@ package io.cygnus.restful.service.transport;
 
 import java.util.List;
 
-import io.cygnus.persistence.entity.CygMqConfig;
+import io.cygnus.repository.entity.CygInfoEntity;
 import io.cygnus.repository.service.CygInfoService;
 import io.mercury.common.collections.group.AbstractGroup;
 import io.mercury.transport.api.Publisher;
@@ -27,14 +27,8 @@ public class OutboxPublisherGroup extends AbstractGroup<Integer, Publisher<byte[
 
 		CygInfoService dao = new CygInfoService();
 
-		List<CygMqConfig> cygMqConfigs = dao.getCygMqConfigById(cygId);
+		CygInfoEntity cygInfo = dao.get(cygId);
 
-		if (cygMqConfigs.isEmpty() || cygMqConfigs.size() > 1) {
-			throw new IllegalArgumentException(
-					"Query MqConfig for CygId(" + cygId + ") is null or more than one record.");
-		}
-
-		CygMqConfig cygMqConfig = cygMqConfigs.get(0);
 
 		RabbitPublisherCfg configurator = RabbitPublisherCfg.configuration(cygMqConfig.getServerMqHost(),
 				cygMqConfig.getServerMqPort(), cygMqConfig.getServerMqUsername(), cygMqConfig.getServerMqPassword(),

@@ -72,8 +72,12 @@ public enum OutboxTitle implements Envelope {
 
 	@Override
 	public int getCode() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getVersion() {
+		return 1;
 	}
 
 }

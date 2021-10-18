@@ -16,6 +16,7 @@ public class SymbolExecutor {
 
 	private final Logger log = CommonLoggerFactory.getLogger(SymbolExecutor.class);
 
+	
 	private final SymbolDao symbolDao = new SymbolDao();
 
 	/**
