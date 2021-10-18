@@ -16,7 +16,7 @@ import io.cygnus.repository.entity.OrderEventEntity;
 @Repository
 public interface OrderEventDao extends JpaRepository<OrderEventEntity, Long> {
 
-	List<OrderEventEntity> queryByStrategyIdAndTradingDay(int tradingDay);
+	List<OrderEventEntity> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
 
 	List<OrderEventEntity> queryByTradingDay(int tradingDay);
 

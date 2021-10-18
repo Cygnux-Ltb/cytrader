@@ -33,7 +33,7 @@ public interface OrderDao extends JpaRepository<OrderEntity, Long> {
 			+ " AND "
 			+ " e.investorId LIKE :investorId "
 			+ " AND "
-			+ " e.instrumentCode LIKE %:instrumentCode% "
+			+ " e.instrumentCode LIKE :instrumentCode% "
 			+ " AND "
 			+ " e.tradingDay >= :startTradingDay "
 			+ " AND "

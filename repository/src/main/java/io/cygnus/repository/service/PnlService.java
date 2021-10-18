@@ -1,6 +1,7 @@
 package io.cygnus.repository.service;
 
 import static io.mercury.common.functional.Functions.exec;
+import static io.mercury.common.functional.Functions.execBool;
 
 import java.util.List;
 
@@ -74,7 +75,7 @@ public final class PnlService {
 	 * @return
 	 */
 	public boolean putPnlDaily(PnlDailyEntity pnlDaily) {
-		return exec(() -> dao.save(pnlDaily), o -> {
+		return execBool(() -> dao.save(pnlDaily), o -> {
 			log.info("save [PnlDailyEntity] success -> {}", pnlDaily);
 			return true;
 		}, e -> {
@@ -89,7 +90,7 @@ public final class PnlService {
 	 * @return
 	 */
 	public boolean putPnlDailySettlement(PnlDailySettlementEntity entity) {
-		return exec(() -> settlementDao.save(entity), o -> {
+		return execBool(() -> settlementDao.save(entity), o -> {
 			log.info("save [PnlDailySettlementEntity] success -> {}", entity);
 			return true;
 		}, e -> {

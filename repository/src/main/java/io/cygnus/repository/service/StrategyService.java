@@ -1,6 +1,7 @@
 package io.cygnus.repository.service;
 
 import static io.mercury.common.functional.Functions.exec;
+import static io.mercury.common.functional.Functions.execBool;
 
 import java.util.List;
 
@@ -115,7 +116,7 @@ public final class StrategyService extends BaseService {
 	 * @return
 	 */
 	public boolean putStrategy(StrategyEntity entity) {
-		return exec(() -> dao.save(entity), o -> {
+		return execBool(() -> dao.save(entity), o -> {
 			log.info("save [StrategyEntity] success -> {}", entity);
 			return true;
 		}, e -> {
@@ -130,7 +131,7 @@ public final class StrategyService extends BaseService {
 	 * @return
 	 */
 	public boolean putStrategyParam(StrategyParamEntity entity) {
-		return exec(() -> paramDao.save(entity), o -> {
+		return execBool(() -> paramDao.save(entity), o -> {
 			log.info("save [StrategyParamEntity] success -> {}", entity);
 			return true;
 		}, e -> {

@@ -1,6 +1,7 @@
 package io.cygnus.repository.service;
 
 import static io.mercury.common.functional.Functions.exec;
+import static io.mercury.common.functional.Functions.execBool;
 
 import java.util.List;
 
@@ -74,7 +75,7 @@ public final class InstrumentService {
 	 * @return
 	 */
 	public boolean putInstrument(@Nonnull InstrumentEntity entity) {
-		return exec(() -> dao.save(entity), o -> {
+		return execBool(() -> dao.save(entity), o -> {
 			log.info("save [InstrumentEntity] success, entity -> {}", entity);
 			return true;
 		}, e -> {
@@ -89,7 +90,7 @@ public final class InstrumentService {
 	 * @return
 	 */
 	public boolean putInstrumentSettlement(@Nonnull InstrumentSettlementEntity entity) {
-		return exec(() -> settlementDao.save(entity), o -> {
+		return execBool(() -> settlementDao.save(entity), o -> {
 			log.info("save [InstrumentSettlementEntity] success -> {}", entity);
 			return true;
 		}, e -> {

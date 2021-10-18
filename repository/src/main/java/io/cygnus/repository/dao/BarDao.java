@@ -14,7 +14,7 @@ public interface BarDao extends JpaRepository<BarEntity, Long> {
 
 	@Query("SELECT * FROM #{#entityName} e "
 			+ " WHERE " 
-			+ " e.instrumentCode LIKE %:instrumentCode% " 
+			+ " e.instrumentCode LIKE :instrumentCode% " 
 			+ " AND "
 			+ " e.tradingDay = :tradingDay ")
 	List<BarEntity> query(

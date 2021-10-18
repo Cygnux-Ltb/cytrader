@@ -22,7 +22,7 @@ public interface InstrumentSettlementDao extends JpaRepository<InstrumentSettlem
 
 	@Query("SELECT * FROM #{#entityName} e " 
 			+ " WHERE "
-			+ " e.instrumentCode LIKE %:instrumentCode% " 
+			+ " e.instrumentCode LIKE :instrumentCode% " 
 			+ " AND "
 			+ " e.tradingDay = :tradingDay ")
 	List<InstrumentSettlementEntity> query(@Nullable String instrumentCode, int tradingDay);

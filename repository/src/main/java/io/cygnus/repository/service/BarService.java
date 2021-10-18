@@ -1,6 +1,7 @@
 package io.cygnus.repository.service;
 
 import static io.mercury.common.functional.Functions.exec;
+import static io.mercury.common.functional.Functions.execBool;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class BarService {
 	 * @return
 	 */
 	public boolean putBar(@Nonnull BarEntity entity) {
-		return exec(() -> dao.save(entity), o -> {
+		return execBool(() -> dao.save(entity), o -> {
 			log.info("save [BarEntity] success -> {}", entity);
 			return true;
 		}, e -> {

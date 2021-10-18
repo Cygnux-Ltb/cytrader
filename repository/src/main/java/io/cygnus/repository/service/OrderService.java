@@ -1,6 +1,7 @@
 package io.cygnus.repository.service;
 
 import static io.mercury.common.functional.Functions.exec;
+import static io.mercury.common.functional.Functions.execBool;
 
 import java.util.List;
 
@@ -127,7 +128,7 @@ public class OrderService extends BaseService {
 	 * @return
 	 */
 	public boolean putOrder(OrderEntity entity) {
-		return exec(() -> dao.save(entity), o -> {
+		return execBool(() -> dao.save(entity), o -> {
 			log.info("save [OrderEntity] success -> {}", entity);
 			return true;
 		}, e -> {
@@ -142,7 +143,7 @@ public class OrderService extends BaseService {
 	 * @return
 	 */
 	public boolean putOrderEvent(OrderEventEntity entity) {
-		return exec(() -> eventDao.save(entity), o -> {
+		return execBool(() -> eventDao.save(entity), o -> {
 			log.info("save [OrderEventEntity] success -> {}", entity);
 			return true;
 		}, e -> {
