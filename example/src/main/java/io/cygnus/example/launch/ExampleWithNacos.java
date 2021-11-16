@@ -1,19 +1,17 @@
 package io.cygnus.example.launch;
 
 import io.mercury.common.datetime.DateTimeUtil;
-import io.mercury.common.log.CommonLogConfigurator;
-import io.mercury.common.log.CommonLogConfigurator.LogLevel;
+import io.mercury.common.log.LogConfigurator;
+import io.mercury.common.log.LogConfigurator.LogLevel;
 
 public class ExampleWithNacos {
 
 	static {
-		CommonLogConfigurator.setFilename("cygnus-example-" + DateTimeUtil.datetimeOfSecond());
-		CommonLogConfigurator.setLogLevel(LogLevel.INFO);
+		LogConfigurator.setLogFilename("cygnus-example-" + DateTimeUtil.datetimeOfSecond());
+		LogConfigurator.setLogLevel(LogLevel.INFO);
 	}
 
 	public static void main(String[] args) {
-
-		
 
 	}
 
