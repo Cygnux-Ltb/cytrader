@@ -18,8 +18,8 @@ import io.cygnus.repository.entity.InstrumentSettlementEntity;
 import io.cygnus.repository.service.InstrumentService;
 import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.service.dto.LastPrice;
-import io.mercury.common.annotation.cache.GetCache;
-import io.mercury.common.util.StringUtil;
+import io.mercury.common.annotation.GetCache;
+import io.mercury.common.util.StringSupport;
 
 @RestController("/instrument")
 public class InstrumentController extends BaseController {
@@ -57,7 +57,7 @@ public class InstrumentController extends BaseController {
 	@GetMapping("/last_price")
 	@GetCache
 	public ResponseEntity<Object> getLastPrice(@RequestParam("instrumentCodes") String instrumentCodes) {
-		if (StringUtil.nonEmpty(instrumentCodes)) {
+		if (StringSupport.nonEmpty(instrumentCodes)) {
 			return badRequest();
 		}
 		List<LastPrice> lastPrices = new ArrayList<>();

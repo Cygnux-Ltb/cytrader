@@ -21,7 +21,7 @@ import io.cygnus.service.dto.pack.OutboxMessage;
 import io.cygnus.service.dto.pack.OutboxTitle;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.util.StringUtil;
+import io.mercury.common.util.StringSupport;
 import io.mercury.transport.api.Publisher;
 
 @RestController("/update_param")
@@ -43,7 +43,7 @@ public class UpdateParamController extends BaseController {
 		// 获取输入参数
 		String json = getBody(request);
 		log.info("method updateParam recv : {}", json);
-		if (StringUtil.isNullOrEmpty(json)) {
+		if (StringSupport.isNullOrEmpty(json)) {
 			return badRequest();
 		}
 		// 将参数转换为List
@@ -68,7 +68,7 @@ public class UpdateParamController extends BaseController {
 		// 获取输入参数
 		String json = getBody(request);
 		log.info("method updateParamSafe recv : {}", json);
-		if (StringUtil.isNullOrEmpty(json)) {
+		if (StringSupport.isNullOrEmpty(json)) {
 			return badRequest();
 		}
 		// 将参数转换为StrategyParam

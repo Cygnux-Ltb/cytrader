@@ -17,7 +17,7 @@ import io.cygnus.repository.entity.CygInfoEntity;
 import io.cygnus.repository.service.CygInfoService;
 import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.service.dto.InitFinish;
-import io.mercury.common.annotation.cache.GetCache;
+import io.mercury.common.annotation.GetCache;
 
 @RestController("/cyg_info")
 public class CygController extends BaseController {

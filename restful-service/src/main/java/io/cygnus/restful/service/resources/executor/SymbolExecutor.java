@@ -34,7 +34,7 @@ public class SymbolExecutor {
 	 * SymbolInfo Cache by symbolName
 	 */
 	private static final CacheMap<String, List<SymbolInfo>> SymbolInfoCacheMap = CacheMap.newBuilder()
-			.buildWith((symbol) -> {
+			.build((symbol) -> {
 				return symbolDao.getSymbolInfoByName(symbol);
 			});
 
@@ -46,7 +46,7 @@ public class SymbolExecutor {
 	 * SymbolTradingFee Cache by symbolName
 	 */
 	private static final CacheMap<String, List<SymbolTradingFee>> SymbolTradingFeeCacheMap = CacheMap.newBuilder()
-			.buildWith((symbol) -> {
+			.build((symbol) -> {
 				return symbolDao.getSymbolTradingFeeByName(symbol);
 			});
 
@@ -62,7 +62,7 @@ public class SymbolExecutor {
 	 * SymbolTradingPeriod Cache by symbolName
 	 */
 	private static final CacheMap<String, List<SymbolTradingPeriod>> SymbolTradingPeriodCacheMap = CacheMap.newBuilder()
-			.buildWith((symbol) -> {
+			.build((symbol) -> {
 				return symbolDao.getSymbolTradingPeriodByName(symbol);
 			});
 

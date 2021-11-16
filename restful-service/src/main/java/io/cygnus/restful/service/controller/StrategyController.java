@@ -18,7 +18,7 @@ import io.cygnus.repository.entity.StrategyParamEntity;
 import io.cygnus.repository.service.StrategyService;
 import io.cygnus.restful.service.base.BaseController;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.util.StringUtil;
+import io.mercury.common.util.StringSupport;
 
 @RestController("/strategy")
 public class StrategyController extends BaseController {
@@ -71,7 +71,7 @@ public class StrategyController extends BaseController {
 	public ResponseEntity<Object> putParamsByStrategyId(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		log.info("method putParamsByStrategyId recv : {}", json);
-		if (StringUtil.isNullOrEmpty(json)) {
+		if (StringSupport.isNullOrEmpty(json)) {
 			return badRequest();
 		}
 		StrategyParamEntity entity = toObject(json, StrategyParamEntity.class);

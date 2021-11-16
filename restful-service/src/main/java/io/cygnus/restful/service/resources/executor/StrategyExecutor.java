@@ -41,7 +41,7 @@ public class StrategyExecutor {
 	/**
 	 * Strategy CacheMap
 	 */
-	private final CacheMap<Integer, StrategyEntity> StrategyCacheMap = CacheMap.newBuilder().buildWith((strategyId) -> {
+	private final CacheMap<Integer, StrategyEntity> StrategyCacheMap = CacheMap.newBuilder().build((strategyId) -> {
 		return service.getStrategy(strategyId);
 	});
 
@@ -65,7 +65,7 @@ public class StrategyExecutor {
 	 * StrategyParam CacheMap
 	 */
 	private final CacheMap<Integer, List<StrategyParamEntity>> StrategyParamCacheMap = CacheMap.newBuilder()
-			.buildWith((strategyId) -> {
+			.build((strategyId) -> {
 				List<StrategyParamEntity> strategyParams = service.getStrategyParams(strategyId);
 				List<StrategyParamEntity> mergeList = new ArrayList<>(strategyParams);
 				// 遍历全部默认参数
@@ -116,7 +116,7 @@ public class StrategyExecutor {
 	 * StrategySymbol CacheMap
 	 */
 	private static CacheMap<Integer, List<StrategySymbol>> strategySymbolCacheMap = CacheMap.newBuilder()
-			.buildWith((strategyId) -> {
+			.build((strategyId) -> {
 				return strategyDao.getSymbolsByStrategyId(strategyId);
 			});
 

@@ -18,7 +18,7 @@ import io.cygnus.persistence.entity.SymbolTradingPeriod;
 import io.cygnus.persistence.entity.TradeableInstrument;
 import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.restful.service.resources.executor.SymbolExecutor;
-import io.mercury.common.util.StringUtil;
+import io.mercury.common.util.StringSupport;
 
 @RestController("/symbol")
 public class SymbolController extends BaseController {
@@ -74,7 +74,7 @@ public class SymbolController extends BaseController {
 	public ResponseEntity<Object> putSymbolTradingFeeByName(@RequestParam("symbol") String symbol,
 			@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
-		if (StringUtil.isNullOrEmpty(json)) {
+		if (StringSupport.isNullOrEmpty(json)) {
 			return badRequest();
 		}
 		SymbolTradingFee symbolTradingFee = toObject(json, SymbolTradingFee.class);
