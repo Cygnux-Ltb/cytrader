@@ -2,7 +2,7 @@ package io.cygnus.repository.service.base;
 
 import org.slf4j.Logger;
 
-import io.mercury.common.util.StringUtil;
+import io.mercury.common.util.StringSupport;
 
 public abstract class BaseService {
 
@@ -15,7 +15,7 @@ public abstract class BaseService {
 	}
 
 	protected final boolean checkStrategyName(String strategyName, Logger log, String msg) {
-		if (StringUtil.isNullOrEmpty(strategyName)) {
+		if (StringSupport.isNullOrEmpty(strategyName)) {
 			log.error("{}, strategyName=={}", msg, strategyName);
 			return true;
 		}
@@ -23,7 +23,7 @@ public abstract class BaseService {
 	}
 
 	protected final boolean checkInvestorId(String investorId, Logger log, String msg) {
-		if (StringUtil.isNullOrEmpty(investorId)) {
+		if (StringSupport.isNullOrEmpty(investorId)) {
 			log.error("{}, investorId=={}", msg, investorId);
 			return true;
 		}
@@ -31,7 +31,7 @@ public abstract class BaseService {
 	}
 
 	protected final boolean checkInstrumentCode(String instrumentCode, Logger log, String msg) {
-		if (StringUtil.isNullOrEmpty(instrumentCode)) {
+		if (StringSupport.isNullOrEmpty(instrumentCode)) {
 			log.error("{}, instrumentCode=={}", msg, instrumentCode);
 			return true;
 		}
