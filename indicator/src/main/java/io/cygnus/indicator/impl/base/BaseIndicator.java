@@ -10,7 +10,7 @@ import io.cygnus.indicator.PointSet;
 import io.cygnus.indicator.impl.base.BaseIndicator.BasePoint;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
-import io.mercury.common.annotation.lang.AbstractFunction;
+import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.log.CommonLoggerFactory;
