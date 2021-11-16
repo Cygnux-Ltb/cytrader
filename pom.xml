@@ -41,12 +41,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<spring.boot.version>2.5.2</spring.boot.version>
+		<java.version>11</java.version>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<spring.boot.version>2.5.6</spring.boot.version>
 		<mercury.version>1.0-SNAPSHOT</mercury.version>
-		<horizon.version>1.0</horizon.version>
+		<horizon.version>0.1</horizon.version>
 	</properties>
 
 	<build>
@@ -71,7 +71,7 @@
 			<version>4.13.1</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- commons -->
 		<!-- see https://github.com/yellow013/mercury.git -->
 		<dependency>
@@ -86,7 +86,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.20</version>
+				<version>1.18.22</version>
 			</dependency>
 
 			<!-- mercury library -->
