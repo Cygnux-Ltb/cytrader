@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 
-import io.cygnus.engine.om.OrderKeeper;
+import io.cygnus.engine.trader.OrderKeeper;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.adaptor.AdaptorEvent;
