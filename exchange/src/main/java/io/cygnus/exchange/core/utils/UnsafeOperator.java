@@ -6,7 +6,6 @@ import io.cygnus.exchange.core.common.MatcherTradeEvent;
 import io.cygnus.exchange.core.common.cmd.CommandResultCode;
 import io.cygnus.exchange.core.common.cmd.OrderCommand;
 
-@SuppressWarnings("restriction")
 public final class UnsafeOperator {
 
 	private static final long OFFSET_RESULT_CODE;

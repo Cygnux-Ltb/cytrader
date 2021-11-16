@@ -12,7 +12,7 @@ import com.lmax.disruptor.SequenceBarrier;
 import com.lmax.disruptor.Sequencer;
 
 import io.cygnus.exchange.core.common.enums.CoreWaitStrategy;
-import io.mercury.common.util.JdkReflection;
+import io.mercury.common.util.JreReflection;
 
 public final class WaitSpinningHelper {
 
@@ -39,10 +39,10 @@ public final class WaitSpinningHelper {
 
 		this.block = waitStrategy.isBlock();
 		if (block) {
-			this.blockingDisruptorWaitStrategy = JdkReflection.extractField(AbstractSequencer.class,
+			this.blockingDisruptorWaitStrategy = JreReflection.extractField(AbstractSequencer.class,
 					(AbstractSequencer) sequencer, "waitStrategy");
-			this.lock = JdkReflection.extractField(BlockingWaitStrategy.class, blockingDisruptorWaitStrategy, "lock");
-			this.processorNotifyCondition = JdkReflection.extractField(BlockingWaitStrategy.class,
+			this.lock = JreReflection.extractField(BlockingWaitStrategy.class, blockingDisruptorWaitStrategy, "lock");
+			this.processorNotifyCondition = JreReflection.extractField(BlockingWaitStrategy.class,
 					blockingDisruptorWaitStrategy, "processorNotifyCondition");
 		} else {
 			this.blockingDisruptorWaitStrategy = null;
@@ -90,7 +90,7 @@ public final class WaitSpinningHelper {
 
 	private static <T> Sequencer extractSequencer(RingBuffer<T> ringBuffer) {
 		try {
-			final Field field = JdkReflection.getField(RingBuffer.class, "sequencer");
+			final Field field = JreReflection.getField(RingBuffer.class, "sequencer");
 			field.setAccessible(true);
 			return (Sequencer) field.get(ringBuffer);
 		} catch (NoSuchFieldException | IllegalAccessException e) {
