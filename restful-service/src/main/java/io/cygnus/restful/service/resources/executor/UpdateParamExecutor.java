@@ -23,7 +23,7 @@ import io.mercury.serialization.json.JsonParser;
 @Component
 public class UpdateParamExecutor {
 
-	private final Logger log = CommonLoggerFactory.getLogger(UpdateParamExecutor.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(UpdateParamExecutor.class);
 
 	private static Map<String, ValidationRule> validationRuleMap;
 
@@ -40,7 +40,7 @@ public class UpdateParamExecutor {
 				validationRuleMap.put(validationRule.getParamName(), validationRule);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("IOException -> {}", e.getMessage(), e);
 		}
 
 	}

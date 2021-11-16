@@ -1,5 +1,8 @@
 package io.cygnus.restful.service.servlet;
 
+import static io.cygnus.restful.service.transport.OutboxPublisherGroup.GROUP_INSTANCE;
+
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,17 +14,14 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 
-import org.eclipse.collections.api.list.ImmutableList;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.entity.CygInfoEntity;
 import io.cygnus.repository.service.CygInfoService;
-import io.cygnus.restful.service.transport.OutboxPublisherGroup;
 import io.cygnus.service.dto.pack.OutboxMessage;
 import io.cygnus.service.dto.pack.OutboxTitle;
-import io.mercury.common.character.Charsets;
 import io.mercury.common.datetime.pattern.spec.TimePattern;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
@@ -41,13 +41,13 @@ public class CygnusInitService {
 		initEndTimeBinnerSender(new Date(), 1000 * 60);
 	}
 
-	public void destroy() {
+	public void destroy() throws IOException {
 		// 关闭数据库连接
 		CommonDaoFactory.closeSessionFactory();
 		// 关闭OutboxPublisher连接
-		ImmutableList<Publisher<byte[]>> members = OutboxPublisherGroup.INSTANCE.getMemberList();
-		for (Publisher<byte[]> publisher : members) {
-			publisher.destroy();
+		var members = GROUP_INSTANCE.getKeys().toList().collect(GROUP_INSTANCE::getMember).toImmutable();
+		for (Publisher<String> publisher : members) {
+			publisher.close();
 		}
 	}
 
@@ -85,13 +85,12 @@ public class CygnusInitService {
 		List<CygInfoEntity> all = service.getAll();
 
 		for (CygInfoEntity cyg : all) {
-			Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cyg.getCygId());
+			var publisher = GROUP_INSTANCE.getMember(cyg.getCygId());
 
 			String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.EndTimeBinner.name(), null));
 
 			log.info("EndTimeBinner : " + msg);
-
-			publisher.publish(msg.getBytes(Charsets.UTF8));
+			publisher.publish(msg);
 		}
 
 	}

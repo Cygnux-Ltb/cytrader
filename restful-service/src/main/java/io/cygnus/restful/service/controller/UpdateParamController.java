@@ -1,5 +1,6 @@
 package io.cygnus.restful.service.controller;
 
+import static io.cygnus.restful.service.transport.OutboxPublisherGroup.GROUP_INSTANCE;
 import static io.mercury.transport.http.MimeType.APPLICATION_JSON_UTF8;
 
 import java.util.List;
@@ -16,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import io.cygnus.repository.entity.StrategyParamEntity;
 import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.restful.service.resources.executor.UpdateParamExecutor;
-import io.cygnus.restful.service.transport.OutboxPublisherGroup;
 import io.cygnus.service.dto.pack.OutboxMessage;
 import io.cygnus.service.dto.pack.OutboxTitle;
-import io.mercury.common.character.Charsets;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringSupport;
+import io.mercury.serialization.json.JsonParser;
+import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.api.Publisher;
 
 @RestController("/update_param")
@@ -49,11 +50,11 @@ public class UpdateParamController extends BaseController {
 		// 将参数转换为List
 		List<StrategyParamEntity> strategyParams = toList(json, StrategyParamEntity.class);
 		// 获取Publisher
-		Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cygId);
+		Publisher<String> publisher = GROUP_INSTANCE.getMember(cygId);
 		// 转换为需要发送的发件箱消息
-		String msg = outboxMessageToJson(new OutboxMessage<>(OutboxTitle.UpdateStrategyParams.name(), strategyParams));
+		String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.UpdateStrategyParams.name(), strategyParams));
 		// 发送消息
-		publisher.publish(msg.getBytes(Charsets.UTF8));
+		publisher.publish(msg);
 		// 返回Put成功标识
 		return ok();
 	}
@@ -72,7 +73,7 @@ public class UpdateParamController extends BaseController {
 			return badRequest();
 		}
 		// 将参数转换为StrategyParam
-		StrategyParam strategyParam = toObject(json, StrategyParam.class);
+		StrategyParamEntity strategyParam = JsonParser.toObject(json, StrategyParamEntity.class);
 		if (checkParamIsNull(strategyParam)) {
 			return badRequest();
 		}

@@ -1,16 +1,19 @@
 package io.cygnus.restful.service.controller;
 
+import static io.cygnus.service.dto.pack.OutboxTitle.StrategySwitch;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,25 +23,25 @@ import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.restful.service.transport.OutboxPublisherGroup;
 import io.cygnus.service.dto.StrategySwitch;
 import io.cygnus.service.dto.pack.OutboxMessage;
-import io.cygnus.service.dto.pack.OutboxTitle;
-import io.mercury.common.character.Charsets;
+import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.api.Publisher;
 
 @RestController("/status")
 public class StatusController extends BaseController {
 
-	private final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private static final Logger log = CommonLoggerFactory.getLogger(StatusController.class);
 
-	private static final ConcurrentHashMap<Integer, StrategySwitch> strategySwitchMap = new ConcurrentHashMap<>();
+	private static final ConcurrentMap<Integer, StrategySwitch> StrategySwitchMap = MutableMaps.newConcurrentHashMap();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public ResponseEntity<Object> statusShow() {
-		Collection<StrategySwitch> strategySwitchs = strategySwitchMap.values();
-		return responseOf(strategySwitchs);
+	@GetMapping
+	public ResponseEntity<Collection<StrategySwitch>> allStrategySwitch() {
+		return responseOf(StrategySwitchMap.values());
 	}
 
 	/**
@@ -65,11 +68,12 @@ public class StatusController extends BaseController {
 		}
 		// 按照CydId分别发送策略开关
 		for (Integer cygId : strategySwitchListMap.keySet()) {
-			Publisher<byte[]> publisher = OutboxPublisherGroup.INSTANCE.acquireMember(cygId);
-			String msg = outboxMessageToJson(
-					new OutboxMessage<>(OutboxTitle.StrategySwitch.name(), strategySwitchListMap.get(cygId)));
+			Publisher<String> publisher = OutboxPublisherGroup.GROUP_INSTANCE.getMember(cygId);
+			String msg = JsonWrapper
+					.toJson(new OutboxMessage<>(StrategySwitch.name(), strategySwitchListMap.get(cygId)));
+
 			log.info("StrategySwitchs : {}", msg);
-			publisher.publish(msg.getBytes(Charsets.UTF8));
+			publisher.publish(msg);
 		}
 		return ok();
 	}
@@ -87,7 +91,7 @@ public class StatusController extends BaseController {
 		log.info("method statusUpdate recv : {}", json);
 		StrategySwitch strategySwitch = toObject(json, StrategySwitch.class);
 		strategySwitch.setCygId(cygId);
-		strategySwitchMap.put(strategySwitch.getKey(), strategySwitch);
+		StrategySwitchMap.put(cygId, strategySwitch);
 		return ok();
 	}
 
