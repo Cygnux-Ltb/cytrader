@@ -1,6 +1,6 @@
 package io.cygnus.engine.strategy;
 
-import static io.mercury.common.collections.ImmutableMaps.immutableIntObjectMapFactory;
+import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
 import static io.mercury.common.log.CommonLoggerFactory.getLogger;
 
 import javax.annotation.Nullable;
@@ -54,7 +54,7 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, PK extends 
 			Instrument instrument) {
 		super(sign, subAccount, params);
 		this.instrument = instrument;
-		this.instruments = immutableIntObjectMapFactory().of(instrument.getInstrumentId(), instrument);
+		this.instruments = getIntObjectMapFactory().of(instrument.getInstrumentId(), instrument);
 	}
 
 	@Override

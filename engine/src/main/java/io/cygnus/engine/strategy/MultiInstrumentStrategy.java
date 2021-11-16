@@ -1,6 +1,6 @@
 package io.cygnus.engine.strategy;
 
-import static io.mercury.common.collections.ImmutableMaps.immutableIntObjectMapFactory;
+import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
 import static java.util.stream.Collectors.toSet;
 
 import java.util.stream.Stream;
@@ -36,7 +36,7 @@ public abstract class MultiInstrumentStrategy<M extends MarketData, PK extends P
 	protected MultiInstrumentStrategy(StrategySign sign, SubAccount subAccount, @Nullable Params<PK> params,
 			@Nonnull Instrument... instruments) {
 		super(sign, subAccount, params);
-		this.instruments = immutableIntObjectMapFactory().from(Stream.of(instruments).collect(toSet()),
+		this.instruments = getIntObjectMapFactory().from(Stream.of(instruments).collect(toSet()),
 				Instrument::getInstrumentId, instrument -> instrument);
 	}
 
