@@ -1,41 +1,67 @@
-package io.cygnus.engine.actor;
+package io.cygnus.engine.status;
+
+import static io.mercury.common.collections.MutableLists.newFastList;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
+
+import io.mercury.common.collections.ImmutableMaps;
 
 public final class ApplicationStatus {
 
-	private static final AtomicReference<AppStatus> CurrentStatus = new AtomicReference<AppStatus>(AppStatus.Unknown);
+	private static final AtomicInteger CurrentStatus = new AtomicInteger(AppStatus.Unknown.getCode());
 
 	private ApplicationStatus() {
 	}
 
-	public static AppStatus currentStatus() {
-		return CurrentStatus.get();
+	public static AppStatus getStatus() {
+		return AppStatus.valueOf(CurrentStatus.get()) ;
 	}
 
 	public static void setInitialization() {
-		CurrentStatus.set(AppStatus.Initialization);
+		CurrentStatus.set(AppStatus.Initialization.getCode());
 	}
 
 	public static void setOnline() {
-		CurrentStatus.set(AppStatus.Online);
+		CurrentStatus.set(AppStatus.Online.getCode());
 	}
 
 	public static void setOffline() {
-		CurrentStatus.set(AppStatus.Offline);
+		CurrentStatus.set(AppStatus.Offline.getCode());
 	}
 
 	public static void setUnknown() {
-		CurrentStatus.set(AppStatus.Unknown);
+		CurrentStatus.set(AppStatus.Unknown.getCode());
 	}
 
 	public static enum AppStatus {
-		Initialization, Offline, Online, Unknown
+
+		Initialization(0), Online(1), Offline(2), Unknown(-1);
+
+		private final int code;
+
+		private static final ImmutableIntObjectMap<AppStatus> Map = ImmutableMaps.getIntObjectMapFactory()
+				.from(newFastList(AppStatus.values()), status -> status.getCode(), status -> status);
+
+		private AppStatus(int code) {
+			this.code = code;
+		}
+
+		public int getCode() {
+			return code;
+		}
+
+		public static AppStatus valueOf(int code) {
+			var obj = Map.get(code);
+			return obj == null ? Unknown : obj;
+		}
+
 	}
 
 	public static void main(String[] args) {
@@ -52,6 +78,8 @@ public final class ApplicationStatus {
 
 		System.out.println(epochMilli);
 		System.out.println(epochMilli - zoned2018_1);
+
+		System.out.println();
 
 	}
 
