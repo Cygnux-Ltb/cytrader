@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Table(name = "cyg_strategy_param")
 @Entity(name = EntityName.StrategyParam)
-public final class StrategyParamEntity {
+public final class CygStrategyParam {
 
 	@Id
 	@Column(name = CommonColumn.UID)
@@ -32,7 +32,7 @@ public final class StrategyParamEntity {
 
 	@Column(name = CommonColumn.STRATEGY_ID)
 	private int strategyId;
-	
+
 	@Column(name = CommonColumn.STRATEGY_NAME)
 	private String strategyName;
 

@@ -41,7 +41,7 @@ public final class CygInfoEntity {
 	@Column(name = "trader_name", length = 128)
 	private String traderName;
 
-	@Column(name = "adaptor_type", length = 16)
+	@Column(name = "adaptor_type", length = 32)
 	private String interfaceType;
 
 }

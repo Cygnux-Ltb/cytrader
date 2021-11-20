@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Table(name = "cyg_instrument")
 @Entity(name = EntityName.Instrument)
-public final class InstrumentEntity {
+public final class CygInstrument {
 
 	@Id
 	@Column(name = CommonColumn.UID)
@@ -36,7 +36,7 @@ public final class InstrumentEntity {
 	/**
 	 * instrumentCode
 	 */
-	@Column(name = CommonColumn.INSTRUMENT_CODE)
+	@Column(name = CommonColumn.INSTRUMENT_CODE, nullable = false)
 	private String instrumentCode;
 
 	/**

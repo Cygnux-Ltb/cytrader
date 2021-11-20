@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.OrderEventEntity;
+import io.cygnus.repository.entity.CygOrderEvent;
 
 /**
  * OrderEvent DAO
@@ -14,12 +14,12 @@ import io.cygnus.repository.entity.OrderEventEntity;
  * 
  */
 @Repository
-public interface OrderEventDao extends JpaRepository<OrderEventEntity, Long> {
+public interface OrderEventDao extends JpaRepository<CygOrderEvent, Long> {
 
-	List<OrderEventEntity> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
+	List<CygOrderEvent> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
 
-	List<OrderEventEntity> queryByTradingDay(int tradingDay);
+	List<CygOrderEvent> queryByTradingDay(int tradingDay);
 
-	List<OrderEventEntity> queryByOrdSysId(long ordSysId);
+	List<CygOrderEvent> queryByOrdSysId(long ordSysId);
 
 }

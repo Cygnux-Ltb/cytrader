@@ -27,7 +27,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Table(name = "cyg_order")
 @Entity(name = EntityName.Order)
-public final class OrderEntity {
+public final class CygOrder {
 
 	@Id
 	@Column(name = CommonColumn.UID)

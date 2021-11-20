@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.PnlDailyEntity;
+import io.cygnus.repository.entity.CygPnlDaily;
 
 /**
  * 
@@ -15,8 +15,8 @@ import io.cygnus.repository.entity.PnlDailyEntity;
  * 
  */
 @Repository
-public interface PnlDailyDao extends JpaRepository<PnlDailyEntity, Long> {
+public interface PnlDailyDao extends JpaRepository<CygPnlDaily, Long> {
 
-	List<PnlDailyEntity> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
+	List<CygPnlDaily> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
 
 }

@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Table(name = "cyg_pnl_daily_settlement")
 @Entity(name = EntityName.PnlDailySettlement)
-public final class PnlDailySettlementEntity {
+public final class CygPnlDailySettlement {
 
 	@Id
 	@Column(name = CommonColumn.UID)

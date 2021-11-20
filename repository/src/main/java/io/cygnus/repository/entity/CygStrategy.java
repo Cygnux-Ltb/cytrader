@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Table(name = "cyg_strategy")
 @Entity(name = EntityName.Strategy)
-public final class StrategyEntity {
+public final class CygStrategy {
 
 	@Id
 	@Column(name = CommonColumn.STRATEGY_ID)

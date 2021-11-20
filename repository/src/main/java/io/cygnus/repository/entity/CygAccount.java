@@ -25,26 +25,26 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Table(name = "cyg_account")
 @Entity(name = EntityName.Account)
-public final class AccountEntity {
+public final class CygAccount {
 
 	@Id
 	@Column(name = CommonColumn.UID)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long uid;
 
-	@Column(name = "sub_account_id")
+	@Column(name = "sub_account_id", nullable = false)
 	private int subAccountId;
 
-	@Column(name = "account_id")
+	@Column(name = "account_id", nullable = false)
 	private int accountId;
 
-	@Column(name = CommonColumn.BROKER_ID)
+	@Column(name = CommonColumn.BROKER_ID, nullable = false)
 	private String brokerId;
 
-	@Column(name = CommonColumn.INVESTOR_ID)
+	@Column(name = CommonColumn.INVESTOR_ID, nullable = false)
 	private String investorId;
 
-	@Column(name = "adaptor_type")
+	@Column(name = "adaptor_type", nullable = false)
 	private String adaptorType;
 
 }

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.OrderEntity;
+import io.cygnus.repository.entity.CygOrder;
 
 /**
  * 
@@ -17,7 +17,7 @@ import io.cygnus.repository.entity.OrderEntity;
  * 
  */
 @Repository
-public interface OrderDao extends JpaRepository<OrderEntity, Long> {
+public interface OrderDao extends JpaRepository<CygOrder, Long> {
 
 	/**
 	 * 
@@ -38,7 +38,7 @@ public interface OrderDao extends JpaRepository<OrderEntity, Long> {
 			+ " e.tradingDay >= :startTradingDay "
 			+ " AND "
 			+ " e.tradingDay <= :endTradingDay ")
-	List<OrderEntity> query(
+	List<CygOrder> query(
 			@Param("strategyId") int strategyId, 
 			@Param("investorId") String investorId,
 			@Param("instrumentCode") String instrumentCode, 

@@ -3,7 +3,7 @@ package io.cygnus.repository.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.AccountEntity;
+import io.cygnus.repository.entity.CygAccount;
 
 import java.util.List;
 
@@ -15,14 +15,14 @@ import java.util.List;
  */
 
 @Repository
-public interface AccountDao extends JpaRepository<AccountEntity, Long> {
+public interface AccountDao extends JpaRepository<CygAccount, Long> {
 
-	List<AccountEntity> queryByBrokerId(String brokerId);
+	List<CygAccount> queryByBrokerId(String brokerId);
 
-	List<AccountEntity> queryByInvestorId(String investorId);
+	List<CygAccount> queryByInvestorId(String investorId);
 
-	List<AccountEntity> queryByAccountId(int accountId);
+	List<CygAccount> queryByAccountId(int accountId);
 
-	List<AccountEntity> queryBySubAccountId(int subAccountId);
+	List<CygAccount> queryBySubAccountId(int subAccountId);
 
 }

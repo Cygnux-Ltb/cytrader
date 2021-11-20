@@ -24,9 +24,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "cyg_instrument_settlement")
-@Entity(name = EntityName.InstrumentSettlement)
-public final class InstrumentSettlementEntity {
+@Table(name = "cyg_instrument_static")
+@Entity(name = EntityName.InstrumentStatic)
+public final class CygInstrumentStatic {
 
 	@Id
 	@Column(name = CommonColumn.UID)
@@ -36,13 +36,13 @@ public final class InstrumentSettlementEntity {
 	/**
 	 * instrumentCode
 	 */
-	@Column(name = CommonColumn.INSTRUMENT_CODE)
+	@Column(name = CommonColumn.INSTRUMENT_CODE, nullable = false)
 	private String instrumentCode;
 
 	/**
 	 * tradingDay
 	 */
-	@Column(name = CommonColumn.TRADING_DAY)
+	@Column(name = CommonColumn.TRADING_DAY, nullable = false)
 	private int tradingDay;
 
 	/**
@@ -50,6 +50,12 @@ public final class InstrumentSettlementEntity {
 	 */
 	@Column(name = "last_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
 	private double lastPrice;
+
+	/**
+	 * 
+	 */
+	@Column(name = "open_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+	private double openPrice;
 
 	/**
 	 * settlementPrice

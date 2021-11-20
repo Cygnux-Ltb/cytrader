@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.cygnus.repository.entity.StrategyParamEntity;
+import io.cygnus.repository.entity.CygStrategyParam;
 
 /**
  * StrategyParam DAO
@@ -14,10 +14,10 @@ import io.cygnus.repository.entity.StrategyParamEntity;
  * 
  */
 @Repository
-public interface StrategyParamDao extends JpaRepository<StrategyParamEntity, Long> {
+public interface StrategyParamDao extends JpaRepository<CygStrategyParam, Long> {
 
-	List<StrategyParamEntity> queryByStrategyId(int strategyId);
+	List<CygStrategyParam> queryByStrategyId(int strategyId);
 
-	List<StrategyParamEntity> queryByStrategyName(String strategyName);
+	List<CygStrategyParam> queryByStrategyName(String strategyName);
 
 }
