@@ -3,17 +3,17 @@ package io.cygnus.indicator.impl;
 import java.time.Duration;
 
 import io.cygnus.indicator.IndicatorEvent;
-import io.cygnus.indicator.impl.EmaIndicator.EmaEvent;
-import io.cygnus.indicator.impl.EmaIndicator.EmaPoint;
+import io.cygnus.indicator.impl.EMA.EmaEvent;
+import io.cygnus.indicator.impl.EMA.EmaPoint;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.collections.list.LongSlidingWindow;
 import io.mercury.common.sequence.TimeWindow;
 
-public final class EmaIndicator extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {
+public final class EMA extends FixedPeriodIndicator<EmaPoint, EmaEvent, BasicMarketData> {
 
-	public EmaIndicator(Instrument instrument, Duration duration, int cycle) {
+	public EMA(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration);
 	}
 

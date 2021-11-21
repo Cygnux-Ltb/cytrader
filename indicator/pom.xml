@@ -33,9 +33,17 @@
 		<dependency>
 			<groupId>org.knowm.xchart</groupId>
 			<artifactId>xchart</artifactId>
-			<version>3.8.0</version>
+			<version>3.8.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
+		<!-- jOOU is a recursive acronym that stands for jOOU Object Oriented Unsigned 
+			Types. It is a simple wrapper for UByte, UShort, UInteger, ULong types -->
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>joou</artifactId>

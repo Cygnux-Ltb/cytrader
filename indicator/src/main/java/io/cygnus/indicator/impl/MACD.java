@@ -3,17 +3,17 @@ package io.cygnus.indicator.impl;
 import java.time.Duration;
 
 import io.cygnus.indicator.IndicatorEvent;
-import io.cygnus.indicator.impl.MacdIndicator.MacdEvent;
-import io.cygnus.indicator.impl.MacdIndicator.MacdPoint;
+import io.cygnus.indicator.impl.MACD.MacdEvent;
+import io.cygnus.indicator.impl.MACD.MacdPoint;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator.FixedPeriodPoint;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.sequence.TimeWindow;
 
-public final class MacdIndicator extends FixedPeriodIndicator<MacdPoint, MacdEvent, BasicMarketData> {
+public final class MACD extends FixedPeriodIndicator<MacdPoint, MacdEvent, BasicMarketData> {
 
-	public MacdIndicator(Instrument instrument, Duration duration) {
+	public MACD(Instrument instrument, Duration duration) {
 		super(instrument, duration);
 	}
 

@@ -3,18 +3,18 @@ package io.cygnus.indicator.impl;
 import java.time.Duration;
 
 import io.cygnus.indicator.IndicatorEvent;
-import io.cygnus.indicator.impl.BollingerBandsIndicator.BollingerBandsEvent;
-import io.cygnus.indicator.impl.BollingerBandsIndicator.BollingerBandsPoint;
+import io.cygnus.indicator.impl.BollingerBands.BollingerBandsEvent;
+import io.cygnus.indicator.impl.BollingerBands.BollingerBandsPoint;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator;
 import io.cygnus.indicator.impl.base.FixedPeriodIndicator.FixedPeriodPoint;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.mercury.common.sequence.TimeWindow;
 
-public final class BollingerBandsIndicator
+public final class BollingerBands
 		extends FixedPeriodIndicator<BollingerBandsPoint, BollingerBandsEvent, BasicMarketData> {
 
-	public BollingerBandsIndicator(Instrument instrument, Duration duration, int cycle) {
+	public BollingerBands(Instrument instrument, Duration duration, int cycle) {
 		super(instrument, duration, cycle);
 	}
 
