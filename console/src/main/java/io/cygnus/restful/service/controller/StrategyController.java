@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.repository.entity.StrategyEntity;
-import io.cygnus.repository.entity.StrategyParamEntity;
-import io.cygnus.repository.service.StrategyService;
+import io.cygnus.repository.entity.CygStrategy;
+import io.cygnus.repository.entity.CygStrategyParam;
+import io.cygnus.restful.service.StrategyService;
 import io.cygnus.restful.service.base.BaseController;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringSupport;
@@ -34,7 +34,7 @@ public class StrategyController extends BaseController {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<List<StrategyEntity>> getStrategys() {
+	public ResponseEntity<List<CygStrategy>> getStrategys() {
 		return responseOf(service.getStrategys());
 	}
 
@@ -44,8 +44,8 @@ public class StrategyController extends BaseController {
 	 * @param strategyId
 	 * @return
 	 */
-	public ResponseEntity<StrategyEntity> getStrategyById(@RequestParam("strategyId") int strategyId) {
-		StrategyEntity strategy = service.getStrategy(strategyId);
+	public ResponseEntity<CygStrategy> getStrategyById(@RequestParam("strategyId") int strategyId) {
+		CygStrategy strategy = service.getStrategy(strategyId);
 		return responseOf(strategy);
 	}
 
@@ -57,7 +57,7 @@ public class StrategyController extends BaseController {
 	 */
 	@GetMapping("/param")
 	public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
-		List<StrategyParamEntity> strategyParams = service.getStrategyParams(strategyId);
+		List<CygStrategyParam> strategyParams = service.getStrategyParams(strategyId);
 		return responseOf(strategyParams);
 	}
 
@@ -74,7 +74,7 @@ public class StrategyController extends BaseController {
 		if (StringSupport.isNullOrEmpty(json)) {
 			return badRequest();
 		}
-		StrategyParamEntity entity = toObject(json, StrategyParamEntity.class);
+		CygStrategyParam entity = toObject(json, CygStrategyParam.class);
 		return (service.putStrategyParam(entity)) ? ok() : internalServerError();
 	}
 

@@ -1,4 +1,4 @@
-package io.cygnus.repository.service;
+package io.cygnus.restful.service;
 
 import static io.mercury.common.functional.Functions.exec;
 
@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.dao.AccountDao;
-import io.cygnus.repository.entity.AccountEntity;
+import io.cygnus.repository.entity.CygAccount;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 
@@ -22,11 +22,11 @@ public class AccountService {
 	@Resource
 	private AccountDao dao;
 
-	public List<AccountEntity> getAccount(int accountId) {
+	public List<CygAccount> getAccount(int accountId) {
 		exec(() -> dao.queryByAccountId(accountId), list -> list, e -> {
 
 		});
-		List<AccountEntity> list = dao.queryByAccountId(accountId);
+		List<CygAccount> list = dao.queryByAccountId(accountId);
 		log.info("query Account where accountId == {}, result -> {}", JsonWrapper.toJson(list));
 		return list;
 	}

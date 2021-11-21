@@ -1,8 +1,10 @@
 package io.cygnus.restful.service.controller;
 
-import java.util.ArrayList;
+import static java.util.Arrays.stream;
+
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.repository.entity.InstrumentSettlementEntity;
-import io.cygnus.repository.service.InstrumentService;
+import io.cygnus.repository.entity.CygInstrumentStatic;
+import io.cygnus.restful.service.InstrumentService;
 import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.service.dto.LastPrice;
 import io.mercury.common.annotation.GetCache;
@@ -34,14 +36,13 @@ public class InstrumentController extends BaseController {
 	 * @param tradingDay
 	 * @return
 	 */
-	@GetMapping("/settlement_price")
-	public ResponseEntity<List<InstrumentSettlementEntity>> getSettlementPrice(
+	@GetMapping("/static_info")
+	public ResponseEntity<List<CygInstrumentStatic>> getSettlementPrice(
 			@RequestParam("instrumentCode") String instrumentCode, @RequestParam("tradingDay") int tradingDay) {
 		if (checkParamIsNull(instrumentCode, tradingDay)) {
 			return badRequest();
 		}
-		List<InstrumentSettlementEntity> instrumentSettlements = service.getInstrumentSettlement(instrumentCode,
-				tradingDay);
+		List<CygInstrumentStatic> instrumentSettlements = service.getInstrumentSettlement(instrumentCode, tradingDay);
 		return responseOf(instrumentSettlements);
 	}
 
@@ -60,14 +61,10 @@ public class InstrumentController extends BaseController {
 		if (StringSupport.nonEmpty(instrumentCodes)) {
 			return badRequest();
 		}
-		List<LastPrice> lastPrices = new ArrayList<>();
-		String[] instrumentCodeArray = instrumentCodes.split(",");
-		for (String instrumentCode : instrumentCodeArray) {
-			final LastPrice lastPrice = lastPriceMap.putIfAbsent(instrumentCode,
-					new LastPrice().setInstrumentCode(instrumentCode));
-			// TODO 修改最新价格进入队列
-			lastPrices.add(lastPrice);
-		}
+		List<LastPrice> lastPrices = stream(instrumentCodes.split(",")).map(instrumentCode -> lastPriceMap
+				.putIfAbsent(instrumentCode, new LastPrice().setInstrumentCode(instrumentCode)))
+				.collect(Collectors.toList());
+
 		return responseOf(lastPrices);
 	}
 

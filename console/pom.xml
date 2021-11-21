@@ -10,8 +10,8 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>restful-service</artifactId>
-	<name>restful-service</name>
+	<artifactId>console</artifactId>
+	<name>console</name>
 
 	<properties>
 	</properties>

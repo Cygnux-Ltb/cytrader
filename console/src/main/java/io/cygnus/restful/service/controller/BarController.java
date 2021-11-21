@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.repository.entity.BarEntity;
-import io.cygnus.repository.service.BarService;
+import io.cygnus.repository.entity.CygBar;
+import io.cygnus.restful.service.BarService;
 import io.cygnus.restful.service.base.BaseController;
 
 @RestController("/bar")
@@ -33,7 +33,7 @@ public class BarController extends BaseController {
 	 * @return
 	 */
 	@GetMapping
-	public List<BarEntity> getBars(@RequestParam("instrumentCode") String instrumentCode,
+	public List<CygBar> getBars(@RequestParam("instrumentCode") String instrumentCode,
 			@RequestParam("tradingDay") int tradingDay) {
 		return service.getBars(instrumentCode, tradingDay);
 	}
@@ -47,7 +47,7 @@ public class BarController extends BaseController {
 	@PutMapping(consumes = APPLICATION_JSON_UTF8)
 	public ResponseEntity<Integer> putBar(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
-		BarEntity bar = toObject(json, BarEntity.class);
+		CygBar bar = toObject(json, CygBar.class);
 		return service.putBar(bar) ? ResponseEntity.status(HttpStatus.ACCEPTED).build() : internalServerError();
 	}
 

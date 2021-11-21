@@ -1,4 +1,4 @@
-package io.cygnus.repository.service;
+package io.cygnus.restful.service;
 
 import java.util.ArrayList;
 import java.util.List;

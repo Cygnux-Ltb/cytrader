@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.repository.entity.PnlDailyEntity;
-import io.cygnus.repository.entity.PnlDailySettlementEntity;
-import io.cygnus.repository.service.PnlService;
+import io.cygnus.repository.entity.CygPnlDaily;
+import io.cygnus.repository.entity.CygPnlDailySettlement;
+import io.cygnus.restful.service.PnlService;
 import io.cygnus.restful.service.base.BaseController;
 
 @RestController("/pnl")
@@ -48,7 +48,7 @@ public class PnlRestfulApi extends BaseController {
 	public ResponseEntity<Object> putPnlDailys(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
 		return checkParamIsNull(json) ? badRequest()
-				: service.putPnlDaily(toObject(json, PnlDailyEntity.class)) ? ok() : internalServerError();
+				: service.putPnlDaily(toObject(json, CygPnlDaily.class)) ? ok() : internalServerError();
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class PnlRestfulApi extends BaseController {
 	 * @return
 	 */
 	@GetMapping("/settlement")
-	public ResponseEntity<List<PnlDailySettlementEntity>> getPnlSettlementDailys(
+	public ResponseEntity<List<CygPnlDailySettlement>> getPnlSettlementDailys(
 			@RequestParam("strategyId") int strategyId, @RequestParam("tradingDay") int tradingDay) {
 		if (checkParamIsNull(tradingDay))
 			return badRequest();

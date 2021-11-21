@@ -1,4 +1,4 @@
-package io.cygnus.repository.service;
+package io.cygnus.restful.service;
 
 import static io.mercury.common.functional.Functions.exec;
 import static io.mercury.common.functional.Functions.execBool;
@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.dao.BarDao;
-import io.cygnus.repository.entity.BarEntity;
+import io.cygnus.repository.entity.CygBar;
 import io.mercury.common.log.CommonLoggerFactory;
 
 @Service
@@ -30,7 +30,7 @@ public class BarService {
 	 * @param tradingDay
 	 * @return
 	 */
-	public List<BarEntity> getBars(@Nonnull String instrumentCode, int tradingDay) {
+	public List<CygBar> getBars(@Nonnull String instrumentCode, int tradingDay) {
 		return exec(() -> dao.query(instrumentCode, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [BarEntity] return 0 row, instrumentCode=={}, tradingDay=={}", instrumentCode,
@@ -49,7 +49,7 @@ public class BarService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putBar(@Nonnull BarEntity entity) {
+	public boolean putBar(@Nonnull CygBar entity) {
 		return execBool(() -> dao.save(entity), o -> {
 			log.info("save [BarEntity] success -> {}", entity);
 			return true;

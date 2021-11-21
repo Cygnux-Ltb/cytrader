@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.repository.entity.OrderEntity;
-import io.cygnus.repository.entity.OrderEventEntity;
-import io.cygnus.repository.service.OrderService;
+import io.cygnus.repository.entity.CygOrder;
+import io.cygnus.repository.entity.CygOrderEvent;
+import io.cygnus.restful.service.OrderService;
 import io.cygnus.restful.service.base.BaseController;
 
 @RestController("/order")
@@ -40,7 +40,7 @@ public class OrderController extends BaseController {
 		if (checkParamIsNull(strategyId, tradingDay, investorId, instrumentCode)) {
 			return badRequest();
 		}
-		List<OrderEntity> orders = service.getOrders(strategyId, investorId, instrumentCode, tradingDay);
+		List<CygOrder> orders = service.getOrders(strategyId, investorId, instrumentCode, tradingDay);
 		return responseOf(orders);
 	}
 
@@ -57,7 +57,7 @@ public class OrderController extends BaseController {
 		if (checkParamIsNull(strategyId, tradingDay)) {
 			return badRequest();
 		}
-		List<OrderEventEntity> orderEvents = service.getOrderEvents(tradingDay);
+		List<CygOrderEvent> orderEvents = service.getOrderEvents(tradingDay);
 		// TODO 过滤最后的订单
 		return responseOf(orderEvents);
 	}
@@ -70,7 +70,7 @@ public class OrderController extends BaseController {
 	@PutMapping
 	public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {
 		String json = getBody(request);
-		return service.putOrder(toObject(json, OrderEntity.class)) ? ok() : internalServerError();
+		return service.putOrder(toObject(json, CygOrder.class)) ? ok() : internalServerError();
 	}
 
 }

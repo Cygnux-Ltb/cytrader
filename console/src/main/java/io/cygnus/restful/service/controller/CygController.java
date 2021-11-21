@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnus.repository.entity.CygInfoEntity;
-import io.cygnus.repository.service.CygInfoService;
+import io.cygnus.restful.service.CygInfoService;
 import io.cygnus.restful.service.base.BaseController;
 import io.cygnus.service.dto.InitFinish;
 import io.mercury.common.annotation.GetCache;

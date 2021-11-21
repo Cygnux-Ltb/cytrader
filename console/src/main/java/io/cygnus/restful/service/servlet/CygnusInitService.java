@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.entity.CygInfoEntity;
-import io.cygnus.repository.service.CygInfoService;
+import io.cygnus.restful.service.CygInfoService;
 import io.cygnus.service.dto.pack.OutboxMessage;
 import io.cygnus.service.dto.pack.OutboxTitle;
 import io.mercury.common.datetime.pattern.spec.TimePattern;

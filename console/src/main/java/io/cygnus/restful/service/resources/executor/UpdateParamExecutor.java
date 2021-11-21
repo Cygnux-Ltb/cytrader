@@ -13,8 +13,8 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import io.cygnus.repository.entity.StrategyParamEntity;
-import io.cygnus.repository.service.StrategyService;
+import io.cygnus.repository.entity.CygStrategyParam;
+import io.cygnus.restful.service.StrategyService;
 import io.cygnus.restful.service.resources.executor.bean.ValidationRule;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -49,7 +49,7 @@ public class UpdateParamExecutor {
 	 * @param strategyParam
 	 * @return
 	 */
-	public int updateParamSafe(StrategyParamEntity strategyParam) {
+	public int updateParamSafe(CygStrategyParam strategyParam) {
 		if (validationStrategyParam(strategyParam)) {
 			if (strategyService.putStrategyParam(strategyParam)) {
 				return 1;
@@ -61,17 +61,17 @@ public class UpdateParamExecutor {
 		}
 	}
 
-	private boolean validationStrategyParam(StrategyParamEntity strategyParam) {
-		String strategyParamName = strategyParam.getParamName();
-		ValidationRule validationRule = validationRuleMap.get(strategyParamName);
-		if (!validationParamName(strategyParamName, validationRule)) {
+	private boolean validationStrategyParam(CygStrategyParam param) {
+		String paramName = param.getParamName();
+		ValidationRule rule = validationRuleMap.get(paramName);
+		if (!validationParamName(paramName, rule)) {
 			return false;
 		}
-		String strategyParamValue = strategyParam.getParamValue();
-		if (!validationRegex(strategyParamValue, validationRule.getRegex())) {
+		String paramValue = param.getParamValue();
+		if (!validationRegex(paramValue, rule.getRegex())) {
 			return false;
 		}
-		if (!validationValue(strategyParamValue, validationRule)) {
+		if (!validationValue(paramValue, rule)) {
 			return false;
 		}
 		return true;
@@ -96,12 +96,12 @@ public class UpdateParamExecutor {
 	/**
 	 * 使用正则表达式验证整个参数的StringValue
 	 *
-	 * @param strategyParamValue
+	 * @param paramValue
 	 * @param regex
 	 * @return
 	 */
-	private boolean validationRegex(String strategyParamValue, String regex) {
-		return Pattern.matches(regex, strategyParamValue);
+	private boolean validationRegex(String paramValue, String regex) {
+		return Pattern.matches(regex, paramValue);
 	}
 
 	/**
@@ -110,23 +110,23 @@ public class UpdateParamExecutor {
 	 * @param strategyParam
 	 * @return
 	 */
-	private boolean validationValue(String strategyParamValue, ValidationRule validationRule) {
-		String[] paramValueArray = strategyParamValue.split(";");
-		String valueType = validationRule.getValueType();
+	private boolean validationValue(String paramValue, ValidationRule rule) {
+		String[] valueArray = paramValue.split(";");
+		String valueType = rule.getValueType();
 		switch (valueType) {
 		case "Int":
-			return validationIntValue(paramValueArray, validationRule);
+			return validationIntValue(valueArray, rule);
 		case "Double":
-			return validationDoubleValue(paramValueArray, validationRule);
+			return validationDoubleValue(valueArray, rule);
 		default:
 			return false;
 		}
 	}
 
-	private boolean validationIntValue(String[] paramValueArray, ValidationRule validationRule) {
-		int maxValue = Integer.valueOf(validationRule.getMaxValue());
-		int minValue = Integer.valueOf(validationRule.getMinValue());
-		for (String paramValue : paramValueArray) {
+	private boolean validationIntValue(String[] valueArray, ValidationRule rule) {
+		int maxValue = Integer.valueOf(rule.getMaxValue());
+		int minValue = Integer.valueOf(rule.getMinValue());
+		for (String paramValue : valueArray) {
 			String valueStr = paramValue.split(",")[1];
 			int value = Integer.valueOf(valueStr);
 			// 大于Rule定于的最大值或小于最小值则返回false
@@ -137,14 +137,14 @@ public class UpdateParamExecutor {
 		return true;
 	}
 
-	private boolean validationDoubleValue(String[] paramValueArray, ValidationRule validationRule) {
-		double maxValue = Double.valueOf(validationRule.getMaxValue());
-		double minValue = Double.valueOf(validationRule.getMinValue());
-		for (String paramValue : paramValueArray) {
-			String valueStr = paramValue.split(",")[1];
-			double value = Double.valueOf(valueStr);
+	private boolean validationDoubleValue(String[] valueArray, ValidationRule rule) {
+		double maxValue = Double.valueOf(rule.getMaxValue());
+		double minValue = Double.valueOf(rule.getMinValue());
+		for (String value : valueArray) {
+			String valueStr = value.split(",")[1];
+			double doubleValue = Double.valueOf(valueStr);
 			// 大于Rule定义的最大值或小于最小值则返回false
-			if (value > maxValue || value < minValue) {
+			if (doubleValue > maxValue || doubleValue < minValue) {
 				return false;
 			}
 		}

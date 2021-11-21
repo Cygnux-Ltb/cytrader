@@ -1,4 +1,4 @@
-package io.cygnus.repository.service;
+package io.cygnus.restful.service;
 
 import static io.mercury.common.functional.Functions.exec;
 import static io.mercury.common.functional.Functions.execBool;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.dao.InstrumentDao;
 import io.cygnus.repository.dao.InstrumentSettlementDao;
-import io.cygnus.repository.entity.InstrumentEntity;
-import io.cygnus.repository.entity.InstrumentSettlementEntity;
+import io.cygnus.repository.entity.CygInstrument;
+import io.cygnus.repository.entity.CygInstrumentStatic;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 
@@ -35,7 +35,7 @@ public final class InstrumentService {
 	 * @param instrumentCode
 	 * @return
 	 */
-	public List<InstrumentEntity> getInstrument(@Nonnull String instrumentCode) {
+	public List<CygInstrument> getInstrument(@Nonnull String instrumentCode) {
 		return exec(() -> dao.query(instrumentCode), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [InstrumentEntity] return 0 row, instrumentCode=={}", instrumentCode);
@@ -54,7 +54,7 @@ public final class InstrumentService {
 	 * @param tradingDay
 	 * @return
 	 */
-	public List<InstrumentSettlementEntity> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
+	public List<CygInstrumentStatic> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
 		return exec(() -> settlementDao.query(instrumentCode, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [InstrumentSettlementEntity] return 0 row, instrumentCode=={}, tradingDay=={}",
@@ -74,7 +74,7 @@ public final class InstrumentService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putInstrument(@Nonnull InstrumentEntity entity) {
+	public boolean putInstrument(@Nonnull CygInstrument entity) {
 		return execBool(() -> dao.save(entity), o -> {
 			log.info("save [InstrumentEntity] success, entity -> {}", entity);
 			return true;
@@ -89,7 +89,7 @@ public final class InstrumentService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putInstrumentSettlement(@Nonnull InstrumentSettlementEntity entity) {
+	public boolean putInstrumentSettlement(@Nonnull CygInstrumentStatic entity) {
 		return execBool(() -> settlementDao.save(entity), o -> {
 			log.info("save [InstrumentSettlementEntity] success -> {}", entity);
 			return true;
