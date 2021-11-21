@@ -21,37 +21,31 @@ public final class OrderBook {
 	/*
 	 * 存储本OrderBook里的所有订单, 以ordSysId索引
 	 */
-
 	private final MutableLongObjectMap<Order> orderMap;
 
 	/*
 	 * 存储本OrderBook里的所有long订单, 以ordSysId索引
 	 */
-
 	private final MutableLongObjectMap<Order> longOrderMap;
 
 	/*
 	 * 存储本OrderBook里的所有short订单, 以ordSysId索引
 	 */
-
 	private final MutableLongObjectMap<Order> shortOrderMap;
 
 	/*
 	 * 存储本OrderBook里的所有活动状态的订单, 以ordSysId索引
 	 */
-
 	private final MutableLongObjectMap<Order> activeOrderMap;
 
 	/*
 	 * 存储本OrderBook里的所有活动状态的long订单, 以ordSysId索引
 	 */
-
 	private final MutableLongObjectMap<Order> activeLongOrderMap;
 
 	/*
 	 * 存储本OrderBook里的所有活动状态的short订单, 以ordSysId索引
 	 */
-
 	private final MutableLongObjectMap<Order> activeShortOrderMap;
 
 	/**

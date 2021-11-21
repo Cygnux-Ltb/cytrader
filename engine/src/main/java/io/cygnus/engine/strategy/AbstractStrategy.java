@@ -37,7 +37,7 @@ import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
-import io.mercury.common.sequence.SnowflakeAlgorithm;
+import io.mercury.common.sequence.SnowflakeAlgo;
 import io.mercury.common.util.Assertor;
 
 public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey> extends EnableableComponent
@@ -84,7 +84,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 		this.account = account;
 		this.accountId = account.getAccountId();
 		this.params = params;
-		final SnowflakeAlgorithm snowflake = new SnowflakeAlgorithm(strategyId);
+		final SnowflakeAlgo snowflake = new SnowflakeAlgo(strategyId);
 		this.allocator = () -> snowflake.next();
 	}
 
@@ -339,7 +339,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	}
 
 	protected void openPosition(Instrument instrument, int offerQty, TrdDirection direction) {
-		openPosition(instrument, offerQty, getLevel1Price(instrument, direction), OrdType.Limit, direction);
+		openPosition(instrument, offerQty, getLevel1Price(instrument, direction), OrdType.Limited, direction);
 	}
 
 	/**
@@ -377,7 +377,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	 * @param instrument 交易标的
 	 */
 	protected void closeAllPosition(Instrument instrument) {
-		closeAllPosition(instrument, OrdType.Limit);
+		closeAllPosition(instrument, OrdType.Limited);
 	}
 
 	/**
@@ -417,7 +417,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 		} else {
 			log.info("{} :: Execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
 					getStrategyName(), subAccountId, instrument.getInstrumentCode(), position);
-			closePosition(instrument, position, offerPrice, OrdType.Limit);
+			closePosition(instrument, position, offerPrice, OrdType.Limited);
 		}
 	}
 
@@ -447,7 +447,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	 * @param offerPrice 委托价格
 	 */
 	protected void closePosition(Instrument instrument, int offerQty, long offerPrice) {
-		closePosition(instrument, offerQty, offerPrice, OrdType.Limit);
+		closePosition(instrument, offerQty, offerPrice, OrdType.Limited);
 	}
 
 	/**

@@ -49,27 +49,27 @@ public final class OrderKeeper implements Serializable {
 	/*
 	 * 存储所有的order
 	 */
-	private static final OrderBook OrderBook = new OrderBook(Capacity.L09_SIZE);
+	private static final OrderBook AllOrders = new OrderBook(Capacity.L09_SIZE);
 
 	/*
 	 * 按照subAccountId分组存储
 	 */
-	private static final MutableIntObjectMap<OrderBook> SubAccountOrderBooks = newIntObjectHashMap();
+	private static final MutableIntObjectMap<OrderBook> SubAccountOrders = newIntObjectHashMap();
 
 	/*
 	 * 按照accountId分组存储
 	 */
-	private static final MutableIntObjectMap<OrderBook> AccountOrderBooks = newIntObjectHashMap();
+	private static final MutableIntObjectMap<OrderBook> AccountOrders = newIntObjectHashMap();
 
 	/*
 	 * 按照strategyId分组存储
 	 */
-	private static final MutableIntObjectMap<OrderBook> StrategyOrderBooks = newIntObjectHashMap();
+	private static final MutableIntObjectMap<OrderBook> StrategyOrders = newIntObjectHashMap();
 
 	/*
 	 * 按照instrumentId分组存储
 	 */
-	private static final MutableIntObjectMap<OrderBook> InstrumentOrderBooks = newIntObjectHashMap();
+	private static final MutableIntObjectMap<OrderBook> InstrumentOrders = newIntObjectHashMap();
 
 	private OrderKeeper() {
 	}
@@ -82,7 +82,7 @@ public final class OrderKeeper implements Serializable {
 	private static void putOrder(Order order) {
 		int subAccountId = order.getSubAccountId();
 		int accountId = order.getAccountId();
-		OrderBook.putOrder(order);
+		AllOrders.putOrder(order);
 		getSubAccountOrderBook(subAccountId).putOrder(order);
 		getAccountOrderBook(accountId).putOrder(order);
 		getStrategyOrderBook(order.getStrategyId()).putOrder(order);
@@ -99,7 +99,7 @@ public final class OrderKeeper implements Serializable {
 		case Canceled:
 		case NewRejected:
 		case CancelRejected:
-			OrderBook.finishOrder(order);
+			AllOrders.finishOrder(order);
 			getSubAccountOrderBook(order.getSubAccountId()).finishOrder(order);
 			getAccountOrderBook(order.getAccountId()).finishOrder(order);
 			getStrategyOrderBook(order.getStrategyId()).finishOrder(order);
@@ -132,9 +132,8 @@ public final class OrderKeeper implements Serializable {
 					report.getDirection(), report.getAction());
 			// 新订单放入OrderBook
 			putOrder(order);
-		} else {
+		} else
 			order.writeLog(log, "OrderBookKeeper :: Search order OK");
-		}
 		ChildOrder childOrder = (ChildOrder) order;
 		// 根据订单回报更新订单状态
 		OrderUpdater.updateWithReport(childOrder, report);
@@ -149,7 +148,7 @@ public final class OrderKeeper implements Serializable {
 	 * @return
 	 */
 	public static boolean isContainsOrder(long ordSysId) {
-		return OrderBook.isContainsOrder(ordSysId);
+		return AllOrders.isContainsOrder(ordSysId);
 	}
 
 	/**
@@ -159,7 +158,7 @@ public final class OrderKeeper implements Serializable {
 	 */
 	@Nullable
 	public static Order getOrder(long ordSysId) {
-		return OrderBook.getOrder(ordSysId);
+		return AllOrders.getOrder(ordSysId);
 	}
 
 	/**
@@ -168,7 +167,7 @@ public final class OrderKeeper implements Serializable {
 	 * @return
 	 */
 	public static OrderBook getSubAccountOrderBook(int subAccountId) {
-		return SubAccountOrderBooks.getIfAbsentPut(subAccountId, OrderBook::new);
+		return SubAccountOrders.getIfAbsentPut(subAccountId, OrderBook::new);
 	}
 
 	/**
@@ -177,7 +176,7 @@ public final class OrderKeeper implements Serializable {
 	 * @return
 	 */
 	public static OrderBook getAccountOrderBook(int accountId) {
-		return AccountOrderBooks.getIfAbsentPut(accountId, OrderBook::new);
+		return AccountOrders.getIfAbsentPut(accountId, OrderBook::new);
 	}
 
 	/**
@@ -186,7 +185,7 @@ public final class OrderKeeper implements Serializable {
 	 * @return
 	 */
 	public static OrderBook getStrategyOrderBook(int strategyId) {
-		return StrategyOrderBooks.getIfAbsentPut(strategyId, OrderBook::new);
+		return StrategyOrders.getIfAbsentPut(strategyId, OrderBook::new);
 	}
 
 	/**
@@ -195,7 +194,7 @@ public final class OrderKeeper implements Serializable {
 	 * @return
 	 */
 	public static OrderBook getInstrumentOrderBook(Instrument instrument) {
-		return InstrumentOrderBooks.getIfAbsentPut(instrument.getInstrumentId(), OrderBook::new);
+		return InstrumentOrders.getIfAbsentPut(instrument.getInstrumentId(), OrderBook::new);
 	}
 
 	public static void onMarketData(BasicMarketData marketData) {
