@@ -27,15 +27,11 @@
 	</developers>
 
 	<modules>
-		<module>dashboard</module>
+		<module>console</module>
 		<module>engine</module>
 		<module>example</module>
-		<module>exchange</module>
 		<module>indicator</module>
 		<module>repository</module>
-		<module>restful-client</module>
-		<module>restful-service</module>
-		<module>simulator</module>
 	</modules>
 
 	<properties>
