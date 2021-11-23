@@ -331,7 +331,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	 * @return
 	 */
 	protected int getCurrentPosition(int subAccountId, Instrument instrument) {
-		int position = PositionKeeper.getCurrentPosition(subAccountId, instrument);
+		int position = PositionKeeper.getCurrentSubAccountPosition(subAccountId, instrument);
 		if (position == 0)
 			log.warn("{} :: No position, subAccountId==[{}], instrument -> {}", getStrategyName(), subAccountId,
 					instrument);
