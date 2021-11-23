@@ -1,10 +1,11 @@
-package io.cygnus.restful.service.controller;
+package io.cygnus.console.controller;
 
-import static io.cygnus.restful.service.transport.OutboxPublisherGroup.GROUP_INSTANCE;
+import static io.cygnus.console.transport.OutboxPublisherGroup.GROUP_INSTANCE;
 import static io.mercury.transport.http.MimeType.APPLICATION_JSON_UTF8;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -14,14 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.cygnus.console.controller.base.BaseController;
+import io.cygnus.console.service.ParamService;
+import io.cygnus.console.service.dto.pack.OutboxMessage;
+import io.cygnus.console.service.dto.pack.OutboxTitle;
 import io.cygnus.repository.entity.CygStrategyParam;
-import io.cygnus.restful.service.base.BaseController;
-import io.cygnus.restful.service.resources.executor.UpdateParamExecutor;
-import io.cygnus.service.dto.pack.OutboxMessage;
-import io.cygnus.service.dto.pack.OutboxTitle;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.util.StringSupport;
-import io.mercury.serialization.json.JsonParser;
 import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.api.Publisher;
 
@@ -30,7 +29,8 @@ public class UpdateParamController extends BaseController {
 
 	private final Logger log = CommonLoggerFactory.getLogger(getClass());
 
-	private UpdateParamExecutor executor = new UpdateParamExecutor();
+	@Resource
+	private ParamService service;
 
 	/**
 	 * 
@@ -41,14 +41,9 @@ public class UpdateParamController extends BaseController {
 	@PutMapping(consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	public ResponseEntity<Object> updateParam(@RequestParam("cygId") Integer cygId,
 			@RequestBody HttpServletRequest request) {
-		// 获取输入参数
-		String json = getBody(request);
-		log.info("method updateParam recv : {}", json);
-		if (StringSupport.isNullOrEmpty(json)) {
-			return badRequest();
-		}
+
 		// 将参数转换为List
-		List<CygStrategyParam> strategyParams = toList(json, CygStrategyParam.class);
+		List<CygStrategyParam> strategyParams = bodyToList(request, CygStrategyParam.class);
 		// 获取Publisher
 		Publisher<String> publisher = GROUP_INSTANCE.getMember(cygId);
 		// 转换为需要发送的发件箱消息
@@ -66,18 +61,11 @@ public class UpdateParamController extends BaseController {
 	 */
 	@PutMapping(path = "/safe", consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	public ResponseEntity<Object> updateParamSafe(@RequestBody HttpServletRequest request) {
-		// 获取输入参数
-		String json = getBody(request);
-		log.info("method updateParamSafe recv : {}", json);
-		if (StringSupport.isNullOrEmpty(json)) {
+		var strategyParam = bodyToObject(request, CygStrategyParam.class);
+		if (strategyParam == null)
 			return badRequest();
-		}
-		// 将参数转换为StrategyParam
-		CygStrategyParam strategyParam = JsonParser.toObject(json, CygStrategyParam.class);
-		if (checkParamIsNull(strategyParam)) {
-			return badRequest();
-		}
-		switch (executor.updateParamSafe(strategyParam)) {
+		log.info("method updateParamSafe recv : {}", strategyParam);
+		switch (service.updateParamSafe(strategyParam)) {
 		// 更新成功返回Ok状态码
 		case 1:
 			return ok();

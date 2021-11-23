@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.resources.executor;
+package io.cygnus.console.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,17 +13,16 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
+import io.cygnus.console.service.bean.ValidationRule;
 import io.cygnus.repository.entity.CygStrategyParam;
-import io.cygnus.restful.service.StrategyService;
-import io.cygnus.restful.service.resources.executor.bean.ValidationRule;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonParser;
 
 @Component
-public class UpdateParamExecutor {
+public class ParamService {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(UpdateParamExecutor.class);
+	private static final Logger log = CommonLoggerFactory.getLogger(ParamService.class);
 
 	private static Map<String, ValidationRule> validationRuleMap;
 
@@ -31,7 +30,7 @@ public class UpdateParamExecutor {
 	private StrategyService strategyService;
 
 	static {
-		InputStream inputStream = UpdateParamExecutor.class.getResourceAsStream("ValidationRules.json");
+		InputStream inputStream = ParamService.class.getResourceAsStream("validation_rules.json");
 		try {
 			String json = IOUtils.toString(inputStream, Charsets.UTF8);
 			List<ValidationRule> validationRules = JsonParser.toList(json, ValidationRule.class);

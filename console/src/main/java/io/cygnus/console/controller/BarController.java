@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.controller;
+package io.cygnus.console.controller;
 
 import static io.mercury.transport.http.MimeType.APPLICATION_JSON_UTF8;
 
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.cygnus.console.controller.base.BaseController;
+import io.cygnus.console.service.BarService;
 import io.cygnus.repository.entity.CygBar;
-import io.cygnus.restful.service.BarService;
-import io.cygnus.restful.service.base.BaseController;
 
 @RestController("/bar")
 public class BarController extends BaseController {
@@ -46,9 +46,9 @@ public class BarController extends BaseController {
 	 */
 	@PutMapping(consumes = APPLICATION_JSON_UTF8)
 	public ResponseEntity<Integer> putBar(@RequestBody HttpServletRequest request) {
-		String json = getBody(request);
-		CygBar bar = toObject(json, CygBar.class);
-		return service.putBar(bar) ? ResponseEntity.status(HttpStatus.ACCEPTED).build() : internalServerError();
+		CygBar bar = bodyToObject(request, CygBar.class);
+		return bar == null ? badRequest()
+				: service.putBar(bar) ? ResponseEntity.status(HttpStatus.ACCEPTED).build() : internalServerError();
 	}
 
 }

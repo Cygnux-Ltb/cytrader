@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.controller;
+package io.cygnus.console.controller;
 
 import java.util.List;
 
@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.cygnus.console.controller.base.BaseController;
+import io.cygnus.console.service.StrategyService;
 import io.cygnus.repository.entity.CygStrategy;
 import io.cygnus.repository.entity.CygStrategyParam;
-import io.cygnus.restful.service.StrategyService;
-import io.cygnus.restful.service.base.BaseController;
 import io.mercury.common.log.CommonLoggerFactory;
-import io.mercury.common.util.StringSupport;
 
 @RestController("/strategy")
 public class StrategyController extends BaseController {
@@ -69,13 +68,9 @@ public class StrategyController extends BaseController {
 	 */
 	@PutMapping("/{strategyId}/param")
 	public ResponseEntity<Object> putParamsByStrategyId(@RequestBody HttpServletRequest request) {
-		String json = getBody(request);
-		log.info("method putParamsByStrategyId recv : {}", json);
-		if (StringSupport.isNullOrEmpty(json)) {
-			return badRequest();
-		}
-		CygStrategyParam entity = toObject(json, CygStrategyParam.class);
-		return (service.putStrategyParam(entity)) ? ok() : internalServerError();
+		CygStrategyParam param = bodyToObject(request, CygStrategyParam.class);
+		log.info("putParamsByStrategyId recv : {}", param);
+		return param == null ? badRequest() : service.putStrategyParam(param) ? ok() : internalServerError();
 	}
 
 }

@@ -1,6 +1,6 @@
-package io.cygnus.restful.service.controller;
+package io.cygnus.console.controller;
 
-import static io.cygnus.service.dto.pack.OutboxTitle.StrategySwitch;
+import static io.cygnus.console.service.dto.pack.OutboxTitle.StrategySwitch;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnus.restful.service.base.BaseController;
-import io.cygnus.restful.service.transport.OutboxPublisherGroup;
-import io.cygnus.service.dto.StrategySwitch;
-import io.cygnus.service.dto.pack.OutboxMessage;
+import io.cygnus.console.controller.base.BaseController;
+import io.cygnus.console.service.dto.StrategySwitch;
+import io.cygnus.console.service.dto.pack.OutboxMessage;
+import io.cygnus.console.transport.OutboxPublisherGroup;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
@@ -51,9 +51,10 @@ public class StatusController extends BaseController {
 	 */
 	@PutMapping("/command")
 	public ResponseEntity<Object> statusCommand(@RequestBody HttpServletRequest request) {
-		String json = getBody(request);
-		log.info("method statusCommand recv : {}", json);
-		List<StrategySwitch> strategySwitchs = toList(json, StrategySwitch.class);
+		var strategySwitchs = bodyToList(request, StrategySwitch.class);
+		if (strategySwitchs == null) {
+			return badRequest();
+		}
 		// 将传入的StrategySwitchs按照CygID分组
 		Map<Integer, List<StrategySwitch>> strategySwitchListMap = new HashMap<>();
 		for (StrategySwitch strategySwitch : strategySwitchs) {
@@ -87,9 +88,7 @@ public class StatusController extends BaseController {
 	@PutMapping("/update")
 	public ResponseEntity<Object> statusUpdate(@RequestParam("cygId") int cygId,
 			@RequestBody HttpServletRequest request) {
-		String json = getBody(request);
-		log.info("method statusUpdate recv : {}", json);
-		StrategySwitch strategySwitch = toObject(json, StrategySwitch.class);
+		StrategySwitch strategySwitch = bodyToObject(request, StrategySwitch.class);
 		strategySwitch.setCygId(cygId);
 		StrategySwitchMap.put(cygId, strategySwitch);
 		return ok();

@@ -1,4 +1,4 @@
-package io.cygnus.restful.service;
+package io.cygnus.console.service;
 
 import static io.mercury.common.functional.Functions.exec;
 import static io.mercury.common.functional.Functions.execBool;
@@ -11,11 +11,11 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
+import io.cygnus.console.service.base.BaseService;
 import io.cygnus.repository.dao.StrategyDao;
 import io.cygnus.repository.dao.StrategyParamDao;
 import io.cygnus.repository.entity.CygStrategy;
 import io.cygnus.repository.entity.CygStrategyParam;
-import io.cygnus.repository.service.base.BaseService;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.CommonLoggerFactory;
 

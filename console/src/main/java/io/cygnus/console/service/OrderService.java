@@ -1,4 +1,4 @@
-package io.cygnus.restful.service;
+package io.cygnus.console.service;
 
 import static io.mercury.common.functional.Functions.exec;
 import static io.mercury.common.functional.Functions.execBool;
@@ -12,11 +12,11 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
+import io.cygnus.console.service.base.BaseService;
 import io.cygnus.repository.dao.OrderDao;
 import io.cygnus.repository.dao.OrderEventDao;
 import io.cygnus.repository.entity.CygOrder;
 import io.cygnus.repository.entity.CygOrderEvent;
-import io.cygnus.repository.service.base.BaseService;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.CommonLoggerFactory;
 

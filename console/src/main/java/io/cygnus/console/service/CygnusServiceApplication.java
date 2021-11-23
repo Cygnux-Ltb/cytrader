@@ -1,4 +1,4 @@
-package io.cygnus.restful.service;
+package io.cygnus.console.service;
 
 import static io.mercury.common.log.LogConfigurator.setLogFilename;
 import static io.mercury.common.log.LogConfigurator.setLogFolder;

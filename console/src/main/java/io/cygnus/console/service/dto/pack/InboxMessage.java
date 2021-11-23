@@ -1,4 +1,4 @@
-package io.cygnus.service.dto.pack;
+package io.cygnus.console.service.dto.pack;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

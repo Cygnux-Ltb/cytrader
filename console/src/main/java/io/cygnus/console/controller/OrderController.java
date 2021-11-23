@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.controller;
+package io.cygnus.console.controller;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.cygnus.console.controller.base.BaseController;
+import io.cygnus.console.service.OrderService;
 import io.cygnus.repository.entity.CygOrder;
 import io.cygnus.repository.entity.CygOrderEvent;
-import io.cygnus.restful.service.OrderService;
-import io.cygnus.restful.service.base.BaseController;
 
 @RestController("/order")
 public class OrderController extends BaseController {
@@ -69,8 +69,8 @@ public class OrderController extends BaseController {
 	 */
 	@PutMapping
 	public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {
-		String json = getBody(request);
-		return service.putOrder(toObject(json, CygOrder.class)) ? ok() : internalServerError();
+		var order = bodyToObject(request, CygOrder.class);
+		return order == null ? badRequest() : service.putOrder(order) ? ok() : internalServerError();
 	}
 
 }

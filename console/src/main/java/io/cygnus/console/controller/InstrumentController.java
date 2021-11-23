@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.controller;
+package io.cygnus.console.controller;
 
 import static java.util.Arrays.stream;
 
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.cygnus.console.controller.base.BaseController;
+import io.cygnus.console.service.InstrumentService;
+import io.cygnus.console.service.dto.InstrumentPrice;
+import io.cygnus.repository.entity.CygInstrument;
 import io.cygnus.repository.entity.CygInstrumentStatic;
-import io.cygnus.restful.service.InstrumentService;
-import io.cygnus.restful.service.base.BaseController;
-import io.cygnus.service.dto.LastPrice;
-import io.mercury.common.annotation.GetCache;
 import io.mercury.common.util.StringSupport;
 
 @RestController("/instrument")
@@ -47,7 +47,7 @@ public class InstrumentController extends BaseController {
 	}
 
 	// LastPrices Cache
-	private static final ConcurrentHashMap<String, LastPrice> lastPriceMap = new ConcurrentHashMap<>();
+	private static final ConcurrentHashMap<String, InstrumentPrice> lastPriceMap = new ConcurrentHashMap<>();
 
 	/**
 	 * Get LastPrices
@@ -56,15 +56,12 @@ public class InstrumentController extends BaseController {
 	 * @return
 	 */
 	@GetMapping("/last_price")
-	@GetCache
-	public ResponseEntity<Object> getLastPrice(@RequestParam("instrumentCodes") String instrumentCodes) {
-		if (StringSupport.nonEmpty(instrumentCodes)) {
+	public ResponseEntity<List<InstrumentPrice>> getLastPrice(@RequestParam("instrumentCodes") String instrumentCodes) {
+		if (StringSupport.isNullOrEmpty(instrumentCodes))
 			return badRequest();
-		}
-		List<LastPrice> lastPrices = stream(instrumentCodes.split(",")).map(instrumentCode -> lastPriceMap
-				.putIfAbsent(instrumentCode, new LastPrice().setInstrumentCode(instrumentCode)))
+		List<InstrumentPrice> lastPrices = stream(instrumentCodes.split(",")).map(instrumentCode -> lastPriceMap
+				.putIfAbsent(instrumentCode, new InstrumentPrice().setInstrumentCode(instrumentCode)))
 				.collect(Collectors.toList());
-
 		return responseOf(lastPrices);
 	}
 
@@ -76,13 +73,36 @@ public class InstrumentController extends BaseController {
 	 */
 	@PutMapping("/last_price")
 	public ResponseEntity<Object> putLastPrice(@RequestBody HttpServletRequest request) {
-		String json = getBody(request);
-		if (json == null) {
+		final InstrumentPrice price = bodyToObject(request, InstrumentPrice.class);
+		if (price == null)
 			return badRequest();
-		}
-		final LastPrice lastPrice = toObject(json, LastPrice.class);
-		lastPriceMap.put(lastPrice.getInstrumentCode(), lastPrice);
+		lastPriceMap.put(price.getInstrumentCode(), price);
 		return ok();
+	}
+
+	/**
+	 * Get [SymbolTradingFee] for [symbol]
+	 * 
+	 * @param symbol
+	 * @return
+	 */
+	public ResponseEntity<Object> getSymbolTradingFeeByName(@RequestParam("instrumentCode") String instrumentCode) {
+		List<CygInstrument> instrument = service.getInstrument(instrumentCode);
+		return responseOf(instrument);
+	}
+
+	/**
+	 * Get [TradeableInstrument] for [symbol] and [tradingDay]
+	 * 
+	 * @param symbol
+	 * @param tradingDay
+	 * @return
+	 */
+	@GetMapping("/tradeable/{symbol}/{tradingDay}")
+	public ResponseEntity<Object> getTradeables(@RequestParam("symbol") String symbol,
+			@RequestParam("tradingDay") String tradingDay) {
+
+		return responseOf(null);
 	}
 
 }

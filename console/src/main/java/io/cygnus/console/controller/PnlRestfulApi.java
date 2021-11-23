@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.controller;
+package io.cygnus.console.controller;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.cygnus.console.controller.base.BaseController;
+import io.cygnus.console.service.PnlService;
 import io.cygnus.repository.entity.CygPnlDaily;
 import io.cygnus.repository.entity.CygPnlDailySettlement;
-import io.cygnus.restful.service.PnlService;
-import io.cygnus.restful.service.base.BaseController;
 
 @RestController("/pnl")
 public class PnlRestfulApi extends BaseController {
@@ -46,9 +46,8 @@ public class PnlRestfulApi extends BaseController {
 	 */
 	@PutMapping
 	public ResponseEntity<Object> putPnlDailys(@RequestBody HttpServletRequest request) {
-		String json = getBody(request);
-		return checkParamIsNull(json) ? badRequest()
-				: service.putPnlDaily(toObject(json, CygPnlDaily.class)) ? ok() : internalServerError();
+		var pnlDaily = bodyToObject(request, CygPnlDaily.class);
+		return pnlDaily == null ? badRequest() : service.putPnlDaily(pnlDaily) ? ok() : internalServerError();
 	}
 
 	/**

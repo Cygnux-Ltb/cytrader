@@ -1,6 +1,6 @@
-package io.cygnus.restful.service.servlet;
+package io.cygnus.console.servlet;
 
-import static io.cygnus.restful.service.transport.OutboxPublisherGroup.GROUP_INSTANCE;
+import static io.cygnus.console.transport.OutboxPublisherGroup.GROUP_INSTANCE;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -17,11 +17,11 @@ import javax.servlet.ServletException;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
+import io.cygnus.console.service.CygInfoService;
+import io.cygnus.console.service.dto.pack.OutboxMessage;
+import io.cygnus.console.service.dto.pack.OutboxTitle;
 import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.entity.CygInfoEntity;
-import io.cygnus.restful.service.CygInfoService;
-import io.cygnus.service.dto.pack.OutboxMessage;
-import io.cygnus.service.dto.pack.OutboxTitle;
 import io.mercury.common.datetime.pattern.spec.TimePattern;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;

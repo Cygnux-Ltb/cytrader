@@ -1,4 +1,4 @@
-package io.cygnus.service.dto.pack;
+package io.cygnus.console.service.dto.pack;
 
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 

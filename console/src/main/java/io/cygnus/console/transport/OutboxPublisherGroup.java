@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.transport;
+package io.cygnus.console.transport;
 
 import io.mercury.common.collections.group.IntGroup;
 import io.mercury.transport.api.Publisher;

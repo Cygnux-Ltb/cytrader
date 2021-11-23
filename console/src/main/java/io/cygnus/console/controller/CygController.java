@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.controller;
+package io.cygnus.console.controller;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.cygnus.console.controller.base.BaseController;
+import io.cygnus.console.service.CygInfoService;
+import io.cygnus.console.service.dto.InitFinish;
 import io.cygnus.repository.entity.CygInfoEntity;
-import io.cygnus.restful.service.CygInfoService;
-import io.cygnus.restful.service.base.BaseController;
-import io.cygnus.service.dto.InitFinish;
-import io.mercury.common.annotation.GetCache;
 
 @RestController("/cyg_info")
 public class CygController extends BaseController {
@@ -34,13 +33,12 @@ public class CygController extends BaseController {
 	 * @return
 	 */
 	@GetMapping
-	@GetCache
 	public ResponseEntity<Object> getAllCygInfo() {
 		List<CygInfoEntity> cygInfoList = service.getAll();
 		return responseOf(cygInfoList);
 	}
 
-	private static ConcurrentHashMap<Integer, InitFinish> cygInfoInitFinishCacheMap = new ConcurrentHashMap<>();
+	private static final ConcurrentHashMap<Integer, InitFinish> CygInfoInitFinishCacheMap = new ConcurrentHashMap<>();
 
 	/**
 	 * 
@@ -49,12 +47,10 @@ public class CygController extends BaseController {
 	 */
 	@PutMapping("/initialized")
 	public ResponseEntity<Object> putInitFinish(@RequestBody HttpServletRequest request) {
-		String json = getBody(request);
-		if (checkParamIsNull(json)) {
+		InitFinish initFinish = bodyToObject(request, InitFinish.class);
+		if (initFinish == null)
 			return badRequest();
-		}
-		InitFinish initFinish = toObject(json, InitFinish.class);
-		cygInfoInitFinishCacheMap.put(initFinish.getCygId(), initFinish);
+		CygInfoInitFinishCacheMap.put(initFinish.getCygId(), initFinish);
 		return ok();
 
 	}
@@ -65,7 +61,7 @@ public class CygController extends BaseController {
 	 * @return
 	 */
 	@GetMapping("/{cygId}")
-	public ResponseEntity<CygInfoEntity> getcygInfoById(@PathParam("cygId") int cygId) {
+	public ResponseEntity<CygInfoEntity> getCygInfo(@PathParam("cygId") int cygId) {
 		CygInfoEntity entity = service.get(cygId);
 		return responseOf(entity);
 	}

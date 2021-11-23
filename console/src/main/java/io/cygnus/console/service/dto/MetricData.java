@@ -1,4 +1,4 @@
-package io.cygnus.service.dto;
+package io.cygnus.console.service.dto;
 
 import lombok.Getter;
 import lombok.Setter;

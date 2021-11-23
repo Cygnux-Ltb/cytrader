@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.base;
+package io.cygnus.console.controller.base;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.datetime.pattern.spec.DatePattern;
 import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.util.StringSupport;
 import io.mercury.serialization.json.JsonParser;
 
 public abstract class BaseController {
@@ -89,43 +90,31 @@ public abstract class BaseController {
 		return t == null ? internalServerError() : ResponseEntity.ok(t);
 	}
 
-	/**
-	 * 
-	 * @param request
-	 * @return
-	 */
-	protected String getBody(HttpServletRequest request) {
+	private String getBody(HttpServletRequest request) {
 		try {
-			// String json = IOUtils.toString(request.getInputStream(),
-			// CharsetCode.UTF8);
-			// System.out.println(json);
 			return IOUtils.toString(request.getInputStream(), Charsets.UTF8);
 		} catch (IOException e) {
-			log.error("Get body has exception", e);
+			log.error("get body content has IOException -> {}", e.getMessage(), e);
 			return null;
 		}
 	}
 
-	/**
-	 * 
-	 * @param <T>
-	 * @param json
-	 * @param clazz
-	 * @return
-	 */
-	protected <T> T toObject(String json, Class<T> clazz) {
-		return JsonParser.toObject(json, clazz);
+	protected <T> T bodyToObject(HttpServletRequest request, Class<T> clazz) {
+		String body = getBody(request);
+		if (StringSupport.isNullOrEmpty(body)) {
+			log.error("body content is null or empty");
+			return null;
+		}
+		return JsonParser.toObject(body, clazz);
 	}
 
-	/**
-	 * 
-	 * @param <T>
-	 * @param json
-	 * @param clazz
-	 * @return
-	 */
-	protected <T> List<T> toList(String json, Class<T> clazz) {
-		return JsonParser.toList(json, clazz);
+	protected <T> List<T> bodyToList(HttpServletRequest request, Class<T> clazz) {
+		String body = getBody(request);
+		if (StringSupport.isNullOrEmpty(body)) {
+			log.error("body content is null or empty");
+			return null;
+		}
+		return JsonParser.toList(body, clazz);
 	}
 
 }

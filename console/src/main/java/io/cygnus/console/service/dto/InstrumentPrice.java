@@ -1,4 +1,4 @@
-package io.cygnus.service.dto;
+package io.cygnus.console.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +11,10 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class LastPrice {
+public class InstrumentPrice {
 
 	private String instrumentCode;
 
-	private double lastPrice;
+	private double price;
 
 }

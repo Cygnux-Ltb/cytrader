@@ -1,4 +1,4 @@
-package io.cygnus.repository.service.dto;
+package io.cygnus.console.service.dto;
 
 public class Ins {
 

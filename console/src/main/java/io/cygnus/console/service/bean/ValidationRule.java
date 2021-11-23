@@ -1,4 +1,4 @@
-package io.cygnus.restful.service.resources.executor.bean;
+package io.cygnus.console.service.bean;
 
 public class ValidationRule {
 

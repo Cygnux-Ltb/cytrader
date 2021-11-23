@@ -1,4 +1,4 @@
-package io.cygnus.repository.service.base;
+package io.cygnus.console.service.base;
 
 import org.slf4j.Logger;
 
