@@ -22,7 +22,7 @@ import io.cygnus.console.service.dto.pack.OutboxMessage;
 import io.cygnus.console.service.dto.pack.OutboxTitle;
 import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.entity.CygInfoEntity;
-import io.mercury.common.datetime.pattern.spec.TimePattern;
+import io.mercury.common.datetime.pattern.TimePattern;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.api.Publisher;
@@ -46,7 +46,7 @@ public class CygnusInitService {
 		CommonDaoFactory.closeSessionFactory();
 		// 关闭OutboxPublisher连接
 		var members = GROUP_INSTANCE.getKeys().toList().collect(GROUP_INSTANCE::getMember).toImmutable();
-		for (Publisher<String> publisher : members) {
+		for (Publisher<String, String> publisher : members) {
 			publisher.close();
 		}
 	}

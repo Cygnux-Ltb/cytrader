@@ -45,7 +45,7 @@ public class UpdateParamController extends BaseController {
 		// 将参数转换为List
 		List<CygStrategyParam> strategyParams = bodyToList(request, CygStrategyParam.class);
 		// 获取Publisher
-		Publisher<String> publisher = GROUP_INSTANCE.getMember(cygId);
+		Publisher<String, String> publisher = GROUP_INSTANCE.getMember(cygId);
 		// 转换为需要发送的发件箱消息
 		String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.UpdateStrategyParams.name(), strategyParams));
 		// 发送消息

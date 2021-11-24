@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import io.mercury.common.character.Charsets;
-import io.mercury.common.datetime.pattern.spec.DatePattern;
+import io.mercury.common.datetime.pattern.DatePattern;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.util.StringSupport;
 import io.mercury.serialization.json.JsonParser;
@@ -30,7 +30,7 @@ public abstract class BaseController {
 	 */
 	protected Date changeTradingDay(String tradingDay) {
 		try {
-			return DatePattern.YYYYMMDD.newSimpleDateFormat().parse(tradingDay);
+			return DatePattern.YYYYMMDD.newDateFormat().parse(tradingDay);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return null;

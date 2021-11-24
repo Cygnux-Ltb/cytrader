@@ -69,7 +69,7 @@ public class StatusController extends BaseController {
 		}
 		// 按照CydId分别发送策略开关
 		for (Integer cygId : strategySwitchListMap.keySet()) {
-			Publisher<String> publisher = OutboxPublisherGroup.GROUP_INSTANCE.getMember(cygId);
+			Publisher<String, String> publisher = OutboxPublisherGroup.GROUP_INSTANCE.getMember(cygId);
 			String msg = JsonWrapper
 					.toJson(new OutboxMessage<>(StrategySwitch.name(), strategySwitchListMap.get(cygId)));
 
