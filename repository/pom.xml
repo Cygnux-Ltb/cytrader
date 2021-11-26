@@ -62,15 +62,6 @@
 			<artifactId>persistence-h2</artifactId>
 			<version>${mercury.version}</version>
 		</dependency>
-
-		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
-			<version>8.0.23</version> </dependency> -->
-
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>commons-core</artifactId>
-			<version>${mercury.version}</version>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.projectlombok</groupId>

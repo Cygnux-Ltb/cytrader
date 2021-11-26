@@ -19,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.horizon</groupId>
-			<artifactId>adaptor-ftdc</artifactId>
+			<artifactId>adaptor-ctp</artifactId>
 			<version>0.1</version>
 		</dependency>
 		<dependency>

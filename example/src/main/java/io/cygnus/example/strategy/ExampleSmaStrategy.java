@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import io.cygnus.engine.strategy.SingleInstrumentStrategy;
 import io.cygnus.engine.strategy.api.StrategySign;
-import io.cygnus.indicator.impl.SMA.SmaEvent;
-import io.cygnus.indicator.impl.SmaPoint;
 import io.horizon.market.data.impl.BasicMarketData;
+import io.horizon.market.indicator.impl.SmaPoint;
+import io.horizon.market.indicator.impl.SMA.SmaEvent;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.order.Order;
