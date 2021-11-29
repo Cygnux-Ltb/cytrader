@@ -3,8 +3,9 @@ package io.cygnus.core.position;
 import org.junit.Test;
 
 import io.cygnus.engine.position.PositionKeeper;
-import io.horizon.market.instrument.impl.futures.ChinaFutures;
-import io.horizon.market.instrument.impl.futures.ChinaFuturesSymbol;
+import io.horizon.market.instrument.Instrument;
+import io.horizon.market.instrument.futures.ChinaFuturesInstrument;
+import io.horizon.market.instrument.futures.ChinaFuturesSymbol;
 import io.horizon.trader.order.attr.TrdDirection;
 
 public class PositionKeeperTest {
@@ -12,7 +13,7 @@ public class PositionKeeperTest {
 	@Test
 	public void test() {
 		int subAccountId = 10;
-		ChinaFutures rb2010 = new ChinaFutures(ChinaFuturesSymbol.RB, 2010);
+		Instrument rb2010 = ChinaFuturesInstrument.newInstance(ChinaFuturesSymbol.RB, 2010);
 		PositionKeeper.setSubAccountPositionsLimit(subAccountId, rb2010, 10, 10);
 		PositionKeeper.addCurrentPosition(subAccountId, rb2010, TrdDirection.Long, 10);
 		PositionKeeper.addCurrentPosition(subAccountId, rb2010, TrdDirection.Short, 15);
