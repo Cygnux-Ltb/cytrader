@@ -34,11 +34,11 @@ import io.horizon.trader.risk.CircuitBreaker;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.fsm.EnableableComponent;
+import io.mercury.common.lang.Assertor;
 import io.mercury.common.log.CommonLoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
 import io.mercury.common.sequence.SnowflakeAlgo;
-import io.mercury.common.util.Assertor;
 
 public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey> extends EnableableComponent
 		implements Strategy<M>, CircuitBreaker {

@@ -15,9 +15,9 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.adaptor.AdaptorEvent;
+import io.mercury.common.lang.Assertor;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
-import io.mercury.common.util.Assertor;
 
 public abstract class SingleInstrumentStrategy<M extends MarketData, PK extends ParamKey>
 		extends AbstractStrategy<M, PK> {
@@ -81,7 +81,7 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, PK extends 
 		switch (event.getStatus()) {
 		case MdEnable:
 			log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
-			adaptor.subscribeMarketData(instrument);
+			adaptor.subscribeMarketData(new Instrument[] { instrument });
 			log.info("{} :: Call subscribeMarketData, instrument -> {}", getStrategyName(), instrument);
 			break;
 		case TraderEnable:

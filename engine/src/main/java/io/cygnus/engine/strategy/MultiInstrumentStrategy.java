@@ -16,9 +16,9 @@ import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
+import io.mercury.common.lang.Assertor;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
-import io.mercury.common.util.Assertor;
 
 public abstract class MultiInstrumentStrategy<M extends MarketData, PK extends ParamKey>
 		extends AbstractStrategy<M, PK> {
