@@ -6,7 +6,7 @@ import io.cygnus.engine.position.PositionKeeper;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.futures.ChinaFuturesInstrument;
 import io.horizon.market.instrument.futures.ChinaFuturesSymbol;
-import io.horizon.trader.order.attr.TrdDirection;
+import io.horizon.trader.order.enums.TrdDirection;
 
 public class PositionKeeperTest {
 

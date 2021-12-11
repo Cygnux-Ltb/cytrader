@@ -21,9 +21,9 @@ import io.horizon.trader.order.Order;
 import io.horizon.trader.order.OrderReport;
 import io.horizon.trader.order.attr.OrdPrice;
 import io.horizon.trader.order.attr.OrdQty;
-import io.horizon.trader.order.attr.OrdType;
-import io.horizon.trader.order.attr.TrdAction;
-import io.horizon.trader.order.attr.TrdDirection;
+import io.horizon.trader.order.enums.OrdType;
+import io.horizon.trader.order.enums.TrdAction;
+import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
 

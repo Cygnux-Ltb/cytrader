@@ -19,8 +19,7 @@
 			<groupId>io.mercury</groupId>
 			<artifactId>commons-concurrent</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>io.mercury</groupId> <artifactId>actors</artifactId> 
-			<version>0.1</version> </dependency> -->
+
 		<dependency>
 			<groupId>io.horizon</groupId>
 			<artifactId>trader-api</artifactId>
@@ -43,6 +42,13 @@
 			<artifactId>transport-zmq</artifactId>
 			<version>${mercury.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>io.mercury</groupId>
+			<artifactId>actors</artifactId>
+			<version>${mercury.version}</version>
+		</dependency>
+
 	</dependencies>
 
 </project>

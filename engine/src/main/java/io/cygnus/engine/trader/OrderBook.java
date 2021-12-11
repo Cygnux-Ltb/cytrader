@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 
 import io.horizon.trader.order.Order;
-import io.horizon.trader.order.attr.OrdStatus.OrdStatusException;
+import io.horizon.trader.order.enums.OrdStatus.OrdStatusException;
 import io.mercury.common.collections.Capacity;
 
 /**
