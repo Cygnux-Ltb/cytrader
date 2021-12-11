@@ -29,9 +29,7 @@
 	<modules>
 		<module>console</module>
 		<module>engine</module>
-		<module>engine-ng</module>
 		<module>example</module>
-		<module>indicator</module>
 		<module>repository</module>
 	</modules>
 
