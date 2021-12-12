@@ -8,7 +8,7 @@ public enum SchedulerDataType implements Envelope {
 
 	OrderReport(1),
 
-	AdaptorEvent(2),
+	AdaptorReport(2),
 
 	;
 

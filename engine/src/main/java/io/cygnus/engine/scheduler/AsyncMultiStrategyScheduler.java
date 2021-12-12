@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import io.cygnus.engine.trader.OrderKeeper;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
-import io.horizon.trader.adaptor.AdaptorEvent;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.OrderReport;
+import io.horizon.trader.report.AdaptorReport;
+import io.horizon.trader.report.OrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.CommonLoggerFactory;
@@ -59,9 +59,9 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 						strategyMap.get(order.getStrategyId()).onOrder(order);
 						break;
 					case AdaptorEvent:
-						AdaptorEvent adaptorEvent = msg.getAdaptorEvent();
-						adaptorEvent.getAdaptorId();
-						log.info("Recv AdaptorEvent -> {}", adaptorEvent);
+						AdaptorReport adaptorReport = msg.getAdaptorReport();
+						adaptorReport.getAdaptorId();
+						log.info("Recv AdaptorEvent -> {}", adaptorReport);
 						break;
 					default:
 						throw new IllegalStateException("scheduler mark illegal");
@@ -83,8 +83,8 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 
 	// TODO add pools
 	@Override
-	public void onAdaptorEvent(AdaptorEvent event) {
-		queue.enqueue(new QueueMsg(event));
+	public void onAdaptorReport(AdaptorReport report) {
+		queue.enqueue(new QueueMsg(report));
 	}
 
 	private class QueueMsg {
@@ -93,23 +93,23 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 
 		private M marketData;
 
-		private OrderReport ordReport;
+		private OrderReport orderReport;
 
-		private AdaptorEvent adaptorEvent;
+		private AdaptorReport adaptorReport;
 
 		private QueueMsg(M marketData) {
 			this.mark = MarketData;
 			this.marketData = marketData;
 		}
 
-		private QueueMsg(OrderReport ordReport) {
+		private QueueMsg(OrderReport orderReport) {
 			this.mark = OrderReport;
-			this.ordReport = ordReport;
+			this.orderReport = orderReport;
 		}
 
-		private QueueMsg(AdaptorEvent adaptorEvent) {
+		private QueueMsg(AdaptorReport adaptorReport) {
 			this.mark = AdaptorEvent;
-			this.adaptorEvent = adaptorEvent;
+			this.adaptorReport = adaptorReport;
 		}
 
 		public int getMark() {
@@ -121,11 +121,11 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 		}
 
 		public OrderReport getOrdReport() {
-			return ordReport;
+			return orderReport;
 		}
 
-		public AdaptorEvent getAdaptorEvent() {
-			return adaptorEvent;
+		public AdaptorReport getAdaptorReport() {
+			return adaptorReport;
 		}
 
 	}

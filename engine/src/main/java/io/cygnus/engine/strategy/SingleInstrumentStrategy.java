@@ -14,7 +14,8 @@ import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
-import io.horizon.trader.adaptor.AdaptorEvent;
+import io.horizon.trader.adaptor.AdaptorStatus;
+import io.horizon.trader.report.AdaptorReport;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
@@ -75,16 +76,16 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, PK extends 
 	}
 
 	@Override
-	public void onAdaptorEvent(AdaptorEvent event) {
+	public void onAdaptorReport(AdaptorReport event) {
 		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", getStrategyName(),
 				event.getAdaptorId(), event.getStatus());
 		switch (event.getStatus()) {
-		case MdEnable:
+		case AdaptorStatus.Code.MD_ENABLE:
 			log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
 			adaptor.subscribeMarketData(new Instrument[] { instrument });
 			log.info("{} :: Call subscribeMarketData, instrument -> {}", getStrategyName(), instrument);
 			break;
-		case TraderEnable:
+		case AdaptorStatus.Code.TRADER_ENABLE:
 			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
 			adaptor.queryOrder(instrument);
 			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", getStrategyName(),

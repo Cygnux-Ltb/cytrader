@@ -8,10 +8,10 @@ import io.cygnus.engine.strategy.api.Strategy;
 import io.cygnus.engine.trader.OrderKeeper;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
-import io.horizon.trader.adaptor.AdaptorEvent;
 import io.horizon.trader.handler.InboundScheduler;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.OrderReport;
+import io.horizon.trader.report.AdaptorReport;
+import io.horizon.trader.report.OrderReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
 /**
@@ -52,9 +52,9 @@ public class SingleStrategyScheduler<M extends MarketData> implements InboundSch
 	}
 
 	@Override
-	public void onAdaptorEvent(AdaptorEvent event) {
-		log.error("On Adaptor Event -> {}", event);
-		strategy.onAdaptorEvent(event);
+	public void onAdaptorReport(AdaptorReport report) {
+		log.error("On Adaptor Report -> {}", report);
+		strategy.onAdaptorReport(report);
 	}
 
 	@Override

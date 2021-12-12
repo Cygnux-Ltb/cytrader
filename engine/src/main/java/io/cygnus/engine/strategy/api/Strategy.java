@@ -13,7 +13,7 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
-import io.horizon.trader.handler.AdaptorEventHandler;
+import io.horizon.trader.handler.AdaptorReportHandler;
 import io.horizon.trader.handler.OrderHandler;
 import io.mercury.common.fsm.Enableable;
 
@@ -26,8 +26,8 @@ public interface Strategy<M extends MarketData> extends
 		MarketDataHandler<M>,
 		// 集成订单处理
 		OrderHandler,
-		// 集成AdaptorEvent处理
-		AdaptorEventHandler,
+		// 集成AdaptorReport处理
+		AdaptorReportHandler,
 		// 用于清理资源
 		Closeable {
 

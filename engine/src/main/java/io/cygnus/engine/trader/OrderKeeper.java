@@ -13,17 +13,14 @@ import org.slf4j.Logger;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
-import io.horizon.trader.account.AccountKeeper;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.order.OrdSysIdAllocator;
 import io.horizon.trader.order.Order;
-import io.horizon.trader.order.OrderReport;
-import io.horizon.trader.order.attr.OrdPrice;
-import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
+import io.horizon.trader.report.OrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.CommonLoggerFactory;
 
@@ -125,11 +122,8 @@ public final class OrderKeeper implements Serializable {
 		if (order == null) {
 			// 处理订单由外部系统发出而收到报单回报的情况
 			log.warn("Received other source order, ordSysId==[{}]", report.getOrdSysId());
-			Account account = AccountKeeper.getAccountByInvestorId(report.getInvestorId());
 			// 根据成交回报创建新订单, 放入OrderBook托管
-			order = ChildOrder.newExternalOrder(report.getOrdSysId(), account.getAccountId(), report.getInstrument(),
-					OrdQty.withOffer(report.getOfferQty()), OrdPrice.withOffer(report.getOfferPrice()),
-					report.getDirection(), report.getAction());
+			order = ChildOrder.newExternalOrder(report);
 			// 新订单放入OrderBook
 			putOrder(order);
 		} else

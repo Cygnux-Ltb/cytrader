@@ -5,9 +5,9 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.OrderReport;
 import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.enums.OrdStatus;
+import io.horizon.trader.report.OrderReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
 public final class OrderUpdater {
@@ -25,33 +25,34 @@ public final class OrderUpdater {
 	 */
 	public static void updateWithReport(@Nonnull ChildOrder order, @Nonnull OrderReport report) {
 		OrdQty qty = order.getQty();
-		int reportFilledQty = report.getFilledQty();
-		log.info("OrdReport ordStatus==[{}], reportFilledQty==[{}], tradePrice==[{}], order.qty() -> {}",
-				report.getOrdStatus(), reportFilledQty, report.getTradePrice(), qty);
+		int filledQty = report.getFilledQty();
+		OrdStatus status = OrdStatus.valueOf(report.getStatus());
+		log.info("OrdReport status==[{}], filledQty==[{}], tradePrice==[{}], order.qty() -> {}",
+				status, filledQty, report.getTradePrice(), qty);
 		// 处理未返回订单状态的情况, 根据成交数量判断
-		if (report.getOrdStatus() == OrdStatus.Unprovided) {
+		if (status == OrdStatus.Unprovided) {
 			int offerQty = qty.getOfferQty();
 			order.setStatus(
 					// 成交数量等于委托数量, 状态为全部成交
-					reportFilledQty == offerQty ? OrdStatus.Filled
+					filledQty == offerQty ? OrdStatus.Filled
 							// 成交数量小于委托数量同时成交数量大于0, 状态为部分成交
-							: reportFilledQty < offerQty && reportFilledQty > 0 ? OrdStatus.PartiallyFilled
+							: filledQty < offerQty && filledQty > 0 ? OrdStatus.PartiallyFilled
 									// 成交数量等于0, 状态为New
 									: OrdStatus.New);
 		}
 		// 已返回订单状态, 直接读取
 		else {
-			order.setStatus(report.getOrdStatus());
+			order.setStatus(status);
 		}
 		switch (order.getStatus()) {
 		case PartiallyFilled:
 			// 处理部分成交, 设置已成交数量
 			// Set FilledQty
-			order.getQty().setFilledQty(reportFilledQty);
+			order.getQty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade record
-			order.addTrdRecord(report.getEpochMillis(), report.getTradePrice(),
-					reportFilledQty - order.getQty().getLastFilledQty());
+			order.addTrdRecord(report.getEpochMicros(), report.getTradePrice(),
+					filledQty - order.getQty().getLastFilledQty());
 			log.info(
 					"ChildOrder current status PartiallyFilled, strategyId==[{}], ordSysId==[{}], "
 							+ "filledQty==[{}], avgTradePrice==[{}]",
@@ -60,11 +61,11 @@ public final class OrderUpdater {
 		case Filled:
 			// 处理全部成交, 设置已成交数量
 			// Set FilledQty
-			order.getQty().setFilledQty(reportFilledQty);
+			order.getQty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade Record
-			order.addTrdRecord(report.getEpochMillis(), report.getTradePrice(),
-					reportFilledQty - order.getQty().getLastFilledQty());
+			order.addTrdRecord(report.getEpochMicros(), report.getTradePrice(),
+					filledQty - order.getQty().getLastFilledQty());
 			// 计算此订单成交均价
 			// Calculation AvgPrice
 			long avgTradePrice = order.fillAndGetAvgTradePrice();

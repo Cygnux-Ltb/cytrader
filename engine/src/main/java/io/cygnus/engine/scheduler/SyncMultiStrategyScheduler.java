@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import io.cygnus.engine.trader.OrderKeeper;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
-import io.horizon.trader.adaptor.AdaptorEvent;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.order.OrderReport;
+import io.horizon.trader.report.AdaptorReport;
+import io.horizon.trader.report.OrderReport;
 import io.mercury.common.log.CommonLoggerFactory;
 
 /**
@@ -53,8 +53,8 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 
 	// TODO add pools
 	@Override
-	public void onAdaptorEvent(AdaptorEvent event) {
-		log.info("Recv AdaptorEvent -> {}", event);
+	public void onAdaptorReport(AdaptorReport report) {
+		log.info("Recv AdaptorReport -> {}", report);
 	}
 
 
