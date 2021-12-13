@@ -79,6 +79,12 @@
 			<!-- see https://github.com/yellow013/mercury.git -->
 			<dependency>
 				<groupId>io.mercury</groupId>
+				<artifactId>commons-di</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.mercury</groupId>
 				<artifactId>commons-concurrent</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>

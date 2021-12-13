@@ -3,13 +3,13 @@ package io.cygnus.example.strategy;
 import java.io.IOException;
 
 import io.cygnus.engine.strategy.SingleInstrumentStrategy;
-import io.cygnus.engine.strategy.api.StrategySign;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.indicator.impl.SmaPoint;
 import io.horizon.market.indicator.impl.SMA.SmaEvent;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.order.Order;
+import io.horizon.trader.strategy.StrategySign;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
 
