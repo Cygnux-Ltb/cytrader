@@ -1,4 +1,4 @@
-package io.cygnus.engine.scheduler.base;
+package io.cygnus.engine.scheduler;
 
 import io.mercury.common.codec.Envelope;
 

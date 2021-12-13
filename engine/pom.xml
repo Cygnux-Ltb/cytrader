@@ -17,6 +17,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.mercury</groupId>
+			<artifactId>commons-di</artifactId>
+		</dependency>
+	
+		<dependency>
+			<groupId>io.mercury</groupId>
 			<artifactId>commons-concurrent</artifactId>
 		</dependency>
 

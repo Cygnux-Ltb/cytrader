@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 
-import io.cygnus.engine.strategy.api.Strategy;
 import io.cygnus.engine.trader.OrderKeeper;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
@@ -12,6 +11,7 @@ import io.horizon.trader.handler.InboundScheduler;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.report.AdaptorReport;
 import io.horizon.trader.report.OrderReport;
+import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.log.CommonLoggerFactory;
 
 /**

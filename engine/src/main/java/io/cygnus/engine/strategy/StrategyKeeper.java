@@ -8,8 +8,8 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.cygnus.engine.strategy.api.Strategy;
 import io.horizon.market.instrument.Instrument;
+import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.CommonLoggerFactory;

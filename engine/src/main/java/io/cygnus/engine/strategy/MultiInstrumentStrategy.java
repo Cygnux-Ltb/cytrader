@@ -10,12 +10,12 @@ import javax.annotation.Nullable;
 
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 
-import io.cygnus.engine.strategy.api.Strategy;
-import io.cygnus.engine.strategy.api.StrategySign;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
+import io.horizon.trader.strategy.Strategy;
+import io.horizon.trader.strategy.StrategySign;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
