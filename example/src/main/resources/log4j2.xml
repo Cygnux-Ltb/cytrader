@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration status="${sys:log4j2.level}">
+	<appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] [%C{1}.%M] %msg%n" />
+		</Console>
+		<RollingFile name="rollingFile"
+			fileName="${sys:user.home}/logs/${sys:log4j2.filename}.log"
+			filePattern="${sys:user.home}/logs/${sys:log4j2.filename}.%d{yyyyMMdd}.log"
+			append="true">
+			<!-- 日志输出格式 -->
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} %-5level [%t] [%C{1}.%M] %msg%n" />
+			<!-- 设置日志文件分割策略 -->
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="1GB" />
+			</Policies>
+		</RollingFile>
+	</appenders>
+	<loggers>
+		<root level="${sys:log4j2.level}">
+			<appender-ref ref="console"></appender-ref>
+			<appender-ref ref="rollingFile"></appender-ref>
+		</root>
+	</loggers>
+</configuration>

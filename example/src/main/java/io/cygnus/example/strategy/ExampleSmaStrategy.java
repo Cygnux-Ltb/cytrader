@@ -4,12 +4,11 @@ import java.io.IOException;
 
 import io.cygnus.engine.strategy.SingleInstrumentStrategy;
 import io.horizon.market.data.impl.BasicMarketData;
-import io.horizon.market.indicator.impl.SmaPoint;
 import io.horizon.market.indicator.impl.SMA.SmaEvent;
+import io.horizon.market.indicator.impl.SmaPoint;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.order.Order;
-import io.horizon.trader.strategy.StrategySign;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
 
@@ -21,19 +20,7 @@ import io.mercury.common.param.Params.ParamKey;
 public final class ExampleSmaStrategy extends SingleInstrumentStrategy<BasicMarketData, ParamKey> implements SmaEvent {
 
 	public ExampleSmaStrategy(SubAccount subAccount, Params<ParamKey> params, Instrument instrument) {
-		super(new StrategySign() {
-
-			@Override
-			public int getStrategyId() {
-				return 100;
-			}
-
-			@Override
-			public String getStrategyName() {
-				return "ExampleSmaStrategy";
-			}
-
-		}, subAccount, params, instrument);
+		super(100, "ExampleSmaStrategy", subAccount, params, instrument);
 	}
 
 	@Override
