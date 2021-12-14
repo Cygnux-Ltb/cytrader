@@ -30,7 +30,6 @@ import io.horizon.trader.order.enums.TrdDirection;
 import io.horizon.trader.risk.CircuitBreaker;
 import io.horizon.trader.strategy.Strategy;
 import io.horizon.trader.strategy.StrategyEvent;
-import io.horizon.trader.strategy.StrategySign;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.fsm.EnableableComponent;
@@ -71,11 +70,13 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 
 	private final OrdSysIdAllocator allocator;
 
-	protected AbstractStrategy(@Nonnull StrategySign sign, @Nonnull SubAccount subAccount,
+	protected AbstractStrategy(int strategyId, @Nonnull String strategyName, @Nonnull SubAccount subAccount,
 			@Nullable Params<PK> params) {
 		Assertor.nonNull(subAccount, "subAccount");
-		this.strategyId = sign.getStrategyId();
-		this.strategyName = sign.getStrategyName();
+		Assertor.atWithinRange(strategyId, 1, Strategy.MAX_STRATEGY_ID, "strategyId");
+		Assertor.nonEmpty(strategyName, "strategyName");
+		this.strategyId = strategyId;
+		this.strategyName = strategyName;
 		this.subAccount = subAccount;
 		this.subAccountId = subAccount.getSubAccountId();
 		final Account account = AccountKeeper.getAccountBySubAccountId(subAccount.getSubAccountId());

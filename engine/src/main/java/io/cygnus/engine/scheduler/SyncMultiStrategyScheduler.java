@@ -42,11 +42,11 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 
 	@Override
 	public void onOrderReport(OrderReport report) {
-		log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerUniqueId(),
+		log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerSysId(),
 				report.getOrdSysId());
 		ChildOrder order = OrderKeeper.handleOrderReport(report);
 		log.info("Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
-				report.getBrokerUniqueId(), order.getStrategyId(), order.getInstrument().getInstrumentCode(),
+				report.getBrokerSysId(), order.getStrategyId(), order.getInstrument().getInstrumentCode(),
 				report.getOrdSysId());
 		strategyMap.get(order.getStrategyId()).onOrder(order);
 	}
@@ -57,11 +57,10 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 		log.info("Recv AdaptorReport -> {}", report);
 	}
 
-
 	@Override
 	protected void close0() throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

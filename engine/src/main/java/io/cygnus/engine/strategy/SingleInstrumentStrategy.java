@@ -3,6 +3,7 @@ package io.cygnus.engine.strategy;
 import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
 import static io.mercury.common.log.CommonLoggerFactory.getLogger;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
@@ -15,7 +16,6 @@ import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.adaptor.AdaptorStatus;
 import io.horizon.trader.report.AdaptorReport;
 import io.horizon.trader.strategy.Strategy;
-import io.horizon.trader.strategy.StrategySign;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
@@ -40,8 +40,9 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, PK extends 
 	 * @param subAccount
 	 * @param instrument
 	 */
-	protected SingleInstrumentStrategy(StrategySign sign, SubAccount subAccount, Instrument instrument) {
-		this(sign, subAccount, null, instrument);
+	protected SingleInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
+			Instrument instrument) {
+		this(strategyId, strategyName, subAccount, null, instrument);
 	}
 
 	/**
@@ -51,9 +52,9 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, PK extends 
 	 * @param params
 	 * @param instrument
 	 */
-	protected SingleInstrumentStrategy(StrategySign sign, SubAccount subAccount, @Nullable Params<PK> params,
-			Instrument instrument) {
-		super(sign, subAccount, params);
+	protected SingleInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
+			@Nullable Params<PK> params, Instrument instrument) {
+		super(strategyId, strategyName, subAccount, params);
 		this.instrument = instrument;
 		this.instruments = getIntObjectMapFactory().of(instrument.getInstrumentId(), instrument);
 	}

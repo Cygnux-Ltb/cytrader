@@ -15,7 +15,6 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.strategy.Strategy;
-import io.horizon.trader.strategy.StrategySign;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
@@ -29,13 +28,14 @@ public abstract class MultiInstrumentStrategy<M extends MarketData, PK extends P
 
 	protected Adaptor adaptor;
 
-	protected MultiInstrumentStrategy(StrategySign sign, SubAccount subAccount, @Nonnull Instrument... instruments) {
-		this(sign, subAccount, null, instruments);
+	protected MultiInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
+			@Nonnull Instrument... instruments) {
+		this(strategyId, strategyName, subAccount, null, instruments);
 	}
 
-	protected MultiInstrumentStrategy(StrategySign sign, SubAccount subAccount, @Nullable Params<PK> params,
-			@Nonnull Instrument... instruments) {
-		super(sign, subAccount, params);
+	protected MultiInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
+			@Nullable Params<PK> params, @Nonnull Instrument... instruments) {
+		super(strategyId, strategyName, subAccount, params);
 		this.instruments = getIntObjectMapFactory().from(Stream.of(instruments).collect(toSet()),
 				Instrument::getInstrumentId, instrument -> instrument);
 	}

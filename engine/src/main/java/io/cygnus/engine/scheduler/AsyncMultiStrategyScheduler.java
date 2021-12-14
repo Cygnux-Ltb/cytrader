@@ -49,12 +49,12 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 						break;
 					case OrderReport:
 						OrderReport report = msg.getOrdReport();
-						log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerUniqueId(),
+						log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerSysId(),
 								report.getOrdSysId());
 						ChildOrder order = OrderKeeper.handleOrderReport(report);
 						log.info(
-								"Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
-								report.getBrokerUniqueId(), order.getStrategyId(),
+								"Search Order OK. brokerSysId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
+								report.getBrokerSysId(), order.getStrategyId(),
 								order.getInstrument().getInstrumentCode(), report.getOrdSysId());
 						strategyMap.get(order.getStrategyId()).onOrder(order);
 						break;
