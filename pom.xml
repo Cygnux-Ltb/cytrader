@@ -38,7 +38,7 @@
 		<java.version>11</java.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
-		<spring.boot.version>2.6.0</spring.boot.version>
+		<spring.boot.version>2.6.1</spring.boot.version>
 		<mercury.version>1.0-SNAPSHOT</mercury.version>
 		<horizon.version>0.1</horizon.version>
 	</properties>
@@ -62,7 +62,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -86,6 +86,24 @@
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>commons-concurrent</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>serialization-json</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>serialization-avro</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-zmq</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
 

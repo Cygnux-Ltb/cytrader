@@ -1,14 +1,14 @@
 package io.cygnus.example.launch;
 
 import io.mercury.common.datetime.DateTimeUtil;
-import io.mercury.common.log.LogConfigurator;
-import io.mercury.common.log.LogConfigurator.LogLevel;
+import io.mercury.common.log.Log4j2Configurator;
+import io.mercury.common.log.Log4j2Configurator.LogLevel;
 
 public class ExampleLauncher {
 
 	static {
-		LogConfigurator.setLogFilename("example-" + DateTimeUtil.datetimeOfSecond());
-		LogConfigurator.setLogLevel(LogLevel.INFO);
+		Log4j2Configurator.setLogFilename("example-" + DateTimeUtil.datetimeOfSecond());
+		Log4j2Configurator.setLogLevel(LogLevel.INFO);
 	}
 
 	public static void main(String[] args) {
