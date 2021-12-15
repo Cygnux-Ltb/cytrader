@@ -34,7 +34,7 @@ import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.lang.Assertor;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.param.Params;
 import io.mercury.common.param.Params.ParamKey;
 import io.mercury.common.sequence.SnowflakeAlgo;
@@ -43,7 +43,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 		implements Strategy<M>, CircuitBreaker {
 
 	// Logger
-	private final static Logger log = CommonLoggerFactory.getLogger(AbstractStrategy.class);
+	private final static Logger log = Log4j2LoggerFactory.getLogger(AbstractStrategy.class);
 
 	// 策略ID
 	protected final int strategyId;

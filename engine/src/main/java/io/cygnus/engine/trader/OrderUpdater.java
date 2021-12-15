@@ -8,14 +8,14 @@ import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.enums.OrdStatus;
 import io.horizon.trader.report.OrderReport;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 public final class OrderUpdater {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderUpdater.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(OrderUpdater.class);
 
 	/**
 	 * 根据订单回报处理订单状态

@@ -12,7 +12,7 @@ import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.report.AdaptorReport;
 import io.horizon.trader.report.OrderReport;
 import io.horizon.trader.strategy.Strategy;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * 
@@ -27,7 +27,7 @@ public class SingleStrategyScheduler<M extends MarketData> implements InboundSch
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(SingleStrategyScheduler.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(SingleStrategyScheduler.class);
 
 	/**
 	 * Only one strategy

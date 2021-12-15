@@ -10,7 +10,7 @@ import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.report.AdaptorReport;
 import io.horizon.trader.report.OrderReport;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * 
@@ -24,7 +24,7 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(SyncMultiStrategyScheduler.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(SyncMultiStrategyScheduler.class);
 
 	public SyncMultiStrategyScheduler() {
 

@@ -1,7 +1,7 @@
 package io.cygnus.engine.strategy;
 
 import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
-import static io.mercury.common.log.CommonLoggerFactory.getLogger;
+import static io.mercury.common.log.Log4j2LoggerFactory.getLogger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

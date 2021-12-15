@@ -14,14 +14,14 @@ import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 public abstract class AbstractMultiStrategyScheduler<M extends MarketData> implements MultiStrategyScheduler<M> {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(AbstractMultiStrategyScheduler.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(AbstractMultiStrategyScheduler.class);
 
 	/**
 	 * 策略列表

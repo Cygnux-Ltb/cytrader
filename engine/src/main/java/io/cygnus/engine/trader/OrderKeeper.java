@@ -22,7 +22,7 @@ import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.horizon.trader.report.OrderReport;
 import io.mercury.common.collections.Capacity;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * 统一管理订单<br>
@@ -41,7 +41,7 @@ public final class OrderKeeper implements Serializable {
 	/*
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(OrderKeeper.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(OrderKeeper.class);
 
 	/*
 	 * 存储所有的order

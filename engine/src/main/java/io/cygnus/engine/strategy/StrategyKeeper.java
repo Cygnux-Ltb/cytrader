@@ -12,7 +12,7 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * 可以使用在 #StrategyScheduler 中进行行情分发的管理
@@ -31,7 +31,7 @@ public final class StrategyKeeper implements Serializable {
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(StrategyKeeper.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(StrategyKeeper.class);
 
 	/**
 	 * 策略列表

@@ -12,7 +12,7 @@ import io.horizon.trader.report.AdaptorReport;
 import io.horizon.trader.report.OrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 /**
  * 
@@ -26,7 +26,7 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 	/**
 	 * Logger
 	 */
-	private static final Logger log = CommonLoggerFactory.getLogger(AsyncMultiStrategyScheduler.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(AsyncMultiStrategyScheduler.class);
 
 	private final JctSingleConsumerQueue<QueueMsg> queue;
 
