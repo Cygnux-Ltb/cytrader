@@ -23,14 +23,14 @@ import io.cygnus.console.service.dto.pack.OutboxTitle;
 import io.cygnus.repository.db.CommonDaoFactory;
 import io.cygnus.repository.entity.CygInfoEntity;
 import io.mercury.common.datetime.pattern.TimePattern;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.api.Publisher;
 
 @Component
 public class CygnusInitService {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(CygnusInitService.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(CygnusInitService.class);
 
 	@Resource
 	private CygInfoService service;

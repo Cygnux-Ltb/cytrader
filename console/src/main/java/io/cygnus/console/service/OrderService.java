@@ -18,12 +18,12 @@ import io.cygnus.repository.dao.OrderEventDao;
 import io.cygnus.repository.entity.CygOrder;
 import io.cygnus.repository.entity.CygOrderEvent;
 import io.mercury.common.lang.Throws;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 @Service
 public class OrderService extends BaseService {
 
-	private final Logger log = CommonLoggerFactory.getLogger(OrderService.class);
+	private final Logger log = Log4j2LoggerFactory.getLogger(OrderService.class);
 
 	@Resource
 	private OrderDao dao;

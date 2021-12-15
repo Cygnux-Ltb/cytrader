@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.dao.BarDao;
 import io.cygnus.repository.entity.CygBar;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 @Service
 public class BarService {
 
-	private final Logger log = CommonLoggerFactory.getLogger(BarService.class);
+	private final Logger log = Log4j2LoggerFactory.getLogger(BarService.class);
 
 	@Resource
 	private BarDao dao;

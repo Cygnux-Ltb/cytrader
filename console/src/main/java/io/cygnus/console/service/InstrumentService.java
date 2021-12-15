@@ -16,13 +16,13 @@ import io.cygnus.repository.dao.InstrumentDao;
 import io.cygnus.repository.dao.InstrumentSettlementDao;
 import io.cygnus.repository.entity.CygInstrument;
 import io.cygnus.repository.entity.CygInstrumentStatic;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 
 @Service
 public final class InstrumentService {
 
-	private final Logger log = CommonLoggerFactory.getLogger(InstrumentService.class);
+	private final Logger log = Log4j2LoggerFactory.getLogger(InstrumentService.class);
 
 	@Resource
 	private InstrumentDao dao;

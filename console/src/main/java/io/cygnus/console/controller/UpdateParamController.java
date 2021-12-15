@@ -20,14 +20,14 @@ import io.cygnus.console.service.ParamService;
 import io.cygnus.console.service.dto.pack.OutboxMessage;
 import io.cygnus.console.service.dto.pack.OutboxTitle;
 import io.cygnus.repository.entity.CygStrategyParam;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.api.Publisher;
 
 @RestController("/update_param")
 public class UpdateParamController extends BaseController {
 
-	private final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private final Logger log = Log4j2LoggerFactory.getLogger(getClass());
 
 	@Resource
 	private ParamService service;

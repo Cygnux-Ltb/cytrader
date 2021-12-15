@@ -15,12 +15,12 @@ import io.cygnus.repository.dao.PnlDailyDao;
 import io.cygnus.repository.dao.PnlDailySettlementDao;
 import io.cygnus.repository.entity.CygPnlDaily;
 import io.cygnus.repository.entity.CygPnlDailySettlement;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 @Service
 public final class PnlService {
 
-	private final Logger log = CommonLoggerFactory.getLogger(PnlService.class);
+	private final Logger log = Log4j2LoggerFactory.getLogger(PnlService.class);
 
 	@Resource
 	private PnlDailyDao dao;

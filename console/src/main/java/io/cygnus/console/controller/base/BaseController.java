@@ -14,13 +14,13 @@ import org.springframework.http.ResponseEntity;
 
 import io.mercury.common.character.Charsets;
 import io.mercury.common.datetime.pattern.DatePattern;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.util.StringSupport;
 import io.mercury.serialization.json.JsonParser;
 
 public abstract class BaseController {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(BaseController.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(BaseController.class);
 
 	/**
 	 * 转换String到Date

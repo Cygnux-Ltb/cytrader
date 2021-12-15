@@ -16,13 +16,13 @@ import org.springframework.stereotype.Component;
 import io.cygnus.console.service.bean.ValidationRule;
 import io.cygnus.repository.entity.CygStrategyParam;
 import io.mercury.common.character.Charsets;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonParser;
 
 @Component
 public class ParamService {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(ParamService.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(ParamService.class);
 
 	private static Map<String, ValidationRule> validationRuleMap;
 

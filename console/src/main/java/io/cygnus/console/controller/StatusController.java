@@ -24,14 +24,14 @@ import io.cygnus.console.service.dto.StrategySwitch;
 import io.cygnus.console.service.dto.pack.OutboxMessage;
 import io.cygnus.console.transport.OutboxPublisherGroup;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.api.Publisher;
 
 @RestController("/status")
 public class StatusController extends BaseController {
 
-	private static final Logger log = CommonLoggerFactory.getLogger(StatusController.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(StatusController.class);
 
 	private static final ConcurrentMap<Integer, StrategySwitch> StrategySwitchMap = MutableMaps.newConcurrentHashMap();
 

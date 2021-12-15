@@ -64,7 +64,6 @@
 		<dependency>
 			<groupId>io.mercury</groupId>
 			<artifactId>serialization-json</artifactId>
-			<version>${mercury.version}</version>
 		</dependency>
 
 		<dependency>
@@ -79,10 +78,6 @@
 			<version>${mercury.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>commons-concurrent</artifactId>
-		</dependency>
 	</dependencies>
 
 </project>

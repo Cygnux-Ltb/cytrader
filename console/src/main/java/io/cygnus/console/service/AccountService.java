@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 
 import io.cygnus.repository.dao.AccountDao;
 import io.cygnus.repository.entity.CygAccount;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 
 @Service
 public class AccountService {
 
-	private final Logger log = CommonLoggerFactory.getLogger(AccountService.class);
+	private final Logger log = Log4j2LoggerFactory.getLogger(AccountService.class);
 
 	@Resource
 	private AccountDao dao;

@@ -1,20 +1,18 @@
-package io.cygnus.console.service;
-
-import static io.mercury.common.log.LogConfigurator.setLogFilename;
-import static io.mercury.common.log.LogConfigurator.setLogFolder;
-import static io.mercury.common.log.LogConfigurator.setLogLevel;
-import static io.mercury.common.log.LogConfigurator.LogLevel.INFO;
+package io.cygnus.console;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import io.mercury.common.log.Log4j2Configurator;
+import io.mercury.common.log.Log4j2Configurator.LogLevel;
 
 @SpringBootApplication
 public class CygnusServiceApplication {
 
 	static {
-		setLogFolder("cygnus");
-		setLogFilename("cygnus-service");
-		setLogLevel(INFO);
+		Log4j2Configurator.setLogFolder("cygnus");
+		Log4j2Configurator.setLogFilename("cygnus-service");
+		Log4j2Configurator.setLogLevel(LogLevel.INFO);
 	}
 
 	public static void main(String[] args) {

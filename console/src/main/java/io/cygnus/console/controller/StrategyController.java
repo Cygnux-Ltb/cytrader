@@ -17,12 +17,12 @@ import io.cygnus.console.controller.base.BaseController;
 import io.cygnus.console.service.StrategyService;
 import io.cygnus.repository.entity.CygStrategy;
 import io.cygnus.repository.entity.CygStrategyParam;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 @RestController("/strategy")
 public class StrategyController extends BaseController {
 
-	private final Logger log = CommonLoggerFactory.getLogger(getClass());
+	private final Logger log = Log4j2LoggerFactory.getLogger(getClass());
 
 	@Resource
 	private StrategyService service;

@@ -17,12 +17,12 @@ import io.cygnus.repository.dao.StrategyParamDao;
 import io.cygnus.repository.entity.CygStrategy;
 import io.cygnus.repository.entity.CygStrategyParam;
 import io.mercury.common.lang.Throws;
-import io.mercury.common.log.CommonLoggerFactory;
+import io.mercury.common.log.Log4j2LoggerFactory;
 
 @Service
 public final class StrategyService extends BaseService {
 
-	private final Logger log = CommonLoggerFactory.getLogger(StrategyService.class);
+	private final Logger log = Log4j2LoggerFactory.getLogger(StrategyService.class);
 
 	@Resource
 	private StrategyDao dao;
