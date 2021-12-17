@@ -77,7 +77,6 @@
 			<artifactId>transport-http</artifactId>
 			<version>${mercury.version}</version>
 		</dependency>
-
 	</dependencies>
 
 </project>
