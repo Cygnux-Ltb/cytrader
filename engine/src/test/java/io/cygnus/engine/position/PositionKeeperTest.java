@@ -1,8 +1,7 @@
-package io.cygnus.core.position;
+package io.cygnus.engine.position;
 
 import org.junit.Test;
 
-import io.cygnus.engine.position.PositionKeeper;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.futures.ChinaFuturesInstrument;
 import io.horizon.market.instrument.futures.ChinaFuturesSymbol;
