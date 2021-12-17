@@ -223,7 +223,7 @@ public final class PositionKeeper implements Serializable, Formattable<String> {
 	public static void updateCurrentPosition(ChildOrder order) {
 		int subAccountId = order.getSubAccountId();
 		Instrument instrument = order.getInstrument();
-		int trdQty = order.getLastTrdRecord().getTrdQty();
+		int trdQty = order.getLastRecord().getTradeQty();
 		switch (order.getDirection()) {
 		case Long:
 			switch (order.getAction()) {

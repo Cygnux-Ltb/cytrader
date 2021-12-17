@@ -2,16 +2,16 @@ package io.cygnus.engine.status;
 
 import org.eclipse.collections.api.list.MutableList;
 
-import io.horizon.trader.order.TrdSignal;
+import io.horizon.trader.order.TradeSignal;
 import io.mercury.common.collections.MutableLists;
 
 public final class TradeSignalActor {
 
-	private MutableList<TrdSignal> trdSignalList = MutableLists.newFastList(256);
+	private MutableList<TradeSignal> trdSignalList = MutableLists.newFastList(256);
 
 	public static final TradeSignalActor Singleton = new TradeSignalActor();
 
-	public boolean addTradeSignal(TrdSignal signal) {
+	public boolean addTradeSignal(TradeSignal signal) {
 		return trdSignalList.add(signal);
 	}
 
@@ -19,7 +19,7 @@ public final class TradeSignalActor {
 	 * 
 	 * @param signal
 	 */
-	public void handleTradeSignal(TrdSignal signal) {
+	public void handleTradeSignal(TradeSignal signal) {
 		switch (signal.getAction()) {
 		case Open:
 			switch (signal.getDirection()) {

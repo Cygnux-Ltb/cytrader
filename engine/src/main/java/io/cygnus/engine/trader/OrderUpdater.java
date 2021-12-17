@@ -51,7 +51,7 @@ public final class OrderUpdater {
 			order.getQty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade record
-			order.addTrdRecord(report.getEpochMicros(), report.getTradePrice(),
+			order.addRecord(report.getEpochMicros(), report.getTradePrice(),
 					filledQty - order.getQty().getLastFilledQty());
 			log.info(
 					"ChildOrder current status PartiallyFilled, strategyId==[{}], ordSysId==[{}], "
@@ -64,7 +64,7 @@ public final class OrderUpdater {
 			order.getQty().setFilledQty(filledQty);
 			// 新增订单成交记录
 			// Add NewTrade Record
-			order.addTrdRecord(report.getEpochMicros(), report.getTradePrice(),
+			order.addRecord(report.getEpochMicros(), report.getTradePrice(),
 					filledQty - order.getQty().getLastFilledQty());
 			// 计算此订单成交均价
 			// Calculation AvgPrice
