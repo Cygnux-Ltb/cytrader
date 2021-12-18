@@ -36,7 +36,7 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 
 	public AsyncMultiStrategyScheduler(Capacity capacity) {
 		this.queue = JctSingleConsumerQueue.singleProducer("AsyncMultiStrategyScheduler-Queue")
-				.setCapacity(capacity.value()).useSpinStrategy().buildWithProcessor(msg -> {
+				.setCapacity(capacity.value()).useSpinStrategy().build(msg -> {
 					switch (msg.getMark()) {
 					case MarketData:
 						M marketData = msg.getMarketData();

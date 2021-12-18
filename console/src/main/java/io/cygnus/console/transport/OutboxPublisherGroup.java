@@ -8,7 +8,6 @@ public class OutboxPublisherGroup extends IntGroup<Publisher<String, String>> {
 	/**
 	 * 
 	 */
-
 	public static final OutboxPublisherGroup GROUP_INSTANCE = new OutboxPublisherGroup();
 
 	// TODO ERROR
