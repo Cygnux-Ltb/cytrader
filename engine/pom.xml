@@ -22,7 +22,7 @@
 		
 		<dependency>
 			<groupId>io.mercury</groupId>
-			<artifactId>commons-di</artifactId>
+			<artifactId>commons-injection</artifactId>
 		</dependency>
 
 		<dependency>
