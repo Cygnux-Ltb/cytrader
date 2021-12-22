@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.cygnus</groupId>
+	<groupId>io.cygnustech</groupId>
 	<artifactId>cygnus</artifactId>
 	<version>1.0</version>
 
@@ -40,7 +40,8 @@
 		<maven.compiler.source>11</maven.compiler.source>
 		<spring.boot.version>2.6.1</spring.boot.version>
 		<mercury.version>1.0-SNAPSHOT</mercury.version>
-		<horizon.version>0.1</horizon.version>
+		<horizon.version>1.0</horizon.version>
+		<avro.version>1.11.0</avro.version>
 	</properties>
 
 	<build>
@@ -75,47 +76,73 @@
 				<version>1.18.22</version>
 			</dependency>
 
-			<!-- mercury library -->
 			<!-- see https://github.com/yellow013/mercury.git -->
+			<!-- mercury commons -->
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>commons-core</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>commons-config</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>commons-concurrent</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>commons-injection</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
 
+			<!-- mercury persistence -->
 			<dependency>
 				<groupId>io.mercury</groupId>
-				<artifactId>commons-concurrent</artifactId>
+				<artifactId>persistence-chronicle</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.mercury</groupId>
+				<artifactId>persistence-h2</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
 
+			<!-- mercury serialization -->
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>serialization-json</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>serialization-avro</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
 
+			<!-- mercury transport -->
 			<dependency>
 				<groupId>io.mercury</groupId>
 				<artifactId>transport-zmq</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
-
-			<!-- horizon -->
-			<!-- see https://github.com/yellow013/horizon.git -->
 			<dependency>
-				<groupId>io.horizon</groupId>
+				<groupId>io.mercury</groupId>
+				<artifactId>transport-rabbitmq</artifactId>
+				<version>${mercury.version}</version>
+			</dependency>
+
+			<!-- API -->
+			<dependency>
+				<groupId>io.cygnustech</groupId>
 				<artifactId>market-api</artifactId>
 				<version>${horizon.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.horizon</groupId>
+				<groupId>io.cygnustech</groupId>
 				<artifactId>trader-api</artifactId>
 				<version>${horizon.version}</version>
 			</dependency>
