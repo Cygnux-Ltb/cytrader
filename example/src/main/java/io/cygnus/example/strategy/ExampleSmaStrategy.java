@@ -9,8 +9,8 @@ import io.horizon.market.indicator.impl.SmaPoint;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.order.Order;
+import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
-import io.mercury.common.param.Params.ParamKey;
 
 /**
  * 
