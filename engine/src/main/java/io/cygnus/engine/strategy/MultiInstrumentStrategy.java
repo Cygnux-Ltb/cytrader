@@ -16,11 +16,10 @@ import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.lang.Assertor;
+import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
-import io.mercury.common.param.Params.ParamKey;
 
-public abstract class MultiInstrumentStrategy<M extends MarketData, PK extends ParamKey>
-		extends AbstractStrategy<M, PK> {
+public abstract class MultiInstrumentStrategy<M extends MarketData, K extends ParamKey> extends AbstractStrategy<M, K> {
 
 	// 策略订阅的合约列表
 
@@ -34,7 +33,7 @@ public abstract class MultiInstrumentStrategy<M extends MarketData, PK extends P
 	}
 
 	protected MultiInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
-			@Nullable Params<PK> params, @Nonnull Instrument... instruments) {
+			@Nullable Params<K> params, @Nonnull Instrument... instruments) {
 		super(strategyId, strategyName, subAccount, params);
 		this.instruments = getIntObjectMapFactory().from(Stream.of(instruments).collect(toSet()),
 				Instrument::getInstrumentId, instrument -> instrument);

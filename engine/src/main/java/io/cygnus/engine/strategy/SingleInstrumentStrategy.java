@@ -17,11 +17,11 @@ import io.horizon.trader.adaptor.AdaptorStatus;
 import io.horizon.trader.report.AdaptorReport;
 import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.lang.Assertor;
+import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
-import io.mercury.common.param.Params.ParamKey;
 
-public abstract class SingleInstrumentStrategy<M extends MarketData, PK extends ParamKey>
-		extends AbstractStrategy<M, PK> {
+public abstract class SingleInstrumentStrategy<M extends MarketData, K extends ParamKey>
+		extends AbstractStrategy<M, K> {
 
 	// Logger
 	private static final Logger log = getLogger(SingleInstrumentStrategy.class);
@@ -53,7 +53,7 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, PK extends 
 	 * @param instrument
 	 */
 	protected SingleInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
-			@Nullable Params<PK> params, Instrument instrument) {
+			@Nullable Params<K> params, Instrument instrument) {
 		super(strategyId, strategyName, subAccount, params);
 		this.instrument = instrument;
 		this.instruments = getIntObjectMapFactory().of(instrument.getInstrumentId(), instrument);

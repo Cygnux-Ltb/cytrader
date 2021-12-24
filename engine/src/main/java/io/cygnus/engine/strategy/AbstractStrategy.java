@@ -35,11 +35,11 @@ import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
-import io.mercury.common.param.Params.ParamKey;
 import io.mercury.common.sequence.SnowflakeAlgo;
 
-public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey> extends EnableableComponent
+public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey> extends EnableableComponent
 		implements Strategy<M>, CircuitBreaker {
 
 	// Logger
@@ -66,12 +66,12 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 	protected final MutableLongObjectMap<Order> orders = MutableMaps.newLongObjectHashMap();
 
 	// 策略参数
-	protected final Params<PK> params;
+	protected final Params<K> params;
 
 	private final OrdSysIdAllocator allocator;
 
 	protected AbstractStrategy(int strategyId, @Nonnull String strategyName, @Nonnull SubAccount subAccount,
-			@Nullable Params<PK> params) {
+			@Nullable Params<K> params) {
 		Assertor.nonNull(subAccount, "subAccount");
 		Assertor.atWithinRange(strategyId, 1, Strategy.MAX_STRATEGY_ID, "strategyId");
 		Assertor.nonEmpty(strategyName, "strategyName");
@@ -109,7 +109,7 @@ public abstract class AbstractStrategy<M extends MarketData, PK extends ParamKey
 		return orders;
 	}
 
-	public Params<PK> getParams() {
+	public Params<K> getParams() {
 		return params;
 	}
 
