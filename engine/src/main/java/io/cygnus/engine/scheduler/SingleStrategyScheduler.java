@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import io.cygnus.engine.trader.OrderKeeper;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
-import io.horizon.trader.handler.InboundScheduler;
+import io.horizon.trader.handler.InboundHandler;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.report.AdaptorReport;
 import io.horizon.trader.report.OrderReport;
@@ -22,7 +22,7 @@ import io.mercury.common.log.Log4j2LoggerFactory;
  *
  * @param <M>
  */
-public class SingleStrategyScheduler<M extends MarketData> implements InboundScheduler<M> {
+public class SingleStrategyScheduler<M extends MarketData> implements InboundHandler<M> {
 
 	/**
 	 * Logger

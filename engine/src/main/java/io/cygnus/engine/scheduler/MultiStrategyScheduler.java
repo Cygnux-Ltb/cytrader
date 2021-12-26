@@ -1,7 +1,7 @@
 package io.cygnus.engine.scheduler;
 
 import io.horizon.market.data.MarketData;
-import io.horizon.trader.handler.InboundScheduler;
+import io.horizon.trader.handler.InboundHandler;
 import io.horizon.trader.strategy.Strategy;
 
 /**
@@ -10,7 +10,7 @@ import io.horizon.trader.strategy.Strategy;
  *
  * @param <M>
  */
-public interface MultiStrategyScheduler<M extends MarketData> extends InboundScheduler<M> {
+public interface MultiStrategyScheduler<M extends MarketData> extends InboundHandler<M> {
 
 	void addStrategy(Strategy<M> strategy);
 

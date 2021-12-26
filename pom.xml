@@ -102,11 +102,6 @@
 			<!-- mercury persistence -->
 			<dependency>
 				<groupId>io.mercury</groupId>
-				<artifactId>persistence-chronicle</artifactId>
-				<version>${mercury.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.mercury</groupId>
 				<artifactId>persistence-h2</artifactId>
 				<version>${mercury.version}</version>
 			</dependency>
