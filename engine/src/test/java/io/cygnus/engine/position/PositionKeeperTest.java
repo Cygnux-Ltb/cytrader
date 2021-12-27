@@ -2,9 +2,9 @@ package io.cygnus.engine.position;
 
 import org.junit.Test;
 
+import io.horizon.market.instrument.ChinaFutures.ChinaFuturesInstrument;
+import io.horizon.market.instrument.ChinaFutures.ChinaFuturesSymbol;
 import io.horizon.market.instrument.Instrument;
-import io.horizon.market.instrument.futures.ChinaFuturesInstrument;
-import io.horizon.market.instrument.futures.ChinaFuturesSymbol;
 import io.horizon.trader.order.enums.TrdDirection;
 
 public class PositionKeeperTest {
