@@ -8,8 +8,8 @@ import io.cygnus.engine.trader.OrderKeeper;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.report.AdaptorReport;
-import io.horizon.trader.report.OrderReport;
+import io.horizon.trader.transport.outbound.AdaptorReport;
+import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.Log4j2LoggerFactory;
@@ -35,7 +35,7 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 	private static final int AdaptorEvent = 2;
 
 	public AsyncMultiStrategyScheduler(Capacity capacity) {
-		this.queue = JctSingleConsumerQueue.singleProducer("AsyncMultiStrategyScheduler-Queue")
+		this.queue = JctSingleConsumerQueue.spscQueue("AsyncMultiStrategyScheduler-Queue")
 				.setCapacity(capacity.value()).useSpinStrategy().build(msg -> {
 					switch (msg.getMark()) {
 					case MarketData:

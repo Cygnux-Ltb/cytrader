@@ -1,7 +1,7 @@
 package io.cygnus.engine.actor;
 
 import io.horizon.trader.handler.OrderReportHandler;
-import io.horizon.trader.report.OrderReport;
+import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.actors.CommonActorT1;
 
 public class OrderReportActor extends CommonActorT1<OrderReport> implements OrderReportHandler {

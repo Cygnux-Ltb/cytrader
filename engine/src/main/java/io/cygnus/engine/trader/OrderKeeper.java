@@ -20,7 +20,7 @@ import io.horizon.trader.order.Order;
 import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
-import io.horizon.trader.report.OrderReport;
+import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.Log4j2LoggerFactory;
 

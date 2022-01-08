@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.order.attr.OrdQty;
 import io.horizon.trader.order.enums.OrdStatus;
-import io.horizon.trader.report.OrderReport;
+import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 public final class OrderUpdater {
