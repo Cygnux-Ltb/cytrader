@@ -15,6 +15,7 @@ import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.strategy.Strategy;
 import io.horizon.trader.transport.outbound.AdaptorReport;
+import io.mercury.common.datetime.EpochUtil;
 import io.mercury.common.lang.Assertor;
 import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
@@ -87,13 +88,15 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, K extends P
 			break;
 		case TRADER_ENABLE:
 			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
-			adaptor.queryOrder(instrument);
-			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", getStrategyName(),
-					event.getAdaptorId());
-			adaptor.queryPositions(instrument);
+			// TODO
+//			adaptor.queryOrder(null);
+//			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", getStrategyName(),
+//					event.getAdaptorId());
+			adaptor.queryPositions(queryPositionsReq.setExchangeCode(instrument.getExchangeCode())
+					.setInstrumentCode(instrument.getInstrumentCode()).setGenerateTime(EpochUtil.getEpochMillis()));
 			log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", getStrategyName(),
 					event.getAdaptorId());
-			adaptor.queryBalance();
+			adaptor.queryBalance(queryBalanceReq.setGenerateTime(EpochUtil.getEpochMillis()));
 			log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", getStrategyName(),
 					event.getAdaptorId());
 			break;

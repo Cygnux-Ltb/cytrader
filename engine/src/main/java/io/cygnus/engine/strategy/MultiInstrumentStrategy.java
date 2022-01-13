@@ -22,7 +22,6 @@ import io.mercury.common.param.Params;
 public abstract class MultiInstrumentStrategy<M extends MarketData, K extends ParamKey> extends AbstractStrategy<M, K> {
 
 	// 策略订阅的合约列表
-
 	protected ImmutableIntObjectMap<Instrument> instruments;
 
 	protected Adaptor adaptor;

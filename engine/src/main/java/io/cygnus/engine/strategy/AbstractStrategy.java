@@ -18,6 +18,7 @@ import io.horizon.market.data.MarketDataSnapshot;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
+import io.horizon.trader.account.Account.AccountException;
 import io.horizon.trader.account.AccountKeeper;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
@@ -30,6 +31,8 @@ import io.horizon.trader.order.enums.TrdDirection;
 import io.horizon.trader.risk.CircuitBreaker;
 import io.horizon.trader.strategy.Strategy;
 import io.horizon.trader.strategy.StrategyEvent;
+import io.horizon.trader.transport.inbound.QueryBalance;
+import io.horizon.trader.transport.inbound.QueryPositions;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.fsm.EnableableComponent;
@@ -68,6 +71,11 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 	// 策略参数
 	protected final Params<K> params;
 
+	// TODO
+	protected QueryPositions queryPositionsReq;
+	// TODO
+	protected QueryBalance queryBalanceReq;
+
 	private final OrdSysIdAllocator allocator;
 
 	protected AbstractStrategy(int strategyId, @Nonnull String strategyName, @Nonnull SubAccount subAccount,
@@ -81,11 +89,15 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 		this.subAccountId = subAccount.getSubAccountId();
 		final Account account = AccountKeeper.getAccountBySubAccountId(subAccount.getSubAccountId());
 		if (account == null)
-			throw new IllegalArgumentException(subAccount.getSubAccountName() + " is not found Account");
+			throw new AccountException(subAccount.getSubAccountName() + " is not found Account");
 		this.account = account;
 		this.accountId = account.getAccountId();
 		this.params = params;
-		final SnowflakeAlgo snowflake = new SnowflakeAlgo(strategyId);
+		this.queryPositionsReq = QueryPositions.newBuilder().setAccountId(accountId).setBrokerId(account.getBrokerId())
+				.setOperatorId(strategyName).setStrategyId(strategyId).setSubAccountId(subAccountId).build();
+		this.queryBalanceReq = QueryBalance.newBuilder().setAccountId(accountId).setBrokerId(account.getBrokerId())
+				.setOperatorId(strategyName).setStrategyId(strategyId).setSubAccountId(subAccountId).build();
+		var snowflake = new SnowflakeAlgo(strategyId);
 		this.allocator = () -> snowflake.next();
 	}
 
@@ -369,7 +381,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 		childOrder.writeLog(log, getStrategyName() + " :: Open position generate [ChildOrder]");
 		saveOrder(childOrder);
 
-		getAdaptor(instrument).newOredr(childOrder);
+		getAdaptor(instrument).newOredr(childOrder.toNewOrder());
 		childOrder.writeLog(log, getStrategyName() + " :: Open position [ChildOrder] has been sent");
 	}
 
@@ -466,7 +478,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 		childOrder.writeLog(log, "Close position generate [ChildOrder]");
 		saveOrder(childOrder);
 
-		getAdaptor(instrument).newOredr(childOrder);
+		getAdaptor(instrument).newOredr(childOrder.toNewOrder());
 		childOrder.writeLog(log, "Close position [ChildOrder] has been sent");
 	}
 

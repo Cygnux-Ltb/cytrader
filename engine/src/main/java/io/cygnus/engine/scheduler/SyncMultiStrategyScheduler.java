@@ -42,11 +42,11 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 
 	@Override
 	public void onOrderReport(OrderReport report) {
-		log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerSysId(),
+		log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerOrdSysId(),
 				report.getOrdSysId());
 		ChildOrder order = OrderKeeper.handleOrderReport(report);
 		log.info("Search Order OK. brokerUniqueId==[{}], strategyId==[{}], instrumentCode==[{}], ordSysId==[{}]",
-				report.getBrokerSysId(), order.getStrategyId(), order.getInstrument().getInstrumentCode(),
+				report.getBrokerOrdSysId(), order.getStrategyId(), order.getInstrument().getInstrumentCode(),
 				report.getOrdSysId());
 		strategyMap.get(order.getStrategyId()).onOrder(order);
 	}
