@@ -13,7 +13,6 @@ public class ExampleLauncher {
 
 	public static void main(String[] args) {
 		// 此处可以以多种方式读取配置
-		
 	}
 
 }
