@@ -25,18 +25,18 @@ public class OrderWatermark {
 		System.out.println(currentTimeMillis << Byte.SIZE);
 
 		System.out.println(Short.BYTES);
+		
 		System.out.println(BitFormatter.longBinaryFormat(currentTimeMillis));
 		System.out.println(BitFormatter.longBinaryFormat(currentTimeMillis << Byte.SIZE));
 		System.out.println(BitFormatter.longBinaryFormat(currentTimeMillis << Short.SIZE));
 		System.out.println(BitFormatter.longBinaryFormat(currentTimeMillis << (Byte.SIZE * 2)));
-
 		System.out.println(BitFormatter.longBinaryFormat(toEpochSecond));
 
 		System.out.println(ZonedDateTime.ofInstant(Instant.ofEpochMilli(140737488355327L), ZoneOffset.UTC));
 
 		System.out.println(BitFormatter.longBinaryFormat(Long.MAX_VALUE >> 16));
-		System.out.println((Long.MAX_VALUE >> 16));
-		System.out.println((1 << 8));
+		System.out.println(Long.MAX_VALUE >> 16);
+		System.out.println(1 << 8);
 		System.out.println(BitFormatter.longBinaryFormat(Long.MAX_VALUE));
 
 	}

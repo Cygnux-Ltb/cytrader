@@ -19,7 +19,7 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
 import io.horizon.trader.account.Account.AccountException;
-import io.horizon.trader.account.AccountKeeper;
+import io.horizon.trader.account.AccountFinder;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.order.ChildOrder;
@@ -87,7 +87,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 		this.strategyName = strategyName;
 		this.subAccount = subAccount;
 		this.subAccountId = subAccount.getSubAccountId();
-		final Account account = AccountKeeper.getAccountBySubAccountId(subAccount.getSubAccountId());
+		final Account account = AccountFinder.getAccountBySubAccountId(subAccount.getSubAccountId());
 		if (account == null)
 			throw new AccountException(subAccount.getSubAccountName() + " is not found Account");
 		this.account = account;
@@ -198,12 +198,12 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 
 	@Override
 	public void enableAccount(int accountId) {
-		AccountKeeper.setAccountTradable(accountId);
+		AccountFinder.setAccountTradable(accountId);
 	}
 
 	@Override
 	public void disableAccount(int accountId) {
-		AccountKeeper.setAccountNotTradable(accountId);
+		AccountFinder.setAccountNotTradable(accountId);
 	}
 
 	@Override

@@ -27,10 +27,12 @@ public final class OrderUpdater {
 		OrdQty qty = order.getQty();
 		int filledQty = report.getFilledQty();
 		OrdStatus status = OrdStatus.valueOf(report.getStatus());
-		log.info("OrdReport status==[{}], filledQty==[{}], tradePrice==[{}], order.qty() -> {}",
-				status, filledQty, report.getTradePrice(), qty);
-		// 处理未返回订单状态的情况, 根据成交数量判断
-		if (status == OrdStatus.Unprovided) {
+		log.info("OrdReport status==[{}], filledQty==[{}], tradePrice==[{}], order.getQty() -> {}", status, filledQty,
+				report.getTradePrice(), qty);
+		switch (status) {
+		case Unprovided:
+		case Invalid:
+			// 处理未返回订单状态的情况, 根据成交数量判断
 			int offerQty = qty.getOfferQty();
 			order.setStatus(
 					// 成交数量等于委托数量, 状态为全部成交
@@ -39,10 +41,11 @@ public final class OrderUpdater {
 							: filledQty < offerQty && filledQty > 0 ? OrdStatus.PartiallyFilled
 									// 成交数量等于0, 状态为New
 									: OrdStatus.New);
-		}
-		// 已返回订单状态, 直接读取
-		else {
+			break;
+		default:
+			// 已返回订单状态, 直接读取
 			order.setStatus(status);
+			break;
 		}
 		switch (order.getStatus()) {
 		case PartiallyFilled:
