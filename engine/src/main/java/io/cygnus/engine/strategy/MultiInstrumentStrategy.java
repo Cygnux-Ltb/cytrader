@@ -9,17 +9,21 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
+import org.slf4j.Logger;
 
-import io.horizon.market.data.MarketData;
+import io.horizon.market.api.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.lang.Assertor;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
 
 public abstract class MultiInstrumentStrategy<M extends MarketData, K extends ParamKey> extends AbstractStrategy<M, K> {
+
+	private final static Logger log = Log4j2LoggerFactory.getLogger(MultiInstrumentStrategy.class);
 
 	// 策略订阅的合约列表
 	protected ImmutableIntObjectMap<Instrument> instruments;
@@ -47,6 +51,8 @@ public abstract class MultiInstrumentStrategy<M extends MarketData, K extends Pa
 	public Strategy<M> addAdaptor(Adaptor adaptor) {
 		Assertor.nonNull(adaptor, "adaptor");
 		this.adaptor = adaptor;
+		log.info("added adaptor, strategyId -> {}, strategyName -> {}, adaptorId -> {}", strategyId, strategyName,
+				adaptor.getAdaptorId());
 		return this;
 	}
 

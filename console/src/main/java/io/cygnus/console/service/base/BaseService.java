@@ -8,7 +8,7 @@ public abstract class BaseService {
 
 	protected final boolean checkStrategyId(int strategyId, Logger log, String msg) {
 		if (strategyId <= 0) {
-			log.error("{}, ordSysId=={}", msg, strategyId);
+			log.error("{}, strategyId=={}", msg, strategyId);
 			return true;
 		}
 		return false;

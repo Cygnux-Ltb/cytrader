@@ -130,7 +130,7 @@ public final class OrderKeeper implements Serializable {
 			order.writeLog(log, "OrderBookKeeper :: Search order OK");
 		ChildOrder childOrder = (ChildOrder) order;
 		// 根据订单回报更新订单状态
-		OrderUpdater.updateWithReport(childOrder, report);
+		OrderUpdater.updateOrder(childOrder, report);
 		// 更新Keeper内订单
 		updateOrder(childOrder);
 		return childOrder;
@@ -211,7 +211,7 @@ public final class OrderKeeper implements Serializable {
 	 * @return
 	 */
 	public static ChildOrder createAndSaveChildOrder(OrdSysIdAllocator ordSysIdAllocator, int strategyId,
-			SubAccount subAccount, Account account, Instrument instrument, int offerQty, long offerPrice, OrdType type,
+			SubAccount subAccount, Account account, Instrument instrument, int offerQty, double offerPrice, OrdType type,
 			TrdDirection direction, TrdAction action) {
 		ChildOrder childOrder = ChildOrder.newOrder(ordSysIdAllocator, strategyId, subAccount, account, instrument,
 				offerQty, offerPrice, type, direction, action);

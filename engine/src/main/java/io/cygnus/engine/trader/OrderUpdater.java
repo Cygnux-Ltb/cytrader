@@ -23,7 +23,7 @@ public final class OrderUpdater {
 	 * @param order
 	 * @param report
 	 */
-	public static void updateWithReport(@Nonnull ChildOrder order, @Nonnull OrderReport report) {
+	public static void updateOrder(@Nonnull ChildOrder order, @Nonnull OrderReport report) {
 		OrdQty qty = order.getQty();
 		int filledQty = report.getFilledQty();
 		OrdStatus status = OrdStatus.valueOf(report.getStatus());
@@ -71,7 +71,7 @@ public final class OrderUpdater {
 					filledQty - order.getQty().getLastFilledQty());
 			// 计算此订单成交均价
 			// Calculation AvgPrice
-			long avgTradePrice = order.fillAndGetAvgTradePrice();
+			double avgTradePrice = order.fillAndGetAvgTradePrice();
 			log.info(
 					"ChildOrder current status Filled, strategyId==[{}], ordSysId==[{}], "
 							+ "filledQty==[{}], avgTradePrice==[{}]",

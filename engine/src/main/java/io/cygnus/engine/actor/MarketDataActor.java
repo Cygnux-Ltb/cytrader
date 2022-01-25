@@ -1,6 +1,6 @@
 package io.cygnus.engine.actor;
 
-import io.horizon.market.data.MarketData;
+import io.horizon.market.api.MarketData;
 import io.horizon.market.handler.MarketDataHandler;
 import io.mercury.actors.CommonActorT1;
 

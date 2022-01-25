@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 
 import io.cygnus.engine.position.PositionKeeper;
 import io.cygnus.engine.trader.OrderKeeper;
-import io.horizon.market.data.MarketData;
+import io.horizon.market.api.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.market.data.MarketDataSnapshot;
 import io.horizon.market.instrument.Instrument;
@@ -323,7 +323,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 	 * @param direction
 	 * @return
 	 */
-	protected long getLevel1Price(Instrument instrument, TrdDirection direction) {
+	protected double getLevel1Price(Instrument instrument, TrdDirection direction) {
 		MarketDataSnapshot snapshot = MarketDataKeeper.getSnapshot(instrument);
 		switch (direction) {
 		case Long:
@@ -374,7 +374,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 	 * @param ordType    订单类型
 	 * @param direction  多空方向
 	 */
-	protected void openPosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType,
+	protected void openPosition(Instrument instrument, int offerQty, double offerPrice, OrdType ordType,
 			TrdDirection direction) {
 		final ChildOrder childOrder = OrderKeeper.createAndSaveChildOrder(allocator, strategyId, subAccount, account,
 				instrument, abs(offerQty), offerPrice, ordType, direction, TrdAction.Open);
@@ -407,7 +407,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 		} else {
 			log.info("{} :: Execution close all positions, subAccountId==[{}], instrumentCode==[{}], position==[{}]",
 					getStrategyName(), subAccountId, instrument.getInstrumentCode(), position);
-			long offerPrice = 0L;
+			double offerPrice = 0.0D;
 			if (position > 0)
 				offerPrice = getLevel1Price(instrument, TrdDirection.Long);
 			else
@@ -421,7 +421,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 	 * @param instrument
 	 * @param offerPrice
 	 */
-	protected void closeAllPosition(Instrument instrument, long offerPrice) {
+	protected void closeAllPosition(Instrument instrument, double offerPrice) {
 		final int position = getCurrentPosition(subAccountId, instrument);
 		if (position == 0) {
 			log.warn(
@@ -470,7 +470,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 	 * @param offerPrice 委托价格
 	 * @param ordType    订单类型
 	 */
-	protected void closePosition(Instrument instrument, int offerQty, long offerPrice, OrdType ordType) {
+	protected void closePosition(Instrument instrument, int offerQty, double offerPrice, OrdType ordType) {
 		final ChildOrder childOrder = OrderKeeper.createAndSaveChildOrder(allocator, strategyId, subAccount, account,
 				instrument, abs(offerQty), offerPrice, ordType, offerQty > 0 ? TrdDirection.Long : TrdDirection.Short,
 				TrdAction.Close);

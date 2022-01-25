@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.slf4j.Logger;
 
-import io.horizon.market.data.MarketData;
+import io.horizon.market.api.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
