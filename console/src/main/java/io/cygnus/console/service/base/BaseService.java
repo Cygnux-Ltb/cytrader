@@ -7,7 +7,7 @@ import io.mercury.common.util.StringSupport;
 public abstract class BaseService {
 
 	protected final boolean checkStrategyId(int strategyId, Logger log, String msg) {
-		if (strategyId <= 0) {
+		if (strategyId < 0) {
 			log.error("{}, strategyId=={}", msg, strategyId);
 			return true;
 		}

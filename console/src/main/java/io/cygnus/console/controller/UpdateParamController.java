@@ -1,7 +1,7 @@
 package io.cygnus.console.controller;
 
 import static io.cygnus.console.transport.OutboxPublisherGroup.GROUP_INSTANCE;
-import static io.mercury.transport.http.MimeType.APPLICATION_JSON_UTF8;
+import static io.mercury.transport.http.base.MimeType.APPLICATION_JSON_UTF8;
 
 import java.util.List;
 

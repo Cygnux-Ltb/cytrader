@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
@@ -43,63 +42,52 @@ public class OrderService extends BaseService {
 		return getOrders(strategyId, investorId, instrumentCode, tradingDay, tradingDay);
 	}
 
-	private final String QueryOrderParamErrorMsg = "query [OrderEntity] param error";
+	private final String queryOrderParamErrorMsg = "[OrderService::getOrders] param error";
 
 	/**
 	 * 
 	 * @param strategyId
-	 * @param startTradingDay
-	 * @param endTradingDay
 	 * @param investorId
 	 * @param instrumentCode
+	 * @param startTradingDay
+	 * @param endTradingDay
 	 * @return
 	 */
 	public List<CygOrder> getOrders(int strategyId, String investorId, String instrumentCode, int startTradingDay,
 			int endTradingDay) {
-		if (checkStrategyId(strategyId, log, QueryOrderParamErrorMsg))
+		if (checkStrategyId(strategyId, log, queryOrderParamErrorMsg))
 			Throws.illegalArgument("strategyId");
-		if (checkTradingDay(startTradingDay, endTradingDay, log, QueryOrderParamErrorMsg))
+		if (checkTradingDay(startTradingDay, endTradingDay, log, queryOrderParamErrorMsg))
 			Throws.illegalArgument("startTradingDay & endTradingDay");
-		if (checkInvestorId(investorId, log, QueryOrderParamErrorMsg))
+		if (checkInvestorId(investorId, log, queryOrderParamErrorMsg))
 			Throws.illegalArgument("investorId");
-		if (checkInstrumentCode(instrumentCode, log, QueryOrderParamErrorMsg))
+		if (checkInstrumentCode(instrumentCode, log, queryOrderParamErrorMsg))
 			Throws.illegalArgument("instrumentCode");
-		return exec(() -> dao.query(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay),
-				list -> {
-					if (CollectionUtils.isEmpty(list))
-						log.warn(
-								"query [OrderEntity] return 0 row, strategyId=={}, startTradingDay=={}, endTradingDay=={}, investorId=={}, instrumentCode=={}",
-								strategyId, startTradingDay, endTradingDay, investorId, instrumentCode);
-					else
-						log.info(
-								"query [OrderEntity] where strategyId=={}, startTradingDay=={}, endTradingDay=={}, investorId=={}, instrumentCode=={}, result row -> {}",
-								strategyId, startTradingDay, endTradingDay, investorId, instrumentCode, list.size());
-					return list;
-				}, e -> {
-					log.error(
-							"query [OrderEntity] exception, strategyId=={}, startTradingDay=={}, endTradingDay=={}, investorId=={}, instrumentCode=={}",
-							strategyId, startTradingDay, endTradingDay, investorId, instrumentCode, e);
-				});
+		return exec(() -> dao.query(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay), list -> {
+			log.info(
+					"[OrderDao::query] return {} row, strategyId=={}, investorId=={}, instrumentCode=={}, startTradingDay=={}, endTradingDay=={}",
+					list.size(), strategyId, investorId, instrumentCode, startTradingDay, endTradingDay);
+			return list;
+		}, e -> {
+			log.error(
+					"[OrderDao::query] exception, strategyId=={}, investorId=={}, instrumentCode=={}, startTradingDay=={}, endTradingDay=={}",
+					strategyId, investorId, instrumentCode, startTradingDay, endTradingDay, e);
+		});
 	}
-
-	private final String QueryOrderEventParamErrorMsg = "query [OrderEventEntity] param error";
 
 	/**
 	 * 
 	 * @param ordSysId
 	 * @return
 	 */
-	public List<CygOrderEvent> getOrderEvents(long ordSysId) {
-		if (checkOrdSysId(ordSysId, log, QueryOrderEventParamErrorMsg))
+	public List<CygOrderEvent> getOrderEventsByOrderSysId(long ordSysId) {
+		if (checkOrdSysId(ordSysId, log, "[OrderService::getOrderEventsByOrderSysId] param error"))
 			return new FastList<>();
 		return exec(() -> eventDao.queryByOrdSysId(ordSysId), list -> {
-			if (CollectionUtils.isEmpty(list))
-				log.warn("query [OrderEventEntity] return 0 row, ordSysId=={}", ordSysId);
-			else
-				log.info("query [OrderEventEntity] where ordSysId=={}, result row -> {}", ordSysId, list.size());
+			log.info("[OrderEventDao::queryByOrdSysId] return {} row, ordSysId=={}", list.size(), ordSysId);
 			return list;
 		}, e -> {
-			log.error("query [OrderEventEntity] exception, ordSysId=={}", ordSysId, e);
+			log.error("[OrderEventDao::queryByOrdSysId] exception, ordSysId=={}", ordSysId, e);
 		});
 	}
 
@@ -108,17 +96,14 @@ public class OrderService extends BaseService {
 	 * @param tradingDay
 	 * @return
 	 */
-	public List<CygOrderEvent> getOrderEvents(int tradingDay) {
-		if (checkTradingDay(tradingDay, log, QueryOrderEventParamErrorMsg))
+	public List<CygOrderEvent> getOrderEventsByTradingDay(int tradingDay) {
+		if (checkTradingDay(tradingDay, log, "[OrderService::getOrderEventsByTradingDay] param error"))
 			return new FastList<>();
 		return exec(() -> eventDao.queryByTradingDay(tradingDay), list -> {
-			if (CollectionUtils.isEmpty(list))
-				log.warn("query [OrderEventEntity] return 0 row, tradingDay=={}", tradingDay);
-			else
-				log.info("query [OrderEventEntity] where tradingDay=={}, result row -> {}", tradingDay, list.size());
+			log.info("[OrderEventDao::queryByTradingDay] return {} row, tradingDay=={}, ", list.size(), tradingDay);
 			return list;
 		}, e -> {
-			log.error("query [OrderEventEntity] exception, tradingDay=={}", tradingDay, e);
+			log.error("[OrderEventDao::queryByTradingDay] exception, tradingDay=={}", tradingDay, e);
 		});
 	}
 
@@ -129,10 +114,10 @@ public class OrderService extends BaseService {
 	 */
 	public boolean putOrder(CygOrder entity) {
 		return execBool(() -> dao.save(entity), o -> {
-			log.info("save [OrderEntity] success -> {}", entity);
+			log.info("[OrderDao::save] success -> {}", entity);
 			return true;
 		}, e -> {
-			log.error("save [OrderEntity] failure -> {}", entity, e);
+			log.error("[OrderDao::save] failure -> {}", entity, e);
 			return false;
 		});
 	}
@@ -144,10 +129,10 @@ public class OrderService extends BaseService {
 	 */
 	public boolean putOrderEvent(CygOrderEvent entity) {
 		return execBool(() -> eventDao.save(entity), o -> {
-			log.info("save [OrderEventEntity] success -> {}", entity);
+			log.info("[OrderEventDao::save] success -> {}", entity);
 			return true;
 		}, e -> {
-			log.error("save [OrderEventEntity] failure -> {}", entity, e);
+			log.error("[OrderEventDao::save] failure -> {}", entity, e);
 			return false;
 		});
 	}

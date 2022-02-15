@@ -57,7 +57,7 @@ public class OrderController extends BaseController {
 		if (checkParamIsNull(strategyId, tradingDay)) {
 			return badRequest();
 		}
-		List<CygOrderEvent> orderEvents = service.getOrderEvents(tradingDay);
+		List<CygOrderEvent> orderEvents = service.getOrderEventsByTradingDay(tradingDay);
 		// TODO 过滤最后的订单
 		return responseOf(orderEvents);
 	}
