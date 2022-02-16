@@ -1,6 +1,6 @@
 package io.cygnus.engine.scheduler;
 
-import io.horizon.market.api.MarketData;
+import io.horizon.market.data.MarketData;
 import io.horizon.trader.handler.InboundHandler;
 import io.horizon.trader.strategy.Strategy;
 

@@ -12,9 +12,9 @@ import org.slf4j.Logger;
 
 import io.cygnus.engine.position.PositionKeeper;
 import io.cygnus.engine.trader.OrderKeeper;
-import io.horizon.market.api.MarketData;
+import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
-import io.horizon.market.data.MarketDataSnapshot;
+import io.horizon.market.data.MarketDataKeeper.MarketDataSnapshot;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.market.instrument.InstrumentKeeper;
 import io.horizon.trader.account.Account;
