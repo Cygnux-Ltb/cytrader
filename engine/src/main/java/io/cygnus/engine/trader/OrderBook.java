@@ -60,12 +60,12 @@ public final class OrderBook {
 	 * @param capacity
 	 */
 	OrderBook(Capacity capacity) {
-		this.orderMap = newLongObjectHashMap(capacity);
-		this.longOrderMap = newLongObjectHashMap(capacity.half());
-		this.shortOrderMap = newLongObjectHashMap(capacity.half());
-		this.activeOrderMap = newLongObjectHashMap(capacity.quarter());
-		this.activeLongOrderMap = newLongObjectHashMap(capacity.quarter());
-		this.activeShortOrderMap = newLongObjectHashMap(capacity.quarter());
+		this.orderMap = newLongObjectHashMap(capacity.value());
+		this.longOrderMap = newLongObjectHashMap(capacity.half().value());
+		this.shortOrderMap = newLongObjectHashMap(capacity.half().value());
+		this.activeOrderMap = newLongObjectHashMap(capacity.quarter().value());
+		this.activeLongOrderMap = newLongObjectHashMap(capacity.quarter().value());
+		this.activeShortOrderMap = newLongObjectHashMap(capacity.quarter().value());
 	}
 
 	public MutableLongObjectMap<Order> getOrderMap() {
