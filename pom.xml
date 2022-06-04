@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- This is parent redstone pom.xml -->
-	<groupId>io.cygnuslab</groupId>
-	<artifactId>cygnus</artifactId>
+	<groupId>io.cygnuxltb</groupId>
+	<artifactId>cygnux</artifactId>
 	<version>1.0</version>
 
 	<packaging>pom</packaging>
-	<name>cygnus</name>
+	<name>cygnux</name>
 
 	<url>http://cygnuslab.io</url>
 	<licenses>
@@ -141,12 +141,12 @@
 
 			<!-- API -->
 			<dependency>
-				<groupId>io.cygnuslab</groupId>
+				<groupId>io.cygnuxltb</groupId>
 				<artifactId>market-api</artifactId>
 				<version>${horizon.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.cygnuslab</groupId>
+				<groupId>io.cygnuxltb</groupId>
 				<artifactId>trader-api</artifactId>
 				<version>${horizon.version}</version>
 			</dependency>

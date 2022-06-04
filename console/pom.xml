@@ -5,8 +5,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>io.cygnuslab</groupId>
-		<artifactId>cygnus</artifactId>
+		<groupId>io.cygnuxltb</groupId>
+		<artifactId>cygnux</artifactId>
 		<version>1.0</version>
 	</parent>
 
@@ -72,7 +72,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.cygnuslab</groupId>
+			<groupId>io.cygnuxltb</groupId>
 			<artifactId>repository</artifactId>
 			<version>${project.version}</version>
 		</dependency>
