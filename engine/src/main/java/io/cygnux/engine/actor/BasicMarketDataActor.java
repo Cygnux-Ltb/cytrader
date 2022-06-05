@@ -1,4 +1,4 @@
-package io.cygnus.engine.actor;
+package io.cygnux.engine.actor;
 
 import io.horizon.market.data.impl.BasicMarketData;
 

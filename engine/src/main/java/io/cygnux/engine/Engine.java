@@ -1,4 +1,4 @@
-package io.cygnus.engine;
+package io.cygnux.engine;
 
 public interface Engine {
 

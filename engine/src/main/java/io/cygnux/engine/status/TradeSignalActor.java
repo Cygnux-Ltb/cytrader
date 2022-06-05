@@ -1,4 +1,4 @@
-package io.cygnus.engine.status;
+package io.cygnux.engine.status;
 
 import org.eclipse.collections.api.list.MutableList;
 

@@ -1,4 +1,4 @@
-package io.cygnus.engine.barrier;
+package io.cygnux.engine.barrier;
 
 import javax.annotation.concurrent.NotThreadSafe;
 

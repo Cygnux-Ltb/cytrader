@@ -1,4 +1,4 @@
-package io.cygnus.engine.strategy;
+package io.cygnux.engine.strategy;
 
 import static java.lang.Math.abs;
 
@@ -7,11 +7,11 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import io.cygnux.engine.trader.OrderKeeper;
 import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
 import org.slf4j.Logger;
 
-import io.cygnus.engine.position.PositionKeeper;
-import io.cygnus.engine.trader.OrderKeeper;
+import io.cygnux.engine.position.PositionKeeper;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.market.data.MarketDataKeeper.MarketDataSnapshot;

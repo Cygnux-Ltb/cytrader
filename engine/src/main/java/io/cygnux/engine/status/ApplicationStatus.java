@@ -1,4 +1,4 @@
-package io.cygnus.engine.status;
+package io.cygnux.engine.status;
 
 import static io.mercury.common.collections.MutableLists.newFastList;
 

@@ -1,4 +1,4 @@
-package io.cygnus.engine.trader;
+package io.cygnux.engine.trader;
 
 import javax.annotation.Nonnull;
 

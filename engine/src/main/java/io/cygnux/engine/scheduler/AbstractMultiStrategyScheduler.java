@@ -1,4 +1,4 @@
-package io.cygnus.engine.scheduler;
+package io.cygnux.engine.scheduler;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 

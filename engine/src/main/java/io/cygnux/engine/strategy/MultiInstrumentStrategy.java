@@ -1,4 +1,4 @@
-package io.cygnus.engine.strategy;
+package io.cygnux.engine.strategy;
 
 import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
 import static java.util.stream.Collectors.toSet;

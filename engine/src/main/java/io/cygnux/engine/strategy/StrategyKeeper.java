@@ -1,4 +1,4 @@
-package io.cygnus.engine.strategy;
+package io.cygnux.engine.strategy;
 
 import java.io.Serializable;
 
