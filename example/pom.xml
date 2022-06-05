@@ -24,7 +24,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>io.cygnus.example.launch.ExampleLauncher</mainClass>
+							<mainClass>io.cygnux.example.launch.ExampleLauncher</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
