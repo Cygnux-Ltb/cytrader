@@ -38,7 +38,7 @@
 		<java.version>17</java.version>
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
-		<spring.boot.version>2.6.3</spring.boot.version>
+		<spring.boot.version>2.7.0</spring.boot.version>
 		<mercury.version>1.0-SNAPSHOT</mercury.version>
 		<horizon.version>1.0</horizon.version>
 		<avro.version>1.11.0</avro.version>
@@ -50,7 +50,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.9.0</version>
+					<version>3.10.1</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -82,9 +82,8 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.22</version>
+				<version>1.18.24</version>
 			</dependency>
-
 			<!-- see https://github.com/yellow013/mercury.git -->
 			<!-- mercury commons -->
 			<dependency>
