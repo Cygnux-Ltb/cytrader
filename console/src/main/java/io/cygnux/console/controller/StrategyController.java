@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnux.console.controller.base.BaseController;
-import io.cygnux.repository.entity.CygStrategy;
-import io.cygnux.repository.entity.CygStrategyParam;
+import io.cygnux.repository.entities.internal.InStrategy;
+import io.cygnux.repository.entities.internal.InStrategyParam;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 @RestController("/strategy")
@@ -33,7 +33,7 @@ public class StrategyController extends BaseController {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<List<CygStrategy>> getStrategys() {
+	public ResponseEntity<List<InStrategy>> getStrategys() {
 		return responseOf(service.getStrategys());
 	}
 
@@ -43,8 +43,8 @@ public class StrategyController extends BaseController {
 	 * @param strategyId
 	 * @return
 	 */
-	public ResponseEntity<CygStrategy> getStrategyById(@RequestParam("strategyId") int strategyId) {
-		CygStrategy strategy = service.getStrategy(strategyId);
+	public ResponseEntity<InStrategy> getStrategyById(@RequestParam("strategyId") int strategyId) {
+		InStrategy strategy = service.getStrategy(strategyId);
 		return responseOf(strategy);
 	}
 
@@ -56,7 +56,7 @@ public class StrategyController extends BaseController {
 	 */
 	@GetMapping("/param")
 	public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
-		List<CygStrategyParam> strategyParams = service.getStrategyParams(strategyId);
+		List<InStrategyParam> strategyParams = service.getStrategyParams(strategyId);
 		return responseOf(strategyParams);
 	}
 
@@ -68,7 +68,7 @@ public class StrategyController extends BaseController {
 	 */
 	@PutMapping("/{strategyId}/param")
 	public ResponseEntity<Object> putParamsByStrategyId(@RequestBody HttpServletRequest request) {
-		CygStrategyParam param = bodyToObject(request, CygStrategyParam.class);
+		InStrategyParam param = bodyToObject(request, InStrategyParam.class);
 		log.info("putParamsByStrategyId recv : {}", param);
 		return param == null ? badRequest() : service.putStrategyParam(param) ? ok() : internalServerError();
 	}

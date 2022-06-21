@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 
 import io.cygnux.repository.dao.InstrumentDao;
 import io.cygnux.repository.dao.InstrumentSettlementDao;
-import io.cygnux.repository.entity.CygInstrument;
-import io.cygnux.repository.entity.CygInstrumentStatic;
+import io.cygnux.repository.entities.internal.InInstrument;
+import io.cygnux.repository.entities.internal.InInstrumentStatic;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 
@@ -35,7 +35,7 @@ public final class InstrumentService {
 	 * @param instrumentCode
 	 * @return
 	 */
-	public List<CygInstrument> getInstrument(@Nonnull String instrumentCode) {
+	public List<InInstrument> getInstrument(@Nonnull String instrumentCode) {
 		return exec(() -> dao.query(instrumentCode), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [InstrumentEntity] return 0 row, instrumentCode=={}", instrumentCode);
@@ -54,7 +54,7 @@ public final class InstrumentService {
 	 * @param tradingDay
 	 * @return
 	 */
-	public List<CygInstrumentStatic> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
+	public List<InInstrumentStatic> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
 		return exec(() -> settlementDao.query(instrumentCode, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [InstrumentSettlementEntity] return 0 row, instrumentCode=={}, tradingDay=={}",
@@ -74,7 +74,7 @@ public final class InstrumentService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putInstrument(@Nonnull CygInstrument entity) {
+	public boolean putInstrument(@Nonnull InInstrument entity) {
 		return execBool(() -> dao.save(entity), o -> {
 			log.info("save [InstrumentEntity] success, entity -> {}", entity);
 			return true;
@@ -89,7 +89,7 @@ public final class InstrumentService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putInstrumentSettlement(@Nonnull CygInstrumentStatic entity) {
+	public boolean putInstrumentSettlement(@Nonnull InInstrumentStatic entity) {
 		return execBool(() -> settlementDao.save(entity), o -> {
 			log.info("save [InstrumentSettlementEntity] success -> {}", entity);
 			return true;

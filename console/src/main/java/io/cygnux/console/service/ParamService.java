@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import io.cygnux.console.service.bean.ValidationRule;
-import io.cygnux.repository.entity.CygStrategyParam;
+import io.cygnux.repository.entities.internal.InStrategyParam;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonParser;
@@ -48,7 +48,7 @@ public class ParamService {
 	 * @param strategyParam
 	 * @return
 	 */
-	public int updateParamSafe(CygStrategyParam strategyParam) {
+	public int updateParamSafe(InStrategyParam strategyParam) {
 		if (validationStrategyParam(strategyParam)) {
 			if (strategyService.putStrategyParam(strategyParam)) {
 				return 1;
@@ -60,7 +60,7 @@ public class ParamService {
 		}
 	}
 
-	private boolean validationStrategyParam(CygStrategyParam param) {
+	private boolean validationStrategyParam(InStrategyParam param) {
 		String paramName = param.getParamName();
 		ValidationRule rule = validationRuleMap.get(paramName);
 		if (!validationParamName(paramName, rule)) {

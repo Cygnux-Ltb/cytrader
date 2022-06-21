@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import io.cygnux.console.service.dto.pack.OutboxMessage;
 import io.cygnux.console.service.dto.pack.OutboxTitle;
 import io.cygnux.repository.db.CommonDaoFactory;
-import io.cygnux.repository.entity.CygInfoEntity;
+import io.cygnux.repository.entities.internal.InProduct;
 import io.mercury.common.datetime.pattern.TimePattern;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
@@ -81,9 +81,9 @@ public class CygnusInitService {
 
 	private void sendEndTimeBinner() {
 
-		List<CygInfoEntity> all = service.getAll();
+		List<InProduct> all = service.getAll();
 
-		for (CygInfoEntity cyg : all) {
+		for (InProduct cyg : all) {
 			var publisher = OutboxPublisherGroup.GROUP_INSTANCE.getMember(cyg.getCygId());
 
 			String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.EndTimeBinner.name(), null));

@@ -1,62 +1,58 @@
 package io.cygnux.console.service;
 
-import static io.mercury.common.functional.Functions.exec;
-import static io.mercury.common.functional.Functions.execBool;
-
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Resource;
-
+import io.cygnux.repository.dao.BarDao;
+import io.cygnux.repository.entities.internal.InBar;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
-import io.cygnux.repository.dao.BarDao;
-import io.cygnux.repository.entity.CygBar;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import javax.annotation.Nonnull;
+import javax.annotation.Resource;
+import java.util.List;
+
+import static io.mercury.common.functional.Functions.exec;
+import static io.mercury.common.functional.Functions.execBool;
 
 @Service
 public class BarService {
 
-	private final Logger log = Log4j2LoggerFactory.getLogger(BarService.class);
+    private final Logger log = Log4j2LoggerFactory.getLogger(BarService.class);
 
-	@Resource
-	private BarDao dao;
+    @Resource
+    private BarDao dao;
 
-	/**
-	 * 
-	 * @param instrumentCode
-	 * @param tradingDay
-	 * @return
-	 */
-	public List<CygBar> getBars(@Nonnull String instrumentCode, int tradingDay) {
-		return exec(() -> dao.query(instrumentCode, tradingDay), list -> {
-			if (CollectionUtils.isEmpty(list))
-				log.warn("query [BarEntity] return 0 row, instrumentCode=={}, tradingDay=={}", instrumentCode,
-						tradingDay);
-			else
-				log.info("query [BarEntity] where instrumentCode=={}, tradingDay=={}, result row -> {}", instrumentCode,
-						tradingDay, list.size());
-			return list;
-		}, e -> {
-			log.error("query [BarEntity] exception, instrumentCode=={}, tradingDay=={}", instrumentCode, tradingDay, e);
-		});
-	}
+    /**
+     * @param instrumentCode
+     * @param tradingDay
+     * @return
+     */
+    public List<InBar> getBars(@Nonnull String instrumentCode, int tradingDay) {
+        return exec(() -> dao.query(instrumentCode, tradingDay), list -> {
+            if (CollectionUtils.isEmpty(list))
+                log.warn("query [BarEntity] return 0 row, instrumentCode=={}, tradingDay=={}", instrumentCode,
+                        tradingDay);
+            else
+                log.info("query [BarEntity] where instrumentCode=={}, tradingDay=={}, result row -> {}", instrumentCode,
+                        tradingDay, list.size());
+            return list;
+        }, e -> {
+            log.error("query [BarEntity] exception, instrumentCode=={}, tradingDay=={}", instrumentCode, tradingDay, e);
+        });
+    }
 
-	/**
-	 * 
-	 * @param entity
-	 * @return
-	 */
-	public boolean putBar(@Nonnull CygBar entity) {
-		return execBool(() -> dao.save(entity), o -> {
-			log.info("save [BarEntity] success -> {}", entity);
-			return true;
-		}, e -> {
-			log.error("save [BarEntity] failure -> {}", entity, e);
-			return false;
-		});
-	}
+    /**
+     * @param bar
+     * @return
+     */
+    public boolean putBar(@Nonnull InBar bar) {
+        return execBool(() -> dao.save(bar), o -> {
+            log.info("save [BarEntity] success -> {}", bar);
+            return true;
+        }, e -> {
+            log.error("save [BarEntity] failure -> {}", bar, e);
+            return false;
+        });
+    }
 
 }

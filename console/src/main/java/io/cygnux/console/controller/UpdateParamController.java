@@ -19,7 +19,7 @@ import io.cygnux.console.controller.base.BaseController;
 import io.cygnux.console.service.ParamService;
 import io.cygnux.console.service.dto.pack.OutboxMessage;
 import io.cygnux.console.service.dto.pack.OutboxTitle;
-import io.cygnux.repository.entity.CygStrategyParam;
+import io.cygnux.repository.entities.internal.InStrategyParam;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import io.mercury.transport.api.Publisher;
@@ -43,7 +43,7 @@ public class UpdateParamController extends BaseController {
 			@RequestBody HttpServletRequest request) {
 
 		// 将参数转换为List
-		List<CygStrategyParam> strategyParams = bodyToList(request, CygStrategyParam.class);
+		List<InStrategyParam> strategyParams = bodyToList(request, InStrategyParam.class);
 		// 获取Publisher
 		Publisher<String, String> publisher = GROUP_INSTANCE.getMember(cygId);
 		// 转换为需要发送的发件箱消息
@@ -61,7 +61,7 @@ public class UpdateParamController extends BaseController {
 	 */
 	@PutMapping(path = "/safe", consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	public ResponseEntity<Object> updateParamSafe(@RequestBody HttpServletRequest request) {
-		var strategyParam = bodyToObject(request, CygStrategyParam.class);
+		var strategyParam = bodyToObject(request, InStrategyParam.class);
 		if (strategyParam == null)
 			return badRequest();
 		log.info("method updateParamSafe recv : {}", strategyParam);

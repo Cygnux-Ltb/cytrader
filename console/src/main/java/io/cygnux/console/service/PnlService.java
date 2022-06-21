@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 import io.cygnux.repository.dao.PnlDailyDao;
 import io.cygnux.repository.dao.PnlDailySettlementDao;
-import io.cygnux.repository.entity.CygPnlDaily;
-import io.cygnux.repository.entity.CygPnlDailySettlement;
+import io.cygnux.repository.entities.internal.InPnlDaily;
+import io.cygnux.repository.entities.internal.InPnlDailySettlement;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 @Service
@@ -34,7 +34,7 @@ public final class PnlService {
 	 * @param tradingDay
 	 * @return
 	 */
-	public List<CygPnlDaily> getPnlDailys(int strategyId, int tradingDay) {
+	public List<InPnlDaily> getPnlDailys(int strategyId, int tradingDay) {
 		return exec(() -> dao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [PnlDailyEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId, tradingDay);
@@ -54,7 +54,7 @@ public final class PnlService {
 	 * @param tradingDay
 	 * @return
 	 */
-	public List<CygPnlDailySettlement> getPnlDailySettlements(int strategyId, int tradingDay) {
+	public List<InPnlDailySettlement> getPnlDailySettlements(int strategyId, int tradingDay) {
 		return exec(() -> settlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
 			if (CollectionUtils.isEmpty(list))
 				log.warn("query [PnlDailySettlementEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId,
@@ -74,7 +74,7 @@ public final class PnlService {
 	 * @param pnlDaily
 	 * @return
 	 */
-	public boolean putPnlDaily(CygPnlDaily pnlDaily) {
+	public boolean putPnlDaily(InPnlDaily pnlDaily) {
 		return execBool(() -> dao.save(pnlDaily), o -> {
 			log.info("save [PnlDailyEntity] success -> {}", pnlDaily);
 			return true;
@@ -89,7 +89,7 @@ public final class PnlService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putPnlDailySettlement(CygPnlDailySettlement entity) {
+	public boolean putPnlDailySettlement(InPnlDailySettlement entity) {
 		return execBool(() -> settlementDao.save(entity), o -> {
 			log.info("save [PnlDailySettlementEntity] success -> {}", entity);
 			return true;

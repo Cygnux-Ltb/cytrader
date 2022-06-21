@@ -1,6 +1,5 @@
 package io.cygnux.console.controller;
 
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Resource;
@@ -19,7 +18,7 @@ import io.cygnux.console.controller.base.BaseController;
 import io.cygnux.repository.entities.internal.InProduct;
 
 @RestController("/product")
-public class CygController extends BaseController {
+public class ProductController extends BaseController {
 
     /**
      * 执行具体操作的executor

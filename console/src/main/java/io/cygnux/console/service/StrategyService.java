@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import io.cygnux.console.service.base.BaseService;
 import io.cygnux.repository.dao.StrategyDao;
 import io.cygnux.repository.dao.StrategyParamDao;
-import io.cygnux.repository.entity.CygStrategy;
-import io.cygnux.repository.entity.CygStrategyParam;
+import io.cygnux.repository.entities.internal.InStrategy;
+import io.cygnux.repository.entities.internal.InStrategyParam;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
@@ -34,7 +34,7 @@ public final class StrategyService extends BaseService {
 	 * 
 	 * @return
 	 */
-	public List<CygStrategy> getStrategys() {
+	public List<InStrategy> getStrategys() {
 		return exec(() -> dao.findAll(), list -> list, e -> {
 			log.error("query [StrategyEntity] exception", e);
 		});
@@ -45,7 +45,7 @@ public final class StrategyService extends BaseService {
 	 * @param strategyId
 	 * @return
 	 */
-	public CygStrategy getStrategy(int strategyId) {
+	public InStrategy getStrategy(int strategyId) {
 		if (checkStrategyId(strategyId, log, "query [StrategyEntity] param error"))
 			Throws.illegalArgument("strategyId");
 		return dao.queryByStrategyId(strategyId);
@@ -56,7 +56,7 @@ public final class StrategyService extends BaseService {
 	 * @param strategyName
 	 * @return
 	 */
-	public List<CygStrategy> getStrategy(String strategyName) {
+	public List<InStrategy> getStrategy(String strategyName) {
 		if (checkStrategyName(strategyName, log, "query [StrategyEntity] param error"))
 			Throws.illegalArgument("strategyName");
 		return dao.queryByStrategyName(strategyName);
@@ -67,7 +67,7 @@ public final class StrategyService extends BaseService {
 	 * @param strategyId
 	 * @return
 	 */
-	public List<CygStrategyParam> getStrategyParams(int strategyId) {
+	public List<InStrategyParam> getStrategyParams(int strategyId) {
 		if (checkStrategyId(strategyId, log, "query [StrategyParamEntity] param error"))
 			Throws.illegalArgument("strategyId");
 		return exec(() -> paramDao.queryByStrategyId(strategyId), list -> {
@@ -86,7 +86,7 @@ public final class StrategyService extends BaseService {
 	 * @param strategyName
 	 * @return
 	 */
-	public List<CygStrategyParam> getStrategyParams(String strategyName) {
+	public List<InStrategyParam> getStrategyParams(String strategyName) {
 		if (checkStrategyName(strategyName, log, "query [StrategyParamEntity] param error"))
 			Throws.illegalArgument("strategyId");
 		return exec(() -> paramDao.queryByStrategyName(strategyName), list -> {
@@ -106,7 +106,7 @@ public final class StrategyService extends BaseService {
 	 * @param strategyName
 	 * @return
 	 */
-	public List<CygStrategyParam> getDefaultStrategyParams() {
+	public List<InStrategyParam> getDefaultStrategyParams() {
 		return getStrategyParams(0);
 	}
 
@@ -115,7 +115,7 @@ public final class StrategyService extends BaseService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putStrategy(CygStrategy entity) {
+	public boolean putStrategy(InStrategy entity) {
 		return execBool(() -> dao.save(entity), o -> {
 			log.info("save [StrategyEntity] success -> {}", entity);
 			return true;
@@ -130,7 +130,7 @@ public final class StrategyService extends BaseService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putStrategyParam(CygStrategyParam entity) {
+	public boolean putStrategyParam(InStrategyParam entity) {
 		return execBool(() -> paramDao.save(entity), o -> {
 			log.info("save [StrategyParamEntity] success -> {}", entity);
 			return true;
