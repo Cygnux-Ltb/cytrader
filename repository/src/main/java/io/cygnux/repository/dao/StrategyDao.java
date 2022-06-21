@@ -1,23 +1,21 @@
 package io.cygnux.repository.dao;
 
-import java.util.List;
-
-import io.cygnux.repository.entity.CygStrategy;
+import io.cygnux.repository.entities.internal.InStrategy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
- * 
  * Strategy DAO
- * 
+ *
  * @author yellow013
- * 
  */
 @Repository
-public interface StrategyDao extends JpaRepository<CygStrategy, Integer> {
+public interface StrategyDao extends JpaRepository<InStrategy, Integer> {
 
-	public CygStrategy queryByStrategyId(int strayegyId);
+    InStrategy queryByStrategyId(int strayegyId);
 
-	public List<CygStrategy> queryByStrategyName(String strayegyName);
+    List<InStrategy> queryByStrategyName(String strayegyName);
 
 }

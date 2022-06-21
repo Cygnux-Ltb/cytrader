@@ -1,14 +1,8 @@
-package io.cygnux.repository.entity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package io.cygnux.repository.entities.internal;
 
 import io.cygnux.repository.constant.CommonColumn;
 import io.cygnux.repository.constant.EntityName;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -23,9 +17,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "cyg_account")
+@Table(name = "in_account")
 @Entity(name = EntityName.Account)
-public final class CygAccount {
+public final class InAccount {
 
 	@Id
 	@Column(name = CommonColumn.UID)
@@ -41,7 +35,7 @@ public final class CygAccount {
 	@Column(name = CommonColumn.BROKER_ID, nullable = false)
 	private String brokerId;
 
-	@Column(name = CommonColumn.INVESTOR_ID, nullable = false)
+	@Column(name = "investor_id")
 	private String investorId;
 
 	@Column(name = "adaptor_type", nullable = false)

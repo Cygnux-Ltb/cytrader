@@ -1,20 +1,14 @@
-package io.cygnux.repository.entity;
-
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package io.cygnux.repository.entities.internal;
 
 import io.cygnux.repository.constant.ColumnDefinition;
 import io.cygnux.repository.constant.CommonColumn;
 import io.cygnux.repository.constant.EntityName;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import java.util.Date;
 
 /**
  * OrderEvent Entity
@@ -25,9 +19,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "cyg_order_event")
+@Table(name = "in_order_event")
 @Entity(name = EntityName.OrderEvent)
-public final class CygOrderEvent {
+public final class InOrderEvent {
 
 	@Id
 	@Column(name = CommonColumn.UID)

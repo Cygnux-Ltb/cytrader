@@ -2,7 +2,7 @@ package io.cygnux.repository.dao;
 
 import java.util.List;
 
-import io.cygnux.repository.entity.CygOrder;
+import io.cygnux.repository.entities.internal.InOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  * 
  */
 @Repository
-public interface OrderDao extends JpaRepository<CygOrder, Long> {
+public interface OrderDao extends JpaRepository<InOrder, Long> {
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public interface OrderDao extends JpaRepository<CygOrder, Long> {
 			+ " e.tradingDay >= :startTradingDay "
 			+ " AND "
 			+ " e.tradingDay <= :endTradingDay ")
-	List<CygOrder> query(
+	List<InOrder> query(
 			@Param("strategyId") int strategyId, 
 			@Param("investorId") String investorId,
 			@Param("instrumentCode") String instrumentCode, 

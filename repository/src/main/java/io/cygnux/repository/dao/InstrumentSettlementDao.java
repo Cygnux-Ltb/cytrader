@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import io.cygnux.repository.entity.CygInstrumentStatic;
+import io.cygnux.repository.entities.internal.InInstrumentStatic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,13 +17,13 @@ import org.springframework.stereotype.Repository;
  * 
  */
 @Repository
-public interface InstrumentSettlementDao extends JpaRepository<CygInstrumentStatic, Long> {
+public interface InstrumentSettlementDao extends JpaRepository<InInstrumentStatic, Long> {
 
 	@Query("SELECT * FROM #{#entityName} e " 
 			+ " WHERE "
 			+ " e.instrumentCode LIKE :instrumentCode% " 
 			+ " AND "
 			+ " e.tradingDay = :tradingDay ")
-	List<CygInstrumentStatic> query(@Nullable String instrumentCode, int tradingDay);
+	List<InInstrumentStatic> query(@Nullable String instrumentCode, int tradingDay);
 	
 }

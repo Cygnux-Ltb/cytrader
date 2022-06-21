@@ -1,15 +1,9 @@
-package io.cygnux.repository.entity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package io.cygnux.repository.entities.internal;
 
 import io.cygnux.repository.constant.ColumnDefinition;
 import io.cygnux.repository.constant.CommonColumn;
 import io.cygnux.repository.constant.EntityName;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -24,9 +18,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "cyg_pnl_daily_settlement")
+@Table(name = "in_pnl_daily_settlement")
 @Entity(name = EntityName.PnlDailySettlement)
-public final class CygPnlDailySettlement {
+public final class InPnlDailySettlement {
 
 	@Id
 	@Column(name = CommonColumn.UID)

@@ -1,6 +1,6 @@
 package io.cygnux.repository.dao;
 
-import io.cygnux.repository.entity.CygAccount;
+import io.cygnux.repository.entities.internal.InAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,20 +8,19 @@ import java.util.List;
 
 /**
  * Account DAO
- * 
+ *
  * @author yellow013
- * 
  */
 
 @Repository
-public interface AccountDao extends JpaRepository<CygAccount, Long> {
+public interface AccountDao extends JpaRepository<InAccount, Long> {
 
-	List<CygAccount> queryByBrokerId(String brokerId);
+    List<InAccount> queryByBrokerId(String brokerId);
 
-	List<CygAccount> queryByInvestorId(String investorId);
+    List<InAccount> queryByInvestorId(String investorId);
 
-	List<CygAccount> queryByAccountId(int accountId);
+    List<InAccount> queryByAccountId(int accountId);
 
-	List<CygAccount> queryBySubAccountId(int subAccountId);
+    List<InAccount> queryBySubAccountId(int subAccountId);
 
 }

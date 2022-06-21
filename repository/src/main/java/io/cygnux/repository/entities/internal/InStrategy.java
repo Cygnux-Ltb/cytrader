@@ -1,12 +1,11 @@
-package io.cygnux.repository.entity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package io.cygnux.repository.entities.internal;
 
 import io.cygnux.repository.constant.CommonColumn;
 import io.cygnux.repository.constant.EntityName;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -20,9 +19,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "cyg_strategy")
+@Table(name = "in_strategy")
 @Entity(name = EntityName.Strategy)
-public final class CygStrategy {
+public final class InStrategy {
 
 	@Id
 	@Column(name = CommonColumn.STRATEGY_ID)

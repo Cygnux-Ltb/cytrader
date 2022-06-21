@@ -1,15 +1,9 @@
-package io.cygnux.repository.entity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package io.cygnux.repository.entities.internal;
 
 import io.cygnux.repository.constant.ColumnDefinition;
 import io.cygnux.repository.constant.CommonColumn;
 import io.cygnux.repository.constant.EntityName;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -24,9 +18,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "cyg_instrument")
+@Table(name = "in_instrument")
 @Entity(name = EntityName.Instrument)
-public final class CygInstrument {
+public final class InInstrument {
 
 	@Id
 	@Column(name = CommonColumn.UID)
