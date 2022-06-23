@@ -1,30 +1,26 @@
 package io.cygnux.console.controller;
 
-import java.util.concurrent.ConcurrentHashMap;
+import io.cygnux.console.service.ProductService;
+import io.cygnux.console.service.dto.InitFinish;
+import io.cygnux.repository.entities.ItProduct;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
+import java.util.concurrent.ConcurrentHashMap;
 
-import io.cygnux.console.service.CygInfoService;
-import io.cygnux.console.service.dto.InitFinish;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import io.cygnux.console.controller.base.BaseController;
-import io.cygnux.repository.entities.internal.InProduct;
+import static io.cygnux.console.utils.ControllerUtil.*;
+import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
 
 @RestController("/product")
-public class ProductController extends BaseController {
+public final class ProductController {
 
     /**
      * 执行具体操作的executor
      */
     @Resource
-    private CygInfoService service;
+    private ProductService service;
 
     /**
      * Get All cygInfo
@@ -32,7 +28,7 @@ public class ProductController extends BaseController {
      * @return
      */
     @GetMapping
-    public ResponseEntity<Object> getAllCygInfo() {
+    public ResponseEntity<Object> getAllProduct() {
         var list = service.getAll();
         return responseOf(list);
     }
@@ -44,7 +40,8 @@ public class ProductController extends BaseController {
      * @return
      */
     @PutMapping("/initialized")
-    public ResponseEntity<Object> putInitFinish(@RequestBody HttpServletRequest request) {
+    public ResponseEntity<Object> putInitFinish(
+            @RequestBody HttpServletRequest request) {
         InitFinish initFinish = bodyToObject(request, InitFinish.class);
         if (initFinish == null)
             return badRequest();
@@ -58,8 +55,9 @@ public class ProductController extends BaseController {
      * @return
      */
     @GetMapping("/{productId}")
-    public ResponseEntity<InProduct> getProduct(@PathParam("productId") int productId) {
-        InProduct entity = service.get(productId);
+    public ResponseEntity<ItProduct> getProduct(
+            @PathVariable("productId") int productId) {
+        ItProduct entity = service.get(productId);
         return responseOf(entity);
     }
 

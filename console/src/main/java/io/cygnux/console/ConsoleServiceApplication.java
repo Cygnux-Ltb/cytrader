@@ -10,8 +10,8 @@ import io.mercury.common.log.Log4j2Configurator.LogLevel;
 public class ConsoleServiceApplication {
 
 	static {
-		Log4j2Configurator.setLogFolder("cygnus");
-		Log4j2Configurator.setLogFilename("cygnus-service");
+		Log4j2Configurator.setLogFolder("console");
+		Log4j2Configurator.setLogFilename("console-service");
 		Log4j2Configurator.setLogLevel(LogLevel.INFO);
 	}
 

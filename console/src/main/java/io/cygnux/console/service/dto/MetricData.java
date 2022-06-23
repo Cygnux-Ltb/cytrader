@@ -27,10 +27,10 @@ public class MetricData {
 
 	@Override
 	public String toString() {
-		return new StringBuffer().append(keyId).append(",").append(interfaceType).append(",").append(exchangeCode)
-				.append(",").append(strategyId).append(",").append(lastPoint).append("<->").append(currPoint)
-				.append(",").append(lastPoint).append(",").append(currPoint).append(",").append(epochTime).append(",")
-				.append(epochTimeDiff).toString();
+		return keyId + "," + interfaceType + "," + exchangeCode +
+				"," + strategyId + "," + lastPoint + "<->" + currPoint +
+				"," + lastPoint + "," + currPoint + "," + epochTime + "," +
+				epochTimeDiff;
 	}
 
 }

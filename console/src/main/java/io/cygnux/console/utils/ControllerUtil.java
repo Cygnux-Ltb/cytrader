@@ -3,14 +3,14 @@ package io.cygnux.console.utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public final class Controllers {
+public final class ControllerUtil {
 
     /**
      * Http Status Code: 400 Bad Request
      *
      * @return
      */
-    public <T> ResponseEntity<T> badRequest() {
+    public static <T> ResponseEntity<T> badRequest() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
@@ -19,7 +19,7 @@ public final class Controllers {
      *
      * @return
      */
-    public <T> ResponseEntity<T> internalServerError() {
+    public static <T> ResponseEntity<T> internalServerError() {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
@@ -28,7 +28,7 @@ public final class Controllers {
      *
      * @return
      */
-    public <T> ResponseEntity<T> ok() {
+    public static <T> ResponseEntity<T> ok() {
         return ResponseEntity.ok().build();
     }
 
@@ -39,7 +39,7 @@ public final class Controllers {
      * @param t
      * @return
      */
-    public <T> ResponseEntity<T> responseOf(T t) {
+    public static <T> ResponseEntity<T> responseOf(T t) {
         return t == null ? internalServerError() : ResponseEntity.ok(t);
     }
 

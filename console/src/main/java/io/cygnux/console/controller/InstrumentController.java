@@ -1,30 +1,25 @@
 package io.cygnux.console.controller;
 
-import static java.util.Arrays.stream;
+import io.cygnux.console.service.InstrumentService;
+import io.cygnux.console.service.dto.InstrumentPrice;
+import io.cygnux.repository.entities.StInstrumentStatic;
+import io.mercury.common.util.StringSupport;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import io.cygnux.console.service.InstrumentService;
-import io.cygnux.console.service.dto.InstrumentPrice;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import io.cygnux.console.controller.base.BaseController;
-import io.cygnux.repository.entities.internal.InInstrument;
-import io.cygnux.repository.entities.internal.InInstrumentStatic;
-import io.mercury.common.util.StringSupport;
+import static io.cygnux.console.utils.ControllerUtil.*;
+import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.utils.ParamsValidateUtil.paramIsNull;
+import static java.util.Arrays.stream;
 
 @RestController("/instrument")
-public class InstrumentController extends BaseController {
+public final class InstrumentController {
 
     @Resource
     private InstrumentService service;
@@ -37,13 +32,13 @@ public class InstrumentController extends BaseController {
      * @return
      */
     @GetMapping("/static_info")
-    public ResponseEntity<List<InInstrumentStatic>> getSettlementPrice(
+    public ResponseEntity<List<StInstrumentStatic>> getSettlementPrice(
             @RequestParam("instrumentCode") String instrumentCode,
             @RequestParam("tradingDay") int tradingDay) {
-        if (checkParamIsNull(instrumentCode, tradingDay)) {
+        if (paramIsNull(instrumentCode, tradingDay)) {
             return badRequest();
         }
-        var instrumentSettlements = service.getInstrumentSettlement(instrumentCode, tradingDay);
+        var instrumentSettlements = service.getInstrumentStatic(instrumentCode, tradingDay);
         return responseOf(instrumentSettlements);
     }
 
@@ -57,7 +52,8 @@ public class InstrumentController extends BaseController {
      * @return
      */
     @GetMapping("/last_price")
-    public ResponseEntity<List<InstrumentPrice>> getLastPrice(@RequestParam("instrumentCodes") String instrumentCodes) {
+    public ResponseEntity<List<InstrumentPrice>> getLastPrice(
+            @RequestParam("instrumentCodes") String instrumentCodes) {
         if (StringSupport.isNullOrEmpty(instrumentCodes))
             return badRequest();
         var lastPrices = stream(instrumentCodes.split(",")).map(instrumentCode -> lastPriceMap
@@ -73,7 +69,8 @@ public class InstrumentController extends BaseController {
      * @return
      */
     @PutMapping("/last_price")
-    public ResponseEntity<Object> putLastPrice(@RequestBody HttpServletRequest request) {
+    public ResponseEntity<Object> putLastPrice(
+            @RequestBody HttpServletRequest request) {
         var price = bodyToObject(request, InstrumentPrice.class);
         if (price == null)
             return badRequest();
@@ -87,7 +84,8 @@ public class InstrumentController extends BaseController {
      * @param instrumentCode
      * @return
      */
-    public ResponseEntity<Object> getSymbolTradingFeeByName(@RequestParam("instrumentCode") String instrumentCode) {
+    public ResponseEntity<Object> getSymbolTradingFeeByName(
+            @RequestParam("instrumentCode") String instrumentCode) {
         var instrument = service.getInstrument(instrumentCode);
         return responseOf(instrument);
     }
@@ -100,8 +98,9 @@ public class InstrumentController extends BaseController {
      * @return
      */
     @GetMapping("/tradeable/{symbol}/{tradingDay}")
-    public ResponseEntity<Object> getTradeables(@RequestParam("symbol") String symbol,
-                                                @RequestParam("tradingDay") String tradingDay) {
+    public ResponseEntity<Object> getTradeables(
+            @RequestParam("symbol") String symbol,
+            @RequestParam("tradingDay") String tradingDay) {
         return responseOf(null);
     }
 

@@ -1,13 +1,12 @@
 package io.cygnux.console.controller;
 
-import static io.cygnux.console.transport.OutboxPublisherGroup.GROUP_INSTANCE;
-import static io.mercury.transport.http.base.MimeType.APPLICATION_JSON_UTF8;
-
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
+import io.cygnux.console.service.ParamService;
+import io.cygnux.console.service.dto.pack.OutboxMessage;
+import io.cygnux.console.service.dto.pack.OutboxTitle;
+import io.cygnux.repository.entities.ItParam;
+import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.serialization.json.JsonWrapper;
+import io.mercury.transport.api.Publisher;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,16 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnux.console.service.ParamService;
-import io.cygnux.console.service.dto.pack.OutboxMessage;
-import io.cygnux.console.service.dto.pack.OutboxTitle;
-import io.cygnux.repository.entities.internal.ItStrategyParam;
-import io.mercury.common.log.Log4j2LoggerFactory;
-import io.mercury.serialization.json.JsonWrapper;
-import io.mercury.transport.api.Publisher;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-@RestController("/update_param")
-public final class UpdateParamController {
+import static io.cygnux.console.transport.OutboxPublisherGroup.GROUP_INSTANCE;
+import static io.cygnux.console.utils.ControllerUtil.*;
+import static io.cygnux.console.utils.ParamsValidateUtil.bodyToList;
+import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
+import static io.mercury.transport.http.base.MimeType.APPLICATION_JSON_UTF8;
+
+@RestController("/params")
+public final class ParamsController {
 
     private final Logger log = Log4j2LoggerFactory.getLogger(getClass());
 
@@ -41,7 +42,7 @@ public final class UpdateParamController {
                                               @RequestBody HttpServletRequest request) {
 
         // 将参数转换为List
-        List<ItStrategyParam> strategyParams = bodyToList(request, ItStrategyParam.class);
+        List<ItParam> strategyParams = bodyToList(request, ItParam.class);
         // 获取Publisher
         Publisher<String, String> publisher = GROUP_INSTANCE.getMember(cygId);
         // 转换为需要发送的发件箱消息
@@ -58,7 +59,7 @@ public final class UpdateParamController {
      */
     @PutMapping(path = "/safe", consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
     public ResponseEntity<Object> updateParamSafe(@RequestBody HttpServletRequest request) {
-        var strategyParam = bodyToObject(request, ItStrategyParam.class);
+        var strategyParam = bodyToObject(request, ItParam.class);
         if (strategyParam == null)
             return badRequest();
         log.info("method updateParamSafe recv : {}", strategyParam);

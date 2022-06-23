@@ -1,7 +1,7 @@
 package io.cygnux.console.service;
 
 import io.cygnux.repository.dao.BarDao;
-import io.cygnux.repository.entities.internal.InBar;
+import io.cygnux.repository.entities.StBar;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -17,7 +17,7 @@ import static io.mercury.common.functional.Functions.execBool;
 @Service
 public class BarService {
 
-    private final Logger log = Log4j2LoggerFactory.getLogger(BarService.class);
+    private static final Logger log = Log4j2LoggerFactory.getLogger(BarService.class);
 
     @Resource
     private BarDao dao;
@@ -27,7 +27,7 @@ public class BarService {
      * @param tradingDay
      * @return
      */
-    public List<InBar> getBars(@Nonnull String instrumentCode, int tradingDay) {
+    public List<StBar> getBars(@Nonnull String instrumentCode, int tradingDay) {
         return exec(() -> dao.query(instrumentCode, tradingDay), list -> {
             if (CollectionUtils.isEmpty(list))
                 log.warn("query [BarEntity] return 0 row, instrumentCode=={}, tradingDay=={}", instrumentCode,
@@ -45,7 +45,7 @@ public class BarService {
      * @param bar
      * @return
      */
-    public boolean putBar(@Nonnull InBar bar) {
+    public boolean putBar(@Nonnull StBar bar) {
         return execBool(() -> dao.save(bar), o -> {
             log.info("save [BarEntity] success -> {}", bar);
             return true;

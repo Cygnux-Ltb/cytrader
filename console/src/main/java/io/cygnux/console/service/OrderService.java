@@ -14,15 +14,15 @@ import org.springframework.stereotype.Service;
 import io.cygnux.console.service.base.BaseService;
 import io.cygnux.repository.dao.OrderDao;
 import io.cygnux.repository.dao.OrderEventDao;
-import io.cygnux.repository.entities.internal.InOrder;
-import io.cygnux.repository.entities.internal.InOrderEvent;
+import io.cygnux.repository.entities.ItOrder;
+import io.cygnux.repository.entities.ItOrderEvent;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 @Service
 public class OrderService extends BaseService {
 
-	private final Logger log = Log4j2LoggerFactory.getLogger(OrderService.class);
+	private static final Logger log = Log4j2LoggerFactory.getLogger(OrderService.class);
 
 	@Resource
 	private OrderDao dao;
@@ -38,7 +38,7 @@ public class OrderService extends BaseService {
 	 * @param instrumentCode
 	 * @return
 	 */
-	public List<InOrder> getOrders(int strategyId, String investorId, String instrumentCode, int tradingDay) {
+	public List<ItOrder> getOrders(int strategyId, String investorId, String instrumentCode, int tradingDay) {
 		return getOrders(strategyId, investorId, instrumentCode, tradingDay, tradingDay);
 	}
 
@@ -53,7 +53,7 @@ public class OrderService extends BaseService {
 	 * @param endTradingDay
 	 * @return
 	 */
-	public List<InOrder> getOrders(int strategyId, String investorId, String instrumentCode, int startTradingDay,
+	public List<ItOrder> getOrders(int strategyId, String investorId, String instrumentCode, int startTradingDay,
 								   int endTradingDay) {
 		if (checkStrategyId(strategyId, log, queryOrderParamErrorMsg))
 			Throws.illegalArgument("strategyId");
@@ -80,7 +80,7 @@ public class OrderService extends BaseService {
 	 * @param ordSysId
 	 * @return
 	 */
-	public List<InOrderEvent> getOrderEventsByOrderSysId(long ordSysId) {
+	public List<ItOrderEvent> getOrderEventsByOrderSysId(long ordSysId) {
 		if (checkOrdSysId(ordSysId, log, "[OrderService::getOrderEventsByOrderSysId] param error"))
 			return new FastList<>();
 		return exec(() -> eventDao.queryByOrdSysId(ordSysId), list -> {
@@ -96,7 +96,7 @@ public class OrderService extends BaseService {
 	 * @param tradingDay
 	 * @return
 	 */
-	public List<InOrderEvent> getOrderEventsByTradingDay(int tradingDay) {
+	public List<ItOrderEvent> getOrderEventsByTradingDay(int tradingDay) {
 		if (checkTradingDay(tradingDay, log, "[OrderService::getOrderEventsByTradingDay] param error"))
 			return new FastList<>();
 		return exec(() -> eventDao.queryByTradingDay(tradingDay), list -> {
@@ -112,7 +112,7 @@ public class OrderService extends BaseService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putOrder(InOrder entity) {
+	public boolean putOrder(ItOrder entity) {
 		return execBool(() -> dao.save(entity), o -> {
 			log.info("[OrderDao::save] success -> {}", entity);
 			return true;
@@ -127,7 +127,7 @@ public class OrderService extends BaseService {
 	 * @param entity
 	 * @return
 	 */
-	public boolean putOrderEvent(InOrderEvent entity) {
+	public boolean putOrderEvent(ItOrderEvent entity) {
 		return execBool(() -> eventDao.save(entity), o -> {
 			log.info("[OrderEventDao::save] success -> {}", entity);
 			return true;
