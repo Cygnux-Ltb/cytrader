@@ -1,7 +1,6 @@
-package io.cygnux.repository.entities.internal;
+package io.cygnux.repository.entities;
 
 import io.cygnux.repository.constant.CommonColumn;
-import io.cygnux.repository.constant.EntityName;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,9 +17,11 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "in_product")
-@Entity(name = EntityName.CygInfo)
-public final class InProduct {
+@Table(name = "product")
+@Entity(name = ItProduct.EntityName)
+public final class ItProduct {
+
+    public final static String EntityName = "ItProduct";
 
     @Id
     @Column(name = "product_id")

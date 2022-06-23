@@ -1,6 +1,5 @@
-package io.cygnux.repository.entities.internal;
+package io.cygnux.repository.entities;
 
-import io.cygnux.repository.constant.EntityName;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +16,11 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "in_bar")
-@Entity(name = EntityName.Bar)
-public final class InBar {
+@Table(name = "st_bar")
+@Entity(name = StBar.EntityName)
+public final class StBar {
+
+	public final static String EntityName = "StBar";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,7 +72,7 @@ public final class InBar {
 	/*
 	 * Close double 19_4
 	 */
-	@Column(name = "close")
+	@Column(name = "close", nullable = false)
 	private double close;
 
 	/*

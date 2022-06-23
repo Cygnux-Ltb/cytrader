@@ -7,7 +7,7 @@ import io.mercury.common.log.Log4j2Configurator;
 import io.mercury.common.log.Log4j2Configurator.LogLevel;
 
 @SpringBootApplication
-public class CygnusServiceApplication {
+public class ConsoleServiceApplication {
 
 	static {
 		Log4j2Configurator.setLogFolder("cygnus");
@@ -16,7 +16,7 @@ public class CygnusServiceApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(CygnusServiceApplication.class, args);
+		SpringApplication.run(ConsoleServiceApplication.class, args);
 	}
 
 }

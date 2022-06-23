@@ -1,7 +1,6 @@
-package io.cygnux.repository.entities.internal;
+package io.cygnux.repository.entities;
 
 import io.cygnux.repository.constant.CommonColumn;
-import io.cygnux.repository.constant.EntityName;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +17,10 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Table(name = "in_account")
-@Entity(name = EntityName.Account)
-public final class InAccount {
+@Entity(name = ItAccount.EntityName)
+public final class ItAccount {
+
+	public final static String EntityName = "ItAccount";
 
 	@Id
 	@Column(name = CommonColumn.UID)

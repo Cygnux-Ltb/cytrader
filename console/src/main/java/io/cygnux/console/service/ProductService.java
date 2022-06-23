@@ -12,9 +12,9 @@ import io.cygnux.repository.entities.internal.InProduct;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 @Service
-public class CygInfoService {
+public class ProductService {
 
-	private final Logger log = Log4j2LoggerFactory.getLogger(CygInfoService.class);
+	private final Logger log = Log4j2LoggerFactory.getLogger(ProductService.class);
 
 	@Resource
 	private ProductDao dao;

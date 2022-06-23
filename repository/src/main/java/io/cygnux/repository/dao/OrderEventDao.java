@@ -2,7 +2,7 @@ package io.cygnux.repository.dao;
 
 import java.util.List;
 
-import io.cygnux.repository.entities.internal.InOrderEvent;
+import io.cygnux.repository.entities.ItOrderEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Repository;
  * 
  */
 @Repository
-public interface OrderEventDao extends JpaRepository<InOrderEvent, Long> {
+public interface OrderEventDao extends JpaRepository<ItOrderEvent, Long> {
 
-	List<InOrderEvent> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
+	List<ItOrderEvent> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
 
-	List<InOrderEvent> queryByTradingDay(int tradingDay);
+	List<ItOrderEvent> queryByTradingDay(int tradingDay);
 
-	List<InOrderEvent> queryByOrdSysId(long ordSysId);
+	List<ItOrderEvent> queryByOrdSysId(long ordSysId);
 
 }

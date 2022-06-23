@@ -2,7 +2,7 @@ package io.cygnux.repository.dao;
 
 import java.util.List;
 
-import io.cygnux.repository.entities.internal.InOrder;
+import io.cygnux.repository.entities.ItOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  * 
  */
 @Repository
-public interface OrderDao extends JpaRepository<InOrder, Long> {
+public interface OrderDao extends JpaRepository<ItOrder, Long> {
 
 	/**
 	 * 
@@ -27,7 +27,7 @@ public interface OrderDao extends JpaRepository<InOrder, Long> {
 	 * @param endTradingDay
 	 * @return
 	 */
-	@Query("SELECT * FROM #{#entityName} e WHERE "
+	@Query("SELECT '*' FROM #{#entityName} e WHERE "
 			+ " e.strategyId = :strategyId "
 			+ " AND "
 			+ " e.investorId LIKE :investorId "
@@ -37,7 +37,7 @@ public interface OrderDao extends JpaRepository<InOrder, Long> {
 			+ " e.tradingDay >= :startTradingDay "
 			+ " AND "
 			+ " e.tradingDay <= :endTradingDay ")
-	List<InOrder> query(
+	List<ItOrder> query(
 			@Param("strategyId") int strategyId, 
 			@Param("investorId") String investorId,
 			@Param("instrumentCode") String instrumentCode, 

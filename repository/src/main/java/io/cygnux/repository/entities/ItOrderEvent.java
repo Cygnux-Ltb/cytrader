@@ -1,8 +1,7 @@
-package io.cygnux.repository.entities.internal;
+package io.cygnux.repository.entities;
 
 import io.cygnux.repository.constant.ColumnDefinition;
 import io.cygnux.repository.constant.CommonColumn;
-import io.cygnux.repository.constant.EntityName;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +19,10 @@ import java.util.Date;
 @Setter
 @Accessors(chain = true)
 @Table(name = "in_order_event")
-@Entity(name = EntityName.OrderEvent)
-public final class InOrderEvent {
+@Entity(name = ItOrderEvent.EntityName)
+public final class ItOrderEvent {
+
+	public final static String EntityName = "ItOrderEvent";
 
 	@Id
 	@Column(name = CommonColumn.UID)
