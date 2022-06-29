@@ -16,7 +16,7 @@ import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.strategy.Strategy;
 import io.horizon.trader.transport.outbound.AdaptorReport;
 import io.mercury.common.datetime.EpochTime;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
 
@@ -66,7 +66,7 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, K extends P
 
 	@Override
 	public Strategy<M> addAdaptor(Adaptor adaptor) {
-		Assertor.nonNull(adaptor, "adaptor");
+		Asserter.nonNull(adaptor, "adaptor");
 		this.adaptor = adaptor;
 		return this;
 	}

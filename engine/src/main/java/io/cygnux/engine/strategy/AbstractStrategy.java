@@ -36,7 +36,7 @@ import io.horizon.trader.transport.inbound.QueryPositions;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.fsm.EnableableComponent;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
@@ -80,9 +80,9 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 
 	protected AbstractStrategy(int strategyId, @Nonnull String strategyName, @Nonnull SubAccount subAccount,
 			@Nullable Params<K> params) {
-		Assertor.nonNull(subAccount, "subAccount");
-		Assertor.atWithinRange(strategyId, 1, Strategy.MAX_STRATEGY_ID, "strategyId");
-		Assertor.nonEmpty(strategyName, "strategyName");
+		Asserter.nonNull(subAccount, "subAccount");
+		Asserter.atWithinRange(strategyId, 1, Strategy.MAX_STRATEGY_ID, "strategyId");
+		Asserter.nonEmpty(strategyName, "strategyName");
 		this.strategyId = strategyId;
 		this.strategyName = strategyName;
 		this.subAccount = subAccount;
@@ -127,7 +127,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 
 	@Override
 	public Strategy<M> initialize(@Nonnull Supplier<Boolean> initializer) {
-		Assertor.nonNull(initializer, "initializer");
+		Asserter.nonNull(initializer, "initializer");
 		this.initSuccess = initializer.get();
 		log.info("Initialize result initSuccess==[{}]", initSuccess);
 		// TODO 设置StrategyKeeper

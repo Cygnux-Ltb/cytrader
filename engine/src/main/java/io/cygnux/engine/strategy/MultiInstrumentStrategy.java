@@ -16,7 +16,7 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.strategy.Strategy;
-import io.mercury.common.lang.Assertor;
+import io.mercury.common.lang.Asserter;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
@@ -49,7 +49,7 @@ public abstract class MultiInstrumentStrategy<M extends MarketData, K extends Pa
 
 	@Override
 	public Strategy<M> addAdaptor(Adaptor adaptor) {
-		Assertor.nonNull(adaptor, "adaptor");
+		Asserter.nonNull(adaptor, "adaptor");
 		this.adaptor = adaptor;
 		log.info("added adaptor, strategyId -> {}, strategyName -> {}, adaptorId -> {}", strategyId, strategyName,
 				adaptor.getAdaptorId());
