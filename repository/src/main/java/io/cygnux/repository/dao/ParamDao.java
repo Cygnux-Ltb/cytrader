@@ -13,7 +13,7 @@ import java.util.List;
  * 
  */
 @Repository
-public interface StrategyParamDao extends JpaRepository<ItParam, Long> {
+public interface ParamDao extends JpaRepository<ItParam, Long> {
 
 	List<ItParam> queryByStrategyId(int strategyId);
 
