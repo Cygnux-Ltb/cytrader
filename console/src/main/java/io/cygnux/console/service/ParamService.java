@@ -1,10 +1,13 @@
 package io.cygnux.console.service;
 
 import io.cygnux.console.service.bean.ValidationRule;
+import io.cygnux.repository.dao.ParamDao;
 import io.cygnux.repository.entities.ItParam;
 import io.mercury.common.character.Charsets;
+import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonParser;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
@@ -17,6 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import static io.cygnux.console.utils.ParamsValidateUtil.checkStrategyId;
+import static io.cygnux.console.utils.ParamsValidateUtil.checkStrategyName;
+import static io.mercury.common.functional.Functions.exec;
+import static io.mercury.common.functional.Functions.execBool;
+
 @Component
 public class ParamService {
 
@@ -25,7 +33,7 @@ public class ParamService {
     private static final Map<String, ValidationRule> validationRuleMap = new HashMap<>();
 
     @Resource
-    private StrategyService strategyService;
+    private ParamDao dao;
 
     static {
         try (InputStream inputStream = ParamService.class.getResourceAsStream("validation_rules.json")) {
@@ -48,13 +56,16 @@ public class ParamService {
      */
     public int updateParamSafe(ItParam param) {
         if (validationStrategyParam(param)) {
-            if (strategyService.putStrategyParam(param)) {
-                return 0;
-            } else {
-                return 1;
+            try {
+                ItParam saved = dao.save(param);
+                if (saved == null) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            } catch (Exception e) {
+                return -1;
             }
-        } else {
-            return -1;
         }
     }
 
@@ -143,6 +154,66 @@ public class ParamService {
             }
         }
         return true;
+    }
+
+    /**
+     * @return
+     */
+    public List<ItParam> getDefaultStrategyParams() {
+        return getStrategyParams(0);
+    }
+
+
+    /**
+     * @param strategyId
+     * @return
+     */
+    public List<ItParam> getStrategyParams(int strategyId) {
+        if (checkStrategyId(strategyId, log, "query [StrategyParamEntity] param error"))
+            Throws.illegalArgument("strategyId");
+        return exec(() -> dao.queryByStrategyId(strategyId), list -> {
+            if (CollectionUtils.isEmpty(list)) {
+                log.warn("query [StrategyParamEntity] return 0 row, strategyId=={}", strategyId);
+            } else
+                log.info("query [StrategyParamEntity] where strategyId=={}, result row -> {}", strategyId, list.size());
+            return list;
+        }, e -> {
+            log.error("query [StrategyParamEntity] exception, strategyId=={}", strategyId, e);
+        });
+    }
+
+
+    /**
+     * @param strategyName
+     * @return
+     */
+    public List<ItParam> getStrategyParams(String strategyName) {
+        if (checkStrategyName(strategyName, log, "query [StrategyParamEntity] param error"))
+            Throws.illegalArgument("strategyId");
+        return exec(() -> dao.queryByStrategyName(strategyName), list -> {
+            if (CollectionUtils.isEmpty(list)) {
+                log.warn("query [StrategyParamEntity] return 0 row, strategyName=={}", strategyName);
+            } else
+                log.info("query [StrategyParamEntity] where strategyName=={}, result row -> {}", strategyName,
+                        list.size());
+            return list;
+        }, e -> {
+            log.error("query [StrategyParamEntity] exception, strategyName=={}", strategyName, e);
+        });
+    }
+
+    /**
+     * @param entity
+     * @return
+     */
+    public boolean putStrategyParam(ItParam entity) {
+        return execBool(() -> dao.save(entity), o -> {
+            log.info("save [StrategyParamEntity] success -> {}", entity);
+            return true;
+        }, e -> {
+            log.error("save [StrategyParamEntity] failure -> {}", entity, e);
+            return false;
+        });
     }
 
     public static void main(String[] args) {

@@ -11,7 +11,6 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
-import io.cygnux.console.service.base.BaseService;
 import io.cygnux.repository.dao.OrderDao;
 import io.cygnux.repository.dao.OrderEventDao;
 import io.cygnux.repository.entities.ItOrder;
@@ -20,7 +19,7 @@ import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 @Service
-public class OrderService extends BaseService {
+public class OrderService {
 
 	private static final Logger log = Log4j2LoggerFactory.getLogger(OrderService.class);
 

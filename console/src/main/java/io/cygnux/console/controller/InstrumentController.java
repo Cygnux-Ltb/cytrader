@@ -91,16 +91,16 @@ public final class InstrumentController {
     }
 
     /**
-     * Get [TradeableInstrument] for [symbol] and [tradingDay]
+     * Get [TradableInstrument] for [symbol] and [tradingDay]
      *
      * @param symbol
      * @param tradingDay
      * @return
      */
-    @GetMapping("/tradeable/{symbol}/{tradingDay}")
-    public ResponseEntity<Object> getTradeables(
-            @RequestParam("symbol") String symbol,
-            @RequestParam("tradingDay") String tradingDay) {
+    @GetMapping("/tradable/{symbol}/{tradingDay}")
+    public ResponseEntity<Object> getTradableInstrument(
+            @PathVariable("symbol") String symbol,
+            @PathVariable("tradingDay") String tradingDay) {
         return responseOf(null);
     }
 

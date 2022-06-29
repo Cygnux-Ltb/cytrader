@@ -34,7 +34,8 @@ public final class OrderController {
      */
     @GetMapping
     public ResponseEntity<Object> getOrder(@RequestParam("strategyId") int strategyId,
-                                           @RequestParam("investorId") String investorId, @RequestParam("instrumentCode") String instrumentCode,
+                                           @RequestParam("investorId") String investorId,
+                                           @RequestParam("instrumentCode") String instrumentCode,
                                            @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(strategyId, tradingDay, investorId, instrumentCode)) {
             return badRequest();
