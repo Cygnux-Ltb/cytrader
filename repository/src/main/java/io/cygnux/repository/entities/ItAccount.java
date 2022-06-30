@@ -7,39 +7,37 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
- * 
  * Account Entity
- * 
- * @author yellow013
  *
+ * @author yellow013
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "in_account")
-@Entity(name = ItAccount.EntityName)
-public final class ItAccount {
+@Table(name = "internal_account")
+@Entity(name = InternalAccount.EntityName)
+public final class InternalAccount {
 
-	public final static String EntityName = "ItAccount";
+    public final static String EntityName = "ItAccount";
 
-	@Id
-	@Column(name = CommonColumn.UID)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long uid;
+    @Id
+    @Column(name = CommonColumn.UID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long uid;
 
-	@Column(name = "sub_account_id", nullable = false)
-	private int subAccountId;
+    @Column(name = "sub_account_id", nullable = false)
+    private int subAccountId;
 
-	@Column(name = "account_id", nullable = false)
-	private int accountId;
+    @Column(name = "account_id", nullable = false)
+    private int accountId;
 
-	@Column(name = CommonColumn.BROKER_ID, nullable = false)
-	private String brokerId;
+    @Column(name = CommonColumn.BROKER_ID, nullable = false)
+    private String brokerId;
 
-	@Column(name = "investor_id")
-	private String investorId;
+    @Column(name = "investor_id")
+    private String investorId;
 
-	@Column(name = "adaptor_type", nullable = false)
-	private String adaptorType;
+    @Column(name = "adaptor_type", nullable = false)
+    private String adaptorType;
 
 }
