@@ -9,18 +9,16 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 
  * Instrument DAO
- * 
+ *
  * @author yellow013
- * 
  */
 @Repository
 public interface InstrumentDao extends JpaRepository<StInstrument, Long> {
 
-	@Query("SELECT '*' FROM #{#entityName} e "
-			+ " WHERE "
-			+ "e.instrumentCode LIKE :instrumentCode ")
-	List<StInstrument> query(@Nullable String instrumentCode);
+    @Query("SELECT '*' FROM #{#entityName} e "
+            + " WHERE "
+            + "e.instrumentCode LIKE :instrumentCode ")
+    List<StInstrument> query(@Nullable String instrumentCode);
 
 }

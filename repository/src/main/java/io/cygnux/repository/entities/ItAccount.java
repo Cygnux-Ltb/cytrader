@@ -14,9 +14,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "internal_account")
-@Entity(name = InternalAccount.EntityName)
-public final class InternalAccount {
+@Table(name = "it_account")
+@Entity(name = ItAccount.EntityName)
+public final class ItAccount {
 
     public final static String EntityName = "ItAccount";
 

@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 
 /**
  * PnlSettlementDaily DAO
- * 
+ *
  * @author yellow013
- * 
  */
 @Repository
 public interface PnlDailySettlementDao extends JpaRepository<StPnlSettlement, Long> {
 
-	List<StPnlSettlement> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
+    List<StPnlSettlement> queryByStrategyIdAndTradingDay(int strategyId,
+                                                         int tradingDay);
 
 }

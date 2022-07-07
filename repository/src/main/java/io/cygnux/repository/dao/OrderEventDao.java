@@ -8,17 +8,17 @@ import org.springframework.stereotype.Repository;
 
 /**
  * OrderEvent DAO
- * 
+ *
  * @author yellow013
- * 
  */
 @Repository
 public interface OrderEventDao extends JpaRepository<ItOrderEvent, Long> {
 
-	List<ItOrderEvent> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
+    List<ItOrderEvent> queryByStrategyIdAndTradingDay(int strategyId,
+                                                      int tradingDay);
 
-	List<ItOrderEvent> queryByTradingDay(int tradingDay);
+    List<ItOrderEvent> queryByTradingDay(int tradingDay);
 
-	List<ItOrderEvent> queryByOrdSysId(long ordSysId);
+    List<ItOrderEvent> queryByOrdSysId(long ordSysId);
 
 }

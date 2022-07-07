@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RepositoryApplication {
 
     static {
-
-
+        
     }
 
     public static void main(String[] args) {
