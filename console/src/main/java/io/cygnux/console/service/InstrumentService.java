@@ -3,7 +3,7 @@ package io.cygnux.console.service;
 import io.cygnux.repository.dao.InstrumentDao;
 import io.cygnux.repository.dao.InstrumentSettlementDao;
 import io.cygnux.repository.entities.StInstrument;
-import io.cygnux.repository.entities.StInstrumentStatic;
+import io.cygnux.repository.entities.StInstrumentSettlement;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import org.apache.commons.collections4.CollectionUtils;
@@ -50,7 +50,7 @@ public final class InstrumentService {
      * @param tradingDay
      * @return
      */
-    public List<StInstrumentStatic> getInstrumentStatic(@Nonnull String instrumentCode, int tradingDay) {
+    public List<StInstrumentSettlement> getInstrumentStatic(@Nonnull String instrumentCode, int tradingDay) {
         return exec(() -> settlementDao.query(instrumentCode, tradingDay), list -> {
             if (CollectionUtils.isEmpty(list))
                 log.warn("query [InstrumentSettlementEntity] return 0 row, instrumentCode=={}, tradingDay=={}",
@@ -83,7 +83,7 @@ public final class InstrumentService {
      * @param entity
      * @return
      */
-    public boolean putInstrumentStatic(@Nonnull StInstrumentStatic entity) {
+    public boolean putInstrumentStatic(@Nonnull StInstrumentSettlement entity) {
         return execBool(() -> settlementDao.save(entity), o -> {
             log.info("save [InstrumentSettlementEntity] success -> {}", entity);
             return true;

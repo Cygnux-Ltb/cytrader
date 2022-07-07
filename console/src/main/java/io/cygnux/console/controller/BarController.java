@@ -2,6 +2,7 @@ package io.cygnux.console.controller;
 
 import io.cygnux.console.service.BarService;
 import io.cygnux.repository.entities.StBar;
+import io.mercury.common.http.MimeType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.util.List;
 import static io.cygnux.console.utils.ControllerUtil.badRequest;
 import static io.cygnux.console.utils.ControllerUtil.internalServerError;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
-import static io.mercury.transport.http.base.MimeType.APPLICATION_JSON_UTF8;
+import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController("/bar")
 public final class BarController {

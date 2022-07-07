@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>io.cygnuxltb</groupId>
-		<artifactId>cygnux</artifactId>
-		<version>1.0</version>
-	</parent>
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.cygnuxltb</groupId>
+        <artifactId>cygnux</artifactId>
+        <version>1.0</version>
+    </parent>
 
-	<artifactId>console</artifactId>
-	<name>console</name>
+    <artifactId>console</artifactId>
+    <name>console</name>
 
-	<properties>
-	</properties>
+    <properties>
+    </properties>
 
-	<build>
-		<finalName>cygnus-console</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring.boot.version}</version>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <finalName>cygnus-console</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+            </plugin>
+        </plugins>
+    </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
+        <!-- Jakarta Restful Web Services -->
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring.boot.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>ch.qos.logback</groupId>
-					<artifactId>logback-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>ch.qos.logback</groupId>
-					<artifactId>logback-classic</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.logging.log4j</groupId>
-					<artifactId>log4j-to-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>serialization-json</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>io.cygnuxltb</groupId>
+            <artifactId>repository</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>transport-rabbitmq</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>serialization-json</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>transport-http</artifactId>
-			<version>${mercury.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.cygnuxltb</groupId>
-			<artifactId>repository</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>transport-rabbitmq</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

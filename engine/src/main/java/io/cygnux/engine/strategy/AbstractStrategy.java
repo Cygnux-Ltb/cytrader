@@ -381,7 +381,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 		childOrder.writeLog(log, getStrategyName() + " :: Open position generate [ChildOrder]");
 		saveOrder(childOrder);
 
-		getAdaptor(instrument).newOredr(childOrder.toNewOrder());
+		getAdaptor(instrument).newOrder(childOrder.toNewOrder());
 		childOrder.writeLog(log, getStrategyName() + " :: Open position [ChildOrder] has been sent");
 	}
 
@@ -478,7 +478,7 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 		childOrder.writeLog(log, "Close position generate [ChildOrder]");
 		saveOrder(childOrder);
 
-		getAdaptor(instrument).newOredr(childOrder.toNewOrder());
+		getAdaptor(instrument).newOrder(childOrder.toNewOrder());
 		childOrder.writeLog(log, "Close position [ChildOrder] has been sent");
 	}
 
