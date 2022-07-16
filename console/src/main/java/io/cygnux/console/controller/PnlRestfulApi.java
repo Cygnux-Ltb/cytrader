@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnux.console.service.PnlService;
-import io.cygnux.repository.entities.StPnl;
-import io.cygnux.repository.entities.StPnlSettlement;
+import io.cygnux.repository.entities.TPnl;
+import io.cygnux.repository.entities.TPnlSettlement;
 
-import static io.cygnux.console.utils.ControllerUtil.*;
+import static io.cygnux.console.utils.ResponseUtil.*;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
 import static io.cygnux.console.utils.ParamsValidateUtil.paramIsNull;
 
@@ -39,7 +39,7 @@ public final class PnlRestfulApi {
             @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(tradingDay))
             return badRequest();
-        return responseOf(service.getPnlDailys(strategyId, tradingDay));
+        return responseOf(service.getPnl(strategyId, tradingDay));
     }
 
     /**
@@ -51,8 +51,8 @@ public final class PnlRestfulApi {
     @PutMapping
     public ResponseEntity<Object> putPnlDailys(
             @RequestBody HttpServletRequest request) {
-        var pnlDaily = bodyToObject(request, StPnl.class);
-        return pnlDaily == null ? badRequest() : service.putPnlDaily(pnlDaily) ? ok() : internalServerError();
+        var pnlDaily = bodyToObject(request, TPnl.class);
+        return pnlDaily == null ? badRequest() : service.putPnl(pnlDaily) ? ok() : internalServerError();
     }
 
     /**
@@ -63,12 +63,12 @@ public final class PnlRestfulApi {
      * @return
      */
     @GetMapping("/settlement")
-    public ResponseEntity<List<StPnlSettlement>> getPnlSettlementDailys(
+    public ResponseEntity<List<TPnlSettlement>> getPnlSettlementDailys(
             @RequestParam("strategyId") int strategyId,
             @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(tradingDay))
             return badRequest();
-        return responseOf(service.getPnlDailySettlements(strategyId, tradingDay));
+        return responseOf(service.getPnlSettlement(strategyId, tradingDay));
     }
 
 }

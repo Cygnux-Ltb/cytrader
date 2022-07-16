@@ -1,7 +1,7 @@
 package io.cygnux.console.service;
 
 import io.cygnux.repository.dao.StrategyDao;
-import io.cygnux.repository.entities.ItStrategy;
+import io.cygnux.repository.entities.TStrategy;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ public final class StrategyService {
     /**
      * @return
      */
-    public List<ItStrategy> getStrategies() {
+    public List<TStrategy> getStrategies() {
         return exec(() -> dao.findAll(), list -> list, e -> {
             log.error("query [StrategyEntity] exception", e);
         });
@@ -36,7 +36,7 @@ public final class StrategyService {
      * @param strategyId
      * @return
      */
-    public ItStrategy getStrategy(int strategyId) {
+    public TStrategy getStrategy(int strategyId) {
         if (checkStrategyId(strategyId, log, "query [StrategyEntity] param error"))
             Throws.illegalArgument("strategyId");
         return dao.queryByStrategyId(strategyId);
@@ -46,7 +46,7 @@ public final class StrategyService {
      * @param strategyName
      * @return
      */
-    public List<ItStrategy> getStrategy(String strategyName) {
+    public List<TStrategy> getStrategy(String strategyName) {
         if (checkStrategyName(strategyName, log, "query [StrategyEntity] param error"))
             Throws.illegalArgument("strategyName");
         return dao.queryByStrategyName(strategyName);
@@ -57,7 +57,7 @@ public final class StrategyService {
      * @param entity
      * @return
      */
-    public boolean putStrategy(ItStrategy entity) {
+    public boolean putStrategy(TStrategy entity) {
         return execBool(() -> dao.save(entity), o -> {
             log.info("save [StrategyEntity] success -> {}", entity);
             return true;

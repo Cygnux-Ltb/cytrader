@@ -1,5 +1,6 @@
-package io.cygnux.console.service.dto.pack;
+package io.cygnux.console.dto.pack;
 
+import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
 
 import io.mercury.common.codec.Envelope;
@@ -27,7 +28,11 @@ public enum InboxTitle implements Envelope {
 	@Getter
 	private final int code;
 
-	private static final MutableIntObjectMap<InboxTitle> Map = MutableMaps.newIntObjectHashMap();
+	private static final ImmutableIntObjectMap<InboxTitle> Map =
+
+
+
+			MutableMaps.newIntObjectHashMap();
 
 	static {
 		for (InboxTitle value : InboxTitle.values())

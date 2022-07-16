@@ -1,2 +1,8 @@
-package io.cygnux.console.dto;public class ControlCommand {
+package io.cygnux.console.dto;
+
+
+public class ControlCommand {
+
+
+
 }

@@ -1,4 +1,4 @@
-package io.cygnux.console.service.dto.pack;
+package io.cygnux.console.dto.pack;
 
 import static io.mercury.common.collections.MutableMaps.newUnifiedMap;
 

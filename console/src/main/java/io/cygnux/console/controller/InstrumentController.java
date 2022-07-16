@@ -1,8 +1,8 @@
 package io.cygnux.console.controller;
 
 import io.cygnux.console.service.InstrumentService;
-import io.cygnux.console.service.dto.InstrumentPrice;
-import io.cygnux.repository.entities.StInstrumentSettlement;
+import io.cygnux.console.dto.InstrumentPrice;
+import io.cygnux.repository.entities.TInstrumentSettlement;
 import io.mercury.common.util.StringSupport;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import static io.cygnux.console.utils.ControllerUtil.*;
+import static io.cygnux.console.utils.ResponseUtil.*;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
 import static io.cygnux.console.utils.ParamsValidateUtil.paramIsNull;
 import static java.util.Arrays.stream;
@@ -31,14 +31,14 @@ public final class InstrumentController {
      * @param tradingDay
      * @return
      */
-    @GetMapping("/static_info")
-    public ResponseEntity<List<StInstrumentSettlement>> getSettlementPrice(
+    @GetMapping("/settlement")
+    public ResponseEntity<List<TInstrumentSettlement>> getSettlementPrice(
             @RequestParam("instrumentCode") String instrumentCode,
             @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(instrumentCode, tradingDay)) {
             return badRequest();
         }
-        var instrumentSettlements = service.getInstrumentStatic(instrumentCode, tradingDay);
+        var instrumentSettlements = service.getInstrumentSettlement(instrumentCode, tradingDay);
         return responseOf(instrumentSettlements);
     }
 

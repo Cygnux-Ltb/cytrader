@@ -2,8 +2,8 @@ package io.cygnux.console.service;
 
 import io.cygnux.repository.dao.InstrumentDao;
 import io.cygnux.repository.dao.InstrumentSettlementDao;
-import io.cygnux.repository.entities.StInstrument;
-import io.cygnux.repository.entities.StInstrumentSettlement;
+import io.cygnux.repository.entities.TInstrument;
+import io.cygnux.repository.entities.TInstrumentSettlement;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import org.apache.commons.collections4.CollectionUtils;
@@ -32,7 +32,7 @@ public final class InstrumentService {
      * @param instrumentCode
      * @return
      */
-    public List<StInstrument> getInstrument(@Nonnull String instrumentCode) {
+    public List<TInstrument> getInstrument(@Nonnull String instrumentCode) {
         return exec(() -> dao.query(instrumentCode), list -> {
             if (CollectionUtils.isEmpty(list))
                 log.warn("query [InstrumentEntity] return 0 row, instrumentCode=={}", instrumentCode);
@@ -50,26 +50,27 @@ public final class InstrumentService {
      * @param tradingDay
      * @return
      */
-    public List<StInstrumentSettlement> getInstrumentStatic(@Nonnull String instrumentCode, int tradingDay) {
-        return exec(() -> settlementDao.query(instrumentCode, tradingDay), list -> {
-            if (CollectionUtils.isEmpty(list))
-                log.warn("query [InstrumentSettlementEntity] return 0 row, instrumentCode=={}, tradingDay=={}",
-                        instrumentCode, tradingDay);
-            else
-                log.info("query [InstrumentSettlementEntity] where instrumentCode=={} and tradingDay=={}, result -> {}",
-                        instrumentCode, tradingDay, JsonWrapper.toPrettyJsonHasNulls(list));
-            return list;
-        }, e -> {
-            log.error("query [InstrumentSettlementEntity] exception, instrumentCode=={}, tradingDay=={}",
-                    instrumentCode, tradingDay, e);
-        });
+    public List<TInstrumentSettlement> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
+        return exec(() -> settlementDao.queryByInstrumentCodeAndTradingDay(instrumentCode, tradingDay),
+                list -> {
+                    if (CollectionUtils.isEmpty(list))
+                        log.warn("query [InstrumentSettlementEntity] return 0 row, instrumentCode=={}, tradingDay=={}",
+                                instrumentCode, tradingDay);
+                    else
+                        log.info("query [InstrumentSettlementEntity] where instrumentCode=={} and tradingDay=={}, result -> {}",
+                                instrumentCode, tradingDay, JsonWrapper.toPrettyJsonHasNulls(list));
+                    return list;
+                }, e -> {
+                    log.error("query [InstrumentSettlementEntity] exception, instrumentCode=={}, tradingDay=={}",
+                            instrumentCode, tradingDay, e);
+                });
     }
 
     /**
      * @param entity
      * @return
      */
-    public boolean putInstrument(@Nonnull StInstrument entity) {
+    public boolean putInstrument(@Nonnull TInstrument entity) {
         return execBool(() -> dao.save(entity), o -> {
             log.info("save [InstrumentEntity] success, entity -> {}", entity);
             return true;
@@ -83,7 +84,7 @@ public final class InstrumentService {
      * @param entity
      * @return
      */
-    public boolean putInstrumentStatic(@Nonnull StInstrumentSettlement entity) {
+    public boolean putInstrumentStatic(@Nonnull TInstrumentSettlement entity) {
         return execBool(() -> settlementDao.save(entity), o -> {
             log.info("save [InstrumentSettlementEntity] success -> {}", entity);
             return true;

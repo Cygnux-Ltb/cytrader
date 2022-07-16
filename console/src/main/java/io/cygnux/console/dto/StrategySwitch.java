@@ -1,4 +1,4 @@
-package io.cygnux.console.service.dto;
+package io.cygnux.console.dto;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -24,7 +24,7 @@ public class StrategySwitch implements Comparable<StrategySwitch> {
 
     private String instrumentCode;
 
-    private boolean tradeable;
+    private boolean tradable;
 
     public String getKey() {
         return productId + "-" + strategyId + "-" + instrumentCode;

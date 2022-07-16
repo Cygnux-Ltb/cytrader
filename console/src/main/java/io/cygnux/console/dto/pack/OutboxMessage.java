@@ -1,11 +1,11 @@
-package io.cygnux.console.service.dto.pack;
+package io.cygnux.console.dto.pack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.cygnux.console.service.dto.StrategySwitch;
+import io.cygnux.console.dto.StrategySwitch;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

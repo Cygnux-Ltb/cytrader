@@ -3,7 +3,7 @@ package io.cygnux.console.utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public final class ControllerUtil {
+public final class ResponseUtil {
 
     /**
      * Http Status Code: 400 Bad Request

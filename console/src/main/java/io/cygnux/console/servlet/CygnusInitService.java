@@ -1,11 +1,10 @@
 package io.cygnux.console.servlet;
 
-import io.cygnux.console.service.ProductService;
-import io.cygnux.console.service.dto.pack.OutboxMessage;
-import io.cygnux.console.service.dto.pack.OutboxTitle;
-import io.cygnux.console.transport.OutboxPublisherGroup;
+import io.cygnux.console.dto.pack.OutboxMessage;
+import io.cygnux.console.dto.pack.OutboxTitle;
+import io.cygnux.console.transport.CommandDispatcher;
 import io.cygnux.repository.db.CommonDaoFactory;
-import io.cygnux.repository.entities.ItProduct;
+import io.cygnux.repository.entities.TProduct;
 import io.mercury.common.datetime.pattern.TimePattern;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,22 +26,12 @@ public class CygnusInitService {
     private static final Logger log = Log4j2LoggerFactory.getLogger(CygnusInitService.class);
 
     @Resource
-    private ProductService service;
+    private CommandDispatcher dispatcher;
 
     @PostConstruct
     public void init() {
         log.info("Cygnus Servlet init...");
         initEndTimeBarsSender(new Date());
-    }
-
-    public void destroy() throws IOException {
-        // 关闭数据库连接
-        CommonDaoFactory.closeSessionFactory();
-        // 关闭OutboxPublisher连接
-        var members = OutboxPublisherGroup.GROUP_INSTANCE.getKeys().toList().collect(OutboxPublisherGroup.GROUP_INSTANCE::getMember).toImmutable();
-        for (var member : members) {
-            member.close();
-        }
     }
 
     private void initEndTimeBarsSender(Date startTime) {
@@ -74,10 +62,10 @@ public class CygnusInitService {
 
     private void sendEndTimeBars() {
 
-        List<ItProduct> all = service.getAll();
+        List<TProduct> all = service.getAll();
 
-        for (ItProduct cyg : all) {
-            var publisher = OutboxPublisherGroup.GROUP_INSTANCE.getMember(cyg.getProductId());
+        for (TProduct cyg : all) {
+            var publisher = CommandDispatcher.getMember(cyg.getProductId());
 
             String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.EndTimeBinner.name(), null));
 

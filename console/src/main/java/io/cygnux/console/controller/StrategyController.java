@@ -2,8 +2,8 @@ package io.cygnux.console.controller;
 
 import io.cygnux.console.service.ParamService;
 import io.cygnux.console.service.StrategyService;
-import io.cygnux.repository.entities.ItParam;
-import io.cygnux.repository.entities.ItStrategy;
+import io.cygnux.repository.entities.TParam;
+import io.cygnux.repository.entities.TStrategy;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-import static io.cygnux.console.utils.ControllerUtil.*;
+import static io.cygnux.console.utils.ResponseUtil.*;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
 
 @RestController("/strategy")
@@ -33,7 +33,7 @@ public final class StrategyController {
      * @return
      */
     @GetMapping
-    public ResponseEntity<List<ItStrategy>> getStrategies() {
+    public ResponseEntity<List<TStrategy>> getStrategies() {
         return responseOf(strategyService.getStrategies());
     }
 
@@ -43,8 +43,8 @@ public final class StrategyController {
      * @param strategyId
      * @return
      */
-    public ResponseEntity<ItStrategy> getStrategyById(@RequestParam("strategyId") int strategyId) {
-        ItStrategy strategy = strategyService.getStrategy(strategyId);
+    public ResponseEntity<TStrategy> getStrategyById(@RequestParam("strategyId") int strategyId) {
+        TStrategy strategy = strategyService.getStrategy(strategyId);
         return responseOf(strategy);
     }
 
@@ -56,7 +56,7 @@ public final class StrategyController {
      */
     @GetMapping("/param")
     public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
-        List<ItParam> strategyParams = paramService.getStrategyParams(strategyId);
+        List<TParam> strategyParams = paramService.getStrategyParams(strategyId);
         return responseOf(strategyParams);
     }
 
@@ -68,7 +68,7 @@ public final class StrategyController {
      */
     @PutMapping("/{strategyId}/param")
     public ResponseEntity<Object> putParamsByStrategyId(@PathVariable("strategyId") int strategyId, @RequestBody HttpServletRequest request) {
-        var params = bodyToObject(request, ItParam.class);
+        var params = bodyToObject(request, TParam.class);
         log.info("putParamsByStrategyId recv : {}", params);
         return params == null ? badRequest() : paramService.putStrategyParam(params) ? ok() : internalServerError();
     }
