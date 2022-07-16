@@ -1,6 +1,6 @@
 package io.cygnux.repository.dao;
 
-import io.cygnux.repository.entities.ItAccount;
+import io.cygnux.repository.entities.TAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,14 +13,14 @@ import java.util.List;
  */
 
 @Repository
-public interface AccountDao extends JpaRepository<ItAccount, Long> {
+public interface AccountDao extends JpaRepository<TAccount, Long> {
 
-    List<ItAccount> queryByBrokerId(String brokerId);
+    List<TAccount> queryByBrokerId(String brokerId);
 
-    List<ItAccount> queryByInvestorId(String investorId);
+    List<TAccount> queryByInvestorId(String investorId);
 
-    List<ItAccount> queryByAccountId(int accountId);
+    List<TAccount> queryByAccountId(int accountId);
 
-    List<ItAccount> queryBySubAccountId(int subAccountId);
+    List<TAccount> queryBySubAccountId(int subAccountId);
 
 }

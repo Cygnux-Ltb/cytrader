@@ -11,30 +11,29 @@ import lombok.experimental.Accessors;
 
 /**
  * Strategy Entity
- * 
- * @author yellow013
  *
+ * @author yellow013
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "strategy")
-@Entity(name = ItStrategy.EntityName)
-public final class ItStrategy {
+@Table(name = "t_strategy")
+@Entity(name = TStrategy.ENTITY_NAME)
+public final class TStrategy {
 
-	public final static String EntityName = "ItStrategy";
+    public final static String ENTITY_NAME = "TStrategy";
 
-	@Id
-	@Column(name = CommonColumn.STRATEGY_ID)
-	private int strategyId;
+    @Id
+    @Column(name = CommonColumn.STRATEGY_ID)
+    private int strategyId;
 
-	@Column(name = CommonColumn.STRATEGY_NAME)
-	private String strategyName;
+    @Column(name = CommonColumn.STRATEGY_NAME)
+    private String strategyName;
 
-	@Column(name = "strategy_owner")
-	private String strategyOwner;
+    @Column(name = "strategy_owner")
+    private String strategyOwner;
 
-	@Column(name = "strategy_info")
-	private String strategyInfo;
+    @Column(name = "strategy_info")
+    private String strategyInfo;
 
 }

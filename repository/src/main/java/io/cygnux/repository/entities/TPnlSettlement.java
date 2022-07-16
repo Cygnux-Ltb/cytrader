@@ -15,11 +15,11 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "st_pnl_settlement")
-@Entity(name = PnlSettlement.EntityName)
-public final class PnlSettlement {
+@Table(name = "t_pnl_settlement")
+@Entity(name = TPnlSettlement.ENTITY_NAME)
+public final class TPnlSettlement {
 
-    public final static String EntityName = "StPnlSettlement";
+    public final static String ENTITY_NAME = "TPnlSettlement";
 
     @Id
     @Column(name = CommonColumn.UID)

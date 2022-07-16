@@ -15,11 +15,11 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "st_instrument")
-@Entity(name = StInstrument.EntityName)
-public final class StInstrument {
+@Table(name = "t_instrument")
+@Entity(name = TInstrument.ENTITY_NAME)
+public final class TInstrument {
 
-    public final static String EntityName = "StInstrument";
+    public final static String ENTITY_NAME = "TInstrument";
 
     @Id
     @Column(name = CommonColumn.UID)

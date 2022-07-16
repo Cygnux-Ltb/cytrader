@@ -17,11 +17,11 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "product")
-@Entity(name = ItProduct.EntityName)
-public final class ItProduct {
+@Table(name = "t_product")
+@Entity(name = TProduct.ENTITY_NAME)
+public final class TProduct {
 
-    public final static String EntityName = "ItProduct";
+    public final static String ENTITY_NAME = "TProduct";
 
     @Id
     @Column(name = "product_id")

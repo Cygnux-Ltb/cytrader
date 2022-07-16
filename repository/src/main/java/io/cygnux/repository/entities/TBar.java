@@ -16,11 +16,11 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "st_bar")
-@Entity(name = StBar.EntityName)
-public final class StBar {
+@Table(name = "t_bar")
+@Entity(name = TBar.ENTITY_NAME)
+public final class TBar {
 
-	public final static String EntityName = "StBar";
+	public final static String ENTITY_NAME = "TBar";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

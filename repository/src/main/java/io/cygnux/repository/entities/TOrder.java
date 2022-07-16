@@ -18,11 +18,11 @@ import java.util.Date;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "in_order")
-@Entity(name = ItOrder.EntityName)
-public final class ItOrder {
+@Table(name = "t_order")
+@Entity(name = TOrder.ENTITY_NAME)
+public final class TOrder {
 
-	public final static String EntityName = "ItOrder";
+	public final static String ENTITY_NAME = "TOrder";
 
 	@Id
 	@Column(name = CommonColumn.UID)

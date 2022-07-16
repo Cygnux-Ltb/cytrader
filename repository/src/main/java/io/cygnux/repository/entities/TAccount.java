@@ -14,11 +14,11 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name = "it_account")
-@Entity(name = ItAccount.EntityName)
-public final class ItAccount {
+@Table(name = "t_account")
+@Entity(name = TAccount.ENTITY_NAME)
+public final class TAccount {
 
-    public final static String EntityName = "ItAccount";
+    public final static String ENTITY_NAME = "TAccount";
 
     @Id
     @Column(name = CommonColumn.UID)

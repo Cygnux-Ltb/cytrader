@@ -1,6 +1,6 @@
 package io.cygnux.repository.dao;
 
-import io.cygnux.repository.entities.ItStrategy;
+import io.cygnux.repository.entities.TStrategy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,10 +12,10 @@ import java.util.List;
  * @author yellow013
  */
 @Repository
-public interface StrategyDao extends JpaRepository<ItStrategy, Integer> {
+public interface StrategyDao extends JpaRepository<TStrategy, Integer> {
 
-    ItStrategy queryByStrategyId(int strategyId);
+    TStrategy queryByStrategyId(int strategyId);
 
-    List<ItStrategy> queryByStrategyName(String strategyName);
+    List<TStrategy> queryByStrategyName(String strategyName);
 
 }
