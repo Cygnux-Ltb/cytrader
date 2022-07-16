@@ -16,8 +16,8 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Table(name = "shr_pnl")
-@Entity(name = StPnl.EntityName)
-public final class StPnl {
+@Entity(name = Pnl.EntityName)
+public final class Pnl {
 
     public final static String EntityName = "StPnl";
 

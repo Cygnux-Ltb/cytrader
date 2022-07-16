@@ -12,6 +12,8 @@ import io.horizon.trader.transport.outbound.AdaptorReport;
 import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
+import javax.annotation.Nonnull;
+
 /**
  * 
  * @author yellow013
@@ -53,7 +55,7 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 
 	// TODO add pools
 	@Override
-	public void onAdaptorReport(AdaptorReport report) {
+	public void onAdaptorReport(@Nonnull AdaptorReport report) {
 		log.info("Recv AdaptorReport -> {}", report);
 	}
 

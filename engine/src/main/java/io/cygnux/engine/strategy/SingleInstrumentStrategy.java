@@ -77,7 +77,7 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, K extends P
 	}
 
 	@Override
-	public void onAdaptorReport(AdaptorReport event) {
+	public void onAdaptorReport(@Nonnull AdaptorReport event) {
 		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", getStrategyName(),
 				event.getAdaptorId(), event.getStatus());
 		switch (event.getStatus()) {

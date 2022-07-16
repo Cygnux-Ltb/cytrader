@@ -14,6 +14,8 @@ import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
+import javax.annotation.Nonnull;
+
 /**
  * 
  * @author yellow013
@@ -83,7 +85,7 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 
 	// TODO add pools
 	@Override
-	public void onAdaptorReport(AdaptorReport report) {
+	public void onAdaptorReport(@Nonnull AdaptorReport report) {
 		queue.enqueue(new QueueMsg(report));
 	}
 

@@ -14,6 +14,8 @@ import io.horizon.trader.transport.outbound.AdaptorReport;
 import io.horizon.trader.transport.outbound.OrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
+import javax.annotation.Nonnull;
+
 /**
  * 
  * 单策略调度器, 直接调用策略回调函数, 没有异步操作, 最简单并且速度最快的调度器
@@ -52,7 +54,7 @@ public class SingleStrategyScheduler<M extends MarketData> implements InboundHan
 	}
 
 	@Override
-	public void onAdaptorReport(AdaptorReport report) {
+	public void onAdaptorReport(@Nonnull AdaptorReport report) {
 		log.error("On Adaptor Report -> {}", report);
 		strategy.onAdaptorReport(report);
 	}
