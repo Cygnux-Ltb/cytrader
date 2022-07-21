@@ -13,56 +13,54 @@ import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
 
 /**
- * 
  * @author yellow013
- *
  */
 public final class ExampleSmaStrategy extends SingleInstrumentStrategy<BasicMarketData, ParamKey> implements SmaEvent {
 
-	public ExampleSmaStrategy(SubAccount subAccount, Params<ParamKey> params, Instrument instrument) {
-		super(100, "ExampleSmaStrategy", subAccount, params, instrument);
-	}
+    public ExampleSmaStrategy(SubAccount subAccount, Params<ParamKey> params, Instrument instrument) {
+        super(100, "ExampleSmaStrategy", subAccount, params, instrument);
+    }
 
-	@Override
-	public String getStrategyName() {
-		return "SmaStrategyExample";
-	}
+    @Override
+    public String getStrategyName() {
+        return "SmaStrategyExample";
+    }
 
-	@Override
-	protected void handleMarketData(BasicMarketData marketData) {
+    @Override
+    protected void handleMarketData(BasicMarketData marketData) {
 
-	}
+    }
 
-	@Override
-	protected void handleOrder(Order order) {
+    @Override
+    protected void handleOrder(Order order) {
 
-	}
+    }
 
-	@Override
-	public void onCurrentPointAvgPriceChanged(SmaPoint point) {
+    @Override
+    public void onCurrentPointAvgPriceChanged(SmaPoint point) {
 
-	}
+    }
 
-	@Override
-	public void onStartSmaPoint(SmaPoint point) {
+    @Override
+    public void onStartSmaPoint(SmaPoint point) {
 
-	}
+    }
 
-	@Override
-	public void onEndSmaPoint(SmaPoint point) {
+    @Override
+    public void onEndSmaPoint(SmaPoint point) {
 
-	}
+    }
 
-	@Override
-	public String getEventName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public String getEventName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public void close() throws IOException {
-		// TODO Auto-generated method stub
+    @Override
+    public void close() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }
