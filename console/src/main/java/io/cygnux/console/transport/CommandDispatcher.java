@@ -1,7 +1,7 @@
 package io.cygnux.console.transport;
 
 import io.cygnux.console.dto.StrategySwitch;
-import io.cygnux.repository.entities.TParam;
+import io.cygnux.repository.entity.ParamEntity;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -27,7 +27,7 @@ public final class CommandDispatcher {
     }
 
 
-    public boolean sendParams(List<TParam> params) {
+    public boolean sendParams(List<ParamEntity> params) {
         return false;
     }
 }

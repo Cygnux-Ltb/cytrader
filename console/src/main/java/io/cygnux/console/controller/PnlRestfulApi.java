@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.cygnux.console.service.PnlService;
-import io.cygnux.repository.entities.TPnl;
-import io.cygnux.repository.entities.TPnlSettlement;
+import io.cygnux.repository.entity.PnlEntity;
+import io.cygnux.repository.entity.PnlSettlementEntity;
 
 import static io.cygnux.console.utils.ResponseUtil.*;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
@@ -51,7 +51,7 @@ public final class PnlRestfulApi {
     @PutMapping
     public ResponseEntity<Object> putPnlDailys(
             @RequestBody HttpServletRequest request) {
-        var pnlDaily = bodyToObject(request, TPnl.class);
+        var pnlDaily = bodyToObject(request, PnlEntity.class);
         return pnlDaily == null ? badRequest() : service.putPnl(pnlDaily) ? ok() : internalServerError();
     }
 
@@ -63,7 +63,7 @@ public final class PnlRestfulApi {
      * @return
      */
     @GetMapping("/settlement")
-    public ResponseEntity<List<TPnlSettlement>> getPnlSettlementDailys(
+    public ResponseEntity<List<PnlSettlementEntity>> getPnlSettlementDailys(
             @RequestParam("strategyId") int strategyId,
             @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(tradingDay))

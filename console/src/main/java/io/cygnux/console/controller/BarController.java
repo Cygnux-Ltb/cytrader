@@ -1,7 +1,7 @@
 package io.cygnux.console.controller;
 
 import io.cygnux.console.service.BarService;
-import io.cygnux.repository.entities.TBar;
+import io.cygnux.repository.entity.BarEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +29,8 @@ public final class BarController {
      * @return
      */
     @GetMapping
-    public List<TBar> getBars(@RequestParam("instrumentCode") String instrumentCode,
-                              @RequestParam("tradingDay") int tradingDay) {
+    public List<BarEntity> getBars(@RequestParam("instrumentCode") String instrumentCode,
+                                   @RequestParam("tradingDay") int tradingDay) {
         return service.getBars(instrumentCode, tradingDay);
     }
 
@@ -42,7 +42,7 @@ public final class BarController {
      */
     @PutMapping(consumes = APPLICATION_JSON_UTF8)
     public ResponseEntity<Integer> putBar(@RequestBody HttpServletRequest request) {
-        var bar = bodyToObject(request, TBar.class);
+        var bar = bodyToObject(request, BarEntity.class);
         return bar == null ? badRequest()
                 : service.putBar(bar) ? ResponseEntity.status(HttpStatus.ACCEPTED).build() : internalServerError();
     }

@@ -2,8 +2,8 @@ package io.cygnux.console.controller;
 
 import io.cygnux.console.service.ParamService;
 import io.cygnux.console.service.StrategyService;
-import io.cygnux.repository.entities.TParam;
-import io.cygnux.repository.entities.TStrategy;
+import io.cygnux.repository.entity.ParamEntity;
+import io.cygnux.repository.entity.StrategyEntity;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +33,7 @@ public final class StrategyController {
      * @return
      */
     @GetMapping
-    public ResponseEntity<List<TStrategy>> getStrategies() {
+    public ResponseEntity<List<StrategyEntity>> getStrategies() {
         return responseOf(strategyService.getStrategies());
     }
 
@@ -43,8 +43,8 @@ public final class StrategyController {
      * @param strategyId
      * @return
      */
-    public ResponseEntity<TStrategy> getStrategyById(@RequestParam("strategyId") int strategyId) {
-        TStrategy strategy = strategyService.getStrategy(strategyId);
+    public ResponseEntity<StrategyEntity> getStrategyById(@RequestParam("strategyId") int strategyId) {
+        StrategyEntity strategy = strategyService.getStrategy(strategyId);
         return responseOf(strategy);
     }
 
@@ -56,7 +56,7 @@ public final class StrategyController {
      */
     @GetMapping("/param")
     public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
-        List<TParam> strategyParams = paramService.getStrategyParams(strategyId);
+        List<ParamEntity> strategyParams = paramService.getStrategyParams(strategyId);
         return responseOf(strategyParams);
     }
 
@@ -68,7 +68,7 @@ public final class StrategyController {
      */
     @PutMapping("/{strategyId}/param")
     public ResponseEntity<Object> putParamsByStrategyId(@PathVariable("strategyId") int strategyId, @RequestBody HttpServletRequest request) {
-        var params = bodyToObject(request, TParam.class);
+        var params = bodyToObject(request, ParamEntity.class);
         log.info("putParamsByStrategyId recv : {}", params);
         return params == null ? badRequest() : paramService.putStrategyParam(params) ? ok() : internalServerError();
     }

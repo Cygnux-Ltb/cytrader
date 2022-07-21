@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnux.repository.entities.TOrder;
+import io.cygnux.repository.entity.OrderEntity;
 
 import static io.cygnux.console.utils.ResponseUtil.*;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
@@ -66,7 +66,7 @@ public final class OrderController {
      */
     @PutMapping
     public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {
-        var order = bodyToObject(request, TOrder.class);
+        var order = bodyToObject(request, OrderEntity.class);
         return order == null ? badRequest() : service.putOrder(order) ? ok() : internalServerError();
     }
 

@@ -1,7 +1,7 @@
 package io.cygnux.console.service;
 
 import io.cygnux.repository.dao.AccountDao;
-import io.cygnux.repository.entities.TAccount;
+import io.cygnux.repository.entity.AccountEntity;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import org.slf4j.Logger;
@@ -20,10 +20,10 @@ public class AccountService {
     @Resource
     private AccountDao dao;
 
-    public List<TAccount> getAccount(int accountId) {
+    public List<AccountEntity> getAccount(int accountId) {
         exec(() -> dao.queryByAccountId(accountId), list -> list, e -> {
         });
-        List<TAccount> list = dao.queryByAccountId(accountId);
+        List<AccountEntity> list = dao.queryByAccountId(accountId);
         log.info("query Account where accountId == {}, result -> {}", accountId, JsonWrapper.toJson(list));
         return list;
     }

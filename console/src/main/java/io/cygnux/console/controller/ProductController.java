@@ -1,7 +1,7 @@
 package io.cygnux.console.controller;
 
 import io.cygnux.console.dto.InitFinish;
-import io.cygnux.repository.entities.TProduct;
+import io.cygnux.repository.entity.ProductEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,9 +54,9 @@ public final class ProductController {
      * @return
      */
     @GetMapping("/{productId}")
-    public ResponseEntity<TProduct> getProduct(
+    public ResponseEntity<ProductEntity> getProduct(
             @PathVariable("productId") int productId) {
-        TProduct entity = service
+        ProductEntity entity = service
         return responseOf(entity);
     }
 

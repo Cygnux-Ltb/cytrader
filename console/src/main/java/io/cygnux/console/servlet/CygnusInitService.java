@@ -3,8 +3,7 @@ package io.cygnux.console.servlet;
 import io.cygnux.console.dto.pack.OutboxMessage;
 import io.cygnux.console.dto.pack.OutboxTitle;
 import io.cygnux.console.transport.CommandDispatcher;
-import io.cygnux.repository.db.CommonDaoFactory;
-import io.cygnux.repository.entities.TProduct;
+import io.cygnux.repository.entity.ProductEntity;
 import io.mercury.common.datetime.pattern.TimePattern;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
@@ -62,9 +61,9 @@ public class CygnusInitService {
 
     private void sendEndTimeBars() {
 
-        List<TProduct> all = service.getAll();
+        List<ProductEntity> all = service.getAll();
 
-        for (TProduct cyg : all) {
+        for (ProductEntity cyg : all) {
             var publisher = CommandDispatcher.getMember(cyg.getProductId());
 
             String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.EndTimeBinner.name(), null));

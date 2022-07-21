@@ -2,8 +2,8 @@ package io.cygnux.console.service;
 
 import io.cygnux.repository.dao.InstrumentDao;
 import io.cygnux.repository.dao.InstrumentSettlementDao;
-import io.cygnux.repository.entities.TInstrument;
-import io.cygnux.repository.entities.TInstrumentSettlement;
+import io.cygnux.repository.entity.InstrumentEntity;
+import io.cygnux.repository.entity.InstrumentSettlementEntity;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import org.apache.commons.collections4.CollectionUtils;
@@ -29,67 +29,67 @@ public final class InstrumentService {
     private InstrumentSettlementDao settlementDao;
 
     /**
-     * @param instrumentCode
-     * @return
+     * @param instrumentCode String
+     * @return List<TInstrument>
      */
-    public List<TInstrument> getInstrument(@Nonnull String instrumentCode) {
+    public List<InstrumentEntity> getInstrument(@Nonnull String instrumentCode) {
         return exec(() -> dao.query(instrumentCode), list -> {
             if (CollectionUtils.isEmpty(list))
-                log.warn("query [InstrumentEntity] return 0 row, instrumentCode=={}", instrumentCode);
+                log.warn("query [TInstrument] return 0 row, instrumentCode=={}", instrumentCode);
             else
-                log.info("query [InstrumentEntity] where instrumentCode=={}, result -> {}", instrumentCode,
-                        JsonWrapper.toPrettyJsonHasNulls(list));
+                log.info("query [TInstrument] where instrumentCode=={}, result -> {}", instrumentCode,
+                        JsonWrapper.toJson(list));
             return list;
         }, e -> {
-            log.error("query [InstrumentEntity] exception, instrumentCode=={}", instrumentCode, e);
+            log.error("query [TInstrument] exception, instrumentCode=={}", instrumentCode, e);
         });
     }
 
     /**
-     * @param instrumentCode
-     * @param tradingDay
-     * @return
+     * @param instrumentCode String
+     * @param tradingDay     int
+     * @return List<TInstrumentSettlement>
      */
-    public List<TInstrumentSettlement> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
+    public List<InstrumentSettlementEntity> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
         return exec(() -> settlementDao.queryByInstrumentCodeAndTradingDay(instrumentCode, tradingDay),
                 list -> {
                     if (CollectionUtils.isEmpty(list))
-                        log.warn("query [InstrumentSettlementEntity] return 0 row, instrumentCode=={}, tradingDay=={}",
+                        log.warn("query [TInstrumentSettlement] return 0 row, instrumentCode=={}, tradingDay=={}",
                                 instrumentCode, tradingDay);
                     else
-                        log.info("query [InstrumentSettlementEntity] where instrumentCode=={} and tradingDay=={}, result -> {}",
+                        log.info("query [TInstrumentSettlement] where instrumentCode=={} and tradingDay=={}, result -> {}",
                                 instrumentCode, tradingDay, JsonWrapper.toPrettyJsonHasNulls(list));
                     return list;
                 }, e -> {
-                    log.error("query [InstrumentSettlementEntity] exception, instrumentCode=={}, tradingDay=={}",
+                    log.error("query [TInstrumentSettlement] exception, instrumentCode=={}, tradingDay=={}",
                             instrumentCode, tradingDay, e);
                 });
     }
 
     /**
-     * @param entity
-     * @return
+     * @param instrument TInstrument
+     * @return boolean
      */
-    public boolean putInstrument(@Nonnull TInstrument entity) {
-        return execBool(() -> dao.save(entity), o -> {
-            log.info("save [InstrumentEntity] success, entity -> {}", entity);
+    public boolean putInstrument(@Nonnull InstrumentEntity instrument) {
+        return execBool(() -> dao.save(instrument), o -> {
+            log.info("save [TInstrument] success, instrument -> {}", instrument);
             return true;
         }, e -> {
-            log.error("save [InstrumentEntity] failure, entity -> {}", entity, e);
+            log.error("save [TInstrument] failure, instrument -> {}", instrument, e);
             return false;
         });
     }
 
     /**
-     * @param entity
+     * @param instrumentSettlement TInstrumentSettlement
      * @return
      */
-    public boolean putInstrumentStatic(@Nonnull TInstrumentSettlement entity) {
-        return execBool(() -> settlementDao.save(entity), o -> {
-            log.info("save [InstrumentSettlementEntity] success -> {}", entity);
+    public boolean putInstrumentStatic(@Nonnull InstrumentSettlementEntity instrumentSettlement) {
+        return execBool(() -> settlementDao.save(instrumentSettlement), o -> {
+            log.info("save [TInstrumentSettlement] success -> {}", instrumentSettlement);
             return true;
         }, e -> {
-            log.error("save [InstrumentSettlementEntity] failure -> {}", entity, e);
+            log.error("save [TInstrumentSettlement] failure -> {}", instrumentSettlement, e);
             return false;
         });
     }

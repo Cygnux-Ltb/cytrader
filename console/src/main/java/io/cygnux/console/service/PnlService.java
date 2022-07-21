@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 import io.cygnux.repository.dao.PnlDailyDao;
 import io.cygnux.repository.dao.PnlDailySettlementDao;
-import io.cygnux.repository.entities.TPnl;
-import io.cygnux.repository.entities.TPnlSettlement;
+import io.cygnux.repository.entity.PnlEntity;
+import io.cygnux.repository.entity.PnlSettlementEntity;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 @Service
@@ -33,7 +33,7 @@ public final class PnlService {
      * @param tradingDay int
      * @return List<StPnl>
      */
-    public List<TPnl> getPnl(int strategyId, int tradingDay) {
+    public List<PnlEntity> getPnl(int strategyId, int tradingDay) {
         return exec(() -> dao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
             if (CollectionUtils.isEmpty(list))
                 log.warn("query [PnlDailyEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId, tradingDay);
@@ -50,7 +50,7 @@ public final class PnlService {
      * @param tradingDay int
      * @return List<StPnlSettlement>
      */
-    public List<TPnlSettlement> getPnlSettlement(int strategyId, int tradingDay) {
+    public List<PnlSettlementEntity> getPnlSettlement(int strategyId, int tradingDay) {
         return exec(() -> settlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
             if (CollectionUtils.isEmpty(list))
                 log.warn("query [PnlDailySettlementEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId,
@@ -67,7 +67,7 @@ public final class PnlService {
      * @param pnl StPnl
      * @return
      */
-    public boolean putPnl(TPnl pnl) {
+    public boolean putPnl(PnlEntity pnl) {
         return execBool(() -> dao.save(pnl), o -> {
             log.info("save [PnlDailyEntity] success -> {}", pnl);
             return true;
@@ -81,7 +81,7 @@ public final class PnlService {
      * @param pnlSettlement StPnlSettlement
      * @return
      */
-    public boolean putPnlSettlement(TPnlSettlement pnlSettlement) {
+    public boolean putPnlSettlement(PnlSettlementEntity pnlSettlement) {
         return execBool(() -> settlementDao.save(pnlSettlement), o -> {
             log.info("save [PnlDailySettlementEntity] success -> {}", pnlSettlement);
             return true;

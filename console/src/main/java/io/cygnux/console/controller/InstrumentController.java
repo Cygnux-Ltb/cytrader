@@ -2,7 +2,7 @@ package io.cygnux.console.controller;
 
 import io.cygnux.console.service.InstrumentService;
 import io.cygnux.console.dto.InstrumentPrice;
-import io.cygnux.repository.entities.TInstrumentSettlement;
+import io.cygnux.repository.entity.InstrumentSettlementEntity;
 import io.mercury.common.util.StringSupport;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public final class InstrumentController {
      * @return
      */
     @GetMapping("/settlement")
-    public ResponseEntity<List<TInstrumentSettlement>> getSettlementPrice(
+    public ResponseEntity<List<InstrumentSettlementEntity>> getSettlementPrice(
             @RequestParam("instrumentCode") String instrumentCode,
             @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(instrumentCode, tradingDay)) {

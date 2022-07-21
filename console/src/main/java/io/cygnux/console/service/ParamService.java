@@ -2,7 +2,7 @@ package io.cygnux.console.service;
 
 import io.cygnux.console.service.bean.ValidationRule;
 import io.cygnux.repository.dao.ParamDao;
-import io.cygnux.repository.entities.TParam;
+import io.cygnux.repository.entity.ParamEntity;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
@@ -54,10 +54,10 @@ public class ParamService {
      * @param param
      * @return
      */
-    public int updateParamSafe(TParam param) {
+    public int updateParamSafe(ParamEntity param) {
         if (validationStrategyParam(param)) {
             try {
-                TParam saved = dao.save(param);
+                ParamEntity saved = dao.save(param);
                 if (saved == null) {
                     return 0;
                 } else {
@@ -69,7 +69,7 @@ public class ParamService {
         }
     }
 
-    private boolean validationStrategyParam(TParam param) {
+    private boolean validationStrategyParam(ParamEntity param) {
         String paramName = param.getParamName();
         ValidationRule rule = validationRuleMap.get(paramName);
         if (!validationParamName(paramName, rule)) {
@@ -159,7 +159,7 @@ public class ParamService {
     /**
      * @return
      */
-    public List<TParam> getDefaultStrategyParams() {
+    public List<ParamEntity> getDefaultStrategyParams() {
         return getStrategyParams(0);
     }
 
@@ -168,7 +168,7 @@ public class ParamService {
      * @param strategyId
      * @return
      */
-    public List<TParam> getStrategyParams(int strategyId) {
+    public List<ParamEntity> getStrategyParams(int strategyId) {
         if (checkStrategyId(strategyId, log, "query [StrategyParamEntity] param error"))
             Throws.illegalArgument("strategyId");
         return exec(() -> dao.queryByStrategyId(strategyId), list -> {
@@ -187,7 +187,7 @@ public class ParamService {
      * @param strategyName
      * @return
      */
-    public List<TParam> getStrategyParams(String strategyName) {
+    public List<ParamEntity> getStrategyParams(String strategyName) {
         if (checkStrategyName(strategyName, log, "query [StrategyParamEntity] param error"))
             Throws.illegalArgument("strategyId");
         return exec(() -> dao.queryByStrategyName(strategyName), list -> {
@@ -206,7 +206,7 @@ public class ParamService {
      * @param entity
      * @return
      */
-    public boolean putStrategyParam(TParam entity) {
+    public boolean putStrategyParam(ParamEntity entity) {
         return execBool(() -> dao.save(entity), o -> {
             log.info("save [StrategyParamEntity] success -> {}", entity);
             return true;
