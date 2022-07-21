@@ -1,6 +1,6 @@
 package io.cygnux.repository.dao;
 
-import io.cygnux.repository.entities.TInstrument;
+import io.cygnux.repository.entity.InstrumentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,11 +14,11 @@ import java.util.List;
  * @author yellow013
  */
 @Repository
-public interface InstrumentDao extends JpaRepository<TInstrument, Long> {
+public interface InstrumentDao extends JpaRepository<InstrumentEntity, Long> {
 
     @Query("SELECT '*' FROM #{#entityName} e "
             + " WHERE "
             + "e.instrumentCode LIKE :instrumentCode ")
-    List<TInstrument> query(@Nullable String instrumentCode);
+    List<InstrumentEntity> query(@Nullable String instrumentCode);
 
 }

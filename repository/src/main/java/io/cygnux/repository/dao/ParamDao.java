@@ -1,6 +1,6 @@
 package io.cygnux.repository.dao;
 
-import io.cygnux.repository.entities.TParam;
+import io.cygnux.repository.entity.ParamEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,10 +13,10 @@ import java.util.List;
  * 
  */
 @Repository
-public interface ParamDao extends JpaRepository<TParam, Long> {
+public interface ParamDao extends JpaRepository<ParamEntity, Long> {
 
-	List<TParam> queryByStrategyId(int strategyId);
+	List<ParamEntity> queryByStrategyId(int strategyId);
 
-	List<TParam> queryByStrategyName(String strategyName);
+	List<ParamEntity> queryByStrategyName(String strategyName);
 
 }

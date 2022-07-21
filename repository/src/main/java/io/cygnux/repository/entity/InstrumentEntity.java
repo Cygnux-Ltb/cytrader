@@ -1,4 +1,4 @@
-package io.cygnux.repository.entities;
+package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.ColumnDefinition;
 import io.cygnux.repository.constant.CommonColumn;
@@ -16,10 +16,8 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Table(name = "t_instrument")
-@Entity(name = TInstrument.ENTITY_NAME)
-public final class TInstrument {
-
-    public final static String ENTITY_NAME = "TInstrument";
+@Entity
+public final class InstrumentEntity {
 
     @Id
     @Column(name = CommonColumn.UID)
@@ -32,10 +30,13 @@ public final class TInstrument {
     @Column(name = CommonColumn.INSTRUMENT_CODE, nullable = false)
     private String instrumentCode;
 
+    @Column(name = "instrument_type", nullable = false)
+    private String instrumentType;
+
     /**
      * exchangeCode
      */
-    @Column(name = "exchangeCode", nullable = false)
+    @Column(name = "exchange_code", nullable = false)
     private String exchangeCode;
 
     /**
@@ -47,7 +48,7 @@ public final class TInstrument {
     /**
      * tradeable
      */
-    @Column(name = "tradeable")
-    private boolean tradeable;
+    @Column(name = "tradable")
+    private boolean tradable;
 
 }

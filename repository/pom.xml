@@ -14,7 +14,7 @@
     <name>repository</name>
 
     <properties>
-        <hibernate.version>6.1.0.Final</hibernate.version>
+        <hibernate.version>6.1.1.Final</hibernate.version>
     </properties>
 
     <dependencies>

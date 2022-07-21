@@ -1,4 +1,4 @@
-package io.cygnux.repository.entities;
+package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.ColumnDefinition;
 import io.cygnux.repository.constant.CommonColumn;
@@ -19,10 +19,8 @@ import java.util.Date;
 @Setter
 @Accessors(chain = true)
 @Table(name = "t_order_event")
-@Entity(name = TOrderEvent.ENTITY_NAME)
-public final class TOrderEvent {
-
-	public final static String ENTITY_NAME = "TOrderEvent";
+@Entity
+public final class OrderEventEntity {
 
 	@Id
 	@Column(name = CommonColumn.UID)

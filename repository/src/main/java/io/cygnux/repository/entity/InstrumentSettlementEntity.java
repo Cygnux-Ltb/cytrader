@@ -1,4 +1,4 @@
-package io.cygnux.repository.entities;
+package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.ColumnDefinition;
 import io.cygnux.repository.constant.CommonColumn;
@@ -16,10 +16,8 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Table(name = "t_instrument_settlement")
-@Entity(name = TInstrumentSettlement.ENTITY_NAME)
-public final class TInstrumentSettlement {
-
-    public final static String ENTITY_NAME = "TInstrumentSettlement";
+@Entity
+public final class InstrumentSettlementEntity {
 
     @Id
     @Column(name = CommonColumn.UID)

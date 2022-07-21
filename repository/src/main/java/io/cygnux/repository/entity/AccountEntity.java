@@ -1,4 +1,4 @@
-package io.cygnux.repository.entities;
+package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.CommonColumn;
 import jakarta.persistence.*;
@@ -15,26 +15,24 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Table(name = "t_account")
-@Entity(name = TAccount.ENTITY_NAME)
-public final class TAccount {
-
-    public final static String ENTITY_NAME = "TAccount";
+@Entity
+public final class AccountEntity {
 
     @Id
     @Column(name = CommonColumn.UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
-    @Column(name = "sub_account_id", nullable = false)
-    private int subAccountId;
-
-    @Column(name = "account_id", nullable = false)
+    @Column(name = CommonColumn.ACCOUNT_ID, nullable = false)
     private int accountId;
+
+    @Column(name = CommonColumn.SUB_ACCOUNT_ID, nullable = false)
+    private int subAccountId;
 
     @Column(name = CommonColumn.BROKER_ID, nullable = false)
     private String brokerId;
 
-    @Column(name = "investor_id")
+    @Column(name = CommonColumn.INVESTOR_ID)
     private String investorId;
 
     @Column(name = "adaptor_type", nullable = false)

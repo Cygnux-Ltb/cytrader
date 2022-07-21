@@ -1,4 +1,4 @@
-package io.cygnux.repository.entities;
+package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.CommonColumn;
 import jakarta.persistence.*;
@@ -15,10 +15,8 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Table(name = "t_param")
-@Entity(name = TParam.ENTITY_NAME)
-public final class TParam {
-
-    public final static String ENTITY_NAME = "TParam";
+@Entity
+public final class ParamEntity {
 
     @Id
     @Column(name = CommonColumn.UID)

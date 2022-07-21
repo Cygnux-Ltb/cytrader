@@ -1,4 +1,4 @@
-package io.cygnux.repository.entities;
+package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.CommonColumn;
 import jakarta.persistence.Column;
@@ -18,10 +18,8 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @Table(name = "t_strategy")
-@Entity(name = TStrategy.ENTITY_NAME)
-public final class TStrategy {
-
-    public final static String ENTITY_NAME = "TStrategy";
+@Entity
+public final class StrategyEntity {
 
     @Id
     @Column(name = CommonColumn.STRATEGY_ID)
