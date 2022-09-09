@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  * <p>
  * Bar
  */
-
 @Getter
 @Setter
 @Accessors(chain = true)

@@ -1,6 +1,6 @@
 package io.cygnux.repository.entity;
 
-import io.cygnux.repository.constant.CommonColumn;
+import io.cygnux.repository.constant.RdbColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,6 +8,9 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import static io.cygnux.repository.constant.RdbColumn.STRATEGY_ID;
+import static io.cygnux.repository.constant.RdbColumn.STRATEGY_NAME;
 
 /**
  * Strategy Entity
@@ -22,10 +25,10 @@ import lombok.experimental.Accessors;
 public final class StrategyEntity {
 
     @Id
-    @Column(name = CommonColumn.STRATEGY_ID)
+    @Column(name = STRATEGY_ID)
     private int strategyId;
 
-    @Column(name = CommonColumn.STRATEGY_NAME)
+    @Column(name = STRATEGY_NAME)
     private String strategyName;
 
     @Column(name = "strategy_owner")

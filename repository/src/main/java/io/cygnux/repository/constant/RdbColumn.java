@@ -1,6 +1,6 @@
 package io.cygnux.repository.constant;
 
-public interface CommonColumn {
+public interface RdbColumn {
 
     String UID = "uid";
 

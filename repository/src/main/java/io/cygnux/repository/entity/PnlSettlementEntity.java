@@ -1,11 +1,13 @@
 package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.ColumnDefinition;
-import io.cygnux.repository.constant.CommonColumn;
+import io.cygnux.repository.constant.RdbColumn;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import static io.cygnux.repository.constant.RdbColumn.*;
 
 /**
  * PnlSettlementDaily Entity
@@ -20,26 +22,26 @@ import lombok.experimental.Accessors;
 public final class PnlSettlementEntity {
 
     @Id
-    @Column(name = CommonColumn.UID)
+    @Column(name = UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
     /**
      * strategyId
      */
-    @Column(name = CommonColumn.STRATEGY_ID)
+    @Column(name = STRATEGY_ID)
     private int strategyId;
 
     /**
      * instrumentCode
      */
-    @Column(name = CommonColumn.INSTRUMENT_CODE)
+    @Column(name = INSTRUMENT_CODE)
     private String instrumentCode;
 
     /**
      * tradingDay
      */
-    @Column(name = CommonColumn.TRADING_DAY)
+    @Column(name = RdbColumn.TRADING_DAY)
     private int tradingDay;
 
     /**

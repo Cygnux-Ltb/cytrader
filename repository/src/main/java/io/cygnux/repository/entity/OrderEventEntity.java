@@ -1,13 +1,15 @@
 package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.ColumnDefinition;
-import io.cygnux.repository.constant.CommonColumn;
+import io.cygnux.repository.constant.RdbColumn;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
+
+import static io.cygnux.repository.constant.RdbColumn.*;
 
 /**
  * OrderEvent Entity
@@ -23,32 +25,32 @@ import java.util.Date;
 public final class OrderEventEntity {
 
 	@Id
-	@Column(name = CommonColumn.UID)
+	@Column(name = UID)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long uid;
 
 	/**
 	 * strategyId
 	 */
-	@Column(name = CommonColumn.STRATEGY_ID)
+	@Column(name = STRATEGY_ID)
 	private int strategyId;
 
 	/**
 	 * tradingDay
 	 */
-	@Column(name = CommonColumn.TRADING_DAY)
+	@Column(name = TRADING_DAY)
 	private int tradingDay;
 
 	/**
 	 * investorId
 	 */
-	@Column(name = CommonColumn.INVESTOR_ID)
+	@Column(name = INVESTOR_ID)
 	private String investorId;
 
 	/**
 	 * instrumentCode
 	 */
-	@Column(name = CommonColumn.INSTRUMENT_CODE)
+	@Column(name = INSTRUMENT_CODE)
 	private String instrumentCode;
 
 	/**

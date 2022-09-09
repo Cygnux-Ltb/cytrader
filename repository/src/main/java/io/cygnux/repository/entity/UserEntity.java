@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import static io.cygnux.repository.constant.RdbColumn.UID;
+
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -16,7 +18,7 @@ import lombok.experimental.Accessors;
 public class UserEntity {
 
     @Id
-    @Column(name = "uid", nullable = false)
+    @Column(name = UID, nullable = false)
     private long uid;
 
     private long userId;
@@ -28,7 +30,6 @@ public class UserEntity {
     private String email;
 
     private String phone;
-
 
     private int subAccountId;
 

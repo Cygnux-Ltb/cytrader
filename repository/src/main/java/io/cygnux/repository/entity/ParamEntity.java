@@ -1,10 +1,12 @@
 package io.cygnux.repository.entity;
 
-import io.cygnux.repository.constant.CommonColumn;
+import io.cygnux.repository.constant.RdbColumn;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import static io.cygnux.repository.constant.RdbColumn.*;
 
 /**
  * StrategyParam Entity
@@ -19,14 +21,14 @@ import lombok.experimental.Accessors;
 public final class ParamEntity {
 
     @Id
-    @Column(name = CommonColumn.UID)
+    @Column(name = UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
-    @Column(name = CommonColumn.STRATEGY_ID)
+    @Column(name = STRATEGY_ID)
     private int strategyId;
 
-    @Column(name = CommonColumn.STRATEGY_NAME)
+    @Column(name = STRATEGY_NAME)
     private String strategyName;
 
     @Column(name = "param_name")

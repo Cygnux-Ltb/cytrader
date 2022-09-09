@@ -1,6 +1,6 @@
 package io.cygnux.repository.entity;
 
-import io.cygnux.repository.constant.CommonColumn;
+import io.cygnux.repository.constant.RdbColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,6 +8,9 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import static io.cygnux.repository.constant.RdbColumn.BROKER_ID;
+import static io.cygnux.repository.constant.RdbColumn.INVESTOR_ID;
 
 /**
  * CygInfo Entity
@@ -28,10 +31,10 @@ public final class ProductEntity {
     @Column(name = "product_name", length = 128)
     private String productName;
 
-    @Column(name = CommonColumn.INVESTOR_ID)
+    @Column(name = INVESTOR_ID)
     private String investorId;
 
-    @Column(name = CommonColumn.BROKER_ID)
+    @Column(name = BROKER_ID)
     private String brokerId;
 
     @Column(name = "trader_name", length = 128)

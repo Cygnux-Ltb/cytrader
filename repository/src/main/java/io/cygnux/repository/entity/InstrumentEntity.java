@@ -1,11 +1,14 @@
 package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.ColumnDefinition;
-import io.cygnux.repository.constant.CommonColumn;
+import io.cygnux.repository.constant.RdbColumn;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import static io.cygnux.repository.constant.RdbColumn.INSTRUMENT_CODE;
+import static io.cygnux.repository.constant.RdbColumn.UID;
 
 /**
  * Instrument Entity
@@ -20,14 +23,14 @@ import lombok.experimental.Accessors;
 public final class InstrumentEntity {
 
     @Id
-    @Column(name = CommonColumn.UID)
+    @Column(name = UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
     /**
      * instrumentCode
      */
-    @Column(name = CommonColumn.INSTRUMENT_CODE, nullable = false)
+    @Column(name = INSTRUMENT_CODE, nullable = false)
     private String instrumentCode;
 
     @Column(name = "instrument_type", nullable = false)

@@ -1,10 +1,12 @@
 package io.cygnux.repository.entity;
 
-import io.cygnux.repository.constant.CommonColumn;
+import io.cygnux.repository.constant.RdbColumn;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import static io.cygnux.repository.constant.RdbColumn.*;
 
 /**
  * Account Entity
@@ -19,20 +21,20 @@ import lombok.experimental.Accessors;
 public final class AccountEntity {
 
     @Id
-    @Column(name = CommonColumn.UID)
+    @Column(name = UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
-    @Column(name = CommonColumn.ACCOUNT_ID, nullable = false)
+    @Column(name = ACCOUNT_ID, nullable = false)
     private int accountId;
 
-    @Column(name = CommonColumn.SUB_ACCOUNT_ID, nullable = false)
+    @Column(name = SUB_ACCOUNT_ID, nullable = false)
     private int subAccountId;
 
-    @Column(name = CommonColumn.BROKER_ID, nullable = false)
+    @Column(name = BROKER_ID, nullable = false)
     private String brokerId;
 
-    @Column(name = CommonColumn.INVESTOR_ID)
+    @Column(name = INVESTOR_ID)
     private String investorId;
 
     @Column(name = "adaptor_type", nullable = false)
