@@ -67,6 +67,7 @@ public class ParamService {
                 return -1;
             }
         }
+        return -1;
     }
 
     private boolean validationStrategyParam(ParamEntity param) {

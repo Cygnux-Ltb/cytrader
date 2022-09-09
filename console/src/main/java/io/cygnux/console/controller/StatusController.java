@@ -65,12 +65,12 @@ public final class StatusController {
         }
         // 按照CydId分别发送策略开关
         for (Integer cygId : strategySwitchListMap.keySet()) {
-            Publisher<String, String> publisher = CommandDispatcher.GROUP_INSTANCE.getMember(cygId);
+            //Publisher<String, String> publisher = CommandDispatcher.GROUP_INSTANCE.getMember(cygId);
             String msg = JsonWrapper
                     .toJson(new OutboxMessage<>(StrategySwitch.name(), strategySwitchListMap.get(cygId)));
 
             log.info("StrategySwitchs : {}", msg);
-            publisher.publish(msg);
+            //publisher.publish(msg);
         }
         return ok();
     }

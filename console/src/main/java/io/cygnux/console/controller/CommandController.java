@@ -42,7 +42,7 @@ public final class CommandController {
 
 
     /**
-     * @param cygId
+     * @param productId
      * @param request
      * @return
      */
@@ -52,12 +52,12 @@ public final class CommandController {
         // 将参数转换为List
         List<ParamEntity> strategyParams = bodyToList(request, ParamEntity.class);
         // 获取Publisher
-        dispatcher.sendCommand();
-        Publisher<String, String> publisher = GROUP_INSTANCE.getMember(cygId);
+        //dispatcher.sendCommand();
+        //Publisher<String, String> publisher = GROUP_INSTANCE.getMember(cygId);
         // 转换为需要发送的发件箱消息
         String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.UpdateStrategyParams.name(), strategyParams));
         // 发送消息
-        publisher.publish(msg);
+        //publisher.publish(msg);
         // 返回Put成功标识
         return ok();
     }
