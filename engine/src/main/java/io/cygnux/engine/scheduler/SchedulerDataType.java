@@ -14,7 +14,7 @@ public enum SchedulerDataType implements Envelope {
 
 	private final int code;
 
-	private SchedulerDataType(int code) {
+	SchedulerDataType(int code) {
 		this.code = code;
 	}
 

@@ -10,8 +10,8 @@ import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.handler.InboundHandler;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.strategy.Strategy;
-import io.horizon.trader.transport.outbound.AdaptorReport;
-import io.horizon.trader.transport.outbound.OrderReport;
+import io.horizon.trader.transport.outbound.DtoAdaptorReport;
+import io.horizon.trader.transport.outbound.DtoOrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 import javax.annotation.Nonnull;
@@ -41,20 +41,20 @@ public class SingleStrategyScheduler<M extends MarketData> implements InboundHan
 	}
 
 	@Override
-	public void onMarketData(M marketData) {
+	public void onMarketData(@Nonnull M marketData) {
 		MarketDataKeeper.onMarketDate(marketData);
 		strategy.onMarketData(marketData);
 	}
 
 	@Override
-	public void onOrderReport(OrderReport report) {
+	public void onOrderReport(@Nonnull DtoOrderReport report) {
 		ChildOrder order = OrderKeeper.handleOrderReport(report);
 		// 调用策略实现的订单回调函数
 		strategy.onOrder(order);
 	}
 
 	@Override
-	public void onAdaptorReport(@Nonnull AdaptorReport report) {
+	public void onAdaptorReport(@Nonnull DtoAdaptorReport report) {
 		log.error("On Adaptor Report -> {}", report);
 		strategy.onAdaptorReport(report);
 	}

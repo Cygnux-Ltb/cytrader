@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.transport.outbound.AdaptorReport;
-import io.horizon.trader.transport.outbound.OrderReport;
+import io.horizon.trader.transport.outbound.DtoAdaptorReport;
+import io.horizon.trader.transport.outbound.DtoOrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 
 import javax.annotation.Nonnull;
@@ -33,7 +33,7 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 	}
 
 	@Override
-	public void onMarketData(M marketData) {
+	public void onMarketData(@Nonnull M marketData) {
 		MarketDataKeeper.onMarketDate(marketData);
 		subscribedMap.get(marketData.getInstrumentId()).each(strategy -> {
 			if (strategy.isEnabled()) {
@@ -43,7 +43,7 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 	}
 
 	@Override
-	public void onOrderReport(OrderReport report) {
+	public void onOrderReport(@Nonnull DtoOrderReport report) {
 		log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerOrdSysId(),
 				report.getOrdSysId());
 		ChildOrder order = OrderKeeper.handleOrderReport(report);
@@ -55,7 +55,7 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 
 	// TODO add pools
 	@Override
-	public void onAdaptorReport(@Nonnull AdaptorReport report) {
+	public void onAdaptorReport(@Nonnull DtoAdaptorReport report) {
 		log.info("Recv AdaptorReport -> {}", report);
 	}
 

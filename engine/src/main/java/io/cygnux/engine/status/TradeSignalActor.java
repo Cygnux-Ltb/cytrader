@@ -7,52 +7,51 @@ import io.mercury.common.collections.MutableLists;
 
 public final class TradeSignalActor {
 
-	private MutableList<TradeSignal> trdSignalList = MutableLists.newFastList(256);
+    private final MutableList<TradeSignal> trdSignalList = MutableLists.newFastList(256);
 
-	public static final TradeSignalActor Singleton = new TradeSignalActor();
+    public static final TradeSignalActor Singleton = new TradeSignalActor();
 
-	public boolean addTradeSignal(TradeSignal signal) {
-		return trdSignalList.add(signal);
-	}
+    public boolean addTradeSignal(TradeSignal signal) {
+        return trdSignalList.add(signal);
+    }
 
-	/**
-	 * 
-	 * @param signal
-	 */
-	public void handleTradeSignal(TradeSignal signal) {
-		switch (signal.getAction()) {
-		case Open:
-			switch (signal.getDirection()) {
-			case Long:
+    /**
+     * @param signal TradeSignal
+     */
+    public void handleTradeSignal(TradeSignal signal) {
+        switch (signal.getAction()) {
+            case Open:
+                switch (signal.getDirection()) {
+                    case Long:
 
-				break;
-			case Short:
+                        break;
+                    case Short:
 
-				break;
+                        break;
 
-			default:
-				break;
-			}
-			break;
-		case Close:
-			switch (signal.getDirection()) {
-			case Long:
+                    default:
+                        break;
+                }
+                break;
+            case Close:
+                switch (signal.getDirection()) {
+                    case Long:
 
-				break;
+                        break;
 
-			case Short:
+                    case Short:
 
-				break;
+                        break;
 
-			default:
-				break;
-			}
+                    default:
+                        break;
+                }
 
-			break;
-		default:
-			break;
-		}
+                break;
+            default:
+                break;
+        }
 
-	}
+    }
 
 }

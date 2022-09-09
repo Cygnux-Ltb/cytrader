@@ -2,8 +2,8 @@ package io.cygnux.engine.position;
 
 import org.junit.Test;
 
-import io.horizon.market.instrument.ChinaFutures.ChinaFuturesInstrument;
-import io.horizon.market.instrument.ChinaFutures.ChinaFuturesSymbol;
+import io.horizon.market.instrument.futures.ChinaFutures.ChinaFuturesInstrument;
+import io.horizon.market.instrument.futures.ChinaFutures.ChinaFuturesSymbol;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.enums.TrdDirection;
 

@@ -2,6 +2,7 @@ package io.cygnux.engine.position;
 
 import static java.lang.Math.abs;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -29,6 +30,7 @@ import io.mercury.serialization.json.JsonWrapper;
 @NotThreadSafe
 public final class PositionKeeper2 implements Serializable, Formatter<String> {
 
+	@Serial
 	private static final long serialVersionUID = -23036653515185236L;
 
 	/**

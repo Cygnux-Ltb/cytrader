@@ -1,109 +1,108 @@
 package io.cygnux.engine.strategy;
 
-import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
-import static io.mercury.common.log.Log4j2LoggerFactory.getLogger;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
-import org.slf4j.Logger;
-
 import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.strategy.Strategy;
-import io.horizon.trader.transport.outbound.AdaptorReport;
+import io.horizon.trader.transport.outbound.DtoAdaptorReport;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.lang.Asserter;
 import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
+import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
+import org.slf4j.Logger;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
+import static io.mercury.common.log.Log4j2LoggerFactory.getLogger;
 
 public abstract class SingleInstrumentStrategy<M extends MarketData, K extends ParamKey>
-		extends AbstractStrategy<M, K> {
+        extends AbstractStrategy<M, K> {
 
-	// Logger
-	private static final Logger log = getLogger(SingleInstrumentStrategy.class);
+    // Logger
+    private static final Logger log = getLogger(SingleInstrumentStrategy.class);
 
-	// 策略订阅的合约
-	protected Instrument instrument;
+    // 策略订阅的合约
+    protected Instrument instrument;
 
-	// 策略订阅的合约列表
-	protected ImmutableIntObjectMap<Instrument> instruments;
+    // 策略订阅的合约列表
+    protected ImmutableIntObjectMap<Instrument> instruments;
 
-	private Adaptor adaptor;
+    private Adaptor adaptor;
 
-	/**
-	 * 
-	 * @param strategyId
-	 * @param subAccount
-	 * @param instrument
-	 */
-	protected SingleInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
-			Instrument instrument) {
-		this(strategyId, strategyName, subAccount, null, instrument);
-	}
+    /**
+     * @param strategyId   int
+     * @param strategyName String
+     * @param subAccount   String
+     * @param instrument   SubAccount
+     */
+    protected SingleInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
+                                       Instrument instrument) {
+        this(strategyId, strategyName, subAccount, null, instrument);
+    }
 
-	/**
-	 * 
-	 * @param strategyId
-	 * @param subAccount
-	 * @param params
-	 * @param instrument
-	 */
-	protected SingleInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
-			@Nullable Params<K> params, Instrument instrument) {
-		super(strategyId, strategyName, subAccount, params);
-		this.instrument = instrument;
-		this.instruments = getIntObjectMapFactory().of(instrument.getInstrumentId(), instrument);
-	}
+    /**
+     * @param strategyId   int
+     * @param strategyName String
+     * @param subAccount   SubAccount
+     * @param params       Params<K>
+     * @param instrument   Instrument
+     */
+    protected SingleInstrumentStrategy(int strategyId, @Nonnull String strategyName, SubAccount subAccount,
+                                       @Nullable Params<K> params, Instrument instrument) {
+        super(strategyId, strategyName, subAccount, params);
+        this.instrument = instrument;
+        this.instruments = getIntObjectMapFactory().of(instrument.getInstrumentId(), instrument);
+    }
 
-	@Override
-	public ImmutableIntObjectMap<Instrument> getInstruments() {
-		return instruments;
-	}
 
-	@Override
-	public Strategy<M> addAdaptor(Adaptor adaptor) {
-		Asserter.nonNull(adaptor, "adaptor");
-		this.adaptor = adaptor;
-		return this;
-	}
+    @Override
+    @Nonnull
+    public ImmutableIntObjectMap<Instrument> getInstruments() {
+        return instruments;
+    }
 
-	@Override
-	protected Adaptor getAdaptor(Instrument instrument) {
-		return adaptor;
-	}
+    @Override
+    public Strategy<M> addAdaptor(@Nonnull Adaptor adaptor) {
+        Asserter.nonNull(adaptor, "adaptor");
+        this.adaptor = adaptor;
+        return this;
+    }
 
-	@Override
-	public void onAdaptorReport(@Nonnull AdaptorReport event) {
-		log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", getStrategyName(),
-				event.getAdaptorId(), event.getStatus());
-		switch (event.getStatus()) {
-		case MD_ENABLE:
-			log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
-			adaptor.subscribeMarketData(new Instrument[] { instrument });
-			log.info("{} :: Call subscribeMarketData, instrument -> {}", getStrategyName(), instrument);
-			break;
-		case TRADER_ENABLE:
-			log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
-			// TODO
+    @Override
+    protected Adaptor getAdaptor(@Nonnull Instrument instrument) {
+        return adaptor;
+    }
+
+    @Override
+    public void onAdaptorReport(@Nonnull DtoAdaptorReport event) {
+        log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", getStrategyName(),
+                event.getAdaptorId(), event.getStatus());
+        switch (event.getStatus()) {
+            case MD_ENABLE -> {
+                log.info("{} :: Handle adaptor MdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
+                adaptor.subscribeMarketData(new Instrument[]{instrument});
+                log.info("{} :: Call subscribeMarketData, instrument -> {}", getStrategyName(), instrument);
+            }
+            case TRADER_ENABLE -> {
+                log.info("{} :: Handle adaptor TdEnable, adaptorId==[{}]", getStrategyName(), event.getAdaptorId());
+                // TODO
 //			adaptor.queryOrder(null);
-//			log.info("{} :: Call queryOrder, adaptodId==[{}], account is default", getStrategyName(),
+//			log.info("{} :: Call queryOrder, adaptorId==[{}], account is default", getStrategyName(),
 //					event.getAdaptorId());
-			adaptor.queryPositions(queryPositionsReq.setExchangeCode(instrument.getExchangeCode())
-					.setInstrumentCode(instrument.getInstrumentCode()).setGenerateTime(EpochTime.getEpochMillis()));
-			log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", getStrategyName(),
-					event.getAdaptorId());
-			adaptor.queryBalance(queryBalanceReq.setGenerateTime(EpochTime.getEpochMillis()));
-			log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", getStrategyName(),
-					event.getAdaptorId());
-			break;
-		default:
-			log.warn("{} unhandled event received {}", getStrategyName(), event);
-			break;
-		}
-	}
+                adaptor.queryPositions(queryPositionsReq.setExchangeCode(instrument.getExchangeCode())
+                        .setInstrumentCode(instrument.getInstrumentCode()).setGenerateTime(EpochTime.getEpochMillis()));
+                log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", getStrategyName(),
+                        event.getAdaptorId());
+                adaptor.queryBalance(queryBalanceReq.setGenerateTime(EpochTime.getEpochMillis()));
+                log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", getStrategyName(),
+                        event.getAdaptorId());
+            }
+            default -> log.warn("{} unhandled event received {}", getStrategyName(), event);
+        }
+    }
 
 }

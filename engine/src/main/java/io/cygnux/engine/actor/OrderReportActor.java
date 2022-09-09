@@ -1,20 +1,20 @@
 package io.cygnux.engine.actor;
 
 import io.horizon.trader.handler.OrderReportHandler;
-import io.horizon.trader.transport.outbound.OrderReport;
-import io.mercury.actors.BaseActorT1;
+import io.horizon.trader.transport.outbound.DtoOrderReport;
+import io.mercury.actors.def.BaseActorT1;
 
 import javax.annotation.Nonnull;
 
-public class OrderReportActor extends BaseActorT1<OrderReport> implements OrderReportHandler {
+public class OrderReportActor extends BaseActorT1<DtoOrderReport> implements OrderReportHandler {
 
     @Override
-    protected Class<OrderReport> eventType() {
-        return OrderReport.class;
+    protected Class<DtoOrderReport> eventType() {
+        return DtoOrderReport.class;
     }
 
     @Override
-    protected void onEvent(OrderReport t) {
+    protected void onEvent(DtoOrderReport t) {
         onOrderReport(t);
     }
 
@@ -25,7 +25,7 @@ public class OrderReportActor extends BaseActorT1<OrderReport> implements OrderR
     }
 
     @Override
-    public void onOrderReport(@Nonnull OrderReport report) {
+    public void onOrderReport(@Nonnull DtoOrderReport report) {
         // TODO Auto-generated method stub
 
     }
