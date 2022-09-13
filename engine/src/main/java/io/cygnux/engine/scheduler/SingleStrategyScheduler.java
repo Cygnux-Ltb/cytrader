@@ -1,10 +1,6 @@
 package io.cygnux.engine.scheduler;
 
-import java.io.IOException;
-
 import io.cygnux.engine.trader.OrderKeeper;
-import org.slf4j.Logger;
-
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.handler.InboundHandler;
@@ -13,8 +9,10 @@ import io.horizon.trader.strategy.Strategy;
 import io.horizon.trader.transport.outbound.DtoAdaptorReport;
 import io.horizon.trader.transport.outbound.DtoOrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 
 /**
  * 

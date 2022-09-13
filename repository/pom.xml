@@ -14,7 +14,6 @@
     <name>repository</name>
 
     <properties>
-        <hibernate.version>6.1.2.Final</hibernate.version>
     </properties>
 
     <dependencies>
@@ -23,9 +22,9 @@
             <artifactId>persistence-h2</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
+            <version>6.1.3.Final</version>
             <exclusions>
                 <exclusion>
                     <!-- Persistence API -->
