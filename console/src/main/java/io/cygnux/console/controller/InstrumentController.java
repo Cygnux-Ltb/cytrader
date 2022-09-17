@@ -27,9 +27,9 @@ public final class InstrumentController {
     /**
      * Get Settlement Price
      *
-     * @param instrumentCode
-     * @param tradingDay
-     * @return
+     * @param instrumentCode String
+     * @param tradingDay     int
+     * @return ResponseEntity<List < InstrumentSettlementEntity>>
      */
     @GetMapping("/settlement")
     public ResponseEntity<List<InstrumentSettlementEntity>> getSettlementPrice(
@@ -48,8 +48,8 @@ public final class InstrumentController {
     /**
      * Get LastPrices
      *
-     * @param instrumentCodes
-     * @return
+     * @param instrumentCodes String
+     * @return ResponseEntity<List < InstrumentPrice>>
      */
     @GetMapping("/last_price")
     public ResponseEntity<List<InstrumentPrice>> getLastPrice(
@@ -65,8 +65,8 @@ public final class InstrumentController {
     /**
      * Put LastPrice
      *
-     * @param request
-     * @return
+     * @param request HttpServletRequest
+     * @return ResponseEntity<Object>
      */
     @PutMapping("/last_price")
     public ResponseEntity<Object> putLastPrice(
@@ -81,8 +81,8 @@ public final class InstrumentController {
     /**
      * Get [SymbolTradingFee] for [symbol]
      *
-     * @param instrumentCode
-     * @return
+     * @param instrumentCode String
+     * @return ResponseEntity<Object>
      */
     public ResponseEntity<Object> getSymbolTradingFeeByName(
             @RequestParam("instrumentCode") String instrumentCode) {
@@ -93,9 +93,9 @@ public final class InstrumentController {
     /**
      * Get [TradableInstrument] for [symbol] and [tradingDay]
      *
-     * @param symbol
-     * @param tradingDay
-     * @return
+     * @param symbol     String
+     * @param tradingDay String
+     * @return ResponseEntity<Object>
      */
     @GetMapping("/tradable/{symbol}/{tradingDay}")
     public ResponseEntity<Object> getTradableInstrument(
