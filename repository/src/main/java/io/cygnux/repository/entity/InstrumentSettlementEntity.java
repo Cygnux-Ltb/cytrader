@@ -1,13 +1,19 @@
 package io.cygnux.repository.entity;
 
 import io.cygnux.repository.constant.ColumnDefinition;
-import io.cygnux.repository.constant.RdbColumn;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import static io.cygnux.repository.constant.RdbColumn.*;
+import static io.cygnux.repository.constant.RdbColumn.INSTRUMENT_CODE;
+import static io.cygnux.repository.constant.RdbColumn.TRADING_DAY;
+import static io.cygnux.repository.constant.RdbColumn.UID;
 
 /**
  * InstrumentSettlement Entity

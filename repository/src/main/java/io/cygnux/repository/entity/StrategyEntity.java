@@ -1,6 +1,5 @@
 package io.cygnux.repository.entity;
 
-import io.cygnux.repository.constant.RdbColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
