@@ -44,20 +44,16 @@
             <version>${spring.boot.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
+                    <groupId>org.slf4j</groupId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.hibernate</groupId>
                     <artifactId>hibernate-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>HikariCP</artifactId>
+                    <groupId>com.zaxxer</groupId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -72,10 +68,15 @@
                     <groupId>jakarta.transaction</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>HikariCP</artifactId>
-                    <groupId>com.zaxxer</groupId>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.33</version>
         </dependency>
 
         <dependency>
