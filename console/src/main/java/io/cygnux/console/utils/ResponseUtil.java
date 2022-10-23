@@ -8,7 +8,7 @@ public final class ResponseUtil {
     /**
      * Http Status Code: 400 Bad Request
      *
-     * @return
+     * @return ResponseEntity<T>
      */
     public static <T> ResponseEntity<T> badRequest() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

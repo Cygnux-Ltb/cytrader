@@ -28,11 +28,11 @@ public final class OrderController {
     /**
      * 查询Order
      *
-     * @param strategyId
-     * @param tradingDay
-     * @param investorId
-     * @param instrumentCode
-     * @return
+     * @param strategyId     int
+     * @param tradingDay     String
+     * @param investorId     String
+     * @param instrumentCode int
+     * @return ResponseEntity<Object>
      */
     @GetMapping
     public ResponseEntity<Object> getOrder(@RequestParam("strategyId") int strategyId,
@@ -47,9 +47,9 @@ public final class OrderController {
     }
 
     /**
-     * @param tradingDay
-     * @param strategyId
-     * @return
+     * @param tradingDay int
+     * @param strategyId int
+     * @return ResponseEntity<Object>
      */
     @GetMapping("/status")
     public ResponseEntity<Object> getOrdersByInit(@RequestParam("tradingDay") int tradingDay,
@@ -63,8 +63,8 @@ public final class OrderController {
     }
 
     /**
-     * @param request
-     * @return
+     * @param request HttpServletRequest
+     * @return ResponseEntity<Object>
      */
     @PutMapping
     public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {

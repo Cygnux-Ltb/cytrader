@@ -12,7 +12,6 @@ public final class CommandDispatcher {
 
     @PostConstruct
     private void init() {
-
     }
 
     /**
@@ -30,4 +29,5 @@ public final class CommandDispatcher {
     public boolean sendParams(List<ParamEntity> params) {
         return false;
     }
+
 }

@@ -1,10 +1,8 @@
 package io.cygnux.console.controller;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
+import io.cygnux.console.service.PnlService;
+import io.cygnux.repository.entity.PnlEntity;
+import io.cygnux.repository.entity.PnlSettlementEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,13 +10,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnux.console.service.PnlService;
-import io.cygnux.repository.entity.PnlEntity;
-import io.cygnux.repository.entity.PnlSettlementEntity;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-import static io.cygnux.console.utils.ResponseUtil.*;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
 import static io.cygnux.console.utils.ParamsValidateUtil.paramIsNull;
+import static io.cygnux.console.utils.ResponseUtil.badRequest;
+import static io.cygnux.console.utils.ResponseUtil.internalServerError;
+import static io.cygnux.console.utils.ResponseUtil.ok;
+import static io.cygnux.console.utils.ResponseUtil.responseOf;
 
 @RestController("/pnl")
 public final class PnlRestfulApi {
@@ -29,14 +30,13 @@ public final class PnlRestfulApi {
     /**
      * 查询PNL
      *
-     * @param strategyId
-     * @param tradingDay
-     * @return
+     * @param strategyId int
+     * @param tradingDay int
+     * @return ResponseEntity<Object>
      */
     @GetMapping
-    public ResponseEntity<Object> getPnl(
-            @RequestParam("strategyId") int strategyId,
-            @RequestParam("tradingDay") int tradingDay) {
+    public ResponseEntity<Object> getPnl(@RequestParam("strategyId") int strategyId,
+                                         @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(tradingDay))
             return badRequest();
         return responseOf(service.getPnl(strategyId, tradingDay));
@@ -45,12 +45,11 @@ public final class PnlRestfulApi {
     /**
      * Put PnlDaily
      *
-     * @param request
-     * @return
+     * @param request HttpServletRequest
+     * @return ResponseEntity<Object>
      */
     @PutMapping
-    public ResponseEntity<Object> putPnlDailys(
-            @RequestBody HttpServletRequest request) {
+    public ResponseEntity<Object> putPnlDaily(@RequestBody HttpServletRequest request) {
         var pnlDaily = bodyToObject(request, PnlEntity.class);
         return pnlDaily == null ? badRequest() : service.putPnl(pnlDaily) ? ok() : internalServerError();
     }
@@ -58,12 +57,12 @@ public final class PnlRestfulApi {
     /**
      * 查询结算PNL
      *
-     * @param strategyId
-     * @param tradingDay
-     * @return
+     * @param strategyId int
+     * @param tradingDay int
+     * @return ResponseEntity<List < PnlSettlementEntity>>
      */
     @GetMapping("/settlement")
-    public ResponseEntity<List<PnlSettlementEntity>> getPnlSettlementDailys(
+    public ResponseEntity<List<PnlSettlementEntity>> getPnlSettlementDaily(
             @RequestParam("strategyId") int strategyId,
             @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(tradingDay))

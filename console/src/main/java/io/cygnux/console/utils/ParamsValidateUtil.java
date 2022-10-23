@@ -18,8 +18,8 @@ public final class ParamsValidateUtil {
     /**
      * 检查参数列表
      *
-     * @param objs
-     * @return
+     * @param objs Object...
+     * @return boolean
      */
     public static boolean paramIsNull(Object... objs) {
         for (Object obj : objs) {

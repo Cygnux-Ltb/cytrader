@@ -7,7 +7,6 @@ import io.cygnux.console.transport.CommandDispatcher;
 import io.cygnux.repository.entity.ParamEntity;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
-import io.mercury.transport.api.Publisher;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,7 +20,9 @@ import java.util.List;
 
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToList;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
-import static io.cygnux.console.utils.ResponseUtil.*;
+import static io.cygnux.console.utils.ResponseUtil.badRequest;
+import static io.cygnux.console.utils.ResponseUtil.internalServerError;
+import static io.cygnux.console.utils.ResponseUtil.ok;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController("command")

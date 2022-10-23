@@ -1,16 +1,10 @@
 package io.cygnux.console.controller;
 
-import static io.cygnux.console.dto.pack.OutboxTitle.StrategySwitch;
-import static io.cygnux.console.utils.ResponseUtil.*;
-import static io.cygnux.console.utils.ParamsValidateUtil.bodyToList;
-import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
-
-import java.util.*;
-import java.util.concurrent.ConcurrentMap;
-
-import javax.servlet.http.HttpServletRequest;
-
 import io.cygnux.console.dto.StrategySwitch;
+import io.cygnux.console.dto.pack.OutboxMessage;
+import io.mercury.common.collections.MutableMaps;
+import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.serialization.json.JsonWrapper;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +13,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.cygnux.console.dto.pack.OutboxMessage;
-import io.cygnux.console.transport.CommandDispatcher;
-import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.log.Log4j2LoggerFactory;
-import io.mercury.serialization.json.JsonWrapper;
-import io.mercury.transport.api.Publisher;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
+
+import static io.cygnux.console.dto.pack.OutboxTitle.StrategySwitch;
+import static io.cygnux.console.utils.ParamsValidateUtil.bodyToList;
+import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.utils.ResponseUtil.badRequest;
+import static io.cygnux.console.utils.ResponseUtil.ok;
+import static io.cygnux.console.utils.ResponseUtil.responseOf;
 
 @RestController("/status")
 public final class StatusController {
@@ -34,7 +37,7 @@ public final class StatusController {
     private static final ConcurrentMap<Integer, StrategySwitch> StrategySwitchMap = MutableMaps.newConcurrentHashMap();
 
     /**
-     * @return
+     * @return ResponseEntity<Collection < StrategySwitch>>
      */
     @GetMapping
     public ResponseEntity<Collection<StrategySwitch>> allStrategySwitch() {
@@ -42,8 +45,8 @@ public final class StatusController {
     }
 
     /**
-     * @param request
-     * @return
+     * @param request HttpServletRequest
+     * @return ResponseEntity<Object>
      */
     @PutMapping("/command")
     public ResponseEntity<Object> statusCommand(@RequestBody HttpServletRequest request) {
@@ -69,16 +72,16 @@ public final class StatusController {
             String msg = JsonWrapper
                     .toJson(new OutboxMessage<>(StrategySwitch.name(), strategySwitchListMap.get(cygId)));
 
-            log.info("StrategySwitchs : {}", msg);
+            log.info("StrategySwitch : {}", msg);
             //publisher.publish(msg);
         }
         return ok();
     }
 
     /**
-     * @param productId
-     * @param request
-     * @return
+     * @param productId int
+     * @param request   HttpServletRequest
+     * @return ResponseEntity<Object>
      */
     @PutMapping("/update")
     public ResponseEntity<Object> statusUpdate(@RequestParam("productId") int productId,

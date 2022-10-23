@@ -7,14 +7,22 @@ import io.cygnux.repository.entity.StrategyEntity;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-import static io.cygnux.console.utils.ResponseUtil.*;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.utils.ResponseUtil.badRequest;
+import static io.cygnux.console.utils.ResponseUtil.internalServerError;
+import static io.cygnux.console.utils.ResponseUtil.ok;
+import static io.cygnux.console.utils.ResponseUtil.responseOf;
 
 @RestController("/strategy")
 public final class StrategyController {
@@ -30,7 +38,7 @@ public final class StrategyController {
     /**
      * 返回全部Strategy
      *
-     * @return
+     * @return ResponseEntity<List < StrategyEntity>>
      */
     @GetMapping
     public ResponseEntity<List<StrategyEntity>> getStrategies() {
@@ -40,8 +48,8 @@ public final class StrategyController {
     /**
      * 使用StrategyId作为get params访问Strategy
      *
-     * @param strategyId
-     * @return
+     * @param strategyId int
+     * @return ResponseEntity<StrategyEntity>
      */
     public ResponseEntity<StrategyEntity> getStrategyById(@RequestParam("strategyId") int strategyId) {
         StrategyEntity strategy = strategyService.getStrategy(strategyId);
@@ -51,8 +59,8 @@ public final class StrategyController {
     /**
      * 使用StrategyId作为URI访问Param
      *
-     * @param strategyId
-     * @return
+     * @param strategyId int
+     * @return ResponseEntity<Object>
      */
     @GetMapping("/param")
     public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
@@ -63,11 +71,12 @@ public final class StrategyController {
     /**
      * Put StrategyParam URI is StrategyId
      *
-     * @param strategyId
-     * @return
+     * @param strategyId int
+     * @return HttpServletRequest
      */
     @PutMapping("/{strategyId}/param")
-    public ResponseEntity<Object> putParamsByStrategyId(@PathVariable("strategyId") int strategyId, @RequestBody HttpServletRequest request) {
+    public ResponseEntity<Object> putParamsByStrategyId(@PathVariable("strategyId") int strategyId,
+                                                        @RequestBody HttpServletRequest request) {
         var params = bodyToObject(request, ParamEntity.class);
         log.info("putParamsByStrategyId recv : {}", params);
         return params == null ? badRequest() : paramService.putStrategyParam(params) ? ok() : internalServerError();

@@ -13,8 +13,8 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class InboxMessage {
 
-	private String title;
+    private String title;
 
-	private String content;
+    private String content;
 
 }

@@ -4,14 +4,20 @@ import io.cygnux.console.dto.InitFinish;
 import io.cygnux.console.service.ProductService;
 import io.cygnux.repository.entity.ProductEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static io.cygnux.console.utils.ResponseUtil.*;
 import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.utils.ResponseUtil.badRequest;
+import static io.cygnux.console.utils.ResponseUtil.ok;
+import static io.cygnux.console.utils.ResponseUtil.responseOf;
 
 @RestController("/product")
 public final class ProductController {
@@ -23,9 +29,9 @@ public final class ProductController {
     private ProductService service;
 
     /**
-     * Get All cygInfo
+     * Get all product
      *
-     * @return
+     * @return ResponseEntity<Object>
      */
     @GetMapping
     public ResponseEntity<Object> getAllProduct() {
