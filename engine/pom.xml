@@ -1,54 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>io.cygnuxltb</groupId>
-		<artifactId>cygnux</artifactId>
-		<version>1.0</version>
-	</parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.cygnuxltb</groupId>
+        <artifactId>cygnux</artifactId>
+        <version>1.0</version>
+    </parent>
 
-	<artifactId>engine</artifactId>
-	<name>engine</name>
+    <artifactId>engine</artifactId>
+    <name>engine</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>commons-concurrent</artifactId>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>commons-concurrent</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>commons-injection</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>commons-injection</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>serialization-json</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>serialization-json</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>serialization-avro</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>serialization-avro</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>transport-zmq</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>transport-zmq</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>io.cygnuxltb</groupId>
-			<artifactId>trader-api</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>io.cygnuxltb</groupId>
+            <artifactId>trader-api</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>io.mercury</groupId>
-			<artifactId>actors</artifactId>
-			<version>${mercury.version}</version>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>actors</artifactId>
+            <version>${mercury.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
