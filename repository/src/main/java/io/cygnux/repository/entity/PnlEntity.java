@@ -1,126 +1,112 @@
 package io.cygnux.repository.entity;
 
-import io.cygnux.repository.constant.ColumnDefinition;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-import static io.cygnux.repository.constant.RdbColumn.INSTRUMENT_CODE;
-import static io.cygnux.repository.constant.RdbColumn.STRATEGY_ID;
-import static io.cygnux.repository.constant.RdbColumn.TRADING_DAY;
-import static io.cygnux.repository.constant.RdbColumn.UID;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.cygnux.repository.constant.CommonQueryColumn;
+import lombok.Data;
 
 /**
  * PnlDaily Entity
  *
  * @author yellow013
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@Table(name = "t_pnl")
-@Entity
+@Data
+@TableName("cyg_pnl")
 public final class PnlEntity {
 
-    @Id
-    @Column(name = UID)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private long uid;
 
     /**
      * strategyId
      */
-    @Column(name = STRATEGY_ID)
+    @TableField(CommonQueryColumn.STRATEGY_ID)
     private int strategyId;
 
     /**
      * instrumentCode
      */
-    @Column(name = INSTRUMENT_CODE)
+    @TableField(CommonQueryColumn.INSTRUMENT_CODE)
     private String instrumentCode;
 
     /**
      * tradingDay
      */
-    @Column(name = TRADING_DAY)
+    @TableField(CommonQueryColumn.TRADING_DAY)
     private int tradingDay;
 
     /**
      * avgBuyPrice
      */
-    @Column(name = "avg_buy_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+    @TableField("avg_buy_price")
     private double avgBuyPrice;
 
     /**
      * avgSellPrice
      */
-    @Column(name = "avg_sell_price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+    @TableField("avg_sell_price")
     private double avgSellPrice;
 
     /**
      * buyQuantity
      */
-    @Column(name = "buy_quantity")
+    @TableField("buy_quantity")
     private int buyQuantity;
 
     /**
      * sellQuantity
      */
-    @Column(name = "sell_quantity")
+    @TableField("sell_quantity")
     private int sellQuantity;
 
     /**
      * todayLong
      */
-    @Column(name = "today_long")
+    @TableField("today_long")
     private int todayLong;
 
     /**
      * todayShort
      */
-    @Column(name = "today_short")
+    @TableField("today_short")
     private int todayShort;
 
     /**
      * yesterdayLong
      */
-    @Column(name = "yesterday_long")
+    @TableField("yesterday_long")
     private int yesterdayLong;
 
     /**
      * yesterdayShort
      */
-    @Column(name = "yesterday_short")
+    @TableField("yesterday_short")
     private int yesterdayShort;
 
     /**
      * netPosition
      */
-    @Column(name = "net_position")
+    @TableField("net_position")
     private int netPosition;
 
     /**
      * aggregatedFee
      */
-    @Column(name = "aggregated_fee", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+    @TableField("aggregated_fee")
     private double aggregatedFee;
 
     /**
      * approved
      */
-    @Column(name = "approved")
+    @TableField("approved")
     private int approved;
 
     /**
      * turnover
      */
-    @Column(name = "turnover")
+    @TableField("turnover")
     private int turnover;
 
 }

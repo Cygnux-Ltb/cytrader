@@ -1,90 +1,76 @@
 package io.cygnux.repository.entity;
 
-import io.cygnux.repository.constant.ColumnDefinition;
-import io.cygnux.repository.constant.RdbColumn;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-import static io.cygnux.repository.constant.RdbColumn.INSTRUMENT_CODE;
-import static io.cygnux.repository.constant.RdbColumn.STRATEGY_ID;
-import static io.cygnux.repository.constant.RdbColumn.UID;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.cygnux.repository.constant.CommonQueryColumn;
+import lombok.Data;
 
 /**
  * PnlSettlementDaily Entity
  *
  * @author yellow013
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@Table(name = "t_pnl_settlement")
-@Entity
+@Data
+@TableName("cyg_pnl_settlement")
 public final class PnlSettlementEntity {
 
-    @Id
-    @Column(name = UID)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private long uid;
 
     /**
      * strategyId
      */
-    @Column(name = STRATEGY_ID)
+    @TableField(CommonQueryColumn.STRATEGY_ID)
     private int strategyId;
 
     /**
      * instrumentCode
      */
-    @Column(name = INSTRUMENT_CODE)
+    @TableField(CommonQueryColumn.INSTRUMENT_CODE)
     private String instrumentCode;
 
     /**
      * tradingDay
      */
-    @Column(name = RdbColumn.TRADING_DAY)
+    @TableField(CommonQueryColumn.TRADING_DAY)
     private int tradingDay;
 
     /**
      * position
      */
-    @Column(name = "position")
+    @TableField("position")
     private int position;
 
     /**
      * pnlTotal
      */
-    @Column(name = "pnl_total", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+    @TableField("pnl_total")
     private double pnlTotal;
 
     /**
      * pnlNet
      */
-    @Column(name = "pnl_net", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+    @TableField("pnl_net")
     private double pnlNet;
 
     /**
      * tradeCost
      */
-    @Column(name = "trade_cost", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+    @TableField("trade_cost")
     private double tradeCost;
 
     /**
      * exposure
      */
-    @Column(name = "exposure", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+    @TableField("exposure")
     private double exposure;
 
     /**
      * approved
      */
-    @Column(name = "approved")
+    @TableField("approved")
     private int approved;
 
 }

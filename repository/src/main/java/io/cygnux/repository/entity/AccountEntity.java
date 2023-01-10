@@ -1,51 +1,37 @@
 package io.cygnux.repository.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-import static io.cygnux.repository.constant.RdbColumn.ACCOUNT_ID;
-import static io.cygnux.repository.constant.RdbColumn.BROKER_ID;
-import static io.cygnux.repository.constant.RdbColumn.INVESTOR_ID;
-import static io.cygnux.repository.constant.RdbColumn.SUB_ACCOUNT_ID;
-import static io.cygnux.repository.constant.RdbColumn.UID;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.cygnux.repository.constant.CommonQueryColumn;
+import lombok.Data;
 
 /**
- * Account Entity
+ * Account database entity
  *
  * @author yellow013
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@Table(name = "t_account")
-@Entity
+@Data
+@TableName("cyg_account")
 public final class AccountEntity {
 
-    @Id
-    @Column(name = UID)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private long uid;
 
-    @Column(name = ACCOUNT_ID, nullable = false)
+    @TableField(CommonQueryColumn.ACCOUNT_ID)
     private int accountId;
 
-    @Column(name = SUB_ACCOUNT_ID, nullable = false)
+    @TableField(CommonQueryColumn.SUB_ACCOUNT_ID)
     private int subAccountId;
 
-    @Column(name = BROKER_ID, nullable = false)
-    private String brokerId;
+    @TableField(CommonQueryColumn.BROKER)
+    private String broker;
 
-    @Column(name = INVESTOR_ID)
+    @TableField(CommonQueryColumn.INVESTOR_ID)
     private String investorId;
 
-    @Column(name = "adaptor_type", nullable = false)
+    @TableField("adaptor_type")
     private String adaptorType;
 
 }

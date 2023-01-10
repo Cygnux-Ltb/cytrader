@@ -1,39 +1,29 @@
 package io.cygnux.repository.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.cygnux.repository.constant.ColumnDefinition;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.Data;
 
 import java.util.Date;
 
-import static io.cygnux.repository.constant.RdbColumn.INSTRUMENT_CODE;
-import static io.cygnux.repository.constant.RdbColumn.INVESTOR_ID;
-import static io.cygnux.repository.constant.RdbColumn.STRATEGY_ID;
-import static io.cygnux.repository.constant.RdbColumn.TRADING_DAY;
-import static io.cygnux.repository.constant.RdbColumn.UID;
+import static io.cygnux.repository.constant.CommonQueryColumn.INSTRUMENT_CODE;
+import static io.cygnux.repository.constant.CommonQueryColumn.INVESTOR_ID;
+import static io.cygnux.repository.constant.CommonQueryColumn.STRATEGY_ID;
+import static io.cygnux.repository.constant.CommonQueryColumn.TRADING_DAY;
 
 /**
  * Order Entity
  *
  * @author yellow013
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@Table(name = "t_order")
-@Entity
+@Data
+@TableName("cyg_order")
 public final class OrderEntity {
 
-    @Id
-    @Column(name = UID)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private long uid;
 
     /**
@@ -189,13 +179,13 @@ public final class OrderEntity {
     /**
      * statusMsg
      */
-    @Column(name = "status_msg", length = 255)
+    @Column(name = "status_msg")
     private String statusMsg;
 
     /**
      * fee double 19_4
      */
-    @Column(name = "fee", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+    @Column(name = "fee")
     private double fee;
 
     /**

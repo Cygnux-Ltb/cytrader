@@ -1,49 +1,43 @@
 package io.cygnux.repository.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-import static io.cygnux.repository.constant.RdbColumn.STRATEGY_ID;
-import static io.cygnux.repository.constant.RdbColumn.STRATEGY_NAME;
-import static io.cygnux.repository.constant.RdbColumn.UID;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.cygnux.repository.constant.CommonQueryColumn;
+import lombok.Data;
 
 /**
  * StrategyParam Entity
  *
  * @author yellow013
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@Table(name = "t_param")
-@Entity
+@Data
+@TableName("cyg_param")
 public final class ParamEntity {
 
-    @Id
-    @Column(name = UID)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private long uid;
 
-    @Column(name = STRATEGY_ID)
+    @TableField(CommonQueryColumn.STRATEGY_ID)
     private int strategyId;
 
-    @Column(name = STRATEGY_NAME)
+    @TableField(CommonQueryColumn.STRATEGY_NAME)
     private String strategyName;
 
-    @Column(name = "param_name")
+    @TableField("owner_type")
+    private String ownerType;
+
+    @TableField("owner")
+    private String owner;
+
+    @TableField("param_name")
     private String paramName;
 
-    @Column(name = "param_type")
+    @TableField("param_type")
     private String paramType;
 
-    @Column(name = "param_value")
+    @TableField("param_value")
     private String paramValue;
 
 }

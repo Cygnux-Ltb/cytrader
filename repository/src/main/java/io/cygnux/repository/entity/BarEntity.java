@@ -1,57 +1,51 @@
 package io.cygnux.repository.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 /**
  * @author yellow013
  * <p>
- * Bar
+ * Bar of 1 minute
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@Table(name = "t_bar")
-@Entity
+@Data
+@TableName("cyg_bar")
 public final class BarEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "uid")
+    @TableId(type = IdType.AUTO)
     private long uid;
 
-    @Column(name = "instrument_code")
+    @TableField("instrument_code")
     private String instrumentCode;
 
-    @Column(name = "trading_day")
+    @TableField("trading_day")
     private int tradingDay;
 
-    @Column(name = "time_point")
+    @TableField("actual_date")
+    private int actualDate;
+
+    @TableField("time_point")
     private int timePoint;
 
-    @Column(name = "open")
+    @TableField("open")
     private double open;
 
-    @Column(name = "high")
+    @TableField("high")
     private double high;
 
-    @Column(name = "low")
+    @TableField("low")
     private double low;
 
-    @Column(name = "close", nullable = false)
+    @TableField("close")
     private double close;
 
-    @Column(name = "volume")
+    @TableField("volume")
     private double volume;
 
-    @Column(name = "turnover")
+    @TableField("turnover")
     private long turnover;
 
 }

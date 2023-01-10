@@ -1,6 +1,6 @@
 package io.cygnux.repository.constant;
 
-public interface QueryColumn {
+public interface CommonQueryColumn {
 
     /**
      * 策略ID
@@ -28,9 +28,14 @@ public interface QueryColumn {
     String ACCOUNT_ID = "account_id";
 
     /**
-     * 子账户ID
+     * 子账户ID (逻辑账户)
      */
     String SUB_ACCOUNT_ID = "sub_account_id";
+
+    /**
+     * 用户ID
+     */
+    String USER_ID = "user_id";
 
     /**
      * 交易标的代码

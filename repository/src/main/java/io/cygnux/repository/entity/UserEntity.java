@@ -1,36 +1,35 @@
 package io.cygnux.repository.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.cygnux.repository.constant.CommonQueryColumn;
+import lombok.Data;
 
-import static io.cygnux.repository.constant.RdbColumn.UID;
-
-@Getter
-@Setter
-@Accessors(chain = true)
-@Table(name = "t_bar")
-@Entity
+@Data
+@TableName("cyg_user")
 public class UserEntity {
 
-    @Id
-    @Column(name = UID, nullable = false)
+    @TableId(type = IdType.AUTO)
     private long uid;
 
-    private long userId;
+    @TableField(CommonQueryColumn.USER_ID)
+    private int userId;
 
+    @TableField("username")
     private String username;
 
+    @TableField("password")
     private String password;
 
+    @TableField("email")
     private String email;
 
+    @TableField("phone")
     private String phone;
 
+    @TableField(CommonQueryColumn.SUB_ACCOUNT_ID)
     private int subAccountId;
 
 }

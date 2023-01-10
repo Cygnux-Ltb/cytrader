@@ -1,39 +1,36 @@
 package io.cygnux.repository.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
-import static io.cygnux.repository.constant.RdbColumn.STRATEGY_ID;
-import static io.cygnux.repository.constant.RdbColumn.STRATEGY_NAME;
+import static io.cygnux.repository.constant.CommonQueryColumn.STRATEGY_ID;
+import static io.cygnux.repository.constant.CommonQueryColumn.STRATEGY_NAME;
 
 /**
  * Strategy Entity
  *
  * @author yellow013
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@Table(name = "t_strategy")
-@Entity
+@Data
+@TableName("cyg_strategy")
 public final class StrategyEntity {
 
-    @Id
-    @Column(name = STRATEGY_ID)
+    @TableId(type = IdType.AUTO)
+    private long uid;
+
+    @TableField(STRATEGY_ID)
     private int strategyId;
 
-    @Column(name = STRATEGY_NAME)
+    @TableField(STRATEGY_NAME)
     private String strategyName;
 
-    @Column(name = "strategy_owner")
+    @TableField("strategy_owner")
     private String strategyOwner;
 
-    @Column(name = "strategy_info")
+    @TableField("strategy_info")
     private String strategyInfo;
 
 }

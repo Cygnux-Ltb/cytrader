@@ -1,24 +1,13 @@
 package io.cygnux.repository.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.cygnux.repository.entity.OrderEventEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * OrderEvent DAO
  *
  * @author yellow013
  */
-@Repository
-public interface OrderEventDao extends JpaRepository<OrderEventEntity, Long> {
-
-    List<OrderEventEntity> queryByStrategyIdAndTradingDay(int strategyId,
-                                                          int tradingDay);
-
-    List<OrderEventEntity> queryByTradingDay(int tradingDay);
-
-    List<OrderEventEntity> queryByOrdSysId(long ordSysId);
+public interface OrderEventDao extends BaseMapper<OrderEventEntity> {
 
 }

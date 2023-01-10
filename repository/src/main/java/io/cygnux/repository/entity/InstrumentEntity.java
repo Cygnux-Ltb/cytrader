@@ -1,61 +1,52 @@
 package io.cygnux.repository.entity;
 
-import io.cygnux.repository.constant.ColumnDefinition;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-import static io.cygnux.repository.constant.RdbColumn.INSTRUMENT_CODE;
-import static io.cygnux.repository.constant.RdbColumn.UID;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.cygnux.repository.constant.CommonQueryColumn;
+import lombok.Data;
 
 /**
  * Instrument Entity
  *
  * @author yellow013
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@Table(name = "t_instrument")
-@Entity
+@Data
+@TableName("cyg_instrument")
 public final class InstrumentEntity {
 
-    @Id
-    @Column(name = UID)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(type = IdType.AUTO)
     private long uid;
 
     /**
-     * instrumentCode
+     * instrumentCode [*]
      */
-    @Column(name = INSTRUMENT_CODE, nullable = false)
+    @TableField(CommonQueryColumn.INSTRUMENT_CODE)
     private String instrumentCode;
 
-    @Column(name = "instrument_type", nullable = false)
+    /**
+     * instrumentType [*]
+     */
+    @TableField("instrument_type")
     private String instrumentType;
 
     /**
-     * exchangeCode
+     * exchangeCode [*]
      */
-    @Column(name = "exchange_code", nullable = false)
+    @TableField("exchange_code")
     private String exchangeCode;
 
     /**
      * fee
      */
-    @Column(name = "fee", nullable = false, columnDefinition = ColumnDefinition.DECIMAL_19_8)
+    @TableField("fee")
     private double fee;
 
     /**
-     * tradeable
+     * tradable
      */
-    @Column(name = "tradable")
+    @TableField("tradable")
     private boolean tradable;
 
 }
