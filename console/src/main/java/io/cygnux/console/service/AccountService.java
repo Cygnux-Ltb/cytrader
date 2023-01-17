@@ -1,31 +1,22 @@
 package io.cygnux.console.service;
 
-import io.cygnux.repository.dao.AccountDao;
-import io.cygnux.repository.entity.AccountEntity;
-import io.mercury.common.log.Log4j2LoggerFactory;
-import io.mercury.serialization.json.JsonWrapper;
-import org.slf4j.Logger;
+import io.cygnux.console.persistence.dao.AccountDao;
+import io.cygnux.console.persistence.entity.AccountEntity;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
-import static io.mercury.common.functional.Functions.exec;
+import static io.cygnux.console.persistence.util.DaoExecutor.select;
 
 @Service
 public class AccountService {
 
-    private static final Logger log = Log4j2LoggerFactory.getLogger(AccountService.class);
-
     @Resource
-    private AccountDao dao;
+    private AccountDao accountDao;
 
     public List<AccountEntity> getAccount(int accountId) {
-        exec(() -> dao.queryByAccountId(accountId), list -> list, e -> {
-        });
-        List<AccountEntity> list = dao.queryByAccountId(accountId);
-        log.info("query Account where accountId == {}, result -> {}", accountId, JsonWrapper.toJson(list));
-        return list;
+        return select(() -> accountDao.queryByAccountId(accountId), AccountEntity.class);
     }
 
 }

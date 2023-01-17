@@ -1,12 +1,14 @@
 package io.cygnux.console.controller;
 
-import io.cygnux.console.dto.pack.OutboxMessage;
-import io.cygnux.console.dto.pack.OutboxTitle;
+import io.cygnux.console.service.dto.pack.OutboxMessage;
+import io.cygnux.console.service.dto.pack.OutboxTitle;
 import io.cygnux.console.service.ParamService;
 import io.cygnux.console.transport.CommandDispatcher;
-import io.cygnux.repository.entity.ParamEntity;
+import io.cygnux.console.persistence.entity.ParamEntity;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,15 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-import static io.cygnux.console.utils.ParamsValidateUtil.bodyToList;
-import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
-import static io.cygnux.console.utils.ResponseUtil.badRequest;
-import static io.cygnux.console.utils.ResponseUtil.internalServerError;
-import static io.cygnux.console.utils.ResponseUtil.ok;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToList;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
+import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
+import static io.cygnux.console.controller.util.ResponseUtil.ok;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController("command")

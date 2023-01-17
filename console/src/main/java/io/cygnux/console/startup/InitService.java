@@ -1,4 +1,4 @@
-package io.cygnux.console.servlet;
+package io.cygnux.console.startup;
 
 import io.cygnux.console.service.ProductService;
 import io.cygnux.console.transport.CommandDispatcher;
@@ -18,9 +18,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 @Component
-public class CygnusInitService {
+public class InitService {
 
-    private static final Logger log = Log4j2LoggerFactory.getLogger(CygnusInitService.class);
+    private static final Logger log = Log4j2LoggerFactory.getLogger(InitService.class);
 
     @Resource
     private CommandDispatcher dispatcher;

@@ -1,7 +1,9 @@
 package io.cygnux.console.controller;
 
 import io.cygnux.console.service.BarService;
-import io.cygnux.repository.entity.BarEntity;
+import io.cygnux.console.persistence.entity.BarEntity;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
-import static io.cygnux.console.utils.ResponseUtil.badRequest;
-import static io.cygnux.console.utils.ResponseUtil.internalServerError;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
+import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController("/bar")

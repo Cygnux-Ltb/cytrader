@@ -1,18 +1,17 @@
 package io.cygnux.console.service;
 
 import io.cygnux.console.service.bean.ValidationRule;
-import io.cygnux.repository.dao.ParamDao;
-import io.cygnux.repository.entity.ParamEntity;
+import io.cygnux.console.persistence.dao.ParamDao;
+import io.cygnux.console.persistence.entity.ParamEntity;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonParser;
-import org.apache.commons.collections4.CollectionUtils;
+import jakarta.annotation.Resource;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -20,10 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static io.cygnux.console.utils.ParamsValidateUtil.checkStrategyId;
-import static io.cygnux.console.utils.ParamsValidateUtil.checkStrategyName;
-import static io.mercury.common.functional.Functions.exec;
-import static io.mercury.common.functional.Functions.execBool;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.checkStrategyId;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.checkStrategyName;
+import static io.cygnux.console.persistence.util.DaoExecutor.insertOrUpdate;
+import static io.cygnux.console.persistence.util.DaoExecutor.select;
 
 @Component
 public class ParamService {
@@ -33,7 +32,7 @@ public class ParamService {
     private static final Map<String, ValidationRule> validationRuleMap = new HashMap<>();
 
     @Resource
-    private ParamDao dao;
+    private ParamDao paramDao;
 
     static {
         try (InputStream inputStream = ParamService.class.getResourceAsStream("validation_rules.json")) {
@@ -57,7 +56,7 @@ public class ParamService {
     public int updateParamSafe(ParamEntity param) {
         if (validationStrategyParam(param)) {
             try {
-                ParamEntity saved = dao.save(param);
+                ParamEntity saved = paramDao.save(param);
                 if (saved == null) {
                     return 0;
                 } else {
@@ -80,10 +79,7 @@ public class ParamService {
         if (!validationRegex(paramValue, rule.getRegex())) {
             return false;
         }
-        if (!validationValue(paramValue, rule)) {
-            return false;
-        }
-        return true;
+        return validationValue(paramValue, rule);
     }
 
     /**
@@ -96,10 +92,7 @@ public class ParamService {
      * @return boolean
      */
     private boolean validationParamName(String strategyParamName, ValidationRule validationRule) {
-        if (strategyParamName != null && validationRule != null) {
-            return true;
-        }
-        return false;
+        return strategyParamName != null && validationRule != null;
     }
 
     /**
@@ -158,7 +151,7 @@ public class ParamService {
     }
 
     /**
-     * @return
+     * @return List<ParamEntity>
      */
     public List<ParamEntity> getDefaultStrategyParams() {
         return getStrategyParams(0);
@@ -166,55 +159,32 @@ public class ParamService {
 
 
     /**
-     * @param strategyId
-     * @return
+     * @param strategyId int
+     * @return List<ParamEntity>
      */
     public List<ParamEntity> getStrategyParams(int strategyId) {
-        if (checkStrategyId(strategyId, log, "query [StrategyParamEntity] param error"))
+        if (checkStrategyId(strategyId, log, "query [ParamEntity] param error"))
             Throws.illegalArgument("strategyId");
-        return exec(() -> dao.queryByStrategyId(strategyId), list -> {
-            if (CollectionUtils.isEmpty(list)) {
-                log.warn("query [StrategyParamEntity] return 0 row, strategyId=={}", strategyId);
-            } else
-                log.info("query [StrategyParamEntity] where strategyId=={}, result row -> {}", strategyId, list.size());
-            return list;
-        }, e -> {
-            log.error("query [StrategyParamEntity] exception, strategyId=={}", strategyId, e);
-        });
+        return select(() -> paramDao.queryByStrategyId(strategyId), ParamEntity.class);
     }
 
 
     /**
-     * @param strategyName
-     * @return
+     * @param strategyName String
+     * @return List<ParamEntity>
      */
     public List<ParamEntity> getStrategyParams(String strategyName) {
         if (checkStrategyName(strategyName, log, "query [StrategyParamEntity] param error"))
             Throws.illegalArgument("strategyId");
-        return exec(() -> dao.queryByStrategyName(strategyName), list -> {
-            if (CollectionUtils.isEmpty(list)) {
-                log.warn("query [StrategyParamEntity] return 0 row, strategyName=={}", strategyName);
-            } else
-                log.info("query [StrategyParamEntity] where strategyName=={}, result row -> {}", strategyName,
-                        list.size());
-            return list;
-        }, e -> {
-            log.error("query [StrategyParamEntity] exception, strategyName=={}", strategyName, e);
-        });
+        return select(() -> paramDao.queryByStrategyName(strategyName), ParamEntity.class);
     }
 
     /**
-     * @param entity
-     * @return
+     * @param entity ParamEntity
+     * @return boolean
      */
     public boolean putStrategyParam(ParamEntity entity) {
-        return execBool(() -> dao.save(entity), o -> {
-            log.info("save [StrategyParamEntity] success -> {}", entity);
-            return true;
-        }, e -> {
-            log.error("save [StrategyParamEntity] failure -> {}", entity, e);
-            return false;
-        });
+        return insertOrUpdate(paramDao, entity);
     }
 
     public static void main(String[] args) {

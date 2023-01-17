@@ -1,5 +1,6 @@
-package io.cygnux.console.entity;
+package io.cygnux.console.persistence.entity;
 
+import io.cygnux.console.persistence.constant.CommonQueryColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,11 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-
-import static io.cygnux.console.dao.constant.CommonQueryColumn.INSTRUMENT_CODE;
-import static io.cygnux.console.dao.constant.CommonQueryColumn.INVESTOR_ID;
-import static io.cygnux.console.dao.constant.CommonQueryColumn.STRATEGY_ID;
-import static io.cygnux.console.dao.constant.CommonQueryColumn.TRADING_DAY;
 
 /**
  * OrderEvent Entity
@@ -31,25 +27,25 @@ public final class OrderEventEntity {
     /**
      * strategy_id [*]
      */
-    @Column(name = STRATEGY_ID)
+    @Column(name = CommonQueryColumn.STRATEGY_ID)
     private int strategyId;
 
     /**
      * trading_day [*]
      */
-    @Column(name = TRADING_DAY)
+    @Column(name = CommonQueryColumn.TRADING_DAY)
     private int tradingDay;
 
     /**
      * investor_id
      */
-    @Column(name = INVESTOR_ID)
+    @Column(name = CommonQueryColumn.INVESTOR_ID)
     private String investorId;
 
     /**
      * instrument_code
      */
-    @Column(name = INSTRUMENT_CODE)
+    @Column(name = CommonQueryColumn.INSTRUMENT_CODE)
     private String instrumentCode;
 
     /**

@@ -32,6 +32,29 @@
             <scope>provided</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>serialization-json</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>transport-rabbitmq</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.mercury</groupId>
+            <artifactId>persistence-h2</artifactId>
+        </dependency>
+
+        <!-- Jakarta XML Binding API -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
         <!-- Jakarta Restful Web Services -->
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
@@ -39,6 +62,35 @@
             <version>3.1.0</version>
         </dependency>
 
+        <!-- Starter for using Log4j2 for logging. -->
+        <!-- An alternative to spring-boot-starter-logging -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+            <version>${spring.boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Starter for using JDBC with the HikariCP connection pool -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <version>${spring.boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Starter for building web, including Restful, applications using Spring MVC. -->
+        <!-- Uses Tomcat as the default embedded container -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -59,20 +111,36 @@
             </exclusions>
         </dependency>
 
+        <!-- Starter for using Spring Data JPA with Hibernate -->
         <dependency>
-            <groupId>io.cygnuxltb</groupId>
-            <artifactId>repository</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring.boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jakarta.persistence-api</artifactId>
+                    <groupId>jakarta.persistence</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jakarta.transaction-api</artifactId>
+                    <groupId>jakarta.transaction</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jakarta.xml.bind-api</artifactId>
+                    <groupId>jakarta.xml.bind</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
-            <groupId>io.mercury</groupId>
-            <artifactId>serialization-json</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.mercury</groupId>
-            <artifactId>transport-rabbitmq</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

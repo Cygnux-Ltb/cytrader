@@ -1,4 +1,4 @@
-package io.cygnux.console.entity;
+package io.cygnux.console.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

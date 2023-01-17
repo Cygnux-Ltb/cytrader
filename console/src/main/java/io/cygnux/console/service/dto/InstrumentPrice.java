@@ -1,4 +1,4 @@
-package io.cygnux.console.dto;
+package io.cygnux.console.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,8 +13,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class InstrumentPrice {
 
-	private String instrumentCode;
+    private String instrumentCode;
 
-	private double price;
+    private double price;
 
 }

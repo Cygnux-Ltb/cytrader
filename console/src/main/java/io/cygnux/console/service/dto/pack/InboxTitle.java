@@ -1,4 +1,4 @@
-package io.cygnux.console.dto.pack;
+package io.cygnux.console.service.dto.pack;
 
 import io.mercury.common.codec.Envelope;
 import io.mercury.common.collections.ImmutableMaps;

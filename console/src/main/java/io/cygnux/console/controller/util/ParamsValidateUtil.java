@@ -1,4 +1,4 @@
-package io.cygnux.console.utils;
+package io.cygnux.console.controller.util;
 
 import io.mercury.common.character.Charsets;
 import io.mercury.common.log.Log4j2LoggerFactory;

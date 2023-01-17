@@ -1,4 +1,4 @@
-package io.cygnux.console.persistence.dao.util;
+package io.cygnux.console.persistence.util;
 
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;

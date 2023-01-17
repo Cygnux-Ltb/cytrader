@@ -1,7 +1,7 @@
-package io.cygnux.console.entity;
+package io.cygnux.console.persistence.entity;
 
-import io.cygnux.console.dao.constant.ColumnDefinition;
-import io.cygnux.console.dao.constant.CommonQueryColumn;
+import io.cygnux.console.persistence.constant.ColumnDefinition;
+import io.cygnux.console.persistence.constant.CommonQueryColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

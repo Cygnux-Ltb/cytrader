@@ -1,4 +1,4 @@
-package io.cygnux.console.dto;
+package io.cygnux.console.service.dto;
 
 import io.mercury.serialization.json.JsonWrapper;
 import lombok.AllArgsConstructor;

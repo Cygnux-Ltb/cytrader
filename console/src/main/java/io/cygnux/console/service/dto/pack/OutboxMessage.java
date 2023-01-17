@@ -1,6 +1,6 @@
-package io.cygnux.console.dto.pack;
+package io.cygnux.console.service.dto.pack;
 
-import io.cygnux.console.dto.StrategySwitch;
+import io.cygnux.console.service.dto.StrategySwitch;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

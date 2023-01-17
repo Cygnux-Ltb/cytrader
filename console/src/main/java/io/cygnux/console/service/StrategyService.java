@@ -1,19 +1,20 @@
 package io.cygnux.console.service;
 
-import io.cygnux.repository.dao.StrategyDao;
-import io.cygnux.repository.entity.StrategyEntity;
+import io.cygnux.console.persistence.dao.StrategyDao;
+import io.cygnux.console.persistence.entity.StrategyEntity;
+import io.cygnux.console.persistence.util.DaoExecutor;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import javax.annotation.Nullable;
 import java.util.List;
 
-import static io.cygnux.console.utils.ParamsValidateUtil.checkStrategyId;
-import static io.cygnux.console.utils.ParamsValidateUtil.checkStrategyName;
-import static io.mercury.common.functional.Functions.exec;
-import static io.mercury.common.functional.Functions.execBool;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.checkStrategyId;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.checkStrategyName;
+import static io.cygnux.console.persistence.util.DaoExecutor.select;
 
 @Service
 public final class StrategyService {
@@ -21,50 +22,50 @@ public final class StrategyService {
     private static final Logger log = Log4j2LoggerFactory.getLogger(StrategyService.class);
 
     @Resource
-    private StrategyDao dao;
+    private StrategyDao strategyDao;
 
     /**
-     * @return
+     * @return List<StrategyEntity>
      */
-    public List<StrategyEntity> getStrategies() {
-        return exec(() -> dao.findAll(), list -> list, e -> {
-            log.error("query [StrategyEntity] exception", e);
-        });
+    public List<StrategyEntity> getAllStrategy() {
+        return select(() -> strategyDao.findAll(), StrategyEntity.class);
     }
 
     /**
-     * @param strategyId
-     * @return
+     * @param strategyId int
+     * @return StrategyEntity
      */
+    @Nullable
     public StrategyEntity getStrategy(int strategyId) {
         if (checkStrategyId(strategyId, log, "query [StrategyEntity] param error"))
             Throws.illegalArgument("strategyId");
-        return dao.queryByStrategyId(strategyId);
+        StrategyEntity entity = strategyDao.queryByStrategyId(strategyId);
+        if (entity == null)
+            log.error("entity == null where strategyId -> {}", strategyId);
+        return entity;
     }
 
     /**
-     * @param strategyName
-     * @return
+     * @param strategyName String
+     * @return StrategyEntity
      */
-    public List<StrategyEntity> getStrategy(String strategyName) {
+    @Nullable
+    public StrategyEntity getStrategy(String strategyName) {
         if (checkStrategyName(strategyName, log, "query [StrategyEntity] param error"))
             Throws.illegalArgument("strategyName");
-        return dao.queryByStrategyName(strategyName);
+        StrategyEntity entity = strategyDao.queryByStrategyName(strategyName);
+        if (entity == null)
+            log.error("entity == null where strategyName -> {}", strategyName);
+        return entity;
     }
 
 
     /**
-     * @param entity
-     * @return
+     * @param entity StrategyEntity
+     * @return boolean
      */
     public boolean putStrategy(StrategyEntity entity) {
-        return execBool(() -> dao.save(entity), o -> {
-            log.info("save [StrategyEntity] success -> {}", entity);
-            return true;
-        }, e -> {
-            log.error("save [StrategyEntity] failure -> {}", entity, e);
-            return false;
-        });
+        return DaoExecutor.insertOrUpdate(strategyDao, entity);
     }
 
 

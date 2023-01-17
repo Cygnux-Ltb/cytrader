@@ -1,4 +1,4 @@
-package io.cygnux.console.dto;
+package io.cygnux.console.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

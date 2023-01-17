@@ -1,8 +1,10 @@
 package io.cygnux.console.controller;
 
+import io.cygnux.console.persistence.entity.PnlEntity;
+import io.cygnux.console.persistence.entity.PnlSettlementEntity;
 import io.cygnux.console.service.PnlService;
-import io.cygnux.repository.entity.PnlEntity;
-import io.cygnux.repository.entity.PnlSettlementEntity;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -10,16 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
-import static io.cygnux.console.utils.ParamsValidateUtil.paramIsNull;
-import static io.cygnux.console.utils.ResponseUtil.badRequest;
-import static io.cygnux.console.utils.ResponseUtil.internalServerError;
-import static io.cygnux.console.utils.ResponseUtil.ok;
-import static io.cygnux.console.utils.ResponseUtil.responseOf;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.paramIsNull;
+import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
+import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
+import static io.cygnux.console.controller.util.ResponseUtil.ok;
+import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
 
 @RestController("/pnl")
 public final class PnlRestfulApi {
@@ -46,10 +46,10 @@ public final class PnlRestfulApi {
      * Put PnlDaily
      *
      * @param request HttpServletRequest
-     * @return ResponseEntity<Object>
+     * @return ResponseEntity<?>
      */
     @PutMapping
-    public ResponseEntity<Object> putPnlDaily(@RequestBody HttpServletRequest request) {
+    public ResponseEntity<?> putPnl(@RequestBody HttpServletRequest request) {
         var pnlDaily = bodyToObject(request, PnlEntity.class);
         return pnlDaily == null ? badRequest() : service.putPnl(pnlDaily) ? ok() : internalServerError();
     }
@@ -63,8 +63,7 @@ public final class PnlRestfulApi {
      */
     @GetMapping("/settlement")
     public ResponseEntity<List<PnlSettlementEntity>> getPnlSettlementDaily(
-            @RequestParam("strategyId") int strategyId,
-            @RequestParam("tradingDay") int tradingDay) {
+            @RequestParam("strategyId") int strategyId, @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(tradingDay))
             return badRequest();
         return responseOf(service.getPnlSettlement(strategyId, tradingDay));

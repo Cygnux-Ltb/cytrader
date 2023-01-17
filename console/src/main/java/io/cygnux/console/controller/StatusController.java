@@ -1,10 +1,11 @@
 package io.cygnux.console.controller;
 
-import io.cygnux.console.dto.StrategySwitch;
-import io.cygnux.console.dto.pack.OutboxMessage;
+import io.cygnux.console.service.dto.StrategySwitch;
+import io.cygnux.console.service.dto.pack.OutboxMessage;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -22,12 +22,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.cygnux.console.dto.pack.OutboxTitle.StrategySwitch;
-import static io.cygnux.console.utils.ParamsValidateUtil.bodyToList;
-import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
-import static io.cygnux.console.utils.ResponseUtil.badRequest;
-import static io.cygnux.console.utils.ResponseUtil.ok;
-import static io.cygnux.console.utils.ResponseUtil.responseOf;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToList;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
+import static io.cygnux.console.controller.util.ResponseUtil.ok;
+import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
+import static io.cygnux.console.service.dto.pack.OutboxTitle.StrategySwitch;
 
 @RestController("/status")
 public final class StatusController {
@@ -46,10 +46,10 @@ public final class StatusController {
 
     /**
      * @param request HttpServletRequest
-     * @return ResponseEntity<Object>
+     * @return ResponseEntity<?>
      */
     @PutMapping("/command")
-    public ResponseEntity<Object> statusCommand(@RequestBody HttpServletRequest request) {
+    public ResponseEntity<?> statusCommand(@RequestBody HttpServletRequest request) {
         var strategySwitchList = bodyToList(request, StrategySwitch.class);
         if (strategySwitchList == null) {
             return badRequest();
@@ -81,13 +81,12 @@ public final class StatusController {
     /**
      * @param productId int
      * @param request   HttpServletRequest
-     * @return ResponseEntity<Object>
+     * @return ResponseEntity<?>
      */
     @PutMapping("/update")
-    public ResponseEntity<Object> statusUpdate(@RequestParam("productId") int productId,
-                                               @RequestBody HttpServletRequest request) {
+    public ResponseEntity<?> statusUpdate(@RequestParam("productId") int productId,
+                                          @RequestBody HttpServletRequest request) {
         StrategySwitch strategySwitch = bodyToObject(request, StrategySwitch.class);
-
         Objects.requireNonNull(strategySwitch, "Input StrategySwitch is null");
         strategySwitch.setProductId(productId);
         StrategySwitchMap.put(productId, strategySwitch);

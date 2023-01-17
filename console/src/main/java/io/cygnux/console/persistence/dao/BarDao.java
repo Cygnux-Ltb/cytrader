@@ -1,6 +1,6 @@
-package io.cygnux.console.dao;
+package io.cygnux.console.persistence.dao;
 
-import io.cygnux.console.entity.BarEntity;
+import io.cygnux.console.persistence.entity.BarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Repository
 public interface BarDao extends JpaRepository<BarEntity, Long> {
-
 
     @Query("SELECT '*' FROM #{#entityName} e WHERE "
             + " e.instrumentCode LIKE :instrumentCode% "

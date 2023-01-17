@@ -1,7 +1,9 @@
 package io.cygnux.console.controller;
 
 import io.cygnux.console.service.OrderService;
-import io.cygnux.repository.entity.OrderEntity;
+import io.cygnux.console.persistence.entity.OrderEntity;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -9,15 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
-import static io.cygnux.console.utils.ParamsValidateUtil.bodyToObject;
-import static io.cygnux.console.utils.ParamsValidateUtil.paramIsNull;
-import static io.cygnux.console.utils.ResponseUtil.badRequest;
-import static io.cygnux.console.utils.ResponseUtil.internalServerError;
-import static io.cygnux.console.utils.ResponseUtil.ok;
-import static io.cygnux.console.utils.ResponseUtil.responseOf;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.paramIsNull;
+import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
+import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
+import static io.cygnux.console.controller.util.ResponseUtil.ok;
+import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
 
 @RestController("/order")
 public final class OrderController {

@@ -1,8 +1,9 @@
 package io.cygnux.console.service;
 
-import io.cygnux.repository.entity.ProductEntity;
-import io.mercury.common.log.Log4j2LoggerFactory;
-import org.slf4j.Logger;
+import io.cygnux.console.persistence.dao.ProductDao;
+import io.cygnux.console.persistence.entity.ProductEntity;
+import io.cygnux.console.persistence.util.DaoExecutor;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,14 +11,15 @@ import java.util.List;
 @Component
 public class ProductService {
 
-    private static final Logger log = Log4j2LoggerFactory.getLogger(ProductService.class);
+    @Resource
+    private ProductDao productDao;
 
     public List<ProductEntity> getAll() {
-        return null;
+        return DaoExecutor.select(() -> productDao.findAll(), ProductEntity.class);
     }
 
-    public ProductEntity get(int productId) {
-        return null;
+    public ProductEntity getProduct(int productId) {
+        return productDao.queryByProductId(productId);
     }
 
 }

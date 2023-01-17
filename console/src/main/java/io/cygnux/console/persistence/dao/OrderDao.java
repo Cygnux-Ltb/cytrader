@@ -1,6 +1,6 @@
-package io.cygnux.console.dao;
+package io.cygnux.console.persistence.dao;
 
-import io.cygnux.console.entity.OrderEntity;
+import io.cygnux.console.persistence.entity.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,13 +15,14 @@ import java.util.List;
  */
 @Repository
 public interface OrderDao extends JpaRepository<OrderEntity, Long> {
+
     /**
-     * @param strategyId
-     * @param investorId
-     * @param instrumentCode
-     * @param startTradingDay
-     * @param endTradingDay
-     * @return
+     * @param strategyId      int
+     * @param investorId      String
+     * @param instrumentCode  String
+     * @param startTradingDay int
+     * @param endTradingDay   int
+     * @return List<OrderEntity>
      */
     @Query("SELECT '*' FROM #{#entityName} e WHERE "
             + " e.strategyId = :strategyId "

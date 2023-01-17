@@ -1,94 +1,60 @@
 package io.cygnux.console.service;
 
-import static io.mercury.common.functional.Functions.exec;
-import static io.mercury.common.functional.Functions.execBool;
+import io.cygnux.console.persistence.dao.PnlDao;
+import io.cygnux.console.persistence.dao.PnlSettlementDao;
+import io.cygnux.console.persistence.entity.PnlEntity;
+import io.cygnux.console.persistence.entity.PnlSettlementEntity;
+import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.slf4j.Logger;
-import org.springframework.stereotype.Service;
-
-import io.cygnux.repository.dao.PnlDailyDao;
-import io.cygnux.repository.dao.PnlDailySettlementDao;
-import io.cygnux.repository.entity.PnlEntity;
-import io.cygnux.repository.entity.PnlSettlementEntity;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import static io.cygnux.console.persistence.util.DaoExecutor.insertOrUpdate;
+import static io.cygnux.console.persistence.util.DaoExecutor.select;
 
 @Service
 public final class PnlService {
 
-    private static final Logger log = Log4j2LoggerFactory.getLogger(PnlService.class);
+    @Resource
+    private PnlDao pnlDao;
 
     @Resource
-    private PnlDailyDao dao;
-
-    @Resource
-    private PnlDailySettlementDao settlementDao;
+    private PnlSettlementDao pnlSettlementDao;
 
     /**
      * @param strategyId int
      * @param tradingDay int
-     * @return List<StPnl>
+     * @return List<PnlEntity>
      */
     public List<PnlEntity> getPnl(int strategyId, int tradingDay) {
-        return exec(() -> dao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
-            if (CollectionUtils.isEmpty(list))
-                log.warn("query [PnlDailyEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId, tradingDay);
-            else
-                log.info("query [PnlDailyEntity] where strategyId=={}, tradingDay=={}, result row -> {}", strategyId,
-                        tradingDay, list.size());
-            return list;
-        }, e -> log.error("query [PnlDailyEntity] exception, strategyId=={}, tradingDay=={}", strategyId, tradingDay, e));
-
+        return select(() -> pnlDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay),
+                PnlEntity.class);
     }
 
     /**
      * @param strategyId int
      * @param tradingDay int
-     * @return List<StPnlSettlement>
+     * @return List<PnlSettlementEntity>
      */
     public List<PnlSettlementEntity> getPnlSettlement(int strategyId, int tradingDay) {
-        return exec(() -> settlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay), list -> {
-            if (CollectionUtils.isEmpty(list))
-                log.warn("query [PnlDailySettlementEntity] return 0 row, strategyId=={}, tradingDay=={}", strategyId,
-                        tradingDay);
-            else
-                log.info("query [PnlDailySettlementEntity] where strategyId=={}, tradingDay=={}, result row -> {}",
-                        strategyId, tradingDay, list.size());
-            return list;
-        }, e -> log.error("query [PnlDailySettlementEntity] exception, strategyId=={}, tradingDay=={}", strategyId,
-                tradingDay, e));
+        return select(() -> pnlSettlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay),
+                PnlSettlementEntity.class);
     }
 
     /**
-     * @param pnl StPnl
-     * @return
+     * @param entity PnlEntity
+     * @return boolean
      */
-    public boolean putPnl(PnlEntity pnl) {
-        return execBool(() -> dao.save(pnl), o -> {
-            log.info("save [PnlDailyEntity] success -> {}", pnl);
-            return true;
-        }, e -> {
-            log.error("save [PnlDailyEntity] failure -> {}", pnl, e);
-            return false;
-        });
+    public boolean putPnl(PnlEntity entity) {
+        return insertOrUpdate(pnlDao, entity);
     }
 
     /**
-     * @param pnlSettlement StPnlSettlement
-     * @return
+     * @param entity PnlSettlementEntity
+     * @return boolean
      */
-    public boolean putPnlSettlement(PnlSettlementEntity pnlSettlement) {
-        return execBool(() -> settlementDao.save(pnlSettlement), o -> {
-            log.info("save [PnlDailySettlementEntity] success -> {}", pnlSettlement);
-            return true;
-        }, e -> {
-            log.error("save [PnlDailySettlementEntity] failure -> {}", pnlSettlement, e);
-            return false;
-        });
+    public boolean putPnlSettlement(PnlSettlementEntity entity) {
+        return insertOrUpdate(pnlSettlementDao, entity);
     }
 
 }

@@ -1,23 +1,26 @@
 package io.cygnux.console.service;
 
-import static io.cygnux.console.utils.ParamsValidateUtil.*;
-import static io.mercury.common.functional.Functions.exec;
-import static io.mercury.common.functional.Functions.execBool;
-
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import io.cygnux.console.persistence.dao.OrderDao;
+import io.cygnux.console.persistence.dao.OrderEventDao;
+import io.cygnux.console.persistence.util.DaoExecutor;
+import io.cygnux.console.persistence.entity.OrderEntity;
+import io.cygnux.console.persistence.entity.OrderEventEntity;
+import io.mercury.common.lang.Throws;
+import io.mercury.common.log.Log4j2LoggerFactory;
+import jakarta.annotation.Resource;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
-import io.cygnux.repository.dao.OrderDao;
-import io.cygnux.repository.dao.OrderEventDao;
-import io.cygnux.repository.entity.OrderEntity;
-import io.cygnux.repository.entity.OrderEventEntity;
-import io.mercury.common.lang.Throws;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import java.util.List;
+
+import static io.cygnux.console.controller.util.ParamsValidateUtil.checkInstrumentCode;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.checkInvestorId;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.checkOrdSysId;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.checkStrategyId;
+import static io.cygnux.console.controller.util.ParamsValidateUtil.checkTradingDay;
+import static io.mercury.common.functional.Functions.exec;
+import static io.mercury.common.functional.Functions.execBool;
 
 @Service
 public class OrderService {
@@ -41,8 +44,6 @@ public class OrderService {
         return getOrders(strategyId, investorId, instrumentCode, tradingDay, tradingDay);
     }
 
-    private final String queryOrderParamErrorMsg = "[OrderService::getOrders] param error";
-
     /**
      * @param strategyId      int
      * @param investorId      String
@@ -51,24 +52,20 @@ public class OrderService {
      * @param endTradingDay   int
      * @return List<TOrder>
      */
-    public List<OrderEntity> getOrders(int strategyId, String investorId, String instrumentCode, int startTradingDay,
-                                       int endTradingDay) {
-        if (checkStrategyId(strategyId, log, queryOrderParamErrorMsg))
+    public List<OrderEntity> getOrders(int strategyId, String investorId, String instrumentCode,
+                                       int startTradingDay, int endTradingDay) {
+        var errMsg = "[OrderService::getOrders] param error";
+        if (checkStrategyId(strategyId, log, errMsg))
             Throws.illegalArgument("strategyId");
-        if (checkTradingDay(startTradingDay, endTradingDay, log, queryOrderParamErrorMsg))
+        if (checkTradingDay(startTradingDay, endTradingDay, log, errMsg))
             Throws.illegalArgument("startTradingDay & endTradingDay");
-        if (checkInvestorId(investorId, log, queryOrderParamErrorMsg))
+        if (checkInvestorId(investorId, log, errMsg))
             Throws.illegalArgument("investorId");
-        if (checkInstrumentCode(instrumentCode, log, queryOrderParamErrorMsg))
+        if (checkInstrumentCode(instrumentCode, log, errMsg))
             Throws.illegalArgument("instrumentCode");
-        return exec(() -> dao.query(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay), list -> {
-            log.info(
-                    "[OrderDao::query] return {} row, strategyId=={}, investorId=={}, instrumentCode=={}, startTradingDay=={}, endTradingDay=={}",
-                    list.size(), strategyId, investorId, instrumentCode, startTradingDay, endTradingDay);
-            return list;
-        }, e -> log.error(
-                "[OrderDao::query] exception, strategyId=={}, investorId=={}, instrumentCode=={}, startTradingDay=={}, endTradingDay=={}",
-                strategyId, investorId, instrumentCode, startTradingDay, endTradingDay, e));
+        return DaoExecutor.select(() -> dao.query(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay),
+                OrderEntity.class);
+
     }
 
     /**
@@ -85,8 +82,8 @@ public class OrderService {
     }
 
     /**
-     * @param tradingDay
-     * @return
+     * @param tradingDay int
+     * @return List<OrderEventEntity>
      */
     public List<OrderEventEntity> getOrderEventsByTradingDay(int tradingDay) {
         if (checkTradingDay(tradingDay, log, "[OrderService::getOrderEventsByTradingDay] param error"))

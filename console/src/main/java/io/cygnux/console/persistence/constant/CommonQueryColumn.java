@@ -1,4 +1,4 @@
-package io.cygnux.console.persistence.dao.constant;
+package io.cygnux.console.persistence.constant;
 
 public interface CommonQueryColumn {
 

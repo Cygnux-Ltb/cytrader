@@ -1,10 +1,10 @@
 package io.cygnux.console.transport;
 
-import io.cygnux.console.dto.StrategySwitch;
-import io.cygnux.repository.entity.ParamEntity;
+import io.cygnux.console.service.dto.StrategySwitch;
+import io.cygnux.console.persistence.entity.ParamEntity;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component

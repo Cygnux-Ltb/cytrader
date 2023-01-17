@@ -1,4 +1,4 @@
-package io.cygnux.console.dto.pack;
+package io.cygnux.console.service.dto.pack;
 
 import static io.mercury.common.collections.MutableMaps.newUnifiedMap;
 
@@ -40,7 +40,7 @@ public enum OutboxTitle implements Envelope {
 
     UpdateStrategyParams,
 
-    EndTimeBinner,
+    EndTimeBar,
 
     UpdateStrategySignals,
 

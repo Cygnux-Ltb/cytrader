@@ -1,57 +1,48 @@
 package io.cygnux.console.service;
 
-import io.cygnux.repository.dao.BarDao;
-import io.cygnux.repository.entity.BarEntity;
-import io.mercury.common.log.Log4j2LoggerFactory;
-import org.apache.commons.collections4.CollectionUtils;
-import org.slf4j.Logger;
+import io.cygnux.console.persistence.dao.BarDao;
+import io.cygnux.console.persistence.entity.BarEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 
-import static io.mercury.common.functional.Functions.exec;
-import static io.mercury.common.functional.Functions.execBool;
+import static io.cygnux.console.persistence.util.DaoExecutor.insertOrUpdate;
+import static io.cygnux.console.persistence.util.DaoExecutor.select;
 
 @Service
 public class BarService {
 
-    private static final Logger log = Log4j2LoggerFactory.getLogger(BarService.class);
-
     @Resource
-    private BarDao dao;
+    private BarDao barDao;
 
     /**
      * @param instrumentCode String
      * @param tradingDay     int
-     * @return List<TBar>
+     * @return List<BarEntity>
      */
     public List<BarEntity> getBars(@Nonnull String instrumentCode, int tradingDay) {
-        return exec(() -> dao.queryByInstrumentCodeAndTradingDay(instrumentCode, tradingDay),
-                list -> {
-                    if (CollectionUtils.isEmpty(list))
-                        log.warn("query [BarEntity] return 0 row, instrumentCode=={}, tradingDay=={}", instrumentCode,
-                                tradingDay);
-                    else
-                        log.info("query [BarEntity] where instrumentCode=={}, tradingDay=={}, result row -> {}", instrumentCode,
-                                tradingDay, list.size());
-                    return list;
-                }, e -> log.error("query [BarEntity] exception, instrumentCode=={}, tradingDay=={}", instrumentCode, tradingDay, e));
+        return getBars(instrumentCode, tradingDay, tradingDay);
+    }
+
+
+    /**
+     * @param instrumentCode  String
+     * @param startTradingDay int
+     * @param endTradingDay   int
+     * @return List<BarEntity>
+     */
+    public List<BarEntity> getBars(@Nonnull String instrumentCode, int startTradingDay, int endTradingDay) {
+        return select(() -> barDao.query(instrumentCode, startTradingDay, endTradingDay), BarEntity.class);
     }
 
     /**
-     * @param bar TBar
+     * @param entity BarEntity
      * @return boolean
      */
-    public boolean putBar(@Nonnull BarEntity bar) {
-        return execBool(() -> dao.save(bar), o -> {
-            log.info("save [BarEntity] success -> {}", bar);
-            return true;
-        }, e -> {
-            log.error("save [BarEntity] failure -> {}", bar, e);
-            return false;
-        });
+    public boolean putBar(@Nonnull BarEntity entity) {
+        return insertOrUpdate(barDao, entity);
     }
 
 }
