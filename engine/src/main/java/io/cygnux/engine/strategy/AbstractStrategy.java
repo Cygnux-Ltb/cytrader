@@ -21,8 +21,8 @@ import io.horizon.trader.order.enums.TrdDirection;
 import io.horizon.trader.risk.CircuitBreaker;
 import io.horizon.trader.strategy.Strategy;
 import io.horizon.trader.strategy.StrategyEvent;
-import io.horizon.trader.transport.inbound.DtoQueryBalance;
-import io.horizon.trader.transport.inbound.DtoQueryPositions;
+import io.horizon.trader.transport.inbound.TdxQueryBalance;
+import io.horizon.trader.transport.inbound.TdxQueryPositions;
 import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.fsm.EnableableComponent;
@@ -70,9 +70,9 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
     protected final Params<K> params;
 
     // TODO
-    protected DtoQueryPositions queryPositionsReq;
+    protected TdxQueryPositions queryPositionsReq;
     // TODO
-    protected DtoQueryBalance queryBalanceReq;
+    protected TdxQueryBalance queryBalanceReq;
 
     private final OrdSysIdAllocator allocator;
 
@@ -91,9 +91,9 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
         this.account = account;
         this.accountId = account.getAccountId();
         this.params = params;
-        this.queryPositionsReq = DtoQueryPositions.newBuilder().setAccountId(accountId).setBrokerId(account.getBrokerId())
+        this.queryPositionsReq = TdxQueryPositions.newBuilder().setAccountId(accountId).setBrokerId(account.getBrokerId())
                 .setOperatorId(strategyName).setStrategyId(strategyId).setSubAccountId(subAccountId).build();
-        this.queryBalanceReq = DtoQueryBalance.newBuilder().setAccountId(accountId).setBrokerId(account.getBrokerId())
+        this.queryBalanceReq = TdxQueryBalance.newBuilder().setAccountId(accountId).setBrokerId(account.getBrokerId())
                 .setOperatorId(strategyName).setStrategyId(strategyId).setSubAccountId(subAccountId).build();
         var snowflake = new SnowflakeAlgo(strategyId);
         this.allocator = snowflake::next;

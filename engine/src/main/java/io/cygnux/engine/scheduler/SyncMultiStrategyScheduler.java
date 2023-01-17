@@ -4,8 +4,8 @@ import io.cygnux.engine.trader.OrderKeeper;
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.transport.outbound.DtoAdaptorReport;
-import io.horizon.trader.transport.outbound.DtoOrderReport;
+import io.horizon.trader.transport.outbound.TdxAdaptorReport;
+import io.horizon.trader.transport.outbound.TdxOrderReport;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
@@ -38,7 +38,7 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
     }
 
     @Override
-    public void onOrderReport(@Nonnull DtoOrderReport report) {
+    public void onOrderReport(@Nonnull TdxOrderReport report) {
         log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerOrdSysId(),
                 report.getOrdSysId());
         ChildOrder order = OrderKeeper.handleOrderReport(report);
@@ -50,7 +50,7 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
 
     // TODO add pools
     @Override
-    public void onAdaptorReport(@Nonnull DtoAdaptorReport report) {
+    public void onAdaptorReport(@Nonnull TdxAdaptorReport report) {
         log.info("Recv AdaptorReport -> {}", report);
     }
 

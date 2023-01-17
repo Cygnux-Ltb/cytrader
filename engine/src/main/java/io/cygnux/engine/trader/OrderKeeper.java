@@ -1,15 +1,5 @@
 package io.cygnux.engine.trader;
 
-import static io.mercury.common.collections.MutableMaps.newIntObjectHashMap;
-
-import java.io.Serializable;
-
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.NotThreadSafe;
-
-import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.slf4j.Logger;
-
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.Account;
@@ -20,9 +10,18 @@ import io.horizon.trader.order.Order;
 import io.horizon.trader.order.enums.OrdType;
 import io.horizon.trader.order.enums.TrdAction;
 import io.horizon.trader.order.enums.TrdDirection;
-import io.horizon.trader.transport.outbound.DtoOrderReport;
+import io.horizon.trader.transport.outbound.TdxOrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
+import org.slf4j.Logger;
+
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.NotThreadSafe;
+import java.io.Serial;
+import java.io.Serializable;
+
+import static io.mercury.common.collections.MutableMaps.newIntObjectHashMap;
 
 /**
  * 统一管理订单<br>
@@ -36,6 +35,7 @@ import io.mercury.common.log.Log4j2LoggerFactory;
 @NotThreadSafe
 public final class OrderKeeper implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 8581377004396461013L;
 
     /*
@@ -74,7 +74,7 @@ public final class OrderKeeper implements Serializable {
     /**
      * 新增订单
      *
-     * @param order
+     * @param order Order
      */
     private static void putOrder(Order order) {
         int subAccountId = order.getSubAccountId();
@@ -87,7 +87,7 @@ public final class OrderKeeper implements Serializable {
     }
 
     /**
-     * @param order
+     * @param order Order
      */
     private static void updateOrder(Order order) {
         switch (order.getStatus()) {
@@ -114,7 +114,7 @@ public final class OrderKeeper implements Serializable {
      * @param report
      * @return
      */
-    public static ChildOrder handleOrderReport(DtoOrderReport report) {
+    public static ChildOrder handleOrderReport(TdxOrderReport report) {
         log.info("Handle OrdReport, report -> {}", report);
         // 根据订单回报查找所属订单
         Order order = getOrder(report.getOrdSysId());

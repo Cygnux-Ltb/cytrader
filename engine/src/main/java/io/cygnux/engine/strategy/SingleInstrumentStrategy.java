@@ -5,7 +5,7 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.account.SubAccount;
 import io.horizon.trader.adaptor.Adaptor;
 import io.horizon.trader.strategy.Strategy;
-import io.horizon.trader.transport.outbound.DtoAdaptorReport;
+import io.horizon.trader.transport.outbound.TdxAdaptorReport;
 import io.mercury.common.datetime.EpochTime;
 import io.mercury.common.lang.Asserter;
 import io.mercury.common.param.ParamKey;
@@ -78,7 +78,7 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, K extends P
     }
 
     @Override
-    public void onAdaptorReport(@Nonnull DtoAdaptorReport event) {
+    public void onAdaptorReport(@Nonnull TdxAdaptorReport event) {
         log.info("{} :: On adaptor status callback, adaptorId==[{}], status==[{}]", getStrategyName(),
                 event.getAdaptorId(), event.getStatus());
         switch (event.getStatus()) {

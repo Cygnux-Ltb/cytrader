@@ -1,18 +1,15 @@
 package io.cygnux.engine.scheduler;
 
-import java.io.IOException;
-
 import io.cygnux.engine.trader.OrderKeeper;
-import org.slf4j.Logger;
-
 import io.horizon.market.data.MarketData;
 import io.horizon.market.data.MarketDataKeeper;
 import io.horizon.trader.order.ChildOrder;
-import io.horizon.trader.transport.outbound.DtoAdaptorReport;
-import io.horizon.trader.transport.outbound.DtoOrderReport;
+import io.horizon.trader.transport.outbound.TdxAdaptorReport;
+import io.horizon.trader.transport.outbound.TdxOrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
 
@@ -48,7 +45,7 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
                             });
                         }
                         case OrderReport -> {
-                            DtoOrderReport report = msg.getOrderReport();
+                            TdxOrderReport report = msg.getOrderReport();
                             log.info("Handle OrderReport, brokerUniqueId==[{}], ordSysId==[{}]", report.getBrokerOrdSysId(),
                                     report.getOrdSysId());
                             ChildOrder order = OrderKeeper.handleOrderReport(report);
@@ -59,8 +56,8 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
                             strategyMap.get(order.getStrategyId()).onOrder(order);
                         }
                         case AdaptorEvent -> {
-                            DtoAdaptorReport adaptorReport = msg.getAdaptorReport();
-                            adaptorReport.getAdaptorId();
+                            TdxAdaptorReport adaptorReport = msg.getAdaptorReport();
+                            String adaptorId = adaptorReport.getAdaptorId();
                             log.info("Recv AdaptorEvent -> {}", adaptorReport);
                         }
                         default -> throw new IllegalStateException("scheduler mark illegal");
@@ -76,13 +73,13 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 
     // TODO add pools
     @Override
-    public void onOrderReport(@Nonnull DtoOrderReport report) {
+    public void onOrderReport(@Nonnull TdxOrderReport report) {
         queue.enqueue(new QueueMsg(report));
     }
 
     // TODO add pools
     @Override
-    public void onAdaptorReport(@Nonnull DtoAdaptorReport report) {
+    public void onAdaptorReport(@Nonnull TdxAdaptorReport report) {
         queue.enqueue(new QueueMsg(report));
     }
 
@@ -92,21 +89,21 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
 
         private M marketData;
 
-        private DtoOrderReport orderReport;
+        private TdxOrderReport orderReport;
 
-        private DtoAdaptorReport adaptorReport;
+        private TdxAdaptorReport adaptorReport;
 
         private QueueMsg(M marketData) {
             this.mark = MarketData;
             this.marketData = marketData;
         }
 
-        private QueueMsg(DtoOrderReport orderReport) {
+        private QueueMsg(TdxOrderReport orderReport) {
             this.mark = OrderReport;
             this.orderReport = orderReport;
         }
 
-        private QueueMsg(DtoAdaptorReport adaptorReport) {
+        private QueueMsg(TdxAdaptorReport adaptorReport) {
             this.mark = AdaptorEvent;
             this.adaptorReport = adaptorReport;
         }
@@ -119,18 +116,18 @@ public final class AsyncMultiStrategyScheduler<M extends MarketData> extends Abs
             return marketData;
         }
 
-        public DtoOrderReport getOrderReport() {
+        public TdxOrderReport getOrderReport() {
             return orderReport;
         }
 
-        public DtoAdaptorReport getAdaptorReport() {
+        public TdxAdaptorReport getAdaptorReport() {
             return adaptorReport;
         }
 
     }
 
     @Override
-    protected void close0() throws IOException {
+    protected void close0() {
         // TODO Auto-generated method stub
 
     }
