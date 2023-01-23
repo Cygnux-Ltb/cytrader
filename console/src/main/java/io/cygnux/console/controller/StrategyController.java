@@ -60,10 +60,10 @@ public final class StrategyController {
      * 使用StrategyId作为URI访问Param
      *
      * @param strategyId int
-     * @return ResponseEntity<Object>
+     * @return ResponseEntity<?>
      */
     @GetMapping("/param")
-    public ResponseEntity<Object> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
+    public ResponseEntity<?> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
         List<ParamEntity> strategyParams = paramService.getStrategyParams(strategyId);
         return responseOf(strategyParams);
     }

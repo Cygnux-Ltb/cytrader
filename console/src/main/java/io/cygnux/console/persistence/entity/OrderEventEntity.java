@@ -1,5 +1,6 @@
 package io.cygnux.console.persistence.entity;
 
+import io.cygnux.console.persistence.constant.ColumnDefinition;
 import io.cygnux.console.persistence.constant.CommonQueryColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
- * OrderEvent Entity
+ * OrderEvent Entity 订单事件
  *
  * @author yellow013
  */
@@ -20,33 +21,58 @@ import lombok.Data;
 public final class OrderEventEntity {
 
     @Id
-    @Column(name = "uid")
+    @Column(name = ColumnDefinition.UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
     /**
-     * strategy_id [*]
-     */
-    @Column(name = CommonQueryColumn.STRATEGY_ID)
-    private int strategyId;
-
-    /**
-     * trading_day [*]
+     * tradingDay [*]
      */
     @Column(name = CommonQueryColumn.TRADING_DAY)
     private int tradingDay;
 
     /**
-     * investor_id
+     * strategyId [*]
+     */
+    @Column(name = CommonQueryColumn.STRATEGY_ID)
+    private int strategyId;
+
+    /**
+     * instrumentCode [*]
+     */
+    @Column(name = CommonQueryColumn.INSTRUMENT_CODE)
+    private String instrumentCode;
+
+    /**
+     * investorId [*]
      */
     @Column(name = CommonQueryColumn.INVESTOR_ID)
     private String investorId;
 
     /**
-     * instrument_code
+     * brokerId [*]
      */
-    @Column(name = CommonQueryColumn.INSTRUMENT_CODE)
-    private String instrumentCode;
+    @Column(name = CommonQueryColumn.BROKER_ID)
+    private String brokerId;
+
+    /**
+     * accountId [*]
+     */
+    @Column(name = CommonQueryColumn.ACCOUNT_ID)
+    private int accountId;
+
+    /**
+     * subAccountId [*]
+     */
+    @Column(name = CommonQueryColumn.SUB_ACCOUNT_ID)
+    private int subAccountId;
+
+    /**
+     * userId [*]
+     */
+    @Column(name = CommonQueryColumn.USER_ID)
+    private int userId;
+
 
     /**
      * ord_sys_id [*]
@@ -58,7 +84,7 @@ public final class OrderEventEntity {
      * order_ref
      */
     @Column(name = "order_ref")
-    private Integer orderRef;
+    private String orderRef;
 
     /**
      * order_msg_type
@@ -66,11 +92,6 @@ public final class OrderEventEntity {
     @Column(name = "order_msg_type")
     private int orderMsgType;
 
-    /**
-     * user_id varchar 31
-     */
-    @Column(name = "user_id")
-    private String userId;
 
     /**
      * direction char
@@ -90,19 +111,18 @@ public final class OrderEventEntity {
     @Column(name = "limit_price")
     private double limitPrice;
 
-
-
     /**
      * order_status char
      */
-    @Column(name = "ord_status")
-    private int ordStatus;
+    @Column(name = "status")
+    private int status;
 
     /**
-     * broker_id
+     * status_msg
      */
-    @Column(name = "broker_id")
-    private String brokerId;
+    @Column(name = "status_msg")
+    private String statusMsg;
+
 
     /**
      * brokerSysID
@@ -166,20 +186,9 @@ public final class OrderEventEntity {
     private int cancelTime;
 
 
-
     /**
-     * status_msg
+     * remark
      */
-    @Column(name = "status_msg")
-    private String statusMsg;
-
-    /**
-     * fee
-     */
-    @Column(name = "fee")
-    private double fee;
-
-
     @Column(name = "remark")
     private String remark;
 

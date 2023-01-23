@@ -1,5 +1,6 @@
 package io.cygnux.console.persistence.entity;
 
+import io.cygnux.console.persistence.constant.ColumnDefinition;
 import io.cygnux.console.persistence.constant.CommonQueryColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
- * PnlSettlementDaily Entity
+ * PnlSettlement Entity
  *
  * @author yellow013
  */
@@ -20,7 +21,7 @@ import lombok.Data;
 public final class PnlSettlementEntity {
 
     @Id
-    @Column(name ="uid")
+    @Column(name = ColumnDefinition.UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 

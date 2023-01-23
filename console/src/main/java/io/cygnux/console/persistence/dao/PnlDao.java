@@ -14,7 +14,11 @@ import java.util.List;
 @Repository
 public interface PnlDao extends JpaRepository<PnlEntity, Long> {
 
+    /**
+     * @param strategyId int
+     * @param tradingDay int
+     * @return List<PnlEntity>
+     */
     List<PnlEntity> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
-
 
 }

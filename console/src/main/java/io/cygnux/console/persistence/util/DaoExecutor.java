@@ -17,6 +17,11 @@ public final class DaoExecutor {
 
     private static final Logger log = Log4j2LoggerFactory.getLogger(DaoExecutor.class);
 
+    /**
+     * @param query Supplier<List<T>>
+     * @param type  Class<T>
+     * @return List<T>
+     */
     public static <T> List<T> select(Supplier<List<T>> query, Class<T> type) {
         return exec(query,
                 result -> {
@@ -31,6 +36,11 @@ public final class DaoExecutor {
                 e -> log.error("query all [{}], an exception occurred", type.getSimpleName(), e));
     }
 
+    /**
+     * @param repository JpaRepository<T, Long>
+     * @param entity     T
+     * @return boolean
+     */
     public static <T> boolean insertOrUpdate(JpaRepository<T, Long> repository, T entity) {
         return execBool(() -> {
             if (entity == null)

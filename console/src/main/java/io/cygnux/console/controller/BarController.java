@@ -32,7 +32,7 @@ public final class BarController {
      * @param tradingDay     int
      * @return List<BarEntity>
      */
-    @GetMapping
+    @GetMapping("")
     public List<BarEntity> getBars(@RequestParam("instrumentCode") String instrumentCode,
                                    @RequestParam("tradingDay") int tradingDay) {
         return service.getBars(instrumentCode, tradingDay);
@@ -44,7 +44,7 @@ public final class BarController {
      * @param request HttpServletRequest
      * @return ResponseEntity<Integer>
      */
-    @PutMapping(consumes = APPLICATION_JSON_UTF8)
+    @PutMapping(path = "", consumes = APPLICATION_JSON_UTF8)
     public ResponseEntity<Integer> putBar(@RequestBody HttpServletRequest request) {
         var bar = bodyToObject(request, BarEntity.class);
         return bar == null ? badRequest()

@@ -27,7 +27,7 @@ public final class InstrumentService {
      * @return List<InstrumentEntity>
      */
     public List<InstrumentEntity> getInstrument(@Nonnull String instrumentCode) {
-        return select(() -> instrumentDao.query(instrumentCode),
+        return select(() -> instrumentDao.queryBy(instrumentCode),
                 InstrumentEntity.class);
     }
 

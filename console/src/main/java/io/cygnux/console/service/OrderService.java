@@ -63,7 +63,7 @@ public class OrderService {
             Throws.illegalArgument("investorId");
         if (checkInstrumentCode(instrumentCode, log, errMsg))
             Throws.illegalArgument("instrumentCode");
-        return DaoExecutor.select(() -> dao.query(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay),
+        return DaoExecutor.select(() -> dao.queryBy(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay),
                 OrderEntity.class);
 
     }

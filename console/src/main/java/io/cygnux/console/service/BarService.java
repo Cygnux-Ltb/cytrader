@@ -34,7 +34,7 @@ public class BarService {
      * @return List<BarEntity>
      */
     public List<BarEntity> getBars(@Nonnull String instrumentCode, int startTradingDay, int endTradingDay) {
-        return select(() -> barDao.query(instrumentCode, startTradingDay, endTradingDay), BarEntity.class);
+        return select(() -> barDao.queryBy(instrumentCode, startTradingDay, endTradingDay), BarEntity.class);
     }
 
     /**

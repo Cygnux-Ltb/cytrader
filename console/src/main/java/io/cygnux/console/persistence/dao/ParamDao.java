@@ -14,8 +14,18 @@ import java.util.List;
 @Repository
 public interface ParamDao extends JpaRepository<ParamEntity, Long> {
 
+    /**
+     *
+     * @param strategyId int
+     * @return List<ParamEntity>
+     */
     List<ParamEntity> queryByStrategyId(int strategyId);
 
+    /**
+     *
+     * @param strategyName String
+     * @return List<ParamEntity>
+     */
     List<ParamEntity> queryByStrategyName(String strategyName);
 
 }

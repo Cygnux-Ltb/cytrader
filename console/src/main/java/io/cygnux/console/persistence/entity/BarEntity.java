@@ -1,5 +1,6 @@
 package io.cygnux.console.persistence.entity;
 
+import io.cygnux.console.persistence.constant.ColumnDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,9 +10,10 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
- * @author yellow013
+ * Bar Entity of 1 minute
  * <p>
- * Bar of 1 minute
+ *
+ * @author yellow013
  */
 @Data
 @Entity
@@ -19,38 +21,38 @@ import lombok.Data;
 public final class BarEntity {
 
     @Id
-    @Column(name ="uid")
+    @Column(name = ColumnDefinition.UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
-    @Column(name ="instrument_code")
+    @Column(name = "instrument_code")
     private String instrumentCode;
 
-    @Column(name ="trading_day")
+    @Column(name = "trading_day")
     private int tradingDay;
 
-    @Column(name ="actual_date")
+    @Column(name = "actual_date")
     private int actualDate;
 
-    @Column(name ="time_point")
+    @Column(name = "time_point")
     private int timePoint;
 
-    @Column(name ="open")
+    @Column(name = "open")
     private double open;
 
-    @Column(name ="high")
+    @Column(name = "high")
     private double high;
 
-    @Column(name ="low")
+    @Column(name = "low")
     private double low;
 
-    @Column(name ="close")
+    @Column(name = "close")
     private double close;
 
-    @Column(name ="volume")
+    @Column(name = "volume")
     private double volume;
 
-    @Column(name ="turnover")
+    @Column(name = "turnover")
     private long turnover;
 
 }

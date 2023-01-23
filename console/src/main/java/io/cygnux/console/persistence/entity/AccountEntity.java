@@ -1,5 +1,6 @@
 package io.cygnux.console.persistence.entity;
 
+import io.cygnux.console.persistence.constant.ColumnDefinition;
 import io.cygnux.console.persistence.constant.CommonQueryColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
- * Account database entity
+ * Account Entity
  *
  * @author yellow013
  */
@@ -20,7 +21,7 @@ import lombok.Data;
 public final class AccountEntity {
 
     @Id
-    @Column(name = "uid")
+    @Column(name = ColumnDefinition.UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
@@ -30,8 +31,8 @@ public final class AccountEntity {
     @Column(name = CommonQueryColumn.SUB_ACCOUNT_ID)
     private int subAccountId;
 
-    @Column(name = CommonQueryColumn.BROKER)
-    private String broker;
+    @Column(name = CommonQueryColumn.BROKER_ID)
+    private String brokerId;
 
     @Column(name = CommonQueryColumn.INVESTOR_ID)
     private String investorId;

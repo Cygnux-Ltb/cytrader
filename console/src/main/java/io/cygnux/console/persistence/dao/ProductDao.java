@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductDao extends JpaRepository<ProductEntity, Long> {
 
+    /**
+     *
+     * @param productId int
+     * @return ProductEntity
+     */
     ProductEntity queryByProductId(int productId);
 
 }

@@ -22,8 +22,8 @@ public interface BarDao extends JpaRepository<BarEntity, Long> {
             + " e.tradingDay >= :startTradingDay "
             + " AND "
             + " e.tradingDay <= :endTradingDay ")
-    List<BarEntity> query(@Param("instrumentCode") String instrumentCode,
-                          @Param("startTradingDay") int startTradingDay,
-                          @Param("endTradingDay") int endTradingDay);
+    List<BarEntity> queryBy(@Param("instrumentCode") String instrumentCode,
+                            @Param("startTradingDay") int startTradingDay,
+                            @Param("endTradingDay") int endTradingDay);
 
 }

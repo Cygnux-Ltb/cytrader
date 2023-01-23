@@ -13,14 +13,14 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * Order Entity 基本信息
+ * OrderExt Entity 扩展信息
  *
  * @author yellow013
  */
 @Data
 @Entity
-@Table(name = "cyg_order")
-public final class OrderEntity {
+@Table(name = "cyg_order_ext")
+public final class OrderExtEntity {
 
     @Id
     @Column(name = ColumnDefinition.UID)
@@ -75,23 +75,20 @@ public final class OrderEntity {
     @Column(name = CommonQueryColumn.USER_ID)
     private int userId;
 
+
     /**
-     * ordSysId [*]
+     * orderSysId [*]
      */
     @Column(name = "ord_sys_id")
     private long ordSysId;
 
-    /**
-     * ordType
-     */
-    @Column(name = "ord_type")
-    private String ordType;
 
     /**
      * orderRef
      */
     @Column(name = "order_ref")
     private String orderRef;
+
 
     /**
      * direction
@@ -116,6 +113,26 @@ public final class OrderEntity {
      */
     @Column(name = "offer_qty")
     private int offerQty;
+
+
+    /**
+     * brokerSysId
+     */
+    @Column(name = "broker_sys_id")
+    private long brokerSysId;
+
+    /**
+     * volume
+     */
+    @Column(name = "volume")
+    private int volume;
+
+    /**
+     * price
+     */
+    @Column(name = "price", columnDefinition = ColumnDefinition.DECIMAL_19_4)
+    private double price;
+
 
     /**
      * insertTime

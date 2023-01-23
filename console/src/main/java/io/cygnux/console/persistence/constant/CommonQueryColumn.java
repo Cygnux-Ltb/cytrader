@@ -15,7 +15,7 @@ public interface CommonQueryColumn {
     /**
      * 经纪商
      */
-    String BROKER = "broker";
+    String BROKER_ID = "broker_id";
 
     /**
      * 投资者ID

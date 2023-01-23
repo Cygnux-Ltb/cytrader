@@ -32,11 +32,11 @@ public final class PnlRestfulApi {
      *
      * @param strategyId int
      * @param tradingDay int
-     * @return ResponseEntity<Object>
+     * @return ResponseEntity<List < PnlEntity>>
      */
     @GetMapping
-    public ResponseEntity<Object> getPnl(@RequestParam("strategyId") int strategyId,
-                                         @RequestParam("tradingDay") int tradingDay) {
+    public ResponseEntity<List<PnlEntity>> getPnl(@RequestParam("strategyId") int strategyId,
+                                                  @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(tradingDay))
             return badRequest();
         return responseOf(service.getPnl(strategyId, tradingDay));
@@ -51,7 +51,9 @@ public final class PnlRestfulApi {
     @PutMapping
     public ResponseEntity<?> putPnl(@RequestBody HttpServletRequest request) {
         var pnlDaily = bodyToObject(request, PnlEntity.class);
-        return pnlDaily == null ? badRequest() : service.putPnl(pnlDaily) ? ok() : internalServerError();
+        return pnlDaily == null
+                ? badRequest() : service.putPnl(pnlDaily)
+                ? ok() : internalServerError();
     }
 
     /**

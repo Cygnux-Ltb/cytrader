@@ -35,7 +35,7 @@ public final class OrderController {
      * @return ResponseEntity<Object>
      */
     @GetMapping
-    public ResponseEntity<Object> getOrder(@RequestParam("strategyId") int strategyId,
+    public ResponseEntity<?> getOrder(@RequestParam("strategyId") int strategyId,
                                            @RequestParam("investorId") String investorId,
                                            @RequestParam("instrumentCode") String instrumentCode,
                                            @RequestParam("tradingDay") int tradingDay) {

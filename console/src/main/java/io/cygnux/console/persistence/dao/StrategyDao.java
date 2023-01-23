@@ -12,8 +12,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StrategyDao extends JpaRepository<StrategyEntity, Long> {
 
+    /**
+     *
+     * @param strategyId int
+     * @return StrategyEntity
+     */
     StrategyEntity queryByStrategyId(int strategyId);
 
+    /**
+     *
+     * @param strategyName String
+     * @return StrategyEntity
+     */
     StrategyEntity queryByStrategyName(String strategyName);
 
 }

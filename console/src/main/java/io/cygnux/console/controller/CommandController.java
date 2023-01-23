@@ -43,13 +43,13 @@ public final class CommandController {
 
 
     /**
-     * @param productId
-     * @param request
-     * @return
+     * @param productId int
+     * @param request   HttpServletRequest
+     * @return ResponseEntity<?>
      */
     @PutMapping(path = "/param", consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
-    public ResponseEntity<Object> updateParam(@RequestParam("productId") int productId,
-                                              @RequestBody HttpServletRequest request) {
+    public ResponseEntity<?> updateParam(@RequestParam("productId") int productId,
+                                         @RequestBody HttpServletRequest request) {
         // 将参数转换为List
         List<ParamEntity> strategyParams = bodyToList(request, ParamEntity.class);
         // 获取Publisher
@@ -64,11 +64,11 @@ public final class CommandController {
     }
 
     /**
-     * @param request
-     * @return
+     * @param request HttpServletRequest
+     * @return ResponseEntity<?>
      */
     @PutMapping(path = "/safe", consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
-    public ResponseEntity<Object> updateParamSafe(@RequestBody HttpServletRequest request) {
+    public ResponseEntity<?> updateParamSafe(@RequestBody HttpServletRequest request) {
         var strategyParam = bodyToObject(request, ParamEntity.class);
         if (strategyParam == null)
             return badRequest();

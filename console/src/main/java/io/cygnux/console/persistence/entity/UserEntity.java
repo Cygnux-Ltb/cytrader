@@ -1,5 +1,6 @@
 package io.cygnux.console.persistence.entity;
 
+import io.cygnux.console.persistence.constant.ColumnDefinition;
 import io.cygnux.console.persistence.constant.CommonQueryColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,13 +10,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * User Entity
+ *
+ * @author yellow013
+ */
 @Data
 @Entity
 @Table(name = "cyg_user")
 public class UserEntity {
 
     @Id
-    @Column(name = "uid")
+    @Column(name = ColumnDefinition.UID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 

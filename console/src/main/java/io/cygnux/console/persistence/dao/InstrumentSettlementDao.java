@@ -15,6 +15,12 @@ import java.util.List;
 @Repository
 public interface InstrumentSettlementDao extends JpaRepository<InstrumentSettlementEntity, Long> {
 
+    /**
+     *
+     * @param instrumentCode String
+     * @param tradingDay int
+     * @return List<InstrumentSettlementEntity>
+     */
     List<InstrumentSettlementEntity> queryByInstrumentCodeAndTradingDay(
             @Nullable String instrumentCode, int tradingDay);
     

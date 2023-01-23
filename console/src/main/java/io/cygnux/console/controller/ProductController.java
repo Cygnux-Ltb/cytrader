@@ -32,7 +32,7 @@ public final class ProductController {
     /**
      * Get all product
      *
-     * @return ResponseEntity<List<ProductEntity>>
+     * @return ResponseEntity<List < ProductEntity>>
      */
     @GetMapping
     public ResponseEntity<List<ProductEntity>> getAllProduct() {
@@ -53,7 +53,6 @@ public final class ProductController {
             return badRequest();
         CygInfoInitFinishCacheMap.put(initFinish.getCygId(), initFinish);
         return ok();
-
     }
 
     /**

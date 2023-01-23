@@ -14,10 +14,26 @@ import java.util.List;
 @Repository
 public interface OrderEventDao extends JpaRepository<OrderEventEntity, Long> {
 
+    /**
+     *
+     * @param strategyId int
+     * @param tradingDay int
+     * @return List<OrderEventEntity>
+     */
     List<OrderEventEntity> queryByStrategyIdAndTradingDay(int strategyId, int tradingDay);
 
+    /**
+     *
+     * @param tradingDay int
+     * @return List<OrderEventEntity>
+     */
     List<OrderEventEntity> queryByTradingDay(int tradingDay);
 
+    /**
+     *
+     * @param ordSysId long
+     * @return List<OrderEventEntity>
+     */
     List<OrderEventEntity> queryByOrdSysId(long ordSysId);
 
 

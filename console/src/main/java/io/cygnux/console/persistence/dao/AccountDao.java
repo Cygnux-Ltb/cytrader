@@ -15,10 +15,10 @@ import java.util.List;
 public interface AccountDao extends JpaRepository<AccountEntity, Long> {
 
     /**
-     * @param broker String
+     * @param brokerId String
      * @return List<AccountEntity>
      */
-    List<AccountEntity> queryByBroker(String broker);
+    List<AccountEntity> queryByBrokerId(String brokerId);
 
     /**
      * @param investorId String
