@@ -1,7 +1,7 @@
 package io.cygnux.console.persistence.entity;
 
-import io.cygnux.console.persistence.constant.ColumnDefinition;
-import io.cygnux.console.persistence.constant.CommonQueryColumn;
+import io.cygnux.console.persistence.CommonColumn;
+import io.mercury.persistence.rdb.ColumnDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,16 +25,16 @@ public final class AccountEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
-    @Column(name = CommonQueryColumn.ACCOUNT_ID)
+    @Column(name = CommonColumn.ACCOUNT_ID)
     private int accountId;
 
-    @Column(name = CommonQueryColumn.SUB_ACCOUNT_ID)
+    @Column(name = CommonColumn.SUB_ACCOUNT_ID)
     private int subAccountId;
 
-    @Column(name = CommonQueryColumn.BROKER_ID)
+    @Column(name = CommonColumn.BROKER_ID)
     private String brokerId;
 
-    @Column(name = CommonQueryColumn.INVESTOR_ID)
+    @Column(name = CommonColumn.INVESTOR_ID)
     private String investorId;
 
     @Column(name = "adaptor_type")

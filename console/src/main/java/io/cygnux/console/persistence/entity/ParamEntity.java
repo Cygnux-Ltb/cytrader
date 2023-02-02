@@ -1,7 +1,7 @@
 package io.cygnux.console.persistence.entity;
 
-import io.cygnux.console.persistence.constant.ColumnDefinition;
-import io.cygnux.console.persistence.constant.CommonQueryColumn;
+import io.cygnux.console.persistence.CommonColumn;
+import io.mercury.persistence.rdb.ColumnDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,10 +25,10 @@ public final class ParamEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
-    @Column(name = CommonQueryColumn.STRATEGY_ID)
+    @Column(name = CommonColumn.STRATEGY_ID)
     private int strategyId;
 
-    @Column(name =CommonQueryColumn.STRATEGY_NAME)
+    @Column(name = CommonColumn.STRATEGY_NAME)
     private String strategyName;
 
     @Column(name ="owner_type")

@@ -1,6 +1,6 @@
 package io.cygnux.console.persistence.entity;
 
-import io.cygnux.console.persistence.constant.ColumnDefinition;
+import io.mercury.persistence.rdb.ColumnDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

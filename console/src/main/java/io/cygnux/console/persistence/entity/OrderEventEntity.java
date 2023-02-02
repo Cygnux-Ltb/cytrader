@@ -1,7 +1,7 @@
 package io.cygnux.console.persistence.entity;
 
-import io.cygnux.console.persistence.constant.ColumnDefinition;
-import io.cygnux.console.persistence.constant.CommonQueryColumn;
+import io.cygnux.console.persistence.CommonColumn;
+import io.mercury.persistence.rdb.ColumnDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
- * OrderEvent Entity 订单事件
+ * Trade Entity 订单事件
  *
  * @author yellow013
  */
@@ -28,49 +28,49 @@ public final class OrderEventEntity {
     /**
      * tradingDay [*]
      */
-    @Column(name = CommonQueryColumn.TRADING_DAY)
+    @Column(name = CommonColumn.TRADING_DAY)
     private int tradingDay;
 
     /**
      * strategyId [*]
      */
-    @Column(name = CommonQueryColumn.STRATEGY_ID)
+    @Column(name = CommonColumn.STRATEGY_ID)
     private int strategyId;
 
     /**
      * instrumentCode [*]
      */
-    @Column(name = CommonQueryColumn.INSTRUMENT_CODE)
+    @Column(name = CommonColumn.INSTRUMENT_CODE)
     private String instrumentCode;
 
     /**
      * investorId [*]
      */
-    @Column(name = CommonQueryColumn.INVESTOR_ID)
+    @Column(name = CommonColumn.INVESTOR_ID)
     private String investorId;
 
     /**
      * brokerId [*]
      */
-    @Column(name = CommonQueryColumn.BROKER_ID)
+    @Column(name = CommonColumn.BROKER_ID)
     private String brokerId;
 
     /**
      * accountId [*]
      */
-    @Column(name = CommonQueryColumn.ACCOUNT_ID)
+    @Column(name = CommonColumn.ACCOUNT_ID)
     private int accountId;
 
     /**
      * subAccountId [*]
      */
-    @Column(name = CommonQueryColumn.SUB_ACCOUNT_ID)
+    @Column(name = CommonColumn.SUB_ACCOUNT_ID)
     private int subAccountId;
 
     /**
      * userId [*]
      */
-    @Column(name = CommonQueryColumn.USER_ID)
+    @Column(name = CommonColumn.USER_ID)
     private int userId;
 
 
@@ -92,18 +92,17 @@ public final class OrderEventEntity {
     @Column(name = "order_msg_type")
     private int orderMsgType;
 
+    /**
+     * ord_offset
+     */
+    @Column(name = "ord_offset")
+    private char ordOffset;
 
     /**
-     * direction char
+     * direction
      */
     @Column(name = "direction")
     private char direction;
-
-    /**
-     * offset char
-     */
-    @Column(name = "offset")
-    private char offset;
 
     /**
      * limit_price double 19_4
@@ -184,7 +183,6 @@ public final class OrderEventEntity {
      */
     @Column(name = "cancel_time")
     private int cancelTime;
-
 
     /**
      * remark

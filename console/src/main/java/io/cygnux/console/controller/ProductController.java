@@ -1,11 +1,13 @@
 package io.cygnux.console.controller;
 
+import io.cygnux.console.controller.base.ServiceException;
 import io.cygnux.console.persistence.entity.ProductEntity;
 import io.cygnux.console.service.ProductService;
 import io.cygnux.console.service.dto.InitFinish;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
 import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
 import static io.cygnux.console.controller.util.ResponseUtil.ok;
 import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
 
-@RestController("/product")
+@RestController
 public final class ProductController {
 
     /**
@@ -29,24 +31,26 @@ public final class ProductController {
     @Resource
     private ProductService service;
 
+    private static final ConcurrentHashMap<Integer, InitFinish> CygInfoInitFinishCacheMap = new ConcurrentHashMap<>();
+
     /**
      * Get all product
      *
      * @return ResponseEntity<List < ProductEntity>>
      */
-    @GetMapping
+    @ExceptionHandler(ServiceException.class)
+    @GetMapping("/product")
     public ResponseEntity<List<ProductEntity>> getAllProduct() {
         var list = service.getAll();
         return responseOf(list);
     }
 
-    private static final ConcurrentHashMap<Integer, InitFinish> CygInfoInitFinishCacheMap = new ConcurrentHashMap<>();
-
     /**
      * @param request HttpServletRequest
      * @return ResponseEntity<?>
      */
-    @PutMapping("/initialized")
+    @ExceptionHandler(ServiceException.class)
+    @PutMapping("/product/initialized")
     public ResponseEntity<?> putInitFinish(@RequestBody HttpServletRequest request) {
         InitFinish initFinish = bodyToObject(request, InitFinish.class);
         if (initFinish == null)
@@ -59,9 +63,8 @@ public final class ProductController {
      * @param productId int
      * @return ResponseEntity<ProductEntity>
      */
-    @GetMapping("/{productId}")
-    public ResponseEntity<ProductEntity> getProduct(
-            @PathVariable("productId") int productId) {
+    @GetMapping("/product/{productId}")
+    public ResponseEntity<ProductEntity> getProduct(@PathVariable("productId") int productId) {
         ProductEntity entity = service.getProduct(productId);
         return responseOf(entity);
     }

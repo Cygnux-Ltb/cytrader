@@ -1,5 +1,6 @@
 package io.cygnux.console.controller;
 
+import io.cygnux.console.controller.base.ServiceException;
 import io.cygnux.console.persistence.entity.InstrumentSettlementEntity;
 import io.cygnux.console.service.InstrumentService;
 import io.cygnux.console.service.dto.InstrumentPrice;
@@ -7,10 +8,12 @@ import io.mercury.common.util.StringSupport;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,14 +21,15 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
-import static io.cygnux.console.controller.util.ParamsValidateUtil.paramIsNull;
+import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
+import static io.cygnux.console.controller.util.RequestUtil.paramIsNull;
 import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
 import static io.cygnux.console.controller.util.ResponseUtil.ok;
 import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
 import static java.util.Arrays.stream;
 
-@RestController("/instrument")
+@RestController
+@RequestMapping(path = "/instrument")
 public final class InstrumentController {
 
     @Resource
@@ -38,15 +42,15 @@ public final class InstrumentController {
      * @param tradingDay     int
      * @return ResponseEntity<List < InstrumentSettlementEntity>>
      */
-    @GetMapping("/settlement")
-    public ResponseEntity<List<InstrumentSettlementEntity>> getSettlementPrice(
+    @ExceptionHandler(ServiceException.class)
+    @GetMapping(path = "/settlement")
+    public List<InstrumentSettlementEntity> getSettlementPrice(
             @RequestParam("instrumentCode") String instrumentCode,
             @RequestParam("tradingDay") int tradingDay) {
         if (paramIsNull(instrumentCode, tradingDay)) {
-            return badRequest();
+            return null;
         }
-        var instrumentSettlements = service.getInstrumentSettlement(instrumentCode, tradingDay);
-        return responseOf(instrumentSettlements);
+        return service.getInstrumentSettlement(instrumentCode, tradingDay);
     }
 
     // LastPrices Cache
@@ -58,7 +62,8 @@ public final class InstrumentController {
      * @param instrumentCodes String
      * @return ResponseEntity<List < InstrumentPrice>>
      */
-    @GetMapping("/last_price")
+    @ExceptionHandler(ServiceException.class)
+    @GetMapping(path = "/last_price")
     public ResponseEntity<List<InstrumentPrice>> getLastPrice(@RequestParam("instrumentCodes") String instrumentCodes) {
         if (StringSupport.isNullOrEmpty(instrumentCodes))
             return badRequest();
@@ -74,7 +79,8 @@ public final class InstrumentController {
      * @param request HttpServletRequest
      * @return ResponseEntity<Object>
      */
-    @PutMapping("/last_price")
+    @ExceptionHandler(ServiceException.class)
+    @PutMapping(path = "/last_price")
     public ResponseEntity<Object> putLastPrice(@RequestBody HttpServletRequest request) {
         var price = bodyToObject(request, InstrumentPrice.class);
         if (price == null)
@@ -89,6 +95,7 @@ public final class InstrumentController {
      * @param instrumentCode String
      * @return ResponseEntity<Object>
      */
+    @ExceptionHandler(ServiceException.class)
     public ResponseEntity<Object> getSymbolTradingFeeByName(@RequestParam("instrumentCode") String instrumentCode) {
         var instrument = service.getInstrument(instrumentCode);
         return responseOf(instrument);
@@ -101,9 +108,10 @@ public final class InstrumentController {
      * @param tradingDay String
      * @return ResponseEntity<Object>
      */
-    @GetMapping("/tradable/{symbol}/{tradingDay}")
-    public ResponseEntity<Object> getTradableInstrument(@PathVariable("symbol") String symbol,
-                                                        @PathVariable("tradingDay") String tradingDay) {
+    @ExceptionHandler(ServiceException.class)
+    @GetMapping(path = "/tradable/{tradingDay}/{symbol}")
+    public ResponseEntity<Object> getTradableInstrument(@PathVariable("tradingDay") int tradingDay,
+                                                        @PathVariable("symbol") String symbol) {
         return responseOf(null);
     }
 

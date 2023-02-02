@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static io.cygnux.console.controller.util.ParamsValidateUtil.checkStrategyId;
-import static io.cygnux.console.controller.util.ParamsValidateUtil.checkStrategyName;
+import static io.cygnux.console.controller.util.RequestUtil.checkStrategyId;
+import static io.cygnux.console.controller.util.RequestUtil.checkStrategyName;
 import static io.cygnux.console.persistence.util.DaoExecutor.insertOrUpdate;
 import static io.cygnux.console.persistence.util.DaoExecutor.select;
 

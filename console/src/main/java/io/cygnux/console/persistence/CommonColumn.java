@@ -1,6 +1,6 @@
-package io.cygnux.console.persistence.constant;
+package io.cygnux.console.persistence;
 
-public interface CommonQueryColumn {
+public interface CommonColumn {
 
     /**
      * 策略ID

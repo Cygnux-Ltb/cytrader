@@ -1,5 +1,6 @@
 package io.cygnux.console.controller;
 
+import io.cygnux.console.controller.base.ServiceException;
 import io.cygnux.console.service.dto.StrategySwitch;
 import io.cygnux.console.service.dto.pack.OutboxMessage;
 import io.mercury.common.collections.MutableMaps;
@@ -8,9 +9,11 @@ import io.mercury.serialization.json.JsonWrapper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,14 +25,15 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToList;
-import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.controller.util.RequestUtil.bodyToList;
+import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
 import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
 import static io.cygnux.console.controller.util.ResponseUtil.ok;
-import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
 import static io.cygnux.console.service.dto.pack.OutboxTitle.StrategySwitch;
+import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
-@RestController("/status")
+@RestController
+@RequestMapping(path = "/status")
 public final class StatusController {
 
     private static final Logger log = Log4j2LoggerFactory.getLogger(StatusController.class);
@@ -39,16 +43,18 @@ public final class StatusController {
     /**
      * @return ResponseEntity<Collection < StrategySwitch>>
      */
+    @ExceptionHandler(ServiceException.class)
     @GetMapping
-    public ResponseEntity<Collection<StrategySwitch>> allStrategySwitch() {
-        return responseOf(StrategySwitchMap.values());
+    public Collection<StrategySwitch> allStrategySwitch() {
+        return StrategySwitchMap.values();
     }
 
     /**
      * @param request HttpServletRequest
      * @return ResponseEntity<?>
      */
-    @PutMapping("/command")
+    @ExceptionHandler(ServiceException.class)
+    @PutMapping(path = "/command", consumes = APPLICATION_JSON_UTF8)
     public ResponseEntity<?> statusCommand(@RequestBody HttpServletRequest request) {
         var strategySwitchList = bodyToList(request, StrategySwitch.class);
         if (strategySwitchList == null) {

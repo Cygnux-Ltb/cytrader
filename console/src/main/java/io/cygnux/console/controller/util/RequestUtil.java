@@ -11,9 +11,9 @@ import org.slf4j.Logger;
 import java.io.IOException;
 import java.util.List;
 
-public final class ParamsValidateUtil {
+public final class RequestUtil {
 
-    private static final Logger log = Log4j2LoggerFactory.getLogger(ParamsValidateUtil.class);
+    private static final Logger log = Log4j2LoggerFactory.getLogger(RequestUtil.class);
 
     /**
      * 检查参数列表
@@ -22,16 +22,13 @@ public final class ParamsValidateUtil {
      * @return boolean
      */
     public static boolean paramIsNull(Object... objs) {
-        for (Object obj : objs) {
-            if (obj != null) {
+        for (Object obj : objs)
+            if (obj != null)
                 return false;
-            }
-        }
         return true;
     }
 
-
-    public static String getBody(HttpServletRequest request) {
+    private static String getBody(HttpServletRequest request) {
         try {
             return IOUtils.toString(request.getInputStream(), Charsets.UTF8);
         } catch (IOException e) {

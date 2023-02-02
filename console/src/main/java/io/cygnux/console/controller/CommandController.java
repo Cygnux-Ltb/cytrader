@@ -1,5 +1,6 @@
 package io.cygnux.console.controller;
 
+import io.cygnux.console.controller.base.ServiceException;
 import io.cygnux.console.service.dto.pack.OutboxMessage;
 import io.cygnux.console.service.dto.pack.OutboxTitle;
 import io.cygnux.console.service.ParamService;
@@ -11,21 +12,24 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToList;
-import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
+import static io.cygnux.console.controller.util.RequestUtil.bodyToList;
+import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
 import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
 import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
 import static io.cygnux.console.controller.util.ResponseUtil.ok;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
-@RestController("command")
+@RestController
+@RequestMapping(path = "/command")
 public final class CommandController {
 
     @Resource
@@ -37,7 +41,6 @@ public final class CommandController {
     private static final Logger log = Log4j2LoggerFactory.getLogger(CommandController.class);
 
     public ResponseEntity<String> get() {
-
         return null;
     }
 
@@ -47,6 +50,7 @@ public final class CommandController {
      * @param request   HttpServletRequest
      * @return ResponseEntity<?>
      */
+    @ExceptionHandler(ServiceException.class)
     @PutMapping(path = "/param", consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
     public ResponseEntity<?> updateParam(@RequestParam("productId") int productId,
                                          @RequestBody HttpServletRequest request) {
@@ -67,6 +71,7 @@ public final class CommandController {
      * @param request HttpServletRequest
      * @return ResponseEntity<?>
      */
+    @ExceptionHandler(ServiceException.class)
     @PutMapping(path = "/safe", consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
     public ResponseEntity<?> updateParamSafe(@RequestBody HttpServletRequest request) {
         var strategyParam = bodyToObject(request, ParamEntity.class);
@@ -82,6 +87,5 @@ public final class CommandController {
             default -> internalServerError();
         };
     }
-
 
 }

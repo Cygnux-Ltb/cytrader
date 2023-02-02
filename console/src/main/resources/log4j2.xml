@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="${sys:log4j2.level:-ERROR}">
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d{yy-MM-dd HH:mm:ss.SSS} %-5level [%t] [%C{1}.%M] %msg%n"/>
+        </Console>
+        <RollingFile name="ROLLING_FILE"
+                     fileName="${sys:java.io.tmpdir}/logs/${sys:log4j2.filename:-started-at-$${date:yyMMdd-HHmmss}}.log"
+                     filePattern="${sys:java.io.tmpdir}/logs/${sys:log4j2.filename:-started-at-$${date:yyMMdd-HHmmss}}.%d{yyMMdd}.log"
+                     append="true">
+            <!-- 日志输出格式 -->
+            <PatternLayout
+                    pattern="%d{yy-MM-dd HH:mm:ss.SSS} %-5level [%t] [%C{1}.%M] %msg%n"/>
+            <!-- 设置日志文件分割策略 -->
+            <Policies>
+                <!-- 基于时间分割 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!-- 基于文件大小分割, 根据系统属性配置, 默认值255MB -->
+                <SizeBasedTriggeringPolicy
+                        size="${sys:log4j2.sizeOfMb:-255}MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="${sys:log4j2.level:-ERROR}">
+            <Appender-ref ref="CONSOLE"/>
+            <Appender-ref ref="ROLLING_FILE"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -12,14 +12,14 @@ import java.util.List;
 public class ProductService {
 
     @Resource
-    private ProductDao productDao;
+    private ProductDao dao;
 
     public List<ProductEntity> getAll() {
-        return DaoExecutor.select(() -> productDao.findAll(), ProductEntity.class);
+        return DaoExecutor.select(() -> dao.findAll(), ProductEntity.class);
     }
 
     public ProductEntity getProduct(int productId) {
-        return productDao.queryByProductId(productId);
+        return dao.queryByProductId(productId);
     }
 
 }

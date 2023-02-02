@@ -1,7 +1,7 @@
 package io.cygnux.console.persistence.entity;
 
-import io.cygnux.console.persistence.constant.ColumnDefinition;
-import io.cygnux.console.persistence.constant.CommonQueryColumn;
+import io.cygnux.console.persistence.CommonColumn;
+import io.mercury.persistence.rdb.ColumnDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +28,7 @@ public final class InstrumentEntity {
     /**
      * instrumentCode [*]
      */
-    @Column(name = CommonQueryColumn.INSTRUMENT_CODE)
+    @Column(name = CommonColumn.INSTRUMENT_CODE)
     private String instrumentCode;
 
     /**

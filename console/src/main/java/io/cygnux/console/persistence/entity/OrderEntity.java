@@ -1,7 +1,7 @@
 package io.cygnux.console.persistence.entity;
 
-import io.cygnux.console.persistence.constant.ColumnDefinition;
-import io.cygnux.console.persistence.constant.CommonQueryColumn;
+import io.cygnux.console.persistence.CommonColumn;
+import io.mercury.persistence.rdb.ColumnDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,49 +30,49 @@ public final class OrderEntity {
     /**
      * tradingDay [*]
      */
-    @Column(name = CommonQueryColumn.TRADING_DAY)
+    @Column(name = CommonColumn.TRADING_DAY)
     private int tradingDay;
 
     /**
      * strategyId [*]
      */
-    @Column(name = CommonQueryColumn.STRATEGY_ID)
+    @Column(name = CommonColumn.STRATEGY_ID)
     private int strategyId;
 
     /**
      * instrumentCode [*]
      */
-    @Column(name = CommonQueryColumn.INSTRUMENT_CODE)
+    @Column(name = CommonColumn.INSTRUMENT_CODE)
     private String instrumentCode;
 
     /**
      * investorId [*]
      */
-    @Column(name = CommonQueryColumn.INVESTOR_ID)
+    @Column(name = CommonColumn.INVESTOR_ID)
     private String investorId;
 
     /**
      * brokerId [*]
      */
-    @Column(name = CommonQueryColumn.BROKER_ID)
+    @Column(name = CommonColumn.BROKER_ID)
     private String brokerId;
 
     /**
      * accountId [*]
      */
-    @Column(name = CommonQueryColumn.ACCOUNT_ID)
+    @Column(name = CommonColumn.ACCOUNT_ID)
     private int accountId;
 
     /**
      * subAccountId [*]
      */
-    @Column(name = CommonQueryColumn.SUB_ACCOUNT_ID)
+    @Column(name = CommonColumn.SUB_ACCOUNT_ID)
     private int subAccountId;
 
     /**
      * userId [*]
      */
-    @Column(name = CommonQueryColumn.USER_ID)
+    @Column(name = CommonColumn.USER_ID)
     private int userId;
 
     /**

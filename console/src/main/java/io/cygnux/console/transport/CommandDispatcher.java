@@ -14,12 +14,14 @@ public final class CommandDispatcher {
     private void init() {
     }
 
+
     /**
      *
      */
     public boolean sendControlCommand(StrategySwitch strategySwitch) {
         return false;
     }
+
 
     public boolean sendStrategyCommand(StrategySwitch strategySwitch) {
         return false;

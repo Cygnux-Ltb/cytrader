@@ -1,7 +1,7 @@
 package io.cygnux.console.persistence.entity;
 
-import io.cygnux.console.persistence.constant.ColumnDefinition;
-import io.cygnux.console.persistence.constant.CommonQueryColumn;
+import io.cygnux.console.persistence.CommonColumn;
+import io.mercury.persistence.rdb.ColumnDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,10 +31,10 @@ public final class ProductEntity {
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name = CommonQueryColumn.SUB_ACCOUNT_ID)
+    @Column(name = CommonColumn.SUB_ACCOUNT_ID)
     private String subAccountId;
 
-    @Column(name = CommonQueryColumn.USER_ID)
+    @Column(name = CommonColumn.USER_ID)
     private String userId;
 
     @Column(name = "adaptor_type")

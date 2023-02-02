@@ -1,5 +1,6 @@
 package io.cygnux.console.controller;
 
+import io.cygnux.console.controller.base.ServiceException;
 import io.cygnux.console.persistence.entity.ParamEntity;
 import io.cygnux.console.persistence.entity.StrategyEntity;
 import io.cygnux.console.service.ParamService;
@@ -9,22 +10,22 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static io.cygnux.console.controller.util.ParamsValidateUtil.bodyToObject;
-import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
-import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
-import static io.cygnux.console.controller.util.ResponseUtil.ok;
+import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
 import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
+import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
-@RestController("/strategy")
+@RestController
+@RequestMapping(path = "/strategy")
 public final class StrategyController {
 
     private final Logger log = Log4j2LoggerFactory.getLogger(getClass());
@@ -40,9 +41,10 @@ public final class StrategyController {
      *
      * @return ResponseEntity<List < StrategyEntity>>
      */
+    @ExceptionHandler(ServiceException.class)
     @GetMapping
-    public ResponseEntity<List<StrategyEntity>> getStrategies() {
-        return responseOf(strategyService.getAllStrategy());
+    public List<StrategyEntity> getAllStrategy() {
+        return strategyService.getAllStrategy();
     }
 
     /**
@@ -51,7 +53,9 @@ public final class StrategyController {
      * @param strategyId int
      * @return ResponseEntity<StrategyEntity>
      */
-    public ResponseEntity<StrategyEntity> getStrategyById(@RequestParam("strategyId") int strategyId) {
+    @ExceptionHandler(ServiceException.class)
+    @GetMapping(path = "/{strategyId}")
+    public ResponseEntity<StrategyEntity> getStrategyById(@PathVariable("strategyId") int strategyId) {
         StrategyEntity strategy = strategyService.getStrategy(strategyId);
         return responseOf(strategy);
     }
@@ -62,10 +66,10 @@ public final class StrategyController {
      * @param strategyId int
      * @return ResponseEntity<?>
      */
-    @GetMapping("/param")
-    public ResponseEntity<?> getParamsByStrategyId(@RequestParam("strategyId") int strategyId) {
-        List<ParamEntity> strategyParams = paramService.getStrategyParams(strategyId);
-        return responseOf(strategyParams);
+    @ExceptionHandler(ServiceException.class)
+    @GetMapping("/{strategyId}/param")
+    public List<ParamEntity> getParamsByStrategyId(@PathVariable("strategyId") int strategyId) {
+        return paramService.getStrategyParams(strategyId);
     }
 
     /**
@@ -74,12 +78,12 @@ public final class StrategyController {
      * @param strategyId int
      * @return HttpServletRequest
      */
-    @PutMapping("/{strategyId}/param")
-    public ResponseEntity<Object> putParamsByStrategyId(@PathVariable("strategyId") int strategyId,
-                                                        @RequestBody HttpServletRequest request) {
+    @PutMapping(path = "/{strategyId}/param", consumes = APPLICATION_JSON_UTF8)
+    public boolean putParamsByStrategyId(@PathVariable("strategyId") int strategyId,
+                                         @RequestBody HttpServletRequest request) {
         var params = bodyToObject(request, ParamEntity.class);
         log.info("putParamsByStrategyId recv : {}", params);
-        return params == null ? badRequest() : paramService.putStrategyParam(params) ? ok() : internalServerError();
+        return params != null && paramService.putStrategyParam(params);
     }
 
 }
