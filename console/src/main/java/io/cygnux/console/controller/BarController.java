@@ -55,6 +55,7 @@ public final class BarController {
     @PutMapping(consumes = APPLICATION_JSON_UTF8)
     public ResponseEntity<Integer> putBar(@RequestBody HttpServletRequest request) {
         var bar = bodyToObject(request, BarEntity.class);
+        System.out.println("131451511");
         return bar == null ? badRequest()
                 : service.putBar(bar)
                 ? ResponseEntity.status(HttpStatus.ACCEPTED).build()

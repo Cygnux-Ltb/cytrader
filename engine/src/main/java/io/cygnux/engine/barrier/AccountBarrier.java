@@ -12,6 +12,7 @@ import io.horizon.trader.risk.OrderBarrier;
 @NotThreadSafe
 public class AccountBarrier implements OrderBarrier {
 
+
 	@Override
 	public boolean filter(ChildOrder order) {
 		// TODO Auto-generated method stub
