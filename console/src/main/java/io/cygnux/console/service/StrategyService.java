@@ -41,7 +41,7 @@ public final class StrategyService {
             Throws.illegalArgument("strategyId");
         StrategyEntity entity = strategyDao.queryByStrategyId(strategyId);
         if (entity == null)
-            log.error("entity == null where strategyId -> {}", strategyId);
+            log.warn("entity == null where strategyId -> {}", strategyId);
         return entity;
     }
 
@@ -55,7 +55,7 @@ public final class StrategyService {
             Throws.illegalArgument("strategyName");
         StrategyEntity entity = strategyDao.queryByStrategyName(strategyName);
         if (entity == null)
-            log.error("entity == null where strategyName -> {}", strategyName);
+            log.warn("entity == null where strategyName -> {}", strategyName);
         return entity;
     }
 

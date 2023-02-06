@@ -55,9 +55,9 @@ public final class StrategyController {
      */
     @ExceptionHandler(ServiceException.class)
     @GetMapping(path = "/{strategyId}")
-    public ResponseEntity<StrategyEntity> getStrategyById(@PathVariable("strategyId") int strategyId) {
-        StrategyEntity strategy = strategyService.getStrategy(strategyId);
-        return responseOf(strategy);
+    public StrategyEntity getStrategyById(@PathVariable("strategyId") int strategyId) {
+        System.out.println("13131");
+        return strategyService.getStrategy(strategyId);
     }
 
     /**

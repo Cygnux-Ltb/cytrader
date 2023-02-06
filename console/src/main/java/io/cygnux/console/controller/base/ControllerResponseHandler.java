@@ -32,7 +32,7 @@ public class ControllerResponseHandler implements ResponseBodyAdvice<Object> {
                                   @Nonnull ServerHttpRequest request,
                                   @Nonnull ServerHttpResponse response) {
         if (body == null) {
-            return ResultEnum.INTERNAL_ERROR.newResponse();
+            return ResultEnum.OK.newResponse(new Object());
         } else if (body instanceof Boolean b) {
             if (b) {
                 return ResultEnum.OK.newResponse();

@@ -29,6 +29,7 @@
         <module>console</module>
         <module>engine</module>
         <module>example</module>
+        <module>websocket</module>
     </modules>
 
     <properties>
