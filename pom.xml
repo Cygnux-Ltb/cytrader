@@ -5,7 +5,7 @@
 
     <!-- This is parent cygnux pom.xml -->
     <groupId>io.cygnuxltb</groupId>
-    <artifactId>cygnux</artifactId>
+    <artifactId>cytrader</artifactId>
     <version>1.0</version>
 
     <packaging>pom</packaging>
