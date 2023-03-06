@@ -1,10 +1,10 @@
-package io.cygnux.console.service;
+package io.cygnuxltb.console.service;
 
-import io.cygnux.console.persistence.dao.OrderDao;
-import io.cygnux.console.persistence.dao.OrderEventDao;
-import io.cygnux.console.persistence.util.DaoExecutor;
-import io.cygnux.console.persistence.entity.OrderEntity;
-import io.cygnux.console.persistence.entity.OrderEventEntity;
+import io.cygnuxltb.console.persistence.dao.OrderDao;
+import io.cygnuxltb.console.persistence.dao.OrderEventDao;
+import io.cygnuxltb.console.persistence.entity.OrderEntity;
+import io.cygnuxltb.console.persistence.entity.OrderEventEntity;
+import io.cygnuxltb.console.persistence.util.DaoExecutor;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
@@ -95,8 +95,8 @@ public class OrderService {
     }
 
     /**
-     * @param entity
-     * @return
+     * @param entity OrderEntity
+     * @return boolean
      */
     public boolean putOrder(OrderEntity entity) {
         return execBool(() -> dao.save(entity), o -> {
@@ -109,8 +109,8 @@ public class OrderService {
     }
 
     /**
-     * @param entity
-     * @return
+     * @param entity OrderEventEntity
+     * @return boolean
      */
     public boolean putOrderEvent(OrderEventEntity entity) {
         return execBool(() -> eventDao.save(entity), o -> {

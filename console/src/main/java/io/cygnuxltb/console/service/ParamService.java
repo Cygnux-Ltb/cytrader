@@ -1,8 +1,8 @@
-package io.cygnux.console.service;
+package io.cygnuxltb.console.service;
 
-import io.cygnux.console.persistence.dao.ParamDao;
-import io.cygnux.console.persistence.entity.ParamEntity;
-import io.cygnux.console.service.bean.ValidationRule;
+import io.cygnuxltb.console.persistence.dao.ParamDao;
+import io.cygnuxltb.console.persistence.entity.ParamEntity;
+import io.cygnuxltb.console.service.bean.ValidationRule;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
@@ -21,8 +21,8 @@ import java.util.regex.Pattern;
 
 import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyId;
 import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyName;
-import static io.cygnux.console.persistence.util.DaoExecutor.insertOrUpdate;
-import static io.cygnux.console.persistence.util.DaoExecutor.select;
+import static io.cygnuxltb.console.persistence.util.DaoExecutor.insertOrUpdate;
+import static io.cygnuxltb.console.persistence.util.DaoExecutor.select;
 
 @Component
 public class ParamService {

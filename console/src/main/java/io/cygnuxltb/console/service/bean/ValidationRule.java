@@ -1,4 +1,4 @@
-package io.cygnux.console.service.bean;
+package io.cygnuxltb.console.service.bean;
 
 public class ValidationRule {
 

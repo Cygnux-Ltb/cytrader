@@ -1,4 +1,4 @@
-package io.cygnux.console.controller.util;
+package io.cygnuxltb.console.controller.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

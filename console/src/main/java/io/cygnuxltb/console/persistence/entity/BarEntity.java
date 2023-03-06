@@ -1,4 +1,4 @@
-package io.cygnux.console.persistence.entity;
+package io.cygnuxltb.console.persistence.entity;
 
 import io.mercury.persistence.rdb.ColumnDefinition;
 import jakarta.persistence.Column;

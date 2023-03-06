@@ -1,8 +1,8 @@
-package io.cygnux.console.service;
+package io.cygnuxltb.console.service;
 
-import io.cygnux.console.persistence.dao.StrategyDao;
-import io.cygnux.console.persistence.entity.StrategyEntity;
-import io.cygnux.console.persistence.util.DaoExecutor;
+import io.cygnuxltb.console.persistence.dao.StrategyDao;
+import io.cygnuxltb.console.persistence.entity.StrategyEntity;
+import io.cygnuxltb.console.persistence.util.DaoExecutor;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyId;
 import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyName;
-import static io.cygnux.console.persistence.util.DaoExecutor.select;
+import static io.cygnuxltb.console.persistence.util.DaoExecutor.select;
 
 @Service
 public final class StrategyService {

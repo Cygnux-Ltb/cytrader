@@ -1,6 +1,6 @@
-package io.cygnux.console.persistence.dao;
+package io.cygnuxltb.console.persistence.dao;
 
-import io.cygnux.console.persistence.entity.OrderEntity;
+import io.cygnuxltb.console.persistence.entity.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,4 +1,4 @@
-package io.cygnux.console.controller.base;
+package io.cygnuxltb.console.controller.base;
 
 import io.mercury.common.log.Log4j2LoggerFactory;
 import org.slf4j.Logger;

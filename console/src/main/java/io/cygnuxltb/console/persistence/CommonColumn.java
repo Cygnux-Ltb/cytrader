@@ -1,4 +1,4 @@
-package io.cygnux.console.persistence;
+package io.cygnuxltb.console.persistence;
 
 public interface CommonColumn {
 

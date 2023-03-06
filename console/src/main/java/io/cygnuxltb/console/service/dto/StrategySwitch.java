@@ -1,4 +1,4 @@
-package io.cygnux.console.service.dto;
+package io.cygnuxltb.console.service.dto;
 
 import java.util.Set;
 import java.util.TreeSet;

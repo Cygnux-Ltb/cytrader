@@ -1,9 +1,11 @@
-package io.cygnux.console.controller;
+package io.cygnuxltb.console.controller;
 
-import io.cygnux.console.controller.base.ServiceException;
-import io.cygnux.console.persistence.entity.PnlEntity;
-import io.cygnux.console.persistence.entity.PnlSettlementEntity;
-import io.cygnux.console.service.PnlService;
+import io.cygnuxltb.console.controller.base.ServiceException;
+import io.cygnuxltb.console.persistence.entity.PnlEntity;
+import io.cygnuxltb.console.persistence.entity.PnlSettlementEntity;
+import io.cygnuxltb.console.service.PnlService;
+import io.cygnuxltb.console.controller.util.RequestUtil;
+import io.cygnuxltb.console.controller.util.ResponseUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
-import static io.cygnux.console.controller.util.RequestUtil.paramIsNull;
-import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
-import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
-import static io.cygnux.console.controller.util.ResponseUtil.ok;
-import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController
@@ -44,9 +40,9 @@ public final class PnlController {
     @GetMapping(path = "/{tradingDay}")
     public ResponseEntity<List<PnlEntity>> getPnl(@PathVariable("tradingDay") int tradingDay,
                                                   @RequestParam("strategyId") int strategyId) {
-        if (paramIsNull(tradingDay))
-            return badRequest();
-        return responseOf(service.getPnl(strategyId, tradingDay));
+        if (RequestUtil.paramIsNull(tradingDay))
+            return ResponseUtil.badRequest();
+        return ResponseUtil.responseOf(service.getPnl(strategyId, tradingDay));
     }
 
     /**
@@ -58,10 +54,10 @@ public final class PnlController {
     @ExceptionHandler(ServiceException.class)
     @PutMapping(consumes = APPLICATION_JSON_UTF8)
     public ResponseEntity<?> putPnl(@RequestBody HttpServletRequest request) {
-        var pnlDaily = bodyToObject(request, PnlEntity.class);
+        var pnlDaily = RequestUtil.bodyToObject(request, PnlEntity.class);
         return pnlDaily == null
-                ? badRequest() : service.putPnl(pnlDaily)
-                ? ok() : internalServerError();
+                ? ResponseUtil.badRequest() : service.putPnl(pnlDaily)
+                ? ResponseUtil.ok() : ResponseUtil.internalServerError();
     }
 
     /**
@@ -75,9 +71,9 @@ public final class PnlController {
     @GetMapping("/settlement")
     public ResponseEntity<List<PnlSettlementEntity>> getPnlSettlementDaily(
             @RequestParam("strategyId") int strategyId, @RequestParam("tradingDay") int tradingDay) {
-        if (paramIsNull(tradingDay))
-            return badRequest();
-        return responseOf(service.getPnlSettlement(strategyId, tradingDay));
+        if (RequestUtil.paramIsNull(tradingDay))
+            return ResponseUtil.badRequest();
+        return ResponseUtil.responseOf(service.getPnlSettlement(strategyId, tradingDay));
     }
 
 }

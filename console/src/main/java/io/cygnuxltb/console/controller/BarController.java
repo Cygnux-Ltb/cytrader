@@ -1,8 +1,10 @@
-package io.cygnux.console.controller;
+package io.cygnuxltb.console.controller;
 
-import io.cygnux.console.controller.base.ServiceException;
-import io.cygnux.console.persistence.entity.BarEntity;
-import io.cygnux.console.service.BarService;
+import io.cygnuxltb.console.controller.base.ServiceException;
+import io.cygnuxltb.console.persistence.entity.BarEntity;
+import io.cygnuxltb.console.service.BarService;
+import io.cygnuxltb.console.controller.util.RequestUtil;
+import io.cygnuxltb.console.controller.util.ResponseUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -18,9 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
-import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
-import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController
@@ -54,12 +53,12 @@ public final class BarController {
     @ExceptionHandler(ServiceException.class)
     @PutMapping(consumes = APPLICATION_JSON_UTF8)
     public ResponseEntity<Integer> putBar(@RequestBody HttpServletRequest request) {
-        var bar = bodyToObject(request, BarEntity.class);
+        var bar = RequestUtil.bodyToObject(request, BarEntity.class);
         System.out.println("131451511");
-        return bar == null ? badRequest()
+        return bar == null ? ResponseUtil.badRequest()
                 : service.putBar(bar)
                 ? ResponseEntity.status(HttpStatus.ACCEPTED).build()
-                : internalServerError();
+                : ResponseUtil.internalServerError();
     }
 
 }

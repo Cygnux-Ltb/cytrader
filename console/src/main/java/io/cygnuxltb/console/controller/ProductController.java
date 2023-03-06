@@ -1,9 +1,11 @@
-package io.cygnux.console.controller;
+package io.cygnuxltb.console.controller;
 
-import io.cygnux.console.controller.base.ServiceException;
-import io.cygnux.console.persistence.entity.ProductEntity;
-import io.cygnux.console.service.ProductService;
-import io.cygnux.console.service.dto.InitFinish;
+import io.cygnuxltb.console.controller.base.ServiceException;
+import io.cygnuxltb.console.persistence.entity.ProductEntity;
+import io.cygnuxltb.console.service.ProductService;
+import io.cygnuxltb.console.service.dto.InitFinish;
+import io.cygnuxltb.console.controller.util.RequestUtil;
+import io.cygnuxltb.console.controller.util.ResponseUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
-import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
-import static io.cygnux.console.controller.util.ResponseUtil.ok;
-import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
 
 @RestController
 public final class ProductController {
@@ -42,7 +39,7 @@ public final class ProductController {
     @GetMapping("/product")
     public ResponseEntity<List<ProductEntity>> getAllProduct() {
         var list = service.getAll();
-        return responseOf(list);
+        return ResponseUtil.responseOf(list);
     }
 
     /**
@@ -52,11 +49,11 @@ public final class ProductController {
     @ExceptionHandler(ServiceException.class)
     @PutMapping("/product/initialized")
     public ResponseEntity<?> putInitFinish(@RequestBody HttpServletRequest request) {
-        InitFinish initFinish = bodyToObject(request, InitFinish.class);
+        InitFinish initFinish = RequestUtil.bodyToObject(request, InitFinish.class);
         if (initFinish == null)
-            return badRequest();
+            return ResponseUtil.badRequest();
         CygInfoInitFinishCacheMap.put(initFinish.getCygId(), initFinish);
-        return ok();
+        return ResponseUtil.ok();
     }
 
     /**
@@ -66,7 +63,7 @@ public final class ProductController {
     @GetMapping("/product/{productId}")
     public ResponseEntity<ProductEntity> getProduct(@PathVariable("productId") int productId) {
         ProductEntity entity = service.getProduct(productId);
-        return responseOf(entity);
+        return ResponseUtil.responseOf(entity);
     }
 
 }

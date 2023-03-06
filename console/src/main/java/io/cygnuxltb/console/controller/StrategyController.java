@@ -1,10 +1,11 @@
-package io.cygnux.console.controller;
+package io.cygnuxltb.console.controller;
 
-import io.cygnux.console.controller.base.ServiceException;
-import io.cygnux.console.persistence.entity.ParamEntity;
-import io.cygnux.console.persistence.entity.StrategyEntity;
-import io.cygnux.console.service.ParamService;
-import io.cygnux.console.service.StrategyService;
+import io.cygnuxltb.console.controller.base.ServiceException;
+import io.cygnuxltb.console.persistence.entity.ParamEntity;
+import io.cygnuxltb.console.persistence.entity.StrategyEntity;
+import io.cygnuxltb.console.service.ParamService;
+import io.cygnuxltb.console.service.StrategyService;
+import io.cygnuxltb.console.controller.util.RequestUtil;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController
@@ -79,7 +79,7 @@ public final class StrategyController {
     @PutMapping(path = "/{strategyId}/param", consumes = APPLICATION_JSON_UTF8)
     public boolean putParamsByStrategyId(@PathVariable("strategyId") int strategyId,
                                          @RequestBody HttpServletRequest request) {
-        var params = bodyToObject(request, ParamEntity.class);
+        var params = RequestUtil.bodyToObject(request, ParamEntity.class);
         log.info("putParamsByStrategyId recv : {}", params);
         return params != null && paramService.putStrategyParam(params);
     }

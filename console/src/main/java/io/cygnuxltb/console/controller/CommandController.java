@@ -1,11 +1,13 @@
-package io.cygnux.console.controller;
+package io.cygnuxltb.console.controller;
 
-import io.cygnux.console.controller.base.ServiceException;
-import io.cygnux.console.persistence.entity.ParamEntity;
-import io.cygnux.console.service.ParamService;
-import io.cygnux.console.service.dto.pack.OutboxMessage;
-import io.cygnux.console.service.dto.pack.OutboxTitle;
-import io.cygnux.console.transport.CommandDispatcher;
+import io.cygnuxltb.console.controller.base.ServiceException;
+import io.cygnuxltb.console.persistence.entity.ParamEntity;
+import io.cygnuxltb.console.service.ParamService;
+import io.cygnuxltb.console.service.dto.pack.OutboxMessage;
+import io.cygnuxltb.console.service.dto.pack.OutboxTitle;
+import io.cygnuxltb.console.component.CommandDispatcher;
+import io.cygnuxltb.console.controller.util.RequestUtil;
+import io.cygnuxltb.console.controller.util.ResponseUtil;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import jakarta.annotation.Resource;
@@ -21,11 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static io.cygnux.console.controller.util.RequestUtil.bodyToList;
-import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
-import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
-import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
-import static io.cygnux.console.controller.util.ResponseUtil.ok;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController
@@ -55,7 +52,7 @@ public final class CommandController {
     public ResponseEntity<?> updateParam(@RequestParam("productId") int productId,
                                          @RequestBody HttpServletRequest request) {
         // 将参数转换为List
-        List<ParamEntity> strategyParams = bodyToList(request, ParamEntity.class);
+        List<ParamEntity> strategyParams = RequestUtil.bodyToList(request, ParamEntity.class);
         // 获取Publisher
         //dispatcher.sendCommand();
         //Publisher<String, String> publisher = GROUP_INSTANCE.getMember(cygId);
@@ -64,7 +61,7 @@ public final class CommandController {
         // 发送消息
         //publisher.publish(msg);
         // 返回Put成功标识
-        return ok();
+        return ResponseUtil.ok();
     }
 
     /**
@@ -74,17 +71,17 @@ public final class CommandController {
     @ExceptionHandler(ServiceException.class)
     @PutMapping(path = "/safe", consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
     public ResponseEntity<?> updateParamSafe(@RequestBody HttpServletRequest request) {
-        var strategyParam = bodyToObject(request, ParamEntity.class);
+        var strategyParam = RequestUtil.bodyToObject(request, ParamEntity.class);
         if (strategyParam == null)
-            return badRequest();
+            return ResponseUtil.badRequest();
         log.info("method updateParamSafe recv : {}", strategyParam);
         return switch (service.updateParamSafe(strategyParam)) {
             // 更新成功返回Ok状态码
-            case 0 -> ok();
+            case 0 -> ResponseUtil.ok();
             // 返回错误参数状态码
-            case -1 -> badRequest();
+            case -1 -> ResponseUtil.badRequest();
             // 否则返回服务器内部错误状态码
-            default -> internalServerError();
+            default -> ResponseUtil.internalServerError();
         };
     }
 

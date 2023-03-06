@@ -1,8 +1,10 @@
-package io.cygnux.console.controller;
+package io.cygnuxltb.console.controller;
 
-import io.cygnux.console.controller.base.ServiceException;
-import io.cygnux.console.persistence.entity.OrderEntity;
-import io.cygnux.console.service.OrderService;
+import io.cygnuxltb.console.controller.base.ServiceException;
+import io.cygnuxltb.console.persistence.entity.OrderEntity;
+import io.cygnuxltb.console.service.OrderService;
+import io.cygnuxltb.console.controller.util.RequestUtil;
+import io.cygnuxltb.console.controller.util.ResponseUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import static io.cygnux.console.controller.util.RequestUtil.bodyToObject;
-import static io.cygnux.console.controller.util.RequestUtil.paramIsNull;
-import static io.cygnux.console.controller.util.ResponseUtil.badRequest;
-import static io.cygnux.console.controller.util.ResponseUtil.internalServerError;
-import static io.cygnux.console.controller.util.ResponseUtil.ok;
-import static io.cygnux.console.controller.util.ResponseUtil.responseOf;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController
@@ -45,10 +41,10 @@ public final class OrderController {
                                       @RequestParam("strategyId") int strategyId,
                                       @RequestParam("investorId") String investorId,
                                       @RequestParam("instrumentCode") String instrumentCode) {
-        if (paramIsNull(strategyId, tradingDay, investorId, instrumentCode))
-            return badRequest();
+        if (RequestUtil.paramIsNull(strategyId, tradingDay, investorId, instrumentCode))
+            return ResponseUtil.badRequest();
         var orders = service.getOrders(strategyId, investorId, instrumentCode, tradingDay);
-        return responseOf(orders);
+        return ResponseUtil.responseOf(orders);
     }
 
     /**
@@ -60,12 +56,12 @@ public final class OrderController {
     @GetMapping(path = "/status")
     public ResponseEntity<Object> getOrdersByInit(@RequestParam("tradingDay") int tradingDay,
                                                   @RequestParam("strategyId") int strategyId) {
-        if (paramIsNull(strategyId, tradingDay)) {
-            return badRequest();
+        if (RequestUtil.paramIsNull(strategyId, tradingDay)) {
+            return ResponseUtil.badRequest();
         }
         var events = service.getOrderEventsByTradingDay(tradingDay);
         // TODO 过滤最后的订单
-        return responseOf(events);
+        return ResponseUtil.responseOf(events);
     }
 
     /**
@@ -75,8 +71,8 @@ public final class OrderController {
     @ExceptionHandler(ServiceException.class)
     @PutMapping(consumes = APPLICATION_JSON_UTF8)
     public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {
-        var order = bodyToObject(request, OrderEntity.class);
-        return order == null ? badRequest() : service.putOrder(order) ? ok() : internalServerError();
+        var order = RequestUtil.bodyToObject(request, OrderEntity.class);
+        return order == null ? ResponseUtil.badRequest() : service.putOrder(order) ? ResponseUtil.ok() : ResponseUtil.internalServerError();
     }
 
 }

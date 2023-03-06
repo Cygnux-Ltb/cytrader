@@ -1,4 +1,4 @@
-package io.cygnuxltb.console.transport;
+package io.cygnuxltb.console.component;
 
 import io.cygnuxltb.console.persistence.entity.ParamEntity;
 import io.cygnuxltb.console.service.dto.StrategySwitch;

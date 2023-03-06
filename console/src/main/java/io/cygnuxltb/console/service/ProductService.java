@@ -1,8 +1,8 @@
-package io.cygnux.console.service;
+package io.cygnuxltb.console.service;
 
-import io.cygnux.console.persistence.dao.ProductDao;
-import io.cygnux.console.persistence.entity.ProductEntity;
-import io.cygnux.console.persistence.util.DaoExecutor;
+import io.cygnuxltb.console.persistence.dao.ProductDao;
+import io.cygnuxltb.console.persistence.entity.ProductEntity;
+import io.cygnuxltb.console.persistence.util.DaoExecutor;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 

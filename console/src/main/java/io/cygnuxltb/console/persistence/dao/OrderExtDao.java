@@ -1,6 +1,6 @@
-package io.cygnux.console.persistence.dao;
+package io.cygnuxltb.console.persistence.dao;
 
-import io.cygnux.console.persistence.entity.OrderExtEntity;
+import io.cygnuxltb.console.persistence.entity.OrderExtEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrderExtDao extends JpaRepository<OrderExtEntity, Long> {

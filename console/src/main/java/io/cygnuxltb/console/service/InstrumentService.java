@@ -1,17 +1,17 @@
-package io.cygnux.console.service;
+package io.cygnuxltb.console.service;
 
-import io.cygnux.console.persistence.dao.InstrumentDao;
-import io.cygnux.console.persistence.dao.InstrumentSettlementDao;
-import io.cygnux.console.persistence.entity.InstrumentEntity;
-import io.cygnux.console.persistence.entity.InstrumentSettlementEntity;
+import io.cygnuxltb.console.persistence.dao.InstrumentDao;
+import io.cygnuxltb.console.persistence.dao.InstrumentSettlementDao;
+import io.cygnuxltb.console.persistence.entity.InstrumentEntity;
+import io.cygnuxltb.console.persistence.entity.InstrumentSettlementEntity;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static io.cygnux.console.persistence.util.DaoExecutor.insertOrUpdate;
-import static io.cygnux.console.persistence.util.DaoExecutor.select;
+import static io.cygnuxltb.console.persistence.util.DaoExecutor.insertOrUpdate;
+import static io.cygnuxltb.console.persistence.util.DaoExecutor.select;
 
 @Service
 public final class InstrumentService {

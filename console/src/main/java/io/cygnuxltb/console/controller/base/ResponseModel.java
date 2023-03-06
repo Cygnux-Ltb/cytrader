@@ -1,4 +1,4 @@
-package io.cygnux.console.controller.base;
+package io.cygnuxltb.console.controller.base;
 
 public record ResponseModel(
         int code,
