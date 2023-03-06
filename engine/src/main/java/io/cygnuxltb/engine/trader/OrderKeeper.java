@@ -1,4 +1,4 @@
-package io.cygnux.engine.trader;
+package io.cygnuxltb.engine.trader;
 
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.instrument.Instrument;

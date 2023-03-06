@@ -1,4 +1,4 @@
-package io.cygnux.engine.position;
+package io.cygnuxltb.engine.position;
 
 import static java.lang.Math.abs;
 
