@@ -3,7 +3,7 @@ package io.cygnuxltb.websocket;
 import io.javalin.Javalin;
 import io.mercury.common.log.Log4j2Configurator;
 
-public class Main {
+public class WebsocketStartup {
 
     static {
         Log4j2Configurator.setLogFolder("cytrader");

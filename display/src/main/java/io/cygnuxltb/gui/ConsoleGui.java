@@ -1,4 +1,4 @@
-package io.cygnuxltb.console.gui;
+package io.cygnuxltb.gui;
 
 public class ConsoleGui {
 

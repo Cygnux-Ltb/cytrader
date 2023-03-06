@@ -1,4 +1,4 @@
-package io.cygnux.example.strategy;
+package io.cygnuxltb.example.strategy;
 
 import io.cygnuxltb.engine.strategy.SingleInstrumentStrategy;
 import io.horizon.market.data.impl.BasicMarketData;

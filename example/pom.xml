@@ -22,7 +22,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>io.cygnux.example.launch.ExampleLauncher</mainClass>
+                            <mainClass>io.cygnuxltb.example.launch.ExampleLauncher</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

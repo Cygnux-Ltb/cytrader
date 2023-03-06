@@ -9,7 +9,7 @@
     <version>1.0</version>
 
     <packaging>pom</packaging>
-    <name>cygnux</name>
+    <name>cytrader</name>
 
     <url>https://cygnuxltb.io</url>
     <licenses>
@@ -30,6 +30,7 @@
         <module>engine</module>
         <module>example</module>
         <module>websocket</module>
+        <module>display</module>
     </modules>
 
     <properties>
