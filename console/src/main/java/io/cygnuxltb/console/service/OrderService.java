@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static io.cygnux.console.controller.util.RequestUtil.checkInstrumentCode;
-import static io.cygnux.console.controller.util.RequestUtil.checkInvestorId;
-import static io.cygnux.console.controller.util.RequestUtil.checkOrdSysId;
-import static io.cygnux.console.controller.util.RequestUtil.checkStrategyId;
-import static io.cygnux.console.controller.util.RequestUtil.checkTradingDay;
+import static io.cygnuxltb.console.controller.util.RequestUtil.checkInstrumentCode;
+import static io.cygnuxltb.console.controller.util.RequestUtil.checkInvestorId;
+import static io.cygnuxltb.console.controller.util.RequestUtil.checkOrdSysId;
+import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyId;
+import static io.cygnuxltb.console.controller.util.RequestUtil.checkTradingDay;
 import static io.mercury.common.functional.Functions.exec;
 import static io.mercury.common.functional.Functions.execBool;
 

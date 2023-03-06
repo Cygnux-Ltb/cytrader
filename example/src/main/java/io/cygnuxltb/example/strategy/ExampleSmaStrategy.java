@@ -1,8 +1,6 @@
 package io.cygnux.example.strategy;
 
-import java.io.IOException;
-
-import io.cygnux.engine.strategy.SingleInstrumentStrategy;
+import io.cygnuxltb.engine.strategy.SingleInstrumentStrategy;
 import io.horizon.market.data.impl.BasicMarketData;
 import io.horizon.market.indicator.impl.SMA.SmaEvent;
 import io.horizon.market.indicator.impl.SmaPoint;

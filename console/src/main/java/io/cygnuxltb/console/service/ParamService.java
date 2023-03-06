@@ -1,8 +1,8 @@
 package io.cygnux.console.service;
 
-import io.cygnux.console.service.bean.ValidationRule;
 import io.cygnux.console.persistence.dao.ParamDao;
 import io.cygnux.console.persistence.entity.ParamEntity;
+import io.cygnux.console.service.bean.ValidationRule;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.lang.Throws;
 import io.mercury.common.log.Log4j2LoggerFactory;
@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static io.cygnux.console.controller.util.RequestUtil.checkStrategyId;
-import static io.cygnux.console.controller.util.RequestUtil.checkStrategyName;
+import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyId;
+import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyName;
 import static io.cygnux.console.persistence.util.DaoExecutor.insertOrUpdate;
 import static io.cygnux.console.persistence.util.DaoExecutor.select;
 
@@ -50,8 +50,8 @@ public class ParamService {
     }
 
     /**
-     * @param param
-     * @return
+     * @param param ParamEntity
+     * @return int
      */
     public int updateParamSafe(ParamEntity param) {
         if (validationStrategyParam(param)) {
@@ -87,8 +87,8 @@ public class ParamService {
      * 证明上层caller使用[strategyParamName]从map中成功get到了相应的ValidationRule对象,
      * 所以此InputParam为[ValidationRuleMap]的子集, 返回ture.
      *
-     * @param strategyParamName
-     * @param validationRule
+     * @param strategyParamName String
+     * @param validationRule    ValidationRule
      * @return boolean
      */
     private boolean validationParamName(String strategyParamName, ValidationRule validationRule) {
@@ -98,9 +98,9 @@ public class ParamService {
     /**
      * 使用正则表达式验证整个参数的StringValue
      *
-     * @param paramValue
-     * @param regex
-     * @return
+     * @param paramValue String
+     * @param regex      String
+     * @return boolean
      */
     private boolean validationRegex(String paramValue, String regex) {
         return Pattern.matches(regex, paramValue);
@@ -109,8 +109,9 @@ public class ParamService {
     /**
      * Validation Value Type and Range
      *
-     * @param paramValue
-     * @return
+     * @param paramValue String
+     * @param rule       ValidationRule
+     * @return boolean
      */
     private boolean validationValue(String paramValue, ValidationRule rule) {
         String[] valueArray = paramValue.split(";");

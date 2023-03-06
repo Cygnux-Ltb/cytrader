@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static io.cygnux.console.controller.util.RequestUtil.checkStrategyId;
-import static io.cygnux.console.controller.util.RequestUtil.checkStrategyName;
+import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyId;
+import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyName;
 import static io.cygnux.console.persistence.util.DaoExecutor.select;
 
 @Service

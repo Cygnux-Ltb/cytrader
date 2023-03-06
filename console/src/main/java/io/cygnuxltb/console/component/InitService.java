@@ -1,8 +1,8 @@
-package io.cygnux.console.startup;
+package io.cygnuxltb.console.startup;
 
-import io.cygnux.console.persistence.entity.ProductEntity;
-import io.cygnux.console.service.ProductService;
-import io.cygnux.console.transport.CommandDispatcher;
+import io.cygnuxltb.console.persistence.entity.ProductEntity;
+import io.cygnuxltb.console.service.ProductService;
+import io.cygnuxltb.console.transport.CommandDispatcher;
 import io.mercury.common.datetime.pattern.TimePattern;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import jakarta.annotation.PostConstruct;

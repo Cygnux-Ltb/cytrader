@@ -1,4 +1,4 @@
-package io.cygnux.console.gui;
+package io.cygnuxltb.console.gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

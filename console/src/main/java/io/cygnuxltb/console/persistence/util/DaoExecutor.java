@@ -18,22 +18,22 @@ public final class DaoExecutor {
     private static final Logger log = Log4j2LoggerFactory.getLogger(DaoExecutor.class);
 
     /**
-     * @param query Supplier<List<T>>
-     * @param type  Class<T>
+     * @param queryFunc Supplier<List<T>>
+     * @param type      Class<T>
      * @return List<T>
      */
-    public static <T> List<T> select(Supplier<List<T>> query, Class<T> type) {
-        return exec(query,
+    public static <T> List<T> select(Supplier<List<T>> queryFunc, Class<T> type) {
+        return exec(queryFunc,
                 result -> {
                     if (isEmpty(result))
-                        log.warn("query [{}] return 0 row", type.getSimpleName());
+                        log.warn("queryFunc [{}] return 0 row", type.getSimpleName());
                     else if (result.size() > 4)
-                        log.info("query [{}] return {} row", type.getSimpleName(), result.size());
+                        log.info("queryFunc [{}] return {} row", type.getSimpleName(), result.size());
                     else
-                        log.info("query [{}], result -> {}", type.getSimpleName(), JsonWrapper.toJson(result));
+                        log.info("queryFunc [{}], result -> {}", type.getSimpleName(), JsonWrapper.toJson(result));
                     return result;
                 },
-                e -> log.error("query all [{}], an exception occurred", type.getSimpleName(), e));
+                e -> log.error("queryFunc all [{}], an exception occurred", type.getSimpleName(), e));
     }
 
     /**
