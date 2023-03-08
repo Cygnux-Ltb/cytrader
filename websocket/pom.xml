@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>io.mercury</groupId>
-            <artifactId>transport-rabbitmq</artifactId>
+            <artifactId>transport-zmq</artifactId>
         </dependency>
         <dependency>
             <groupId>io.javalin</groupId>

@@ -1,10 +1,12 @@
 package io.cygnuxltb.websocket;
 
-public class WsRecv {
+import io.mercury.transport.zmq.ZmqReceiver;
+
+public class WsPipeline {
 
     static {
 
-        Zmq
+        ZmqReceiver receiver ;
 
 
     }
