@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
+ * 配置信息表
  * StrategyParam Entity
  *
  * @author yellow013
@@ -31,19 +32,19 @@ public final class ParamEntity {
     @Column(name = CommonColumn.STRATEGY_NAME)
     private String strategyName;
 
-    @Column(name ="owner_type")
+    @Column(name = "owner_type")
     private String ownerType;
 
-    @Column(name ="owner")
+    @Column(name = "owner")
     private String owner;
 
-    @Column(name ="param_name")
+    @Column(name = "param_name")
     private String paramName;
 
-    @Column(name ="param_type")
+    @Column(name = "param_type")
     private String paramType;
 
-    @Column(name ="param_value")
+    @Column(name = "param_value")
     private String paramValue;
 
 }

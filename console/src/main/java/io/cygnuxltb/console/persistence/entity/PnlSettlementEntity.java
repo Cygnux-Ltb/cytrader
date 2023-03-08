@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
+ * 盈亏结算表
  * PnlSettlement Entity
  *
  * @author yellow013
@@ -46,37 +47,37 @@ public final class PnlSettlementEntity {
     /**
      * position
      */
-    @Column(name ="position")
+    @Column(name = "position")
     private int position;
 
     /**
      * pnlTotal
      */
-    @Column(name ="pnl_total")
+    @Column(name = "pnl_total")
     private double pnlTotal;
 
     /**
      * pnlNet
      */
-    @Column(name ="pnl_net")
+    @Column(name = "pnl_net")
     private double pnlNet;
 
     /**
      * tradeCost
      */
-    @Column(name ="trade_cost")
+    @Column(name = "trade_cost")
     private double tradeCost;
 
     /**
      * exposure
      */
-    @Column(name ="exposure")
+    @Column(name = "exposure")
     private double exposure;
 
     /**
      * approved
      */
-    @Column(name ="approved")
+    @Column(name = "approved")
     private int approved;
 
 }

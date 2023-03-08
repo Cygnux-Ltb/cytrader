@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
+ * 交易标的结算表
  * InstrumentSettlement Entity
  *
  * @author yellow013

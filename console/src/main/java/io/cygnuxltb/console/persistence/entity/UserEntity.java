@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
+ * 用户表
  * User Entity
  *
  * @author yellow013

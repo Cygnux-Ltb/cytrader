@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
+ * 盈亏表
  * Pnl Entity
  *
  * @author yellow013
@@ -46,73 +47,73 @@ public final class PnlEntity {
     /**
      * avgBuyPrice
      */
-    @Column(name ="avg_buy_price")
+    @Column(name = "avg_buy_price")
     private double avgBuyPrice;
 
     /**
      * avgSellPrice
      */
-    @Column(name ="avg_sell_price")
+    @Column(name = "avg_sell_price")
     private double avgSellPrice;
 
     /**
      * buyQuantity
      */
-    @Column(name ="buy_quantity")
+    @Column(name = "buy_quantity")
     private int buyQuantity;
 
     /**
      * sellQuantity
      */
-    @Column(name ="sell_quantity")
+    @Column(name = "sell_quantity")
     private int sellQuantity;
 
     /**
      * todayLong
      */
-    @Column(name ="today_long")
+    @Column(name = "today_long")
     private int todayLong;
 
     /**
      * todayShort
      */
-    @Column(name ="today_short")
+    @Column(name = "today_short")
     private int todayShort;
 
     /**
      * yesterdayLong
      */
-    @Column(name ="yesterday_long")
+    @Column(name = "yesterday_long")
     private int yesterdayLong;
 
     /**
      * yesterdayShort
      */
-    @Column(name ="yesterday_short")
+    @Column(name = "yesterday_short")
     private int yesterdayShort;
 
     /**
      * netPosition
      */
-    @Column(name ="net_position")
+    @Column(name = "net_position")
     private int netPosition;
 
     /**
      * aggregatedFee
      */
-    @Column(name ="aggregated_fee")
+    @Column(name = "aggregated_fee")
     private double aggregatedFee;
 
     /**
      * approved
      */
-    @Column(name ="approved")
+    @Column(name = "approved")
     private int approved;
 
     /**
      * turnover
      */
-    @Column(name ="turnover")
+    @Column(name = "turnover")
     private int turnover;
 
 }

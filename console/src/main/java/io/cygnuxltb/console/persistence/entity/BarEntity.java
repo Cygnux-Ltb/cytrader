@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
+ * K线表
  * Bar Entity of 1 minute
  * <p>
  *

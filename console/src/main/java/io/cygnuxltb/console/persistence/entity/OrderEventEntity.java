@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
+ * 订单事件表
  * Trade Entity 订单事件
  *
  * @author yellow013

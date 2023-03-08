@@ -13,7 +13,9 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * OrderExt Entity 扩展信息
+ * 订单扩展信息表
+ * <p>
+ * OrderExt Entity
  *
  * @author yellow013
  */

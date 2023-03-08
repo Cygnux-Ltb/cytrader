@@ -18,7 +18,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "cyg_account")
+@Table(name = "cyg_indicator")
 public final class IndicatorEntity {
 
     @Id

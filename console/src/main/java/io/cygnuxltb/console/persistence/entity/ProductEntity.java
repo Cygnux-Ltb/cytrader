@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
+ * 交易产品表
  * Product Entity
  *
  * @author yellow013

@@ -13,6 +13,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
+ * 订单基本信息表
  * Order Entity 基本信息
  *
  * @author yellow013
