@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="smart-doc">
+    <title>Cygnux-Console</title>
+    <link rel="stylesheet" href="font.css">
+    <link rel="stylesheet" href="AllInOne.css?v=1679824615184"/>
+    
+    <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
+        background: #f7f7f8;
+    }
+
+    .hljs {
+        padding: 0em;
+    }</style>
+    <script src="highlight.min.js"></script>
+    <script src="jquery.min.js"></script>
+</head>
+<body class="book toc2 toc-left">
+<div id="header"><h1>Cygnux-Console</h1>
+    <div id="toc" class="toc2">
+        <div id="book-search-input"><input id="search" type="text" placeholder="Type to search"></div>
+        <div id="toctitle"><span>API Reference</span></div>
+        <ul id="accordion" class="sectlevel1">
+            <li class=""><a class="dd" href="api.html#header">1.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="api.html#_1_1_返回全部Strategy">1.1.&nbsp;返回全部Strategy</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_2_使用StrategyId作为get params访问Strategy">1.2.&nbsp;使用StrategyId作为get params访问Strategy</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_3_使用StrategyId作为URI访问Param">1.3.&nbsp;使用StrategyId作为URI访问Param</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_4_Put StrategyParam URI is StrategyId">1.4.&nbsp;Put StrategyParam URI is StrategyId</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="BarController.html#header">2.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="BarController.html#_2_1_Get Bars">2.1.&nbsp;Get Bars</a>
+                    </li>
+
+                    <li><a
+                            href="BarController.html#_2_2_Put Bar">2.2.&nbsp;Put Bar</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="PnlController.html#header">3.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="PnlController.html#_3_1_查询PNL">3.1.&nbsp;查询PNL</a>
+                    </li>
+
+                    <li><a
+                            href="PnlController.html#_3_2_Put PnlDaily">3.2.&nbsp;Put PnlDaily</a>
+                    </li>
+
+                    <li><a
+                            href="PnlController.html#_3_3_查询结算PNL">3.3.&nbsp;查询结算PNL</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="CommandController.html#header">4.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="CommandController.html#_4_1_">4.1.&nbsp;</a>
+                    </li>
+
+                    <li><a
+                            href="CommandController.html#_4_2_">4.2.&nbsp;</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="ProductController.html#header">5.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="ProductController.html#_5_1_Get all product">5.1.&nbsp;Get all product</a>
+                    </li>
+
+                    <li><a
+                            href="ProductController.html#_5_2_">5.2.&nbsp;</a>
+                    </li>
+
+                    <li><a
+                            href="ProductController.html#_5_3_">5.3.&nbsp;</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="open"><a class="dd" href="StatusController.html#header">6.&nbsp;</a>
+                <ul class="sectlevel2" style="display: block">
+                    <li><a
+                            href="StatusController.html#_6_1_">6.1.&nbsp;</a>
+                    </li>
+
+                    <li><a
+                            href="StatusController.html#_6_2_">6.2.&nbsp;</a>
+                    </li>
+
+                    <li><a
+                            href="StatusController.html#_6_3_">6.3.&nbsp;</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="InstrumentController.html#header">7.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="InstrumentController.html#_7_1_Get Settlement Price">7.1.&nbsp;Get Settlement Price</a>
+                    </li>
+
+                    <li><a
+                            href="InstrumentController.html#_7_2_Get LastPrices">7.2.&nbsp;Get LastPrices</a>
+                    </li>
+
+                    <li><a
+                            href="InstrumentController.html#_7_3_Put LastPrice">7.3.&nbsp;Put LastPrice</a>
+                    </li>
+
+                    <li><a
+                            href="InstrumentController.html#_7_4_Get [TradableInstrument] for [symbol] and [tradingDay]">7.4.&nbsp;Get [TradableInstrument] for [symbol] and [tradingDay]</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="OrderController.html#header">8.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="OrderController.html#_8_1_查询Order">8.1.&nbsp;查询Order</a>
+                    </li>
+
+                    <li><a
+                            href="OrderController.html#_8_2_">8.2.&nbsp;</a>
+                    </li>
+
+                    <li><a
+                            href="OrderController.html#_8_3_">8.3.&nbsp;</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="content">
+    <div class="sect1"><h2 id="_"><a class="anchor" href="#_"></a><a class="link" href="#_">6.&nbsp;</a>
+    </h2>
+        <div class="sectionbody">
+            <div class="sect2"><h3 id="_6_1_">
+                <a class="anchor" href="#_6_1_"></a>
+                <a class="link" href="#_6_1_">6.1.&nbsp;</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/status/" class="bare">&nbsp;/status/</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;</p></div>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X GET -i /status/</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">productId</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyId</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">instrumentCode</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">tradable</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">[
+  {
+    "productId": 762,
+    "strategyId": 782,
+    "instrumentCode": "84389",
+    "tradable": true
+  }
+]</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_6_2_">
+                <a class="anchor" href="#_6_2_"></a>
+                <a class="link" href="#_6_2_">6.2.&nbsp;</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/status/command" class="bare">&nbsp;/status/command</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;PUT</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;</p></div>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X PUT -i /status/command</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_6_3_">
+                <a class="anchor" href="#_6_3_"></a>
+                <a class="link" href="#_6_3_">6.3.&nbsp;</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/status/update" class="bare">&nbsp;/status/update</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;PUT</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;</p></div>
+                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">productId</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X PUT -i /status/update --data 'productId=929'</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2023-03-26 18:56:55</span><span
+            class="footer-modification">Suggestions,contact,support and error reporting on<a
+            href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">&nbsp;Gitee</a>&nbsp;or<a
+            href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">&nbsp;Github</a></span></footer>
+</div>
+<script src="search.js?v=1679824615184"></script>
+<script>
+    $(function () {
+        const Accordion = function (el, multiple) {
+            this.el = el || {};
+            this.multiple = multiple || false;
+            const links = this.el.find('.dd');
+            links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown);
+        };
+        Accordion.prototype.dropdown = function (e) {
+            const $el = e.data.el;
+            const $this = $(this), $next = $this.next();
+            $next.slideToggle();
+            $this.parent().toggleClass('open');
+            if (!e.data.multiple) {
+                $el.find('.submenu').not($next).slideUp("20").parent().removeClass('open');
+            }
+        };
+        new Accordion($('#accordion'), false);
+        hljs.highlightAll()
+    });
+</script>
+</body>
+</html>
