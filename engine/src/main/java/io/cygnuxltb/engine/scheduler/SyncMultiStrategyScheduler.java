@@ -55,7 +55,7 @@ public final class SyncMultiStrategyScheduler<M extends MarketData> extends Abst
     }
 
     @Override
-    protected void close0() throws IOException {
+    protected void close0() {
         // TODO Auto-generated method stub
 
     }

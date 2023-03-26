@@ -1,6 +1,7 @@
 package io.cygnuxltb.engine.status;
 
-import static io.mercury.common.collections.MutableLists.newFastList;
+import io.mercury.common.collections.ImmutableMaps;
+import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -9,9 +10,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
-
-import io.mercury.common.collections.ImmutableMaps;
+import static io.mercury.common.collections.MutableLists.newFastList;
 
 public final class ApplicationStatus {
 

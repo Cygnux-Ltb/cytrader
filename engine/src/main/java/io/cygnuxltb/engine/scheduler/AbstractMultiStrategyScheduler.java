@@ -1,13 +1,5 @@
 package io.cygnuxltb.engine.scheduler;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
-
-import java.io.IOException;
-
-import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
-import org.eclipse.collections.api.set.MutableSet;
-import org.slf4j.Logger;
-
 import io.horizon.market.data.MarketData;
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.strategy.Strategy;
@@ -15,6 +7,13 @@ import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.collections.MutableSets;
 import io.mercury.common.log.Log4j2LoggerFactory;
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
+import org.eclipse.collections.api.set.MutableSet;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+
+import static org.apache.commons.io.IOUtils.closeQuietly;
 
 public abstract class AbstractMultiStrategyScheduler<M extends MarketData> implements MultiStrategyScheduler<M> {
 

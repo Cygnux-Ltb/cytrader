@@ -1,7 +1,9 @@
 package io.cygnuxltb.websocket;
 
-import io.javalin.Javalin;
 import io.mercury.common.log.Log4j2Configurator;
+
+import static spark.Spark.get;
+import static spark.Spark.port;
 
 public class WebsocketStartup {
 
@@ -12,9 +14,8 @@ public class WebsocketStartup {
     }
 
     public static void main(String[] args) {
-        var app = Javalin.create(/*config*/)
-                .get("/", ctx -> ctx.result("Hello World"))
-                .start(7070);
+        port(8089);
+        get("/hello", (req, res) -> "Hello World");
     }
 
 }

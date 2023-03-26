@@ -1,4 +1,4 @@
 package io.cygnuxltb.websocket;
 
-public class WsMessage {
+public final class WsMessage {
 }

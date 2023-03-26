@@ -91,28 +91,24 @@ public final class OrderKeeper implements Serializable {
      */
     private static void updateOrder(Order order) {
         switch (order.getStatus()) {
-            case Filled:
-            case Canceled:
-            case NewRejected:
-            case CancelRejected:
+            case Filled, Canceled, NewRejected, CancelRejected -> {
                 AllOrders.finishOrder(order);
                 getSubAccountOrderBook(order.getSubAccountId()).finishOrder(order);
                 getAccountOrderBook(order.getAccountId()).finishOrder(order);
                 getStrategyOrderBook(order.getStrategyId()).finishOrder(order);
                 getInstrumentOrderBook(order.getInstrument()).finishOrder(order);
-                break;
-            default:
-                log.info("Not need processed, strategyId==[{}], ordSysId==[{}], status==[{}]", order.getStrategyId(),
-                        order.getOrdSysId(), order.getStatus());
-                break;
+            }
+            default ->
+                    log.info("Not need processed, strategyId==[{}], ordSysId==[{}], status==[{}]", order.getStrategyId(),
+                            order.getOrdSysId(), order.getStatus());
         }
     }
 
     /**
      * 处理订单回报
      *
-     * @param report
-     * @return
+     * @param report TdxOrderReport
+     * @return ChildOrder
      */
     public static ChildOrder handleOrderReport(TdxOrderReport report) {
         log.info("Handle OrdReport, report -> {}", report);
@@ -136,16 +132,16 @@ public final class OrderKeeper implements Serializable {
     }
 
     /**
-     * @param ordSysId
-     * @return
+     * @param ordSysId long
+     * @return boolean
      */
     public static boolean isContainsOrder(long ordSysId) {
         return AllOrders.isContainsOrder(ordSysId);
     }
 
     /**
-     * @param ordSysId
-     * @return
+     * @param ordSysId long
+     * @return Order
      */
     @Nullable
     public static Order getOrder(long ordSysId) {
@@ -153,32 +149,32 @@ public final class OrderKeeper implements Serializable {
     }
 
     /**
-     * @param subAccountId
-     * @return
+     * @param subAccountId int
+     * @return OrderBook
      */
     public static OrderBook getSubAccountOrderBook(int subAccountId) {
         return SubAccountOrders.getIfAbsentPut(subAccountId, OrderBook::new);
     }
 
     /**
-     * @param accountId
-     * @return
+     * @param accountId int
+     * @return OrderBook
      */
     public static OrderBook getAccountOrderBook(int accountId) {
         return AccountOrders.getIfAbsentPut(accountId, OrderBook::new);
     }
 
     /**
-     * @param strategyId
-     * @return
+     * @param strategyId int
+     * @return OrderBook
      */
     public static OrderBook getStrategyOrderBook(int strategyId) {
         return StrategyOrders.getIfAbsentPut(strategyId, OrderBook::new);
     }
 
     /**
-     * @param instrument
-     * @return
+     * @param instrument Instrument
+     * @return OrderBook
      */
     public static OrderBook getInstrumentOrderBook(Instrument instrument) {
         return InstrumentOrders.getIfAbsentPut(instrument.getInstrumentId(), OrderBook::new);
@@ -191,23 +187,30 @@ public final class OrderKeeper implements Serializable {
     /**
      * 创建[ParentOrder], 并存入Keeper
      *
-     * @param ordSysIdAllocator
-     * @param strategyId
-     * @param subAccount
-     * @param account
-     * @param instrument
-     * @param offerQty
-     * @param offerPrice
-     * @param type
-     * @param direction
-     * @param action
-     * @return
+     * @param ordSysIdAllocator OrdSysIdAllocator
+     * @param strategyId        int
+     * @param subAccount        SubAccount
+     * @param account           Account
+     * @param instrument        Instrument
+     * @param offerQty          int
+     * @param offerPrice        double
+     * @param type              OrdType
+     * @param direction         TrdDirection
+     * @param action            TrdAction
+     * @return ChildOrder
      */
-    public static ChildOrder createAndSaveChildOrder(OrdSysIdAllocator ordSysIdAllocator, int strategyId,
-                                                     SubAccount subAccount, Account account, Instrument instrument, int offerQty, double offerPrice, OrdType type,
-                                                     TrdDirection direction, TrdAction action) {
-        ChildOrder childOrder = ChildOrder.newOrder(ordSysIdAllocator, strategyId, subAccount, account, instrument,
-                offerQty, offerPrice, type, direction, action);
+    public static ChildOrder createAndSaveChildOrder(OrdSysIdAllocator ordSysIdAllocator,
+                                                     int strategyId,
+                                                     SubAccount subAccount,
+                                                     Account account,
+                                                     Instrument instrument,
+                                                     int offerQty,
+                                                     double offerPrice,
+                                                     OrdType type,
+                                                     TrdDirection direction,
+                                                     TrdAction action) {
+        ChildOrder childOrder = ChildOrder.newOrder(ordSysIdAllocator, strategyId,
+                subAccount, account, instrument, offerQty, offerPrice, type, direction, action);
         putOrder(childOrder);
         return childOrder;
     }

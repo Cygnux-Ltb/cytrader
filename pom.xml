@@ -31,6 +31,7 @@
         <module>example</module>
         <module>websocket</module>
         <module>display</module>
+        <module>protocol</module>
     </modules>
 
     <properties>
@@ -38,7 +39,7 @@
         <java.version>17</java.version>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.source>17</maven.compiler.source>
-        <spring.boot.version>3.0.4</spring.boot.version>
+        <spring-boot.version>3.0.4</spring-boot.version>
         <mercury.version>1.0-SNAPSHOT</mercury.version>
         <horizon.version>1.0</horizon.version>
         <avro.version>1.11.1</avro.version>

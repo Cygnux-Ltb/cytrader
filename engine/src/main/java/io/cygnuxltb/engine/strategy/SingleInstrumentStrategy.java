@@ -95,10 +95,10 @@ public abstract class SingleInstrumentStrategy<M extends MarketData, K extends P
 //					event.getAdaptorId());
                 adaptor.queryPositions(queryPositionsReq.setExchangeCode(instrument.getExchangeCode())
                         .setInstrumentCode(instrument.getInstrumentCode()).setGenerateTime(EpochTime.getEpochMillis()));
-                log.info("{} :: Call queryPositions, adaptodId==[{}], account is default", getStrategyName(),
+                log.info("{} :: Call queryPositions, adaptorId==[{}], account is default", getStrategyName(),
                         event.getAdaptorId());
                 adaptor.queryBalance(queryBalanceReq.setGenerateTime(EpochTime.getEpochMillis()));
-                log.info("{} :: Call queryBalance, adaptodId==[{}], account is default", getStrategyName(),
+                log.info("{} :: Call queryBalance, adaptorId==[{}], account is default", getStrategyName(),
                         event.getAdaptorId());
             }
             default -> log.warn("{} unhandled event received {}", getStrategyName(), event);

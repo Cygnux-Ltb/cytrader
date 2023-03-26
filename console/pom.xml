@@ -20,7 +20,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring-boot.version}</version>
             </plugin>
             <plugin>
                 <groupId>com.github.shalousun</groupId>
@@ -73,7 +73,13 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
-            <version>4.3.8</version>
+            <version>4.4.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-core</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -105,29 +111,23 @@
             <version>3.1.0</version>
         </dependency>
 
+        <!-- YAML 1.1 parser and emitter for Java -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.0</version>
+        </dependency>
+
         <!-- Starter for using Log4j2 for logging. -->
         <!-- An alternative to spring-boot-starter-logging -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
-            <version>${spring.boot.version}</version>
+            <version>${spring-boot.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
                     <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- Starter for using JDBC with the HikariCP connection pool -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-            <version>${spring.boot.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                    <groupId>org.springframework.boot</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -137,7 +137,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.boot.version}</version>
+            <version>${spring-boot.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>ch.qos.logback</groupId>
@@ -151,38 +151,51 @@
                     <groupId>org.apache.logging.log4j</groupId>
                     <artifactId>log4j-to-slf4j</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- The AspectJ weaver applies aspects to Java classes.
+             It can be used as a Java agent in order to apply load-time weaving
+             (LTW) during class-loading and also contains the AspectJ runtime classes. -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.19</version>
         </dependency>
 
         <!-- Starter for using Spring Data JPA with Hibernate -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${spring.boot.version}</version>
+            <version>${spring-boot.version}</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>slf4j-api</artifactId>
                     <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>aspectjweaver</artifactId>
                     <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>jakarta.annotation-api</artifactId>
                     <groupId>jakarta.annotation</groupId>
+                    <artifactId>jakarta.annotation-api</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>jakarta.persistence-api</artifactId>
                     <groupId>jakarta.persistence</groupId>
+                    <artifactId>jakarta.persistence-api</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>jakarta.transaction-api</artifactId>
                     <groupId>jakarta.transaction</groupId>
+                    <artifactId>jakarta.transaction-api</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>jakarta.xml.bind-api</artifactId>
                     <groupId>jakarta.xml.bind</groupId>
+                    <artifactId>jakarta.xml.bind-api</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
