@@ -19,11 +19,6 @@
 
         <dependency>
             <groupId>io.mercury</groupId>
-            <artifactId>commons-injection</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.mercury</groupId>
             <artifactId>serialization-json</artifactId>
         </dependency>
 

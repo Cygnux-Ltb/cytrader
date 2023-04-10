@@ -27,11 +27,13 @@
 
     <modules>
         <module>console</module>
+        <module>display</module>
         <module>engine</module>
         <module>example</module>
         <module>websocket</module>
-        <module>display</module>
         <module>protocol</module>
+        <module>websocket</module>
+        <module>console-hc</module>
     </modules>
 
     <properties>
@@ -102,12 +104,6 @@
                 <artifactId>commons-concurrent</artifactId>
                 <version>${mercury.version}</version>
             </dependency>
-            <dependency>
-                <groupId>io.mercury</groupId>
-                <artifactId>commons-injection</artifactId>
-                <version>${mercury.version}</version>
-            </dependency>
-
             <!-- mercury persistence -->
             <dependency>
                 <groupId>io.mercury</groupId>
