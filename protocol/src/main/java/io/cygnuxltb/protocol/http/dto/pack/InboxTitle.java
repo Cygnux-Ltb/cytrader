@@ -1,12 +1,10 @@
-package io.cygnuxltb.console.service.dto.pack;
+package io.cygnuxltb.protocol.http.dto.pack;
 
 import io.mercury.common.codec.Envelope;
 import io.mercury.common.collections.ImmutableMaps;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.eclipse.collections.api.map.primitive.ImmutableIntObjectMap;
 
-@AllArgsConstructor
 public enum InboxTitle implements Envelope {
 
     Unknown(-1),
@@ -25,6 +23,10 @@ public enum InboxTitle implements Envelope {
 
     @Getter
     private final int code;
+
+    InboxTitle(int code) {
+        this.code = code;
+    }
 
     private static final ImmutableIntObjectMap<InboxTitle> Map =
             ImmutableMaps.toImmutableIntObjectMap(InboxTitle::getCode, InboxTitle.values());

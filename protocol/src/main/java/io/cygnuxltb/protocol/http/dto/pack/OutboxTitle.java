@@ -1,12 +1,10 @@
-package io.cygnuxltb.console.service.dto.pack;
-
-import static io.mercury.common.collections.MutableMaps.newUnifiedMap;
-
-import java.util.Map;
-
-import javax.annotation.Nonnull;
+package io.cygnuxltb.protocol.http.dto.pack;
 
 import io.mercury.common.codec.Envelope;
+import io.mercury.common.collections.MutableMaps;
+
+import javax.annotation.Nonnull;
+import java.util.Map;
 
 public enum OutboxTitle implements Envelope {
 
@@ -56,7 +54,7 @@ public enum OutboxTitle implements Envelope {
 
     ;
 
-    private static final Map<String, OutboxTitle> Map = newUnifiedMap();
+    private static final Map<String, OutboxTitle> Map = MutableMaps.newUnifiedMap();
 
     static {
         for (OutboxTitle value : OutboxTitle.values())

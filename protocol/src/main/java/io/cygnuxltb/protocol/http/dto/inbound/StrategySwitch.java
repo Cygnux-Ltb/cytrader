@@ -1,18 +1,12 @@
-package io.cygnuxltb.console.service.dto;
+package io.cygnuxltb.protocol.http.dto.inbound;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.Set;
 import java.util.TreeSet;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)

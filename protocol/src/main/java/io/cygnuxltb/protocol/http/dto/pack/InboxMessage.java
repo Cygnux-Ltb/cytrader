@@ -1,16 +1,12 @@
-package io.cygnuxltb.console.service.dto.pack;
+package io.cygnuxltb.protocol.http.dto.pack;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Data
-@Builder
+@Getter
+@Setter
 @Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
 public class InboxMessage {
 
     private String title;

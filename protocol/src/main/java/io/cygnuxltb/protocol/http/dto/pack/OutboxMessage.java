@@ -1,10 +1,8 @@
-package io.cygnuxltb.console.service.dto.pack;
+package io.cygnuxltb.protocol.http.dto.pack;
 
-import io.cygnuxltb.console.service.dto.StrategySwitch;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.cygnuxltb.protocol.http.dto.inbound.StrategySwitch;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
@@ -12,11 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Data
-@Builder
+@Getter
+@Setter
 @Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
 public class OutboxMessage<T> {
 
     private String title;
