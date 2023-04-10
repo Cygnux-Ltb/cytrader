@@ -15,14 +15,13 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
-    <build></build>
-
 
     <dependencies>
-
-
-
+        <dependency>
+            <groupId>io.cygnuxltb</groupId>
+            <artifactId>protocol</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 
