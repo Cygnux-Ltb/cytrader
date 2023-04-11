@@ -2,10 +2,10 @@ package io.cygnuxltb.console.service;
 
 import io.cygnuxltb.console.persistence.dao.BarDao;
 import io.cygnuxltb.console.persistence.entity.BarEntity;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
-import jakarta.annotation.Resource;
 import java.util.List;
 
 import static io.cygnuxltb.console.persistence.util.DaoExecutor.insertOrUpdate;
@@ -34,7 +34,8 @@ public class BarService {
      * @return List<BarEntity>
      */
     public List<BarEntity> getBars(@Nonnull String instrumentCode, int startTradingDay, int endTradingDay) {
-        return select(() -> barDao.queryBy(instrumentCode, startTradingDay, endTradingDay), BarEntity.class);
+        return select(() -> barDao.queryBy(instrumentCode, startTradingDay, endTradingDay),
+                BarEntity.class);
     }
 
     /**

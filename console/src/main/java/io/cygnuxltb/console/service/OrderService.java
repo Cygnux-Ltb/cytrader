@@ -54,7 +54,7 @@ public class OrderService {
      */
     public List<OrderEntity> getOrders(int strategyId, String investorId, String instrumentCode,
                                        int startTradingDay, int endTradingDay) {
-        var errMsg = "[OrderService::getOrders] param error";
+        String errMsg = "[OrderService::getOrders] param error";
         if (checkStrategyId(strategyId, log, errMsg))
             Throws.illegalArgument("strategyId");
         if (checkTradingDay(startTradingDay, endTradingDay, log, errMsg))
@@ -65,7 +65,6 @@ public class OrderService {
             Throws.illegalArgument("instrumentCode");
         return DaoExecutor.select(() -> dao.queryBy(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay),
                 OrderEntity.class);
-
     }
 
     /**
@@ -75,10 +74,11 @@ public class OrderService {
     public List<OrderEventEntity> getOrderEventsByOrderSysId(long ordSysId) {
         if (checkOrdSysId(ordSysId, log, "[OrderService::getOrderEventsByOrderSysId] param error"))
             return new FastList<>();
-        return exec(() -> eventDao.queryByOrdSysId(ordSysId), list -> {
-            log.info("[OrderEventDao::queryByOrdSysId] return {} row, ordSysId=={}", list.size(), ordSysId);
-            return list;
-        }, e -> log.error("[OrderEventDao::queryByOrdSysId] exception, ordSysId=={}", ordSysId, e));
+        return exec(() -> eventDao.queryByOrdSysId(ordSysId),
+                list -> {
+                    log.info("[OrderEventDao::queryByOrdSysId] return {} row, ordSysId=={}", list.size(), ordSysId);
+                    return list;
+                }, e -> log.error("[OrderEventDao::queryByOrdSysId] exception, ordSysId=={}", ordSysId, e));
     }
 
     /**
@@ -88,10 +88,11 @@ public class OrderService {
     public List<OrderEventEntity> getOrderEventsByTradingDay(int tradingDay) {
         if (checkTradingDay(tradingDay, log, "[OrderService::getOrderEventsByTradingDay] param error"))
             return new FastList<>();
-        return exec(() -> eventDao.queryByTradingDay(tradingDay), list -> {
-            log.info("[OrderEventDao::queryByTradingDay] return {} row, tradingDay=={}, ", list.size(), tradingDay);
-            return list;
-        }, e -> log.error("[OrderEventDao::queryByTradingDay] exception, tradingDay=={}", tradingDay, e));
+        return exec(() -> eventDao.queryByTradingDay(tradingDay),
+                list -> {
+                    log.info("[OrderEventDao::queryByTradingDay] return {} row, tradingDay=={}, ", list.size(), tradingDay);
+                    return list;
+                }, e -> log.error("[OrderEventDao::queryByTradingDay] exception, tradingDay=={}", tradingDay, e));
     }
 
     /**
@@ -99,13 +100,14 @@ public class OrderService {
      * @return boolean
      */
     public boolean putOrder(OrderEntity entity) {
-        return execBool(() -> dao.save(entity), o -> {
-            log.info("[OrderDao::save] success -> {}", entity);
-            return true;
-        }, e -> {
-            log.error("[OrderDao::save] failure -> {}", entity, e);
-            return false;
-        });
+        return execBool(() -> dao.save(entity),
+                o -> {
+                    log.info("[OrderDao::save] success -> {}", entity);
+                    return true;
+                }, e -> {
+                    log.error("[OrderDao::save] failure -> {}", entity, e);
+                    return false;
+                });
     }
 
     /**
@@ -113,13 +115,14 @@ public class OrderService {
      * @return boolean
      */
     public boolean putOrderEvent(OrderEventEntity entity) {
-        return execBool(() -> eventDao.save(entity), o -> {
-            log.info("[OrderEventDao::save] success -> {}", entity);
-            return true;
-        }, e -> {
-            log.error("[OrderEventDao::save] failure -> {}", entity, e);
-            return false;
-        });
+        return execBool(() -> eventDao.save(entity),
+                o -> {
+                    log.info("[OrderEventDao::save] success -> {}", entity);
+                    return true;
+                }, e -> {
+                    log.error("[OrderEventDao::save] failure -> {}", entity, e);
+                    return false;
+                });
     }
 
 }

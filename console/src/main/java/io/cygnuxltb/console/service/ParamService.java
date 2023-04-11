@@ -57,11 +57,7 @@ public class ParamService {
         if (validationStrategyParam(param)) {
             try {
                 ParamEntity saved = paramDao.save(param);
-                if (saved == null) {
-                    return 0;
-                } else {
-                    return 1;
-                }
+                return 1;
             } catch (Exception e) {
                 return -1;
             }

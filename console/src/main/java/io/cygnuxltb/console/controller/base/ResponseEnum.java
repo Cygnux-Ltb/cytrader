@@ -2,12 +2,14 @@ package io.cygnuxltb.console.controller.base;
 
 import java.util.Collection;
 
-public enum ResultEnum {
+public enum ResponseEnum {
 
     /* 成功状态码 */
     OK(200, "请求成功"),
 
     CREATED(201, "已创建"),
+
+    UPDATED(204, "已更新"),
 
 
     /* 错误状态码 */
@@ -32,17 +34,17 @@ public enum ResultEnum {
     private final String message;
 
 
-    ResultEnum(int code, String message) {
+    ResponseEnum(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public ResponseModel newResponse() {
-        return new ResponseModel(code, message, false, null);
+    public ResponseBean newResponse() {
+        return new ResponseBean(code, message, false, null);
     }
 
-    public ResponseModel newResponse(Object data) {
-        return new ResponseModel(code, message, data instanceof Collection, data);
+    public ResponseBean newResponse(Object data) {
+        return new ResponseBean(code, message, data instanceof Collection, data);
     }
 
 }

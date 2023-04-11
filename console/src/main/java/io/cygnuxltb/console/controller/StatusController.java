@@ -1,10 +1,11 @@
 package io.cygnuxltb.console.controller;
 
 import io.cygnuxltb.console.controller.base.ServiceException;
-import io.cygnuxltb.console.service.dto.StrategySwitch;
-import io.cygnuxltb.console.service.dto.pack.OutboxMessage;
 import io.cygnuxltb.console.controller.util.RequestUtil;
 import io.cygnuxltb.console.controller.util.ResponseUtil;
+import io.cygnuxltb.protocol.http.dto.inbound.StrategySwitch;
+import io.cygnuxltb.protocol.http.dto.pack.OutboxMessage;
+import io.cygnuxltb.protocol.http.dto.pack.OutboxTitle;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
@@ -27,7 +28,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.cygnuxltb.console.service.dto.pack.OutboxTitle.StrategySwitch;
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
 @RestController
@@ -71,11 +71,12 @@ public final class StatusController {
             }
         }
         // 按照CydId分别发送策略开关
-        for (Integer cygId : strategySwitchListMap.keySet()) {
+        for (Integer sysId : strategySwitchListMap.keySet()) {
             //Publisher<String, String> publisher = CommandDispatcher.GROUP_INSTANCE.getMember(cygId);
             String msg = JsonWrapper
-                    .toJson(new OutboxMessage<>(StrategySwitch.name(), strategySwitchListMap.get(cygId)));
-
+                    .toJson(new OutboxMessage<>()
+                            .setTitle(OutboxTitle.StrategySwitch.name())
+                            .setContent(strategySwitchListMap.get(sysId)));
             log.info("StrategySwitch : {}", msg);
             //publisher.publish(msg);
         }

@@ -1,13 +1,13 @@
 package io.cygnuxltb.console.controller;
 
-import io.cygnuxltb.console.controller.base.ServiceException;
-import io.cygnuxltb.console.persistence.entity.ParamEntity;
-import io.cygnuxltb.console.service.ParamService;
-import io.cygnuxltb.console.service.dto.pack.OutboxMessage;
-import io.cygnuxltb.console.service.dto.pack.OutboxTitle;
 import io.cygnuxltb.console.component.CommandDispatcher;
+import io.cygnuxltb.console.controller.base.ServiceException;
 import io.cygnuxltb.console.controller.util.RequestUtil;
 import io.cygnuxltb.console.controller.util.ResponseUtil;
+import io.cygnuxltb.console.persistence.entity.ParamEntity;
+import io.cygnuxltb.console.service.ParamService;
+import io.cygnuxltb.protocol.http.dto.pack.OutboxMessage;
+import io.cygnuxltb.protocol.http.dto.pack.OutboxTitle;
 import io.mercury.common.log.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import jakarta.annotation.Resource;
@@ -57,7 +57,9 @@ public final class CommandController {
         //dispatcher.sendCommand();
         //Publisher<String, String> publisher = GROUP_INSTANCE.getMember(cygId);
         // 转换为需要发送的发件箱消息
-        String msg = JsonWrapper.toJson(new OutboxMessage<>(OutboxTitle.UpdateStrategyParams.name(), strategyParams));
+        String msg = JsonWrapper.toJson(new OutboxMessage<>()
+                .setTitle(OutboxTitle.UpdateStrategyParams.name())
+                .setContent(strategyParams));
         // 发送消息
         //publisher.publish(msg);
         // 返回Put成功标识

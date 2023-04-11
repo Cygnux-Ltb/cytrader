@@ -119,6 +119,12 @@
             <version>2.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.cygnuxltb</groupId>
+            <artifactId>protocol</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- Starter for using Log4j2 for logging. -->
         <!-- An alternative to spring-boot-starter-logging -->
         <dependency>
@@ -129,6 +135,14 @@
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
                     <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j-core</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j-api</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -200,7 +214,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
     </dependencies>
 
 </project>

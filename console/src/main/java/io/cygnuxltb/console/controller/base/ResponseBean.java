@@ -1,6 +1,6 @@
 package io.cygnuxltb.console.controller.base;
 
-public record ResponseModel(
+public record ResponseBean(
         int code,
         String message,
         boolean isArray,

@@ -1,11 +1,11 @@
 package io.cygnuxltb.console.controller;
 
 import io.cygnuxltb.console.controller.base.ServiceException;
-import io.cygnuxltb.console.persistence.entity.ProductEntity;
-import io.cygnuxltb.console.service.ProductService;
-import io.cygnuxltb.console.service.dto.InitFinish;
 import io.cygnuxltb.console.controller.util.RequestUtil;
 import io.cygnuxltb.console.controller.util.ResponseUtil;
+import io.cygnuxltb.console.persistence.entity.ProductEntity;
+import io.cygnuxltb.console.service.ProductService;
+import io.cygnuxltb.protocol.http.dto.inbound.ControlCommand.InitFinish;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +52,7 @@ public final class ProductController {
         InitFinish initFinish = RequestUtil.bodyToObject(request, InitFinish.class);
         if (initFinish == null)
             return ResponseUtil.badRequest();
-        CygInfoInitFinishCacheMap.put(initFinish.getCygId(), initFinish);
+        CygInfoInitFinishCacheMap.put(initFinish.getSysId(), initFinish);
         return ResponseUtil.ok();
     }
 
@@ -62,7 +62,7 @@ public final class ProductController {
      */
     @GetMapping("/product/{productId}")
     public ResponseEntity<ProductEntity> getProduct(@PathVariable("productId") int productId) {
-        ProductEntity entity = service.getProduct(productId);
+        ProductEntity entity = service.getById(productId);
         return ResponseUtil.responseOf(entity);
     }
 

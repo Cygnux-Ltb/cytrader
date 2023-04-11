@@ -16,7 +16,8 @@ public class AccountService {
     private AccountDao accountDao;
 
     public List<AccountEntity> getAccount(int accountId) {
-        return select(() -> accountDao.queryByAccountId(accountId), AccountEntity.class);
+        return select(() -> accountDao.queryByAccountId(accountId),
+                AccountEntity.class);
     }
 
 }
