@@ -12,9 +12,9 @@ public enum OutboxTitle implements Envelope {
 
     TimeBars,
 
-    CygInfo,
+    SysInfo,
 
-    CygStrategy,
+    SysStrategy,
 
     Strategy,
 
@@ -30,7 +30,7 @@ public enum OutboxTitle implements Envelope {
 
     SymbolTradingPeriod,
 
-    TradeableInstrument,
+    TradableInstrument,
 
     InitFinish,
 
