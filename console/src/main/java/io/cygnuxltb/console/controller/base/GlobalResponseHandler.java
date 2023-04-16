@@ -31,16 +31,16 @@ public class ControllerResponseHandler implements ResponseBodyAdvice<Object> {
                                   @Nonnull Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   @Nonnull ServerHttpRequest request,
                                   @Nonnull ServerHttpResponse response) {
-        if (body == null)
-            return ResponseEnum.OK.newResponse();
-        else if (body instanceof Boolean b)
-            if (b)
-                return ResponseEnum.OK.newResponse();
-            else
-                return ResponseEnum.FORBIDDEN.newResponse();
-        else if (body instanceof Integer i)
-            return ResponseEnum.CREATED.newResponse(i);
-        return ResponseEnum.OK.newResponse(body);
+        if (body == null) {
+            return ResponseStatus.OK.newResponse();
+        } else if (body instanceof Boolean bool) {
+            return bool
+                    ? ResponseStatus.OK.newResponse()
+                    : ResponseStatus.FORBIDDEN.newResponse();
+        } else if (body instanceof Integer i) {
+            return ResponseStatus.CREATED.newResponse(i);
+        }
+        return ResponseStatus.OK.newResponse(body);
     }
 
 }

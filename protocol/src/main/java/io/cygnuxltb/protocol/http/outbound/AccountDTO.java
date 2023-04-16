@@ -4,18 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+
 /**
- * 交易账户表
- * Account Entity
+ * 交易账户
  *
  * @author yellow013
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-public final class IndicatorDTO {
-
-    private long uid;
+public final class AccountDTO {
 
     private int accountId;
 
@@ -28,4 +26,3 @@ public final class IndicatorDTO {
     private String adaptorType;
 
 }
-

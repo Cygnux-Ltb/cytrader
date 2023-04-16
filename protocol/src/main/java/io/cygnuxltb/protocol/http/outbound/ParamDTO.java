@@ -15,20 +15,39 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public final class ParamDTO {
 
-    private long uid;
-
+    /**
+     *
+     */
     private int strategyId;
 
+    /**
+     *
+     */
     private String strategyName;
 
+    /**
+     *
+     */
     private String ownerType;
 
+    /**
+     *
+     */
     private String owner;
 
+    /**
+     *
+     */
     private String paramName;
 
+    /**
+     *
+     */
     private String paramType;
 
+    /**
+     *
+     */
     private String paramValue;
 
 }

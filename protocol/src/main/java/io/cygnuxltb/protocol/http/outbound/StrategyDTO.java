@@ -15,8 +15,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public final class StrategyDTO {
 
-    private long uid;
-
     private int strategyId;
 
     private String strategyName;

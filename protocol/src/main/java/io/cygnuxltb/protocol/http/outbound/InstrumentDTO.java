@@ -15,8 +15,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public final class InstrumentDTO {
 
-    private long uid;
-
     /**
      * instrumentCode [*]
      */

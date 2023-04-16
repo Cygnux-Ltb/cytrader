@@ -18,8 +18,6 @@ import java.util.Date;
 @Accessors(chain = true)
 public final class OrderExtDTO {
 
-    private long uid;
-
     /**
      * tradingDay [*]
      */

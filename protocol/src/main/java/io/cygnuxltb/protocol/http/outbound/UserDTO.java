@@ -15,8 +15,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserDTO {
 
-    private long uid;
-
     private int userId;
 
     private String username;

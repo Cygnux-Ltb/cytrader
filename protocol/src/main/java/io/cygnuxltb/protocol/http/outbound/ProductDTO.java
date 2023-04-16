@@ -15,8 +15,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public final class ProductDTO {
 
-    private long uid;
-
     private int productId;
 
     private String productName;

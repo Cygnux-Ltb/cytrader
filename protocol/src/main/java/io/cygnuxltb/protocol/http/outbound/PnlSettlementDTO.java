@@ -5,8 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
- * 盈亏结算表
- * PnlSettlement Entity
+ * 盈亏结算
  *
  * @author yellow013
  */
@@ -15,51 +14,50 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public final class PnlSettlementDTO {
 
-    private long uid;
-
     /**
-     * strategyId
+     * 策略ID
      */
     private int strategyId;
 
     /**
-     * instrumentCode
+     * 交易标的代码
      */
     private String instrumentCode;
 
     /**
-     * tradingDay
+     * 交易日
      */
     private int tradingDay;
 
     /**
-     * position
+     * 仓位
      */
     private int position;
 
     /**
-     * pnlTotal
+     * 盈亏
      */
     private double pnlTotal;
 
     /**
-     * pnlNet
+     * 净盈亏
      */
     private double pnlNet;
 
     /**
-     * tradeCost
+     * 交易成本
      */
     private double tradeCost;
 
     /**
-     * exposure
+     * 风险暴露
      */
     private double exposure;
 
     /**
-     * approved
+     * 认证状态
      */
     private int approved;
+
 
 }
