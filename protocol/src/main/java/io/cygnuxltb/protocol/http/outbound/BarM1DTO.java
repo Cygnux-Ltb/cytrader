@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public final class M1BarDTO {
+public final class BarM1DTO {
 
     /**
      * 交易标的代码 [*]

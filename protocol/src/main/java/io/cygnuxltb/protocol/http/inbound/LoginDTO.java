@@ -1,4 +1,4 @@
-package io.cygnuxltb.protocol.http.dto.inbound;
+package io.cygnuxltb.protocol.http.inbound;
 
 public class LoginDTO {
 

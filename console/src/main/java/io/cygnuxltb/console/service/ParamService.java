@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyId;
-import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyName;
+import static io.cygnuxltb.console.controller.util.ControllerUtil.illegalStrategyId;
+import static io.cygnuxltb.console.controller.util.ControllerUtil.illegalStrategyName;
 import static io.cygnuxltb.console.persistence.util.DaoExecutor.insertOrUpdate;
 import static io.cygnuxltb.console.persistence.util.DaoExecutor.select;
 
@@ -160,9 +160,10 @@ public class ParamService {
      * @return List<ParamEntity>
      */
     public List<ParamEntity> getStrategyParams(int strategyId) {
-        if (checkStrategyId(strategyId, log, "query [ParamEntity] param error"))
+        if (illegalStrategyId(strategyId, log))
             Throws.illegalArgument("strategyId");
-        return select(() -> paramDao.queryByStrategyId(strategyId), ParamEntity.class);
+        return select(ParamEntity.class,
+                () -> paramDao.queryByStrategyId(strategyId));
     }
 
 
@@ -171,9 +172,9 @@ public class ParamService {
      * @return List<ParamEntity>
      */
     public List<ParamEntity> getStrategyParams(String strategyName) {
-        if (checkStrategyName(strategyName, log, "query [StrategyParamEntity] param error"))
-            Throws.illegalArgument("strategyId");
-        return select(() -> paramDao.queryByStrategyName(strategyName), ParamEntity.class);
+        if (illegalStrategyName(strategyName, log))
+            Throws.illegalArgument("query StrategyParams param error -> strategyId");
+        return select(ParamEntity.class, () -> paramDao.queryByStrategyName(strategyName));
     }
 
     /**

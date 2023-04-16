@@ -1,4 +1,4 @@
-package io.cygnuxltb.protocol.http.dto.outbound;
+package io.cygnuxltb.protocol.http.outbound;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 public final class OrderEventDTO {
 
     /**
-     * tradingDay [*]
+     * 交易日 [*]
      */
     private int tradingDay;
 
@@ -26,7 +26,7 @@ public final class OrderEventDTO {
     private int strategyId;
 
     /**
-     * instrumentCode [*]
+     * 交易标的代码 [*]
      */
     private String instrumentCode;
 

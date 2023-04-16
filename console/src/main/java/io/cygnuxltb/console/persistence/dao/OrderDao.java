@@ -24,22 +24,17 @@ public interface OrderDao extends JpaRepository<OrderEntity, Long> {
      * @param endTradingDay   int
      * @return List<OrderEntity>
      */
-    @Query("SELECT '*' FROM #{#entityName} e WHERE "
+    @Query("SELECT '*' FROM #{#entityName} e WHERE"
             + " e.strategyId = :strategyId "
-            + " AND "
-            + " e.investorId LIKE :investorId "
-            + " AND "
-            + " e.instrumentCode LIKE :instrumentCode% "
-            + " AND "
-            + " e.tradingDay >= :startTradingDay "
-            + " AND "
-            + " e.tradingDay <= :endTradingDay ")
-    List<OrderEntity> queryBy(
-            @Param("strategyId") int strategyId,
-            @Param("investorId") String investorId,
-            @Param("instrumentCode") String instrumentCode,
-            @Param("startTradingDay") int startTradingDay,
-            @Param("endTradingDay") int endTradingDay);
+            + " AND e.investorId = :investorId "
+            + " AND e.instrumentCode = :instrumentCode "
+            + " AND e.tradingDay >= :startTradingDay "
+            + " AND e.tradingDay <= :endTradingDay ")
+    List<OrderEntity> queryBy(@Param("strategyId") int strategyId,
+                              @Param("investorId") String investorId,
+                              @Param("instrumentCode") String instrumentCode,
+                              @Param("startTradingDay") int startTradingDay,
+                              @Param("endTradingDay") int endTradingDay);
 
     /**
      * @param ordSysId long

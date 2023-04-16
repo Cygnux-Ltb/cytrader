@@ -11,9 +11,6 @@ import javax.annotation.Nonnull;
 
 public final class OrderUpdater {
 
-    /**
-     * Logger
-     */
     private static final Logger log = Log4j2LoggerFactory.getLogger(OrderUpdater.class);
 
     /**

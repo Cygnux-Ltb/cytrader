@@ -1,7 +1,7 @@
 package io.cygnuxltb.console.component;
 
 import io.cygnuxltb.console.persistence.entity.ParamEntity;
-import io.cygnuxltb.console.service.dto.StrategySwitch;
+import io.cygnuxltb.protocol.http.inbound.StrategySwitch;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 

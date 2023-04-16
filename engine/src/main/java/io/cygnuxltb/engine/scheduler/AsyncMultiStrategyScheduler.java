@@ -20,9 +20,6 @@ import javax.annotation.Nonnull;
  */
 public final class AsyncMultiStrategyScheduler<M extends MarketData> extends AbstractMultiStrategyScheduler<M> {
 
-    /**
-     * Logger
-     */
     private static final Logger log = Log4j2LoggerFactory.getLogger(AsyncMultiStrategyScheduler.class);
 
     private final JctSingleConsumerQueue<QueueMsg> queue;

@@ -35,8 +35,8 @@
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="StrategyController.html#header">2.&nbsp;策略服务</a>
-                <ul class="sectlevel2" style="display: none">
+            <li class="open"><a class="dd" href="StrategyController.html#header">2.&nbsp;策略服务</a>
+                <ul class="sectlevel2" style="display: block">
                     <li><a
                             href="StrategyController.html#_2_1_返回全部Strategy">2.1.&nbsp;返回全部Strategy</a>
                     </li>
@@ -121,8 +121,8 @@
                     </li>
                 </ul>
             </li>
-            <li class="open"><a class="dd" href="InstrumentController.html#header">8.&nbsp;交易标的查询接口</a>
-                <ul class="sectlevel2" style="display: block">
+            <li class=""><a class="dd" href="InstrumentController.html#header">8.&nbsp;交易标的查询接口</a>
+                <ul class="sectlevel2" style="display: none">
                     <li><a
                             href="InstrumentController.html#_8_1_获取结算价格">8.1.&nbsp;获取结算价格</a>
                     </li>
@@ -159,58 +159,22 @@
     </div>
 </div>
 <div id="content">
-    <div class="sect1"><h2 id="_交易标的查询接口"><a class="anchor" href="#_交易标的查询接口"></a><a class="link" href="#_交易标的查询接口">8.&nbsp;交易标的查询接口</a>
+    <div class="sect1"><h2 id="_策略服务"><a class="anchor" href="#_策略服务"></a><a class="link" href="#_策略服务">2.&nbsp;策略服务</a>
     </h2>
         <div class="sectionbody">
-            <div class="sect2"><h3 id="_8_1_获取结算价格">
-                <a class="anchor" href="#_8_1_获取结算价格"></a>
-                <a class="link" href="#_8_1_获取结算价格">8.1.&nbsp;获取结算价格</a>
+            <div class="sect2"><h3 id="_2_1_返回全部Strategy">
+                <a class="anchor" href="#_2_1_返回全部Strategy"></a>
+                <a class="link" href="#_2_1_返回全部Strategy">2.1.&nbsp;返回全部Strategy</a>
             </h3>
-                <div class="paragraph"><p><strong>URL:</strong><a href="/instrument/settlement" class="bare">&nbsp;/instrument/settlement</a>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/strategy" class="bare">&nbsp;/strategy</a>
                 </p></div>
                 <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
                 <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>&nbsp;获取结算价格</p></div>
-                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
-                <table class="tableblock frame-all grid-all spread">
-                    <colgroup>
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th class="tableblock halign-left valign-top">Parameter</th>
-                        <th class="tableblock halign-left valign-top">Type</th>
-                        <th class="tableblock halign-left valign-top">Description</th>
-                        <th class="tableblock halign-left valign-top">Required</th>
-                        <th class="tableblock halign-left valign-top">Since</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">tradingDay</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">    int</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">instrumentCode</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;返回全部Strategy</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /instrument/settlement?tradingDay=942&instrumentCode=29541 --data '&942&29541'</code></pre>
+                        <pre><code class="bash">curl -X GET -i /strategy</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -231,127 +195,36 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">instrumentCode</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">交易标的代码 [*]</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">uid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">tradingDay</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyId</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">交易日 [*]</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">closePrice</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">收盘价</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">openPrice</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">开盘价</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">settlementPrice</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">结算价</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
-                <div class="listingblock">
-                    <div class="content">
-                        <pre><code class="json">[
-  {
-    "instrumentCode": "29541",
-    "tradingDay": 435,
-    "closePrice": 91.47,
-    "openPrice": 96.46,
-    "settlementPrice": 51.43
-  }
-]</code></pre>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sect2"><h3 id="_8_2_获取最新价格">
-                <a class="anchor" href="#_8_2_获取最新价格"></a>
-                <a class="link" href="#_8_2_获取最新价格">8.2.&nbsp;获取最新价格</a>
-            </h3>
-                <div class="paragraph"><p><strong>URL:</strong><a href="/instrument/last" class="bare">&nbsp;/instrument/last</a>
-                </p></div>
-                <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
-                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>&nbsp;获取最新价格</p></div>
-                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
-                <table class="tableblock frame-all grid-all spread">
-                    <colgroup>
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th class="tableblock halign-left valign-top">Parameter</th>
-                        <th class="tableblock halign-left valign-top">Type</th>
-                        <th class="tableblock halign-left valign-top">Description</th>
-                        <th class="tableblock halign-left valign-top">Required</th>
-                        <th class="tableblock halign-left valign-top">Since</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">instrumentCodes</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
-                <div class="listingblock">
-                    <div class="content">
-                        <pre><code class="bash">curl -X GET -i /instrument/last?instrumentCodes=gh9kcz --data '&gh9kcz'</code></pre>
-                    </div>
-                </div>
-                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
-                <table class="tableblock frame-all grid-all spread">
-                    <colgroup>
-                        <col style="width: 25%;">
-                        <col style="width: 25%;">
-                        <col style="width: 25%;">
-                        <col style="width: 25%;">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th class="tableblock halign-left valign-top">Field</th>
-                        <th class="tableblock halign-left valign-top">Type</th>
-                        <th class="tableblock halign-left valign-top">Description</th>
-                        <th class="tableblock halign-left valign-top">Since</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">instrumentCode</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyName</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">lastPrice</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyOwner</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyInfo</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
@@ -362,46 +235,26 @@
                     <div class="content">
                         <pre><code class="json">[
   {
-    "instrumentCode": "29541",
-    "lastPrice": 9.43
+    "uid": 946,
+    "strategyId": 624,
+    "strategyName": "damien.swift",
+    "strategyOwner": "8s6qnx",
+    "strategyInfo": "6eyinz"
   }
 ]</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="sect2"><h3 id="_8_3_更新最新价格">
-                <a class="anchor" href="#_8_3_更新最新价格"></a>
-                <a class="link" href="#_8_3_更新最新价格">8.3.&nbsp;更新最新价格</a>
+            <div class="sect2"><h3 id="_2_2_使用StrategyId作为get params访问Strategy">
+                <a class="anchor" href="#_2_2_使用StrategyId作为get params访问Strategy"></a>
+                <a class="link" href="#_2_2_使用StrategyId作为get params访问Strategy">2.2.&nbsp;使用StrategyId作为get params访问Strategy</a>
             </h3>
-                <div class="paragraph"><p><strong>URL:</strong><a href="/instrument/last" class="bare">&nbsp;/instrument/last</a>
-                </p></div>
-                <div class="paragraph"><p><strong>Type:</strong>&nbsp;PUT</p></div>
-                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>&nbsp;更新最新价格</p></div>
-                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
-                <div class="listingblock">
-                    <div class="content">
-                        <pre><code class="bash">curl -X PUT -i /instrument/last</code></pre>
-                    </div>
-                </div>
-                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
-                <div class="listingblock">
-                    <div class="content">
-                        <pre><code class="json">OK</code></pre>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sect2"><h3 id="_8_4_获取可交易的标的">
-                <a class="anchor" href="#_8_4_获取可交易的标的"></a>
-                <a class="link" href="#_8_4_获取可交易的标的">8.4.&nbsp;获取可交易的标的</a>
-            </h3>
-                <div class="paragraph"><p><strong>URL:</strong><a href="/instrument/tradable/{tradingDay}/{symbol}" class="bare">&nbsp;/instrument/tradable/{tradingDay}/{symbol}</a>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/strategy/{strategyId}" class="bare">&nbsp;/strategy/{strategyId}</a>
                 </p></div>
                 <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
                 <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>&nbsp;获取可交易的标的</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;使用StrategyId作为get params访问Strategy</p></div>
                 <div class="paragraph"><p><strong>Path-parameters:</strong></p></div>
                 <table class="tableblock frame-all grid-all spread">
                     <colgroup>
@@ -422,17 +275,9 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">tradingDay</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyId</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">symbol</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">    String</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
@@ -441,13 +286,259 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /instrument/tradable/553/9bliwv</code></pre>
+                        <pre><code class="bash">curl -X GET -i /strategy/931</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">uid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyId</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyName</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyOwner</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyInfo</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "uid": 600,
+  "strategyId": 675,
+  "strategyName": "damien.swift",
+  "strategyOwner": "tohg34",
+  "strategyInfo": "xz8f3f"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_2_3_使用StrategyId作为URI访问Param">
+                <a class="anchor" href="#_2_3_使用StrategyId作为URI访问Param"></a>
+                <a class="link" href="#_2_3_使用StrategyId作为URI访问Param">2.3.&nbsp;使用StrategyId作为URI访问Param</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/strategy/{strategyId}/param" class="bare">&nbsp;/strategy/{strategyId}/param</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;使用StrategyId作为URI访问Param</p></div>
+                <div class="paragraph"><p><strong>Path-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyId</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X GET -i /strategy/613/param</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">uid</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyId</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyName</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">ownerType</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">owner</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">paramName</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">paramType</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">paramValue</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">[
+  {
+    "uid": 152,
+    "strategyId": 916,
+    "strategyName": "damien.swift",
+    "ownerType": "ch78mw",
+    "owner": "1ry3jj",
+    "paramName": "damien.swift",
+    "paramType": "c1dyuc",
+    "paramValue": "sx013s"
+  }
+]</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_2_4_Put StrategyParam URI is StrategyId">
+                <a class="anchor" href="#_2_4_Put StrategyParam URI is StrategyId"></a>
+                <a class="link" href="#_2_4_Put StrategyParam URI is StrategyId">2.4.&nbsp;Put StrategyParam URI is StrategyId</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/strategy/{strategyId}/param" class="bare">&nbsp;/strategy/{strategyId}/param</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;PUT</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;APPLICATION_JSON_UTF8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;Put StrategyParam URI is StrategyId</p></div>
+                <div class="paragraph"><p><strong>Path-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">strategyId</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /strategy/660/param</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="json">OK</code></pre>
+                        <pre><code class="json">true</code></pre>
                     </div>
                 </div>
             </div>

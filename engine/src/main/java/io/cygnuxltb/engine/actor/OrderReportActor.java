@@ -6,7 +6,8 @@ import io.mercury.actors.def.BaseActorT1;
 
 import javax.annotation.Nonnull;
 
-public class OrderReportActor extends BaseActorT1<TdxOrderReport> implements OrderReportHandler {
+public class OrderReportActor extends BaseActorT1<TdxOrderReport>
+        implements OrderReportHandler {
 
     @Override
     protected Class<TdxOrderReport> eventType() {

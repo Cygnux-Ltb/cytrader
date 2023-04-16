@@ -1,6 +1,6 @@
 
-# 
-## Get Settlement Price
+# 交易标的查询接口
+## 获取结算价格
 
 **URL:** `/instrument/settlement`
 
@@ -9,7 +9,7 @@
 
 **Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
 
-**Description:** Get Settlement Price
+**Description:** 获取结算价格
 
 
 
@@ -17,50 +17,48 @@
 
 | Parameter | Type | Required | Description | Since |
 |-----------|------|----------|-------------|-------|
-|instrumentCode|string|true|String|-|
 |tradingDay|int32|true|    int|-|
+|instrumentCode|string|true|String|-|
 
 
 **Request-example:**
 ```
-curl -X GET -i /instrument/settlement?instrumentCode=84389&tradingDay=628 --data '&84389&628'
+curl -X GET -i /instrument/settlement?tradingDay=78&instrumentCode=29541 --data '&78&29541'
 ```
 
 **Response-fields:**
 
 | Field | Type | Description | Since |
 |-------|------|-------------|-------|
-|uid|int64|No comments found.|-|
-|instrumentCode|string|instrumentCode|-|
-|tradingDay|int32|tradingDay [*]|-|
-|lastPrice|double|lastPrice|-|
-|openPrice|double|openPrice|-|
-|settlementPrice|double|settlementPrice|-|
+|instrumentCode|string|交易标的代码 [*]|-|
+|tradingDay|int32|交易日 [*]|-|
+|closePrice|double|收盘价|-|
+|openPrice|double|开盘价|-|
+|settlementPrice|double|结算价|-|
 
 **Response-example:**
 ```
 [
   {
-    "uid": 277,
-    "instrumentCode": "84389",
-    "tradingDay": 67,
-    "lastPrice": 92.26,
-    "openPrice": 79.86,
-    "settlementPrice": 58.71
+    "instrumentCode": "29541",
+    "tradingDay": 221,
+    "closePrice": 33.74,
+    "openPrice": 26.15,
+    "settlementPrice": 53.77
   }
 ]
 ```
 
-## Get LastPrices
+## 获取最新价格
 
-**URL:** `/instrument/last_price`
+**URL:** `/instrument/last`
 
 **Type:** `GET`
 
 
 **Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
 
-**Description:** Get LastPrices
+**Description:** 获取最新价格
 
 
 
@@ -73,7 +71,7 @@ curl -X GET -i /instrument/settlement?instrumentCode=84389&tradingDay=628 --data
 
 **Request-example:**
 ```
-curl -X GET -i /instrument/last_price?instrumentCodes=344lxy --data '&344lxy'
+curl -X GET -i /instrument/last?instrumentCodes=onxu2t --data '&onxu2t'
 ```
 
 **Response-fields:**
@@ -81,28 +79,28 @@ curl -X GET -i /instrument/last_price?instrumentCodes=344lxy --data '&344lxy'
 | Field | Type | Description | Since |
 |-------|------|-------------|-------|
 |instrumentCode|string|No comments found.|-|
-|price|double|No comments found.|-|
+|lastPrice|double|No comments found.|-|
 
 **Response-example:**
 ```
 [
   {
-    "instrumentCode": "84389",
-    "price": 37.02
+    "instrumentCode": "29541",
+    "lastPrice": 47.62
   }
 ]
 ```
 
-## Put LastPrice
+## 更新最新价格
 
-**URL:** `/instrument/last_price`
+**URL:** `/instrument/last`
 
 **Type:** `PUT`
 
 
 **Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
 
-**Description:** Put LastPrice
+**Description:** 更新最新价格
 
 
 
@@ -110,21 +108,15 @@ curl -X GET -i /instrument/last_price?instrumentCodes=344lxy --data '&344lxy'
 
 **Request-example:**
 ```
-curl -X PUT -i /instrument/last_price
+curl -X PUT -i /instrument/last
 ```
-
-**Response-fields:**
-
-| Field | Type | Description | Since |
-|-------|------|-------------|-------|
-|any object|object|any object.|-|
 
 **Response-example:**
 ```
-{}
+OK
 ```
 
-## Get [TradableInstrument] for [symbol] and [tradingDay]
+## 获取可交易的标的
 
 **URL:** `/instrument/tradable/{tradingDay}/{symbol}`
 
@@ -133,7 +125,7 @@ curl -X PUT -i /instrument/last_price
 
 **Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
 
-**Description:** Get [TradableInstrument] for [symbol] and [tradingDay]
+**Description:** 获取可交易的标的
 
 
 **Path-parameters:**
@@ -147,17 +139,11 @@ curl -X PUT -i /instrument/last_price
 
 **Request-example:**
 ```
-curl -X GET -i /instrument/tradable/716/lq7qrj
+curl -X GET -i /instrument/tradable/71/yaeenh
 ```
-
-**Response-fields:**
-
-| Field | Type | Description | Since |
-|-------|------|-------------|-------|
-|any object|object|any object.|-|
 
 **Response-example:**
 ```
-{}
+OK
 ```
 

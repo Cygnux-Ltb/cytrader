@@ -1,15 +1,15 @@
 
-# 
-## 
+# 交易系统状态服务接口
+## 获取全部策略状态
 
-**URL:** `/status/`
+**URL:** `/status`
 
 **Type:** `GET`
 
 
 **Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
 
-**Description:** 
+**Description:** 获取全部策略状态
 
 
 
@@ -17,7 +17,7 @@
 
 **Request-example:**
 ```
-curl -X GET -i /status/
+curl -X GET -i /status
 ```
 
 **Response-fields:**
@@ -33,24 +33,24 @@ curl -X GET -i /status/
 ```
 [
   {
-    "productId": 957,
-    "strategyId": 15,
-    "instrumentCode": "84389",
+    "productId": 782,
+    "strategyId": 274,
+    "instrumentCode": "29541",
     "tradable": true
   }
 ]
 ```
 
-## 
+## 发送状态指令
 
 **URL:** `/status/command`
 
 **Type:** `PUT`
 
 
-**Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
+**Content-Type:** `APPLICATION_JSON_UTF8`
 
-**Description:** 
+**Description:** 发送状态指令
 
 
 
@@ -58,15 +58,15 @@ curl -X GET -i /status/
 
 **Request-example:**
 ```
-curl -X PUT -i /status/command
+curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /status/command
 ```
 
 **Response-example:**
 ```
-{}
+OK
 ```
 
-## 
+## 更新状态
 
 **URL:** `/status/update`
 
@@ -75,7 +75,7 @@ curl -X PUT -i /status/command
 
 **Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
 
-**Description:** 
+**Description:** 更新状态
 
 
 
@@ -88,11 +88,11 @@ curl -X PUT -i /status/command
 
 **Request-example:**
 ```
-curl -X PUT -i /status/update --data 'productId=87'
+curl -X PUT -i /status/update --data 'productId=580'
 ```
 
 **Response-example:**
 ```
-{}
+OK
 ```
 

@@ -4,49 +4,82 @@ import io.cygnuxltb.console.persistence.dao.InstrumentDao;
 import io.cygnuxltb.console.persistence.dao.InstrumentSettlementDao;
 import io.cygnuxltb.console.persistence.entity.InstrumentEntity;
 import io.cygnuxltb.console.persistence.entity.InstrumentSettlementEntity;
+import io.cygnuxltb.console.service.bean.OutboundConverter;
+import io.cygnuxltb.protocol.http.inbound.InstrumentPrice;
+import io.cygnuxltb.protocol.http.outbound.InstrumentDTO;
+import io.cygnuxltb.protocol.http.outbound.InstrumentSettlementDTO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import static io.cygnuxltb.console.persistence.util.DaoExecutor.insertOrUpdate;
 import static io.cygnuxltb.console.persistence.util.DaoExecutor.select;
+import static java.util.Arrays.stream;
 
 @Service
 public final class InstrumentService {
 
     @Resource
-    private InstrumentDao instrumentDao;
+    private InstrumentDao dao;
 
     @Resource
-    private InstrumentSettlementDao instrumentSettlementDao;
+    private InstrumentSettlementDao settlementDao;
+
+    // LastPrices Cache
+    private final ConcurrentHashMap<String, InstrumentPrice> lastPriceMap = new ConcurrentHashMap<>();
+
+    private InstrumentPrice getInstrumentPrice(String instrumentCode) {
+        return lastPriceMap.putIfAbsent(instrumentCode, new InstrumentPrice(instrumentCode));
+    }
 
     /**
      * @param instrumentCode String
      * @return List<InstrumentEntity>
      */
-    public List<InstrumentEntity> getInstrument(@Nonnull String instrumentCode) {
-        return select(() -> instrumentDao.queryBy(instrumentCode),
-                InstrumentEntity.class);
+    public List<InstrumentDTO> getInstrument(@Nonnull String instrumentCode) {
+        return select(InstrumentEntity.class,
+                () -> dao.queryBy(instrumentCode))
+                .stream()
+                .map(OutboundConverter::toInstrumentDTO)
+                .collect(Collectors.toList());
     }
 
     /**
-     * @param instrumentCode String
      * @param tradingDay     int
+     * @param instrumentCode String
      * @return List<InstrumentSettlementEntity>
      */
-    public List<InstrumentSettlementEntity> getInstrumentSettlement(@Nonnull String instrumentCode, int tradingDay) {
-        return select(() -> instrumentSettlementDao.queryByInstrumentCodeAndTradingDay(instrumentCode, tradingDay),
-                InstrumentSettlementEntity.class);
+    public List<InstrumentSettlementDTO> getInstrumentSettlement(int tradingDay,
+                                                                 @Nonnull String instrumentCode) {
+        return select(InstrumentSettlementEntity.class,
+                () -> settlementDao
+                        .queryByInstrumentCodeAndTradingDay(instrumentCode, tradingDay))
+                .stream()
+                .map(OutboundConverter::toInstrumentSettlementDTO)
+                .collect(Collectors.toList());
     }
+
+    /**
+     * @param instrumentCodes String[]
+     * @return List<InstrumentPrice>
+     */
+    public List<InstrumentPrice> getLastPrice(String... instrumentCodes) {
+        return stream(instrumentCodes)
+                .map(this::getInstrumentPrice)
+                .collect(Collectors.toList());
+    }
+
 
     /**
      * @param entity InstrumentEntity
      * @return boolean
      */
     public boolean putInstrument(@Nonnull InstrumentEntity entity) {
-        return insertOrUpdate(instrumentDao, entity);
+        return insertOrUpdate(dao, entity);
     }
 
     /**
@@ -54,7 +87,21 @@ public final class InstrumentService {
      * @return boolean
      */
     public boolean putInstrumentStatic(@Nonnull InstrumentSettlementEntity entity) {
-        return insertOrUpdate(instrumentSettlementDao, entity);
+        return insertOrUpdate(settlementDao, entity);
+    }
+
+    /**
+     * @param instrumentCode String
+     * @param price          double
+     * @return boolean
+     */
+    public boolean putLastPrice(@Nonnull String instrumentCode, double price) {
+        try {
+            getInstrumentPrice(instrumentCode).setLastPrice(price);
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
     }
 
 }

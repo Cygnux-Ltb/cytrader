@@ -1,4 +1,4 @@
-package io.cygnuxltb.protocol.http.dto.outbound;
+package io.cygnuxltb.protocol.http.outbound;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,27 +16,27 @@ import lombok.experimental.Accessors;
 public final class InstrumentSettlementDTO {
 
     /**
-     * instrumentCode
+     * 交易标的代码 [*]
      */
     private String instrumentCode;
 
     /**
-     * tradingDay [*]
+     * 交易日 [*]
      */
     private int tradingDay;
 
     /**
-     * lastPrice
+     * 收盘价
      */
-    private double lastPrice;
+    private double closePrice;
 
     /**
-     * openPrice
+     * 开盘价
      */
     private double openPrice;
 
     /**
-     * settlementPrice
+     * 结算价
      */
     private double settlementPrice;
 

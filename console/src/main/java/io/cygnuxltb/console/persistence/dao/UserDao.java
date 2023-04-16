@@ -1,6 +1,7 @@
 package io.cygnuxltb.console.persistence.dao;
 
 import io.cygnuxltb.console.persistence.entity.BarEntity;
+import io.cygnuxltb.console.persistence.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,21 +10,21 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Bar DAO
+ * User DAO
  *
  * @author yellow013
  */
 @Repository
-public interface BarDao extends JpaRepository<BarEntity, Long> {
+public interface UserDao extends JpaRepository<UserEntity, Long> {
 
     @Query("SELECT '*' FROM #{#entityName} e WHERE "
-            + " e.instrumentCode LIKE :instrumentCode% "
-            + " AND "
-            + " e.tradingDay >= :startTradingDay "
-            + " AND "
-            + " e.tradingDay <= :endTradingDay ")
-    List<BarEntity> queryBy(@Param("instrumentCode") String instrumentCode,
-                            @Param("startTradingDay") int startTradingDay,
-                            @Param("endTradingDay") int endTradingDay);
+            + " e.username = :username "
+            + " OR e.email = :email "
+            + " OR e.phone = :phone "
+            + " AND e.password = :password")
+    List<BarEntity> queryBy(@Param("username") String username,
+                            @Param("email") String email,
+                            @Param("phone") String phone,
+                            @Param("password") String password);
 
 }

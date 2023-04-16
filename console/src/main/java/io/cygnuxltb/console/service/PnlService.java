@@ -27,8 +27,8 @@ public final class PnlService {
      * @return List<PnlEntity>
      */
     public List<PnlEntity> getPnl(int strategyId, int tradingDay) {
-        return select(() -> pnlDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay),
-                PnlEntity.class);
+        return select(PnlEntity.class,
+                () -> pnlDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay));
     }
 
     /**
@@ -37,8 +37,8 @@ public final class PnlService {
      * @return List<PnlSettlementEntity>
      */
     public List<PnlSettlementEntity> getPnlSettlement(int strategyId, int tradingDay) {
-        return select(() -> pnlSettlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay),
-                PnlSettlementEntity.class);
+        return select(PnlSettlementEntity.class,
+                () -> pnlSettlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay));
     }
 
     /**

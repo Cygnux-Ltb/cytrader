@@ -1,14 +1,22 @@
 package io.cygnuxltb.ui;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame implements ActionListener {
 
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JButton loginButton;
+    private final JTextField usernameField;
+
+    private final JPasswordField passwordField;
 
     public LoginFrame() {
         super("Login");
@@ -19,7 +27,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         JLabel passwordLabel = new JLabel("Password:");
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
-        loginButton = new JButton("Login");
+        JButton loginButton = new JButton("Login");
 
         // 添加事件监听器
         loginButton.addActionListener(this);

@@ -1,4 +1,4 @@
-package io.cygnuxltb.protocol.http.dto.outbound;
+package io.cygnuxltb.protocol.http.outbound;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 订单基本信息表
  * Order Entity 基本信息
- *
+ * [*] 为不可为空字段
  * @author yellow013
  */
 @Getter
@@ -18,7 +18,7 @@ import java.util.Date;
 public final class OrderDTO {
 
     /**
-     * tradingDay [*]
+     * 交易日 [*]
      */
     private int tradingDay;
 
@@ -28,7 +28,7 @@ public final class OrderDTO {
     private int strategyId;
 
     /**
-     * instrumentCode [*]
+     * 交易标的代码 [*]
      */
     private String instrumentCode;
 

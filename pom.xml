@@ -27,13 +27,12 @@
 
     <modules>
         <module>console</module>
+        <module>console-hc</module>
         <module>display</module>
         <module>engine</module>
         <module>example</module>
-        <module>websocket</module>
         <module>protocol</module>
         <module>websocket</module>
-        <module>console-hc</module>
     </modules>
 
     <properties>
@@ -41,7 +40,7 @@
         <java.version>17</java.version>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.source>17</maven.compiler.source>
-        <spring-boot.version>3.0.4</spring-boot.version>
+        <spring-boot.version>3.0.5</spring-boot.version>
         <mercury.version>1.0-SNAPSHOT</mercury.version>
         <horizon.version>1.0</horizon.version>
         <avro.version>1.11.1</avro.version>
@@ -53,7 +52,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.10.1</version>
+                    <version>3.11.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -63,6 +62,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <compilerArgument>-parameters</compilerArgument>
+                    <compilerArgs>--enable-preview</compilerArgs>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <release>${java.version}</release>

@@ -1,3 +1,5 @@
 {
-  "outPath": "src/main/resources/static/doc"
+  "outPath": "src/main/resources/static/doc",
+  "showAuthor": false,
+  "inlineEnum":true
 }

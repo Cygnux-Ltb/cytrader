@@ -1,5 +1,5 @@
 
-# 
+# PNL服务接口
 ## 查询PNL
 
 **URL:** `/pnl/{tradingDay}`
@@ -27,7 +27,7 @@
 
 **Request-example:**
 ```
-curl -X GET -i /pnl/605?strategyId=415 --data '&415'
+curl -X GET -i /pnl/705?strategyId=416 --data '&416'
 ```
 
 **Response-fields:**
@@ -55,34 +55,34 @@ curl -X GET -i /pnl/605?strategyId=415 --data '&415'
 ```
 [
   {
-    "uid": 311,
-    "strategyId": 234,
-    "instrumentCode": "84389",
-    "tradingDay": 147,
-    "avgBuyPrice": 69.75,
-    "avgSellPrice": 36.55,
-    "buyQuantity": 68,
-    "sellQuantity": 889,
-    "todayLong": 57,
-    "todayShort": 863,
-    "yesterdayLong": 527,
-    "yesterdayShort": 59,
-    "netPosition": 60,
-    "aggregatedFee": 27.44,
-    "approved": 878,
-    "turnover": 473
+    "uid": 765,
+    "strategyId": 723,
+    "instrumentCode": "29541",
+    "tradingDay": 963,
+    "avgBuyPrice": 45.23,
+    "avgSellPrice": 9.60,
+    "buyQuantity": 46,
+    "sellQuantity": 113,
+    "todayLong": 513,
+    "todayShort": 315,
+    "yesterdayLong": 667,
+    "yesterdayShort": 471,
+    "netPosition": 610,
+    "aggregatedFee": 25.68,
+    "approved": 333,
+    "turnover": 286
   }
 ]
 ```
 
 ## Put PnlDaily
 
-**URL:** `/pnl/`
+**URL:** `/pnl`
 
 **Type:** `PUT`
 
 
-**Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
+**Content-Type:** `APPLICATION_JSON_UTF8`
 
 **Description:** Put PnlDaily
 
@@ -92,12 +92,12 @@ curl -X GET -i /pnl/605?strategyId=415 --data '&415'
 
 **Request-example:**
 ```
-curl -X PUT -i /pnl/
+curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /pnl
 ```
 
 **Response-example:**
 ```
-{}
+OK
 ```
 
 ## 查询结算PNL
@@ -123,7 +123,7 @@ curl -X PUT -i /pnl/
 
 **Request-example:**
 ```
-curl -X GET -i /pnl/settlement?strategyId=52&tradingDay=648 --data '&52&648'
+curl -X GET -i /pnl/settlement?strategyId=298&tradingDay=756 --data '&298&756'
 ```
 
 **Response-fields:**
@@ -145,16 +145,16 @@ curl -X GET -i /pnl/settlement?strategyId=52&tradingDay=648 --data '&52&648'
 ```
 [
   {
-    "uid": 322,
-    "strategyId": 508,
-    "instrumentCode": "84389",
-    "tradingDay": 593,
-    "position": 999,
-    "pnlTotal": 3.05,
-    "pnlNet": 62.12,
-    "tradeCost": 80.93,
-    "exposure": 15.76,
-    "approved": 650
+    "uid": 60,
+    "strategyId": 535,
+    "instrumentCode": "29541",
+    "tradingDay": 638,
+    "position": 840,
+    "pnlTotal": 63.02,
+    "pnlNet": 53.91,
+    "tradeCost": 71.82,
+    "exposure": 61.05,
+    "approved": 665
   }
 ]
 ```

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="smart-doc">
-    <title>Cygnux-Console</title>
+    <title>Cytrader-Console</title>
     <link rel="stylesheet" href="font.css">
-    <link rel="stylesheet" href="AllInOne.css?v=1679824615184"/>
+    <link rel="stylesheet" href="AllInOne.css?v=1681642115179"/>
     
     <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
         background: #f7f7f8;
@@ -19,128 +19,139 @@
     <script src="jquery.min.js"></script>
 </head>
 <body class="book toc2 toc-left">
-<div id="header"><h1>Cygnux-Console</h1>
+<div id="header"><h1>Cytrader-Console</h1>
     <div id="toc" class="toc2">
         <div id="book-search-input"><input id="search" type="text" placeholder="Type to search"></div>
         <div id="toctitle"><span>API Reference</span></div>
         <ul id="accordion" class="sectlevel1">
-            <li class=""><a class="dd" href="api.html#header">1.&nbsp;</a>
+            <li class=""><a class="dd" href="api.html#header">1.&nbsp;用户服务</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="api.html#_1_1_返回全部Strategy">1.1.&nbsp;返回全部Strategy</a>
+                            href="api.html#_1_1_用户登陆">1.1.&nbsp;用户登陆</a>
                     </li>
 
                     <li><a
-                            href="api.html#_1_2_使用StrategyId作为get params访问Strategy">1.2.&nbsp;使用StrategyId作为get params访问Strategy</a>
-                    </li>
-
-                    <li><a
-                            href="api.html#_1_3_使用StrategyId作为URI访问Param">1.3.&nbsp;使用StrategyId作为URI访问Param</a>
-                    </li>
-
-                    <li><a
-                            href="api.html#_1_4_Put StrategyParam URI is StrategyId">1.4.&nbsp;Put StrategyParam URI is StrategyId</a>
+                            href="api.html#_1_2_用户注册, 当前不支持新用户注册">1.2.&nbsp;用户注册, 当前不支持新用户注册</a>
                     </li>
                 </ul>
             </li>
-            <li class="open"><a class="dd" href="BarController.html#header">2.&nbsp;</a>
+            <li class=""><a class="dd" href="StrategyController.html#header">2.&nbsp;策略服务</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="StrategyController.html#_2_1_返回全部Strategy">2.1.&nbsp;返回全部Strategy</a>
+                    </li>
+
+                    <li><a
+                            href="StrategyController.html#_2_2_使用StrategyId作为get params访问Strategy">2.2.&nbsp;使用StrategyId作为get params访问Strategy</a>
+                    </li>
+
+                    <li><a
+                            href="StrategyController.html#_2_3_使用StrategyId作为URI访问Param">2.3.&nbsp;使用StrategyId作为URI访问Param</a>
+                    </li>
+
+                    <li><a
+                            href="StrategyController.html#_2_4_Put StrategyParam URI is StrategyId">2.4.&nbsp;Put StrategyParam URI is StrategyId</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="open"><a class="dd" href="BarController.html#header">3.&nbsp;历史行情接口</a>
                 <ul class="sectlevel2" style="display: block">
                     <li><a
-                            href="BarController.html#_2_1_Get Bars">2.1.&nbsp;Get Bars</a>
+                            href="BarController.html#_3_1_获取1分钟Bar">3.1.&nbsp;获取1分钟Bar</a>
                     </li>
 
                     <li><a
-                            href="BarController.html#_2_2_Put Bar">2.2.&nbsp;Put Bar</a>
+                            href="BarController.html#_3_2_Put Bar">3.2.&nbsp;Put Bar</a>
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="PnlController.html#header">3.&nbsp;</a>
+            <li class=""><a class="dd" href="PnlController.html#header">4.&nbsp;PNL服务接口</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="PnlController.html#_3_1_查询PNL">3.1.&nbsp;查询PNL</a>
+                            href="PnlController.html#_4_1_查询PNL">4.1.&nbsp;查询PNL</a>
                     </li>
 
                     <li><a
-                            href="PnlController.html#_3_2_Put PnlDaily">3.2.&nbsp;Put PnlDaily</a>
+                            href="PnlController.html#_4_2_Put PnlDaily">4.2.&nbsp;Put PnlDaily</a>
                     </li>
 
                     <li><a
-                            href="PnlController.html#_3_3_查询结算PNL">3.3.&nbsp;查询结算PNL</a>
+                            href="PnlController.html#_4_3_查询结算PNL">4.3.&nbsp;查询结算PNL</a>
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="CommandController.html#header">4.&nbsp;</a>
+            <li class=""><a class="dd" href="CommandController.html#header">5.&nbsp;系统指令服务</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="CommandController.html#_4_1_">4.1.&nbsp;</a>
+                            href="CommandController.html#_5_1_更新参数">5.1.&nbsp;更新参数</a>
                     </li>
 
                     <li><a
-                            href="CommandController.html#_4_2_">4.2.&nbsp;</a>
+                            href="CommandController.html#_5_2_安全更新参数">5.2.&nbsp;安全更新参数</a>
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="ProductController.html#header">5.&nbsp;</a>
+            <li class=""><a class="dd" href="ProductController.html#header">6.&nbsp;产品服务接口</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="ProductController.html#_5_1_Get all product">5.1.&nbsp;Get all product</a>
+                            href="ProductController.html#_6_1_获取全部产品">6.1.&nbsp;获取全部产品</a>
                     </li>
 
                     <li><a
-                            href="ProductController.html#_5_2_">5.2.&nbsp;</a>
+                            href="ProductController.html#_6_2_获取指定产品信息">6.2.&nbsp;获取指定产品信息</a>
                     </li>
 
                     <li><a
-                            href="ProductController.html#_5_3_">5.3.&nbsp;</a>
+                            href="ProductController.html#_6_3_产品初始化">6.3.&nbsp;产品初始化</a>
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="StatusController.html#header">6.&nbsp;</a>
+            <li class=""><a class="dd" href="StatusController.html#header">7.&nbsp;交易系统状态服务接口</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="StatusController.html#_6_1_">6.1.&nbsp;</a>
+                            href="StatusController.html#_7_1_获取全部策略状态">7.1.&nbsp;获取全部策略状态</a>
                     </li>
 
                     <li><a
-                            href="StatusController.html#_6_2_">6.2.&nbsp;</a>
+                            href="StatusController.html#_7_2_发送状态指令">7.2.&nbsp;发送状态指令</a>
                     </li>
 
                     <li><a
-                            href="StatusController.html#_6_3_">6.3.&nbsp;</a>
+                            href="StatusController.html#_7_3_更新状态">7.3.&nbsp;更新状态</a>
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="InstrumentController.html#header">7.&nbsp;</a>
+            <li class=""><a class="dd" href="InstrumentController.html#header">8.&nbsp;交易标的查询接口</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="InstrumentController.html#_7_1_Get Settlement Price">7.1.&nbsp;Get Settlement Price</a>
+                            href="InstrumentController.html#_8_1_获取结算价格">8.1.&nbsp;获取结算价格</a>
                     </li>
 
                     <li><a
-                            href="InstrumentController.html#_7_2_Get LastPrices">7.2.&nbsp;Get LastPrices</a>
+                            href="InstrumentController.html#_8_2_获取最新价格">8.2.&nbsp;获取最新价格</a>
                     </li>
 
                     <li><a
-                            href="InstrumentController.html#_7_3_Put LastPrice">7.3.&nbsp;Put LastPrice</a>
+                            href="InstrumentController.html#_8_3_更新最新价格">8.3.&nbsp;更新最新价格</a>
                     </li>
 
                     <li><a
-                            href="InstrumentController.html#_7_4_Get [TradableInstrument] for [symbol] and [tradingDay]">7.4.&nbsp;Get [TradableInstrument] for [symbol] and [tradingDay]</a>
+                            href="InstrumentController.html#_8_4_获取可交易的标的">8.4.&nbsp;获取可交易的标的</a>
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="OrderController.html#header">8.&nbsp;</a>
+            <li class=""><a class="dd" href="OrderController.html#header">9.&nbsp;订单服务接口</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="OrderController.html#_8_1_查询Order">8.1.&nbsp;查询Order</a>
+                            href="OrderController.html#_9_1_查询Order">9.1.&nbsp;查询Order</a>
                     </li>
 
                     <li><a
-                            href="OrderController.html#_8_2_">8.2.&nbsp;</a>
+                            href="OrderController.html#_9_2_获取订单最新状态">9.2.&nbsp;获取订单最新状态</a>
                     </li>
 
                     <li><a
-                            href="OrderController.html#_8_3_">8.3.&nbsp;</a>
+                            href="OrderController.html#_9_3_新增订单">9.3.&nbsp;新增订单</a>
                     </li>
                 </ul>
             </li>
@@ -148,46 +159,18 @@
     </div>
 </div>
 <div id="content">
-    <div class="sect1"><h2 id="_"><a class="anchor" href="#_"></a><a class="link" href="#_">2.&nbsp;</a>
+    <div class="sect1"><h2 id="_历史行情接口"><a class="anchor" href="#_历史行情接口"></a><a class="link" href="#_历史行情接口">3.&nbsp;历史行情接口</a>
     </h2>
         <div class="sectionbody">
-            <div class="sect2"><h3 id="_2_1_Get Bars">
-                <a class="anchor" href="#_2_1_Get Bars"></a>
-                <a class="link" href="#_2_1_Get Bars">2.1.&nbsp;Get Bars</a>
+            <div class="sect2"><h3 id="_3_1_获取1分钟Bar">
+                <a class="anchor" href="#_3_1_获取1分钟Bar"></a>
+                <a class="link" href="#_3_1_获取1分钟Bar">3.1.&nbsp;获取1分钟Bar</a>
             </h3>
-                <div class="paragraph"><p><strong>URL:</strong><a href="/bar/{tradingDay}" class="bare">&nbsp;/bar/{tradingDay}</a>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/bar" class="bare">&nbsp;/bar</a>
                 </p></div>
                 <div class="paragraph"><p><strong>Type:</strong>&nbsp;GET</p></div>
                 <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>&nbsp;Get Bars</p></div>
-                <div class="paragraph"><p><strong>Path-parameters:</strong></p></div>
-                <table class="tableblock frame-all grid-all spread">
-                    <colgroup>
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                        <col style="width: 20%;">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th class="tableblock halign-left valign-top">Parameter</th>
-                        <th class="tableblock halign-left valign-top">Type</th>
-                        <th class="tableblock halign-left valign-top">Description</th>
-                        <th class="tableblock halign-left valign-top">Required</th>
-                        <th class="tableblock halign-left valign-top">Since</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">tradingDay</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">    int</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;获取行情Bar</p></div>
                 <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
                 <table class="tableblock frame-all grid-all spread">
                     <colgroup>
@@ -208,9 +191,17 @@
                     </thead>
                     <tbody>
                     <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">tradingDay</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">    交易日</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">instrumentCode</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">标的代码</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
@@ -219,7 +210,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /bar/91?instrumentCode=84389 --data '&84389'</code></pre>
+                        <pre><code class="bash">curl -X GET -i /bar?tradingDay=498&instrumentCode=29541 --data '&498&29541'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -240,79 +231,72 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">uid</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-                    </tr>
-
-                    <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">instrumentCode</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">交易标的代码 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">tradingDay</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">交易日 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">actualDate</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">实际日期 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">timePoint</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">时间点 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">open</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">开盘价 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">high</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">最高价 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">low</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">最低价 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">close</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">收盘价 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">volume</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">成交量 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
 
                     <tr>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">turnover</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
-                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">成交额 [*]</p></td>
                         <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
                     </tr>
                     </tbody>
@@ -322,53 +306,52 @@
                     <div class="content">
                         <pre><code class="json">[
   {
-    "uid": 486,
-    "instrumentCode": "84389",
-    "tradingDay": 692,
-    "actualDate": 351,
-    "timePoint": 214,
-    "open": 4.84,
-    "high": 25.84,
-    "low": 35.63,
-    "close": 83.28,
-    "volume": 42.60,
-    "turnover": 229
+    "instrumentCode": "29541",
+    "tradingDay": 197,
+    "actualDate": 24,
+    "timePoint": 946,
+    "open": 53.92,
+    "high": 82.27,
+    "low": 0.02,
+    "close": 93.47,
+    "volume": 27.16,
+    "turnover": 83.89
   }
 ]</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="sect2"><h3 id="_2_2_Put Bar">
-                <a class="anchor" href="#_2_2_Put Bar"></a>
-                <a class="link" href="#_2_2_Put Bar">2.2.&nbsp;Put Bar</a>
+            <div class="sect2"><h3 id="_3_2_Put Bar">
+                <a class="anchor" href="#_3_2_Put Bar"></a>
+                <a class="link" href="#_3_2_Put Bar">3.2.&nbsp;Put Bar</a>
             </h3>
-                <div class="paragraph"><p><strong>URL:</strong><a href="/bar/" class="bare">&nbsp;/bar/</a>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/bar" class="bare">&nbsp;/bar</a>
                 </p></div>
-                <div class="paragraph"><p><strong>Type:</strong>&nbsp;PUT</p></div>
-                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
-                <div class="paragraph"><p><strong>Description:</strong>&nbsp;Put Bar</p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;POST</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;APPLICATION_JSON_UTF8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;添加行情Bar</p></div>
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X PUT -i /bar/</code></pre>
+                        <pre><code class="bash">curl -X POST -H 'Content-Type: APPLICATION_JSON_UTF8' -i /bar</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="json">57</code></pre>
+                        <pre><code class="json">OK</code></pre>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2023-03-26 18:56:55</span><span
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2023-04-16 19:48:35</span><span
             class="footer-modification">Suggestions,contact,support and error reporting on<a
             href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">&nbsp;Gitee</a>&nbsp;or<a
             href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">&nbsp;Github</a></span></footer>
 </div>
-<script src="search.js?v=1679824615184"></script>
+<script src="search.js?v=1681642115179"></script>
 <script>
     $(function () {
         const Accordion = function (el, multiple) {

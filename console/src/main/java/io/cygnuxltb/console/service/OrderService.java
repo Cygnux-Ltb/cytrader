@@ -1,5 +1,6 @@
 package io.cygnuxltb.console.service;
 
+import io.cygnuxltb.console.controller.util.ControllerUtil;
 import io.cygnuxltb.console.persistence.dao.OrderDao;
 import io.cygnuxltb.console.persistence.dao.OrderEventDao;
 import io.cygnuxltb.console.persistence.entity.OrderEntity;
@@ -14,11 +15,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static io.cygnuxltb.console.controller.util.RequestUtil.checkInstrumentCode;
-import static io.cygnuxltb.console.controller.util.RequestUtil.checkInvestorId;
-import static io.cygnuxltb.console.controller.util.RequestUtil.checkOrdSysId;
-import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyId;
-import static io.cygnuxltb.console.controller.util.RequestUtil.checkTradingDay;
+import static io.cygnuxltb.console.controller.util.ControllerUtil.illegalInstrumentCode;
+import static io.cygnuxltb.console.controller.util.ControllerUtil.illegalInvestorId;
+import static io.cygnuxltb.console.controller.util.ControllerUtil.illegalOrdSysId;
+import static io.cygnuxltb.console.controller.util.ControllerUtil.illegalStrategyId;
+import static io.cygnuxltb.console.controller.util.ControllerUtil.illegalTradingDay;
 import static io.mercury.common.functional.Functions.exec;
 import static io.mercury.common.functional.Functions.execBool;
 
@@ -55,16 +56,16 @@ public class OrderService {
     public List<OrderEntity> getOrders(int strategyId, String investorId, String instrumentCode,
                                        int startTradingDay, int endTradingDay) {
         String errMsg = "[OrderService::getOrders] param error";
-        if (checkStrategyId(strategyId, log, errMsg))
+        if (illegalStrategyId(strategyId, log))
             Throws.illegalArgument("strategyId");
-        if (checkTradingDay(startTradingDay, endTradingDay, log, errMsg))
+        if (illegalTradingDay(startTradingDay, endTradingDay, log))
             Throws.illegalArgument("startTradingDay & endTradingDay");
-        if (checkInvestorId(investorId, log, errMsg))
+        if (illegalInvestorId(investorId, log))
             Throws.illegalArgument("investorId");
-        if (checkInstrumentCode(instrumentCode, log, errMsg))
+        if (illegalInstrumentCode(instrumentCode, log))
             Throws.illegalArgument("instrumentCode");
-        return DaoExecutor.select(() -> dao.queryBy(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay),
-                OrderEntity.class);
+        return DaoExecutor.select(OrderEntity.class,
+                () -> dao.queryBy(strategyId, investorId, instrumentCode, startTradingDay, endTradingDay));
     }
 
     /**
@@ -72,7 +73,7 @@ public class OrderService {
      * @return List<TOrderEvent>
      */
     public List<OrderEventEntity> getOrderEventsByOrderSysId(long ordSysId) {
-        if (checkOrdSysId(ordSysId, log, "[OrderService::getOrderEventsByOrderSysId] param error"))
+        if (illegalOrdSysId(ordSysId, log))
             return new FastList<>();
         return exec(() -> eventDao.queryByOrdSysId(ordSysId),
                 list -> {
@@ -86,7 +87,7 @@ public class OrderService {
      * @return List<OrderEventEntity>
      */
     public List<OrderEventEntity> getOrderEventsByTradingDay(int tradingDay) {
-        if (checkTradingDay(tradingDay, log, "[OrderService::getOrderEventsByTradingDay] param error"))
+        if (ControllerUtil.illegalTradingDay(tradingDay, log))
             return new FastList<>();
         return exec(() -> eventDao.queryByTradingDay(tradingDay),
                 list -> {

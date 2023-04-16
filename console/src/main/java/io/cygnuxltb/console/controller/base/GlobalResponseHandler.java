@@ -14,33 +14,48 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @RestControllerAdvice
-public class ControllerResponseHandler implements ResponseBodyAdvice<Object> {
+public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
 
-    private static final Logger log = Log4j2LoggerFactory.getLogger(ControllerResponseHandler.class);
+    private static final Logger log = Log4j2LoggerFactory.getLogger(GlobalResponseHandler.class);
 
     @Override
-    public boolean supports(@Nonnull MethodParameter returnType,
-                            @Nonnull Class<? extends HttpMessageConverter<?>> converterType) {
+    public boolean supports(@Nonnull MethodParameter parameter,
+                            @Nonnull Class<? extends HttpMessageConverter<?>> type) {
         return true;
     }
 
     @Override
-    public Object beforeBodyWrite(@Nullable Object body,
-                                  @Nonnull MethodParameter returnType,
+    public Object beforeBodyWrite(@Nullable Object returnObj,
+                                  @Nonnull MethodParameter parameter,
                                   @Nonnull MediaType selectedContentType,
-                                  @Nonnull Class<? extends HttpMessageConverter<?>> selectedConverterType,
+                                  @Nonnull Class<? extends HttpMessageConverter<?>> type,
                                   @Nonnull ServerHttpRequest request,
                                   @Nonnull ServerHttpResponse response) {
-        if (body == null) {
-            return ResponseStatus.OK.newResponse();
-        } else if (body instanceof Boolean bool) {
-            return bool
-                    ? ResponseStatus.OK.newResponse()
-                    : ResponseStatus.FORBIDDEN.newResponse();
-        } else if (body instanceof Integer i) {
-            return ResponseStatus.CREATED.newResponse(i);
+        switch (returnObj) {
+            case null -> {
+                return ResponseStatus.NOT_FOUND.response();
+            }
+            case ResponseBean resp -> {
+                return resp;
+            }
+            case ResponseStatus status -> {
+                return status.response();
+            }
+            case Boolean bool -> {
+                return bool
+                        ? ResponseStatus.OK.response()
+                        : ResponseStatus.FORBIDDEN.response();
+            }
+            case Integer i -> {
+                return i < 0
+                        ? ResponseStatus.CREATED.responseOf(i)
+                        : ResponseStatus.FORBIDDEN.response();
+            }
+            default -> {
+                return ResponseStatus.OK.responseOf(returnObj);
+            }
         }
-        return ResponseStatus.OK.newResponse(body);
     }
+
 
 }

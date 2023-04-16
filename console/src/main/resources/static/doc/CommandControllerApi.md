@@ -1,15 +1,15 @@
 
-# 
-## 
+# 系统指令服务
+## 更新参数
 
 **URL:** `/command/param`
 
 **Type:** `PUT`
 
 
-**Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
+**Content-Type:** `APPLICATION_JSON_UTF8`
 
-**Description:** 
+**Description:** 更新参数
 
 
 
@@ -22,24 +22,24 @@
 
 **Request-example:**
 ```
-curl -X PUT -i /command/param --data 'productId=436'
+curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /command/param --data 'productId=474'
 ```
 
 **Response-example:**
 ```
-{}
+OK
 ```
 
-## 
+## 安全更新参数
 
 **URL:** `/command/safe`
 
 **Type:** `PUT`
 
 
-**Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
+**Content-Type:** `APPLICATION_JSON_UTF8`
 
-**Description:** 
+**Description:** 安全更新参数
 
 
 
@@ -47,11 +47,11 @@ curl -X PUT -i /command/param --data 'productId=436'
 
 **Request-example:**
 ```
-curl -X PUT -i /command/safe
+curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /command/safe
 ```
 
 **Response-example:**
 ```
-{}
+OK
 ```
 

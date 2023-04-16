@@ -1,6 +1,6 @@
-package io.cygnuxltb.protocol.http.dto.pack;
+package io.cygnuxltb.protocol.http.pack;
 
-import io.cygnuxltb.protocol.http.dto.inbound.StrategySwitch;
+import io.cygnuxltb.protocol.http.inbound.StrategySwitch;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

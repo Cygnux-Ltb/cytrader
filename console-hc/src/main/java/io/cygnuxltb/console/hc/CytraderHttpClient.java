@@ -1,11 +1,11 @@
 package io.cygnuxltb.console.hc;
 
-import io.cygnuxltb.protocol.http.dto.outbound.BarDTO;
-import io.cygnuxltb.protocol.http.dto.outbound.OrderDTO;
-import io.cygnuxltb.protocol.http.dto.outbound.ParamDTO;
-import io.cygnuxltb.protocol.http.dto.outbound.PnlDTO;
-import io.cygnuxltb.protocol.http.dto.outbound.ProductDTO;
-import io.cygnuxltb.protocol.http.dto.outbound.StrategyDTO;
+import io.cygnuxltb.protocol.http.outbound.BarM1DTO;
+import io.cygnuxltb.protocol.http.outbound.OrderDTO;
+import io.cygnuxltb.protocol.http.outbound.ParamDTO;
+import io.cygnuxltb.protocol.http.outbound.PnlDTO;
+import io.cygnuxltb.protocol.http.outbound.ProductDTO;
+import io.cygnuxltb.protocol.http.outbound.StrategyDTO;
 import io.mercury.common.http.JreHttpClient;
 import io.mercury.common.http.PathParams.PathParam;
 import io.mercury.common.sys.SysProperties;
@@ -47,8 +47,8 @@ public final class CytraderHttpClient extends BaseHttpClient {
         }
     }
 
-    public List<BarDTO> getBars(int sysId, String instrumentCode, int tradingDay) {
-        return sendGetRequest(BarDTO.class, barUri,
+    public List<BarM1DTO> getBars(int sysId, String instrumentCode, int tradingDay) {
+        return sendGetRequest(BarM1DTO.class, barUri,
                 new PathParam("sysId", sysId),
                 new PathParam("instrumentId", instrumentCode),
                 new PathParam("tradingDay", tradingDay));

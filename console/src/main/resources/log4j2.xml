@@ -3,7 +3,7 @@
     <Appenders>
         <Console name="CONSOLE" target="SYSTEM_OUT">
             <PatternLayout
-                    pattern="%d{yy-MM-dd HH:mm:ss.SSS} %-5level [%t] [%C{1}.%M] %msg%n"/>
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level [%t] [%C{1}.%M] >>> %msg%n"/>
         </Console>
         <RollingFile name="ROLLING_FILE"
                      fileName="${sys:java.io.tmpdir}/logs/${sys:log4j2.filename:-started-at-$${date:yyMMdd-HHmmss}}.log"
@@ -11,7 +11,7 @@
                      append="true">
             <!-- 日志输出格式 -->
             <PatternLayout
-                    pattern="%d{yy-MM-dd HH:mm:ss.SSS} %-5level [%t] [%C{1}.%M] %msg%n"/>
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level [%t] [%C{1}.%M] >>> %msg%n"/>
             <!-- 设置日志文件分割策略 -->
             <Policies>
                 <!-- 基于时间分割 -->

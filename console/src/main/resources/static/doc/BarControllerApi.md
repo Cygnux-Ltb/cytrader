@@ -1,80 +1,74 @@
 
-# 
-## Get Bars
+# 历史行情接口
+## 获取1分钟Bar
 
-**URL:** `/bar/{tradingDay}`
+**URL:** `/bar`
 
 **Type:** `GET`
 
 
 **Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
 
-**Description:** Get Bars
+**Description:** 获取行情Bar
 
 
-**Path-parameters:**
-
-| Parameter | Type | Required | Description | Since |
-|-----------|------|----------|-------------|-------|
-|tradingDay|int32|true|    int|-|
 
 **Query-parameters:**
 
 | Parameter | Type | Required | Description | Since |
 |-----------|------|----------|-------------|-------|
-|instrumentCode|string|true|String|-|
+|tradingDay|int32|true|    交易日|-|
+|instrumentCode|string|true|标的代码|-|
 
 
 **Request-example:**
 ```
-curl -X GET -i /bar/791?instrumentCode=84389 --data '&84389'
+curl -X GET -i /bar?tradingDay=777&instrumentCode=29541 --data '&777&29541'
 ```
 
 **Response-fields:**
 
 | Field | Type | Description | Since |
 |-------|------|-------------|-------|
-|uid|int64|No comments found.|-|
-|instrumentCode|string|No comments found.|-|
-|tradingDay|int32|No comments found.|-|
-|actualDate|int32|No comments found.|-|
-|timePoint|int32|No comments found.|-|
-|open|double|No comments found.|-|
-|high|double|No comments found.|-|
-|low|double|No comments found.|-|
-|close|double|No comments found.|-|
-|volume|double|No comments found.|-|
-|turnover|int64|No comments found.|-|
+|instrumentCode|string|交易标的代码 [*]|-|
+|tradingDay|int32|交易日 [*]|-|
+|actualDate|int32|实际日期 [*]|-|
+|timePoint|int32|时间点 [*]|-|
+|open|double|开盘价 [*]|-|
+|high|double|最高价 [*]|-|
+|low|double|最低价 [*]|-|
+|close|double|收盘价 [*]|-|
+|volume|double|成交量 [*]|-|
+|turnover|double|成交额 [*]|-|
 
 **Response-example:**
 ```
 [
   {
-    "uid": 128,
-    "instrumentCode": "84389",
-    "tradingDay": 346,
-    "actualDate": 419,
-    "timePoint": 117,
-    "open": 99.53,
-    "high": 72.18,
-    "low": 2.19,
-    "close": 77.92,
-    "volume": 63.76,
-    "turnover": 719
+    "instrumentCode": "29541",
+    "tradingDay": 169,
+    "actualDate": 983,
+    "timePoint": 307,
+    "open": 92.03,
+    "high": 53.00,
+    "low": 49.30,
+    "close": 46.53,
+    "volume": 12.18,
+    "turnover": 47.31
   }
 ]
 ```
 
 ## Put Bar
 
-**URL:** `/bar/`
+**URL:** `/bar`
 
-**Type:** `PUT`
+**Type:** `POST`
 
 
-**Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
+**Content-Type:** `APPLICATION_JSON_UTF8`
 
-**Description:** Put Bar
+**Description:** 添加行情Bar
 
 
 
@@ -82,11 +76,11 @@ curl -X GET -i /bar/791?instrumentCode=84389 --data '&84389'
 
 **Request-example:**
 ```
-curl -X PUT -i /bar/
+curl -X POST -H 'Content-Type: APPLICATION_JSON_UTF8' -i /bar
 ```
 
 **Response-example:**
 ```
-664
+OK
 ```
 

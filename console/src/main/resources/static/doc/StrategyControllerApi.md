@@ -1,8 +1,8 @@
 
-# 
+# 策略服务
 ## 返回全部Strategy
 
-**URL:** `/strategy/`
+**URL:** `/strategy`
 
 **Type:** `GET`
 
@@ -17,7 +17,7 @@
 
 **Request-example:**
 ```
-curl -X GET -i /strategy/
+curl -X GET -i /strategy
 ```
 
 **Response-fields:**
@@ -34,11 +34,11 @@ curl -X GET -i /strategy/
 ```
 [
   {
-    "uid": 739,
-    "strategyId": 911,
-    "strategyName": "john.kling",
-    "strategyOwner": "ujuuw3",
-    "strategyInfo": "zbkrl7"
+    "uid": 723,
+    "strategyId": 121,
+    "strategyName": "damien.swift",
+    "strategyOwner": "024csx",
+    "strategyInfo": "nnthvt"
   }
 ]
 ```
@@ -65,7 +65,7 @@ curl -X GET -i /strategy/
 
 **Request-example:**
 ```
-curl -X GET -i /strategy/572
+curl -X GET -i /strategy/891
 ```
 
 **Response-fields:**
@@ -81,11 +81,11 @@ curl -X GET -i /strategy/572
 **Response-example:**
 ```
 {
-  "uid": 214,
-  "strategyId": 624,
-  "strategyName": "john.kling",
-  "strategyOwner": "rfwlpv",
-  "strategyInfo": "c0kgj0"
+  "uid": 978,
+  "strategyId": 373,
+  "strategyName": "damien.swift",
+  "strategyOwner": "p1m994",
+  "strategyInfo": "dc7icl"
 }
 ```
 
@@ -111,7 +111,7 @@ curl -X GET -i /strategy/572
 
 **Request-example:**
 ```
-curl -X GET -i /strategy/993/param
+curl -X GET -i /strategy/219/param
 ```
 
 **Response-fields:**
@@ -131,14 +131,14 @@ curl -X GET -i /strategy/993/param
 ```
 [
   {
-    "uid": 187,
-    "strategyId": 485,
-    "strategyName": "john.kling",
-    "ownerType": "7hxv2p",
-    "owner": "slpi6f",
-    "paramName": "john.kling",
-    "paramType": "vke5c4",
-    "paramValue": "hzay4l"
+    "uid": 489,
+    "strategyId": 585,
+    "strategyName": "damien.swift",
+    "ownerType": "mg77yo",
+    "owner": "keie86",
+    "paramName": "damien.swift",
+    "paramType": "zekc08",
+    "paramValue": "q078yq"
   }
 ]
 ```
@@ -150,7 +150,7 @@ curl -X GET -i /strategy/993/param
 **Type:** `PUT`
 
 
-**Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
+**Content-Type:** `APPLICATION_JSON_UTF8`
 
 **Description:** Put StrategyParam URI is StrategyId
 
@@ -165,7 +165,7 @@ curl -X GET -i /strategy/993/param
 
 **Request-example:**
 ```
-curl -X PUT -i /strategy/717/param
+curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /strategy/345/param
 ```
 
 **Response-example:**

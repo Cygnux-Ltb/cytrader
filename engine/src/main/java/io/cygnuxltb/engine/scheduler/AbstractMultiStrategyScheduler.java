@@ -15,7 +15,8 @@ import java.io.IOException;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
-public abstract class AbstractMultiStrategyScheduler<M extends MarketData> implements MultiStrategyScheduler<M> {
+public abstract class AbstractMultiStrategyScheduler<M extends MarketData>
+		implements MultiStrategyScheduler<M> {
 
 	/**
 	 * Logger

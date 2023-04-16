@@ -19,7 +19,8 @@ import java.util.stream.Stream;
 import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
 import static java.util.stream.Collectors.toSet;
 
-public abstract class MultiInstrumentStrategy<M extends MarketData, K extends ParamKey> extends AbstractStrategy<M, K> {
+public abstract class MultiInstrumentStrategy<M extends MarketData, K extends ParamKey>
+        extends AbstractStrategy<M, K> {
 
     private final static Logger log = Log4j2LoggerFactory.getLogger(MultiInstrumentStrategy.class);
 

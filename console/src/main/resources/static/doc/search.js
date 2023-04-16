@@ -2,154 +2,169 @@ let api = [];
 api.push({
     alias: 'api',
     order: '1',
-    desc: '',
-    link: '',
+    desc: '用户服务',
+    link: '用户服务',
     list: []
 })
 api[0].list.push({
     order: '1',
-    desc: '返回全部Strategy',
+    desc: '用户登陆',
 });
 api[0].list.push({
     order: '2',
+    desc: '用户注册, 当前不支持新用户注册',
+});
+api.push({
+    alias: 'StrategyController',
+    order: '2',
+    desc: '策略服务',
+    link: '策略服务',
+    list: []
+})
+api[1].list.push({
+    order: '1',
+    desc: '返回全部Strategy',
+});
+api[1].list.push({
+    order: '2',
     desc: '使用StrategyId作为get params访问Strategy',
 });
-api[0].list.push({
+api[1].list.push({
     order: '3',
     desc: '使用StrategyId作为URI访问Param',
 });
-api[0].list.push({
+api[1].list.push({
     order: '4',
     desc: 'Put StrategyParam URI is StrategyId',
 });
 api.push({
     alias: 'BarController',
-    order: '2',
-    desc: '',
-    link: '',
+    order: '3',
+    desc: '历史行情接口',
+    link: '历史行情接口',
     list: []
 })
-api[1].list.push({
+api[2].list.push({
     order: '1',
-    desc: 'Get Bars',
+    desc: '获取1分钟Bar',
 });
-api[1].list.push({
+api[2].list.push({
     order: '2',
     desc: 'Put Bar',
 });
 api.push({
     alias: 'PnlController',
-    order: '3',
-    desc: '',
-    link: '',
+    order: '4',
+    desc: 'PNL服务接口',
+    link: 'pnl服务接口',
     list: []
 })
-api[2].list.push({
+api[3].list.push({
     order: '1',
     desc: '查询PNL',
 });
-api[2].list.push({
+api[3].list.push({
     order: '2',
     desc: 'Put PnlDaily',
 });
-api[2].list.push({
+api[3].list.push({
     order: '3',
     desc: '查询结算PNL',
 });
 api.push({
     alias: 'CommandController',
-    order: '4',
-    desc: '',
-    link: '',
+    order: '5',
+    desc: '系统指令服务',
+    link: '系统指令服务',
     list: []
 })
-api[3].list.push({
+api[4].list.push({
     order: '1',
-    desc: '',
+    desc: '更新参数',
 });
-api[3].list.push({
+api[4].list.push({
     order: '2',
-    desc: '',
+    desc: '安全更新参数',
 });
 api.push({
     alias: 'ProductController',
-    order: '5',
-    desc: '',
-    link: '',
+    order: '6',
+    desc: '产品服务接口',
+    link: '产品服务接口',
     list: []
 })
-api[4].list.push({
+api[5].list.push({
     order: '1',
-    desc: 'Get all product',
+    desc: '获取全部产品',
 });
-api[4].list.push({
+api[5].list.push({
     order: '2',
-    desc: '',
+    desc: '获取指定产品信息',
 });
-api[4].list.push({
+api[5].list.push({
     order: '3',
-    desc: '',
+    desc: '产品初始化',
 });
 api.push({
     alias: 'StatusController',
-    order: '6',
-    desc: '',
-    link: '',
+    order: '7',
+    desc: '交易系统状态服务接口',
+    link: '交易系统状态服务接口',
     list: []
 })
-api[5].list.push({
+api[6].list.push({
     order: '1',
-    desc: '',
+    desc: '获取全部策略状态',
 });
-api[5].list.push({
+api[6].list.push({
     order: '2',
-    desc: '',
+    desc: '发送状态指令',
 });
-api[5].list.push({
+api[6].list.push({
     order: '3',
-    desc: '',
+    desc: '更新状态',
 });
 api.push({
     alias: 'InstrumentController',
-    order: '7',
-    desc: '',
-    link: '',
+    order: '8',
+    desc: '交易标的查询接口',
+    link: '交易标的查询接口',
     list: []
 })
-api[6].list.push({
+api[7].list.push({
     order: '1',
-    desc: 'Get Settlement Price',
+    desc: '获取结算价格',
 });
-api[6].list.push({
+api[7].list.push({
     order: '2',
-    desc: 'Get LastPrices',
+    desc: '获取最新价格',
 });
-api[6].list.push({
+api[7].list.push({
     order: '3',
-    desc: 'Put LastPrice',
+    desc: '更新最新价格',
 });
-api[6].list.push({
+api[7].list.push({
     order: '4',
-    desc: 'Get [TradableInstrument] for [symbol] and [tradingDay]',
+    desc: '获取可交易的标的',
 });
 api.push({
     alias: 'OrderController',
-    order: '8',
-    desc: '',
-    link: '',
+    order: '9',
+    desc: '订单服务接口',
+    link: '订单服务接口',
     list: []
 })
-api[7].list.push({
+api[8].list.push({
     order: '1',
     desc: '查询Order',
 });
-api[7].list.push({
+api[8].list.push({
     order: '2',
-    desc: '',
+    desc: '获取订单最新状态',
 });
-api[7].list.push({
+api[8].list.push({
     order: '3',
-    desc: '',
+    desc: '新增订单',
 });
 document.onkeydown = keyDownSearch;
 function keyDownSearch(e) {

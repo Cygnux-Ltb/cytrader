@@ -1,7 +1,9 @@
 package io.cygnuxltb.ui;
 
- import javax.swing.*;
-        import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.BorderLayout;
 
 public class OrderTableFrame extends JFrame {
     public OrderTableFrame() {

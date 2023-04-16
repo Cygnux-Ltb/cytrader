@@ -24,9 +24,6 @@ import java.io.IOException;
  */
 public class SingleStrategyScheduler<M extends MarketData> implements InboundHandler<M> {
 
-	/**
-	 * Logger
-	 */
 	private static final Logger log = Log4j2LoggerFactory.getLogger(SingleStrategyScheduler.class);
 
 	/**

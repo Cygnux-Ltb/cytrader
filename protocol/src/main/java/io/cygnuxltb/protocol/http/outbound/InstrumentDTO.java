@@ -1,4 +1,4 @@
-package io.cygnuxltb.protocol.http.dto.outbound;
+package io.cygnuxltb.protocol.http.outbound;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,12 +16,12 @@ import lombok.experimental.Accessors;
 public final class InstrumentDTO {
 
     /**
-     * instrumentCode [*]
+     * 交易标的代码 [*]
      */
     private String instrumentCode;
 
     /**
-     * instrumentType [*]
+     * 交易标的类型
      */
     private String instrumentType;
 

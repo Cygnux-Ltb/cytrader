@@ -1,9 +1,17 @@
 package io.cygnuxltb.console.controller.base;
 
-public record ResponseBean(
-        int code,
-        String message,
-        boolean isArray,
-        Object data) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Getter
+@Setter
+@Accessors(chain = true)
+public class ResponseBean {
+
+    private int code;
+    private String message;
+    private boolean isArray;
+    private Object data;
 
 }

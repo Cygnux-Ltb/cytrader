@@ -40,10 +40,10 @@ import java.util.function.Supplier;
 
 import static java.lang.Math.abs;
 
-public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey> extends EnableableComponent
+public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
+        extends EnableableComponent
         implements Strategy<M>, CircuitBreaker {
 
-    // Logger
     private final static Logger log = Log4j2LoggerFactory.getLogger(AbstractStrategy.class);
 
     // 策略ID

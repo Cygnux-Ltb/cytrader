@@ -11,9 +11,9 @@ import org.slf4j.Logger;
 import java.io.IOException;
 import java.util.List;
 
-public final class RequestUtil {
+public final class ControllerUtil {
 
-    private static final Logger log = Log4j2LoggerFactory.getLogger(RequestUtil.class);
+    private static final Logger log = Log4j2LoggerFactory.getLogger(ControllerUtil.class);
 
     /**
      * 检查参数列表
@@ -56,57 +56,59 @@ public final class RequestUtil {
     }
 
 
-    public static boolean checkStrategyId(int strategyId, Logger log, String msg) {
+    public static boolean illegalStrategyId(int strategyId, Logger log) {
         if (strategyId < 0) {
-            log.error("{}, strategyId=={}", msg, strategyId);
+            log.error("illegal param -> strategyId=={}", strategyId);
             return true;
         }
         return false;
     }
 
-    public static boolean checkStrategyName(String strategyName, Logger log, String msg) {
+    public static boolean illegalStrategyName(String strategyName, Logger log) {
         if (StringSupport.isNullOrEmpty(strategyName)) {
-            log.error("{}, strategyName=={}", msg, strategyName);
+            log.error("illegal param -> strategyName=={}", strategyName);
             return true;
         }
         return false;
     }
 
-    public static boolean checkInvestorId(String investorId, Logger log, String msg) {
+    public static boolean illegalInvestorId(String investorId, Logger log) {
         if (StringSupport.isNullOrEmpty(investorId)) {
-            log.error("{}, investorId=={}", msg, investorId);
+            log.error("illegal param -> investorId=={}", investorId);
             return true;
         }
         return false;
     }
 
-    public static boolean checkInstrumentCode(String instrumentCode, Logger log, String msg) {
+    public static boolean illegalInstrumentCode(String instrumentCode, Logger log) {
         if (StringSupport.isNullOrEmpty(instrumentCode)) {
-            log.error("{}, instrumentCode=={}", msg, instrumentCode);
+            log.error("illegal param -> instrumentCode=={}", instrumentCode);
             return true;
         }
         return false;
     }
 
-    public static boolean checkTradingDay(int tradingDay, Logger log, String msg) {
+    public static boolean illegalTradingDay(int tradingDay, Logger log) {
         if (tradingDay <= 0) {
-            log.error("{}, tradingDay=={}", msg, tradingDay);
+            log.error("illegal param -> tradingDay=={}", tradingDay);
             return true;
         }
         return false;
     }
 
-    public static boolean checkTradingDay(int startTradingDay, int endTradingDay, Logger log, String msg) {
+    public static boolean illegalTradingDay(int startTradingDay, int endTradingDay,
+                                            Logger log) {
         if (startTradingDay <= 0 || endTradingDay < startTradingDay) {
-            log.error("{}, startTradingDay=={}, endTradingDay=={}", msg, startTradingDay, endTradingDay);
+            log.error("illegal param -> startTradingDay=={}, endTradingDay=={}",
+                    startTradingDay, endTradingDay);
             return true;
         }
         return false;
     }
 
-    public static boolean checkOrdSysId(long ordSysId, Logger log, String msg) {
+    public static boolean illegalOrdSysId(long ordSysId, Logger log) {
         if (ordSysId <= 0) {
-            log.error("{}, ordSysId=={}", msg, ordSysId);
+            log.error("illegal param -> ordSysId=={}", ordSysId);
             return true;
         }
         return false;

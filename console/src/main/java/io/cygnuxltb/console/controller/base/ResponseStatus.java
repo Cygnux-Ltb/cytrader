@@ -2,7 +2,7 @@ package io.cygnuxltb.console.controller.base;
 
 import java.util.Collection;
 
-public enum ResponseEnum {
+public enum ResponseStatus {
 
     /* 成功状态码 */
     OK(200, "请求成功"),
@@ -30,21 +30,26 @@ public enum ResponseEnum {
 
     private final int code;
 
-
     private final String message;
 
-
-    ResponseEnum(int code, String message) {
+    ResponseStatus(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public ResponseBean newResponse() {
-        return new ResponseBean(code, message, false, null);
+    public ResponseBean response() {
+        return new ResponseBean()
+                .setCode(code)
+                .setMessage(message)
+                .setArray(false);
     }
 
-    public ResponseBean newResponse(Object data) {
-        return new ResponseBean(code, message, data instanceof Collection, data);
+    public ResponseBean responseOf(Object data) {
+        return new ResponseBean()
+                .setCode(code)
+                .setMessage(message)
+                .setArray(data instanceof Collection)
+                .setData(data);
     }
 
 }

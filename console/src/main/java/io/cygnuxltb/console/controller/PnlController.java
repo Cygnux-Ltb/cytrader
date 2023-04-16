@@ -1,15 +1,15 @@
 package io.cygnuxltb.console.controller;
 
-import io.cygnuxltb.console.controller.base.ServiceException;
-import io.cygnuxltb.console.controller.util.RequestUtil;
-import io.cygnuxltb.console.controller.util.ResponseUtil;
+import io.cygnuxltb.console.controller.base.ResponseStatus;
+import io.cygnuxltb.console.controller.util.ControllerUtil;
 import io.cygnuxltb.console.persistence.entity.PnlEntity;
 import io.cygnuxltb.console.persistence.entity.PnlSettlementEntity;
 import io.cygnuxltb.console.service.PnlService;
+import io.mercury.common.http.MimeType;
+import io.mercury.common.log.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,9 +22,14 @@ import java.util.List;
 
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
+/**
+ * PNL服务接口
+ */
 @RestController
-@RequestMapping(path = "/pnl")
+@RequestMapping(path = "/pnl", produces = MimeType.APPLICATION_JSON_UTF8)
 public final class PnlController {
+
+    private static final Logger log = Log4j2LoggerFactory.getLogger(PnlController.class);
 
     @Resource
     private PnlService service;
@@ -36,13 +41,12 @@ public final class PnlController {
      * @param tradingDay int
      * @return ResponseEntity<List < PnlEntity>>
      */
-    @ExceptionHandler(ServiceException.class)
     @GetMapping(path = "/{tradingDay}")
-    public ResponseEntity<List<PnlEntity>> getPnl(@PathVariable("tradingDay") int tradingDay,
-                                                  @RequestParam("strategyId") int strategyId) {
-        if (RequestUtil.paramIsNull(tradingDay))
-            return ResponseUtil.badRequest();
-        return ResponseUtil.responseOf(service.getPnl(strategyId, tradingDay));
+    public List<PnlEntity> getPnl(@PathVariable("tradingDay") int tradingDay,
+                                  @RequestParam("strategyId") int strategyId) {
+        if (ControllerUtil.paramIsNull(tradingDay))
+            throw new IllegalArgumentException("get pnl param error -> " + tradingDay);
+        return service.getPnl(strategyId, tradingDay);
     }
 
     /**
@@ -51,13 +55,12 @@ public final class PnlController {
      * @param request HttpServletRequest
      * @return ResponseEntity<?>
      */
-    @ExceptionHandler(ServiceException.class)
     @PutMapping(consumes = APPLICATION_JSON_UTF8)
-    public ResponseEntity<?> putPnl(@RequestBody HttpServletRequest request) {
-        var pnlDaily = RequestUtil.bodyToObject(request, PnlEntity.class);
+    public ResponseStatus putPnl(@RequestBody HttpServletRequest request) {
+        var pnlDaily = ControllerUtil.bodyToObject(request, PnlEntity.class);
         return pnlDaily == null
-                ? ResponseUtil.badRequest() : service.putPnl(pnlDaily)
-                ? ResponseUtil.ok() : ResponseUtil.internalServerError();
+                ? ResponseStatus.BAD_REQUEST : service.putPnl(pnlDaily)
+                ? ResponseStatus.OK : ResponseStatus.INTERNAL_ERROR;
     }
 
     /**
@@ -67,13 +70,12 @@ public final class PnlController {
      * @param tradingDay int
      * @return ResponseEntity<List < PnlSettlementEntity>>
      */
-    @ExceptionHandler(ServiceException.class)
     @GetMapping("/settlement")
-    public ResponseEntity<List<PnlSettlementEntity>> getPnlSettlementDaily(
-            @RequestParam("strategyId") int strategyId, @RequestParam("tradingDay") int tradingDay) {
-        if (RequestUtil.paramIsNull(tradingDay))
-            return ResponseUtil.badRequest();
-        return ResponseUtil.responseOf(service.getPnlSettlement(strategyId, tradingDay));
+    public List<PnlSettlementEntity> getPnlSettlement(@RequestParam("strategyId") int strategyId,
+                                                      @RequestParam("tradingDay") int tradingDay) {
+        if (ControllerUtil.illegalTradingDay(tradingDay, log))
+            throw new IllegalArgumentException("");
+        return (service.getPnlSettlement(strategyId, tradingDay));
     }
 
 }

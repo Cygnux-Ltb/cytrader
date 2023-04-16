@@ -8,7 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * 交易产品表
@@ -16,9 +18,11 @@ import lombok.Data;
  *
  * @author yellow013
  */
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity
-@Table(name = "cyg_product")
+@Table(name = "cy_product")
 public final class ProductEntity {
 
     @Id

@@ -38,9 +38,6 @@ public final class OrderKeeper implements Serializable {
     @Serial
     private static final long serialVersionUID = 8581377004396461013L;
 
-    /*
-     * Logger
-     */
     private static final Logger log = Log4j2LoggerFactory.getLogger(OrderKeeper.class);
 
     /*

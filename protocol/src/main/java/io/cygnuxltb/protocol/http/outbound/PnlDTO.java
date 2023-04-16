@@ -1,4 +1,4 @@
-package io.cygnuxltb.protocol.http.dto.outbound;
+package io.cygnuxltb.protocol.http.outbound;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,12 +20,12 @@ public final class PnlDTO {
     private int strategyId;
 
     /**
-     * 标的代码
+     * 交易标的代码 [*]
      */
     private String instrumentCode;
 
     /**
-     * 交易日
+     * 交易日 [*]
      */
     private int tradingDay;
 

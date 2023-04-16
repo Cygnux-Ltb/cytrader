@@ -1,15 +1,15 @@
 
-# 
-## Get all product
+# 产品服务接口
+## 获取全部产品
 
-**URL:** `/product`
+**URL:** `/product/all`
 
 **Type:** `GET`
 
 
 **Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
 
-**Description:** Get all product
+**Description:** 获取全部产品
 
 
 
@@ -17,7 +17,7 @@
 
 **Request-example:**
 ```
-curl -X GET -i /product
+curl -X GET -i /product/all
 ```
 
 **Response-fields:**
@@ -35,64 +35,39 @@ curl -X GET -i /product
 ```
 [
   {
-    "uid": 134,
-    "productId": 924,
-    "productName": "john.kling",
-    "subAccountId": "84",
-    "userId": "84",
-    "interfaceType": "aph4ra"
+    "uid": 742,
+    "productId": 628,
+    "productName": "damien.swift",
+    "subAccountId": "92",
+    "userId": "92",
+    "interfaceType": "xcnpce"
   }
 ]
 ```
 
-## 
+## 获取指定产品信息
 
-**URL:** `/product/initialized`
-
-**Type:** `PUT`
-
-
-**Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
-
-**Description:** 
-
-
-
-
-
-**Request-example:**
-```
-curl -X PUT -i /product/initialized
-```
-
-**Response-example:**
-```
-{}
-```
-
-## 
-
-**URL:** `/product/{productId}`
+**URL:** `/product`
 
 **Type:** `GET`
 
 
 **Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
 
-**Description:** 
+**Description:** 获取指定产品信息
 
 
-**Path-parameters:**
+
+**Query-parameters:**
 
 | Parameter | Type | Required | Description | Since |
 |-----------|------|----------|-------------|-------|
 |productId|int32|true|int|-|
 
 
-
 **Request-example:**
 ```
-curl -X GET -i /product/724
+curl -X GET -i /product?productId=317 --data '&317'
 ```
 
 **Response-fields:**
@@ -109,12 +84,37 @@ curl -X GET -i /product/724
 **Response-example:**
 ```
 {
-  "uid": 765,
-  "productId": 158,
-  "productName": "john.kling",
-  "subAccountId": "84",
-  "userId": "84",
-  "interfaceType": "o51do7"
+  "uid": 263,
+  "productId": 155,
+  "productName": "damien.swift",
+  "subAccountId": "92",
+  "userId": "92",
+  "interfaceType": "7ix1tz"
 }
+```
+
+## 产品初始化
+
+**URL:** `/product/init`
+
+**Type:** `PUT`
+
+
+**Content-Type:** `application/x-www-form-urlencoded;charset=UTF-8`
+
+**Description:** 产品初始化
+
+
+
+
+
+**Request-example:**
+```
+curl -X PUT -i /product/init
+```
+
+**Response-example:**
+```
+OK
 ```
 

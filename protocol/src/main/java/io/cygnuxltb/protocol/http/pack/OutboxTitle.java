@@ -1,4 +1,4 @@
-package io.cygnuxltb.protocol.http.dto.pack;
+package io.cygnuxltb.protocol.http.pack;
 
 import io.mercury.common.codec.Envelope;
 import io.mercury.common.collections.MutableMaps;

@@ -1,5 +1,6 @@
 package io.cygnuxltb.engine.strategy;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -23,9 +24,7 @@ import io.mercury.common.log.Log4j2LoggerFactory;
 @Deprecated
 public final class StrategyKeeper implements Serializable {
 
-	/**
-	 * 
-	 */
+	@Serial
 	private static final long serialVersionUID = -4657849933310280319L;
 
 	/**

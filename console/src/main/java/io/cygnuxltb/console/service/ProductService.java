@@ -15,7 +15,7 @@ public class ProductService {
     private ProductDao dao;
 
     public List<ProductEntity> getAll() {
-        return DaoExecutor.select(() -> dao.findAll(), ProductEntity.class);
+        return DaoExecutor.select(ProductEntity.class, () -> dao.findAll());
     }
 
     public ProductEntity getById(int productId) {
