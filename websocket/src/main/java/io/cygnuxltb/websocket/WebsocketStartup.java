@@ -1,6 +1,6 @@
 package io.cygnuxltb.websocket;
 
-import io.mercury.common.log.Log4j2Configurator;
+import io.mercury.common.log4j2.Log4j2Configurator;
 
 import static spark.Spark.get;
 import static spark.Spark.port;
