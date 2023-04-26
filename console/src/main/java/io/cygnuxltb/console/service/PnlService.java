@@ -16,10 +16,10 @@ import static io.cygnuxltb.console.persistence.util.DaoExecutor.select;
 public final class PnlService {
 
     @Resource
-    private PnlDao pnlDao;
+    private PnlDao dao;
 
     @Resource
-    private PnlSettlementDao pnlSettlementDao;
+    private PnlSettlementDao settlementDao;
 
     /**
      * @param strategyId int
@@ -28,7 +28,7 @@ public final class PnlService {
      */
     public List<PnlEntity> getPnl(int strategyId, int tradingDay) {
         return select(PnlEntity.class,
-                () -> pnlDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay));
+                () -> dao.queryByStrategyIdAndTradingDay(strategyId, tradingDay));
     }
 
     /**
@@ -38,7 +38,7 @@ public final class PnlService {
      */
     public List<PnlSettlementEntity> getPnlSettlement(int strategyId, int tradingDay) {
         return select(PnlSettlementEntity.class,
-                () -> pnlSettlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay));
+                () -> settlementDao.queryByStrategyIdAndTradingDay(strategyId, tradingDay));
     }
 
     /**
@@ -46,7 +46,7 @@ public final class PnlService {
      * @return boolean
      */
     public boolean putPnl(PnlEntity entity) {
-        return insertOrUpdate(pnlDao, entity);
+        return insertOrUpdate(dao, entity);
     }
 
     /**
@@ -54,7 +54,7 @@ public final class PnlService {
      * @return boolean
      */
     public boolean putPnlSettlement(PnlSettlementEntity entity) {
-        return insertOrUpdate(pnlSettlementDao, entity);
+        return insertOrUpdate(settlementDao, entity);
     }
 
 }

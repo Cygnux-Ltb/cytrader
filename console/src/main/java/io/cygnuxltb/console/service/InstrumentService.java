@@ -8,12 +8,13 @@ import io.cygnuxltb.console.service.bean.OutboundConverter;
 import io.cygnuxltb.protocol.http.inbound.InstrumentPrice;
 import io.cygnuxltb.protocol.http.outbound.InstrumentDTO;
 import io.cygnuxltb.protocol.http.outbound.InstrumentSettlementDTO;
+import io.mercury.common.collections.MutableMaps;
 import jakarta.annotation.Resource;
+import org.eclipse.collections.api.map.ConcurrentMutableMap;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import static io.cygnuxltb.console.persistence.util.DaoExecutor.insertOrUpdate;
@@ -30,7 +31,7 @@ public final class InstrumentService {
     private InstrumentSettlementDao settlementDao;
 
     // LastPrices Cache
-    private final ConcurrentHashMap<String, InstrumentPrice> lastPriceMap = new ConcurrentHashMap<>();
+    private final ConcurrentMutableMap<String, InstrumentPrice> lastPriceMap = MutableMaps.newConcurrentHashMap();
 
     private InstrumentPrice getInstrumentPrice(String instrumentCode) {
         return lastPriceMap.putIfAbsent(instrumentCode, new InstrumentPrice(instrumentCode));

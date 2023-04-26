@@ -27,7 +27,7 @@
 
 **Request-example:**
 ```
-curl -X GET -i /pnl/705?strategyId=416 --data '&416'
+curl -X GET -i /pnl/414?strategyId=238 --data '&238'
 ```
 
 **Response-fields:**
@@ -55,22 +55,22 @@ curl -X GET -i /pnl/705?strategyId=416 --data '&416'
 ```
 [
   {
-    "uid": 765,
-    "strategyId": 723,
-    "instrumentCode": "29541",
-    "tradingDay": 963,
-    "avgBuyPrice": 45.23,
-    "avgSellPrice": 9.60,
-    "buyQuantity": 46,
-    "sellQuantity": 113,
-    "todayLong": 513,
-    "todayShort": 315,
-    "yesterdayLong": 667,
-    "yesterdayShort": 471,
-    "netPosition": 610,
-    "aggregatedFee": 25.68,
-    "approved": 333,
-    "turnover": 286
+    "uid": 108,
+    "strategyId": 987,
+    "instrumentCode": "14444",
+    "tradingDay": 629,
+    "avgBuyPrice": 84.22,
+    "avgSellPrice": 45.83,
+    "buyQuantity": 103,
+    "sellQuantity": 459,
+    "todayLong": 519,
+    "todayShort": 159,
+    "yesterdayLong": 734,
+    "yesterdayShort": 929,
+    "netPosition": 381,
+    "aggregatedFee": 28.83,
+    "approved": 280,
+    "turnover": 87
   }
 ]
 ```
@@ -123,7 +123,7 @@ OK
 
 **Request-example:**
 ```
-curl -X GET -i /pnl/settlement?strategyId=298&tradingDay=756 --data '&298&756'
+curl -X GET -i /pnl/settlement?strategyId=684&tradingDay=410 --data '&684&410'
 ```
 
 **Response-fields:**
@@ -145,16 +145,16 @@ curl -X GET -i /pnl/settlement?strategyId=298&tradingDay=756 --data '&298&756'
 ```
 [
   {
-    "uid": 60,
-    "strategyId": 535,
-    "instrumentCode": "29541",
-    "tradingDay": 638,
-    "position": 840,
-    "pnlTotal": 63.02,
-    "pnlNet": 53.91,
-    "tradeCost": 71.82,
-    "exposure": 61.05,
-    "approved": 665
+    "uid": 721,
+    "strategyId": 149,
+    "instrumentCode": "14444",
+    "tradingDay": 201,
+    "position": 969,
+    "pnlTotal": 16.67,
+    "pnlNet": 25.64,
+    "tradeCost": 43.55,
+    "exposure": 17.09,
+    "approved": 481
   }
 ]
 ```

@@ -3,7 +3,7 @@ package io.cygnuxltb.console.component;
 import io.cygnuxltb.console.persistence.entity.ProductEntity;
 import io.cygnuxltb.console.service.ProductService;
 import io.mercury.common.datetime.pattern.TimePattern;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;

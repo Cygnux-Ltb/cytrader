@@ -6,7 +6,7 @@
     <meta name="generator" content="smart-doc">
     <title>Cytrader-Console</title>
     <link rel="stylesheet" href="font.css">
-    <link rel="stylesheet" href="AllInOne.css?v=1681642115179"/>
+    <link rel="stylesheet" href="AllInOne.css?v=1682217944794"/>
     
     <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
         background: #f7f7f8;
@@ -121,37 +121,40 @@
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="InstrumentController.html#header">8.&nbsp;交易标的查询接口</a>
+            <li class=""><a class="dd" href="PositionController.html#header">8.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">                </ul>
+            </li>
+            <li class=""><a class="dd" href="InstrumentController.html#header">9.&nbsp;交易标的查询接口</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="InstrumentController.html#_8_1_获取结算价格">8.1.&nbsp;获取结算价格</a>
+                            href="InstrumentController.html#_9_1_获取结算价格">9.1.&nbsp;获取结算价格</a>
                     </li>
 
                     <li><a
-                            href="InstrumentController.html#_8_2_获取最新价格">8.2.&nbsp;获取最新价格</a>
+                            href="InstrumentController.html#_9_2_获取最新价格">9.2.&nbsp;获取最新价格</a>
                     </li>
 
                     <li><a
-                            href="InstrumentController.html#_8_3_更新最新价格">8.3.&nbsp;更新最新价格</a>
+                            href="InstrumentController.html#_9_3_更新最新价格">9.3.&nbsp;更新最新价格</a>
                     </li>
 
                     <li><a
-                            href="InstrumentController.html#_8_4_获取可交易的标的">8.4.&nbsp;获取可交易的标的</a>
+                            href="InstrumentController.html#_9_4_获取可交易的标的">9.4.&nbsp;获取可交易的标的</a>
                     </li>
                 </ul>
             </li>
-            <li class="open"><a class="dd" href="OrderController.html#header">9.&nbsp;订单服务接口</a>
+            <li class="open"><a class="dd" href="OrderController.html#header">10.&nbsp;订单服务接口</a>
                 <ul class="sectlevel2" style="display: block">
                     <li><a
-                            href="OrderController.html#_9_1_查询Order">9.1.&nbsp;查询Order</a>
+                            href="OrderController.html#_10_1_查询Order">10.1.&nbsp;查询Order</a>
                     </li>
 
                     <li><a
-                            href="OrderController.html#_9_2_获取订单最新状态">9.2.&nbsp;获取订单最新状态</a>
+                            href="OrderController.html#_10_2_获取订单最新状态">10.2.&nbsp;获取订单最新状态</a>
                     </li>
 
                     <li><a
-                            href="OrderController.html#_9_3_新增订单">9.3.&nbsp;新增订单</a>
+                            href="OrderController.html#_10_3_新增订单">10.3.&nbsp;新增订单</a>
                     </li>
                 </ul>
             </li>
@@ -159,12 +162,12 @@
     </div>
 </div>
 <div id="content">
-    <div class="sect1"><h2 id="_订单服务接口"><a class="anchor" href="#_订单服务接口"></a><a class="link" href="#_订单服务接口">9.&nbsp;订单服务接口</a>
+    <div class="sect1"><h2 id="_订单服务接口"><a class="anchor" href="#_订单服务接口"></a><a class="link" href="#_订单服务接口">10.&nbsp;订单服务接口</a>
     </h2>
         <div class="sectionbody">
-            <div class="sect2"><h3 id="_9_1_查询Order">
-                <a class="anchor" href="#_9_1_查询Order"></a>
-                <a class="link" href="#_9_1_查询Order">9.1.&nbsp;查询Order</a>
+            <div class="sect2"><h3 id="_10_1_查询Order">
+                <a class="anchor" href="#_10_1_查询Order"></a>
+                <a class="link" href="#_10_1_查询Order">10.1.&nbsp;查询Order</a>
             </h3>
                 <div class="paragraph"><p><strong>URL:</strong><a href="/order/{tradingDay}" class="bare">&nbsp;/order/{tradingDay}</a>
                 </p></div>
@@ -246,7 +249,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /order/322?strategyId=483&investorId=92&instrumentCode=29541 --data '&483&92&29541'</code></pre>
+                        <pre><code class="bash">curl -X GET -i /order/357?strategyId=983&investorId=53&instrumentCode=14444 --data '&983&53&14444'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -440,39 +443,39 @@
                     <div class="content">
                         <pre><code class="json">[
   {
-    "uid": 869,
-    "tradingDay": 574,
-    "strategyId": 88,
-    "instrumentCode": "29541",
-    "investorId": "92",
-    "brokerId": "92",
-    "accountId": 515,
-    "subAccountId": 635,
-    "userId": 283,
-    "ordSysId": 870,
-    "ordType": "75axrd",
-    "ordRef": "l2j2f2",
-    "direction": "t",
-    "side": "f",
-    "offerPrice": 29.04,
-    "offerQty": 875,
-    "insertTime": "2023-04-16 19:48:40",
-    "updateTime": "2023-04-16 19:48:40",
-    "cancelTime": "2023-04-16 19:48:40",
-    "frontId": 519,
-    "sessionId": 686,
-    "fee": 51.98,
-    "adaptorType": "wxjhoy",
-    "remark": "pjrz69"
+    "uid": 217,
+    "tradingDay": 170,
+    "strategyId": 706,
+    "instrumentCode": "14444",
+    "investorId": "53",
+    "brokerId": "53",
+    "accountId": 401,
+    "subAccountId": 586,
+    "userId": 604,
+    "ordSysId": 352,
+    "ordType": "wq34c0",
+    "ordRef": "kkmd93",
+    "direction": "x",
+    "side": "o",
+    "offerPrice": 90.90,
+    "offerQty": 904,
+    "insertTime": "2023-04-23 11:45:51",
+    "updateTime": "2023-04-23 11:45:51",
+    "cancelTime": "2023-04-23 11:45:51",
+    "frontId": 203,
+    "sessionId": 699,
+    "fee": 31.33,
+    "adaptorType": "l762jm",
+    "remark": "zyom6p"
   }
 ]</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="sect2"><h3 id="_9_2_获取订单最新状态">
-                <a class="anchor" href="#_9_2_获取订单最新状态"></a>
-                <a class="link" href="#_9_2_获取订单最新状态">9.2.&nbsp;获取订单最新状态</a>
+            <div class="sect2"><h3 id="_10_2_获取订单最新状态">
+                <a class="anchor" href="#_10_2_获取订单最新状态"></a>
+                <a class="link" href="#_10_2_获取订单最新状态">10.2.&nbsp;获取订单最新状态</a>
             </h3>
                 <div class="paragraph"><p><strong>URL:</strong><a href="/order/status" class="bare">&nbsp;/order/status</a>
                 </p></div>
@@ -518,7 +521,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /order/status?tradingDay=336&strategyId=100 --data '&336&100'</code></pre>
+                        <pre><code class="bash">curl -X GET -i /order/status?tradingDay=25&strategyId=737 --data '&25&737'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -740,43 +743,43 @@
                     <div class="content">
                         <pre><code class="json">[
   {
-    "uid": 593,
-    "tradingDay": 217,
-    "strategyId": 33,
-    "instrumentCode": "29541",
-    "investorId": "92",
-    "brokerId": "92",
-    "accountId": 578,
-    "subAccountId": 434,
-    "userId": 50,
-    "ordSysId": 181,
-    "ordRef": "4ncede",
-    "ordMsgType": 936,
+    "uid": 989,
+    "tradingDay": 777,
+    "strategyId": 751,
+    "instrumentCode": "14444",
+    "investorId": "53",
+    "brokerId": "53",
+    "accountId": 109,
+    "subAccountId": 813,
+    "userId": 81,
+    "ordSysId": 959,
+    "ordRef": "3va4lf",
+    "ordMsgType": 161,
     "ordOffset": "j",
-    "direction": "y",
-    "limitPrice": 81.27,
-    "status": 612,
-    "statusMsg": "2wcqzq",
-    "brokerSysID": 396,
-    "volume": 285,
-    "volumeFilled": 962,
-    "volumeRemained": 922,
-    "price": 93.36,
-    "tradeId": "92",
-    "ordRejReason": 76,
-    "insertTime": 418,
-    "updateTime": 728,
-    "cancelTime": 563,
-    "remark": "jhp63f"
+    "direction": "t",
+    "limitPrice": 72.82,
+    "status": 239,
+    "statusMsg": "b9ti4u",
+    "brokerSysID": 498,
+    "volume": 836,
+    "volumeFilled": 70,
+    "volumeRemained": 664,
+    "price": 64.23,
+    "tradeId": "53",
+    "ordRejReason": 120,
+    "insertTime": 343,
+    "updateTime": 881,
+    "cancelTime": 813,
+    "remark": "vpxbns"
   }
 ]</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="sect2"><h3 id="_9_3_新增订单">
-                <a class="anchor" href="#_9_3_新增订单"></a>
-                <a class="link" href="#_9_3_新增订单">9.3.&nbsp;新增订单</a>
+            <div class="sect2"><h3 id="_10_3_新增订单">
+                <a class="anchor" href="#_10_3_新增订单"></a>
+                <a class="link" href="#_10_3_新增订单">10.3.&nbsp;新增订单</a>
             </h3>
                 <div class="paragraph"><p><strong>URL:</strong><a href="/order" class="bare">&nbsp;/order</a>
                 </p></div>
@@ -798,12 +801,12 @@
             </div>
         </div>
     </div>
-    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2023-04-16 19:48:35</span><span
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2023-04-23 11:45:44</span><span
             class="footer-modification">Suggestions,contact,support and error reporting on<a
             href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">&nbsp;Gitee</a>&nbsp;or<a
             href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">&nbsp;Github</a></span></footer>
 </div>
-<script src="search.js?v=1681642115179"></script>
+<script src="search.js?v=1682217944794"></script>
 <script>
     $(function () {
         const Accordion = function (el, multiple) {

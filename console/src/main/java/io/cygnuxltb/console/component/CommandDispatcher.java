@@ -14,7 +14,6 @@ public final class CommandDispatcher {
     private void init() {
     }
 
-
     /**
      *
      */

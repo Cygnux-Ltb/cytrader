@@ -23,7 +23,7 @@
 
 **Request-example:**
 ```
-curl -X GET -i /bar?tradingDay=777&instrumentCode=29541 --data '&777&29541'
+curl -X GET -i /bar?tradingDay=857&instrumentCode=14444 --data '&857&14444'
 ```
 
 **Response-fields:**
@@ -45,16 +45,16 @@ curl -X GET -i /bar?tradingDay=777&instrumentCode=29541 --data '&777&29541'
 ```
 [
   {
-    "instrumentCode": "29541",
-    "tradingDay": 169,
-    "actualDate": 983,
-    "timePoint": 307,
-    "open": 92.03,
-    "high": 53.00,
-    "low": 49.30,
-    "close": 46.53,
-    "volume": 12.18,
-    "turnover": 47.31
+    "instrumentCode": "14444",
+    "tradingDay": 311,
+    "actualDate": 272,
+    "timePoint": 326,
+    "open": 18.73,
+    "high": 14.16,
+    "low": 12.28,
+    "close": 3.99,
+    "volume": 80.93,
+    "turnover": 32.92
   }
 ]
 ```

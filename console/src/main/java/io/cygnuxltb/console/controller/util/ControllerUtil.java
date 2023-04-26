@@ -1,7 +1,7 @@
 package io.cygnuxltb.console.controller.util;
 
 import io.mercury.common.character.Charsets;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.util.StringSupport;
 import io.mercury.serialization.json.JsonParser;
 import jakarta.servlet.http.HttpServletRequest;

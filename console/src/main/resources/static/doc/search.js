@@ -125,44 +125,51 @@ api[6].list.push({
     desc: '更新状态',
 });
 api.push({
-    alias: 'InstrumentController',
+    alias: 'PositionController',
     order: '8',
+    desc: '',
+    link: '',
+    list: []
+})
+api.push({
+    alias: 'InstrumentController',
+    order: '9',
     desc: '交易标的查询接口',
     link: '交易标的查询接口',
     list: []
 })
-api[7].list.push({
+api[8].list.push({
     order: '1',
     desc: '获取结算价格',
 });
-api[7].list.push({
+api[8].list.push({
     order: '2',
     desc: '获取最新价格',
 });
-api[7].list.push({
+api[8].list.push({
     order: '3',
     desc: '更新最新价格',
 });
-api[7].list.push({
+api[8].list.push({
     order: '4',
     desc: '获取可交易的标的',
 });
 api.push({
     alias: 'OrderController',
-    order: '9',
+    order: '10',
     desc: '订单服务接口',
     link: '订单服务接口',
     list: []
 })
-api[8].list.push({
+api[9].list.push({
     order: '1',
     desc: '查询Order',
 });
-api[8].list.push({
+api[9].list.push({
     order: '2',
     desc: '获取订单最新状态',
 });
-api[8].list.push({
+api[9].list.push({
     order: '3',
     desc: '新增订单',
 });

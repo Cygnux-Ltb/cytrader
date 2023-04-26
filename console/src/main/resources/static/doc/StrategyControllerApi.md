@@ -34,11 +34,11 @@ curl -X GET -i /strategy
 ```
 [
   {
-    "uid": 723,
-    "strategyId": 121,
-    "strategyName": "damien.swift",
-    "strategyOwner": "024csx",
-    "strategyInfo": "nnthvt"
+    "uid": 351,
+    "strategyId": 94,
+    "strategyName": "wilhemina.hirthe",
+    "strategyOwner": "om00h6",
+    "strategyInfo": "8xm9mf"
   }
 ]
 ```
@@ -65,7 +65,7 @@ curl -X GET -i /strategy
 
 **Request-example:**
 ```
-curl -X GET -i /strategy/891
+curl -X GET -i /strategy/195
 ```
 
 **Response-fields:**
@@ -81,11 +81,11 @@ curl -X GET -i /strategy/891
 **Response-example:**
 ```
 {
-  "uid": 978,
-  "strategyId": 373,
-  "strategyName": "damien.swift",
-  "strategyOwner": "p1m994",
-  "strategyInfo": "dc7icl"
+  "uid": 116,
+  "strategyId": 670,
+  "strategyName": "wilhemina.hirthe",
+  "strategyOwner": "ze5a2g",
+  "strategyInfo": "suaftb"
 }
 ```
 
@@ -111,7 +111,7 @@ curl -X GET -i /strategy/891
 
 **Request-example:**
 ```
-curl -X GET -i /strategy/219/param
+curl -X GET -i /strategy/636/param
 ```
 
 **Response-fields:**
@@ -131,14 +131,14 @@ curl -X GET -i /strategy/219/param
 ```
 [
   {
-    "uid": 489,
-    "strategyId": 585,
-    "strategyName": "damien.swift",
-    "ownerType": "mg77yo",
-    "owner": "keie86",
-    "paramName": "damien.swift",
-    "paramType": "zekc08",
-    "paramValue": "q078yq"
+    "uid": 155,
+    "strategyId": 225,
+    "strategyName": "wilhemina.hirthe",
+    "ownerType": "2hy0x5",
+    "owner": "pe7dl1",
+    "paramName": "wilhemina.hirthe",
+    "paramType": "88f5fz",
+    "paramValue": "rmpbse"
   }
 ]
 ```
@@ -165,7 +165,7 @@ curl -X GET -i /strategy/219/param
 
 **Request-example:**
 ```
-curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /strategy/345/param
+curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /strategy/564/param
 ```
 
 **Response-example:**

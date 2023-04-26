@@ -8,7 +8,7 @@ import io.cygnuxltb.protocol.http.outbound.InstrumentDTO;
 import io.cygnuxltb.protocol.http.outbound.InstrumentSettlementDTO;
 import io.mercury.common.http.MimeType;
 import io.mercury.common.lang.Throws;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.util.StringSupport;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;

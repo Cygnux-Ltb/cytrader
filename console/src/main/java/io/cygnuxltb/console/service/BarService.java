@@ -19,7 +19,7 @@ public class BarService {
 
 
     @Resource
-    private BarDao barDao;
+    private BarDao dao;
 
     /**
      * @param instrumentCode String
@@ -39,7 +39,7 @@ public class BarService {
      */
     public List<BarM1DTO> getBars(@Nonnull String instrumentCode, int startTradingDay, int endTradingDay) {
         return select(BarEntity.class,
-                () -> barDao.queryBy(instrumentCode, startTradingDay, endTradingDay))
+                () -> dao.queryBy(instrumentCode, startTradingDay, endTradingDay))
                 .stream()
                 .map(OutboundConverter::toBarDTO)
                 .collect(Collectors.toList());
@@ -50,7 +50,7 @@ public class BarService {
      * @return boolean
      */
     public boolean putBar(@Nonnull BarEntity entity) {
-        return insertOrUpdate(barDao, entity);
+        return insertOrUpdate(dao, entity);
     }
 
 }

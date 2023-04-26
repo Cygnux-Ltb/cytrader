@@ -23,7 +23,7 @@
 
 **Request-example:**
 ```
-curl -X POST -i /user/signin --data 'sign=hnnw5i&password=byvkfi'
+curl -X POST -i /user/signin --data 'sign=a2uokd&password=yllhqa'
 ```
 
 **Response-example:**
@@ -55,7 +55,7 @@ true
 
 **Request-example:**
 ```
-curl -X POST -i /user/signup --data 'sign=pellup&type=928&password=18scg1'
+curl -X POST -i /user/signup --data 'sign=av2jwz&type=910&password=xd5et3'
 ```
 
 **Response-fields:**
@@ -70,7 +70,7 @@ curl -X POST -i /user/signup --data 'sign=pellup&type=928&password=18scg1'
 **Response-example:**
 ```
 {
-  "code": 497,
+  "code": 236,
   "message": "success",
   "array": true,
   "data": {}

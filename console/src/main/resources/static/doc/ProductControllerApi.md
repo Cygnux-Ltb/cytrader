@@ -35,12 +35,12 @@ curl -X GET -i /product/all
 ```
 [
   {
-    "uid": 742,
-    "productId": 628,
-    "productName": "damien.swift",
-    "subAccountId": "92",
-    "userId": "92",
-    "interfaceType": "xcnpce"
+    "uid": 946,
+    "productId": 829,
+    "productName": "wilhemina.hirthe",
+    "subAccountId": "53",
+    "userId": "53",
+    "interfaceType": "suclpl"
   }
 ]
 ```
@@ -67,7 +67,7 @@ curl -X GET -i /product/all
 
 **Request-example:**
 ```
-curl -X GET -i /product?productId=317 --data '&317'
+curl -X GET -i /product?productId=49 --data '&49'
 ```
 
 **Response-fields:**
@@ -84,12 +84,12 @@ curl -X GET -i /product?productId=317 --data '&317'
 **Response-example:**
 ```
 {
-  "uid": 263,
-  "productId": 155,
-  "productName": "damien.swift",
-  "subAccountId": "92",
-  "userId": "92",
-  "interfaceType": "7ix1tz"
+  "uid": 946,
+  "productId": 344,
+  "productName": "wilhemina.hirthe",
+  "subAccountId": "53",
+  "userId": "53",
+  "interfaceType": "ageuol"
 }
 ```
 

@@ -22,7 +22,7 @@
 
 **Request-example:**
 ```
-curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /command/param --data 'productId=474'
+curl -X PUT -H 'Content-Type: APPLICATION_JSON_UTF8' -i /command/param --data 'productId=444'
 ```
 
 **Response-example:**

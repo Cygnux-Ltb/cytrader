@@ -4,7 +4,7 @@ import io.cygnuxltb.console.controller.base.ResponseBean;
 import io.cygnuxltb.console.controller.base.ResponseStatus;
 import io.cygnuxltb.console.service.UserService;
 import io.mercury.common.http.MimeType;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;

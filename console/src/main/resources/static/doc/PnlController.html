@@ -6,7 +6,7 @@
     <meta name="generator" content="smart-doc">
     <title>Cytrader-Console</title>
     <link rel="stylesheet" href="font.css">
-    <link rel="stylesheet" href="AllInOne.css?v=1681642115179"/>
+    <link rel="stylesheet" href="AllInOne.css?v=1682217944794"/>
     
     <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
         background: #f7f7f8;
@@ -121,37 +121,40 @@
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="InstrumentController.html#header">8.&nbsp;交易标的查询接口</a>
+            <li class=""><a class="dd" href="PositionController.html#header">8.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">                </ul>
+            </li>
+            <li class=""><a class="dd" href="InstrumentController.html#header">9.&nbsp;交易标的查询接口</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="InstrumentController.html#_8_1_获取结算价格">8.1.&nbsp;获取结算价格</a>
+                            href="InstrumentController.html#_9_1_获取结算价格">9.1.&nbsp;获取结算价格</a>
                     </li>
 
                     <li><a
-                            href="InstrumentController.html#_8_2_获取最新价格">8.2.&nbsp;获取最新价格</a>
+                            href="InstrumentController.html#_9_2_获取最新价格">9.2.&nbsp;获取最新价格</a>
                     </li>
 
                     <li><a
-                            href="InstrumentController.html#_8_3_更新最新价格">8.3.&nbsp;更新最新价格</a>
+                            href="InstrumentController.html#_9_3_更新最新价格">9.3.&nbsp;更新最新价格</a>
                     </li>
 
                     <li><a
-                            href="InstrumentController.html#_8_4_获取可交易的标的">8.4.&nbsp;获取可交易的标的</a>
+                            href="InstrumentController.html#_9_4_获取可交易的标的">9.4.&nbsp;获取可交易的标的</a>
                     </li>
                 </ul>
             </li>
-            <li class=""><a class="dd" href="OrderController.html#header">9.&nbsp;订单服务接口</a>
+            <li class=""><a class="dd" href="OrderController.html#header">10.&nbsp;订单服务接口</a>
                 <ul class="sectlevel2" style="display: none">
                     <li><a
-                            href="OrderController.html#_9_1_查询Order">9.1.&nbsp;查询Order</a>
+                            href="OrderController.html#_10_1_查询Order">10.1.&nbsp;查询Order</a>
                     </li>
 
                     <li><a
-                            href="OrderController.html#_9_2_获取订单最新状态">9.2.&nbsp;获取订单最新状态</a>
+                            href="OrderController.html#_10_2_获取订单最新状态">10.2.&nbsp;获取订单最新状态</a>
                     </li>
 
                     <li><a
-                            href="OrderController.html#_9_3_新增订单">9.3.&nbsp;新增订单</a>
+                            href="OrderController.html#_10_3_新增订单">10.3.&nbsp;新增订单</a>
                     </li>
                 </ul>
             </li>
@@ -230,7 +233,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /pnl/944?strategyId=837 --data '&837'</code></pre>
+                        <pre><code class="bash">curl -X GET -i /pnl/956?strategyId=571 --data '&571'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -368,22 +371,22 @@
                     <div class="content">
                         <pre><code class="json">[
   {
-    "uid": 108,
-    "strategyId": 529,
-    "instrumentCode": "29541",
-    "tradingDay": 885,
-    "avgBuyPrice": 96.77,
-    "avgSellPrice": 12.75,
-    "buyQuantity": 868,
-    "sellQuantity": 253,
-    "todayLong": 432,
-    "todayShort": 986,
-    "yesterdayLong": 361,
-    "yesterdayShort": 74,
-    "netPosition": 343,
-    "aggregatedFee": 54.29,
-    "approved": 483,
-    "turnover": 714
+    "uid": 489,
+    "strategyId": 52,
+    "instrumentCode": "14444",
+    "tradingDay": 26,
+    "avgBuyPrice": 80.18,
+    "avgSellPrice": 77.14,
+    "buyQuantity": 5,
+    "sellQuantity": 65,
+    "todayLong": 989,
+    "todayShort": 940,
+    "yesterdayLong": 841,
+    "yesterdayShort": 992,
+    "netPosition": 606,
+    "aggregatedFee": 7.72,
+    "approved": 273,
+    "turnover": 319
   }
 ]</code></pre>
                     </div>
@@ -461,7 +464,7 @@
                 <div class="paragraph"><p><strong>Request-example:</strong></p></div>
                 <div class="listingblock">
                     <div class="content">
-                        <pre><code class="bash">curl -X GET -i /pnl/settlement?strategyId=595&tradingDay=886 --data '&595&886'</code></pre>
+                        <pre><code class="bash">curl -X GET -i /pnl/settlement?strategyId=578&tradingDay=143 --data '&578&143'</code></pre>
                     </div>
                 </div>
                 <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
@@ -557,16 +560,16 @@
                     <div class="content">
                         <pre><code class="json">[
   {
-    "uid": 744,
-    "strategyId": 235,
-    "instrumentCode": "29541",
-    "tradingDay": 826,
-    "position": 201,
-    "pnlTotal": 31.39,
-    "pnlNet": 37.91,
-    "tradeCost": 43.13,
-    "exposure": 62.67,
-    "approved": 68
+    "uid": 112,
+    "strategyId": 103,
+    "instrumentCode": "14444",
+    "tradingDay": 217,
+    "position": 768,
+    "pnlTotal": 0.02,
+    "pnlNet": 72.71,
+    "tradeCost": 47.93,
+    "exposure": 71.34,
+    "approved": 105
   }
 ]</code></pre>
                     </div>
@@ -574,12 +577,12 @@
             </div>
         </div>
     </div>
-    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2023-04-16 19:48:35</span><span
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2023-04-23 11:45:44</span><span
             class="footer-modification">Suggestions,contact,support and error reporting on<a
             href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">&nbsp;Gitee</a>&nbsp;or<a
             href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">&nbsp;Github</a></span></footer>
 </div>
-<script src="search.js?v=1681642115179"></script>
+<script src="search.js?v=1682217944794"></script>
 <script>
     $(function () {
         const Accordion = function (el, multiple) {

@@ -7,7 +7,7 @@ import io.cygnuxltb.protocol.http.pack.OutboxMessage;
 import io.cygnuxltb.protocol.http.pack.OutboxTitle;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.http.MimeType;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonWrapper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -37,7 +37,7 @@ public final class StatusController {
 
     private static final Logger log = Log4j2LoggerFactory.getLogger(StatusController.class);
 
-    private static final ConcurrentMap<Integer, StrategySwitch> StrategySwitchMap = MutableMaps.newConcurrentHashMap();
+    private final ConcurrentMap<Integer, StrategySwitch> StrategySwitchMap = MutableMaps.newConcurrentHashMap();
 
     /**
      * 获取全部策略状态

@@ -4,7 +4,7 @@ import io.cygnuxltb.console.persistence.dao.StrategyDao;
 import io.cygnuxltb.console.persistence.entity.StrategyEntity;
 import io.cygnuxltb.console.persistence.util.DaoExecutor;
 import io.mercury.common.lang.Throws;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,8 @@ public final class StrategyService {
      * @return List<StrategyEntity>
      */
     public List<StrategyEntity> getAllStrategy() {
-        return select(StrategyEntity.class, () -> strategyDao.findAll());
+        return select(StrategyEntity.class,
+                () -> strategyDao.findAll());
     }
 
     /**

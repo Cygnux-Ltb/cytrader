@@ -6,7 +6,7 @@ import io.cygnuxltb.console.persistence.entity.StrategyEntity;
 import io.cygnuxltb.console.service.ParamService;
 import io.cygnuxltb.console.service.StrategyService;
 import io.mercury.common.http.MimeType;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;

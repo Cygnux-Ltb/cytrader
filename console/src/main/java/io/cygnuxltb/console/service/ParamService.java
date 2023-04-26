@@ -5,7 +5,7 @@ import io.cygnuxltb.console.persistence.entity.ParamEntity;
 import io.cygnuxltb.console.service.bean.ValidationRule;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.lang.Throws;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonParser;
 import jakarta.annotation.Resource;
 import org.apache.commons.io.IOUtils;
@@ -38,9 +38,9 @@ public class ParamService {
         try (InputStream inputStream = ParamService.class.getResourceAsStream("validation_rules.json")) {
             if (inputStream != null) {
                 String json = IOUtils.toString(inputStream, Charsets.UTF8);
-                List<ValidationRule> validationRules = JsonParser.toList(json, ValidationRule.class);
-                for (ValidationRule validationRule : validationRules) {
-                    validationRuleMap.put(validationRule.getParamName(), validationRule);
+                List<ValidationRule> rules = JsonParser.toList(json, ValidationRule.class);
+                for (ValidationRule rule : rules) {
+                    validationRuleMap.put(rule.getParamName(), rule);
                 }
             }
         } catch (IOException e) {
