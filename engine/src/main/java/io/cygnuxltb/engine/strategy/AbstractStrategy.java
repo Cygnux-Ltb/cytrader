@@ -27,7 +27,7 @@ import io.mercury.common.annotation.AbstractFunction;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.fsm.EnableableComponent;
 import io.mercury.common.lang.Asserter;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.param.ParamKey;
 import io.mercury.common.param.Params;
 import io.mercury.common.sequence.SnowflakeAlgo;
@@ -216,7 +216,8 @@ public abstract class AbstractStrategy<M extends MarketData, K extends ParamKey>
 
     @Override
     public void onThrowable(Throwable throwable) {
-        log.error("StrategyId -> [{}] throw exception -> [{}]", strategyId, throwable);
+        log.error("StrategyId -> [{}] throw exception -> [{}]",
+                strategyId, throwable.getMessage(), throwable);
     }
 
     /**

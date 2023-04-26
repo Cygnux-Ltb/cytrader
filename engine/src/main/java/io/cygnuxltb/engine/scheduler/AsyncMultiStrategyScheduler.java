@@ -8,7 +8,7 @@ import io.horizon.trader.transport.outbound.TdxAdaptorReport;
 import io.horizon.trader.transport.outbound.TdxOrderReport;
 import io.mercury.common.collections.Capacity;
 import io.mercury.common.concurrent.queue.jct.JctSingleConsumerQueue;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;

@@ -5,7 +5,7 @@ import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.functional.Formatter;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.util.BitOperator;
 import io.mercury.serialization.json.JsonWrapper;
 import org.eclipse.collections.api.map.primitive.MutableLongIntMap;

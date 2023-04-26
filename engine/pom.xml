@@ -37,11 +37,6 @@
             <artifactId>trader-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.mercury</groupId>
-            <artifactId>actors</artifactId>
-            <version>${mercury.version}</version>
-        </dependency>
     </dependencies>
 
 </project>

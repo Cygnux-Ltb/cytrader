@@ -11,9 +11,4 @@ public class BasicMarketDataActor extends MarketDataActor<BasicMarketData> {
 
 	}
 
-	@Override
-	protected Class<BasicMarketData> eventType() {
-		return BasicMarketData.class;
-	}
-
 }

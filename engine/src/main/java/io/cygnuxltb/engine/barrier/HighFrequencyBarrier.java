@@ -2,7 +2,7 @@ package io.cygnuxltb.engine.barrier;
 
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.risk.OrderBarrier;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import org.slf4j.Logger;
 
 import javax.annotation.concurrent.NotThreadSafe;
