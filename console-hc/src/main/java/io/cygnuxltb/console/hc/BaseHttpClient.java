@@ -3,7 +3,7 @@ package io.cygnuxltb.console.hc;
 import io.mercury.common.http.JreHttpClient;
 import io.mercury.common.http.PathParams;
 import io.mercury.common.http.PathParams.PathParam;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.util.StringSupport;
 import io.mercury.serialization.json.JsonParser;
 import io.mercury.serialization.json.JsonWrapper;
