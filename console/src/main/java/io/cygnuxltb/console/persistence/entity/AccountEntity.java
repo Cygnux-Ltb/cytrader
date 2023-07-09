@@ -8,7 +8,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 
 /**
  * 交易账户表
@@ -16,9 +19,12 @@ import lombok.Data;
  *
  * @author yellow013
  */
-@Data
+
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity
-@Table(name = "cyg_account")
+@Table(name = "cy_account")
 public final class AccountEntity {
 
     @Id
@@ -42,4 +48,3 @@ public final class AccountEntity {
     private String adaptorType;
 
 }
-

@@ -17,12 +17,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static io.mercury.common.collections.ImmutableMaps.getIntObjectMapFactory;
-import static io.mercury.common.log.Log4j2LoggerFactory.getLogger;
+import static io.mercury.common.log4j2.Log4j2LoggerFactory.getLogger;
 
 public abstract class SingleInstrumentStrategy<M extends MarketData, K extends ParamKey>
         extends AbstractStrategy<M, K> {
 
-    // Logger
     private static final Logger log = getLogger(SingleInstrumentStrategy.class);
 
     // 策略订阅的合约

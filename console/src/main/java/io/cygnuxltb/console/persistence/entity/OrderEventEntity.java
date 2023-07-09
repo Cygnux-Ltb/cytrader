@@ -8,7 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * 订单事件表
@@ -16,9 +18,11 @@ import lombok.Data;
  *
  * @author yellow013
  */
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity
-@Table(name = "cyg_order_event")
+@Table(name = "cy_order_event")
 public final class OrderEventEntity {
 
     @Id
@@ -84,14 +88,14 @@ public final class OrderEventEntity {
     /**
      * order_ref
      */
-    @Column(name = "order_ref")
-    private String orderRef;
+    @Column(name = "ord_ref")
+    private String ordRef;
 
     /**
      * order_msg_type
      */
-    @Column(name = "order_msg_type")
-    private int orderMsgType;
+    @Column(name = "ord_msg_type")
+    private int ordMsgType;
 
     /**
      * ord_offset

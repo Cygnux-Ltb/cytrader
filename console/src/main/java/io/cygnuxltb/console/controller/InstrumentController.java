@@ -1,16 +1,18 @@
 package io.cygnuxltb.console.controller;
 
-import io.cygnuxltb.console.controller.base.ServiceException;
-import io.cygnuxltb.console.persistence.entity.InstrumentSettlementEntity;
+import io.cygnuxltb.console.controller.base.ResponseStatus;
+import io.cygnuxltb.console.controller.util.ControllerUtil;
 import io.cygnuxltb.console.service.InstrumentService;
-import io.cygnuxltb.console.service.dto.InstrumentPrice;
-import io.cygnuxltb.console.controller.util.RequestUtil;
-import io.cygnuxltb.console.controller.util.ResponseUtil;
+import io.cygnuxltb.protocol.http.inbound.InstrumentPrice;
+import io.cygnuxltb.protocol.http.outbound.InstrumentDTO;
+import io.cygnuxltb.protocol.http.outbound.InstrumentSettlementDTO;
+import io.mercury.common.http.MimeType;
+import io.mercury.common.lang.Throws;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.util.StringSupport;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,96 +22,90 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
-import static java.util.Arrays.stream;
-
+/**
+ * 交易标的查询接口
+ */
 @RestController
-@RequestMapping(path = "/instrument")
+@RequestMapping(path = "/instrument", produces = MimeType.APPLICATION_JSON_UTF8)
 public final class InstrumentController {
+
+    private static final Logger log = Log4j2LoggerFactory.getLogger(InstrumentController.class);
 
     @Resource
     private InstrumentService service;
 
+
     /**
-     * Get Settlement Price
+     * 获取结算价格
      *
-     * @param instrumentCode String
      * @param tradingDay     int
-     * @return ResponseEntity<List < InstrumentSettlementEntity>>
+     * @param instrumentCode String
+     * @return List<InstrumentSettlementDTO>
      */
-    @ExceptionHandler(ServiceException.class)
     @GetMapping(path = "/settlement")
-    public List<InstrumentSettlementEntity> getSettlementPrice(
-            @RequestParam("instrumentCode") String instrumentCode,
-            @RequestParam("tradingDay") int tradingDay) {
-        if (RequestUtil.paramIsNull(instrumentCode, tradingDay)) {
+    public List<InstrumentSettlementDTO> getSettlementPrice(
+            @RequestParam("tradingDay") int tradingDay,
+            @RequestParam("instrumentCode") String instrumentCode) {
+        if (ControllerUtil.paramIsNull(instrumentCode, tradingDay)) {
             return null;
         }
-        return service.getInstrumentSettlement(instrumentCode, tradingDay);
+        return service.getInstrumentSettlement(tradingDay, instrumentCode);
     }
 
-    // LastPrices Cache
-    private static final ConcurrentHashMap<String, InstrumentPrice> lastPriceMap = new ConcurrentHashMap<>();
 
     /**
-     * Get LastPrices
+     * 获取最新价格
      *
      * @param instrumentCodes String
      * @return ResponseEntity<List < InstrumentPrice>>
      */
-    @ExceptionHandler(ServiceException.class)
-    @GetMapping(path = "/last_price")
-    public ResponseEntity<List<InstrumentPrice>> getLastPrice(@RequestParam("instrumentCodes") String instrumentCodes) {
+    @GetMapping(path = "/last")
+    public List<InstrumentPrice> getLastPrice(
+            @RequestParam("instrumentCodes") String instrumentCodes) {
         if (StringSupport.isNullOrEmpty(instrumentCodes))
-            return ResponseUtil.badRequest();
-        var lastPrices = stream(instrumentCodes.split(",")).map(instrumentCode -> lastPriceMap
-                        .putIfAbsent(instrumentCode, new InstrumentPrice().setInstrumentCode(instrumentCode)))
-                .collect(Collectors.toList());
-        return ResponseUtil.responseOf(lastPrices);
+            Throws.illegalArgument("instrumentCodes");
+        return service.getLastPrice(instrumentCodes.split(","));
     }
 
     /**
-     * Put LastPrice
+     * 更新最新价格
      *
      * @param request HttpServletRequest
      * @return ResponseEntity<Object>
      */
-    @ExceptionHandler(ServiceException.class)
-    @PutMapping(path = "/last_price")
-    public ResponseEntity<Object> putLastPrice(@RequestBody HttpServletRequest request) {
-        var price = RequestUtil.bodyToObject(request, InstrumentPrice.class);
+    @PutMapping(path = "/last", produces = MimeType.APPLICATION_JSON_UTF8)
+    public ResponseStatus putLastPrice(@RequestBody HttpServletRequest request) {
+        var price = ControllerUtil.bodyToObject(request, InstrumentPrice.class);
         if (price == null)
-            return ResponseUtil.badRequest();
-        lastPriceMap.put(price.getInstrumentCode(), price);
-        return ResponseUtil.ok();
+            return ResponseStatus.BAD_REQUEST;
+        service.putLastPrice(price.getInstrumentCode(), price.getLastPrice());
+        return ResponseStatus.OK;
     }
 
     /**
-     * Get [SymbolTradingFee] for [symbol]
+     * 获取交易费用
      *
      * @param instrumentCode String
      * @return ResponseEntity<Object>
      */
-    @ExceptionHandler(ServiceException.class)
-    public ResponseEntity<Object> getSymbolTradingFeeByName(@RequestParam("instrumentCode") String instrumentCode) {
-        var instrument = service.getInstrument(instrumentCode);
-        return ResponseUtil.responseOf(instrument);
+    public List<InstrumentDTO> getSymbolTradingFeeByName(
+            @RequestParam("instrumentCode") String instrumentCode) {
+        return service.getInstrument(instrumentCode);
     }
 
+
     /**
-     * Get [TradableInstrument] for [symbol] and [tradingDay]
+     * 获取可交易的标的
      *
      * @param symbol     String
      * @param tradingDay String
      * @return ResponseEntity<Object>
      */
-    @ExceptionHandler(ServiceException.class)
     @GetMapping(path = "/tradable/{tradingDay}/{symbol}")
-    public ResponseEntity<Object> getTradableInstrument(@PathVariable("tradingDay") int tradingDay,
-                                                        @PathVariable("symbol") String symbol) {
-        return ResponseUtil.responseOf(null);
+    public ResponseStatus getTradableInstrument(@PathVariable("tradingDay") int tradingDay,
+                                                @PathVariable("symbol") String symbol) {
+        return ResponseStatus.OK;
     }
 
 }

@@ -5,7 +5,7 @@ import io.cygnuxltb.console.persistence.entity.ParamEntity;
 import io.cygnuxltb.console.service.bean.ValidationRule;
 import io.mercury.common.character.Charsets;
 import io.mercury.common.lang.Throws;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.serialization.json.JsonParser;
 import jakarta.annotation.Resource;
 import org.apache.commons.io.IOUtils;
@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyId;
-import static io.cygnuxltb.console.controller.util.RequestUtil.checkStrategyName;
+import static io.cygnuxltb.console.controller.util.ControllerUtil.illegalStrategyId;
+import static io.cygnuxltb.console.controller.util.ControllerUtil.illegalStrategyName;
 import static io.cygnuxltb.console.persistence.util.DaoExecutor.insertOrUpdate;
 import static io.cygnuxltb.console.persistence.util.DaoExecutor.select;
 
@@ -38,9 +38,9 @@ public class ParamService {
         try (InputStream inputStream = ParamService.class.getResourceAsStream("validation_rules.json")) {
             if (inputStream != null) {
                 String json = IOUtils.toString(inputStream, Charsets.UTF8);
-                List<ValidationRule> validationRules = JsonParser.toList(json, ValidationRule.class);
-                for (ValidationRule validationRule : validationRules) {
-                    validationRuleMap.put(validationRule.getParamName(), validationRule);
+                List<ValidationRule> rules = JsonParser.toList(json, ValidationRule.class);
+                for (ValidationRule rule : rules) {
+                    validationRuleMap.put(rule.getParamName(), rule);
                 }
             }
         } catch (IOException e) {
@@ -57,11 +57,7 @@ public class ParamService {
         if (validationStrategyParam(param)) {
             try {
                 ParamEntity saved = paramDao.save(param);
-                if (saved == null) {
-                    return 0;
-                } else {
-                    return 1;
-                }
+                return 1;
             } catch (Exception e) {
                 return -1;
             }
@@ -164,9 +160,10 @@ public class ParamService {
      * @return List<ParamEntity>
      */
     public List<ParamEntity> getStrategyParams(int strategyId) {
-        if (checkStrategyId(strategyId, log, "query [ParamEntity] param error"))
+        if (illegalStrategyId(strategyId, log))
             Throws.illegalArgument("strategyId");
-        return select(() -> paramDao.queryByStrategyId(strategyId), ParamEntity.class);
+        return select(ParamEntity.class,
+                () -> paramDao.queryByStrategyId(strategyId));
     }
 
 
@@ -175,9 +172,9 @@ public class ParamService {
      * @return List<ParamEntity>
      */
     public List<ParamEntity> getStrategyParams(String strategyName) {
-        if (checkStrategyName(strategyName, log, "query [StrategyParamEntity] param error"))
-            Throws.illegalArgument("strategyId");
-        return select(() -> paramDao.queryByStrategyName(strategyName), ParamEntity.class);
+        if (illegalStrategyName(strategyName, log))
+            Throws.illegalArgument("query StrategyParams param error -> strategyId");
+        return select(ParamEntity.class, () -> paramDao.queryByStrategyName(strategyName));
     }
 
     /**

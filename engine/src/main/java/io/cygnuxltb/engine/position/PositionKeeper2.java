@@ -1,24 +1,22 @@
 package io.cygnuxltb.engine.position;
 
-import static java.lang.Math.abs;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.HashMap;
-
-import javax.annotation.concurrent.NotThreadSafe;
-
-import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
-import org.slf4j.Logger;
-
 import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.order.enums.TrdDirection;
 import io.mercury.common.collections.MutableMaps;
 import io.mercury.common.functional.Formatter;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import io.mercury.common.util.BitOperator;
 import io.mercury.serialization.json.JsonWrapper;
+import org.eclipse.collections.api.map.primitive.MutableLongIntMap;
+import org.slf4j.Logger;
+
+import javax.annotation.concurrent.NotThreadSafe;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.HashMap;
+
+import static java.lang.Math.abs;
 
 /**
  * 统一管理子账户仓位信息<br>
@@ -144,7 +142,7 @@ public final class PositionKeeper2 implements Serializable, Formatter<String> {
      * @param subAccountId 子账户ID
      * @param instrument   交易标的
      * @param direction    交易方向
-     * @return
+     * @return int
      */
     public static int getCurrentSubAccountPositionLimit(int subAccountId, Instrument instrument,
                                                         TrdDirection direction) {
@@ -218,7 +216,7 @@ public final class PositionKeeper2 implements Serializable, Formatter<String> {
         Instrument instrument = order.getInstrument();
         int trdQty = order.getLastRecord().tradeQty();
         switch (order.getDirection()) {
-            case Long:
+            case Long -> {
                 switch (order.getAction()) {
                     case Open -> trdQty = abs(trdQty);
                     case Close, CloseToday, CloseYesterday -> trdQty = -abs(trdQty);
@@ -226,8 +224,8 @@ public final class PositionKeeper2 implements Serializable, Formatter<String> {
                             log.error("Order action is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
                                     subAccountId, order.getOrdSysId(), instrument.getInstrumentCode());
                 }
-                break;
-            case Short:
+            }
+            case Short -> {
                 switch (order.getAction()) {
                     case Open -> trdQty = -abs(trdQty);
                     case Close, CloseToday, CloseYesterday -> trdQty = abs(trdQty);
@@ -235,11 +233,10 @@ public final class PositionKeeper2 implements Serializable, Formatter<String> {
                             log.error("Order action is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
                                     subAccountId, order.getOrdSysId(), instrument.getInstrumentCode());
                 }
-                break;
-            case Invalid:
-                log.error("Order direction is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
-                        subAccountId, order.getOrdSysId(), instrument.getInstrumentCode());
-                break;
+            }
+            case Invalid ->
+                    log.error("Order direction is [Invalid], subAccountId==[{}], ordSysId==[{}], instrumentCode==[{}]",
+                            subAccountId, order.getOrdSysId(), instrument.getInstrumentCode());
         }
         long posKey = mergePositionsKey(subAccountId, instrument);
         int beforePos = SubAccountInstrumentPos.get(posKey);

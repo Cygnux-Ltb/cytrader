@@ -1,14 +1,15 @@
 package io.cygnuxltb.console.controller;
 
-import io.cygnuxltb.console.controller.base.ServiceException;
+import io.cygnuxltb.console.controller.base.ResponseStatus;
+import io.cygnuxltb.console.controller.util.ControllerUtil;
 import io.cygnuxltb.console.persistence.entity.OrderEntity;
+import io.cygnuxltb.console.persistence.entity.OrderEventEntity;
 import io.cygnuxltb.console.service.OrderService;
-import io.cygnuxltb.console.controller.util.RequestUtil;
-import io.cygnuxltb.console.controller.util.ResponseUtil;
+import io.mercury.common.http.MimeType;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,11 +18,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
+/**
+ * 订单服务接口
+ */
 @RestController
-@RequestMapping(path = "/order")
+@RequestMapping(path = "/order", produces = MimeType.APPLICATION_JSON_UTF8)
 public final class OrderController {
+
+    private static final Logger log = Log4j2LoggerFactory.getLogger(OrderController.class);
 
     @Resource
     private OrderService service;
@@ -33,46 +41,47 @@ public final class OrderController {
      * @param tradingDay     String
      * @param investorId     String
      * @param instrumentCode int
-     * @return ResponseEntity<Object>
+     * @return List<OrderEntity>
      */
-    @ExceptionHandler(ServiceException.class)
     @GetMapping(path = "/{tradingDay}")
-    public ResponseEntity<?> getOrder(@PathVariable("tradingDay") int tradingDay,
+    public List<OrderEntity> getOrder(@PathVariable("tradingDay") int tradingDay,
                                       @RequestParam("strategyId") int strategyId,
                                       @RequestParam("investorId") String investorId,
                                       @RequestParam("instrumentCode") String instrumentCode) {
-        if (RequestUtil.paramIsNull(strategyId, tradingDay, investorId, instrumentCode))
-            return ResponseUtil.badRequest();
-        var orders = service.getOrders(strategyId, investorId, instrumentCode, tradingDay);
-        return ResponseUtil.responseOf(orders);
+        if (ControllerUtil.paramIsNull(strategyId, tradingDay, investorId, instrumentCode))
+            return null;
+        return service.getOrders(strategyId, investorId, instrumentCode, tradingDay);
     }
 
     /**
+     * 获取订单最新状态
+     *
      * @param tradingDay int
      * @param strategyId int
      * @return ResponseEntity<Object>
      */
-    @ExceptionHandler(ServiceException.class)
     @GetMapping(path = "/status")
-    public ResponseEntity<Object> getOrdersByInit(@RequestParam("tradingDay") int tradingDay,
+    public List<OrderEventEntity> getOrdersByInit(@RequestParam("tradingDay") int tradingDay,
                                                   @RequestParam("strategyId") int strategyId) {
-        if (RequestUtil.paramIsNull(strategyId, tradingDay)) {
-            return ResponseUtil.badRequest();
+        if (ControllerUtil.paramIsNull(strategyId, tradingDay)) {
+            return null;
         }
-        var events = service.getOrderEventsByTradingDay(tradingDay);
         // TODO 过滤最后的订单
-        return ResponseUtil.responseOf(events);
+        return service.getOrderEventsByTradingDay(tradingDay);
     }
 
     /**
+     * 新增订单
+     *
      * @param request HttpServletRequest
      * @return ResponseEntity<Object>
      */
-    @ExceptionHandler(ServiceException.class)
     @PutMapping(consumes = APPLICATION_JSON_UTF8)
-    public ResponseEntity<Object> putOrder(@RequestBody HttpServletRequest request) {
-        var order = RequestUtil.bodyToObject(request, OrderEntity.class);
-        return order == null ? ResponseUtil.badRequest() : service.putOrder(order) ? ResponseUtil.ok() : ResponseUtil.internalServerError();
+    public ResponseStatus putOrder(@RequestBody HttpServletRequest request) {
+        var order = ControllerUtil.bodyToObject(request, OrderEntity.class);
+        return order == null
+                ? ResponseStatus.BAD_REQUEST : service.putOrder(order)
+                ? ResponseStatus.OK : ResponseStatus.INTERNAL_ERROR;
     }
 
 }

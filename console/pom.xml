@@ -15,22 +15,29 @@
     </properties>
 
     <build>
-        <finalName>cygnus-console</finalName>
+        <finalName>cytrader-console</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.github.shalousun</groupId>
                 <artifactId>smart-doc-maven-plugin</artifactId>
-                <version>2.6.3</version>
+                <version>2.6.7</version>
                 <configuration>
                     <!--指定生成文档的使用的配置文件, 配置文件放在自己的项目中-->
                     <configFile>./src/main/resources/smart-doc.json</configFile>
                     <!--指定项目名称-->
-                    <projectName>Cygnux-Console</projectName>
+                    <projectName>Cytrader-Console</projectName>
                     <!--smart-doc实现自动分析依赖树加载第三方依赖的源码, 如果一些框架依赖库加载不到导致报错, 这时请使用excludes排除掉-->
                     <excludes>
                         <!--格式为: groupId:artifactId;参考如下-->
@@ -50,10 +57,11 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <!--如果不需要在执行编译时启动smart-doc，则将phase注释掉-->
+                        <id>document</id>
+                        <!-- 如果不需要在执行编译时启动smart-doc, 则将phase注释掉 -->
                         <phase>compile</phase>
                         <goals>
-                            <!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
+                            <!-- smart-doc提供了html, openapi, markdown等goal, 可按需配置 -->
                             <goal>html</goal>
                             <goal>markdown</goal>
                         </goals>
@@ -73,7 +81,7 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
-            <version>4.4.0</version>
+            <version>4.4.1</version>
             <exclusions>
                 <exclusion>
                     <artifactId>jackson-core</artifactId>
@@ -118,6 +126,12 @@
             <version>2.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.cygnuxltb</groupId>
+            <artifactId>protocol</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- Starter for using Log4j2 for logging. -->
         <!-- An alternative to spring-boot-starter-logging -->
         <dependency>
@@ -128,6 +142,22 @@
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
                     <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-jul</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-slf4j2-impl</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -147,13 +177,14 @@
                     <groupId>ch.qos.logback</groupId>
                     <artifactId>logback-classic</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j-to-slf4j</artifactId>
-                </exclusion>
+
                 <exclusion>
                     <groupId>org.yaml</groupId>
                     <artifactId>snakeyaml</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <groupId>org.springframework.boot</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -199,7 +230,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
     </dependencies>
 
 </project>

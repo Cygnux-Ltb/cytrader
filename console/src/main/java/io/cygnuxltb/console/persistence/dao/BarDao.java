@@ -16,12 +16,10 @@ import java.util.List;
 @Repository
 public interface BarDao extends JpaRepository<BarEntity, Long> {
 
-    @Query("SELECT '*' FROM #{#entityName} e WHERE "
-            + " e.instrumentCode LIKE :instrumentCode% "
-            + " AND "
-            + " e.tradingDay >= :startTradingDay "
-            + " AND "
-            + " e.tradingDay <= :endTradingDay ")
+    @Query("SELECT '*' FROM #{#entityName} e WHERE"
+            + " e.instrumentCode = :instrumentCode "
+            + " AND e.tradingDay >= :startTradingDay "
+            + " AND e.tradingDay <= :endTradingDay ")
     List<BarEntity> queryBy(@Param("instrumentCode") String instrumentCode,
                             @Param("startTradingDay") int startTradingDay,
                             @Param("endTradingDay") int endTradingDay);

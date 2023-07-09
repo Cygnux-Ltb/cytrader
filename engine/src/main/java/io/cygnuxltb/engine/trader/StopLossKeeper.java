@@ -7,8 +7,4 @@ package io.cygnuxltb.engine.trader;
  */
 public final class StopLossKeeper {
 
-	
-	
-	
-	
 }

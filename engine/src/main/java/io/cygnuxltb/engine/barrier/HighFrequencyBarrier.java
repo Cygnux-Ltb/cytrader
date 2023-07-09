@@ -1,15 +1,12 @@
 package io.cygnuxltb.engine.barrier;
 
-import javax.annotation.concurrent.NotThreadSafe;
-
-import org.slf4j.Logger;
-import org.springframework.stereotype.Component;
-
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.risk.OrderBarrier;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
+import org.slf4j.Logger;
 
-@Component
+import javax.annotation.concurrent.NotThreadSafe;
+
 @NotThreadSafe
 public final class HighFrequencyBarrier implements OrderBarrier {
 

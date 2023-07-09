@@ -1,16 +1,15 @@
 package io.cygnuxltb.console.controller;
 
-import io.cygnuxltb.console.controller.base.ServiceException;
+import io.cygnuxltb.console.controller.util.ControllerUtil;
 import io.cygnuxltb.console.persistence.entity.ParamEntity;
 import io.cygnuxltb.console.persistence.entity.StrategyEntity;
 import io.cygnuxltb.console.service.ParamService;
 import io.cygnuxltb.console.service.StrategyService;
-import io.cygnuxltb.console.controller.util.RequestUtil;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.http.MimeType;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,11 +21,14 @@ import java.util.List;
 
 import static io.mercury.common.http.MimeType.APPLICATION_JSON_UTF8;
 
+/**
+ * 策略服务
+ */
 @RestController
-@RequestMapping(path = "/strategy")
+@RequestMapping(path = "/strategy", produces = MimeType.APPLICATION_JSON_UTF8)
 public final class StrategyController {
 
-    private final Logger log = Log4j2LoggerFactory.getLogger(getClass());
+    private static final Logger log = Log4j2LoggerFactory.getLogger(StrategyController.class);
 
     @Resource
     private StrategyService strategyService;
@@ -39,7 +41,6 @@ public final class StrategyController {
      *
      * @return ResponseEntity<List < StrategyEntity>>
      */
-    @ExceptionHandler(ServiceException.class)
     @GetMapping
     public List<StrategyEntity> getAllStrategy() {
         return strategyService.getAllStrategy();
@@ -51,7 +52,6 @@ public final class StrategyController {
      * @param strategyId int
      * @return ResponseEntity<StrategyEntity>
      */
-    @ExceptionHandler(ServiceException.class)
     @GetMapping(path = "/{strategyId}")
     public StrategyEntity getStrategyById(@PathVariable("strategyId") int strategyId) {
         System.out.println("13131");
@@ -64,7 +64,6 @@ public final class StrategyController {
      * @param strategyId int
      * @return ResponseEntity<?>
      */
-    @ExceptionHandler(ServiceException.class)
     @GetMapping("/{strategyId}/param")
     public List<ParamEntity> getParamsByStrategyId(@PathVariable("strategyId") int strategyId) {
         return paramService.getStrategyParams(strategyId);
@@ -79,7 +78,7 @@ public final class StrategyController {
     @PutMapping(path = "/{strategyId}/param", consumes = APPLICATION_JSON_UTF8)
     public boolean putParamsByStrategyId(@PathVariable("strategyId") int strategyId,
                                          @RequestBody HttpServletRequest request) {
-        var params = RequestUtil.bodyToObject(request, ParamEntity.class);
+        var params = ControllerUtil.bodyToObject(request, ParamEntity.class);
         log.info("putParamsByStrategyId recv : {}", params);
         return params != null && paramService.putStrategyParam(params);
     }

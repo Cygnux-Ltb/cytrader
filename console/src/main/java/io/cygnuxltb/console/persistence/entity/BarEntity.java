@@ -1,5 +1,6 @@
 package io.cygnuxltb.console.persistence.entity;
 
+import io.cygnuxltb.console.persistence.CommonColumn;
 import io.mercury.persistence.rdb.ColumnDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * K线表
@@ -16,9 +19,11 @@ import lombok.Data;
  *
  * @author yellow013
  */
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity
-@Table(name = "cyg_bar")
+@Table(name = "cy_bar")
 public final class BarEntity {
 
     @Id
@@ -26,10 +31,10 @@ public final class BarEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uid;
 
-    @Column(name = "instrument_code")
+    @Column(name = CommonColumn.INSTRUMENT_CODE)
     private String instrumentCode;
 
-    @Column(name = "trading_day")
+    @Column(name = CommonColumn.TRADING_DAY)
     private int tradingDay;
 
     @Column(name = "actual_date")

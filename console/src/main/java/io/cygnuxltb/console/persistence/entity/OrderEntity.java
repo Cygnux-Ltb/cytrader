@@ -8,7 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
@@ -18,9 +20,11 @@ import java.util.Date;
  *
  * @author yellow013
  */
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity
-@Table(name = "cyg_order")
+@Table(name = "cy_order")
 public final class OrderEntity {
 
     @Id
@@ -91,8 +95,8 @@ public final class OrderEntity {
     /**
      * orderRef
      */
-    @Column(name = "order_ref")
-    private String orderRef;
+    @Column(name = "ord_ref")
+    private String ordRef;
 
     /**
      * direction

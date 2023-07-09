@@ -68,7 +68,8 @@ public final class ApplicationStatus {
         System.out.println(Integer.MAX_VALUE);
         System.out.println(Long.MAX_VALUE);
 
-        long zoned2018_1 = ZonedDateTime.of(LocalDate.of(2018, 11, 8), LocalTime.MIN, ZoneId.systemDefault())
+        long zoned2018_1 = ZonedDateTime.of(LocalDate.of(2018, 11, 8),
+                        LocalTime.MIN, ZoneId.systemDefault())
                 .toInstant().getEpochSecond();
 
         System.out.println(zoned2018_1);

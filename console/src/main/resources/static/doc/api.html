@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="smart-doc">
+    <title>Cytrader-Console</title>
+    <link rel="stylesheet" href="font.css">
+    <link rel="stylesheet" href="AllInOne.css?v=1682217944794"/>
+    
+    <style>.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
+        background: #f7f7f8;
+    }
+
+    .hljs {
+        padding: 0em;
+    }</style>
+    <script src="highlight.min.js"></script>
+    <script src="jquery.min.js"></script>
+</head>
+<body class="book toc2 toc-left">
+<div id="header"><h1>Cytrader-Console</h1>
+    <div id="toc" class="toc2">
+        <div id="book-search-input"><input id="search" type="text" placeholder="Type to search"></div>
+        <div id="toctitle"><span>API Reference</span></div>
+        <ul id="accordion" class="sectlevel1">
+            <li class="open"><a class="dd" href="api.html#header">1.&nbsp;用户服务</a>
+                <ul class="sectlevel2" style="display: block">
+                    <li><a
+                            href="api.html#_1_1_用户登陆">1.1.&nbsp;用户登陆</a>
+                    </li>
+
+                    <li><a
+                            href="api.html#_1_2_用户注册, 当前不支持新用户注册">1.2.&nbsp;用户注册, 当前不支持新用户注册</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="StrategyController.html#header">2.&nbsp;策略服务</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="StrategyController.html#_2_1_返回全部Strategy">2.1.&nbsp;返回全部Strategy</a>
+                    </li>
+
+                    <li><a
+                            href="StrategyController.html#_2_2_使用StrategyId作为get params访问Strategy">2.2.&nbsp;使用StrategyId作为get params访问Strategy</a>
+                    </li>
+
+                    <li><a
+                            href="StrategyController.html#_2_3_使用StrategyId作为URI访问Param">2.3.&nbsp;使用StrategyId作为URI访问Param</a>
+                    </li>
+
+                    <li><a
+                            href="StrategyController.html#_2_4_Put StrategyParam URI is StrategyId">2.4.&nbsp;Put StrategyParam URI is StrategyId</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="BarController.html#header">3.&nbsp;历史行情接口</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="BarController.html#_3_1_获取1分钟Bar">3.1.&nbsp;获取1分钟Bar</a>
+                    </li>
+
+                    <li><a
+                            href="BarController.html#_3_2_Put Bar">3.2.&nbsp;Put Bar</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="PnlController.html#header">4.&nbsp;PNL服务接口</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="PnlController.html#_4_1_查询PNL">4.1.&nbsp;查询PNL</a>
+                    </li>
+
+                    <li><a
+                            href="PnlController.html#_4_2_Put PnlDaily">4.2.&nbsp;Put PnlDaily</a>
+                    </li>
+
+                    <li><a
+                            href="PnlController.html#_4_3_查询结算PNL">4.3.&nbsp;查询结算PNL</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="CommandController.html#header">5.&nbsp;系统指令服务</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="CommandController.html#_5_1_更新参数">5.1.&nbsp;更新参数</a>
+                    </li>
+
+                    <li><a
+                            href="CommandController.html#_5_2_安全更新参数">5.2.&nbsp;安全更新参数</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="ProductController.html#header">6.&nbsp;产品服务接口</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="ProductController.html#_6_1_获取全部产品">6.1.&nbsp;获取全部产品</a>
+                    </li>
+
+                    <li><a
+                            href="ProductController.html#_6_2_获取指定产品信息">6.2.&nbsp;获取指定产品信息</a>
+                    </li>
+
+                    <li><a
+                            href="ProductController.html#_6_3_产品初始化">6.3.&nbsp;产品初始化</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="StatusController.html#header">7.&nbsp;交易系统状态服务接口</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="StatusController.html#_7_1_获取全部策略状态">7.1.&nbsp;获取全部策略状态</a>
+                    </li>
+
+                    <li><a
+                            href="StatusController.html#_7_2_发送状态指令">7.2.&nbsp;发送状态指令</a>
+                    </li>
+
+                    <li><a
+                            href="StatusController.html#_7_3_更新状态">7.3.&nbsp;更新状态</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="PositionController.html#header">8.&nbsp;</a>
+                <ul class="sectlevel2" style="display: none">                </ul>
+            </li>
+            <li class=""><a class="dd" href="InstrumentController.html#header">9.&nbsp;交易标的查询接口</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="InstrumentController.html#_9_1_获取结算价格">9.1.&nbsp;获取结算价格</a>
+                    </li>
+
+                    <li><a
+                            href="InstrumentController.html#_9_2_获取最新价格">9.2.&nbsp;获取最新价格</a>
+                    </li>
+
+                    <li><a
+                            href="InstrumentController.html#_9_3_更新最新价格">9.3.&nbsp;更新最新价格</a>
+                    </li>
+
+                    <li><a
+                            href="InstrumentController.html#_9_4_获取可交易的标的">9.4.&nbsp;获取可交易的标的</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a class="dd" href="OrderController.html#header">10.&nbsp;订单服务接口</a>
+                <ul class="sectlevel2" style="display: none">
+                    <li><a
+                            href="OrderController.html#_10_1_查询Order">10.1.&nbsp;查询Order</a>
+                    </li>
+
+                    <li><a
+                            href="OrderController.html#_10_2_获取订单最新状态">10.2.&nbsp;获取订单最新状态</a>
+                    </li>
+
+                    <li><a
+                            href="OrderController.html#_10_3_新增订单">10.3.&nbsp;新增订单</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="content">
+    <div class="sect1"><h2 id="_用户服务"><a class="anchor" href="#_用户服务"></a><a class="link" href="#_用户服务">1.&nbsp;用户服务</a>
+    </h2>
+        <div class="sectionbody">
+            <div class="sect2"><h3 id="_1_1_用户登陆">
+                <a class="anchor" href="#_1_1_用户登陆"></a>
+                <a class="link" href="#_1_1_用户登陆">1.1.&nbsp;用户登陆</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/user/signin" class="bare">&nbsp;/user/signin</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;POST</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;用户登陆</p></div>
+                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">sign</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">    用户名/邮箱/手机号</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">密码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X POST -i /user/signin --data 'sign=merxu0&password=20vu3t'</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">true</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sect2"><h3 id="_1_2_用户注册, 当前不支持新用户注册">
+                <a class="anchor" href="#_1_2_用户注册, 当前不支持新用户注册"></a>
+                <a class="link" href="#_1_2_用户注册, 当前不支持新用户注册">1.2.&nbsp;用户注册, 当前不支持新用户注册</a>
+            </h3>
+                <div class="paragraph"><p><strong>URL:</strong><a href="/user/signup" class="bare">&nbsp;/user/signup</a>
+                </p></div>
+                <div class="paragraph"><p><strong>Type:</strong>&nbsp;POST</p></div>
+                <div class="paragraph"><p><strong>Content-Type:</strong>&nbsp;application/x-www-form-urlencoded;charset=UTF-8</p></div>
+                <div class="paragraph"><p><strong>Description:</strong>&nbsp;用户注册, 当前不支持新用户注册</p></div>
+                <div class="paragraph"><p><strong>Query-parameters:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Parameter</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Required</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">sign</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">    标识</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">    标识类型</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">密码</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Request-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="bash">curl -X POST -i /user/signup --data 'sign=cya406&type=454&password=9d4w91'</code></pre>
+                    </div>
+                </div>
+                <div class="paragraph"><p><strong>Response-fields:</strong></p></div>
+                <table class="tableblock frame-all grid-all spread">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="tableblock halign-left valign-top">Field</th>
+                        <th class="tableblock halign-left valign-top">Type</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                        <th class="tableblock halign-left valign-top">Since</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">message</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+
+                    <tr>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">No comments found.</p></td>
+                        <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="paragraph"><p><strong>Response-example:</strong></p></div>
+                <div class="listingblock">
+                    <div class="content">
+                        <pre><code class="json">{
+  "code": 770,
+  "message": "success",
+  "array": true,
+  "data": {}
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer"><span class="copyright">Generated by smart-doc at 2023-04-23 11:45:44</span><span
+            class="footer-modification">Suggestions,contact,support and error reporting on<a
+            href="https://gitee.com/smart-doc-team/smart-doc" target="_blank">&nbsp;Gitee</a>&nbsp;or<a
+            href="https://github.com/smart-doc-group/smart-doc.git" target="_blank">&nbsp;Github</a></span></footer>
+</div>
+<script src="search.js?v=1682217944794"></script>
+<script>
+    $(function () {
+        const Accordion = function (el, multiple) {
+            this.el = el || {};
+            this.multiple = multiple || false;
+            const links = this.el.find('.dd');
+            links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown);
+        };
+        Accordion.prototype.dropdown = function (e) {
+            const $el = e.data.el;
+            const $this = $(this), $next = $this.next();
+            $next.slideToggle();
+            $this.parent().toggleClass('open');
+            if (!e.data.multiple) {
+                $el.find('.submenu').not($next).slideUp("20").parent().removeClass('open');
+            }
+        };
+        new Accordion($('#accordion'), false);
+        hljs.highlightAll()
+    });
+</script>
+</body>
+</html>

@@ -1,14 +1,11 @@
 package io.cygnuxltb.engine.barrier;
 
-import javax.annotation.concurrent.NotThreadSafe;
-
-import org.springframework.stereotype.Component;
-
 import io.horizon.trader.order.ChildOrder;
 import io.horizon.trader.risk.OrderBarrier;
 
+import javax.annotation.concurrent.NotThreadSafe;
 
-@Component
+
 @NotThreadSafe
 public class AccountBarrier implements OrderBarrier {
 

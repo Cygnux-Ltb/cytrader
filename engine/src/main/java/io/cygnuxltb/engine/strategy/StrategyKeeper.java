@@ -1,5 +1,6 @@
 package io.cygnuxltb.engine.strategy;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -12,7 +13,7 @@ import io.horizon.market.instrument.Instrument;
 import io.horizon.trader.strategy.Strategy;
 import io.mercury.common.collections.MutableLists;
 import io.mercury.common.collections.MutableMaps;
-import io.mercury.common.log.Log4j2LoggerFactory;
+import io.mercury.common.log4j2.Log4j2LoggerFactory;
 
 /**
  * 可以使用在 #StrategyScheduler 中进行行情分发的管理
@@ -23,9 +24,7 @@ import io.mercury.common.log.Log4j2LoggerFactory;
 @Deprecated
 public final class StrategyKeeper implements Serializable {
 
-	/**
-	 * 
-	 */
+	@Serial
 	private static final long serialVersionUID = -4657849933310280319L;
 
 	/**
